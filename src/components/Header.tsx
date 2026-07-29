@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
-import { LanguageSwitcher } from './LanguageSwitcher';
+import { DesktopMegaMenu } from './DesktopMegaMenu';
+import { ChevronDown, Menu, X } from './Icons';
 
 interface HeaderProps {
   currentLang: Language;
@@ -21,31 +22,30 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenEvaluationModal
 }) => {
   const t = getTranslations(currentLang);
+  const [activeMegaMenu, setActiveMegaMenu] = useState<'immigration' | 'romania' | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { id: 'home', label: t.nav.home },
-    { id: 'immigration', label: t.nav.immigration },
-    { id: 'study', label: t.nav.study },
-    { id: 'work', label: t.nav.work },
-    { id: 'company', label: t.nav.company },
-    { id: 'living', label: t.nav.living },
-    { id: 'universities', label: t.nav.universities },
-    { id: 'cities', label: t.nav.cities },
-    { id: 'services', label: t.nav.services },
-    { id: 'about-romania', label: t.nav.aboutRomania },
-    { id: 'articles', label: t.nav.articles },
-    { id: 'about', label: t.nav.aboutUs },
-    { id: 'contact', label: t.nav.contact }
+    { id: 'immigration', label: currentLang === 'fa' ? 'مهاجرت' : 'Immigration', megaMenu: 'immigration' as const },
+    { id: 'study', label: currentLang === 'fa' ? 'تحصیل' : 'Study' },
+    { id: 'work', label: currentLang === 'fa' ? 'کار' : 'Work' },
+    { id: 'company', label: currentLang === 'fa' ? 'کسب‌وکار' : 'Business' },
+    { id: 'living', label: currentLang === 'fa' ? 'زندگی در رومانی' : 'Living in Romania' },
+    { id: 'about-romania', label: currentLang === 'fa' ? 'رومانی را بشناسید' : 'Discover Romania', megaMenu: 'romania' as const },
   ];
 
-  const handleNavClick = (id: string) => {
-    onNavigate(id);
-    setMobileMenuOpen(false);
+  const handleNavClick = (item: typeof navItems[0]) => {
+    if (item.megaMenu) {
+      setActiveMegaMenu(activeMegaMenu === item.megaMenu ? null : item.megaMenu);
+    } else {
+      setActiveMegaMenu(null);
+      onNavigate(item.id);
+    }
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#DDE5EE] shadow-sm transition-all">
+    <header className="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#dfe6ef] h-[80px] flex flex-col justify-between transition-all duration-300">
+      
       {/* 4px Top Romanian Tricolor Line */}
       <div className="romania-tricolor-bar">
         <div />
@@ -53,122 +53,157 @@ export const Header: React.FC<HeaderProps> = ({
         <div />
       </div>
 
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          
-          {/* Logo Area */}
-          <div 
-            className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer group"
-            onClick={() => handleNavClick('home')}
-          >
-            <div className="w-10 h-10 rounded-xl bg-[#071E3D] text-white flex items-center justify-center font-black text-lg shadow-sm border border-slate-700 relative overflow-hidden group-hover:scale-105 transition-transform">
-              <div className="absolute top-0 bottom-0 left-0 w-1 flex flex-col">
-                <div className="h-1/3 bg-[#0038A8]" />
-                <div className="h-1/3 bg-[#FCD116]" />
-                <div className="h-1/3 bg-[#CE1126]" />
-              </div>
-              <span className="text-white">D</span>
-              <span className="text-[#FCD116]">R</span>
+      <div className="max-w-[1280px] w-full mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+        
+        {/* Brand Logo Mark */}
+        <div 
+          className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer group"
+          onClick={() => {
+            setActiveMegaMenu(null);
+            onNavigate('home');
+          }}
+        >
+          {/* Polished Logo: Letter D + Letter R + 3 vertical color bars */}
+          <div className="w-10 h-10 rounded-xl bg-[#06162d] text-white flex items-center justify-center font-black text-lg shadow-sm border border-[#0038a8]/30 relative overflow-hidden group-hover:scale-105 transition-transform">
+            <div className="absolute top-0 bottom-0 left-0 w-1.5 flex flex-col">
+              <div className="h-1/3 bg-[#0038a8]" />
+              <div className="h-1/3 bg-[#fcd116]" />
+              <div className="h-1/3 bg-[#ce1126]" />
             </div>
-
-            <div>
-              <span className="text-lg sm:text-xl font-bold text-[#122033] tracking-tight block leading-snug group-hover:text-[#0038A8] transition-colors">
-                {t.brand.name}
-              </span>
-              <span className="text-[11px] text-[#516174] font-medium block">
-                {t.brand.subtitle}
-              </span>
-            </div>
+            <span className="text-white ml-0.5">D</span>
+            <span className="text-[#fcd116]">R</span>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2 rtl:space-x-reverse">
-            {navItems.slice(0, 9).map((item) => {
-              const isActive = activeRoute === item.id;
-              return (
+          <div className="flex flex-col">
+            <span className="text-lg sm:text-xl font-bold tracking-tight text-[#142033] group-hover:text-[#0038a8] transition-colors leading-tight">
+              در رومانی
+            </span>
+            <span className="text-[10px] text-[#526174] tracking-widest uppercase font-semibold">
+              DAR ROMANIA
+            </span>
+          </div>
+        </div>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center space-x-7 rtl:space-x-reverse text-xs font-semibold text-[#142033]">
+          {navItems.map((item) => {
+            const isActive = activeRoute === item.id || (item.megaMenu && activeMegaMenu === item.megaMenu);
+            return (
+              <div key={item.id} className="relative">
                 <button
-                  key={item.id}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`px-3 py-2 text-xs xl:text-sm font-medium transition-all duration-150 relative ${
-                    isActive
-                      ? 'text-[#0038A8] font-bold'
-                      : 'text-[#122033] hover:text-[#0038A8]'
+                  onClick={() => handleNavClick(item)}
+                  className={`flex items-center space-x-1.5 rtl:space-x-reverse py-2 transition-colors cursor-pointer ${
+                    isActive ? 'text-[#0038a8] font-bold' : 'hover:text-[#0038a8]'
                   }`}
                 >
                   <span>{item.label}</span>
-                  {isActive && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-1 bg-[#FCD116] rounded-full" />
-                  )}
+                  {item.megaMenu && <ChevronDown size={14} className="text-[#788697]" />}
                 </button>
-              );
-            })}
-          </nav>
+              </div>
+            );
+          })}
+        </nav>
 
-          {/* Right Header Actions */}
-          <div className="hidden sm:flex items-center space-x-4 rtl:space-x-reverse">
-            <LanguageSwitcher currentLang={currentLang} onLanguageChange={onLanguageChange} />
-
+        {/* Right Desktop Header Actions */}
+        <div className="hidden lg:flex items-center space-x-4 rtl:space-x-reverse">
+          
+          {/* Language Switch: FA | EN */}
+          <div className="flex items-center p-1 rounded-xl bg-[#eef3f8] border border-[#dfe6ef]">
             <button
-              onClick={onOpenEvaluationModal}
-              className="bg-[#0038A8] hover:bg-[#002B7F] text-white px-4 py-2.5 rounded-xl font-bold text-xs xl:text-sm shadow-sm hover:shadow transition-all flex items-center space-x-2 rtl:space-x-reverse border border-[#002B7F]"
+              onClick={() => onLanguageChange('fa')}
+              className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                currentLang === 'fa' ? 'bg-[#0038a8] text-white shadow-xs' : 'text-[#142033] hover:text-[#0038a8]'
+              }`}
             >
-              <span className="w-2 h-2 rounded-full bg-[#FCD116]" />
-              <span>{t.nav.freeEvaluation}</span>
+              FA
+            </button>
+            <button
+              onClick={() => onLanguageChange('en')}
+              className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                currentLang === 'en' ? 'bg-[#0038a8] text-white shadow-xs' : 'text-[#142033] hover:text-[#0038a8]'
+              }`}
+            >
+              EN
             </button>
           </div>
 
-          {/* Mobile Menu Toggle Button */}
-          <div className="flex items-center space-x-2 rtl:space-x-reverse lg:hidden">
-            <LanguageSwitcher currentLang={currentLang} onLanguageChange={onLanguageChange} />
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-lg text-[#122033] hover:text-[#0038A8] hover:bg-slate-100 transition-colors"
-              aria-label="Toggle menu"
-            >
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                {mobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
-          </div>
-
+          {/* Primary Header CTA in Romanian Blue */}
+          <button
+            onClick={onOpenEvaluationModal}
+            className="bg-[#0038a8] hover:bg-[#1554bd] text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-sm transition-all cursor-pointer"
+          >
+            {currentLang === 'fa' ? 'ارزیابی رایگان' : 'Free Assessment'}
+          </button>
         </div>
+
+        {/* Mobile Controls */}
+        <div className="flex items-center space-x-2 rtl:space-x-reverse lg:hidden">
+          <div className="flex items-center p-0.5 rounded-lg bg-[#eef3f8] border border-[#dfe6ef] text-[11px]">
+            <button
+              onClick={() => onLanguageChange('fa')}
+              className={`px-2 py-0.5 rounded font-bold ${currentLang === 'fa' ? 'bg-[#0038a8] text-white' : 'text-[#142033]'}`}
+            >
+              FA
+            </button>
+            <button
+              onClick={() => onLanguageChange('en')}
+              className={`px-2 py-0.5 rounded font-bold ${currentLang === 'en' ? 'bg-[#0038a8] text-white' : 'text-[#142033]'}`}
+            >
+              EN
+            </button>
+          </div>
+
+          <button
+            onClick={onOpenEvaluationModal}
+            className="bg-[#0038a8] text-white text-[11px] font-bold px-3 py-1.5 rounded-lg cursor-pointer"
+          >
+            {currentLang === 'fa' ? 'ارزیابی' : 'Audit'}
+          </button>
+
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 rounded-lg bg-[#eef3f8] text-[#142033] border border-[#dfe6ef] cursor-pointer"
+          >
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Render Active Desktop Mega Menu */}
+      {activeMegaMenu && (
+        <DesktopMegaMenu
+          type={activeMegaMenu}
+          currentLang={currentLang}
+          onNavigate={(route) => {
+            setActiveMegaMenu(null);
+            onNavigate(route);
+          }}
+          onClose={() => setActiveMegaMenu(null)}
+          onOpenEvaluationModal={onOpenEvaluationModal}
+        />
+      )}
+
+      {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-[#DDE5EE] px-4 pt-3 pb-6 space-y-2 shadow-lg animate-fadeIn">
+        <div className="lg:hidden bg-white border-b border-[#dfe6ef] px-4 pt-3 pb-6 space-y-2 shadow-xl animate-fadeIn">
           {navItems.map((item) => (
             <button
               key={item.id}
-              onClick={() => handleNavClick(item.id)}
-              className={`w-full text-start px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                activeRoute === item.id
-                  ? 'bg-blue-50 text-[#0038A8] font-bold'
-                  : 'text-[#122033] hover:bg-slate-50'
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onNavigate(item.id);
+              }}
+              className={`w-full text-start px-4 py-2.5 rounded-xl text-xs font-semibold transition-colors ${
+                activeRoute === item.id ? 'bg-blue-50 text-[#0038a8] font-bold' : 'text-[#142033] hover:bg-[#eef3f8]'
               }`}
             >
               {item.label}
             </button>
           ))}
-
-          <div className="pt-3 border-t border-slate-100">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenEvaluationModal();
-              }}
-              className="w-full bg-[#0038A8] text-white py-3 rounded-xl font-bold text-center text-sm shadow-sm flex items-center justify-center space-x-2 rtl:space-x-reverse"
-            >
-              <span className="w-2 h-2 rounded-full bg-[#FCD116]" />
-              <span>{t.nav.freeEvaluation}</span>
-            </button>
-          </div>
         </div>
       )}
+
     </header>
   );
 };

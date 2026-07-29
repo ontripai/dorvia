@@ -9,20 +9,41 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        navy: {
+          950: '#06162d',
+          900: '#081f3f',
+          800: '#0b2b55',
+        },
         romania: {
-          blue: '#0038A8',
-          'blue-dark': '#002B7F',
-          'blue-deep': '#071E3D',
-          yellow: '#FCD116',
-          'yellow-soft': '#FFF7CC',
-          red: '#CE1126',
-          'red-dark': '#A80E20',
-          'red-soft': '#FFF0F2',
+          blue: {
+            700: '#0038a8',
+            600: '#1554bd',
+            500: '#2f6bd1',
+            100: '#e7efff',
+            50: '#f3f7ff',
+          },
+          yellow: {
+            500: '#fcd116',
+            400: '#ffda39',
+            100: '#fff2a6',
+            50: '#fffbdf',
+          },
+          red: {
+            700: '#a50f20',
+            600: '#ce1126',
+            100: '#ffe5e9',
+            50: '#fff3f5',
+          }
+        },
+        surface: {
+          DEFAULT: '#ffffff',
+          soft: '#eef3f8',
+          blue: '#f3f7ff',
         }
       },
       fontFamily: {
         persian: ['Vazirmatn', 'sans-serif'],
-        english: ['Inter', 'sans-serif'],
+        english: ['Inter', 'Manrope', 'sans-serif'],
       }
     },
   },

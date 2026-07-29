@@ -1,80 +1,138 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Vazirmatn:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Romanian Flag Brand Colors */
-  --romania-blue: #0038A8;
-  --romania-blue-dark: #002B7F;
-  --romania-blue-deep: #071E3D;
+  /* Navy Brand Palette */
+  --navy-950: #06162d;
+  --navy-900: #081f3f;
+  --navy-800: #0b2b55;
 
-  --romania-yellow: #FCD116;
-  --romania-yellow-soft: #FFF7CC;
+  /* Romanian Tricolor System */
+  --romania-blue-700: #0038a8;
+  --romania-blue-600: #1554bd;
+  --romania-blue-500: #2f6bd1;
+  --romania-blue-100: #e7efff;
+  --romania-blue-50: #f3f7ff;
 
-  --romania-red: #CE1126;
-  --romania-red-dark: #A80E20;
-  --romania-red-soft: #FFF0F2;
+  --romania-yellow-500: #fcd116;
+  --romania-yellow-400: #ffda39;
+  --romania-yellow-100: #fff2a6;
+  --romania-yellow-50: #fffbdf;
 
-  /* Neutrals */
-  --background-main: #F7F9FC;
-  --background-white: #FFFFFF;
-  --background-muted: #EEF3F8;
+  --romania-red-700: #a50f20;
+  --romania-red-600: #ce1126;
+  --romania-red-100: #ffe5e9;
+  --romania-red-50: #fff3f5;
 
-  --text-primary: #122033;
-  --text-secondary: #516174;
-  --text-muted: #7B8796;
+  /* Surface & Background Tokens */
+  --background: #f7f9fc;
+  --surface: #ffffff;
+  --surface-soft: #eef3f8;
+  --surface-blue: #f3f7ff;
 
-  --border-light: #DDE5EE;
-  --border-medium: #C9D4E1;
+  /* Typography Colors */
+  --text-primary: #142033;
+  --text-secondary: #526174;
+  --text-muted: #788697;
 
+  /* Borders */
+  --border-light: #dfe6ef;
+  --border-strong: #c9d4e2;
+
+  /* Status Colors */
+  --success: #18794e;
+  --warning: #a15c00;
+  --error: #b42335;
+
+  /* Fonts */
   --font-persian: 'Vazirmatn', Tahoma, Arial, sans-serif;
-  --font-english: 'Inter', sans-serif;
+  --font-english: 'Inter', 'Manrope', sans-serif;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgba(7, 30, 61, 0.03), 0 10px 30px rgba(7, 30, 61, 0.06);
+  --shadow-card-hover: 0 16px 45px rgba(7, 30, 61, 0.11);
+  --shadow-floating: 0 24px 65px rgba(7, 30, 61, 0.16);
 }
 
 body {
   font-family: var(--font-persian);
-  background-color: var(--background-main);
+  background-color: var(--background);
   color: var(--text-primary);
-  line-height: 1.9;
+  font-size: 17px;
+  line-height: 1.95;
+  font-weight: 400;
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.35;
+h1 {
+  font-size: clamp(2.35rem, 5vw, 4.4rem);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  font-weight: 700;
   color: var(--text-primary);
 }
 
-.romania-card-shadow {
-  box-shadow: 0 12px 35px rgba(7, 30, 61, 0.07);
+h2 {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  line-height: 1.32;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
-.romania-card-shadow-hover:hover {
-  box-shadow: 0 18px 45px rgba(7, 30, 61, 0.12);
+h3 {
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
+/* 4px Top Romanian Tricolor Line */
 .romania-tricolor-bar {
   height: 4px;
   width: 100%;
   display: flex;
 }
-.romania-tricolor-bar > div:nth-child(1) { background-color: var(--romania-blue); width: 33.333%; }
-.romania-tricolor-bar > div:nth-child(2) { background-color: var(--romania-yellow); width: 33.333%; }
-.romania-tricolor-bar > div:nth-child(3) { background-color: var(--romania-red); width: 33.333%; }
+.romania-tricolor-bar > div:nth-child(1) { background-color: var(--romania-blue-700); width: 33.333%; }
+.romania-tricolor-bar > div:nth-child(2) { background-color: var(--romania-yellow-500); width: 33.333%; }
+.romania-tricolor-bar > div:nth-child(3) { background-color: var(--romania-red-600); width: 33.333%; }
 
+/* Editorial Card & Panel Utilities */
+.editorial-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.editorial-card:hover {
+  border-color: var(--romania-blue-600);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
+}
+
+.dark-hero-panel {
+  background: radial-gradient(circle at 15% 15%, rgba(50, 107, 209, 0.38), transparent 34%),
+              linear-gradient(135deg, #06162d 0%, #002b7f 58%, #0038a8 100%);
+  color: #FFFFFF;
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--background-muted);
+  background: var(--background);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border-medium);
+  background: var(--border-strong);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--romania-blue);
+  background: var(--romania-blue-700);
 }
 
 @keyframes fadeIn {

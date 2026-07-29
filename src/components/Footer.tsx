@@ -3,7 +3,7 @@
 import React from 'react';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
-import { LanguageSwitcher } from './LanguageSwitcher';
+import { ShieldCheck } from './Icons';
 
 interface FooterProps {
   currentLang: Language;
@@ -15,164 +15,124 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
   const t = getTranslations(currentLang);
 
   return (
-    <footer className="bg-[#061A35] text-slate-300 border-t border-slate-800 pt-16 pb-12 relative overflow-hidden">
-      {/* 4px Top Romanian Tricolor Line */}
-      <div className="romania-tricolor-bar absolute top-0 left-0 right-0">
+    <footer className="bg-[#06162d] text-white pt-0 pb-12 relative border-t border-[#0b2b55] overflow-hidden">
+      
+      {/* 4px Romanian Tricolor Top Border */}
+      <div className="romania-tricolor-bar">
         <div />
         <div />
         <div />
       </div>
 
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800/80">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 space-y-12">
+        
+        {/* Main 5-Column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 text-xs text-slate-300">
           
-          {/* Column 1 & 2: Brand Info */}
-          <div className="lg:col-span-2 space-y-4">
+          {/* Col 1: Brand Statement */}
+          <div className="space-y-4 lg:col-span-1">
             <div className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer" onClick={() => onNavigate('home')}>
-              <div className="w-10 h-10 rounded-xl bg-[#071E3D] text-white flex items-center justify-center font-black text-lg shadow-sm border border-slate-700 relative overflow-hidden">
+              <div className="w-9 h-9 rounded-xl bg-white text-[#06162d] flex items-center justify-center font-black text-base relative overflow-hidden">
                 <div className="absolute top-0 bottom-0 left-0 w-1 flex flex-col">
-                  <div className="h-1/3 bg-[#0038A8]" />
-                  <div className="h-1/3 bg-[#FCD116]" />
-                  <div className="h-1/3 bg-[#CE1126]" />
+                  <div className="h-1/3 bg-[#0038a8]" />
+                  <div className="h-1/3 bg-[#fcd116]" />
+                  <div className="h-1/3 bg-[#ce1126]" />
                 </div>
-                <span>D</span>
-                <span className="text-[#FCD116]">R</span>
+                <span className="text-[#06162d] ml-0.5">D</span>
+                <span className="text-[#0038a8]">R</span>
               </div>
-              <div>
-                <span className="text-xl font-bold text-white tracking-tight block">
-                  {t.brand.name}
-                </span>
-                <span className="text-xs text-slate-400 font-medium block">
-                  {t.brand.subtitle}
-                </span>
-              </div>
+              <span className="text-lg font-extrabold text-white">در رومانی</span>
             </div>
 
-            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-md">
-              {t.brand.description}
+            <p className="text-[#788697] leading-relaxed">
+              {t.brand.tagline}
             </p>
 
-            <div className="pt-2 flex items-center space-x-3 rtl:space-x-reverse">
-              <span className="text-xs text-slate-400 font-bold">{currentLang === 'fa' ? 'زبان:' : 'Language:'}</span>
-              <LanguageSwitcher currentLang={currentLang} onLanguageChange={onLanguageChange} />
+            <div className="flex items-center space-x-2 rtl:space-x-reverse text-[11px] text-slate-400">
+              <ShieldCheck size={14} className="text-[#fcd116]" />
+              <span>EU GDPR Compliant</span>
             </div>
           </div>
 
-          {/* Column 3: Quick Links */}
+          {/* Col 2: Pathways */}
           <div className="space-y-3">
-            <h3 className="text-white text-xs font-bold tracking-wider uppercase border-b border-slate-800 pb-2">
-              {t.footer.quickLinks}
-            </h3>
-            <ul className="space-y-2 text-xs sm:text-sm">
-              <li>
-                <button onClick={() => onNavigate('immigration')} className="hover:text-[#FCD116] transition-colors">
-                  {t.nav.immigration}
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('study')} className="hover:text-[#FCD116] transition-colors">
-                  {t.nav.study}
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('work')} className="hover:text-[#FCD116] transition-colors">
-                  {t.nav.work}
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('company')} className="hover:text-[#FCD116] transition-colors">
-                  {t.nav.company}
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('living')} className="hover:text-[#FCD116] transition-colors">
-                  {t.nav.living}
-                </button>
-              </li>
+            <h4 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
+              {currentLang === 'fa' ? 'مسیرهای مهاجرت' : 'Pathways'}
+            </h4>
+            <ul className="space-y-2 text-slate-300">
+              <li><button onClick={() => onNavigate('study')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.pathways.study.title}</button></li>
+              <li><button onClick={() => onNavigate('work')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.pathways.work.title}</button></li>
+              <li><button onClick={() => onNavigate('company')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.pathways.company.title}</button></li>
+              <li><button onClick={() => onNavigate('immigration')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.pathways.investment.title}</button></li>
+              <li><button onClick={() => onNavigate('immigration')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.pathways.family.title}</button></li>
             </ul>
           </div>
 
-          {/* Column 4: Services */}
+          {/* Col 3: Education & Cities */}
           <div className="space-y-3">
-            <h3 className="text-white text-xs font-bold tracking-wider uppercase border-b border-slate-800 pb-2">
-              {t.footer.servicesTitle}
-            </h3>
-            <ul className="space-y-2 text-xs sm:text-sm">
-              <li>
-                <button onClick={() => onNavigate('universities')} className="hover:text-[#FCD116] transition-colors">
-                  {t.nav.universities}
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('cities')} className="hover:text-[#FCD116] transition-colors">
-                  {t.nav.cities}
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('services')} className="hover:text-[#FCD116] transition-colors">
-                  {t.nav.services}
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('about-romania')} className="hover:text-[#FCD116] transition-colors">
-                  {t.nav.aboutRomania}
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('articles')} className="hover:text-[#FCD116] transition-colors">
-                  {t.nav.articles}
-                </button>
-              </li>
+            <h4 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
+              {currentLang === 'fa' ? 'دانشگاه‌ها و شهرها' : 'Universities & Cities'}
+            </h4>
+            <ul className="space-y-2 text-slate-300">
+              <li><button onClick={() => onNavigate('universities')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.nav.universities}</button></li>
+              <li><button onClick={() => onNavigate('cities')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.nav.cities}</button></li>
+              <li><button onClick={() => onNavigate('living')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.nav.living}</button></li>
+              <li><button onClick={() => onNavigate('about-romania')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.nav.aboutRomania}</button></li>
             </ul>
           </div>
 
-          {/* Column 5: Legal & Contact */}
+          {/* Col 4: Legal Pages */}
           <div className="space-y-3">
-            <h3 className="text-white text-xs font-bold tracking-wider uppercase border-b border-slate-800 pb-2">
+            <h4 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
               {t.footer.legalTitle}
-            </h3>
-            <ul className="space-y-2 text-xs sm:text-sm">
-              <li>
-                <button onClick={() => onNavigate('legal/privacy')} className="hover:text-[#FCD116] transition-colors">
-                  {currentLang === 'fa' ? 'سیاست حریم خصوصی' : 'Privacy Policy'}
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('legal/terms')} className="hover:text-[#FCD116] transition-colors">
-                  {currentLang === 'fa' ? 'شرایط و ضوابط' : 'Terms & Conditions'}
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('legal/disclaimer')} className="hover:text-[#FCD116] transition-colors">
-                  {currentLang === 'fa' ? 'تکذیبیه و شفافیت' : 'Legal Disclaimer'}
-                </button>
-              </li>
-              <li className="pt-2 text-xs text-slate-400 space-y-1">
-                <div className="flex items-center space-x-1.5 rtl:space-x-reverse">
-                  <span>📍 Bucharest, Romania</span>
-                </div>
-                <div className="flex items-center space-x-1.5 rtl:space-x-reverse">
-                  <span>✉️ info@darromania.com</span>
-                </div>
-              </li>
+            </h4>
+            <ul className="space-y-2 text-slate-300">
+              <li><button onClick={() => onNavigate('legal/privacy')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سیاست حریم خصوصی' : 'Privacy Policy'}</button></li>
+              <li><button onClick={() => onNavigate('legal/terms')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'شرایط و قوانین' : 'Terms of Service'}</button></li>
+              <li><button onClick={() => onNavigate('legal/disclaimer')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سلب مسئولیت قانونی' : 'Legal Disclaimer'}</button></li>
+            </ul>
+          </div>
+
+          {/* Col 5: Contact Info */}
+          <div className="space-y-3">
+            <h4 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
+              {t.footer.contactInfo}
+            </h4>
+            <ul className="space-y-2 text-slate-300">
+              <li>📍 {t.footer.address}</li>
+              <li>✉️ {t.footer.email}</li>
+              <li>📞 {t.footer.phone}</li>
             </ul>
           </div>
 
         </div>
 
-        {/* Legal Notice Footer Banner */}
-        <div className="mt-8 bg-slate-900/80 border border-slate-800 rounded-2xl p-4 text-xs text-slate-400 leading-relaxed flex items-start space-x-3 rtl:space-x-reverse">
-          <span className="text-[#FCD116] font-bold text-sm">ℹ️</span>
-          <p>{t.disclaimer.text}</p>
+        {/* Short Legal Disclaimer Banner */}
+        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-[11px] text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <span>
+            {currentLang === 'fa'
+              ? 'این وب‌سایت نتیجه صدور ویزا، پذیرش یا اقامت را تضمین نمی‌کند. تصمیم‌گیری نهایی در صلاحیت سفارت و اداره کل مهاجرت رومانی (IGI) است.'
+              : 'This platform does not guarantee visa, admission, or residency outcomes. Final approvals belong to official Romanian authorities.'}
+          </span>
+          <button
+            onClick={() => onNavigate('legal/disclaimer')}
+            className="text-[#fcd116] font-bold hover:underline shrink-0 cursor-pointer"
+          >
+            {currentLang === 'fa' ? 'مطالعه سلب مسئولیت کامل' : 'Read Full Disclaimer'}
+          </button>
         </div>
 
-        {/* Bottom Copyright */}
-        <div className="mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 space-y-4 sm:space-y-0 border-t border-slate-800/60">
+        {/* Bottom Copyright Bar */}
+        <div className="pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#788697] gap-4">
           <p>{t.footer.copyright}</p>
-          <div className="flex space-x-6 rtl:space-x-reverse">
-            <span>Bucharest, Romania</span>
-            <span>•</span>
-            <span>European Union (Schengen)</span>
+
+          <div className="flex items-center space-x-4 rtl:space-x-reverse">
+            <button
+              onClick={() => onLanguageChange(currentLang === 'fa' ? 'en' : 'fa')}
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              {currentLang === 'fa' ? 'English (EN)' : 'فارسی (FA)'}
+            </button>
           </div>
         </div>
 
