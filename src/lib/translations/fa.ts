@@ -59,6 +59,7 @@ export const faTranslations = {
     }
   },
   whyRomania: {
+    eyebrow: "مزایای اصلی",
     title: "چرا کشور رومانی؟",
     subtitle: "مزایای کلیدی رومانی برای مهاجرت، تحصیل و توسعه کسب‌وکار ایرانیان",
     items: [

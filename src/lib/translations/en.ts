@@ -1,136 +1,137 @@
 export const enTranslations = {
   brand: {
-    name: "In Romania",
-    subtitle: "Dar Romania | In Romania",
-    tagline: "Your trusted gateway to legal immigration, study, work, and business in Romania",
-    description: "Comprehensive information portal and evaluation platform for international applicants — especially from Iran, UAE, Turkey & worldwide — seeking legal pathways to Romania & the EU."
+    name: "Dar Romania",
+    subtitle: "In Romania | Official Guidance",
+    tagline: "Professional Advisory Platform for Immigration, Study, Work & Corporate Services in Romania",
+    description: "Comprehensive guidance and initial case assessment for international applicants seeking legal education, employment, and business formation in Romania and the European Union."
   },
   nav: {
     home: "Home",
     immigration: "Immigration",
     study: "Study in Romania",
-    work: "Work in Romania",
-    company: "Company Registration",
+    work: "Work Permits",
+    company: "Company Formation",
     living: "Living in Romania",
     universities: "Universities",
-    cities: "Cities in Romania",
+    cities: "Cities",
     services: "Our Services",
     aboutRomania: "About Romania",
-    articles: "Articles & Guides",
+    articles: "Articles & News",
     aboutUs: "About Us",
     contact: "Contact Us",
-    freeEvaluation: "Free Initial Evaluation",
+    freeEvaluation: "Free Evaluation",
     bookConsultation: "Book Consultation"
   },
   hero: {
-    badge: "Official EU & Schengen Member State",
-    headline: "Your Trusted Guide to Studying, Working, Doing Business & Living in Romania",
-    subheadline: "Transparent legal guidance and educational support tailored for international applicants seeking European opportunities.",
-    ctaPrimary: "Evaluate My Situation",
-    ctaSecondary: "Book a Consultation",
-    trustNote: "Fast Response | No-cost Initial Evaluation | 100% Legal Transparency"
+    badge: "Official European Union & Schengen Member",
+    headline: "Your Reliable Pathway for Education, Career, Business & Life in Romania",
+    subheadline: "Transparent legal guidance and educational advisory tailored for global applicants exploring new European opportunities in Romania.",
+    ctaPrimary: "Evaluate My Case",
+    ctaSecondary: "Book Consultation",
+    trustNote: "Fast Response | Free Case Assessment | Full Legal Transparency"
   },
   pathways: {
-    title: "Main Legal Pathways to Romania",
-    subtitle: "Explore tailored pathways based on your academic background, career goals, or investment budget.",
+    title: "Primary Entry & Residency Pathways in Romania",
+    subtitle: "Select the most suitable legal pathway based on your academic, professional, or investment background.",
     study: {
       title: "Study in Romania",
-      desc: "Accredited European university degrees, affordable tuition fees, programs in English or French, and student residence permits."
+      desc: "University admissions across accredited EU institutions with affordable tuition, English & French taught programs, and student residency rights."
     },
     work: {
-      title: "Work & Career",
-      desc: "In-demand job vacancies in IT, engineering, and healthcare with official work permits and long-term residence opportunities."
+      title: "Employment & Work Permits",
+      desc: "Tech, engineering, and skilled career opportunities backed by official work authorizations (Aviz de Munca) leading to permanent residency."
     },
     company: {
-      title: "Company Registration",
-      desc: "Establish your business in the growing European market with competitive tax rates (1% to 16%) and business residency."
+      title: "Corporate Formation (SRL)",
+      desc: "Establish your business in a dynamic European market with competitive corporate tax rates (1% to 16%) and executive residency options."
     },
     investment: {
-      title: "Investment Pathways",
-      desc: "Attractive business and real estate investment opportunities within the European Union framework."
+      title: "Investment Opportunities",
+      desc: "Strategic investments in real estate, industrial infrastructure, and innovative European tech startups."
     },
     family: {
       title: "Family Reunification",
-      desc: "Legal procedures for bringing spouses and children to join legal residents in Romania."
+      desc: "Legal procedures for bringing spouses and dependent children to join legal residents in Romania."
     },
     living: {
       title: "Living & Settlement",
-      desc: "Affordable cost of living, high safety index, rich culture, and seamless access across the Schengen Area."
+      desc: "Balanced cost of living, high public safety standards, rich cultural heritage, and visa-free travel across the Schengen zone."
     }
   },
   whyRomania: {
-    title: "Why Choose Romania?",
-    subtitle: "Key strategic advantages of living, studying, and expanding your business in Romania",
+    eyebrow: "Key Advantages",
+    title: "Why Romania?",
+    subtitle: "Strategic benefits of relocating, studying, or expanding business operations in Romania",
     items: [
       {
-        title: "EU & Schengen Access",
-        desc: "Visa-free travel across 29 Schengen member states with full European legal rights and security."
+        title: "Full EU & Schengen Status",
+        desc: "Visa-free mobility across all Schengen countries and access to European legal standards."
       },
       {
         title: "Affordable Cost of Living",
-        desc: "Living and housing expenses are 30% to 50% lower than in Western Europe while enjoying European standards."
+        desc: "Housing and living expenses 30-50% lower than Western Europe while retaining high quality of life."
       },
       {
-        title: "World-Class Universities",
-        desc: "Globally recognized degrees in Medicine, Dentistry, Engineering, and Business without complex entrance exams."
+        title: "Globally Accredited Higher Education",
+        desc: "Internationally recognized degrees in Medicine, Dentistry, Engineering, and Business without complex entrance exams."
       },
       {
-        title: "Competitive Tax Rates",
-        desc: "One of the most business-friendly tax systems in Europe (1% micro-company income tax option)."
+        title: "Competitive Corporate Tax Rates",
+        desc: "One of the most attractive micro-business tax frameworks in Europe (1% revenue tax option)."
       },
       {
-        title: "Growing Job Opportunities",
-        desc: "High demand for qualified professionals in tech, engineering, construction, and healthcare."
+        title: "Growing Skilled Job Market",
+        desc: "Active demand for qualified professionals in IT, engineering, construction, and corporate services with Euro compensation."
       },
       {
-        title: "Safe & Welcoming Environment",
-        desc: "Low crime rate, family-friendly cities, rich natural landscapes, and hospitable local culture."
+        title: "High Safety & Welcoming Society",
+        desc: "Peaceful environment, low crime rates, and hospitable attitudes toward international residents."
       }
     ]
   },
   evaluationForm: {
     title: "Free Initial Case Evaluation",
-    subtitle: "Fill in your background details to receive an initial review from our legal and educational advisors.",
+    subtitle: "Provide your background details and our advisory team will analyze your suitability for legal pathways in Romania.",
     fullName: "Full Name",
     email: "Email Address",
-    phone: "Phone / WhatsApp (with country code)",
-    currentCountry: "Current Country of Residence",
+    phone: "Phone / WhatsApp Number",
+    currentCountry: "Country of Residence",
     nationality: "Nationality",
-    preferredLanguage: "Preferred Communication Language",
-    mainGoal: "Your Primary Objective",
+    preferredLanguage: "Preferred Language",
+    mainGoal: "Primary Objective",
     goals: {
-      study: "Study at Romanian University",
-      work: "Obtain Job Offer & Work Permit",
-      company: "Register a Company / Business",
-      investment: "Business / Property Investment",
+      study: "University Education in Romania",
+      work: "Job Placement & Work Permit",
+      company: "Company Registration (SRL)",
+      investment: "Real Estate or Business Investment",
       family: "Family Reunification",
-      other: "General Consultation & Other"
+      other: "General Advisory & Other"
     },
-    educationLevel: "Highest Level of Education",
+    educationLevel: "Highest Degree Completed",
     workExperience: "Work Experience (Years)",
-    approximateBudget: "Approximate Budget (EUR)",
+    approximateBudget: "Estimated Budget (EUR)",
     maritalStatus: "Marital Status",
     single: "Single",
     married: "Married",
     marriedWithChildren: "Married with Children",
-    message: "Additional Information or Specific Questions",
-    privacyConsent: "I agree to the privacy policy and data processing for case evaluation.",
+    message: "Additional Details or Specific Questions",
+    privacyConsent: "I agree to the privacy policy and data storage for case evaluation purposes.",
     submit: "Submit Evaluation Request",
-    submitting: "Submitting Your Request...",
+    submitting: "Submitting Details...",
     successTitle: "Evaluation Request Submitted!",
-    successMsg: "Our team will analyze your background and contact you via WhatsApp or Email within 24-48 business hours."
+    successMsg: "Our advisors in Romania will contact you via WhatsApp or Email within 24 to 48 business hours."
   },
   disclaimer: {
-    title: "Professional Standards & Transparency",
-    text: "Dar Romania provides information, legal advisory, and administrative support services in accordance with Romanian legislation. Final decisions regarding visa issuances and residence permits rest solely with the Ministry of Foreign Affairs (Romanian Embassies) and the General Inspectorate for Immigration (IGI). No agency can guarantee visa approval."
+    title: "Commitment to Professional Integrity",
+    text: "Dar Romania provides professional advisory and administrative support services in compliance with Romanian legislation. Visa issuance and residency permit approvals rest exclusively within the jurisdiction of the Embassy of Romania and the General Inspectorate for Immigration (IGI)."
   },
   footer: {
     quickLinks: "Quick Links",
-    servicesTitle: "Our Services",
+    servicesTitle: "Specialized Services",
     legalTitle: "Legal Information",
-    copyright: "© All rights reserved. Dar Romania | In Romania.",
-    contactInfo: "Contact Information",
-    address: "Bucharest, Romania / Regional Hubs",
+    copyright: "All rights reserved by 'Dar Romania' platform.",
+    contactInfo: "Contact Us",
+    address: "Bucharest, Romania",
     email: "info@darromania.com",
     phone: "+40 700 000 000"
   }
