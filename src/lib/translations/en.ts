@@ -89,6 +89,17 @@ export const enTranslations = {
       }
     ]
   },
+  aboutRomaniaIntro: {
+    eyebrow: "About Romania",
+    title: "Discover Romania",
+    desc: "Located in Southeastern Europe with Bucharest as its capital, Romania is a full EU and Schengen member state offering a rich blend of history, Carpathian nature, tech infrastructure, and robust economic growth.",
+    facts: [
+      { label: "European Union", val: "Full Member" },
+      { label: "Schengen Area", val: "Fully Acceded" },
+      { label: "Capital", val: "Bucharest" }
+    ],
+    cta: "Read Full Guide About Romania"
+  },
   evaluationForm: {
     title: "Free Initial Case Evaluation",
     subtitle: "Provide your background details and our advisory team will analyze your suitability for legal pathways in Romania.",
