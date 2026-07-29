@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>در رومانی | Dar Romania - پلتفرم اطلاعات و ارزیابی مهاجرت، تحصیل و کار در رومانی</title>
+  <meta name="description" content="پلتفرم جامع راهنمایی و ارزیابی اولیه برای ایرانیان سراسر جهان جهت ورود قانونی، تحصیل، اشتغال و ثبت شرکت در اتحادیه اروپا و کشور رومانی.">
+
+  <!-- Google Fonts: Vazirmatn (Persian) & Inter (English) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            romania: {
+              blue: '#002B7F',
+              yellow: '#FCD116',
+              red: '#CE1126',
+            }
+          },
+          fontFamily: {
+            persian: ['Vazirmatn', 'sans-serif'],
+            english: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- React & Babel CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Supabase JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    body {
+      font-family: 'Vazirmatn', 'Inter', sans-serif;
+      background-color: #F8FAFC;
+      color: #0F172A;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 antialiased text-slate-900 selection:bg-[#002B7F] selection:text-white min-h-screen">
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // --- TRANSLATIONS DICTIONARY ---
+    const faT = {
+      brandName: "در رومانی",
+      brandSub: "Dar Romania | In Romania",
+      tagline: "مسیر مطمئن شما برای تحصیل، کار، کسب‌وکار و زندگی در رومانی",
+      badge: "عضو رسمی اتحادیه اروپا و منطقه شنگن",
+      freeEval: "ارزیابی اولیه رایگان",
+      bookConsult: "رزرو مشاوره",
+      heroHeadline: "مسیر مطمئن شما برای تحصیل، کار، کسب‌وکار و زندگی در رومانی",
+      heroSub: "راهنمای جامع و شفاف خدمات حقوقی و آموزشی برای ایرانیان سراسر جهان جهت ورود قانونی، تحصیل، اشتغال و ثبت شرکت در اتحادیه اروپا.",
+      trustNote: "پاسخگویی سریع | ارزیابی اولیه بدون هزینه | شفافیت کامل قانونی",
+      nav: {
+        home: "صفحه اصلی",
+        immigration: "مهاجرت به رومانی",
+        study: "تحصیل در رومانی",
+        work: "کار در رومانی",
+        company: "ثبت شرکت",
+        living: "زندگی در رومانی",
+        universities: "دانشگاه‌ها",
+        cities: "شهرهای رومانی",
+        services: "خدمات ما",
+        aboutRomania: "درباره رومانی",
+        articles: "مقالات و اخبار",
+        aboutUs: "درباره ما",
+        contact: "تماس با ما"
+      }
+    };
+
+    const enT = {
+      brandName: "In Romania",
+      brandSub: "Dar Romania | In Romania",
+      tagline: "Your trusted guide to studying, working, doing business, and living in Romania",
+      badge: "Official EU & Schengen Member State",
+      freeEval: "Free Initial Evaluation",
+      bookConsult: "Book Consultation",
+      heroHeadline: "Your Trusted Guide to Studying, Working, Doing Business & Living in Romania",
+      heroSub: "Transparent legal guidance and educational support for international applicants — especially from Iran, UAE, Turkey & worldwide — seeking legal pathways to Romania & the EU.",
+      trustNote: "Fast Response | No-cost Initial Evaluation | 100% Legal Transparency",
+      nav: {
+        home: "Home",
+        immigration: "Immigration",
+        study: "Study in Romania",
+        work: "Work in Romania",
+        company: "Company Registration",
+        living: "Living in Romania",
+        universities: "Universities",
+        cities: "Cities in Romania",
+        services: "Our Services",
+        aboutRomania: "About Romania",
+        articles: "Articles & Guides",
+        aboutUs: "About Us",
+        contact: "Contact Us"
+      }
+    };
+
+    function App() {
+      const [lang, setLang] = useState('fa');
+      const [route, setRoute] = useState('home');
+      const [modalOpen, setModalOpen] = useState(false);
+      const [formStatus, setFormStatus] = useState('idle');
+
+      const t = lang === 'fa' ? faT : enT;
+      const isRtl = lang === 'fa';
+
+      useEffect(() => {
+        document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+        document.documentElement.lang = lang;
+      }, [lang]);
+
+      const navItems = [
+        { id: 'home', label: t.nav.home },
+        { id: 'immigration', label: t.nav.immigration },
+        { id: 'study', label: t.nav.study },
+        { id: 'work', label: t.nav.work },
+        { id: 'company', label: t.nav.company },
+        { id: 'living', label: t.nav.living },
+        { id: 'universities', label: t.nav.universities },
+        { id: 'cities', label: t.nav.cities },
+        { id: 'services', label: t.nav.services },
+        { id: 'about-romania', label: t.nav.aboutRomania },
+        { id: 'articles', label: t.nav.articles },
+        { id: 'about', label: t.nav.aboutUs },
+        { id: 'contact', label: t.nav.contact },
+      ];
+
+      const handleFormSubmit = (e) => {
+        e.preventDefault();
+        setFormStatus('submitting');
+        setTimeout(() => {
+          setFormStatus('success');
+        }, 1000);
+      };
+
+      return (
+        <div className="min-h-screen flex flex-col justify-between">
+          
+          {/* Header */}
+          <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+            <div className="h-1.5 w-full flex">
+              <div className="bg-[#002B7F] w-1/3" />
+              <div className="bg-[#FCD116] w-1/3" />
+              <div className="bg-[#CE1126] w-1/3" />
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center justify-between h-20">
+                
+                {/* Logo */}
+                <div onClick={() => setRoute('home')} className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer">
+                  <div className="w-10 h-10 rounded-xl bg-[#002B7F] text-white flex items-center justify-center font-extrabold text-xl shadow-md">
+                    <span className="text-[#FCD116]">D</span>R
+                  </div>
+                  <div>
+                    <span className="text-xl font-extrabold text-slate-900 tracking-tight block">{t.brandName}</span>
+                    <span className="text-xs text-slate-500 font-medium">{t.brandSub}</span>
+                  </div>
+                </div>
+
+                {/* Nav Links */}
+                <nav className="hidden lg:flex items-center space-x-1 rtl:space-x-reverse">
+                  {navItems.slice(0, 9).map(item => (
+                    <button
+                      key={item.id}
+                      onClick={() => setRoute(item.id)}
+                      className={`px-3 py-2 text-xs xl:text-sm font-semibold rounded-lg transition-colors ${
+                        route === item.id ? 'text-[#002B7F] bg-blue-50 font-bold' : 'text-slate-700 hover:text-[#002B7F]'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </nav>
+
+                {/* Language & CTA */}
+                <div className="flex items-center space-x-3 rtl:space-x-reverse">
+                  <div className="inline-flex rounded-lg bg-slate-100 p-1 border border-slate-200 text-xs">
+                    <button
+                      onClick={() => setLang('fa')}
+                      className={`px-2.5 py-1 rounded-md font-bold transition-all ${lang === 'fa' ? 'bg-[#002B7F] text-white' : 'text-slate-600'}`}
+                    >
+                      🇮🇷 FA
+                    </button>
+                    <button
+                      onClick={() => setLang('en')}
+                      className={`px-2.5 py-1 rounded-md font-bold transition-all ${lang === 'en' ? 'bg-[#002B7F] text-white' : 'text-slate-600'}`}
+                    >
+                      🇬🇧 EN
+                    </button>
+                  </div>
+
+                  <button
+                    onClick={() => setModalOpen(true)}
+                    className="bg-[#002B7F] hover:bg-[#002266] text-white px-4 py-2.5 rounded-xl font-semibold text-xs xl:text-sm shadow-md transition-all flex items-center space-x-2 rtl:space-x-reverse"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-[#FCD116] animate-pulse"></span>
+                    <span>{t.freeEval}</span>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </header>
+
+          {/* Main Body */}
+          <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-16">
+            
+            {/* Hero Section */}
+            <section className="relative rounded-3xl bg-gradient-to-b from-slate-900 via-[#002B7F] to-slate-900 text-white p-8 sm:p-14 text-center space-y-6 shadow-2xl overflow-hidden">
+              <div className="inline-flex items-center space-x-2 rtl:space-x-reverse px-4 py-1.5 rounded-full bg-white/10 text-[#FCD116] text-xs sm:text-sm font-bold border border-white/20">
+                <span>🇪🇺</span>
+                <span>{t.badge}</span>
+              </div>
+
+              <h1 className="text-3xl sm:text-5xl font-black max-w-4xl mx-auto leading-tight">
+                {t.heroHeadline}
+              </h1>
+
+              <p className="text-slate-200 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed">
+                {t.heroSub}
+              </p>
+
+              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button
+                  onClick={() => setModalOpen(true)}
+                  className="w-full sm:w-auto px-8 py-4 bg-[#FCD116] hover:bg-yellow-400 text-slate-950 font-extrabold rounded-2xl text-base shadow-xl"
+                >
+                  {t.freeEval}
+                </button>
+                <button
+                  onClick={() => setRoute('contact')}
+                  className="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-2xl text-base border border-white/30"
+                >
+                  {t.bookConsult}
+                </button>
+              </div>
+
+              <p className="text-xs text-slate-300 font-medium pt-2">✓ {t.trustNote}</p>
+            </section>
+
+            {/* Pathways Grid */}
+            <section className="space-y-8">
+              <div className="text-center max-w-3xl mx-auto">
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900">
+                  {lang === 'fa' ? 'روش‌های اصلی قانونی ورود به رومانی' : 'Main Legal Pathways to Romania'}
+                </h2>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div onClick={() => setRoute('study')} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all cursor-pointer space-y-3">
+                  <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#002B7F] flex items-center justify-center text-2xl">🎓</div>
+                  <h3 className="text-lg font-bold text-slate-900">{t.nav.study}</h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">{lang === 'fa' ? 'پذیرش تحصیلی با شهریه مناسب، دوره‌های انگلیسی و اقامت دانشجویی.' : 'Accredited European university degrees with affordable tuition.'}</p>
+                  <div className="text-xs font-bold text-[#002B7F]">{lang === 'fa' ? 'اطلاعات بیشتر ←' : 'Learn More →'}</div>
+                </div>
+
+                <div onClick={() => setRoute('work')} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all cursor-pointer space-y-3">
+                  <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#002B7F] flex items-center justify-center text-2xl">💼</div>
+                  <h3 className="text-lg font-bold text-slate-900">{t.nav.work}</h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">{lang === 'fa' ? 'فرصت‌های شغلی در IT و مهندسی همراه با مجوز اشتغال رسمی.' : 'In-demand job vacancies with official work permit Aviz de Munca.'}</p>
+                  <div className="text-xs font-bold text-[#002B7F]">{lang === 'fa' ? 'اطلاعات بیشتر ←' : 'Learn More →'}</div>
+                </div>
+
+                <div onClick={() => setRoute('company')} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all cursor-pointer space-y-3">
+                  <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#002B7F] flex items-center justify-center text-2xl">🏢</div>
+                  <h3 className="text-lg font-bold text-slate-900">{t.nav.company}</h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">{lang === 'fa' ? 'ثبت شرکت SRL با مالیات ۱ درصدی و اخذ اقامت تجاری مدیرعامل.' : 'SRL company formation with 1% micro tax and business residency.'}</p>
+                  <div className="text-xs font-bold text-[#002B7F]">{lang === 'fa' ? 'اطلاعات بیشتر ←' : 'Learn More →'}</div>
+                </div>
+              </div>
+            </section>
+
+            {/* Lead Form Embedded */}
+            <section className="bg-white p-8 rounded-3xl border border-slate-200 shadow-xl max-w-4xl mx-auto space-y-6">
+              <div className="text-center space-y-2">
+                <span className="text-xs font-bold text-[#002B7F] bg-blue-50 px-3 py-1 rounded-full">{t.freeEval}</span>
+                <h2 className="text-2xl font-extrabold text-slate-900">{lang === 'fa' ? 'فرم ارزیابی اولیه رایگان' : 'Free Initial Case Evaluation'}</h2>
+                <p className="text-xs text-slate-600">{lang === 'fa' ? 'مشخصات خود را وارد کنید تا کارشناسان ما رزومه شما را بررسی کنند.' : 'Fill in your details for an initial legal feasibility review.'}</p>
+              </div>
+
+              {formStatus === 'success' ? (
+                <div className="bg-emerald-50 border border-emerald-200 p-6 rounded-2xl text-center text-emerald-800 space-y-2">
+                  <div className="text-2xl">✓</div>
+                  <h3 className="font-bold text-lg">{lang === 'fa' ? 'درخواست شما با موفقیت ثبت شد!' : 'Request Submitted Successfully!'}</h3>
+                  <p className="text-xs">{lang === 'fa' ? 'کارشناسان ما ظرف ۲۴ تا ۴۸ ساعت با شما تماس خواهند گرفت.' : 'Our team will reach out via WhatsApp/Email within 24-48 hours.'}</p>
+                </div>
+              ) : (
+                <form onSubmit={handleFormSubmit} className="space-y-4 text-xs sm:text-sm">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <input required type="text" placeholder={lang === 'fa' ? 'نام و نام خانوادگی *' : 'Full Name *'} className="p-3 bg-slate-50 border border-slate-200 rounded-xl" />
+                    <input required type="email" placeholder={lang === 'fa' ? 'آدرس ایمیل *' : 'Email Address *'} className="p-3 bg-slate-50 border border-slate-200 rounded-xl" />
+                    <input required type="tel" placeholder={lang === 'fa' ? 'شماره واتس‌اپ *' : 'WhatsApp Number *'} className="p-3 bg-slate-50 border border-slate-200 rounded-xl" />
+                    <select className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                      <option>{lang === 'fa' ? 'تحصیل در دانشگاه' : 'University Study'}</option>
+                      <option>{lang === 'fa' ? 'اشتغال و کار' : 'Work Permit'}</option>
+                      <option>{lang === 'fa' ? 'ثبت شرکت' : 'Company Registration'}</option>
+                    </select>
+                  </div>
+                  <textarea rows="3" placeholder={lang === 'fa' ? 'توضیحات تکمیلی...' : 'Additional Details...'} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl"></textarea>
+                  <button type="submit" className="w-full py-4 bg-[#002B7F] text-white font-bold rounded-xl shadow-lg hover:bg-[#002266] transition-all">
+                    {lang === 'fa' ? 'ارسال درخواست ارزیابی' : 'Submit Evaluation Request'}
+                  </button>
+                </form>
+              )}
+            </section>
+
+          </main>
+
+          {/* Footer */}
+          <footer className="bg-slate-900 text-slate-400 py-12 text-xs border-t border-slate-800">
+            <div className="max-w-7xl mx-auto px-4 text-center space-y-4">
+              <p className="font-bold text-white text-base">{t.brandName} | Dar Romania</p>
+              <p className="max-w-2xl mx-auto leading-relaxed">
+                {lang === 'fa' 
+                  ? 'موسسه در رومانی ارائه دهنده خدمات مشاوره و ارزیابی اولیه پرونده‌های حقوقی و آموزشی در رومانی است. تصمیم‌گیری نهایی صراحتاً در اختیار سفارت و دولت رومانی می‌باشد.'
+                  : 'Dar Romania provides legal advisory and evaluation support. Final visa decisions rest solely under official Romanian government jurisdiction.'}
+              </p>
+              <p className="text-slate-500">© 2026 Dar Romania | In Romania. All rights reserved.</p>
+            </div>
+          </footer>
+
+          {/* Modal */}
+          {modalOpen && (
+            <div className="fixed inset-0 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+              <div className="bg-white p-6 rounded-3xl max-w-lg w-full space-y-4 relative">
+                <button onClick={() => setModalOpen(false)} className="absolute top-4 left-4 text-xl font-bold">✕</button>
+                <h3 className="font-bold text-lg text-slate-900">{t.freeEval}</h3>
+                <form onSubmit={handleFormSubmit} className="space-y-3 text-xs">
+                  <input required placeholder={lang === 'fa' ? 'نام و نام خانوادگی' : 'Full Name'} className="w-full p-3 bg-slate-50 border rounded-xl" />
+                  <input required type="email" placeholder="Email" className="w-full p-3 bg-slate-50 border rounded-xl" />
+                  <input required type="tel" placeholder="WhatsApp" className="w-full p-3 bg-slate-50 border rounded-xl" />
+                  <button type="submit" className="w-full py-3 bg-[#002B7F] text-white font-bold rounded-xl">{lang === 'fa' ? 'ثبت درخواست' : 'Submit'}</button>
+                </form>
+              </div>
+            </div>
+          )}
+
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+
+</body>
+</html>
