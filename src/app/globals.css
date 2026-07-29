@@ -1,37 +1,80 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Vazirmatn:wght@400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --romania-blue: #002B7F;
+  /* Romanian Flag Brand Colors */
+  --romania-blue: #0038A8;
+  --romania-blue-dark: #002B7F;
+  --romania-blue-deep: #071E3D;
+
   --romania-yellow: #FCD116;
+  --romania-yellow-soft: #FFF7CC;
+
   --romania-red: #CE1126;
-  --font-persian: 'Vazirmatn', sans-serif;
+  --romania-red-dark: #A80E20;
+  --romania-red-soft: #FFF0F2;
+
+  /* Neutrals */
+  --background-main: #F7F9FC;
+  --background-white: #FFFFFF;
+  --background-muted: #EEF3F8;
+
+  --text-primary: #122033;
+  --text-secondary: #516174;
+  --text-muted: #7B8796;
+
+  --border-light: #DDE5EE;
+  --border-medium: #C9D4E1;
+
+  --font-persian: 'Vazirmatn', Tahoma, Arial, sans-serif;
   --font-english: 'Inter', sans-serif;
 }
 
 body {
   font-family: var(--font-persian);
-  background-color: #F8FAFC;
-  color: #0F172A;
+  background-color: var(--background-main);
+  color: var(--text-primary);
+  line-height: 1.9;
   overflow-x: hidden;
 }
 
-/* Custom scrollbar */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.35;
+  color: var(--text-primary);
+}
+
+.romania-card-shadow {
+  box-shadow: 0 12px 35px rgba(7, 30, 61, 0.07);
+}
+
+.romania-card-shadow-hover:hover {
+  box-shadow: 0 18px 45px rgba(7, 30, 61, 0.12);
+}
+
+.romania-tricolor-bar {
+  height: 4px;
+  width: 100%;
+  display: flex;
+}
+.romania-tricolor-bar > div:nth-child(1) { background-color: var(--romania-blue); width: 33.333%; }
+.romania-tricolor-bar > div:nth-child(2) { background-color: var(--romania-yellow); width: 33.333%; }
+.romania-tricolor-bar > div:nth-child(3) { background-color: var(--romania-red); width: 33.333%; }
+
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: var(--background-muted);
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: var(--border-medium);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #002B7F;
+  background: var(--romania-blue);
 }
 
 @keyframes fadeIn {
@@ -40,5 +83,5 @@ body {
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.3s ease-out forwards;
+  animation: fadeIn 0.25s ease-out forwards;
 }
