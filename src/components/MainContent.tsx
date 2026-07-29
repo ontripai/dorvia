@@ -12,6 +12,9 @@ import { LeadForm } from './LeadForm';
 import { TrustSection } from './TrustSection';
 import { AudienceSelector } from './AudienceSelector';
 import { ProcessTimeline } from './ProcessTimeline';
+import { FAQAccordion } from './FAQAccordion';
+import { OfficialResourceCard } from './OfficialResourceCard';
+import { Button } from './Button';
 import { 
   GraduationCap, 
   BriefcaseBusiness, 
@@ -52,14 +55,14 @@ export const MainContent: React.FC<MainContentProps> = ({
   switch (activeRoute) {
     
     // -------------------------------------------------------------
-    // 1. HOME PAGE (Premium European Editorial Experience)
+    // 1. HOME PAGE (Master 20-Step Visual Sequence & Mona Benchmarks)
     // -------------------------------------------------------------
     case 'home':
     default:
       return (
         <div className="space-y-0 -mt-8 sm:-mt-12">
           
-          {/* Section 1: Premium Editorial Hero (55% Content / 45% Image Composition) */}
+          {/* Step 3: Focused Romania Hero (55% Content / 45% Visual Composition) */}
           <section className="dark-hero-panel py-20 sm:py-28 relative overflow-hidden rounded-b-[28px] shadow-2xl min-h-[680px] flex items-center">
             
             {/* Ambient Lighting Background */}
@@ -88,22 +91,26 @@ export const MainContent: React.FC<MainContentProps> = ({
                       : 'Verified insights, eligibility audits, and structured advisory for global applicants exploring legal opportunities in Romania.'}
                   </p>
 
-                  {/* Hero Action Button Hierarchy */}
+                  {/* Hero Action Buttons Hierarchy */}
                   <div className="pt-3 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                    <button
+                    <Button
+                      variant="accent"
+                      size="lg"
                       onClick={onOpenEvaluationModal}
-                      className="w-full sm:w-auto bg-[#fcd116] hover:bg-yellow-400 text-[#06162d] font-extrabold px-8 py-4 rounded-xl text-sm flex items-center justify-center space-x-2 rtl:space-x-reverse shadow-xl transition-all cursor-pointer"
+                      rightIcon={<ArrowIcon size={16} />}
+                      className="w-full sm:w-auto"
                     >
-                      <span>{t.hero.ctaPrimary}</span>
-                      <ArrowIcon size={16} />
-                    </button>
+                      {t.hero.ctaPrimary}
+                    </Button>
 
-                    <button
+                    <Button
+                      variant="outline"
+                      size="lg"
                       onClick={() => onNavigate('services')}
-                      className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-bold px-8 py-4 rounded-xl text-sm border border-white/30 backdrop-blur transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse cursor-pointer"
+                      className="w-full sm:w-auto"
                     >
-                      <span>{currentLang === 'fa' ? 'مشاهده مسیرهای رومانی' : 'Explore Legal Pathways'}</span>
-                    </button>
+                      {currentLang === 'fa' ? 'مشاهده مسیرها' : 'Explore Pathways'}
+                    </Button>
                   </div>
 
                   {/* Tertiary Link */}
@@ -119,11 +126,10 @@ export const MainContent: React.FC<MainContentProps> = ({
 
                 </div>
 
-                {/* Visual Image Composition Column (45% desktop width = 5 cols) */}
+                {/* Visual Composition Column (45% desktop width = 5 cols) */}
                 <div className="lg:col-span-5 relative">
                   <div className="relative mx-auto max-w-md lg:max-w-none">
                     
-                    {/* Primary Photo Container */}
                     <div className="relative overflow-hidden rounded-[28px] border border-white/20 bg-slate-900/90 shadow-2xl p-6 space-y-4">
                       
                       <div className="flex items-center justify-between text-xs text-slate-200 font-bold border-b border-white/15 pb-3">
@@ -131,7 +137,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                           <Landmark size={16} />
                           <span>Bucharest • European Union</span>
                         </span>
-                        <span className="bg-[#0038a8] px-2.5 py-1 rounded-md text-[11px] text-white border border-blue-400/30">Schengen Zone</span>
+                        <span className="bg-[#0038a8] px-2.5 py-1 rounded-md text-[11px] text-white border border-blue-400/30">Schengen Member</span>
                       </div>
 
                       <div className="space-y-3 pt-1 text-xs">
@@ -162,44 +168,44 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
           </section>
 
-          {/* Section 2: Official Trust Strip */}
+          {/* Step 4: Compact Trust Strip */}
           <section className="bg-white border-b border-[#dfe6ef] py-6">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center text-xs font-bold text-[#142033]">
                 
                 <div className="flex items-center justify-center space-x-3 rtl:space-x-reverse py-1">
                   <Landmark size={20} className="text-[#0038a8]" />
-                  <span>{currentLang === 'fa' ? 'اطلاعات قابل‌بررسی از منابع رسمی' : 'Verified Official Sources'}</span>
+                  <span>{currentLang === 'fa' ? 'اطلاعات مبتنی بر منابع رسمی' : 'Sourced from Official Portals'}</span>
                 </div>
 
                 <div className="flex items-center justify-center space-x-3 rtl:space-x-reverse py-1 border-y md:border-y-0 md:border-x border-[#dfe6ef]">
                   <FileCheck2 size={20} className="text-[#0038a8]" />
-                  <span>{currentLang === 'fa' ? 'ارزیابی متناسب با شرایط شخصی' : 'Tailored Eligibility Audit'}</span>
+                  <span>{currentLang === 'fa' ? 'بررسی متناسب با شرایط متقاضی' : 'Tailored Applicant Assessment'}</span>
                 </div>
 
                 <div className="flex items-center justify-center space-x-3 rtl:space-x-reverse py-1">
                   <ShieldCheck size={20} className="text-emerald-700" />
-                  <span>{currentLang === 'fa' ? 'پاسخگویی بدون وعده‌های غیرواقعی' : 'Transparent & Legal Compliance'}</span>
+                  <span>{currentLang === 'fa' ? 'عدم ارائه وعده غیرواقعی' : 'No Unverified Promises'}</span>
                 </div>
 
               </div>
             </div>
           </section>
 
-          {/* Section 3: Interactive Audience Goal Selector */}
+          {/* Step 5: Goal Selector */}
           <AudienceSelector
             currentLang={currentLang}
             onNavigate={onNavigate}
             onOpenEvaluationModal={onOpenEvaluationModal}
           />
 
-          {/* Section 4: Main Pathways Grid (3 cols x 2 rows) */}
+          {/* Step 6: Main Pathways Grid */}
           <section className="py-20 bg-white">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
               
               <div className="text-center space-y-3 max-w-2xl mx-auto mb-14">
                 <span className="text-xs font-extrabold uppercase tracking-widest text-[#0038a8]">
-                  {currentLang === 'fa' ? 'مسیرهای ورود قانونی' : 'Primary Pathways'}
+                  {currentLang === 'fa' ? 'مسیرهای قانونی' : 'Legal Pathways'}
                 </span>
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-[#142033]">
                   {t.pathways.title}
@@ -263,16 +269,15 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
           </section>
 
-          {/* Section 5: "Why Romania?" Editorial Two-Column Section */}
+          {/* Step 7: "Why Romania?" Editorial Split Section */}
           <section className="py-20 bg-[#f7f9fc] border-y border-[#dfe6ef]">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
-                {/* Left Column: Facts & Images */}
                 <div className="lg:col-span-5 space-y-4">
                   <div className="editorial-card p-6 space-y-4 bg-white border border-[#dfe6ef]">
                     <div className="flex items-center justify-between border-b border-[#dfe6ef] pb-3 text-xs font-bold text-[#142033]">
-                      <span>🇷🇴 {currentLang === 'fa' ? 'شناسنامه کشور رومانی' : 'Romania Snapshot'}</span>
+                      <span>🇷🇴 {currentLang === 'fa' ? 'شناسنامه کشور رومانی' : 'Romania Country Profile'}</span>
                       <span className="text-[#0038a8]">EU & Schengen</span>
                     </div>
 
@@ -282,25 +287,24 @@ export const MainContent: React.FC<MainContentProps> = ({
                         <span className="font-bold text-[#142033]">Bucharest</span>
                       </div>
                       <div className="p-3 rounded-xl bg-[#eef3f8] flex items-center justify-between font-medium">
-                        <span>{currentLang === 'fa' ? 'عضویت در شنگن:' : 'Schengen Status:'}</span>
+                        <span>{currentLang === 'fa' ? 'عضویت در شنگن:' : 'Schengen Area:'}</span>
                         <span className="font-bold text-emerald-700">{currentLang === 'fa' ? 'عضو رسمی' : 'Full Member'}</span>
                       </div>
                       <div className="p-3 rounded-xl bg-[#eef3f8] flex items-center justify-between font-medium">
-                        <span>{currentLang === 'fa' ? 'زبان رسمی / تدریس:' : 'Official Languages:'}</span>
-                        <span className="font-bold text-[#142033]">Romanian, English, French</span>
+                        <span>{currentLang === 'fa' ? 'زبان‌های تدریس:' : 'Languages of Instruction:'}</span>
+                        <span className="font-bold text-[#142033]">English, French, Romanian</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Right Column: 4 Editorial Advantages */}
                 <div className="lg:col-span-7 space-y-6">
                   <div className="space-y-2">
                     <span className="text-xs font-extrabold uppercase tracking-widest text-[#0038a8]">
                       {t.whyRomania.eyebrow}
                     </span>
                     <h2 className="text-3xl font-extrabold text-[#142033]">
-                      {t.whyRomania.title}
+                      {currentLang === 'fa' ? 'کشوری اروپایی با فرصت‌های متنوع برای تحصیل، کار و کسب‌وکار' : 'A European Nation Offering Diverse Academic & Business Growth'}
                     </h2>
                   </div>
 
@@ -318,10 +322,10 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
           </section>
 
-          {/* Section 6: Process Timeline */}
+          {/* Step 10: Process Timeline */}
           <ProcessTimeline currentLang={currentLang} />
 
-          {/* Section 7: Featured Universities */}
+          {/* Step 11: Featured Universities */}
           <section className="py-20 bg-white">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
               
@@ -334,13 +338,14 @@ export const MainContent: React.FC<MainContentProps> = ({
                     {currentLang === 'fa' ? 'آموزش عالی رومانی' : 'Accredited Romanian Universities'}
                   </h2>
                 </div>
-                <button
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={() => onNavigate('universities')}
-                  className="text-xs font-bold text-[#0038a8] hover:underline flex items-center space-x-1 rtl:space-x-reverse cursor-pointer"
+                  rightIcon={<ArrowIcon size={14} />}
                 >
-                  <span>{currentLang === 'fa' ? 'مشاهده همه دانشگاه‌ها' : 'View All Universities'}</span>
-                  <ArrowIcon size={14} />
-                </button>
+                  {currentLang === 'fa' ? 'مشاهده همه دانشگاه‌ها' : 'View All Universities'}
+                </Button>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -357,7 +362,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
           </section>
 
-          {/* Section 8: Key Cities */}
+          {/* Step 12: Featured Cities */}
           <section className="py-20 bg-[#f7f9fc] border-y border-[#dfe6ef]">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
               
@@ -370,13 +375,14 @@ export const MainContent: React.FC<MainContentProps> = ({
                     {currentLang === 'fa' ? 'شهرهای رومانی برای استقرار' : 'Top Cities for Relocation'}
                   </h2>
                 </div>
-                <button
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={() => onNavigate('cities')}
-                  className="text-xs font-bold text-[#0038a8] hover:underline flex items-center space-x-1 rtl:space-x-reverse cursor-pointer"
+                  rightIcon={<ArrowIcon size={14} />}
                 >
-                  <span>{currentLang === 'fa' ? 'مقایسه شهرهای رومانی' : 'Compare Cities'}</span>
-                  <ArrowIcon size={14} />
-                </button>
+                  {currentLang === 'fa' ? 'مقایسه شهرهای رومانی' : 'Compare Cities'}
+                </Button>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -393,20 +399,69 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
           </section>
 
-          {/* Section 9: Interactive Multi-Step Lead Form */}
-          <section id="evaluation-form-section" className="py-20 bg-white">
+          {/* Step 13: Official Resources Section */}
+          <section className="py-20 bg-white">
+            <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+              <div className="text-center space-y-2 max-w-2xl mx-auto">
+                <span className="text-xs font-extrabold uppercase tracking-widest text-[#0038a8]">
+                  {currentLang === 'fa' ? 'منابع قانونی' : 'Official Portals'}
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142033]">
+                  {currentLang === 'fa' ? 'درگاه‌های رسمی و دولتی رومانی' : 'Official Romanian Authorities'}
+                </h2>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <OfficialResourceCard
+                  currentLang={currentLang}
+                  title={currentLang === 'fa' ? 'اداره کل مهاجرت (IGI)' : 'General Inspectorate for Immigration'}
+                  category={currentLang === 'fa' ? 'اقامت و ویزا' : 'Residency & Visa'}
+                  domain="igi.mai.gov.ro"
+                  url="https://igi.mai.gov.ro"
+                  lastChecked="2026"
+                />
+                <OfficialResourceCard
+                  currentLang={currentLang}
+                  title={currentLang === 'fa' ? 'وزارت امور خارجه (MAE)' : 'Ministry of Foreign Affairs'}
+                  category={currentLang === 'fa' ? 'کنسولی' : 'Consular'}
+                  domain="mae.ro"
+                  url="https://mae.ro"
+                  lastChecked="2026"
+                />
+                <OfficialResourceCard
+                  currentLang={currentLang}
+                  title={currentLang === 'fa' ? 'وزارت آموزش رومانی' : 'Ministry of Education'}
+                  category={currentLang === 'fa' ? 'تاییدیه مدارک' : 'Academic Verification'}
+                  domain="edu.ro"
+                  url="https://edu.ro"
+                  lastChecked="2026"
+                />
+                <OfficialResourceCard
+                  currentLang={currentLang}
+                  title={currentLang === 'fa' ? 'اداره ثبت شرکت‌ها (ONRC)' : 'National Trade Register Office'}
+                  category={currentLang === 'fa' ? 'تجاری' : 'Corporate'}
+                  domain="onrc.ro"
+                  url="https://onrc.ro"
+                  lastChecked="2026"
+                />
+              </div>
+            </div>
+          </section>
+
+          {/* Step 14: Multi-Step Assessment Form */}
+          <section id="evaluation-form-section" className="py-20 bg-[#f7f9fc] border-y border-[#dfe6ef]">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
               <LeadForm currentLang={currentLang} />
             </div>
           </section>
 
-          {/* Section 10: Trust Principles Section */}
-          <section className="py-20 bg-[#f7f9fc] border-t border-[#dfe6ef]">
+          {/* Step 16: Working Principles */}
+          <section className="py-20 bg-white border-b border-[#dfe6ef]">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
               
               <div className="text-center space-y-2 max-w-2xl mx-auto">
                 <span className="text-xs font-extrabold uppercase tracking-widest text-[#0038a8]">
-                  {currentLang === 'fa' ? 'اصول اخلاقی و حقوقی ما' : 'Trust Principles'}
+                  {currentLang === 'fa' ? 'اصول اخلاقی و حقوقی' : 'Working Principles'}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142033]">
                   {currentLang === 'fa' ? 'شفافیت کامل در ارائه خدمات' : 'Our Professional Commitments'}
@@ -417,50 +472,74 @@ export const MainContent: React.FC<MainContentProps> = ({
                 <div className="editorial-card p-6 bg-white space-y-3">
                   <FileCheck2 size={24} className="text-[#0038a8]" />
                   <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'اطلاعات قابل بررسی' : 'Verified Insights'}</h3>
-                  <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'تمام قوانین و ضوابط اعلام شده مستقیماً از منابع رسمی سفارت و IGI می‌باشد.' : 'Content sourced directly from official Embassy and IGI documentation.'}</p>
+                  <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'مطالب مهم حقوقی و دانشگاهی همراه با منبع و تاریخ آخرین بررسی منتشر می‌شوند.' : 'Sourced from official Romanian embassy and IGI documentation.'}</p>
                 </div>
 
                 <div className="editorial-card p-6 bg-white space-y-3">
                   <Scale size={24} className="text-[#0038a8]" />
-                  <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'شفافیت در حدود خدمات' : 'Scope Clarity'}</h3>
-                  <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'تعهد کامل به شفاف‌سازی هزینه‌ها و عدم ارائه وعده‌های بدون پشتوانه.' : 'Clear scope definition and fee transparency without unbacked claims.'}</p>
+                  <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'شفافیت در حدود خدمات' : 'Scope Transparency'}</h3>
+                  <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'پیش از شروع همکاری، محدوده خدمات، هزینه‌ها و مسئولیت‌های طرفین توضیح داده می‌شود.' : 'Scope of service, timelines, and costs defined clearly in advance.'}</p>
                 </div>
 
                 <div className="editorial-card p-6 bg-white space-y-3">
                   <ShieldCheck size={24} className="text-[#0038a8]" />
                   <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'عدم تضمین نتیجه' : 'Honest Legal Limits'}</h3>
-                  <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'صداقت حقوقی درباره اینکه صدور ویزا صراحتاً در صلاحیت سفارت است.' : 'Legal honesty acknowledging that visa decisions rest strictly with embassies.'}</p>
+                  <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'تصمیم نهایی درباره پذیرش، ویزا و اقامت صراحتاً در اختیار مراجع مربوطه است.' : 'Legal honesty acknowledging that visa issuance rests strictly with authorities.'}</p>
                 </div>
 
                 <div className="editorial-card p-6 bg-white space-y-3">
                   <LockKeyhole size={24} className="text-[#0038a8]" />
                   <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'حفظ حریم خصوصی' : 'GDPR Compliance'}</h3>
-                  <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'نگهداری محرمانه تمامی اطلاعات ارزیابی طبق استانداردهای GDPR اتحادیه اروپا.' : 'Strict data privacy compliance under European GDPR standards.'}</p>
+                  <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'اطلاعات متقاضیان فقط برای ارائه خدمات و ارتباط مرتبط پردازش می‌شود.' : 'Data stored securely under European Union GDPR regulations.'}</p>
                 </div>
               </div>
 
             </div>
           </section>
 
-          {/* Section 11: Final CTA Banner */}
+          {/* Step 17: FAQ Accordion */}
+          <section className="py-20 bg-[#f7f9fc]">
+            <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+              <div className="text-center space-y-2 max-w-2xl mx-auto">
+                <span className="text-xs font-extrabold uppercase tracking-widest text-[#0038a8]">
+                  {currentLang === 'fa' ? 'پرسش‌های متداول' : 'Frequently Asked Questions'}
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142033]">
+                  {currentLang === 'fa' ? 'پاسخ به سوالات کلیدی متقاضیان' : 'Key Information & Clarifications'}
+                </h2>
+              </div>
+
+              <FAQAccordion currentLang={currentLang} />
+            </div>
+          </section>
+
+          {/* Step 18: Final CTA Banner */}
           <section className="dark-hero-panel py-16 text-white text-center space-y-6">
             <div className="max-w-[800px] mx-auto px-4 space-y-4">
               <h2 className="text-2xl sm:text-4xl font-extrabold text-white">
-                {currentLang === 'fa' ? 'آماده بررسی اولیه شرایط پرونده خود هستید؟' : 'Ready to Assess Your Legal Eligibility?'}
+                {currentLang === 'fa' ? 'برای انتخاب مسیر مناسب رومانی نیاز به راهنمایی دارید؟' : 'Ready to Assess Your Legal Eligibility?'}
               </h2>
               <p className="text-xs sm:text-sm text-slate-200 leading-relaxed max-w-xl mx-auto">
                 {currentLang === 'fa'
-                  ? 'ارزیابی اولیه بدون هزینه انجام می‌شود و مشاوران ما بهترین گزینه‌های ممکن را پیشنهاد خواهند داد.'
-                  : 'Start your free assessment today and receive structured guidance from our Romanian advisory team.'}
+                  ? 'اطلاعات اولیه خود را ارسال کنید تا گزینه‌های قابل بررسی برای تحصیل، کار، کسب‌وکار یا زندگی در رومانی مشخص شوند.'
+                  : 'Submit your basic background details for a clear, personalized evaluation of options in Romania.'}
               </p>
-              <div className="pt-2">
-                <button
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button
+                  variant="accent"
+                  size="md"
                   onClick={onOpenEvaluationModal}
-                  className="bg-[#fcd116] hover:bg-yellow-400 text-[#06162d] font-extrabold px-8 py-4 rounded-xl text-xs inline-flex items-center space-x-2 rtl:space-x-reverse cursor-pointer shadow-lg"
+                  rightIcon={<ArrowIcon size={16} />}
                 >
-                  <span>{t.hero.ctaPrimary}</span>
-                  <ArrowIcon size={16} />
-                </button>
+                  {currentLang === 'fa' ? 'شروع ارزیابی رایگان' : 'Start Free Assessment'}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="md"
+                  onClick={onOpenEvaluationModal}
+                >
+                  {currentLang === 'fa' ? 'رزرو مشاوره' : 'Schedule Consultation'}
+                </Button>
               </div>
             </div>
           </section>
@@ -469,7 +548,7 @@ export const MainContent: React.FC<MainContentProps> = ({
       );
 
     // -------------------------------------------------------------
-    // OTHER ROUTE PAGES (IMMIGRATION, STUDY, WORK, etc.)
+    // OTHER ROUTE PAGES
     // -------------------------------------------------------------
     case 'immigration':
       return (
@@ -492,19 +571,17 @@ export const MainContent: React.FC<MainContentProps> = ({
             <div className="editorial-card p-6 space-y-3 bg-white">
               <h3 className="text-lg font-bold text-[#0038a8]">🎓 {t.pathways.study.title}</h3>
               <p className="text-xs text-[#526174] leading-relaxed">{t.pathways.study.desc}</p>
-              <button onClick={() => onNavigate('study')} className="text-xs font-bold text-[#0038a8] hover:underline flex items-center space-x-1 rtl:space-x-reverse cursor-pointer">
-                <span>{currentLang === 'fa' ? 'جزئیات تحصیل در رومانی' : 'Study Details'}</span>
-                <ArrowIcon size={14} />
-              </button>
+              <Button variant="ghost" size="sm" onClick={() => onNavigate('study')} rightIcon={<ArrowIcon size={14} />}>
+                {currentLang === 'fa' ? 'جزئیات تحصیل در رومانی' : 'Study Details'}
+              </Button>
             </div>
 
             <div className="editorial-card p-6 space-y-3 bg-white">
               <h3 className="text-lg font-bold text-[#0038a8]">💼 {t.pathways.work.title}</h3>
               <p className="text-xs text-[#526174] leading-relaxed">{t.pathways.work.desc}</p>
-              <button onClick={() => onNavigate('work')} className="text-xs font-bold text-[#0038a8] hover:underline flex items-center space-x-1 rtl:space-x-reverse cursor-pointer">
-                <span>{currentLang === 'fa' ? 'جزئیات اشتغال و ویزای کار' : 'Work Permit Details'}</span>
-                <ArrowIcon size={14} />
-              </button>
+              <Button variant="ghost" size="sm" onClick={() => onNavigate('work')} rightIcon={<ArrowIcon size={14} />}>
+                {currentLang === 'fa' ? 'جزئیات اشتغال و ویزای کار' : 'Work Permit Details'}
+              </Button>
             </div>
           </div>
 
