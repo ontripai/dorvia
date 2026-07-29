@@ -4,7 +4,6 @@ import React from 'react';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { AlertCircle, MapPin, Mail } from './Icons';
 
 interface FooterProps {
   currentLang: Language;
@@ -43,7 +42,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
                 <span className="text-xl font-bold text-white tracking-tight block">
                   {t.brand.name}
                 </span>
-                <span className="text-xs text-slate-400 font-medium">
+                <span className="text-xs text-slate-400 font-medium block">
                   {t.brand.subtitle}
                 </span>
               </div>
@@ -150,12 +149,10 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
               </li>
               <li className="pt-2 text-xs text-slate-400 space-y-1">
                 <div className="flex items-center space-x-1.5 rtl:space-x-reverse">
-                  <MapPin className="w-3.5 h-3.5 text-[#FCD116]" />
-                  <span>{t.footer.address}</span>
+                  <span>📍 Bucharest, Romania</span>
                 </div>
                 <div className="flex items-center space-x-1.5 rtl:space-x-reverse">
-                  <Mail className="w-3.5 h-3.5 text-[#FCD116]" />
-                  <span>{t.footer.email}</span>
+                  <span>✉️ info@darromania.com</span>
                 </div>
               </li>
             </ul>
@@ -165,7 +162,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
 
         {/* Legal Notice Footer Banner */}
         <div className="mt-8 bg-slate-900/80 border border-slate-800 rounded-2xl p-4 text-xs text-slate-400 leading-relaxed flex items-start space-x-3 rtl:space-x-reverse">
-          <AlertCircle className="w-4 h-4 text-[#FCD116] shrink-0 mt-0.5" />
+          <span className="text-[#FCD116] font-bold text-sm">ℹ️</span>
           <p>{t.disclaimer.text}</p>
         </div>
 
