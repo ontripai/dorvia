@@ -43,7 +43,7 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
     onClose();
   };
 
-  // IMMIGRATION MEGA MENU
+  // 1. IMMIGRATION MEGA MENU
   if (type === 'immigration') {
     return (
       <div ref={menuRef} className="absolute top-full left-0 right-0 z-50 bg-white border-b border-[#dfe6ef] shadow-2xl py-8 animate-fadeIn">
@@ -119,7 +119,7 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
     );
   }
 
-  // STUDY MEGA MENU
+  // 2. STUDY MEGA MENU
   if (type === 'study') {
     return (
       <div ref={menuRef} className="absolute top-full left-0 right-0 z-50 bg-white border-b border-[#dfe6ef] shadow-2xl py-8 animate-fadeIn">
@@ -168,7 +168,7 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
     );
   }
 
-  // BUSINESS MEGA MENU
+  // 3. BUSINESS MEGA MENU
   if (type === 'business') {
     return (
       <div ref={menuRef} className="absolute top-full left-0 right-0 z-50 bg-white border-b border-[#dfe6ef] shadow-2xl py-8 animate-fadeIn">
@@ -200,10 +200,11 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
 
           </div>
         </div>
-      );
+      </div>
+    );
   }
 
-  // NEW: NEEDS MEGA MENU ("نیازها در رومانی")
+  // 4. NEEDS MEGA MENU ("نیازها در رومانی")
   if (type === 'needs') {
     return (
       <div ref={menuRef} className="absolute top-full left-0 right-0 z-50 bg-white border-b border-[#dfe6ef] shadow-2xl py-8 animate-fadeIn">
@@ -262,7 +263,7 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
     );
   }
 
-  // NEW: ROMANIA MEGA MENU ("رومانی")
+  // 5. ROMANIA MEGA MENU ("رومانی")
   return (
     <div ref={menuRef} className="absolute top-full left-0 right-0 z-50 bg-white border-b border-[#dfe6ef] shadow-2xl py-8 animate-fadeIn">
       <div className="max-w-[1280px] mx-auto px-8">
