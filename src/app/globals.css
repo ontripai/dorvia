@@ -57,6 +57,19 @@
   --shadow-floating: 0 24px 65px rgba(7, 30, 61, 0.16);
 }
 
+/* Browser CSS Resets for Buttons and Inputs */
+button, input, select, textarea {
+  font-family: inherit;
+  outline: none;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
 body {
   font-family: var(--font-persian);
   background-color: var(--background);
@@ -65,6 +78,8 @@ body {
   line-height: 1.95;
   font-weight: 400;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
