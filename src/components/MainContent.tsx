@@ -14,6 +14,8 @@ import { AudienceSelector } from './AudienceSelector';
 import { ProcessTimeline } from './ProcessTimeline';
 import { FAQAccordion } from './FAQAccordion';
 import { OfficialResourceCard } from './OfficialResourceCard';
+import { NeedsContent } from './NeedsContent';
+import { RomaniaOverviewContent } from './RomaniaOverviewContent';
 import { Button } from './Button';
 import { 
   GraduationCap, 
@@ -51,18 +53,43 @@ export const MainContent: React.FC<MainContentProps> = ({
   const [uniSearch, setUniSearch] = useState('');
   const [citySearch, setCitySearch] = useState('');
 
+  // HANDLE PREFIXED SUB-ROUTES FOR NEEDS AND ROMANIA
+  if (activeRoute.startsWith('needs')) {
+    const sub = activeRoute.split('/')[1] || 'first-days-checklist';
+    return (
+      <NeedsContent
+        subRoute={sub}
+        currentLang={currentLang}
+        onNavigate={onNavigate}
+        onOpenEvaluationModal={onOpenEvaluationModal}
+      />
+    );
+  }
+
+  if (activeRoute.startsWith('romania')) {
+    const sub = activeRoute.split('/')[1] || 'economy';
+    return (
+      <RomaniaOverviewContent
+        subRoute={sub}
+        currentLang={currentLang}
+        onNavigate={onNavigate}
+        onOpenEvaluationModal={onOpenEvaluationModal}
+      />
+    );
+  }
+
   // RENDER PAGE BY ROUTE ID
   switch (activeRoute) {
     
     // -------------------------------------------------------------
-    // 1. HOME PAGE (Master 20-Step Visual Sequence & Mona Benchmarks)
+    // 1. HOME PAGE (Master Visual Sequence & Mona Benchmarks)
     // -------------------------------------------------------------
     case 'home':
     default:
       return (
         <div className="space-y-0">
           
-          {/* Step 3: Focused Romania Hero (55% Content / 45% Visual Composition) */}
+          {/* Focused Romania Hero (55% Content / 45% Visual Composition) */}
           <section className="dark-hero-panel py-20 sm:py-28 relative overflow-hidden rounded-b-[28px] shadow-2xl min-h-[680px] flex items-center">
             
             {/* Ambient Lighting Background */}
@@ -168,7 +195,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
           </section>
 
-          {/* Step 4: Compact Trust Strip */}
+          {/* Compact Trust Strip */}
           <section className="bg-white border-b border-[#dfe6ef] py-6">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center text-xs font-bold text-[#142033]">
@@ -192,14 +219,14 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
           </section>
 
-          {/* Step 5: Goal Selector */}
+          {/* Goal Selector */}
           <AudienceSelector
             currentLang={currentLang}
             onNavigate={onNavigate}
             onOpenEvaluationModal={onOpenEvaluationModal}
           />
 
-          {/* Step 6: Main Pathways Grid */}
+          {/* Main Pathways Grid */}
           <section className="py-20 bg-white">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
               
@@ -262,14 +289,14 @@ export const MainContent: React.FC<MainContentProps> = ({
                   desc={t.pathways.living.desc}
                   icon={House}
                   badge={currentLang === 'fa' ? 'راهنمای استقرار' : 'Settlement'}
-                  onClick={() => onNavigate('living')}
+                  onClick={() => onNavigate('needs/first-days-checklist')}
                 />
               </div>
 
             </div>
           </section>
 
-          {/* Step 7: "Why Romania?" Editorial Split Section */}
+          {/* "Why Romania?" Editorial Split Section */}
           <section className="py-20 bg-[#f7f9fc] border-y border-[#dfe6ef]">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -322,10 +349,10 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
           </section>
 
-          {/* Step 10: Process Timeline */}
+          {/* Process Timeline */}
           <ProcessTimeline currentLang={currentLang} />
 
-          {/* Step 11: Featured Universities */}
+          {/* Featured Universities */}
           <section className="py-20 bg-white">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
               
@@ -362,7 +389,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
           </section>
 
-          {/* Step 12: Featured Cities */}
+          {/* Featured Cities */}
           <section className="py-20 bg-[#f7f9fc] border-y border-[#dfe6ef]">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
               
@@ -378,7 +405,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => onNavigate('cities')}
+                  onClick={() => onNavigate('romania/cities')}
                   rightIcon={<ArrowIcon size={14} />}
                 >
                   {currentLang === 'fa' ? 'مقایسه شهرهای رومانی' : 'Compare Cities'}
@@ -391,7 +418,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                     key={city.id}
                     city={city}
                     currentLang={currentLang}
-                    onSelect={() => onNavigate('cities')}
+                    onSelect={() => onNavigate('romania/cities')}
                   />
                 ))}
               </div>
@@ -399,7 +426,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
           </section>
 
-          {/* Step 13: Official Resources Section */}
+          {/* Official Resources Section */}
           <section className="py-20 bg-white">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
               <div className="text-center space-y-2 max-w-2xl mx-auto">
@@ -448,14 +475,14 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
           </section>
 
-          {/* Step 14: Multi-Step Assessment Form */}
+          {/* Multi-Step Assessment Form */}
           <section id="evaluation-form-section" className="py-20 bg-[#f7f9fc] border-y border-[#dfe6ef]">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
               <LeadForm currentLang={currentLang} />
             </div>
           </section>
 
-          {/* Step 16: Working Principles */}
+          {/* Working Principles */}
           <section className="py-20 bg-white border-b border-[#dfe6ef]">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
               
@@ -497,7 +524,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
           </section>
 
-          {/* Step 17: FAQ Accordion */}
+          {/* FAQ Accordion */}
           <section className="py-20 bg-[#f7f9fc]">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
               <div className="text-center space-y-2 max-w-2xl mx-auto">
@@ -513,7 +540,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
           </section>
 
-          {/* Step 18: Final CTA Banner */}
+          {/* Final CTA Banner */}
           <section className="dark-hero-panel py-16 text-white text-center space-y-6">
             <div className="max-w-[800px] mx-auto px-4 space-y-4">
               <h2 className="text-2xl sm:text-4xl font-extrabold text-white">
@@ -547,9 +574,7 @@ export const MainContent: React.FC<MainContentProps> = ({
         </div>
       );
 
-    // -------------------------------------------------------------
     // OTHER ROUTE PAGES
-    // -------------------------------------------------------------
     case 'immigration':
       return (
         <div className="space-y-12 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
@@ -679,22 +704,6 @@ export const MainContent: React.FC<MainContentProps> = ({
         </div>
       );
 
-    case 'living':
-      return (
-        <div className="space-y-12 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'زندگی و استقرار در رومانی' : 'Living in Romania'}
-            </h1>
-            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
-              {currentLang === 'fa'
-                ? 'بررسی هزینه‌های زندگی، اجاره مسکن، بیمه درمانی و شاخص‌های امنیت اجتماعی.'
-                : 'Living costs, apartment rentals, healthcare, and safety index across Romania.'}
-            </p>
-          </div>
-        </div>
-      );
-
     case 'universities':
       const filteredUnis = featuredUniversities.filter((uni) => {
         const nameMatches = uni.name[currentLang].toLowerCase().includes(uniSearch.toLowerCase());
@@ -758,20 +767,6 @@ export const MainContent: React.FC<MainContentProps> = ({
             {filteredCities.map((city) => (
               <CityCard key={city.id} city={city} currentLang={currentLang} onSelect={() => {}} />
             ))}
-          </div>
-        </div>
-      );
-
-    case 'about-romania':
-      return (
-        <div className="space-y-12 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'درباره کشور رومانی' : 'About Romania'}
-            </h1>
-            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
-              {t.aboutRomaniaIntro.desc}
-            </p>
           </div>
         </div>
       );

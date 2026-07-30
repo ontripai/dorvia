@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, GraduationCap, BriefcaseBusiness, Building2, Cha
 import { Button } from './Button';
 
 interface DesktopMegaMenuProps {
-  type: 'immigration' | 'study' | 'business' | 'romania';
+  type: 'immigration' | 'study' | 'business' | 'needs' | 'romania';
   currentLang: Language;
   onNavigate: (route: string) => void;
   onClose: () => void;
@@ -200,11 +200,69 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
 
           </div>
         </div>
+      );
+  }
+
+  // NEW: NEEDS MEGA MENU ("نیازها در رومانی")
+  if (type === 'needs') {
+    return (
+      <div ref={menuRef} className="absolute top-full left-0 right-0 z-50 bg-white border-b border-[#dfe6ef] shadow-2xl py-8 animate-fadeIn">
+        <div className="max-w-[1280px] mx-auto px-8">
+          <div className="grid grid-cols-12 gap-8 text-xs">
+            
+            <div className="col-span-4 space-y-3">
+              <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider border-b border-[#dfe6ef] pb-2">
+                {currentLang === 'fa' ? 'امور اداری و رسمی' : 'Official Services'}
+              </h4>
+              <ul className="space-y-2 text-[#526174] font-medium">
+                <li><button onClick={() => handleLinkClick('needs/currency-exchange')} className="hover:text-[#0038a8] py-1 cursor-pointer">💵 {currentLang === 'fa' ? 'صرافی و تبدیل پول (نرخ مرجع BNR)' : 'Currency Exchange & BNR Rates'}</button></li>
+                <li><button onClick={() => handleLinkClick('needs/driving-license')} className="hover:text-[#0038a8] py-1 cursor-pointer">🚗 {currentLang === 'fa' ? 'گواهینامه رانندگی و شرایط تبدیل' : 'Driving License Exchange'}</button></li>
+                <li><button onClick={() => handleLinkClick('needs/certified-translation')} className="hover:text-[#0038a8] py-1 cursor-pointer">📄 {currentLang === 'fa' ? 'دارالترجمه و مترجمین مجاز دادگستری' : 'Authorized Certified Translators'}</button></li>
+              </ul>
+            </div>
+
+            <div className="col-span-4 space-y-3">
+              <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider border-b border-[#dfe6ef] pb-2">
+                {currentLang === 'fa' ? 'استقرار و حقوقی' : 'Housing & Consular'}
+              </h4>
+              <ul className="space-y-2 text-[#526174] font-medium">
+                <li><button onClick={() => handleLinkClick('needs/notary-public')} className="hover:text-[#0038a8] py-1 cursor-pointer">⚖️ {currentLang === 'fa' ? 'دفتر اسناد رسمی (Notar Public)' : 'Notary Public Services'}</button></li>
+                <li><button onClick={() => handleLinkClick('needs/iranian-embassy-and-mikhak')} className="hover:text-[#0038a8] py-1 cursor-pointer">🇮🇷 {currentLang === 'fa' ? 'سفارت ایران در بخارست و سامانه میخک' : 'Iranian Embassy & Mikhak System'}</button></li>
+                <li><button onClick={() => handleLinkClick('needs/housing')} className="hover:text-[#0038a8] py-1 cursor-pointer">🏠 {currentLang === 'fa' ? 'راهنمای اجاره و خرید مسکن' : 'Renting & Buying Property'}</button></li>
+              </ul>
+            </div>
+
+            <div className="col-span-4 bg-[#06162d] text-white p-5 rounded-2xl flex flex-col justify-between shadow-lg">
+              <div className="space-y-2">
+                <span className="text-[11px] font-bold text-[#fcd116] uppercase tracking-wider">
+                  {currentLang === 'fa' ? 'تازه واردین' : 'New Arrivals'}
+                </span>
+                <h5 className="font-extrabold text-sm text-white leading-snug">
+                  {currentLang === 'fa' ? 'چک‌لیست روزهای نخست ورود' : 'First-Days Arrival Checklist'}
+                </h5>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  {currentLang === 'fa' ? 'اقدامات ضروری در ۷۲ ساعت، ۷ روز و ۳۰ روز اول ورود به رومانی.' : 'Essential tasks for your first 72 hours, 7 days & 30 days.'}
+                </p>
+              </div>
+
+              <Button
+                variant="accent"
+                size="sm"
+                onClick={() => handleLinkClick('needs/first-days-checklist')}
+                rightIcon={<ArrowIcon size={14} />}
+                className="mt-4 w-full"
+              >
+                {currentLang === 'fa' ? 'مشاهده چک‌لیست ورود' : 'View Arrival Checklist'}
+              </Button>
+            </div>
+
+          </div>
+        </div>
       </div>
     );
   }
 
-  // ROMANIA MEGA MENU
+  // NEW: ROMANIA MEGA MENU ("رومانی")
   return (
     <div ref={menuRef} className="absolute top-full left-0 right-0 z-50 bg-white border-b border-[#dfe6ef] shadow-2xl py-8 animate-fadeIn">
       <div className="max-w-[1280px] mx-auto px-8">
@@ -212,29 +270,29 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
           
           <div className="col-span-4 space-y-3">
             <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider border-b border-[#dfe6ef] pb-2">
-              {currentLang === 'fa' ? 'کشور رومانی' : 'Discover Romania'}
+              {currentLang === 'fa' ? 'شناخت رومانی' : 'Discover Romania'}
             </h4>
             <ul className="space-y-2 text-[#526174] font-medium">
-              <li><button onClick={() => handleLinkClick('about-romania')} className="hover:text-[#0038a8] py-1 cursor-pointer">{currentLang === 'fa' ? 'معرفی عمومی و عضویت در شنگن' : 'General Overview & Schengen Status'}</button></li>
-              <li><button onClick={() => handleLinkClick('living')} className="hover:text-[#0038a8] py-1 cursor-pointer">{currentLang === 'fa' ? 'هزینه‌های زندگی، اجاره و مسکن' : 'Cost of Living & Rent'}</button></li>
-              <li><button onClick={() => handleLinkClick('about-romania')} className="hover:text-[#0038a8] py-1 cursor-pointer">{currentLang === 'fa' ? 'اقتصاد، فناوری و بازار کار' : 'Economy & Tech Industry'}</button></li>
+              <li><button onClick={() => handleLinkClick('romania/economy')} className="hover:text-[#0038a8] py-1 cursor-pointer">📊 {currentLang === 'fa' ? 'اقتصاد، صنایع و درآمدها' : 'Economy, Industries & Wages'}</button></li>
+              <li><button onClick={() => handleLinkClick('romania/society')} className="hover:text-[#0038a8] py-1 cursor-pointer">👥 {currentLang === 'fa' ? 'جامعه، زبان و زندگی اجتماعی' : 'Society & Social Etiquette'}</button></li>
+              <li><button onClick={() => handleLinkClick('romania/culture-and-arts')} className="hover:text-[#0038a8] py-1 cursor-pointer">🎨 {currentLang === 'fa' ? 'فرهنگ، هنر و تاریخ رومانی' : 'Culture, Arts & Heritage'}</button></li>
             </ul>
           </div>
 
           <div className="col-span-4 space-y-3">
             <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider border-b border-[#dfe6ef] pb-2">
-              {currentLang === 'fa' ? 'شهرهای اصلی' : 'Key Cities'}
+              {currentLang === 'fa' ? 'قوانین و گردشگری' : 'Laws & Tourism'}
             </h4>
             <ul className="space-y-2 text-[#526174] font-medium">
-              <li><button onClick={() => handleLinkClick('cities')} className="hover:text-[#0038a8] py-1 cursor-pointer">🏛️ Bucharest (پایتخت و مرکز اقتصادی)</button></li>
-              <li><button onClick={() => handleLinkClick('cities')} className="hover:text-[#0038a8] py-1 cursor-pointer">💻 Cluj-Napoca (قطب فناوری و دانشگاهی)</button></li>
-              <li><button onClick={() => handleLinkClick('cities')} className="hover:text-[#0038a8] py-1 cursor-pointer">⚙️ Timișoara (مرکز صنعتی و مهندسی)</button></li>
+              <li><button onClick={() => handleLinkClick('romania/laws-and-regulations')} className="hover:text-[#0038a8] py-1 cursor-pointer">⚖️ {currentLang === 'fa' ? 'قوانین و مقررات مهم' : 'Key Laws & Regulations'}</button></li>
+              <li><button onClick={() => handleLinkClick('romania/tourism')} className="hover:text-[#0038a8] py-1 cursor-pointer">🏰 {currentLang === 'fa' ? 'راهنمای گردشگری و جاذبه‌ها' : 'Tourism & Itineraries'}</button></li>
+              <li><button onClick={() => handleLinkClick('romania/cities')} className="hover:text-[#0038a8] py-1 cursor-pointer">🏛️ {currentLang === 'fa' ? 'شهرهای اصلی رومانی' : 'Key Romanian Cities'}</button></li>
             </ul>
           </div>
 
           <div className="col-span-4 space-y-3">
             <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider border-b border-[#dfe6ef] pb-2">
-              {currentLang === 'fa' ? 'منابع رسمی' : 'Official Resources'}
+              {currentLang === 'fa' ? 'درگاه‌های قانونی رسمی' : 'Official Government Sites'}
             </h4>
             <ul className="space-y-2 text-[#526174] font-medium">
               <li><a href="https://igi.mai.gov.ro" target="_blank" rel="noopener noreferrer" className="hover:text-[#0038a8] flex items-center space-x-1.5 rtl:space-x-reverse py-1 cursor-pointer"><Landmark size={14} className="text-[#0038a8]" /><span>IGI (اداره کل مهاجرت)</span></a></li>

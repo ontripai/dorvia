@@ -68,27 +68,31 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
             </ul>
           </div>
 
-          {/* Col 3: Education & Cities */}
+          {/* Col 3: Essentials in Romania */}
           <div className="space-y-3">
             <h4 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
-              {currentLang === 'fa' ? 'دانشگاه‌ها و شهرها' : 'Universities & Cities'}
+              {currentLang === 'fa' ? 'نیازها در رومانی' : 'Essentials'}
             </h4>
             <ul className="space-y-2 text-slate-300">
-              <li><button onClick={() => onNavigate('universities')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.nav.universities}</button></li>
-              <li><button onClick={() => onNavigate('cities')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.nav.cities}</button></li>
-              <li><button onClick={() => onNavigate('living')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.nav.living}</button></li>
-              <li><button onClick={() => onNavigate('about-romania')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.nav.aboutRomania}</button></li>
+              <li><button onClick={() => onNavigate('needs/currency-exchange')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'صرافی و نرخ BNR' : 'Currency & BNR Rates'}</button></li>
+              <li><button onClick={() => onNavigate('needs/driving-license')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'گواهینامه رانندگی' : 'Driving License'}</button></li>
+              <li><button onClick={() => onNavigate('needs/certified-translation')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'دارالترجمه رسمی' : 'Certified Translation'}</button></li>
+              <li><button onClick={() => onNavigate('needs/notary-public')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'دفتر اسناد رسمی' : 'Notary Public'}</button></li>
+              <li><button onClick={() => onNavigate('needs/iranian-embassy-and-mikhak')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سفارت ایران و میخک' : 'Iranian Embassy & Mikhak'}</button></li>
+              <li><button onClick={() => onNavigate('needs/housing')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'اجاره و خرید مسکن' : 'Housing Guide'}</button></li>
             </ul>
           </div>
 
-          {/* Col 4: Legal Pages */}
+          {/* Col 4: Romania & Legal */}
           <div className="space-y-3">
             <h4 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
-              {t.footer.legalTitle}
+              {currentLang === 'fa' ? 'شناخت رومانی و حقوقی' : 'Romania & Legal'}
             </h4>
             <ul className="space-y-2 text-slate-300">
+              <li><button onClick={() => onNavigate('romania/economy')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'اقتصاد و صنایع رومانی' : 'Economy & Industries'}</button></li>
+              <li><button onClick={() => onNavigate('romania/cities')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'شهرهای رومانی' : 'Key Cities'}</button></li>
+              <li><button onClick={() => onNavigate('romania/tourism')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'راهنمای گردشگری' : 'Tourism Guide'}</button></li>
               <li><button onClick={() => onNavigate('legal/privacy')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سیاست حریم خصوصی' : 'Privacy Policy'}</button></li>
-              <li><button onClick={() => onNavigate('legal/terms')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'شرایط و قوانین' : 'Terms of Service'}</button></li>
               <li><button onClick={() => onNavigate('legal/disclaimer')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سلب مسئولیت قانونی' : 'Legal Disclaimer'}</button></li>
             </ul>
           </div>
