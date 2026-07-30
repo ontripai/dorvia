@@ -60,7 +60,7 @@ export const MainContent: React.FC<MainContentProps> = ({
     case 'home':
     default:
       return (
-        <div className="space-y-0 -mt-8 sm:-mt-12">
+        <div className="space-y-0">
           
           {/* Step 3: Focused Romania Hero (55% Content / 45% Visual Composition) */}
           <section className="dark-hero-panel py-20 sm:py-28 relative overflow-hidden rounded-b-[28px] shadow-2xl min-h-[680px] flex items-center">
@@ -155,7 +155,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                         </div>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-[#0038a8]/80 border border-[#fcd116]/30 text-center text-xs text-slate-100 font-bold shadow-inner">
+                      <div className="p-3 rounded-xl bg-[#0038a8]/80 border border-[#fcd116]/40 text-center text-xs text-slate-100 font-bold shadow-inner">
                         {currentLang === 'fa' ? 'ارزیابی حقوقی پرونده‌ها مطابق با قوانین اداره مهاجرت (IGI)' : 'Initial assessment compliant with official IGI immigration rules'}
                       </div>
 

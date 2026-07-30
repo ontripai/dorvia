@@ -72,21 +72,18 @@ h1 {
   line-height: 1.18;
   letter-spacing: -0.02em;
   font-weight: 700;
-  color: var(--text-primary);
 }
 
 h2 {
   font-size: clamp(1.8rem, 3.5vw, 3rem);
   line-height: 1.32;
   font-weight: 700;
-  color: var(--text-primary);
 }
 
 h3 {
   font-size: clamp(1.25rem, 2vw, 1.55rem);
   line-height: 1.45;
   font-weight: 700;
-  color: var(--text-primary);
 }
 
 /* 4px Top Romanian Tricolor Line */
