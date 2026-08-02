@@ -28,9 +28,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
           {/* Col 1: Brand Statement */}
           <div className="space-y-4 lg:col-span-1">
             <div className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer" onClick={() => onNavigate('home')}>
-              <div className="w-9 h-9 rounded-xl bg-white text-[#071B3D] flex items-center justify-center font-black text-base relative overflow-hidden">
-                <Image src="/dorvia-logo-primary.svg" width={28} height={28} alt="DORVIA" />
-              </div>
+                <img src="/dorvia-wordmark.svg" alt="DORVIA" className="h-[28px] sm:h-[32px] w-auto" />
               <span className="text-lg font-extrabold text-white">در رومانی</span>
             </div>
 

@@ -64,9 +64,7 @@ export const Header: React.FC<HeaderProps> = ({
             onNavigate('home');
           }}
         >
-          <div className="w-10 h-10 rounded-xl bg-[#071B3D] text-white flex items-center justify-center font-black text-lg shadow-sm border border-[#2F6FED]/30 relative overflow-hidden group-hover:scale-105 transition-transform">
-            <Image src="/dorvia-logo-primary.svg" width={32} height={32} alt="DORVIA" />
-          </div>
+          <img src="/dorvia-wordmark.svg" alt="DORVIA" className="h-[32px] sm:h-[36px] w-auto group-hover:scale-105 transition-transform" />
 
           <div className="flex flex-col">
             <span className="text-lg sm:text-xl font-bold tracking-tight text-[#142033] group-hover:text-[#2F6FED] transition-colors leading-tight">
