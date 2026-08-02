@@ -43,7 +43,7 @@ module.exports = {
       },
       fontFamily: {
         persian: ['Vazirmatn', 'sans-serif'],
-        english: ['Inter', 'Manrope', 'sans-serif'],
+        english: ['Manrope', 'sans-serif'],
       }
     },
   },

@@ -8,6 +8,7 @@ import { MobileDrawer } from './MobileDrawer';
 import { SearchDialog } from './SearchDialog';
 import { Button } from './Button';
 import { ChevronDown, Menu, Search } from './Icons';
+import Image from 'next/image';
 
 interface HeaderProps {
   currentLang: Language;
@@ -74,8 +75,7 @@ export const Header: React.FC<HeaderProps> = ({
               <div className="h-1/3 bg-[#fcd116]" />
               <div className="h-1/3 bg-[#ce1126]" />
             </div>
-            <span className="text-white ml-0.5">D</span>
-            <span className="text-[#fcd116]">R</span>
+            <Image src="/dorvia-logo-primary.svg" width={32} height={32} alt="DR" />
           </div>
 
           <div className="flex flex-col">

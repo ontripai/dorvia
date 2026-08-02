@@ -4,6 +4,7 @@ import React from 'react';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
 import { ShieldCheck } from './Icons';
+import Image from 'next/image';
 
 interface FooterProps {
   currentLang: Language;
@@ -38,8 +39,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
                   <div className="h-1/3 bg-[#fcd116]" />
                   <div className="h-1/3 bg-[#ce1126]" />
                 </div>
-                <span className="text-[#06162d] ml-0.5">D</span>
-                <span className="text-[#0038a8]">R</span>
+                <Image src="/dorvia-logo-primary.svg" width={28} height={28} alt="DR" />
               </div>
               <span className="text-lg font-extrabold text-white">در رومانی</span>
             </div>

@@ -1,6 +1,6 @@
 export const enTranslations = {
   brand: {
-    name: "Dar Romania",
+    name: "DORVIA EUROP",
     subtitle: "In Romania | Official Guidance",
     tagline: "Professional Advisory Platform for Immigration, Study, Work & Corporate Services in Romania",
     description: "Comprehensive guidance and initial case assessment for international applicants seeking legal education, employment, and business formation in Romania and the European Union."
@@ -134,16 +134,16 @@ export const enTranslations = {
   },
   disclaimer: {
     title: "Commitment to Professional Integrity",
-    text: "Dar Romania provides professional advisory and administrative support services in compliance with Romanian legislation. Visa issuance and residency permit approvals rest exclusively within the jurisdiction of the Embassy of Romania and the General Inspectorate for Immigration (IGI)."
+    text: "DORVIA EUROP provides professional advisory and administrative support services in compliance with Romanian legislation. Visa issuance and residency permit approvals rest exclusively within the jurisdiction of the Embassy of Romania and the General Inspectorate for Immigration (IGI)."
   },
   footer: {
     quickLinks: "Quick Links",
     servicesTitle: "Specialized Services",
     legalTitle: "Legal Information",
-    copyright: "All rights reserved by 'Dar Romania' platform.",
+    copyright: "All rights reserved by 'DORVIA EUROP' platform.",
     contactInfo: "Contact Us",
     address: "Bucharest, Romania",
-    email: "info@darromania.com",
-    phone: "+40 700 000 000"
+    email: "ontrip.ai@gmail.com",
+    phone: "+40 727 348 009"
   }
 };
