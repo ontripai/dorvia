@@ -25,7 +25,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantClasses: Record<ButtonVariant, string> = {
     primary: "border-0 bg-[#2F6FED] hover:bg-[#081f3f] text-white focus:ring-[#2F6FED] shadow-xs hover:-translate-y-0.5",
-    accent: "border-0 bg-[#2F6FED] hover:bg-[#1A5BB8] text-white font-extrabold focus:ring-[#fcd116] shadow-sm hover:-translate-y-0.5",
+    accent: "border-0 bg-[#2F6FED] hover:bg-[#1A5BB8] text-white font-extrabold focus:ring-[#2F6FED] shadow-sm hover:-translate-y-0.5",
     secondary: "bg-white hover:bg-[#eef3f8] text-[#142033] border border-[#dfe6ef] focus:ring-[#2F6FED]",
     outline: "bg-transparent hover:bg-white/10 text-white border border-white/30 backdrop-blur focus:ring-white",
     ghost: "border-0 bg-transparent hover:bg-[#eef3f8] text-[#2F6FED] focus:ring-[#2F6FED]",

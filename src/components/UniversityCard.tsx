@@ -13,7 +13,7 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
       
       {/* Visual Header Banner */}
       <div className="bg-gradient-to-r from-[#071B3D] to-[#2F6FED] p-5 text-white relative">
-        <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#2F6FED] text-slate-900 mb-2">
+        <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#2F6FED] text-white mb-2">
           {university.ranking}
         </span>
         <h3 className="text-lg font-bold group-hover:text-[#2F6FED] transition-colors leading-snug">
