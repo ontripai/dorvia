@@ -27,7 +27,7 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <span className="text-[#fcd116] font-bold text-xs uppercase tracking-wider">
+            <span className="text-[#F4F7FC] font-bold text-xs uppercase tracking-wider">
               {currentLang === 'fa' ? 'شناخت کشور رومانی' : 'Discover Romania'}
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
@@ -43,7 +43,7 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="editorial-card p-5 bg-white text-center space-y-1">
               <div className="text-xs text-[#788697] font-bold">عضویت در اتحادیه اروپا</div>
-              <div className="text-lg font-extrabold text-[#0038a8]">کامل (EU)</div>
+              <div className="text-lg font-extrabold text-[#2F6FED]">کامل (EU)</div>
             </div>
             <div className="editorial-card p-5 bg-white text-center space-y-1">
               <div className="text-xs text-[#788697] font-bold">منطقه شنگن</div>
@@ -51,11 +51,11 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
             </div>
             <div className="editorial-card p-5 bg-white text-center space-y-1">
               <div className="text-xs text-[#788697] font-bold">صنایع پیشرو</div>
-              <div className="text-lg font-extrabold text-[#0038a8]">IT & Auto</div>
+              <div className="text-lg font-extrabold text-[#2F6FED]">IT & Auto</div>
             </div>
             <div className="editorial-card p-5 bg-white text-center space-y-1">
               <div className="text-xs text-[#788697] font-bold">واحد پول ملی</div>
-              <div className="text-lg font-extrabold text-[#0038a8]">RON (Leu)</div>
+              <div className="text-lg font-extrabold text-[#2F6FED]">RON (Leu)</div>
             </div>
           </div>
         </div>
@@ -100,7 +100,7 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <span className="text-[#fcd116] font-bold text-xs uppercase tracking-wider">
+            <span className="text-[#F4F7FC] font-bold text-xs uppercase tracking-wider">
               {currentLang === 'fa' ? 'حقوق و مقررات' : 'Legal Hub'}
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">

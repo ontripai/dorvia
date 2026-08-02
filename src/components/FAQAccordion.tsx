@@ -65,13 +65,13 @@ export const FAQAccordion: React.FC<FAQAccordionProps> = ({ currentLang }) => {
           >
             <button
               onClick={() => toggleAccordion(idx)}
-              className="w-full p-5 text-start font-bold text-[#142033] text-sm sm:text-base flex items-center justify-between space-x-3 rtl:space-x-reverse cursor-pointer hover:text-[#0038a8] transition-colors"
+              className="w-full p-5 text-start font-bold text-[#142033] text-sm sm:text-base flex items-center justify-between space-x-3 rtl:space-x-reverse cursor-pointer hover:text-[#2F6FED] transition-colors"
               aria-expanded={isOpen}
             >
               <span>{item.q}</span>
               <ChevronDown
                 size={18}
-                className={`transform transition-transform shrink-0 text-[#788697] ${isOpen ? 'rotate-180 text-[#0038a8]' : ''}`}
+                className={`transform transition-transform shrink-0 text-[#788697] ${isOpen ? 'rotate-180 text-[#2F6FED]' : ''}`}
               />
             </button>
 

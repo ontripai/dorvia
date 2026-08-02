@@ -10,27 +10,27 @@ module.exports = {
     extend: {
       colors: {
         navy: {
-          950: '#06162d',
+          950: '#071B3D',
           900: '#081f3f',
           800: '#0b2b55',
         },
         romania: {
           blue: {
-            700: '#0038a8',
+            700: '#2F6FED',
             600: '#1554bd',
             500: '#2f6bd1',
             100: '#e7efff',
             50: '#f3f7ff',
           },
           yellow: {
-            500: '#fcd116',
+            500: '#2F6FED',
             400: '#ffda39',
             100: '#fff2a6',
             50: '#fffbdf',
           },
           red: {
             700: '#a50f20',
-            600: '#ce1126',
+            600: 'transparent',
             100: '#ffe5e9',
             50: '#fff3f5',
           }

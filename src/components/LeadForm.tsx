@@ -116,7 +116,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
       {/* Form Header */}
       <div className="mb-8 space-y-2 border-b border-[#dfe6ef] pb-6">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-[#0038a8]">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-[#2F6FED]">
             {currentLang === 'fa' ? 'ارزیابی رایگان پرونده' : 'Free Case Evaluation'}
           </span>
           <span className="text-xs font-bold text-[#526174]">
@@ -133,7 +133,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
         {/* Step Progress Bar */}
         <div className="w-full bg-[#eef3f8] h-2 rounded-full overflow-hidden mt-4">
           <div
-            className="bg-[#0038a8] h-full transition-all duration-300 rounded-full"
+            className="bg-[#2F6FED] h-full transition-all duration-300 rounded-full"
             style={{ width: `${(currentStep / 4) * 100}%` }}
           />
         </div>
@@ -166,7 +166,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder={currentLang === 'fa' ? 'مثال: علی محمدی' : 'e.g. John Smith'}
-                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#0038a8] bg-white"
+                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
                   />
                 </div>
 
@@ -179,7 +179,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
                     onChange={handleChange}
                     dir="ltr"
                     placeholder="+98 912 000 0000"
-                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#0038a8] bg-white text-start"
+                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white text-start"
                   />
                 </div>
 
@@ -192,7 +192,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
                     onChange={handleChange}
                     dir="ltr"
                     placeholder="name@example.com"
-                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#0038a8] bg-white text-start"
+                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white text-start"
                   />
                 </div>
 
@@ -203,7 +203,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
                     name="currentCountry"
                     value={formData.currentCountry}
                     onChange={handleChange}
-                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#0038a8] bg-white"
+                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
                   />
                 </div>
               </div>
@@ -226,10 +226,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
                       key={g.id}
                       onClick={() => handleGoalSelect(g.id)}
                       className={`p-4 rounded-xl border transition-all cursor-pointer flex items-center space-x-3 rtl:space-x-reverse ${
-                        isSelected ? 'bg-blue-50 border-[#0038a8] text-[#0038a8] font-bold shadow-xs' : 'bg-white border-[#dfe6ef] text-[#142033] hover:border-[#0038a8]/40'
+                        isSelected ? 'bg-blue-50 border-[#2F6FED] text-[#2F6FED] font-bold shadow-xs' : 'bg-white border-[#dfe6ef] text-[#142033] hover:border-[#2F6FED]/40'
                       }`}
                     >
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isSelected ? 'bg-[#0038a8] text-white' : 'bg-[#eef3f8] text-[#0038a8]'}`}>
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isSelected ? 'bg-[#2F6FED] text-white' : 'bg-[#eef3f8] text-[#2F6FED]'}`}>
                         <IconComp size={18} />
                       </div>
                       <span className="leading-snug">{g.title}</span>
@@ -254,7 +254,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
                     name="educationLevel"
                     value={formData.educationLevel}
                     onChange={handleChange}
-                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#0038a8] bg-white"
+                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
                   >
                     <option value="دیپلم">{currentLang === 'fa' ? 'دیپلم / پیش‌دانشگاهی' : 'High School Diploma'}</option>
                     <option value="کاردانی">{currentLang === 'fa' ? 'کاردانی / فوق دیپلم' : 'Associate Degree'}</option>
@@ -270,7 +270,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
                     name="workExperience"
                     value={formData.workExperience}
                     onChange={handleChange}
-                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#0038a8] bg-white"
+                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
                   >
                     <option value="0-1">{currentLang === 'fa' ? 'کمتر از ۱ سال' : 'Less than 1 year'}</option>
                     <option value="1-3">{currentLang === 'fa' ? '۱ تا ۳ سال' : '1 - 3 years'}</option>
@@ -285,7 +285,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
                     name="approximateBudget"
                     value={formData.approximateBudget}
                     onChange={handleChange}
-                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#0038a8] bg-white"
+                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
                   >
                     <option value="5000-10000">5,000 - 10,000 EUR</option>
                     <option value="10000-20000">10,000 - 20,000 EUR</option>
@@ -299,7 +299,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
                     name="maritalStatus"
                     value={formData.maritalStatus}
                     onChange={handleChange}
-                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#0038a8] bg-white"
+                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
                   >
                     <option value="single">{t.evaluationForm.single}</option>
                     <option value="married">{t.evaluationForm.married}</option>
@@ -326,7 +326,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
                     value={formData.message}
                     onChange={handleChange}
                     placeholder={currentLang === 'fa' ? 'نکات اختصاصی پرونده، سوالات احتمالی یا دانشگاه‌های مدنظر...' : 'Specific notes, target universities, or questions...'}
-                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#0038a8] bg-white"
+                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
                   />
                 </div>
 
@@ -336,7 +336,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
                     name="privacyConsent"
                     checked={formData.privacyConsent}
                     onChange={handleChange}
-                    className="mt-1 w-4 h-4 text-[#0038a8] rounded border-[#dfe6ef] focus:ring-[#0038a8]"
+                    className="mt-1 w-4 h-4 text-[#2F6FED] rounded border-[#dfe6ef] focus:ring-[#2F6FED]"
                   />
                   <span className="text-[#526174] leading-relaxed">
                     {t.evaluationForm.privacyConsent}
@@ -363,7 +363,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
               <button
                 type="button"
                 onClick={handleNextStep}
-                className="px-6 py-3 rounded-xl bg-[#0038a8] hover:bg-[#1554bd] text-white font-bold text-xs flex items-center space-x-2 rtl:space-x-reverse transition-colors shadow-xs cursor-pointer"
+                className="px-6 py-3 rounded-xl bg-[#2F6FED] hover:bg-[#1554bd] text-white font-bold text-xs flex items-center space-x-2 rtl:space-x-reverse transition-colors shadow-xs cursor-pointer"
               >
                 <span>{currentLang === 'fa' ? 'گام بعدی' : 'Next Step'}</span>
                 <ArrowIcon size={14} />
@@ -373,7 +373,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
                 type="button"
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="px-8 py-3.5 rounded-xl bg-[#fcd116] hover:bg-yellow-400 text-[#06162d] font-extrabold text-xs flex items-center space-x-2 rtl:space-x-reverse transition-all shadow-md cursor-pointer disabled:opacity-50"
+                className="px-8 py-3.5 rounded-xl bg-[#2F6FED] hover:bg-[#1A5BB8] text-white font-extrabold text-xs flex items-center space-x-2 rtl:space-x-reverse transition-all shadow-md cursor-pointer disabled:opacity-50"
               >
                 <span>{isSubmitting ? t.evaluationForm.submitting : t.evaluationForm.submit}</span>
                 <Check size={16} />
@@ -386,29 +386,29 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
         {/* Right Info Panel */}
         <div className="lg:col-span-4 bg-[#eef3f8] rounded-2xl p-6 border border-[#dfe6ef] space-y-4 flex flex-col justify-between">
           <div className="space-y-3 text-xs">
-            <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#0038a8] font-extrabold uppercase tracking-wider">
+            <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#2F6FED] font-extrabold uppercase tracking-wider">
               <ShieldCheck size={16} />
               <span>{currentLang === 'fa' ? 'چه اتفاقی پس از ارسال می‌افتد؟' : 'What Happens Next?'}</span>
             </div>
             
             <ol className="space-y-3 text-[#526174] leading-relaxed pt-1">
               <li className="flex items-start space-x-2 rtl:space-x-reverse">
-                <span className="font-bold text-[#0038a8]">۱.</span>
+                <span className="font-bold text-[#2F6FED]">۱.</span>
                 <span>{currentLang === 'fa' ? 'بررسی سوابق تحصیلی و شغلی شما توسط کارشناسان حقوقی در رومانی.' : 'Evaluation of your documents against Romanian criteria.'}</span>
               </li>
               <li className="flex items-start space-x-2 rtl:space-x-reverse">
-                <span className="font-bold text-[#0038a8]">۲.</span>
+                <span className="font-bold text-[#2F6FED]">۲.</span>
                 <span>{currentLang === 'fa' ? 'تماس مستقیم از طریق واتس‌اپ یا ایمیل جهت تکمیل اطلاعات.' : 'Direct contact via WhatsApp or Email to finalize options.'}</span>
               </li>
               <li className="flex items-start space-x-2 rtl:space-x-reverse">
-                <span className="font-bold text-[#0038a8]">۳.</span>
+                <span className="font-bold text-[#2F6FED]">۳.</span>
                 <span>{currentLang === 'fa' ? 'ارائه شفاف‌ترین مسیرهای قانونی بدون ادعاهای غیرواقعی.' : 'Clear pathway recommendation compliant with official IGI standards.'}</span>
               </li>
             </ol>
           </div>
 
           <div className="pt-4 border-t border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse text-[11px] text-[#788697]">
-            <LockKeyhole size={14} className="shrink-0 text-[#0038a8]" />
+            <LockKeyhole size={14} className="shrink-0 text-[#2F6FED]" />
             <span>{currentLang === 'fa' ? 'اطلاعات شما طبق قوانین GDPR اروپا کاملاً محرمانه می‌ماند.' : 'Strictly confidential under EU GDPR rules.'}</span>
           </div>
         </div>

@@ -74,7 +74,7 @@ export const AudienceSelector: React.FC<AudienceSelectorProps> = ({
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         <div className="text-center space-y-2 max-w-2xl mx-auto">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-[#0038a8]">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-[#2F6FED]">
             {currentLang === 'fa' ? 'انتخاب بر اساس نیاز شما' : 'Guided Decision'}
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142033]">
@@ -93,11 +93,11 @@ export const AudienceSelector: React.FC<AudienceSelectorProps> = ({
                 onClick={() => setSelectedGoal(g.id)}
                 className={`p-4 rounded-2xl border transition-all text-center flex flex-col items-center justify-center space-y-2 min-h-[110px] cursor-pointer ${
                   isSelected
-                    ? 'bg-[#0038a8] border-[#0038a8] text-white shadow-md scale-102'
-                    : 'bg-white border-[#dfe6ef] text-[#142033] hover:border-[#0038a8]/40 hover:shadow-xs'
+                    ? 'bg-[#2F6FED] border-[#2F6FED] text-white shadow-md scale-102'
+                    : 'bg-white border-[#dfe6ef] text-[#142033] hover:border-[#2F6FED]/40 hover:shadow-xs'
                 }`}
               >
-                <ItemIcon size={24} className={isSelected ? 'text-[#fcd116]' : 'text-[#0038a8]'} />
+                <ItemIcon size={24} className={isSelected ? 'text-[#2F6FED]' : 'text-[#2F6FED]'} />
                 <span className="text-xs font-bold leading-tight">{g.title}</span>
               </button>
             );
@@ -107,7 +107,7 @@ export const AudienceSelector: React.FC<AudienceSelectorProps> = ({
         {/* Dynamic Detail Panel for Selected Goal */}
         <div className="bg-white rounded-2xl border border-[#dfe6ef] p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm animate-fadeIn">
           <div className="flex items-start space-x-4 rtl:space-x-reverse">
-            <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#0038a8] flex items-center justify-center shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#2F6FED] flex items-center justify-center shrink-0">
               <IconComp size={24} />
             </div>
             <div className="space-y-1">
@@ -127,7 +127,7 @@ export const AudienceSelector: React.FC<AudienceSelectorProps> = ({
 
             <button
               onClick={onOpenEvaluationModal}
-              className="flex-1 md:flex-initial bg-[#fcd116] hover:bg-yellow-400 text-[#06162d] font-extrabold text-xs px-5 py-3 rounded-xl shadow-xs transition-colors flex items-center justify-center space-x-2 rtl:space-x-reverse cursor-pointer"
+              className="flex-1 md:flex-initial bg-[#2F6FED] hover:bg-[#1A5BB8] text-white font-extrabold text-xs px-5 py-3 rounded-xl shadow-xs transition-colors flex items-center justify-center space-x-2 rtl:space-x-reverse cursor-pointer"
             >
               <span>{currentLang === 'fa' ? 'ارزیابی رایگان شرایط' : 'Free Case Audit'}</span>
             </button>

@@ -29,7 +29,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <span className="text-[#fcd116] font-bold text-xs uppercase tracking-wider">
+            <span className="text-[#2F6FED] font-bold text-xs uppercase tracking-wider">
               {currentLang === 'fa' ? 'نیازهای ضروری در رومانی' : 'Essentials in Romania'}
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
@@ -46,7 +46,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
           <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
             <div className="flex items-center justify-between border-b border-[#dfe6ef] pb-3">
               <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#142033]">
-                <Landmark size={20} className="text-[#0038a8]" />
+                <Landmark size={20} className="text-[#2F6FED]" />
                 <h3 className="font-extrabold text-base">{currentLang === 'fa' ? 'نرخ مرجع بانک ملی رومانی (BNR)' : 'National Bank of Romania (BNR) Reference Rates'}</h3>
               </div>
               <span className="text-[11px] text-[#788697] font-semibold">{currentLang === 'fa' ? 'آخرین بروزرسانی: ۲۰۲۶' : 'Updated: 2026'}</span>
@@ -55,23 +55,23 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 text-center">
               <div className="p-3.5 rounded-xl bg-[#f7f9fc] border border-[#dfe6ef]">
                 <div className="text-xs text-[#788697] font-bold">1 EUR</div>
-                <div className="text-base font-extrabold text-[#0038a8] mt-1">4.97 RON</div>
+                <div className="text-base font-extrabold text-[#2F6FED] mt-1">4.97 RON</div>
               </div>
               <div className="p-3.5 rounded-xl bg-[#f7f9fc] border border-[#dfe6ef]">
                 <div className="text-xs text-[#788697] font-bold">1 USD</div>
-                <div className="text-base font-extrabold text-[#0038a8] mt-1">4.58 RON</div>
+                <div className="text-base font-extrabold text-[#2F6FED] mt-1">4.58 RON</div>
               </div>
               <div className="p-3.5 rounded-xl bg-[#f7f9fc] border border-[#dfe6ef]">
                 <div className="text-xs text-[#788697] font-bold">1 GBP</div>
-                <div className="text-base font-extrabold text-[#0038a8] mt-1">5.82 RON</div>
+                <div className="text-base font-extrabold text-[#2F6FED] mt-1">5.82 RON</div>
               </div>
               <div className="p-3.5 rounded-xl bg-[#f7f9fc] border border-[#dfe6ef]">
                 <div className="text-xs text-[#788697] font-bold">1 AED</div>
-                <div className="text-base font-extrabold text-[#0038a8] mt-1">1.24 RON</div>
+                <div className="text-base font-extrabold text-[#2F6FED] mt-1">1.24 RON</div>
               </div>
               <div className="p-3.5 rounded-xl bg-[#f7f9fc] border border-[#dfe6ef]">
                 <div className="text-xs text-[#788697] font-bold">1 TRY</div>
-                <div className="text-base font-extrabold text-[#0038a8] mt-1">0.14 RON</div>
+                <div className="text-base font-extrabold text-[#2F6FED] mt-1">0.14 RON</div>
               </div>
             </div>
 
@@ -118,7 +118,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
           </div>
 
           <div className="editorial-card p-6 bg-white space-y-4">
-            <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl text-xs text-[#0038a8] font-bold">
+            <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl text-xs text-[#2F6FED] font-bold">
               ℹ️ {currentLang === 'fa' ? 'وضعیت تبدیل گواهینامه ایرانی باید بر اساس آخرین فهرست و دستورالعمل رسمی DGPCI و وزارت امور داخلی رومانی بررسی شود.' : 'Iranian driving license exchange status must be verified against current DGPCI directives.'}
             </div>
 
@@ -159,11 +159,11 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             <h3 className="font-extrabold text-base text-[#142033]">{currentLang === 'fa' ? 'تفاوت انواع ترجمه مدارک' : 'Types of Legal Document Translation'}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
               <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
-                <span className="font-bold text-[#0038a8]">Traducere Autorizata</span>
+                <span className="font-bold text-[#2F6FED]">Traducere Autorizata</span>
                 <p className="text-[#526174]">ترجمه توسط مترجم دارای پروانه رسمی از وزارت دادگستری رومانی همراه با مهر و شماره مجوز.</p>
               </div>
               <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
-                <span className="font-bold text-[#0038a8]">Traducere Legalizata</span>
+                <span className="font-bold text-[#2F6FED]">Traducere Legalizata</span>
                 <p className="text-[#526174]">ترجمه مجاز که امضای مترجم توسط دفتر اسناد رسمی (Notar Public) در رومانی تایید شده است.</p>
               </div>
             </div>
@@ -201,7 +201,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <span className="text-[#fcd116] font-bold text-xs uppercase tracking-wider">
+            <span className="text-[#2F6FED] font-bold text-xs uppercase tracking-wider">
               {currentLang === 'fa' ? 'خدمات کنسولی' : 'Consular Services'}
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
@@ -259,13 +259,13 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
           <div className="flex border-b border-[#dfe6ef] space-x-4 rtl:space-x-reverse">
             <button
               onClick={() => setHousingTab('rent')}
-              className={`pb-3 font-bold text-sm border-b-2 cursor-pointer ${housingTab === 'rent' ? 'border-[#0038a8] text-[#0038a8]' : 'border-transparent text-[#788697]'}`}
+              className={`pb-3 font-bold text-sm border-b-2 cursor-pointer ${housingTab === 'rent' ? 'border-[#2F6FED] text-[#2F6FED]' : 'border-transparent text-[#788697]'}`}
             >
               {currentLang === 'fa' ? 'اجاره مسکن' : 'Renting Property'}
             </button>
             <button
               onClick={() => setHousingTab('buy')}
-              className={`pb-3 font-bold text-sm border-b-2 cursor-pointer ${housingTab === 'buy' ? 'border-[#0038a8] text-[#0038a8]' : 'border-transparent text-[#788697]'}`}
+              className={`pb-3 font-bold text-sm border-b-2 cursor-pointer ${housingTab === 'buy' ? 'border-[#2F6FED] text-[#2F6FED]' : 'border-transparent text-[#788697]'}`}
             >
               {currentLang === 'fa' ? 'خرید ملک' : 'Buying Property'}
             </button>
@@ -297,7 +297,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <span className="text-[#fcd116] font-bold text-xs uppercase tracking-wider">
+            <span className="text-[#2F6FED] font-bold text-xs uppercase tracking-wider">
               {currentLang === 'fa' ? 'راهنمای تازه واردین' : 'New Arrivals Guide'}
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
@@ -312,7 +312,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white space-y-3">
-              <span className="bg-blue-100 text-[#0038a8] px-3 py-1 rounded-full text-xs font-bold">۷۲ ساعت اول</span>
+              <span className="bg-blue-100 text-[#2F6FED] px-3 py-1 rounded-full text-xs font-bold">۷۲ ساعت اول</span>
               <ul className="space-y-2 text-xs text-[#526174] pt-2">
                 <li>✓ تهیه سیم‌کارت رومانی (Orange, Vodafone)</li>
                 <li>✓ تهیه کارت حمل و نقل شهری (STB)</li>
@@ -320,7 +320,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               </ul>
             </div>
             <div className="editorial-card p-6 bg-white space-y-3">
-              <span className="bg-blue-100 text-[#0038a8] px-3 py-1 rounded-full text-xs font-bold">۷ روز اول</span>
+              <span className="bg-blue-100 text-[#2F6FED] px-3 py-1 rounded-full text-xs font-bold">۷ روز اول</span>
               <ul className="space-y-2 text-xs text-[#526174] pt-2">
                 <li>✓ ثبت‌نام در دانشگاه / کارفرما</li>
                 <li>✓ امضای قرارداد اجاره مسکن</li>
@@ -328,7 +328,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               </ul>
             </div>
             <div className="editorial-card p-6 bg-white space-y-3">
-              <span className="bg-blue-100 text-[#0038a8] px-3 py-1 rounded-full text-xs font-bold">۳۰ روز اول</span>
+              <span className="bg-blue-100 text-[#2F6FED] px-3 py-1 rounded-full text-xs font-bold">۳۰ روز اول</span>
               <ul className="space-y-2 text-xs text-[#526174] pt-2">
                 <li>✓ نوبت‌دهی و مراجعه به IGI کارت اقامت</li>
                 <li>✓ ثبت معاینات پزشکی اقامت</li>

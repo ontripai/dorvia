@@ -41,105 +41,105 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
       title: { fa: 'صرافی، تبدیل پول و نرخ مرجع بانک ملی رومانی', en: 'Currency Exchange & BNR Rates' },
       category: { fa: 'نیازها در رومانی', en: 'Essentials' },
       route: 'needs/currency-exchange',
-      icon: <Landmark size={16} className="text-[#0038a8]" />
+      icon: <Landmark size={16} className="text-[#2F6FED]" />
     },
     {
       id: 'driving',
       title: { fa: 'گواهینامه رانندگی و شرایط تبدیل گواهینامه', en: 'Driving License Exchange' },
       category: { fa: 'نیازها در رومانی', en: 'Essentials' },
       route: 'needs/driving-license',
-      icon: <House size={16} className="text-[#0038a8]" />
+      icon: <House size={16} className="text-[#2F6FED]" />
     },
     {
       id: 'translation',
       title: { fa: 'دارالترجمه و مترجمین مجاز وزارت دادگستری', en: 'Authorized Translators & Legalization' },
       category: { fa: 'نیازها در رومانی', en: 'Essentials' },
       route: 'needs/certified-translation',
-      icon: <Landmark size={16} className="text-[#0038a8]" />
+      icon: <Landmark size={16} className="text-[#2F6FED]" />
     },
     {
       id: 'notary',
       title: { fa: 'دفتر اسناد رسمی و خدمات نوتاری در رومانی', en: 'Notary Public Services' },
       category: { fa: 'نیازها در رومانی', en: 'Essentials' },
       route: 'needs/notary-public',
-      icon: <Landmark size={16} className="text-[#0038a8]" />
+      icon: <Landmark size={16} className="text-[#2F6FED]" />
     },
     {
       id: 'embassy',
       title: { fa: 'سفارت ایران در بخارست و خدمات سامانه میخک', en: 'Iranian Embassy & Mikhak Portal' },
       category: { fa: 'نیازها در رومانی', en: 'Essentials' },
       route: 'needs/iranian-embassy-and-mikhak',
-      icon: <Landmark size={16} className="text-[#0038a8]" />
+      icon: <Landmark size={16} className="text-[#2F6FED]" />
     },
     {
       id: 'housing',
       title: { fa: 'راهنمای اجاره و خرید مسکن در رومانی', en: 'Renting & Buying Property' },
       category: { fa: 'نیازها در رومانی', en: 'Essentials' },
       route: 'needs/housing',
-      icon: <House size={16} className="text-[#0038a8]" />
+      icon: <House size={16} className="text-[#2F6FED]" />
     },
     {
       id: 'checklist',
       title: { fa: 'چک‌لیست روزهای نخست ورود به رومانی', en: 'First-Days Arrival Checklist' },
       category: { fa: 'نیازها در رومانی', en: 'Essentials' },
       route: 'needs/first-days-checklist',
-      icon: <House size={16} className="text-[#0038a8]" />
+      icon: <House size={16} className="text-[#2F6FED]" />
     },
     {
       id: 'economy',
       title: { fa: 'اقتصاد رومانی، صنایع، درآمدها و حقوق قانونی', en: 'Economy of Romania & Industry Wages' },
       category: { fa: 'شناخت رومانی', en: 'Discover Romania' },
       route: 'romania/economy',
-      icon: <Building2 size={16} className="text-[#0038a8]" />
+      icon: <Building2 size={16} className="text-[#2F6FED]" />
     },
     {
       id: 'society',
       title: { fa: 'جامعه، زبان و آداب زندگی اجتماعی در رومانی', en: 'Romanian Society & Social Etiquette' },
       category: { fa: 'شناخت رومانی', en: 'Discover Romania' },
       route: 'romania/society',
-      icon: <Building2 size={16} className="text-[#0038a8]" />
+      icon: <Building2 size={16} className="text-[#2F6FED]" />
     },
     {
       id: 'culture',
       title: { fa: 'فرهنگ، هنر، معماری و جاذبه‌های رومانی', en: 'Culture, Arts & Heritage' },
       category: { fa: 'شناخت رومانی', en: 'Discover Romania' },
       route: 'romania/culture-and-arts',
-      icon: <Building2 size={16} className="text-[#0038a8]" />
+      icon: <Building2 size={16} className="text-[#2F6FED]" />
     },
     {
       id: 'laws',
       title: { fa: 'قوانین و مقررات مهم مهاجرت، کار و کارفرمایی', en: 'Laws & Regulatory Overview' },
       category: { fa: 'شناخت رومانی', en: 'Discover Romania' },
       route: 'romania/laws-and-regulations',
-      icon: <Building2 size={16} className="text-[#0038a8]" />
+      icon: <Building2 size={16} className="text-[#2F6FED]" />
     },
     {
       id: 'tourism',
       title: { fa: 'راهنمای گردشگری و برنامه‌های سفر در رومانی', en: 'Romania Tourism & Travel Guides' },
       category: { fa: 'شناخت رومانی', en: 'Discover Romania' },
       route: 'romania/tourism',
-      icon: <Building2 size={16} className="text-[#0038a8]" />
+      icon: <Building2 size={16} className="text-[#2F6FED]" />
     },
     {
       id: 'study',
       title: { fa: 'تحصیل در دانشگاه‌های معتبر رومانی', en: 'Study in Romanian Universities' },
       category: { fa: 'تحصیل', en: 'Study' },
       route: 'study',
-      icon: <GraduationCap size={16} className="text-[#0038a8]" />
+      icon: <GraduationCap size={16} className="text-[#2F6FED]" />
     },
     {
       id: 'work',
       title: { fa: 'ویزای کار و مجوز اشتغال Aviz de Munca', en: 'Work Permit & Employment' },
       category: { fa: 'کار', en: 'Work' },
       route: 'work',
-      icon: <BriefcaseBusiness size={16} className="text-[#0038a8]" />
+      icon: <BriefcaseBusiness size={16} className="text-[#2F6FED]" />
     },
     {
       id: 'company',
       title: { fa: 'ثبت شرکت SRL و قوانین مالیاتی رومانی', en: 'Company Formation (SRL) & Tax Rules' },
       category: { fa: 'کسب‌وکار', en: 'Business' },
       route: 'company',
-      icon: <Building2 size={16} className="text-[#0038a8]" />
+      icon: <Building2 size={16} className="text-[#2F6FED]" />
     }
   ];
 
@@ -154,12 +154,12 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
   });
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#06162d]/80 backdrop-blur-sm flex items-start justify-center p-4 sm:p-6 lg:p-20 animate-fadeIn">
+    <div className="fixed inset-0 z-50 bg-[#071B3D]/80 backdrop-blur-sm flex items-start justify-center p-4 sm:p-6 lg:p-20 animate-fadeIn">
       <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden border border-[#dfe6ef] flex flex-col max-h-[80vh]">
         
         {/* Search Header Input */}
         <div className="p-4 border-b border-[#dfe6ef] flex items-center space-x-3 rtl:space-x-reverse bg-[#f7f9fc]">
-          <Search size={20} className="text-[#0038a8] shrink-0" />
+          <Search size={20} className="text-[#2F6FED] shrink-0" />
           <input
             ref={inputRef}
             type="text"
@@ -190,18 +190,18 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
                   onNavigate(item.route);
                   onClose();
                 }}
-                className="w-full text-start p-3.5 rounded-xl border border-[#dfe6ef] hover:border-[#0038a8] hover:bg-[#f3f7ff] transition-all flex items-center justify-between group cursor-pointer"
+                className="w-full text-start p-3.5 rounded-xl border border-[#dfe6ef] hover:border-[#2F6FED] hover:bg-[#f3f7ff] transition-all flex items-center justify-between group cursor-pointer"
               >
                 <div className="flex items-center space-x-3 rtl:space-x-reverse">
                   {item.icon}
                   <div>
-                    <h4 className="font-extrabold text-xs sm:text-sm text-[#142033] group-hover:text-[#0038a8] transition-colors">
+                    <h4 className="font-extrabold text-xs sm:text-sm text-[#142033] group-hover:text-[#2F6FED] transition-colors">
                       {item.title[currentLang]}
                     </h4>
                     <span className="text-[11px] text-[#788697] font-semibold">{item.category[currentLang]}</span>
                   </div>
                 </div>
-                <ChevronLeft size={16} className="text-[#788697] group-hover:text-[#0038a8] transition-colors rtl:rotate-0 rotate-180" />
+                <ChevronLeft size={16} className="text-[#788697] group-hover:text-[#2F6FED] transition-colors rtl:rotate-0 rotate-180" />
               </button>
             ))
           )}

@@ -18,7 +18,7 @@ export default function App() {
     const dir = getDirection(currentLang);
     document.documentElement.dir = dir;
     document.documentElement.lang = currentLang;
-    document.body.style.fontFamily = currentLang === 'fa' ? "'Vazirmatn', sans-serif" : "'Inter', sans-serif";
+    document.body.style.fontFamily = currentLang === 'fa' ? "'Vazirmatn', sans-serif" : "'Manrope', sans-serif";
   }, [currentLang]);
 
   const handleLanguageChange = (newLang: Language) => {
@@ -33,7 +33,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#f7f9fc] text-[#142033] font-sans selection:bg-[#0038a8] selection:text-white pb-16 lg:pb-0">
+    <div className="min-h-screen flex flex-col justify-between bg-[#f7f9fc] text-[#142033] font-sans selection:bg-[#2F6FED] selection:text-white pb-16 lg:pb-0">
       
       {/* Header */}
       <Header
@@ -62,18 +62,18 @@ export default function App() {
       />
 
       {/* Mobile Sticky Action Bar (Max height 64px, safe area insets) */}
-      <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-[#06162d]/95 backdrop-blur-md border-t border-white/10 px-4 py-2.5 flex items-center justify-between gap-3 shadow-2xl max-h-[64px]">
+      <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-[#071B3D]/95 backdrop-blur-md border-t border-white/10 px-4 py-2.5 flex items-center justify-between gap-3 shadow-2xl max-h-[64px]">
         <button
           onClick={() => handleNavigate('contact')}
           className="flex-1 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold py-2.5 rounded-xl flex items-center justify-center space-x-1.5 rtl:space-x-reverse border border-white/15 cursor-pointer"
         >
-          <PhoneCall size={14} className="text-[#fcd116]" />
+          <PhoneCall size={14} className="text-[#2F6FED]" />
           <span>{currentLang === 'fa' ? 'تماس / مشاوره' : 'Call Advisory'}</span>
         </button>
 
         <button
           onClick={() => setIsEvaluationModalOpen(true)}
-          className="flex-1 bg-[#fcd116] hover:bg-yellow-400 text-[#06162d] text-xs font-extrabold py-2.5 rounded-xl flex items-center justify-center space-x-1.5 rtl:space-x-reverse shadow-md cursor-pointer"
+          className="flex-1 bg-[#2F6FED] hover:bg-[#1A5BB8] text-white text-xs font-extrabold py-2.5 rounded-xl flex items-center justify-center space-x-1.5 rtl:space-x-reverse shadow-md cursor-pointer"
         >
           <Sparkles size={14} />
           <span>{currentLang === 'fa' ? 'ارزیابی رایگان' : 'Free Assessment'}</span>

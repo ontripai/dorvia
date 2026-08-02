@@ -94,7 +94,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             
             {/* Ambient Lighting Background */}
             <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-[#2f6bd1]/30 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-[#fcd116]/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-[#2F6FED]/10 rounded-full blur-3xl pointer-events-none" />
 
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -103,8 +103,8 @@ export const MainContent: React.FC<MainContentProps> = ({
                 <div className="lg:col-span-7 space-y-6 text-center lg:text-start">
                   
                   {/* Eyebrow Badge */}
-                  <div className="inline-flex items-center space-x-2 rtl:space-x-reverse bg-white/10 border border-white/15 px-4 py-1.5 rounded-full text-xs font-semibold text-[#fcd116]">
-                    <ShieldCheck size={14} className="text-[#fcd116]" />
+                  <div className="inline-flex items-center space-x-2 rtl:space-x-reverse bg-white/10 border border-white/15 px-4 py-1.5 rounded-full text-xs font-semibold text-[#F4F7FC]">
+                    <ShieldCheck size={14} className="text-[#F4F7FC]" />
                     <span>{currentLang === 'fa' ? 'راهنمای جامع رومانی برای ایرانیان سراسر جهان' : 'Official Romanian Platform for Global Applicants'}</span>
                   </div>
 
@@ -144,9 +144,9 @@ export const MainContent: React.FC<MainContentProps> = ({
                   <div className="pt-2 flex items-center justify-center lg:justify-start">
                     <button
                       onClick={onOpenEvaluationModal}
-                      className="text-xs text-slate-300 hover:text-[#fcd116] font-semibold inline-flex items-center space-x-2 rtl:space-x-reverse transition-colors cursor-pointer"
+                      className="text-xs text-slate-300 hover:text-[#F4F7FC] font-semibold inline-flex items-center space-x-2 rtl:space-x-reverse transition-colors cursor-pointer"
                     >
-                      <Calendar size={14} className="text-[#fcd116]" />
+                      <Calendar size={14} className="text-[#F4F7FC]" />
                       <span>{currentLang === 'fa' ? 'رزرو مشاوره تخصصی' : 'Schedule Personal Consultation'}</span>
                     </button>
                   </div>
@@ -160,29 +160,29 @@ export const MainContent: React.FC<MainContentProps> = ({
                     <div className="relative overflow-hidden rounded-[28px] border border-white/20 bg-slate-900/90 shadow-2xl p-6 space-y-4">
                       
                       <div className="flex items-center justify-between text-xs text-slate-200 font-bold border-b border-white/15 pb-3">
-                        <span className="flex items-center space-x-2 rtl:space-x-reverse text-[#fcd116]">
+                        <span className="flex items-center space-x-2 rtl:space-x-reverse text-[#F4F7FC]">
                           <Landmark size={16} />
                           <span>Bucharest • European Union</span>
                         </span>
-                        <span className="bg-[#0038a8] px-2.5 py-1 rounded-md text-[11px] text-white border border-blue-400/30">Schengen Member</span>
+                        <span className="bg-[#2F6FED] px-2.5 py-1 rounded-md text-[11px] text-white border border-blue-400/30">Schengen Member</span>
                       </div>
 
                       <div className="space-y-3 pt-1 text-xs">
                         <div className="p-3.5 rounded-xl bg-white/10 border border-white/15 flex items-center justify-between">
                           <span className="font-semibold text-white">🎓 Accredited Higher Education</span>
-                          <span className="font-extrabold text-[#fcd116]">EU Degrees</span>
+                          <span className="font-extrabold text-[#F4F7FC]">EU Degrees</span>
                         </div>
                         <div className="p-3.5 rounded-xl bg-white/10 border border-white/15 flex items-center justify-between">
                           <span className="font-semibold text-white">💼 Employment & Work Permits</span>
-                          <span className="font-extrabold text-[#fcd116]">Aviz de Munca</span>
+                          <span className="font-extrabold text-[#F4F7FC]">Aviz de Munca</span>
                         </div>
                         <div className="p-3.5 rounded-xl bg-white/10 border border-white/15 flex items-center justify-between">
                           <span className="font-semibold text-white">🏢 Corporate Registration (SRL)</span>
-                          <span className="font-extrabold text-[#fcd116]">1% Tax Option</span>
+                          <span className="font-extrabold text-[#F4F7FC]">1% Tax Option</span>
                         </div>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-[#0038a8]/80 border border-[#fcd116]/40 text-center text-xs text-slate-100 font-bold shadow-inner">
+                      <div className="p-3 rounded-xl bg-[#2F6FED]/80 border border-[#2F6FED]/40 text-center text-xs text-slate-100 font-bold shadow-inner">
                         {currentLang === 'fa' ? 'ارزیابی حقوقی پرونده‌ها مطابق با قوانین اداره مهاجرت (IGI)' : 'Initial assessment compliant with official IGI immigration rules'}
                       </div>
 
@@ -201,12 +201,12 @@ export const MainContent: React.FC<MainContentProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center text-xs font-bold text-[#142033]">
                 
                 <div className="flex items-center justify-center space-x-3 rtl:space-x-reverse py-1">
-                  <Landmark size={20} className="text-[#0038a8]" />
+                  <Landmark size={20} className="text-[#2F6FED]" />
                   <span>{currentLang === 'fa' ? 'اطلاعات مبتنی بر منابع رسمی' : 'Sourced from Official Portals'}</span>
                 </div>
 
                 <div className="flex items-center justify-center space-x-3 rtl:space-x-reverse py-1 border-y md:border-y-0 md:border-x border-[#dfe6ef]">
-                  <FileCheck2 size={20} className="text-[#0038a8]" />
+                  <FileCheck2 size={20} className="text-[#2F6FED]" />
                   <span>{currentLang === 'fa' ? 'بررسی متناسب با شرایط متقاضی' : 'Tailored Applicant Assessment'}</span>
                 </div>
 
@@ -231,7 +231,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
               
               <div className="text-center space-y-3 max-w-2xl mx-auto mb-14">
-                <span className="text-xs font-extrabold uppercase tracking-widest text-[#0038a8]">
+                <span className="text-xs font-extrabold uppercase tracking-widest text-[#2F6FED]">
                   {currentLang === 'fa' ? 'مسیرهای قانونی' : 'Legal Pathways'}
                 </span>
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-[#142033]">
@@ -305,7 +305,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   <div className="editorial-card p-6 space-y-4 bg-white border border-[#dfe6ef]">
                     <div className="flex items-center justify-between border-b border-[#dfe6ef] pb-3 text-xs font-bold text-[#142033]">
                       <span>🇷🇴 {currentLang === 'fa' ? 'شناسنامه کشور رومانی' : 'Romania Country Profile'}</span>
-                      <span className="text-[#0038a8]">EU & Schengen</span>
+                      <span className="text-[#2F6FED]">EU & Schengen</span>
                     </div>
 
                     <div className="space-y-3 text-xs">
@@ -327,7 +327,7 @@ export const MainContent: React.FC<MainContentProps> = ({
 
                 <div className="lg:col-span-7 space-y-6">
                   <div className="space-y-2">
-                    <span className="text-xs font-extrabold uppercase tracking-widest text-[#0038a8]">
+                    <span className="text-xs font-extrabold uppercase tracking-widest text-[#2F6FED]">
                       {t.whyRomania.eyebrow}
                     </span>
                     <h2 className="text-3xl font-extrabold text-[#142033]">
@@ -358,7 +358,7 @@ export const MainContent: React.FC<MainContentProps> = ({
               
               <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 border-b border-[#dfe6ef] pb-4">
                 <div className="space-y-1">
-                  <span className="text-[#0038a8] font-extrabold text-xs uppercase tracking-wider">
+                  <span className="text-[#2F6FED] font-extrabold text-xs uppercase tracking-wider">
                     {currentLang === 'fa' ? 'دانشگاه‌های معتبر' : 'Higher Education'}
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142033]">
@@ -395,7 +395,7 @@ export const MainContent: React.FC<MainContentProps> = ({
               
               <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 border-b border-[#dfe6ef] pb-4">
                 <div className="space-y-1">
-                  <span className="text-[#0038a8] font-extrabold text-xs uppercase tracking-wider">
+                  <span className="text-[#2F6FED] font-extrabold text-xs uppercase tracking-wider">
                     {currentLang === 'fa' ? 'شهرهای اصلی' : 'Key Cities'}
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142033]">
@@ -430,7 +430,7 @@ export const MainContent: React.FC<MainContentProps> = ({
           <section className="py-20 bg-white">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
               <div className="text-center space-y-2 max-w-2xl mx-auto">
-                <span className="text-xs font-extrabold uppercase tracking-widest text-[#0038a8]">
+                <span className="text-xs font-extrabold uppercase tracking-widest text-[#2F6FED]">
                   {currentLang === 'fa' ? 'منابع قانونی' : 'Official Portals'}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142033]">
@@ -487,7 +487,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
               
               <div className="text-center space-y-2 max-w-2xl mx-auto">
-                <span className="text-xs font-extrabold uppercase tracking-widest text-[#0038a8]">
+                <span className="text-xs font-extrabold uppercase tracking-widest text-[#2F6FED]">
                   {currentLang === 'fa' ? 'اصول اخلاقی و حقوقی' : 'Working Principles'}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142033]">
@@ -497,25 +497,25 @@ export const MainContent: React.FC<MainContentProps> = ({
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div className="editorial-card p-6 bg-white space-y-3">
-                  <FileCheck2 size={24} className="text-[#0038a8]" />
+                  <FileCheck2 size={24} className="text-[#2F6FED]" />
                   <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'اطلاعات قابل بررسی' : 'Verified Insights'}</h3>
                   <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'مطالب مهم حقوقی و دانشگاهی همراه با منبع و تاریخ آخرین بررسی منتشر می‌شوند.' : 'Sourced from official Romanian embassy and IGI documentation.'}</p>
                 </div>
 
                 <div className="editorial-card p-6 bg-white space-y-3">
-                  <Scale size={24} className="text-[#0038a8]" />
+                  <Scale size={24} className="text-[#2F6FED]" />
                   <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'شفافیت در حدود خدمات' : 'Scope Transparency'}</h3>
                   <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'پیش از شروع همکاری، محدوده خدمات، هزینه‌ها و مسئولیت‌های طرفین توضیح داده می‌شود.' : 'Scope of service, timelines, and costs defined clearly in advance.'}</p>
                 </div>
 
                 <div className="editorial-card p-6 bg-white space-y-3">
-                  <ShieldCheck size={24} className="text-[#0038a8]" />
+                  <ShieldCheck size={24} className="text-[#2F6FED]" />
                   <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'عدم تضمین نتیجه' : 'Honest Legal Limits'}</h3>
                   <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'تصمیم نهایی درباره پذیرش، ویزا و اقامت صراحتاً در اختیار مراجع مربوطه است.' : 'Legal honesty acknowledging that visa issuance rests strictly with authorities.'}</p>
                 </div>
 
                 <div className="editorial-card p-6 bg-white space-y-3">
-                  <LockKeyhole size={24} className="text-[#0038a8]" />
+                  <LockKeyhole size={24} className="text-[#2F6FED]" />
                   <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'حفظ حریم خصوصی' : 'GDPR Compliance'}</h3>
                   <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'اطلاعات متقاضیان فقط برای ارائه خدمات و ارتباط مرتبط پردازش می‌شود.' : 'Data stored securely under European Union GDPR regulations.'}</p>
                 </div>
@@ -528,7 +528,7 @@ export const MainContent: React.FC<MainContentProps> = ({
           <section className="py-20 bg-[#f7f9fc]">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
               <div className="text-center space-y-2 max-w-2xl mx-auto">
-                <span className="text-xs font-extrabold uppercase tracking-widest text-[#0038a8]">
+                <span className="text-xs font-extrabold uppercase tracking-widest text-[#2F6FED]">
                   {currentLang === 'fa' ? 'پرسش‌های متداول' : 'Frequently Asked Questions'}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142033]">
@@ -579,7 +579,7 @@ export const MainContent: React.FC<MainContentProps> = ({
       return (
         <div className="space-y-12 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <span className="text-[#fcd116] font-bold text-xs uppercase tracking-wider">
+            <span className="text-[#F4F7FC] font-bold text-xs uppercase tracking-wider">
               {currentLang === 'fa' ? 'بررسی مسیرهای قانونی' : 'Legal Pathways Overview'}
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
@@ -594,7 +594,7 @@ export const MainContent: React.FC<MainContentProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="editorial-card p-6 space-y-3 bg-white">
-              <h3 className="text-lg font-bold text-[#0038a8]">🎓 {t.pathways.study.title}</h3>
+              <h3 className="text-lg font-bold text-[#2F6FED]">🎓 {t.pathways.study.title}</h3>
               <p className="text-xs text-[#526174] leading-relaxed">{t.pathways.study.desc}</p>
               <Button variant="ghost" size="sm" onClick={() => onNavigate('study')} rightIcon={<ArrowIcon size={14} />}>
                 {currentLang === 'fa' ? 'جزئیات تحصیل در رومانی' : 'Study Details'}
@@ -602,7 +602,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
 
             <div className="editorial-card p-6 space-y-3 bg-white">
-              <h3 className="text-lg font-bold text-[#0038a8]">💼 {t.pathways.work.title}</h3>
+              <h3 className="text-lg font-bold text-[#2F6FED]">💼 {t.pathways.work.title}</h3>
               <p className="text-xs text-[#526174] leading-relaxed">{t.pathways.work.desc}</p>
               <Button variant="ghost" size="sm" onClick={() => onNavigate('work')} rightIcon={<ArrowIcon size={14} />}>
                 {currentLang === 'fa' ? 'جزئیات اشتغال و ویزای کار' : 'Work Permit Details'}
@@ -618,7 +618,7 @@ export const MainContent: React.FC<MainContentProps> = ({
       return (
         <div className="space-y-12 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <span className="text-[#fcd116] font-bold text-xs uppercase tracking-wider">
+            <span className="text-[#F4F7FC] font-bold text-xs uppercase tracking-wider">
               {currentLang === 'fa' ? 'آموزش عالی رومانی' : 'Higher Education'}
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
@@ -639,11 +639,11 @@ export const MainContent: React.FC<MainContentProps> = ({
                 </h2>
                 <ul className="space-y-2 text-xs sm:text-sm text-[#526174]">
                   <li className="flex items-center space-x-2 rtl:space-x-reverse">
-                    <span className="w-4 h-4 rounded-full bg-blue-100 text-[#0038a8] flex items-center justify-center text-[10px] font-bold">✓</span>
+                    <span className="w-4 h-4 rounded-full bg-blue-100 text-[#2F6FED] flex items-center justify-center text-[10px] font-bold">✓</span>
                     <span>{currentLang === 'fa' ? 'پذیرش در رشته‌های پزشکی و مهندسی به زبان انگلیسی' : 'Medicine & Engineering in English'}</span>
                   </li>
                   <li className="flex items-center space-x-2 rtl:space-x-reverse">
-                    <span className="w-4 h-4 rounded-full bg-blue-100 text-[#0038a8] flex items-center justify-center text-[10px] font-bold">✓</span>
+                    <span className="w-4 h-4 rounded-full bg-blue-100 text-[#2F6FED] flex items-center justify-center text-[10px] font-bold">✓</span>
                     <span>{currentLang === 'fa' ? 'شهریه سالانه متعادل بر اساس رشته و دانشگاه' : 'Balanced annual tuition rates'}</span>
                   </li>
                 </ul>
@@ -726,7 +726,7 @@ export const MainContent: React.FC<MainContentProps> = ({
               value={uniSearch}
               onChange={(e) => setUniSearch(e.target.value)}
               placeholder={currentLang === 'fa' ? 'جستجوی دانشگاه یا شهر...' : 'Search university or city...'}
-              className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#0038a8] bg-white"
+              className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
             />
           </div>
 
@@ -759,7 +759,7 @@ export const MainContent: React.FC<MainContentProps> = ({
               value={citySearch}
               onChange={(e) => setCitySearch(e.target.value)}
               placeholder={currentLang === 'fa' ? 'جستجوی شهر...' : 'Search city...'}
-              className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#0038a8] bg-white"
+              className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
             />
           </div>
 
@@ -802,7 +802,7 @@ export const MainContent: React.FC<MainContentProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {sampleArticles.map((art) => (
               <div key={art.id} className="editorial-card p-6 space-y-3 bg-white">
-                <span className="text-xs text-[#0038a8] bg-blue-50 px-2.5 py-1 rounded font-semibold">{art.category[currentLang]}</span>
+                <span className="text-xs text-[#2F6FED] bg-blue-50 px-2.5 py-1 rounded font-semibold">{art.category[currentLang]}</span>
                 <h3 className="font-bold text-[#142033] text-base">{art.title[currentLang]}</h3>
                 <p className="text-xs text-[#526174] leading-relaxed">{art.excerpt[currentLang]}</p>
               </div>
@@ -843,8 +843,8 @@ export const MainContent: React.FC<MainContentProps> = ({
                 <div className="font-bold text-[#142033]">📍 {currentLang === 'fa' ? 'دفتر رومانی:' : 'Bucharest Office:'}</div>
                 <p className="text-xs text-[#526174]">Bucharest, Romania</p>
               </div>
-              <div className="bg-[#0038a8] text-white p-6 rounded-2xl space-y-2 shadow-md">
-                <div className="font-bold text-[#fcd116]">✉️ {currentLang === 'fa' ? 'ایمیل:' : 'Email:'}</div>
+              <div className="bg-[#2F6FED] text-white p-6 rounded-2xl space-y-2 shadow-md">
+                <div className="font-bold text-[#F4F7FC]">✉️ {currentLang === 'fa' ? 'ایمیل:' : 'Email:'}</div>
                 <p className="text-xs text-slate-100">info@darromania.com</p>
               </div>
             </div>

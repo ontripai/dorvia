@@ -64,12 +64,12 @@ export const Header: React.FC<HeaderProps> = ({
             onNavigate('home');
           }}
         >
-          <div className="w-10 h-10 rounded-xl bg-[#06162d] text-white flex items-center justify-center font-black text-lg shadow-sm border border-[#0038a8]/30 relative overflow-hidden group-hover:scale-105 transition-transform">
+          <div className="w-10 h-10 rounded-xl bg-[#071B3D] text-white flex items-center justify-center font-black text-lg shadow-sm border border-[#2F6FED]/30 relative overflow-hidden group-hover:scale-105 transition-transform">
             <Image src="/dorvia-logo-primary.svg" width={32} height={32} alt="DORVIA" />
           </div>
 
           <div className="flex flex-col">
-            <span className="text-lg sm:text-xl font-bold tracking-tight text-[#142033] group-hover:text-[#0038a8] transition-colors leading-tight">
+            <span className="text-lg sm:text-xl font-bold tracking-tight text-[#142033] group-hover:text-[#2F6FED] transition-colors leading-tight">
               {currentLang === 'fa' ? 'در رومانی' : 'IN ROMANIA'}
             </span>
             <span className="text-[10px] text-[#788697] tracking-widest uppercase font-semibold">
@@ -87,7 +87,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <button
                   onClick={() => handleNavClick(item)}
                   className={`flex items-center space-x-1.5 rtl:space-x-reverse py-2 transition-colors cursor-pointer ${
-                    isActive ? 'text-[#0038a8] font-bold' : 'hover:text-[#0038a8]'
+                    isActive ? 'text-[#2F6FED] font-bold' : 'hover:text-[#2F6FED]'
                   }`}
                 >
                   <span>{item.label}</span>
@@ -108,7 +108,7 @@ export const Header: React.FC<HeaderProps> = ({
             aria-label="Search"
             title={currentLang === 'fa' ? 'جستجو' : 'Search'}
           >
-            <Search size={18} className="text-[#0038a8]" />
+            <Search size={18} className="text-[#2F6FED]" />
           </button>
 
           {/* Segmented Language Switcher (36px height) */}
@@ -116,7 +116,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={() => onLanguageChange('fa')}
               className={`px-3 py-1 h-full rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                currentLang === 'fa' ? 'bg-[#0038a8] text-white shadow-xs' : 'text-[#06162d] hover:text-[#0038a8]'
+                currentLang === 'fa' ? 'bg-[#2F6FED] text-white shadow-xs' : 'text-[#071B3D] hover:text-[#2F6FED]'
               }`}
             >
               FA
@@ -124,7 +124,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={() => onLanguageChange('en')}
               className={`px-3 py-1 h-full rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                currentLang === 'en' ? 'bg-[#0038a8] text-white shadow-xs' : 'text-[#06162d] hover:text-[#0038a8]'
+                currentLang === 'en' ? 'bg-[#2F6FED] text-white shadow-xs' : 'text-[#071B3D] hover:text-[#2F6FED]'
               }`}
             >
               EN
@@ -148,19 +148,19 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => setSearchDialogOpen(true)}
             className="p-2 rounded-lg bg-[#eef3f8] text-[#142033] border border-[#dfe6ef] min-h-[36px] min-w-[36px] flex items-center justify-center"
           >
-            <Search size={18} className="text-[#0038a8]" />
+            <Search size={18} className="text-[#2F6FED]" />
           </button>
 
           <div className="flex items-center h-[32px] p-0.5 rounded-lg bg-[#eef3f8] border border-[#dfe6ef] text-[11px]">
             <button
               onClick={() => onLanguageChange('fa')}
-              className={`px-2 py-0.5 rounded font-bold ${currentLang === 'fa' ? 'bg-[#0038a8] text-white' : 'text-[#142033]'}`}
+              className={`px-2 py-0.5 rounded font-bold ${currentLang === 'fa' ? 'bg-[#2F6FED] text-white' : 'text-[#142033]'}`}
             >
               FA
             </button>
             <button
               onClick={() => onLanguageChange('en')}
-              className={`px-2 py-0.5 rounded font-bold ${currentLang === 'en' ? 'bg-[#0038a8] text-white' : 'text-[#142033]'}`}
+              className={`px-2 py-0.5 rounded font-bold ${currentLang === 'en' ? 'bg-[#2F6FED] text-white' : 'text-[#142033]'}`}
             >
               EN
             </button>

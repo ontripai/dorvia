@@ -56,12 +56,12 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#06162d]/90 backdrop-blur-md flex flex-col justify-between p-6 overflow-y-auto animate-fadeIn">
+    <div className="fixed inset-0 z-50 bg-[#071B3D]/90 backdrop-blur-md flex flex-col justify-between p-6 overflow-y-auto animate-fadeIn">
       
       {/* Top Mobile Bar */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-4">
         <div className="flex items-center space-x-2 rtl:space-x-reverse">
-          <div className="w-8 h-8 rounded-lg bg-white text-[#06162d] flex items-center justify-center font-bold text-sm">
+          <div className="w-8 h-8 rounded-lg bg-white text-[#071B3D] flex items-center justify-center font-bold text-sm">
             DR
           </div>
           <span className="font-extrabold text-white text-base">در رومانی</span>
@@ -83,7 +83,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             key={item.id}
             onClick={() => handleLinkClick(item.id)}
             className={`w-full text-start px-4 py-3 rounded-xl text-sm font-semibold transition-colors min-h-[44px] flex items-center justify-between ${
-              activeRoute === item.id ? 'bg-[#0038a8] text-white font-bold' : 'text-slate-200 hover:bg-white/10'
+              activeRoute === item.id ? 'bg-[#2F6FED] text-white font-bold' : 'text-slate-200 hover:bg-white/10'
             }`}
           >
             <span>{item.label}</span>
