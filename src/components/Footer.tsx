@@ -18,12 +18,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
   return (
     <footer className="bg-[#06162d] text-white pt-0 pb-12 relative border-t border-[#0b2b55] overflow-hidden">
       
-      {/* 4px Romanian Tricolor Top Border */}
-      <div className="romania-tricolor-bar">
-        <div />
-        <div />
-        <div />
-      </div>
+      {/* Removed Romanian Tricolor Top Border */}
 
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 space-y-12">
         
@@ -34,12 +29,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
           <div className="space-y-4 lg:col-span-1">
             <div className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer" onClick={() => onNavigate('home')}>
               <div className="w-9 h-9 rounded-xl bg-white text-[#06162d] flex items-center justify-center font-black text-base relative overflow-hidden">
-                <div className="absolute top-0 bottom-0 left-0 w-1 flex flex-col">
-                  <div className="h-1/3 bg-[#0038a8]" />
-                  <div className="h-1/3 bg-[#fcd116]" />
-                  <div className="h-1/3 bg-[#ce1126]" />
-                </div>
-                <Image src="/dorvia-logo-primary.svg" width={28} height={28} alt="DR" />
+                <Image src="/dorvia-logo-primary.svg" width={28} height={28} alt="DORVIA" />
               </div>
               <span className="text-lg font-extrabold text-white">در رومانی</span>
             </div>
@@ -49,8 +39,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
             </p>
 
             <div className="flex items-center space-x-2 rtl:space-x-reverse text-[11px] text-slate-400">
-              <ShieldCheck size={14} className="text-[#fcd116]" />
-              <span>EU GDPR Compliant</span>
+              {/* EU GDPR Removed */}
             </div>
           </div>
 

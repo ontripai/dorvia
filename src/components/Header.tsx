@@ -52,12 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#dfe6ef] h-[80px] flex flex-col justify-between transition-all duration-300">
       
-      {/* 4px Top Romanian Tricolor Signature */}
-      <div className="romania-tricolor-bar">
-        <div />
-        <div />
-        <div />
-      </div>
+      {/* Removed Romanian Tricolor Signature */}
 
       <div className="max-w-[1280px] w-full mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
         
@@ -70,12 +65,7 @@ export const Header: React.FC<HeaderProps> = ({
           }}
         >
           <div className="w-10 h-10 rounded-xl bg-[#06162d] text-white flex items-center justify-center font-black text-lg shadow-sm border border-[#0038a8]/30 relative overflow-hidden group-hover:scale-105 transition-transform">
-            <div className="absolute top-0 bottom-0 left-0 w-1.5 flex flex-col">
-              <div className="h-1/3 bg-[#0038a8]" />
-              <div className="h-1/3 bg-[#fcd116]" />
-              <div className="h-1/3 bg-[#ce1126]" />
-            </div>
-            <Image src="/dorvia-logo-primary.svg" width={32} height={32} alt="DR" />
+            <Image src="/dorvia-logo-primary.svg" width={32} height={32} alt="DORVIA" />
           </div>
 
           <div className="flex flex-col">

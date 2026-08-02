@@ -29,7 +29,7 @@ export const featuredUniversities: University[] = [
     },
     ranking: 'Top Medical University in South-Eastern Europe',
     description: {
-      fa: 'معتبرترین مرکز تربیت پزشک و دندانپزشک در شرق اروپا با تاییدیه مستقیم سازمان بهداشت جهانی و اتحادیه اروپا.',
+      fa: 'معتبرترین مرکز تربیت پزشک و دندانپزشک در شرق اروپا. مدرک این دانشگاه در فهرست جهانی مدارس پزشکی ثبت است.',
       en: 'The top medical educational center in Southeastern Europe with full WHO & EU accreditation.'
     }
   },
