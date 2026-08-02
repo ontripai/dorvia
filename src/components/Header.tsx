@@ -64,7 +64,7 @@ export const Header: React.FC<HeaderProps> = ({
             onNavigate('home');
           }}
         >
-          <img src="/dorvia-wordmark.svg" alt="DORVIA" className="h-[32px] sm:h-[36px] w-auto group-hover:scale-105 transition-transform" />
+          <img src="/images/logo/dorvia-logo-primary-transparent-3000.png" alt="DORVIA" className="h-[32px] sm:h-[36px] w-auto group-hover:scale-105 transition-transform" />
 
           <div className="flex flex-col">
             <span className="text-lg sm:text-xl font-bold tracking-tight text-[#142033] group-hover:text-[#2F6FED] transition-colors leading-tight">
