@@ -91,8 +91,8 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
             </h4>
             <ul className="space-y-2 text-slate-300">
               <li>📍 {t.footer.address}</li>
-              <li>✉️ {t.footer.email}</li>
-              <li>📞 {t.footer.phone}</li>
+              <li>✉️ <span dir="ltr" className="inline-block">{t.footer.email}</span></li>
+              <li>📞 <span dir="ltr" className="inline-block">{t.footer.phone}</span></li>
             </ul>
           </div>
 

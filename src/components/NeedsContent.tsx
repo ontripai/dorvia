@@ -219,7 +219,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               <h3 className="font-extrabold text-[#142033] text-base">📍 {currentLang === 'fa' ? 'اطلاعات سفارت جمهوری اسلامی ایران در بخارست' : 'Embassy Contact Information'}</h3>
               <ul className="space-y-2 text-xs text-[#526174]">
                 <li><strong>{currentLang === 'fa' ? 'آدرس:' : 'Address:'}</strong> Lascăr Catargiu 39, București</li>
-                <li><strong>{currentLang === 'fa' ? 'تلفن:' : 'Phone:'}</strong> +40 21 312 0493</li>
+                <li><strong>{currentLang === 'fa' ? 'تلفن:' : 'Phone:'}</strong> <span dir="ltr" className="inline-block">+40 21 312 0493</span></li>
                 <li><strong>{currentLang === 'fa' ? 'سامانه میخک:' : 'Mikhak System:'}</strong> mikhak.mfa.gov.ir</li>
               </ul>
               <a href="https://mikhak.mfa.gov.ir" target="_blank" rel="noopener noreferrer">

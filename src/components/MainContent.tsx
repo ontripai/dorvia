@@ -105,7 +105,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   {/* Eyebrow Badge */}
                   <div className="inline-flex items-center space-x-2 rtl:space-x-reverse bg-white/10 border border-white/15 px-4 py-1.5 rounded-full text-xs font-semibold text-[#F4F7FC]">
                     <ShieldCheck size={14} className="text-[#F4F7FC]" />
-                    <span>{currentLang === 'fa' ? 'راهنمای جامع رومانی برای ایرانیان سراسر جهان' : 'Official Romanian Platform for Global Applicants'}</span>
+                    <span>{currentLang === 'fa' ? 'پلتفرم مستقل مشاوره برای متقاضیان سراسر جهان' : 'Independent Advisory Platform for Global Applicants'}</span>
                   </div>
 
                   <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.2]">
@@ -178,7 +178,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                         </div>
                         <div className="p-3.5 rounded-xl bg-white/10 border border-white/15 flex items-center justify-between">
                           <span className="font-semibold text-white">🏢 Corporate Registration (SRL)</span>
-                          <span className="font-extrabold text-[#F4F7FC]">1% Tax Option</span>
+                          <span className="font-extrabold text-[#F4F7FC]">{currentLang === 'fa' ? 'مالیات شرکتهای کوچک: از ۱٪' : 'Micro-Company Tax: from 1%'}</span>
                         </div>
                       </div>
 
@@ -845,7 +845,7 @@ export const MainContent: React.FC<MainContentProps> = ({
               </div>
               <div className="bg-[#2F6FED] text-white p-6 rounded-2xl space-y-2 shadow-md">
                 <div className="font-bold text-[#F4F7FC]">✉️ {currentLang === 'fa' ? 'ایمیل:' : 'Email:'}</div>
-                <p className="text-xs text-slate-100">info@darromania.com</p>
+                <p className="text-xs text-slate-100"><span dir="ltr" className="inline-block">ontrip.ai@gmail.com</span></p>
               </div>
             </div>
 
