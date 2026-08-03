@@ -379,7 +379,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   desc={t.pathways.family.desc}
                   icon={Users}
                   badge={currentLang === 'fa' ? 'پیوست خانواده' : 'Family'}
-                  href="/immigration"
+                  href="/immigration/family-reunification"
                 />
                 <PathwayCard
                   currentLang={currentLang}
@@ -387,7 +387,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   desc={t.pathways.living.desc}
                   icon={House}
                   badge={currentLang === 'fa' ? 'راهنمای استقرار' : 'Settlement'}
-                  href="/needs/first-days-checklist"
+                  href="/start-here/living-here"
                 />
               </div>
 

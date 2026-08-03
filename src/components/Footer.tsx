@@ -51,8 +51,8 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
               <li><Link href="/study" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.study.title}</Link></li>
               <li><Link href="/work" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.work.title}</Link></li>
               <li><Link href="/company" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.company.title}</Link></li>
-              <li><Link href="/immigration" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.investment.title}</Link></li>
-              <li><Link href="/immigration" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.family.title}</Link></li>
+              <li><Link href="/company/investment" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.investment.title}</Link></li>
+              <li><Link href="/immigration/family-reunification" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.family.title}</Link></li>
             </ul>
           </div>
 
