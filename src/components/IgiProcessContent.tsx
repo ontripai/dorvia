@@ -20,8 +20,8 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
         </h1>
         <div className="text-[11px] text-slate-400 mt-2">
           {currentLang === 'fa' 
-            ? 'منبع: اداره کل مهاجرت رومانی (IGI) — igi.mai.gov.ro — آخرین بررسی: ۲۰۲۶'
-            : 'Source: General Inspectorate for Immigration (IGI) — igi.mai.gov.ro — Last reviewed: 2026'}
+            ? 'منبع: اداره کل مهاجرت رومانی (IGI) — igi.mai.gov.ro — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+            : 'Source: General Inspectorate for Immigration (IGI) — igi.mai.gov.ro — Last reviewed: August 2026'}
         </div>
       </div>
 

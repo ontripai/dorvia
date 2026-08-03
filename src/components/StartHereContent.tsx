@@ -22,8 +22,8 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
   const ArrowIcon = currentLang === 'fa' ? ArrowLeft : ArrowRight;
 
   const disclaimer = currentLang === 'fa' 
-    ? 'منبع: اداره کل مهاجرت رومانی (IGI) — آخرین بررسی: ۲۰۲۶'
-    : 'Source: General Inspectorate for Immigration (IGI) — Last reviewed: 2026';
+    ? 'منبع: اداره کل مهاجرت رومانی (IGI) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+    : 'Source: General Inspectorate for Immigration (IGI) — Last reviewed: August 2026';
 
   switch (subRoute) {
     case 'planning-to-come':

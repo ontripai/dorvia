@@ -8,7 +8,7 @@ export default function RomaniaPage() {
 
   return (
     <RomaniaOverviewContent
-      subRoute="economy"
+      subRoute="romania"
       currentLang={currentLang}
       onNavigate={onNavigate}
       onOpenEvaluationModal={onOpenEvaluationModal}

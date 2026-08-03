@@ -31,8 +31,8 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa' 
-                ? 'منبع: اداره ثبت شرکت‌های رومانی (ONRC) — onrc.ro — آخرین بررسی: ۲۰۲۶'
-                : 'Source: Romanian National Trade Register Office (ONRC) — onrc.ro — Last reviewed: 2026'}
+                ? 'منبع: اداره ثبت شرکت‌های رومانی (ONRC) — onrc.ro — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: Romanian National Trade Register Office (ONRC) — onrc.ro — Last reviewed: August 2026'}
             </div>
           </div>
 
@@ -106,8 +106,8 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa' 
-                ? 'منبع: قانون مالیاتی رومانی، سازمان امور مالیاتی (ANAF) — آخرین بررسی: ۲۰۲۶'
-                : 'Source: Romanian Tax Code, National Agency for Fiscal Administration (ANAF) — Last reviewed: 2026'}
+                ? 'منبع: قانون مالیاتی رومانی، سازمان امور مالیاتی (ANAF) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: Romanian Tax Code, National Agency for Fiscal Administration (ANAF) — Last reviewed: August 2026'}
             </div>
           </div>
 
@@ -238,8 +238,8 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa' 
-                ? 'منبع: اداره کل مهاجرت رومانی (IGI) — igi.mai.gov.ro — آخرین بررسی: ۲۰۲۶'
-                : 'Source: General Inspectorate for Immigration (IGI) — igi.mai.gov.ro — Last reviewed: 2026'}
+                ? 'منبع: اداره کل مهاجرت رومانی (IGI) — igi.mai.gov.ro — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: General Inspectorate for Immigration (IGI) — igi.mai.gov.ro — Last reviewed: August 2026'}
             </div>
           </div>
 
@@ -290,8 +290,8 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa'
-                ? 'منبع: اداره ثبت اسناد و املاک رومانی (OCPI)، سازمان امور مالیاتی رومانی (ANAF) — آخرین بررسی: ۲۰۲۶'
-                : 'Source: National Agency for Cadastre and Land Registration (OCPI), National Agency for Fiscal Administration (ANAF) — Last reviewed: 2026'}
+                ? 'منبع: اداره ثبت اسناد و املاک رومانی (OCPI)، سازمان امور مالیاتی رومانی (ANAF) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: National Agency for Cadastre and Land Registration (OCPI), National Agency for Fiscal Administration (ANAF) — Last reviewed: August 2026'}
             </div>
           </div>
 
@@ -364,8 +364,8 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa'
-                ? 'منبع: قانون مالیاتی رومانی (Legea 227/2015)، سازمان امور مالیاتی رومانی (ANAF) — آخرین بررسی: ۲۰۲۶'
-                : 'Source: Romanian Fiscal Code (Legea 227/2015), National Agency for Fiscal Administration (ANAF) — Last reviewed: 2026'}
+                ? 'منبع: قانون مالیاتی رومانی (Legea 227/2015)، سازمان امور مالیاتی رومانی (ANAF) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: Romanian Fiscal Code (Legea 227/2015), National Agency for Fiscal Administration (ANAF) — Last reviewed: August 2026'}
             </div>
           </div>
 
@@ -438,8 +438,8 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa'
-                ? 'منبع: سازمان امور مالیاتی رومانی (ANAF)، وزارت دارایی رومانی — آخرین بررسی: ۲۰۲۶'
-                : 'Source: National Agency for Fiscal Administration (ANAF), Romanian Ministry of Finance — Last reviewed: 2026'}
+                ? 'منبع: سازمان امور مالیاتی رومانی (ANAF)، وزارت دارایی رومانی — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: National Agency for Fiscal Administration (ANAF), Romanian Ministry of Finance — Last reviewed: August 2026'}
             </div>
           </div>
 

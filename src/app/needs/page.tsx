@@ -8,7 +8,7 @@ export default function NeedsPage() {
 
   return (
     <NeedsContent
-      subRoute="first-days-checklist"
+      subRoute="needs"
       currentLang={currentLang}
       onNavigate={onNavigate}
       onOpenEvaluationModal={onOpenEvaluationModal}

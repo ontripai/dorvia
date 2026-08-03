@@ -20,8 +20,8 @@ export const InvestmentOverviewContent: React.FC<InvestmentOverviewContentProps>
         </h1>
         <div className="text-[11px] text-slate-400 mt-2">
           {currentLang === 'fa' 
-            ? 'منبع: آژانس رومانیایی سرمایه‌گذاری و تجارت خارجی (ARICE، arice.gov.ro)، آیین‌نامه اتباع خارجی (OUG 194/2002) — آخرین بررسی: ۲۰۲۶'
-            : 'Source: Romanian Agency for Investment and Foreign Trade (ARICE, arice.gov.ro), Foreigners Regime (OUG 194/2002) — Last reviewed: 2026'}
+            ? 'منبع: آژانس رومانیایی سرمایه‌گذاری و تجارت خارجی (ARICE، arice.gov.ro)، آیین‌نامه اتباع خارجی (OUG 194/2002) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+            : 'Source: Romanian Agency for Investment and Foreign Trade (ARICE, arice.gov.ro), Foreigners Regime (OUG 194/2002) — Last reviewed: August 2026'}
         </div>
       </div>
 

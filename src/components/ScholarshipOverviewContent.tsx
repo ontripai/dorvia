@@ -20,8 +20,8 @@ export const ScholarshipOverviewContent: React.FC<ScholarshipOverviewContentProp
         </h1>
         <div className="text-[11px] text-slate-400 mt-2">
           {currentLang === 'fa' 
-            ? 'منبع: وزارت امور خارجه رومانی، پلتفرم رسمی Study in Romania (studyinromania.gov.ro) — آخرین بررسی: ۲۰۲۶'
-            : 'Source: Romanian Ministry of Foreign Affairs, Official Study in Romania Platform (studyinromania.gov.ro) — Last reviewed: 2026'}
+            ? 'منبع: وزارت امور خارجه رومانی، پلتفرم رسمی Study in Romania (studyinromania.gov.ro) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+            : 'Source: Romanian Ministry of Foreign Affairs, Official Study in Romania Platform (studyinromania.gov.ro) — Last reviewed: August 2026'}
         </div>
       </div>
 

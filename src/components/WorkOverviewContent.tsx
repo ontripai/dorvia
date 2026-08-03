@@ -24,8 +24,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
   const sourceLine = (
     <div className="text-[11px] text-slate-400 mt-2">
       {currentLang === 'fa' 
-        ? 'منبع: اداره کل مهاجرت رومانی (IGI) — igi.mai.gov.ro — آخرین بررسی: ۲۰۲۶'
-        : 'Source: General Inspectorate for Immigration (IGI) — igi.mai.gov.ro — Last reviewed: 2026'}
+        ? 'منبع: اداره کل مهاجرت رومانی (IGI) — igi.mai.gov.ro — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+        : 'Source: General Inspectorate for Immigration (IGI) — igi.mai.gov.ro — Last reviewed: August 2026'}
     </div>
   );
 
@@ -180,8 +180,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa' 
-                ? 'منبع: پورتال EURES اتحادیه اروپا، آژانس ملی استخدام رومانی (ANOFM) — آخرین بررسی: ۲۰۲۶'
-                : 'Source: EU EURES Portal, National Agency for Employment (ANOFM) — Last reviewed: 2026'}
+                ? 'منبع: پورتال EURES اتحادیه اروپا، آژانس ملی استخدام رومانی (ANOFM) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: EU EURES Portal, National Agency for Employment (ANOFM) — Last reviewed: August 2026'}
             </div>
           </div>
 
@@ -261,8 +261,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa' 
-                ? 'منبع: قانون کار رومانی (Legea 53/2003)، بازرسی کار رومانی (Inspecţia Muncii، inspectiamuncii.ro) — آخرین بررسی: ۲۰۲۶'
-                : 'Source: Romanian Labor Code (Legea 53/2003), Romanian Labor Inspection (Inspecţia Muncii, inspectiamuncii.ro) — Last reviewed: 2026'}
+                ? 'منبع: قانون کار رومانی (Legea 53/2003)، بازرسی کار رومانی (Inspecţia Muncii، inspectiamuncii.ro) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: Romanian Labor Code (Legea 53/2003), Romanian Labor Inspection (Inspecţia Muncii, inspectiamuncii.ro) — Last reviewed: August 2026'}
             </div>
           </div>
 
@@ -336,8 +336,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa' 
-                ? 'منبع: سازمان امور مالیاتی رومانی (ANAF)، قانون مالیاتی رومانی (Codul Fiscal) — آخرین بررسی: ۲۰۲۶'
-                : 'Source: Romanian National Agency for Fiscal Administration (ANAF), Romanian Fiscal Code (Codul Fiscal) — Last reviewed: 2026'}
+                ? 'منبع: سازمان امور مالیاتی رومانی (ANAF)، قانون مالیاتی رومانی (Codul Fiscal) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: Romanian National Agency for Fiscal Administration (ANAF), Romanian Fiscal Code (Codul Fiscal) — Last reviewed: August 2026'}
             </div>
           </div>
 
@@ -410,8 +410,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa' 
-                ? 'منبع: سازمان ملی بیمه سلامت رومانی (CNAS)، سازمان ملی بازنشستگی عمومی (CNPP) — آخرین بررسی: ۲۰۲۶'
-                : 'Source: National Health Insurance House (CNAS), National Public Pension House (CNPP) — Last reviewed: 2026'}
+                ? 'منبع: سازمان ملی بیمه سلامت رومانی (CNAS)، سازمان ملی بازنشستگی عمومی (CNPP) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: National Health Insurance House (CNAS), National Public Pension House (CNPP) — Last reviewed: August 2026'}
             </div>
           </div>
 

@@ -3,7 +3,7 @@
 import React from 'react';
 import { Language } from '../types';
 import { Button } from './Button';
-import { Landmark, Building2, ShieldCheck, Scale, FileCheck2, ExternalLink } from './Icons';
+import { Landmark, Building2, ShieldCheck, Scale, FileCheck2, ExternalLink, ArrowRight, ArrowLeft } from './Icons';
 import { featuredCities } from '../lib/data';
 import { CityCard } from './CityCard';
 
@@ -20,7 +20,98 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
   onNavigate,
   onOpenEvaluationModal
 }) => {
+  const ArrowIcon = currentLang === 'fa' ? ArrowLeft : ArrowRight;
+
   switch (subRoute) {
+
+    // 0. ROMANIA GENERAL HUB
+    case 'romania':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <span className="text-[#F4F7FC] font-bold text-xs uppercase tracking-wider">
+              {currentLang === 'fa' ? 'شناخت کشور رومانی' : 'Discover Romania'}
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'راهنمای جامع جغرافیا، شهرها و قوانین رومانی' : 'Overview of Romania: Society, Economy & Key Cities'}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa'
+                ? 'مقدمه‌ای بر اقتصاد پویا، جامعه چندفرهنگی، تاریخ و فرهنگ غنی و کلیدی‌ترین شهرهای کشور رومانی.'
+                : 'Introduction to Romania’s growing EU economy, diverse society, rich cultural heritage, and key urban centers.'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('romania/economy')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">📈</span>
+                  <span>{currentLang === 'fa' ? 'اقتصاد و بازار کار' : 'Economy & Industries'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'تحلیل ساختار اقتصادی، قطب‌های فناوری و متوسط درآمد قانونی.' : 'Economic structure, IT hubs, and wage standards.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('romania/society')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">👥</span>
+                  <span>{currentLang === 'fa' ? 'جامعه و زندگی اجتماعی' : 'Society & Demographics'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'آشنایی با مردم رومانی، زبان رسمی، آداب اجتماعی و سیستم آموزش.' : 'Population dynamics, social life, and expat integration.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('romania/culture-and-arts')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🏛️</span>
+                  <span>{currentLang === 'fa' ? 'فرهنگ، هنر و میراث' : 'Culture, Arts & Heritage'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'تاریخ غنی، قلعه‌های ترانسیلوانیا، موسیقی کلاسیک و آیین‌های سنتی.' : 'Carpathian folklore, historical landmarks, and classical music.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('romania/laws-and-regulations')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">⚖️</span>
+                  <span>{currentLang === 'fa' ? 'قوانین و مقررات عمومی' : 'Key Laws & Regulations'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'حقوق مصرف‌کننده، اصول قراردادها و حریم خصوصی (GDPR) در رومانی.' : 'General civil code, consumer rights, and GDPR standards.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('romania/cities')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🏙️</span>
+                  <span>{currentLang === 'fa' ? 'شهرهای مهم رومانی' : 'Key Cities of Romania'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'راهنمای بخارست، کلوژ-نپوکا، یاش، تیمیشوارا و براشوف برای اقامت.' : 'Guides for Bucharest, Cluj-Napoca, Timișoara, Iași, and Brașov.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('romania/tourism')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">✈️</span>
+                  <span>{currentLang === 'fa' ? 'جاذبه‌های گردشگری' : 'Tourism & Travel'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'معرفی قلعه‌های تاریخی، طبیعت کارپات و دلتای دانوب.' : 'Danube delta, Carpathian ski resorts, and historical castles.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+          </div>
+        </div>
+      );
+
 
     // 1. ECONOMY OF ROMANIA
     case 'economy':

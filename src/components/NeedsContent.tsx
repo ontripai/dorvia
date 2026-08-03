@@ -24,7 +24,213 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
   // SUB-ROUTE CONTENT ROUTING
   switch (subRoute) {
 
-    // 1. CURRENCY EXCHANGE
+    // 0. NEEDS LANDING HUB
+    case 'needs':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <span className="text-[#2F6FED] font-bold text-xs uppercase tracking-wider">
+              {currentLang === 'fa' ? 'نیازهای زندگی روزمره در رومانی' : 'Essentials in Romania'}
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'نیازمندی‌ها و کارهای اداری ورود و استقرار' : 'Essentials & Settlement Guide'}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa'
+                ? 'راهنمای کارهای اداری، مالی، مسکن، خدمات درمانی، مدارس فرزندان، گواهینامه رانندگی و زندگی در رومانی.'
+                : 'Your comprehensive directory for daily life, banking, renting, healthcare, schooling, and local compliance.'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/first-days-checklist')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">✓</span>
+                  <span>{currentLang === 'fa' ? 'چک‌لیست روزهای نخست ورود' : 'First-Days Arrival Checklist'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'اقدامات حیاتی ۷۲ ساعت، ۷ روز و ۳۰ روز اول ورود به کشور رومانی.' : 'Essential tasks for your first 72 hours, 7 days, and 30 days.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/currency-exchange')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🏦</span>
+                  <span>{currentLang === 'fa' ? 'صرافی و پرداخت‌ها' : 'Currency Exchange & Payments'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'نرخ‌های مرجع بانک ملی (BNR)، صرافی‌های معتبر و افتتاح حساب بانکی.' : 'BNR rates, banking, local card setup, and money transfers.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/housing')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🏠</span>
+                  <span>{currentLang === 'fa' ? 'اجاره و خرید مسکن' : 'Renting & Buying Property'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'چک‌لیست قرارداد اجاره، ثبت در دارایی (ANAF)، ودیعه و مالکیت ملک.' : 'Rental contracts, security deposits, ANAF registration, and buying rules.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/driving-license')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🚗</span>
+                  <span>{currentLang === 'fa' ? 'گواهینامه رانندگی' : 'Driving License'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'شرایط رانندگی با گواهینامه بین‌المللی و تبدیل آن در DGPCI.' : 'Rules for international driving permits and license exchange.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/certified-translation')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">📄</span>
+                  <span>{currentLang === 'fa' ? 'دارالترجمه رسمی' : 'Certified Translation'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'ترجمه رسمی مدارک هویتی و تحصیلی به زبان رومانیایی توسط مترجمین مجاز.' : 'Authorized translations of academic and civil documents.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/notary-public')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">⚖️</span>
+                  <span>{currentLang === 'fa' ? 'دفتر اسناد رسمی' : 'Notary Public'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'ثبت اسناد رسمی، اساسنامه‌های شرکتی و وکالت‌نامه‌ها (Procura).' : 'Legalizing contracts, power of attorney, and corporate deeds.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/iranian-embassy-and-mikhak')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🏛️</span>
+                  <span>{currentLang === 'fa' ? 'سفارت ایران و میخک' : 'Iranian Embassy & Mikhak'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'امور کنسولی، تایید مدرک تحصیلی و وکالت‌نامه‌ها از طریق سامانه میخک.' : 'Consular services, document authentication, and mikhak registry.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/health')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">❤️</span>
+                  <span>{currentLang === 'fa' ? 'خدمات درمانی و سلامت' : 'Healthcare & Insurance'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'آشنایی با بیمه سلامت عمومی (CNAS)، پزشک خانواده و فوریت‌های پزشکی.' : 'National health insurance (CNAS), family doctors, and clinics.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/school')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🎓</span>
+                  <span>{currentLang === 'fa' ? 'مدارس و سیستم آموزشی' : 'Schools & Education'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'سیستم مدارس دولتی رومانی و گزینه‌های مدارس بین‌المللی برای فرزندان.' : 'Public primary and secondary school systems and international schools.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/telecom')}>
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">📱</span>
+                  <span>{currentLang === 'fa' ? 'تلفن همراه و اینترنت' : 'Telecom & Connectivity'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'خرید سیم‌کارت‌های اعتباری و دائمی (Orange, Vodafone, Digi) و اینترنت خانگی.' : 'Orange, Vodafone, Digi mobile plans and high-speed fiber broadband.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </div>
+          </div>
+        </div>
+      );
+
+    case 'health':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'راهنمای خدمات درمانی و سلامت در رومانی' : 'Healthcare & Medical Guide'}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa' ? 'پزشک خانواده، ثبت‌نام در سازمان بیمه دولتی (CNAS)، و مراکز درمانی خصوصی.' : 'Family doctors, national insurance registration (CNAS), and private medical centers.'}
+            </p>
+          </div>
+          <div className="editorial-card p-8 bg-white border border-[#dfe6ef] space-y-4 max-w-3xl mx-auto">
+            <h3 className="text-xl font-bold text-[#142033]">{currentLang === 'fa' ? 'مراقبت‌های درمانی و ثبت‌نام بیمه سلامت رومانی' : 'Healthcare Access in Romania'}</h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa' 
+                ? 'ثبت‌نام در سازمان ملی بیمه سلامت (CNAS) برای مهاجرین مقیم قانونی از طریق پرداخت‌های سهمیه بیمه یا معافیت‌های دانشجویی امکان‌پذیر است. در گام اول باید یک پزشک خانواده (Medic de Familie) را انتخاب کنید تا به عنوان دروازه ورود شما به سیستم ارجاعات درمانی باشد.'
+                : 'Registration with the National Health Insurance House (CNAS) is mandatory for long-term residents. Students and employees are generally covered automatically through university registration or payroll tax deductions. Your first action should be registering with a local family doctor (Medic de Familie).'}
+            </p>
+            <div className="p-4 bg-[#F8FAFC] border border-[#e2e8f0] rounded-xl text-xs text-[#526174] font-semibold">
+              ℹ️ {currentLang === 'fa' ? 'بررسی شرایط درمانی و مدارک لازم باید با مراجعه مستقیم به وب‌سایت رسمی CNAS (cnas.ro) انجام شود.' : 'Please cross-reference current health coverage details on the official CNAS website (cnas.ro).'}
+            </div>
+          </div>
+        </div>
+      );
+
+    case 'school':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'مدارس و سیستم آموزشی مدارس در رومانی' : 'Primary & Secondary Schools in Romania'}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa' ? 'سیستم ثبت‌نام مدارس عمومی رومانی و گزینه‌های مدارس بین‌المللی.' : 'Enrollment procedures in public schools and options for international curriculums.'}
+            </p>
+          </div>
+          <div className="editorial-card p-8 bg-white border border-[#dfe6ef] space-y-4 max-w-3xl mx-auto">
+            <h3 className="text-xl font-bold text-[#142033]">{currentLang === 'fa' ? 'ثبت‌نام فرزندان در سیستم مدارس رومانی' : 'School Enrollment Procedures'}</h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa' 
+                ? 'فرزندان مهاجرین مقیم قانونی حق تحصیل در سیستم آموزش عمومی رومانی را دارند. تحصیل در مدارس دولتی به زبان رومانیایی است. مدارس بین‌المللی مختلفی نیز در بخارست با برنامه‌های درسی بریتانیایی، آمریکایی یا فرانسوی فعال هستند.'
+                : 'Children of legal residents have full access to the public school system in Romania. While public school instruction is in Romanian, multiple international schools (British, American, and French curriculums) operate in major hubs like Bucharest.'}
+            </p>
+            <div className="p-4 bg-[#F8FAFC] border border-[#e2e8f0] rounded-xl text-xs text-[#526174] font-semibold">
+              ℹ️ {currentLang === 'fa' ? 'شرایط ثبت‌نام و تطبیق تحصیلی از طریق اداره کل بازرسی مدارس هر استان پیگیری می‌شود.' : 'Contact the local county School Inspectorate (Inspectorat Scolar) for enrollment requirements.'}
+            </div>
+          </div>
+        </div>
+      );
+
+    case 'telecom':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'تلفن همراه و اینترنت در رومانی' : 'Mobile & Internet Services in Romania'}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa' ? 'خرید سیم‌کارت‌های اعتباری (Cartela SIM)، قراردادهای دائمی و اینترنت فیبر نوری.' : 'Prepaid SIM cards (Cartela SIM), postpaid subscriptions, and high-speed broadband.'}
+            </p>
+          </div>
+          <div className="editorial-card p-8 bg-white border border-[#dfe6ef] space-y-4 max-w-3xl mx-auto">
+            <h3 className="text-xl font-bold text-[#142033]">{currentLang === 'fa' ? 'خدمات مخابراتی و اینترنت خانگی' : 'Telecom Providers & Broadband'}</h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa' 
+                ? 'اپراتورهای اصلی تلفن همراه در رومانی Orange، Vodafone و Digi هستند. برای روزهای نخست ورود، خرید سیم‌کارت اعتباری (Prepaid) بدون نیاز به مدارک اقامتی آسان‌ترین گزینه است. اینترنت فیبر نوری خانگی نیز با پهنای باند بالا و هزینه‌های بسیار مناسب عرضه می‌شود.'
+                : 'The primary telecom operators are Orange, Vodafone, and Digi. For your first days, a prepaid SIM card is the easiest option since it requires no residency registration. Romania boasts some of the fastest and cheapest fiber broadband internet in the world.'}
+            </p>
+            <div className="p-4 bg-[#F8FAFC] border border-[#e2e8f0] rounded-xl text-xs text-[#526174] font-semibold">
+              ℹ️ {currentLang === 'fa' ? 'برای خرید اشتراک دائمی (Abonament)، ارائه کارت اقامت رومانیایی (Permis de Ședere) الزامی است.' : 'Note that postpaid subscription contracts (Abonament) require a valid residence card.'}
+            </div>
+          </div>
+        </div>
+      );
+
     case 'currency-exchange':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
@@ -54,7 +260,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 <Landmark size={20} className="text-[#2F6FED]" />
                 <h3 className="font-extrabold text-base">{currentLang === 'fa' ? 'نرخ مرجع بانک ملی رومانی (BNR)' : 'National Bank of Romania (BNR) Reference Rates'}</h3>
               </div>
-              <span className="text-[11px] text-[#788697] font-semibold">{currentLang === 'fa' ? 'آخرین بروزرسانی: ۲۰۲۶' : 'Updated: 2026'}</span>
+              <span className="text-[11px] text-[#788697] font-semibold">{currentLang === 'fa' ? 'آخرین بروزرسانی: مرداد ۱۴۰۵ / اوت ۲۰۲۶' : 'Updated: August 2026'}</span>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 text-center">

@@ -23,8 +23,8 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa'
-                ? 'منبع: اداره کل مهاجرت رومانی (IGI) — آخرین بررسی: ۲۰۲۶'
-                : 'Source: General Inspectorate for Immigration (IGI) — Last reviewed: 2026'}
+                ? 'منبع: اداره کل مهاجرت رومانی (IGI) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: General Inspectorate for Immigration (IGI) — Last reviewed: August 2026'}
             </div>
           </div>
 
@@ -97,8 +97,8 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa'
-                ? 'منبع: اداره کل مهاجرت رومانی (IGI)، وزارت امور خارجه رومانی (MAE) — آخرین بررسی: ۲۰۲۶'
-                : 'Source: General Inspectorate for Immigration (IGI), Ministry of Foreign Affairs (MAE) — Last reviewed: 2026'}
+                ? 'منبع: اداره کل مهاجرت رومانی (IGI)، وزارت امور خارجه رومانی (MAE) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: General Inspectorate for Immigration (IGI), Ministry of Foreign Affairs (MAE) — Last reviewed: August 2026'}
             </div>
           </div>
 
@@ -171,8 +171,8 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa'
-                ? 'منبع: وب‌سایت‌های رسمی دانشگاه‌های رومانی — آخرین بررسی: ۲۰۲۶ (ارقام تقریبی؛ برای مبلغ دقیق به سایت هر دانشگاه مراجعه شود)'
-                : 'Source: Official Romanian university websites — Last reviewed: 2026 (Approximate figures; check specific university websites for exact amounts)'}
+                ? 'منبع: وب‌سایت‌های رسمی دانشگاه‌های رومانی — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶ (ارقام تقریبی؛ برای مبلغ دقیق به سایت هر دانشگاه مراجعه شود)'
+                : 'Source: Official Romanian university websites — Last reviewed: August 2026 (Approximate figures; check specific university websites for exact amounts)'}
             </div>
           </div>
 
@@ -250,8 +250,8 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa'
-                ? 'منبع: اداره کل مهاجرت رومانی (IGI)، وزارت کار رومانی — آخرین بررسی: ۲۰۲۶'
-                : 'Source: General Inspectorate for Immigration (IGI), Ministry of Labor — Last reviewed: 2026'}
+                ? 'منبع: اداره کل مهاجرت رومانی (IGI)، وزارت کار رومانی — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: General Inspectorate for Immigration (IGI), Ministry of Labor — Last reviewed: August 2026'}
             </div>
           </div>
 

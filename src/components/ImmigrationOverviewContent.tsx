@@ -31,8 +31,8 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa' 
-                ? 'منبع: اداره کل مهاجرت رومانی (IGI)، آیین‌نامه اتباع خارجی (OUG 194/2002) — آخرین بررسی: ۲۰۲۶'
-                : 'Source: General Inspectorate for Immigration (IGI), Foreigners Regime (OUG 194/2002) — Last reviewed: 2026'}
+                ? 'منبع: اداره کل مهاجرت رومانی (IGI)، آیین‌نامه اتباع خارجی (OUG 194/2002) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: General Inspectorate for Immigration (IGI), Foreigners Regime (OUG 194/2002) — Last reviewed: August 2026'}
             </div>
           </div>
 
@@ -104,8 +104,8 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa' 
-                ? 'منبع: اداره کل مهاجرت رومانی (IGI) — آخرین بررسی: ۲۰۲۶'
-                : 'Source: General Inspectorate for Immigration (IGI) — Last reviewed: 2026'}
+                ? 'منبع: اداره کل مهاجرت رومانی (IGI) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: General Inspectorate for Immigration (IGI) — Last reviewed: August 2026'}
             </div>
           </div>
 
@@ -177,8 +177,8 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa' 
-                ? 'منبع: سازمان ملی تابعیت رومانی (ANC، cetatenie.just.ro)، قانون تابعیت رومانی (Legea 21/1991) — آخرین بررسی: ۲۰۲۶'
-                : 'Source: National Authority for Citizenship (ANC, cetatenie.just.ro), Romanian Citizenship Law (Legea 21/1991) — Last reviewed: 2026'}
+                ? 'منبع: سازمان ملی تابعیت رومانی (ANC، cetatenie.just.ro)، قانون تابعیت رومانی (Legea 21/1991) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: National Authority for Citizenship (ANC, cetatenie.just.ro), Romanian Citizenship Law (Legea 21/1991) — Last reviewed: August 2026'}
             </div>
           </div>
 
@@ -252,8 +252,8 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa' 
-                ? 'منبع: اداره کل مهاجرت رومانی (IGI)، آیین‌نامه اتباع خارجی (OUG 194/2002) — آخرین بررسی: ۲۰۲۶'
-                : 'Source: General Inspectorate for Immigration (IGI), Foreigners Regime (OUG 194/2002) — Last reviewed: 2026'}
+                ? 'منبع: اداره کل مهاجرت رومانی (IGI)، آیین‌نامه اتباع خارجی (OUG 194/2002) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: General Inspectorate for Immigration (IGI), Foreigners Regime (OUG 194/2002) — Last reviewed: August 2026'}
             </div>
           </div>
 

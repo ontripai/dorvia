@@ -25,8 +25,8 @@ export const PreparatoryYearContent: React.FC<PreparatoryYearContentProps> = ({ 
         </p>
         <div className="text-[11px] text-slate-400 mt-2">
           {currentLang === 'fa' 
-            ? 'منبع: دانشگاه بخارست (international.unibuc.ro) — آخرین بررسی: ۲۰۲۶'
-            : 'Source: University of Bucharest (international.unibuc.ro) — Last reviewed: 2026'}
+            ? 'منبع: دانشگاه بخارست (international.unibuc.ro) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+            : 'Source: University of Bucharest (international.unibuc.ro) — Last reviewed: August 2026'}
         </div>
       </div>
 
