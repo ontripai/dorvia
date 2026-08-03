@@ -327,6 +327,34 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 : 'An overview of legal residence pathways, renewal procedures, family reunification, and acquiring Romanian citizenship.'}
             </p>
           </div>
+
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-[#142033]">
+              {currentLang === 'fa' ? 'مسیرهای مهاجرت' : 'Immigration Pathways'}
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('immigration/igi-process')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'مراحل IGI' : 'IGI Process'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'مراحل ثبت و دریافت کارت اقامت' : 'Steps to register and get your residence card'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('immigration/residence-renewal')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'تمدید اقامت' : 'Residence Renewal'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'نحوه و زمان‌بندی تمدید کارت اقامت' : 'How and when to renew your residence permit'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('immigration/long-term-residence')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'اقامت بلندمدت' : 'Long-term Residence'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'شرایط اخذ اقامت دائم رومانی' : 'Conditions for obtaining permanent residency'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('immigration/citizenship')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'تابعیت' : 'Citizenship'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'مسیر رسیدن به پاسپورت رومانیایی' : 'The pathway to acquiring a Romanian passport'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('immigration/family-reunification')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'پیوست خانواده' : 'Family Reunification'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'آوردن همسر و فرزندان به رومانی' : 'Bringing your spouse and children to Romania'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
   }

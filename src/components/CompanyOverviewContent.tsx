@@ -514,6 +514,42 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 : 'SRL company formation steps, corporate tax rules, and executive residency criteria.'}
             </p>
           </div>
+
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-[#142033]">
+              {currentLang === 'fa' ? 'مسیرهای کسب‌وکار' : 'Business Pathways'}
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('company/registration')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'ثبت شرکت' : 'Registration'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'مراحل ثبت شرکت با مسئولیت محدود (SRL)' : 'Steps to register an SRL company'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('company/tax-types')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'نرخ‌های مالیاتی' : 'Tax Rates'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'مالیات شرکت‌های خرد و سود سهام' : 'Micro-enterprise and dividend taxes'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('company/bank-account')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'حساب بانکی' : 'Bank Account'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'فرآیند افتتاح حساب بانکی شرکتی' : 'Corporate bank account opening process'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('company/residency')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'اقامت مدیرعامل' : 'CEO Residency'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'قوانین اقامت تجاری از طریق شرکت' : 'Commercial residency rules via company'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('company/real-estate-investment')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'سرمایه‌گذاری املاک' : 'Real Estate'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'خرید و سرمایه‌گذاری در بازار املاک' : 'Buying and investing in the property market'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('company/startup-tech-investment')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'استارت‌آپ و فناوری' : 'Startup & Tech'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'فرصت‌های بخش IT و دانش‌بنیان' : 'Opportunities in IT and tech sectors'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('company/annual-tax-reporting')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'گزارش‌دهی سالانه' : 'Annual Reporting'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'الزامات قانونی حسابداری در پایان سال' : 'Year-end legal accounting requirements'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
   }

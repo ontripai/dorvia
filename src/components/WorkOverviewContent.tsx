@@ -473,28 +473,52 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
         </div>
       );
 
-    default: {
-      const getTitle = () => {
-        switch (subRoute) {
-          default:
-            return currentLang === 'fa' ? 'بخش کار' : 'Work Section';
-        }
-      };
-
+    default:
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {getTitle()}
+              {currentLang === 'fa' ? 'کار و اشتغال در رومانی' : 'Work in Romania'}
             </h1>
             <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
               {currentLang === 'fa' 
-                ? 'محتوای این بخش در حال تکمیل است. برای اطلاعات فعلی درباره فرصت‌های شغلی و قوانین کار در رومانی، می‌توانید از طریق فرم ارزیابی رایگان با ما در تماس باشید.' 
-                : 'This section is being completed. For current information on job opportunities and labor laws in Romania, please contact us through the free assessment form.'}
+                ? 'راهنمای بازار کار، قوانین اشتغال، ویزای کار و شرایط اخذ مجوز کار در رومانی.' 
+                : 'Guide to the job market, employment laws, work visas, and work permit conditions in Romania.'}
             </p>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-[#142033]">
+              {currentLang === 'fa' ? 'مسیرهای اشتغال' : 'Employment Pathways'}
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('work/finding-job')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'پیدا کردن کار' : 'Finding a Job'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'سایت‌های کاریابی و نگارش رزومه استاندارد' : 'Job portals and standard CV writing'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('work/work-permit')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'مجوز کار' : 'Work Permit'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'فرآیند دریافت Aviz de Munca توسط کارفرما' : 'The process for employers to get Aviz de Munca'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('work/work-visa')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'ویزای کاری' : 'Work Visa'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'اقدام برای ویزای نوع D/AM پس از دریافت مجوز' : 'Applying for the D/AM visa after permit approval'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('work/employment-contract')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'قرارداد استخدام' : 'Employment Contract'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'انواع قرارداد کاری و حقوق کارمند' : 'Types of contracts and employee rights'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('work/taxes-salaries')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'حقوق و مالیات' : 'Taxes & Salaries'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'نحوه محاسبه حقوق خالص و کسورات قانونی' : 'Calculating net salary and legal deductions'}</p>
+              </div>
+              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('work/insurance')}>
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'بیمه' : 'Insurance'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'پوشش بیمه تامین اجتماعی و درمانی' : 'Social and health insurance coverage'}</p>
+              </div>
+            </div>
           </div>
         </div>
       );
-    }
   }
 };
