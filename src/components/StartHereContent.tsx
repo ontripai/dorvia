@@ -35,6 +35,12 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
           </div>
 
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'تصمیم‌گیری برای مهاجرت به رومانی گام اول و هیجان‌انگیزی است، اما نیازمند استراتژی دقیق و انتظارات واقع‌بینانه می‌باشد. چه هدف شما تحصیل در دانشگاه‌های تاریخی باشد، چه کار در بخش رو به رشد فناوری اطلاعات، و چه راه‌اندازی یک استارتاپ در اتحادیه اروپا، مسیر ورود شما تمام فرآیند اداری بعدی را تعیین می‌کند. درک تفاوت‌های این مسیرها، هزینه‌های مرتبط و زمان‌بندی‌های دقیق بسیار حیاتی است. شروع برنامه‌ریزی از ماه‌ها قبل و تکیه صرف بر منابع رسمی مانند اداره کل مهاجرت (IGI) شما را از افتادن در دام مشکلات رایج بوروکراتیک نجات خواهد داد.'
+              : 'Making the decision to move to Romania is an exciting first step, but it requires a clear strategy and realistic expectations. Whether you are aiming to study at a historic university, secure employment in the booming IT sector, or launch a startup in the European Union, your entry pathway dictates your entire administrative journey. Understanding the distinctions between these routes, the associated costs, and the strict timelines involved is crucial. Starting your preparation months in advance and relying exclusively on official sources like the General Inspectorate for Immigration (IGI) will save you from common bureaucratic pitfalls.'}
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -104,6 +110,22 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </ul>
             </div>
           </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'کل فرآیند مهاجرت چقدر طول می‌کشد؟' : 'How long does the entire relocation process take?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بسته به مسیر انتخابی (مثل انتظار برای پذیرش دانشگاه یا مجوز کار)، کل فرآیند از برنامه‌ریزی تا رسیدن به رومانی می‌تواند بین ۳ تا ۸ ماه زمان ببرد.' : 'Depending on your pathway—such as waiting for university acceptance or a work permit—the entire process from planning to arriving can take anywhere from 3 to 8 months.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا برای مهاجرت به وکیل نیاز دارم؟' : 'Do I need an immigration lawyer to move to Romania?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'اگرچه از نظر قانونی اجباری نیست، اما برای مسیرهای پیچیده‌ای مانند ثبت شرکت یا مجوز کار، داشتن یک مشاور یا وکیل مهاجرتی به‌شدت توصیه می‌شود.' : 'While not legally required, hiring a specialized consultant or lawyer is highly recommended for complex pathways like company registration or work permits.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
 
@@ -115,6 +137,12 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               {currentLang === 'fa' ? 'تازه به رومانی رسیده‌ام' : 'Just arrived in Romania'}
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'به رومانی خوش آمدید! از لحظه‌ای که از فرودگاه خارج می‌شوید، زمان برای انجام چندین کار اداری حیاتی آغاز می‌شود. اگرچه گشت‌وگذار در محیط جدید وسوسه‌انگیز است، اما اولویت مطلق شما باید تضمین وضعیت قانونی‌تان باشد. ویزای ورود شما (تایپ D) تنها یک پل موقت است؛ شما باید فوراً پروسه دریافت کارت اقامت موقت را از اداره کل مهاجرت (IGI) آغاز کنید. همزمان، ساماندهی زندگی عملی—مانند دریافت شماره تلفن محلی، یافتن مسکن دائم و افتتاح حساب بانکی—پایه‌های زندگی روزمره جدید شما را شکل خواهد داد.'
+              : 'Welcome to Romania! The moment you step out of the airport, the clock starts ticking on several critical administrative tasks. While it is natural to want to explore your new surroundings, your absolute first priority must be securing your legal status. Your entry visa (Type D) is only a temporary bridge; you must immediately begin the process of obtaining your temporary residence permit from the General Inspectorate for Immigration (IGI). Simultaneously, setting up your practical life—such as getting a local phone number, finding permanent housing, and opening a bank account—will form the foundation of your new daily routine.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -187,6 +215,22 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </ul>
             </div>
           </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم بلافاصله پس از ورود کار کنم؟' : 'Can I start working immediately after I arrive?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'تنها در صورتی که با ویزای کاری مرتبط با مجوز کار از پیش تاییدشده وارد شده باشید؛ دانشجویان و همراهان خانواده شرایط متفاوتی برای کار دارند.' : 'Only if you arrived on a specific work visa with a pre-approved work permit; students and family members have different working rights.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر ویزای من پیش از صدور کارت اقامت منقضی شود چه؟' : 'What happens if my visa expires before I get my residence card?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'مادامی که درخواست اقامت خود را پیش از انقضای ویزا به‌طور رسمی در سامانه IGI ثبت کرده باشید، اقامت شما تا زمان صدور رای نهایی به‌صورت خودکار تمدید می‌شود.' : 'As long as you have officially submitted your residence permit application to IGI before your visa expires, your legal stay is automatically extended until a decision is made.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
 
@@ -198,6 +242,12 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               {currentLang === 'fa' ? 'ساکن رومانی هستم' : 'Living in Romania'}
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'تثبیت زندگی در رومانی به معنای تغییر تمرکز از موانع اداری اولیه به سمت ادغام در جامعه و برنامه‌ریزی بلندمدت است. پس از دریافت کارت اقامت معتبر، شما به بخشی از سیستم محلی تبدیل می‌شوید و به امکاناتی چون نظام سلامت عمومی، بانکداری کامل و شبکه‌های اجتماعی دسترسی پیدا می‌کنید. حفظ وضعیت قانونی نیازمند هوشیاری است، زیرا کارت‌های اقامت باید پیش از انقضا تمدید شوند. فراتر از کاغذبازی‌ها، این مرحله درباره ساختن زندگی است—یادگیری زبان رومانیایی، درک تعهدات مالیاتی محلی و شاید هدف‌گذاری برای رسیدن به اقامت دائم یا حتی شهروندی در آینده.'
+              : 'Settling into long-term life in Romania means shifting your focus from immediate administrative hurdles to social integration and long-term planning. Once you hold a valid residence permit, you become part of the local system, gaining access to public healthcare, banking, and community networks. Maintaining your legal status requires vigilance, as residence permits must be renewed well before they expire. Beyond paperwork, this phase is about building a life—learning the Romanian language, understanding local tax obligations, and perhaps setting your sights on the ultimate goals of long-term residency or even citizenship.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -283,6 +333,22 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </ul>
             </div>
           </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چه زمانی می‌توانم برای اقامت دائم درخواست دهم؟' : 'How soon can I apply for permanent residency?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'اتباع غیراروپایی عموماً می‌توانند پس از ۵ سال اقامت قانونی و مستمر در رومانی، مشروط به احراز شرایط خاص، برای اقامت بلندمدت اقدام کنند.' : 'Non-EU citizens can generally apply for long-term residency after 5 years of continuous, legal stay in Romania, subject to specific conditions.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم خانواده‌ام را برای زندگی به رومانی بیاورم؟' : 'Can I bring my family to live with me?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، در صورتی که کارت اقامتی با اعتبار حداقل یک سال داشته باشید، ممکن است واجد شرایط ثبت درخواست پیوست خانواده برای همسر و فرزندان زیر سن قانونی خود باشید.' : 'Yes, if you hold a valid residence permit valid for at least one year, you may be eligible to apply for Family Reunification for your spouse and minor children.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
 
@@ -294,6 +360,12 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               {currentLang === 'fa' ? 'چک‌لیست پیش از سفر' : 'Pre-departure Checklist'}
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'هفته‌های منتهی به پرواز شما به رومانی برای تضمین یک انتقال بدون دردسر بسیار حیاتی است. یک برنامه‌ریزی منظم پیش از سفر، استرس را کاهش داده و از تاخیرهای پرهزینه در زمان ورود جلوگیری می‌کند. تمرکز اصلی شما باید بر گردآوری و محافظت از مدارک ضروری باشد—به‌ویژه پاسپورت، ویزای تاییدشده، مدارک تحصیلی یا مدنی آپوستیل‌شده، و تاییدیه محل اقامت. آمادگی مالی نیز به همان اندازه مهم است؛ اطمینان از دسترسی به بودجه کافی برای هفته‌های اول در کنار بیمه مسافرتی جامع، آرامش خاطر شما را در این سفر بین‌المللی فراهم می‌سازد.'
+              : 'The weeks leading up to your departure for Romania are critical for ensuring a smooth transition. A well-organized pre-departure phase minimizes stress and prevents costly delays upon arrival. Your primary focus should be on gathering and protecting your essential documents—specifically your passport, validated visa, apostilled academic or civil records, and proof of accommodation. Financial preparation is equally vital; ensuring you have enough accessible funds for your first few weeks, alongside comprehensive travel insurance, will provide peace of mind as you embark on this international journey.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -348,6 +420,22 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </ul>
             </div>
           </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا باید مدارکم را قبل از رسیدن ترجمه کنم یا بعد از آن؟' : 'Should I translate my documents before or after arriving?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'توصیه می‌شود مدارک اصلی را در کشور خود ترجمه و آپوستیل کنید، اگرچه نهادهای رومانیایی غالباً ترجمه‌های انجام‌شده توسط مترجمین رسمی داخل رومانی را ترجیح می‌دهند.' : 'It is highly recommended to translate and apostille your core documents in your home country, though translations done by Romanian-authorized translators inside Romania are often preferred for local institutional use.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چقدر پول نقد باید در پرواز همراه داشته باشم؟' : 'How much cash should I carry on the flight?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'باید پول نقد کافی (ترجیحاً یورو) برای پوشش اجاره ماه اول، ودیعه و مخارج فوری همراه داشته باشید، اما طبق قانون، مبالغ بالای ۱۰ هزار یورو باید در گمرک اظهار شود.' : 'You should carry enough cash, preferably in Euros, to cover your first month\'s rent, deposit, and immediate living expenses, but legally you must declare cash amounts exceeding €10,000 at customs.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
 
@@ -359,6 +447,12 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               {currentLang === 'fa' ? '۳ روز اول در رومانی' : 'First 3 Days'}
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'در ۷۲ ساعت نخست ورود به رومانی، تمرکز شما باید بر رفع نیازهای اولیه و برقراری ارتباطات ضروری باشد. از لحظه حرکت از فرودگاه اوتوپنی به سمت محل اقامت موقت، تا خرید سیم‌کارت محلی، این گام‌های نخست به شما کمک می‌کنند تا متصل و در دسترس بمانید. همچنین باید با محله خود آشنا شوید و نزدیک‌ترین سوپرمارکت‌ها، داروخانه‌ها و ایستگاه‌های حمل‌ونقل عمومی را پیدا کنید. اگرچه میل به انجام سریع کارهای اداری بزرگ وجود دارد، بهتر است از این سه روز اول برای رفع خستگی سفر و جهت‌یابی ایمن در محیط جدید استفاده کنید.'
+              : 'The first 72 hours in Romania are about covering your immediate, basic needs and establishing a communication lifeline. From navigating the transfer from Otopeni Airport to your temporary accommodation, to purchasing a local SIM card, these initial steps are all about getting connected. You will also need to familiarize yourself with your immediate neighborhood, locating the nearest grocery stores, pharmacies, and public transport hubs. While the urge to immediately tackle major administrative tasks is strong, use these first three days to overcome jet lag and orient yourself safely.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -423,6 +517,22 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </ul>
             </div>
           </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بهترین مکان برای خرید سیم‌کارت محلی کجاست؟' : 'Where is the best place to buy a local SIM card?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'شما می‌توانید سیم‌کارت‌های اعتباری (Prepaid) از اپراتورهای اصلی مثل Orange یا Vodafone را مستقیماً در سالن پروازهای ورودی فرودگاه یا از کیوسک‌ها و سوپرمارکت‌های داخل شهر تهیه کنید.' : 'You can purchase prepaid SIM cards from major providers like Orange or Vodafone directly at the airport arrivals hall or at any kiosk/supermarket in the city.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا استفاده از تاکسی‌های فرودگاه امن است؟' : 'Is it safe to use taxis from the airport?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، اما منحصراً از دستگاه‌های لمسی سفارش تاکسی در ترمینال ورودی یا اپلیکیشن‌هایی نظیر Uber و Bolt استفاده کنید و از سوار شدن به ماشین رانندگانی که مستقیماً به شما پیشنهاد می‌دهند خودداری نمایید.' : 'Yes, but you should exclusively use the official touch-screen ordering machines inside the arrivals terminal or ride-hailing apps like Uber and Bolt, avoiding drivers who solicit passengers directly.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
 
@@ -434,6 +544,12 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               {currentLang === 'fa' ? 'ماه اول اقامت' : 'First Month'}
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'ماه اول حضور شما در رومانی با عبور از وضعیت یک مسافر به یک مقیم ثبت‌شده تعریف می‌شود. این دوره‌ای است که باید بار سنگین کارهای اداری را به سرانجام برسانید. اولویت مطلق شما ثبت موفقیت‌آمیز درخواست کارت اقامت (Permis de Ședere) در اداره مهاجرت (IGI) است. برای این منظور، لازم است یک قرارداد مسکن بلندمدت را نهایی کنید، معاینات پزشکی لازم را انجام دهید و وضعیت ثبت‌نام دانشگاه یا اشتغال خود را قطعی سازید. پیمودن موفق این مسیر در ماه اول، بستر قانونی و لجستیکی مستحکمی برای یک زندگی آرام و بدون استرس در رومانی فراهم می‌آورد.'
+              : 'Your first month in Romania is defined by the transition from a visitor to a registered resident. This is the period where you must finalize the heavy administrative lifting. Your absolute top priority is successfully submitting your application for a residence permit (Permis de Ședere) at IGI. To do this, you will need to finalize a long-term housing contract, undergo necessary medical checkups, and solidify your enrollment at your university or workplace. Successfully navigating this month lays the legal and logistical groundwork for a stable, stress-free life in Romania.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -504,6 +620,22 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'پیگیری مداوم وضعیت درخواست کارت اقامت نزد IGI در صورت طولانی شدن روند معمول.' : 'Continuously tracking your residence permit application status with IGI, especially if the timeline exceeds usual estimates.'}</li>
               </ul>
+            </div>
+          </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چقدر طول می‌کشد تا IGI کارت اقامت را صادر کند؟' : 'How long does it take for IGI to issue the residence card?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون، IGI بین ۳۰ تا ۴۵ روز زمان دارد تا پس از ثبت اطلاعات بیومتریک شما، کارت فیزیکی اقامت را پردازش و صادر نماید.' : 'By law, IGI has 30 to 45 days to process your application and issue the physical card after you submit your biometric data.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم در حالی که پرونده اقامتم در جریان است از رومانی خارج شوم؟' : 'Can I leave Romania while my residence permit is processing?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'شدیداً توصیه می‌شود در صورتی که ویزای اولیه شما منقضی شده است از کشور خارج نشوید، زیرا ممکن است برای ورود مجدد بدون کارت اقامت فیزیکی با مشکل مواجه شوید.' : 'It is strongly advised not to leave the country if your original entry visa has expired, as you may face difficulties re-entering without the physical residence card.'}</p>
+              </div>
             </div>
           </div>
         </div>

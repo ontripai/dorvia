@@ -35,6 +35,12 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'تأسیس شرکت با مسئولیت محدود (SRL) محبوب‌ترین و کارآمدترین روش برای شروع یک کسب‌وکار در رومانی است. فرآیند ثبت که تحت نظارت اداره ثبت شرکت‌ها (ONRC) انجام می‌شود، ساختاریافته است و به سرمایه‌گذاران خارجی (حتی خارج از اتحادیه اروپا) اجازه می‌دهد مالک ۱۰۰٪ سهام و مدیرعامل شرکت خود باشند. آماده‌سازی دقیق مدارک اولیه نظیر رزرو نام، تعیین آدرس قانونی (sediu social) و تدوین اساسنامه بسیار حیاتی است. پس از ارسال مدارک از طریق پلتفرم دیجیتال، شرکت شما به‌سرعت ثبت شده و کد مالیاتی (CUI) صادر می‌گردد.'
+              : 'Establishing a Limited Liability Company (SRL) is the most popular and efficient way to start a business in Romania. The registration process, overseen by the National Trade Register Office (ONRC), is highly structured and allows foreign investors, including non-EU citizens, to be sole shareholders and directors. Preparing accurate preliminary documentation, such as reserving the company name and legally establishing a registered office (sediu social), is essential. Once all documents are properly submitted, the company is officially registered and a unique tax code (CUI) is issued rapidly.'}
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -71,6 +77,22 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </ul>
             </div>
           </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'پروسه ثبت شرکت چقدر زمان می‌برد؟' : 'How long does the registration take?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'پس از آماده‌سازی و ارسال کامل مدارک به ONRC، ثبت نهایی معمولاً بین ۳ تا ۵ روز کاری زمان می‌برد.' : 'Once all documents are prepared and submitted to ONRC, the final registration typically takes between 3 to 5 working days.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا برای ثبت شرکت به شریک رومانیایی نیاز دارم؟' : 'Do I need a local Romanian partner?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، اتباع خارجی می‌توانند به تنهایی مالک ۱۰۰٪ سهام شرکت و مدیرعامل آن باشند.' : 'No, foreign nationals can own 100% of the company shares and act as the sole director.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
 
@@ -86,6 +108,12 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 ? 'منبع: قانون مالیاتی رومانی، سازمان امور مالیاتی (ANAF) — آخرین بررسی: ۲۰۲۶'
                 : 'Source: Romanian Tax Code, National Agency for Fiscal Administration (ANAF) — Last reviewed: 2026'}
             </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'رومانی یکی از جذاب‌ترین سیستم‌های مالیاتی را در اتحادیه اروپا برای کسب‌وکارهای کوچک و استارت‌آپ‌ها ارائه می‌دهد. مهم‌ترین مزیت، رژیم مالیاتی میکرو-شرکت (Micro-Enterprise) است؛ در این سیستم، شرکت‌هایی که گردش مالی سالانه آن‌ها کمتر از ۱۰۰,۰۰۰ یورو است و حداقل یک کارمند تمام‌وقت دارند، تنها ۱٪ مالیات بر درآمد (نه سود) پرداخت می‌کنند. چنانچه گردش مالی از این سقف عبور کند، شرکت وارد رژیم استاندارد مالیات بر سود شرکتی با نرخ ۱۶٪ می‌شود. درک این ساختارها برای برنامه‌ریزی مالی دقیق ضروری است.'
+              : 'Romania offers one of the most attractive corporate tax regimes in the European Union, particularly for small businesses and startups. A notable advantage is the micro-enterprise tax regime, where eligible companies pay only a 1% tax on their total revenue (rather than profit), provided their annual turnover remains under €100,000 and they employ at least one full-time worker. Should a company exceed this revenue threshold, it transitions to the standard corporate profit tax rate of 16%. Understanding these structures is vital for accurate financial forecasting.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -121,6 +149,22 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </ul>
             </div>
           </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا بدون استخدام کارمند می‌توانم از مالیات ۱٪ استفاده کنم؟' : 'Can I pay 1% tax with 0 employees?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، بر اساس قوانین جدید، داشتن حداقل یک کارمند تمام‌وقت برای بهره‌مندی از نرخ ۱٪ میکرو-شرکت الزامی است.' : 'No, under current laws, having at least one full-time employee is mandatory to qualify for the 1% micro-enterprise rate.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر درآمد من از ۱۰۰ هزار یورو بیشتر شود چه اتفاقی می‌افتد؟' : 'What happens if revenue exceeds €100k?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'شرکت شما به‌طور خودکار از رژیم میکرو خارج شده و مشمول پرداخت مالیات ۱۶ درصدی بر سود خالص خواهد شد.' : 'Your company will automatically exit the micro-enterprise regime and become subject to the 16% tax on net corporate profit.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
 
@@ -136,6 +180,12 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 ? 'این بخش راهنمای عمومی است؛ شرایط دقیق هر بانک باید مستقیماً از آن بانک استعلام شود.'
                 : 'This section is a general guide; exact conditions should be verified directly with each respective bank.'}
             </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'افتتاح حساب بانکی شرکتی در رومانی، گامی الزامی برای شروع فعالیت تجاری و واریز سرمایه اولیه است. اگرچه این روند برای شهروندان رومانیایی ساده است، اما مدیران خارجی معمولاً با بررسی‌های دقیق‌تر (KYC) و مقررات ضد پولشویی (AML) مواجه می‌شوند که گاهاً حضور فیزیکی آن‌ها را در شعبه الزامی می‌کند. انتخاب بانکی که خدمات بین‌المللی مطلوب، کارت‌های ارزی و سیستم بانکداری آنلاین قدرتمندی ارائه دهد، تأثیر زیادی در مدیریت روان‌تر کسب‌وکار شما خواهد داشت.'
+              : 'Opening a corporate bank account in Romania is a mandatory step for finalizing your company\'s operational setup and injecting the initial share capital. While the process is straightforward for Romanian citizens, foreign directors may face stricter compliance and Anti-Money Laundering (AML) checks, which occasionally require their physical presence at the branch. It is highly recommended to choose a bank that aligns with your business needs, particularly concerning international wire transfers, multi-currency accounts, and robust online banking platforms.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -163,6 +213,18 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </ul>
             </div>
           </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم از راه دور حساب بانکی شرکتی باز کنم؟' : 'Can I open a corporate account entirely online as a foreigner?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'با وجود ارائه خدمات آنلاین توسط برخی بانک‌ها، برای اتباع کشورهای غیراروپایی معمولاً حضور فیزیکی مدیرعامل جهت احراز هویت در شعبه الزامی است.' : 'While some banks offer online services, foreign directors from non-EU countries are often required to visit the branch in person for KYC procedures.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
 
@@ -180,6 +242,12 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'تأسیس یک شرکت در رومانی به‌خودی‌خود منجر به صدور اجازه اقامت برای سهامداران یا مدیران خارجی آن نمی‌شود. برای دریافت اقامت تجاری (Commercial Residency)، کارآفرینان خارج از اتحادیه اروپا باید پرونده مجزایی را نزد اداره کل مهاجرت (IGI) تشکیل دهند. این پروسه نیازمند ارائه یک طرح کسب‌وکار قوی، اثبات تمکن مالی برای سرمایه‌گذاری واقعی، و ایجاد شغل برای نیروهای بومی است تا نشان دهد حضور شرکت شما برای اقتصاد رومانی ارزش‌آفرین خواهد بود.'
+              : 'Setting up a company in Romania does not automatically grant a residence permit to its foreign shareholders or directors. To legally reside in the country based on business activities, non-EU entrepreneurs must apply for a specific commercial residency permit through the General Inspectorate for Immigration (IGI). This process requires presenting a viable business plan, demonstrating a genuine economic impact, and proving a minimum level of actual investment or job creation to show that your business adds value to the Romanian economy.'}
+          </div>
+
           <div className="grid grid-cols-1 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4 max-w-3xl">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -193,8 +261,25 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </ul>
             </div>
           </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا تنها با خرید سهام یک شرکت رومانیایی می‌توانم اقامت بگیرم؟' : 'Does buying shares in a Romanian company give me residency?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، صرفِ داشتن سهام کافی نیست؛ شما باید اثبات کنید که سرمایه‌گذاری قابل توجهی انجام داده‌اید و در مدیریت کسب‌وکار به‌طور فعال مشارکت دارید.' : 'No, simply holding shares is insufficient; you must prove substantial investment and active involvement in managing the business.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'حداقل سرمایه مورد نیاز چقدر است؟' : 'How much investment is required?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بسته به نوع و مسیر دقیق اقامت (مثلاً به عنوان مدیر یا سرمایه‌گذار عمده)، قوانین متغیر است، اما معمولاً سرمایه‌گذاری‌های بالای ۵۰,۰۰۰ یورو یا ایجاد حداقل ۱۰ شغل تمام‌وقت مد نظر IGI قرار می‌گیرد.' : 'Depending on the exact legal pathway (e.g., as a director or major investor), requirements vary, but typically investments over €50,000 or creating at least 10 full-time jobs are scrutinized favorably by IGI.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
+
     case 'real-estate-investment':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
@@ -207,6 +292,12 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 ? 'منبع: اداره ثبت اسناد و املاک رومانی (OCPI)، سازمان امور مالیاتی رومانی (ANAF) — آخرین بررسی: ۲۰۲۶'
                 : 'Source: National Agency for Cadastre and Land Registration (OCPI), National Agency for Fiscal Administration (ANAF) — Last reviewed: 2026'}
             </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'سرمایه‌گذاری در بازار املاک رومانی با توجه به رشد پیوسته ارزش ملک، گزینه‌ای بسیار جذاب است. بر اساس قوانین، اتباع خارج از اتحادیه اروپا کاملاً مجاز به خرید آپارتمان، خانه یا ساختمان تجاری (بنا) هستند. با این حال، مالکیت مستقیم زمین برای اتباع خارجی محدودیت دارد، مگر در صورت وجود معاهدات متقابل. برای عبور قانونی از این محدودیت، بسیاری از سرمایه‌گذاران ترجیح می‌دهند املاک و مستغلات (به همراه زمین) را به نام یک شرکت ثبت‌شده رومانیایی (SRL) خریداری کنند که خود مالکیت کامل آن شرکت را در اختیار دارند.'
+              : 'Investing in Romanian real estate presents a lucrative opportunity, characterized by growing property values and a straightforward legal framework. Non-EU citizens have the full right to purchase and own apartments, houses, and commercial buildings under the exact same conditions as locals. However, direct ownership of the underlying land is restricted for foreigners unless a bilateral treaty exists. To seamlessly navigate this, many foreign investors opt to purchase properties through a registered Romanian company (SRL), which bypasses all land ownership restrictions.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -244,6 +335,22 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </ul>
             </div>
           </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم آپارتمانی در بخارست به نام خودم بخرم؟' : 'Can I buy an apartment in Bucharest as a non-EU citizen?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، شما می‌توانید مالکیت خودِ آپارتمان را به‌طور کامل به نام شخصی خود ثبت کنید، اما زمینِ زیر مجتمع ممکن است به‌صورت اجاره‌ای (Concession) ثبت شود.' : 'Yes, you can fully own the apartment unit itself under your personal name, though the land beneath the building may be held in concession.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا با خرید ملک به من اقامت رومانی داده می‌شود؟' : 'Does buying real estate grant me residency?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. رومانی در حال حاضر برنامه «ویزای طلایی» (Golden Visa) بابت خرید ملک شخصی ندارد و خرید ملک مستقیماً منجر به صدور اقامت نمی‌شود.' : 'No. Romania does not currently have a "Golden Visa" program; buying real estate does not automatically grant a residence permit.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
 
@@ -259,6 +366,12 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 ? 'منبع: قانون مالیاتی رومانی (Legea 227/2015)، سازمان امور مالیاتی رومانی (ANAF) — آخرین بررسی: ۲۰۲۶'
                 : 'Source: Romanian Fiscal Code (Legea 227/2015), National Agency for Fiscal Administration (ANAF) — Last reviewed: 2026'}
             </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'رومانی با بهره‌گیری از سیاست‌های حمایتی و نیروی کار بسیار متخصص، به‌سرعت در حال تبدیل‌شدن به یکی از قطب‌های مهم فناوری در اروپاست. یکی از جذاب‌ترین مشوق‌های دولتی برای استارت‌آپ‌های حوزه IT، معافیت کارمندان بخش «تولید نرم‌افزار» از پرداخت مالیات ۱۰ درصدی بر درآمد حقوق است. کارآفرینانی که شرکت خود را با کدهای فعالیت (CAEN) اختصاصی مانند 6201 (برنامه‌نویسی) ثبت کنند، می‌توانند از این امتیاز قانونی برای کاهش هزینه‌ها و جذب بهترین استعدادها بهره‌مند شوند.'
+              : 'Romania has rapidly emerged as a prominent tech hub in Europe, heavily supported by favorable state policies and a highly skilled workforce. One of the most significant incentives is the tax exemption for IT professionals; employees working in specific software creation roles are completely exempt from the 10% income tax. For tech startups, properly registering the company with the correct CAEN codes (such as 6201 for custom software development) is the first critical step to unlocking these financial benefits and attracting top talent.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -296,6 +409,22 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </ul>
             </div>
           </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا تمام کارمندان یک شرکت IT معاف از مالیات هستند؟' : 'Are all tech company employees exempt from income tax?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، این معافیت منحصراً شامل سِمت‌هایی می‌شود که در قانون مشخص شده‌اند (مانند مهندس نرم‌افزار یا تحلیلگر) و مشاغل اداری یا مالیِ همان شرکت را شامل نمی‌شود.' : 'No, the exemption applies only to specific software creation roles outlined in the law (like programmers and system analysts) and does not cover administrative or financial staff.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا خود من به‌عنوان بنیان‌گذار از این معافیت برخوردار می‌شوم؟' : 'Do founders get this tax cut?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'تنها در صورتی که با شرکت خود قرارداد کاری رسمی برای یک سمت فنی (تولید نرم‌افزار) ببندید و شرایط تحصیلی/حقوقی آن را داشته باشید.' : 'Only if you are officially employed by your company with a formal labor contract in an eligible technical role and meet the educational/legal requirements.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
 
@@ -311,6 +440,12 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 ? 'منبع: سازمان امور مالیاتی رومانی (ANAF)، وزارت دارایی رومانی — آخرین بررسی: ۲۰۲۶'
                 : 'Source: National Agency for Fiscal Administration (ANAF), Romanian Ministry of Finance — Last reviewed: 2026'}
             </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'رعایت انضباط مالی و انجام صحیح گزارش‌دهی‌ها برای بقای قانونی هر شرکتی در رومانی الزامی است. هر موجودیت ثبت‌شده، فارغ از حجم درآمد، موظف است صورت‌های مالی سالانه خود را به‌صورت الکترونیکی و با امضای دیجیتالِ مورد تأیید به سازمان امور مالیاتی (ANAF) ارسال نماید. مهلت این کار معمولاً در اواخر ماه می هر سال است. حتی شرکت‌هایی که در طول سال مالی هیچ‌گونه تراکنش یا فعالیتی نداشته‌اند (شرکت‌های غیرفعال)، از این قاعده مستثنی نیستند و باید اظهارنامه عدم‌فعالیت را در موعد مقرر تحویل دهند تا از جرایم سنگین مصون بمانند.'
+              : 'Maintaining strict financial compliance is essential for the legal operation of any company in Romania. Every registered entity, regardless of its size or activity level, is legally obligated to submit annual financial statements to the National Agency for Fiscal Administration (ANAF). These reports must be digitally signed and filed by the statutory deadline, usually the end of May. Even dormant companies that have conducted zero transactions must fulfill their reporting duties by submitting a declaration of inactivity to avoid severe penalties.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -345,6 +480,22 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 <li>{currentLang === 'fa' ? 'شرکت‌هایی که از زمان ثبت تا پایان سال مالی هیچ فعالیتی نداشته‌اند، نیازی به تهیه صورت مالی کامل ندارند؛ در عوض باید ظرف ۶۰ روز از پایان سال مالی، اظهارنامه عدم‌فعالیت را به ANAF ارسال کنند.' : 'Companies that have had no activity from registration until the end of the financial year do not need to prepare full financial statements; instead, they must submit a declaration of inactivity to ANAF within 60 days of the financial year-end.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
+            </div>
+          </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر موعد ارسال گزارش سالانه را از دست بدهم چه می‌شود؟' : 'What happens if I miss the annual reporting deadline?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'تأخیر در ارسال جریمه‌های نقدی بین ۲,۰۰۰ تا ۵,۰۰۰ لئو به دنبال دارد و تاخیر بیش از ۵ ماه منجر به قرار گرفتن در لیست غیرفعال‌های مالیاتی می‌شود.' : 'Late submissions lead to fines between 2,000 and 5,000 RON, and prolonged delays over 5 months can result in the company being declared "fiscally inactive".'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا شرکت بدون هیچ فعالیتی هم به حسابدار نیاز دارد؟' : 'Do I need an accountant if my company has no activity?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'شما همچنان برای ارسال اظهارنامه عدم‌فعالیت با امضای دیجیتالِ تأییدشده به یک شخص مجاز نیاز دارید، هرچند هزینه آن بسیار ناچیز است.' : 'You still need an authorized person with a digital signature to submit the declaration of inactivity, though the accounting cost is minimal.'}</p>
+              </div>
             </div>
           </div>
         </div>

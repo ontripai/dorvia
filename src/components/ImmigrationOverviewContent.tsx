@@ -35,6 +35,12 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </div>
           </div>
 
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'تمدید اقامت موقت در رومانی یکی از مهم‌ترین دغدغه‌های اتباع خارجی پس از سال اول حضور است. بر اساس آیین‌نامه اتباع خارجی رومانی (OUG 194/2002)، تا زمانی که شرایط اولیه صدور اقامت—مانند ادامه تحصیل، تمدید قرارداد کاری یا پابرجا بودن ازدواج—برقرار باشد، حق اقامت به‌صورت دوره‌ای قابل تمدید است. متقاضیان موظفند پیش از پایان مهلت کارت اقامت فعلی خود، درخواست تمدید را به همراه مدارک مثبته جدید به اداره کل مهاجرت (IGI) ارائه کنند. عدم اقدام به‌موقع می‌تواند منجر به جریمه نقدی یا حتی لغو حق اقامت شود.'
+              : 'Renewing a temporary residence permit in Romania is one of the most critical responsibilities for foreign nationals after their first year. According to the Romanian Foreigners Regime (OUG 194/2002), as long as the initial conditions for granting residence—such as continuing studies, renewing an employment contract, or maintaining a marriage—remain valid, the right of residence can be renewed periodically. Applicants must submit their renewal request along with updated supporting documents to the General Inspectorate for Immigration (IGI) before their current permit expires. Failure to act on time can result in fines or even the cancellation of the right of stay.'}
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -69,6 +75,22 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
               </ul>
             </div>
           </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چه زمانی باید برای تمدید اقامت اقدام کنم؟' : 'When should I apply for residence renewal?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'درخواست تمدید اقامت شما باید حداقل ۳۰ روز پیش از پایان انقضای کارت اقامت فعلی در سامانه و شعب IGI ثبت شود.' : 'Your renewal application must be submitted online and at IGI branches at least 30 days before the expiration of your current residence card.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم اقامت خود را برای بیش از یک سال تمدید کنم؟' : 'Can I renew my residence for more than one year?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'تمدید اقامت به‌طور معمول یک‌ساله است، اما در برخی شرایط مانند داشتن قرارداد کار دائم، ممکن است کارت‌های چندساله نیز صادر گردد.' : 'Renewals are typically granted on a one-year basis, but in certain situations, such as having a permanent employment contract, multi-year cards may be issued.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
 
@@ -84,6 +106,12 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 ? 'منبع: اداره کل مهاجرت رومانی (IGI) — آخرین بررسی: ۲۰۲۶'
                 : 'Source: General Inspectorate for Immigration (IGI) — Last reviewed: 2026'}
             </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'اقامت بلندمدت (Drept de Ședere pe Termen Lung) در رومانی نقطه‌عطفی در مسیر مهاجرتی اتباع غیراروپایی است که ثبات و حقوقی تقریباً برابر با شهروندان محلی (به جز حق رأی) را برای آن‌ها به ارمغان می‌آورد. این نوع اقامت، پس از اثبات حضور قانونی و مستمر در خاک رومانی به مدت زمان مشخص (معمولاً ۵ سال) و با احراز شرایطی نظیر داشتن درآمد کافی، مسکن مناسب و آشنایی با زبان رومانیایی، توسط IGI اعطا می‌شود. دارندگان این وضعیت می‌توانند بدون نیاز به مجوز کار مجزا در بازار کار رومانی فعالیت کنند و مسیر بسیار هموارتری برای اخذ تابعیت این کشور خواهند داشت.'
+              : 'Long-term residence (Drept de Ședere pe Termen Lung) in Romania is a milestone in the immigration journey of non-EU citizens, offering stability and rights almost equal to those of local citizens (except voting rights). This status is granted by IGI after proving continuous and legal physical presence in Romanian territory for a specified period (typically 5 years) and meeting requirements such as sufficient income, appropriate housing, and familiarity with the Romanian language. Holders of this status can participate in the labor market without needing a separate work permit and enjoy a much smoother path toward acquiring citizenship.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -115,9 +143,25 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 <span>{currentLang === 'fa' ? 'بعد از پایان اعتبار' : 'After Expiration'}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'در صورت پایان اقامت بلندمدت در حالی که فرد هنوز در رومانی است، ظرف ۳۰ روز از تاریخ اطلاع‌رسانی می‌تواند برای اقامت موقت با اهداف مشخص‌شده در قانون درخواست دهد.' : 'If long-term residence expires while the individual is still in Romania, they can apply for temporary residence for legally specified purposes within 30 days from the date of notification.'}</li>
+                <li>{currentLang === 'fa' ? 'در صورت پایان اعتبار اقامت بلندمدت در حالی که فرد هنوز در رومانی است، ظرف ۳۰ روز از تاریخ اطلاع‌رسانی می‌تواند برای اقامت موقت با اهداف مشخص‌شده در قانون درخواست دهد.' : 'If long-term residence expires while the individual is still in Romania, they can apply for temporary residence for legally specified purposes within 30 days from the date of notification.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
+            </div>
+          </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'شرط حضور مستمر برای اخذ اقامت بلندمدت چیست؟' : 'What is the continuous presence requirement for long-term residence?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'شما نباید در طول ۵ سال پیش از درخواست، بیش از ۱۰ ماه در مجموع یا بیش از ۶ ماه به‌صورت متوالی خارج از خاک رومانی حضور داشته باشید.' : 'You must not be absent from Romanian territory for more than 10 months in total, or for more than 6 consecutive months, during the 5-year period preceding the application.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اعتبار کارت اقامت بلندمدت چند سال است؟' : 'How long is the long-term residence card valid?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'حق اقامت بلندمدت دائمی است، اما فیزیکِ کارت اقامت برای متقاضیان عادی به‌صورت ۱۰ ساله و برای اعضای خانواده شهروندان رومانی ۵ ساله صادر و سپس تمدید می‌شود.' : 'The right to long-term residence is permanent, but the physical residence card is issued for 10 years for general applicants and 5 years for family members of Romanian citizens, after which it is simply renewed.'}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -135,6 +179,12 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 ? 'منبع: سازمان ملی تابعیت رومانی (ANC، cetatenie.just.ro)، قانون تابعیت رومانی (Legea 21/1991) — آخرین بررسی: ۲۰۲۶'
                 : 'Source: National Authority for Citizenship (ANC, cetatenie.just.ro), Romanian Citizenship Law (Legea 21/1991) — Last reviewed: 2026'}
             </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'دریافت تابعیت رومانی بالاترین سطح ادغام در این کشور است که به شما پاسپورت رومانیایی و تمامی حقوق شهروندی اتحادیه اروپا را اعطا می‌کند. مسیر اصلی برای اتباع خارجی جهت کسب این تابعیت، تقاضا بر اساس قانون تابعیت رومانی (ماده ۸ قانون ۲۱/۱۹۹۱) است که نیازمند حداقل ۸ سال اقامت قانونی مستمر (یا ۵ سال در صورت ازدواج با شهروند رومانیایی) می‌باشد. علاوه بر رعایت مدت زمان حضور، سازمان ملی تابعیت (ANC) متقاضیان را از نظر وفاداری به دولت، نداشتن سابقه کیفری، استقلال مالی، و موفقیت در آزمون زبان، فرهنگ و قانون اساسی رومانی مورد ارزیابی دقیق قرار می‌دهد.'
+              : 'Acquiring Romanian citizenship is the highest level of integration, granting you a Romanian passport and all EU citizenship rights. The primary pathway for foreign nationals is applying under Article 8 of the Romanian Citizenship Law (Law 21/1991), which requires at least 8 years of continuous legal residence (or 5 years if married to a Romanian citizen). Beyond the residency duration, the National Authority for Citizenship (ANC) strictly evaluates applicants on their loyalty to the state, clean criminal record, financial independence, and success in passing an exam on the Romanian language, culture, and constitution.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -173,6 +223,22 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
               </ul>
             </div>
           </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'پروسه بررسی پرونده تابعیت چقدر زمان می‌برد؟' : 'How long does the citizenship application process take?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بر اساس روال قانونی و آمارهای فعلی سازمان ملی تابعیت (ANC)، رسیدگی به درخواست‌های ماده ۸ معمولاً حدود ۲ سال زمان می‌برد.' : 'Based on legal procedures and current ANC statistics, processing Article 8 applications typically takes around 2 years.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا آزمون زبان و قانون اساسی برای دریافت تابعیت دشوار است؟' : 'Is the language and constitution exam difficult?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'متقاضی باید توانایی خواندن، نوشتن و مکالمه روان به زبان رومانیایی را داشته باشد و به پرسش‌هایی درباره تاریخ، جغرافیا و قانون اساسی پاسخ دهد که نیازمند مطالعه و آمادگی کامل است.' : 'The applicant must demonstrate the ability to read, write, and converse fluently in Romanian, and answer questions regarding the country\'s history, geography, and constitution, which requires thorough preparation.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       );
 
@@ -188,6 +254,12 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 ? 'منبع: اداره کل مهاجرت رومانی (IGI)، آیین‌نامه اتباع خارجی (OUG 194/2002) — آخرین بررسی: ۲۰۲۶'
                 : 'Source: General Inspectorate for Immigration (IGI), Foreigners Regime (OUG 194/2002) — Last reviewed: 2026'}
             </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa' 
+              ? 'ویزا و اقامت از طریق پیوست خانواده، راهکاری قانونی برای گرد هم آوردن اعضای خانواده در خاک رومانی است. بر اساس قوانین مهاجرتی، شهروندان رومانیایی یا اتباع خارجی که دارای کارت اقامت معتبر (به ویژه اقامت بلندمدت) هستند، می‌توانند به عنوان حامی مالی و قانونی (Sponsor) برای الحاق همسر و فرزندان تحت تکفل خود درخواست دهند. در این پروسه، اداره کل مهاجرت (IGI) مدارک اثبات‌کننده رابطه خانوادگی را بررسی کرده و پس از تأیید عدم صوری بودن ازدواج، مجوز لازم جهت دریافت ویزای نوع D و در نهایت کارت اقامت موقت را برای اعضای خانواده صادر می‌نماید.'
+              : 'Visa and residency through family reunification is a legal framework designed to bring family members together in Romania. Under immigration laws, Romanian citizens or foreign nationals holding a valid residence permit (especially long-term residence) can act as a sponsor to request reunification with their spouse and dependent children. During this process, the General Inspectorate for Immigration (IGI) evaluates documents proving the familial relationship and, after confirming that a marriage is not one of convenience, issues the necessary approval for obtaining a Type D visa and ultimately a temporary residence permit for the family members.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -221,6 +293,22 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 <li>{currentLang === 'fa' ? 'IGI بررسی می‌کند که ازدواج مبنای درخواست، «ازدواج صوری» نباشد؛ در صورت احراز صوری بودن، درخواست رد می‌شود.' : 'IGI will investigate to ensure the marriage forming the basis of the application is not a "marriage of convenience"; if proven so, the application will be denied.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
+            </div>
+          </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بررسی درخواست پیوست خانواده چقدر طول می‌کشد؟' : 'How long does it take to process a family reunification application?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'زمان قانونی رسیدگی به درخواست اولیه صدور مجوز پیوست خانواده و کارت اقامت تا ۹۰ روز کاری است.' : 'The legal processing time for the initial family reunification permit and residence card application is up to 90 working days.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا همسر من می‌تواند با ویزای پیوست خانواده در رومانی کار کند؟' : 'Can my spouse work in Romania with a family reunification visa?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، اعضای خانواده‌ای که از طریق پیوست خانواده با یک شهروند رومانیایی یا مقیم بلندمدت اقامت دریافت می‌کنند، بر اساس قوانین موجود می‌توانند در رومانی مشغول به کار شوند.' : 'Yes, family members who obtain residency through family reunification with a Romanian citizen or long-term resident are generally allowed to work in Romania under existing regulations.'}</p>
+              </div>
             </div>
           </div>
         </div>
