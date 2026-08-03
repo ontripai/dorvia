@@ -126,20 +126,36 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
         </div>
       );
 
-    default:
+    default: {
+      const getTitle = () => {
+        switch (subRoute) {
+          case 'find-job':
+            return currentLang === 'fa' ? 'پیدا کردن کار در رومانی' : 'Finding a Job in Romania';
+          case 'contract':
+            return currentLang === 'fa' ? 'قرارداد استخدام در رومانی' : 'Employment Contract in Romania';
+          case 'tax':
+            return currentLang === 'fa' ? 'حقوق و مالیات کارمندان' : 'Employee Salary and Taxes';
+          case 'insurance':
+            return currentLang === 'fa' ? 'بیمه اجتماعی و درمانی' : 'Social and Health Insurance';
+          default:
+            return currentLang === 'fa' ? 'بخش کار' : 'Work Section';
+        }
+      };
+
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white capitalize">
-              {subRoute.replace('-', ' ')}
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {getTitle()}
             </h1>
             <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
               {currentLang === 'fa' 
-                ? `این صفحه برای بخش کار (${subRoute}) رزرو شده است و محتوای آن به زودی اضافه می‌شود.` 
-                : `Placeholder for Work section (${subRoute}). Full content will be added soon.`}
+                ? 'محتوای این بخش در حال تکمیل است. برای اطلاعات فعلی درباره فرصت‌های شغلی و قوانین کار در رومانی، می‌توانید از طریق فرم ارزیابی رایگان با ما در تماس باشید.' 
+                : 'This section is being completed. For current information on job opportunities and labor laws in Romania, please contact us through the free assessment form.'}
             </p>
           </div>
         </div>
       );
+    }
   }
 };
