@@ -7,7 +7,7 @@ import { ArrowLeft, ArrowRight, GraduationCap, BriefcaseBusiness, Building2, Cha
 import { Button } from './Button';
 
 interface DesktopMegaMenuProps {
-  type: 'starthere' | 'immigration' | 'study' | 'work' | 'business' | 'needs' | 'romania';
+  type: 'starthere' | 'immigration' | 'study' | 'work' | 'business' | 'work-business' | 'needs' | 'romania';
   currentLang: Language;
   onNavigate: (route: string) => void;
   onClose: () => void;
@@ -237,68 +237,61 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
     );
   }
 
-  // 3. WORK MEGA MENU
-  if (type === 'work') {
+  // 3. WORK & BUSINESS MEGA MENU ("کار و کسب‌وکار")
+  if (type === 'work-business' || type === 'work' || type === 'business') {
     return (
       <div ref={menuRef} className="absolute top-full left-0 right-0 z-50 bg-white border-b border-[#dfe6ef] shadow-2xl py-8 animate-fadeIn">
         <div className="max-w-[1280px] mx-auto px-8">
           <div className="grid grid-cols-12 gap-8 text-xs">
             
-            <div className="col-span-6 space-y-3">
-              <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider border-b border-[#dfe6ef] pb-2">
-                {currentLang === 'fa' ? 'اشتغال در رومانی' : 'Employment in Romania'}
-              </h4>
+            {/* Column 1: Employment & Work (6 subroutes + hub link) */}
+            <div className="col-span-6 space-y-3 border-r border-[#dfe6ef] rtl:border-r-0 rtl:border-l pl-0 pr-0 rtl:pl-6 ltr:pr-6">
+              <div className="flex items-center justify-between border-b border-[#dfe6ef] pb-2">
+                <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider">
+                  💼 {currentLang === 'fa' ? 'استخدام و کار' : 'Employment & Career'}
+                </h4>
+                <Link
+                  href="/work"
+                  onClick={onClose}
+                  className="text-[11px] font-bold text-[#2F6FED] hover:underline flex items-center space-x-1 rtl:space-x-reverse"
+                >
+                  <span>{currentLang === 'fa' ? 'هاب اصلی کار' : 'Work Hub'}</span>
+                  <ArrowIcon size={12} />
+                </Link>
+              </div>
               <ul className="space-y-2 text-[#526174] font-medium">
-                <li><Link href="/work/find-job" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'پیدا کردن کار' : 'Find a Job'}</Link></li>
-                <li><Link href="/work/permit" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'مجوز کار (Aviz de Muncă)' : 'Work Permit'}</Link></li>
-                <li><Link href="/work/visa" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'ویزای کاری' : 'Work Visa'}</Link></li>
+                <li><Link href="/work/find-job" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>🔍</span> <span>{currentLang === 'fa' ? 'پیدا کردن کار' : 'Find a Job'}</span></Link></li>
+                <li><Link href="/work/permit" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>📄</span> <span>{currentLang === 'fa' ? 'مجوز کار (Aviz de Muncă)' : 'Work Permit'}</span></Link></li>
+                <li><Link href="/work/visa" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>🛂</span> <span>{currentLang === 'fa' ? 'ویزای کاری' : 'Work Visa'}</span></Link></li>
+                <li><Link href="/work/contract" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>📜</span> <span>{currentLang === 'fa' ? 'قرارداد استخدام' : 'Employment Contract'}</span></Link></li>
+                <li><Link href="/work/tax" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>💰</span> <span>{currentLang === 'fa' ? 'حقوق و مالیات' : 'Salary & Tax'}</span></Link></li>
+                <li><Link href="/work/insurance" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>🏥</span> <span>{currentLang === 'fa' ? 'بیمه (اجتماعی/درمانی)' : 'Insurance'}</span></Link></li>
               </ul>
             </div>
 
+            {/* Column 2: Business & Investment (7 subroutes + hub link) */}
             <div className="col-span-6 space-y-3">
-              <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider border-b border-[#dfe6ef] pb-2">
-                {currentLang === 'fa' ? 'قرارداد و شرایط' : 'Contracts & Conditions'}
-              </h4>
+              <div className="flex items-center justify-between border-b border-[#dfe6ef] pb-2">
+                <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider">
+                  🏢 {currentLang === 'fa' ? 'کسب‌وکار و سرمایه‌گذاری' : 'Business & Investment'}
+                </h4>
+                <Link
+                  href="/company"
+                  onClick={onClose}
+                  className="text-[11px] font-bold text-[#2F6FED] hover:underline flex items-center space-x-1 rtl:space-x-reverse"
+                >
+                  <span>{currentLang === 'fa' ? 'هاب اصلی کسب‌وکار' : 'Business Hub'}</span>
+                  <ArrowIcon size={12} />
+                </Link>
+              </div>
               <ul className="space-y-2 text-[#526174] font-medium">
-                <li><Link href="/work/contract" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'قرارداد استخدام' : 'Employment Contract'}</Link></li>
-                <li><Link href="/work/tax" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'حقوق و مالیات' : 'Salary & Tax'}</Link></li>
-                <li><Link href="/work/insurance" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'بیمه (اجتماعی/درمانی)' : 'Insurance'}</Link></li>
-              </ul>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // 4. BUSINESS MEGA MENU
-  if (type === 'business') {
-    return (
-      <div ref={menuRef} className="absolute top-full left-0 right-0 z-50 bg-white border-b border-[#dfe6ef] shadow-2xl py-8 animate-fadeIn">
-        <div className="max-w-[1280px] mx-auto px-8">
-          <div className="grid grid-cols-12 gap-8 text-xs">
-            
-            <div className="col-span-6 space-y-3">
-              <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider border-b border-[#dfe6ef] pb-2">
-                {currentLang === 'fa' ? 'ثبت شرکت و تجاری (SRL)' : 'Company Formation (SRL)'}
-              </h4>
-              <ul className="space-y-2 text-[#526174] font-medium">
-                <li><Link href="/company/registration" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'مراحل ثبت شرکت SRL و ثبت در اداره ONRC' : 'SRL Incorporation Steps at ONRC'}</Link></li>
-                <li><Link href="/company/tax-types" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'انواع نرخ‌های مالیاتی (۱٪ تا ۱۶٪)' : 'Corporate Tax Options (1% to 16%)'}</Link></li>
-                <li><Link href="/company/bank-account" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'افتتاح حساب بانکی شرکت در بخارست' : 'Corporate Bank Account Setup'}</Link></li>
-                <li><Link href="/company/residency" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'شرایط دریافت اقامت مدیرعامل و سهامدار' : 'Executive Residence Criteria'}</Link></li>
-              </ul>
-            </div>
-
-            <div className="col-span-6 space-y-3">
-              <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider border-b border-[#dfe6ef] pb-2">
-                {currentLang === 'fa' ? 'سرمایه‌گذاری و توسعه' : 'Investment & Expansion'}
-              </h4>
-              <ul className="space-y-2 text-[#526174] font-medium">
-                <li><Link href="/company/real-estate-investment" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'سرمایه‌گذاری در املاک و مستغلات' : 'Real Estate Opportunities'}</Link></li>
-                <li><Link href="/company/startup-tech-investment" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'استارت‌آپ‌ها و فناوری اطلاعات' : 'Tech Startups & Innovation'}</Link></li>
-                <li><Link href="/company/annual-tax-reporting" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'قوانین مالیاتی و گزارش‌دهی سالانه' : 'Annual Tax Compliance'}</Link></li>
+                <li><Link href="/company/registration" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>🏛️</span> <span>{currentLang === 'fa' ? 'مراحل ثبت شرکت SRL و ثبت در ONRC' : 'SRL Incorporation Steps at ONRC'}</span></Link></li>
+                <li><Link href="/company/tax-types" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>📊</span> <span>{currentLang === 'fa' ? 'انواع نرخ‌های مالیاتی (۱٪ تا ۱۶٪)' : 'Corporate Tax Options (1% to 16%)'}</span></Link></li>
+                <li><Link href="/company/bank-account" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>💳</span> <span>{currentLang === 'fa' ? 'افتتاح حساب بانکی شرکت در بخارست' : 'Corporate Bank Account Setup'}</span></Link></li>
+                <li><Link href="/company/residency" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>👔</span> <span>{currentLang === 'fa' ? 'شرایط دریافت اقامت مدیرعامل و سهامدار' : 'Executive Residence Criteria'}</span></Link></li>
+                <li><Link href="/company/real-estate-investment" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>🏙️</span> <span>{currentLang === 'fa' ? 'سرمایه‌گذاری در املاک و مستغلات' : 'Real Estate Opportunities'}</span></Link></li>
+                <li><Link href="/company/startup-tech-investment" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>🚀</span> <span>{currentLang === 'fa' ? 'استارت‌آپ‌ها و فناوری اطلاعات' : 'Tech Startups & Innovation'}</span></Link></li>
+                <li><Link href="/company/annual-tax-reporting" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>⚖️</span> <span>{currentLang === 'fa' ? 'قوانین مالیاتی و گزارش‌دهی سالانه' : 'Annual Tax Compliance'}</span></Link></li>
               </ul>
             </div>
 
