@@ -130,11 +130,12 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 {currentLang === 'fa' ? 'مراحل اقامتی IGI' : 'IGI Residency Steps'}
               </h4>
               <ul className="space-y-2 text-[#526174] font-medium">
-                <li className="py-1">{currentLang === 'fa' ? '۱. ارزیابی اولیه مدارک' : '1. Initial Document Audit'}</li>
-                <li className="py-1">{currentLang === 'fa' ? '۲. صدور پذیرش / مجوز کار' : '2. Admission / Aviz de Munca'}</li>
-                <li className="py-1">{currentLang === 'fa' ? '۳. درخواست ویزای تایپ D' : '3. Type D Visa Application'}</li>
-                <li className="py-1">{currentLang === 'fa' ? '۴. ورود و صدور کارت اقامت' : '4. Residence Permit Issuance'}</li>
+                <li><button onClick={() => handleLinkClick('immigration/igi-process')} className="hover:text-[#2F6FED] py-1 cursor-pointer text-right w-full">{currentLang === 'fa' ? '۱. ارزیابی اولیه مدارک' : '1. Initial Document Audit'}</button></li>
+                <li><button onClick={() => handleLinkClick('immigration/igi-process')} className="hover:text-[#2F6FED] py-1 cursor-pointer text-right w-full">{currentLang === 'fa' ? '۲. صدور ویزای بلندمدت (نوع D)' : '2. Long-stay Visa (Type D)'}</button></li>
+                <li><button onClick={() => handleLinkClick('immigration/igi-process')} className="hover:text-[#2F6FED] py-1 cursor-pointer text-right w-full">{currentLang === 'fa' ? '۳. درخواست کارت اقامت موقت' : '3. Temporary Residence Permit'}</button></li>
+                <li><button onClick={() => handleLinkClick('immigration/igi-process')} className="hover:text-[#2F6FED] py-1 cursor-pointer text-right w-full">{currentLang === 'fa' ? '۴. ورود و صدور کارت اقامت' : '4. Arrival & Permit Issuance'}</button></li>
               </ul>
+
             </div>
 
             <div className="col-span-3 space-y-3">

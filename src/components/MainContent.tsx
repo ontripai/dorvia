@@ -18,6 +18,7 @@ import { NeedsContent } from './NeedsContent';
 import { RomaniaOverviewContent } from './RomaniaOverviewContent';
 import { WorkOverviewContent } from './WorkOverviewContent';
 import { StartHereContent } from './StartHereContent';
+import { IgiProcessContent } from './IgiProcessContent';
 import { Button } from './Button';
 import { 
   GraduationCap, 
@@ -56,6 +57,10 @@ export const MainContent: React.FC<MainContentProps> = ({
   const [citySearch, setCitySearch] = useState('');
 
   // HANDLE PREFIXED SUB-ROUTES FOR NEEDS AND ROMANIA
+  if (activeRoute === 'immigration/igi-process') {
+    return <IgiProcessContent currentLang={currentLang} />;
+  }
+
   if (activeRoute.startsWith('start-here')) {
     const sub = activeRoute.split('/')[1] || 'planning-to-come';
     return (
