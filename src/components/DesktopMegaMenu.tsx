@@ -295,9 +295,9 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 {currentLang === 'fa' ? 'سرمایه‌گذاری و توسعه' : 'Investment & Expansion'}
               </h4>
               <ul className="space-y-2 text-[#526174] font-medium">
-                <li><button onClick={() => handleLinkClick('company/investment')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'سرمایه‌گذاری در املاک و مستغلات' : 'Real Estate Opportunities'}</button></li>
-                <li><button onClick={() => handleLinkClick('company/investment')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'استارت‌آپ‌ها و فناوری اطلاعات' : 'Tech Startups & Innovation'}</button></li>
-                <li><button onClick={() => handleLinkClick('company/investment')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'قوانین مالیاتی و گزارش‌دهی سالانه' : 'Annual Tax Compliance'}</button></li>
+                <li><button onClick={() => handleLinkClick('company/real-estate-investment')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'سرمایه‌گذاری در املاک و مستغلات' : 'Real Estate Opportunities'}</button></li>
+                <li><button onClick={() => handleLinkClick('company/startup-tech-investment')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'استارت‌آپ‌ها و فناوری اطلاعات' : 'Tech Startups & Innovation'}</button></li>
+                <li><button onClick={() => handleLinkClick('company/annual-tax-reporting')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'قوانین مالیاتی و گزارش‌دهی سالانه' : 'Annual Tax Compliance'}</button></li>
               </ul>
             </div>
 

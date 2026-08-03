@@ -195,6 +195,160 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
           </div>
         </div>
       );
+    case 'real-estate-investment':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'سرمایه‌گذاری در املاک و مستغلات' : 'Real Estate Investment'}
+            </h1>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منبع: اداره ثبت اسناد و املاک رومانی (OCPI)، سازمان امور مالیاتی رومانی (ANAF) — آخرین بررسی: ۲۰۲۶'
+                : 'Source: National Agency for Cadastre and Land Registration (OCPI), National Agency for Fiscal Administration (ANAF) — Last reviewed: 2026'}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'قانون مالکیت برای اتباع خارجی' : 'Foreign Ownership Rights'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'اتباع کشورهای غیرعضو اتحادیه اروپا می‌توانند آپارتمان، خانه یا ساختمان تجاری در رومانی بخرند، دقیقاً با همان شرایط شهروندان رومانیایی.' : 'Non-EU citizens can purchase apartments, houses, or commercial buildings in Romania under the exact same conditions as Romanian citizens.'}</li>
+                <li>{currentLang === 'fa' ? 'محدودیت اصلی مربوط به مالکیت زمین است: مالکیت مستقیم زمین برای اتباع خارج از اتحادیه اروپا فقط در صورت وجود معاهده متقابل بین رومانی و کشور متقاضی امکان‌پذیر است؛ در غیر این صورت فقط حق مالکیت بنا (نه زمین زیر آن) قابل خرید است.' : 'The main restriction concerns land ownership: direct ownership of land by non-EU citizens is only possible if a bilateral treaty exists between Romania and the applicant\'s country; otherwise, only the right to own the building (not the land beneath it) can be purchased.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'راه‌حل رایج برای مالکیت زمین' : 'Common Solution for Land Ownership'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'رایج‌ترین روش برای دور زدن این محدودیت، خرید ملک از طریق یک شرکت رومانیایی (SRL) است که خودِ متقاضی مالک آن باشد؛ شرکت‌ها محدودیتی در مالکیت زمین ندارند.' : 'The most common method to bypass this restriction is purchasing the property through a Romanian company (SRL) owned by the applicant; companies have no restrictions on land ownership.'}</li>
+                <li>{currentLang === 'fa' ? 'برای هرگونه معامله ملکی، خریدار خارجی باید ابتدا شماره شناسایی مالیاتی (Cod de Identificare Fiscală / CIF) از سازمان امور مالیاتی رومانی (ANAF) دریافت کند.' : 'For any real estate transaction, a foreign buyer must first obtain a Fiscal Identification Code (CIF) from the National Agency for Fiscal Administration (ANAF).'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'مراحل رسمی معامله' : 'Official Transaction Steps'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'معامله باید نزد دفتر اسناد رسمی (Notar Public) ثبت و تایید شود.' : 'The transaction must be authenticated and registered by a Notary Public (Notar Public).'}</li>
+                <li>{currentLang === 'fa' ? 'ثبت نهایی مالکیت در دفتر املاک (Carte Funciară) از طریق اداره ثبت اسناد و املاک (OCPI) انجام می‌شود.' : 'Final registration of ownership in the Land Registry (Carte Funciară) is processed through the National Agency for Cadastre and Land Registration (OCPI).'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      );
+
+    case 'startup-tech-investment':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'استارت‌آپ‌ها و فناوری اطلاعات' : 'Tech Startups & Innovation'}
+            </h1>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منبع: قانون مالیاتی رومانی (Legea 227/2015)، سازمان امور مالیاتی رومانی (ANAF) — آخرین بررسی: ۲۰۲۶'
+                : 'Source: Romanian Fiscal Code (Legea 227/2015), National Agency for Fiscal Administration (ANAF) — Last reviewed: 2026'}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'معافیت مالیاتی برنامه‌نویسان' : 'Tax Exemption for Programmers'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'طبق قانون مالیاتی رومانی (Legea 227/2015، ماده ۶۰)، کارکنان شاغل در شرکت‌هایی که فعالیت اصلی یا فرعی‌شان «تولید نرم‌افزار» است (با کدهای فعالیت CAEN مشخص: 5821، 5829، 6201، 6202، 6209) از پرداخت مالیات ۱۰٪ بر درآمد حقوق معاف هستند.' : 'According to the Romanian Fiscal Code (Law 227/2015, Article 60), employees working in companies whose main or secondary activity is "software creation" (specific CAEN codes: 5821, 5829, 6201, 6202, 6209) are exempt from the 10% income tax on salaries.'}</li>
+                <li>{currentLang === 'fa' ? 'این معافیت فقط مالیات بر درآمد را پوشش می‌دهد؛ کارمند همچنان باید سهم کامل بازنشستگی (CAS) و بیمه سلامت (CASS) را بپردازد.' : 'This exemption only covers income tax; the employee must still pay the full pension (CAS) and health insurance (CASS) contributions.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'شرایط شرکت و کارمند' : 'Company and Employee Requirements'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'شرکت باید حداقل درآمد ۱۰,۰۰۰ یورو (معادل به لئو) به‌ازای هر کارمند مشمول در سال مالی قبل کسب کرده باشد (شرکت‌های تازه‌تاسیس از این شرط معاف‌اند).' : 'The company must have generated a minimum revenue of €10,000 (equivalent in RON) per eligible employee in the previous fiscal year (newly established companies are exempt from this condition).'}</li>
+                <li>{currentLang === 'fa' ? 'سمت کارمند باید در فهرست مشخص‌شده قانونی باشد (مثل برنامه‌نویس، مهندس نرم‌افزار، تحلیلگر سیستم، مدیر پروژه فناوری اطلاعات).' : 'The employee\'s position must be on the legally specified list (e.g., programmer, software engineer, systems analyst, IT project manager).'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'نکته برای کارآفرینان استارت‌آپی' : 'Tip for Startup Entrepreneurs'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'ثبت شرکت با کد فعالیت مناسب (CAEN) اولین قدم برای بهره‌مندی از این معافیت است؛ جزئیات ثبت شرکت در صفحه «مراحل ثبت شرکت» موجود است.' : 'Registering a company with the appropriate activity code (CAEN) is the first step to benefit from this exemption; details are available on the "Registration Steps" page.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      );
+
+    case 'annual-tax-reporting':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'قوانین مالیاتی و گزارش‌دهی سالانه' : 'Annual Tax Compliance'}
+            </h1>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منبع: سازمان امور مالیاتی رومانی (ANAF)، وزارت دارایی رومانی — آخرین بررسی: ۲۰۲۶'
+                : 'Source: National Agency for Fiscal Administration (ANAF), Romanian Ministry of Finance — Last reviewed: 2026'}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'الزام گزارش‌دهی سالانه' : 'Annual Reporting Obligation'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'هر شرکت ثبت‌شده در رومانی (از جمله SRL) موظف است صورت‌های مالی سالانه را به‌صورت الکترونیکی و با امضای دیجیتال معتبر به سازمان امور مالیاتی رومانی (ANAF) ارسال کند.' : 'Every company registered in Romania (including SRLs) is required to submit annual financial statements electronically, using a valid digital signature, to the National Agency for Fiscal Administration (ANAF).'}</li>
+                <li>{currentLang === 'fa' ? 'مهلت معمول ارسال صورت‌های مالی سالانه، ۳۱ می هر سال است (در صورت مصادف شدن با تعطیلات رسمی، ممکن است چند روز تمدید شود).' : 'The standard deadline for submitting annual financial statements is May 31st of each year (this may be extended by a few days if it falls on a public holiday).'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'عواقب عدم ارسال به‌موقع' : 'Consequences of Late Submission'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'عدم ارسال صورت‌های مالی می‌تواند جریمه نقدی (بین ۲,۰۰۰ تا ۵,۰۰۰ لئو) به همراه داشته باشد.' : 'Failure to submit financial statements can result in fines ranging from 2,000 to 5,000 RON.'}</li>
+                <li>{currentLang === 'fa' ? 'اگر شرکت بیش از ۵ ماه بعد از مهلت قانونی هم صورت مالی ارسال نکند، ممکن است از سوی ANAF به‌عنوان «غیرفعال مالیاتی» اعلام شود که پیامدهای جدی‌تری (مثل از دست دادن حق کسر مالیاتی طرف‌های معامله) دارد.' : 'If a company fails to submit financial statements for more than 5 months past the legal deadline, it may be declared "fiscally inactive" by ANAF, which carries severe consequences (such as business partners losing the right to deduct taxes).'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'شرکت‌های بدون فعالیت' : 'Dormant Companies'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'شرکت‌هایی که از زمان ثبت تا پایان سال مالی هیچ فعالیتی نداشته‌اند، نیازی به تهیه صورت مالی کامل ندارند؛ در عوض باید ظرف ۶۰ روز از پایان سال مالی، اظهارنامه عدم‌فعالیت را به ANAF ارسال کنند.' : 'Companies that have had no activity from registration until the end of the financial year do not need to prepare full financial statements; instead, they must submit a declaration of inactivity to ANAF within 60 days of the financial year-end.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      );
 
     default:
       return (
