@@ -20,6 +20,7 @@ import { WorkOverviewContent } from './WorkOverviewContent';
 import { StartHereContent } from './StartHereContent';
 import { IgiProcessContent } from './IgiProcessContent';
 import { PreparatoryYearContent } from './PreparatoryYearContent';
+import { CompanyOverviewContent } from './CompanyOverviewContent';
 import { Button } from './Button';
 import { 
   GraduationCap, 
@@ -99,6 +100,21 @@ export const MainContent: React.FC<MainContentProps> = ({
         onNavigate={onNavigate}
         onOpenEvaluationModal={onOpenEvaluationModal}
       />
+    );
+  }
+
+  if (activeRoute.startsWith('company')) {
+    const sub = activeRoute.split('/')[1] || 'overview';
+    return (
+      <div className="space-y-12">
+        <CompanyOverviewContent
+          subRoute={sub}
+          currentLang={currentLang}
+          onNavigate={onNavigate}
+          onOpenEvaluationModal={onOpenEvaluationModal}
+        />
+        <LeadForm currentLang={currentLang} />
+      </div>
     );
   }
 
@@ -719,24 +735,6 @@ export const MainContent: React.FC<MainContentProps> = ({
               {currentLang === 'fa'
                 ? 'راهنمای بازار کار، رشته‌های پرتقاضا (IT، مهندسی) و فرآیند صدور مجوز کار (Aviz de Munca).'
                 : 'Job market overview, in-demand technical sectors, and Work Permit approval rules.'}
-            </p>
-          </div>
-
-          <LeadForm currentLang={currentLang} />
-        </div>
-      );
-
-    case 'company':
-      return (
-        <div className="space-y-12 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'ثبت شرکت در رومانی (SRL)' : 'Company Registration'}
-            </h1>
-            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
-              {currentLang === 'fa'
-                ? 'بررسی قوانین ثبت شرکت SRL، ضوابط مالیاتی بر اساس نوع فعالیت و مسیرهای اقامتی مرتبط.'
-                : 'SRL company formation steps, corporate tax rules, and executive residency criteria.'}
             </p>
           </div>
 
