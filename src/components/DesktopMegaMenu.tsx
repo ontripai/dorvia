@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, GraduationCap, BriefcaseBusiness, Building2, Cha
 import { Button } from './Button';
 
 interface DesktopMegaMenuProps {
-  type: 'immigration' | 'study' | 'business' | 'needs' | 'romania';
+  type: 'starthere' | 'immigration' | 'study' | 'business' | 'needs' | 'romania';
   currentLang: Language;
   onNavigate: (route: string) => void;
   onClose: () => void;
@@ -42,6 +42,68 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
     onNavigate(route);
     onClose();
   };
+
+  // 0. START HERE MEGA MENU
+  if (type === 'starthere') {
+    return (
+      <div ref={menuRef} className="absolute top-full left-0 right-0 z-50 bg-white border-b border-[#dfe6ef] shadow-2xl py-8 animate-fadeIn">
+        <div className="max-w-[1280px] mx-auto px-8">
+          <div className="grid grid-cols-12 gap-8 text-xs">
+            
+            <div className="col-span-4 space-y-3">
+              <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider border-b border-[#dfe6ef] pb-2">
+                {currentLang === 'fa' ? 'وضعیت شما' : 'Your Status'}
+              </h4>
+              <ul className="space-y-2 text-[#526174] font-medium">
+                <li><button onClick={() => handleLinkClick('start-here')} className="hover:text-[#2F6FED] py-1 cursor-pointer">🎯 {currentLang === 'fa' ? 'قصد آمدن به رومانی دارم' : 'Planning to come'}</button></li>
+                <li><button onClick={() => handleLinkClick('start-here')} className="hover:text-[#2F6FED] py-1 cursor-pointer">🛬 {currentLang === 'fa' ? 'به‌تازگی وارد شده‌ام' : 'Just arrived'}</button></li>
+                <li><button onClick={() => handleLinkClick('start-here')} className="hover:text-[#2F6FED] py-1 cursor-pointer">🏠 {currentLang === 'fa' ? 'در رومانی زندگی می‌کنم' : 'Living in Romania'}</button></li>
+              </ul>
+            </div>
+
+            <div className="col-span-4 space-y-3">
+              <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider border-b border-[#dfe6ef] pb-2">
+                {currentLang === 'fa' ? 'چک‌لیست‌ها' : 'Checklists'}
+              </h4>
+              <ul className="space-y-2 text-[#526174] font-medium">
+                <li><button onClick={() => handleLinkClick('start-here')} className="hover:text-[#2F6FED] py-1 cursor-pointer">📋 {currentLang === 'fa' ? 'چک‌لیست قبل از سفر' : 'Pre-departure Checklist'}</button></li>
+                <li><button onClick={() => handleLinkClick('start-here')} className="hover:text-[#2F6FED] py-1 cursor-pointer">⏱️ {currentLang === 'fa' ? 'سه روز اول' : 'First 3 Days'}</button></li>
+                <li><button onClick={() => handleLinkClick('start-here')} className="hover:text-[#2F6FED] py-1 cursor-pointer">📅 {currentLang === 'fa' ? 'ماه اول' : 'First Month'}</button></li>
+              </ul>
+            </div>
+
+            <div className="col-span-4 bg-[#071B3D] text-white p-5 rounded-2xl flex flex-col justify-between shadow-lg">
+              <div className="space-y-2">
+                <span className="text-[11px] font-bold text-[#2F6FED] uppercase tracking-wider">
+                  {currentLang === 'fa' ? 'شروع سریع' : 'Quick Start'}
+                </span>
+                <h5 className="font-extrabold text-sm text-white leading-snug">
+                  {currentLang === 'fa' ? 'ارزیابی اولیه' : 'Initial Assessment'}
+                </h5>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  {currentLang === 'fa' ? 'مسیر مهاجرتی خود را با پر کردن فرم ارزیابی ما آغاز کنید.' : 'Start your journey by filling out our free assessment form.'}
+                </p>
+              </div>
+
+              <Button
+                variant="accent"
+                size="sm"
+                onClick={() => {
+                  onClose();
+                  onOpenEvaluationModal();
+                }}
+                rightIcon={<ArrowIcon size={14} />}
+                className="mt-4 w-full"
+              >
+                {currentLang === 'fa' ? 'شروع ارزیابی رایگان' : 'Start Free Assessment'}
+              </Button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // 1. IMMIGRATION MEGA MENU
   if (type === 'immigration') {

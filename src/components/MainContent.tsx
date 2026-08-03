@@ -811,6 +811,16 @@ export const MainContent: React.FC<MainContentProps> = ({
         </div>
       );
 
+    case 'about-romania':
+      return (
+        <RomaniaOverviewContent
+          subRoute="economy"
+          currentLang={currentLang}
+          onNavigate={onNavigate}
+          onOpenEvaluationModal={onOpenEvaluationModal}
+        />
+      );
+
     case 'about':
       return (
         <div className="space-y-12 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">

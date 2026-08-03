@@ -26,18 +26,20 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenEvaluationModal
 }) => {
   const t = getTranslations(currentLang);
-  const [activeMegaMenu, setActiveMegaMenu] = useState<'immigration' | 'study' | 'business' | 'needs' | 'romania' | null>(null);
+  const [activeMegaMenu, setActiveMegaMenu] = useState<'starthere' | 'immigration' | 'study' | 'business' | 'needs' | 'romania' | null>(null);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [searchDialogOpen, setSearchDialogOpen] = useState(false);
 
-  // EXACT 6 PRIMARY NAVIGATION ITEMS
+  // EXACT 8 PRIMARY NAVIGATION ITEMS
   const primaryNavItems = [
+    { id: 'start-here', label: currentLang === 'fa' ? 'شروع از اینجا' : 'Start Here', megaMenu: 'starthere' as const },
     { id: 'immigration', label: currentLang === 'fa' ? 'مهاجرت' : 'Immigration', megaMenu: 'immigration' as const },
     { id: 'study', label: currentLang === 'fa' ? 'تحصیل' : 'Study', megaMenu: 'study' as const },
     { id: 'work', label: currentLang === 'fa' ? 'کار' : 'Work' },
     { id: 'company', label: currentLang === 'fa' ? 'کسب‌وکار' : 'Business', megaMenu: 'business' as const },
     { id: 'needs', label: currentLang === 'fa' ? 'نیازها در رومانی' : 'Essentials in Romania', megaMenu: 'needs' as const },
     { id: 'romania', label: currentLang === 'fa' ? 'رومانی' : 'Romania', megaMenu: 'romania' as const },
+    { id: 'about', label: currentLang === 'fa' ? 'درباره ما' : 'About Us' },
   ];
 
   const handleNavClick = (item: typeof primaryNavItems[0]) => {

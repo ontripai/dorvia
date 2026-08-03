@@ -36,6 +36,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   }, [onClose]);
 
   const navItems = [
+    { id: 'start-here', label: currentLang === 'fa' ? 'شروع از اینجا' : 'Start Here' },
     { id: 'immigration', label: currentLang === 'fa' ? 'مهاجرت' : 'Immigration' },
     { id: 'study', label: currentLang === 'fa' ? 'تحصیل' : 'Study' },
     { id: 'work', label: currentLang === 'fa' ? 'کار' : 'Work' },
