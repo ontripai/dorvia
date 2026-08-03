@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/config';
 import type { Metadata } from 'next';
 
 const metaMap: Record<string, { title: string; desc: string; noindex?: boolean }> = {
@@ -38,12 +39,12 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     description: meta.desc,
     robots: meta.noindex ? { index: false, follow: true } : undefined,
     alternates: {
-      canonical: `https://dorvia.eu/romania/${params.slug}`,
+      canonical: `${SITE_URL}/romania/${params.slug}`,
     },
     openGraph: {
       title: meta.title,
       description: meta.desc,
-      url: `https://dorvia.eu/romania/${params.slug}`,
+      url: `${SITE_URL}/romania/${params.slug}`,
     }
   };
 }

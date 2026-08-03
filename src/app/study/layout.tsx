@@ -1,15 +1,16 @@
+import { SITE_URL } from '@/config';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'تحصیل در رومانی | در رومانی – DORVIA EUROP',
   description: 'تحصیل در دانشگاه‌های معتبر رومانی به زبان انگلیسی، پذیرش بدون کنکور، مدارک معتبر اتحادیه اروپا و شهریه اقتصادی.',
   alternates: {
-    canonical: 'https://dorvia.eu/study',
+    canonical: `${SITE_URL}/study`,
   },
   openGraph: {
     title: 'تحصیل در رومانی | در رومانی – DORVIA EUROP',
     description: 'تحصیل در دانشگاه‌های معتبر رومانی به زبان انگلیسی، پذیرش بدون کنکور، مدارک معتبر اتحادیه اروپا و شهریه اقتصادی.',
-    url: 'https://dorvia.eu/study',
+    url: `${SITE_URL}/study`,
   }
 };
 

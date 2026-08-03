@@ -1,15 +1,16 @@
+import { SITE_URL } from '@/config';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'کار و اشتغال در رومانی | در رومانی – DORVIA EUROP',
   description: 'راهنمای کاریابی، اخذ مجوز کار (Aviz de Munca)، ویزای کاری و قوانین استخدام اتباع خارجی در رومانی.',
   alternates: {
-    canonical: 'https://dorvia.eu/work',
+    canonical: `${SITE_URL}/work`,
   },
   openGraph: {
     title: 'کار و اشتغال در رومانی | در رومانی – DORVIA EUROP',
     description: 'راهنمای کاریابی، اخذ مجوز کار (Aviz de Munca)، ویزای کاری و قوانین استخدام اتباع خارجی در رومانی.',
-    url: 'https://dorvia.eu/work',
+    url: `${SITE_URL}/work`,
   }
 };
 

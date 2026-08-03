@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/config';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,12 +9,12 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: 'https://dorvia.eu/articles',
+    canonical: `${SITE_URL}/articles`,
   },
   openGraph: {
     title: 'مقالات و راهنماها | در رومانی – DORVIA EUROP',
     description: 'مقالات، راهنماها و آخرین به‌روزرسانی‌های قوانین مهاجرتی، کار و تحصیل در رومانی.',
-    url: 'https://dorvia.eu/articles',
+    url: `${SITE_URL}/articles`,
   }
 };
 

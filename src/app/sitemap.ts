@@ -1,7 +1,8 @@
+import { SITE_URL } from '@/config';
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://dorvia.eu';
+  const baseUrl = SITE_URL;
 
   const routes = [
     '',

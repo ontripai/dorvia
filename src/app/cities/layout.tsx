@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/config';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,12 +9,12 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: 'https://dorvia.eu/cities',
+    canonical: `${SITE_URL}/cities`,
   },
   openGraph: {
     title: 'شهرهای رومانی | در رومانی – DORVIA EUROP',
     description: 'راهنمای شهرهای مهم کشور رومانی از جمله بخارست، کلوژ-نپوکا، تیمیشوارا و یاش.',
-    url: 'https://dorvia.eu/cities',
+    url: `${SITE_URL}/cities`,
   }
 };
 

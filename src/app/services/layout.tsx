@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/config';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,12 +9,12 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: 'https://dorvia.eu/services',
+    canonical: `${SITE_URL}/services`,
   },
   openGraph: {
     title: 'خدمات تخصصی مهاجرتی | در رومانی – DORVIA EUROP',
     description: 'خدمات پذیرش تحصیلی، ویزای کار، ثبت شرکت، تایید مدارک و همراهی پس از ورود در کشور رومانی.',
-    url: 'https://dorvia.eu/services',
+    url: `${SITE_URL}/services`,
   }
 };
 

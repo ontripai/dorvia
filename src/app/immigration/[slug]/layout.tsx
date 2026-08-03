@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/config';
 import type { Metadata } from 'next';
 
 const metaMap: Record<string, { title: string; desc: string }> = {
@@ -28,12 +29,12 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: meta.title,
     description: meta.desc,
     alternates: {
-      canonical: `https://dorvia.eu/immigration/${params.slug}`,
+      canonical: `${SITE_URL}/immigration/${params.slug}`,
     },
     openGraph: {
       title: meta.title,
       description: meta.desc,
-      url: `https://dorvia.eu/immigration/${params.slug}`,
+      url: `${SITE_URL}/immigration/${params.slug}`,
     }
   };
 }

@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/config';
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { AppLayout } from '../components/AppLayout';
@@ -7,12 +8,12 @@ export const metadata: Metadata = {
   description: 'اپلیکیشن جامع برای ارزیابی و مشاوره رایگان مهاجرت به رومانی و اتحادیه اروپا. دریافت اطلاعات به‌روز درباره شرایط کار، تحصیل، ثبت شرکت (سرمایه‌گذاری) و پیوست خانواده.',
   keywords: ['مهاجرت به رومانی', 'اقامت در رومانی', 'کاریابی رومانی', 'ویزای تحصیلی در رومانی', 'ثبت شرکت رومانی', 'DORVIA EUROP', 'Immigration to Romania'],
   alternates: {
-    canonical: 'https://dorvia.eu/',
+    canonical: SITE_URL,
   },
   openGraph: {
     title: 'دوریا اروپا | DORVIA EUROP - مرجع مهاجرت، اقامت، کار و ویزای تحصیلی در رومانی',
     description: 'اپلیکیشن جامع برای ارزیابی و مشاوره رایگان مهاجرت به رومانی و اتحادیه اروپا. دریافت اطلاعات به‌روز درباره شرایط کار، تحصیل، ثبت شرکت (سرمایه‌گذاری) و پیوست خانواده.',
-    url: 'https://dorvia.eu/',
+    url: SITE_URL,
   }
 };
 

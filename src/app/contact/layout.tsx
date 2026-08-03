@@ -1,15 +1,16 @@
+import { SITE_URL } from '@/config';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'ارتباط با ما | در رومانی – DORVIA EUROP',
   description: 'ارتباط با کارشناسان DORVIA EUROP جهت مشاوره و ارزیابی پرونده‌های مهاجرتی رومانی.',
   alternates: {
-    canonical: 'https://dorvia.eu/contact',
+    canonical: `${SITE_URL}/contact`,
   },
   openGraph: {
     title: 'ارتباط با ما | در رومانی – DORVIA EUROP',
     description: 'ارتباط با کارشناسان DORVIA EUROP جهت مشاوره و ارزیابی پرونده‌های مهاجرتی رومانی.',
-    url: 'https://dorvia.eu/contact',
+    url: `${SITE_URL}/contact`,
   }
 };
 
