@@ -23,6 +23,7 @@ import { PreparatoryYearContent } from './PreparatoryYearContent';
 import { CompanyOverviewContent } from './CompanyOverviewContent';
 import { ImmigrationOverviewContent } from './ImmigrationOverviewContent';
 import { ScholarshipOverviewContent } from './ScholarshipOverviewContent';
+import { InvestmentOverviewContent } from './InvestmentOverviewContent';
 import { Button } from './Button';
 import { 
   GraduationCap, 
@@ -102,6 +103,15 @@ export const MainContent: React.FC<MainContentProps> = ({
         onNavigate={onNavigate}
         onOpenEvaluationModal={onOpenEvaluationModal}
       />
+    );
+  }
+
+  if (activeRoute === 'company/investment') {
+    return (
+      <div className="space-y-12">
+        <InvestmentOverviewContent currentLang={currentLang} />
+        <LeadForm currentLang={currentLang} />
+      </div>
     );
   }
 
@@ -354,8 +364,8 @@ export const MainContent: React.FC<MainContentProps> = ({
                   title={t.pathways.investment.title}
                   desc={t.pathways.investment.desc}
                   icon={ChartNoAxesCombined}
-                  badge={currentLang === 'fa' ? 'بررسی فرصت‌ها' : 'Investment'}
-                  onClick={() => onNavigate('immigration')}
+                  badge={currentLang === 'fa' ? 'سرمایه‌گذاری' : 'Investment'}
+                  onClick={() => onNavigate('company/investment')}
                 />
                 <PathwayCard
                   currentLang={currentLang}
@@ -737,8 +747,24 @@ export const MainContent: React.FC<MainContentProps> = ({
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {featuredUniversities.map((uni) => (
-                    <UniversityCard key={uni.id} university={uni} currentLang={currentLang} onSelect={() => {}} />
+                    <UniversityCard key={uni.id} university={uni} currentLang={currentLang} onSelect={() => onNavigate('universities')} />
                   ))}
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-lg font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مسیرهای تحصیلی' : 'Study Pathways'}
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('study/scholarships')}>
+                    <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'بورسیه تحصیلی دولتی' : 'Government Scholarships'}</h4>
+                    <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'معافیت کامل از شهریه و هزینه ثبت‌نام' : 'Full tuition waiver and stipend'}</p>
+                  </div>
+                  <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('study/preparatory-year')}>
+                    <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'سال زبان (پیش‌دانشگاهی)' : 'Language Preparatory Year'}</h4>
+                    <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'دوره آموزش زبان رومانیایی پیش از دانشگاه' : 'Romanian language course before degree'}</p>
+                  </div>
                 </div>
               </div>
             </div>

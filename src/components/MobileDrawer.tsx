@@ -63,6 +63,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
     { id: 'company/tax-types', label: currentLang === 'fa' ? '— انواع نرخ‌های مالیاتی' : '— Tax Types' },
     { id: 'company/bank-account', label: currentLang === 'fa' ? '— افتتاح حساب بانکی' : '— Bank Account' },
     { id: 'company/residency', label: currentLang === 'fa' ? '— قوانین اقامتی مدیرعامل' : '— Executive Residency' },
+    { id: 'company/investment', label: currentLang === 'fa' ? '— سرمایه‌گذاری' : '— Investment' },
     { id: 'living', label: currentLang === 'fa' ? 'زندگی در رومانی' : 'Living in Romania' },
     { id: 'about-romania', label: currentLang === 'fa' ? 'شناخت رومانی' : 'Discover Romania' },
     { id: 'universities', label: t.nav.universities },
