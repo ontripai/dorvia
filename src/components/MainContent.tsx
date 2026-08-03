@@ -100,7 +100,7 @@ export const MainContent: React.FC<MainContentProps> = ({
   }
 
   if (activeRoute.startsWith('work')) {
-    const sub = activeRoute.split('/')[1] || 'find-job';
+    const sub = activeRoute.split('/')[1] || 'overview';
     return (
       <WorkOverviewContent
         subRoute={sub}
