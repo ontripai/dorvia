@@ -45,6 +45,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
     { id: 'start-here/first-month', label: currentLang === 'fa' ? '— ماه اول' : '— First Month' },
     { id: 'immigration', label: currentLang === 'fa' ? 'مهاجرت' : 'Immigration' },
     { id: 'study', label: currentLang === 'fa' ? 'تحصیل' : 'Study' },
+    { id: 'study/preparatory-year', label: currentLang === 'fa' ? '— سال زبان (پیش‌دانشگاهی)' : '— Language Preparatory Year' },
     { id: 'work', label: currentLang === 'fa' ? 'کار' : 'Work' },
     { id: 'work/find-job', label: currentLang === 'fa' ? '— پیدا کردن کار' : '— Find a Job' },
     { id: 'work/permit', label: currentLang === 'fa' ? '— مجوز کار (Aviz de Muncă)' : '— Work Permit' },

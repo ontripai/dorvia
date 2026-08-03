@@ -19,6 +19,7 @@ import { RomaniaOverviewContent } from './RomaniaOverviewContent';
 import { WorkOverviewContent } from './WorkOverviewContent';
 import { StartHereContent } from './StartHereContent';
 import { IgiProcessContent } from './IgiProcessContent';
+import { PreparatoryYearContent } from './PreparatoryYearContent';
 import { Button } from './Button';
 import { 
   GraduationCap, 
@@ -57,6 +58,10 @@ export const MainContent: React.FC<MainContentProps> = ({
   const [citySearch, setCitySearch] = useState('');
 
   // HANDLE PREFIXED SUB-ROUTES FOR NEEDS AND ROMANIA
+  if (activeRoute === 'study/preparatory-year') {
+    return <PreparatoryYearContent currentLang={currentLang} />;
+  }
+
   if (activeRoute === 'immigration/igi-process') {
     return <IgiProcessContent currentLang={currentLang} />;
   }

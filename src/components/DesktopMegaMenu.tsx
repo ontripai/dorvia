@@ -197,6 +197,7 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 <li><button onClick={() => handleLinkClick('study')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'مدارک و الزامات ترجمه رسمی' : 'Required Documents & Legalization'}</button></li>
                 <li><button onClick={() => handleLinkClick('study')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'ویزای تحصیلی تایپ D/SD' : 'Type D/SD Student Visa'}</button></li>
                 <li><button onClick={() => handleLinkClick('study')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'شهریه دانشگاه‌ها و هزینه خوابگاه' : 'Tuition Rates & Dormitories'}</button></li>
+                <li><button onClick={() => handleLinkClick('study/preparatory-year')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'سال زبان (پیش‌دانشگاهی)' : 'Language Preparatory Year'}</button></li>
                 <li><button onClick={() => handleLinkClick('study')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'مجوز کار پاره‌پوقت دانشجویی' : 'Student Work Permits'}</button></li>
               </ul>
             </div>
