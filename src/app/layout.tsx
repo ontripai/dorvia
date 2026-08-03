@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { AppLayout } from '../components/AppLayout';
 
@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   keywords: ['مهاجرت به رومانی', 'اقامت در رومانی', 'کاریابی رومانی', 'ویزای تحصیلی در رومانی', 'ثبت شرکت رومانی', 'DORVIA EUROP', 'Immigration to Romania'],
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -15,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fa" dir="rtl">
-      <body className="min-h-screen bg-slate-50 antialiased selection:bg-[#2F6FED] selection:text-white">
+      <body className="min-h-screen bg-slate-50 antialiased text-slate-900 selection:bg-[#002B7F] selection:text-white">
         <AppLayout>
           {children}
         </AppLayout>
