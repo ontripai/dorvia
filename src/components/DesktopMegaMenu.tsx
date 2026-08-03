@@ -279,10 +279,10 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 {currentLang === 'fa' ? 'ثبت شرکت و تجاری (SRL)' : 'Company Formation (SRL)'}
               </h4>
               <ul className="space-y-2 text-[#526174] font-medium">
-                <li><button onClick={() => handleLinkClick('company')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'مراحل ثبت شرکت SRL و ثبت در اداره ONRC' : 'SRL Incorporation Steps at ONRC'}</button></li>
-                <li><button onClick={() => handleLinkClick('company')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'انواع نرخ‌های مالیاتی (۱٪ تا ۱۶٪)' : 'Corporate Tax Options (1% to 16%)'}</button></li>
-                <li><button onClick={() => handleLinkClick('company')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'افتتاح حساب بانکی شرکت در بخارست' : 'Corporate Bank Account Setup'}</button></li>
-                <li><button onClick={() => handleLinkClick('company')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'شرایط دریافت اقامت مدیرعامل و سهامدار' : 'Executive Residence Criteria'}</button></li>
+                <li><button onClick={() => handleLinkClick('company/registration')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'مراحل ثبت شرکت SRL و ثبت در اداره ONRC' : 'SRL Incorporation Steps at ONRC'}</button></li>
+                <li><button onClick={() => handleLinkClick('company/tax-types')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'انواع نرخ‌های مالیاتی (۱٪ تا ۱۶٪)' : 'Corporate Tax Options (1% to 16%)'}</button></li>
+                <li><button onClick={() => handleLinkClick('company/bank-account')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'افتتاح حساب بانکی شرکت در بخارست' : 'Corporate Bank Account Setup'}</button></li>
+                <li><button onClick={() => handleLinkClick('company/residency')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'شرایط دریافت اقامت مدیرعامل و سهامدار' : 'Executive Residence Criteria'}</button></li>
               </ul>
             </div>
 
