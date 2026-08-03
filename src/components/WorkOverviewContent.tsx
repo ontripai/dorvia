@@ -16,18 +16,130 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
   onNavigate,
   onOpenEvaluationModal
 }) => {
-  return (
-    <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-      <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-white capitalize">
-          {subRoute.replace('-', ' ')}
-        </h1>
-        <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
-          {currentLang === 'fa' 
-            ? `این صفحه برای بخش کار (${subRoute}) رزرو شده است و محتوای آن به زودی اضافه می‌شود.` 
-            : `Placeholder for Work section (${subRoute}). Full content will be added soon.`}
-        </p>
-      </div>
+  const disclaimer = currentLang === 'fa'
+    ? 'این مورد باید بر اساس مقررات جاری و شرایط فردی بررسی شود.'
+    : 'This must be verified based on current regulations and individual circumstances.';
+
+  const sourceLine = (
+    <div className="text-[11px] text-slate-400 mt-2">
+      {currentLang === 'fa' 
+        ? 'منبع: اداره کل مهاجرت رومانی (IGI) — igi.mai.gov.ro — آخرین بررسی: ۲۰۲۶'
+        : 'Source: General Inspectorate for Immigration (IGI) — igi.mai.gov.ro — Last reviewed: 2026'}
     </div>
   );
+
+  switch (subRoute) {
+    case 'permit':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'مجوز کار در رومانی (Aviz de Muncă)' : 'Work Permit (Aviz de Muncă)'}
+            </h1>
+            {sourceLine}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'نقش کارفرما' : 'Employer\'s Role'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'درخواست مجوز کار توسط کارفرمای رومانیایی نزد IGI ثبت می‌شود، نه خودِ متقاضی.' : 'The work permit application is submitted by the Romanian employer to IGI, not by the applicant.'}</li>
+                <li>{currentLang === 'fa' ? 'معمولاً کارفرما باید نشان دهد این جایگاه شغلی توسط شهروند رومانی/اتحادیه اروپا/فضای اقتصادی اروپا پر نشده است.' : 'Generally, the employer must demonstrate that the position could not be filled by a Romanian/EU/EEA citizen.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'مدارک موردنیاز متقاضی' : 'Applicant\'s Required Documents'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'قرارداد کاری یا پیشنهاد رسمی استخدام.' : 'Employment contract or official job offer.'}</li>
+                <li>{currentLang === 'fa' ? 'مدارک تحصیلی و/یا سوابق کاری مرتبط با جایگاه شغلی.' : 'Educational degrees and/or work experience relevant to the position.'}</li>
+                <li>{currentLang === 'fa' ? 'گواهی عدم سوءپیشینه.' : 'Criminal record certificate.'}</li>
+                <li>{currentLang === 'fa' ? 'مدرک تسلط به زبان (در صورت نیاز جایگاه شغلی).' : 'Proof of language proficiency (if required for the role).'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'پس از صدور مجوز' : 'After Issuance'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'مجوز کار، پایه‌ی درخواست ویزای بلندمدت کاری (نوع D/AM) نزد سفارت رومانی است.' : 'The work permit serves as the basis for the long-stay work visa (Type D/AM) application at the Romanian embassy.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      );
+
+    case 'visa':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'ویزای بلندمدت کاری (D/AM)' : 'Long-Stay Work Visa (D/AM)'}
+            </h1>
+            {sourceLine}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'مراحل درخواست' : 'Application Process'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'پس از دریافت مجوز کار توسط کارفرما، متقاضی می‌تواند برای ویزای بلندمدت کاری در سفارت/کنسولگری رومانی اقدام کند.' : 'After the employer obtains the work permit, the applicant can apply for the long-stay work visa at the Romanian embassy/consulate.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'پس از ورود به رومانی' : 'After Arrival in Romania'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'درخواست کارت اقامت موقت برای اشتغال نزد ادارات محلی IGI، حداقل ۳۰ روز قبل از پایان اعتبار حق اقامت اولیه.' : 'Apply for a temporary residence permit for employment at local IGI offices, at least 30 days before the initial right of stay expires.'}</li>
+                <li>{currentLang === 'fa' ? 'رسیدگی معمولاً ظرف ۳۰ روز (قابل تمدید تا ۱۵ روز در صورت نیاز به بررسی بیشتر).' : 'Processing typically takes 30 days (extendable by up to 15 days for further checks).'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'تغییر کارفرما' : 'Changing Employers'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'تغییر کارفرما معمولاً نیازمند بازبینی یا صدور مجدد مجوز کار است.' : 'Changing employers usually requires a review or re-issuance of the work permit.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      );
+
+    default:
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white capitalize">
+              {subRoute.replace('-', ' ')}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa' 
+                ? `این صفحه برای بخش کار (${subRoute}) رزرو شده است و محتوای آن به زودی اضافه می‌شود.` 
+                : `Placeholder for Work section (${subRoute}). Full content will be added soon.`}
+            </p>
+          </div>
+        </div>
+      );
+  }
 };
