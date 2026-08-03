@@ -70,11 +70,11 @@ export const Header: React.FC<HeaderProps> = ({
         >
           <img src="/images/logo/dorvia-logo-primary-transparent-3000.png" alt="DORVIA" className="h-[32px] sm:h-[36px] w-auto group-hover:scale-105 transition-transform" />
 
-          <div className="flex flex-col">
-            <span className="text-lg sm:text-xl font-bold tracking-tight text-[#142033] group-hover:text-[#2F6FED] transition-colors leading-tight">
+          <div className="flex flex-col justify-center">
+            <span className="text-lg sm:text-xl font-bold tracking-tight text-[#142033] group-hover:text-[#2F6FED] transition-colors leading-tight whitespace-nowrap">
               {currentLang === 'fa' ? t.brand.siteName : t.brand.siteName.toUpperCase()}
             </span>
-            <span className="text-[10px] text-[#788697] tracking-widest uppercase font-semibold">
+            <span className="hidden sm:block text-[10px] text-[#788697] tracking-widest uppercase font-semibold whitespace-nowrap">
               {currentLang === 'fa' ? 'راهنمای تحصیل، کار و زندگی' : 'Study • Work • Business • Life'}
             </span>
           </div>
@@ -152,7 +152,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Mobile Controls */}
-        <div className="flex items-center space-x-2 rtl:space-x-reverse lg:hidden">
+        <div className="flex items-center space-x-2 rtl:space-x-reverse lg:hidden shrink-0">
           <button
             onClick={() => setSearchDialogOpen(true)}
             className="p-2 rounded-lg bg-[#eef3f8] text-[#142033] border border-[#dfe6ef] min-h-[36px] min-w-[36px] flex items-center justify-center"
