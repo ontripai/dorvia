@@ -197,12 +197,12 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 {currentLang === 'fa' ? 'راهنمای پذیرش تحصیلی' : 'Admission Guidance'}
               </h4>
               <ul className="space-y-2 text-[#526174] font-medium">
-                <li><button onClick={() => handleLinkClick('study')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'مدارک و الزامات ترجمه رسمی' : 'Required Documents & Legalization'}</button></li>
-                <li><button onClick={() => handleLinkClick('study')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'ویزای تحصیلی تایپ D/SD' : 'Type D/SD Student Visa'}</button></li>
-                <li><button onClick={() => handleLinkClick('study')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'شهریه دانشگاه‌ها و هزینه خوابگاه' : 'Tuition Rates & Dormitories'}</button></li>
+                <li><button onClick={() => handleLinkClick('study/requirements')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'مدارک و الزامات پذیرش' : 'Required Documents & Legalization'}</button></li>
+                <li><button onClick={() => handleLinkClick('study/visa-type-d')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'ویزای تحصیلی تایپ D' : 'Type D/SD Student Visa'}</button></li>
+                <li><button onClick={() => handleLinkClick('study/tuition-overview')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'شهریه‌های تحصیلی (نمای کلی)' : 'Tuition Rates & Dormitories'}</button></li>
                 <li><button onClick={() => handleLinkClick('study/preparatory-year')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'سال زبان (پیش‌دانشگاهی)' : 'Language Preparatory Year'}</button></li>
                 <li><button onClick={() => handleLinkClick('study/scholarships')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'بورسیه تحصیلی دولتی' : 'Government Scholarships'}</button></li>
-                <li><button onClick={() => handleLinkClick('study')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'مجوز کار پاره‌وقت دانشجویی' : 'Student Work Permits'}</button></li>
+                <li><button onClick={() => handleLinkClick('study/part-time-work')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'مجوز کار پاره‌وقت دانشجویی' : 'Student Work Permits'}</button></li>
               </ul>
             </div>
 

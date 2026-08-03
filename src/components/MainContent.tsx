@@ -20,6 +20,7 @@ import { WorkOverviewContent } from './WorkOverviewContent';
 import { StartHereContent } from './StartHereContent';
 import { IgiProcessContent } from './IgiProcessContent';
 import { PreparatoryYearContent } from './PreparatoryYearContent';
+import { StudyDetailsContent } from './StudyDetailsContent';
 import { CompanyOverviewContent } from './CompanyOverviewContent';
 import { ImmigrationOverviewContent } from './ImmigrationOverviewContent';
 import { ScholarshipOverviewContent } from './ScholarshipOverviewContent';
@@ -62,7 +63,11 @@ export const MainContent: React.FC<MainContentProps> = ({
   const [citySearch, setCitySearch] = useState('');
 
   // HANDLE PREFIXED SUB-ROUTES FOR NEEDS AND ROMANIA
-  if (activeRoute === 'study/preparatory-year') {
+    if (['study/requirements', 'study/visa-type-d', 'study/tuition-overview', 'study/part-time-work'].includes(activeRoute)) {
+      return <StudyDetailsContent subRoute={activeRoute.split('/')[1]} currentLang={currentLang} />;
+    }
+
+    if (activeRoute === 'study/preparatory-year') {
     return <PreparatoryYearContent currentLang={currentLang} />;
   }
 
