@@ -62,21 +62,16 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Brand Logo Wordmark & Symbol */}
         <Link
           href="/"
-          className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer group"
+          className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer group shrink-0"
           onClick={() => {
             setActiveMegaMenu(null);
           }}
         >
           <img src="/images/logo/dorvia-logo-primary-transparent-3000.png" alt="DORVIA" className="h-[32px] sm:h-[36px] w-auto group-hover:scale-105 transition-transform" />
 
-          <div className="flex flex-col justify-center">
-            <span className="text-lg sm:text-xl font-bold tracking-tight text-[#142033] group-hover:text-[#2F6FED] transition-colors leading-tight whitespace-nowrap">
-              {currentLang === 'fa' ? t.brand.siteName : t.brand.siteName.toUpperCase()}
-            </span>
-            <span className="hidden sm:block text-[10px] text-[#788697] tracking-widest uppercase font-semibold whitespace-nowrap">
-              {currentLang === 'fa' ? 'راهنمای تحصیل، کار و زندگی' : 'Study • Work • Business • Life'}
-            </span>
-          </div>
+          <span className="text-base sm:text-lg font-extrabold tracking-tight text-[#142033] group-hover:text-[#2F6FED] transition-colors leading-none whitespace-nowrap">
+            {currentLang === 'fa' ? t.brand.siteName : t.brand.siteName.toUpperCase()}
+          </span>
         </Link>
 
         {/* Primary Desktop Navigation (Exact 6 Items) */}
