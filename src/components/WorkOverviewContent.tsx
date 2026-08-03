@@ -185,15 +185,165 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
         </div>
       );
 
+    case 'contract':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'قرارداد استخدام در رومانی' : 'Employment Contract in Romania'}
+            </h1>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa' 
+                ? 'منبع: قانون کار رومانی (Legea 53/2003)، بازرسی کار رومانی (Inspecţia Muncii، inspectiamuncii.ro) — آخرین بررسی: ۲۰۲۶'
+                : 'Source: Romanian Labor Code (Legea 53/2003), Romanian Labor Inspection (Inspecţia Muncii, inspectiamuncii.ro) — Last reviewed: 2026'}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'الزامات قانونی قرارداد' : 'Legal Contract Requirements'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'طبق قانون کار رومانی (Legea 53/2003 – Codul Muncii)، هر قرارداد استخدام باید پیش از شروع فعالیت در سامانه ملی ثبت کارکنان (Registrul General de Evidenţă a Salariaţilor / REVISAL) ثبت شود.' : 'According to the Romanian Labor Code (Legea 53/2003 – Codul Muncii), every employment contract must be registered in the National Register of Employees (Registrul General de Evidenţă a Salariaţilor / REVISAL) prior to starting work.'}</li>
+                <li>{currentLang === 'fa' ? 'کارفرما موظف است پیش از شروع کار، یک نسخه از قرارداد را به کارمند تحویل دهد.' : 'The employer is obligated to provide the employee with a copy of the contract before they commence work.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'دوره آزمایشی (Perioada de Probă)' : 'Probationary Period (Perioada de Probă)'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'در طول یک قرارداد استخدام، فقط یک دوره آزمایشی مجاز است، مگر در موارد استثنا (مثل شروع در سمت یا حرفه جدید نزد همان کارفرما، یا مشاغل با شرایط سخت/مضر/خطرناک).' : 'During an employment contract, only one probationary period is permitted, except in special cases (such as starting a new position/profession with the same employer, or jobs with difficult/harmful/dangerous conditions).'}</li>
+                <li>{currentLang === 'fa' ? 'دوره آزمایشی به‌عنوان سابقه کار محسوب می‌شود.' : 'The probationary period is counted as official employment history.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'نظارت و مرجع رسمی' : 'Supervision and Official Authority'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'بازرسی کار رومانی (Inspecţia Muncii) و ادارات منطقه‌ای آن (Inspectoratul Teritorial de Muncă) مرجع رسمی نظارت بر اجرای صحیح قراردادهای کار هستند.' : 'The Romanian Labor Inspection (Inspecţia Muncii) and its regional offices (Inspectoratul Teritorial de Muncă) are the official authorities overseeing the proper execution of labor contracts.'}</li>
+                <li>{currentLang === 'fa' ? 'هرگونه تغییر در بندهای قرارداد در طول اجرای آن نیاز به الحاقیه رسمی (act adiţional) دارد، مگر در مواردی که قانون صراحتاً استثنا کرده باشد.' : 'Any modification to contract clauses during its execution requires a formal addendum (act adiţional), unless the law explicitly provides an exception.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      );
+
+    case 'tax':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'حقوق و مالیات' : 'Salary and Taxes'}
+            </h1>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa' 
+                ? 'منبع: سازمان امور مالیاتی رومانی (ANAF)، قانون مالیاتی رومانی (Codul Fiscal) — آخرین بررسی: ۲۰۲۶'
+                : 'Source: Romanian National Agency for Fiscal Administration (ANAF), Romanian Fiscal Code (Codul Fiscal) — Last reviewed: 2026'}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'کسورات قانونی از حقوق' : 'Statutory Salary Deductions'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'از حقوق ناخالص (Salariu Brut) هر کارمند سه کسر اجباری انجام می‌شود: مالیات بر درآمد ۱۰٪، سهم بازنشستگی (CAS) ۲۵٪، و سهم بیمه سلامت (CASS) ۱۰٪.' : 'Three mandatory deductions are made from each employee\'s gross salary (Salariu Brut): 10% income tax, 25% pension contribution (CAS), and 10% health insurance contribution (CASS).'}</li>
+                <li>{currentLang === 'fa' ? 'این کسورات توسط کارفرما محاسبه و مستقیماً به سازمان امور مالیاتی (ANAF) پرداخت می‌شود؛ کارمند حقوق خالص (Net) را دریافت می‌کند.' : 'These deductions are calculated by the employer and paid directly to the National Agency for Fiscal Administration (ANAF); the employee receives the net salary (Net).'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'سهم کارفرما' : 'Employer Contributions'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'علاوه بر کسورات کارمند، کارفرما موظف است سهم بیمه کار (CAM) به میزان ۲.۲۵٪ روی حقوق ناخالص بپردازد که صرف بیمه بیکاری و حوادث کاری می‌شود.' : 'In addition to employee deductions, the employer is obligated to pay a 2.25% work insurance contribution (CAM) on the gross salary, covering unemployment and workplace accidents.'}</li>
+                <li>{currentLang === 'fa' ? 'حقوق خالص معمولاً حدود ۵۷ تا ۶۰ درصد حقوق ناخالص است.' : 'The net salary is typically around 57 to 60 percent of the gross salary.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'تکالیف اظهارنامه' : 'Declaration Obligations'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'کارفرما موظف است هرماه اظهارنامه ۱۱۲ (Declarația 112) شامل کسورات و بیمه کارکنان را به‌صورت الکترونیکی به ANAF ارسال کند.' : 'The employer must electronically submit Declaration 112 (Declarația 112), detailing employee deductions and insurance, to ANAF on a monthly basis.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      );
+
+    case 'insurance':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'بیمه' : 'Insurance'}
+            </h1>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa' 
+                ? 'منبع: سازمان ملی بیمه سلامت رومانی (CNAS)، سازمان ملی بازنشستگی عمومی (CNPP) — آخرین بررسی: ۲۰۲۶'
+                : 'Source: National Health Insurance House (CNAS), National Public Pension House (CNPP) — Last reviewed: 2026'}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'بیمه سلامت خودکار' : 'Automatic Health Insurance'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'هر فردی که در رومانی به‌صورت قانونی استخدام باشد و سهم CASS از حقوقش کسر شود، به‌طور خودکار تحت پوشش بیمه سلامت عمومی (Casa Națională de Asigurări de Sănătate / CNAS) قرار می‌گیرد.' : 'Anyone legally employed in Romania with the CASS contribution deducted from their salary is automatically covered by the public health insurance system (Casa Națională de Asigurări de Sănătate / CNAS).'}</li>
+                <li>{currentLang === 'fa' ? 'کارت ملی بیمه سلامت (Cardul Național de Asigurări de Sănătate) برای دریافت خدمات درمانی در مراکز طرف‌قرارداد استفاده می‌شود.' : 'The National Health Insurance Card (Cardul Național de Asigurări de Sănătate) is used to access medical services at contracted facilities.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'بیمه بازنشستگی' : 'Pension Insurance'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'سهم CAS کسرشده از حقوق به صندوق ملی بازنشستگی عمومی (Casa Națională de Pensii Publice / CNPP) واریز می‌شود و سابقه بیمه بازنشستگی فرد را می‌سازد.' : 'The CAS contribution deducted from the salary is deposited into the National Public Pension House (Casa Națională de Pensii Publice / CNPP), building the individual\'s pension history.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'وضعیت افراد بدون قرارداد کاری' : 'Status of Non-Employees'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'افرادی که کارمند نیستند نیز می‌توانند با ارائه اظهارنامه واحد (Declarația Unică / فرم D212) به‌صورت داوطلبانه در سیستم بیمه سلامت ثبت‌نام کنند.' : 'Non-employees can also voluntarily enroll in the health insurance system by submitting the Single Declaration (Declarația Unică / Form D212).'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      );
+
     default: {
       const getTitle = () => {
         switch (subRoute) {
-          case 'contract':
-            return currentLang === 'fa' ? 'قرارداد استخدام در رومانی' : 'Employment Contract in Romania';
-          case 'tax':
-            return currentLang === 'fa' ? 'حقوق و مالیات کارمندان' : 'Employee Salary and Taxes';
-          case 'insurance':
-            return currentLang === 'fa' ? 'بیمه اجتماعی و درمانی' : 'Social and Health Insurance';
           default:
             return currentLang === 'fa' ? 'بخش کار' : 'Work Section';
         }
