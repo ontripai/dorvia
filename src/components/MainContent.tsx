@@ -21,6 +21,7 @@ import { StartHereContent } from './StartHereContent';
 import { IgiProcessContent } from './IgiProcessContent';
 import { PreparatoryYearContent } from './PreparatoryYearContent';
 import { CompanyOverviewContent } from './CompanyOverviewContent';
+import { ImmigrationOverviewContent } from './ImmigrationOverviewContent';
 import { Button } from './Button';
 import { 
   GraduationCap, 
@@ -108,6 +109,21 @@ export const MainContent: React.FC<MainContentProps> = ({
     return (
       <div className="space-y-12">
         <CompanyOverviewContent
+          subRoute={sub}
+          currentLang={currentLang}
+          onNavigate={onNavigate}
+          onOpenEvaluationModal={onOpenEvaluationModal}
+        />
+        <LeadForm currentLang={currentLang} />
+      </div>
+    );
+  }
+
+  if (activeRoute.startsWith('immigration') && activeRoute !== 'immigration/igi-process') {
+    const sub = activeRoute.split('/')[1] || 'overview';
+    return (
+      <div className="space-y-12">
+        <ImmigrationOverviewContent
           subRoute={sub}
           currentLang={currentLang}
           onNavigate={onNavigate}
