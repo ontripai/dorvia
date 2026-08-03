@@ -33,7 +33,7 @@ export const ScholarshipOverviewContent: React.FC<ScholarshipOverviewContentProp
           </h3>
           <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
             <li>{currentLang === 'fa' ? 'دولت رومانی هرساله از طریق وزارت امور خارجه، بورسیه‌های کامل (Fully-Funded) برای شهروندان کشورهای غیر عضو اتحادیه اروپا در مقاطع کارشناسی، کارشناسی ارشد و دکتری ارائه می‌دهد.' : 'Every year, through the Ministry of Foreign Affairs, the Romanian government offers fully-funded scholarships for citizens of non-EU countries in bachelor\'s, master\'s, and doctoral programs.'}</li>
-            <li>{currentLang === 'fa' ? 'این بورسیه شامل معافیت کامل از شهریه و هزینه ثبت‌نام، کمک‌هزینه ماهانه، و اقامتگاه دانشجویی (در صورت وجود ظرفیت) است.' : 'This scholarship includes a full waiver of tuition and registration fees, a monthly stipend, and student accommodation (subject to availability).'}</li>
+            <li>{currentLang === 'fa' ? 'مزایا، رشته‌های مشمول، زبان تحصیل، کمک‌هزینه و مهلت درخواست در هر برنامه بورسیه متفاوت است و باید بر اساس فراخوان رسمی همان سال بررسی شود.' : 'Benefits, eligible fields, language of study, stipends, and application deadlines vary by scholarship program and must be verified based on the official call for that year.'}</li>
           </ul>
         </div>
 

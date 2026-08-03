@@ -377,7 +377,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
             {currentLang === 'fa' 
-              ? 'پیدا کردن محل سکونت مناسب یکی از مهم‌ترین دغدغه‌های مهاجران تازه‌وارد در رومانی است. بازار مسکن گزینه‌های متنوعی از آپارتمان‌های مدرن تا خانه‌های حومه‌شهری را پیش روی شما می‌گذارد. در زمان اجاره، پرداخت یک ماه پیش‌پرداخت و یک ماه ودیعه (Garantie) امری رایج است و حتماً باید بر امضای یک قرارداد رسمی و ثبت‌شده پافشاری کنید تا از آن برای تشکیل پرونده اقامت خود در اداره مهاجرت بهره ببرید. برای کسانی که قصد خرید دارند، اتباع غیراروپایی مجاز به مالکیت ساختمان هستند، اما مالکیت مستقیم زمین مشروط به ثبت شرکت تجاری است.'
+              ? 'پیدا کردن محل سکونت مناسب یکی از مهم‌ترین دغدغه‌های مهاجران تازه‌وارد در رومانی است. بازار مسکن گزینه‌های متنوعی از آپارتمان‌های مدرن تا خانه‌های حومه‌شهری را پیش روی شما می‌گذارد. در زمان اجاره، پرداخت یک ماه پیش‌پرداخت و یک ماه ودیعه (Garantie) امری رایج است و حتماً باید بر امضای یک قرارداد رسمی و ثبت‌شده پافشاری کنید تا از آن برای تشکیل پرونده اقامت خود در اداره مهاجرت بهره ببرید. شرایط خرید ملک و زمین برای اتباع کشورهای خارج از اتحادیه اروپا به تابعیت، نوع ملک، ساختار معامله و مقررات جاری بستگی دارد. پیش از پرداخت بیعانه یا امضای قرارداد، بررسی مستقل حقوقی و ثبتی ضروری است.'
               : 'Finding a suitable place to live is one of the most critical steps for newcomers to Romania. The housing market offers a variety of options, from modern apartments in vibrant city centers to quieter suburban houses. When renting, it is standard practice to pay one month\'s rent upfront alongside a security deposit, and it is crucial to insist on a formal, written contract registered with the tax authorities (ANAF). For those looking to buy, non-EU citizens can freely purchase the physical building (apartments/houses), though direct ownership of land requires a registered Romanian company or a specific bilateral treaty.'}
           </div>
 
@@ -410,7 +410,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
           ) : (
             <div className="editorial-card p-6 bg-white space-y-3 border border-[#dfe6ef]">
               <h4 className="font-extrabold text-base text-[#142033]">ضوابط خرید ملک برای اتباع غیر EU</h4>
-              <p className="text-sm text-[#526174] leading-relaxed">اتباع غیر اروپایی امکان خرید اعیانی (آپارتمان) را دارند، اما خرید عرصه (زمین) تابع شرایط خاص یا ثبت شرکت است. استعلام ثبت اسناد (ANCPI eTerra) الزامی است.</p>
+              <p className="text-sm text-[#526174] leading-relaxed">شرایط خرید ملک و زمین برای اتباع کشورهای خارج از اتحادیه اروپا به تابعیت، نوع ملک، ساختار معامله و مقررات جاری بستگی دارد. پیش از پرداخت بیعانه یا امضای قرارداد، بررسی مستقل حقوقی و ثبتی ضروری است.</p>
             </div>
           )}
 
@@ -421,7 +421,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             <div className="space-y-6">
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'کمیسیون آژانس املاک را چه کسی پرداخت می‌کند؟' : 'Who pays the real estate agency fee?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'در رومانی عرف بر این است که مستأجر و صاحب‌خانه هر کدام معادل ۵۰٪ مبلغ یک ماه اجاره را به‌عنوان کمیسیون به آژانس پرداخت می‌کنند.' : 'Typically, the tenant and the landlord each pay a commission to the agency, usually equivalent to 50% of one month\'s rent.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'مبلغ و مسئول پرداخت کمیسیون به قرارداد آژانس و شرایط معامله بستگی دارد و یک نرخ ثابت قانونی برای همه معاملات نیست.' : 'Typically, the tenant and the landlord each pay a commission to the agency, usually equivalent to 50% of one month\'s rent.'}</p>
               </div>
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم با قرارداد اجاره برای اقامت درخواست دهم؟' : 'Can I use my rental contract for my residence permit application?'}</h4>

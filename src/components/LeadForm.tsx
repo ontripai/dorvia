@@ -394,7 +394,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
             <ol className="space-y-3 text-[#526174] leading-relaxed pt-1">
               <li className="flex items-start space-x-2 rtl:space-x-reverse">
                 <span className="font-bold text-[#2F6FED]">۱.</span>
-                <span>{currentLang === 'fa' ? 'بررسی سوابق تحصیلی و شغلی شما توسط کارشناسان حقوقی در رومانی.' : 'Evaluation of your documents against Romanian criteria.'}</span>
+                <span>{currentLang === 'fa' ? 'بررسی اولیه اطلاعات توسط تیم DORVIA EUROP.' : 'Initial review of information by the DORVIA EUROP team.'}</span>
               </li>
               <li className="flex items-start space-x-2 rtl:space-x-reverse">
                 <span className="font-bold text-[#2F6FED]">۲.</span>
@@ -409,7 +409,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
 
           <div className="pt-4 border-t border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse text-[11px] text-[#788697]">
             <LockKeyhole size={14} className="shrink-0 text-[#2F6FED]" />
-            <span>{currentLang === 'fa' ? 'اطلاعات شما طبق قوانین GDPR اروپا کاملاً محرمانه می‌ماند.' : 'Strictly confidential under EU GDPR rules.'}</span>
+            <span>{currentLang === 'fa' ? 'اطلاعات شما با رعایت سیاست حفظ حریم خصوصی سایت و منحصراً برای بررسی درخواست و ارتباطات مربوط به خدمات پردازش می‌شود.' : "Your information is processed in accordance with the site's privacy policy and solely for reviewing requests and service-related communication."}</span>
           </div>
         </div>
 

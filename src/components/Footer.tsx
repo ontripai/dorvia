@@ -92,8 +92,8 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
             </h4>
             <ul className="space-y-2 text-slate-300">
               <li>📍 {t.footer.address}</li>
-              <li>✉️ <span dir="ltr" className="inline-block">{t.footer.email}</span></li>
-              <li>📞 <span dir="ltr" className="inline-block">{t.footer.phone}</span></li>
+              <li>✉️ <a href="mailto:ontrip.ai@gmail.com" dir="ltr" className="inline-block hover:text-[#2F6FED] transition-colors">{t.footer.email}</a></li>
+              <li>📞 <a href="tel:+40727348009" dir="ltr" className="inline-block hover:text-[#2F6FED] transition-colors">{t.footer.phone}</a> | <a href="https://wa.me/40727348009" target="_blank" rel="noopener noreferrer" className="hover:text-[#25D366] transition-colors">WhatsApp</a></li>
             </ul>
           </div>
 

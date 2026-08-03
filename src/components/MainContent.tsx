@@ -199,7 +199,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   {/* Eyebrow Badge */}
                   <div className="inline-flex items-center space-x-2 rtl:space-x-reverse bg-white/10 border border-white/15 px-4 py-1.5 rounded-full text-xs font-semibold text-[#F4F7FC]">
                     <ShieldCheck size={14} className="text-[#F4F7FC]" />
-                    <span>{currentLang === 'fa' ? 'پلتفرم مستقل مشاوره برای متقاضیان سراسر جهان' : 'Independent Advisory Platform for Global Applicants'}</span>
+                    <span>{currentLang === 'fa' ? 'پلتفرم فارسی و انگلیسی DORVIA EUROP برای ورود، استقرار و زندگی در رومانی' : 'DORVIA EUROP English & Persian Platform for Entry, Settlement, and Life in Romania'}</span>
                   </div>
 
                   <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.2]">
@@ -274,8 +274,8 @@ export const MainContent: React.FC<MainContentProps> = ({
                           <span className="font-semibold text-white">🏢 Corporate Registration (SRL)</span>
                           <span className="font-extrabold text-[#F4F7FC] leading-snug max-w-[200px] text-right">
                             {currentLang === 'fa' 
-                              ? 'مالیات ۱٪ برای شرکتهای کوچک (گردش مالی زیر ۱۰۰,۰۰۰ یورو با حداقل یک کارمند)؛ در غیر این صورت ۱۶٪' 
-                              : '1% tax for micro-companies (<€100k revenue, min 1 employee); otherwise 16%'}
+                              ? 'شرایط مالیاتی شرکت به نوع فعالیت، درآمد، ساختار مالکیت، کارکنان و مقررات جاری بستگی دارد و باید با حسابدار بررسی شود.' 
+                              : 'Corporate tax conditions depend on the type of activity, revenue, ownership structure, employees, and current regulations, and must be verified with an accountant.'}
                           </span>
                         </div>
                       </div>
@@ -615,7 +615,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                 <div className="editorial-card p-6 bg-white space-y-3">
                   <LockKeyhole size={24} className="text-[#2F6FED]" />
                   <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'حفظ حریم خصوصی' : 'GDPR Compliance'}</h3>
-                  <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'اطلاعات متقاضیان فقط برای ارائه خدمات و ارتباط مرتبط پردازش می‌شود.' : 'Data stored securely under European Union GDPR regulations.'}</p>
+                  <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'اطلاعات شما با رعایت سیاست حفظ حریم خصوصی سایت و منحصراً برای بررسی درخواست و ارتباطات مربوط به خدمات پردازش می‌شود.' : "Your information is processed in accordance with the site's privacy policy and solely for reviewing requests and service-related communication."}</p>
                 </div>
               </div>
 
@@ -946,7 +946,7 @@ export const MainContent: React.FC<MainContentProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="space-y-6">
               <div className="editorial-card p-6 space-y-2 bg-white">
-                <div className="font-bold text-[#142033]">📍 {currentLang === 'fa' ? 'دفتر رومانی:' : 'Bucharest Office:'}</div>
+                <div className="font-bold text-[#142033]">📍 {currentLang === 'fa' ? 'موقعیت مکانی:' : 'Location:'}</div>
                 <p className="text-xs text-[#526174]">Bucharest, Romania</p>
               </div>
               <div className="bg-[#2F6FED] text-white p-6 rounded-2xl space-y-2 shadow-md">

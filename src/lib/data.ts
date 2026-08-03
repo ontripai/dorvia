@@ -11,7 +11,7 @@ export const featuredUniversities: University[] = [
       fa: ['حقوق و علوم سیاسی', 'علوم کامپیوتر و ریاضیات', 'زبان‌های خارجی و روانشناسی', 'مدیریت و اقتصاد'],
       en: ['Law & Political Science', 'Computer Science & Mathematics', 'Foreign Languages & Psychology', 'Business & Economics']
     },
-    ranking: '#1 in Romania (Top 800 QS)',
+
     description: {
       fa: 'قدیمی‌ترین و برجسته‌ترین دانشگاه جامع رومانی، تاسیس ۱۸۶۴. برای دریافت مبلغ دقیق شهریه بر اساس دانشکده، به international.unibuc.ro مراجعه کنید.',
       en: 'Romania’s premier comprehensive public university. For exact tuition fees per faculty, please visit international.unibuc.ro.'
@@ -29,7 +29,7 @@ export const featuredUniversities: University[] = [
       fa: ['پزشکی عمومی (انگلیسی)', 'دندانپزشکی', 'داروسازی'],
       en: ['General Medicine (English)', 'Dentistry', 'Pharmacy']
     },
-    ranking: 'Top Medical University in South-Eastern Europe',
+
     description: {
       fa: 'پزشکی و دندانپزشکی: ۱۰,۰۰۰ یورو/سال، داروسازی: ۸,۵۰۰ یورو/سال. (رقم مربوط به سال ۲۵-۲۰۲۴ است؛ برای سال ۲۷-۲۰۲۶ باید مستقیم از دانشگاه استعلام شود زیرا فهرست یورویی جدید منتشر نشده).',
       en: 'Medicine/Dentistry: €10,000/yr, Pharmacy: €8,500/yr. (Based on 2024-25 data; exact 2026-27 EUR fees pending release, check directly with university).'
@@ -47,7 +47,7 @@ export const featuredUniversities: University[] = [
       fa: ['مهندسی نرم‌افزار و IT', 'بیوتکنولوژی', 'مدیریت بین‌الملل', 'هنر و رسانه'],
       en: ['Software Engineering & IT', 'Biotechnology', 'International Business', 'Arts & Media']
     },
-    ranking: 'Leading European Research University',
+
     description: {
       fa: 'شهریه به یورو در ماه اعلام می‌شود (۹ ماه در سال): کامپیوتر (۹۰۰€/ماه)، ریاضی (۷۰۰€)، مدیریت (۵۰۰€)، زیست‌شناسی (۳۵۰€)، اقتصاد (۲۵۰€).',
       en: 'Tuition paid monthly in EUR (9 months/year): CS (€900/mo), Math (€700/mo), Business (€500/mo), Biology (€350/mo), Economics (€250/mo).'
@@ -65,7 +65,7 @@ export const featuredUniversities: University[] = [
       fa: ['مهندسی کامپیوتر و هوش مصنوعی', 'هوا فضا', 'مهندسی برق و انرژی', 'مکانیک و رباتیک'],
       en: ['Computer Engineering & AI', 'Aerospace Engineering', 'Electrical & Energy', 'Robotics & Mechanics']
     },
-    ranking: 'Top Engineering Tech University',
+
     description: {
       fa: 'فنی، علوم و ریاضی: ۲,۶۰۰€ (کارشناسی) تا ۲,۷۰۰€ (ارشد). علوم انسانی و اقتصاد: ۲,۲۰۰€. هنر و معماری: تا ۷,۵۰۰€ در سال.',
       en: 'Tech/Math/Science: €2,600 (BSc) - €2,700 (MSc). Humanities/Economics: €2,200. Arts/Music: up to €7,500 per year.'

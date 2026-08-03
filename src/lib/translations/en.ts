@@ -78,7 +78,7 @@ export const enTranslations = {
       },
       {
         title: "Low Taxes & Business Hub",
-        desc: "One of the most attractive tax frameworks in Europe (1% tax for micro-companies under €100k revenue with at least 1 employee; otherwise 16%)."
+        desc: "Corporate tax conditions depend on the type of activity, revenue, ownership structure, employees, and current regulations, and must be verified with an accountant."
       },
       {
         title: "Growing Skilled Job Market",

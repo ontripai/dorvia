@@ -28,7 +28,7 @@ export const TrustSection: React.FC<TrustSectionProps> = ({ currentLang }) => {
     {
       icon: '🇪🇺',
       title: currentLang === 'fa' ? 'تخصص در اتحادیه اروپا و شنگن' : 'EU & Schengen Area Expertise',
-      desc: currentLang === 'fa' ? 'بهره‌مندی از دانش عمیق حقوقی و اقتصادی حوزه شنگن جهت تسهیل مسیر آینده شما و خانواده‌تان.' : 'In-depth knowledge of Schengen integration law to ensure your long-term mobility and family safety.'
+      desc: currentLang === 'fa' ? 'رومانی عضو منطقه شنگن است. شرایط سفر اتباع غیراروپایی به سایر کشورهای شنگن به نوع و اعتبار ویزا یا کارت اقامت و مقررات جاری بستگی دارد.' : 'Romania is a member of the Schengen Area. Travel conditions for non-EU citizens to other Schengen countries depend on the type and validity of the visa or residence permit and current regulations.'
     }
   ];
 

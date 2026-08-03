@@ -113,15 +113,15 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
             {currentLang === 'fa' 
-              ? 'رومانی یکی از جذاب‌ترین سیستم‌های مالیاتی را در اتحادیه اروپا برای کسب‌وکارهای کوچک و استارت‌آپ‌ها ارائه می‌دهد. مهم‌ترین مزیت، رژیم مالیاتی میکرو-شرکت (Micro-Enterprise) است؛ در این سیستم، شرکت‌هایی که گردش مالی سالانه آن‌ها کمتر از ۱۰۰,۰۰۰ یورو است و حداقل یک کارمند تمام‌وقت دارند، تنها ۱٪ مالیات بر درآمد (نه سود) پرداخت می‌کنند. چنانچه گردش مالی از این سقف عبور کند، شرکت وارد رژیم استاندارد مالیات بر سود شرکتی با نرخ ۱۶٪ می‌شود. درک این ساختارها برای برنامه‌ریزی مالی دقیق ضروری است.'
-              : 'Romania offers one of the most attractive corporate tax regimes in the European Union, particularly for small businesses and startups. A notable advantage is the micro-enterprise tax regime, where eligible companies pay only a 1% tax on their total revenue (rather than profit), provided their annual turnover remains under €100,000 and they employ at least one full-time worker. Should a company exceed this revenue threshold, it transitions to the standard corporate profit tax rate of 16%. Understanding these structures is vital for accurate financial forecasting.'}
+              ? 'شرایط مالیاتی شرکت به نوع فعالیت، درآمد، ساختار مالکیت، کارکنان و مقررات جاری بستگی دارد و باید با حسابدار بررسی شود. چنانچه گردش مالی از این سقف عبور کند، شرکت وارد رژیم استاندارد مالیات بر سود شرکتی با نرخ ۱۶٪ می‌شود. درک این ساختارها برای برنامه‌ریزی مالی دقیق ضروری است.'
+              : 'Corporate tax conditions depend on the type of activity, revenue, ownership structure, employees, and current regulations, and must be verified with an accountant. Should a company exceed this revenue threshold, it transitions to the standard corporate profit tax rate of 16%. Understanding these structures is vital for accurate financial forecasting.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
-                <span>{currentLang === 'fa' ? 'مالیات ۱٪ بر درآمد (میکرو-شرکت)' : '1% Income Tax (Micro-Enterprise)'}</span>
+                <span>{currentLang === 'fa' ? 'مشاوره مالیاتی و حسابداری' : 'Tax & Accounting Consultation'}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'فقط برای شرکت‌هایی با گردش مالی سالانه زیر ۱۰۰,۰۰۰ یورو و حداقل یک کارمند تمام‌وقت.' : 'Only for companies with an annual turnover under €100,000 and at least one full-time employee.'}</li>

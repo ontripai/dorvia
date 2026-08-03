@@ -45,7 +45,7 @@ export const AudienceSelector: React.FC<AudienceSelectorProps> = ({
       route: 'company',
       summary: currentLang === 'fa'
         ? 'ثبت شرکت SRL با نرخ مالیات رقابتی (۱ تا ۱۶ درصد) و دریافت اقامت تجاری در اتحادیه اروپا.'
-        : 'Company formation (SRL) with 1% to 16% corporate tax options and executive residency rights.'
+        : 'Company formation (SRL) options and potential residency routes, subject to current business and tax regulations.'
     },
     {
       id: 'family',
@@ -62,7 +62,7 @@ export const AudienceSelector: React.FC<AudienceSelectorProps> = ({
       title: currentLang === 'fa' ? 'زندگی و استقرار' : 'Living & Relocation',
       route: 'living',
       summary: currentLang === 'fa'
-        ? 'هزینه‌های زندگی مقرون‌به‌صرفه، امنیت اجتماعی بالا و دسترسی آزاد به کل حوزه شنگن.'
+        ? 'هزینه‌های زندگی مقرون‌به‌صرفه و امنیت اجتماعی بالا.'
         : 'Affordable lifestyle, safety standards, and full Schengen zone mobility.'
     },
   ];

@@ -25,7 +25,7 @@ export interface University {
   type: { fa: string; en: string }; // Public / Private
   tuitionRange: { fa: string; en: string };
   popularFields: { fa: string[]; en: string[] };
-  ranking: string;
+  ranking?: string;
   description: { fa: string; en: string };
   source?: { name: string; url: string };
   lastReviewed?: string;
