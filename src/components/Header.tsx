@@ -35,7 +35,6 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'start-here', label: currentLang === 'fa' ? 'شروع از اینجا' : 'Start Here', megaMenu: 'starthere' as const },
     { id: 'immigration', label: currentLang === 'fa' ? 'مهاجرت' : 'Immigration', megaMenu: 'immigration' as const },
     { id: 'study', label: currentLang === 'fa' ? 'تحصیل' : 'Study', megaMenu: 'study' as const },
-    { id: 'scholarships', label: currentLang === 'fa' ? 'بورسیه' : 'Scholarships' },
     { id: 'work', label: currentLang === 'fa' ? 'کار' : 'Work', megaMenu: 'work' as const },
     { id: 'company', label: currentLang === 'fa' ? 'کسب‌وکار' : 'Business', megaMenu: 'business' as const },
     { id: 'needs', label: currentLang === 'fa' ? 'نیازها در رومانی' : 'Essentials in Romania', megaMenu: 'needs' as const },

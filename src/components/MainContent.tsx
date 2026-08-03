@@ -135,7 +135,7 @@ export const MainContent: React.FC<MainContentProps> = ({
     );
   }
 
-  if (activeRoute === 'scholarships') {
+  if (activeRoute === 'study/scholarships') {
     return (
       <div className="space-y-12">
         <ScholarshipOverviewContent currentLang={currentLang} />
