@@ -50,7 +50,13 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
             <span className="text-slate-500 font-medium">{currentLang === 'fa' ? 'حدود شهریه:' : 'Tuition:'}</span>
             <span className="font-bold text-[#071B3D]">{university.tuitionRange[currentLang]}</span>
           </div>
-          {university.source && (
+          {university.source && university.id === 'unibuc' ? (
+            <div className="text-[9px] text-slate-400 mt-1">
+              {currentLang === 'fa' 
+                ? 'منبع دقیق موجود نیست — برای مبلغ قطعی به international.unibuc.ro مراجعه کنید'
+                : 'Exact source unavailable — for confirmed fees visit international.unibuc.ro'}
+            </div>
+          ) : university.source && (
             <div className="text-[9px] text-slate-400 mt-1">
               {currentLang === 'fa' 
                 ? `منبع: ${university.source.name} — آخرین بررسی: ${university.lastReviewed || ''}`
