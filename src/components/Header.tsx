@@ -68,7 +68,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           <div className="flex flex-col">
             <span className="text-lg sm:text-xl font-bold tracking-tight text-[#142033] group-hover:text-[#2F6FED] transition-colors leading-tight">
-              {currentLang === 'fa' ? 'در رومانی' : 'IN ROMANIA'}
+              {currentLang === 'fa' ? t.brand.siteName : t.brand.siteName.toUpperCase()}
             </span>
             <span className="text-[10px] text-[#788697] tracking-widest uppercase font-semibold">
               {currentLang === 'fa' ? 'راهنمای تحصیل، کار و زندگی' : 'Study • Work • Business • Life'}

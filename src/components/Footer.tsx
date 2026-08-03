@@ -29,7 +29,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
           <div className="space-y-4 lg:col-span-1">
             <div className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer" onClick={() => onNavigate('home')}>
                 <img src="/images/logo/dorvia-logo-reversed-transparent-3000.png" alt="DORVIA" className="h-[28px] sm:h-[32px] w-auto" />
-              <span className="text-lg font-extrabold text-white">در رومانی</span>
+              <span className="text-lg font-extrabold text-white">{t.brand.siteName}</span>
             </div>
 
             <p className="text-[#788697] leading-relaxed">

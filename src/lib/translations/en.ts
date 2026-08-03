@@ -1,6 +1,7 @@
 export const enTranslations = {
   brand: {
     name: "DORVIA EUROP",
+    siteName: "In Romania",
     subtitle: "In Romania | Official Guidance",
     tagline: "Professional Advisory Platform for Immigration, Study, Work & Corporate Services in Romania",
     description: "Comprehensive guidance and initial case assessment for international applicants seeking legal education, employment, and business formation in Romania and the European Union."
