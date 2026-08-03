@@ -1,15 +1,15 @@
 'use client';
 
-import { useAppContext } from '../components/AppLayout';
-import { MainContent } from '../components/MainContent';
+import { useAppContext } from '../../components/AppLayout';
+import { NeedsContent } from '../../components/NeedsContent';
 
-export default function Home() {
+export default function NeedsPage() {
   const { currentLang, onNavigate, onOpenEvaluationModal } = useAppContext();
 
   return (
-    <MainContent
+    <NeedsContent
+      subRoute="first-days-checklist"
       currentLang={currentLang}
-      activeRoute="home"
       onNavigate={onNavigate}
       onOpenEvaluationModal={onOpenEvaluationModal}
     />

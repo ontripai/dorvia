@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { AppLayout } from '../components/AppLayout';
 
 export const metadata: Metadata = {
-  title: 'در رومانی | DORVIA EUROP - مرجع مهاجرت، تحصیل، کار و ثبت شرکت در رومانی',
-  description: 'پلتفرم جامع راهنمایی و ارزیابی اولیه مهاجرت قانونی به کشور رومانی و اتحادیه اروپا برای ایرانیان سراسر جهان (تحصیل، کار، ثبت شرکت، سرمایه‌گذاری).',
-  keywords: ['مهاجرت به رومانی', 'تحصیل در رومانی', 'ویزای کار رومانی', 'ثبت شرکت در رومانی', 'پزشکی رومانی', 'DORVIA EUROP', 'Immigration to Romania'],
+  title: 'دوریا اروپا | DORVIA EUROP - مرجع مهاجرت، اقامت، کار و ویزای تحصیلی در رومانی',
+  description: 'اپلیکیشن جامع برای ارزیابی و مشاوره رایگان مهاجرت به رومانی و اتحادیه اروپا. دریافت اطلاعات به‌روز درباره شرایط کار، تحصیل، ثبت شرکت (سرمایه‌گذاری) و پیوست خانواده.',
+  keywords: ['مهاجرت به رومانی', 'اقامت در رومانی', 'کاریابی رومانی', 'ویزای تحصیلی در رومانی', 'ثبت شرکت رومانی', 'DORVIA EUROP', 'Immigration to Romania'],
 };
 
 export default function RootLayout({
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body className="min-h-screen bg-slate-50 antialiased selection:bg-[#2F6FED] selection:text-white">
-        {children}
+        <AppLayout>
+          {children}
+        </AppLayout>
       </body>
     </html>
   );

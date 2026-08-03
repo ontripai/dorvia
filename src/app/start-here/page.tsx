@@ -1,15 +1,15 @@
 'use client';
 
-import { useAppContext } from '../components/AppLayout';
-import { MainContent } from '../components/MainContent';
+import { useAppContext } from '../../components/AppLayout';
+import { StartHereContent } from '../../components/StartHereContent';
 
-export default function Home() {
+export default function StartHerePage() {
   const { currentLang, onNavigate, onOpenEvaluationModal } = useAppContext();
 
   return (
-    <MainContent
+    <StartHereContent
+      subRoute="planning-to-come"
       currentLang={currentLang}
-      activeRoute="home"
       onNavigate={onNavigate}
       onOpenEvaluationModal={onOpenEvaluationModal}
     />
