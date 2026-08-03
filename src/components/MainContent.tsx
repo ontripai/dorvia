@@ -16,6 +16,7 @@ import { FAQAccordion } from './FAQAccordion';
 import { OfficialResourceCard } from './OfficialResourceCard';
 import { NeedsContent } from './NeedsContent';
 import { RomaniaOverviewContent } from './RomaniaOverviewContent';
+import { WorkOverviewContent } from './WorkOverviewContent';
 import { Button } from './Button';
 import { 
   GraduationCap, 
@@ -58,6 +59,18 @@ export const MainContent: React.FC<MainContentProps> = ({
     const sub = activeRoute.split('/')[1] || 'first-days-checklist';
     return (
       <NeedsContent
+        subRoute={sub}
+        currentLang={currentLang}
+        onNavigate={onNavigate}
+        onOpenEvaluationModal={onOpenEvaluationModal}
+      />
+    );
+  }
+
+  if (activeRoute.startsWith('work')) {
+    const sub = activeRoute.split('/')[1] || 'find-job';
+    return (
+      <WorkOverviewContent
         subRoute={sub}
         currentLang={currentLang}
         onNavigate={onNavigate}

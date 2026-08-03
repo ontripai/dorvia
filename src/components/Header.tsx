@@ -26,7 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenEvaluationModal
 }) => {
   const t = getTranslations(currentLang);
-  const [activeMegaMenu, setActiveMegaMenu] = useState<'starthere' | 'immigration' | 'study' | 'business' | 'needs' | 'romania' | null>(null);
+  const [activeMegaMenu, setActiveMegaMenu] = useState<'starthere' | 'immigration' | 'study' | 'work' | 'business' | 'needs' | 'romania' | null>(null);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [searchDialogOpen, setSearchDialogOpen] = useState(false);
 
@@ -35,7 +35,7 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'start-here', label: currentLang === 'fa' ? 'شروع از اینجا' : 'Start Here', megaMenu: 'starthere' as const },
     { id: 'immigration', label: currentLang === 'fa' ? 'مهاجرت' : 'Immigration', megaMenu: 'immigration' as const },
     { id: 'study', label: currentLang === 'fa' ? 'تحصیل' : 'Study', megaMenu: 'study' as const },
-    { id: 'work', label: currentLang === 'fa' ? 'کار' : 'Work' },
+    { id: 'work', label: currentLang === 'fa' ? 'کار' : 'Work', megaMenu: 'work' as const },
     { id: 'company', label: currentLang === 'fa' ? 'کسب‌وکار' : 'Business', megaMenu: 'business' as const },
     { id: 'needs', label: currentLang === 'fa' ? 'نیازها در رومانی' : 'Essentials in Romania', megaMenu: 'needs' as const },
     { id: 'romania', label: currentLang === 'fa' ? 'رومانی' : 'Romania', megaMenu: 'romania' as const },

@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, GraduationCap, BriefcaseBusiness, Building2, Cha
 import { Button } from './Button';
 
 interface DesktopMegaMenuProps {
-  type: 'starthere' | 'immigration' | 'study' | 'business' | 'needs' | 'romania';
+  type: 'starthere' | 'immigration' | 'study' | 'work' | 'business' | 'needs' | 'romania';
   currentLang: Language;
   onNavigate: (route: string) => void;
   onClose: () => void;
@@ -230,7 +230,42 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
     );
   }
 
-  // 3. BUSINESS MEGA MENU
+  // 3. WORK MEGA MENU
+  if (type === 'work') {
+    return (
+      <div ref={menuRef} className="absolute top-full left-0 right-0 z-50 bg-white border-b border-[#dfe6ef] shadow-2xl py-8 animate-fadeIn">
+        <div className="max-w-[1280px] mx-auto px-8">
+          <div className="grid grid-cols-12 gap-8 text-xs">
+            
+            <div className="col-span-6 space-y-3">
+              <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider border-b border-[#dfe6ef] pb-2">
+                {currentLang === 'fa' ? 'اشتغال در رومانی' : 'Employment in Romania'}
+              </h4>
+              <ul className="space-y-2 text-[#526174] font-medium">
+                <li><button onClick={() => handleLinkClick('work/find-job')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'پیدا کردن کار' : 'Find a Job'}</button></li>
+                <li><button onClick={() => handleLinkClick('work/permit')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'مجوز کار (Aviz de Muncă)' : 'Work Permit'}</button></li>
+                <li><button onClick={() => handleLinkClick('work/visa')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'ویزای کاری' : 'Work Visa'}</button></li>
+              </ul>
+            </div>
+
+            <div className="col-span-6 space-y-3">
+              <h4 className="font-extrabold text-[#142033] text-sm uppercase tracking-wider border-b border-[#dfe6ef] pb-2">
+                {currentLang === 'fa' ? 'قرارداد و شرایط' : 'Contracts & Conditions'}
+              </h4>
+              <ul className="space-y-2 text-[#526174] font-medium">
+                <li><button onClick={() => handleLinkClick('work/contract')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'قرارداد استخدام' : 'Employment Contract'}</button></li>
+                <li><button onClick={() => handleLinkClick('work/tax')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'حقوق و مالیات' : 'Salary & Tax'}</button></li>
+                <li><button onClick={() => handleLinkClick('work/insurance')} className="hover:text-[#2F6FED] py-1 cursor-pointer">{currentLang === 'fa' ? 'بیمه (اجتماعی/درمانی)' : 'Insurance'}</button></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 4. BUSINESS MEGA MENU
   if (type === 'business') {
     return (
       <div ref={menuRef} className="absolute top-full left-0 right-0 z-50 bg-white border-b border-[#dfe6ef] shadow-2xl py-8 animate-fadeIn">
