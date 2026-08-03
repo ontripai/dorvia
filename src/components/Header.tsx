@@ -47,8 +47,9 @@ export const Header: React.FC<HeaderProps> = ({
       setActiveMegaMenu(activeMegaMenu === item.megaMenu ? null : item.megaMenu);
     } else {
       setActiveMegaMenu(null);
-      onNavigate(item.id);
     }
+    // Always navigate to the hub page, even if it has a mega menu
+    onNavigate(item.id);
   };
 
   return (
