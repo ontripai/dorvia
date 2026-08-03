@@ -45,9 +45,18 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
           </div>
         </div>
 
-        <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-          <span className="text-slate-500 font-medium">{currentLang === 'fa' ? 'حدود شهریه:' : 'Tuition:'}</span>
-          <span className="font-bold text-[#071B3D]">{university.tuitionRange[currentLang]}</span>
+        <div className="pt-3 border-t border-slate-100 space-y-1">
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-slate-500 font-medium">{currentLang === 'fa' ? 'حدود شهریه:' : 'Tuition:'}</span>
+            <span className="font-bold text-[#071B3D]">{university.tuitionRange[currentLang]}</span>
+          </div>
+          {university.source && (
+            <div className="text-[9px] text-slate-400 mt-1">
+              {currentLang === 'fa' 
+                ? `منبع: ${university.source.name} — آخرین بررسی: ${university.lastReviewed || ''}`
+                : `Source: ${university.source.name} — Last reviewed: ${university.lastReviewed || ''}`}
+            </div>
+          )}
         </div>
       </div>
 

@@ -27,6 +27,8 @@ export interface University {
   popularFields: { fa: string[]; en: string[] };
   ranking: string;
   description: { fa: string; en: string };
+  source?: { name: string; url: string };
+  lastReviewed?: string;
 }
 
 export interface City {

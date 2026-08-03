@@ -55,9 +55,9 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 {currentLang === 'fa' ? 'وضعیت شما' : 'Your Status'}
               </h4>
               <ul className="space-y-2 text-[#526174] font-medium">
-                <li><button onClick={() => handleLinkClick('start-here')} className="hover:text-[#2F6FED] py-1 cursor-pointer">🎯 {currentLang === 'fa' ? 'قصد آمدن به رومانی دارم' : 'Planning to come'}</button></li>
-                <li><button onClick={() => handleLinkClick('start-here')} className="hover:text-[#2F6FED] py-1 cursor-pointer">🛬 {currentLang === 'fa' ? 'به‌تازگی وارد شده‌ام' : 'Just arrived'}</button></li>
-                <li><button onClick={() => handleLinkClick('start-here')} className="hover:text-[#2F6FED] py-1 cursor-pointer">🏠 {currentLang === 'fa' ? 'در رومانی زندگی می‌کنم' : 'Living in Romania'}</button></li>
+                <li><button onClick={() => handleLinkClick('start-here/planning-to-come')} className="hover:text-[#2F6FED] py-1 cursor-pointer">🎯 {currentLang === 'fa' ? 'قصد آمدن به رومانی دارم' : 'Planning to come'}</button></li>
+                <li><button onClick={() => handleLinkClick('start-here/just-arrived')} className="hover:text-[#2F6FED] py-1 cursor-pointer">🛬 {currentLang === 'fa' ? 'به‌تازگی وارد شده‌ام' : 'Just arrived'}</button></li>
+                <li><button onClick={() => handleLinkClick('start-here/living-here')} className="hover:text-[#2F6FED] py-1 cursor-pointer">🏠 {currentLang === 'fa' ? 'در رومانی زندگی می‌کنم' : 'Living in Romania'}</button></li>
               </ul>
             </div>
 
@@ -66,9 +66,9 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 {currentLang === 'fa' ? 'چک‌لیست‌ها' : 'Checklists'}
               </h4>
               <ul className="space-y-2 text-[#526174] font-medium">
-                <li><button onClick={() => handleLinkClick('start-here')} className="hover:text-[#2F6FED] py-1 cursor-pointer">📋 {currentLang === 'fa' ? 'چک‌لیست قبل از سفر' : 'Pre-departure Checklist'}</button></li>
-                <li><button onClick={() => handleLinkClick('start-here')} className="hover:text-[#2F6FED] py-1 cursor-pointer">⏱️ {currentLang === 'fa' ? 'سه روز اول' : 'First 3 Days'}</button></li>
-                <li><button onClick={() => handleLinkClick('start-here')} className="hover:text-[#2F6FED] py-1 cursor-pointer">📅 {currentLang === 'fa' ? 'ماه اول' : 'First Month'}</button></li>
+                <li><button onClick={() => handleLinkClick('start-here/pre-departure-checklist')} className="hover:text-[#2F6FED] py-1 cursor-pointer">📋 {currentLang === 'fa' ? 'چک‌لیست قبل از سفر' : 'Pre-departure Checklist'}</button></li>
+                <li><button onClick={() => handleLinkClick('start-here/first-three-days')} className="hover:text-[#2F6FED] py-1 cursor-pointer">⏱️ {currentLang === 'fa' ? 'سه روز اول' : 'First 3 Days'}</button></li>
+                <li><button onClick={() => handleLinkClick('start-here/first-month')} className="hover:text-[#2F6FED] py-1 cursor-pointer">📅 {currentLang === 'fa' ? 'ماه اول' : 'First Month'}</button></li>
               </ul>
             </div>
 

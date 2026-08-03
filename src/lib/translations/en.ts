@@ -44,7 +44,7 @@ export const enTranslations = {
     },
     company: {
       title: "Corporate Formation (SRL)",
-      desc: "Establish your business in a dynamic European market with competitive corporate tax rates (1% to 16%) and executive residency options."
+      desc: "Establish your business in a dynamic EU market. Note: Company registration alone does not grant residency; a separate commercial residency permit from IGI is required."
     },
     investment: {
       title: "Investment Opportunities",
@@ -77,8 +77,8 @@ export const enTranslations = {
         desc: "Internationally recognized degrees in Medicine, Dentistry, Engineering, and Business without complex entrance exams."
       },
       {
-        title: "Competitive Corporate Tax Rates",
-        desc: "One of the most attractive micro-business tax frameworks in Europe (1% revenue tax option)."
+        title: "Low Taxes & Business Hub",
+        desc: "One of the most attractive tax frameworks in Europe (1% tax for micro-companies under €100k revenue with at least 1 employee; otherwise 16%)."
       },
       {
         title: "Growing Skilled Job Market",

@@ -37,6 +37,12 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
 
   const navItems = [
     { id: 'start-here', label: currentLang === 'fa' ? 'شروع از اینجا' : 'Start Here' },
+    { id: 'start-here/planning-to-come', label: currentLang === 'fa' ? '— قصد آمدن به رومانی دارم' : '— Planning to come' },
+    { id: 'start-here/just-arrived', label: currentLang === 'fa' ? '— به‌تازگی وارد شده‌ام' : '— Just arrived' },
+    { id: 'start-here/living-here', label: currentLang === 'fa' ? '— در رومانی زندگی می‌کنم' : '— Living in Romania' },
+    { id: 'start-here/pre-departure-checklist', label: currentLang === 'fa' ? '— چک‌لیست قبل از سفر' : '— Pre-departure Checklist' },
+    { id: 'start-here/first-three-days', label: currentLang === 'fa' ? '— سه روز اول' : '— First 3 Days' },
+    { id: 'start-here/first-month', label: currentLang === 'fa' ? '— ماه اول' : '— First Month' },
     { id: 'immigration', label: currentLang === 'fa' ? 'مهاجرت' : 'Immigration' },
     { id: 'study', label: currentLang === 'fa' ? 'تحصیل' : 'Study' },
     { id: 'work', label: currentLang === 'fa' ? 'کار' : 'Work' },

@@ -6,64 +6,72 @@ export const featuredUniversities: University[] = [
     name: { fa: 'دانشگاه بخارست', en: 'University of Bucharest' },
     city: { fa: 'بخارست', en: 'Bucharest' },
     type: { fa: 'دولتی', en: 'Public' },
-    tuitionRange: { fa: '۲,۰۰۰ - ۴,۵۰۰ یورو / سال', en: '€2,000 - €4,500 / year' },
+    tuitionRange: { fa: '۲,۰۰۰ - ۴,۵۰۰ یورو / سال (تقریبی)', en: '€2,000 - €4,500 / year (Approx.)' },
     popularFields: {
       fa: ['حقوق و علوم سیاسی', 'علوم کامپیوتر و ریاضیات', 'زبان‌های خارجی و روانشناسی', 'مدیریت و اقتصاد'],
       en: ['Law & Political Science', 'Computer Science & Mathematics', 'Foreign Languages & Psychology', 'Business & Economics']
     },
     ranking: '#1 in Romania (Top 800 QS)',
     description: {
-      fa: 'قدیمی‌ترین و برجسته‌ترین دانشگاه جامع رومانی، تاسیس ۱۸۶۴، با کادر علمی بین‌المللی و دوره‌های متنوع به زبان انگلیسی.',
-      en: 'Romania’s premier comprehensive public university, founded in 1864, offering wide-ranging English-taught programs.'
-    }
+      fa: 'قدیمی‌ترین و برجسته‌ترین دانشگاه جامع رومانی، تاسیس ۱۸۶۴. برای دریافت مبلغ دقیق شهریه بر اساس دانشکده، به international.unibuc.ro مراجعه کنید.',
+      en: 'Romania’s premier comprehensive public university. For exact tuition fees per faculty, please visit international.unibuc.ro.'
+    },
+    source: { name: 'international.unibuc.ro', url: 'https://international.unibuc.ro' },
+    lastReviewed: '2026-2027'
   },
   {
     id: 'umf-carol-davila',
     name: { fa: 'دانشگاه پزشکی و داروسازی کارول داویلا', en: 'Carol Davila University of Medicine and Pharmacy' },
     city: { fa: 'بخارست', en: 'Bucharest' },
     type: { fa: 'دولتی تخصصی', en: 'Public Medical' },
-    tuitionRange: { fa: '۶,۰۰۰ - ۸,۵۰۰ یورو / سال', en: '€6,000 - €8,500 / year' },
+    tuitionRange: { fa: '۸,۵۰۰ - ۱۰,۰۰۰ یورو / سال', en: '€8,500 - €10,000 / year' },
     popularFields: {
       fa: ['پزشکی عمومی (انگلیسی)', 'دندانپزشکی', 'داروسازی'],
       en: ['General Medicine (English)', 'Dentistry', 'Pharmacy']
     },
     ranking: 'Top Medical University in South-Eastern Europe',
     description: {
-      fa: 'معتبرترین مرکز تربیت پزشک و دندانپزشک در شرق اروپا. مدرک این دانشگاه در فهرست جهانی مدارس پزشکی ثبت است.',
-      en: 'The top medical educational center in Southeastern Europe with full WHO & EU accreditation.'
-    }
+      fa: 'پزشکی و دندانپزشکی: ۱۰,۰۰۰ یورو/سال، داروسازی: ۸,۵۰۰ یورو/سال. (رقم مربوط به سال ۲۵-۲۰۲۴ است؛ برای سال ۲۷-۲۰۲۶ باید مستقیم از دانشگاه استعلام شود زیرا فهرست یورویی جدید منتشر نشده).',
+      en: 'Medicine/Dentistry: €10,000/yr, Pharmacy: €8,500/yr. (Based on 2024-25 data; exact 2026-27 EUR fees pending release, check directly with university).'
+    },
+    source: { name: 'UMFCD Official', url: 'https://old.umfcd.ro/en/international-students' },
+    lastReviewed: '2025-2026'
   },
   {
     id: 'ubb-cluj',
     name: { fa: 'دانشگاه بابش-بویایی کلوژ-نپوکا', en: 'Babeș-Bolyai University (UBB)' },
     city: { fa: 'کلوژ-نپوکا', en: 'Cluj-Napoca' },
     type: { fa: 'دولتی جامع', en: 'Public' },
-    tuitionRange: { fa: '۲,۲۰۰ - ۴,۸۰۰ یورو / سال', en: '€2,200 - €4,800 / year' },
+    tuitionRange: { fa: '۲,۲۵۰ - ۸,۱۰۰ یورو / سال', en: '€2,250 - €8,100 / year' },
     popularFields: {
       fa: ['مهندسی نرم‌افزار و IT', 'بیوتکنولوژی', 'مدیریت بین‌الملل', 'هنر و رسانه'],
       en: ['Software Engineering & IT', 'Biotechnology', 'International Business', 'Arts & Media']
     },
     ranking: 'Leading European Research University',
     description: {
-      fa: 'بزرگ‌ترین دانشگاه رومانی واقع در پایتخت فناوری کشور (کلوژ) با محیطی بسیار فوق‌العاده و زنده برای دانشجویان بین‌المللی.',
-      en: 'Romania’s largest university located in the tech capital Cluj-Napoca, renowned for innovation and IT excellence.'
-    }
+      fa: 'شهریه به یورو در ماه اعلام می‌شود (۹ ماه در سال): کامپیوتر (۹۰۰€/ماه)، ریاضی (۷۰۰€)، مدیریت (۵۰۰€)، زیست‌شناسی (۳۵۰€)، اقتصاد (۲۵۰€).',
+      en: 'Tuition paid monthly in EUR (9 months/year): CS (€900/mo), Math (€700/mo), Business (€500/mo), Biology (€350/mo), Economics (€250/mo).'
+    },
+    source: { name: 'UBB Senate Decision', url: 'https://senat.ubbcluj.ro' },
+    lastReviewed: '2026-2027'
   },
   {
     id: 'upb-polytechnic',
     name: { fa: 'دانشگاه پلی‌تکنیک بخارست', en: 'National University of Science and Technology POLITEHNICA Bucharest' },
     city: { fa: 'بخارست', en: 'Bucharest' },
     type: { fa: 'دولتی مهندسی', en: 'Public Technological' },
-    tuitionRange: { fa: '۲,۷۰۰ - ۵,۰۰۰ یورو / سال', en: '€2,700 - €5,000 / year' },
+    tuitionRange: { fa: '۲,۲۰۰ - ۷,۵۰۰ یورو / سال', en: '€2,200 - €7,500 / year' },
     popularFields: {
       fa: ['مهندسی کامپیوتر و هوش مصنوعی', 'هوا فضا', 'مهندسی برق و انرژی', 'مکانیک و رباتیک'],
       en: ['Computer Engineering & AI', 'Aerospace Engineering', 'Electrical & Energy', 'Robotics & Mechanics']
     },
-    ranking: 'Top Technical University',
+    ranking: 'Top Engineering Tech University',
     description: {
-      fa: 'قطب اصلی مهندسی و فناوری رومانی با بالاترین آمار جذب فارغ‌التحصیلان در شرکت‌های چندملیتی اروپایی.',
-      en: 'Romania’s main engineering hub with exceptional graduate employment rates across EU tech corporations.'
-    }
+      fa: 'فنی، علوم و ریاضی: ۲,۶۰۰€ (کارشناسی) تا ۲,۷۰۰€ (ارشد). علوم انسانی و اقتصاد: ۲,۲۰۰€. هنر و معماری: تا ۷,۵۰۰€ در سال.',
+      en: 'Tech/Math/Science: €2,600 (BSc) - €2,700 (MSc). Humanities/Economics: €2,200. Arts/Music: up to €7,500 per year.'
+    },
+    source: { name: 'UPB Official Tuition Document', url: 'https://international.upb.ro/assets/docs/2026/regulations/POLITEHNICA_Bucharest_tuition_fees.pdf' },
+    lastReviewed: '2026-2027'
   }
 ];
 

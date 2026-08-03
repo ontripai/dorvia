@@ -17,6 +17,7 @@ import { OfficialResourceCard } from './OfficialResourceCard';
 import { NeedsContent } from './NeedsContent';
 import { RomaniaOverviewContent } from './RomaniaOverviewContent';
 import { WorkOverviewContent } from './WorkOverviewContent';
+import { StartHereContent } from './StartHereContent';
 import { Button } from './Button';
 import { 
   GraduationCap, 
@@ -55,6 +56,18 @@ export const MainContent: React.FC<MainContentProps> = ({
   const [citySearch, setCitySearch] = useState('');
 
   // HANDLE PREFIXED SUB-ROUTES FOR NEEDS AND ROMANIA
+  if (activeRoute.startsWith('start-here')) {
+    const sub = activeRoute.split('/')[1] || 'planning-to-come';
+    return (
+      <StartHereContent
+        subRoute={sub}
+        currentLang={currentLang}
+        onNavigate={onNavigate}
+        onOpenEvaluationModal={onOpenEvaluationModal}
+      />
+    );
+  }
+
   if (activeRoute.startsWith('needs')) {
     const sub = activeRoute.split('/')[1] || 'first-days-checklist';
     return (
@@ -191,7 +204,11 @@ export const MainContent: React.FC<MainContentProps> = ({
                         </div>
                         <div className="p-3.5 rounded-xl bg-white/10 border border-white/15 flex items-center justify-between">
                           <span className="font-semibold text-white">🏢 Corporate Registration (SRL)</span>
-                          <span className="font-extrabold text-[#F4F7FC]">{currentLang === 'fa' ? 'مالیات شرکتهای کوچک: از ۱٪' : 'Micro-Company Tax: from 1%'}</span>
+                          <span className="font-extrabold text-[#F4F7FC] leading-snug max-w-[200px] text-right">
+                            {currentLang === 'fa' 
+                              ? 'مالیات ۱٪ برای شرکتهای کوچک (گردش مالی زیر ۱۰۰,۰۰۰ یورو با حداقل یک کارمند)؛ در غیر این صورت ۱۶٪' 
+                              : '1% tax for micro-companies (<€100k revenue, min 1 employee); otherwise 16%'}
+                          </span>
                         </div>
                       </div>
 
