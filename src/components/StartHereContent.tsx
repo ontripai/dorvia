@@ -21,8 +21,8 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
   const ArrowIcon = currentLang === 'fa' ? ArrowLeft : ArrowRight;
 
   const disclaimer = currentLang === 'fa' 
-    ? 'این مورد باید بر اساس مقررات جاری و شرایط فردی بررسی شود.'
-    : 'This must be verified based on current regulations and individual circumstances.';
+    ? 'منبع: اداره کل مهاجرت رومانی (IGI) — آخرین بررسی: ۲۰۲۶'
+    : 'Source: General Inspectorate for Immigration (IGI) — Last reviewed: 2026';
 
   switch (subRoute) {
     case 'planning-to-come':
@@ -30,23 +30,49 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'قصد آمدن به رومانی دارم' : 'Planning to come to Romania'}
+              {currentLang === 'fa' ? 'قصد آمدن به رومانی را دارم' : 'Planning to come to Romania'}
             </h1>
-            <p className="text-slate-200 text-sm max-w-3xl leading-relaxed">
-              {currentLang === 'fa' 
-                ? 'چک‌لیست کلی مراحل پیش از سفر: تعیین مسیر (تحصیل، کار یا تجاری)، جمع‌آوری مدارک اولیه لازم، تفاوت انواع ویزا (به‌ویژه ویزای طولانی‌مدت نوع D)، و زمان‌بندی تقریبی فرآیند.'
-                : 'General pre-departure checklist: defining your pathway (study, work, or business), required initial documents, visa types (especially Long-stay Type D), and estimated processing timelines.'}
-            </p>
-            <p className="text-slate-400 text-xs italic">{disclaimer}</p>
+            <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
           </div>
-          
-          <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4 text-center max-w-md">
-             <h3 className="text-lg font-bold text-[#142033]">
-                {currentLang === 'fa' ? 'نمی‌دانید از کجا شروع کنید؟' : 'Not sure where to start?'}
-             </h3>
-             <Button variant="primary" size="lg" onClick={onOpenEvaluationModal} rightIcon={<ArrowIcon size={16} />}>
-                {currentLang === 'fa' ? 'فرم ارزیابی اولیه' : 'Initial Assessment Form'}
-             </Button>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'انتخاب مسیر مناسب' : 'Choosing the Right Pathway'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>
+                  {currentLang === 'fa' ? 'مسیر ورود به رومانی بسته به هدف شما متفاوت است: ' : 'Your entry pathway varies depending on your purpose: '}
+                  <button onClick={() => onNavigate('study')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'تحصیل' : 'Study'}</button>{', '}
+                  <button onClick={() => onNavigate('work')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'کار' : 'Work'}</button>{', '}
+                  <button onClick={() => onNavigate('company')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'ثبت شرکت' : 'Business'}</button>
+                  {currentLang === 'fa' ? ' یا پیوست خانواده.' : ' or Family Reunification.'}
+                </li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'زمان‌بندی واقع‌بینانه' : 'Realistic Timeline'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'فرآیندهای اداری (ویزا، اقامت) معمولاً هفته‌ها تا ماه‌ها زمان می‌برند؛ بهتر است برنامه‌ریزی از حداقل چند ماه قبل از تاریخ موردنظر شروع شود.' : 'Administrative processes (visa, residency) often take weeks to months; it is best to start planning several months ahead of your target date.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'منابع رسمی برای شروع' : 'Official Starting Resources'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'معرفی IGI (اداره کل مهاجرت) و سفارت/کنسولگری رومانی به‌عنوان مراجع اصلی برای اطلاعات به‌روز.' : 'The General Inspectorate for Immigration (IGI) and the Romanian Embassy/Consulate are the primary official sources for up-to-date information.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
           </div>
         </div>
       );
@@ -56,22 +82,42 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'به‌تازگی وارد شده‌ام' : 'Just arrived in Romania'}
+              {currentLang === 'fa' ? 'تازه به رومانی رسیده‌ام' : 'Just arrived in Romania'}
             </h1>
-            <p className="text-slate-200 text-sm max-w-3xl leading-relaxed">
-              {currentLang === 'fa' 
-                ? 'کارهای فوری بعد از ورود: ثبت‌نام آدرس محل اقامت، دریافت کد شناسایی (CNP در صورت تایید اقامت)، افتتاح حساب بانکی، خرید سیم‌کارت، و پیگیری مراحل بعدی دریافت کارت اقامت.'
-                : 'Immediate tasks upon arrival: registering your address, obtaining a personal identification number (CNP upon residency approval), opening a bank account, getting a local SIM card, and proceeding with your residence permit issuance.'}
-            </p>
-            <p className="text-slate-400 text-xs italic">{disclaimer}</p>
+            <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
           </div>
-          <div className="flex gap-4">
-            <Button variant="outline" onClick={() => onNavigate('start-here/first-three-days')}>
-              {currentLang === 'fa' ? 'سه روز اول' : 'First 3 Days'}
-            </Button>
-            <Button variant="outline" onClick={() => onNavigate('start-here/first-month')}>
-              {currentLang === 'fa' ? 'ماه اول' : 'First Month'}
-            </Button>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'اولویت فوری' : 'Immediate Priority'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'ثبت‌نام دریافت کارت اقامت موقت نزد IGI باید ظرف مهلت قانونی (معمولاً پیش از پایان اعتبار ویزای D) انجام شود.' : 'Registering for a temporary residence permit with IGI must be done within the legal timeframe (usually before the Type D visa expires).'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'کارهای عملی روزهای اول' : 'Practical First Tasks'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'تهیه سیم‌کارت محلی، افتتاح حساب بانکی (نیاز به CNP یا مدرک اقامت دارد)، و پیدا کردن محل اسکان موقت.' : 'Getting a local SIM card, opening a bank account (requires CNP or residency document), and finding temporary accommodation.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'نکته مهم آدرس' : 'Important Address Note'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'آدرس محل سکونت باید در مدارک اقامتی ثبت شود؛ تغییر آدرس باید به IGI اطلاع داده شود.' : 'Your residential address must be registered on your residency documents; any change of address must be reported to IGI.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
           </div>
         </div>
       );
@@ -81,19 +127,54 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'در رومانی زندگی می‌کنم' : 'Living in Romania'}
+              {currentLang === 'fa' ? 'ساکن رومانی هستم' : 'Living in Romania'}
             </h1>
-            <p className="text-slate-200 text-sm max-w-3xl leading-relaxed">
-              {currentLang === 'fa' 
-                ? 'منابع مفید برای مقیمان: تمدید اقامت، تغییر وضعیت اقامتی، دسترسی به خدمات ضروری و نیازها، و آشنایی با انجمن‌ها یا جامعه ایرانیان مستقر در کشور.'
-                : 'Resources for residents: renewing your residence permit, changing immigration status, accessing essential services, and connecting with the Iranian community.'}
-            </p>
-            <p className="text-slate-400 text-xs italic">{disclaimer}</p>
+            <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
           </div>
-          <div>
-            <Button variant="primary" onClick={() => onNavigate('needs')} rightIcon={<ArrowIcon size={16} />}>
-              {currentLang === 'fa' ? 'رفتن به بخش نیازها در رومانی' : 'Go to Essentials in Romania'}
-            </Button>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'تمدید و نگهداری وضعیت اقامتی' : 'Residency Maintenance'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>
+                  {currentLang === 'fa' ? 'یادآوری اینکه تمدید کارت اقامت باید پیش از پایان اعتبار انجام شود. اطلاعات بیشتر در ' : 'Permit renewal must be done before expiration. Read more in '}
+                  <button onClick={() => onNavigate('immigration/residence-renewal')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'تمدید اقامت' : 'Residence Renewal'}</button>
+                  {currentLang === 'fa' ? '.' : '.'}
+                </li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'ادغام در جامعه' : 'Social Integration'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>
+                  {currentLang === 'fa' ? 'دسترسی به نظام سلامت عمومی (' : 'Accessing the public health system ('}
+                  <button onClick={() => onNavigate('needs/insurance')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'بیمه' : 'Insurance'}</button>
+                  {currentLang === 'fa' ? ')، امکان یادگیری زبان رومانیایی، و شبکه‌های جامعه ایرانیان مقیم.' : '), learning the Romanian language, and Iranian community networks.'}
+                </li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'مسیر بلندمدت' : 'Long-term Pathways'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>
+                  {currentLang === 'fa' ? 'پس از دوره‌ای مشخص از اقامت قانونی مستمر، امکان اقدام برای ' : 'After a specific period of continuous legal residency, you may apply for '}
+                  <button onClick={() => onNavigate('immigration/long-term-residence')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'اقامت بلندمدت' : 'Long-term Residence'}</button>
+                  {currentLang === 'fa' ? ' یا تابعیت وجود دارد.' : ' or Citizenship.'}
+                </li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
           </div>
         </div>
       );
@@ -103,14 +184,42 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'چک‌لیست قبل از سفر' : 'Pre-departure Checklist'}
+              {currentLang === 'fa' ? 'چک‌لیست پیش از سفر' : 'Pre-departure Checklist'}
             </h1>
-            <p className="text-slate-200 text-sm max-w-3xl leading-relaxed">
-              {currentLang === 'fa' 
-                ? 'چک‌لیست عملیاتی برای سفر به رومانی: همراه داشتن پاسپورت معتبر، ویزا یا تأییدیه اقامت، مدارک تحصیلی و کاری ترجمه‌شده و تأییدشده، تهیه بیمه مسافرتی معتبر، رزرو محل اقامت اولیه، و تبدیل ارز اولیه به یورو یا رون (RON).'
-                : 'Practical checklist for traveling to Romania: carrying a valid passport, visa or residency approval, translated and certified academic/work documents, valid travel insurance, initial accommodation booking, and basic currency exchange.'}
-            </p>
-            <p className="text-slate-400 text-xs italic">{disclaimer}</p>
+            <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'مدارک ضروری' : 'Essential Documents'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'پاسپورت با حداقل ۳ ماه اعتبار بیشتر از تاریخ انقضای ویزا، ویزای D معتبر، بیمه درمانی بین‌المللی، مدرک تمکن مالی.' : 'Passport valid for at least 3 months beyond visa expiration, a valid Type D visa, international travel insurance, and proof of funds.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'آماده‌سازی مالی و ارتباطی' : 'Financial & Comm Prep'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'تبدیل حداقلی ارز برای هزینه‌های اولیه، اطلاع‌رسانی به بانک درباره سفر (در صورت استفاده از کارت بین‌المللی)، ذخیره نسخه دیجیتال از مدارک مهم.' : 'Exchanging a minimum amount of currency for initial expenses, notifying your bank (if using international cards), and saving digital copies of key documents.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'هماهنگی محل اسکان' : 'Accommodation Setup'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'تایید رزرو محل اقامت موقت یا خوابگاه پیش از پرواز، توصیه به داشتن آدرس دقیق مقصد.' : 'Confirming your temporary housing or dorm reservation before the flight, and having the exact destination address at hand.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
           </div>
         </div>
       );
@@ -120,14 +229,42 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'سه روز اول' : 'First 3 Days'}
+              {currentLang === 'fa' ? '۳ روز اول در رومانی' : 'First 3 Days'}
             </h1>
-            <p className="text-slate-200 text-sm max-w-3xl leading-relaxed">
-              {currentLang === 'fa' 
-                ? 'اولویت‌های ضروری در ۷۲ ساعت نخست: تهیه سیم‌کارت محلی، تبدیل ارز محدود بر اساس نرخ رسمی (BNR)، سازماندهی حمل‌ونقل از فرودگاه به محل اقامت، اطلاع‌رسانی ورود به دانشگاه یا کارفرما، و تهیه غذا و نیازهای فوری.'
-                : 'Crucial priorities in the first 72 hours: acquiring a local SIM card, limited currency exchange based on official BNR rates, arranging airport transportation, notifying your university or employer of your arrival, and securing food and immediate needs.'}
-            </p>
-            <p className="text-slate-400 text-xs italic">{disclaimer}</p>
+            <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'روز ورود' : 'Arrival Day'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'عبور از گمرک و کنترل مرزی، دریافت مهر ورود، اطمینان از صحت اطلاعات پاسپورت.' : 'Clearing customs and border control, getting the entry stamp, and ensuring passport details are correctly processed.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'کارهای فوری' : 'Urgent Tasks'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'تهیه سیم‌کارت محلی برای ارتباط، شناسایی نزدیک‌ترین شعبه IGI محل اقامت برای مراحل بعدی.' : 'Purchasing a local SIM card for communication, and locating the nearest IGI branch for your upcoming residency steps.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'نکته ایمنی' : 'Safety Note'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'نگهداری نسخه از مدارک هویتی به‌صورت جداگانه از اصل مدارک.' : 'Keep copies of your identity documents stored separately from the originals.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
           </div>
         </div>
       );
@@ -137,14 +274,46 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'ماه اول' : 'First Month'}
+              {currentLang === 'fa' ? 'ماه اول اقامت' : 'First Month'}
             </h1>
-            <p className="text-slate-200 text-sm max-w-3xl leading-relaxed">
-              {currentLang === 'fa' 
-                ? 'اقدامات اساسی در ۳۰ روز نخست: ثبت رسمی آدرس محل سکونت نزد مقامات (IGI)، شروع فرآیند صدور کارت اقامت، افتتاح حساب بانکی کامل، آشنایی با سیستم حمل‌ونقل عمومی، و پیدا کردن پزشک خانواده یا بررسی وضعیت بیمه درمانی.'
-                : 'Essential actions during your first 30 days: officially registering your residential address with IGI, starting the residence permit issuance process, opening a full bank account, familiarizing yourself with public transit, and finding a GP or checking health insurance.'}
-            </p>
-            <p className="text-slate-400 text-xs italic">{disclaimer}</p>
+            <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'ثبت رسمی اقامت' : 'Official Residency Registration'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>
+                  {currentLang === 'fa' ? 'درخواست کارت اقامت موقت نزد IGI باید در این بازه انجام شود. رجوع به ' : 'Requesting a temporary residence permit at IGI must be done in this timeframe. See '}
+                  <button onClick={() => onNavigate('immigration/igi-process')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'مراحل IGI' : 'IGI Process'}</button>
+                  {currentLang === 'fa' ? '.' : '.'}
+                </li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'امور بانکی و مالی' : 'Banking & Finance'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'افتتاح حساب بانکی دائم، دریافت شماره شناسایی مالیاتی در صورت نیاز (برای اجاره ملک یا فعالیت اقتصادی).' : 'Opening a permanent bank account and obtaining a tax identification number if necessary (for renting property or economic activities).'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'ثبت‌نام در خدمات' : 'Service Enrollment'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'ثبت‌نام تحصیلی (در صورت دانشجو بودن) یا شروع رسمی کار (در صورت داشتن قرارداد)، ثبت آدرس محل سکونت.' : 'University enrollment (if a student) or officially starting work (if employed), and registering your residential address.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
           </div>
         </div>
       );
