@@ -38,7 +38,7 @@ export default function UniversitiesPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredUnis.map((uni) => (
-          <UniversityCard key={uni.id} university={uni} currentLang={currentLang} onSelect={() => onNavigate('study')} />
+          <UniversityCard key={uni.id} university={uni} currentLang={currentLang} href="/study" />
         ))}
       </div>
     </div>

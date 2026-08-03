@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Language } from '../types';
 import { GraduationCap, BriefcaseBusiness, Building2, Users, House, ArrowRight, ArrowLeft } from './Icons';
 
@@ -117,13 +118,13 @@ export const AudienceSelector: React.FC<AudienceSelectorProps> = ({
           </div>
 
           <div className="flex items-center space-x-3 rtl:space-x-reverse w-full md:w-auto shrink-0">
-            <button
-              onClick={() => onNavigate(activeObj.route)}
-              className="flex-1 md:flex-initial bg-[#eef3f8] hover:bg-slate-200 text-[#142033] font-bold text-xs px-5 py-3 rounded-xl border border-[#dfe6ef] transition-colors flex items-center justify-center space-x-2 rtl:space-x-reverse cursor-pointer"
+            <Link
+              href={`/${activeObj.route}`}
+              className="flex-1 md:flex-initial bg-[#eef3f8] hover:bg-slate-200 text-[#142033] font-bold text-xs px-5 py-3 rounded-xl border border-[#dfe6ef] transition-colors flex items-center justify-center space-x-2 rtl:space-x-reverse cursor-pointer block text-center"
             >
-              <span>{currentLang === 'fa' ? 'مطالعه جزئیات مسیر' : 'Explore Pathway'}</span>
+              <span>{currentLang === 'fa' ? 'مطالعه جزئیات این مسیر' : 'Explore Pathway'}</span>
               <ArrowIcon size={14} />
-            </button>
+            </Link>
 
             <button
               onClick={onOpenEvaluationModal}

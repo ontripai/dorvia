@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
 import { X, ChevronDown } from './Icons';
@@ -80,11 +81,6 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
     { id: 'contact', label: t.nav.contact },
   ];
 
-  const handleLinkClick = (id: string) => {
-    onNavigate(id);
-    onClose();
-  };
-
   return (
     <div className="fixed inset-0 z-50 bg-[#071B3D]/90 backdrop-blur-md flex flex-col justify-between p-6 overflow-y-auto animate-fadeIn">
       
@@ -109,16 +105,17 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
       {/* Main Drawer Links */}
       <div className="py-6 space-y-1.5 flex-1">
         {navItems.map((item) => (
-          <button
+          <Link
             key={item.id}
-            onClick={() => handleLinkClick(item.id)}
-            className={`w-full text-start px-4 py-3 rounded-xl text-sm font-semibold transition-colors min-h-[44px] flex items-center justify-between ${
+            href={`/${item.id === 'home' ? '' : item.id}`}
+            onClick={onClose}
+            className={`w-full text-start px-4 py-3 rounded-xl text-sm font-semibold transition-colors min-h-[44px] flex items-center justify-between block ${
               activeRoute === item.id ? 'bg-[#2F6FED] text-white font-bold' : 'text-slate-200 hover:bg-white/10'
             }`}
           >
             <span>{item.label}</span>
             <ChevronDown size={14} className="text-slate-400" />
-          </button>
+          </Link>
         ))}
       </div>
 
@@ -139,7 +136,8 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
         <Button
           variant="outline"
           size="md"
-          onClick={() => handleLinkClick('contact')}
+          href="/contact"
+          onClick={onClose}
           className="w-full"
         >
           {currentLang === 'fa' ? 'تماس با ما' : 'Contact Us'}

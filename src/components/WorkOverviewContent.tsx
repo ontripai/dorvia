@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Language } from '../types';
 
 interface WorkOverviewContentProps {
@@ -210,9 +211,9 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'اتباع خارج از اتحادیه اروپا/منطقه اقتصادی اروپا برای اشتغال قانونی نیاز به ' : 'Non-EU/EEA citizens require a '}
-                  <button onClick={() => onNavigate('work/permit')} className="text-[#2F6FED] font-medium hover:underline focus:outline-none">
+                  <Link href="/work/permit" className="text-[#2F6FED] font-medium hover:underline focus:outline-none">
                     {currentLang === 'fa' ? 'مجوز کار (Aviz de Muncă)' : 'Work Permit (Aviz de Muncă)'}
-                  </button>
+                  </Link>
                   {currentLang === 'fa' ? ' دارند که باید توسط کارفرما از اداره کل مهاجرت (IGI) درخواست شود.' : ' for legal employment, which must be requested by the employer from the General Inspectorate for Immigration (IGI).'}
                 </li>
                 <li>{currentLang === 'fa' ? 'پیش‌نیاز شروع این فرآیند، داشتن پیشنهاد شغلی رسمی از یک کارفرمای ثبت‌شده در رومانی است.' : 'A prerequisite to initiating this process is having an official job offer from a registered employer in Romania.'}</li>
@@ -492,30 +493,30 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               {currentLang === 'fa' ? 'مسیرهای اشتغال' : 'Employment Pathways'}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('work/finding-job')}>
+              <Link href="/work/finding-job" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
                 <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'پیدا کردن کار' : 'Finding a Job'}</h4>
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'سایت‌های کاریابی و نگارش رزومه استاندارد' : 'Job portals and standard CV writing'}</p>
-              </div>
-              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('work/work-permit')}>
+              </Link>
+              <Link href="/work/work-permit" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
                 <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'مجوز کار' : 'Work Permit'}</h4>
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'فرآیند دریافت Aviz de Munca توسط کارفرما' : 'The process for employers to get Aviz de Munca'}</p>
-              </div>
-              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('work/work-visa')}>
+              </Link>
+              <Link href="/work/work-visa" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
                 <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'ویزای کاری' : 'Work Visa'}</h4>
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'اقدام برای ویزای نوع D/AM پس از دریافت مجوز' : 'Applying for the D/AM visa after permit approval'}</p>
-              </div>
-              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('work/employment-contract')}>
+              </Link>
+              <Link href="/work/employment-contract" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
                 <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'قرارداد استخدام' : 'Employment Contract'}</h4>
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'انواع قرارداد کاری و حقوق کارمند' : 'Types of contracts and employee rights'}</p>
-              </div>
-              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('work/taxes-salaries')}>
+              </Link>
+              <Link href="/work/taxes-salaries" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
                 <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'حقوق و مالیات' : 'Taxes & Salaries'}</h4>
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'نحوه محاسبه حقوق خالص و کسورات قانونی' : 'Calculating net salary and legal deductions'}</p>
-              </div>
-              <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('work/insurance')}>
+              </Link>
+              <Link href="/work/insurance" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
                 <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'بیمه' : 'Insurance'}</h4>
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'پوشش بیمه تامین اجتماعی و درمانی' : 'Social and health insurance coverage'}</p>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

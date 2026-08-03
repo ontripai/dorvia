@@ -1,13 +1,15 @@
 import React from 'react';
+import Link from 'next/link';
 import { City, Language } from '../types';
 
 interface CityCardProps {
   city: City;
   currentLang: Language;
-  onSelect: (city: City) => void;
+  onSelect?: (city: City) => void;
+  href?: string;
 }
 
-export const CityCard: React.FC<CityCardProps> = ({ city, currentLang, onSelect }) => {
+export const CityCard: React.FC<CityCardProps> = ({ city, currentLang, onSelect, href }) => {
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col justify-between group">
       
@@ -47,12 +49,21 @@ export const CityCard: React.FC<CityCardProps> = ({ city, currentLang, onSelect 
 
       {/* Card Action */}
       <div className="px-5 pb-5 pt-0">
-        <button
-          onClick={() => onSelect(city)}
-          className="w-full py-2.5 bg-blue-50 hover:bg-[#071B3D] text-[#071B3D] hover:text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center space-x-1 rtl:space-x-reverse"
-        >
-          <span>{currentLang === 'fa' ? 'راهنمای زندگی و تحصیل در این شهر' : 'City & University Guide'}</span>
-        </button>
+        {href ? (
+          <Link
+            href={href}
+            className="w-full py-2.5 bg-slate-50 hover:bg-[#071B3D] text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 hover:border-[#071B3D] flex items-center justify-center space-x-1 rtl:space-x-reverse block text-center"
+          >
+            <span>{currentLang === 'fa' ? 'راهنمای زندگی و تحصیل در این شهر' : 'View Detailed Guide'}</span>
+          </Link>
+        ) : (
+          <button
+            onClick={() => onSelect && onSelect(city)}
+            className="w-full py-2.5 bg-slate-50 hover:bg-[#071B3D] text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 hover:border-[#071B3D] flex items-center justify-center space-x-1 rtl:space-x-reverse"
+          >
+            <span>{currentLang === 'fa' ? 'راهنمای زندگی و تحصیل در این شهر' : 'View Detailed Guide'}</span>
+          </button>
+        )}
       </div>
 
     </div>

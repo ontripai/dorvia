@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
 import { featuredUniversities, featuredCities, mainServices, sampleArticles } from '../lib/data';
@@ -226,7 +227,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                     <Button
                       variant="outline"
                       size="lg"
-                      onClick={() => onNavigate('services')}
+                      href="/services"
                       className="w-full sm:w-auto"
                     >
                       {currentLang === 'fa' ? 'مشاهده مسیرها' : 'Explore Pathways'}
@@ -346,7 +347,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   desc={t.pathways.study.desc}
                   icon={GraduationCap}
                   badge={currentLang === 'fa' ? 'مسیر تحصیلی' : 'Academic'}
-                  onClick={() => onNavigate('study')}
+                  href="/study"
                 />
                 <PathwayCard
                   currentLang={currentLang}
@@ -354,7 +355,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   desc={t.pathways.work.desc}
                   icon={BriefcaseBusiness}
                   badge={currentLang === 'fa' ? 'مسیر کاری' : 'Careers'}
-                  onClick={() => onNavigate('work')}
+                  href="/work"
                 />
                 <PathwayCard
                   currentLang={currentLang}
@@ -362,7 +363,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   desc={t.pathways.company.desc}
                   icon={Building2}
                   badge={currentLang === 'fa' ? 'فعالیت تجاری' : 'Corporate'}
-                  onClick={() => onNavigate('company')}
+                  href="/company"
                 />
                 <PathwayCard
                   currentLang={currentLang}
@@ -370,7 +371,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   desc={t.pathways.investment.desc}
                   icon={ChartNoAxesCombined}
                   badge={currentLang === 'fa' ? 'سرمایه‌گذاری' : 'Investment'}
-                  onClick={() => onNavigate('company/investment')}
+                  href="/company/investment"
                 />
                 <PathwayCard
                   currentLang={currentLang}
@@ -378,7 +379,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   desc={t.pathways.family.desc}
                   icon={Users}
                   badge={currentLang === 'fa' ? 'پیوست خانواده' : 'Family'}
-                  onClick={() => onNavigate('immigration')}
+                  href="/immigration"
                 />
                 <PathwayCard
                   currentLang={currentLang}
@@ -386,7 +387,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   desc={t.pathways.living.desc}
                   icon={House}
                   badge={currentLang === 'fa' ? 'راهنمای استقرار' : 'Settlement'}
-                  onClick={() => onNavigate('needs/first-days-checklist')}
+                  href="/needs/first-days-checklist"
                 />
               </div>
 
@@ -465,7 +466,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => onNavigate('universities')}
+                  href="/universities"
                   rightIcon={<ArrowIcon size={14} />}
                 >
                   {currentLang === 'fa' ? 'مشاهده همه دانشگاه‌ها' : 'View All Universities'}
@@ -478,7 +479,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                     key={uni.id}
                     university={uni}
                     currentLang={currentLang}
-                    onSelect={() => onNavigate('study')}
+                    href="/study"
                   />
                 ))}
               </div>
@@ -502,7 +503,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => onNavigate('romania/cities')}
+                  href="/romania/cities"
                   rightIcon={<ArrowIcon size={14} />}
                 >
                   {currentLang === 'fa' ? 'مقایسه شهرهای رومانی' : 'Compare Cities'}
@@ -515,7 +516,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                     key={city.id}
                     city={city}
                     currentLang={currentLang}
-                    onSelect={() => onNavigate('romania/cities')}
+                    href="/romania/cities"
                   />
                 ))}
               </div>
@@ -693,7 +694,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             <div className="editorial-card p-6 space-y-3 bg-white">
               <h3 className="text-lg font-bold text-[#2F6FED]">🎓 {t.pathways.study.title}</h3>
               <p className="text-xs text-[#526174] leading-relaxed">{t.pathways.study.desc}</p>
-              <Button variant="ghost" size="sm" onClick={() => onNavigate('study')} rightIcon={<ArrowIcon size={14} />}>
+              <Button variant="ghost" size="sm" href="/study" rightIcon={<ArrowIcon size={14} />}>
                 {currentLang === 'fa' ? 'جزئیات تحصیل در رومانی' : 'Study Details'}
               </Button>
             </div>
@@ -701,7 +702,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             <div className="editorial-card p-6 space-y-3 bg-white">
               <h3 className="text-lg font-bold text-[#2F6FED]">💼 {t.pathways.work.title}</h3>
               <p className="text-xs text-[#526174] leading-relaxed">{t.pathways.work.desc}</p>
-              <Button variant="ghost" size="sm" onClick={() => onNavigate('work')} rightIcon={<ArrowIcon size={14} />}>
+              <Button variant="ghost" size="sm" href="/work" rightIcon={<ArrowIcon size={14} />}>
                 {currentLang === 'fa' ? 'جزئیات اشتغال و ویزای کار' : 'Work Permit Details'}
               </Button>
             </div>
@@ -752,7 +753,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {featuredUniversities.map((uni) => (
-                    <UniversityCard key={uni.id} university={uni} currentLang={currentLang} onSelect={() => onNavigate('universities')} />
+                    <UniversityCard key={uni.id} university={uni} currentLang={currentLang} href="/universities" />
                   ))}
                 </div>
               </div>
@@ -762,14 +763,14 @@ export const MainContent: React.FC<MainContentProps> = ({
                   {currentLang === 'fa' ? 'مسیرهای تحصیلی' : 'Study Pathways'}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('study/scholarships')}>
+                  <Link href="/study/scholarships" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
                     <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'بورسیه تحصیلی دولتی' : 'Government Scholarships'}</h4>
                     <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'معافیت کامل از شهریه و هزینه ثبت‌نام' : 'Full tuition waiver and stipend'}</p>
-                  </div>
-                  <div className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" onClick={() => onNavigate('study/preparatory-year')}>
+                  </Link>
+                  <Link href="/study/preparatory-year" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
                     <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'سال زبان (پیش‌دانشگاهی)' : 'Language Preparatory Year'}</h4>
                     <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'دوره آموزش زبان رومانیایی پیش از دانشگاه' : 'Romanian language course before degree'}</p>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -827,7 +828,7 @@ export const MainContent: React.FC<MainContentProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredUnis.map((uni) => (
-              <UniversityCard key={uni.id} university={uni} currentLang={currentLang} onSelect={() => onNavigate('study')} />
+              <UniversityCard key={uni.id} university={uni} currentLang={currentLang} href="/study" />
             ))}
           </div>
         </div>

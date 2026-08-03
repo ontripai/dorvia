@@ -1,13 +1,15 @@
 import React from 'react';
+import Link from 'next/link';
 import { University, Language } from '../types';
 
 interface UniversityCardProps {
   university: University;
   currentLang: Language;
-  onSelect: (uni: University) => void;
+  onSelect?: (uni: University) => void;
+  href?: string;
 }
 
-export const UniversityCard: React.FC<UniversityCardProps> = ({ university, currentLang, onSelect }) => {
+export const UniversityCard: React.FC<UniversityCardProps> = ({ university, currentLang, onSelect, href }) => {
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col justify-between group">
       
@@ -68,12 +70,21 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
 
       {/* Card Action */}
       <div className="px-5 pb-5 pt-0">
-        <button
-          onClick={() => onSelect(university)}
-          className="w-full py-2.5 bg-slate-50 hover:bg-[#071B3D] text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 hover:border-[#071B3D] flex items-center justify-center space-x-1 rtl:space-x-reverse"
-        >
-          <span>{currentLang === 'fa' ? 'مشاهده شرایط پذیرش' : 'View Admission Process'}</span>
-        </button>
+        {href ? (
+          <Link
+            href={href}
+            className="w-full py-2.5 bg-slate-50 hover:bg-[#071B3D] text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 hover:border-[#071B3D] flex items-center justify-center space-x-1 rtl:space-x-reverse block text-center"
+          >
+            <span>{currentLang === 'fa' ? 'مشاهده شرایط پذیرش' : 'View Admission Process'}</span>
+          </Link>
+        ) : (
+          <button
+            onClick={() => onSelect && onSelect(university)}
+            className="w-full py-2.5 bg-slate-50 hover:bg-[#071B3D] text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 hover:border-[#071B3D] flex items-center justify-center space-x-1 rtl:space-x-reverse"
+          >
+            <span>{currentLang === 'fa' ? 'مشاهده شرایط پذیرش' : 'View Admission Process'}</span>
+          </button>
+        )}
       </div>
 
     </div>

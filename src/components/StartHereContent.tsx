@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Language } from '../types';
 import { Button } from './Button';
 import { ArrowRight, ArrowLeft } from './Icons';
@@ -50,9 +51,9 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'مسیر ورود به رومانی بسته به هدف شما متفاوت است: ' : 'Your entry pathway varies depending on your purpose: '}
-                  <button onClick={() => onNavigate('study')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'تحصیل' : 'Study'}</button>{', '}
-                  <button onClick={() => onNavigate('work')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'کار' : 'Work'}</button>{', '}
-                  <button onClick={() => onNavigate('company')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'ثبت شرکت' : 'Business'}</button>
+                  <Link href="/study" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'تحصیل' : 'Study'}</Link>{', '}
+                  <Link href="/work" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'کار' : 'Work'}</Link>{', '}
+                  <Link href="/company" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'ثبت شرکت' : 'Business'}</Link>
                   {currentLang === 'fa' ? ' یا پیوست خانواده.' : ' or Family Reunification.'}
                 </li>
               </ul>
@@ -196,7 +197,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'چگونگی دسترسی به خدمات درمانی اورژانسی در روزهای اول (پیش از تکمیل بیمه رسمی CASS). اطلاعات در بخش ' : 'How to access emergency medical services in the first days (before CASS insurance). See '}
-                  <button onClick={() => onNavigate('needs/insurance')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'بیمه' : 'Insurance'}</button>
+                  <Link href="/needs/insurance" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'بیمه' : 'Insurance'}</Link>
                   {currentLang === 'fa' ? '.' : '.'}
                 </li>
               </ul>
@@ -210,7 +211,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'شماره اورژانس رومانی (112) و دسترسی به کنسولگری ایران. ' : 'Romanian emergency number (112) and Iranian consulate access. '}
-                  <button onClick={() => onNavigate('romania/embassy-iran')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'سفارت ایران و سامانه میخک' : 'Embassy of Iran & Mikhak'}</button>
+                  <Link href="/romania/embassy-iran" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'سفارت ایران و سامانه میخک' : 'Embassy of Iran & Mikhak'}</Link>
                 </li>
               </ul>
             </div>
@@ -259,7 +260,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'یادآوری اینکه تمدید کارت اقامت باید پیش از پایان اعتبار انجام شود. اطلاعات بیشتر در ' : 'Permit renewal must be done before expiration. Read more in '}
-                  <button onClick={() => onNavigate('immigration/residence-renewal')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'تمدید اقامت' : 'Residence Renewal'}</button>
+                  <Link href="/immigration/residence-renewal" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'تمدید اقامت' : 'Residence Renewal'}</Link>
                   {currentLang === 'fa' ? '.' : '.'}
                 </li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
@@ -274,7 +275,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'دسترسی به نظام سلامت عمومی (' : 'Accessing the public health system ('}
-                  <button onClick={() => onNavigate('needs/insurance')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'بیمه' : 'Insurance'}</button>
+                  <Link href="/needs/insurance" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'بیمه' : 'Insurance'}</Link>
                   {currentLang === 'fa' ? ')، امکان یادگیری زبان رومانیایی، و شبکه‌های جامعه ایرانیان مقیم.' : '), learning the Romanian language, and Iranian community networks.'}
                 </li>
               </ul>
@@ -288,7 +289,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'پس از دوره‌ای مشخص از اقامت قانونی مستمر، امکان اقدام برای ' : 'After a specific period of continuous legal residency, you may apply for '}
-                  <button onClick={() => onNavigate('immigration/long-term-residence')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'اقامت بلندمدت' : 'Long-term Residence'}</button>
+                  <Link href="/immigration/long-term-residence" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'اقامت بلندمدت' : 'Long-term Residence'}</Link>
                   {currentLang === 'fa' ? ' یا تابعیت وجود دارد.' : ' or Citizenship.'}
                 </li>
               </ul>
@@ -302,7 +303,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'افتتاح و مدیریت حساب بانکی و آشنایی با نظام مالیاتی. ' : 'Opening a bank account and understanding personal taxes. '}
-                  <button onClick={() => onNavigate('work/taxes-salaries')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'حقوق و مالیات' : 'Taxes & Salaries'}</button>
+                  <Link href="/work/taxes-salaries" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'حقوق و مالیات' : 'Taxes & Salaries'}</Link>
                 </li>
               </ul>
             </div>
@@ -315,7 +316,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'نکات کلیدی برای امضای قرارداد اجاره طولانی‌مدت. ' : 'Key tips for signing a long-term rental contract. '}
-                  <button onClick={() => onNavigate('needs/housing')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'اجاره و خرید مسکن' : 'Housing & Rentals'}</button>
+                  <Link href="/needs/housing" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'اجاره و خرید مسکن' : 'Housing & Rentals'}</Link>
                 </li>
               </ul>
             </div>
@@ -328,7 +329,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'امکان تبدیل گواهینامه ایرانی یا اخذ گواهینامه جدید. ' : 'Exchanging your Iranian license or getting a new one. '}
-                  <button onClick={() => onNavigate('needs/driving-license')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'تبدیل گواهینامه' : 'Driving License Ex'}</button>
+                  <Link href="/needs/driving-license" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'تبدیل گواهینامه' : 'Driving License Ex'}</Link>
                 </li>
               </ul>
             </div>
@@ -561,7 +562,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'درخواست کارت اقامت موقت نزد IGI باید در این بازه انجام شود. رجوع به ' : 'Requesting a temporary residence permit at IGI must be done in this timeframe. See '}
-                  <button onClick={() => onNavigate('immigration/igi-process')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'مراحل IGI' : 'IGI Process'}</button>
+                  <Link href="/immigration/igi-process" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'مراحل IGI' : 'IGI Process'}</Link>
                   {currentLang === 'fa' ? '.' : '.'}
                 </li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
@@ -596,7 +597,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'در صورت اجاره ملک، ثبت قرارداد اجاره و اطلاع آدرس به IGI الزامی است. ' : 'If renting long-term, registering the lease and updating IGI is mandatory. '}
-                  <button onClick={() => onNavigate('needs/housing')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'اجاره و خرید مسکن' : 'Housing & Rentals'}</button>
+                  <Link href="/needs/housing" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'اجاره و خرید مسکن' : 'Housing & Rentals'}</Link>
                 </li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>

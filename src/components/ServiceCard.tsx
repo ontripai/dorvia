@@ -1,13 +1,15 @@
 import React from 'react';
+import Link from 'next/link';
 import { ServiceItem, Language } from '../types';
 
 interface ServiceCardProps {
   service: ServiceItem;
   currentLang: Language;
-  onSelect: (service: ServiceItem) => void;
+  onSelect?: (service: ServiceItem) => void;
+  href?: string;
 }
 
-export const ServiceCard: React.FC<ServiceCardProps> = ({ service, currentLang, onSelect }) => {
+export const ServiceCard: React.FC<ServiceCardProps> = ({ service, currentLang, onSelect, href }) => {
   return (
     <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
       <div>
@@ -33,12 +35,23 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, currentLang, 
         </div>
       </div>
 
-      <button
-        onClick={() => onSelect(service)}
-        className="w-full py-3 bg-[#071B3D] hover:bg-[#002266] text-white rounded-xl text-xs font-bold shadow-sm hover:shadow transition-all"
-      >
-        {currentLang === 'fa' ? 'جزئیات خدمات و مشاوره' : 'Service Details & Consultation'}
-      </button>
+      {href ? (
+        <Link
+          href={href}
+          className="w-full mt-6 py-3 bg-[#eef3f8] hover:bg-[#071B3D] text-[#071B3D] hover:text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse group/btn block text-center"
+        >
+          <span>{currentLang === 'fa' ? 'جزئیات خدمات و مشاوره' : 'Request This Service'}</span>
+          <span className="group-hover/btn:translate-x-1 rtl:group-hover/btn:-translate-x-1 transition-transform">→</span>
+        </Link>
+      ) : (
+        <button
+          onClick={() => onSelect && onSelect(service)}
+          className="w-full mt-6 py-3 bg-[#eef3f8] hover:bg-[#071B3D] text-[#071B3D] hover:text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse group/btn"
+        >
+          <span>{currentLang === 'fa' ? 'جزئیات خدمات و مشاوره' : 'Request This Service'}</span>
+          <span className="group-hover/btn:translate-x-1 rtl:group-hover/btn:-translate-x-1 transition-transform">→</span>
+        </button>
+      )}
     </div>
   );
 };

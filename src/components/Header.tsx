@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
 import { DesktopMegaMenu } from './DesktopMegaMenu';
@@ -60,11 +61,11 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="max-w-[1280px] w-full mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
         
         {/* Brand Logo Wordmark & Symbol */}
-        <div 
+        <Link
+          href="/"
           className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer group"
           onClick={() => {
             setActiveMegaMenu(null);
-            onNavigate('home');
           }}
         >
           <img src="/images/logo/dorvia-logo-primary-transparent-3000.png" alt="DORVIA" className="h-[32px] sm:h-[36px] w-auto group-hover:scale-105 transition-transform" />
@@ -77,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({
               {currentLang === 'fa' ? 'راهنمای تحصیل، کار و زندگی' : 'Study • Work • Business • Life'}
             </span>
           </div>
-        </div>
+        </Link>
 
         {/* Primary Desktop Navigation (Exact 6 Items) */}
         <nav className="hidden lg:flex items-center space-x-6 rtl:space-x-reverse text-xs font-semibold text-[#142033]">
@@ -85,15 +86,22 @@ export const Header: React.FC<HeaderProps> = ({
             const isActive = activeRoute === item.id || (item.megaMenu && activeMegaMenu === item.megaMenu);
             return (
               <div key={item.id} className="relative">
-                <button
-                  onClick={() => handleNavClick(item)}
+                <Link
+                  href={`/${item.id === 'home' ? '' : item.id}`}
+                  onClick={() => {
+                    if (item.megaMenu) {
+                      setActiveMegaMenu(activeMegaMenu === item.megaMenu ? null : item.megaMenu);
+                    } else {
+                      setActiveMegaMenu(null);
+                    }
+                  }}
                   className={`flex items-center space-x-1.5 rtl:space-x-reverse py-2 transition-colors cursor-pointer ${
                     isActive ? 'text-[#2F6FED] font-bold' : 'hover:text-[#2F6FED]'
                   }`}
                 >
                   <span>{item.label}</span>
                   {item.megaMenu && <ChevronDown size={14} className="text-[#788697]" />}
-                </button>
+                </Link>
               </div>
             );
           })}

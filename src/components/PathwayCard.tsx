@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Language } from '../types';
 import { ArrowLeft, ArrowRight } from './Icons';
 
@@ -8,7 +9,7 @@ interface PathwayCardProps {
   desc: string;
   icon: React.ComponentType<{ size?: number; className?: string }>;
   badge?: string;
-  onClick: () => void;
+  href: string;
 }
 
 export const PathwayCard: React.FC<PathwayCardProps> = ({
@@ -17,14 +18,14 @@ export const PathwayCard: React.FC<PathwayCardProps> = ({
   desc,
   icon: IconComp,
   badge,
-  onClick
+  href
 }) => {
   const ArrowIcon = currentLang === 'fa' ? ArrowLeft : ArrowRight;
 
   return (
-    <div
-      onClick={onClick}
-      className="editorial-card p-6 flex flex-col justify-between cursor-pointer group relative overflow-hidden"
+    <Link
+      href={href}
+      className="editorial-card p-6 flex flex-col justify-between cursor-pointer group relative overflow-hidden block"
     >
       {/* Subtle Top Blue Hover Bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-[#2F6FED] opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -55,6 +56,6 @@ export const PathwayCard: React.FC<PathwayCardProps> = ({
         <span>{currentLang === 'fa' ? 'بررسی شرایط و اطلاعات بیشتر' : 'Explore Pathway Details'}</span>
         <ArrowIcon size={16} className="transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
       </div>
-    </div>
+    </Link>
   );
 };
