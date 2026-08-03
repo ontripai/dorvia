@@ -70,7 +70,7 @@ export const enTranslations = {
       },
       {
         title: "Affordable Cost of Living",
-        desc: "Housing and living expenses 30-50% lower than Western Europe while retaining high quality of life."
+        desc: "Housing and daily living expenses in Romania are generally lower than in many Western European countries, though exact amounts depend on the city and lifestyle."
       },
       {
         title: "Globally Accredited Higher Education",
@@ -141,7 +141,7 @@ export const enTranslations = {
     quickLinks: "Quick Links",
     servicesTitle: "Specialized Services",
     legalTitle: "Legal Information",
-    copyright: "All rights reserved by 'DORVIA EUROP' platform.",
+    copyright: "All rights reserved by DORVIA EUROP — A NAVAN Brand.",
     contactInfo: "Contact Us",
     address: "Bucharest, Romania",
     email: "ontrip.ai@gmail.com",
