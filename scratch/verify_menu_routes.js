@@ -3,11 +3,11 @@ const path = require('path');
 
 const routesToVerify = [
   '/work',
-  '/work/find-job',
-  '/work/permit',
-  '/work/visa',
-  '/work/contract',
-  '/work/tax',
+  '/work/finding-job',
+  '/work/work-permit',
+  '/work/work-visa',
+  '/work/employment-contract',
+  '/work/taxes-salaries',
   '/work/insurance',
   '/company',
   '/company/registration',

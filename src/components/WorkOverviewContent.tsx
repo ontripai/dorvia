@@ -30,6 +30,7 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
   );
 
   switch (subRoute) {
+    case 'work-permit':
     case 'permit':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
@@ -102,6 +103,7 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
         </div>
       );
 
+    case 'work-visa':
     case 'visa':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
@@ -171,6 +173,7 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
         </div>
       );
 
+    case 'finding-job':
     case 'find-job':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
@@ -252,6 +255,7 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
         </div>
       );
 
+    case 'employment-contract':
     case 'contract':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
@@ -327,6 +331,7 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
         </div>
       );
 
+    case 'taxes-salaries':
     case 'tax':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
