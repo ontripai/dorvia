@@ -22,6 +22,7 @@ import { IgiProcessContent } from './IgiProcessContent';
 import { PreparatoryYearContent } from './PreparatoryYearContent';
 import { CompanyOverviewContent } from './CompanyOverviewContent';
 import { ImmigrationOverviewContent } from './ImmigrationOverviewContent';
+import { ScholarshipOverviewContent } from './ScholarshipOverviewContent';
 import { Button } from './Button';
 import { 
   GraduationCap, 
@@ -129,6 +130,15 @@ export const MainContent: React.FC<MainContentProps> = ({
           onNavigate={onNavigate}
           onOpenEvaluationModal={onOpenEvaluationModal}
         />
+        <LeadForm currentLang={currentLang} />
+      </div>
+    );
+  }
+
+  if (activeRoute === 'scholarships') {
+    return (
+      <div className="space-y-12">
+        <ScholarshipOverviewContent currentLang={currentLang} />
         <LeadForm currentLang={currentLang} />
       </div>
     );
