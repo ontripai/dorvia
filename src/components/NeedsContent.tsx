@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Language } from '../types';
 import { Button } from './Button';
 import { Landmark, House, FileCheck2, ShieldCheck, LockKeyhole, ExternalLink, ArrowRight, ArrowLeft } from './Icons';
+import { BnrRatesFeed } from './BnrRatesFeed';
 
 interface NeedsContentProps {
   subRoute: string;
@@ -250,46 +251,11 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
             {currentLang === 'fa' 
-              ? 'مدیریت تبدیل ارز و پرداخت‌های روزمره در رومانی، در صورت آشنایی با سیستم محلی، بسیار ساده است. ارز رسمی این کشور لئوی رومانی (RON) است؛ اگرچه برای معاملات کلان مانند خرید ملک یا خودرو ممکن است یورو استفاده شود، اما تمام خریدهای روزمره باید با RON انجام شود. بانک ملی رومانی (BNR) روزانه نرخ‌های مرجع را اعلام می‌کند که به‌عنوان معیار اصلی شناخته می‌شود. برای جلوگیری از پرداخت کارمزدهای پنهان و نرخ‌های نامناسب، توصیه می‌شود منحصراً از بانک‌های معتبر یا صرافی‌های مجازی (Case de Schimb Valutar) استفاده کنید که به‌وضوح عبارت "بدون کارمزد" (0% Comision) را درج کرده‌اند.'
+              ? 'مدیریت تبدیل ارز و پرداخت‌های روزمره در رومانی، در صورت آشنایی با سیستم محلی، بسیار ساده است. ارز رسمی این کشور لئوی رومانی (RON) است؛ اگرچه برای معاملات کلان مانند خرید ملک یا خودرو ممکن است یورو استفاده شود، اما تمام خریدهای روزمره باید با RON انجام شود. بانک ملی رومانی (BNR) روزانه نرخ‌های مرجع را اعلام می‌کند که به‌عنوان معیار اصلی شناخته می‌شود. برای جلوگیری از پرداخت کارمزدهای پنهان و نرخ‌های نامناسب، توصیه می‌شود منحصراً از بانک‌های معتبر یا دفاتر تبدیل ارز یا صرافی‌های مجاز (Case de Schimb Valutar) استفاده کنید که به‌وضوح عبارت "بدون کارمزد" (0% Comision) را درج کرده‌اند.'
               : 'Navigating currency exchange and everyday payments in Romania is straightforward once you understand the local system. The official currency is the Romanian Leu (RON), and while euros are widely accepted for large transactions like real estate or car purchases, daily expenses are strictly handled in RON. The National Bank of Romania (BNR) sets the official daily reference rates, which serve as a benchmark. To avoid hidden fees and unfavorable rates, it is highly recommended to use licensed commercial banks or authorized exchange offices (Case de Schimb Valutar) that explicitly display "0% Comision".'}
           </div>
 
-          <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-            <div className="flex items-center justify-between border-b border-[#dfe6ef] pb-3">
-              <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#142033]">
-                <Landmark size={20} className="text-[#2F6FED]" />
-                <h3 className="font-extrabold text-base">{currentLang === 'fa' ? 'نرخ مرجع بانک ملی رومانی (BNR)' : 'National Bank of Romania (BNR) Reference Rates'}</h3>
-              </div>
-              <span className="text-[11px] text-[#788697] font-semibold">{currentLang === 'fa' ? 'آخرین بروزرسانی: مرداد ۱۴۰۵ / اوت ۲۰۲۶' : 'Updated: August 2026'}</span>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 text-center">
-              <div className="p-3.5 rounded-xl bg-[#f7f9fc] border border-[#dfe6ef]">
-                <div className="text-xs text-[#788697] font-bold">1 EUR</div>
-                <div className="text-base font-extrabold text-[#2F6FED] mt-1">4.97 RON</div>
-              </div>
-              <div className="p-3.5 rounded-xl bg-[#f7f9fc] border border-[#dfe6ef]">
-                <div className="text-xs text-[#788697] font-bold">1 USD</div>
-                <div className="text-base font-extrabold text-[#2F6FED] mt-1">4.58 RON</div>
-              </div>
-              <div className="p-3.5 rounded-xl bg-[#f7f9fc] border border-[#dfe6ef]">
-                <div className="text-xs text-[#788697] font-bold">1 GBP</div>
-                <div className="text-base font-extrabold text-[#2F6FED] mt-1">5.82 RON</div>
-              </div>
-              <div className="p-3.5 rounded-xl bg-[#f7f9fc] border border-[#dfe6ef]">
-                <div className="text-xs text-[#788697] font-bold">1 AED</div>
-                <div className="text-base font-extrabold text-[#2F6FED] mt-1">1.24 RON</div>
-              </div>
-              <div className="p-3.5 rounded-xl bg-[#f7f9fc] border border-[#dfe6ef]">
-                <div className="text-xs text-[#788697] font-bold">1 TRY</div>
-                <div className="text-base font-extrabold text-[#2F6FED] mt-1">0.14 RON</div>
-              </div>
-            </div>
-
-            <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 font-semibold">
-              ⚠️ {currentLang === 'fa' ? 'تذکر مهم: نرخ مرجع بانک ملی رومانی الزاماً همان نرخ نهایی صرافی یا کارمزد کارت‌های بانکی نیست.' : 'Important Notice: BNR reference rates are benchmark indicators and may differ from commercial bank exchange spreads.'}
-            </div>
-          </div>
+          <BnrRatesFeed currentLang={currentLang} />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="editorial-card p-6 bg-white space-y-3 border border-[#dfe6ef]">
