@@ -35,7 +35,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
@@ -70,7 +70,37 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'معرفی IGI (اداره کل مهاجرت) و سفارت/کنسولگری رومانی به‌عنوان مراجع اصلی برای اطلاعات به‌روز.' : 'The General Inspectorate for Immigration (IGI) and the Romanian Embassy/Consulate are the primary official sources for up-to-date information.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
+                <span>{currentLang === 'fa' ? 'بازه هزینه‌ای تقریبی' : 'Estimated Cost Ranges'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'تخمین کلی هزینه‌های شروع (شهریه/ سرمایه شرکت، ویزا، بیمه، پرواز) برای هر مسیر اصلی. ارقام دقیق در صفحات مرتبط موجود است.' : 'Estimated initial costs (tuition/capital, visa, insurance, flight) vary by pathway. Check specific pages for exact figures.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
+                <span>{currentLang === 'fa' ? 'اشتباهات رایج متقاضیان' : 'Common Mistakes'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'شروع دیرهنگام فرآیند، عدم تطبیق مدارک ترجمه‌شده با استانداردهای رومانی، و نداشتن بیمه معتبر بین‌المللی.' : 'Starting late, failing to match translated documents with Romanian standards, and lacking valid international insurance.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">6</span>
+                <span>{currentLang === 'fa' ? 'چک اولیه واجد شرایط بودن' : 'Initial Eligibility Check'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'سوالات کلیدی پیش از شروع: آیا مدرک تحصیلی/تجربه کاری مرتبط دارم؟ آیا تمکن مالی کافی اثبات شده است؟' : 'Key questions before starting: Do I have a relevant degree or work experience? Can I prove sufficient financial means?'}</li>
               </ul>
             </div>
           </div>
@@ -87,7 +117,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
@@ -95,6 +125,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'ثبت‌نام دریافت کارت اقامت موقت نزد IGI باید ظرف مهلت قانونی (معمولاً پیش از پایان اعتبار ویزای D) انجام شود.' : 'Registering for a temporary residence permit with IGI must be done within the legal timeframe (usually before the Type D visa expires).'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
             </div>
 
@@ -115,7 +146,44 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'آدرس محل سکونت باید در مدارک اقامتی ثبت شود؛ تغییر آدرس باید به IGI اطلاع داده شود.' : 'Your residential address must be registered on your residency documents; any change of address must be reported to IGI.'}</li>
+              </ul>
+            </div>
+            
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
+                <span>{currentLang === 'fa' ? 'رزرو نوبت IGI' : 'IGI Appointment Booking'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'درخواست کارت اقامت نیاز به نوبت قبلی نزد شعبه محلی IGI دارد؛ این نوبت‌ها گاهی پر می‌شوند، لذا زودهنگام اقدام کنید.' : 'Applying for a residence permit requires an appointment at the local IGI branch; these slots fill up quickly, so act early.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+            
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
+                <span>{currentLang === 'fa' ? 'نظام سلامت اورژانسی' : 'Emergency Healthcare'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>
+                  {currentLang === 'fa' ? 'چگونگی دسترسی به خدمات درمانی اورژانسی در روزهای اول (پیش از تکمیل بیمه رسمی CASS). اطلاعات در بخش ' : 'How to access emergency medical services in the first days (before CASS insurance). See '}
+                  <button onClick={() => onNavigate('needs/insurance')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'بیمه' : 'Insurance'}</button>
+                  {currentLang === 'fa' ? '.' : '.'}
+                </li>
+              </ul>
+            </div>
+            
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">6</span>
+                <span>{currentLang === 'fa' ? 'مخاطبین ضروری' : 'Emergency Contacts'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>
+                  {currentLang === 'fa' ? 'شماره اورژانس رومانی (112) و دسترسی به کنسولگری ایران. ' : 'Romanian emergency number (112) and Iranian consulate access. '}
+                  <button onClick={() => onNavigate('romania/embassy-iran')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'سفارت ایران و سامانه میخک' : 'Embassy of Iran & Mikhak'}</button>
+                </li>
               </ul>
             </div>
           </div>
@@ -132,7 +200,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
@@ -144,6 +212,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
                   <button onClick={() => onNavigate('immigration/residence-renewal')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'تمدید اقامت' : 'Residence Renewal'}</button>
                   {currentLang === 'fa' ? '.' : '.'}
                 </li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
             </div>
 
@@ -172,7 +241,45 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
                   <button onClick={() => onNavigate('immigration/long-term-residence')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'اقامت بلندمدت' : 'Long-term Residence'}</button>
                   {currentLang === 'fa' ? ' یا تابعیت وجود دارد.' : ' or Citizenship.'}
                 </li>
-                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
+                <span>{currentLang === 'fa' ? 'امور مالی روزمره' : 'Day-to-day Finances'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>
+                  {currentLang === 'fa' ? 'افتتاح و مدیریت حساب بانکی و آشنایی با نظام مالیاتی. ' : 'Opening a bank account and understanding personal taxes. '}
+                  <button onClick={() => onNavigate('work/taxes-salaries')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'حقوق و مالیات' : 'Taxes & Salaries'}</button>
+                </li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
+                <span>{currentLang === 'fa' ? 'مسکن و اجاره بلندمدت' : 'Long-term Housing'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>
+                  {currentLang === 'fa' ? 'نکات کلیدی برای امضای قرارداد اجاره طولانی‌مدت. ' : 'Key tips for signing a long-term rental contract. '}
+                  <button onClick={() => onNavigate('needs/housing')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'اجاره و خرید مسکن' : 'Housing & Rentals'}</button>
+                </li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">6</span>
+                <span>{currentLang === 'fa' ? 'گواهینامه رانندگی' : 'Driving License'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>
+                  {currentLang === 'fa' ? 'امکان تبدیل گواهینامه ایرانی یا اخذ گواهینامه جدید. ' : 'Exchanging your Iranian license or getting a new one. '}
+                  <button onClick={() => onNavigate('needs/driving-license')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'تبدیل گواهینامه' : 'Driving License Ex'}</button>
+                </li>
               </ul>
             </div>
           </div>
@@ -189,7 +296,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
@@ -220,6 +327,26 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
             </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
+                <span>{currentLang === 'fa' ? 'موارد قابل حمل توصیه شده' : 'Recommended Items'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'مدارک اصل و کپی، پول نقد اولیه، داروهای ضروری با نسخه پزشک در صورت نیاز، و مبدل دوشاخه برق اروپایی.' : 'Original docs and copies, initial cash, essential prescription medications, and a European power adapter.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
+                <span>{currentLang === 'fa' ? 'هماهنگی ارتباطی پیش از پرواز' : 'Pre-flight Communications'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'اطلاع‌رسانی به خانواده از برنامه پرواز، و ذخیره شماره تماس اضطراری سفارت و دانشگاه/کارفرما در موبایل.' : 'Informing family of your flight itinerary, and saving emergency contacts for the embassy and university/employer on your phone.'}</li>
+              </ul>
+            </div>
           </div>
         </div>
       );
@@ -234,7 +361,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
@@ -262,7 +389,37 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'نگهداری نسخه از مدارک هویتی به‌صورت جداگانه از اصل مدارک.' : 'Keep copies of your identity documents stored separately from the originals.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
+                <span>{currentLang === 'fa' ? 'حمل‌ونقل از فرودگاه' : 'Airport Transfer'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'گزینه‌های رایج انتقال از فرودگاه اوتوپنی (OTP) به مرکز شهر شامل تاکسی‌های رسمی، اتوبوس اکسپرس، و قطار/مترو است.' : 'Common transfer options from Otopeni (OTP) airport to the city center include official taxis, express buses, and trains.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
+                <span>{currentLang === 'fa' ? 'خریدهای ضروری روز اول' : 'Day 1 Essentials'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'سیم‌کارت، وسایل اولیه اسکان، آب و غذای آماده برای ساعات اولیه.' : 'Local SIM card, basic accommodation supplies, water, and ready-to-eat food for the first hours.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">6</span>
+                <span>{currentLang === 'fa' ? 'آشنایی اولیه با محیط' : 'Initial Orientation'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'پیدا کردن نزدیک‌ترین سوپرمارکت، داروخانه، و ایستگاه حمل‌ونقل عمومی به محل اقامت موقت.' : 'Locating the nearest supermarket, pharmacy, and public transit stop to your temporary accommodation.'}</li>
               </ul>
             </div>
           </div>
@@ -279,7 +436,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
@@ -291,6 +448,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
                   <button onClick={() => onNavigate('immigration/igi-process')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'مراحل IGI' : 'IGI Process'}</button>
                   {currentLang === 'fa' ? '.' : '.'}
                 </li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
             </div>
 
@@ -311,7 +469,40 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'ثبت‌نام تحصیلی (در صورت دانشجو بودن) یا شروع رسمی کار (در صورت داشتن قرارداد)، ثبت آدرس محل سکونت.' : 'University enrollment (if a student) or officially starting work (if employed), and registering your residential address.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
+                <span>{currentLang === 'fa' ? 'تثبیت محل زندگی' : 'Securing Housing'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>
+                  {currentLang === 'fa' ? 'در صورت اجاره ملک، ثبت قرارداد اجاره و اطلاع آدرس به IGI الزامی است. ' : 'If renting long-term, registering the lease and updating IGI is mandatory. '}
+                  <button onClick={() => onNavigate('needs/housing')} className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'اجاره و خرید مسکن' : 'Housing & Rentals'}</button>
+                </li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
+                <span>{currentLang === 'fa' ? 'شبکه‌سازی اولیه' : 'Initial Networking'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'عضویت در گروه‌های محلی جامعه ایرانیان، شرکت در رویدادهای دانشگاه/محل کار برای آشنایی بهتر با محیط.' : 'Joining local Iranian community groups and attending university or workplace events to integrate.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">6</span>
+                <span>{currentLang === 'fa' ? 'بررسی وضعیت پرونده' : 'Tracking Application Status'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'پیگیری مداوم وضعیت درخواست کارت اقامت نزد IGI در صورت طولانی شدن روند معمول.' : 'Continuously tracking your residence permit application status with IGI, especially if the timeline exceeds usual estimates.'}</li>
               </ul>
             </div>
           </div>
