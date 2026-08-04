@@ -1,13 +1,13 @@
-import { SITE_URL } from '@/config';
+import { SITE_URL, isProduction } from '@/config';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'مقالات و راهنماها | در رومانی – DORVIA EUROP',
   description: 'مقالات، راهنماها و آخرین به‌روزرسانی‌های قوانین مهاجرتی، کار و تحصیل در رومانی.',
-  robots: {
+  robots: isProduction ?  {
     index: false,
     follow: true,
-  },
+  } : undefined,
   alternates: {
     canonical: `${SITE_URL}/articles`,
   },

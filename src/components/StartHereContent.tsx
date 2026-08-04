@@ -116,6 +116,61 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             </div>
           </div>
 
+          
+          <h3 className="text-2xl font-bold text-[#142033] mt-12 mb-6 px-2">{currentLang === 'fa' ? 'چک‌لیست نهایی پیش از سفر' : 'Final Pre-departure Checklist'}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'مدارک ضروری' : 'Essential Documents'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'پاسپورت با حداقل ۳ ماه اعتبار بیشتر از تاریخ انقضای ویزا، ویزای D معتبر، بیمه درمانی بین‌المللی، مدرک تمکن مالی.' : 'Passport valid for at least 3 months beyond visa expiration, a valid Type D visa, international travel insurance, and proof of funds.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'آماده‌سازی مالی و ارتباطی' : 'Financial & Comm Prep'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'تبدیل حداقلی ارز برای هزینه‌های اولیه، اطلاع‌رسانی به بانک درباره سفر (در صورت استفاده از کارت بین‌المللی)، ذخیره نسخه دیجیتال از مدارک مهم.' : 'Exchanging a minimum amount of currency for initial expenses, notifying your bank (if using international cards), and saving digital copies of key documents.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'هماهنگی محل اسکان' : 'Accommodation Setup'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'تایید رزرو محل اقامت موقت یا خوابگاه پیش از پرواز، توصیه به داشتن آدرس دقیق مقصد.' : 'Confirming your temporary housing or dorm reservation before the flight, and having the exact destination address at hand.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
+                <span>{currentLang === 'fa' ? 'موارد قابل حمل توصیه شده' : 'Recommended Items'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'مدارک اصل و کپی، پول نقد اولیه، داروهای ضروری با نسخه پزشک در صورت نیاز، و مبدل دوشاخه برق اروپایی.' : 'Original docs and copies, initial cash, essential prescription medications, and a European power adapter.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
+                <span>{currentLang === 'fa' ? 'هماهنگی ارتباطی پیش از پرواز' : 'Pre-flight Communications'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'اطلاع‌رسانی به خانواده از برنامه پرواز، و ذخیره شماره تماس اضطراری سفارت و دانشگاه/کارفرما در موبایل.' : 'Informing family of your flight itinerary, and saving emergency contacts for the embassy and university/employer on your phone.'}</li>
+              </ul>
+            </div>
+          </div>
+          
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -225,6 +280,71 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             </div>
           </div>
 
+          
+          <h3 className="text-2xl font-bold text-[#142033] mt-12 mb-6 px-2">{currentLang === 'fa' ? 'راهنمای ۷۲ ساعت نخست' : 'First 72 Hours Guide'}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'روز ورود' : 'Arrival Day'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'عبور از گمرک و کنترل مرزی، دریافت مهر ورود، اطمینان از صحت اطلاعات پاسپورت.' : 'Clearing customs and border control, getting the entry stamp, and ensuring passport details are correctly processed.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'کارهای فوری' : 'Urgent Tasks'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'تهیه سیم‌کارت محلی برای ارتباط، شناسایی نزدیک‌ترین شعبه IGI محل اقامت برای مراحل بعدی.' : 'Purchasing a local SIM card for communication, and locating the nearest IGI branch for your upcoming residency steps.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'نکته ایمنی' : 'Safety Note'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'نگهداری نسخه از مدارک هویتی به‌صورت جداگانه از اصل مدارک.' : 'Keep copies of your identity documents stored separately from the originals.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
+                <span>{currentLang === 'fa' ? 'حمل‌ونقل از فرودگاه' : 'Airport Transfer'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'گزینه‌های رایج انتقال از فرودگاه اوتوپنی (OTP) به مرکز شهر شامل تاکسی‌های رسمی، اتوبوس اکسپرس، و قطار/مترو است.' : 'Common transfer options from Otopeni (OTP) airport to the city center include official taxis, express buses, and trains.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
+                <span>{currentLang === 'fa' ? 'خریدهای ضروری روز اول' : 'Day 1 Essentials'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'سیم‌کارت، وسایل اولیه اسکان، آب و غذای آماده برای ساعات اولیه.' : 'Local SIM card, basic accommodation supplies, water, and ready-to-eat food for the first hours.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">6</span>
+                <span>{currentLang === 'fa' ? 'آشنایی اولیه با محیط' : 'Initial Orientation'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'پیدا کردن نزدیک‌ترین سوپرمارکت، داروخانه، و ایستگاه حمل‌ونقل عمومی به محل اقامت موقت.' : 'Locating the nearest supermarket, pharmacy, and public transit stop to your temporary accommodation.'}</li>
+              </ul>
+            </div>
+          </div>
+          
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -347,236 +467,8 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             </div>
           </div>
 
-          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
-            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
-              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
-            </h3>
-            <div className="space-y-6">
-              <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چه زمانی می‌توانم برای اقامت دائم درخواست دهم؟' : 'How soon can I apply for permanent residency?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'اتباع غیراروپایی عموماً می‌توانند پس از ۵ سال اقامت قانونی و مستمر در رومانی، مشروط به احراز شرایط خاص، برای اقامت بلندمدت اقدام کنند.' : 'Non-EU citizens can generally apply for long-term residency after 5 years of continuous, legal stay in Romania, subject to specific conditions.'}</p>
-              </div>
-              <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم خانواده‌ام را برای زندگی به رومانی بیاورم؟' : 'Can I bring my family to live with me?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، در صورتی که کارت اقامتی با اعتبار حداقل یک سال داشته باشید، ممکن است واجد شرایط ثبت درخواست پیوست خانواده برای همسر و فرزندان زیر سن قانونی خود باشید.' : 'Yes, if you hold a valid residence permit valid for at least one year, you may be eligible to apply for Family Reunification for your spouse and minor children.'}</p>
-              </div>
-            </div>
-          </div>
-
-          <ParentHubFooterCard slugRoute="start-here/settling-in" currentLang={currentLang} onNavigate={onNavigate} />
-        </div>
-      );
-
-    case 'pre-departure-checklist':
-      return (
-        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-          <Breadcrumb slugRoute="start-here/planning-to-come" currentLang={currentLang} onNavigate={onNavigate} />
-
-          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'چک‌لیست پیش از سفر' : 'Pre-departure Checklist'}
-            </h1>
-            <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
-          </div>
-
-          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-            {currentLang === 'fa' 
-              ? 'هفته‌های منتهی به پرواز شما به رومانی برای تضمین یک انتقال بدون دردسر بسیار حیاتی است. یک برنامه‌ریزی منظم پیش از سفر، استرس را کاهش داده و از تاخیرهای پرهزینه در زمان ورود جلوگیری می‌کند. تمرکز اصلی شما باید بر گردآوری و محافظت از مدارک ضروری باشد—به‌ویژه پاسپورت، ویزای تاییدشده، مدارک تحصیلی یا مدنی آپوستیل‌شده، و تاییدیه محل اقامت. آمادگی مالی نیز به همان اندازه مهم است؛ اطمینان از دسترسی به بودجه کافی برای هفته‌های اول در کنار بیمه مسافرتی جامع، آرامش خاطر شما را در این سفر بین‌المللی فراهم می‌سازد.'
-              : 'The weeks leading up to your departure for Romania are critical for ensuring a smooth transition. A well-organized pre-departure phase minimizes stress and prevents costly delays upon arrival. Your primary focus should be on gathering and protecting your essential documents—specifically your passport, validated visa, apostilled academic or civil records, and proof of accommodation. Financial preparation is equally vital; ensuring you have enough accessible funds for your first few weeks, alongside comprehensive travel insurance, will provide peace of mind as you embark on this international journey.'}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
-                <span>{currentLang === 'fa' ? 'مدارک ضروری' : 'Essential Documents'}</span>
-              </h3>
-              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'پاسپورت با حداقل ۳ ماه اعتبار بیشتر از تاریخ انقضای ویزا، ویزای D معتبر، بیمه درمانی بین‌المللی، مدرک تمکن مالی.' : 'Passport valid for at least 3 months beyond visa expiration, a valid Type D visa, international travel insurance, and proof of funds.'}</li>
-              </ul>
-            </div>
-
-            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
-                <span>{currentLang === 'fa' ? 'آماده‌سازی مالی و ارتباطی' : 'Financial & Comm Prep'}</span>
-              </h3>
-              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'تبدیل حداقلی ارز برای هزینه‌های اولیه، اطلاع‌رسانی به بانک درباره سفر (در صورت استفاده از کارت بین‌المللی)، ذخیره نسخه دیجیتال از مدارک مهم.' : 'Exchanging a minimum amount of currency for initial expenses, notifying your bank (if using international cards), and saving digital copies of key documents.'}</li>
-              </ul>
-            </div>
-
-            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
-                <span>{currentLang === 'fa' ? 'هماهنگی محل اسکان' : 'Accommodation Setup'}</span>
-              </h3>
-              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'تایید رزرو محل اقامت موقت یا خوابگاه پیش از پرواز، توصیه به داشتن آدرس دقیق مقصد.' : 'Confirming your temporary housing or dorm reservation before the flight, and having the exact destination address at hand.'}</li>
-                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
-              </ul>
-            </div>
-
-            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
-                <span>{currentLang === 'fa' ? 'موارد قابل حمل توصیه شده' : 'Recommended Items'}</span>
-              </h3>
-              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'مدارک اصل و کپی، پول نقد اولیه، داروهای ضروری با نسخه پزشک در صورت نیاز، و مبدل دوشاخه برق اروپایی.' : 'Original docs and copies, initial cash, essential prescription medications, and a European power adapter.'}</li>
-              </ul>
-            </div>
-
-            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
-                <span>{currentLang === 'fa' ? 'هماهنگی ارتباطی پیش از پرواز' : 'Pre-flight Communications'}</span>
-              </h3>
-              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'اطلاع‌رسانی به خانواده از برنامه پرواز، و ذخیره شماره تماس اضطراری سفارت و دانشگاه/کارفرما در موبایل.' : 'Informing family of your flight itinerary, and saving emergency contacts for the embassy and university/employer on your phone.'}</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
-            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
-              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
-            </h3>
-            <div className="space-y-6">
-              <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا باید مدارکم را قبل از رسیدن ترجمه کنم یا بعد از آن؟' : 'Should I translate my documents before or after arriving?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'توصیه می‌شود مدارک اصلی را در کشور خود ترجمه و آپوستیل کنید، اگرچه نهادهای رومانیایی غالباً ترجمه‌های انجام‌شده توسط مترجمین رسمی داخل رومانی را ترجیح می‌دهند.' : 'It is highly recommended to translate and apostille your core documents in your home country, though translations done by Romanian-authorized translators inside Romania are often preferred for local institutional use.'}</p>
-              </div>
-              <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چقدر پول نقد باید در پرواز همراه داشته باشم؟' : 'How much cash should I carry on the flight?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'باید پول نقد کافی (ترجیحاً یورو) برای پوشش اجاره ماه اول، ودیعه و مخارج فوری همراه داشته باشید، اما طبق قانون، مبالغ بالای ۱۰ هزار یورو باید در گمرک اظهار شود.' : 'You should carry enough cash, preferably in Euros, to cover your first month\'s rent, deposit, and immediate living expenses, but legally you must declare cash amounts exceeding €10,000 at customs.'}</p>
-              </div>
-            </div>
-          </div>
-
-          <ParentHubFooterCard slugRoute="start-here/planning-to-come" currentLang={currentLang} onNavigate={onNavigate} />
-        </div>
-      );
-
-    case 'first-three-days':
-      return (
-        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-          <Breadcrumb slugRoute="start-here/newly-arrived" currentLang={currentLang} onNavigate={onNavigate} />
-
-          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? '۳ روز اول در رومانی' : 'First 3 Days'}
-            </h1>
-            <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
-          </div>
-
-          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-            {currentLang === 'fa' 
-              ? 'در ۷۲ ساعت نخست ورود به رومانی، تمرکز شما باید بر رفع نیازهای اولیه و برقراری ارتباطات ضروری باشد. از لحظه حرکت از فرودگاه اوتوپنی به سمت محل اقامت موقت، تا خرید سیم‌کارت محلی، این گام‌های نخست به شما کمک می‌کنند تا متصل و در دسترس بمانید. همچنین باید با محله خود آشنا شوید و نزدیک‌ترین سوپرمارکت‌ها، داروخانه‌ها و ایستگاه‌های حمل‌ونقل عمومی را پیدا کنید. اگرچه میل به انجام سریع کارهای اداری بزرگ وجود دارد، بهتر است از این سه روز اول برای رفع خستگی سفر و جهت‌یابی ایمن در محیط جدید استفاده کنید.'
-              : 'The first 72 hours in Romania are about covering your immediate, basic needs and establishing a communication lifeline. From navigating the transfer from Otopeni Airport to your temporary accommodation, to purchasing a local SIM card, these initial steps are all about getting connected. You will also need to familiarize yourself with your immediate neighborhood, locating the nearest grocery stores, pharmacies, and public transport hubs. While the urge to immediately tackle major administrative tasks is strong, use these first three days to overcome jet lag and orient yourself safely.'}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
-                <span>{currentLang === 'fa' ? 'روز ورود' : 'Arrival Day'}</span>
-              </h3>
-              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'عبور از گمرک و کنترل مرزی، دریافت مهر ورود، اطمینان از صحت اطلاعات پاسپورت.' : 'Clearing customs and border control, getting the entry stamp, and ensuring passport details are correctly processed.'}</li>
-              </ul>
-            </div>
-
-            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
-                <span>{currentLang === 'fa' ? 'کارهای فوری' : 'Urgent Tasks'}</span>
-              </h3>
-              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'تهیه سیم‌کارت محلی برای ارتباط، شناسایی نزدیک‌ترین شعبه IGI محل اقامت برای مراحل بعدی.' : 'Purchasing a local SIM card for communication, and locating the nearest IGI branch for your upcoming residency steps.'}</li>
-              </ul>
-            </div>
-
-            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
-                <span>{currentLang === 'fa' ? 'نکته ایمنی' : 'Safety Note'}</span>
-              </h3>
-              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'نگهداری نسخه از مدارک هویتی به‌صورت جداگانه از اصل مدارک.' : 'Keep copies of your identity documents stored separately from the originals.'}</li>
-              </ul>
-            </div>
-
-            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
-                <span>{currentLang === 'fa' ? 'حمل‌ونقل از فرودگاه' : 'Airport Transfer'}</span>
-              </h3>
-              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'گزینه‌های رایج انتقال از فرودگاه اوتوپنی (OTP) به مرکز شهر شامل تاکسی‌های رسمی، اتوبوس اکسپرس، و قطار/مترو است.' : 'Common transfer options from Otopeni (OTP) airport to the city center include official taxis, express buses, and trains.'}</li>
-                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
-              </ul>
-            </div>
-
-            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
-                <span>{currentLang === 'fa' ? 'خریدهای ضروری روز اول' : 'Day 1 Essentials'}</span>
-              </h3>
-              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'سیم‌کارت، وسایل اولیه اسکان، آب و غذای آماده برای ساعات اولیه.' : 'Local SIM card, basic accommodation supplies, water, and ready-to-eat food for the first hours.'}</li>
-              </ul>
-            </div>
-
-            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">6</span>
-                <span>{currentLang === 'fa' ? 'آشنایی اولیه با محیط' : 'Initial Orientation'}</span>
-              </h3>
-              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'پیدا کردن نزدیک‌ترین سوپرمارکت، داروخانه، و ایستگاه حمل‌ونقل عمومی به محل اقامت موقت.' : 'Locating the nearest supermarket, pharmacy, and public transit stop to your temporary accommodation.'}</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
-            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
-              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
-            </h3>
-            <div className="space-y-6">
-              <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بهترین مکان برای خرید سیم‌کارت محلی کجاست؟' : 'Where is the best place to buy a local SIM card?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'شما می‌توانید سیم‌کارت‌های اعتباری (Prepaid) از اپراتورهای اصلی مثل Orange یا Vodafone را مستقیماً در سالن پروازهای ورودی فرودگاه یا از کیوسک‌ها و سوپرمارکت‌های داخل شهر تهیه کنید.' : 'You can purchase prepaid SIM cards from major providers like Orange or Vodafone directly at the airport arrivals hall or at any kiosk/supermarket in the city.'}</p>
-              </div>
-              <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا استفاده از تاکسی‌های فرودگاه امن است؟' : 'Is it safe to use taxis from the airport?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، اما منحصراً از دستگاه‌های لمسی سفارش تاکسی در ترمینال ورودی یا اپلیکیشن‌هایی نظیر Uber و Bolt استفاده کنید و از سوار شدن به ماشین رانندگانی که مستقیماً به شما پیشنهاد می‌دهند خودداری نمایید.' : 'Yes, but you should exclusively use the official touch-screen ordering machines inside the arrivals terminal or ride-hailing apps like Uber and Bolt, avoiding drivers who solicit passengers directly.'}</p>
-              </div>
-            </div>
-          </div>
-
-          <ParentHubFooterCard slugRoute="start-here/newly-arrived" currentLang={currentLang} onNavigate={onNavigate} />
-        </div>
-      );
-
-    case 'first-month':
-      return (
-        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-          <Breadcrumb slugRoute="start-here/settling-in" currentLang={currentLang} onNavigate={onNavigate} />
-
-          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'ماه اول اقامت' : 'First Month'}
-            </h1>
-            <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
-          </div>
-
-          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-            {currentLang === 'fa' 
-              ? 'ماه اول حضور شما در رومانی با عبور از وضعیت یک مسافر به یک مقیم ثبت‌شده تعریف می‌شود. این دوره‌ای است که باید بار سنگین کارهای اداری را به سرانجام برسانید. اولویت مطلق شما ثبت موفقیت‌آمیز درخواست کارت اقامت (Permis de Ședere) در اداره مهاجرت (IGI) است. برای این منظور، لازم است یک قرارداد مسکن بلندمدت را نهایی کنید، معاینات پزشکی لازم را انجام دهید و وضعیت ثبت‌نام دانشگاه یا اشتغال خود را قطعی سازید. پیمودن موفق این مسیر در ماه اول، بستر قانونی و لجستیکی مستحکمی برای یک زندگی آرام و بدون استرس در رومانی فراهم می‌آورد.'
-              : 'Your first month in Romania is defined by the transition from a visitor to a registered resident. This is the period where you must finalize the heavy administrative lifting. Your absolute top priority is successfully submitting your application for a residence permit (Permis de Ședere) at IGI. To do this, you will need to finalize a long-term housing contract, undergo necessary medical checkups, and solidify your enrollment at your university or workplace. Successfully navigating this month lays the legal and logistical groundwork for a stable, stress-free life in Romania.'}
-          </div>
-
+          
+          <h3 className="text-2xl font-bold text-[#142033] mt-12 mb-6 px-2">{currentLang === 'fa' ? 'اقدامات ضروری ماه اول' : 'Essential First-Month Actions'}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -647,19 +539,19 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </ul>
             </div>
           </div>
-
+          
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
             </h3>
             <div className="space-y-6">
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چقدر طول می‌کشد تا IGI کارت اقامت را صادر کند؟' : 'How long does it take for IGI to issue the residence card?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون، IGI بین ۳۰ تا ۴۵ روز زمان دارد تا پس از ثبت اطلاعات بیومتریک شما، کارت فیزیکی اقامت را پردازش و صادر نماید.' : 'By law, IGI has 30 to 45 days to process your application and issue the physical card after you submit your biometric data.'}</p>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چه زمانی می‌توانم برای اقامت دائم درخواست دهم؟' : 'How soon can I apply for permanent residency?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'اتباع غیراروپایی عموماً می‌توانند پس از ۵ سال اقامت قانونی و مستمر در رومانی، مشروط به احراز شرایط خاص، برای اقامت بلندمدت اقدام کنند.' : 'Non-EU citizens can generally apply for long-term residency after 5 years of continuous, legal stay in Romania, subject to specific conditions.'}</p>
               </div>
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم در حالی که پرونده اقامتم در جریان است از رومانی خارج شوم؟' : 'Can I leave Romania while my residence permit is processing?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'شدیداً توصیه می‌شود در صورتی که ویزای اولیه شما منقضی شده است از کشور خارج نشوید، زیرا ممکن است برای ورود مجدد بدون کارت اقامت فیزیکی با مشکل مواجه شوید.' : 'It is strongly advised not to leave the country if your original entry visa has expired, as you may face difficulties re-entering without the physical residence card.'}</p>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم خانواده‌ام را برای زندگی به رومانی بیاورم؟' : 'Can I bring my family to live with me?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، در صورتی که کارت اقامتی با اعتبار حداقل یک سال داشته باشید، ممکن است واجد شرایط ثبت درخواست پیوست خانواده برای همسر و فرزندان زیر سن قانونی خود باشید.' : 'Yes, if you hold a valid residence permit valid for at least one year, you may be eligible to apply for Family Reunification for your spouse and minor children.'}</p>
               </div>
             </div>
           </div>

@@ -146,5 +146,17 @@ export const enTranslations = {
     address: "Bucharest, Romania",
     email: "ontrip.ai@gmail.com",
     phone: "+40 727 348 009"
+  },
+  seoMetadata: {
+    "work/work-permit": {
+      title: "Work in Romania | DORVIA EUROP",
+      description: "Complete guide to obtaining a work permit in Romania (Aviz de Muncă), requirements, required documents, and work visa steps.",
+      h1: "Work Permit in Romania (Aviz de Muncă)"
+    },
+    "romania/cities": {
+      title: "Discover Romania | DORVIA EUROP",
+      description: "Comprehensive guide to Romanian cities for living, studying, and working. Compare Bucharest, Cluj, Timisoara, and other major cities.",
+      h1: "Cities of Romania"
+    }
   }
 };

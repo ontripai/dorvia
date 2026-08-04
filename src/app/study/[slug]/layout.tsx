@@ -1,36 +1,29 @@
-import { SITE_URL } from '@/config';
+import { SITE_URL, isProduction } from '@/config';
 import type { Metadata } from 'next';
-
-const metaMap: Record<string, { title: string; desc: string }> = {
-  'preparatory-year': {
-    title: 'دوره سال زبان رومانیایی | در رومانی – DORVIA EUROP',
-    desc: 'شرایط ثبت‌نام، شهریه و اطلاعات دوره آمادگی زبان رومانیایی (Preparatory Year) پیش از ورود به دانشگاه.'
-  },
-  'scholarships': {
-    title: 'بورسیه تحصیلی دولت رومانی | در رومانی – DORVIA EUROP',
-    desc: 'راهنمای ثبت‌نام در برنامه بورسیه وزارت امور خارجه رومانی ویژه دانشجویان کشورهای غیر عضو اتحادیه اروپا.'
-  }
-};
+import { PAGE_META } from '@/lib/pageMeta';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const meta = metaMap[params.slug] || {
-    title: 'تحصیل در رومانی | در رومانی – DORVIA EUROP',
-    desc: 'شرایط تحصیل و اخذ پذیرش دانشگاهی در رومانی.'
-  };
+  const fullPath = `study/${params.slug}`;
+  const meta = PAGE_META[fullPath] || PAGE_META[params.slug] || PAGE_META['study'];
+  
+  const title = meta?.seoTitleFa || (meta?.titleFa ? `${meta.titleFa} | در رومانی – DORVIA EUROP` : 'در رومانی – DORVIA EUROP');
+  const description = meta?.seoDescFa || 'راهنمای جامع خدمات حقوقی، تحصیلی و مهاجرتی در کشور رومانی.';
+
   return {
-    title: meta.title,
-    description: meta.desc,
+    title,
+    description,
     alternates: {
-      canonical: `${SITE_URL}/study/${params.slug}`,
+      canonical: `${SITE_URL}/${fullPath}`,
     },
     openGraph: {
-      title: meta.title,
-      description: meta.desc,
-      url: `${SITE_URL}/study/${params.slug}`,
-    }
+      title,
+      description,
+      url: `${SITE_URL}/${fullPath}`,
+    },
+    robots: isProduction ? (!meta?.indexable ? { index: false, follow: true } : undefined) : undefined
   };
 }
 
-export default function StudySubLayout({ children }: { children: React.ReactNode }) {
+export default function SubLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }

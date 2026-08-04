@@ -12,6 +12,66 @@ export interface RouteConfig {
 }
 
 export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
+  'home': {
+    canonical: '/',
+    aliases: [],
+    parentHub: null,
+    titleFa: 'صفحه اصلی',
+    titleEn: 'Home',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'special'
+  },
+  'about': {
+    canonical: '/about',
+    aliases: [],
+    parentHub: null,
+    titleFa: 'درباره ما',
+    titleEn: 'About Us',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'special'
+  },
+  'contact': {
+    canonical: '/contact',
+    aliases: [],
+    parentHub: null,
+    titleFa: 'تماس با ما',
+    titleEn: 'Contact',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'special'
+  },
+  'universities': {
+    canonical: '/universities',
+    aliases: [],
+    parentHub: null,
+    titleFa: 'دانشگاه‌ها',
+    titleEn: 'Universities',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'hub'
+  },
+  'services': {
+    canonical: '/services',
+    aliases: [],
+    parentHub: null,
+    titleFa: 'خدمات ما',
+    titleEn: 'Our Services',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'hub'
+  },
+  'articles': {
+    canonical: '/articles',
+    aliases: [],
+    parentHub: null,
+    titleFa: 'مقالات و اخبار',
+    titleEn: 'Articles & News',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'hub'
+  },
   'needs': {
     canonical: '/needs',
     aliases: [],
