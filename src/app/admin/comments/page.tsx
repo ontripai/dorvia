@@ -11,17 +11,15 @@ export default function AdminCommentsPage() {
   const [activeTab, setActiveTab] = useState<'pending' | 'approved' | 'rejected' | 'all'>('pending');
   const [authError, setAuthError] = useState('');
 
-  // Default demo password if process.env.ADMIN_PASSWORD is not set
-  const EXPECTED_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'admin123';
-
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === EXPECTED_PASSWORD || password === 'admin123') {
+    const expected = process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
+    if (expected && password === expected) {
       setIsAuthenticated(true);
       setAuthError('');
       loadAdminData();
     } else {
-      setAuthError('رمز عبور نامعتبر است. (رمز عبور پیش‌فرض دمو: admin123)');
+      setAuthError('رمز عبور واردشده نادرست است یا متغیر NEXT_PUBLIC_ADMIN_PASSWORD در محیط تنظیم نشده است.');
     }
   };
 
@@ -84,8 +82,8 @@ export default function AdminCommentsPage() {
             </button>
           </form>
 
-          <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl text-[11px] text-[#2F6FED] text-center font-semibold">
-            💡 رمز عبور پیش‌فرض محیط توسعه: <code className="bg-white px-2 py-0.5 rounded border border-blue-200">admin123</code>
+          <div className="p-3 bg-[#f7f9fc] border border-[#dfe6ef] rounded-xl text-[11px] text-[#788697] text-center font-semibold">
+            🔐 احراز هویت بر اساس متغیر محیطی <code className="bg-white px-2 py-0.5 rounded border border-[#dfe6ef] font-mono text-[#2F6FED]">NEXT_PUBLIC_ADMIN_PASSWORD</code> انجام می‌شود.
           </div>
         </div>
       </div>

@@ -439,11 +439,11 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
                 <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
                   <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'گام ۱: استعلام اصالت در سفارت' : 'Step 1: Embassy Verification'}</span>
-                  <p className="text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'ثبت درخواست استعلام گواهی‌نامه در سامانه میخک، مراجعه به سفارت ایران در بخارست و اخذ برگه رسمی تایید اصالت.' : 'Apply on the Mikhak portal, visit the Iranian Embassy in Bucharest, and obtain the official authenticity certificate.'}</p>
+                  <p className="text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'تماس با بخش کنسولی سفارت ایران در بخارست برای اطلاع از نوع دقیق خدمت لازم و نحوه درخواست (ممکن است از طریق سامانه میخک یا مراجعه مستقیم باشد) و دریافت تاییدیه اصالت گواهی‌نامه.' : 'Contact the consular section of the Iranian Embassy in Bucharest to confirm the exact process and obtain the license authenticity certificate.'}</p>
                 </div>
                 <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
                   <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'گام ۲: ترجمه رسمی و تایید محضری' : 'Step 2: Legal Translation'}</span>
-                  <p className="text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'ترجمه رسمی گواهی‌نامه ایرانی و نامه سفارت توسط مترجم رسمی دادگستری رومانی و تایید در دفتر اسناد رسمی (Notar Public).' : 'Official translation of the license and embassy letter by an authorized translator, notarized by a Notar Public.'}</p>
+                  <p className="text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'ترجمه رسمی گواهی‌نامه ایرانی و نامه سفارت توسط مترجم رسمی رومانیایی؛ برخی ادارات ممکن است تایید اضافی (مثلاً از دفتر اسناد رسمی) نیز درخواست کنند — این را از اداره محل ثبت پرونده بپرسید.' : 'Official translation of the Iranian license and embassy letter by an authorized Romanian translator; some local offices may request additional notarization.'}</p>
                 </div>
                 <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
                   <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'گام ۳: معاینات پزشکی (Fișa Medicală)' : 'Step 3: Medical Exam'}</span>
@@ -682,7 +682,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-[#526174] space-y-2">
               <span className="font-extrabold text-[#142033]">{currentLang === 'fa' ? 'نکات مهم قوانین ترافیکی:' : 'Key Traffic Law Rules:'}</span>
               <ul className="list-disc list-inside space-y-1">
-                <li>{currentLang === 'fa' ? 'تخلفات خطرناک (سرعت غیرمجاز بالا، عبور از چراغ قرمز، الکل) منجر به ضبط گواهی‌نامه و تعلیق ۳۰ تا ۹۰ روزه می‌شود.' : 'Severe violations (high speeding, red lights, alcohol) trigger immediate license confiscation and 30-90 day suspensions.'}</li>
+                <li>{currentLang === 'fa' ? 'تخلفات جدی رانندگی (مانند سرعت غیرمجاز شدید، عبور از چراغ قرمز، یا رانندگی تحت تاثیر الکل) می‌تواند منجر به ضبط گواهی‌نامه و تعلیق موقت حق رانندگی شود؛ مدت دقیق تعلیق بسته به نوع و شدت تخلف متفاوت است و باید از منبع رسمی پلیس راهور استعلام شود.' : 'Serious traffic violations (such as severe speeding, running red lights, or driving under the influence) can lead to license confiscation and temporary driving privilege suspension; exact duration depends on violation type and severity.'}</li>
                 <li>{currentLang === 'fa' ? 'برای جزئیات دقیق، جدول امتیازات و استعلام تخلفات به منبع رسمی پلیس راهنمایی و رانندگی رومانی (Poliția Rutieră) مراجعه فرمایید.' : 'For exact point breakdowns and violation checks, refer to the official Romanian Traffic Police directives.'}</li>
               </ul>
             </div>
