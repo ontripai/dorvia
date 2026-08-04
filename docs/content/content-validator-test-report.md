@@ -1,31 +1,11 @@
-# Content Validator Negative Test Report
+# Content Validator Test Report
 
-## Test Scope
-Tested `scripts/validateContent.ts` by passing a mocked content file (`run_negative_test.js`) intentionally containing the following violations:
-- Foreign exchange marked medical not-required without qualification
-- IDP scenario missing a dedicated source
-- IDP fixed fee without source
-- IDP fixed deadline without source
-- FA/EN medical-condition mismatch
-- FA/EN IDP source mismatch
+## Overview
+The Content Validator script was previously relying on a local 	s-node which often causes ESM loading inconsistencies on Linux & Vercel CI. 
 
-## Execution Command
-```bash
-node run_negative_test.js
-```
+## Fixes Applied
+- Added 	sx to the devDependencies for a stable and predictable TypeScript script execution.
+- Updated pm run validate:content script in package.json to use px tsx scripts/validateContent.ts.
 
-## Results
-The validator successfully identified all violations:
-```
-Errors caught in EN:
-- Foreign exchange marked medical not-required without qualification
-- IDP scenario missing a dedicated source
-- IDP fixed fee without source
-- IDP fixed deadline without source
-Parity Errors:
-- FA/EN medical-condition mismatch: EN=not-required, FA=conditional
-- FA/EN IDP source mismatch: EN=, FA=sourceId: 'dgpci-idp-wrong',sourceId: 'different-source'
-```
-
-## Conclusion
-The `validateContent.ts` script successfully enforces the conditional medical rules, specific IDP source requirements, and strict FA/EN cross-locale parity.
+## Status
+Validation scripts now run and pass successfully during the pre-build hook on standard CI, maintaining full functionality for both a.ts and en.ts.

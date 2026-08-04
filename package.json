@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "validate:content": "npx ts-node scripts/validateContent.ts",
+    "validate:content": "npx tsx scripts/validateContent.ts",
     "build": "npm run validate:content && next build",
     "start": "next start",
     "lint": "next lint"
@@ -22,6 +22,7 @@
     "autoprefixer": "^10.4.17",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.23.5",
     "typescript": "^5.3.3"
   }
 }

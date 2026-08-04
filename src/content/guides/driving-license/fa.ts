@@ -206,7 +206,7 @@ export const drivingLicenseFA: OperationalGuide = {
         {
       id: 'international-driving-permit',
       title: 'International Driving Permit (IDP)',
-      appliesTo: ['Holders of a valid Romanian national driving licence'],
+      appliesTo: ['دارندگان گواهینامه رانندگی ملی معتبر رومانی'],
       documents: [
         { name: 'Valid Romanian Driving Licence', isMandatory: true }
       ],
