@@ -1,41 +1,40 @@
-# Implementation Roadmap
+# Implementation Roadmap (Gated Sequence)
 
-این نقشه راه، گام‌های اجرایی تبدیل پلتفرم «در رومانی» از یک مرجع اطلاعاتی صرف، به یک پلتفرم سه‌لایه (اطلاعات + خدمات DORVIA + دایرکتوری ارائه‌دهندگان) را مشخص می‌کند.
+## Gate 0 — Audit Approved
+- [x] Complete route inventory
+- [x] Complete quality matrix
+- [x] Complete risk matrix
+- [x] Owner decisions collected
 
-## فاز ۱: بازنگری ساختار مسیرهای تبدیل (Conversion Paths)
-**هدف:** قرار دادن CTAهای خدماتی DORVIA در صفحات راهنما (Guides).
-- [ ] طراحی و ساخت کامپوننت `ServiceCTA` (نوع اول: فرم مستقیم یا لینک به فرم ارزیابی مهاجرت).
-- [ ] طراحی و ساخت کامپوننت `LocalProviderCarousel` (نوع سوم: دایرکتوری ارائه‌دهندگان).
-- [ ] جانمایی `ServiceCTA` در صفحات `company/registration` (سفارش ثبت شرکت).
-- [ ] جانمایی `ServiceCTA` در صفحات `immigration` و `work` (مشاوره ارزیابی).
+## Phase 1 — Operational Content System
+- Standard page model (Who it's for, Eligibility, Official Sources, Review Dates).
+- Shared components for CTAs (UI only).
+- **Pilot**: `needs/driving-license`.
 
-## فاز ۲: معماری داده و Backend برای ارائه‌دهندگان
-**هدف:** ایجاد ساختار داده برای کسب‌وکارهای ثالث.
-- [ ] ایجاد جداول دیتابیس Supabase برای `providers`، `provider_services`، و `leads`.
-- [ ] ساخت APIهای دریافت و لیست کردن ارائه‌دهندگان به صورت سرور‌ساید.
-- [ ] پیاده‌سازی فرم ثبت‌نام اولیه کسب‌وکار (Join as Provider).
+## Phase 2 — DORVIA Service Catalogue
+- Define actual services (Scope, pricing, exclusions).
+- Pricing model (Fixed vs Quote).
+- Build dedicated service forms with Legal terms.
 
-## فاز ۳: پیاده‌سازی صفحات دایرکتوری ارائه‌دهندگان (Marketplace)
-**هدف:** ایجاد صفحاتی برای لیست کردن و مقایسه ارائه‌دهندگان.
-- [ ] ساخت صفحه `needs/currency-exchange/providers` (صرافی‌ها).
-- [ ] ساخت صفحه `needs/health/providers` (پزشکان و کلینیک‌ها).
-- [ ] ساخت صفحه `needs/notary-public/providers` (نوتاری‌ها و مترجمان رسمی).
-- [ ] یکپارچه‌سازی کامپوننت `LocalProviderCarousel` با داده‌های واقعی دیتابیس در صفحات آموزشی مرتبط.
+## Phase 3 — Legal and Trust Foundation
+- Draft and publish Privacy Policy updates for Lead Generation.
+- Publish Provider Terms and Verification Policy.
+- Advertising rules.
 
-## فاز ۴: زیرساخت فرم‌ها و لید (Lead Generation)
-**هدف:** اتصال فرم‌های کاربران به داشبورد و ارسال برای ارائه‌دهنده یا DORVIA.
-- [ ] پیاده‌سازی فرم‌های چندمرحله‌ای برای درخواست‌های خدماتی پیچیده (مثل ثبت شرکت).
-- [ ] اتصال فرم‌ها به سیستم نوتیفیکیشن ایمیلی یا SMS.
-- [ ] ساخت پنل ساده مدیریت لید (Admin Dashboard) برای رصد درخواست‌های خدماتی.
+## Phase 4 — Direct DORVIA Conversion Pilot
+- **Pilot**: `company/registration` (Company registration).
+- Implement self-service route + DORVIA service request. NO third-party marketplace yet.
 
-## فاز ۵: صفحات قانونی و اعتمادسازی
-**هدف:** شفاف‌سازی مدل تجاری.
-- [ ] تدوین و انتشار `legal/advertising-policy` (سیاست تبلیغات و اسپانسرها).
-- [ ] تدوین و انتشار `legal/provider-terms` (شرایط حضور ارائه‌دهندگان).
+## Phase 5 — Provider Governance and Data Model
+- Define Supabase schema (Providers, Leads, Roles, Verification Data).
+- Implement Admin verification UI.
 
-## فاز ۶: احراز هویت و داشبورد کاربری / کسب‌وکار
-**هدف:** ارائه پنل به کاربران و ارائه‌دهندگان (نقشه بلندمدت).
-- [ ] پیاده‌سازی سیستم Login/Register.
-- [ ] ایجاد نقش‌های `Customer` و `Provider`.
-- [ ] ساخت داشبورد برای `Customer` (جهت پیگیری وضعیت درخواست‌ها).
-- [ ] ساخت داشبورد برای `Provider` (جهت ویرایش پروفایل و دریافت لید).
+## Phase 6 — Low-Risk Provider Directory Pilot
+- **Pilot**: Certified Translators.
+- Admin-created providers only. Manual verification. Clear sponsored labels. No automated lead sales yet.
+
+## Phase 7 — Higher-Risk Categories
+- Only after Phase 6 evaluation: Accountants, Real Estate, Medical, Currency Exchange.
+
+## Phase 8 — Lead and Dashboard Systems
+- Customer/Provider dashboards. Automated lead allocation and billing.
