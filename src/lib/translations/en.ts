@@ -157,6 +157,11 @@ export const enTranslations = {
       title: "Cities of Romania for Living, Work and Study | DORVIA EUROP",
       description: "Comprehensive guide to Romanian cities for living, studying, and working. Compare Bucharest, Cluj, Timisoara, and other major cities.",
       h1: "Cities of Romania"
+    },
+    "needs/driving-license": {
+      title: "Driving Licence in Romania: Exchange, Issuance and Rules | DORVIA EUROP",
+      description: "Complete operational guide to Romanian driving licences: rules, exchanges, new issuance, and International Driving Permits (IDP).",
+      h1: "Driving Licence in Romania"
     }
   }
 };

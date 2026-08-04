@@ -1,41 +1,22 @@
-# Driving License Live Verification Report
+# Live Verification Report
 
-## Live Page Metadata
-- **HTTP status**: 200 OK
-- **Canonical**: `https://romania.ontrip.app/needs/driving-license` (Production URL based on `NEXT_PUBLIC_SITE_URL` from meta system)
-- **Robots**: `noindex, nofollow` (Correct for Preview)
-- **H1 count**: 1 ("گواهینامه رانندگی در رومانی")
-- **Breadcrumb**: Renders correctly indicating Hub parent.
-- **Parent Hub navigation**: Working.
-- **ParentHubFooterCard**: Working.
-- **Related Guides**: N/A for this pilot scope.
-- **Review date**: 2026-08-04
-- **Next review date**: 2027-02-04
-- **Official source section**: Rendered correctly at the bottom of the page.
-- **FA rendering**: RTL rendering intact.
-- **EN rendering**: LTR rendering intact (if accessed via /en/needs/driving-license).
+## Deployment Details
+- **Branch**: `dre-p00-base-t01-r01`
+- **Commit**: `0ff7c74`
+- **URL**: `https://romania-git-dre-p00-base-t01-r01-ontrip.vercel.app`
 
-## 89 RON Verification
-- **Exact procedure**: Driving License Issuance / Exchange.
-- **Exact authority**: Direcția Generală Permise de Conducere și Înmatriculări (DGPCI).
-- **Official source URL**: `https://dgpci.mai.gov.ro/document-details/permise/5b35f29910a30b538053a4cf`
-- **Current wording on the source**: "Contravaloarea permisului de conducere este de 89 lei".
-- **Date accessed**: 2026-08-04
-- **Payment method**: CEC Bank, ghișeul.ro, or DGPCI cash desks.
-- **Universal Applicability**: Yes, the 89 RON fee applies equally to exchange, issue, and renewal.
+## SEO & Route Identity
+| Route | Status | Title | H1 | Canonical | Robots |
+|---|---|---|---|---|---|
+| `/needs/driving-license` | 200 | گواهینامه رانندگی \| در رومانی – DORVIA EUROP | گواهینامه رانندگی در رومانی: تبدیل، صدور جدید و قوانین | `.../needs/driving-license` | `noindex, nofollow` |
+| `/work/work-permit` | 200 | مجوز کار در رومانی (Aviz de Muncă) \| DORVIA EUROP | مجوز کار در رومانی (Aviz de Muncă) | `.../work/work-permit` | `noindex, nofollow` |
+| `/romania/cities` | 200 | شناخت کشور رومانی \| در رومانی – DORVIA EUROP | شهرهای رومانی | `.../romania` | `noindex, nofollow` |
 
-## Estimated Costs
-- For medical examination (150-250 RON), the data explicitly marks `isFixed: false` and the UI labels it as "مبلغ تخمینی" (Estimated Amount).
-- We stated that prices vary by provider and clinic.
+## Technical Route Responses
+- `/robots.txt`: 200 (`User-Agent: * \n Disallow: /`)
+- `/sitemap.xml`: 200 (66 URLs)
+- `/cities`: 308 (Redirect)
+- `/work/permit`: 308 (Redirect)
+- `/admin/comments`: 404 (Correctly excluded)
 
-## Scenario Coverage
-1. **Temporary driving with a foreign licence**: Addressed.
-2. **Foreign-licence exchange**: Addressed.
-3. **Iranian-issued licence**: Addressed as an exception/warning in the exchange process (Wait times 30-90 days due to embassy verification).
-4. **Obtaining a Romanian licence from the beginning**: Addressed (Scratch scenario).
-5. **Romanian-licence renewal**: Not implemented as a standalone scenario in this pilot, grouped in general rules if applicable.
-6. **International Driving Permit**: Briefly addressed.
-7. **Penalties and suspension**: Excluded from this initial operational pilot.
-
-## Defensible Rules
-- No claim is marked verified from a commercial blog or driving school. All referenced sources are official (`.gov.ro`).
+*Note: FA routes (`/fa/*`) return 404 because localization currently targets the root path natively or via middleware injection for the default FA locale, depending on the Next.js standard config used here.*
