@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Language } from '../types';
 import { Button } from './Button';
 import { Landmark, Building2, ShieldCheck, Scale, FileCheck2, ExternalLink, ArrowRight, ArrowLeft } from './Icons';
@@ -43,7 +44,7 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('romania/economy')}>
+            <Link href="/romania/economy" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">📈</span>
@@ -52,9 +53,9 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'تحلیل ساختار اقتصادی، قطب‌های فناوری و متوسط درآمد قانونی.' : 'Economic structure, IT hubs, and wage standards.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
 
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('romania/society')}>
+            <Link href="/romania/society" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">👥</span>
@@ -63,9 +64,9 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'آشنایی با مردم رومانی، زبان رسمی، آداب اجتماعی و سیستم آموزش.' : 'Population dynamics, social life, and expat integration.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
 
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('romania/culture-and-arts')}>
+            <Link href="/romania/culture-and-arts" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🏛️</span>
@@ -74,9 +75,9 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'تاریخ غنی، قلعه‌های ترانسیلوانیا، موسیقی کلاسیک و آیین‌های سنتی.' : 'Carpathian folklore, historical landmarks, and classical music.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
 
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('romania/laws-and-regulations')}>
+            <Link href="/romania/laws-and-regulations" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">⚖️</span>
@@ -85,9 +86,9 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'حقوق مصرف‌کننده، اصول قراردادها و حریم خصوصی (GDPR) در رومانی.' : 'General civil code, consumer rights, and GDPR standards.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
 
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('romania/cities')}>
+            <Link href="/romania/cities" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🏙️</span>
@@ -96,9 +97,9 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'راهنمای بخارست، کلوژ-نپوکا، یاش، تیمیشوارا و براشوف برای اقامت.' : 'Guides for Bucharest, Cluj-Napoca, Timișoara, Iași, and Brașov.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
 
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('romania/tourism')}>
+            <Link href="/romania/tourism" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">✈️</span>
@@ -107,7 +108,7 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'معرفی قلعه‌های تاریخی، طبیعت کارپات و دلتای دانوب.' : 'Danube delta, Carpathian ski resorts, and historical castles.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
           </div>
         </div>
       );

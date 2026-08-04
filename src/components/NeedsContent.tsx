@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Language } from '../types';
 import { Button } from './Button';
 import { Landmark, House, FileCheck2, ShieldCheck, LockKeyhole, ExternalLink, ArrowRight, ArrowLeft } from './Icons';
@@ -46,7 +47,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/first-days-checklist')}>
+            <Link href="/needs/first-days-checklist" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">✓</span>
@@ -55,9 +56,9 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'اقدامات حیاتی ۷۲ ساعت، ۷ روز و ۳۰ روز اول ورود به کشور رومانی.' : 'Essential tasks for your first 72 hours, 7 days, and 30 days.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
 
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/currency-exchange')}>
+            <Link href="/needs/currency-exchange" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🏦</span>
@@ -66,9 +67,9 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'نرخ‌های مرجع بانک ملی (BNR)، صرافی‌های معتبر و افتتاح حساب بانکی.' : 'BNR rates, banking, local card setup, and money transfers.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
 
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/housing')}>
+            <Link href="/needs/housing" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🏠</span>
@@ -77,9 +78,9 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'چک‌لیست قرارداد اجاره، ثبت در دارایی (ANAF)، ودیعه و مالکیت ملک.' : 'Rental contracts, security deposits, ANAF registration, and buying rules.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
 
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/driving-license')}>
+            <Link href="/needs/driving-license" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🚗</span>
@@ -88,9 +89,9 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'شرایط رانندگی با گواهینامه بین‌المللی و تبدیل آن در DGPCI.' : 'Rules for international driving permits and license exchange.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
 
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/certified-translation')}>
+            <Link href="/needs/certified-translation" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">📄</span>
@@ -99,9 +100,9 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'ترجمه رسمی مدارک هویتی و تحصیلی به زبان رومانیایی توسط مترجمین مجاز.' : 'Authorized translations of academic and civil documents.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
 
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/notary-public')}>
+            <Link href="/needs/notary-public" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">⚖️</span>
@@ -110,9 +111,9 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'ثبت اسناد رسمی، اساسنامه‌های شرکتی و وکالت‌نامه‌ها (Procura).' : 'Legalizing contracts, power of attorney, and corporate deeds.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
 
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/iranian-embassy-and-mikhak')}>
+            <Link href="/needs/iranian-embassy-and-mikhak" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🏛️</span>
@@ -121,9 +122,9 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'امور کنسولی، تایید مدرک تحصیلی و وکالت‌نامه‌ها از طریق سامانه میخک.' : 'Consular services, document authentication, and mikhak registry.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
 
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/health')}>
+            <Link href="/needs/health" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">❤️</span>
@@ -132,9 +133,9 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'آشنایی با بیمه سلامت عمومی (CNAS)، پزشک خانواده و فوریت‌های پزشکی.' : 'National health insurance (CNAS), family doctors, and clinics.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
 
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/school')}>
+            <Link href="/needs/school" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🎓</span>
@@ -143,9 +144,9 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'سیستم مدارس دولتی رومانی و گزینه‌های مدارس بین‌المللی برای فرزندان.' : 'Public primary and secondary school systems and international schools.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
 
-            <div className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between" onClick={() => onNavigate('needs/telecom')}>
+            <Link href="/needs/telecom" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">📱</span>
@@ -154,7 +155,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'خرید سیم‌کارت‌های اعتباری و دائمی (Orange, Vodafone, Digi) و اینترنت خانگی.' : 'Orange, Vodafone, Digi mobile plans and high-speed fiber broadband.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
-            </div>
+            </Link>
           </div>
         </div>
       );
