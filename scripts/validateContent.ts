@@ -37,15 +37,17 @@ function extractGuideData(filePath: string) {
   }
 
   // 3. No UNRESOLVED claims without a warning
-  if (content.includes('UNRESOLVED') && !content.includes('warnings:')) {
-    errors.push('UNRESOLVED claim found without a visible warning array');
+  if (content.includes('UNRESOLVED') && !content.includes('warnings: [')) {
+    if (!content.includes('warnings: [\'') && !content.includes('warnings: ["')) {
+       errors.push('UNRESOLVED claim found without a visible warning array');
+    }
   }
 
   // 4. Duplicate sources
   const sourceMatches = content.match(/id:\s*['"]([^'"]+)['"]/g);
   let sourceIds: string[] = [];
   if (sourceMatches) {
-    sourceIds = sourceMatches.map(m => m.match(/['"]([^'"]+)['"]/)?.[1] as string);
+    sourceIds = sourceMatches.map(m => (m.match(/['"]([^'"]+)['"]/) as RegExpMatchArray)[1]);
     const duplicates = sourceIds.filter((item, index) => sourceIds.indexOf(item) !== index);
     if (duplicates.length > 0) {
       errors.push(`Duplicate source IDs found: ${duplicates.join(', ')}`);
@@ -53,15 +55,6 @@ function extractGuideData(filePath: string) {
   }
 
   // 5. Scenario IDs
-  const situationIdMatches = content.match(/id:\s*['"]([^'"]+)['"]/g);
-  let situationIds: string[] = [];
-  if (situationIdMatches) {
-    // Note: some id's might be sources, but scenarios also have id.
-    // Let's rely on a simpler parser or just extract all IDs that match our list.
-  }
-  
-  // Since AST parsing is hard with regex, let's do targeted checks.
-  // We expect EXACTLY 7 required scenario IDs
   let foundScenarios = 0;
   for (const reqId of requiredScenarioIds) {
     if (!content.includes(`id: '${reqId}'`) && !content.includes(`id: "${reqId}"`)) {
@@ -71,36 +64,88 @@ function extractGuideData(filePath: string) {
     }
   }
 
+  // 6. Medical rules
+  const exchangeMatch = content.match(/id:\s*['"]foreign-licence-exchange['"][\s\S]*?(?=id:\s*['"]|$)/);
+  if (exchangeMatch && exchangeMatch[0]) {
+    const exchangeBlock = exchangeMatch[0];
+    if (exchangeBlock.includes(`requiresMedical: 'not-required'`)) {
+      errors.push(`Foreign exchange marked medical not-required without qualification`);
+    }
+    if (exchangeBlock.includes(`requiresMedical: 'conditional'`) && !exchangeBlock.includes('medicalConditionText:')) {
+      errors.push(`Foreign exchange marked medical conditional without medicalConditionText`);
+    }
+  }
+
+  // 7. IDP Rules
+  const idpMatch = content.match(/id:\s*['"]international-driving-permit['"][\s\S]*?(?=id:\s*['"]|$)/);
+  if (idpMatch && idpMatch[0]) {
+    const idpBlock = idpMatch[0];
+    if (!idpBlock.includes('sourceId:')) {
+      errors.push(`IDP scenario missing a dedicated source`);
+    }
+    // check fees and timeline in IDP block
+    const idpFees = idpBlock.split('fees: [')[1]?.split(']')[0] || '';
+    if (idpFees.includes('isFixed: true') && !idpFees.includes('sourceId:')) {
+      errors.push(`IDP fixed fee without source`);
+    }
+    const idpTimeline = idpBlock.split('timeline: [')[1]?.split(']')[0] || '';
+    if (idpTimeline.includes('isFixed: true') || (!idpTimeline.includes('isGuaranteed: true') && idpTimeline.includes('duration:'))) {
+        // "IDP fixed deadline without source"
+        if (idpTimeline.includes('duration:') && !idpTimeline.includes('sourceId:')) {
+            errors.push(`IDP fixed deadline without source`);
+        }
+    }
+  }
+
   // Fixed fees and timelines must have a sourceId.
-  // For each fee/timeline block, if isFixed: true, ensure sourceId exists.
-  const isFixedTrueCount = (content.match(/isFixed:\s*true/g) || []).length;
-  const sourceIdCountInFees = (content.match(/sourceId:\s*['"][^'"]+['"]/g) || []).length;
-  // This is a naive check. A better approach is matching blocks.
-  const feeBlocks = content.split('fees: [')[1]?.split(']')[0] || '';
-  if (feeBlocks) {
-    const individualFees = feeBlocks.split('},').map(s => s + '}');
+  const feeBlocks = content.split('fees: [').slice(1).map(b => b.split(']')[0]);
+  feeBlocks.forEach((feeBlock, bIdx) => {
+    const individualFees = feeBlock.split('},').map(s => s + '}');
     individualFees.forEach((feeStr, idx) => {
       if (feeStr.includes('isFixed: true') && !feeStr.includes('sourceId:')) {
-        errors.push(`Fixed fee entry missing sourceId reference in block index ${idx}`);
+        errors.push(`Fixed fee entry missing sourceId reference in block index ${bIdx}-${idx}`);
       }
     });
-  }
+  });
   
-  const timelineBlocks = content.split('timeline: [')[1]?.split(']')[0] || '';
-  if (timelineBlocks) {
-    const individualTimelines = timelineBlocks.split('},').map(s => s + '}');
+  const timelineBlocks = content.split('timeline: [').slice(1).map(b => b.split(']')[0]);
+  timelineBlocks.forEach((tBlock, bIdx) => {
+    const individualTimelines = tBlock.split('},').map(s => s + '}');
     individualTimelines.forEach((tStr, idx) => {
       if (tStr.includes('isFixed: true') && !tStr.includes('sourceId:')) {
-         errors.push(`Fixed timeline entry missing sourceId reference in block index ${idx}`);
+         errors.push(`Fixed timeline entry missing sourceId reference in block index ${bIdx}-${idx}`);
       }
     });
-  }
+  });
 
   return errors;
 }
 
 const guidesDir = path.join(cwd, 'src/content/guides');
 let hasErrors = false;
+
+// We will also check cross-locale parity for FA and EN.
+function checkParity(enContent: string, faContent: string) {
+    const errors: string[] = [];
+    const enExchangeMatch = enContent.match(/id:\s*['"]foreign-licence-exchange['"][\s\S]*?(?=id:\s*['"]|$)/)?.[0] || '';
+    const faExchangeMatch = faContent.match(/id:\s*['"]foreign-licence-exchange['"][\s\S]*?(?=id:\s*['"]|$)/)?.[0] || '';
+    
+    const enMedical = enExchangeMatch.match(/requiresMedical:\s*['"]([^'"]+)['"]/)?.[1];
+    const faMedical = faExchangeMatch.match(/requiresMedical:\s*['"]([^'"]+)['"]/)?.[1];
+    if (enMedical && faMedical && enMedical !== faMedical) {
+        errors.push(`FA/EN medical-condition mismatch: EN=${enMedical}, FA=${faMedical}`);
+    }
+
+    const enIdpMatch = enContent.match(/id:\s*['"]international-driving-permit['"][\s\S]*?(?=id:\s*['"]|$)/)?.[0] || '';
+    const faIdpMatch = faContent.match(/id:\s*['"]international-driving-permit['"][\s\S]*?(?=id:\s*['"]|$)/)?.[0] || '';
+    const enIdpSources = enIdpMatch.match(/sourceId:\s*['"]([^'"]+)['"]/g)?.join(',') || '';
+    const faIdpSources = faIdpMatch.match(/sourceId:\s*['"]([^'"]+)['"]/g)?.join(',') || '';
+    if (enIdpSources !== faIdpSources) {
+        errors.push(`FA/EN IDP source mismatch: EN=${enIdpSources}, FA=${faIdpSources}`);
+    }
+    
+    return errors;
+}
 
 function scanDir(dir: string) {
   if (!fs.existsSync(dir)) return;
@@ -109,6 +154,19 @@ function scanDir(dir: string) {
     const fullPath = path.join(dir, file);
     if (fs.statSync(fullPath).isDirectory()) {
       scanDir(fullPath);
+      // For driving-license check parity
+      if (file === 'driving-license') {
+          const enPath = path.join(fullPath, 'en.ts');
+          const faPath = path.join(fullPath, 'fa.ts');
+          if (fs.existsSync(enPath) && fs.existsSync(faPath)) {
+              const pErrors = checkParity(fs.readFileSync(enPath, 'utf8'), fs.readFileSync(faPath, 'utf8'));
+              if (pErrors.length > 0) {
+                  console.error(`❌ Cross-locale Parity Errors in ${file}:`);
+                  pErrors.forEach(e => console.error(`  - ${e}`));
+                  hasErrors = true;
+              }
+          }
+      }
     } else if (fullPath.endsWith('.ts')) {
       console.log(`Validating ${fullPath}...`);
       const errors = extractGuideData(fullPath);

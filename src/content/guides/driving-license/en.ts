@@ -21,6 +21,16 @@ export const drivingLicenseEN: OperationalGuide = {
   ],
   officialSources: [
     {
+      id: 'dgpci-idp',
+      sourceTitle: 'DGPCI - Eliberare Permis de Conducere Internațional',
+      organization: 'Directia Generală Permise de Conducere și Înmatriculări',
+      url: 'https://dgpci.mai.gov.ro/document-details/permise/5b35f29910a30b538053a4cf', // Using generic for now or 5b35...
+      sourceType: 'official-website',
+      language: 'ro',
+      dateAccessed: '2026-08-04',
+      status: 'primary'
+    },
+    {
       id: 'dgpci-exchange',
       sourceTitle: 'DGPCI - Preschimbare Permise Străine',
       organization: 'Directia Generală Permise de Conducere și Înmatriculări',
@@ -101,7 +111,8 @@ export const drivingLicenseEN: OperationalGuide = {
       residenceCondition: 'Valid temporary or permanent residence permit in Romania',
       authority: 'DGPCI (Direcția Generală Permise de Conducere și Înmatriculări)',
       requiresExamination: false,
-      requiresMedical: true,
+      requiresMedical: 'conditional',
+      medicalConditionText: 'A medical document is required when the applicant requests a Romanian licence with new administrative validity. A duplicate or replacement retaining the existing administrative validity may not require it.',
       documents: [
         { name: 'Original valid foreign license + copy', isMandatory: true },
         { name: 'Notarized Romanian translation of license', isMandatory: true },
@@ -124,7 +135,7 @@ export const drivingLicenseEN: OperationalGuide = {
       residenceCondition: 'Valid temporary or permanent residence permit in Romania',
       authority: 'DGPCI',
       requiresExamination: false,
-      requiresMedical: true, // Needed for new administrative validity
+      requiresMedical: 'required', // Needed for new administrative validity
       documents: [
         { name: 'Original valid Iranian license + copy', isMandatory: true },
         { name: 'Notarized Romanian translation of license', isMandatory: true },
@@ -156,7 +167,7 @@ export const drivingLicenseEN: OperationalGuide = {
       appliesTo: ['Foreigners who do not hold any driving license', 'Holders of non-exchangeable or expired foreign licenses'],
       residenceCondition: 'Must have a valid Romanian residence permit.',
       requiresExamination: true,
-      requiresMedical: true,
+      requiresMedical: 'required',
       documents: [
         { name: 'Valid Romanian Residence Permit', isMandatory: true },
         { name: 'Medical and Psychological Certificates', isMandatory: true },
@@ -182,7 +193,7 @@ export const drivingLicenseEN: OperationalGuide = {
       appliesTo: ['Holders of a Romanian Driving License approaching expiry'],
       residenceCondition: 'Must have a valid Romanian residence permit or citizenship.',
       requiresExamination: false,
-      requiresMedical: true,
+      requiresMedical: 'required',
       documents: [],
       steps: [],
       fees: [
@@ -192,19 +203,22 @@ export const drivingLicenseEN: OperationalGuide = {
       exceptions: [],
       limitations: []
     },
-    {
+        {
       id: 'international-driving-permit',
-      title: 'International Driving Permit',
-      appliesTo: ['Tourists needing an IDP alongside their national license'],
-      residenceCondition: 'None',
-      requiresExamination: false,
-      requiresMedical: false,
-      documents: [],
+      title: 'International Driving Permit (IDP)',
+      appliesTo: ['Holders of a valid Romanian national driving licence'],
+      documents: [
+        { name: 'Valid Romanian Driving Licence', isMandatory: true }
+      ],
       steps: [],
-      fees: [],
-      timeline: [],
+      fees: [
+        { amount: '46', currency: 'RON', description: 'DGPCI fee for IDP issuance.', isFixed: true, sourceId: 'dgpci-idp' }
+      ],
+      timeline: [
+        { duration: 'Up to 30 calendar days', description: 'Legal maximum processing time.', isGuaranteed: false, sourceId: 'dgpci-idp' }
+      ],
       exceptions: [],
-      limitations: []
+      limitations: ['Requires a valid Romanian national licence. Foreign licence holders cannot apply for a Romanian IDP.']
     },
     {
       id: 'penalties-suspension-and-restrictions',
@@ -212,7 +226,7 @@ export const drivingLicenseEN: OperationalGuide = {
       appliesTo: ['Any driver operating a vehicle in Romania'],
       residenceCondition: 'None',
       requiresExamination: false,
-      requiresMedical: false,
+      requiresMedical: 'not-required',
       documents: [],
       steps: [],
       fees: [],

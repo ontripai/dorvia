@@ -39,7 +39,8 @@ export interface ScenarioDefinition {
   residenceCondition?: string;
   authority?: string;
   requiresExamination?: boolean;
-  requiresMedical?: boolean;
+  requiresMedical?: 'required' | 'not-required' | 'conditional';
+  medicalConditionText?: string;
   documents: Array<{
     name: string;
     description?: string;
