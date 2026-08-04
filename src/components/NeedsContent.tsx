@@ -9,6 +9,7 @@ import { BnrRatesFeed } from './BnrRatesFeed';
 import { CommentsSection } from './CommentsSection';
 import { HealthGuideContent } from './HealthGuideContent';
 import { BankingGuideContent } from './BankingGuideContent';
+import { SchoolGuideContent } from './SchoolGuideContent';
 
 interface NeedsContentProps {
   subRoute: string;
@@ -179,29 +180,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
       return <HealthGuideContent currentLang={currentLang} onNavigate={onNavigate} />;
 
     case 'school':
-      return (
-        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'مدارس و سیستم آموزشی مدارس در رومانی' : 'Primary & Secondary Schools in Romania'}
-            </h1>
-            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
-              {currentLang === 'fa' ? 'سیستم ثبت‌نام مدارس عمومی رومانی و گزینه‌های مدارس بین‌المللی.' : 'Enrollment procedures in public schools and options for international curriculums.'}
-            </p>
-          </div>
-          <div className="editorial-card p-8 bg-white border border-[#dfe6ef] space-y-4 max-w-3xl mx-auto">
-            <h3 className="text-xl font-bold text-[#142033]">{currentLang === 'fa' ? 'ثبت‌نام فرزندان در سیستم مدارس رومانی' : 'School Enrollment Procedures'}</h3>
-            <p className="text-sm text-[#526174] leading-relaxed">
-              {currentLang === 'fa' 
-                ? 'فرزندان مهاجرین مقیم قانونی حق تحصیل در سیستم آموزش عمومی رومانی را دارند. تحصیل در مدارس دولتی به زبان رومانیایی است. مدارس بین‌المللی مختلفی نیز در بخارست با برنامه‌های درسی بریتانیایی، آمریکایی یا فرانسوی فعال هستند.'
-                : 'Children of legal residents have full access to the public school system in Romania. While public school instruction is in Romanian, multiple international schools (British, American, and French curriculums) operate in major hubs like Bucharest.'}
-            </p>
-            <div className="p-4 bg-[#F8FAFC] border border-[#e2e8f0] rounded-xl text-xs text-[#526174] font-semibold">
-              ℹ️ {currentLang === 'fa' ? 'شرایط ثبت‌نام و تطبیق تحصیلی از طریق اداره کل بازرسی مدارس هر استان پیگیری می‌شود.' : 'Contact the local county School Inspectorate (Inspectorat Scolar) for enrollment requirements.'}
-            </div>
-          </div>
-        </div>
-      );
+      return <SchoolGuideContent currentLang={currentLang} onNavigate={onNavigate} />;
 
     case 'telecom':
       return (
