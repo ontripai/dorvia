@@ -192,7 +192,16 @@ export const CommentsSection: React.FC<CommentsSectionProps> = ({ pagePath, curr
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Honeypot Anti-Bot Field (Hidden) */}
+ 
+          {/* Privacy Notice */}
+          <div className="bg-[#f0f4f8] p-4 rounded-xl border border-[#dfe6ef] space-y-2 mt-2">
+            <p className="text-xs text-[#526174] leading-relaxed">
+              {currentLang === 'fa' 
+                ? 'توجه: نام شما اختیاری است. لطفاً از ارسال اطلاعات شخصی، پزشکی، مهاجرتی یا مالی خودداری کنید. نظرات پس از تایید مدیر به صورت عمومی نمایش داده می‌شوند. جهت ثبت درخواست حذف یا ویرایش، به سیاست حریم خصوصی مراجعه فرمایید.'
+                : 'Notice: Your name is optional. Please do not submit personal, medical, immigration, or financial details. Comments are moderated before public display. See the Privacy Policy to request removal.'}
+            </p>
+          </div>
+         {/* Honeypot Anti-Bot Field (Hidden) */}
           <div style={{ display: 'none' }} aria-hidden="true">
             <input
               type="text"

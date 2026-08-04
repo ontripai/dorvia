@@ -5,8 +5,8 @@ export const TermsContent = ({ currentLang }: { currentLang: string }) => {
     <div className="space-y-6 text-sm text-[#526174] leading-relaxed rtl text-right">
       <h1 className="text-3xl font-extrabold text-[#142033] border-b border-[#dfe6ef] pb-4">شرایط و قوانین استفاده (Terms of Use)</h1>
       
-      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-xl">
-        <p className="font-bold text-yellow-800">[OWNER INPUT REQUIRED: Legal Entity Name and Governing Law Jurisdiction]</p>
+      <div className="bg-[#eef3f8] border-l-4 border-[#2F6FED] p-4 rounded-r-xl">
+        <p className="font-bold text-[#142033] text-xs">حوزه قضایی و اطلاعات ثبتی پس از تایید نهایی درج خواهد شد.</p>
       </div>
 
       <section className="space-y-2">

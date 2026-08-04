@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
+import { hasVerifiedLegalEntity } from '../lib/legalConfig';
 import { GraduationCap, BriefcaseBusiness, Building2, ChartNoAxesCombined, Users, House, Check, ArrowRight, ArrowLeft, ShieldCheck, LockKeyhole } from './Icons';
 
 interface LeadFormProps {
@@ -22,10 +23,6 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
     email: '',
     phone: '',
     mainGoal: 'study',
-    educationLevel: currentLang === 'fa' ? 'کارشناسی' : 'Bachelor',
-    workExperience: '3-5',
-    approximateBudget: '10000-20000',
-    maritalStatus: 'single',
     message: '',
     privacyAcknowledgment: false,
     marketingConsent: false,
@@ -53,12 +50,12 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
   const handleNextStep = () => {
     setErrorMsg('');
     if (currentStep === 1) {
-      if (!formData.fullName.trim() || !formData.phone.trim()) {
-        setErrorMsg(currentLang === 'fa' ? 'لطفاً نام و شماره تماس خود را وارد کنید.' : 'Please enter your name and phone number.');
+      if (!formData.fullName.trim() || (!formData.phone.trim() && !formData.email.trim())) {
+        setErrorMsg(currentLang === 'fa' ? 'لطفاً نام و حداقل یک راه ارتباطی (تلفن یا ایمیل) را وارد کنید.' : 'Please enter your name and at least one contact method (phone or email).');
         return;
       }
     }
-    setCurrentStep((prev) => Math.min(prev + 1, 4));
+    setCurrentStep((prev) => Math.min(prev + 1, 3));
   };
 
   const handlePrevStep = () => {
@@ -105,7 +102,29 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
     { id: 'living', title: currentLang === 'fa' ? 'زندگی و استقرار' : 'Living & Relocation', icon: House },
   ];
 
-  if (isSubmitted) {
+  
+  if (process.env.NODE_ENV === 'production' && !hasVerifiedLegalEntity()) {
+    return (
+      <div className={`editorial-card p-6 sm:p-10 bg-white border border-[#dfe6ef] ${isModal ? 'shadow-none' : 'shadow-lg'} text-center`}>
+        <div className="w-16 h-16 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center mx-auto text-2xl font-bold mb-4">
+          <ShieldCheck size={32} />
+        </div>
+        <h3 className="text-xl font-extrabold text-[#142033] mb-2">
+          {currentLang === 'fa' ? 'نسخه آزمایشی — فرم غیرفعال است' : 'Preview Mode — Form Disabled'}
+        </h3>
+        <p className="text-sm text-[#526174] leading-relaxed mb-6">
+          {currentLang === 'fa' 
+            ? 'ارسال آنلاین موقتاً در دسترس نیست. لطفاً از واتساپ، تلفن یا ایمیل استفاده کنید.' 
+            : 'Online submission is temporarily unavailable. Please contact us via WhatsApp, phone, or email.'}
+        </p>
+        <div className="space-y-2 text-sm font-bold text-[#2F6FED]">
+          <p>📞 +40 700 000 000</p>
+          <p>✉️ ontrip.ai@gmail.com</p>
+        </div>
+      </div>
+    );
+  }
+if (isSubmitted) {
     return (
       <div className="editorial-card p-8 sm:p-12 text-center space-y-6 max-w-xl mx-auto bg-white border border-[#dfe6ef]">
         <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto text-2xl font-bold">
@@ -132,7 +151,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
             {currentLang === 'fa' ? 'ارزیابی رایگان پرونده' : 'Free Case Evaluation'}
           </span>
           <span className="text-xs font-bold text-[#526174]">
-            {currentLang === 'fa' ? `گام ${currentStep} از ۴` : `Step ${currentStep} of 4`}
+            {currentLang === 'fa' ? `گام ${currentStep} از ۳` : `Step ${currentStep} of 3`}
           </span>
         </div>
         <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142033]">
@@ -146,7 +165,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
         <div className="w-full bg-[#eef3f8] h-2 rounded-full overflow-hidden mt-4">
           <div
             className="bg-[#2F6FED] h-full transition-all duration-300 rounded-full"
-            style={{ width: `${(currentStep / 4) * 100}%` }}
+            style={{ width: `${(currentStep / 3) * 100}%` }}
           />
         </div>
       </div>
@@ -183,7 +202,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-[#142033]">{t.evaluationForm.phone} *</label>
+                  <label className="font-bold text-[#142033]">{t.evaluationForm.phone} <span className="text-slate-400 font-normal">({currentLang === 'fa' ? 'الزامی در صورت عدم ثبت ایمیل' : 'Required if no email'})</span></label>
                   <input
                     type="text"
                     name="phone"
@@ -196,7 +215,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-[#142033]">{t.evaluationForm.email} <span className="text-slate-400 font-normal">({currentLang === 'fa' ? 'اختیاری' : 'Optional'})</span></label>
+                  <label className="font-bold text-[#142033]">{t.evaluationForm.email} <span className="text-slate-400 font-normal">({currentLang === 'fa' ? 'الزامی در صورت عدم ثبت تلفن' : 'Required if no phone'})</span></label>
                   <input
                     type="email"
                     name="email"
@@ -241,81 +260,11 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
             </div>
           )}
 
-          {/* STEP 3: Background Details */}
+          {/* STEP 4: Details & Consent */}
           {currentStep === 3 && (
             <div className="space-y-4 animate-fadeIn">
               <h3 className="text-sm font-extrabold text-[#142033] border-b border-[#dfe6ef] pb-2">
-                {currentLang === 'fa' ? '۳. سوابق تحصیلی، شغلی و مالی' : '3. Academic & Budget Background'}
-              </h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                <div className="space-y-1">
-                  <label className="font-bold text-[#142033]">{t.evaluationForm.educationLevel}</label>
-                  <select
-                    name="educationLevel"
-                    value={formData.educationLevel}
-                    onChange={handleChange}
-                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
-                  >
-                    <option value="دیپلم">{currentLang === 'fa' ? 'دیپلم / پیش‌دانشگاهی' : 'High School Diploma'}</option>
-                    <option value="کاردانی">{currentLang === 'fa' ? 'کاردانی / فوق دیپلم' : 'Associate Degree'}</option>
-                    <option value="کارشناسی">{currentLang === 'fa' ? 'کارشناسی (لیسانس)' : 'Bachelor Degree'}</option>
-                    <option value="کارشناسی ارشد">{currentLang === 'fa' ? 'کارشناسی ارشد (فوق لیسانس)' : 'Master Degree'}</option>
-                    <option value="دکتری">{currentLang === 'fa' ? 'دکتری تخصصی (PhD)' : 'Doctorate / PhD'}</option>
-                  </select>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="font-bold text-[#142033]">{t.evaluationForm.workExperience}</label>
-                  <select
-                    name="workExperience"
-                    value={formData.workExperience}
-                    onChange={handleChange}
-                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
-                  >
-                    <option value="0-1">{currentLang === 'fa' ? 'کمتر از ۱ سال' : 'Less than 1 year'}</option>
-                    <option value="1-3">{currentLang === 'fa' ? '۱ تا ۳ سال' : '1 - 3 years'}</option>
-                    <option value="3-5">{currentLang === 'fa' ? '۳ تا ۵ سال' : '3 - 5 years'}</option>
-                    <option value="5+">{currentLang === 'fa' ? 'بیش از ۵ سال' : 'More than 5 years'}</option>
-                  </select>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="font-bold text-[#142033]">{t.evaluationForm.approximateBudget}</label>
-                  <select
-                    name="approximateBudget"
-                    value={formData.approximateBudget}
-                    onChange={handleChange}
-                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
-                  >
-                    <option value="5000-10000">5,000 - 10,000 EUR</option>
-                    <option value="10000-20000">10,000 - 20,000 EUR</option>
-                    <option value="20000+">20,000+ EUR</option>
-                  </select>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="font-bold text-[#142033]">{t.evaluationForm.maritalStatus}</label>
-                  <select
-                    name="maritalStatus"
-                    value={formData.maritalStatus}
-                    onChange={handleChange}
-                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
-                  >
-                    <option value="single">{t.evaluationForm.single}</option>
-                    <option value="married">{t.evaluationForm.married}</option>
-                    <option value="marriedWithChildren">{t.evaluationForm.marriedWithChildren}</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* STEP 4: Details & Consent */}
-          {currentStep === 4 && (
-            <div className="space-y-4 animate-fadeIn">
-              <h3 className="text-sm font-extrabold text-[#142033] border-b border-[#dfe6ef] pb-2">
-                {currentLang === 'fa' ? '۴. توضیحات و موافقت‌نامه حریم خصوصی' : '4. Additional Details & Privacy'}
+                {currentLang === 'fa' ? '۳. توضیحات و موافقت‌نامه حریم خصوصی' : '3. Additional Details & Privacy'}
               </h3>
 
               <div className="space-y-3 text-xs">
@@ -391,7 +340,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
               </button>
             ) : <div />}
 
-            {currentStep < 4 ? (
+            {currentStep < 3 ? (
               <button
                 type="button"
                 onClick={handleNextStep}

@@ -1,3 +1,4 @@
+import { legalOperatorConfig } from '../../../lib/legalConfig';
 import React from 'react';
 
 export const PrivacyContent = ({ currentLang }: { currentLang: string }) => {
@@ -5,18 +6,18 @@ export const PrivacyContent = ({ currentLang }: { currentLang: string }) => {
     <div className="space-y-6 text-sm text-[#526174] leading-relaxed rtl text-right">
       <h1 className="text-3xl font-extrabold text-[#142033] border-b border-[#dfe6ef] pb-4">سیاست حفظ حریم خصوصی</h1>
       
-      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-xl">
-        <p className="font-bold text-yellow-800">[OWNER INPUT REQUIRED: Legal Entity Name, Registration Number, and Official Address Must Be Added Here]</p>
+      <div className="bg-[#eef3f8] border-l-4 border-[#2F6FED] p-4 rounded-r-xl">
+        <p className="font-bold text-[#142033] text-xs">اطلاعات حقوقی مجری (شرکت) به زودی پس از تایید نهایی در این بخش قرار می‌گیرد.</p>
       </div>
 
       <section className="space-y-2">
         <h2 className="text-xl font-bold text-[#142033]">۱. هویت پلتفرم (Identity of the Platform)</h2>
-        <p>پلتفرم DORVIA EUROP به عنوان یک پلتفرم اطلاعاتی و تسهیل‌گر خدمات در رومانی فعالیت می‌کند. [OWNER INPUT REQUIRED: Legal entity standing].</p>
+        <p>پلتفرم DORVIA EUROP به عنوان یک پلتفرم اطلاعاتی و تسهیل‌گر خدمات در رومانی فعالیت می‌کند. فعالیت می‌کند.</p>
       </section>
 
       <section className="space-y-2">
         <h2 className="text-xl font-bold text-[#142033]">۲. اطلاعات تماس (Contact Information)</h2>
-        <p>برای امور مربوط به حریم خصوصی، می‌توانید با [OWNER INPUT REQUIRED: DPO Email / Contact Email] در ارتباط باشید.</p>
+        <p>برای امور مربوط به حریم خصوصی، می‌توانید با ایمیل حریم خصوصی اعلام‌شده در این صفحه تماس بگیرید.</p>
       </section>
 
       <section className="space-y-2">
@@ -56,7 +57,7 @@ export const PrivacyContent = ({ currentLang }: { currentLang: string }) => {
 
       <section className="space-y-2">
         <h2 className="text-xl font-bold text-[#142033]">۱۰. سیاست نگهداری (Retention Policy)</h2>
-        <p>[OWNER INPUT REQUIRED: Exact retention period to be defined]. در حال حاضر، پیام‌های ارسالی تا زمان تعیین تکلیف نهایی پرونده نگهداری می‌شوند.</p>
+        <p>{legalOperatorConfig.retentionPolicy}</p>
       </section>
 
       <section className="space-y-2">
@@ -91,12 +92,12 @@ export const PrivacyContent = ({ currentLang }: { currentLang: string }) => {
 
       <section className="space-y-2">
         <h2 className="text-xl font-bold text-[#142033]">۱۷. تاریخ به‌روزرسانی (Policy Update Date)</h2>
-        <p>این سند آخرین بار در تاریخ [OWNER INPUT REQUIRED: Date] به‌روزرسانی شده است.</p>
+        <p>این سند آخرین بار در تاریخ {legalOperatorConfig.privacyPolicyUpdatedAt} به‌روزرسانی شده است.</p>
       </section>
 
       <section className="space-y-2">
         <h2 className="text-xl font-bold text-[#142033]">۱۸. روش تماس برای درخواست‌های حریم خصوصی (Privacy Requests)</h2>
-        <p>برای ثبت هرگونه درخواست مرتبط با حریم خصوصی خود با [OWNER INPUT REQUIRED: Email/Phone] در ارتباط باشید.</p>
+        <p>برای ثبت هرگونه درخواست مرتبط با حریم خصوصی خود با ایمیل {legalOperatorConfig.privacyContactEmail} در ارتباط باشید.</p>
       </section>
     </div>
   );

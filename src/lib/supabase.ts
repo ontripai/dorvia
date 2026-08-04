@@ -1,10 +1,15 @@
 import { createClient } from '@supabase/supabase-js';
 import { LeadFormData } from '../types';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://your-supabase-project.supabase.co';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'your-anon-key';
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+const isConfigured = supabaseUrl !== '' && supabaseAnonKey !== '';
+
+// Create client conditionally (fails gracefully if unconfigured)
+export const supabase = isConfigured 
+  ? createClient(supabaseUrl, supabaseAnonKey) 
+  : null;
 
 export interface CommentItem {
   id: string;
@@ -17,58 +22,10 @@ export interface CommentItem {
   ip_hash?: string;
 }
 
-const LOCAL_COMMENTS_KEY = 'next_romania_demo_comments_v1';
-
-// Seed demo comments for rich preview when local
-function getLocalComments(): CommentItem[] {
-  if (typeof window === 'undefined') return [];
-  try {
-    const raw = localStorage.getItem(LOCAL_COMMENTS_KEY);
-    if (!raw) {
-      const defaultDemo: CommentItem[] = [
-        {
-          id: 'demo-1',
-          page_path: 'needs/driving-license',
-          name: 'رضا امینی',
-          comment_text: 'راهنمای بسیار مفیدی بود. من فرآیند استعلام گواهی‌نامه از سفارت در بخارست را طبق همین مراحل انجام دادم.',
-          rating: 5,
-          status: 'approved',
-          created_at: new Date(Date.now() - 86400000 * 3).toISOString()
-        },
-        {
-          id: 'demo-2',
-          page_path: 'needs/driving-license',
-          name: 'سارا کاظمی',
-          comment_text: 'ممنون از شفاف‌سازی هزینه‌ها و هزینه ۴۶ لِی خدمت جدید DGPCI برای گواهی‌نامه بین‌المللی.',
-          rating: 5,
-          status: 'approved',
-          created_at: new Date(Date.now() - 86400000 * 1).toISOString()
-        }
-      ];
-      localStorage.setItem(LOCAL_COMMENTS_KEY, JSON.stringify(defaultDemo));
-      return defaultDemo;
-    }
-    return JSON.parse(raw);
-  } catch (e) {
-    return [];
-  }
-}
-
-function saveLocalComments(comments: CommentItem[]) {
-  if (typeof window === 'undefined') return;
-  try {
-    localStorage.setItem(LOCAL_COMMENTS_KEY, JSON.stringify(comments));
-  } catch (e) {}
-}
-
-const isDemo = () => supabaseUrl.includes('your-supabase-project') || !process.env.NEXT_PUBLIC_SUPABASE_URL;
-
 export async function submitLeadForm(formData: LeadFormData) {
   try {
-    if (isDemo()) {
-      console.info('[Dar Romania Supabase Scaffold] Form submission data received:', formData);
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      return { success: true, isDemo: true, data: formData };
+    if (!supabase) {
+      return { success: false, error: 'Database unconfigured' };
     }
 
     const { data, error } = await supabase
@@ -78,16 +35,9 @@ export async function submitLeadForm(formData: LeadFormData) {
           full_name: formData.fullName,
           email: formData.email,
           phone: formData.phone,
-          current_country: formData.currentCountry,
-          nationality: formData.nationality,
-          preferred_language: formData.preferredLanguage,
           main_goal: formData.mainGoal,
-          education_level: formData.educationLevel,
-          work_experience: formData.workExperience,
-          approximate_budget: formData.approximateBudget,
-          marital_status: formData.maritalStatus,
           message: formData.message,
-          privacy_consent: formData.privacyConsent,
+          privacy_consent: formData.privacyConsent || (formData as any).privacyAcknowledgment,
           created_at: new Date().toISOString()
         }
       ]);
@@ -95,168 +45,79 @@ export async function submitLeadForm(formData: LeadFormData) {
     if (error) throw error;
     return { success: true, data };
   } catch (err) {
-    console.error('Error submitting lead form to Supabase:', err);
-    return { success: true, isDemo: true, fallbackMessage: 'Saved locally in preview mode' };
+    console.error('Error submitting lead form to Supabase (Internal)');
+    return { success: false, error: 'Submission failed' };
   }
 }
 
-// 1. Fetch approved comments for public page
 export async function fetchApprovedComments(pagePath: string): Promise<CommentItem[]> {
-  try {
-    if (isDemo()) {
-      const local = getLocalComments();
-      return local.filter((c) => c.page_path === pagePath && c.status === 'approved');
-    }
+  if (!supabase) return [];
 
+  try {
     const { data, error } = await supabase
-      .from('comments')
+      .from('page_comments')
       .select('*')
       .eq('page_path', pagePath)
       .eq('status', 'approved')
       .order('created_at', { ascending: false });
 
-    if (error) throw error;
+    if (error) {
+      console.error('Supabase fetch error (Internal)');
+      return [];
+    }
+
     return data || [];
   } catch (err) {
-    console.error('[Supabase Fetch Comments Error]:', err);
-    // Fallback to local store
-    const local = getLocalComments();
-    return local.filter((c) => c.page_path === pagePath && c.status === 'approved');
+    console.error('Error fetching comments (Internal)');
+    return [];
   }
 }
 
-// 2. Submit new public comment (status defaults to 'pending')
-export async function submitComment(params: {
+export async function submitComment(payload: {
   page_path: string;
   name?: string;
   comment_text: string;
   rating?: number;
   honeypot?: string;
 }) {
-  // Honeypot anti-bot check
-  if (params.honeypot && params.honeypot.trim().length > 0) {
-    return { success: false, error: 'Bot submission detected' };
+  if (payload.honeypot) {
+    return { success: true, message: 'Fake success for bots' };
   }
 
-  const nameToUse = params.name && params.name.trim() ? params.name.trim() : 'کاربر ناشناس';
-  const newComment: CommentItem = {
-    id: 'cmt-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
-    page_path: params.page_path,
-    name: nameToUse,
-    comment_text: params.comment_text.trim(),
-    rating: params.rating || null,
-    status: 'pending',
-    created_at: new Date().toISOString()
-  };
+  if (!supabase) {
+    return { success: false, error: 'ارسال نظر در حال حاضر غیرفعال است. (System Unconfigured)' };
+  }
 
   try {
-    if (isDemo()) {
-      const local = getLocalComments();
-      local.unshift(newComment);
-      saveLocalComments(local);
-      return { success: true, data: newComment, isDemo: true };
-    }
-
-    const { data, error } = await supabase
-      .from('comments')
+    const { error } = await supabase
+      .from('page_comments')
       .insert([
         {
-          page_path: params.page_path,
-          name: nameToUse,
-          comment_text: params.comment_text.trim(),
-          rating: params.rating || null,
-          status: 'pending',
-          created_at: new Date().toISOString()
+          page_path: payload.page_path,
+          name: payload.name || 'کاربر ناشناس',
+          comment_text: payload.comment_text,
+          rating: payload.rating,
+          status: 'pending'
         }
-      ])
-      .select();
-
-    if (error) throw error;
-    return { success: true, data: data?.[0] || newComment };
-  } catch (err) {
-    console.error('[Supabase Submit Comment Error]:', err);
-    // Local fallback
-    const local = getLocalComments();
-    local.unshift(newComment);
-    saveLocalComments(local);
-    return { success: true, data: newComment, isDemo: true };
-  }
-}
-
-// 3. Fetch all comments for Admin moderation panel
-export async function fetchAdminComments(): Promise<CommentItem[]> {
-  try {
-    if (isDemo()) {
-      return getLocalComments();
-    }
-
-    const { data, error } = await supabase
-      .from('comments')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-    return data || [];
-  } catch (err) {
-    console.error('[Supabase Admin Fetch Error]:', err);
-    return getLocalComments();
-  }
-}
-
-// 4. Update comment status (approve/reject)
-export async function updateCommentStatus(commentId: string, status: 'approved' | 'rejected') {
-  try {
-    if (isDemo()) {
-      const local = getLocalComments();
-      const idx = local.findIndex((c) => c.id === commentId);
-      if (idx !== -1) {
-        local[idx].status = status;
-        saveLocalComments(local);
-      }
-      return { success: true, isDemo: true };
-    }
-
-    const { error } = await supabase
-      .from('comments')
-      .update({ status })
-      .eq('id', commentId);
+      ]);
 
     if (error) throw error;
     return { success: true };
   } catch (err) {
-    console.error('[Supabase Update Status Error]:', err);
-    const local = getLocalComments();
-    const idx = local.findIndex((c) => c.id === commentId);
-    if (idx !== -1) {
-      local[idx].status = status;
-      saveLocalComments(local);
-    }
-    return { success: true, isDemo: true };
+    console.error('Error submitting comment (Internal)');
+    return { success: false, error: 'متاسفانه خطایی رخ داد.' };
   }
 }
 
-// 5. Delete comment
-export async function deleteComment(commentId: string) {
-  try {
-    if (isDemo()) {
-      let local = getLocalComments();
-      local = local.filter((c) => c.id !== commentId);
-      saveLocalComments(local);
-      return { success: true, isDemo: true };
-    }
+// Ensure admin operations cannot be run client-side by purging them entirely from the client library
+export async function fetchAdminComments() {
+  throw new Error('Unauthorized');
+}
 
-    const { error } = await supabase
-      .from('comments')
-      .delete()
-      .eq('id', commentId);
+export async function updateCommentStatus(id: string, status: 'approved' | 'rejected') {
+  throw new Error('Unauthorized');
+}
 
-    if (error) throw error;
-    return { success: true };
-  } catch (err) {
-    console.error('[Supabase Delete Comment Error]:', err);
-    let local = getLocalComments();
-    local = local.filter((c) => c.id !== commentId);
-    saveLocalComments(local);
-    return { success: true, isDemo: true };
-  }
+export async function deleteComment(id: string) {
+  throw new Error('Unauthorized');
 }

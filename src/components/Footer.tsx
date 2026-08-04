@@ -81,7 +81,9 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
               <li><Link href="/romania/cities" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'شهرهای رومانی' : 'Key Cities'}</Link></li>
               <li><Link href="/romania/tourism" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'راهنمای گردشگری' : 'Tourism Guide'}</Link></li>
               <li><Link href="/legal/privacy" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سیاست حریم خصوصی' : 'Privacy Policy'}</Link></li>
+              <li><Link href="/legal/terms" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'شرایط استفاده' : 'Terms of Use'}</Link></li>
               <li><Link href="/legal/disclaimer" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سلب مسئولیت قانونی' : 'Legal Disclaimer'}</Link></li>
+              <li><Link href="/legal/privacy" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'اطلاعات کوکی‌ها' : 'Cookie Information'}</Link></li>
             </ul>
           </div>
 

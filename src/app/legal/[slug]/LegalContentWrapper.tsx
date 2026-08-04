@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useAppContext } from '../../../components/AppLayout';
-import { EvaluationCTA } from '../../../components/EvaluationCTA';
 import { PrivacyContent } from './PrivacyContent';
 import { TermsContent } from './TermsContent';
 import { DisclaimerContent } from './DisclaimerContent';
@@ -16,8 +15,10 @@ export const LegalContentWrapper = ({ slug }: { slug: string }) => {
       {slug === 'terms' && <TermsContent currentLang={currentLang} />}
       {slug === 'disclaimer' && <DisclaimerContent currentLang={currentLang} />}
       
-      <div className="pt-8 border-t border-[#dfe6ef]">
-        <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
+      <div className="pt-8 border-t border-[#dfe6ef] text-center">
+        <button onClick={onOpenEvaluationModal} className="text-sm font-bold text-[#2F6FED] hover:underline">
+          {currentLang === 'fa' ? 'تماس با ما' : 'Contact Us'}
+        </button>
       </div>
     </div>
   );
