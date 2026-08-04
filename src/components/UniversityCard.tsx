@@ -1,22 +1,24 @@
 import React from 'react';
+import Link from 'next/link';
 import { University, Language } from '../types';
 
 interface UniversityCardProps {
   university: University;
   currentLang: Language;
-  onSelect: (uni: University) => void;
+  onSelect?: (uni: University) => void;
+  href?: string;
 }
 
-export const UniversityCard: React.FC<UniversityCardProps> = ({ university, currentLang, onSelect }) => {
+export const UniversityCard: React.FC<UniversityCardProps> = ({ university, currentLang, onSelect, href }) => {
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col justify-between group">
       
       {/* Visual Header Banner */}
-      <div className="bg-gradient-to-r from-slate-900 to-[#002B7F] p-5 text-white relative">
-        <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#FCD116] text-slate-900 mb-2">
+      <div className="bg-gradient-to-r from-[#071B3D] to-[#2F6FED] p-5 text-white relative">
+        <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#2F6FED] text-white mb-2">
           {university.ranking}
         </span>
-        <h3 className="text-lg font-bold group-hover:text-[#FCD116] transition-colors leading-snug">
+        <h3 className="text-lg font-bold group-hover:text-[#2F6FED] transition-colors leading-snug">
           {university.name[currentLang]}
         </h3>
         <div className="text-xs text-slate-300 mt-1 flex items-center space-x-2 rtl:space-x-reverse">
@@ -45,20 +47,44 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
           </div>
         </div>
 
-        <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-          <span className="text-slate-500 font-medium">{currentLang === 'fa' ? 'حدود شهریه:' : 'Tuition:'}</span>
-          <span className="font-bold text-[#002B7F]">{university.tuitionRange[currentLang]}</span>
+        <div className="pt-3 border-t border-slate-100 space-y-1">
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-slate-500 font-medium">{currentLang === 'fa' ? 'حدود شهریه:' : 'Tuition:'}</span>
+            <span className="font-bold text-[#071B3D]">{university.tuitionRange[currentLang]}</span>
+          </div>
+          {university.source && university.id === 'unibuc' ? (
+            <div className="text-[9px] text-slate-400 mt-1">
+              {currentLang === 'fa' 
+                ? 'منبع دقیق موجود نیست — برای مبلغ قطعی به international.unibuc.ro مراجعه کنید'
+                : 'Exact source unavailable — for confirmed fees visit international.unibuc.ro'}
+            </div>
+          ) : university.source && (
+            <div className="text-[9px] text-slate-400 mt-1">
+              {currentLang === 'fa' 
+                ? `منبع: ${university.source.name} — آخرین بررسی: ${university.lastReviewed || ''}`
+                : `Source: ${university.source.name} — Last reviewed: ${university.lastReviewed || ''}`}
+            </div>
+          )}
         </div>
       </div>
 
       {/* Card Action */}
       <div className="px-5 pb-5 pt-0">
-        <button
-          onClick={() => onSelect(university)}
-          className="w-full py-2.5 bg-slate-50 hover:bg-[#002B7F] text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 hover:border-[#002B7F] flex items-center justify-center space-x-1 rtl:space-x-reverse"
-        >
-          <span>{currentLang === 'fa' ? 'مشاهده شرایط پذیرش' : 'View Admission Process'}</span>
-        </button>
+        {href ? (
+          <Link
+            href={href}
+            className="w-full py-2.5 bg-slate-50 hover:bg-[#071B3D] text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 hover:border-[#071B3D] flex items-center justify-center space-x-1 rtl:space-x-reverse block text-center"
+          >
+            <span>{currentLang === 'fa' ? 'مشاهده شرایط پذیرش' : 'View Admission Process'}</span>
+          </Link>
+        ) : (
+          <button
+            onClick={() => onSelect && onSelect(university)}
+            className="w-full py-2.5 bg-slate-50 hover:bg-[#071B3D] text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 hover:border-[#071B3D] flex items-center justify-center space-x-1 rtl:space-x-reverse"
+          >
+            <span>{currentLang === 'fa' ? 'مشاهده شرایط پذیرش' : 'View Admission Process'}</span>
+          </button>
+        )}
       </div>
 
     </div>

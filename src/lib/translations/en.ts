@@ -1,6 +1,7 @@
 export const enTranslations = {
   brand: {
-    name: "Dar Romania",
+    name: "DORVIA EUROP",
+    siteName: "In Romania",
     subtitle: "In Romania | Official Guidance",
     tagline: "Professional Advisory Platform for Immigration, Study, Work & Corporate Services in Romania",
     description: "Comprehensive guidance and initial case assessment for international applicants seeking legal education, employment, and business formation in Romania and the European Union."
@@ -43,7 +44,7 @@ export const enTranslations = {
     },
     company: {
       title: "Corporate Formation (SRL)",
-      desc: "Establish your business in a dynamic European market with competitive corporate tax rates (1% to 16%) and executive residency options."
+      desc: "Establish your business in a dynamic EU market. Note: Company registration alone does not grant residency; a separate commercial residency permit from IGI is required."
     },
     investment: {
       title: "Investment Opportunities",
@@ -69,15 +70,15 @@ export const enTranslations = {
       },
       {
         title: "Affordable Cost of Living",
-        desc: "Housing and living expenses 30-50% lower than Western Europe while retaining high quality of life."
+        desc: "Housing and daily living expenses in Romania are generally lower than in many Western European countries, though exact amounts depend on the city and lifestyle."
       },
       {
         title: "Globally Accredited Higher Education",
         desc: "Internationally recognized degrees in Medicine, Dentistry, Engineering, and Business without complex entrance exams."
       },
       {
-        title: "Competitive Corporate Tax Rates",
-        desc: "One of the most attractive micro-business tax frameworks in Europe (1% revenue tax option)."
+        title: "Low Taxes & Business Hub",
+        desc: "Corporate tax conditions depend on the type of activity, revenue, ownership structure, employees, and current regulations, and must be verified with an accountant."
       },
       {
         title: "Growing Skilled Job Market",
@@ -134,16 +135,33 @@ export const enTranslations = {
   },
   disclaimer: {
     title: "Commitment to Professional Integrity",
-    text: "Dar Romania provides professional advisory and administrative support services in compliance with Romanian legislation. Visa issuance and residency permit approvals rest exclusively within the jurisdiction of the Embassy of Romania and the General Inspectorate for Immigration (IGI)."
+    text: "DORVIA EUROP provides professional advisory and administrative support services in compliance with Romanian legislation. Visa issuance and residency permit approvals rest exclusively within the jurisdiction of the Embassy of Romania and the General Inspectorate for Immigration (IGI)."
   },
   footer: {
     quickLinks: "Quick Links",
     servicesTitle: "Specialized Services",
     legalTitle: "Legal Information",
-    copyright: "All rights reserved by 'Dar Romania' platform.",
+    copyright: "All rights reserved by DORVIA EUROP — A NAVAN Brand.",
     contactInfo: "Contact Us",
     address: "Bucharest, Romania",
-    email: "info@darromania.com",
-    phone: "+40 700 000 000"
+    email: "ontrip.ai@gmail.com",
+    phone: "+40 727 348 009"
+  },
+  seoMetadata: {
+    "work/work-permit": {
+      title: "Romania Work Permit (Aviz de Muncă) | DORVIA EUROP",
+      description: "Complete guide to obtaining a work permit in Romania (Aviz de Muncă), requirements, required documents, and work visa steps.",
+      h1: "Work Permit in Romania (Aviz de Muncă)"
+    },
+    "romania/cities": {
+      title: "Cities of Romania for Living, Work and Study | DORVIA EUROP",
+      description: "Comprehensive guide to Romanian cities for living, studying, and working. Compare Bucharest, Cluj, Timisoara, and other major cities.",
+      h1: "Cities of Romania"
+    },
+    "needs/driving-license": {
+      title: "Driving Licence in Romania: Exchange, Issuance and Rules | DORVIA EUROP",
+      description: "Complete operational guide to Romanian driving licences: rules, exchanges, new issuance, and International Driving Permits (IDP).",
+      h1: "Driving Licence in Romania"
+    }
   }
 };

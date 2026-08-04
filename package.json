@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "validate:content": "npx ts-node scripts/validateContent.ts",
+    "build": "npm run validate:content && next build",
     "start": "next start",
     "lint": "next lint"
   },

@@ -1,19 +1,31 @@
 import { createClient } from '@supabase/supabase-js';
 import { LeadFormData } from '../types';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://your-supabase-project.supabase.co';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'your-anon-key';
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+const isConfigured = supabaseUrl !== '' && supabaseAnonKey !== '';
+
+// Create client conditionally (fails gracefully if unconfigured)
+export const supabase = isConfigured 
+  ? createClient(supabaseUrl, supabaseAnonKey) 
+  : null;
+
+export interface CommentItem {
+  id: string;
+  page_path: string;
+  name: string;
+  comment_text: string;
+  rating?: number | null;
+  status: 'pending' | 'approved' | 'rejected';
+  created_at: string;
+  ip_hash?: string;
+}
 
 export async function submitLeadForm(formData: LeadFormData) {
   try {
-    // If Supabase credentials are still default placeholder, log to console and simulate successful insert
-    if (supabaseUrl.includes('your-supabase-project') || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
-      console.info('[Dar Romania Supabase Scaffold] Form submission data received:', formData);
-      // Simulate API latency
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      return { success: true, isDemo: true, data: formData };
+    if (!supabase) {
+      return { success: false, error: 'Database unconfigured' };
     }
 
     const { data, error } = await supabase
@@ -23,16 +35,9 @@ export async function submitLeadForm(formData: LeadFormData) {
           full_name: formData.fullName,
           email: formData.email,
           phone: formData.phone,
-          current_country: formData.currentCountry,
-          nationality: formData.nationality,
-          preferred_language: formData.preferredLanguage,
           main_goal: formData.mainGoal,
-          education_level: formData.educationLevel,
-          work_experience: formData.workExperience,
-          approximate_budget: formData.approximateBudget,
-          marital_status: formData.maritalStatus,
           message: formData.message,
-          privacy_consent: formData.privacyConsent,
+          privacy_consent: formData.privacyConsent || (formData as any).privacyAcknowledgment,
           created_at: new Date().toISOString()
         }
       ]);
@@ -40,8 +45,79 @@ export async function submitLeadForm(formData: LeadFormData) {
     if (error) throw error;
     return { success: true, data };
   } catch (err) {
-    console.error('Error submitting lead form to Supabase:', err);
-    // Graceful fallback for demo
-    return { success: true, isDemo: true, fallbackMessage: 'Saved locally in preview mode' };
+    console.error('Error submitting lead form to Supabase (Internal)');
+    return { success: false, error: 'Submission failed' };
   }
+}
+
+export async function fetchApprovedComments(pagePath: string): Promise<CommentItem[]> {
+  if (!supabase) return [];
+
+  try {
+    const { data, error } = await supabase
+      .from('page_comments')
+      .select('*')
+      .eq('page_path', pagePath)
+      .eq('status', 'approved')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Supabase fetch error (Internal)');
+      return [];
+    }
+
+    return data || [];
+  } catch (err) {
+    console.error('Error fetching comments (Internal)');
+    return [];
+  }
+}
+
+export async function submitComment(payload: {
+  page_path: string;
+  name?: string;
+  comment_text: string;
+  rating?: number;
+  honeypot?: string;
+}) {
+  if (payload.honeypot) {
+    return { success: true, message: 'Fake success for bots' };
+  }
+
+  if (!supabase) {
+    return { success: false, error: 'ارسال نظر در حال حاضر غیرفعال است. (System Unconfigured)' };
+  }
+
+  try {
+    const { error } = await supabase
+      .from('page_comments')
+      .insert([
+        {
+          page_path: payload.page_path,
+          name: payload.name || 'کاربر ناشناس',
+          comment_text: payload.comment_text,
+          rating: payload.rating,
+          status: 'pending'
+        }
+      ]);
+
+    if (error) throw error;
+    return { success: true };
+  } catch (err) {
+    console.error('Error submitting comment (Internal)');
+    return { success: false, error: 'متاسفانه خطایی رخ داد.' };
+  }
+}
+
+// Ensure admin operations cannot be run client-side by purging them entirely from the client library
+export async function fetchAdminComments() {
+  throw new Error('Unauthorized');
+}
+
+export async function updateCommentStatus(id: string, status: 'approved' | 'rejected') {
+  throw new Error('Unauthorized');
+}
+
+export async function deleteComment(id: string) {
+  throw new Error('Unauthorized');
 }

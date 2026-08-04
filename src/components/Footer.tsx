@@ -1,9 +1,11 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
 import { ShieldCheck } from './Icons';
+import Image from 'next/image';
 
 interface FooterProps {
   currentLang: Language;
@@ -15,14 +17,9 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
   const t = getTranslations(currentLang);
 
   return (
-    <footer className="bg-[#06162d] text-white pt-0 pb-12 relative border-t border-[#0b2b55] overflow-hidden">
+    <footer className="bg-[#071B3D] text-white pt-0 pb-12 relative border-t border-[#0b2b55] overflow-hidden">
       
-      {/* 4px Romanian Tricolor Top Border */}
-      <div className="romania-tricolor-bar">
-        <div />
-        <div />
-        <div />
-      </div>
+      {/* Removed Romanian Tricolor Top Border */}
 
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 space-y-12">
         
@@ -31,26 +28,17 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
           
           {/* Col 1: Brand Statement */}
           <div className="space-y-4 lg:col-span-1">
-            <div className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer" onClick={() => onNavigate('home')}>
-              <div className="w-9 h-9 rounded-xl bg-white text-[#06162d] flex items-center justify-center font-black text-base relative overflow-hidden">
-                <div className="absolute top-0 bottom-0 left-0 w-1 flex flex-col">
-                  <div className="h-1/3 bg-[#0038a8]" />
-                  <div className="h-1/3 bg-[#fcd116]" />
-                  <div className="h-1/3 bg-[#ce1126]" />
-                </div>
-                <span className="text-[#06162d] ml-0.5">D</span>
-                <span className="text-[#0038a8]">R</span>
-              </div>
-              <span className="text-lg font-extrabold text-white">در رومانی</span>
-            </div>
+            <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer" >
+                <img src="/images/logo/dorvia-logo-reversed-transparent-3000.png" alt="DORVIA" className="h-[28px] sm:h-[32px] w-auto" />
+              <span className="text-lg font-extrabold text-white">{t.brand.siteName}</span>
+            </Link>
 
             <p className="text-[#788697] leading-relaxed">
               {t.brand.tagline}
             </p>
 
             <div className="flex items-center space-x-2 rtl:space-x-reverse text-[11px] text-slate-400">
-              <ShieldCheck size={14} className="text-[#fcd116]" />
-              <span>EU GDPR Compliant</span>
+              {/* EU GDPR Removed */}
             </div>
           </div>
 
@@ -60,11 +48,11 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
               {currentLang === 'fa' ? 'مسیرهای مهاجرت' : 'Pathways'}
             </h4>
             <ul className="space-y-2 text-slate-300">
-              <li><button onClick={() => onNavigate('study')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.pathways.study.title}</button></li>
-              <li><button onClick={() => onNavigate('work')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.pathways.work.title}</button></li>
-              <li><button onClick={() => onNavigate('company')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.pathways.company.title}</button></li>
-              <li><button onClick={() => onNavigate('immigration')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.pathways.investment.title}</button></li>
-              <li><button onClick={() => onNavigate('immigration')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{t.pathways.family.title}</button></li>
+              <li><Link href="/study" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.study.title}</Link></li>
+              <li><Link href="/work" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.work.title}</Link></li>
+              <li><Link href="/company" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.company.title}</Link></li>
+              <li><Link href="/company/investment" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.investment.title}</Link></li>
+              <li><Link href="/immigration/family-reunification" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.family.title}</Link></li>
             </ul>
           </div>
 
@@ -74,12 +62,12 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
               {currentLang === 'fa' ? 'نیازها در رومانی' : 'Essentials'}
             </h4>
             <ul className="space-y-2 text-slate-300">
-              <li><button onClick={() => onNavigate('needs/currency-exchange')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'صرافی و نرخ BNR' : 'Currency & BNR Rates'}</button></li>
-              <li><button onClick={() => onNavigate('needs/driving-license')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'گواهینامه رانندگی' : 'Driving License'}</button></li>
-              <li><button onClick={() => onNavigate('needs/certified-translation')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'دارالترجمه رسمی' : 'Certified Translation'}</button></li>
-              <li><button onClick={() => onNavigate('needs/notary-public')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'دفتر اسناد رسمی' : 'Notary Public'}</button></li>
-              <li><button onClick={() => onNavigate('needs/iranian-embassy-and-mikhak')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سفارت ایران و میخک' : 'Iranian Embassy & Mikhak'}</button></li>
-              <li><button onClick={() => onNavigate('needs/housing')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'اجاره و خرید مسکن' : 'Housing Guide'}</button></li>
+              <li><Link href="/needs/currency-exchange" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'صرافی و نرخ BNR' : 'Currency & BNR Rates'}</Link></li>
+              <li><Link href="/needs/driving-license" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'گواهینامه رانندگی' : 'Driving License'}</Link></li>
+              <li><Link href="/needs/certified-translation" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'دارالترجمه رسمی' : 'Certified Translation'}</Link></li>
+              <li><Link href="/needs/notary-public" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'دفتر اسناد رسمی' : 'Notary Public'}</Link></li>
+              <li><Link href="/needs/iranian-embassy-and-mikhak" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سفارت ایران و میخک' : 'Iranian Embassy & Mikhak'}</Link></li>
+              <li><Link href="/needs/housing" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'اجاره و خرید مسکن' : 'Housing Guide'}</Link></li>
             </ul>
           </div>
 
@@ -89,11 +77,13 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
               {currentLang === 'fa' ? 'شناخت رومانی و حقوقی' : 'Romania & Legal'}
             </h4>
             <ul className="space-y-2 text-slate-300">
-              <li><button onClick={() => onNavigate('romania/economy')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'اقتصاد و صنایع رومانی' : 'Economy & Industries'}</button></li>
-              <li><button onClick={() => onNavigate('romania/cities')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'شهرهای رومانی' : 'Key Cities'}</button></li>
-              <li><button onClick={() => onNavigate('romania/tourism')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'راهنمای گردشگری' : 'Tourism Guide'}</button></li>
-              <li><button onClick={() => onNavigate('legal/privacy')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سیاست حریم خصوصی' : 'Privacy Policy'}</button></li>
-              <li><button onClick={() => onNavigate('legal/disclaimer')} className="hover:text-[#fcd116] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سلب مسئولیت قانونی' : 'Legal Disclaimer'}</button></li>
+              <li><Link href="/romania/economy" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'اقتصاد و صنایع رومانی' : 'Economy & Industries'}</Link></li>
+              <li><Link href="/romania/cities" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'شهرهای رومانی' : 'Key Cities'}</Link></li>
+              <li><Link href="/romania/tourism" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'راهنمای گردشگری' : 'Tourism Guide'}</Link></li>
+              <li><Link href="/legal/privacy" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سیاست حریم خصوصی' : 'Privacy Policy'}</Link></li>
+              <li><Link href="/legal/terms" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'شرایط استفاده' : 'Terms of Use'}</Link></li>
+              <li><Link href="/legal/disclaimer" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سلب مسئولیت قانونی' : 'Legal Disclaimer'}</Link></li>
+              <li><Link href="/legal/privacy" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'اطلاعات کوکی‌ها' : 'Cookie Information'}</Link></li>
             </ul>
           </div>
 
@@ -104,8 +94,8 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
             </h4>
             <ul className="space-y-2 text-slate-300">
               <li>📍 {t.footer.address}</li>
-              <li>✉️ {t.footer.email}</li>
-              <li>📞 {t.footer.phone}</li>
+              <li>✉️ <a href="mailto:ontrip.ai@gmail.com" dir="ltr" className="inline-block hover:text-[#2F6FED] transition-colors">{t.footer.email}</a></li>
+              <li>📞 <a href="tel:+40727348009" dir="ltr" className="inline-block hover:text-[#2F6FED] transition-colors">{t.footer.phone}</a> | <a href="https://wa.me/40727348009" target="_blank" rel="noopener noreferrer" className="hover:text-[#25D366] transition-colors">WhatsApp</a></li>
             </ul>
           </div>
 
@@ -118,12 +108,11 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
               ? 'این وب‌سایت نتیجه صدور ویزا، پذیرش یا اقامت را تضمین نمی‌کند. تصمیم‌گیری نهایی در صلاحیت سفارت و اداره کل مهاجرت رومانی (IGI) است.'
               : 'This platform does not guarantee visa, admission, or residency outcomes. Final approvals belong to official Romanian authorities.'}
           </span>
-          <button
-            onClick={() => onNavigate('legal/disclaimer')}
-            className="text-[#fcd116] font-bold hover:underline shrink-0 cursor-pointer"
+          <Link href="/legal/disclaimer"
+            className="text-[#F4F7FC] font-bold hover:underline shrink-0 cursor-pointer"
           >
             {currentLang === 'fa' ? 'مطالعه سلب مسئولیت کامل' : 'Read Full Disclaimer'}
-          </button>
+          </Link>
         </div>
 
         {/* Bottom Copyright Bar */}

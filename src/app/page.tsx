@@ -1,7 +1,17 @@
 'use client';
 
-import App from '../App';
+import { useAppContext } from '../components/AppLayout';
+import { MainContent } from '../components/MainContent';
 
 export default function Home() {
-  return <App />;
+  const { currentLang, onNavigate, onOpenEvaluationModal } = useAppContext();
+
+  return (
+    <MainContent
+      currentLang={currentLang}
+      activeRoute="home"
+      onNavigate={onNavigate}
+      onOpenEvaluationModal={onOpenEvaluationModal}
+    />
+  );
 }

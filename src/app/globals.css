@@ -6,12 +6,12 @@
 
 :root {
   /* Navy Brand Palette */
-  --navy-950: #06162d;
+  --navy-950: #071B3D;
   --navy-900: #081f3f;
   --navy-800: #0b2b55;
 
   /* Romanian Tricolor System */
-  --romania-blue-700: #0038a8;
+  --romania-blue-700: #2F6FED;
   --romania-blue-600: #1554bd;
   --romania-blue-500: #2f6bd1;
   --romania-blue-100: #e7efff;
@@ -128,7 +128,7 @@ h3 {
 
 .dark-hero-panel {
   background: radial-gradient(circle at 15% 15%, rgba(50, 107, 209, 0.38), transparent 34%),
-              linear-gradient(135deg, #06162d 0%, #002b7f 58%, #0038a8 100%);
+              linear-gradient(135deg, #071B3D 0%, #071B3D 58%, #2F6FED 100%);
   color: #FFFFFF;
 }
 

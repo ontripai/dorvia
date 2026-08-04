@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
 import { X, ChevronDown } from './Icons';
@@ -36,10 +37,41 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   }, [onClose]);
 
   const navItems = [
-    { id: 'immigration', label: currentLang === 'fa' ? 'مهاجرت' : 'Immigration' },
-    { id: 'study', label: currentLang === 'fa' ? 'تحصیل' : 'Study' },
-    { id: 'work', label: currentLang === 'fa' ? 'کار' : 'Work' },
-    { id: 'company', label: currentLang === 'fa' ? 'کسب‌وکار' : 'Business' },
+    { id: 'start-here', label: currentLang === 'fa' ? 'شروع از اینجا' : 'Start Here' },
+    { id: 'start-here/planning-to-come', label: currentLang === 'fa' ? '— قصد آمدن به رومانی دارم' : '— Planning to come' },
+    { id: 'start-here/newly-arrived', label: currentLang === 'fa' ? '— به‌تازگی وارد شده‌ام' : '— Just arrived' },
+    { id: 'start-here/settling-in', label: currentLang === 'fa' ? '— در رومانی زندگی می‌کنم' : '— Living in Romania' },
+    { id: 'start-here/planning-to-come', label: currentLang === 'fa' ? '— چک‌لیست قبل از سفر' : '— Pre-departure Checklist' },
+    { id: 'start-here/newly-arrived', label: currentLang === 'fa' ? '— سه روز اول' : '— First 3 Days' },
+    { id: 'start-here/settling-in', label: currentLang === 'fa' ? '— ماه اول' : '— First Month' },
+    { id: 'immigration', label: currentLang === 'fa' ? 'مهاجرت و اقامت' : 'Immigration & Residence' },
+    { id: 'immigration/residence-renewal', label: currentLang === 'fa' ? '— تمدید اقامت' : '— Residence Renewal' },
+    { id: 'immigration/long-term-residence', label: currentLang === 'fa' ? '— اقامت بلندمدت' : '— Long-term Residence' },
+    { id: 'immigration/citizenship', label: currentLang === 'fa' ? '— تابعیت' : '— Citizenship' },
+    { id: 'immigration/family-reunification', label: currentLang === 'fa' ? '— پیوست خانواده' : '— Family Reunification' },
+    { id: 'study', label: currentLang === 'fa' ? 'تحصیل و بورسیه' : 'Study & Scholarships' },
+    { id: 'study/requirements', label: currentLang === 'fa' ? '— مدارک و الزامات پذیرش' : '— Required Documents' },
+    { id: 'study/visa-type-d', label: currentLang === 'fa' ? '— ویزای تحصیلی تایپ D' : '— Type D Visa' },
+    { id: 'study/tuition-overview', label: currentLang === 'fa' ? '— شهریه‌های تحصیلی (نمای کلی)' : '— Tuition Rates' },
+    { id: 'study/preparatory-year', label: currentLang === 'fa' ? '— سال زبان (پیش‌دانشگاهی)' : '— Language Preparatory Year' },
+    { id: 'study/scholarships', label: currentLang === 'fa' ? '— بورسیه تحصیلی' : '— Scholarships' },
+    { id: 'study/part-time-work', label: currentLang === 'fa' ? '— مجوز کار پاره‌وقت دانشجویی' : '— Student Work Permits' },
+    { id: 'work', label: currentLang === 'fa' ? 'کار و کسب‌وکار' : 'Work & Business' },
+    { id: 'work', label: currentLang === 'fa' ? '— هاب کار (نمای کلی)' : '— Work Hub Overview' },
+    { id: 'work/finding-job', label: currentLang === 'fa' ? '— پیدا کردن کار' : '— Find a Job' },
+    { id: 'work/work-permit', label: currentLang === 'fa' ? '— مجوز کار (Aviz de Muncă)' : '— Work Permit' },
+    { id: 'work/work-visa', label: currentLang === 'fa' ? '— ویزای کاری' : '— Work Visa' },
+    { id: 'work/employment-contract', label: currentLang === 'fa' ? '— قرارداد استخدام' : '— Employment Contract' },
+    { id: 'work/taxes-salaries', label: currentLang === 'fa' ? '— حقوق و مالیات' : '— Salary & Tax' },
+    { id: 'work/insurance', label: currentLang === 'fa' ? '— بیمه' : '— Insurance' },
+    { id: 'company', label: currentLang === 'fa' ? '— هاب کسب‌وکار (نمای کلی)' : '— Business Hub Overview' },
+    { id: 'company/registration', label: currentLang === 'fa' ? '— مراحل ثبت شرکت (SRL)' : '— Registration Steps (SRL)' },
+    { id: 'company/tax-types', label: currentLang === 'fa' ? '— انواع نرخ‌های مالیاتی' : '— Tax Types' },
+    { id: 'company/bank-account', label: currentLang === 'fa' ? '— افتتاح حساب بانکی' : '— Bank Account' },
+    { id: 'company/residency', label: currentLang === 'fa' ? '— قوانین اقامتی مدیرعامل' : '— Executive Residency' },
+    { id: 'company/real-estate-investment', label: currentLang === 'fa' ? '— املاک و مستغلات' : '— Real Estate Investment' },
+    { id: 'company/startup-tech-investment', label: currentLang === 'fa' ? '— استارت‌آپ و فناوری' : '— Tech Startups' },
+    { id: 'company/annual-tax-reporting', label: currentLang === 'fa' ? '— قوانین و گزارش مالیاتی' : '— Tax Compliance' },
     { id: 'living', label: currentLang === 'fa' ? 'زندگی در رومانی' : 'Living in Romania' },
     { id: 'about-romania', label: currentLang === 'fa' ? 'شناخت رومانی' : 'Discover Romania' },
     { id: 'universities', label: t.nav.universities },
@@ -50,18 +82,13 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
     { id: 'contact', label: t.nav.contact },
   ];
 
-  const handleLinkClick = (id: string) => {
-    onNavigate(id);
-    onClose();
-  };
-
   return (
-    <div className="fixed inset-0 z-50 bg-[#06162d]/90 backdrop-blur-md flex flex-col justify-between p-6 overflow-y-auto animate-fadeIn">
+    <div className="fixed inset-0 z-50 bg-[#071B3D]/90 backdrop-blur-md flex flex-col justify-between p-6 overflow-y-auto animate-fadeIn">
       
       {/* Top Mobile Bar */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-4">
         <div className="flex items-center space-x-2 rtl:space-x-reverse">
-          <div className="w-8 h-8 rounded-lg bg-white text-[#06162d] flex items-center justify-center font-bold text-sm">
+          <div className="w-8 h-8 rounded-lg bg-white text-[#071B3D] flex items-center justify-center font-bold text-sm">
             DR
           </div>
           <span className="font-extrabold text-white text-base">در رومانی</span>
@@ -79,16 +106,17 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
       {/* Main Drawer Links */}
       <div className="py-6 space-y-1.5 flex-1">
         {navItems.map((item) => (
-          <button
+          <Link
             key={item.id}
-            onClick={() => handleLinkClick(item.id)}
-            className={`w-full text-start px-4 py-3 rounded-xl text-sm font-semibold transition-colors min-h-[44px] flex items-center justify-between ${
-              activeRoute === item.id ? 'bg-[#0038a8] text-white font-bold' : 'text-slate-200 hover:bg-white/10'
+            href={`/${item.id === 'home' ? '' : item.id}`}
+            onClick={onClose}
+            className={`w-full text-start px-4 py-3 rounded-xl text-sm font-semibold transition-colors min-h-[44px] flex items-center justify-between block ${
+              activeRoute === item.id ? 'bg-[#2F6FED] text-white font-bold' : 'text-slate-200 hover:bg-white/10'
             }`}
           >
             <span>{item.label}</span>
             <ChevronDown size={14} className="text-slate-400" />
-          </button>
+          </Link>
         ))}
       </div>
 
@@ -109,7 +137,8 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
         <Button
           variant="outline"
           size="md"
-          onClick={() => handleLinkClick('contact')}
+          href="/contact"
+          onClick={onClose}
           className="w-full"
         >
           {currentLang === 'fa' ? 'تماس با ما' : 'Contact Us'}

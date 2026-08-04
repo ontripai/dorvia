@@ -18,8 +18,8 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ currentLang,
             onClick={() => onLanguageChange(lang.id)}
             className={`px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 flex items-center space-x-1.5 rtl:space-x-reverse ${
               isActive
-                ? 'bg-[#002B7F] text-white shadow-sm font-bold'
-                : 'text-slate-700 hover:text-[#002B7F] hover:bg-slate-200/60'
+                ? 'bg-[#071B3D] text-white shadow-sm font-bold'
+                : 'text-slate-700 hover:text-[#071B3D] hover:bg-slate-200/60'
             }`}
 
             aria-label={`Switch to ${lang.label}`}

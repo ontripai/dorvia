@@ -41,7 +41,7 @@ export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({ currentLang })
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-[#0038a8]">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-[#2F6FED]">
             {currentLang === 'fa' ? 'فرآیند گام‌به‌گام' : 'How It Works'}
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#142033]">
@@ -59,12 +59,12 @@ export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({ currentLang })
           {steps.map((s, idx) => (
             <div key={idx} className="editorial-card p-6 flex flex-col justify-between space-y-4 relative group">
               <div className="flex items-center justify-between border-b border-[#dfe6ef] pb-3">
-                <span className="text-2xl font-black text-[#0038a8]">{s.num}</span>
-                <span className="w-2 h-2 rounded-full bg-[#fcd116]" />
+                <span className="text-2xl font-black text-[#2F6FED]">{s.num}</span>
+                <span className="w-2 h-2 rounded-full bg-[#2F6FED]" />
               </div>
 
               <div className="space-y-2">
-                <h3 className="text-base font-extrabold text-[#142033] group-hover:text-[#0038a8] transition-colors">
+                <h3 className="text-base font-extrabold text-[#142033] group-hover:text-[#2F6FED] transition-colors">
                   {s.title}
                 </h3>
                 <p className="text-xs text-[#526174] leading-relaxed">
