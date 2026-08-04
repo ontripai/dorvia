@@ -184,6 +184,8 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
     case 'culture-and-arts':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="romania/culture-and-arts" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'فرهنگ، هنر و میراث تاریخی رومانی' : 'Culture, Arts & Cultural Heritage'}
@@ -194,6 +196,8 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
                 : 'History, Bucharest architecture, Transylvanian heritage, classical music & museums.'}
             </p>
           </div>
+
+          <ParentHubFooterCard slugRoute="romania/culture-and-arts" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
@@ -201,6 +205,8 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
     case 'laws-and-regulations':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="romania/laws-and-regulations" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <span className="text-[#F4F7FC] font-bold text-xs uppercase tracking-wider">
               {currentLang === 'fa' ? 'حقوق و مقررات' : 'Legal Hub'}
@@ -218,6 +224,8 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
           <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl text-xs text-amber-900 leading-relaxed font-semibold">
             ⚖️ <strong>سلب مسئولیت حقوقی:</strong> این صفحه یک راهنمای عمومی است و جایگزین مشاوره حقوقی متناسب با پرونده شخصی نیست. متن و اجرای قوانین ممکن است تغییر کند؛ برای تصمیم‌گیری نهایی باید نسخه جاری قانون و نظر متخصص واجد صلاحیت بررسی شود.
           </div>
+
+          <ParentHubFooterCard slugRoute="romania/laws-and-regulations" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
@@ -225,6 +233,8 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
     case 'tourism':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="romania/tourism" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'راهنمای جامع گردشگری رومانی' : 'Romania Tourism & Travel Guide'}
@@ -235,6 +245,8 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
                 : 'Transylvanian castles, Carpathian mountain nature, Black Sea resorts & Danube Delta.'}
             </p>
           </div>
+
+          <ParentHubFooterCard slugRoute="romania/tourism" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 

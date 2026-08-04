@@ -106,6 +106,8 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
     case 'tax-types':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="company/tax-types" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'نرخ‌های مالیاتی شرکت‌های کوچک در رومانی' : 'Small Business Tax Rates in Romania'}
@@ -172,12 +174,16 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="company/tax-types" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
     case 'bank-account':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="company/bank-account" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'افتتاح حساب بانکی برای شرکت در رومانی' : 'Opening a Corporate Bank Account in Romania'}
@@ -232,12 +238,16 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="company/bank-account" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
     case 'residency':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="company/residency" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'اقامت برای مدیرعامل و سهامدار شرکت' : 'Residency for Company Director and Shareholder'}
@@ -284,12 +294,16 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="company/residency" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
     case 'real-estate-investment':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="company/real-estate-investment" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'سرمایه‌گذاری در املاک و مستغلات' : 'Real Estate Investment'}
@@ -358,12 +372,16 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="company/real-estate-investment" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
     case 'startup-tech-investment':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="company/startup-tech-investment" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'استارت‌آپ‌ها و فناوری اطلاعات' : 'Tech Startups & Innovation'}
@@ -432,12 +450,16 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="company/startup-tech-investment" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
     case 'annual-tax-reporting':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="company/annual-tax-reporting" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'قوانین مالیاتی و گزارش‌دهی سالانه' : 'Annual Tax Compliance'}
@@ -505,6 +527,8 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="company/annual-tax-reporting" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 

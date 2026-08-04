@@ -446,6 +446,8 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="immigration/citizenship" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 

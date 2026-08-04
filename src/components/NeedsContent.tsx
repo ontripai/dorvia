@@ -255,6 +255,8 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
     case 'driving-license':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="needs/driving-license" currentLang={currentLang} onNavigate={onNavigate} />
+
           {/* Hero Header Panel */}
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <span className="text-[#2F6FED] font-bold text-xs uppercase tracking-wider">
@@ -684,6 +686,9 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               : 'Last Review: August 2026. Variable information (fees, deadlines) may be subject to change; verify with official sources or contact us.'}
           </div>
 
+          {/* PARENT HUB FOOTER CARD */}
+          <ParentHubFooterCard slugRoute="needs/driving-license" currentLang={currentLang} onNavigate={onNavigate} />
+
           {/* PUBLIC COMMENTS SECTION */}
           <CommentsSection pagePath={`needs/${subRoute}`} currentLang={currentLang} />
         </div>
@@ -693,6 +698,8 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
     case 'certified-translation':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="needs/certified-translation" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'ترجمه رسمی و مترجمین مجاز' : 'Certified Translation'}
@@ -747,6 +754,8 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="needs/certified-translation" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
@@ -754,6 +763,8 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
     case 'notary-public':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="needs/notary-public" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'دفتر اسناد رسمی و خدمات نوتاری' : 'Notary Public Services'}
@@ -796,6 +807,8 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="needs/notary-public" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
@@ -803,6 +816,8 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
     case 'iranian-embassy-and-mikhak':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="needs/iranian-embassy-and-mikhak" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <span className="text-[#2F6FED] font-bold text-xs uppercase tracking-wider">
               {currentLang === 'fa' ? 'خدمات کنسولی' : 'Consular Services'}
@@ -863,6 +878,8 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="needs/iranian-embassy-and-mikhak" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
@@ -870,6 +887,8 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
     case 'housing':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="needs/housing" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'راهنمای اجاره و خرید مسکن در رومانی' : 'Renting & Buying Property in Romania'}
@@ -935,6 +954,8 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="needs/housing" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
@@ -943,6 +964,8 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
     default:
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="needs/first-days-checklist" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <span className="text-[#2F6FED] font-bold text-xs uppercase tracking-wider">
               {currentLang === 'fa' ? 'راهنمای تازه واردین' : 'New Arrivals Guide'}
@@ -1005,6 +1028,8 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="needs/first-days-checklist" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
   }

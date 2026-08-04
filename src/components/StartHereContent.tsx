@@ -131,12 +131,16 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="start-here/planning-to-come" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
     case 'just-arrived':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="start-here/newly-arrived" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'تازه به رومانی رسیده‌ام' : 'Just arrived in Romania'}
@@ -236,12 +240,16 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="start-here/newly-arrived" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
     case 'living-here':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="start-here/settling-in" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'ساکن رومانی هستم' : 'Living in Romania'}
@@ -354,12 +362,16 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="start-here/settling-in" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
     case 'pre-departure-checklist':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="start-here/arriving-soon" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'چک‌لیست پیش از سفر' : 'Pre-departure Checklist'}
@@ -441,12 +453,16 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="start-here/arriving-soon" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
     case 'first-three-days':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="start-here/newly-arrived" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? '۳ روز اول در رومانی' : 'First 3 Days'}
@@ -538,12 +554,16 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="start-here/newly-arrived" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
     case 'first-month':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="start-here/settling-in" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'ماه اول اقامت' : 'First Month'}
@@ -643,6 +663,8 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="start-here/settling-in" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 

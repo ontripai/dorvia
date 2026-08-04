@@ -37,6 +37,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
     case 'permit':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="work/work-permit" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'مجوز کار در رومانی (Aviz de Muncă)' : 'Work Permit (Aviz de Muncă)'}
@@ -103,6 +105,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="work/work-permit" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
@@ -110,6 +114,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
     case 'visa':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="work/work-visa" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'ویزای بلندمدت کاری (D/AM)' : 'Long-Stay Work Visa (D/AM)'}
@@ -173,6 +179,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="work/work-visa" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
@@ -180,6 +188,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
     case 'find-job':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="work/finding-job" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'پیدا کردن کار در رومانی' : 'Finding a Job in Romania'}
@@ -255,6 +265,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="work/finding-job" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
@@ -262,6 +274,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
     case 'contract':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="work/employment-contract" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'قرارداد استخدام در رومانی' : 'Employment Contract in Romania'}
@@ -331,6 +345,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="work/employment-contract" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
@@ -338,6 +354,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
     case 'tax':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="work/taxes-salaries" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'حقوق و مالیات' : 'Salary and Taxes'}
@@ -406,12 +424,16 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="work/taxes-salaries" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
     case 'insurance':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="work/insurance" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'بیمه' : 'Insurance'}
@@ -479,6 +501,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="work/insurance" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
