@@ -8,6 +8,7 @@ import { Landmark, House, FileCheck2, ShieldCheck, LockKeyhole, ExternalLink, Ar
 import { BnrRatesFeed } from './BnrRatesFeed';
 import { CommentsSection } from './CommentsSection';
 import { HealthGuideContent } from './HealthGuideContent';
+import { BankingGuideContent } from './BankingGuideContent';
 
 interface NeedsContentProps {
   subRoute: string;
@@ -58,13 +59,24 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
             </Link>
 
-            <Link href="/needs/currency-exchange" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+            <Link href="/needs/banking" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                   <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🏦</span>
+                  <span>{currentLang === 'fa' ? 'افتتاح حساب بانکی' : 'Bank Account Opening'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'راهنمای بانک‌های اصلی (BCR, BT, BRD)، مدارک اقامت و نئوبانک‌ها.' : 'Guide to major banks (BCR, BT, BRD), residence permits, and neobanks.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </Link>
+
+            <Link href="/needs/currency-exchange" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">💱</span>
                   <span>{currentLang === 'fa' ? 'صرافی و پرداخت‌ها' : 'Currency Exchange & Payments'}</span>
                 </h4>
-                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'نرخ‌های مرجع بانک ملی (BNR)، صرافی‌های معتبر و افتتاح حساب بانکی.' : 'BNR rates, banking, local card setup, and money transfers.'}</p>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'نرخ‌های مرجع بانک ملی (BNR)، صرافی‌های معتبر و پرداخت روزمره.' : 'BNR rates, licensed exchange offices, and daily payments.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
             </Link>
@@ -159,6 +171,9 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
           </div>
         </div>
       );
+
+    case 'banking':
+      return <BankingGuideContent currentLang={currentLang} onNavigate={onNavigate} />;
 
     case 'health':
       return <HealthGuideContent currentLang={currentLang} onNavigate={onNavigate} />;
