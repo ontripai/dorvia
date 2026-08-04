@@ -20,7 +20,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       description,
       url: `${SITE_URL}/${fullPath}`,
     },
-    robots: isProduction ? (!meta?.indexable ? { index: false, follow: true } : undefined) : undefined
+    robots: isProduction 
+      ? (!meta?.indexable ? { index: false, follow: true } : { index: true, follow: true }) 
+      : { index: false, follow: false }
   };
 }
 
