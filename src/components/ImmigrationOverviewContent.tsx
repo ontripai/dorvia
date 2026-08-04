@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Language } from '../types';
 import { CommentsSection } from './CommentsSection';
 import { IgiProcessContent } from './IgiProcessContent';
+import { FamilyReunificationContent } from './FamilyReunificationContent';
 
 interface ImmigrationOverviewContentProps {
   subRoute: string;
@@ -453,76 +454,7 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
       );
 
     case 'family-reunification':
-      return (
-        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'پیوست خانواده' : 'Family Reunification'}
-            </h1>
-            <div className="text-[11px] text-slate-400 mt-2">
-              {currentLang === 'fa' 
-                ? 'منبع: اداره کل مهاجرت رومانی (IGI)، آیین‌نامه اتباع خارجی (OUG 194/2002) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
-                : 'Source: General Inspectorate for Immigration (IGI), Foreigners Regime (OUG 194/2002) — Last reviewed: August 2026'}
-            </div>
-          </div>
-
-          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-            {currentLang === 'fa' 
-              ? 'ویزا و اقامت از طریق پیوست خانواده، راهکاری قانونی برای گرد هم آوردن اعضای خانواده در خاک رومانی است. بر اساس قوانین مهاجرتی، شهروندان رومانیایی یا اتباع خارجی که دارای کارت اقامت معتبر (به ویژه اقامت بلندمدت) هستند، می‌توانند به عنوان حامی مالی و قانونی (Sponsor) برای الحاق همسر و فرزندان تحت تکفل خود درخواست دهند. در این پروسه، اداره کل مهاجرت (IGI) مدارک اثبات‌کننده رابطه خانوادگی را بررسی کرده و پس از تأیید عدم صوری بودن ازدواج، مجوز لازم جهت دریافت ویزای نوع D و در نهایت کارت اقامت موقت را برای اعضای خانواده صادر می‌نماید.'
-              : 'Visa and residency through family reunification is a legal framework designed to bring family members together in Romania. Under immigration laws, Romanian citizens or foreign nationals holding a valid residence permit (especially long-term residence) can act as a sponsor to request reunification with their spouse and dependent children. During this process, the General Inspectorate for Immigration (IGI) evaluates documents proving the familial relationship and, after confirming that a marriage is not one of convenience, issues the necessary approval for obtaining a Type D visa and ultimately a temporary residence permit for the family members.'}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
-                <span>{currentLang === 'fa' ? 'چارچوب کلی' : 'General Framework'}</span>
-              </h3>
-              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'اعضای خانواده (همسر و فرزندان) شهروند رومانیایی یا دارنده اقامت بلندمدت رومانی می‌توانند برای پیوستن و اخذ حق اقامت موقت با هدف «پیوست خانواده» اقدام کنند.' : 'Family members (spouse and children) of a Romanian citizen or a long-term residence holder can apply to join them and obtain a temporary residence right for the purpose of "family reunification".'}</li>
-              </ul>
-            </div>
-
-            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
-                <span>{currentLang === 'fa' ? 'زمان رسیدگی' : 'Processing Time'}</span>
-              </h3>
-              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'زمان رسیدگی به درخواست اولیه اقامت موقت به‌عنوان عضو خانواده شهروند رومانیایی تا ۹۰ روز است؛ برای درخواست‌های بعدی (تمدید) این زمان به ۳۰ روز کاهش می‌یابد.' : 'The processing time for an initial temporary residence application as a family member of a Romanian citizen is up to 90 days; for subsequent applications (renewals), this time is reduced to 30 days.'}</li>
-                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
-              </ul>
-            </div>
-
-            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
-                <span>{currentLang === 'fa' ? 'نکته مهم' : 'Important Note'}</span>
-              </h3>
-              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'IGI بررسی می‌کند که ازدواج مبنای درخواست، «ازدواج صوری» نباشد؛ در صورت احراز صوری بودن، درخواست رد می‌شود.' : 'IGI will investigate to ensure the marriage forming the basis of the application is not a "marriage of convenience"; if proven so, the application will be denied.'}</li>
-                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
-            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
-              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
-            </h3>
-            <div className="space-y-6">
-              <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بررسی درخواست پیوست خانواده چقدر طول می‌کشد؟' : 'How long does it take to process a family reunification application?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'زمان قانونی رسیدگی به درخواست اولیه صدور مجوز پیوست خانواده و کارت اقامت تا ۹۰ روز کاری است.' : 'The legal processing time for the initial family reunification permit and residence card application is up to 90 working days.'}</p>
-              </div>
-              <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا همسر من می‌تواند با ویزای پیوست خانواده در رومانی کار کند؟' : 'Can my spouse work in Romania with a family reunification visa?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، اعضای خانواده‌ای که از طریق پیوست خانواده با یک شهروند رومانیایی یا مقیم بلندمدت اقامت دریافت می‌کنند، بر اساس قوانین موجود می‌توانند در رومانی مشغول به کار شوند.' : 'Yes, family members who obtain residency through family reunification with a Romanian citizen or long-term resident are generally allowed to work in Romania under existing regulations.'}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
+      return <FamilyReunificationContent currentLang={currentLang} onNavigate={onNavigate} />;
 
     default:
       return (
