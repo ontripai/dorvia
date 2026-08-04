@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Language } from '../types';
+import { EvaluationCTA } from './EvaluationCTA';
 
 interface WorkOverviewContentProps {
   subRoute: string;
@@ -481,18 +482,141 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
 
     default:
       return (
-        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+        <div className="space-y-12 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          {/* 1. HERO PANEL */}
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'کار و اشتغال در رومانی' : 'Work in Romania'}
+              {currentLang === 'fa' ? 'کار و کسب‌وکار در رومانی' : 'Work & Business in Romania'}
             </h1>
             <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
               {currentLang === 'fa' 
-                ? 'راهنمای بازار کار، قوانین اشتغال، ویزای کار و شرایط اخذ مجوز کار در رومانی.' 
-                : 'Guide to the job market, employment laws, work visas, and work permit conditions in Romania.'}
+                ? 'راهنمای جامع بازار کار، دریافت مجوز کار، راه‌اندازی شرکت و مالیات و بیمه در رومانی.' 
+                : 'Comprehensive guide to the job market, work permits, business registration, taxes, and insurance.'}
             </p>
           </div>
 
+          {/* 2. WHICH SITUATION ARE YOU IN? (کدام وضعیت شمایید؟) */}
+          <div className="space-y-4">
+            <h2 className="text-xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🎯</span>
+              <span>{currentLang === 'fa' ? 'کدام وضعیت شمایید؟ (انتخاب سریع مسیر)' : 'Which situation matches your goal?'}</span>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <Link href="/work/finding-job" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">🔍</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'به دنبال کار هستم' : 'I am looking for a job'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'سایت‌های کاریابی رومانی و رزومه‌نویسی پوزیشنی.' : 'Job search portals & CV standards.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'راهنمای پیدا کردن کار ←' : 'Job Search Guide →'}
+                </span>
+              </Link>
+
+              <Link href="/work/work-permit" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">📄</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'مجوز کار لازم دارم' : 'I need a Work Permit'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'فرآیند صدور Aviz de Muncă توسط کارفرما نزد IGI.' : 'Employer application for Aviz de Muncă at IGI.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'مراحل مجوز کار ←' : 'Work Permit Steps →'}
+                </span>
+              </Link>
+
+              <Link href="/company/registration" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">🏢</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'می‌خواهم کسب‌وکار راه‌اندازی کنم' : 'I want to start a business'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'ثبت شرکت (SRL) در ONRC و اخذ سرمایه‌گذاری.' : 'SRL company setup via ONRC registry.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'راهنمای ثبت شرکت ←' : 'Company Formation Guide →'}
+                </span>
+              </Link>
+
+              <Link href="/work/taxes-salaries" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">💰</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'درباره مالیات و حقوق می‌پرسم' : 'Tax & Salary Info'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'محاسبه حقوق خالص و مالیات ۱۰٪ درآمد.' : 'Calculating net wage & 10% income tax.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'محاسبه حقوق و مالیات ←' : 'Taxes & Salary Calculator →'}
+                </span>
+              </Link>
+
+              <Link href="/work/insurance" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">🏥</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'درباره بیمه کاری و درمانی می‌پرسم' : 'Work & Health Insurance'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'سهم بیمه CASS و پوشش خدمات پزشکی.' : 'CASS contribution & medical rights.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'قوانین بیمه کارمندی ←' : 'Employee Insurance Rules →'}
+                </span>
+              </Link>
+            </div>
+          </div>
+
+          {/* 3. WHERE SHOULD I START? (از کجا شروع کنم؟ - DECISION HELPER) */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 sm:p-8 rounded-2xl border border-blue-100 space-y-4">
+            <h3 className="text-lg font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>💡</span>
+              <span>{currentLang === 'fa' ? 'از کجا شروع کنم؟ (راهنمای تصمیم‌گیری)' : 'Where Should I Start? (Decision Helper)'}</span>
+            </h3>
+            <div className="space-y-3 text-xs sm:text-sm text-[#526174]">
+              <div className="flex items-start space-x-2 rtl:space-x-reverse">
+                <span className="text-[#2F6FED] font-bold">▪</span>
+                <span>
+                  {currentLang === 'fa' ? 'در جستجوی موقعیت شغلی مناسب در رومانی هستید؟ ' : 'Looking for job opportunities in Romania? '}
+                  <Link href="/work/finding-job" className="text-[#2F6FED] font-bold hover:underline">
+                    {currentLang === 'fa' ? 'راهنمای پیدا کردن کار و ارسال رزومه را ببینید ←' : 'See job search & CV guide →'}
+                  </Link>
+                </span>
+              </div>
+              <div className="flex items-start space-x-2 rtl:space-x-reverse">
+                <span className="text-[#2F6FED] font-bold">▪</span>
+                <span>
+                  {currentLang === 'fa' ? 'پیشنهاد کاری (Job Offer) دریافت کرده‌اید و مجوز کار می‌خواهید؟ ' : 'Received a job offer and need a work permit? '}
+                  <Link href="/work/work-permit" className="text-[#2F6FED] font-bold hover:underline">
+                    {currentLang === 'fa' ? 'مراحل صدور مجوز کار (Aviz de Muncă) را ببینید ←' : 'See Aviz de Muncă work permit guide →'}
+                  </Link>
+                </span>
+              </div>
+              <div className="flex items-start space-x-2 rtl:space-x-reverse">
+                <span className="text-[#2F6FED] font-bold">▪</span>
+                <span>
+                  {currentLang === 'fa' ? 'می‌خواهید کسب‌وکار و شرکت شخصی خودتان را داشته باشید؟ ' : 'Want to incorporate your own business in Romania? '}
+                  <Link href="/company/registration" className="text-[#2F6FED] font-bold hover:underline">
+                    {currentLang === 'fa' ? 'راهنمای کامل ثبت شرکت (SRL) را ببینید ←' : 'See company registration guide →'}
+                  </Link>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* 4. PATHWAYS SECTION (MANDATORY PRESERVED) */}
           <div className="space-y-4">
             <h3 className="text-lg font-bold text-[#142033]">
               {currentLang === 'fa' ? 'مسیرهای اشتغال' : 'Employment Pathways'}
@@ -523,6 +647,11 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'پوشش بیمه تامین اجتماعی و درمانی' : 'Social and health insurance coverage'}</p>
               </Link>
             </div>
+          </div>
+
+          {/* 5. EVALUATION CTA AT BOTTOM */}
+          <div className="pt-6">
+            <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
           </div>
         </div>
       );

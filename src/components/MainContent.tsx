@@ -10,6 +10,7 @@ import { UniversityCard } from './UniversityCard';
 import { CityCard } from './CityCard';
 import { ServiceCard } from './ServiceCard';
 import { LeadForm } from './LeadForm';
+import { EvaluationCTA } from './EvaluationCTA';
 import { TrustSection } from './TrustSection';
 import { AudienceSelector } from './AudienceSelector';
 import { ProcessTimeline } from './ProcessTimeline';
@@ -715,6 +716,7 @@ export const MainContent: React.FC<MainContentProps> = ({
     case 'study':
       return (
         <div className="space-y-12 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          {/* 1. HERO PANEL */}
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <span className="text-[#F4F7FC] font-bold text-xs uppercase tracking-wider">
               {currentLang === 'fa' ? 'آموزش عالی رومانی' : 'Higher Education'}
@@ -729,6 +731,113 @@ export const MainContent: React.FC<MainContentProps> = ({
             </p>
           </div>
 
+          {/* 2. WHICH SITUATION ARE YOU IN? (کدام وضعیت شمایید؟) */}
+          <div className="space-y-4">
+            <h2 className="text-xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🎯</span>
+              <span>{currentLang === 'fa' ? 'کدام وضعیت شمایید؟ (انتخاب سریع مسیر)' : 'Which situation matches your goal?'}</span>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <Link href="/universities" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">🏫</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'می‌خواهم دانشگاه انتخاب کنم' : 'Choose a University'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'اطلاعات دانشگاه‌های معتبر بخارست، کلوژ، تيميشوارا و یاش.' : 'Top accredited universities in Bucharest, Cluj, Timisoara, and Iasi.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'مشاهده دانشگاه‌ها ←' : 'Browse Universities →'}
+                </span>
+              </Link>
+
+              <Link href="/study/scholarships" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">🎓</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'بورسیه می‌خواهم' : 'I want a Scholarship'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'بورسیه دولتی معاف از شهریه وزارت امور خارجه و ARICE.' : 'Government tuition-waiver scholarships.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'شرایط بورسیه تحصیلی ←' : 'Scholarship Details →'}
+                </span>
+              </Link>
+
+              <Link href="/study/preparatory-year" className="editorial-card p-5 bg-[#ffffff] border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">🗣️</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'باید زبان یاد بگیرم' : 'Language Preparatory Year'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'دوره ۱ ساله Anul Pregătitor برای ورود به دانشگاه.' : '1-year Romanian language preparatory course.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'دوره کالج زبان ←' : 'Prep Year Guide →'}
+                </span>
+              </Link>
+
+              <Link href="/study/visa-type-d" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">🛂</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'درباره ویزای تحصیلی می‌پرسم' : 'Study Visa Info'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'شرایط اخذ ویزای نوع D/SD دانشجویی سفارت.' : 'Type D/SD long-stay student visa requirements.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'راهنمای ویزای تحصیلی ←' : 'Student Visa Guide →'}
+                </span>
+              </Link>
+            </div>
+          </div>
+
+          {/* 3. WHERE SHOULD I START? (از کجا شروع کنم؟ - DECISION HELPER) */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 sm:p-8 rounded-2xl border border-blue-100 space-y-4">
+            <h3 className="text-lg font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>💡</span>
+              <span>{currentLang === 'fa' ? 'از کجا شروع کنم؟ (راهنمای تصمیم‌گیری)' : 'Where Should I Start? (Decision Helper)'}</span>
+            </h3>
+            <div className="space-y-3 text-xs sm:text-sm text-[#526174]">
+              <div className="flex items-start space-x-2 rtl:space-x-reverse">
+                <span className="text-[#2F6FED] font-bold">▪</span>
+                <span>
+                  {currentLang === 'fa' ? 'هنوز دانشگاه و رشته مورد نظر خود را انتخاب نکرده‌اید؟ ' : 'Have not selected a university yet? '}
+                  <Link href="/universities" className="text-[#2F6FED] font-bold hover:underline">
+                    {currentLang === 'fa' ? 'اطلاعات و لیست کامل دانشگاه‌های معتبر رومانی را ببینید ←' : 'Browse accredited Romanian universities →'}
+                  </Link>
+                </span>
+              </div>
+              <div className="flex items-start space-x-2 rtl:space-x-reverse">
+                <span className="text-[#2F6FED] font-bold">▪</span>
+                <span>
+                  {currentLang === 'fa' ? 'به دنبال تحصیل مجانی و دریافت کمک‌هزینه ماهانه هستید؟ ' : 'Looking for tuition-free study and monthly stipends? '}
+                  <Link href="/study/scholarships" className="text-[#2F6FED] font-bold hover:underline">
+                    {currentLang === 'fa' ? 'راهنمای ثبت‌نام بورسیه‌های دولتی رومانی را ببینید ←' : 'See Romanian government scholarship guide →'}
+                  </Link>
+                </span>
+              </div>
+              <div className="flex items-start space-x-2 rtl:space-x-reverse">
+                <span className="text-[#2F6FED] font-bold">▪</span>
+                <span>
+                  {currentLang === 'fa' ? 'پذیرش دانشگاهی دارید و قصد اقدام جهت ویزا دارید؟ ' : 'Already accepted and ready for your student visa? '}
+                  <Link href="/study/visa-type-d" className="text-[#2F6FED] font-bold hover:underline">
+                    {currentLang === 'fa' ? 'چک‌لیست مدارک ویزای تحصیلی نوع D/SD را ببینید ←' : 'See Type D/SD student visa checklist →'}
+                  </Link>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* 4. PRESERVED SECTIONS (WHY STUDY, FEATURED UNIS, PATHWAYS) */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">
               <div className="editorial-card p-6 space-y-4 bg-white">
@@ -776,7 +885,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
 
             <div>
-              <LeadForm currentLang={currentLang} isModal={true} />
+              <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
             </div>
           </div>
         </div>

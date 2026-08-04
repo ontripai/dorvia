@@ -6,6 +6,7 @@ import { Language } from '../types';
 import { CommentsSection } from './CommentsSection';
 import { IgiProcessContent } from './IgiProcessContent';
 import { FamilyReunificationContent } from './FamilyReunificationContent';
+import { EvaluationCTA } from './EvaluationCTA';
 
 interface ImmigrationOverviewContentProps {
   subRoute: string;
@@ -459,9 +460,10 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
     default:
       return (
         <div className="space-y-12 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          {/* 1. HERO PANEL */}
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'مهاجرت به رومانی' : 'Immigration to Romania'}
+              {currentLang === 'fa' ? 'مهاجرت و اقامت در رومانی' : 'Immigration & Residence in Romania'}
             </h1>
             <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
               {currentLang === 'fa'
@@ -470,6 +472,143 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </p>
           </div>
 
+          {/* 2. WHICH SITUATION ARE YOU IN? (کدام وضعیت شمایید؟) */}
+          <div className="space-y-4">
+            <h2 className="text-xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🎯</span>
+              <span>{currentLang === 'fa' ? 'کدام وضعیت شمایید؟ (انتخاب سریع مسیر)' : 'Which situation matches your goal?'}</span>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <Link href="/immigration/igi-process" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">🚪</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'می‌خواهم وارد رومانی شوم' : 'I want to enter Romania'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'راهنمای ویزای ورود و ثبت پرونده اولیه در IGI.' : 'Entry visa guide and initial IGI registration.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'مشاهده مراحل ورود ←' : 'View Entry Steps →'}
+                </span>
+              </Link>
+
+              <Link href="/immigration/igi-process" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">🪪</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'کارت اقامت می‌خواهم' : 'I need a Residence Card'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'فرآیند نوبت‌دهی و صدور Permis de Ședere در IGI.' : 'Appointment booking and Permis de Ședere issuance.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'مشاهده مراحل کارت اقامت ←' : 'View Residence Card Steps →'}
+                </span>
+              </Link>
+
+              <Link href="/immigration/residence-renewal" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">🔄</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'می‌خواهم اقامتم را تمدید کنم' : 'I want to renew my residence'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'مهلت ۳۰ روزه، مدارک تمدید و عدم جریمه در IGI.' : '30-day window, renewal checklist and deadlines.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'راهنمای تمدید اقامت ←' : 'View Renewal Guide →'}
+                </span>
+              </Link>
+
+              <Link href="/immigration/family-reunification" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">👨‍👩‍👧‍👦</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'قصد پیوست خانواده دارم' : 'Family Reunification'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'آوردن همسر و فرزندان با مهلت قانونی ۳ ماهه IGI.' : 'Bringing spouse and children under 3-month IGI timeline.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'شرایط پیوست خانواده ←' : 'Family Reunification Rules →'}
+                </span>
+              </Link>
+
+              <Link href="/immigration/long-term-residence" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">📌</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'اقامت بلندمدت می‌خواهم' : 'Long-Term Permanent Residence'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'شرایط ۵ سال اقامت قانونی مداوم برای کارت ۵ ساله دائم.' : '5-year continuous residence rules for permanent card.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'شرایط اقامت دائم ←' : 'Permanent Residence Rules →'}
+                </span>
+              </Link>
+
+              <Link href="/immigration/citizenship" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">🇷🇴</span>
+                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'درباره تابعیت تحقیق می‌کنم' : 'Romanian Citizenship'}
+                  </h4>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'ماده ۸ قانون تابعیت، آزمون زبان و پاسپورت رومانی.' : 'Article 8 citizenship law, language test & passport.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'مسیر دریافت پاسپورت ←' : 'Citizenship Passport Rules →'}
+                </span>
+              </Link>
+            </div>
+          </div>
+
+          {/* 3. WHERE SHOULD I START? (از کجا شروع کنم؟ - DECISION HELPER) */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 sm:p-8 rounded-2xl border border-blue-100 space-y-4">
+            <h3 className="text-lg font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>💡</span>
+              <span>{currentLang === 'fa' ? 'از کجا شروع کنم؟ (راهنمای تصمیم‌گیری)' : 'Where Should I Start? (Decision Helper)'}</span>
+            </h3>
+            <div className="space-y-3 text-xs sm:text-sm text-[#526174]">
+              <div className="flex items-start space-x-2 rtl:space-x-reverse">
+                <span className="text-[#2F6FED] font-bold">▪</span>
+                <span>
+                  {currentLang === 'fa' ? 'هنوز خارج از رومانی هستید و ویزا ندارید؟ ' : 'Still outside Romania without a visa? '}
+                  <Link href="/immigration/igi-process" className="text-[#2F6FED] font-bold hover:underline">
+                    {currentLang === 'fa' ? 'مسیر ورود، ویزای نوع D و نوبت‌دهی IGI را ببینید ←' : 'See entry visa & IGI process guide →'}
+                  </Link>
+                </span>
+              </div>
+              <div className="flex items-start space-x-2 rtl:space-x-reverse">
+                <span className="text-[#2F6FED] font-bold">▪</span>
+                <span>
+                  {currentLang === 'fa' ? 'در رومانی هستید و کارت اقامتتان رو به انقضاست؟ ' : 'Already in Romania with an expiring residence card? '}
+                  <Link href="/immigration/residence-renewal" className="text-[#2F6FED] font-bold hover:underline">
+                    {currentLang === 'fa' ? 'راهنمای تمدید اقامت بدون جریمه را ببینید ←' : 'See residence renewal guide →'}
+                  </Link>
+                </span>
+              </div>
+              <div className="flex items-start space-x-2 rtl:space-x-reverse">
+                <span className="text-[#2F6FED] font-bold">▪</span>
+                <span>
+                  {currentLang === 'fa' ? 'قصد دارید همسر و فرزندان را کنار خود بیاورید؟ ' : 'Planning to bring your spouse and children to Romania? '}
+                  <Link href="/immigration/family-reunification" className="text-[#2F6FED] font-bold hover:underline">
+                    {currentLang === 'fa' ? 'شرایط و مدارک پیوست خانواده در IGI را ببینید ←' : 'See family reunification rules →'}
+                  </Link>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* 4. PATHWAYS SECTION (MANDATORY PRESERVED) */}
           <div className="space-y-4">
             <h3 className="text-lg font-bold text-[#142033]">
               {currentLang === 'fa' ? 'مسیرهای مهاجرت' : 'Immigration Pathways'}
@@ -496,6 +635,11 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'آوردن همسر و فرزندان به رومانی' : 'Bringing your spouse and children to Romania'}</p>
               </Link>
             </div>
+          </div>
+
+          {/* 5. EVALUATION CTA AT BOTTOM */}
+          <div className="pt-6">
+            <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
           </div>
         </div>
       );
