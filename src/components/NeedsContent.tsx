@@ -6,6 +6,7 @@ import { Button } from './Button';
 import { Landmark, House, FileCheck2, ShieldCheck, LockKeyhole, ExternalLink, ArrowRight, ArrowLeft } from './Icons';
 import { BnrRatesFeed } from './BnrRatesFeed';
 import { CommentsSection } from './CommentsSection';
+import { HealthGuideContent } from './HealthGuideContent';
 
 interface NeedsContentProps {
   subRoute: string;
@@ -159,29 +160,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
       );
 
     case 'health':
-      return (
-        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'راهنمای خدمات درمانی و سلامت در رومانی' : 'Healthcare & Medical Guide'}
-            </h1>
-            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
-              {currentLang === 'fa' ? 'پزشک خانواده، ثبت‌نام در سازمان بیمه دولتی (CNAS)، و مراکز درمانی خصوصی.' : 'Family doctors, national insurance registration (CNAS), and private medical centers.'}
-            </p>
-          </div>
-          <div className="editorial-card p-8 bg-white border border-[#dfe6ef] space-y-4 max-w-3xl mx-auto">
-            <h3 className="text-xl font-bold text-[#142033]">{currentLang === 'fa' ? 'مراقبت‌های درمانی و ثبت‌نام بیمه سلامت رومانی' : 'Healthcare Access in Romania'}</h3>
-            <p className="text-sm text-[#526174] leading-relaxed">
-              {currentLang === 'fa' 
-                ? 'ثبت‌نام در سازمان ملی بیمه سلامت (CNAS) برای مهاجرین مقیم قانونی از طریق پرداخت‌های سهمیه بیمه یا معافیت‌های دانشجویی امکان‌پذیر است. در گام اول باید یک پزشک خانواده (Medic de Familie) را انتخاب کنید تا به عنوان دروازه ورود شما به سیستم ارجاعات درمانی باشد.'
-                : 'Registration with the National Health Insurance House (CNAS) is mandatory for long-term residents. Students and employees are generally covered automatically through university registration or payroll tax deductions. Your first action should be registering with a local family doctor (Medic de Familie).'}
-            </p>
-            <div className="p-4 bg-[#F8FAFC] border border-[#e2e8f0] rounded-xl text-xs text-[#526174] font-semibold">
-              ℹ️ {currentLang === 'fa' ? 'بررسی شرایط درمانی و مدارک لازم باید با مراجعه مستقیم به وب‌سایت رسمی CNAS (cnas.ro) انجام شود.' : 'Please cross-reference current health coverage details on the official CNAS website (cnas.ro).'}
-            </div>
-          </div>
-        </div>
-      );
+      return <HealthGuideContent currentLang={currentLang} onNavigate={onNavigate} />;
 
     case 'school':
       return (
