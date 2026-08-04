@@ -2,6 +2,7 @@
 
 import { useAppContext } from '../../../components/AppLayout';
 import { WorkOverviewContent } from '../../../components/WorkOverviewContent';
+import { EvaluationCTA } from '../../../components/EvaluationCTA';
 
 export default function WorkSubPage({ params }: { params: { slug: string } }) {
   const { currentLang, onNavigate, onOpenEvaluationModal } = useAppContext();
@@ -14,6 +15,7 @@ export default function WorkSubPage({ params }: { params: { slug: string } }) {
         onNavigate={onNavigate}
         onOpenEvaluationModal={onOpenEvaluationModal}
       />
+      <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
     </div>
   );
 }

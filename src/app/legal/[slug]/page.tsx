@@ -2,9 +2,10 @@
 
 import { useAppContext } from '../../../components/AppLayout';
 import { getTranslations } from '../../../lib/i18n';
+import { EvaluationCTA } from '../../../components/EvaluationCTA';
 
 export default function LegalPage({ params }: { params: { slug: string } }) {
-  const { currentLang } = useAppContext();
+  const { currentLang, onOpenEvaluationModal } = useAppContext();
   const t = getTranslations(currentLang);
 
   return (
@@ -18,6 +19,7 @@ export default function LegalPage({ params }: { params: { slug: string } }) {
       <div className="space-y-4 text-xs sm:text-sm text-[#526174] leading-relaxed">
         <p>{t.disclaimer.text}</p>
       </div>
+      <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
     </div>
   );
 }

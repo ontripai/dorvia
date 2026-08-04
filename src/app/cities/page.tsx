@@ -5,9 +5,10 @@ import { useAppContext } from '../../components/AppLayout';
 import { featuredCities } from '../../lib/data';
 import { getTranslations } from '../../lib/i18n';
 import { CityCard } from '../../components/CityCard';
+import { EvaluationCTA } from '../../components/EvaluationCTA';
 
 export default function CitiesPage() {
-  const { currentLang } = useAppContext();
+  const { currentLang, onOpenEvaluationModal } = useAppContext();
   const t = getTranslations(currentLang);
   const [citySearch, setCitySearch] = useState('');
 
@@ -40,6 +41,7 @@ export default function CitiesPage() {
           <CityCard key={city.id} city={city} currentLang={currentLang} onSelect={() => {}} />
         ))}
       </div>
+      <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
     </div>
   );
 }

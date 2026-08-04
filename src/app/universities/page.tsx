@@ -5,9 +5,10 @@ import { useAppContext } from '../../components/AppLayout';
 import { featuredUniversities } from '../../lib/data';
 import { getTranslations } from '../../lib/i18n';
 import { UniversityCard } from '../../components/UniversityCard';
+import { EvaluationCTA } from '../../components/EvaluationCTA';
 
 export default function UniversitiesPage() {
-  const { currentLang, onNavigate } = useAppContext();
+  const { currentLang, onNavigate, onOpenEvaluationModal } = useAppContext();
   const t = getTranslations(currentLang);
   const [uniSearch, setUniSearch] = useState('');
 
@@ -41,6 +42,7 @@ export default function UniversitiesPage() {
           <UniversityCard key={uni.id} university={uni} currentLang={currentLang} href="/study" />
         ))}
       </div>
+      <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
     </div>
   );
 }

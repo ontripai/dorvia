@@ -125,7 +125,14 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
               <tr className="hover:bg-[#f8fafc]">
                 <td className="p-3.5 font-bold text-[#142033]">Permis de Ședere (تحصیلی / کاری)</td>
                 <td className="p-3.5">{currentLang === 'fa' ? 'اتباع کشورهای ثالث (غیر اتحادیه اروپا)' : 'Third-country Nationals'}</td>
-                <td className="p-3.5">{currentLang === 'fa' ? '۳۰ روز (قابل تمدید تا ۴۵ روز)' : '30 days (Extendable to 45)'}</td>
+                <td className="p-3.5">
+                  <div className="font-bold">{currentLang === 'fa' ? 'حدود ۳۰ تا ۴۵ روز' : 'Around 30-45 days'}</div>
+                  <div className="text-[10px] text-slate-400 mt-1 leading-snug">
+                    {currentLang === 'fa' 
+                      ? 'طبق تجربه رایج و منابع حقوقی رومانیایی؛ برای مهلت قانونی دقیق به IGI مراجعه کنید.'
+                      : 'Based on common experience & Romanian legal sources; check with IGI for exact statutory deadlines.'}
+                  </div>
+                </td>
                 <td className="p-3.5">{currentLang === 'fa' ? '۱ سال (قابل تمدید سالانه)' : '1 year (Renewable annually)'}</td>
               </tr>
             </tbody>

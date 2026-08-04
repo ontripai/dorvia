@@ -3,9 +3,10 @@
 import { useAppContext } from '../../components/AppLayout';
 import { getTranslations } from '../../lib/i18n';
 import { sampleArticles } from '../../lib/data';
+import { EvaluationCTA } from '../../components/EvaluationCTA';
 
 export default function ArticlesPage() {
-  const { currentLang } = useAppContext();
+  const { currentLang, onOpenEvaluationModal } = useAppContext();
   const t = getTranslations(currentLang);
 
   return (
@@ -26,6 +27,7 @@ export default function ArticlesPage() {
           </div>
         ))}
       </div>
+      <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
     </div>
   );
 }

@@ -4,10 +4,10 @@ import { useAppContext } from '../../../components/AppLayout';
 import { StudyDetailsContent } from '../../../components/StudyDetailsContent';
 import { PreparatoryYearContent } from '../../../components/PreparatoryYearContent';
 import { ScholarshipOverviewContent } from '../../../components/ScholarshipOverviewContent';
-import { LeadForm } from '../../../components/LeadForm';
+import { EvaluationCTA } from '../../../components/EvaluationCTA';
 
 export default function StudySubPage({ params }: { params: { slug: string } }) {
-  const { currentLang } = useAppContext();
+  const { currentLang , onOpenEvaluationModal } = useAppContext();
 
   if (params.slug === 'preparatory-year') {
     return <PreparatoryYearContent currentLang={currentLang} />;
@@ -17,7 +17,7 @@ export default function StudySubPage({ params }: { params: { slug: string } }) {
     return (
       <div className="space-y-12">
         <ScholarshipOverviewContent currentLang={currentLang} />
-        <LeadForm currentLang={currentLang} />
+        <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
       </div>
     );
   }

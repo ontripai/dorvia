@@ -4,6 +4,7 @@ import { useAppContext } from '../../components/AppLayout';
 import { getTranslations } from '../../lib/i18n';
 import { mainServices } from '../../lib/data';
 import { ServiceCard } from '../../components/ServiceCard';
+import { EvaluationCTA } from '../../components/EvaluationCTA';
 
 export default function ServicesPage() {
   const { currentLang, onOpenEvaluationModal } = useAppContext();
@@ -23,6 +24,7 @@ export default function ServicesPage() {
           <ServiceCard key={svc.id} service={svc} currentLang={currentLang} onSelect={onOpenEvaluationModal} />
         ))}
       </div>
+      <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
     </div>
   );
 }

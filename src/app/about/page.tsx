@@ -3,9 +3,10 @@
 import { useAppContext } from '../../components/AppLayout';
 import { TrustSection } from '../../components/TrustSection';
 import { getTranslations } from '../../lib/i18n';
+import { EvaluationCTA } from '../../components/EvaluationCTA';
 
 export default function AboutPage() {
-  const { currentLang } = useAppContext();
+  const { currentLang, onOpenEvaluationModal } = useAppContext();
   const t = getTranslations(currentLang);
 
   return (
@@ -20,6 +21,7 @@ export default function AboutPage() {
       </div>
 
       <TrustSection currentLang={currentLang} />
+      <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
     </div>
   );
 }

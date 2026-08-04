@@ -2,7 +2,7 @@
 
 import { useAppContext } from '../../../components/AppLayout';
 import { CompanyOverviewContent } from '../../../components/CompanyOverviewContent';
-import { LeadForm } from '../../../components/LeadForm';
+import { EvaluationCTA } from '../../../components/EvaluationCTA';
 
 export default function CompanySubPage({ params }: { params: { slug: string } }) {
   const { currentLang, onNavigate, onOpenEvaluationModal } = useAppContext();
@@ -15,7 +15,7 @@ export default function CompanySubPage({ params }: { params: { slug: string } })
         onNavigate={onNavigate}
         onOpenEvaluationModal={onOpenEvaluationModal}
       />
-      <LeadForm currentLang={currentLang} />
+      <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
     </div>
   );
 }

@@ -1,11 +1,11 @@
 'use client';
 
 import { useAppContext } from '../../components/AppLayout';
-import { LeadForm } from '../../components/LeadForm';
+import { EvaluationCTA } from '../../components/EvaluationCTA';
 import { getTranslations } from '../../lib/i18n';
 
 export default function ContactPage() {
-  const { currentLang } = useAppContext();
+  const { currentLang , onOpenEvaluationModal } = useAppContext();
   const t = getTranslations(currentLang);
 
   return (
@@ -30,7 +30,7 @@ export default function ContactPage() {
         </div>
 
         <div className="lg:col-span-2">
-          <LeadForm currentLang={currentLang} />
+          <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
         </div>
       </div>
     </div>

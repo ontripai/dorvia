@@ -2,7 +2,7 @@
 
 import { useAppContext } from '../../../components/AppLayout';
 import { ImmigrationOverviewContent } from '../../../components/ImmigrationOverviewContent';
-import { LeadForm } from '../../../components/LeadForm';
+import { EvaluationCTA } from '../../../components/EvaluationCTA';
 
 export default function ImmigrationSubPage({ params }: { params: { slug: string } }) {
   const { currentLang, onNavigate, onOpenEvaluationModal } = useAppContext();
@@ -15,7 +15,7 @@ export default function ImmigrationSubPage({ params }: { params: { slug: string 
         onNavigate={onNavigate}
         onOpenEvaluationModal={onOpenEvaluationModal}
       />
-      {params.slug !== 'igi-process' && <LeadForm currentLang={currentLang} />}
+      {params.slug !== 'igi-process' && <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />}
     </div>
   );
 }

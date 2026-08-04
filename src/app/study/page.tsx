@@ -3,10 +3,10 @@
 import { useAppContext } from '../../components/AppLayout';
 import { featuredUniversities } from '../../lib/data';
 import { UniversityCard } from '../../components/UniversityCard';
-import { LeadForm } from '../../components/LeadForm';
+import { EvaluationCTA } from '../../components/EvaluationCTA';
 
 export default function StudyHubPage() {
-  const { currentLang, onNavigate } = useAppContext();
+  const { currentLang, onNavigate , onOpenEvaluationModal } = useAppContext();
 
   return (
     <div className="space-y-12 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
@@ -71,7 +71,7 @@ export default function StudyHubPage() {
         </div>
 
         <div>
-          <LeadForm currentLang={currentLang} isModal={true} />
+          <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
         </div>
       </div>
     </div>

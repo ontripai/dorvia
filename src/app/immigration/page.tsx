@@ -2,7 +2,7 @@
 
 import { useAppContext } from '../../components/AppLayout';
 import { ImmigrationOverviewContent } from '../../components/ImmigrationOverviewContent';
-import { LeadForm } from '../../components/LeadForm';
+import { EvaluationCTA } from '../../components/EvaluationCTA';
 
 export default function ImmigrationPage() {
   const { currentLang, onNavigate, onOpenEvaluationModal } = useAppContext();
@@ -15,7 +15,7 @@ export default function ImmigrationPage() {
         onNavigate={onNavigate}
         onOpenEvaluationModal={onOpenEvaluationModal}
       />
-      <LeadForm currentLang={currentLang} />
+      <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
     </div>
   );
 }
