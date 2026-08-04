@@ -5,6 +5,7 @@ import { Language } from '../types';
 import { Button } from './Button';
 import { Landmark, House, FileCheck2, ShieldCheck, LockKeyhole, ExternalLink, ArrowRight, ArrowLeft } from './Icons';
 import { BnrRatesFeed } from './BnrRatesFeed';
+import { CommentsSection } from './CommentsSection';
 
 interface NeedsContentProps {
   subRoute: string;
@@ -727,6 +728,9 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               ? 'آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶. اطلاعات متغیر (هزینه‌ها، مهلت‌ها) ممکن است تغییر کرده باشند؛ برای تایید نهایی به منابع رسمی بالا مراجعه کنید یا با ما تماس بگیرید.'
               : 'Last Review: August 2026. Variable information (fees, deadlines) may be subject to change; verify with official sources or contact us.'}
           </div>
+
+          {/* PUBLIC COMMENTS SECTION */}
+          <CommentsSection pagePath={`needs/${subRoute}`} currentLang={currentLang} />
         </div>
       );
 
