@@ -10,6 +10,7 @@ import { CommentsSection } from './CommentsSection';
 import { HealthGuideContent } from './HealthGuideContent';
 import { BankingGuideContent } from './BankingGuideContent';
 import { SchoolGuideContent } from './SchoolGuideContent';
+import { TelecomGuideContent } from './TelecomGuideContent';
 
 interface NeedsContentProps {
   subRoute: string;
@@ -183,29 +184,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
       return <SchoolGuideContent currentLang={currentLang} onNavigate={onNavigate} />;
 
     case 'telecom':
-      return (
-        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'تلفن همراه و اینترنت در رومانی' : 'Mobile & Internet Services in Romania'}
-            </h1>
-            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
-              {currentLang === 'fa' ? 'خرید سیم‌کارت‌های اعتباری (Cartela SIM)، قراردادهای دائمی و اینترنت فیبر نوری.' : 'Prepaid SIM cards (Cartela SIM), postpaid subscriptions, and high-speed broadband.'}
-            </p>
-          </div>
-          <div className="editorial-card p-8 bg-white border border-[#dfe6ef] space-y-4 max-w-3xl mx-auto">
-            <h3 className="text-xl font-bold text-[#142033]">{currentLang === 'fa' ? 'خدمات مخابراتی و اینترنت خانگی' : 'Telecom Providers & Broadband'}</h3>
-            <p className="text-sm text-[#526174] leading-relaxed">
-              {currentLang === 'fa' 
-                ? 'اپراتورهای اصلی تلفن همراه در رومانی Orange، Vodafone و Digi هستند. برای روزهای نخست ورود، خرید سیم‌کارت اعتباری (Prepaid) بدون نیاز به مدارک اقامتی آسان‌ترین گزینه است. اینترنت فیبر نوری خانگی نیز با پهنای باند بالا و هزینه‌های بسیار مناسب عرضه می‌شود.'
-                : 'The primary telecom operators are Orange, Vodafone, and Digi. For your first days, a prepaid SIM card is the easiest option since it requires no residency registration. Romania boasts some of the fastest and cheapest fiber broadband internet in the world.'}
-            </p>
-            <div className="p-4 bg-[#F8FAFC] border border-[#e2e8f0] rounded-xl text-xs text-[#526174] font-semibold">
-              ℹ️ {currentLang === 'fa' ? 'برای خرید اشتراک دائمی (Abonament)، ارائه کارت اقامت رومانیایی (Permis de Ședere) الزامی است.' : 'Note that postpaid subscription contracts (Abonament) require a valid residence card.'}
-            </div>
-          </div>
-        </div>
-      );
+      return <TelecomGuideContent currentLang={currentLang} onNavigate={onNavigate} />;
 
     case 'currency-exchange':
       return (
