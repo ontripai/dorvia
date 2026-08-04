@@ -1,9 +1,10 @@
 # Conversion Placement Matrix
 
-| Route | CTA Type 1 (Self-Service) | CTA Type 2 (DORVIA Service) | CTA Type 3 (Third-Party) | Required Disclaimer | Required User Consent | Ready Now? |
+| Route | Exact Page Location | Type (Self/DORVIA/3rd) | Required Legal Notice | Required Consent | Dependency | Ready Now? |
 |---|---|---|---|---|---|---|
-| `/needs/driving-license` | Link to DRPCIV appointment (Primary) | Request Document Prep (Secondary) | Driving Schools (Future) | None | Yes (for Lead) | Yes (Type 1) |
-| `/needs/health` | Download CNAS form (Secondary) | - | Find Family Doctor (Primary) | Medical disclaimer | Yes | Requires Provider Data |
-| `/needs/certified-translation`| - | Translation Coordination (Primary) | Certified Translators (Secondary)| Third-party liability | Yes | Requires Backend |
-| `/company/registration` | Link to ONRC (Secondary) | Request Company Setup (Primary) | Accountants/CECCAR (Secondary)| Tax disclaimer | Yes | Requires Owner Decision |
-| `/immigration/citizenship`| View Law 21/1991 (Primary) | Consultation (Secondary) | Immigration Lawyers (Secondary) | Legal advice disclaimer | Yes | Requires Legal Policy |
+| `/needs/driving-license` | Bottom of Step 3 | Self-Service (DRPCIV link) | None | None | None | Yes |
+| `/needs/driving-license` | Sticky Footer | DORVIA (Escort) | Service terms | Yes | Service definition | Blocked |
+| `/needs/health` | Mid-page | Third-Party (Doctors) | Medical disclaimer | Yes (for Lead) | Provider Data | Blocked |
+| `/company/registration` | Top Hero CTA | DORVIA (Setup) | Tax/Legal disclaimer| Yes | Owner Decision | Blocked |
+| `/immigration/igi-process`| Step 1 (Portal) | Self-Service (IGI link) | None | None | None | Yes |
+| `/immigration/citizenship`| Bottom | Third-Party (Lawyer) | Legal advice notice | Yes | Legal Policy | Blocked |

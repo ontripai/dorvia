@@ -1,9 +1,14 @@
 # DORVIA EUROP Service Opportunity Map
 
-| Service Name | Related Route | User Problem | Scope | Exclusions | Delivery Model | Required Expertise | Required Data | Legal Sensitivity | Pricing Model | CTA | Form Type | Dashboard Need | Current Readiness | Owner Decision |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Immigration Assessment | `/immigration/*` | Doesn't know eligible route | Initial profile check | Final application | DORVIA | Internal | Age, education, budget | High | Free/Fixed | Book Assessment | Multistep | Required | Requires owner decision | Is it paid or free lead-gen? |
-| Document Review | `/immigration/family-reunification`| Fear of IGI rejection | File check before submission | Submission itself | Hybrid (Lawyer) | External | Document scans | Critical | Fixed | Request Review | Secure upload | Required | Requires partner | Who holds liability? |
-| Driving License Assist | `/needs/driving-license` | Language barrier at DRPCIV | Booking, accompaniment | Medical exam fee | DORVIA | Internal | Residency permit | Low | Fixed | Book Escort | Contact | Later | Idea only | What cities covered? |
-| SRL Setup Package | `/company/registration` | Complex bureaucracy | Registration, ONRC | Virtual office | Hybrid | Internal+External | Passports, names | Critical | Quote/Tiered | Get Quote | Multistep | Required | Requires owner decision| B2B or partner with CECCAR? |
-| Settlement Package | `/needs/first-days-checklist` | Total disorientation | SIM, Bank, Transport | Housing | DORVIA | Internal | Arrival date | Low | Fixed | Book Package | Contact | None | Ready for pilot | What is included in price? |
+> **ALL SERVICES LISTED ARE PROPOSED — NOT PUBLICLY OFFERED UNTIL OWNER APPROVAL.**
+
+| Service Name | Related Route | Delivery Model | Required Expertise | Legal Sensitivity | Pricing Model | Dashboard Need | Current Readiness | Owner Decision |
+|---|---|---|---|---|---|---|---|---|
+| Immigration Assessment | `/immigration/*` | DORVIA | Internal | High | Free/Fixed | Required | Ready for definition | Paid or free lead-gen? |
+| Document Review | `/immigration/family-reunification`| Hybrid (Lawyer) | External | Critical | Fixed | Required | Requires partner | Who holds liability? |
+| Residence Renewal Support | `/immigration/residence-renewal` | DORVIA | Internal | High | Fixed | Required | Ready for pilot | Final pricing? |
+| Company Registration | `/company/registration` | Hybrid | Internal+External | Critical | Quote/Tiered | Required | Requires owner decision| B2B or partner with CECCAR? |
+| Accounting Coordination | `/company/taxes-salaries` | Partner | External | Critical | Subscription | Required | Requires partner | CECCAR firm selection |
+| First-day Settlement | `/needs/first-days-checklist` | DORVIA | Internal | Low | Fixed | None | Ready for pilot | What is included? |
+| Driving License Escort | `/needs/driving-license` | DORVIA | Internal | Low | Fixed | Later | Idea only | Cities covered? |
+| Housing Search | `/needs/housing` | Partner (Agent) | External | High | Commission | Required | Requires partner | Lead distribution rules |

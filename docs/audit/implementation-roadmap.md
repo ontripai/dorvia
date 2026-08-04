@@ -1,40 +1,24 @@
 # Implementation Roadmap (Gated Sequence)
 
-## Gate 0 — Audit Approved
-- [x] Complete route inventory
-- [x] Complete quality matrix
-- [x] Complete risk matrix
-- [x] Owner decisions collected
+## Gate 0 — Audit Approval
+- **Gate 0A — Documentation completed** (Completed)
+- **Gate 0B — Evidence review pending** (Pending)
+- **Gate 0C — Owner decisions pending** (Pending)
+- **Gate 0D — Final approval blocked** (Blocked by 0B and 0C)
 
 ## Phase 1 — Operational Content System
-- Standard page model (Who it's for, Eligibility, Official Sources, Review Dates).
-- Shared components for CTAs (UI only).
-- **Pilot**: `needs/driving-license`.
+- Standard page model implementation (Sources, Dates, CTA self-service).
 
-## Phase 2 — DORVIA Service Catalogue
+## Phase 2 — DORVIA Service Catalogue (Pending Gate 0C)
 - Define actual services (Scope, pricing, exclusions).
-- Pricing model (Fixed vs Quote).
-- Build dedicated service forms with Legal terms.
+- Build dedicated service forms.
 
-## Phase 3 — Legal and Trust Foundation
-- Draft and publish Privacy Policy updates for Lead Generation.
-- Publish Provider Terms and Verification Policy.
-- Advertising rules.
+## Phase 3 — Legal and Trust Foundation (Blocking Commercial)
+- Draft Privacy Policy for Telegram/Lead Generation.
+- Publish Provider Terms.
 
 ## Phase 4 — Direct DORVIA Conversion Pilot
-- **Pilot**: `company/registration` (Company registration).
-- Implement self-service route + DORVIA service request. NO third-party marketplace yet.
+- Implement approved DORVIA services (e.g., Company Registration).
 
-## Phase 5 — Provider Governance and Data Model
-- Define Supabase schema (Providers, Leads, Roles, Verification Data).
-- Implement Admin verification UI.
-
-## Phase 6 — Low-Risk Provider Directory Pilot
-- **Pilot**: Certified Translators.
-- Admin-created providers only. Manual verification. Clear sponsored labels. No automated lead sales yet.
-
-## Phase 7 — Higher-Risk Categories
-- Only after Phase 6 evaluation: Accountants, Real Estate, Medical, Currency Exchange.
-
-## Phase 8 — Lead and Dashboard Systems
-- Customer/Provider dashboards. Automated lead allocation and billing.
+## Phase 5 — Low-Risk Provider Directory Pilot
+- Certified Translators (Admin-created, manual verification).

@@ -1,17 +1,13 @@
 # Legal Readiness Matrix
 
-| Policy Document | Current Status | Required Before Feature | Owner Input Required | Legal Review Required |
-|---|---|---|---|---|
-| Privacy Policy | Partial (Exists in codebase but lacks data flow details) | Lead Generation, Form Submit | Yes | Yes |
-| Terms of Use | Partial | Any commercial service | Yes | Yes |
-| Cookie Policy | Missing | General deployment | No | No |
-| Third-Party Disclaimer | Missing | Provider Directory (Phase 6) | Yes | Yes |
-| Advertising Policy | Missing | Sponsored Listings | Yes | No |
-| Provider Terms | Missing | Provider Registration | Yes | Yes |
-| Verification Policy | Missing | Verified Badges | Yes | Yes |
-| Lead-Sharing Consent | Missing | Any Type 3 CTA | No | Yes |
-| Reviews & Complaint Policy| Missing | Public Reviews | Yes | Yes |
+| Policy Document | Current Status | Blocking Risk Implication |
+|---|---|---|
+| Privacy Policy | Basic (Needs Telegram flow added) | Blocks Form Submit, Lead Generation |
+| Terms of Use | Basic | Blocks any commercial service |
+| Cookie Policy | Missing | Blocks general EU deployment |
+| Third-Party Disclaimer | Missing | Blocks Provider Directory |
+| Advertising Policy | Missing | Blocks Sponsored Listings |
+| Provider Terms | Missing | Blocks Provider Registration |
+| Lead-Sharing Consent | Missing | Blocks Type 3 CTAs (Third-party) |
 
-## Mandatory Implementation Gates
-- **No third-party lead transfer before**: Privacy Policy is complete, Lead-sharing consent is explicit, Provider terms exist.
-- **No paid provider placement before**: Advertising Policy exists, Sponsored labelling rules exist, Conflict-of-interest rules exist.
+*Legal pages controlling data collection and commercial features are treated as **BLOCKING RISKS**, not Low Risk.*

@@ -1,73 +1,22 @@
-# Content Quality and Risk Matrix
+# Content Quality and Risk Matrix (Priority Routes)
 
-## Assessment Scales (0-4)
-- **0** = Absent
-- **1** = Very weak
-- **2** = Partial
-- **3** = Good but incomplete
-- **4** = Implementation-ready
+## Duplicate & Alias Analysis
+| Pair | Content Duplicated? | Current Sitemap Status | Recommended Canonical | Redirect Requirement |
+|---|---|---|---|---|
+| `/needs/health` vs `/healthcare` | Yes (Alias in Switch) | Both active | `/needs/health` | 301 from healthcare |
+| `/needs/sim-internet` vs `/telecom` | Yes (Alias in Switch) | Both active | `/needs/telecom` | 301 from sim-internet |
+| `/work/find-job` vs `/finding-job`| Yes (Alias in Switch) | Both active | `/work/finding-job` | 301 from find-job |
+| `/work/permit` vs `/work-permit` | Yes (Alias in Switch) | Both active | `/work/work-permit` | 301 from permit |
+| `/work/tax` vs `/taxes-salaries` | Yes (Alias in Switch) | Both active | `/work/taxes-salaries`| 301 from tax |
 
-## Matrix
-
-| Route | Main User Question | Missing Scenarios | Unverified Claims | Risk Categories | Content Maturity (0-4) | Fact-check (0-4) | Operational (0-4) | Legal (0-4) | Service (0-4) | Provider (0-4) | Mobile (0-4) | SEO (0-4) | Justification |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| `/admin/comments` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/company/annual-tax-reporting` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | TAX, LEGAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/company/bank-account` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | TAX, LEGAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/company/investment` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | TAX, LEGAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/company/real-estate-investment` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | TAX, LEGAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/company/registration` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | TAX, LEGAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/company/residency` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | TAX, LEGAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/company/startup-tech-investment` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | TAX, LEGAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/company/tax-types` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | TAX, LEGAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/immigration/citizenship` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | IMMIGRATION, LEGAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/immigration/family-reunification` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | IMMIGRATION, LEGAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/immigration/igi-process` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | IMMIGRATION, LEGAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/immigration/long-term-residence` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | IMMIGRATION, LEGAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/immigration/residence-renewal` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | IMMIGRATION, LEGAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/legal/disclaimer` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/legal/privacy` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/legal/terms` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/needs/banking` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/needs/certified-translation` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/needs/currency-exchange` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/needs/driving-license` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/needs/first-days-checklist` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/needs/health` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | MEDICAL, PRIVACY | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/needs/healthcare` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | MEDICAL, PRIVACY | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/needs/housing` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/needs/iranian-embassy-and-mikhak` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/needs/notary-public` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/needs/school` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/needs/sim-internet` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/needs/telecom` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/needs/transportation` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/romania/culture` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/romania/culture-and-arts` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/romania/economy` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/romania/geography` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/romania/history` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/romania/laws-and-regulations` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/romania/society` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/romania/tourism` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/start-here/arriving-soon` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/start-here/citizenship-goal` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/start-here/long-term-stay` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/start-here/newly-arrived` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/start-here/planning-to-come` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/start-here/settling-in` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/study/part-time-work` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/study/preparatory-year` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/study/requirements` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/study/scholarships` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/study/tuition-overview` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/study/visa-type-d` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/work/employment-contract` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/work/find-job` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/work/finding-job` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/work/insurance` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/work/permit` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/work/tax` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/work/taxes-salaries` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/work/work-permit` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
-| `/work/work-visa` | How to proceed with this topic? | Exceptions, exact fees | Timeline guarantees | GENERAL | 2 | 1 | 1 | 1 | 0 | 0 | 4 | 3 | Content exists but lacks operational steps, official source links, and clear legal boundaries. |
+## Route-Specific Evidence-Based Quality Analysis
+| Route | Main User Question | Missing Scenarios / Exceptions | Concrete Questionable Claims | Operational Completeness | Justification |
+|---|---|---|---|---|---|
+| `/immigration/igi-process` | How to deal with IGI? | Missing process for lost cards | 30-day timeline is often delayed | Partial | Explains rules well but lacks link to online appointment portal. |
+| `/immigration/residence-renewal` | How to renew? | Rejection appeals | Guaranteeing renewal if documents match | Partial | Good list of docs, lacks penalty fees for late filing. |
+| `/immigration/family-reunification`| Can I bring family? | Refusal based on space/income | Timeline of exactly 3 months | Partial | Missing exact minimum salary calculation for dependents. |
+| `/company/registration` | How to set up an SRL? | Virtual vs Physical office limits | "Fast setup" without mentioning bank delays | Partial | Tax threshold changed in 2024, needs fact-check. |
+| `/needs/driving-license` | How to exchange my license? | Non-reciprocal countries | 90-day physical presence text is vague | Partial | Lacks explicit legal warnings about DRPCIV delays. |
+| `/needs/housing` | How to rent legally? | Eviction laws, deposit disputes | ANAF registration timelines | Partial | Explains basics but lacks standard contract templates. |
+| `/study/scholarships` | How to apply for funding? | MFA specific deadlines | "Full coverage" claims | Partial | No step-by-step submission portal links. |
+| `/evaluation` | Am I eligible? | Edge cases in visa history | None | Yes | Form works, but lacks Privacy consent check (Blocking). |
