@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Language } from '../types';
 import { CommentsSection } from './CommentsSection';
+import { IgiProcessContent } from './IgiProcessContent';
 
 interface ImmigrationOverviewContentProps {
   subRoute: string;
@@ -23,6 +24,9 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
     : 'This must be verified based on current regulations and individual circumstances.';
 
   switch (subRoute) {
+    case 'igi-process':
+      return <IgiProcessContent currentLang={currentLang} />;
+
     case 'residence-renewal':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8 text-right rtl">
