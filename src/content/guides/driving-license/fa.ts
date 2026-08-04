@@ -3,27 +3,27 @@ import { OperationalGuide } from '../../../types/content';
 export const drivingLicenseFA: OperationalGuide = {
   canonicalRoute: '/needs/driving-license',
   locale: 'fa',
-  title: 'گواهی‌نامه رانندگی در رومانی: تبدیل، اخذ از ابتدا و قوانین بین‌المللی',
-  shortDescription: 'راهنمای جامع رانندگی موقت با گواهی‌نامه خارجی، مراحل تبدیل گواهی‌نامه ایرانی، گرفتن گواهی‌نامه از ابتدا، تمدید، و صدور گواهی‌نامه بین‌المللی (IDP).',
-  mainQuestion: 'به عنوان یک خارجی در رومانی، چگونه می‌توانم به صورت قانونی رانندگی کنم یا گواهی‌نامه بگیرم؟',
-  quickAnswer: 'در صورت داشتن گواهی‌نامه معتبر خارجی (مانند ایرانی) و گواهی‌نامه بین‌المللی، می‌توانید موقتاً رانندگی کنید. پس از دریافت اقامت رومانی، باید گواهی‌نامه خود را از طریق اداره DGPCI بدون آزمون به گواهی‌نامه رومانیایی (استاندارد اتحادیه اروپا) تبدیل کنید. در غیر این صورت، می‌توانید با ثبت‌نام در آموزشگاه رانندگی، گواهی‌نامه جدید بگیرید.',
-  targetAudience: ['مهاجران', 'دانشجویان بین‌المللی', 'نیروی کار خارجی', 'شهروندان ایرانی مقیم رومانی'],
+  title: 'گواهینامه رانندگی در رومانی: تبدیل، صدور جدید و قوانین',
+  shortDescription: 'راهنمای جامع رانندگی با گواهینامه خارجی، تبدیل گواهینامه ایرانی، مراحل صدور گواهینامه جدید، تمدید و گواهینامه بین‌المللی.',
+  mainQuestion: 'چگونه می‌توانم به عنوان یک مقیم خارجی در رومانی به صورت قانونی رانندگی کنم یا گواهینامه بگیرم؟',
+  quickAnswer: 'اگر گواهینامه خارجی معتبر و گواهینامه بین‌المللی دارید، می‌توانید به طور موقت رانندگی کنید. پس از دریافت اقامت، باید آن را به گواهینامه رومانیایی تبدیل کنید (بدون آزمون برای کشورهای مجاز). در غیر این صورت باید از طریق آموزشگاه رانندگی برای گواهینامه جدید اقدام کنید.',
+  targetAudience: ['مهاجران', 'دانشجویان بین‌المللی', 'نیروی کار خارجی', 'شهروندان ایرانی در رومانی'],
   generalExceptions: [
-    'گواهی‌نامه‌های منقضی شده خارج از اتحادیه اروپا قابل تبدیل نیستند؛ باید گواهی‌نامه جدید دریافت کنید.',
-    'گواهی‌نامه کشورهای خارج از لیست ضمیمه ۱ دستورالعمل OMAI 163/2011 (و اصلاحات بعدی آن) بدون شرکت در آزمون قابل تبدیل نیستند.'
+    'گواهینامه‌های غیر اروپایی تاریخ‌گذشته قابل تبدیل نیستند؛ باید برای گواهینامه جدید اقدام کنید.',
+    'گواهینامه‌های کشورهای خارج از پیوست 1 دستورالعمل OMAI 163/2011 مستقیماً و بدون آزمون قابل تبدیل نیستند.'
   ],
   commonProblems: [
-    'تاخیر در فرآیند استعلام اصالت گواهی‌نامه از طریق سفارت.',
-    'انقضای اعتبار فرم معاینه پزشکی پیش از پردازش نهایی پرونده (اعتبار این فرم ۶ ماه است).'
+    'تأخیر در تایید اصالت و اعتبار گواهینامه از سوی کشور صادرکننده.',
+    'انقضای گواهی پزشکی پیش از رسیدگی به درخواست (اعتبار آن ۶ ماه است).'
   ],
   warnings: [
-    'نکته مهم اقامتی: پس از استقرار قانونی و دریافت کارت اقامت (Permis de Ședere)، طبق قوانین جاری رومانی معمولاً باید برای تبدیل گواهی‌نامه به گواهی‌نامه رومانیایی اقدام شود.'
+    'نکته مهم اقامت: به محض دریافت اقامت قانونی (Permis de Ședere)، قانون رومانی معمولاً شما را ملزم می‌کند تا در صورت تمایل به رانندگی، گواهینامه خود را در یک بازه زمانی مشخص تبدیل کنید.'
   ],
   officialSources: [
     {
       id: 'dgpci-exchange',
       sourceTitle: 'DGPCI - Preschimbare Permise Străine',
-      organization: 'اداره کل گواهی‌نامه‌های رانندگی و ثبت وسایل نقلیه',
+      organization: 'Directia Generală Permise de Conducere și Înmatriculări',
       url: 'https://dgpci.mai.gov.ro/document-details/permise/5b35f29910a30b538053a4cf',
       sourceType: 'official-website',
       language: 'ro',
@@ -33,8 +33,38 @@ export const drivingLicenseFA: OperationalGuide = {
     {
       id: 'omai-163-2011',
       sourceTitle: 'Ordinul MAI 163/2011 privind preschimbarea permiselor',
-      organization: 'وزارت امور داخلی رومانی',
+      organization: 'Ministry of Internal Affairs',
       url: 'https://legislatie.just.ro/Public/DetaliiDocument/131062',
+      sourceType: 'legislation',
+      language: 'ro',
+      dateAccessed: '2026-08-04',
+      status: 'primary'
+    },
+    {
+      id: 'dgpci-exam',
+      sourceTitle: 'DGPCI - Obținerea permisului de conducere',
+      organization: 'DGPCI',
+      url: 'https://dgpci.mai.gov.ro/document-details/permise/5b35f25a10a30b538053a4ce',
+      sourceType: 'official-website',
+      language: 'ro',
+      dateAccessed: '2026-08-04',
+      status: 'primary'
+    },
+    {
+      id: 'dgpci-renewal',
+      sourceTitle: 'DGPCI - Preschimbarea permisului românesc',
+      organization: 'DGPCI',
+      url: 'https://dgpci.mai.gov.ro/document-details/permise/5b35f2cf10a30b538053a4d0',
+      sourceType: 'official-website',
+      language: 'ro',
+      dateAccessed: '2026-08-04',
+      status: 'primary'
+    },
+    {
+      id: 'codul-rutier',
+      sourceTitle: 'Codul Rutier (O.U.G. 195/2002)',
+      organization: 'Guvernul României',
+      url: 'https://legislatie.just.ro/Public/DetaliiDocument/39474',
       sourceType: 'legislation',
       language: 'ro',
       dateAccessed: '2026-08-04',
@@ -42,8 +72,8 @@ export const drivingLicenseFA: OperationalGuide = {
     }
   ],
   relatedGuides: [
-    { route: '/needs/first-days-checklist', title: 'چک‌لیست روزهای نخست ورود' },
-    { route: '/needs/health', title: 'خدمات درمانی و سلامت (فرم Fișa Medicală)' }
+    { route: '/needs/first-days-checklist', title: 'چک‌لیست روزهای اول پس از ورود' },
+    { route: '/needs/health', title: 'بیمه و درمان (اطلاعات گواهی پزشکی)' }
   ],
   lastReviewed: '2026-08-04',
   nextReview: '2027-02-04',
@@ -54,78 +84,139 @@ export const drivingLicenseFA: OperationalGuide = {
   
   situations: [
     {
-      id: 'temporary',
-      title: 'استفاده موقت از گواهی‌نامه خارجی',
-      appliesTo: ['توریست‌ها', 'دارندگان ویزای کوتاه‌مدت', 'مهاجران پیش از دریافت کارت اقامت'],
-      exceptions: ['در صورتی که گواهی‌نامه به حروف لاتین نباشد، داشتن گواهی‌نامه بین‌المللی (IDP) یا ترجمه رسمی الزامی است.'],
-      limitations: ['تنها تا زمانی اعتبار دارد که اقامت دائم یا موقت خود را ثبت کنید؛ پس از آن مقررات تبدیل اعمال می‌شود.'],
+      id: 'temporary-foreign-licence-use',
+      title: 'استفاده موقت از گواهینامه خارجی',
+      appliesTo: ['توریست‌ها', 'دارندگان ویزای کوتاه‌مدت', 'تازه‌واردان پیش از دریافت کارت اقامت'],
       documents: [],
       steps: [],
       fees: [],
-      timeline: []
+      timeline: [],
+      exceptions: [],
+      limitations: []
     },
     {
-      id: 'exchange-iran',
-      title: 'تبدیل گواهی‌نامه ایرانی در رومانی',
-      appliesTo: ['اتباع ایرانی دارای گواهی‌نامه معتبر ایرانی و کارت اقامت قانونی رومانی (Permis de Ședere)'],
-      residenceCondition: 'دارا بودن کارت اقامت موقت یا دائم معتبر',
-      authority: 'اداره DGPCI',
+      id: 'foreign-licence-exchange',
+      title: 'تبدیل گواهینامه خارجی (عمومی)',
+      appliesTo: ['اتباع خارجی از کشورهای پیوست 1 دستورالعمل (OMAI 163/2011)'],
+      residenceCondition: 'داشتن کارت اقامت معتبر رومانی',
+      authority: 'DGPCI (پلیس راهنمایی و رانندگی و ثبت وسایل نقلیه)',
       requiresExamination: false,
       requiresMedical: true,
       documents: [
-        { name: 'اصل گواهی‌نامه ایرانی معتبر + کپی', isMandatory: true },
-        { name: 'ترجمه رسمی محضری گواهی‌نامه به رومانیایی', isMandatory: true },
-        { name: 'اصل گواهی اصالت صادرشده از سفارت ایران', description: 'دریافت از طریق سامانه میخک/سفارت', isMandatory: true },
+        { name: 'اصل گواهینامه معتبر خارجی + کپی', isMandatory: true },
+        { name: 'ترجمه رسمی رومانیایی گواهینامه', isMandatory: true },
         { name: 'کارت اقامت معتبر رومانی + کپی', isMandatory: true },
-        { name: 'پاسپورت معتبر + کپی صفحات هویتی', isMandatory: true },
-        { name: 'برگه معاینه پزشکی تاییدشده (Fișa Medicală)', isMandatory: true },
-        { name: 'فیش پرداخت هزینه ثبت نام به حساب DGPCI', isMandatory: true },
-        { name: 'فرم درخواست رسمی تکمیل‌شده DGPCI', isMandatory: true }
+        { name: 'گذرنامه معتبر + کپی', isMandatory: true },
+        { name: 'فرم تکمیل‌شده درخواست DGPCI', isMandatory: true }
+      ],
+      steps: [],
+      fees: [
+        { amount: '89', currency: 'RON', description: 'هزینه صدور گواهینامه جهت تبدیل. قابل پرداخت از طریق بانک CEC، سایت ghișeul.ro یا باجه‌های DGPCI.', isFixed: true, sourceId: 'dgpci-exchange' }
+      ],
+      timeline: [],
+      exceptions: ['گواهینامه‌های تاریخ‌گذشته قابل تبدیل نیستند.'],
+      limitations: []
+    },
+    {
+      id: 'iranian-issued-licence',
+      title: 'تبدیل گواهینامه ایرانی در رومانی',
+      appliesTo: ['شهروندان ایرانی دارای گواهینامه معتبر ایرانی و کارت اقامت رومانی'],
+      residenceCondition: 'کارت اقامت معتبر رومانی',
+      authority: 'DGPCI',
+      requiresExamination: false,
+      requiresMedical: true,
+      documents: [
+        { name: 'اصل گواهینامه معتبر ایرانی + کپی', isMandatory: true },
+        { name: 'ترجمه رسمی رومانیایی گواهینامه', isMandatory: true },
+        { name: 'کارت اقامت معتبر رومانی + کپی', isMandatory: true },
+        { name: 'گذرنامه معتبر + کپی', isMandatory: true },
+        { name: 'گواهی سلامت پزشکی (Fișa Medicală) جهت دریافت اعتبار اداری جدید', isMandatory: true },
+        { name: 'رسید پرداخت هزینه صدور DGPCI', isMandatory: true },
+        { name: 'فرم تکمیل‌شده درخواست DGPCI', isMandatory: true }
       ],
       steps: [
-        { title: 'استعلام اصالت در سفارت', description: 'تماس با بخش کنسولی سفارت ایران برای اطلاع از نوع خدمت و دریافت تاییدیه اصالت گواهی‌نامه.' },
-        { title: 'ترجمه رسمی', description: 'ترجمه رسمی گواهی‌نامه و نامه سفارت توسط مترجم مجاز رومانیایی.' },
-        { title: 'معاینه پزشکی', description: 'انجام معاینات (بینایی، شنوایی و عمومی) در کلینیک‌های معتمد DGPCI.' },
-        { title: 'ثبت پرونده در DGPCI', description: 'تحویل پرونده تکمیل‌شده به اداره راهور استان محل سکونت و دریافت رسید.' }
+        { title: 'بررسی اصالت', description: 'مرجع ذی‌صلاح رومانیایی فرآیند استعلام از کشور صادرکننده را مدیریت می‌کند. اصالت و اعتبار گواهینامه باید تایید شود. ممکن است مدارک اضافی درخواست شود.' },
+        { title: 'ترجمه رسمی', description: 'ترجمه رسمی گواهینامه ایرانی توسط مترجم مجاز رومانیایی.' },
+        { title: 'معاینه پزشکی', description: 'انجام معاینات پزشکی در کلینیک‌های مورد تایید DGPCI.' },
+        { title: 'ثبت درخواست در DGPCI', description: 'ارائه پرونده تکمیل‌شده به دفتر استانی DGPCI، پرداخت هزینه صدور و دریافت رسید ثبت‌نام.' }
       ],
       fees: [
-        { amount: '89', currency: 'RON', description: 'تعرفه صدور گواهی‌نامه DGPCI (مبلغ ثابت دولتی)', isFixed: true, sourceId: 'dgpci-exchange' },
-        { amount: '150 - 250', currency: 'RON', description: 'هزینه معاینات پزشکی (بسته به کلینیک انتخابی)', isFixed: false },
-        { amount: '100 - 200', currency: 'RON', description: 'ترجمه رسمی و تایید محضری (به ازای هر مدرک)', isFixed: false }
+        { amount: '89', currency: 'RON', description: 'هزینه صدور گواهینامه جهت تبدیل. قابل پرداخت از طریق بانک CEC، سایت ghișeul.ro یا باجه‌های DGPCI.', isFixed: true, sourceId: 'dgpci-exchange' }
       ],
       timeline: [
-        { duration: '۳۰ - ۹۰ روز', description: 'فرآیند بررسی اصالت گواهی‌نامه‌های خارج از اتحادیه اروپا نیازمند مکاتبه با سفارت است و زمان می‌برد.', isGuaranteed: false }
+        { duration: 'متغیر', description: 'مدت زمان بستگی به فرآیند تایید اصالت و اعتبار از سوی کشور صادرکننده دارد. متقاضی باید الزامات فعلی را از خدمات شهرستان مربوطه جویا شود.', isGuaranteed: false }
       ],
-      exceptions: ['گواهی‌نامه‌های منقضی شده قابل تبدیل نیستند.'],
-      limitations: ['امکان نگهداری همزمان دو گواهی‌نامه وجود ندارد؛ گواهی‌نامه ایرانی شما اخذ و به مرجع صادرکننده در ایران عودت داده می‌شود.'],
+      exceptions: ['گواهینامه‌های تاریخ‌گذشته قابل تبدیل نیستند.'],
+      limitations: ['شما نمی‌توانید همزمان هر دو گواهینامه را در اختیار داشته باشید. گواهینامه ایرانی شما اخذ خواهد شد.'],
       actionLink: { url: 'https://dgpci.mai.gov.ro/document-details/permise/5b35f29910a30b538053a4cf', label: 'پورتال رسمی DGPCI' }
     },
     {
-      id: 'scratch',
-      title: 'گرفتن گواهی‌نامه از ابتدا (آموزشگاه)',
-      appliesTo: ['اتباع خارجی که فاقد هرگونه گواهی‌نامه رانندگی هستند', 'دارندگان گواهی‌نامه منقضی شده یا کشورهایی که در لیست تبدیل قرار ندارند'],
-      residenceCondition: 'باید دارای اقامت قانونی رومانی باشند.',
+      id: 'obtain-romanian-licence-from-scratch',
+      title: 'اخذ گواهینامه رانندگی جدید (از صفر)',
+      appliesTo: ['اتباع خارجی که گواهینامه ندارند', 'دارندگان گواهینامه‌های خارجی غیرقابل تبدیل یا منقضی‌شده'],
+      residenceCondition: 'داشتن کارت اقامت معتبر رومانی الزامی است.',
       requiresExamination: true,
       requiresMedical: true,
       documents: [
         { name: 'کارت اقامت معتبر رومانی', isMandatory: true },
-        { name: 'گواهی پزشکی و روان‌سنجی', isMandatory: true },
-        { name: 'گواهی سوء پیشینه (Cazier Judiciar)', isMandatory: true },
+        { name: 'گواهی پزشکی و روانشناسی', isMandatory: true },
+        { name: 'گواهی عدم سوء‌پیشینه (Cazier Judiciar)', isMandatory: true },
         { name: 'گواهی پایان دوره آموزشگاه رانندگی', isMandatory: true }
       ],
       steps: [
-        { title: 'ثبت‌نام در آموزشگاه', description: 'یافتن آموزشگاه معتبر؛ برخی آموزشگاه‌ها در شهرهای بزرگ کلاس به زبان انگلیسی برگزار می‌کنند.' },
-        { title: 'تست پزشکی و روان‌سنجی', description: 'موفقیت در آزمایش‌های پزشکی و روانی الزامی برای رانندگی.' },
-        { title: 'آزمون تئوری', description: 'قبولی در آزمون رایانه‌ای آیین‌نامه (Sala). در برخی شهرستان‌ها به زبان انگلیسی نیز ارائه می‌شود.' },
-        { title: 'آزمون عملی', description: 'قبولی در آزمون شهری به همراه افسر پلیس.' }
+        { title: 'ثبت‌نام در آموزشگاه رانندگی', description: 'یک آموزشگاه مجاز پیدا کنید. برخی آموزشگاه‌ها در شهرهای بزرگ کلاس‌های انگلیسی دارند.' },
+        { title: 'آزمون‌های پزشکی و روانشناسی', description: 'گذراندن آزمایش‌های سلامت جسمی و روانی.' },
+        { title: 'آزمون آیین‌نامه (تئوری)', description: 'قبولی در آزمون کامپیوتری (Sala).' },
+        { title: 'آزمون عملی', description: 'قبولی در آزمون عملی رانندگی در جاده با ممتحن پلیس.' }
       ],
       fees: [
-        { amount: '1500 - 2500', currency: 'RON', description: 'شهریه آموزشگاه رانندگی (بسته به دسته‌بندی و زبان آموزش متغیر است)', isFixed: false },
-        { amount: '89', currency: 'RON', description: 'تعرفه صدور گواهی‌نامه DGPCI', isFixed: true, sourceId: 'dgpci-exchange' }
+        { amount: '89', currency: 'RON', description: 'هزینه صدور گواهینامه DGPCI. قابل پرداخت از طریق بانک CEC، سایت ghișeul.ro یا باجه‌های DGPCI.', isFixed: true, sourceId: 'dgpci-exam' }
       ],
-      timeline: [
-        { duration: '۲ - ۴ ماه', description: 'زمان مورد نیاز برای تکمیل آموزش و قبولی در آزمون‌ها.', isGuaranteed: false }
+      timeline: [],
+      exceptions: [],
+      limitations: []
+    },
+    {
+      id: 'renew-romanian-licence',
+      title: 'تمدید گواهینامه رومانیایی',
+      appliesTo: ['دارندگان گواهینامه رومانیایی که به تاریخ انقضا نزدیک می‌شوند'],
+      residenceCondition: 'داشتن اقامت معتبر یا شهروندی رومانی.',
+      requiresExamination: false,
+      requiresMedical: true,
+      documents: [],
+      steps: [],
+      fees: [
+        { amount: '89', currency: 'RON', description: 'هزینه صدور گواهینامه جهت تمدید. قابل پرداخت از طریق بانک CEC، سایت ghișeul.ro یا DGPCI.', isFixed: true, sourceId: 'dgpci-renewal' }
       ],
+      timeline: [],
+      exceptions: [],
+      limitations: []
+    },
+    {
+      id: 'international-driving-permit',
+      title: 'گواهینامه رانندگی بین‌المللی',
+      appliesTo: ['توریست‌هایی که به همراه گواهینامه ملی خود به IDP نیاز دارند'],
+      residenceCondition: 'ندارد',
+      requiresExamination: false,
+      requiresMedical: false,
+      documents: [],
+      steps: [],
+      fees: [],
+      timeline: [],
+      exceptions: [],
+      limitations: []
+    },
+    {
+      id: 'penalties-suspension-and-restrictions',
+      title: 'جرایم، تعلیق و محدودیت‌ها',
+      appliesTo: ['هر راننده‌ای که در رومانی رانندگی می‌کند'],
+      residenceCondition: 'ندارد',
+      requiresExamination: false,
+      requiresMedical: false,
+      documents: [],
+      steps: [],
+      fees: [],
+      timeline: [],
       exceptions: [],
       limitations: []
     }
