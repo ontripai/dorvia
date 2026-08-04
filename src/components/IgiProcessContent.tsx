@@ -1,116 +1,323 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Language } from '../types';
+import { CommentsSection } from './CommentsSection';
+import { ExternalLink, CheckCircle, ShieldCheck, Clock, FileCheck2, AlertCircle } from './Icons';
 
 interface IgiProcessContentProps {
   currentLang: Language;
 }
 
 export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLang }) => {
-  const disclaimer = currentLang === 'fa'
-    ? 'این مورد باید بر اساس مقررات جاری و شرایط فردی بررسی شود.'
-    : 'This must be verified based on current regulations and individual circumstances.';
-
   return (
-    <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+    <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8 text-right rtl">
+      {/* HERO PANEL */}
       <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-          {currentLang === 'fa' ? 'مراحل اقامت نزد اداره کل مهاجرت (IGI)' : 'Residence Process at the General Inspectorate for Immigration (IGI)'}
+        <div className="inline-flex items-center space-x-2 rtl:space-x-reverse bg-[#2F6FED]/20 text-[#2F6FED] px-3.5 py-1.5 rounded-xl text-xs font-bold border border-[#2F6FED]/30">
+          <span>{currentLang === 'fa' ? 'راهنمای جامع اداره کل مهاجرت رومانی' : 'General Inspectorate for Immigration (IGI) Guide'}</span>
+        </div>
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-white leading-tight">
+          {currentLang === 'fa'
+            ? 'مراحل اقامت و قوانین صدور کارت نزد اداره IGI'
+            : 'Residency Process & Permit Regulations at IGI'}
         </h1>
-        <div className="text-[11px] text-slate-400 mt-2">
-          {currentLang === 'fa' 
-            ? 'منبع: اداره کل مهاجرت رومانی (IGI) — igi.mai.gov.ro — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
-            : 'Source: General Inspectorate for Immigration (IGI) — igi.mai.gov.ro — Last reviewed: August 2026'}
+        <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed">
+          {currentLang === 'fa'
+            ? 'راهنمای رسمی و تاییدشده قوانین اداره کل مهاجرت رومانی (IGI)، زمان‌بندی‌های ۹۰ و ۳۰ روزه صدور کارت اقامت، گواهی اتباع اتحادیه اروپا و نحوه تمدید.'
+            : 'Official verified guide to Romanian General Inspectorate for Immigration (IGI) rules, 90/30-day timelines, EU certificates, and renewal procedures.'}
+        </p>
+        <div className="text-xs text-slate-400 pt-2 flex items-center space-x-2 rtl:space-x-reverse border-t border-slate-700/60">
+          <span>🏛️</span>
+          <span>
+            {currentLang === 'fa'
+              ? 'منبع رسمی: اداره کل مهاجرت رومانی (IGI) — igi.mai.gov.ro'
+              : 'Official Source: General Inspectorate for Immigration — igi.mai.gov.ro'}
+          </span>
         </div>
       </div>
 
-      <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-        {currentLang === 'fa' 
-          ? 'اداره کل مهاجرت رومانی (IGI) نهاد مرجع برای بررسی و صدور کارت اقامت تمامی اتباع خارجی در رومانی است. برای متقاضیانی که از طریق تحصیلی، کاری یا سایر روش‌ها وارد رومانی می‌شوند، طی کردن مراحل اداری در این نهاد، پس از ورود با ویزای معتبر (مانند ویزای نوع D)، الزامی است. این مراحل شامل ارزیابی دقیق مدارک شناسایی، مالی و اثبات هدف اقامت است و منجر به صدور کارت اقامت موقت می‌گردد. آشنایی با روند کاری IGI و آماده‌سازی کامل مدارک پیش از مراجعه، می‌تواند از تأخیرهای قانونی و بروز مشکلات اقامتی جلوگیری کند.'
-          : 'The General Inspectorate for Immigration (IGI) is the primary authority responsible for processing and issuing residence permits to all foreign nationals in Romania. For applicants entering Romania for studies, work, or other purposes, completing the administrative procedures at this institution after arriving with a valid visa (such as Type D) is mandatory. These steps involve a thorough evaluation of identification, financial documents, and proof of the purpose of stay, ultimately leading to the issuance of a temporary residence permit. Familiarity with IGI\'s workflow and preparing complete documentation beforehand can prevent legal delays and residency issues.'}
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-          <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-            <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
-            <span>{currentLang === 'fa' ? 'ارزیابی اولیه مدارک (نمونه تحصیلی)' : 'Initial Document Evaluation (Study Example)'}</span>
-          </h3>
-          <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-            <li>{currentLang === 'fa' ? 'نامه پذیرش از نهاد مربوطه (مانند وزارت آموزش) الزامی است.' : 'Letter of acceptance from the relevant institution (e.g., Ministry of Education) is mandatory.'}</li>
-            <li>{currentLang === 'fa' ? 'رسید پرداخت هزینه‌های مرتبط (مثل شهریه یا عوارض).' : 'Proof of payment for related fees (e.g., tuition or taxes).'}</li>
-            <li>
-              {currentLang === 'fa' ? 'مدرک تمکن مالی (حداقل معادل حداقل دستمزد ماهانه رومانی برای طول مدت روادید).' : 'Proof of financial means (at least equivalent to the national minimum gross salary for the visa duration).'}
-              <br/><span className="text-[11px] italic text-slate-400">{disclaimer}</span>
-            </li>
-            <li>{currentLang === 'fa' ? 'گواهی عدم سوءپیشینه و بیمه درمانی معتبر.' : 'Criminal record certificate and valid medical insurance.'}</li>
-          </ul>
-        </div>
-
-        <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-          <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-            <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
-            <span>{currentLang === 'fa' ? 'صدور ویزای بلندمدت (نوع D)' : 'Long-stay Visa Issuance (Type D)'}</span>
-          </h3>
-          <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-            <li>
-              {currentLang === 'fa' ? 'هزینه ویزا معمولاً ۱۲۰ یورو است که در کشور مبدأ پرداخت می‌شود.' : 'The visa fee is usually €120, payable in the country of origin.'}
-              <br/><span className="text-[11px] italic text-slate-400">{disclaimer}</span>
-            </li>
-            <li>{currentLang === 'fa' ? 'نظر مثبت IGI معمولاً ظرف ۳۰ تا ۴۵ روز صادر می‌شود.' : 'Positive IGI opinion is usually issued within 30 to 45 days.'}</li>
-            <li>{currentLang === 'fa' ? 'ویزا معمولاً برای اقامت اولیه ۹۰ روزه صادر می‌شود.' : 'The visa is typically granted for an initial 90-day stay.'}</li>
-          </ul>
-        </div>
-
-        <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-          <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-            <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
-            <span>{currentLang === 'fa' ? 'درخواست کارت اقامت موقت' : 'Temporary Residence Permit Application'}</span>
-          </h3>
-          <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-            <li>{currentLang === 'fa' ? 'باید حداقل ۳۰ روز قبل از پایان اعتبار حق اقامت فعلی، در ادارات محلی IGI درخواست داده شود.' : 'Must be submitted to local IGI offices at least 30 days before the expiration of the current right of stay.'}</li>
-            <li>{currentLang === 'fa' ? 'رسیدگی ظرف ۳۰ روز انجام می‌پذیرد (قابل تمدید تا ۱۵ روز در صورت نیاز به بررسی بیشتر).' : 'Processing takes 30 days (extendable by 15 days for further checks).'}</li>
-            <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
-          </ul>
-        </div>
-
-        <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-          <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-            <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
-            <span>{currentLang === 'fa' ? 'ورود و صدور کارت اقامت' : 'Arrival and Permit Issuance'}</span>
-          </h3>
-          <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-            <li>{currentLang === 'fa' ? 'پس از ورود به رومانی، ثبت‌نام در نهاد مربوطه و دریافت نهایی کارت اقامت از IGI انجام می‌پذیرد.' : 'Following arrival in Romania, complete the relevant registration and collect the final residence permit from IGI.'}</li>
-          </ul>
+      {/* SECTION 0: TABLE OF CONTENTS (پرش سریع) */}
+      <div className="bg-white p-6 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+        <h2 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <span>📌</span>
+          <span>{currentLang === 'fa' ? 'فهرست محتوای این راهنما (پرش سریع)' : 'Table of Contents'}</span>
+        </h2>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-bold">
+          <a href="#quick-answer" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۱. پاسخ سریع' : '1. Quick Answer'}
+          </a>
+          <a href="#prerequisites-table" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۲. جدول شرایط اولیه' : '2. Prerequisites Table'}
+          </a>
+          <a href="#step-by-step" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۳. مراحل گام‌به‌گام' : '3. Step-by-Step'}
+          </a>
+          <a href="#required-docs" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۴. مدارک لازم' : '4. Required Documents'}
+          </a>
+          <a href="#official-timelines" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۵. مهلت‌های ۹۰ و ۳۰ روزه' : '5. Official Timelines'}
+          </a>
+          <a href="#common-issues" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۶. نقص مدارک و توقف' : '6. Incomplete Files'}
+          </a>
+          <a href="#official-references" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۷. منابع رسمی' : '7. Official References'}
+          </a>
+          <a href="#related-content" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۸. مطالب مرتبط' : '8. Related Content'}
+          </a>
         </div>
       </div>
 
-      <div className="bg-[#eef3f8] p-6 rounded-2xl border border-[#dfe6ef] text-center max-w-3xl mx-auto">
-        <h4 className="font-bold text-[#2F6FED] mb-2">{currentLang === 'fa' ? 'نکته مهم پس از فارغ‌التحصیلی' : 'Important Note Post-Graduation'}</h4>
-        <p className="text-sm text-[#142033] font-medium leading-relaxed">
-          {currentLang === 'fa' 
-            ? 'دانشجویان پس از فارغ‌التحصیلی، امکان تمدید اقامت تا ۹ ماه را برای جست‌وجوی کار یا راه‌اندازی کسب‌وکار دارند.'
-            : 'Upon graduation, students have the possibility to extend their residence permit for up to 9 months to search for employment or start a business.'}
+      {/* SECTION 1: QUICK ANSWER */}
+      <div id="quick-answer" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+        <div className="flex items-center space-x-3 rtl:space-x-reverse text-[#2F6FED]">
+          <ShieldCheck size={24} />
+          <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033]">
+            {currentLang === 'fa' ? 'پاسخ سریع: اداره IGI چیست و روند صدور کارت چگونه است؟' : 'Quick Answer: What is IGI & Residency Process?'}
+          </h2>
+        </div>
+        <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'اداره کل مهاجرت رومانی (Inspectoratul General pentru Imigrări – IGI) زیرمجموعه وزارت کشور رومانی (MAI)، مرجع نهادهای اجرایی ثبت اقامت، صدور گواهی اتباع اتحادیه اروپا (Certificat de Înregistrare) و کارت اقامت (Cartea de Rezidență) برای اتباع خارجی و اعضای خانواده آن‌هاست. تمامی متقاضیان موظفند درخواست‌های اولیه یا تمدید خود را نزد اداره منطقه‌ای IGI محل سکونت خود ثبت نمایند.'
+            : 'The General Inspectorate for Immigration (IGI), under the Romanian Ministry of Internal Affairs, is the sole authority managing foreign residency, EU registration certificates, and residence cards. All applicants must register their initial or renewal applications at their regional IGI office.'}
         </p>
       </div>
 
-      <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
-        <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
-          {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
-        </h3>
-        <div className="space-y-6">
-          <div>
-            <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چه زمانی باید به IGI مراجعه کنم؟' : 'When should I visit IGI?'}</h4>
-            <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'شما باید حداقل ۳۰ روز پیش از انقضای اعتبار ویزای فعلی خود (مثلاً ویزای نوع D)، درخواست صدور کارت اقامت موقت را در شعبه محلی IGI ثبت کنید.' : 'You must submit your temporary residence permit application at the local IGI branch at least 30 days before your current visa (e.g., Type D) expires.'}</p>
+      {/* SECTION 2: PREREQUISITES TABLE */}
+      <div id="prerequisites-table" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <span>📊</span>
+          <span>{currentLang === 'fa' ? 'جدول خلاصه شرایط و مهلت‌های قانونی IGI' : 'Prerequisites & Legal Regulations Summary Table'}</span>
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-right rtl text-xs sm:text-sm border-collapse">
+            <thead>
+              <tr className="bg-[#071B3D] text-white">
+                <th className="p-3.5 rounded-r-xl">{currentLang === 'fa' ? 'نوع مدرک / کارت' : 'Document Type'}</th>
+                <th className="p-3.5">{currentLang === 'fa' ? 'مشمولین' : 'Eligible Categories'}</th>
+                <th className="p-3.5">{currentLang === 'fa' ? 'مهلت صدور قانونی' : 'Legal Processing Time'}</th>
+                <th className="p-3.5 rounded-l-xl">{currentLang === 'fa' ? 'حداکثر اعتبار' : 'Maximum Validity'}</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#dfe6ef] text-[#526174]">
+              <tr className="hover:bg-[#f8fafc]">
+                <td className="p-3.5 font-bold text-[#142033]">Certificat de Înregistrare</td>
+                <td className="p-3.5">{currentLang === 'fa' ? 'اتباع اتحادیه اروپا / EEA / سوئیس' : 'EU / EEA / Swiss Citizens'}</td>
+                <td className="p-3.5 font-bold text-emerald-600">{currentLang === 'fa' ? 'همان روز (Same Day)' : 'Same Day'}</td>
+                <td className="p-3.5">{currentLang === 'fa' ? 'تا ۵ سال (حداقل ۱ سال)' : 'Up to 5 years (Min 1 yr)'}</td>
+              </tr>
+              <tr className="hover:bg-[#f8fafc]">
+                <td className="p-3.5 font-bold text-[#142033]">Cartea de Rezidență (درخواست اولیه)</td>
+                <td className="p-3.5">{currentLang === 'fa' ? 'اعضای خانواده غیر EU اتباع اتحادیه اروپا' : 'Non-EU Family Members of EU Citizens'}</td>
+                <td className="p-3.5 font-bold text-amber-600">{currentLang === 'fa' ? 'ظرف ۹۰ روز از ثبت درخواست' : 'Within 90 days'}</td>
+                <td className="p-3.5">{currentLang === 'fa' ? 'حداکثر ۵ سال (مطابق با اقامت شهروند EU)' : 'Up to 5 yrs (Matches EU citizen)'}</td>
+              </tr>
+              <tr className="hover:bg-[#f8fafc]">
+                <td className="p-3.5 font-bold text-[#142033]">Cartea de Rezidență (تمدید)</td>
+                <td className="p-3.5">{currentLang === 'fa' ? 'درخواست‌های بعدی تمدید اقامت' : 'Subsequent Renewal Applications'}</td>
+                <td className="p-3.5 font-bold text-blue-600">{currentLang === 'fa' ? 'حداکثر ۳۰ روز' : 'Maximum 30 days'}</td>
+                <td className="p-3.5">{currentLang === 'fa' ? 'حداکثر ۵ سال' : 'Up to 5 years'}</td>
+              </tr>
+              <tr className="hover:bg-[#f8fafc]">
+                <td className="p-3.5 font-bold text-[#142033]">Permis de Ședere (تحصیلی / کاری)</td>
+                <td className="p-3.5">{currentLang === 'fa' ? 'اتباع کشورهای ثالث (غیر اتحادیه اروپا)' : 'Third-country Nationals'}</td>
+                <td className="p-3.5">{currentLang === 'fa' ? '۳۰ روز (قابل تمدید تا ۴۵ روز)' : '30 days (Extendable to 45)'}</td>
+                <td className="p-3.5">{currentLang === 'fa' ? '۱ سال (قابل تمدید سالانه)' : '1 year (Renewable annually)'}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* SECTION 3: STEP-BY-STEP PROCESS */}
+      <div id="step-by-step" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-6">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033]">
+          {currentLang === 'fa' ? 'مراحل گام‌به‌گام ثبت پرونده و تمدید نزد IGI' : 'Step-by-Step IGI Application & Renewal Process'}
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div className="p-5 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-2">
+            <span className="font-extrabold text-[#2F6FED] flex items-center space-x-2 rtl:space-x-reverse">
+              <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-xs">۱</span>
+              <span>{currentLang === 'fa' ? 'گام ۱: ثبت‌نام در پورتال آنلاین IGI' : 'Step 1: Online Portal Registration'}</span>
+            </span>
+            <p className="text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'ثبت اولیه مدارک و رزرو وقت مراجعه از طریق پورتال آنلاین اداره مهاجرت (portal.igi.mai.gov.ro).'
+                : 'Initial document submission and appointment booking via portal.igi.mai.gov.ro.'}
+            </p>
           </div>
-          <div>
-            <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بررسی درخواست اقامت من چقدر طول می‌کشد؟' : 'How long does it take to process my residence application?'}</h4>
-            <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون، بررسی درخواست معمولاً تا ۳۰ روز زمان می‌برد که در صورت نیاز به بررسی‌های بیشتر از سوی اداره مهاجرت، این مدت تا ۱۵ روز دیگر قابل تمدید است.' : 'Legally, the evaluation typically takes up to 30 days, which can be extended by another 15 days if further checks are required by the immigration office.'}</p>
+          <div className="p-5 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-2">
+            <span className="font-extrabold text-[#2F6FED] flex items-center space-x-2 rtl:space-x-reverse">
+              <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-xs">۲</span>
+              <span>{currentLang === 'fa' ? 'گام ۲: آماده‌سازی حداقل ۳۰ روز قبل' : 'Step 2: Timely Preparation (Min 30 Days)'}</span>
+            </span>
+            <p className="text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'توصیه رسمی: تمام مدارک تمدید باید حداقل ۳۰ روز پیش از انقضای کارت فعلی ثبت شوند.'
+                : 'Official recommendation: All renewal files must be submitted at least 30 days before permit expiration.'}
+            </p>
+          </div>
+          <div className="p-5 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-2">
+            <span className="font-extrabold text-[#2F6FED] flex items-center space-x-2 rtl:space-x-reverse">
+              <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-xs">۳</span>
+              <span>{currentLang === 'fa' ? 'گام ۳: مراجعه به اداره منطقه‌ای IGI' : 'Step 3: Regional IGI Visit'}</span>
+            </span>
+            <p className="text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'مراجعه حضوری به اداره IGI استان محل اقامت، ارائه اصل مدارک، پرداخت عوارض و اخذ رسید ثبت.'
+                : 'In-person submission at the provincial IGI office of residence, presenting originals and receiving registration receipt.'}
+            </p>
+          </div>
+          <div className="p-5 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-2">
+            <span className="font-extrabold text-[#2F6FED] flex items-center space-x-2 rtl:space-x-reverse">
+              <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-xs">۴</span>
+              <span>{currentLang === 'fa' ? 'گام ۴: بیومتریک و صدور کارت' : 'Step 4: Biometrics & Card Issuance'}</span>
+            </span>
+            <p className="text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'ثبت اثر انگشت، چهره‌نگاری و دریافت کارت اقامت جدید پس از طی مهلت قانونی رسیدگی.'
+                : 'Fingerprint scanning, photo capture, and final residence card pickup after legal processing.'}
+            </p>
           </div>
         </div>
       </div>
 
+      {/* SECTION 4: REQUIRED DOCUMENTS CHECKLIST */}
+      <div id="required-docs" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <FileCheck2 size={24} className="text-[#2F6FED]" />
+          <span>{currentLang === 'fa' ? 'چک‌لیست مدارک لازم برای تشکیل پرونده و تمدید اقامت' : 'Required Documents Checklist'}</span>
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-[#526174]">
+          <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl flex items-center space-x-3 rtl:space-x-reverse">
+            <CheckCircle size={18} className="text-emerald-600 shrink-0" />
+            <span>{currentLang === 'fa' ? 'پاسپورت معتبر (با حداقل ۶ ماه اعتبار)' : 'Valid passport (min 6 months validity)'}</span>
+          </div>
+          <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl flex items-center space-x-3 rtl:space-x-reverse">
+            <CheckCircle size={18} className="text-emerald-600 shrink-0" />
+            <span>
+              {currentLang === 'fa' ? 'مدرک محل اسکان معتبر — ' : 'Proof of accommodation — '}
+              <Link href="/needs/housing" className="text-[#2F6FED] font-bold hover:underline">
+                {currentLang === 'fa' ? 'راهنمای مسکن در رومانی' : 'Housing Guide'}
+              </Link>
+            </span>
+          </div>
+          <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl flex items-center space-x-3 rtl:space-x-reverse">
+            <CheckCircle size={18} className="text-emerald-600 shrink-0" />
+            <span>{currentLang === 'fa' ? 'مدرک تمکن مالی (حساب بانکی / حقوق / فیش درآمد)' : 'Proof of financial means'}</span>
+          </div>
+          <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl flex items-center space-x-3 rtl:space-x-reverse">
+            <CheckCircle size={18} className="text-emerald-600 shrink-0" />
+            <span>
+              {currentLang === 'fa' ? 'بیمه درمانی معتبر در رومانی — ' : 'Valid health insurance — '}
+              <Link href="/needs" className="text-[#2F6FED] font-bold hover:underline">
+                {currentLang === 'fa' ? 'خدمات بیمه و بهداشت' : 'Health & Insurance Needs'}
+              </Link>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* SECTION 5: OFFICIAL TIMELINES */}
+      <div id="official-timelines" className="bg-[#f0f4f9] p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] space-y-4">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <Clock size={24} className="text-[#2F6FED]" />
+          <span>{currentLang === 'fa' ? 'زمان‌بندی‌های قانونی تاییدشده IGI (مهلت‌های ۹۰ و ۳۰ روزه)' : 'Official Verified IGI Processing Timelines (90/30 Days)'}</span>
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs sm:text-sm">
+          <div className="p-4 bg-white rounded-xl border border-[#dfe6ef] text-center space-y-1 shadow-sm">
+            <span className="text-2xl font-extrabold text-emerald-600">همان روز</span>
+            <div className="font-bold text-[#142033]">{currentLang === 'fa' ? 'Certificat de Înregistrare' : 'EU Registration Certificate'}</div>
+            <p className="text-[11px] text-[#788697]">{currentLang === 'fa' ? 'برای اتباع اتحادیه اروپا / EEA در روز مراجعه صادر می‌شود.' : 'Issued on the same day for EU/EEA citizens.'}</p>
+          </div>
+          <div className="p-4 bg-white rounded-xl border border-[#dfe6ef] text-center space-y-1 shadow-sm">
+            <span className="text-2xl font-extrabold text-amber-600">۹۰ روز</span>
+            <div className="font-bold text-[#142033]">{currentLang === 'fa' ? 'درخواست اولیه کارت اقامت' : 'Initial Residence Card'}</div>
+            <p className="text-[11px] text-[#788697]">{currentLang === 'fa' ? 'برای اعضای خانواده غیر EU ظرف ۹۰ روز صادر می‌شود.' : 'Issued within 90 days for non-EU family members.'}</p>
+          </div>
+          <div className="p-4 bg-white rounded-xl border border-[#dfe6ef] text-center space-y-1 shadow-sm">
+            <span className="text-2xl font-extrabold text-[#2F6FED]">حداکثر ۳۰ روز</span>
+            <div className="font-bold text-[#142033]">{currentLang === 'fa' ? 'درخواست‌های تمدید بعدی' : 'Subsequent Renewals'}</div>
+            <p className="text-[11px] text-[#788697]">{currentLang === 'fa' ? 'تمدیدهای بعدی ظرف حداکثر ۳۰ روز انجام می‌پذیرد.' : 'Renewals processed within maximum 30 days.'}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* SECTION 6: INCOMPLETE FILES & FROZEN TIMELINE */}
+      <div id="common-issues" className="bg-amber-50 p-6 sm:p-8 rounded-2xl border border-amber-200 space-y-3">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-amber-900 flex items-center space-x-2 rtl:space-x-reverse">
+          <AlertCircle size={24} className="text-amber-600" />
+          <span>{currentLang === 'fa' ? 'پرونده‌های ناقص و توقف مهلت قانونی رسیدگی' : 'Incomplete Files & Suspended Processing Timelines'}</span>
+        </h2>
+        <p className="text-xs sm:text-sm text-amber-950 leading-relaxed">
+          {currentLang === 'fa'
+            ? 'طبق قوانین رسمی اداره کل مهاجرت (igi.mai.gov.ro)، در صورتی که مدارک ارائه‌شده ناقص باشند، IGI حداکثر تا ۳۰ روز مهلت اضافه برای تکمیل و تحویل مدارک اعطا می‌کند. این بازه مهلت اضافه، بازه زمانی قانونی رسیدگی پرونده را رسماً متوقف (Suspend) می‌کند تا پرونده به صورت کامل تکمیل گردد.'
+            : 'According to official IGI regulations, if submitted documents are incomplete, IGI grants up to 30 days extension to complement the file. This extension period officially suspends the processing timeframe until complete documentation is presented.'}
+        </p>
+      </div>
+
+      {/* SECTION 7: OFFICIAL REFERENCES */}
+      <div id="official-references" className="bg-[#071B3D] text-white rounded-2xl p-6 sm:p-8 space-y-4">
+        <h3 className="text-lg sm:text-xl font-extrabold border-b border-slate-700 pb-3 flex items-center space-x-2 rtl:space-x-reverse">
+          <span>🔗</span>
+          <span>{currentLang === 'fa' ? 'منابع رسمی و استعلامات قوانین اقامتی IGI' : 'Official IGI Immigration References'}</span>
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <a href="https://igi.mai.gov.ro" target="_blank" rel="noopener noreferrer" className="p-3 bg-[#0b2b55] hover:bg-[#2F6FED] rounded-xl flex items-center justify-between transition-colors">
+            <span>{currentLang === 'fa' ? 'پورتال رسمی IGI رومانی' : 'Official IGI Portal'}</span>
+            <ExternalLink size={14} />
+          </a>
+          <a href="https://portal.igi.mai.gov.ro" target="_blank" rel="noopener noreferrer" className="p-3 bg-[#0b2b55] hover:bg-[#2F6FED] rounded-xl flex items-center justify-between transition-colors">
+            <span>{currentLang === 'fa' ? 'سامانه ثبت وقت آنلاین IGI' : 'IGI Online Appointment Portal'}</span>
+            <ExternalLink size={14} />
+          </a>
+          <a href="https://www.mai.gov.ro" target="_blank" rel="noopener noreferrer" className="p-3 bg-[#0b2b55] hover:bg-[#2F6FED] rounded-xl flex items-center justify-between transition-colors">
+            <span>{currentLang === 'fa' ? 'وزارت کشور رومانی (MAI)' : 'Ministry of Internal Affairs (MAI)'}</span>
+            <ExternalLink size={14} />
+          </a>
+        </div>
+      </div>
+
+      {/* SECTION 8: DATE TAG & RELATED CONTENT */}
+      <div id="related-content" className="space-y-6">
+        <div className="p-4 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl text-center text-xs text-[#788697] font-semibold">
+          {currentLang === 'fa'
+            ? 'آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶. منبع: آیین‌نامه اتباع خارجی رومانی (OUG 194/2002) و igi.mai.gov.ro.'
+            : 'Last Review: August 2026. Source: OUG 194/2002 & igi.mai.gov.ro.'}
+        </div>
+
+        {/* RELATED CONTENT BOX */}
+        <div className="bg-white p-6 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+          <h3 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+            <span>📚</span>
+            <span>{currentLang === 'fa' ? 'مطالب مرتبط و گام‌های بعدی' : 'Related Guides & Next Steps'}</span>
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-bold">
+            <Link href="/immigration/long-term-residence" className="p-4 bg-[#f8fafc] hover:bg-[#eef3f8] border border-[#dfe6ef] rounded-xl space-y-1 block transition-colors">
+              <span className="text-[#2F6FED]">🇮🇷 ➔ 🇷🇴</span>
+              <div className="text-[#142033] font-extrabold">{currentLang === 'fa' ? 'اقامت بلندمدت و دائم رومانی' : 'Long-Term & Permanent Residence'}</div>
+              <p className="text-[11px] text-[#788697] font-normal">{currentLang === 'fa' ? 'شرایط اخذ اقامت ۵ ساله و دائم' : 'Conditions for 5-year permanent status'}</p>
+            </Link>
+            <Link href="/immigration/citizenship" className="p-4 bg-[#f8fafc] hover:bg-[#eef3f8] border border-[#dfe6ef] rounded-xl space-y-1 block transition-colors">
+              <span className="text-[#2F6FED]">🏛️</span>
+              <div className="text-[#142033] font-extrabold">{currentLang === 'fa' ? 'شهروندی و تابعیت رومانی' : 'Romanian Citizenship'}</div>
+              <p className="text-[11px] text-[#788697] font-normal">{currentLang === 'fa' ? 'قوانین و مراحل پاسپورت رومانی' : 'Passport regulations and requirements'}</p>
+            </Link>
+            <Link href="/needs/driving-license" className="p-4 bg-[#f8fafc] hover:bg-[#eef3f8] border border-[#dfe6ef] rounded-xl space-y-1 block transition-colors">
+              <span className="text-[#2F6FED]">🚗</span>
+              <div className="text-[#142033] font-extrabold">{currentLang === 'fa' ? 'تبدیل گواهی‌نامه رانندگی' : 'Driving License Conversion'}</div>
+              <p className="text-[11px] text-[#788697] font-normal">{currentLang === 'fa' ? 'مراحل تبدیل گواهی‌نامه پس از دریافت کارت اقامت' : 'License conversion after residency card'}</p>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* SECTION 9: COMMENTS SECTION */}
+      <CommentsSection pagePath="immigration/igi-process" currentLang={currentLang} />
     </div>
   );
 };
