@@ -69,7 +69,7 @@ export const Header: React.FC<HeaderProps> = ({
         >
           <img src="/images/logo/dorvia-logo-primary-transparent-3000.png" alt="DORVIA" className="h-[32px] sm:h-[36px] w-auto group-hover:scale-105 transition-transform" />
 
-          <span className="text-base sm:text-lg font-extrabold tracking-tight text-[#142033] group-hover:text-[#2F6FED] transition-colors leading-none whitespace-nowrap">
+          <span className="hidden sm:inline-block text-base sm:text-lg font-extrabold tracking-tight text-[#142033] group-hover:text-[#2F6FED] transition-colors leading-none whitespace-nowrap">
             {currentLang === 'fa' ? t.brand.siteName : t.brand.siteName.toUpperCase()}
           </span>
         </Link>
@@ -150,6 +150,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={() => setSearchDialogOpen(true)}
             className="p-2 rounded-lg bg-[#eef3f8] text-[#142033] border border-[#dfe6ef] min-h-[36px] min-w-[36px] flex items-center justify-center"
+            aria-label="Search"
           >
             <Search size={18} className="text-[#2F6FED]" />
           </button>
@@ -173,14 +174,14 @@ export const Header: React.FC<HeaderProps> = ({
             variant="primary"
             size="sm"
             onClick={onOpenEvaluationModal}
-            className="!px-3 !py-1 !text-[11px] !min-h-[32px]"
+            className="hidden sm:inline-flex !px-3 !py-1 !text-[11px] !min-h-[32px]"
           >
             {currentLang === 'fa' ? 'ارزیابی' : 'Audit'}
           </Button>
 
           <button
             onClick={() => setMobileDrawerOpen(true)}
-            className="p-2 rounded-xl bg-[#eef3f8] text-[#142033] border border-[#dfe6ef] cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="p-2 rounded-xl bg-[#eef3f8] hover:bg-[#dfe6ef] text-[#142033] border border-[#dfe6ef] cursor-pointer min-h-[40px] min-w-[40px] flex items-center justify-center shrink-0 z-10"
             aria-label="Open Navigation Menu"
           >
             <Menu size={20} />

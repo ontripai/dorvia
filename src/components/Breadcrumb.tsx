@@ -34,7 +34,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ slugRoute, currentLang, 
   return (
     <>
       {/* MOBILE STICKY PARENT BACK BAR (موبایل و تبلت - چسبان زیر هدر) */}
-      <div className="md:hidden sticky top-14 sm:top-16 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 py-2.5 shadow-sm text-xs transition-all">
+      <div className="md:hidden sticky top-[80px] z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 py-2.5 shadow-sm text-xs transition-all">
         <div className="flex items-center justify-between max-w-[1280px] mx-auto">
           <Link
             href={meta.parentPath}
