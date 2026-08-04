@@ -85,7 +85,7 @@ export const PrivacyContent = ({ currentLang }: { currentLang: string }) => {
         <p>فقط در صورت تیک زدن گزینه اختیاری در فرم ارزیابی، برای شما پیشنهادات و اخبار ارسال خواهد شد.</p>
       </section>
 
-      <section className="space-y-2">
+      <section className="space-y-2" id="cookies">
         <h2 className="text-xl font-bold text-[#142033]">۱۶. کوکی‌ها و آنالیتیکس (Cookie & Analytics)</h2>
         <p>در حال حاضر این سایت از هیچ کوکی شخص ثالث یا ابزار رهگیری تحلیلی (مانند Google Analytics) پیش از کسب اجازه استفاده نمی‌کند و فقط کوکی‌های ضروری عملکردی استفاده می‌شود.</p>
       </section>

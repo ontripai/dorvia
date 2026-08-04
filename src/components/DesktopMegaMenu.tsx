@@ -57,8 +57,8 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
               </h4>
               <ul className="space-y-2 text-[#526174] font-medium">
                 <li><Link href="/start-here/planning-to-come" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🎯 {currentLang === 'fa' ? 'قصد آمدن به رومانی دارم' : 'Planning to come'}</Link></li>
-                <li><Link href="/start-here/just-arrived" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🛬 {currentLang === 'fa' ? 'به‌تازگی وارد شده‌ام' : 'Just arrived'}</Link></li>
-                <li><Link href="/start-here/living-here" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🏠 {currentLang === 'fa' ? 'در رومانی زندگی می‌کنم' : 'Living in Romania'}</Link></li>
+                <li><Link href="/start-here/newly-arrived" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🛬 {currentLang === 'fa' ? 'به‌تازگی وارد شده‌ام' : 'Just arrived'}</Link></li>
+                <li><Link href="/start-here/settling-in" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🏠 {currentLang === 'fa' ? 'در رومانی زندگی می‌کنم' : 'Living in Romania'}</Link></li>
               </ul>
             </div>
 
@@ -67,9 +67,9 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 {currentLang === 'fa' ? 'چک‌لیست‌ها' : 'Checklists'}
               </h4>
               <ul className="space-y-2 text-[#526174] font-medium">
-                <li><Link href="/start-here/pre-departure-checklist" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>📋 {currentLang === 'fa' ? 'چک‌لیست قبل از سفر' : 'Pre-departure Checklist'}</Link></li>
-                <li><Link href="/start-here/first-three-days" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>⏱️ {currentLang === 'fa' ? 'سه روز اول' : 'First 3 Days'}</Link></li>
-                <li><Link href="/start-here/first-month" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>📅 {currentLang === 'fa' ? 'ماه اول' : 'First Month'}</Link></li>
+                <li><Link href="/start-here/planning-to-come" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>📋 {currentLang === 'fa' ? 'چک‌لیست قبل از سفر' : 'Pre-departure Checklist'}</Link></li>
+                <li><Link href="/start-here/newly-arrived" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>⏱️ {currentLang === 'fa' ? 'سه روز اول' : 'First 3 Days'}</Link></li>
+                <li><Link href="/start-here/settling-in" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>📅 {currentLang === 'fa' ? 'ماه اول' : 'First Month'}</Link></li>
               </ul>
             </div>
 

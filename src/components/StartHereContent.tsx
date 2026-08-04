@@ -136,7 +136,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
         </div>
       );
 
-    case 'just-arrived':
+    case 'newly-arrived':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <Breadcrumb slugRoute="start-here/newly-arrived" currentLang={currentLang} onNavigate={onNavigate} />
@@ -245,7 +245,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
         </div>
       );
 
-    case 'living-here':
+    case 'settling-in':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <Breadcrumb slugRoute="start-here/settling-in" currentLang={currentLang} onNavigate={onNavigate} />
@@ -370,7 +370,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
     case 'pre-departure-checklist':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-          <Breadcrumb slugRoute="start-here/arriving-soon" currentLang={currentLang} onNavigate={onNavigate} />
+          <Breadcrumb slugRoute="start-here/planning-to-come" currentLang={currentLang} onNavigate={onNavigate} />
 
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
@@ -454,7 +454,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             </div>
           </div>
 
-          <ParentHubFooterCard slugRoute="start-here/arriving-soon" currentLang={currentLang} onNavigate={onNavigate} />
+          <ParentHubFooterCard slugRoute="start-here/planning-to-come" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 

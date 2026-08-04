@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useAppContext } from '../../components/AppLayout';
-import { featuredCities } from '../../lib/data';
-import { getTranslations } from '../../lib/i18n';
-import { CityCard } from '../../components/CityCard';
-import { EvaluationCTA } from '../../components/EvaluationCTA';
+import { useAppContext } from '../../../components/AppLayout';
+import { featuredCities } from '../../../lib/data';
+import { getTranslations } from '../../../lib/i18n';
+import { CityCard } from '../../../components/CityCard';
+import { EvaluationCTA } from '../../../components/EvaluationCTA';
 
 export default function CitiesPage() {
   const { currentLang, onOpenEvaluationModal } = useAppContext();

@@ -388,7 +388,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   desc={t.pathways.living.desc}
                   icon={House}
                   badge={currentLang === 'fa' ? 'راهنمای استقرار' : 'Settlement'}
-                  href="/start-here/living-here"
+                  href="/start-here/settling-in"
                 />
               </div>
 

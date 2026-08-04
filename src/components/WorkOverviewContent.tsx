@@ -227,7 +227,7 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'اتباع خارج از اتحادیه اروپا/منطقه اقتصادی اروپا برای اشتغال قانونی نیاز به ' : 'Non-EU/EEA citizens require a '}
-                  <Link href="/work/permit" className="text-[#2F6FED] font-medium hover:underline focus:outline-none">
+                  <Link href="/work/work-permit" className="text-[#2F6FED] font-medium hover:underline focus:outline-none">
                     {currentLang === 'fa' ? 'مجوز کار (Aviz de Muncă)' : 'Work Permit (Aviz de Muncă)'}
                   </Link>
                   {currentLang === 'fa' ? ' دارند که باید توسط کارفرما از اداره کل مهاجرت (IGI) درخواست شود.' : ' for legal employment, which must be requested by the employer from the General Inspectorate for Immigration (IGI).'}
