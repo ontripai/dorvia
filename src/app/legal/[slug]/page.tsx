@@ -1,25 +1,39 @@
-'use client';
+import { Metadata } from 'next';
+import { PAGE_META } from '../../../lib/pageMeta';
+import { LegalContentWrapper } from './LegalContentWrapper';
 
-import { useAppContext } from '../../../components/AppLayout';
-import { getTranslations } from '../../../lib/i18n';
-import { EvaluationCTA } from '../../../components/EvaluationCTA';
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const meta = PAGE_META[`legal/${params.slug}`] || PAGE_META['legal'];
+  
+  const titleMap: Record<string, string> = {
+    privacy: 'سیاست حفظ حریم خصوصی | DORVIA EUROP',
+    terms: 'شرایط و قوانین استفاده | DORVIA EUROP',
+    disclaimer: 'سلب مسئولیت | DORVIA EUROP'
+  };
+
+  const descMap: Record<string, string> = {
+    privacy: 'اطلاعات مربوط به نحوه جمع‌آوری، پردازش و نگهداری اطلاعات شما توسط DORVIA EUROP.',
+    terms: 'قوانین و شرایط استفاده از خدمات و پلتفرم در رومانی (DORVIA EUROP).',
+    disclaimer: 'سلب مسئولیت حقوقی در خصوص تضمین نتایج مهاجرتی، تحصیلی و حقوقی.'
+  };
+
+  const title = titleMap[params.slug] || meta?.titleFa || 'Legal';
+  const description = descMap[params.slug] || 'Legal documentation for DORVIA EUROP.';
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://romania-nwnxllu92-ontrip.vercel.app/legal/${params.slug}`
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://romania-nwnxllu92-ontrip.vercel.app/legal/${params.slug}`
+    }
+  };
+}
 
 export default function LegalPage({ params }: { params: { slug: string } }) {
-  const { currentLang, onOpenEvaluationModal } = useAppContext();
-  const t = getTranslations(currentLang);
-
-  return (
-    <div className="space-y-8 animate-fadeIn max-w-4xl mx-auto bg-white p-8 rounded-3xl border border-[#dfe6ef] editorial-card mt-8">
-      <h1 className="text-2xl font-bold text-[#142033] border-b border-[#dfe6ef] pb-4">
-        {params.slug === 'privacy' 
-          ? (currentLang === 'fa' ? 'سیاست حریم خصوصی' : 'Privacy Policy')
-          : (currentLang === 'fa' ? 'شرایط و قوانین استفاده' : 'Terms & Disclaimer')}
-      </h1>
-
-      <div className="space-y-4 text-xs sm:text-sm text-[#526174] leading-relaxed">
-        <p>{t.disclaimer.text}</p>
-      </div>
-      <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
-    </div>
-  );
+  return <LegalContentWrapper slug={params.slug} />;
 }
