@@ -3,6 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { Language } from '../types';
+import { Breadcrumb } from './Breadcrumb';
+import { ParentHubFooterCard } from './ParentHubFooterCard';
 
 interface CompanyOverviewContentProps {
   subRoute: string;
@@ -25,6 +27,8 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
     case 'registration':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="company/registration" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'مراحل ثبت شرکت SRL در رومانی' : 'SRL Company Registration Steps in Romania'}
@@ -94,6 +98,8 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="company/registration" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 

@@ -11,6 +11,8 @@ import { HealthGuideContent } from './HealthGuideContent';
 import { BankingGuideContent } from './BankingGuideContent';
 import { SchoolGuideContent } from './SchoolGuideContent';
 import { TelecomGuideContent } from './TelecomGuideContent';
+import { Breadcrumb } from './Breadcrumb';
+import { ParentHubFooterCard } from './ParentHubFooterCard';
 
 interface NeedsContentProps {
   subRoute: string;

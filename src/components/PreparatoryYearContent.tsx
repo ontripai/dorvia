@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { Language } from '../types';
+import { Breadcrumb } from './Breadcrumb';
+import { ParentHubFooterCard } from './ParentHubFooterCard';
 
 interface PreparatoryYearContentProps {
   currentLang: Language;
@@ -14,6 +16,9 @@ export const PreparatoryYearContent: React.FC<PreparatoryYearContentProps> = ({ 
 
   return (
     <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+      <Breadcrumb slugRoute="study/preparatory-year" currentLang={currentLang} />
+
+      {/* HERO PANEL */}
       <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
           {currentLang === 'fa' ? 'سال آماده‌سازی زبان رومانیایی' : 'Romanian Language Preparatory Year'}
@@ -66,6 +71,8 @@ export const PreparatoryYearContent: React.FC<PreparatoryYearContentProps> = ({ 
           </ul>
         </div>
       </div>
+
+      <ParentHubFooterCard slugRoute="study/preparatory-year" currentLang={currentLang} />
     </div>
   );
 };

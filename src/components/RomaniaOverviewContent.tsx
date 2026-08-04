@@ -7,6 +7,8 @@ import { Button } from './Button';
 import { Landmark, Building2, ShieldCheck, Scale, FileCheck2, ExternalLink, ArrowRight, ArrowLeft } from './Icons';
 import { featuredCities } from '../lib/data';
 import { CityCard } from './CityCard';
+import { Breadcrumb } from './Breadcrumb';
+import { ParentHubFooterCard } from './ParentHubFooterCard';
 
 interface RomaniaOverviewContentProps {
   subRoute: string;
@@ -118,6 +120,8 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
     case 'economy':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="romania/economy" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <span className="text-[#F4F7FC] font-bold text-xs uppercase tracking-wider">
               {currentLang === 'fa' ? 'شناخت کشور رومانی' : 'Discover Romania'}
@@ -150,6 +154,8 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
               <div className="text-lg font-extrabold text-[#2F6FED]">RON (Leu)</div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="romania/economy" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
@@ -157,6 +163,8 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
     case 'society':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="romania/society" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'جامعه و زندگی اجتماعی در رومانی' : 'Romanian Society & Social Life'}
@@ -167,6 +175,8 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
                 : 'Demographics, official language, social etiquette, education system & integration guidance.'}
             </p>
           </div>
+
+          <ParentHubFooterCard slugRoute="romania/society" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 

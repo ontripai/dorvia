@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { Language } from '../types';
 import { CommentsSection } from './CommentsSection';
 import { ExternalLink, CheckCircle, ShieldCheck, Clock, FileCheck2, AlertCircle } from './Icons';
+import { Breadcrumb } from './Breadcrumb';
+import { ParentHubFooterCard } from './ParentHubFooterCard';
 
 interface IgiProcessContentProps {
   currentLang: Language;
@@ -13,6 +15,8 @@ interface IgiProcessContentProps {
 export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLang }) => {
   return (
     <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8 text-right rtl">
+      <Breadcrumb slugRoute="immigration/igi-process" currentLang={currentLang} />
+
       {/* HERO PANEL */}
       <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
         <div className="inline-flex items-center space-x-2 rtl:space-x-reverse bg-[#2F6FED]/20 text-[#2F6FED] px-3.5 py-1.5 rounded-xl text-xs font-bold border border-[#2F6FED]/30">
@@ -324,6 +328,7 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
       </div>
 
       {/* SECTION 9: COMMENTS SECTION */}
+      <ParentHubFooterCard slugRoute="immigration/igi-process" currentLang={currentLang} />
       <CommentsSection pagePath="immigration/igi-process" currentLang={currentLang} />
     </div>
   );

@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { Language } from '../types';
+import { Breadcrumb } from './Breadcrumb';
+import { ParentHubFooterCard } from './ParentHubFooterCard';
 
 interface ScholarshipOverviewContentProps {
   currentLang: Language;
@@ -14,6 +16,7 @@ export const ScholarshipOverviewContent: React.FC<ScholarshipOverviewContentProp
 
   return (
     <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+      <Breadcrumb slugRoute="study/scholarships" currentLang={currentLang} />
       <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
           {currentLang === 'fa' ? 'بورسیه تحصیلی دولت رومانی' : 'Romanian Government Scholarship'}
@@ -62,6 +65,8 @@ export const ScholarshipOverviewContent: React.FC<ScholarshipOverviewContentProp
           </ul>
         </div>
       </div>
+
+      <ParentHubFooterCard slugRoute="study/scholarships" currentLang={currentLang} />
     </div>
   );
 };

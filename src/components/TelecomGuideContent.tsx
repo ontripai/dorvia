@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { Language } from '../types';
 import { CommentsSection } from './CommentsSection';
 import { ExternalLink, CheckCircle, ShieldCheck, Clock, FileCheck2, AlertCircle, PhoneCall, Globe } from './Icons';
+import { Breadcrumb } from './Breadcrumb';
+import { ParentHubFooterCard } from './ParentHubFooterCard';
 
 interface TelecomGuideContentProps {
   currentLang: Language;
@@ -20,6 +22,8 @@ export const TelecomGuideContent: React.FC<TelecomGuideContentProps> = ({ curren
 
   return (
     <div className={`space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8 ${currentLang === 'fa' ? 'text-right rtl' : 'text-left ltr'}`}>
+      <Breadcrumb slugRoute="needs/telecom" currentLang={currentLang} onNavigate={onNavigate} />
+
       {/* HERO PANEL */}
       <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
         <div className="inline-flex items-center space-x-2 rtl:space-x-reverse bg-[#2F6FED]/20 text-[#2F6FED] px-3.5 py-1.5 rounded-xl text-xs font-bold border border-[#2F6FED]/30">
@@ -320,6 +324,8 @@ export const TelecomGuideContent: React.FC<TelecomGuideContentProps> = ({ curren
             </p>
           </div>
         </div>
+
+        <ParentHubFooterCard slugRoute="needs/telecom" currentLang={currentLang} onNavigate={onNavigate} />
 
         {/* COMMENTS SECTION */}
         <div id="related-content" className="pt-6">

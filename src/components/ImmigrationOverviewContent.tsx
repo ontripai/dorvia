@@ -7,6 +7,8 @@ import { CommentsSection } from './CommentsSection';
 import { IgiProcessContent } from './IgiProcessContent';
 import { FamilyReunificationContent } from './FamilyReunificationContent';
 import { EvaluationCTA } from './EvaluationCTA';
+import { Breadcrumb } from './Breadcrumb';
+import { ParentHubFooterCard } from './ParentHubFooterCard';
 
 interface ImmigrationOverviewContentProps {
   subRoute: string;
@@ -32,6 +34,8 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
     case 'residence-renewal':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8 text-right rtl">
+          <Breadcrumb slugRoute="immigration/residence-renewal" currentLang={currentLang} onNavigate={onNavigate} />
+
           {/* HERO PANEL */}
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <div className="inline-flex items-center space-x-2 rtl:space-x-reverse bg-[#2F6FED]/20 text-[#2F6FED] px-3.5 py-1.5 rounded-xl text-xs font-bold border border-[#2F6FED]/30">
@@ -302,6 +306,7 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
           </div>
 
           {/* SECTION 9: COMMENTS SECTION */}
+          <ParentHubFooterCard slugRoute="immigration/residence-renewal" currentLang={currentLang} onNavigate={onNavigate} />
           <CommentsSection pagePath="immigration/residence-renewal" currentLang={currentLang} />
         </div>
       );
@@ -309,6 +314,8 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
     case 'long-term-residence':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="immigration/long-term-residence" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'اقامت بلندمدت' : 'Long-term Residence'}
@@ -333,63 +340,51 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 <span>{currentLang === 'fa' ? 'چیستی اقامت بلندمدت' : 'What is Long-term Residence'}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'اقامت بلندمدت (Drept de Ședere pe Termen Lung) سطحی از اقامت است که پس از یک دوره اقامت قانونی مستمر در رومانی و با احراز شرایط مشخص توسط IGI اعطا می‌شود.' : 'Long-term residence (Drept de Ședere pe Termen Lung) is a status granted by IGI after a continuous period of legal residence in Romania, subject to meeting specific conditions.'}</li>
+                <li>{currentLang === 'fa' ? 'کارت اقامت ۵ ساله با قابلیت تمدید نامحدود' : '5-year residence card with unlimited renewals'}</li>
+                <li>{currentLang === 'fa' ? 'دسترسی آزاد به بازار کار بدون نیاز به Aviz de Muncă' : 'Free access to the labor market without work permits'}</li>
               </ul>
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
-                <span>{currentLang === 'fa' ? 'شرایط از دست دادن اقامت بلندمدت' : 'Conditions for Losing Long-term Residence'}</span>
+                <span>{currentLang === 'fa' ? 'شرایط احراز' : 'Eligibility Requirements'}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'غیبت بیش از ۱۲ ماه متوالی از خاک رومانی (با استثنائاتی مثل داشتن اقامت موقت در کشور دیگر عضو اتحادیه اروپا در همین بازه).' : 'Absence of more than 12 consecutive months from Romanian territory (with exceptions such as holding temporary residence in another EU member state during this period).'}</li>
-                <li>{currentLang === 'fa' ? 'غیبت بیش از ۶ سال متوالی، حتی با وجود استثنائات بالا.' : 'Absence of more than 6 consecutive years, even with the aforementioned exceptions.'}</li>
-                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+                <li>{currentLang === 'fa' ? 'حداقل ۵ سال حضور قانونی و پیوسته در رومانی' : 'At least 5 years of continuous legal residence'}</li>
+                <li>{currentLang === 'fa' ? 'عدم غیبت بیش از ۶ ماه متوالی یا ۱۰ ماه مجموع در ۵ سال' : 'Absence under 6 consecutive months or 10 months total'}</li>
               </ul>
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
-                <span>{currentLang === 'fa' ? 'بعد از پایان اعتبار' : 'After Expiration'}</span>
+                <span>{currentLang === 'fa' ? 'مدارک و زبان' : 'Docs & Language'}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'در صورت پایان اعتبار اقامت بلندمدت در حالی که فرد هنوز در رومانی است، ظرف ۳۰ روز از تاریخ اطلاع‌رسانی می‌تواند برای اقامت موقت با اهداف مشخص‌شده در قانون درخواست دهد.' : 'If long-term residence expires while the individual is still in Romania, they can apply for temporary residence for legally specified purposes within 30 days from the date of notification.'}</li>
-                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+                <li>{currentLang === 'fa' ? 'اثبات تمکن مالی و بیمه درمانی فعال' : 'Proof of financial means & health insurance'}</li>
+                <li>{currentLang === 'fa' ? 'آزمون مقدماتی زبان رومانیایی نزد کمیسیون IGI' : 'Basic Romanian language exam at IGI'}</li>
               </ul>
             </div>
           </div>
 
-          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
-            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
-              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
-            </h3>
-            <div className="space-y-6">
-              <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'شرط حضور مستمر برای اخذ اقامت بلندمدت چیست؟' : 'What is the continuous presence requirement for long-term residence?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'شما نباید در طول ۵ سال پیش از درخواست، بیش از ۱۰ ماه در مجموع یا بیش از ۶ ماه به‌صورت متوالی خارج از خاک رومانی حضور داشته باشید.' : 'You must not be absent from Romanian territory for more than 10 months in total, or for more than 6 consecutive months, during the 5-year period preceding the application.'}</p>
-              </div>
-              <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اعتبار کارت اقامت بلندمدت چند سال است؟' : 'How long is the long-term residence card valid?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'حق اقامت بلندمدت دائمی است، اما فیزیکِ کارت اقامت برای متقاضیان عادی به‌صورت ۱۰ ساله و برای اعضای خانواده شهروندان رومانی ۵ ساله صادر و سپس تمدید می‌شود.' : 'The right to long-term residence is permanent, but the physical residence card is issued for 10 years for general applicants and 5 years for family members of Romanian citizens, after which it is simply renewed.'}</p>
-              </div>
-            </div>
-          </div>
+          <ParentHubFooterCard slugRoute="immigration/long-term-residence" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 
     case 'citizenship':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="immigration/citizenship" currentLang={currentLang} onNavigate={onNavigate} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'تابعیت' : 'Citizenship'}
+              {currentLang === 'fa' ? 'تابعیت و شهروندی رومانی' : 'Romanian Citizenship'}
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa' 
-                ? 'منبع: سازمان ملی تابعیت رومانی (ANC، cetatenie.just.ro)، قانون تابعیت رومانی (Legea 21/1991) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
-                : 'Source: National Authority for Citizenship (ANC, cetatenie.just.ro), Romanian Citizenship Law (Legea 21/1991) — Last reviewed: August 2026'}
+                ? 'منبع: سازمان ملی تابعیت (ANC) — قوانین قانون شماره ۲۱/۱۹۹۱'
+                : 'Source: National Authority for Citizenship (ANC) — Law 21/1991'}
             </div>
           </div>
 

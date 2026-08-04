@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { Language } from '../types';
 import { CommentsSection } from './CommentsSection';
 import { ExternalLink, CheckCircle, ShieldCheck, Clock, FileCheck2, AlertCircle, Users } from './Icons';
+import { Breadcrumb } from './Breadcrumb';
+import { ParentHubFooterCard } from './ParentHubFooterCard';
 
 interface FamilyReunificationContentProps {
   currentLang: Language;
@@ -20,6 +22,8 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
 
   return (
     <div className={`space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8 ${currentLang === 'fa' ? 'text-right rtl' : 'text-left ltr'}`}>
+      <Breadcrumb slugRoute="immigration/family-reunification" currentLang={currentLang} onNavigate={onNavigate} />
+
       {/* HERO PANEL */}
       <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
         <div className="inline-flex items-center space-x-2 rtl:space-x-reverse bg-[#2F6FED]/20 text-[#2F6FED] px-3.5 py-1.5 rounded-xl text-xs font-bold border border-[#2F6FED]/30">
@@ -413,6 +417,8 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
             </p>
           </div>
         </div>
+
+        <ParentHubFooterCard slugRoute="immigration/family-reunification" currentLang={currentLang} onNavigate={onNavigate} />
 
         {/* COMMENTS SECTION */}
         <div className="pt-6">

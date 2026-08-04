@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { Language } from '../types';
+import { Breadcrumb } from './Breadcrumb';
+import { ParentHubFooterCard } from './ParentHubFooterCard';
 
 interface StudyDetailsContentProps {
   subRoute: string;
@@ -17,6 +19,8 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
     case 'requirements':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="study/requirements" currentLang={currentLang} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'مدارک و الزامات پذیرش' : 'Admission Requirements & Documents'}
@@ -85,12 +89,16 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="study/requirements" currentLang={currentLang} />
         </div>
       );
 
     case 'visa-type-d':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="study/visa-type-d" currentLang={currentLang} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'ویزای تحصیلی تایپ D' : 'Type D/SD Student Visa'}
@@ -126,7 +134,7 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
                 <span>{currentLang === 'fa' ? 'زمان رسیدگی و محل درخواست' : 'Processing Time & Application'}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'زمان معمول رسیدگی به درخواست ویزای تحصیلی تا ۶۰ روز از تاریخ ثبت مدارک در کنسولگری است.' : 'The typical processing time for a student visa application is up to 60 days from the date of submission at the consulate.'}</li>
+                <li>{currentLang === 'fa' ? 'زمان معمول رسیدگی به درخواست ویزای تحصیلی تا ۶0 روز از تاریخ ثبت مدارک در کنسولگری است.' : 'The typical processing time for a student visa application is up to 60 days from the date of submission at the consulate.'}</li>
                 <li>{currentLang === 'fa' ? 'درخواست باید حضوری در سفارت/کنسولگری رومانی در کشور محل اقامت ثبت شود.' : 'Applications must be submitted in person at the Romanian embassy/consulate in the applicant\'s country of residence.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
@@ -159,12 +167,16 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="study/visa-type-d" currentLang={currentLang} />
         </div>
       );
 
     case 'tuition-overview':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="study/tuition-overview" currentLang={currentLang} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'شهریه‌های تحصیلی (نمای کلی)' : 'Tuition Rates & Overview'}
@@ -238,12 +250,16 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="study/tuition-overview" currentLang={currentLang} />
         </div>
       );
 
     case 'part-time-work':
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="study/part-time-work" currentLang={currentLang} />
+
           <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
               {currentLang === 'fa' ? 'مجوز کار پاره‌وقت دانشجویی' : 'Student Part-time Work Permit'}
@@ -311,6 +327,8 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
               </div>
             </div>
           </div>
+
+          <ParentHubFooterCard slugRoute="study/part-time-work" currentLang={currentLang} />
         </div>
       );
 
