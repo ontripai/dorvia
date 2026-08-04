@@ -13,6 +13,9 @@ import { SchoolGuideContent } from './SchoolGuideContent';
 import { TelecomGuideContent } from './TelecomGuideContent';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { OperationalGuideLayout } from './guide/OperationalGuideLayout';
+import { drivingLicenseEN } from '../content/guides/driving-license/en';
+import { drivingLicenseFA } from '../content/guides/driving-license/fa';
 
 interface NeedsContentProps {
   subRoute: string;
@@ -252,447 +255,59 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
       );
 
     // 2. DRIVING LICENSE
-    case 'driving-license':
+    case 'driving-license': {
+      const guideData = currentLang === 'fa' ? drivingLicenseFA : drivingLicenseEN;
+      const translations = currentLang === 'fa' ? {
+        tocTitle: 'فهرست محتوای این راهنما',
+        quickOverview: 'پاسخ سریع: ',
+        appliesTo: 'این بخش برای چه کسانی است؟',
+        exceptionsTitle: 'استثنائات و محدودیت‌ها',
+        documentsTitle: 'مدارک مورد نیاز',
+        stepsTitle: 'مراحل انجام کار',
+        feesTitle: 'هزینه‌های مربوطه',
+        timelinesTitle: 'زمان‌بندی فرآیند',
+        amountHeader: 'مبلغ',
+        notesHeader: 'توضیحات',
+        durationHeader: 'مدت زمان',
+        authorityTitle: 'مرجع مسئول',
+        actionLabel: 'پورتال رسمی اقدام',
+        warningsTitle: 'هشدارهای مهم',
+        sourcesTitle: 'منابع رسمی استناد شده',
+        accessedOn: 'تاریخ دسترسی',
+        lastReviewed: 'آخرین بازبینی'
+      } : {
+        tocTitle: 'Table of Contents',
+        quickOverview: 'Quick Overview: ',
+        appliesTo: 'Who this applies to',
+        exceptionsTitle: 'Exceptions & Limitations',
+        documentsTitle: 'Required Documents',
+        stepsTitle: 'Step-by-Step Process',
+        feesTitle: 'Applicable Fees',
+        timelinesTitle: 'Process Timelines',
+        amountHeader: 'Amount',
+        notesHeader: 'Notes',
+        durationHeader: 'Duration',
+        authorityTitle: 'Responsible Authority',
+        actionLabel: 'Official Action Portal',
+        warningsTitle: 'Important Warnings',
+        sourcesTitle: 'Official Sources Cited',
+        accessedOn: 'Accessed on',
+        lastReviewed: 'Last Reviewed'
+      };
+
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <Breadcrumb slugRoute="needs/driving-license" currentLang={currentLang} onNavigate={onNavigate} />
-
-          {/* Hero Header Panel */}
-          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <span className="text-[#2F6FED] font-bold text-xs uppercase tracking-wider">
-              {currentLang === 'fa' ? 'نیازهای ضروری در رومانی' : 'Essentials in Romania'}
-            </span>
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'گواهی‌نامه رانندگی در رومانی: تبدیل، اخذ از ابتدا و قوانین بین‌المللی' : 'Driving License in Romania: Exchange, New License & Foreign Rules'}
-            </h1>
-            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
-              {currentLang === 'fa'
-                ? 'راهنمای جامع ۶ بخشی رانندگی موقت با گواهی‌نامه خارجی، مراحل تبدیل گواهی‌نامه ایرانی، گرفتن گواهی‌نامه از ابتدا، تمدید، و صدور گواهی‌نامه بین‌المللی (IDP).'
-                : 'Comprehensive 6-section guide to temporary driving with foreign licenses, Iranian license exchange, new license steps, renewal, and International Driving Permits (IDP).'}
-            </p>
-          </div>
-
-          {/* SECTION 0: TABLE OF CONTENTS (فهرست محتوا) */}
-          <div className="bg-white rounded-2xl p-6 border border-[#dfe6ef] shadow-sm space-y-4">
-            <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#142033] border-b border-[#dfe6ef] pb-3">
-              <span className="text-lg">📋</span>
-              <h3 className="font-extrabold text-base sm:text-lg">
-                {currentLang === 'fa' ? 'فهرست محتوای این راهنما (پرش سریع)' : 'Table of Contents (Quick Navigation)'}
-              </h3>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs sm:text-sm font-semibold">
-              <a href="#foreign-license-temp" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#2F6FED] rounded-xl border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse transition-colors">
-                <span>🚗</span>
-                <span>{currentLang === 'fa' ? '۱. استفاده موقت از گواهی‌نامه خارجی' : '1. Temporary Foreign License'}</span>
-              </a>
-              <a href="#iranian-license-conversion" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#2F6FED] rounded-xl border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse transition-colors">
-                <span>🔄</span>
-                <span>{currentLang === 'fa' ? '۲. تبدیل گواهی‌نامه ایرانی' : '2. Iranian License Conversion'}</span>
-              </a>
-              <a href="#license-from-scratch" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#2F6FED] rounded-xl border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse transition-colors">
-                <span>🎓</span>
-                <span>{currentLang === 'fa' ? '۳. گرفتن گواهی‌نامه از ابتدا' : '3. License from Scratch'}</span>
-              </a>
-              <a href="#license-renewal" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#2F6FED] rounded-xl border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse transition-colors">
-                <span>📅</span>
-                <span>{currentLang === 'fa' ? '۴. تمدید گواهی‌نامه رومانیایی' : '4. Romanian License Renewal'}</span>
-              </a>
-              <a href="#international-license-idp" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#2F6FED] rounded-xl border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse transition-colors">
-                <span>🌐</span>
-                <span>{currentLang === 'fa' ? '۵. گواهی‌نامه بین‌المللی (IDP)' : '5. International Permit (IDP)'}</span>
-              </a>
-              <a href="#penalties-and-suspension" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#2F6FED] rounded-xl border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse transition-colors">
-                <span>⚠️</span>
-                <span>{currentLang === 'fa' ? '۶. جریمه، تعلیق و امتیاز' : '6. Penalties & Suspensions'}</span>
-              </a>
-            </div>
-          </div>
-
-          {/* SECTION 1: TEMPORARY FOREIGN LICENSE */}
-          <div id="foreign-license-temp" className="editorial-card p-6 sm:p-8 bg-white border border-[#dfe6ef] space-y-4 shadow-sm scroll-mt-24">
-            <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#142033] border-b border-[#dfe6ef] pb-3">
-              <Landmark size={22} className="text-[#2F6FED]" />
-              <h2 className="text-xl font-extrabold">
-                {currentLang === 'fa' ? 'بخش ۱: استفاده موقت از گواهی‌نامه خارجی' : 'Section 1: Temporary Use of Foreign Driving License'}
-              </h2>
-            </div>
-            <div className="text-sm sm:text-base text-[#526174] leading-relaxed space-y-3">
-              <p>
-                {currentLang === 'fa'
-                  ? 'از آنجا که ایران عضو کنوانسیون وین درباره ترافیک جاده‌ای (۱۹۶۸) است (از سال ۱۹۷۶ میلادی)، دارندگان گواهی‌نامه ایرانی معتبر معمولاً می‌توانند در دوره اولیه اقامت موقت با همان گواهی‌نامه (ترجیحاً همراه با گواهی‌نامه بین‌المللی ایرانی) در رومانی رانندگی کنند.'
-                  : 'Since Iran is a contracting party to the Vienna Convention on Road Traffic (1968) since 1976, holders of valid Iranian driving licenses can generally drive in Romania during their initial stay, provided they carry their national license alongside an International Driving Permit.'}
-              </p>
-              <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs sm:text-sm text-amber-900 font-semibold">
-                ⚠️ {currentLang === 'fa'
-                  ? 'نکته مهم اقامتی: پس از استقرار قانونی و دریافت کارت اقامت (Permis de Ședere)، طبق قوانین جاری رومانی معمولاً باید برای تبدیل گواهی‌نامه به گواهی‌نامه رومانیایی اقدام شود. جزئیات دقیق بستگی به نوع اقامت دارد و توصیه می‌شود این وضعیت مستقیماً از اداره مهاجرت (IGI) یا اداره پلیس راهور (DGPCI) استعلام شود.'
-                  : 'Important Residence Note: Once you establish legal residence and receive a residence permit (Permis de Ședere), Romanian law typically mandates converting your foreign license to a Romanian one. Exact rules depend on residency status; verify directly with IGI or DGPCI.'}
-              </div>
-            </div>
-          </div>
-
-          {/* SECTION 2: IRANIAN LICENSE CONVERSION */}
-          <div id="iranian-license-conversion" className="editorial-card p-6 sm:p-8 bg-white border border-[#dfe6ef] space-y-6 shadow-sm scroll-mt-24">
-            <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#142033] border-b border-[#dfe6ef] pb-3">
-              <FileCheck2 size={22} className="text-[#2F6FED]" />
-              <h2 className="text-xl font-extrabold">
-                {currentLang === 'fa' ? 'بخش ۲: تبدیل گواهی‌نامه ایرانی در رومانی' : 'Section 2: Converting an Iranian Driving License in Romania'}
-              </h2>
-            </div>
-
-            {/* Quick Answer */}
-            <div className="p-4 bg-[#f7f9fc] border border-[#dfe6ef] rounded-xl text-xs sm:text-sm text-[#142033]">
-              <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'پاسخ سریع و مخاطبین راهنما: ' : 'Quick Overview: '}</span>
-              <span>
-                {currentLang === 'fa'
-                  ? 'این راهنما ویژه دارندگان کارت اقامت قانونی در رومانی است که قصد دارند گواهی‌نامه ملی معتبر ایرانی خود را به گواهی‌نامه رومانیایی (اتحادیه اروپا) تبدیل کنند.'
-                  : 'This section is tailored for legal Romanian residence permit holders wishing to exchange their valid Iranian national license for a Romanian/EU license.'}
-              </span>
-            </div>
-
-            {/* Table 1: Initial Prerequisites */}
-            <div className="space-y-2">
-              <h3 className="font-extrabold text-base text-[#142033]">
-                {currentLang === 'fa' ? 'جدول شرایط اولیه تبدیل گواهی‌نامه' : 'Initial Exchange Prerequisites'}
-              </h3>
-              <div className="overflow-x-auto">
-                <table className="w-full text-xs sm:text-sm text-right rtl:text-right text-[#526174] border border-[#dfe6ef] rounded-xl overflow-hidden">
-                  <thead className="bg-[#071B3D] text-white font-bold">
-                    <tr>
-                      <th className="p-3 border-b border-[#dfe6ef]">{currentLang === 'fa' ? 'شرایط اولیه' : 'Prerequisite'}</th>
-                      <th className="p-3 border-b border-[#dfe6ef]">{currentLang === 'fa' ? 'توضیحات و الزامات قانونی' : 'Description & Requirements'}</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#dfe6ef] bg-white">
-                    <tr>
-                      <td className="p-3 font-bold text-[#142033] bg-[#f8fafc]">{currentLang === 'fa' ? 'گواهی‌نامه ایرانی معتبر' : 'Valid Iranian License'}</td>
-                      <td className="p-3">
-                        {currentLang === 'fa'
-                          ? 'باید دارای تاریخ اعتبار باشد. ⚠️ گواهی‌نامه‌های منقضی شده صادر از کشورهای خارج از اتحادیه اروپا معمولاً قابل تبدیل نیستند؛ پیش از اقدام مطمئن شوید گواهی‌نامه ایرانی شما همچنان معتبر است.'
-                          : 'Must be currently valid. ⚠️ Expired non-EU licenses are generally non-convertible; ensure your Iranian license remains unexpired prior to application.'}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="p-3 font-bold text-[#142033] bg-[#f8fafc]">{currentLang === 'fa' ? 'اقامت قانونی در رومانی' : 'Legal Residence'}</td>
-                      <td className="p-3">{currentLang === 'fa' ? 'داشتن کارت اقامت موقت یا دائم معتبر (Permis de Ședere).' : 'Valid temporary or permanent residence permit (Permis de Ședere).'}</td>
-                    </tr>
-                    <tr>
-                      <td className="p-3 font-bold text-[#142033] bg-[#f8fafc]">{currentLang === 'fa' ? 'تاییدیه کنسولی' : 'Embassy Verification'}</td>
-                      <td className="p-3">{currentLang === 'fa' ? 'استعلام و گواهی اصالت صادرشده از سفارت ایران در بخارست.' : 'Authenticity certificate issued by the Iranian Embassy in Bucharest.'}</td>
-                    </tr>
-                    <tr>
-                      <td className="p-3 font-bold text-[#142033] bg-[#f8fafc]">{currentLang === 'fa' ? 'سلامت پزشکی' : 'Medical Fitness'}</td>
-                      <td className="p-3">{currentLang === 'fa' ? 'ارائه گواهی معاینات پزشکی (Fișa Medicală) از مراکز معتمد DGPCI.' : 'Medical examination report (Fișa Medicală) from DGPCI authorized clinics.'}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            {/* Complete Steps */}
-            <div className="space-y-3">
-              <h3 className="font-extrabold text-base text-[#142033]">
-                {currentLang === 'fa' ? 'مراحل کامل اجرایی (سفارت ایران + اداره DGPCI)' : 'Step-by-Step Conversion Process'}
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
-                <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
-                  <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'گام ۱: استعلام اصالت در سفارت' : 'Step 1: Embassy Verification'}</span>
-                  <p className="text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'تماس با بخش کنسولی سفارت ایران در بخارست برای اطلاع از نوع دقیق خدمت لازم و نحوه درخواست (ممکن است از طریق سامانه میخک یا مراجعه مستقیم باشد) و دریافت تاییدیه اصالت گواهی‌نامه.' : 'Contact the consular section of the Iranian Embassy in Bucharest to confirm the exact process and obtain the license authenticity certificate.'}</p>
-                </div>
-                <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
-                  <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'گام ۲: ترجمه رسمی و تایید محضری' : 'Step 2: Legal Translation'}</span>
-                  <p className="text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'ترجمه رسمی گواهی‌نامه ایرانی و نامه سفارت توسط مترجم رسمی رومانیایی؛ برخی ادارات ممکن است تایید اضافی (مثلاً از دفتر اسناد رسمی) نیز درخواست کنند — این را از اداره محل ثبت پرونده بپرسید.' : 'Official translation of the Iranian license and embassy letter by an authorized Romanian translator; some local offices may request additional notarization.'}</p>
-                </div>
-                <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
-                  <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'گام ۳: معاینات پزشکی (Fișa Medicală)' : 'Step 3: Medical Exam'}</span>
-                  <p className="text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'مراجعه به کلینیک‌های پزشکی معتمد اداره راهور و دریافت فرم معاینه پزشکی رانندگی (تست بینایی، شنوایی، اعصاب و عمومی).' : 'Complete medical driving checks (vision, hearing, general fitness) at a DGPCI accredited clinic.'}</p>
-                </div>
-                <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
-                  <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'گام ۴: تشکیل پرونده در DGPCI' : 'Step 4: DGPCI Application'}</span>
-                  <p className="text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'مراجعه به اداره پلیس راهور (DGPCI) استان محل سکونت، تحویل پرونده کامل، پرداخت تعرفه و دریافت رسید ثبت.' : 'Submit the completed file to the provincial DGPCI office, pay the issuance fee, and receive the registration receipt.'}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Required Documents Checklist */}
-            <div className="space-y-2">
-              <h3 className="font-extrabold text-base text-[#142033]">
-                {currentLang === 'fa' ? 'فهرست مدارک لازم جهت ارائه به DGPCI' : 'Required Application Documents'}
-              </h3>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-[#526174]">
-                <li className="p-2.5 bg-[#f8fafc] rounded-lg border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="text-emerald-600 font-bold">✓</span>
-                  <span>{currentLang === 'fa' ? 'اصل گواهی‌نامه ایرانی معتبر + کپی' : 'Original valid Iranian license + copy'}</span>
-                </li>
-                <li className="p-2.5 bg-[#f8fafc] rounded-lg border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="text-emerald-600 font-bold">✓</span>
-                  <span>{currentLang === 'fa' ? 'ترجمه رسمی محضری گواهی‌نامه به رومانیایی' : 'Notarized Romanian translation of license'}</span>
-                </li>
-                <li className="p-2.5 bg-[#f8fafc] rounded-lg border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="text-emerald-600 font-bold">✓</span>
-                  <span>{currentLang === 'fa' ? 'اصل گواهی اصالت صادرشده از سفارت ایران' : 'Original embassy authenticity certificate'}</span>
-                </li>
-                <li className="p-2.5 bg-[#f8fafc] rounded-lg border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="text-emerald-600 font-bold">✓</span>
-                  <span>{currentLang === 'fa' ? 'کارت اقامت معتبر رومانی (Permis de Ședere) + کپی' : 'Valid Romanian residence permit + copy'}</span>
-                </li>
-                <li className="p-2.5 bg-[#f8fafc] rounded-lg border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="text-emerald-600 font-bold">✓</span>
-                  <span>{currentLang === 'fa' ? 'پاسپورت معتبر متقاضی + کپی صفحات هویتی' : 'Valid passport + copy of identity pages'}</span>
-                </li>
-                <li className="p-2.5 bg-[#f8fafc] rounded-lg border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="text-emerald-600 font-bold">✓</span>
-                  <span>{currentLang === 'fa' ? 'برگه معاینه پزشکی تاییدشده (Fișa Medicală)' : 'Certified medical fitness form (Fișa Medicală)'}</span>
-                </li>
-                <li className="p-2.5 bg-[#f8fafc] rounded-lg border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="text-emerald-600 font-bold">✓</span>
-                  <span>{currentLang === 'fa' ? 'فیش پرداخت هزینه ۸۹ لِی به حساب DGPCI' : 'Receipt of 89 RON DGPCI issuance fee'}</span>
-                </li>
-                <li className="p-2.5 bg-[#f8fafc] rounded-lg border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="text-emerald-600 font-bold">✓</span>
-                  <span>{currentLang === 'fa' ? 'فرم درخواست رسمی تکمیل‌شده DGPCI' : 'Completed official DGPCI application form'}</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Table 2: Costs Breakdown */}
-            <div className="space-y-2">
-              <h3 className="font-extrabold text-base text-[#142033]">
-                {currentLang === 'fa' ? 'جدول برآورد هزینه‌ها (سال ۲۰۲۶)' : 'Estimated Conversion Costs (2026)'}
-              </h3>
-              <div className="overflow-x-auto">
-                <table className="w-full text-xs sm:text-sm text-right rtl:text-right text-[#526174] border border-[#dfe6ef] rounded-xl overflow-hidden">
-                  <thead className="bg-[#071B3D] text-white font-bold">
-                    <tr>
-                      <th className="p-3 border-b border-[#dfe6ef]">{currentLang === 'fa' ? 'عنوان هزینه' : 'Cost Item'}</th>
-                      <th className="p-3 border-b border-[#dfe6ef]">{currentLang === 'fa' ? 'مبلغ (لِی - RON)' : 'Amount (RON)'}</th>
-                      <th className="p-3 border-b border-[#dfe6ef]">{currentLang === 'fa' ? 'توضیحات' : 'Notes'}</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#dfe6ef] bg-white">
-                    <tr>
-                      <td className="p-3 font-bold text-[#142033] bg-[#f8fafc]">{currentLang === 'fa' ? 'تعرفه صدور گواهی‌نامه DGPCI' : 'DGPCI Issuance Fee'}</td>
-                      <td className="p-3 font-extrabold text-[#2F6FED]">89 RON</td>
-                      <td className="p-3">{currentLang === 'fa' ? 'تعرفه رسمی ثابت کشوری' : 'Official standard state tariff'}</td>
-                    </tr>
-                    <tr>
-                      <td className="p-3 font-bold text-[#142033] bg-[#f8fafc]">{currentLang === 'fa' ? 'معاینات پزشکی (Fișa Medicală)' : 'Medical Exam (Fișa Medicală)'}</td>
-                      <td className="p-3 font-extrabold text-[#2F6FED]">150 - 250 RON</td>
-                      <td className="p-3">{currentLang === 'fa' ? 'بسته به کلینیک طرف قرارداد' : 'Varies by accredited medical center'}</td>
-                    </tr>
-                    <tr>
-                      <td className="p-3 font-bold text-[#142033] bg-[#f8fafc]">{currentLang === 'fa' ? 'ترجمه رسمی و تایید محضری' : 'Official Translation & Notary'}</td>
-                      <td className="p-3 font-extrabold text-[#2F6FED]">100 - 200 RON</td>
-                      <td className="p-3">{currentLang === 'fa' ? 'برای هر مدرک رسمی' : 'Per official document'}</td>
-                    </tr>
-                    <tr>
-                      <td className="p-3 font-bold text-[#142033] bg-[#f8fafc]">{currentLang === 'fa' ? 'تایید کنسولی سفارت' : 'Embassy Authentication'}</td>
-                      <td className="p-3 font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'طبق تعرفه سفارت' : 'Per Embassy Tariff'}</td>
-                      <td className="p-3">{currentLang === 'fa' ? 'از طریق سامانه میخک / سفارت ایران' : 'Via Mikhak portal / Iranian Embassy'}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            {/* Timeframe Correction Note */}
-            <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl text-xs sm:text-sm text-[#2F6FED] font-semibold leading-relaxed">
-              ⏱️ <span className="font-extrabold">{currentLang === 'fa' ? 'مدت انجام کار: ' : 'Processing Timeframe: '}</span>
-              {currentLang === 'fa'
-                ? 'طبق منابع مختلف، بررسی اصالت گواهی‌نامه‌های کشورهای خارج از اتحادیه اروپا از ۱۵ روز کاری تا حدود سه ماه گزارش شده است؛ این بازه بسته به پرونده و حجم کاری اداره متفاوت است. برای برآورد دقیق‌تر با اداره محل ثبت پرونده یا با ما تماس بگیرید.'
-                : 'According to various official sources, the verification of non-EU driving licenses typically ranges from 15 business days to approximately 3 months, depending on individual case details and local office workload.'}
-            </div>
-
-            {/* Common Problems & Frozen Files */}
-            <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs sm:text-sm text-amber-950 space-y-2">
-              <h4 className="font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span>⚠️</span>
-                <span>{currentLang === 'fa' ? 'مشکلات متداول و علت متوقف شدن پرونده‌ها' : 'Common Issues & Frozen Applications'}</span>
-              </h4>
-              <p className="leading-relaxed">
-                {currentLang === 'fa'
-                  ? 'رایج‌ترین دلیل تاخیر یا متوقف شدن پرونده، عدم پاسخگویی به موقع استعلام اصالت یا وجود مغایرت در املا و نام لاتین بین پاسپورت، گواهی‌نامه و کارت اقامت است. همچنین در صورتی که گواهی‌نامه ایرانی در طول روند بررسی منقضی شود، پرونده دچار مشکل خواهد شد؛ بنابراین توصیه می‌شود حتماً زودهنگام اقدام فرمایید.'
-                  : 'The most common causes of delays or frozen applications are discrepancies in Latin name spellings between passport, residence card, and license, or slow response to authenticity checks. Ensure all personal details align strictly across all documents.'}
-              </p>
-            </div>
-          </div>
-
-          {/* SECTION 3: LICENSE FROM SCRATCH IN ROMANIA */}
-          <div id="license-from-scratch" className="editorial-card p-6 sm:p-8 bg-white border border-[#dfe6ef] space-y-6 shadow-sm scroll-mt-24">
-            <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#142033] border-b border-[#dfe6ef] pb-3">
-              <Landmark size={22} className="text-[#2F6FED]" />
-              <h2 className="text-xl font-extrabold">
-                {currentLang === 'fa' ? 'بخش ۳: گرفتن گواهی‌نامه از ابتدا در رومانی' : 'Section 3: Obtaining a Driving License from Scratch in Romania'}
-              </h2>
-            </div>
-
-            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
-              {currentLang === 'fa'
-                ? 'برای افرادی که فاقد گواهی‌نامه معتبر بوده یا امکان تبدیل گواهی‌نامه ملکیت خود را ندارند، مراحل عمومی دریافت گواهی‌نامه جدید در رومانی به شرح زیر است:'
-                : 'For individuals without a valid prior license or whose license is non-convertible, the standard process for obtaining a new Romanian driver\'s license involves:'}
-            </p>
-
-            <ul className="space-y-3 text-xs sm:text-sm text-[#526174]">
-              <li className="p-3.5 bg-[#f8fafc] rounded-xl border border-[#dfe6ef] space-y-1">
-                <span className="font-extrabold text-[#142033]">{currentLang === 'fa' ? '۱. آموزشگاه رانندگی (Școală de Șoferi)' : '1. Driving School Enrollment'}</span>
-                <p>{currentLang === 'fa' ? 'ثبت‌نام در یک آموزشگاه رانندگی مجاز؛ حداقل ۲۴ ساعت آموزش تئوری و ۳۰ ساعت آموزش عملی رانندگی برای پایه B.' : 'Enroll in an accredited driving school; minimum 24 hours of theory and 30 hours of practical driving for Category B.'}</p>
-              </li>
-              <li className="p-3.5 bg-[#f8fafc] rounded-xl border border-[#dfe6ef] space-y-1">
-                <span className="font-extrabold text-[#142033]">{currentLang === 'fa' ? '۲. آزمون تئوری کامپیوتری DGPCI' : '2. Computerized Theory Exam'}</span>
-                <p>{currentLang === 'fa' ? 'شرکت در آزمون تئوری نزد DGPCI؛ اتباع خارجی می‌توانند درخواست دهند آزمون تئوری به یک زبان بین‌المللی رایج (مانند انگلیسی یا فرانسوی) برگزار شود.' : 'Take the DGPCI theory exam; foreign nationals can request the exam in a major international language (e.g. English or French).'}</p>
-              </li>
-              <li className="p-3.5 bg-[#f8fafc] rounded-xl border border-[#dfe6ef] space-y-1">
-                <span className="font-extrabold text-[#142033]">{currentLang === 'fa' ? '۳. آزمون عملی رانندگی (Traseu)' : '3. Practical Driving Exam'}</span>
-                <p>{currentLang === 'fa' ? 'در صورت قبولی در آزمون تئوری (اعتبار نتیجه آزمون تئوری ۱ سال است)، متقاضی در آزمون عملی رانندگی با حضور ممتحن پلیس شرکت می‌کند.' : 'Upon passing the theory exam (valid for 1 year), candidates take the practical driving test with a police examiner.'}</p>
-              </li>
-              <li className="p-3.5 bg-[#f8fafc] rounded-xl border border-[#dfe6ef] space-y-1">
-                <span className="font-extrabold text-[#142033]">{currentLang === 'fa' ? '۴. مدارک لازم و هزینه‌ها' : '4. Required Documents & Fees'}</span>
-                <p>{currentLang === 'fa' ? 'مدارک شامل: فرم درخواست، گواهی سلامت جسمی و روانی، مدرک اقامت/سکونت قانونی در رومانی، اعلامیه محضری مبنی بر نداشتن گواهی‌نامه معتبر دیگر. هزینه پایه صدور گواهی‌نامه ۸۹ لِی (تعرفه ۲۰۲۶) است؛ هزینه دوره آموزشگاه متغیر و جداگانه است و باید مستقیماً از آموزشگاه استعلام شود.' : 'Application form, medical/psychological certificates, residence proof, notarized declaration of non-holding another license. State issuance fee: 89 RON (2026); school tuition is separate.'}</p>
-              </li>
-              <li className="p-3.5 bg-[#f8fafc] rounded-xl border border-[#dfe6ef] space-y-1">
-                <span className="font-extrabold text-[#142033]">{currentLang === 'fa' ? '۵. ضوابط تکرار آزمون عملی' : '5. Practical Retest Rules'}</span>
-                <p>{currentLang === 'fa' ? 'در صورت رد شدن در آزمون عملی، تکرار آزمون نیازمند گذراندن حداقل ۶ ساعت آموزش عملی اضافه در آموزشگاه و پرداخت مجدد هزینه آزمون است.' : 'Failing the practical test requires a minimum of 6 additional practical training hours at the driving school before retesting.'}</p>
-              </li>
-            </ul>
-
-            <div className="text-xs text-[#788697] font-semibold pt-2">
-              🌐 {currentLang === 'fa' ? 'منبع اطلاعاتی: وب‌سایت رسمی اداره DGPCI رومانی (dgpci.mai.gov.ro)' : 'Source: Official DGPCI Website (dgpci.mai.gov.ro)'}
-            </div>
-          </div>
-
-          {/* SECTION 4: ROMANIAN LICENSE RENEWAL */}
-          <div id="license-renewal" className="editorial-card p-6 sm:p-8 bg-white border border-[#dfe6ef] space-y-4 shadow-sm scroll-mt-24">
-            <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#142033] border-b border-[#dfe6ef] pb-3">
-              <FileCheck2 size={22} className="text-[#2F6FED]" />
-              <h2 className="text-xl font-extrabold">
-                {currentLang === 'fa' ? 'بخش ۴: تمدید گواهی‌نامه رومانیایی' : 'Section 4: Renewing a Romanian Driving License'}
-              </h2>
-            </div>
-
-            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
-              {currentLang === 'fa'
-                ? 'گواهی‌نامه‌های صادرشده در رومانی و اتحادیه اروپا معمولاً بین ۱۰ تا ۱۵ سال اعتبار دارند (بسته به پایه رانندگی). فرآیند تمدید گواهی‌نامه نیازمند شرکت مجدد در آزمون‌های رانندگی نیست.'
-                : 'Driving licenses issued in Romania/EU are typically valid for 10 to 15 years depending on the category. Renewing a valid license does not require re-taking driving exams.'}
-            </p>
-
-            <div className="p-4 bg-[#f8fafc] rounded-xl border border-[#dfe6ef] text-xs sm:text-sm text-[#526174] space-y-2">
-              <span className="font-extrabold text-[#142033]">{currentLang === 'fa' ? 'الزامات اصلی تمدید:' : 'Key Renewal Requirements:'}</span>
-              <ul className="list-disc list-inside space-y-1">
-                <li>{currentLang === 'fa' ? 'ارائه گواهی سلامت پزشکی به‌روز (Fișa Medicală)' : 'Updated medical fitness certificate (Fișa Medicală)'}</li>
-                <li>{currentLang === 'fa' ? 'کارت اقامت و پاسپورت معتبر' : 'Valid residence card and passport'}</li>
-                <li>{currentLang === 'fa' ? 'پرداخت هزینه تعرفه صدور (۸۹ لِی)' : 'Payment of issuance tariff (89 RON)'}</li>
-                <li>{currentLang === 'fa' ? 'مراجعه حضوری به اداره DGPCI استان محل سکونت' : 'In-person appointment at provincial DGPCI office'}</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* SECTION 5: INTERNATIONAL DRIVING PERMIT (IDP) */}
-          <div id="international-license-idp" className="editorial-card p-6 sm:p-8 bg-white border border-[#dfe6ef] space-y-4 shadow-sm scroll-mt-24">
-            <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#142033] border-b border-[#dfe6ef] pb-3">
-              <Landmark size={22} className="text-[#2F6FED]" />
-              <h2 className="text-xl font-extrabold">
-                {currentLang === 'fa' ? 'بخش ۵: گواهی‌نامه بین‌المللی (Permis Internațional / IDP)' : 'Section 5: International Driving Permit (IDP)'}
-              </h2>
-            </div>
-
-            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
-              {currentLang === 'fa'
-                ? 'گواهی‌نامه بین‌المللی رومانیایی (که ترجمه رسمی گواهی‌نامه رومانیایی شما به ۷ زبان بین‌المللی است) فقط برای کسانی صادر می‌شود که از قبل دارای گواهی‌نامه معتبر رومانیایی بوده و در رومانی مقیم/دارای اقامت باشند.'
-                : 'A Romanian International Driving Permit (an official 7-language translation of your Romanian license) is issued strictly to holders of valid Romanian driving licenses residing in Romania.'}
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
-              <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-2">
-                <span className="font-extrabold text-emerald-900">{currentLang === 'fa' ? 'گزینه اول: صدور مستقیم از DGPCI (از سال ۲۰۲۴)' : 'Option 1: Direct DGPCI Service (Since 2024)'}</span>
-                <p className="text-emerald-950 leading-relaxed">
-                  {currentLang === 'fa'
-                    ? 'از سال ۲۰۲۴، اداره پلیس راهور (DGPCI) این خدمت را مستقیماً ارائه می‌دهد. هزینه صدور بسیار مناسب و فقط ۴۶ لِی است. زمان صدور طبق اعلام DGPCI حدود ۳۰ روز کاری است.'
-                    : 'Since 2024, DGPCI offers this service directly at a cost of only 46 RON. Estimated processing time is around 30 days.'}
-                </p>
-              </div>
-
-              <div className="p-4 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl space-y-2">
-                <span className="font-extrabold text-[#142033]">{currentLang === 'fa' ? 'گزینه دوم: باشگاه اتومبیل‌رانی رومانی (ACR)' : 'Option 2: Automobil Club Român (ACR)'}</span>
-                <p className="text-[#526174] leading-relaxed">
-                  {currentLang === 'fa'
-                    ? 'گزینه قدیمی‌تر از طریق ACR صورت می‌گیرد اما هزینه‌اش به‌مراتب بالاتر است (حدود ۱,۱۵۰ لِی شامل حق عضویت اجباری باشگاه). اعتبار گواهی‌نامه بین‌المللی حداکثر ۳ سال است.'
-                    : 'The older option via ACR is significantly more expensive (~1,150 RON including compulsory club membership). Maximum IDP validity is 3 years.'}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* SECTION 6: PENALTIES, SUSPENSION & POINTS */}
-          <div id="penalties-and-suspension" className="editorial-card p-6 sm:p-8 bg-white border border-[#dfe6ef] space-y-4 shadow-sm scroll-mt-24">
-            <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#142033] border-b border-[#dfe6ef] pb-3">
-              <ShieldCheck size={22} className="text-[#2F6FED]" />
-              <h2 className="text-xl font-extrabold">
-                {currentLang === 'fa' ? 'بخش ۶: جریمه، تعلیق و نظام امتیازی رانندگی' : 'Section 6: Penalties, License Suspension & Penalty Points'}
-              </h2>
-            </div>
-
-            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
-              {currentLang === 'fa'
-                ? 'رومانی دارای نظام امتیازی (Puncte de Penalizare) و قوانین جدی تعلیق گواهی‌نامه است. تخلفات رانندگی بسته به شدت می‌تواند منجر به جریمه نقدی، ثبت امتیاز منفی یا تعلیق موقت حق رانندگی شود.'
-                : 'Romania utilizes a penalty point system (Puncte de Penalizare) and strict suspension rules. Traffic violations may lead to monetary fines, penalty points, or temporary license suspension.'}
-            </p>
-
-            <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-[#526174] space-y-2">
-              <span className="font-extrabold text-[#142033]">{currentLang === 'fa' ? 'نکات مهم قوانین ترافیکی:' : 'Key Traffic Law Rules:'}</span>
-              <ul className="list-disc list-inside space-y-1">
-                <li>{currentLang === 'fa' ? 'تخلفات جدی رانندگی (مانند سرعت غیرمجاز شدید، عبور از چراغ قرمز، یا رانندگی تحت تاثیر الکل) می‌تواند منجر به ضبط گواهی‌نامه و تعلیق موقت حق رانندگی شود؛ مدت دقیق تعلیق بسته به نوع و شدت تخلف متفاوت است و باید از منبع رسمی پلیس راهور استعلام شود.' : 'Serious traffic violations (such as severe speeding, running red lights, or driving under the influence) can lead to license confiscation and temporary driving privilege suspension; exact duration depends on violation type and severity.'}</li>
-                <li>{currentLang === 'fa' ? 'برای جزئیات دقیق، جدول امتیازات و استعلام تخلفات به منبع رسمی پلیس راهنمایی و رانندگی رومانی (Poliția Rutieră) مراجعه فرمایید.' : 'For exact point breakdowns and violation checks, refer to the official Romanian Traffic Police directives.'}</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* OFFICIAL REFERENCES (پایین صفحه) */}
-          <div className="bg-[#071B3D] text-white rounded-2xl p-6 sm:p-8 space-y-4">
-            <h3 className="text-lg sm:text-xl font-extrabold border-b border-slate-700 pb-3 flex items-center space-x-2 rtl:space-x-reverse">
-              <span>🔗</span>
-              <span>{currentLang === 'fa' ? 'منابع رسمی و استعلامات قانون رانندگی در رومانی' : 'Official Driving Regulations & References'}</span>
-            </h3>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
-              <li>
-                <a href="https://dgpci.mai.gov.ro" target="_blank" rel="noopener noreferrer" className="p-3 bg-[#0b2b55] hover:bg-[#2F6FED] rounded-xl flex items-center justify-between text-slate-200 hover:text-white transition-colors">
-                  <span>DGPCI - اداره کل راهور و ثبت خودرو</span>
-                  <ExternalLink size={14} />
-                </a>
-              </li>
-              <li>
-                <a href="https://bucharest.mfa.ir" target="_blank" rel="noopener noreferrer" className="p-3 bg-[#0b2b55] hover:bg-[#2F6FED] rounded-xl flex items-center justify-between text-slate-200 hover:text-white transition-colors">
-                  <span>سفارت جمهوری اسلامی ایران در بخارست</span>
-                  <ExternalLink size={14} />
-                </a>
-              </li>
-              <li>
-                <a href="https://unece.org/transport/road-safety/vienna-convention-1968" target="_blank" rel="noopener noreferrer" className="p-3 bg-[#0b2b55] hover:bg-[#2F6FED] rounded-xl flex items-center justify-between text-slate-200 hover:text-white transition-colors">
-                  <span>متن کنوانسیون ترافیک جاده‌ای وین ۱۹۶۸</span>
-                  <ExternalLink size={14} />
-                </a>
-              </li>
-              <li>
-                <a href="https://www.acr.ro" target="_blank" rel="noopener noreferrer" className="p-3 bg-[#0b2b55] hover:bg-[#2F6FED] rounded-xl flex items-center justify-between text-slate-200 hover:text-white transition-colors">
-                  <span>ACR - باشگاه اتومبیل‌رانی رومانی</span>
-                  <ExternalLink size={14} />
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* DATE & VALIDITY FOOTER TAG */}
-          <div className="p-4 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl text-center text-xs text-[#788697] font-semibold">
-            {currentLang === 'fa'
-              ? 'آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶. اطلاعات متغیر (هزینه‌ها، مهلت‌ها) ممکن است تغییر کرده باشند؛ برای تایید نهایی به منابع رسمی بالا مراجعه کنید یا با ما تماس بگیرید.'
-              : 'Last Review: August 2026. Variable information (fees, deadlines) may be subject to change; verify with official sources or contact us.'}
-          </div>
-
-          {/* PARENT HUB FOOTER CARD */}
-          <ParentHubFooterCard slugRoute="needs/driving-license" currentLang={currentLang} onNavigate={onNavigate} />
-
-          {/* PUBLIC COMMENTS SECTION */}
+          <OperationalGuideLayout guide={guideData} translations={translations} />
+          <ParentHubFooterCard
+            currentLang={currentLang}
+            slugRoute="needs/driving-license"
+            onNavigate={onNavigate}
+          />
           <CommentsSection pagePath={`needs/${subRoute}`} currentLang={currentLang} />
         </div>
       );
+    }
 
     // 3. CERTIFIED TRANSLATION
     case 'certified-translation':

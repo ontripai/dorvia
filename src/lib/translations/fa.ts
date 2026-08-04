@@ -149,12 +149,12 @@ export const faTranslations = {
   },
   seoMetadata: {
     "work/work-permit": {
-      title: "کار در رومانی | در رومانی – DORVIA EUROP",
+      title: "مجوز کار در رومانی (Aviz de Muncă) | DORVIA EUROP",
       description: "راهنمای کامل دریافت مجوز کار در رومانی (Aviz de Muncă)، شرایط لازم، مدارک مورد نیاز و مراحل اخذ ویزای کاری.",
       h1: "مجوز کار در رومانی (Aviz de Muncă)"
     },
     "romania/cities": {
-      title: "شناخت کشور رومانی | در رومانی – DORVIA EUROP",
+      title: "شهرهای رومانی؛ مقایسه زندگی، کار و تحصیل | DORVIA EUROP",
       description: "راهنمای جامع شهرهای رومانی برای زندگی، تحصیل و کار. مقایسه بخارست، کلوژ، تیمیشوارا و سایر شهرهای مهم.",
       h1: "شهرهای رومانی"
     }

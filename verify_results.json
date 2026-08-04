@@ -1,0 +1,281 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app",
+    "robots": "noindex, nofollow",
+    "title": "دوریا اروپا | DORVIA EUROP - مرجع مهاجرت، اقامت، کار و ویزای تحصیلی در رومانی",
+    "h1": "مسیر آگاهانه شما برای تحصیل، کار و زندگی در رومانی"
+  },
+  {
+    "path": "/about",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app/about",
+    "robots": "noindex, nofollow",
+    "title": "درباره ما | در رومانی – DORVIA EUROP",
+    "h1": "درباره پلتفرم «دوریا اروپا»"
+  },
+  {
+    "path": "/contact",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app/contact",
+    "robots": "noindex, nofollow",
+    "title": "ارتباط با ما | در رومانی – DORVIA EUROP",
+    "h1": "تماس با ما"
+  },
+  {
+    "path": "/work",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app/work",
+    "robots": "noindex, nofollow",
+    "title": "کار و اشتغال در رومانی | در رومانی – DORVIA EUROP",
+    "h1": "کار و کسب‌وکار در رومانی"
+  },
+  {
+    "path": "/work/find-job",
+    "status": 308,
+    "target": "/work/finding-job",
+    "canonical": "MISSING",
+    "robots": "MISSING",
+    "title": "MISSING",
+    "h1": "MISSING"
+  },
+  {
+    "path": "/work/finding-job",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app/work/finding-job",
+    "robots": "noindex, nofollow",
+    "title": "کار در رومانی | در رومانی – DORVIA EUROP",
+    "h1": "پیدا کردن کار در رومانی"
+  },
+  {
+    "path": "/work/permit",
+    "status": 308,
+    "target": "/work/work-permit",
+    "canonical": "MISSING",
+    "robots": "MISSING",
+    "title": "MISSING",
+    "h1": "MISSING"
+  },
+  {
+    "path": "/work/work-permit",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app/work/work-permit",
+    "robots": "noindex, nofollow",
+    "title": "کار در رومانی | در رومانی – DORVIA EUROP",
+    "h1": "مجوز کار در رومانی (Aviz de Muncă)"
+  },
+  {
+    "path": "/work/visa",
+    "status": 308,
+    "target": "/work/work-visa",
+    "canonical": "MISSING",
+    "robots": "MISSING",
+    "title": "MISSING",
+    "h1": "MISSING"
+  },
+  {
+    "path": "/work/work-visa",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app/work/work-visa",
+    "robots": "noindex, nofollow",
+    "title": "کار در رومانی | در رومانی – DORVIA EUROP",
+    "h1": "ویزای بلندمدت کاری (D/AM)"
+  },
+  {
+    "path": "/work/contract",
+    "status": 308,
+    "target": "/work/employment-contract",
+    "canonical": "MISSING",
+    "robots": "MISSING",
+    "title": "MISSING",
+    "h1": "MISSING"
+  },
+  {
+    "path": "/work/employment-contract",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app/work/employment-contract",
+    "robots": "noindex, nofollow",
+    "title": "کار در رومانی | در رومانی – DORVIA EUROP",
+    "h1": "قرارداد استخدام در رومانی"
+  },
+  {
+    "path": "/work/tax",
+    "status": 308,
+    "target": "/work/taxes-salaries",
+    "canonical": "MISSING",
+    "robots": "MISSING",
+    "title": "MISSING",
+    "h1": "MISSING"
+  },
+  {
+    "path": "/work/taxes-salaries",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app/work/taxes-salaries",
+    "robots": "noindex, nofollow",
+    "title": "کار در رومانی | در رومانی – DORVIA EUROP",
+    "h1": "حقوق و مالیات"
+  },
+  {
+    "path": "/needs/healthcare",
+    "status": 308,
+    "target": "/needs/health",
+    "canonical": "MISSING",
+    "robots": "MISSING",
+    "title": "MISSING",
+    "h1": "MISSING"
+  },
+  {
+    "path": "/needs/health",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app/needs/health",
+    "robots": "noindex, follow",
+    "title": "خدمات درمانی و سلامت در رومانی | در رومانی – DORVIA EUROP",
+    "h1": "بیمه سلامت عمومی، ثبت‌نام پزشک خانواده و کارت CEASS"
+  },
+  {
+    "path": "/needs/sim-internet",
+    "status": 308,
+    "target": "/needs/telecom",
+    "canonical": "MISSING",
+    "robots": "MISSING",
+    "title": "MISSING",
+    "h1": "MISSING"
+  },
+  {
+    "path": "/needs/telecom",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app/needs/telecom",
+    "robots": "noindex, follow",
+    "title": "تلفن همراه و اینترنت در رومانی | در رومانی – DORVIA EUROP",
+    "h1": "خدمات تلفن همراه، اینترنت فیبر نوری و بسته‌های ترکیبی"
+  },
+  {
+    "path": "/needs/first-days-checklist",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app/needs/first-days-checklist",
+    "robots": "MISSING",
+    "title": "چک‌لیست روزهای نخست ورود به رومانی | در رومانی – DORVIA EUROP",
+    "h1": "چک‌لیست روزهای نخست ورود به رومانی"
+  },
+  {
+    "path": "/romania/culture",
+    "status": 308,
+    "target": "/romania/culture-and-arts",
+    "canonical": "MISSING",
+    "robots": "MISSING",
+    "title": "MISSING",
+    "h1": "MISSING"
+  },
+  {
+    "path": "/romania/culture-and-arts",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app/romania/culture-and-arts",
+    "robots": "MISSING",
+    "title": "فرهنگ، هنر و میراث رومانی | در رومانی – DORVIA EUROP",
+    "h1": "فرهنگ، هنر و میراث تاریخی رومانی"
+  },
+  {
+    "path": "/cities",
+    "status": 308,
+    "target": "/romania/cities",
+    "canonical": "MISSING",
+    "robots": "MISSING",
+    "title": "MISSING",
+    "h1": "MISSING"
+  },
+  {
+    "path": "/romania/cities",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app/romania",
+    "robots": "noindex, nofollow",
+    "title": "شناخت کشور رومانی | در رومانی – DORVIA EUROP",
+    "h1": "شهرهای رومانی"
+  },
+  {
+    "path": "/legal",
+    "status": 308,
+    "target": "/legal/privacy",
+    "canonical": "MISSING",
+    "robots": "MISSING",
+    "title": "MISSING",
+    "h1": "MISSING"
+  },
+  {
+    "path": "/legal/privacy",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-nwnxllu92-ontrip.vercel.app/legal/privacy",
+    "robots": "noindex, follow",
+    "title": "سیاست حفظ حریم خصوصی | DORVIA EUROP",
+    "h1": "سیاست حفظ حریم خصوصی"
+  },
+  {
+    "path": "/legal/terms",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-nwnxllu92-ontrip.vercel.app/legal/terms",
+    "robots": "noindex, follow",
+    "title": "شرایط و قوانین استفاده | DORVIA EUROP",
+    "h1": "شرایط و قوانین استفاده (Terms of Use)"
+  },
+  {
+    "path": "/legal/disclaimer",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-nwnxllu92-ontrip.vercel.app/legal/disclaimer",
+    "robots": "noindex, follow",
+    "title": "سلب مسئولیت | DORVIA EUROP",
+    "h1": "سلب مسئولیت (Disclaimer)"
+  },
+  {
+    "path": "/evaluation",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "https://romania-8wu6l7wc8-ontrip.vercel.app",
+    "robots": "noindex, nofollow",
+    "title": "دوریا اروپا | DORVIA EUROP - مرجع مهاجرت، اقامت، کار و ویزای تحصیلی در رومانی",
+    "h1": "ارزیابی رایگان شرایط"
+  },
+  {
+    "path": "/admin/comments",
+    "status": 404,
+    "target": "N/A",
+    "canonical": "MISSING",
+    "robots": "MISSING",
+    "title": "MISSING",
+    "h1": "MISSING"
+  },
+  {
+    "path": "/sitemap.xml",
+    "status": 200,
+    "target": "N/A",
+    "canonical": "MISSING",
+    "robots": "MISSING",
+    "title": "MISSING",
+    "h1": "MISSING"
+  },
+  {
+    "path": "/robots.txt",
+    "status": 404,
+    "target": "N/A",
+    "canonical": "MISSING",
+    "robots": "MISSING",
+    "title": "MISSING",
+    "h1": "MISSING"
+  }
+]
