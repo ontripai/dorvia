@@ -1,86 +1,38 @@
 # Rollout Waves
 
-## WAVE 0
-
-
-## WAVE 1
+## PILOT (Completed)
 - /needs/driving-license
-- /needs/first-days-checklist
-- /needs/housing
-- /needs/banking
-- /needs/certified-translation
-- /needs/notary-public
-- /needs/iranian-embassy-and-mikhak
-- /needs/health
-- /needs/school
-- /needs/telecom
-- /needs/currency-exchange
-- /needs/transportation
 
-## WAVE 2
-- /immigration
-- /immigration/igi-process
-- /immigration/residence-renewal
-- /immigration/family-reunification
-- /immigration/long-term-residence
-- /immigration/citizenship
+## WAVE 1: Needs & Essentials (Recommended First Wave)
+**Routes:** /needs/first-days-checklist, /needs/housing, /needs/banking, /needs/telecom, /needs/health, /needs/currency-exchange, etc.
+**Page Types:** Operational Guides
+**Risk Level:** Medium to High
+**Shared Components Required:** OperationalGuideLayout, StepByStepProcess, OfficialSources
+**Recommended Pilot:** /needs/first-days-checklist
+**Complexity:** Moderate
 
-## WAVE 3
-- /work
-- /work/finding-job
-- /work/work-permit
-- /work/work-visa
-- /work/employment-contract
-- /work/taxes-salaries
-- /work/insurance
+## WAVE 2: Immigration (Critical)
+**Routes:** /immigration, /immigration/residence-renewal, /immigration/long-term-residence, etc.
+**Risk Level:** Critical
 
-## WAVE 4
-- /study
-- /study/requirements
-- /study/visa-type-d
-- /study/tuition-overview
-- /study/preparatory-year
-- /study/scholarships
-- /study/part-time-work
+## WAVE 3: Work (High Risk)
+**Routes:** /work, /work/finding-job, /work/work-permit, /work/work-visa, etc.
+**Risk Level:** High
 
-## WAVE 5
-- /company
-- /company/registration
-- /company/tax-types
-- /company/bank-account
-- /company/residency
-- /company/real-estate-investment
-- /company/startup-tech-investment
-- /company/annual-tax-reporting
-- /company/investment
+## WAVE 4: Company (High Risk)
+**Routes:** /company, /company/registration, /company/tax-types, etc.
+**Risk Level:** High
 
-## WAVE 6
-- /start-here
-- /start-here/planning-to-come
-- /start-here/newly-arrived
-- /start-here/settling-in
-- /start-here/long-term-stay
-- /start-here/citizenship-goal
+## WAVE 5: Study (Medium Risk)
+**Routes:** /study, /study/requirements, /study/visa-type-d, etc.
+**Risk Level:** Medium
 
-## WAVE 7
-- /romania
-- /romania/economy
-- /romania/society
-- /romania/culture-and-arts
-- /romania/laws-and-regulations
-- /romania/tourism
-- /romania/geography
-- /romania/history
+## WAVE 6: Romania Reference
+**Routes:** /romania, /romania/cities, /romania/economy, /romania/tourism
+**Risk Level:** Low
 
-## WAVE 8
-- /
-- /about
-- /contact
-- /universities
-- /services
-- /articles
-- /needs
-- /legal
-- /legal/privacy
-- /legal/terms
-- /legal/disclaimer
+## WAVE 7: Start Here Hubs
+**Routes:** /start-here, /start-here/planning-to-come, etc.
+
+## WAVE 8: Institutional
+**Routes:** /about, /contact, /legal/*

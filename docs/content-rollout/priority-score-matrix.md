@@ -1,68 +1,78 @@
 # Priority Score Matrix
 
-- **/**: P3
-- **/about**: P3
-- **/contact**: P3
-- **/universities**: P3
-- **/services**: P3
-- **/articles**: P3
-- **/needs**: P3
-- **/immigration**: P3
-- **/work**: P3
-- **/company**: P3
-- **/study**: P3
-- **/romania**: P3
-- **/start-here**: P3
-- **/legal**: P3
-- **/needs/driving-license**: P0
-- **/needs/first-days-checklist**: P2
-- **/needs/housing**: P2
-- **/needs/banking**: P2
-- **/needs/certified-translation**: P2
-- **/needs/notary-public**: P2
-- **/needs/iranian-embassy-and-mikhak**: P2
-- **/needs/health**: P2
-- **/needs/school**: P2
-- **/needs/telecom**: P2
-- **/needs/currency-exchange**: P2
-- **/needs/transportation**: P2
-- **/immigration/igi-process**: P1
-- **/immigration/residence-renewal**: P1
-- **/immigration/family-reunification**: P1
-- **/immigration/long-term-residence**: P1
-- **/immigration/citizenship**: P1
-- **/work/finding-job**: P1
-- **/work/work-permit**: P1
-- **/work/work-visa**: P1
-- **/work/employment-contract**: P1
-- **/work/taxes-salaries**: P1
-- **/work/insurance**: P1
-- **/company/registration**: P1
-- **/company/tax-types**: P1
-- **/company/bank-account**: P1
-- **/company/residency**: P1
-- **/company/real-estate-investment**: P1
-- **/company/startup-tech-investment**: P1
-- **/company/annual-tax-reporting**: P1
-- **/company/investment**: P1
-- **/study/requirements**: P2
-- **/study/visa-type-d**: P2
-- **/study/tuition-overview**: P2
-- **/study/preparatory-year**: P2
-- **/study/scholarships**: P2
-- **/study/part-time-work**: P2
-- **/start-here/planning-to-come**: P3
-- **/start-here/newly-arrived**: P3
-- **/start-here/settling-in**: P3
-- **/start-here/long-term-stay**: P3
-- **/start-here/citizenship-goal**: P3
-- **/romania/economy**: P3
-- **/romania/society**: P3
-- **/romania/culture-and-arts**: P3
-- **/romania/laws-and-regulations**: P3
-- **/romania/tourism**: P3
-- **/romania/geography**: P3
-- **/romania/history**: P3
-- **/legal/privacy**: P1
-- **/legal/terms**: P1
-- **/legal/disclaimer**: P1
+## P0 (Immediate Public Risk)
+P0 ROUTES: NONE
+
+## P1 (Critical / High Risk)
+- /immigration/igi-process
+- /immigration/residence-renewal
+- /immigration/family-reunification
+- /immigration/long-term-residence
+- /immigration/citizenship
+- /work/finding-job
+- /work/work-permit
+- /work/work-visa
+- /work/employment-contract
+- /work/taxes-salaries
+- /work/insurance
+- /company/registration
+- /company/tax-types
+- /company/bank-account
+- /company/residency
+- /company/real-estate-investment
+- /company/startup-tech-investment
+- /company/annual-tax-reporting
+- /company/investment
+- /legal/privacy
+- /legal/terms
+- /legal/disclaimer
+
+## P2 (Medium Risk)
+- /needs/first-days-checklist
+- /needs/housing
+- /needs/banking
+- /needs/certified-translation
+- /needs/notary-public
+- /needs/iranian-embassy-and-mikhak
+- /needs/health
+- /needs/school
+- /needs/telecom
+- /needs/currency-exchange
+- /needs/transportation
+- /study/requirements
+- /study/visa-type-d
+- /study/tuition-overview
+- /study/preparatory-year
+- /study/scholarships
+- /study/part-time-work
+
+## P3 (Low Risk / Reference)
+- /
+- /about
+- /contact
+- /universities
+- /services
+- /articles
+- /needs
+- /immigration
+- /work
+- /company
+- /study
+- /romania
+- /start-here
+- /legal
+- /start-here/planning-to-come
+- /start-here/newly-arrived
+- /start-here/settling-in
+- /start-here/long-term-stay
+- /start-here/citizenship-goal
+- /romania/economy
+- /romania/society
+- /romania/culture-and-arts
+- /romania/laws-and-regulations
+- /romania/tourism
+- /romania/geography
+- /romania/history
+
+## PILOT (Completed Reference)
+- /needs/driving-license

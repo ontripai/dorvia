@@ -85,7 +85,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 8"
+    "rolloutWave": "WAVE 6"
   },
   {
     "canonical": "/services",
@@ -107,7 +107,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 8"
+    "rolloutWave": "WAVE 6"
   },
   {
     "canonical": "/articles",
@@ -129,7 +129,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 8"
+    "rolloutWave": "WAVE 6"
   },
   {
     "canonical": "/needs",
@@ -217,7 +217,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 5"
+    "rolloutWave": "WAVE 4"
   },
   {
     "canonical": "/study",
@@ -239,7 +239,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 4"
+    "rolloutWave": "WAVE 5"
   },
   {
     "canonical": "/romania",
@@ -261,7 +261,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 7"
+    "rolloutWave": "WAVE 6"
   },
   {
     "canonical": "/start-here",
@@ -283,7 +283,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 6"
+    "rolloutWave": "WAVE 7"
   },
   {
     "canonical": "/legal",
@@ -321,13 +321,13 @@
     "targetPageType": "OPERATIONAL_GUIDE",
     "currentLanguageSupport": "SUBSTANTIVE_PARITY",
     "routeDependencies": [],
-    "contentQuality": "PILOT_STANDARD",
+    "contentQuality": "COMPLETED_REFERENCE_PILOT",
     "sourceStatus": "OFFICIAL_AND_TRACEABLE",
     "riskCategory": "LOCAL_ADMINISTRATION",
     "riskLevel": "MEDIUM",
     "primaryAuthority": "Various",
-    "priority": "P0",
-    "rolloutWave": "WAVE 1"
+    "priority": "PILOT",
+    "rolloutWave": "PILOT"
   },
   {
     "canonical": "/needs/first-days-checklist",
@@ -833,7 +833,7 @@
     "riskLevel": "HIGH",
     "primaryAuthority": "ONRC / ANAF",
     "priority": "P1",
-    "rolloutWave": "WAVE 5"
+    "rolloutWave": "WAVE 4"
   },
   {
     "canonical": "/company/tax-types",
@@ -855,7 +855,7 @@
     "riskLevel": "HIGH",
     "primaryAuthority": "ONRC / ANAF",
     "priority": "P1",
-    "rolloutWave": "WAVE 5"
+    "rolloutWave": "WAVE 4"
   },
   {
     "canonical": "/company/bank-account",
@@ -877,7 +877,7 @@
     "riskLevel": "HIGH",
     "primaryAuthority": "ONRC / ANAF",
     "priority": "P1",
-    "rolloutWave": "WAVE 5"
+    "rolloutWave": "WAVE 4"
   },
   {
     "canonical": "/company/residency",
@@ -899,7 +899,7 @@
     "riskLevel": "HIGH",
     "primaryAuthority": "ONRC / ANAF",
     "priority": "P1",
-    "rolloutWave": "WAVE 5"
+    "rolloutWave": "WAVE 4"
   },
   {
     "canonical": "/company/real-estate-investment",
@@ -921,7 +921,7 @@
     "riskLevel": "HIGH",
     "primaryAuthority": "ONRC / ANAF",
     "priority": "P1",
-    "rolloutWave": "WAVE 5"
+    "rolloutWave": "WAVE 4"
   },
   {
     "canonical": "/company/startup-tech-investment",
@@ -943,7 +943,7 @@
     "riskLevel": "HIGH",
     "primaryAuthority": "ONRC / ANAF",
     "priority": "P1",
-    "rolloutWave": "WAVE 5"
+    "rolloutWave": "WAVE 4"
   },
   {
     "canonical": "/company/annual-tax-reporting",
@@ -965,7 +965,7 @@
     "riskLevel": "HIGH",
     "primaryAuthority": "ONRC / ANAF",
     "priority": "P1",
-    "rolloutWave": "WAVE 5"
+    "rolloutWave": "WAVE 4"
   },
   {
     "canonical": "/company/investment",
@@ -987,7 +987,7 @@
     "riskLevel": "HIGH",
     "primaryAuthority": "ONRC / ANAF",
     "priority": "P1",
-    "rolloutWave": "WAVE 5"
+    "rolloutWave": "WAVE 4"
   },
   {
     "canonical": "/study/requirements",
@@ -1009,7 +1009,7 @@
     "riskLevel": "MEDIUM",
     "primaryAuthority": "Ministry of Education",
     "priority": "P2",
-    "rolloutWave": "WAVE 4"
+    "rolloutWave": "WAVE 5"
   },
   {
     "canonical": "/study/visa-type-d",
@@ -1031,7 +1031,7 @@
     "riskLevel": "MEDIUM",
     "primaryAuthority": "Ministry of Education",
     "priority": "P2",
-    "rolloutWave": "WAVE 4"
+    "rolloutWave": "WAVE 5"
   },
   {
     "canonical": "/study/tuition-overview",
@@ -1053,7 +1053,7 @@
     "riskLevel": "MEDIUM",
     "primaryAuthority": "Ministry of Education",
     "priority": "P2",
-    "rolloutWave": "WAVE 4"
+    "rolloutWave": "WAVE 5"
   },
   {
     "canonical": "/study/preparatory-year",
@@ -1075,7 +1075,7 @@
     "riskLevel": "MEDIUM",
     "primaryAuthority": "Ministry of Education",
     "priority": "P2",
-    "rolloutWave": "WAVE 4"
+    "rolloutWave": "WAVE 5"
   },
   {
     "canonical": "/study/scholarships",
@@ -1097,7 +1097,7 @@
     "riskLevel": "MEDIUM",
     "primaryAuthority": "Ministry of Education",
     "priority": "P2",
-    "rolloutWave": "WAVE 4"
+    "rolloutWave": "WAVE 5"
   },
   {
     "canonical": "/study/part-time-work",
@@ -1119,7 +1119,7 @@
     "riskLevel": "MEDIUM",
     "primaryAuthority": "Ministry of Education",
     "priority": "P2",
-    "rolloutWave": "WAVE 4"
+    "rolloutWave": "WAVE 5"
   },
   {
     "canonical": "/start-here/planning-to-come",
@@ -1141,7 +1141,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 6"
+    "rolloutWave": "WAVE 7"
   },
   {
     "canonical": "/start-here/newly-arrived",
@@ -1163,7 +1163,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 6"
+    "rolloutWave": "WAVE 7"
   },
   {
     "canonical": "/start-here/settling-in",
@@ -1185,7 +1185,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 6"
+    "rolloutWave": "WAVE 7"
   },
   {
     "canonical": "/start-here/long-term-stay",
@@ -1207,7 +1207,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 6"
+    "rolloutWave": "WAVE 7"
   },
   {
     "canonical": "/start-here/citizenship-goal",
@@ -1229,7 +1229,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 6"
+    "rolloutWave": "WAVE 7"
   },
   {
     "canonical": "/romania/economy",
@@ -1251,7 +1251,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 7"
+    "rolloutWave": "WAVE 6"
   },
   {
     "canonical": "/romania/society",
@@ -1273,7 +1273,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 7"
+    "rolloutWave": "WAVE 6"
   },
   {
     "canonical": "/romania/culture-and-arts",
@@ -1295,7 +1295,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 7"
+    "rolloutWave": "WAVE 6"
   },
   {
     "canonical": "/romania/laws-and-regulations",
@@ -1317,7 +1317,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 7"
+    "rolloutWave": "WAVE 6"
   },
   {
     "canonical": "/romania/tourism",
@@ -1339,7 +1339,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 7"
+    "rolloutWave": "WAVE 6"
   },
   {
     "canonical": "/romania/geography",
@@ -1361,7 +1361,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 7"
+    "rolloutWave": "WAVE 6"
   },
   {
     "canonical": "/romania/history",
@@ -1383,7 +1383,7 @@
     "riskLevel": "LOW",
     "primaryAuthority": "N/A",
     "priority": "P3",
-    "rolloutWave": "WAVE 7"
+    "rolloutWave": "WAVE 6"
   },
   {
     "canonical": "/legal/privacy",
