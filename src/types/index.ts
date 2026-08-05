@@ -18,17 +18,57 @@ export interface LeadFormData {
   privacyConsent: boolean;
 }
 
+export type RecognitionStatus = 'IRAN_MOH_APPROVED' | 'GENERAL_POPULAR' | 'IRAN_MOH_NOT_APPROVED' | 'REQUIRES_CURRENT_RECHECK';
+export type TuitionVerificationStatus = 'OFFICIAL_FIXED' | 'OFFICIAL_RANGE' | 'OFFICIAL_REGISTRATION_FEE' | 'HISTORICAL_OFFICIAL' | 'UNOFFICIAL_ESTIMATE' | 'CONTACT_UNIVERSITY' | 'NOT_PROVIDED';
+export type WarningLevel = 'none' | 'warning' | 'danger';
+export type CTAType = 'internal' | 'external';
+
+export interface TuitionItem {
+  program: { fa: string; en: string };
+  amount?: number;
+  maxAmount?: number;
+  currency?: 'EUR' | 'RON';
+  period?: 'academic-year' | 'calendar-year' | 'one-time';
+  feeType: 'tuition' | 'registration_fee' | 'contact';
+}
+
+export interface RecognitionSource {
+  name: { fa: string; en: string };
+  issuer: { fa: string; en: string };
+  academicYear: string;
+  url: string;
+  officialFlag: boolean;
+}
+
 export interface University {
   id: string;
-  name: { fa: string; en: string };
-  city: { fa: string; en: string };
-  type: { fa: string; en: string }; // Public / Private
-  tuitionRange: { fa: string; en: string };
-  popularFields: { fa: string[]; en: string[] };
-  ranking?: string;
-  description: { fa: string; en: string };
-  source?: { name: string; url: string };
-  lastReviewed?: string;
+  displayOrder: number;
+  groupId: number;
+  nameFa: string;
+  nameEn: string;
+  officialRomanianName: string;
+  cityFa: string;
+  cityEn: string;
+  institutionType: { fa: string; en: string };
+  studyFieldsFa: string[];
+  studyFieldsEn: string[];
+  tuitionItems: TuitionItem[];
+  tuitionAcademicYear: string;
+  tuitionVerificationStatus: TuitionVerificationStatus;
+  recognitionStatus: RecognitionStatus;
+  recognitionSources?: RecognitionSource[];
+  badgeTextFa: string;
+  badgeTextEn: string;
+  warningLevel: WarningLevel;
+  descriptionFa: string;
+  descriptionEn: string;
+  sourceRecords: { name: { fa: string; en: string }; url: string }[];
+  reviewedAt: string;
+  ctaLabelFa: string;
+  ctaLabelEn: string;
+  ctaHref: string;
+  ctaType: CTAType;
+  disclaimer?: { fa: string; en: string };
 }
 
 export interface City {
