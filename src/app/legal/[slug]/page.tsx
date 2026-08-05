@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { PAGE_META } from '../../../lib/pageMeta';
 import { LegalContentWrapper } from './LegalContentWrapper';
+import { SITE_URL } from '@/config';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const meta = PAGE_META[`legal/${params.slug}`] || PAGE_META['legal'];
@@ -24,12 +25,12 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title,
     description,
     alternates: {
-      canonical: `https://romania-nwnxllu92-ontrip.vercel.app/legal/${params.slug}`
+      canonical: `${SITE_URL}/legal/${params.slug}`
     },
     openGraph: {
       title,
       description,
-      url: `https://romania-nwnxllu92-ontrip.vercel.app/legal/${params.slug}`
+      url: `${SITE_URL}/legal/${params.slug}`
     }
   };
 }
