@@ -6,7 +6,7 @@
 - [x] Removed Language Leakage by adding localized `statusLabel`, `factCheckLabel`, and `smeReviewLabel` in `OperationalGuideLayout.tsx`.
 - [x] Corrected H1 -> H3 skip by changing the Table of Contents header to H2.
 - [x] `playwright` moved to `devDependencies`.
-- [x] Built test suite runner moved to `scripts/validateFirstDaysNegativeTests.ts` and successfully verified missing/empty claim IDs, scenario ID mismatch, and incorrect source URLs.
+- [x] Built test suite runner moved to `scripts/validateFirstDaysNegativeTests.ts` and successfully verified missing/empty claim IDs, scenario ID mismatch, incorrect source URLs, and various static UI and packaging assertions (total 12 mutation tests and 6 static assertions).
 - [x] `validate:content` passed successfully.
 - [x] Production build passed successfully.
 
