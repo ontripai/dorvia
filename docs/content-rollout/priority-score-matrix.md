@@ -1,9 +1,15 @@
 # Priority Score Matrix
 
-## P0 (Immediate Public Risk)
-P0 ROUTES: NONE
+## Exact Priority Totals (66 Canonical Routes)
+- PILOT: 1
+- P0: 0
+- P1: 22
+- P2: 17
+- P3: 26
 
-## P1 (Critical / High Risk)
+Total: 66
+
+## P1 (Critical / High Risk) Routes [22 total]
 - /immigration/igi-process
 - /immigration/residence-renewal
 - /immigration/family-reunification
@@ -26,53 +32,3 @@ P0 ROUTES: NONE
 - /legal/privacy
 - /legal/terms
 - /legal/disclaimer
-
-## P2 (Medium Risk)
-- /needs/first-days-checklist
-- /needs/housing
-- /needs/banking
-- /needs/certified-translation
-- /needs/notary-public
-- /needs/iranian-embassy-and-mikhak
-- /needs/health
-- /needs/school
-- /needs/telecom
-- /needs/currency-exchange
-- /needs/transportation
-- /study/requirements
-- /study/visa-type-d
-- /study/tuition-overview
-- /study/preparatory-year
-- /study/scholarships
-- /study/part-time-work
-
-## P3 (Low Risk / Reference)
-- /
-- /about
-- /contact
-- /universities
-- /services
-- /articles
-- /needs
-- /immigration
-- /work
-- /company
-- /study
-- /romania
-- /start-here
-- /legal
-- /start-here/planning-to-come
-- /start-here/newly-arrived
-- /start-here/settling-in
-- /start-here/long-term-stay
-- /start-here/citizenship-goal
-- /romania/economy
-- /romania/society
-- /romania/culture-and-arts
-- /romania/laws-and-regulations
-- /romania/tourism
-- /romania/geography
-- /romania/history
-
-## PILOT (Completed Reference)
-- /needs/driving-license
