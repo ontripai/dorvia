@@ -6,6 +6,7 @@
     "dev": "next dev",
     "validate:content": "npx tsx scripts/validateContent.ts",
     "validate:content-audit": "npx tsx scripts/validateContentRolloutAudit.ts",
+    "validate:first-days-negative": "npx tsx scripts/validateFirstDaysNegativeTests.ts",
     "build": "npm run validate:content && next build",
     "start": "next start",
     "lint": "next lint"
@@ -13,6 +14,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
     "next": "^14.1.0",
+    "playwright": "^1.62.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

@@ -5,6 +5,10 @@
 - The `contentStatus` is currently `draft`.
 - The `factCheckStatus` is `partially-verified`.
 
+## SME Review Status
+- **Status**: `SME_REVIEW_PENDING`
+- **Important Note**: SME review has *not* occurred yet. The absence of `PROFESSIONAL_REVIEW_REQUIRED` at the individual claim level does *not* imply that final legal/SME approval has taken place. The public UI will not describe this guide as fully verified or final until actual SME sign-off is completed.
+
 ## Review Schedule
 - The `lastReviewed` date is set to `2026-08-05`.
 - The `nextReview` date is set to `2027-02-05`.

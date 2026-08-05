@@ -187,6 +187,7 @@ export const firstDaysChecklistEN: OperationalGuide = {
   contentOwner: 'DORVIA EUROP Content Team',
   contentStatus: 'draft',
   factCheckStatus: 'partially-verified',
+  smeReviewStatus: 'PENDING',
   riskCategory: ['IMMIGRATION', 'LEGAL', 'FINANCIAL'],
   
   situations: [

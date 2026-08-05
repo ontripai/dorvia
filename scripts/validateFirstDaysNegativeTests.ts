@@ -1,13 +1,14 @@
-const fs = require('fs');
-const { execSync } = require('child_process');
+import fs from 'fs';
+import { execSync } from 'child_process';
+import path from 'path';
 
-const targetFile = 'src/content/guides/first-days-checklist/en.ts';
+const targetFile = path.resolve('src/content/guides/first-days-checklist/en.ts');
 const originalContent = fs.readFileSync(targetFile, 'utf8');
 
 const tests = [
   {
     name: 'Verified Step without sourceId',
-    replace: /status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-student'/g,
+    replace: /status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'anaf-contracts'/g,
     with: `status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05'`
   },
   {
@@ -59,27 +60,29 @@ const tests = [
 
 let allPassed = true;
 
-for (const t of tests) {
-  console.log(`Running Negative Test: ${t.name}`);
-  const modifiedContent = originalContent.replace(t.replace, t.with);
-  
-  if (modifiedContent === originalContent) {
-      console.log(`❌ Failed to patch content for test: ${t.name}`);
-      allPassed = false;
-      continue;
-  }
+try {
+  for (const t of tests) {
+    console.log(`Running Negative Test: ${t.name}`);
+    const modifiedContent = originalContent.replace(t.replace, t.with);
+    
+    if (modifiedContent === originalContent) {
+        console.log(`❌ Failed to patch content for test: ${t.name}`);
+        allPassed = false;
+        continue;
+    }
 
-  fs.writeFileSync(targetFile, modifiedContent);
-  
-  try {
-    execSync('npm run validate:content', { stdio: 'pipe' });
-    console.log(`❌ TEST FAILED: Validator did not exit with code 1 for: ${t.name}`);
-    allPassed = false;
-  } catch (err) {
-    console.log(`✅ TEST PASSED: Validator correctly failed. Exit code 1.`);
+    fs.writeFileSync(targetFile, modifiedContent);
+    
+    try {
+      execSync('npm run validate:content', { stdio: 'pipe' });
+      console.log(`❌ TEST FAILED: Validator did not exit with code 1 for: ${t.name}`);
+      allPassed = false;
+    } catch (err) {
+      console.log(`✅ TEST PASSED: Validator correctly failed. Exit code 1.`);
+    }
   }
-  
-  // Restore
+} finally {
+  // Always restore
   fs.writeFileSync(targetFile, originalContent);
 }
 

@@ -108,5 +108,6 @@ export interface OperationalGuide {
   contentOwner: string;
   contentStatus: ContentStatus;
   factCheckStatus: FactCheckStatus;
+  smeReviewStatus?: 'PENDING' | 'APPROVED' | 'REJECTED';
   riskCategory: RiskCategory[];
 }
