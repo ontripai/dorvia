@@ -5,15 +5,24 @@ const cwd = process.cwd();
 const ROUTE_REGISTRY_PATH = path.join(cwd, 'src/lib/routeRegistry.ts');
 const routeRegistryContent = fs.readFileSync(ROUTE_REGISTRY_PATH, 'utf8');
 
-const requiredScenarioIds = [
-  'temporary-foreign-licence-use',
-  'foreign-licence-exchange',
-  'iranian-issued-licence',
-  'obtain-romanian-licence-from-scratch',
-  'renew-romanian-licence',
-  'international-driving-permit',
-  'penalties-suspension-and-restrictions'
-];
+const REQUIRED_SCENARIOS: Record<string, string[]> = {
+  '/needs/driving-license': [
+    'temporary-foreign-licence-use',
+    'foreign-licence-exchange',
+    'iranian-issued-licence',
+    'obtain-romanian-licence-from-scratch',
+    'renew-romanian-licence',
+    'international-driving-permit',
+    'penalties-suspension-and-restrictions'
+  ],
+  '/needs/first-days-checklist': [
+    'student-arrival',
+    'employee-arrival',
+    'family-arrival',
+    'eu-citizen-arrival',
+    'short-stay-visitor'
+  ]
+};
 
 function extractGuideData(filePath: string) {
   const content = fs.readFileSync(filePath, 'utf8');
@@ -28,13 +37,7 @@ function extractGuideData(filePath: string) {
   });
 
   // 2. Canonical route in registry
-  const routeMatch = content.match(/canonicalRoute:\s*['"]([^'"]+)['"]/);
-  if (routeMatch) {
-    const route = routeMatch[1];
-    if (!routeRegistryContent.includes(`"${route}"`) && !routeRegistryContent.includes(`'${route}'`)) {
-      errors.push(`Canonical route "${route}" is not registered in ROUTE_REGISTRY`);
-    }
-  }
+  // (Moved to section 5 for scenario mapping)
 
   // 3. No UNRESOLVED claims without a warning
   if (content.includes('UNRESOLVED') && !content.includes('warnings: [')) {
@@ -43,20 +46,59 @@ function extractGuideData(filePath: string) {
     }
   }
 
-  // 4. Duplicate sources
-  const sourceMatches = content.match(/id:\s*['"]([^'"]+)['"]/g);
+  // 4. Duplicate sources and claim IDs
+  const officialSourcesBlock = content.split('officialSources: [')[1]?.split('],')[0] || '';
+  const sourceMatches = officialSourcesBlock.match(/id:\s*['"]([^'"]+)['"]/g);
   let sourceIds: string[] = [];
   if (sourceMatches) {
     sourceIds = sourceMatches.map(m => (m.match(/['"]([^'"]+)['"]/) as RegExpMatchArray)[1]);
     const duplicates = sourceIds.filter((item, index) => sourceIds.indexOf(item) !== index);
     if (duplicates.length > 0) {
-      errors.push(`Duplicate source IDs found: ${duplicates.join(', ')}`);
+      errors.push(`Duplicate source IDs found in officialSources: ${duplicates.join(', ')}`);
     }
   }
 
+  const claimMatches = content.match(/claimId:\s*['"]([^'"]+)['"]/g);
+  if (claimMatches) {
+    const claimIds = claimMatches.map(m => (m.match(/['"]([^'"]+)['"]/) as RegExpMatchArray)[1]);
+    const duplicates = claimIds.filter((item, index) => claimIds.indexOf(item) !== index);
+    if (duplicates.length > 0) {
+      errors.push(`Duplicate claim IDs found: ${duplicates.join(', ')}`);
+    }
+  }
+
+  // 4b. Status check for material claims (steps)
+  const stepBlocks = content.split('steps: [').slice(1).map(b => b.split(']')[0]);
+  stepBlocks.forEach((stepBlock, bIdx) => {
+    const individualSteps = stepBlock.split('},').map(s => s + '}');
+    individualSteps.forEach((stepStr, idx) => {
+      // If it looks like a step with a title and description
+      if (stepStr.includes('title:') && stepStr.includes('description:')) {
+         if (!stepStr.includes('status:')) {
+           errors.push(`Step missing status reference in block index ${bIdx}-${idx}`);
+         }
+         if (content.includes("contentStatus: 'published'") || content.includes('contentStatus: "published"')) {
+            if (stepStr.includes('OWNER_REVIEW_REQUIRED') || stepStr.includes('PROFESSIONAL_REVIEW_REQUIRED')) {
+               errors.push(`Published guide contains unresolved claim in block index ${bIdx}-${idx}`);
+            }
+         }
+      }
+    });
+  });
+
   // 5. Scenario IDs
+  const routeMatch = content.match(/canonicalRoute:\s*['"]([^'"]+)['"]/);
+  let route = '';
+  if (routeMatch) {
+    route = routeMatch[1];
+    if (!routeRegistryContent.includes(`"${route}"`) && !routeRegistryContent.includes(`'${route}'`)) {
+      errors.push(`Canonical route "${route}" is not registered in ROUTE_REGISTRY`);
+    }
+  }
+
   let foundScenarios = 0;
-  for (const reqId of requiredScenarioIds) {
+  const reqScenarios = REQUIRED_SCENARIOS[route] || [];
+  for (const reqId of reqScenarios) {
     if (!content.includes(`id: '${reqId}'`) && !content.includes(`id: "${reqId}"`)) {
       errors.push(`Missing required scenario ID: ${reqId}`);
     } else {
@@ -125,23 +167,42 @@ const guidesDir = path.join(cwd, 'src/content/guides');
 let hasErrors = false;
 
 // We will also check cross-locale parity for FA and EN.
-function checkParity(enContent: string, faContent: string) {
+function checkParity(file: string, enContent: string, faContent: string) {
     const errors: string[] = [];
-    const enExchangeMatch = enContent.match(/id:\s*['"]foreign-licence-exchange['"][\s\S]*?(?=id:\s*['"]|$)/)?.[0] || '';
-    const faExchangeMatch = faContent.match(/id:\s*['"]foreign-licence-exchange['"][\s\S]*?(?=id:\s*['"]|$)/)?.[0] || '';
     
-    const enMedical = enExchangeMatch.match(/requiresMedical:\s*['"]([^'"]+)['"]/)?.[1];
-    const faMedical = faExchangeMatch.match(/requiresMedical:\s*['"]([^'"]+)['"]/)?.[1];
-    if (enMedical && faMedical && enMedical !== faMedical) {
-        errors.push(`FA/EN medical-condition mismatch: EN=${enMedical}, FA=${faMedical}`);
+    // Generic Scenario ID Parity
+    const getScenarioIds = (content: string) => {
+        const matches = content.match(/id:\s*['"]([^'"]+)['"]/g);
+        if (!matches) return [];
+        // Filtering heuristic to get situations IDs (first one is often locale or guide id, but let's just compare all IDs).
+        // Actually, just compare all IDs directly to ensure perfect parity.
+        return matches.map(m => (m.match(/['"]([^'"]+)['"]/) as RegExpMatchArray)[1]).sort();
+    };
+    
+    const enIds = getScenarioIds(enContent);
+    const faIds = getScenarioIds(faContent);
+    
+    if (JSON.stringify(enIds) !== JSON.stringify(faIds)) {
+        errors.push(`FA/EN scenario/source ID parity mismatch`);
     }
 
-    const enIdpMatch = enContent.match(/id:\s*['"]international-driving-permit['"][\s\S]*?(?=id:\s*['"]|$)/)?.[0] || '';
-    const faIdpMatch = faContent.match(/id:\s*['"]international-driving-permit['"][\s\S]*?(?=id:\s*['"]|$)/)?.[0] || '';
-    const enIdpSources = enIdpMatch.match(/sourceId:\s*['"]([^'"]+)['"]/g)?.join(',') || '';
-    const faIdpSources = faIdpMatch.match(/sourceId:\s*['"]([^'"]+)['"]/g)?.join(',') || '';
-    if (enIdpSources !== faIdpSources) {
-        errors.push(`FA/EN IDP source mismatch: EN=${enIdpSources}, FA=${faIdpSources}`);
+    if (file === 'driving-license') {
+      const enExchangeMatch = enContent.match(/id:\s*['"]foreign-licence-exchange['"][\s\S]*?(?=id:\s*['"]|$)/)?.[0] || '';
+      const faExchangeMatch = faContent.match(/id:\s*['"]foreign-licence-exchange['"][\s\S]*?(?=id:\s*['"]|$)/)?.[0] || '';
+      
+      const enMedical = enExchangeMatch.match(/requiresMedical:\s*['"]([^'"]+)['"]/)?.[1];
+      const faMedical = faExchangeMatch.match(/requiresMedical:\s*['"]([^'"]+)['"]/)?.[1];
+      if (enMedical && faMedical && enMedical !== faMedical) {
+          errors.push(`FA/EN medical-condition mismatch: EN=${enMedical}, FA=${faMedical}`);
+      }
+
+      const enIdpMatch = enContent.match(/id:\s*['"]international-driving-permit['"][\s\S]*?(?=id:\s*['"]|$)/)?.[0] || '';
+      const faIdpMatch = faContent.match(/id:\s*['"]international-driving-permit['"][\s\S]*?(?=id:\s*['"]|$)/)?.[0] || '';
+      const enIdpSources = enIdpMatch.match(/sourceId:\s*['"]([^'"]+)['"]/g)?.join(',') || '';
+      const faIdpSources = faIdpMatch.match(/sourceId:\s*['"]([^'"]+)['"]/g)?.join(',') || '';
+      if (enIdpSources !== faIdpSources) {
+          errors.push(`FA/EN IDP source mismatch: EN=${enIdpSources}, FA=${faIdpSources}`);
+      }
     }
     
     return errors;
@@ -154,12 +215,12 @@ function scanDir(dir: string) {
     const fullPath = path.join(dir, file);
     if (fs.statSync(fullPath).isDirectory()) {
       scanDir(fullPath);
-      // For driving-license check parity
-      if (file === 'driving-license') {
+      // For guides check parity
+      if (file === 'driving-license' || file === 'first-days-checklist') {
           const enPath = path.join(fullPath, 'en.ts');
           const faPath = path.join(fullPath, 'fa.ts');
           if (fs.existsSync(enPath) && fs.existsSync(faPath)) {
-              const pErrors = checkParity(fs.readFileSync(enPath, 'utf8'), fs.readFileSync(faPath, 'utf8'));
+              const pErrors = checkParity(file, fs.readFileSync(enPath, 'utf8'), fs.readFileSync(faPath, 'utf8'));
               if (pErrors.length > 0) {
                   console.error(`❌ Cross-locale Parity Errors in ${file}:`);
                   pErrors.forEach(e => console.error(`  - ${e}`));

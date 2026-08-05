@@ -45,10 +45,18 @@ export interface ScenarioDefinition {
     name: string;
     description?: string;
     isMandatory: boolean;
+    claimId?: string;
+    sourceId?: string;
   }>;
   steps: Array<{
     title: string;
     description: string;
+    claimId?: string;
+    sourceId?: string;
+    authority?: string;
+    jurisdiction?: string;
+    status?: 'VERIFIED' | 'QUALIFIED' | 'REMOVED' | 'OWNER_REVIEW_REQUIRED' | 'PROFESSIONAL_REVIEW_REQUIRED';
+    reviewDate?: string;
   }>;
   fees: CostEstimate[];
   timeline: TimelineEstimate[];
