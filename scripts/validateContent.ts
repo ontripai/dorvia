@@ -203,7 +203,7 @@ async function validateRoutes() {
       routeErrors.push(`Redirect source ${r.source} is included in Sitemap`);
     }
     // - A physical canonical destination is absent from Registry
-    if (!canonicalRoutes.includes(r.destination) && r.destination !== '/legal/privacy' && r.destination !== '/romania/cities' && r.destination.startsWith('/')) {
+    if (!canonicalRoutes.includes(r.destination) && r.destination.startsWith('/')) {
         if (!canonicalRoutes.includes(r.destination)) {
           routeErrors.push(`Physical canonical destination ${r.destination} is absent from Registry`);
         }
@@ -214,7 +214,7 @@ async function validateRoutes() {
   const legalPagePath = path.join(cwd, 'src/app/legal/[slug]/page.tsx');
   if (fs.existsSync(legalPagePath)) {
     const legalContent = fs.readFileSync(legalPagePath, 'utf8');
-    if (legalContent.includes('romania-nwnxllu92-ontrip.vercel.app')) {
+    if (legalContent.includes('.vercel.app')) {
       routeErrors.push('A legal page canonical contains a Vercel Preview hostname');
     }
   }
@@ -238,13 +238,20 @@ async function validateRoutes() {
   }
 }
 
-validateRoutes();
+async function main() {
+  console.log('Running Content Validation...');
+  scanDir(guidesDir);
 
-console.log('Running Content Validation...');
-scanDir(guidesDir);
+  await validateRoutes();
 
-if (hasErrors) {
-  process.exit(1);
-} else {
-  console.log('All content validated successfully.');
+  if (hasErrors) {
+    process.exit(1);
+  }
+
+  console.log('All content and route validations passed.');
 }
+
+main().catch(error => {
+  console.error(error);
+  process.exit(1);
+});

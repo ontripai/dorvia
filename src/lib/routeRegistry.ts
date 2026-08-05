@@ -748,7 +748,7 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
   'legal/privacy': {
     canonical: '/legal/privacy',
     aliases: ['/legal'],
-    parentHub: '/legal',
+    parentHub: null,
     titleFa: 'حریم خصوصی',
     titleEn: 'Privacy Policy',
     parentTitleFa: 'حقوقی و شرایط',
@@ -760,7 +760,7 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
   'legal/terms': {
     canonical: '/legal/terms',
     aliases: [],
-    parentHub: '/legal',
+    parentHub: null,
     titleFa: 'شرایط استفاده',
     titleEn: 'Terms of Use',
     parentTitleFa: 'حقوقی و شرایط',
@@ -772,7 +772,7 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
   'legal/disclaimer': {
     canonical: '/legal/disclaimer',
     aliases: [],
-    parentHub: '/legal',
+    parentHub: null,
     titleFa: 'سلب مسئولیت',
     titleEn: 'Legal Disclaimer',
     parentTitleFa: 'حقوقی و شرایط',
