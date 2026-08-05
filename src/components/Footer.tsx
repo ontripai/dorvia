@@ -28,13 +28,14 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
           
           {/* Col 1: Brand Statement */}
           <div className="space-y-4 lg:col-span-1">
-            <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer" >
-                <img src="/images/logo/dorvia-logo-reversed-transparent-3000.png" alt="DORVIA" className="h-[28px] sm:h-[32px] w-auto" />
-              <span className="text-lg font-extrabold text-white">{t.brand.siteName}</span>
+            <Link href="/" aria-label="DORVIA EUROP" className="inline-block cursor-pointer" >
+                <img src="/images/logo/dorvia-logo-reversed-transparent-3000.png" alt="DORVIA EUROP" className="h-[28px] sm:h-[32px] w-auto" />
             </Link>
 
-            <p className="text-[#788697] leading-relaxed">
-              {t.brand.tagline}
+            <p className="text-[#788697] leading-relaxed mt-4">
+              {currentLang === 'fa' 
+                ? 'راهنمای ورود، اقامت، تحصیل، کار و زندگی در رومانی' 
+                : 'Guidance for entry, residence, study, work and life in Romania'}
             </p>
 
             <div className="flex items-center space-x-2 rtl:space-x-reverse text-[11px] text-slate-400">
