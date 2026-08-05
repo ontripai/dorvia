@@ -16,6 +16,8 @@ import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { OperationalGuideLayout } from './guide/OperationalGuideLayout';
 import { drivingLicenseEN } from '../content/guides/driving-license/en';
 import { drivingLicenseFA } from '../content/guides/driving-license/fa';
+import { firstDaysChecklistEN } from '../content/guides/first-days-checklist/en';
+import { firstDaysChecklistFA } from '../content/guides/first-days-checklist/fa';
 
 interface NeedsContentProps {
   subRoute: string;
@@ -274,7 +276,16 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
         warningsTitle: 'هشدارهای مهم',
         sourcesTitle: 'منابع رسمی استناد شده',
         accessedOn: 'تاریخ دسترسی',
-        lastReviewed: 'آخرین بازبینی'
+        lastReviewed: 'آخرین بازبینی',
+        statusLabel: 'وضعیت محتوا',
+        factCheckLabel: 'وضعیت راستی‌آزمایی',
+        smeReviewLabel: 'بازبینی تخصصی/حقوقی',
+        statusDraft: 'پیشنویس',
+        statusPublished: 'منتشر شده',
+        factCheckVerified: 'تایید شده',
+        factCheckPartially: 'بخشی تأیید شده',
+        smeReviewPending: 'در انتظار بررسی',
+        smeReviewApproved: 'تایید شده'
       } : {
         tocTitle: 'Table of Contents',
         quickOverview: 'Quick Overview: ',
@@ -292,7 +303,16 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
         warningsTitle: 'Important Warnings',
         sourcesTitle: 'Official Sources Cited',
         accessedOn: 'Accessed on',
-        lastReviewed: 'Last Reviewed'
+        lastReviewed: 'Last Reviewed',
+        statusLabel: 'Content status',
+        factCheckLabel: 'Fact-check status',
+        smeReviewLabel: 'SME/legal review',
+        statusDraft: 'Draft',
+        statusPublished: 'Published',
+        factCheckVerified: 'Verified',
+        factCheckPartially: 'Partially verified',
+        smeReviewPending: 'Pending',
+        smeReviewApproved: 'Approved'
       };
 
       return (
@@ -575,76 +595,81 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
       );
 
     // 7. FIRST DAYS CHECKLIST
-    case 'first-days-checklist':
-    default:
+    case 'first-days-checklist': {
+      const guideData = currentLang === 'fa' ? firstDaysChecklistFA : firstDaysChecklistEN;
+      const translations = currentLang === 'fa' ? {
+        tocTitle: 'فهرست محتوای این راهنما',
+        quickOverview: 'پاسخ سریع: ',
+        appliesTo: 'این بخش برای چه کسانی است؟',
+        exceptionsTitle: 'استثنائات و محدودیت‌ها',
+        documentsTitle: 'مدارک مورد نیاز',
+        stepsTitle: 'مراحل انجام کار',
+        feesTitle: 'هزینه‌های مربوطه',
+        timelinesTitle: 'زمان‌بندی فرآیند',
+        amountHeader: 'مبلغ',
+        notesHeader: 'توضیحات',
+        durationHeader: 'مدت زمان',
+        authorityTitle: 'مرجع مسئول',
+        actionLabel: 'پورتال رسمی اقدام',
+        warningsTitle: 'هشدارهای مهم',
+        sourcesTitle: 'منابع رسمی استناد شده',
+        accessedOn: 'تاریخ دسترسی',
+        lastReviewed: 'آخرین بازبینی',
+        statusLabel: 'وضعیت محتوا',
+        factCheckLabel: 'وضعیت راستی‌آزمایی',
+        smeReviewLabel: 'بازبینی تخصصی/حقوقی',
+        statusDraft: 'پیشنویس',
+        statusPublished: 'منتشر شده',
+        factCheckVerified: 'تایید شده',
+        factCheckPartially: 'بخشی تأیید شده',
+        smeReviewPending: 'در انتظار بررسی',
+        smeReviewApproved: 'تایید شده'
+      } : {
+        tocTitle: 'Table of Contents',
+        quickOverview: 'Quick Overview: ',
+        appliesTo: 'Who this applies to',
+        exceptionsTitle: 'Exceptions & Limitations',
+        documentsTitle: 'Required Documents',
+        stepsTitle: 'Step-by-Step Process',
+        feesTitle: 'Applicable Fees',
+        timelinesTitle: 'Process Timelines',
+        amountHeader: 'Amount',
+        notesHeader: 'Notes',
+        durationHeader: 'Duration',
+        authorityTitle: 'Responsible Authority',
+        actionLabel: 'Official Action Portal',
+        warningsTitle: 'Important Warnings',
+        sourcesTitle: 'Official Sources Cited',
+        accessedOn: 'Accessed on',
+        lastReviewed: 'Last Reviewed',
+        statusLabel: 'Content status',
+        factCheckLabel: 'Fact-check status',
+        smeReviewLabel: 'SME/legal review',
+        statusDraft: 'Draft',
+        statusPublished: 'Published',
+        factCheckVerified: 'Verified',
+        factCheckPartially: 'Partially verified',
+        smeReviewPending: 'Pending',
+        smeReviewApproved: 'Approved'
+      };
+
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <Breadcrumb slugRoute="needs/first-days-checklist" currentLang={currentLang} onNavigate={onNavigate} />
-
-          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
-            <span className="text-[#2F6FED] font-bold text-xs uppercase tracking-wider">
-              {currentLang === 'fa' ? 'راهنمای تازه واردین' : 'New Arrivals Guide'}
-            </span>
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
-              {currentLang === 'fa' ? 'چک‌لیست روزهای نخست ورود به رومانی' : 'First-Days Arrival Checklist'}
-            </h1>
-            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
-              {currentLang === 'fa'
-                ? 'اقدامات حیاتی در ۷۲ ساعت، ۷ روز و ۳۰ روز اول ورود برای دانشجویان، کارکنان و خانواده‌ها.'
-                : 'Essential checklist for your first 72 hours, 7 days, and 30 days in Romania.'}
-            </p>
-          </div>
-
-          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-            {currentLang === 'fa' 
-              ? 'روزهای نخست ورود به رومانی می‌تواند چالش‌برانگیز باشد، اما با یک برنامه‌ریزی دقیق همه‌چیز به‌خوبی پیش خواهد رفت. از لحظه فرود، اولویت شما باید انجام کارهای اداری سریع مانند تهیه سیم‌کارت محلی، آشنایی با نقشه حمل‌ونقل عمومی و باز کردن یک حساب بانکی اولیه باشد. بلافاصله پس از آن، لازم است مکان اقامت دائم خود را با امضای قرارداد مسکن قطعی کرده و وضعیت خود را به دانشگاه یا کارفرما اطلاع دهید تا بتوانید پیش از پایان مهلت ویزا، پرونده اقامت خود را با موفقیت در سامانه IGI به ثبت برسانید.'
-              : 'Your first few days in Romania can be overwhelming, but a structured approach will help you settle in smoothly. From the moment you land, prioritizing immediate administrative tasks will set the foundation for your stay. Securing a local SIM card, understanding the public transport system, and opening a bank account are your initial milestones. Shortly after, you must finalize your housing contract and report your arrival to your university or employer, ensuring you meet the strict legal deadlines for your residence permit application at the General Inspectorate for Immigration (IGI).'}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="editorial-card p-6 bg-white space-y-3 border border-[#dfe6ef]">
-              <span className="bg-blue-100 text-[#2F6FED] px-3 py-1 rounded-full text-xs font-bold">۷۲ ساعت اول</span>
-              <ul className="space-y-2 text-sm text-[#526174] pt-2">
-                <li>✓ تهیه سیم‌کارت رومانی (Orange, Vodafone)</li>
-                <li>✓ تهیه کارت حمل و نقل شهری (STB)</li>
-                <li>✓ تبدیل ارز اولیه به RON</li>
-              </ul>
-            </div>
-            <div className="editorial-card p-6 bg-white space-y-3 border border-[#dfe6ef]">
-              <span className="bg-blue-100 text-[#2F6FED] px-3 py-1 rounded-full text-xs font-bold">۷ روز اول</span>
-              <ul className="space-y-2 text-sm text-[#526174] pt-2">
-                <li>✓ ثبت‌نام در دانشگاه / کارفرما</li>
-                <li>✓ امضای قرارداد اجاره مسکن</li>
-                <li>✓ افتتاح حساب بانکی اولیه</li>
-              </ul>
-            </div>
-            <div className="editorial-card p-6 bg-white space-y-3 border border-[#dfe6ef]">
-              <span className="bg-blue-100 text-[#2F6FED] px-3 py-1 rounded-full text-xs font-bold">۳۰ روز اول</span>
-              <ul className="space-y-2 text-sm text-[#526174] pt-2">
-                <li>✓ نوبت‌دهی و مراجعه به IGI کارت اقامت</li>
-                <li>✓ ثبت معاینات پزشکی اقامت</li>
-                <li>✓ تشکیل پرونده در سامانه میخک</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
-            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
-              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
-            </h3>
-            <div className="space-y-6">
-              <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا باید پاسپورتم را همیشه در شهر به همراه داشته باشم؟' : 'Do I need to carry my passport with me at all times?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، تا زمانی که کارت اقامت رومانیایی (Permis de Ședere) خود را دریافت نکرده‌اید، داشتن پاسپورت به همراه ویزای معتبر برای اثبات هویت الزامی است.' : 'Yes, until you receive your Romanian residence card, you should carry your original passport with the valid visa to prove your legal status.'}</p>
-              </div>
-              <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چه زمانی باید درخواست کارت اقامت خود را ثبت کنم؟' : 'How soon should I apply for my residence permit?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'شما باید به محض داشتن قرارداد مسکن قطعی و حداکثر ۳۰ روز قبل از پایان مهلت قانونی ویزای فعلی، فرآیند را در سامانه آنلاین IGI آغاز کنید.' : 'You should initiate the process on the IGI online portal as soon as you have your housing contract, and strictly at least 30 days before your 90-day visa expires.'}</p>
-              </div>
-            </div>
-          </div>
-
-          <ParentHubFooterCard slugRoute="needs/first-days-checklist" currentLang={currentLang} onNavigate={onNavigate} />
+          <OperationalGuideLayout guide={guideData} translations={translations} />
+          <ParentHubFooterCard
+            currentLang={currentLang}
+            slugRoute="needs/first-days-checklist"
+            onNavigate={onNavigate}
+          />
+          <CommentsSection pagePath={`needs/${subRoute}`} currentLang={currentLang} />
+        </div>
+      );
+    }
+    default:
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <p>Guide not found.</p>
         </div>
       );
   }

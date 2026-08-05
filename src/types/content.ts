@@ -4,17 +4,31 @@ export type ContentStatus = 'draft' | 'editorial-review' | 'fact-check-review' |
 export type FactCheckStatus = 'unchecked' | 'partially-verified' | 'source-verified' | 'requires-legal-review';
 export type RiskCategory = 'IMMIGRATION' | 'LEGAL' | 'TAX' | 'FINANCIAL' | 'MEDICAL' | 'EDUCATION' | 'PRIVACY' | 'CONSUMER' | 'OUTDATED' | 'UNSUPPORTED';
 
+export type ClaimStatus =
+  | 'VERIFIED_LEGAL_REQUIREMENT'
+  | 'QUALIFIED_LEGAL_REQUIREMENT'
+  | 'RECOMMENDED_PRACTICAL_ACTION'
+  | 'PROVIDER_DEPENDENT'
+  | 'OPTIONAL'
+  | 'REMOVED'
+  | 'PROFESSIONAL_REVIEW_REQUIRED'
+  | 'VERIFIED'
+  | 'OWNER_REVIEW_REQUIRED';
+
 export interface OfficialSource {
   id: string;
   sourceTitle: string;
   organization: string;
   url: string;
-  sourceType: 'legislation' | 'official-website' | 'embassy' | 'international-convention' | 'other';
+  sourceType: 'official-website' | 'legislation' | 'official-pdf' | 'embassy' | 'professional-counsel' | 'provider';
   language: 'ro' | 'en' | 'fa';
   dateAccessed: string;
-  publicationDate?: string;
   applicableSection?: string;
-  status: 'primary' | 'secondary';
+  status: 'primary' | 'secondary' | 'deprecated';
+  volatility?: 'high' | 'medium' | 'low';
+  scopeAndExceptions?: string;
+  applicableScenarioIds?: string[];
+  applicableClaimIds?: string[];
 }
 
 export interface CostEstimate {
@@ -22,6 +36,7 @@ export interface CostEstimate {
   currency: 'RON' | 'EUR' | 'USD';
   description: string;
   sourceId?: string;
+  claimId?: string;
   isFixed: boolean;
 }
 
@@ -29,7 +44,19 @@ export interface TimelineEstimate {
   duration: string;
   description: string;
   sourceId?: string;
+  claimId?: string;
   isGuaranteed: boolean;
+}
+
+export interface Step {
+  title: string;
+  description: string;
+  claimId?: string;
+  status?: ClaimStatus;
+  reviewDate?: string;
+  sourceId?: string;
+  authority?: string;
+  jurisdiction?: string;
 }
 
 export interface ScenarioDefinition {
@@ -45,11 +72,12 @@ export interface ScenarioDefinition {
     name: string;
     description?: string;
     isMandatory: boolean;
+    claimId?: string;
+    sourceId?: string;
+    status?: ClaimStatus;
+    reviewDate?: string;
   }>;
-  steps: Array<{
-    title: string;
-    description: string;
-  }>;
+  steps: Step[];
   fees: CostEstimate[];
   timeline: TimelineEstimate[];
   exceptions: string[];
@@ -72,6 +100,7 @@ export interface OperationalGuide {
   generalExceptions: string[];
   commonProblems: string[];
   warnings: string[];
+  publicDisclosure?: string;
   officialSources: OfficialSource[];
   relatedGuides: Array<{
     route: string;
@@ -82,5 +111,6 @@ export interface OperationalGuide {
   contentOwner: string;
   contentStatus: ContentStatus;
   factCheckStatus: FactCheckStatus;
+  smeReviewStatus?: 'PENDING' | 'APPROVED' | 'REJECTED';
   riskCategory: RiskCategory[];
 }
