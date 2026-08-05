@@ -110,17 +110,22 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
           </div>
         </div>
 
-        {uniqueLanguages.length > 0 && (
+        {(uniqueLanguages.filter(l => l !== 'UNKNOWN').length > 0 || uniqueLanguages.includes('UNKNOWN')) && (
           <div className="space-y-1.5 pt-2">
             <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
               {currentLang === 'fa' ? 'زبان‌های تدریس:' : 'Teaching Languages:'}
             </div>
             <div className="flex flex-wrap gap-1.5">
-              {uniqueLanguages.map((lang, idx) => (
+              {uniqueLanguages.filter(l => l !== 'UNKNOWN').map((lang, idx) => (
                 <span key={idx} className="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-md text-[11px] font-bold border border-blue-200">
-                  {lang === 'UNKNOWN' ? (currentLang === 'fa' ? 'نامشخص' : 'Unknown') : lang}
+                  {lang}
                 </span>
               ))}
+              {uniqueLanguages.includes('UNKNOWN') && (
+                <span className="px-2 py-0.5 bg-slate-50 text-slate-600 rounded-md text-[11px] font-medium border border-slate-200 italic">
+                  {currentLang === 'fa' ? 'زبان تدریس نیازمند بررسی است' : 'Teaching language needs verification'}
+                </span>
+              )}
             </div>
           </div>
         )}

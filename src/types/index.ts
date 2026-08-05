@@ -40,7 +40,7 @@ export interface RecognitionSource {
   officialFlag: boolean;
 }
 
-export type StudyAreaId = 
+export type StudyAreaId =
   | 'medicine_dentistry'
   | 'computer_it'
   | 'engineering'

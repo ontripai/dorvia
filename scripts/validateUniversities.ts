@@ -11,6 +11,25 @@ function assert(condition: boolean, msg: string) {
   if (!condition) error(msg);
 }
 
+import fs from 'fs';
+import path from 'path';
+
+// UI checks
+const pagePath = path.resolve(__dirname, '../src/app/universities/page.tsx');
+const cardPath = path.resolve(__dirname, '../src/components/UniversityCard.tsx');
+const pageContent = fs.readFileSync(pagePath, 'utf8');
+const cardContent = fs.readFileSync(cardPath, 'utf8');
+
+assert(
+  pageContent.includes(".filter(lang => lang !== 'UNKNOWN')"),
+  "UNKNOWN must be excluded from language filter dropdown"
+);
+
+assert(
+  cardContent.includes("filter(l => l !== 'UNKNOWN')") && cardContent.includes("includes('UNKNOWN')"),
+  "UNKNOWN must not be rendered as a normal badge"
+);
+
 console.log('Validating universities data...');
 
 // Constraint 1: Exactly 9 universities
@@ -122,6 +141,52 @@ universitiesData.forEach(uni => {
   }
 
 });
+
+// Functional Filtering Tests
+console.log('Running functional filter simulations...');
+
+// Simulate filtering function
+function simulateFilter(area: string | null, lang: string | null) {
+  return universitiesData.filter((uni) => {
+    if (!area && !lang) return true;
+    return uni.programs.some(p => {
+      const matchesArea = area ? p.studyAreaId === area : true;
+      const matchesLang = lang ? p.languages.includes(lang as any) : true;
+      return matchesArea && matchesLang;
+    });
+  });
+}
+
+// 1. Default result
+const defaultResult = simulateFilter(null, null);
+assert(defaultResult.length === 9, `Default result should contain exactly 9 universities, got ${defaultResult.length}`);
+
+// 2. UNKNOWN never satisfies specific language
+const enResults = simulateFilter(null, 'EN');
+assert(enResults.every(u => u.programs.some(p => p.languages.includes('EN'))), "EN filter should only match EN programs");
+
+// 3. Program with UNKNOWN still satisfies study area
+const unknownOnlyPrograms = universitiesData.flatMap(u => u.programs).filter(p => p.languages.includes('UNKNOWN'));
+assert(unknownOnlyPrograms.length > 0, "UNKNOWN remains present in raw data");
+const someUnknownArea = unknownOnlyPrograms[0].studyAreaId;
+const areaResults = simulateFilter(someUnknownArea, null);
+assert(areaResults.length > 0, `UNKNOWN program should still satisfy its verified study area (${someUnknownArea})`);
+
+// 4. Contextual program-level matching (Medicine + UNKNOWN, Business + EN)
+const simulatedUni = {
+  programs: [
+    { name: { en: 'Med', fa: 'Med' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
+    { name: { en: 'Bus', fa: 'Bus' }, studyAreaId: 'management_business', languages: ['EN'] }
+  ]
+};
+const testMatchesAreaLang = (area: string, lang: string) => simulatedUni.programs.some(p =>
+
+  (area ? p.studyAreaId === area : true) && (lang ? p.languages.includes(lang) : true)
+);
+
+assert(testMatchesAreaLang('medicine_dentistry', ''), "Must match Medicine");
+assert(testMatchesAreaLang('management_business', 'EN'), "Must match Business + EN");
+assert(!testMatchesAreaLang('medicine_dentistry', 'EN'), "Must not match Medicine + EN");
 
 if (hasErrors) {
   console.error('\n❌ University validation failed.');

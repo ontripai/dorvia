@@ -38,9 +38,25 @@ function UniversitiesContent() {
   };
 
   const handleStudyAreaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const val = e.target.value;
-    setStudyArea(val as any);
-    updateFilters(val, language);
+    const val = e.target.value as StudyAreaId | '';
+    setStudyArea(val);
+
+    let nextLang = language;
+    if (language && val) {
+      const validLangs = Array.from(new Set(
+        featuredUniversities.flatMap(uni =>
+          uni.programs
+            .filter(p => p.studyAreaId === val)
+            .flatMap(p => p.languages)
+        )
+      )).filter(lang => lang !== 'UNKNOWN');
+
+      if (!validLangs.includes(language as any)) {
+        nextLang = '';
+        setLanguage('');
+      }
+    }
+    updateFilters(val, nextLang);
   };
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -58,7 +74,7 @@ function UniversitiesContent() {
       const cityStr = currentLang === 'fa' ? uni.cityFa : uni.cityEn;
       const officialNameStr = uni.officialRomanianName;
       
-      const matchesSearch = nameStr.toLowerCase().includes(cleanQuery) || 
+      const matchesSearch = nameStr.toLowerCase().includes(cleanQuery) ||
                             cityStr.toLowerCase().includes(cleanQuery) ||
                             officialNameStr.toLowerCase().includes(cleanQuery);
       if (!matchesSearch) return false;
@@ -86,6 +102,21 @@ function UniversitiesContent() {
     languages: { RO: "Romanian", EN: "English", FR: "French", UNKNOWN: "Unknown / Needs Verification" }
   };
 
+  const availableLanguages = Array.from(new Set(
+    featuredUniversities.flatMap(uni =>
+      uni.programs
+        .filter(p => !studyArea || p.studyAreaId === studyArea)
+        .flatMap(p => p.languages)
+    )
+  )).filter(lang => lang !== 'UNKNOWN') as TeachingLanguage[];
+
+  const orderedLanguages = availableLanguages.sort((a, b) => {
+    const order = { 'RO': 1, 'EN': 2, 'FR': 3 };
+    const aOrder = order[a as keyof typeof order] || 99;
+    const bOrder = order[b as keyof typeof order] || 99;
+    return aOrder - bOrder;
+  });
+
   return (
     <div className="space-y-8 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
       <div>
@@ -108,8 +139,8 @@ function UniversitiesContent() {
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
             <label className="block text-xs font-semibold text-[#526174] mb-1">{dirKeys.filters.studyArea}</label>
-            <select 
-              value={studyArea} 
+            <select
+              value={studyArea}
               onChange={handleStudyAreaChange}
               className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
             >
@@ -121,13 +152,13 @@ function UniversitiesContent() {
           </div>
           <div className="flex-1">
             <label className="block text-xs font-semibold text-[#526174] mb-1">{dirKeys.filters.language}</label>
-            <select 
-              value={language} 
+            <select
+              value={language}
               onChange={handleLanguageChange}
               className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
             >
               <option value="">{dirKeys.filters.allLanguages}</option>
-              {Object.keys(dirKeys.languages).map(key => (
+              {orderedLanguages.map(key => (
                 <option key={key} value={key}>{dirKeys.languages[key]}</option>
               ))}
             </select>
