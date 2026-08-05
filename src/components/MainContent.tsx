@@ -514,9 +514,13 @@ export const MainContent: React.FC<MainContentProps> = ({
                       ? 'شامل دانشگاه بخارست، پلی‌تکنیک، ASE و رومانیایی-آمریکایی. برای اطلاع از شهریه‌ها و رشته‌های مهندسی، حقوق، تجارت و مدیریت، فهرست کامل را ببینید.'
                       : 'Including University of Bucharest, Politehnica, ASE, and Romanian-American University. View the full list for engineering, law, and business programs.'}
                   </p>
-                  <Button variant="outline" size="sm" href="/universities" rightIcon={<ArrowIcon size={14} />}>
-                    {currentLang === 'fa' ? 'مشاهده دانشگاه‌های غیرپزشکی' : 'View Non-Medical Universities'}
-                  </Button>
+                  <Link
+                    href="/universities"
+                    className="inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 cursor-pointer text-xs min-h-[36px] px-3.5 space-x-1.5 rtl:space-x-reverse text-blue-700 bg-white border border-blue-200 hover:bg-blue-50 hover:text-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  >
+                    <span>{currentLang === 'fa' ? 'مشاهده دانشگاه‌های غیرپزشکی' : 'View Non-Medical Universities'}</span>
+                    <span className="shrink-0"><ArrowIcon size={14} /></span>
+                  </Link>
                 </div>
 
                 {/* Group 3: Warning */}
@@ -530,9 +534,13 @@ export const MainContent: React.FC<MainContentProps> = ({
                       ? 'این دانشگاه خصوصی با وجود محبوبیت، در فهرست فعلی وزارت بهداشت ایران قرار ندارد. پیش از پرداخت شهریه حدود ۱۱,۰۰۰ یورویی آن، جزئیات کامل را مطالعه کنید.'
                       : 'Despite its popularity for medical studies, this private university is not currently listed by Iran’s MOH. Read the full details before considering the €11,000/year unofficial tuition.'}
                   </p>
-                  <Button variant="outline" size="sm" href="/universities" rightIcon={<ArrowIcon size={14} />}>
-                    {currentLang === 'fa' ? 'مطالعه اطلاعیه' : 'Read Notice'}
-                  </Button>
+                  <Link
+                    href="/universities"
+                    className="inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 cursor-pointer text-xs min-h-[36px] px-3.5 space-x-1.5 rtl:space-x-reverse text-amber-800 bg-white border border-amber-300 hover:bg-amber-100 hover:text-amber-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+                  >
+                    <span>{currentLang === 'fa' ? 'مطالعه اطلاعیه' : 'Read Notice'}</span>
+                    <span className="shrink-0"><ArrowIcon size={14} /></span>
+                  </Link>
                 </div>
               </div>
 
