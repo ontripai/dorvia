@@ -12,8 +12,11 @@ export const universitiesData: University[] = [
     cityFa: 'بخارست',
     cityEn: 'Bucharest',
     institutionType: { fa: 'دولتی علوم پزشکی', en: 'Public Medical' },
-    studyFieldsFa: ['پزشکی عمومی', 'داروسازی', 'دندانپزشکی'],
-    studyFieldsEn: ['General Medicine', 'Pharmacy', 'Dentistry'],
+    programs: [
+      { name: { fa: 'پزشکی عمومی', en: 'General Medicine' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
+      { name: { fa: 'داروسازی', en: 'Pharmacy' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
+      { name: { fa: 'دندانپزشکی', en: 'Dentistry' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] }
+    ],
     tuitionItems: [
       { program: { fa: 'پزشکی', en: 'Medicine' }, amount: 10000, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
       { program: { fa: 'دندانپزشکی', en: 'Dentistry' }, amount: 10000, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
@@ -62,8 +65,11 @@ export const universitiesData: University[] = [
     cityFa: 'تیمیشوارا',
     cityEn: 'Timișoara',
     institutionType: { fa: 'دولتی علوم پزشکی', en: 'Public Medical' },
-    studyFieldsFa: ['پزشکی عمومی', 'داروسازی', 'دندانپزشکی'],
-    studyFieldsEn: ['General Medicine', 'Pharmacy', 'Dentistry'],
+    programs: [
+      { name: { fa: 'پزشکی عمومی', en: 'General Medicine' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
+      { name: { fa: 'داروسازی', en: 'Pharmacy' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
+      { name: { fa: 'دندانپزشکی', en: 'Dentistry' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] }
+    ],
     tuitionItems: [
       { program: { fa: 'پزشکی و دندانپزشکی', en: 'Medicine/Dentistry' }, amount: 9000, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
       { program: { fa: 'داروسازی', en: 'Pharmacy' }, amount: 8000, currency: 'EUR', period: 'academic-year', feeType: 'tuition' }
@@ -111,8 +117,11 @@ export const universitiesData: University[] = [
     cityFa: 'یاش',
     cityEn: 'Iași',
     institutionType: { fa: 'دولتی علوم پزشکی', en: 'Public Medical' },
-    studyFieldsFa: ['پزشکی عمومی', 'داروسازی', 'دندانپزشکی'],
-    studyFieldsEn: ['General Medicine', 'Pharmacy', 'Dentistry'],
+    programs: [
+      { name: { fa: 'پزشکی عمومی', en: 'General Medicine' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
+      { name: { fa: 'داروسازی', en: 'Pharmacy' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
+      { name: { fa: 'دندانپزشکی', en: 'Dentistry' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] }
+    ],
     tuitionItems: [
       { program: { fa: 'همه رشته‌ها', en: 'All Programs' }, feeType: 'contact' }
     ],
@@ -159,8 +168,11 @@ export const universitiesData: University[] = [
     cityFa: 'کلوژ-نپوکا',
     cityEn: 'Cluj-Napoca',
     institutionType: { fa: 'دولتی علوم پزشکی', en: 'Public Medical' },
-    studyFieldsFa: ['پزشکی عمومی', 'داروسازی', 'دندانپزشکی'],
-    studyFieldsEn: ['General Medicine', 'Pharmacy', 'Dentistry'],
+    programs: [
+      { name: { fa: 'پزشکی عمومی', en: 'General Medicine' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
+      { name: { fa: 'داروسازی', en: 'Pharmacy' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
+      { name: { fa: 'دندانپزشکی', en: 'Dentistry' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] }
+    ],
     tuitionItems: [
       { program: { fa: 'سال اول (پزشکی/دندانپزشکی/داروسازی)', en: 'First-year Medicine/Dentistry/Pharmacy' }, amount: 10000, currency: 'EUR', period: 'academic-year', feeType: 'tuition' }
     ],
@@ -209,8 +221,12 @@ export const universitiesData: University[] = [
     cityFa: 'بخارست',
     cityEn: 'Bucharest',
     institutionType: { fa: 'دولتی جامع', en: 'Public Comprehensive' },
-    studyFieldsFa: ['حقوق و علوم سیاسی', 'علوم کامپیوتر و ریاضیات', 'زبان‌های خارجی', 'مدیریت'],
-    studyFieldsEn: ['Law & Political Science', 'Computer Science & Mathematics', 'Foreign Languages', 'Management'],
+    programs: [
+      { name: { fa: 'حقوق و علوم سیاسی', en: 'Law & Political Science' }, studyAreaId: 'law_political_science', languages: ['UNKNOWN'] },
+      { name: { fa: 'علوم کامپیوتر و ریاضیات', en: 'Computer Science & Mathematics' }, studyAreaId: 'computer_it', languages: ['UNKNOWN'] },
+      { name: { fa: 'زبان‌های خارجی', en: 'Foreign Languages' }, studyAreaId: 'foreign_languages', languages: ['UNKNOWN'] },
+      { name: { fa: 'مدیریت', en: 'Management' }, studyAreaId: 'management_business', languages: ['UNKNOWN'] }
+    ],
     tuitionItems: [
       { program: { fa: 'کارشناسی', en: 'Bachelor' }, amount: 2500, maxAmount: 3150, currency: 'EUR', period: 'academic-year', feeType: 'tuition' }
     ],
@@ -250,8 +266,12 @@ export const universitiesData: University[] = [
     cityFa: 'بخارست',
     cityEn: 'Bucharest',
     institutionType: { fa: 'دولتی فناوری', en: 'Public Technological' },
-    studyFieldsFa: ['مهندسی کامپیوتر', 'هوافضا', 'مهندسی برق', 'رباتیک'],
-    studyFieldsEn: ['Computer Engineering', 'Aerospace', 'Electrical Engineering', 'Robotics'],
+    programs: [
+      { name: { fa: 'مهندسی کامپیوتر', en: 'Computer Engineering' }, studyAreaId: 'computer_it', languages: ['UNKNOWN'] },
+      { name: { fa: 'هوافضا', en: 'Aerospace' }, studyAreaId: 'engineering', languages: ['UNKNOWN'] },
+      { name: { fa: 'مهندسی برق', en: 'Electrical Engineering' }, studyAreaId: 'engineering', languages: ['UNKNOWN'] },
+      { name: { fa: 'رباتیک', en: 'Robotics' }, studyAreaId: 'engineering', languages: ['UNKNOWN'] }
+    ],
     tuitionItems: [
       { program: { fa: 'مهندسی (کارشناسی)', en: 'Engineering Undergraduate' }, amount: 2600, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
       { program: { fa: 'مهندسی (کارشناسی ارشد)', en: 'Engineering Graduate' }, amount: 2700, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
@@ -293,8 +313,12 @@ export const universitiesData: University[] = [
     cityFa: 'بخارست',
     cityEn: 'Bucharest',
     institutionType: { fa: 'دولتی اقتصاد', en: 'Public Economic' },
-    studyFieldsFa: ['اقتصاد', 'تجارت بین‌الملل', 'حسابداری', 'مدیریت بازرگانی'],
-    studyFieldsEn: ['Economics', 'International Business', 'Accounting', 'Business Administration'],
+    programs: [
+      { name: { fa: 'اقتصاد', en: 'Economics' }, studyAreaId: 'management_business', languages: ['UNKNOWN'] },
+      { name: { fa: 'تجارت بین‌الملل', en: 'International Business' }, studyAreaId: 'management_business', languages: ['UNKNOWN'] },
+      { name: { fa: 'حسابداری', en: 'Accounting' }, studyAreaId: 'management_business', languages: ['UNKNOWN'] },
+      { name: { fa: 'مدیریت بازرگانی', en: 'Business Administration' }, studyAreaId: 'management_business', languages: ['UNKNOWN'] }
+    ],
     tuitionItems: [
       { program: { fa: 'کارشناسی', en: 'Bachelor' }, amount: 3500, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
       { program: { fa: 'ثبت‌نام کارشناسی', en: 'Bachelor Registration' }, amount: 350, currency: 'EUR', period: 'one-time', feeType: 'registration_fee' },
@@ -344,8 +368,10 @@ export const universitiesData: University[] = [
     cityFa: 'بخارست',
     cityEn: 'Bucharest',
     institutionType: { fa: 'خصوصی', en: 'Private' },
-    studyFieldsFa: ['کسب و کار', 'روابط بین‌الملل'],
-    studyFieldsEn: ['Business', 'International Relations'],
+    programs: [
+      { name: { fa: 'کسب و کار', en: 'Business' }, studyAreaId: 'management_business', languages: ['UNKNOWN'] },
+      { name: { fa: 'روابط بین‌الملل', en: 'International Relations' }, studyAreaId: 'other', languages: ['UNKNOWN'] }
+    ],
     tuitionItems: [
       { program: { fa: 'دوره پایه', en: 'Foundation' }, amount: 2900, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
       { program: { fa: 'کارشناسی', en: 'Bachelor regular' }, amount: 3400, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
@@ -393,8 +419,11 @@ export const universitiesData: University[] = [
     cityFa: 'بخارست',
     cityEn: 'Bucharest',
     institutionType: { fa: 'خصوصی علوم پزشکی', en: 'Private Medical' },
-    studyFieldsFa: ['پزشکی', 'دندانپزشکی', 'داروسازی'],
-    studyFieldsEn: ['Medicine', 'Dentistry', 'Pharmacy'],
+    programs: [
+      { name: { fa: 'پزشکی', en: 'Medicine' }, studyAreaId: 'medicine_dentistry', languages: ['EN'] },
+      { name: { fa: 'دندانپزشکی', en: 'Dentistry' }, studyAreaId: 'medicine_dentistry', languages: ['EN'] },
+      { name: { fa: 'داروسازی', en: 'Pharmacy' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] }
+    ],
     tuitionItems: [
       { program: { fa: 'پزشکی انگلیسی (سال اول)', en: 'English Medicine, first year' }, amount: 16500, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
       { program: { fa: 'دندانپزشکی انگلیسی (سال اول)', en: 'English Dentistry, first year' }, amount: 16500, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },

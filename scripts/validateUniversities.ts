@@ -58,7 +58,12 @@ universitiesData.forEach(uni => {
   assert(!!uni.descriptionFa && !!uni.descriptionEn, `Missing description for ${uni.id}`);
   assert(!!uni.ctaLabelFa && !!uni.ctaLabelEn, `Missing CTA labels for ${uni.id}`);
   assert(!!uni.ctaHref && !uni.ctaHref.includes('#'), `Invalid CTA Href for ${uni.id}`);
-  assert(uni.studyFieldsFa.length === uni.studyFieldsEn.length, `Study fields length mismatch for ${uni.id}`);
+  assert(uni.programs && uni.programs.length > 0, `Missing programs for ${uni.id}`);
+  uni.programs.forEach((prog, pIdx) => {
+    assert(!!prog.name.fa && !!prog.name.en, `Missing bilingual program name at index ${pIdx} in ${uni.id}`);
+    assert(!!prog.studyAreaId, `Missing studyAreaId for program at index ${pIdx} in ${uni.id}`);
+    assert(!!prog.languages && prog.languages.length > 0, `Missing languages for program at index ${pIdx} in ${uni.id}`);
+  });
 
   if (uni.disclaimer) {
     assert(!!uni.disclaimer.fa && !!uni.disclaimer.en, `Disclaimer must be bilingual for ${uni.id}`);

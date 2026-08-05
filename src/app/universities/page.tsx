@@ -1,33 +1,90 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useAppContext } from '../../components/AppLayout';
 import { featuredUniversities } from '../../lib/data';
 import { getTranslations } from '../../lib/i18n';
 import { UniversityCard } from '../../components/UniversityCard';
+import { StudyAreaId, TeachingLanguage } from '../../types';
 import { EvaluationCTA } from '../../components/EvaluationCTA';
 
-export default function UniversitiesPage() {
+function UniversitiesContent() {
   const { currentLang, onOpenEvaluationModal } = useAppContext();
-  const t = getTranslations(currentLang);
+  const t = getTranslations(currentLang) as any;
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [uniSearch, setUniSearch] = useState('');
+  const [studyArea, setStudyArea] = useState<StudyAreaId | ''>('');
+  const [language, setLanguage] = useState<TeachingLanguage | ''>('');
+
+  useEffect(() => {
+    const area = searchParams.get('area') as StudyAreaId | null;
+    const lang = searchParams.get('lang') as TeachingLanguage | null;
+    if (area) setStudyArea(area);
+    if (lang) setLanguage(lang);
+  }, [searchParams]);
+
+  const updateFilters = (area: string, lang: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (area) params.set('area', area);
+    else params.delete('area');
+    
+    if (lang) params.set('lang', lang);
+    else params.delete('lang');
+    
+    router.push(`?${params.toString()}`, { scroll: false });
+  };
+
+  const handleStudyAreaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const val = e.target.value;
+    setStudyArea(val as any);
+    updateFilters(val, language);
+  };
+
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const val = e.target.value;
+    setLanguage(val as any);
+    updateFilters(studyArea, val);
+  };
 
   const cleanQuery = uniSearch.trim().toLowerCase();
   
   const filteredUnis = featuredUniversities.filter((uni) => {
-    if (!cleanQuery) return true;
-    const nameStr = currentLang === 'fa' ? uni.nameFa : uni.nameEn;
-    const cityStr = currentLang === 'fa' ? uni.cityFa : uni.cityEn;
-    const officialNameStr = uni.officialRomanianName;
-    
-    return nameStr.toLowerCase().includes(cleanQuery) || 
-           cityStr.toLowerCase().includes(cleanQuery) ||
-           officialNameStr.toLowerCase().includes(cleanQuery);
+    // text search
+    if (cleanQuery) {
+      const nameStr = currentLang === 'fa' ? uni.nameFa : uni.nameEn;
+      const cityStr = currentLang === 'fa' ? uni.cityFa : uni.cityEn;
+      const officialNameStr = uni.officialRomanianName;
+      
+      const matchesSearch = nameStr.toLowerCase().includes(cleanQuery) || 
+                            cityStr.toLowerCase().includes(cleanQuery) ||
+                            officialNameStr.toLowerCase().includes(cleanQuery);
+      if (!matchesSearch) return false;
+    }
+
+    if (!studyArea && !language) return true;
+
+    // A university matches if it has AT LEAST ONE program that satisfies the active filters
+    const hasMatchingProgram = uni.programs?.some(program => {
+      const matchesArea = studyArea ? program.studyAreaId === studyArea : true;
+      const matchesLang = language ? program.languages.includes(language) : true;
+      return matchesArea && matchesLang;
+    });
+
+    return hasMatchingProgram;
   });
 
   const group1 = filteredUnis.filter(u => u.groupId === 1);
   const group2 = filteredUnis.filter(u => u.groupId === 2);
   const group3 = filteredUnis.filter(u => u.groupId === 3);
+
+  const dirKeys = t.directory || {
+    filters: { studyArea: "Study Area", allStudyAreas: "All Areas", language: "Teaching Language", allLanguages: "All Languages" },
+    studyAreas: { medicine_dentistry: "Medicine & Dentistry", computer_it: "Computer Engineering & IT", engineering: "Electrical & Mechanical Engineering", management_business: "Management & International Business", law_political_science: "Law & Political Science", foreign_languages: "Foreign Languages", other: "Other Programs" },
+    languages: { RO: "Romanian", EN: "English", FR: "French", UNKNOWN: "Unknown / Needs Verification" }
+  };
 
   return (
     <div className="space-y-8 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
@@ -38,7 +95,7 @@ export default function UniversitiesPage() {
         </p>
       </div>
 
-      <div className="bg-[#eef3f8] p-4 rounded-2xl border border-[#dfe6ef]">
+      <div className="bg-[#eef3f8] p-4 rounded-2xl border border-[#dfe6ef] space-y-4">
         <input
           type="text"
           value={uniSearch}
@@ -47,6 +104,35 @@ export default function UniversitiesPage() {
           aria-label={currentLang === 'fa' ? 'جستجوی دانشگاه' : 'Search universities'}
           className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
         />
+        
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex-1">
+            <label className="block text-xs font-semibold text-[#526174] mb-1">{dirKeys.filters.studyArea}</label>
+            <select 
+              value={studyArea} 
+              onChange={handleStudyAreaChange}
+              className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
+            >
+              <option value="">{dirKeys.filters.allStudyAreas}</option>
+              {Object.keys(dirKeys.studyAreas).map(key => (
+                <option key={key} value={key}>{dirKeys.studyAreas[key]}</option>
+              ))}
+            </select>
+          </div>
+          <div className="flex-1">
+            <label className="block text-xs font-semibold text-[#526174] mb-1">{dirKeys.filters.language}</label>
+            <select 
+              value={language} 
+              onChange={handleLanguageChange}
+              className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
+            >
+              <option value="">{dirKeys.filters.allLanguages}</option>
+              {Object.keys(dirKeys.languages).map(key => (
+                <option key={key} value={key}>{dirKeys.languages[key]}</option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
 
       {group1.length > 0 && (
@@ -56,7 +142,7 @@ export default function UniversitiesPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {group1.map((uni) => (
-              <UniversityCard key={uni.id} university={uni} currentLang={currentLang} />
+              <UniversityCard key={uni.id} university={uni} currentLang={currentLang} activeStudyAreaId={studyArea as StudyAreaId | undefined} activeLanguage={language as TeachingLanguage | undefined} />
             ))}
           </div>
         </section>
@@ -69,7 +155,7 @@ export default function UniversitiesPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {group2.map((uni) => (
-              <UniversityCard key={uni.id} university={uni} currentLang={currentLang} />
+              <UniversityCard key={uni.id} university={uni} currentLang={currentLang} activeStudyAreaId={studyArea as StudyAreaId | undefined} activeLanguage={language as TeachingLanguage | undefined} />
             ))}
           </div>
         </section>
@@ -83,7 +169,7 @@ export default function UniversitiesPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {group3.map((uni) => (
-              <UniversityCard key={uni.id} university={uni} currentLang={currentLang} />
+              <UniversityCard key={uni.id} university={uni} currentLang={currentLang} activeStudyAreaId={studyArea as StudyAreaId | undefined} activeLanguage={language as TeachingLanguage | undefined} />
             ))}
           </div>
         </section>
@@ -97,5 +183,13 @@ export default function UniversitiesPage() {
 
       <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
     </div>
+  );
+}
+
+export default function UniversitiesPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center text-sm text-gray-500">Loading...</div>}>
+      <UniversitiesContent />
+    </Suspense>
   );
 }

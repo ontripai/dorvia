@@ -1,13 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
-import { University, Language } from '../types';
+import { University, Language, StudyAreaId, TeachingLanguage } from '../types';
 
 interface UniversityCardProps {
   university: University;
   currentLang: Language;
+  activeStudyAreaId?: StudyAreaId;
+  activeLanguage?: TeachingLanguage;
 }
 
-export const UniversityCard: React.FC<UniversityCardProps> = ({ university, currentLang }) => {
+export const UniversityCard: React.FC<UniversityCardProps> = ({ university, currentLang, activeStudyAreaId, activeLanguage }) => {
   const isWarning = university.warningLevel !== 'none';
   const badgeColors = isWarning
     ? 'bg-amber-100 text-amber-800 border-amber-300'
@@ -44,6 +46,24 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
 
   const disclaimerText = currentLang === 'fa' ? university.disclaimer?.fa : university.disclaimer?.en;
 
+  // Derive display programs and languages based on active filters
+  let displayedPrograms = university.programs;
+  if (activeStudyAreaId && activeLanguage) {
+    displayedPrograms = university.programs.filter(p => p.studyAreaId === activeStudyAreaId && p.languages.includes(activeLanguage));
+  } else if (activeStudyAreaId) {
+    displayedPrograms = university.programs.filter(p => p.studyAreaId === activeStudyAreaId);
+  } else if (activeLanguage) {
+    displayedPrograms = university.programs.filter(p => p.languages.includes(activeLanguage));
+  }
+
+  // Fallback if none match (should not happen since we filter universities first, but just in case)
+  if (!displayedPrograms || displayedPrograms.length === 0) {
+    displayedPrograms = university.programs;
+  }
+
+  // Get unique languages for the displayed programs
+  const uniqueLanguages = Array.from(new Set(displayedPrograms.flatMap(p => p.languages)));
+
   return (
     <div className={`bg-white rounded-2xl border ${isWarning ? 'border-amber-300' : 'border-slate-200'} shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col justify-between group`}>
 
@@ -79,16 +99,31 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
 
         <div className="space-y-1.5 pt-2">
           <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-            {currentLang === 'fa' ? 'رشته‌های تحصیلی:' : 'Study Fields:'}
+            {currentLang === 'fa' ? 'زمینه‌های تحصیلی مرتبط:' : 'Relevant Study Areas:'}
           </div>
           <div className="flex flex-wrap gap-1.5">
-            {(currentLang === 'fa' ? university.studyFieldsFa : university.studyFieldsEn).map((field, idx) => (
+            {displayedPrograms.map((program, idx) => (
               <span key={idx} className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-[11px] font-medium border border-slate-200">
-                {field}
+                {currentLang === 'fa' ? program.name.fa : program.name.en}
               </span>
             ))}
           </div>
         </div>
+
+        {uniqueLanguages.length > 0 && (
+          <div className="space-y-1.5 pt-2">
+            <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+              {currentLang === 'fa' ? 'زبان‌های تدریس:' : 'Teaching Languages:'}
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {uniqueLanguages.map((lang, idx) => (
+                <span key={idx} className="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-md text-[11px] font-bold border border-blue-200">
+                  {lang === 'UNKNOWN' ? (currentLang === 'fa' ? 'نامشخص' : 'Unknown') : lang}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="pt-3 border-t border-slate-100 space-y-2">
           <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
@@ -99,80 +134,34 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
               <span className="text-slate-600 font-medium">
                 {currentLang === 'fa' ? item.program.fa : item.program.en}
               </span>
-              <span className="font-bold text-[#071B3D]">
+              <span className="font-bold text-[#142033]" dir="ltr">
                 {formatAmount(item.amount, item.maxAmount, item.currency, item.period, item.feeType)}
               </span>
             </div>
           ))}
-
-          <div className="flex items-center justify-between mt-2 pt-2 border-t border-dashed border-slate-200">
-            <span className="text-[10px] font-semibold text-slate-500">
-              {currentLang === 'fa' ? 'سال تحصیلی:' : 'Academic Year:'}
-            </span>
-            <span className="text-[10px] font-bold text-slate-700">
-              {university.tuitionAcademicYear}
+          <div className="flex justify-between text-[10px] text-slate-400 pt-1">
+            <span>{currentLang === 'fa' ? 'سال تحصیلی:' : 'Academic Year:'} {university.tuitionAcademicYear}</span>
+            <span>
+              {university.tuitionVerificationStatus === 'OFFICIAL_FIXED' && (currentLang === 'fa' ? '✓ سند رسمی' : '✓ Official Document')}
+              {university.tuitionVerificationStatus === 'CONTACT_UNIVERSITY' && (currentLang === 'fa' ? 'نیاز به استعلام' : 'Check with Uni')}
+              {university.tuitionVerificationStatus === 'OFFICIAL_RANGE' && (currentLang === 'fa' ? '✓ محدوده رسمی' : '✓ Official Range')}
             </span>
           </div>
         </div>
-
-        {((university.recognitionSources && university.recognitionSources.length > 0) || university.sourceRecords.length > 0) && (
-          <div className="pt-2">
-            <div className="text-[10px] font-semibold text-slate-400 mb-1">
-              {currentLang === 'fa' ? 'منابع تایید شده:' : 'Verified Sources:'}
-            </div>
-            <ul className="space-y-1">
-              {university.recognitionSources?.map((source, idx) => (
-                <li key={`rec-${idx}`} className="text-[10px]">
-                  <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-[#2F6FED] hover:underline flex items-center space-x-1 rtl:space-x-reverse">
-                    <span>🔗</span>
-                    <span>{currentLang === 'fa' ? source.name.fa : source.name.en}</span>
-                    {source.officialFlag && (
-                      <span className="ml-1 text-[8px] bg-blue-100 text-blue-700 px-1 py-0.5 rounded">
-                        {currentLang === 'fa' ? 'رسمی' : 'Official'}
-                      </span>
-                    )}
-                  </a>
-                </li>
-              ))}
-              {university.sourceRecords.map((source, idx) => (
-                <li key={`src-${idx}`} className="text-[10px]">
-                  <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-[#2F6FED] hover:underline flex items-center space-x-1 rtl:space-x-reverse">
-                    <span>🔗</span>
-                    <span>{currentLang === 'fa' ? source.name.fa : source.name.en}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <div className="text-[9px] text-slate-400 mt-2">
-              {currentLang === 'fa' ? 'تاریخ بررسی: ' : 'Reviewed: '}
-              {university.reviewedAt}
-            </div>
-          </div>
-        )}
       </div>
 
-      {/* Card Action */}
-      <div className="px-5 pb-5 pt-0">
+      {/* Action Footer */}
+      <div className="p-5 pt-0 mt-auto">
         {university.ctaType === 'internal' ? (
-          <Link
-            href={university.ctaHref}
-            className={`w-full py-3 bg-slate-50 text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 block text-center ${hoverClasses}`}
-          >
+          <Link href={university.ctaHref} className={`block w-full py-2.5 px-4 rounded-xl text-center text-sm font-bold border transition-colors ${isWarning ? 'bg-amber-700 border-amber-700 text-white hover:bg-amber-600 hover:border-amber-600' : 'bg-white border-[#071B3D] text-[#071B3D] ' + hoverClasses + ' hover:text-white'}`}>
             {currentLang === 'fa' ? university.ctaLabelFa : university.ctaLabelEn}
           </Link>
         ) : (
-          <a
-            href={university.ctaHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`w-full py-3 bg-slate-50 text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 flex items-center justify-center space-x-1 rtl:space-x-reverse ${hoverClasses}`}
-          >
-            <span>{currentLang === 'fa' ? university.ctaLabelFa : university.ctaLabelEn}</span>
-            <span className="text-[10px]">↗</span>
+          <a href={university.ctaHref} target="_blank" rel="noopener noreferrer" className={`block w-full py-2.5 px-4 rounded-xl text-center text-sm font-bold border transition-colors ${isWarning ? 'bg-amber-700 border-amber-700 text-white hover:bg-amber-600 hover:border-amber-600' : 'bg-white border-[#071B3D] text-[#071B3D] ' + hoverClasses + ' hover:text-white'}`}>
+            {currentLang === 'fa' ? university.ctaLabelFa : university.ctaLabelEn} ↗
           </a>
         )}
       </div>
-
     </div>
   );
 };
