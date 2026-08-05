@@ -2,10 +2,10 @@
 
 ## Exact Page Type Totals (66 Canonical Routes)
 - OPERATIONAL_GUIDE: 41
-- DECISION_HUB: 9
+- DECISION_HUB: 8
 - REFERENCE_GUIDE: 8
 - LEGAL_PAGE: 3
-- DIRECTORY_OR_INDEX: 2 (`/universities`, `/services`)
+- DIRECTORY_OR_INDEX: 3 (`/universities`, `/services`)
 - INSTITUTIONAL_PAGE: 1 (`/about`)
 - UTILITY_PAGE: 1 (`/contact`)
 - ARTICLE_OR_EDITORIAL_INDEX: 1 (`/articles`)

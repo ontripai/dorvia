@@ -21,9 +21,9 @@ Previous arithmetic (66 - 16 = 50 vs 53) contained three foundational errors:
 3. **Non-Canonical Static Pages (-2 error)**: The assumption that 66 canonical - 16 static = 50 dynamic assumes all 16 static physical pages are canonical. This is false. `/evaluation` and `/romania/cities` are physical static pages but are NOT included in `ROUTE_REGISTRY`. 
 
 **The Reconciled Equation:**
-14 Static Canonical Routes + 52 Dynamic Canonical Outputs = 66 Total Canonical Routes.
+15 Static Canonical + 51 Dynamic Canonical = 66 Canonical Routes
 
-## Dynamic Template Canonical Mapping (52 Outputs)
+## Dynamic Template Canonical Mapping (51 Outputs)
 - `/legal/[slug]`: 4 routes (`/legal`, `/legal/privacy`, `/legal/terms`, `/legal/disclaimer`)
 - `/needs/[slug]`: 12 routes
 - `/immigration/[slug]`: 5 routes

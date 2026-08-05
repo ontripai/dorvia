@@ -61,11 +61,38 @@ function runValidation() {
       errors.push(`Route has no language status: ${entry.canonical}`);
     }
 
+
+    // Check 11: Extra fields missing
+    if (!entry.riskLevel) errors.push('Route has no risk: ' + entry.canonical);
+    if (!entry.sourceStatus) errors.push('Route has no source status: ' + entry.canonical);
+    if (!entry.contentQuality) errors.push('Route has no content quality: ' + entry.canonical);
+
     // Check 9: Unknown page type or status
     const validTypes = ['OPERATIONAL_GUIDE', 'DECISION_HUB', 'REFERENCE_GUIDE', 'DIRECTORY_OR_INDEX', 'TRANSACTIONAL_OR_FORM', 'LEGAL_PAGE', 'INSTITUTIONAL_PAGE', 'ARTICLE_OR_EDITORIAL_INDEX', 'UTILITY_PAGE', 'ARCHIVE_OR_DEPRECATE_CANDIDATE'];
     if (!validTypes.includes(entry.targetPageType)) {
       errors.push(`Unknown page type: ${entry.targetPageType} on ${entry.canonical}`);
     }
+  }
+
+
+  // Check 12: Specific route checks
+  if (canonicalSet.has('/legal')) errors.push('/legal appears as a canonical Audit record');
+  if (!canonicalSet.has('/romania/cities')) errors.push('/romania/cities is missing');
+  if (canonicalSet.has('/cities')) errors.push('/cities appears as canonical');
+
+  // Check 13: Static/Dynamic counts
+  const staticCount = auditData.filter((r: any) => !r.isDynamic).length;
+  const dynamicCount = auditData.filter((r: any) => r.isDynamic).length;
+  if (staticCount !== 15) errors.push(`Static canonical count is not 15 (got ${staticCount})`);
+  if (dynamicCount !== 51) errors.push(`Dynamic canonical count is not 51 (got ${dynamicCount})`);
+
+  // Check 14: Classification totals do not equal 66
+  if (auditData.length !== 66) errors.push(`Classification totals do not equal 66 (got ${auditData.length})`);
+  
+  // Check 15: Sitemap mismatch
+  const sitemapKeys = Object.values(ROUTE_REGISTRY).filter(r => r.inSitemap).map(r => r.canonical);
+  if (auditData.length !== sitemapKeys.length) {
+    errors.push(`Audit count (${auditData.length}) differs from Sitemap count (${sitemapKeys.length})`);
   }
 
   // Check 10: Missing from audit

@@ -1,3 +1,6 @@
+> [!WARNING]
+> This report is SUPERSEDED by V03. The route equations and classifications below are historical.
+
 # Final Route and Classification Reconciliation (V02)
 
 ## 1. Route Arithmetic Reconciled
