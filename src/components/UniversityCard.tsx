@@ -16,6 +16,34 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
     ? 'bg-gradient-to-r from-amber-700 to-amber-600'
     : 'bg-gradient-to-r from-[#071B3D] to-[#2F6FED]';
 
+  const hoverClasses = isWarning
+    ? 'hover:bg-amber-600 hover:border-amber-600'
+    : 'hover:bg-[#071B3D] hover:border-[#071B3D]';
+
+  const formatAmount = (amount?: number, maxAmount?: number, currency?: string, period?: string, feeType?: string) => {
+    if (feeType === 'contact' || !amount) {
+      return currentLang === 'fa' ? 'تماس با دانشگاه' : 'Contact University';
+    }
+
+    const currLabel = currency === 'EUR' ? (currentLang === 'fa' ? 'یورو' : 'EUR') : (currentLang === 'fa' ? 'رون' : 'RON');
+    
+    let periodLabel = '';
+    if (period === 'academic-year') periodLabel = currentLang === 'fa' ? '/ سال تحصیلی' : '/ year';
+    if (period === 'calendar-year') periodLabel = currentLang === 'fa' ? '/ سال تقویمی' : '/ calendar year';
+
+    if (currentLang === 'fa') {
+      const amtStr = amount.toLocaleString('fa-IR');
+      const maxAmtStr = maxAmount ? ' - ' + maxAmount.toLocaleString('fa-IR') : '';
+      return `${amtStr}${maxAmtStr} ${currLabel} ${periodLabel}`;
+    } else {
+      const amtStr = amount.toLocaleString('en-US');
+      const maxAmtStr = maxAmount ? '–' + maxAmount.toLocaleString('en-US') : '';
+      return `${currLabel} ${amtStr}${maxAmtStr}${periodLabel}`;
+    }
+  };
+
+  const disclaimerText = currentLang === 'fa' ? university.disclaimer?.fa : university.disclaimer?.en;
+
   return (
     <div className={`bg-white rounded-2xl border ${isWarning ? 'border-amber-300' : 'border-slate-200'} shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col justify-between group`}>
 
@@ -33,7 +61,7 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
         <div className="text-xs text-white/90 mt-2 flex items-center space-x-2 rtl:space-x-reverse">
           <span>📍 {currentLang === 'fa' ? university.cityFa : university.cityEn}</span>
           <span>•</span>
-          <span>🏛️ {university.institutionType}</span>
+          <span>🏛️ {currentLang === 'fa' ? university.institutionType.fa : university.institutionType.en}</span>
         </div>
       </div>
 
@@ -43,9 +71,9 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
           {currentLang === 'fa' ? university.descriptionFa : university.descriptionEn}
         </p>
 
-        {((currentLang === 'fa' && university.disclaimerFa) || (currentLang === 'en' && university.disclaimerEn)) && (
+        {disclaimerText && (
           <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 text-[11px] text-slate-600 leading-relaxed italic">
-            {currentLang === 'fa' ? university.disclaimerFa : university.disclaimerEn}
+            {disclaimerText}
           </div>
         )}
 
@@ -72,9 +100,7 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
                 {currentLang === 'fa' ? item.program.fa : item.program.en}
               </span>
               <span className="font-bold text-[#071B3D]">
-                {item.amount === 'CONTACT_UNIVERSITY'
-                  ? (currentLang === 'fa' ? 'تماس با دانشگاه' : 'Contact University')
-                  : item.amount}
+                {formatAmount(item.amount, item.maxAmount, item.currency, item.period, item.feeType)}
               </span>
             </div>
           ))}
@@ -89,17 +115,30 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
           </div>
         </div>
 
-        {university.sourceRecords.length > 0 && (
+        {((university.recognitionSources && university.recognitionSources.length > 0) || university.sourceRecords.length > 0) && (
           <div className="pt-2">
             <div className="text-[10px] font-semibold text-slate-400 mb-1">
               {currentLang === 'fa' ? 'منابع تایید شده:' : 'Verified Sources:'}
             </div>
             <ul className="space-y-1">
-              {university.sourceRecords.map((source, idx) => (
-                <li key={idx} className="text-[10px]">
+              {university.recognitionSources?.map((source, idx) => (
+                <li key={`rec-${idx}`} className="text-[10px]">
                   <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-[#2F6FED] hover:underline flex items-center space-x-1 rtl:space-x-reverse">
                     <span>🔗</span>
-                    <span>{source.name}</span>
+                    <span>{currentLang === 'fa' ? source.name.fa : source.name.en}</span>
+                    {source.officialFlag && (
+                      <span className="ml-1 text-[8px] bg-blue-100 text-blue-700 px-1 py-0.5 rounded">
+                        {currentLang === 'fa' ? 'رسمی' : 'Official'}
+                      </span>
+                    )}
+                  </a>
+                </li>
+              ))}
+              {university.sourceRecords.map((source, idx) => (
+                <li key={`src-${idx}`} className="text-[10px]">
+                  <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-[#2F6FED] hover:underline flex items-center space-x-1 rtl:space-x-reverse">
+                    <span>🔗</span>
+                    <span>{currentLang === 'fa' ? source.name.fa : source.name.en}</span>
                   </a>
                 </li>
               ))}
@@ -117,7 +156,7 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
         {university.ctaType === 'internal' ? (
           <Link
             href={university.ctaHref}
-            className={`w-full py-3 bg-slate-50 hover:${isWarning ? 'bg-amber-600 border-amber-600' : 'bg-[#071B3D] border-[#071B3D]'} text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 block text-center`}
+            className={`w-full py-3 bg-slate-50 text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 block text-center ${hoverClasses}`}
           >
             {currentLang === 'fa' ? university.ctaLabelFa : university.ctaLabelEn}
           </Link>
@@ -126,7 +165,7 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
             href={university.ctaHref}
             target="_blank"
             rel="noopener noreferrer"
-            className={`w-full py-3 bg-slate-50 hover:${isWarning ? 'bg-amber-600 border-amber-600' : 'bg-[#071B3D] border-[#071B3D]'} text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 flex items-center justify-center space-x-1 rtl:space-x-reverse`}
+            className={`w-full py-3 bg-slate-50 text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 flex items-center justify-center space-x-1 rtl:space-x-reverse ${hoverClasses}`}
           >
             <span>{currentLang === 'fa' ? university.ctaLabelFa : university.ctaLabelEn}</span>
             <span className="text-[10px]">↗</span>

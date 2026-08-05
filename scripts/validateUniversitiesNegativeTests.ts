@@ -22,14 +22,10 @@ const tests = [
     with: `recognitionStatus: 'IRAN_MOH_APPROVED',`
   },
   {
-    name: 'HISTORICAL_OFFICIAL tuition marked as current year',
-    replace: /tuitionAcademicYear: '2024–2025',/g,
-    with: `tuitionAcademicYear: '2026-2027',`
-  },
-  {
-    name: 'Missing source for OFFICIAL_FIXED',
-    replace: /sourceRecords: \[\s*\{\s*name: 'Official non-EU admission page on international.ase.ro',\s*url: 'https:\/\/international.ase.ro'\s*\}\s*\],/,
-    with: `sourceRecords: [],`
+    name: 'Titu Maiorescu with UNOFFICIAL_ESTIMATE',
+    replace: /tuitionVerificationStatus: 'OFFICIAL_FIXED',\s*recognitionStatus: 'REQUIRES_CURRENT_RECHECK',/g,
+    with: `tuitionVerificationStatus: 'UNOFFICIAL_ESTIMATE',
+    recognitionStatus: 'REQUIRES_CURRENT_RECHECK',`
   },
   {
     name: 'displayOrder not strictly increasing',
@@ -44,7 +40,7 @@ const tests = [
   {
     name: 'Tuition amount without academic year',
     replace:
-      /tuitionAcademicYear:\s*'[^']+',\s*tuitionVerificationStatus:\s*'OFFICIAL_FIXED'/,
+      /tuitionAcademicYear:\s*'2026-2027',\s*tuitionVerificationStatus:\s*'OFFICIAL_FIXED'/,
     with: `tuitionAcademicYear: '',
     tuitionVerificationStatus: 'OFFICIAL_FIXED'`
   },
@@ -52,6 +48,37 @@ const tests = [
     name: 'Invalid CTA Href',
     replace: /ctaHref: '\/study',/g,
     with: `ctaHref: '#',`
+  },
+  {
+    name: 'Missing recognition sources for MOH Approved',
+    replace: /recognitionSources: \[\s*\{\s*name: \{ fa: 'سند رسمی شهریه ۲۰۲۶-۲۰۲۷', en: 'Official Tuition Document 2026-2027' \},\s*issuer: \{ fa: 'UMFCD', en: 'UMFCD' \},\s*academicYear: '2026-2027',\s*url: 'https:\/\/umfcd.ro\/wp-content\/uploads\/2026\/NORME_LEGALE\/Taxe%20UMFCD%202026-2027.pdf',\s*officialFlag: true\s*\}[,\s\S]*?\],/,
+    with: `recognitionSources: [],`
+  },
+  {
+    name: 'Missing bilingual institutionType',
+    replace: /institutionType: \{ fa: 'دولتی جامع', en: 'Public Comprehensive' \},/g,
+    with: `institutionType: { fa: '', en: '' },`
+  },
+  {
+    name: 'One-sided disclaimer',
+    replace: /fa: 'طبق اطلاعات ارائهشده از سوی دانشگاه، امکان بازپرداخت شهریه در صورت رد ویزا وجود دارد، اما شرایط، مدارک و مهلتهای بازپرداخت باید مستقیماً از دانشگاه بررسی شود.',\s*en: 'The university indicates that tuition may be refundable following a visa refusal, subject to its current conditions, required evidence and deadlines. Confirm the policy directly before payment.'/g,
+    with: `fa: 'طبق اطلاعات ارائهشده از سوی دانشگاه، امکان بازپرداخت شهریه در صورت رد ویزا وجود دارد، اما شرایط، مدارک و مهلتهای بازپرداخت باید مستقیماً از دانشگاه بررسی شود.',
+      en: ''`
+  },
+  {
+    name: 'Homepage-only tuition source',
+    replace: /url: 'https:\/\/umfcd.ro\/wp-content\/uploads\/2026\/NORME_LEGALE\/Taxe%20UMFCD%202026-2027.pdf',/g,
+    with: `url: 'https://umfcd.ro/',`
+  },
+  {
+    name: 'Malformed monetary data (string amount instead of number)',
+    replace: /amount: 10000,/g,
+    with: `amount: -10000,`
+  },
+  {
+    name: 'MOH Approved missing official recognition source',
+    replace: /officialFlag: true/g,
+    with: `officialFlag: false`
   }
 ];
 

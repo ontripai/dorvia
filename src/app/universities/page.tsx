@@ -12,12 +12,17 @@ export default function UniversitiesPage() {
   const t = getTranslations(currentLang);
   const [uniSearch, setUniSearch] = useState('');
 
+  const cleanQuery = uniSearch.trim().toLowerCase();
+  
   const filteredUnis = featuredUniversities.filter((uni) => {
+    if (!cleanQuery) return true;
     const nameStr = currentLang === 'fa' ? uni.nameFa : uni.nameEn;
     const cityStr = currentLang === 'fa' ? uni.cityFa : uni.cityEn;
-    const nameMatches = nameStr.toLowerCase().includes(uniSearch.toLowerCase());
-    const cityMatches = cityStr.toLowerCase().includes(uniSearch.toLowerCase());
-    return nameMatches || cityMatches;
+    const officialNameStr = uni.officialRomanianName;
+    
+    return nameStr.toLowerCase().includes(cleanQuery) || 
+           cityStr.toLowerCase().includes(cleanQuery) ||
+           officialNameStr.toLowerCase().includes(cleanQuery);
   });
 
   const group1 = filteredUnis.filter(u => u.groupId === 1);
@@ -39,6 +44,7 @@ export default function UniversitiesPage() {
           value={uniSearch}
           onChange={(e) => setUniSearch(e.target.value)}
           placeholder={currentLang === 'fa' ? 'جستجوی دانشگاه یا شهر...' : 'Search university or city...'}
+          aria-label={currentLang === 'fa' ? 'جستجوی دانشگاه' : 'Search universities'}
           className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
         />
       </div>

@@ -25,8 +25,19 @@ export type CTAType = 'internal' | 'external';
 
 export interface TuitionItem {
   program: { fa: string; en: string };
-  amount: string;
+  amount?: number;
+  maxAmount?: number;
+  currency?: 'EUR' | 'RON';
+  period?: 'academic-year' | 'calendar-year' | 'one-time';
   feeType: 'tuition' | 'registration_fee' | 'contact';
+}
+
+export interface RecognitionSource {
+  name: { fa: string; en: string };
+  issuer: { fa: string; en: string };
+  academicYear: string;
+  url: string;
+  officialFlag: boolean;
 }
 
 export interface University {
@@ -38,26 +49,26 @@ export interface University {
   officialRomanianName: string;
   cityFa: string;
   cityEn: string;
-  institutionType: string;
+  institutionType: { fa: string; en: string };
   studyFieldsFa: string[];
   studyFieldsEn: string[];
   tuitionItems: TuitionItem[];
   tuitionAcademicYear: string;
   tuitionVerificationStatus: TuitionVerificationStatus;
   recognitionStatus: RecognitionStatus;
+  recognitionSources?: RecognitionSource[];
   badgeTextFa: string;
   badgeTextEn: string;
   warningLevel: WarningLevel;
   descriptionFa: string;
   descriptionEn: string;
-  sourceRecords: { name: string; url: string }[];
+  sourceRecords: { name: { fa: string; en: string }; url: string }[];
   reviewedAt: string;
   ctaLabelFa: string;
   ctaLabelEn: string;
   ctaHref: string;
   ctaType: CTAType;
-  disclaimerFa?: string;
-  disclaimerEn?: string;
+  disclaimer?: { fa: string; en: string };
 }
 
 export interface City {
