@@ -156,18 +156,7 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     inSitemap: true,
     pageType: 'hub'
   },
-  'legal': {
-    canonical: '/legal',
-    aliases: [],
-    parentHub: null,
-    titleFa: 'حقوقی و شرایط',
-    titleEn: 'Legal & Terms',
-    
-    
-    indexable: true,
-    inSitemap: true,
-    pageType: 'hub'
-  },
+
   'needs/driving-license': {
     canonical: '/needs/driving-license',
     aliases: [],
@@ -758,7 +747,7 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
   },
   'legal/privacy': {
     canonical: '/legal/privacy',
-    aliases: [],
+    aliases: ['/legal'],
     parentHub: '/legal',
     titleFa: 'حریم خصوصی',
     titleEn: 'Privacy Policy',
@@ -791,5 +780,16 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     indexable: true,
     inSitemap: true,
     pageType: 'legal'
+  },
+
+  'romania-cities': {
+    canonical: '/romania/cities',
+    aliases: ['/cities'],
+    parentHub: '/romania',
+    titleFa: 'شهرهای رومانی',
+    titleEn: 'Cities of Romania',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'hub'
   },
 };
