@@ -257,32 +257,38 @@ export const MainContent: React.FC<MainContentProps> = ({
                       <div className="flex items-center justify-between text-xs text-slate-200 font-bold border-b border-white/15 pb-3">
                         <span className="flex items-center space-x-2 rtl:space-x-reverse text-[#F4F7FC]">
                           <Landmark size={16} />
-                          <span>Bucharest • European Union</span>
+                          <span>{currentLang === 'fa' ? 'بخارست · اتحادیه اروپا' : 'Bucharest • European Union'}</span>
                         </span>
-                        <span className="bg-[#2F6FED] px-2.5 py-1 rounded-md text-[11px] text-white border border-blue-400/30">Schengen Member</span>
+                        <span className="bg-[#2F6FED] px-2.5 py-1 rounded-md text-[11px] text-white border border-blue-400/30">
+                          {currentLang === 'fa' ? 'عضو منطقه شنگن' : 'Schengen Member'}
+                        </span>
                       </div>
 
                       <div className="space-y-3 pt-1 text-xs">
                         <div className="p-3.5 rounded-xl bg-white/10 border border-white/15 flex items-center justify-between">
-                          <span className="font-semibold text-white">🎓 Accredited Higher Education</span>
-                          <span className="font-extrabold text-[#F4F7FC]">EU Degrees</span>
+                          <span className="font-semibold text-white">🎓 {currentLang === 'fa' ? 'آموزش عالی معتبر' : 'Accredited Higher Education'}</span>
+                          <span className="font-extrabold text-[#F4F7FC]">{currentLang === 'fa' ? 'مدارک دانشگاهی اتحادیه اروپا' : 'EU Degrees'}</span>
                         </div>
                         <div className="p-3.5 rounded-xl bg-white/10 border border-white/15 flex items-center justify-between">
-                          <span className="font-semibold text-white">💼 Employment & Work Permits</span>
-                          <span className="font-extrabold text-[#F4F7FC]">Aviz de Munca</span>
+                          <span className="font-semibold text-white">💼 {currentLang === 'fa' ? 'اشتغال و مجوزهای کار' : 'Employment & Work Permits'}</span>
+                          <span className="font-extrabold text-[#F4F7FC]">
+                            {currentLang === 'fa' ? <>مجوز کار (<span dir="ltr">Aviz de Muncă</span>)</> : 'Aviz de Muncă'}
+                          </span>
                         </div>
                         <div className="p-3.5 rounded-xl bg-white/10 border border-white/15 flex items-center justify-between">
-                          <span className="font-semibold text-white">🏢 Corporate Registration (SRL)</span>
+                          <span className="font-semibold text-white">🏢 {currentLang === 'fa' ? <>ثبت شرکت با مسئولیت محدود (<span dir="ltr">SRL</span>)</> : 'Corporate Registration (SRL)'}</span>
                           <span className="font-extrabold text-[#F4F7FC] leading-snug max-w-[200px] text-right">
                             {currentLang === 'fa' 
-                              ? 'شرایط مالیاتی شرکت به نوع فعالیت، درآمد، ساختار مالکیت، کارکنان و مقررات جاری بستگی دارد و باید با حسابدار بررسی شود.' 
+                              ? 'شرایط مالیاتی شرکت به نوع فعالیت، درآمد، ساختار مالکیت و تعداد کارکنان بستگی دارد و باید توسط حسابدار بررسی شود.' 
                               : 'Corporate tax conditions depend on the type of activity, revenue, ownership structure, employees, and current regulations, and must be verified with an accountant.'}
                           </span>
                         </div>
                       </div>
 
                       <div className="p-3 rounded-xl bg-[#2F6FED]/80 border border-[#2F6FED]/40 text-center text-xs text-slate-100 font-bold shadow-inner">
-                        {currentLang === 'fa' ? 'ارزیابی حقوقی پرونده‌ها مطابق با قوانین اداره مهاجرت (IGI)' : 'Initial assessment compliant with official IGI immigration rules'}
+                        {currentLang === 'fa' 
+                          ? <>ارزیابی اولیه پرونده براساس مقررات رسمی اداره مهاجرت رومانی (<span dir="ltr">IGI</span>)</> 
+                          : 'Initial assessment based on official Romanian immigration rules (IGI)'}
                       </div>
 
                     </div>
