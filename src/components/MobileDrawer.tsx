@@ -112,16 +112,14 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
       <div className="flex items-center justify-between border-b border-slate-800 pb-4 px-6 pt-4">
         <Link
           href="/"
+          aria-label="DORVIA EUROP"
           className="flex items-center space-x-2 sm:space-x-3 rtl:space-x-reverse cursor-pointer shrink min-w-0"
           onClick={() => {
             onClose();
             onNavigate('home');
           }}
         >
-          <img src="/images/logo/dorvia-logo-primary-transparent-3000.png" alt="DORVIA" className="h-[28px] w-auto brightness-0 invert" />
-          <span className="inline-block text-base sm:text-lg font-extrabold tracking-tight text-white leading-none whitespace-nowrap">
-            {currentLang === 'fa' ? t.brand.siteName : t.brand.siteName.toUpperCase()}
-          </span>
+          <img src="/images/logo/dorvia-logo-primary-transparent-3000.png" alt="DORVIA EUROP" className="h-[28px] w-auto brightness-0 invert" />
         </Link>
 
         <button
