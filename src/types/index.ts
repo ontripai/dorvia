@@ -18,17 +18,46 @@ export interface LeadFormData {
   privacyConsent: boolean;
 }
 
+export type RecognitionStatus = 'IRAN_MOH_APPROVED' | 'GENERAL_POPULAR' | 'IRAN_MOH_NOT_APPROVED' | 'REQUIRES_CURRENT_RECHECK';
+export type TuitionVerificationStatus = 'OFFICIAL_FIXED' | 'OFFICIAL_RANGE' | 'OFFICIAL_REGISTRATION_FEE' | 'HISTORICAL_OFFICIAL' | 'UNOFFICIAL_ESTIMATE' | 'CONTACT_UNIVERSITY' | 'NOT_PROVIDED';
+export type WarningLevel = 'none' | 'warning' | 'danger';
+export type CTAType = 'internal' | 'external';
+
+export interface TuitionItem {
+  program: { fa: string; en: string };
+  amount: string;
+  feeType: 'tuition' | 'registration_fee' | 'contact';
+}
+
 export interface University {
   id: string;
-  name: { fa: string; en: string };
-  city: { fa: string; en: string };
-  type: { fa: string; en: string }; // Public / Private
-  tuitionRange: { fa: string; en: string };
-  popularFields: { fa: string[]; en: string[] };
-  ranking?: string;
-  description: { fa: string; en: string };
-  source?: { name: string; url: string };
-  lastReviewed?: string;
+  displayOrder: number;
+  groupId: number;
+  nameFa: string;
+  nameEn: string;
+  officialRomanianName: string;
+  cityFa: string;
+  cityEn: string;
+  institutionType: string;
+  studyFieldsFa: string[];
+  studyFieldsEn: string[];
+  tuitionItems: TuitionItem[];
+  tuitionAcademicYear: string;
+  tuitionVerificationStatus: TuitionVerificationStatus;
+  recognitionStatus: RecognitionStatus;
+  badgeTextFa: string;
+  badgeTextEn: string;
+  warningLevel: WarningLevel;
+  descriptionFa: string;
+  descriptionEn: string;
+  sourceRecords: { name: string; url: string }[];
+  reviewedAt: string;
+  ctaLabelFa: string;
+  ctaLabelEn: string;
+  ctaHref: string;
+  ctaType: CTAType;
+  disclaimerFa?: string;
+  disclaimerEn?: string;
 }
 
 export interface City {
