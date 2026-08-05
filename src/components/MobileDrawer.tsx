@@ -95,10 +95,11 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
 
   const drawerContent = (
     <div 
-      className="fixed inset-0 z-[100] bg-[#071B3D] flex flex-col justify-between overflow-y-auto overscroll-contain animate-fadeIn"
+      className="fixed inset-0 bg-[#071B3D] flex flex-col justify-between overflow-y-auto overscroll-contain animate-fadeIn"
       style={{
+        zIndex: 2147483647,
         paddingTop: 'max(1.5rem, env(safe-area-inset-top))',
-        paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom))',
+        paddingBottom: 'calc(env(safe-area-inset-bottom) + 6rem)',
         minHeight: '100dvh',
         height: '100dvh'
       }}
