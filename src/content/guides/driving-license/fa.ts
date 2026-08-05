@@ -43,7 +43,7 @@ export const drivingLicenseFA: OperationalGuide = {
     {
       id: 'omai-163-2011',
       sourceTitle: 'Ordinul MAI 163/2011 privind preschimbarea permiselor',
-      organization: 'Ministry of Internal Affairs',
+      organization: 'وزارت امور داخلی',
       url: 'https://legislatie.just.ro/Public/DetaliiDocument/131062',
       sourceType: 'legislation',
       language: 'ro',
@@ -112,7 +112,7 @@ export const drivingLicenseFA: OperationalGuide = {
       authority: 'DGPCI (پلیس راهنمایی و رانندگی و ثبت وسایل نقلیه)',
       requiresExamination: false,
       requiresMedical: 'conditional',
-      medicalConditionText: 'A medical document is required when the applicant requests a Romanian licence with new administrative validity. A duplicate or replacement retaining the existing administrative validity may not require it.',
+      medicalConditionText: 'هنگامی که متقاضی درخواست گواهینامه رومانیایی با اعتبار اداری جدید را دارد، ارائه مدرک پزشکی الزامی است. برای صدور المثنی یا جایگزین با حفظ اعتبار اداری موجود، ممکن است نیازی به آن نباشد.',
       documents: [
         { name: 'اصل گواهینامه معتبر خارجی + کپی', isMandatory: true },
         { name: 'ترجمه رسمی رومانیایی گواهینامه', isMandatory: true },
@@ -205,20 +205,20 @@ export const drivingLicenseFA: OperationalGuide = {
     },
         {
       id: 'international-driving-permit',
-      title: 'International Driving Permit (IDP)',
+      title: 'گواهینامه بین‌المللی رانندگی (IDP)',
       appliesTo: ['دارندگان گواهینامه رانندگی ملی معتبر رومانی'],
       documents: [
-        { name: 'Valid Romanian Driving Licence', isMandatory: true }
+        { name: 'گواهینامه رانندگی ملی معتبر رومانی', isMandatory: true }
       ],
       steps: [],
       fees: [
-        { amount: '46', currency: 'RON', description: 'DGPCI fee for IDP issuance.', isFixed: true, sourceId: 'dgpci-idp' }
+        { amount: '46', currency: 'RON', description: 'هزینه DGPCI برای صدور IDP.', isFixed: true, sourceId: 'dgpci-idp' }
       ],
       timeline: [
-        { duration: 'Up to 30 calendar days', description: 'Legal maximum processing time.', isGuaranteed: false, sourceId: 'dgpci-idp' }
+        { duration: 'تا ۳۰ روز تقویمی', description: 'حداکثر زمان قانونی بررسی.', isGuaranteed: false, sourceId: 'dgpci-idp' }
       ],
       exceptions: [],
-      limitations: ['Requires a valid Romanian national licence. Foreign licence holders cannot apply for a Romanian IDP.']
+      limitations: ['نیازمند گواهینامه ملی معتبر رومانی است. دارندگان گواهینامه‌های خارجی نمی‌توانند برای IDP رومانی درخواست دهند.']
     },
     {
       id: 'penalties-suspension-and-restrictions',
