@@ -114,11 +114,11 @@ export const Header: React.FC<HeaderProps> = ({
             <Search size={18} className="text-[#2F6FED]" />
           </button>
 
-          {/* Segmented Language Switcher (44px height) */}
-          <div className="flex items-center h-[44px] p-0.5 rounded-xl bg-[#eef3f8] border border-[#dfe6ef]">
+          {/* Segmented Language Switcher */}
+          <div className="flex items-center p-0.5 rounded-xl bg-[#eef3f8] border border-[#dfe6ef]">
             <button
               onClick={() => onLanguageChange('fa')}
-              className={`px-3 py-1 h-full min-w-[44px] flex items-center justify-center rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`px-3 py-1 h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 currentLang === 'fa' ? 'bg-[#2F6FED] text-white shadow-xs' : 'text-[#071B3D] hover:text-[#2F6FED]'
               }`}
             >
@@ -126,7 +126,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
             <button
               onClick={() => onLanguageChange('en')}
-              className={`px-3 py-1 h-full min-w-[44px] flex items-center justify-center rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`px-3 py-1 h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 currentLang === 'en' ? 'bg-[#2F6FED] text-white shadow-xs' : 'text-[#071B3D] hover:text-[#2F6FED]'
               }`}
             >
@@ -155,16 +155,16 @@ export const Header: React.FC<HeaderProps> = ({
             <Search size={18} className="text-[#2F6FED]" />
           </button>
 
-          <div className="flex items-center h-[44px] p-0.5 rounded-lg bg-[#eef3f8] border border-[#dfe6ef] text-[11px]">
+          <div className="flex items-center p-0.5 rounded-lg bg-[#eef3f8] border border-[#dfe6ef] text-[11px]">
             <button
               onClick={() => onLanguageChange('fa')}
-              className={`px-2 py-0.5 h-full min-w-[44px] flex items-center justify-center rounded font-bold ${currentLang === 'fa' ? 'bg-[#2F6FED] text-white' : 'text-[#142033]'}`}
+              className={`px-2 py-0.5 h-[44px] min-w-[44px] flex items-center justify-center rounded font-bold ${currentLang === 'fa' ? 'bg-[#2F6FED] text-white' : 'text-[#142033]'}`}
             >
               FA
             </button>
             <button
               onClick={() => onLanguageChange('en')}
-              className={`px-2 py-0.5 h-full min-w-[44px] flex items-center justify-center rounded font-bold ${currentLang === 'en' ? 'bg-[#2F6FED] text-white' : 'text-[#142033]'}`}
+              className={`px-2 py-0.5 h-[44px] min-w-[44px] flex items-center justify-center rounded font-bold ${currentLang === 'en' ? 'bg-[#2F6FED] text-white' : 'text-[#142033]'}`}
             >
               EN
             </button>
