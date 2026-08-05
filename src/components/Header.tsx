@@ -180,6 +180,7 @@ export const Header: React.FC<HeaderProps> = ({
           </Button>
 
           <button
+            id="mobile-menu-button"
             onClick={() => setMobileDrawerOpen(true)}
             className="p-2 rounded-xl bg-[#eef3f8] hover:bg-[#dfe6ef] text-[#142033] border border-[#dfe6ef] cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0 z-10"
             aria-label="Open Navigation Menu"
