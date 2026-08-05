@@ -2,14 +2,22 @@
 
 ## Exact Page Type Totals (66 Canonical Routes)
 - OPERATIONAL_GUIDE: 41
-- DECISION_HUB: 12
+- DECISION_HUB: 9
 - REFERENCE_GUIDE: 8
 - LEGAL_PAGE: 3
-- INSTITUTIONAL_PAGE: 2
-- DIRECTORY_OR_INDEX: 0
+- DIRECTORY_OR_INDEX: 2 (`/universities`, `/services`)
+- INSTITUTIONAL_PAGE: 1 (`/about`)
+- UTILITY_PAGE: 1 (`/contact`)
+- ARTICLE_OR_EDITORIAL_INDEX: 1 (`/articles`)
 - TRANSACTIONAL_OR_FORM: 0
-- ARTICLE_OR_EDITORIAL_INDEX: 0
-- UTILITY_PAGE: 0
 - ARCHIVE_OR_DEPRECATE_CANDIDATE: 0
 
 Total: 66
+
+## Explicit Reviews
+- `/`: DECISION_HUB (Acts as the master navigational hub).
+- `/universities`: DIRECTORY_OR_INDEX (A listing/index of institutions).
+- `/articles`: ARTICLE_OR_EDITORIAL_INDEX (A blog/news listing).
+- `/services`: DIRECTORY_OR_INDEX (A listing of provider services).
+- `/contact`: UTILITY_PAGE (Functional contact utility).
+- `/about`: INSTITUTIONAL_PAGE (Platform institutional context).

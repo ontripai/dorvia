@@ -1,69 +1,43 @@
 # Route and Build Counts
 
-## Separation of Counts
+## Exact Build Concepts
 
-It is critical to distinguish between canonical routes, physical files, and build output:
+- **Total physical `page.tsx` files**: 25
+- **Public physical `page.tsx` files**: 24
+- **Admin `page.tsx` files**: 1 (`/admin/comments`)
+- **Static physical public route files**: 16
+- **Dynamic template files**: 8
+- **`generateStaticParams` outputs**: 0 (Dynamic pages are server-rendered on demand `ƒ`)
+- **Canonical URL outputs**: 66 (Defined in ROUTE_REGISTRY)
+- **Sitemap URLs**: 66
+- **Next.js “Generating static pages” progress count**: 24 (The 16 static public physical files + 8 base dynamic template iterations)
 
-- **Canonical Routes in ROUTE_REGISTRY: 66**
-  These are the unique, indexable concepts representing public-facing pages in the system.
+## Discrepancy Resolution
 
-- **Sitemap URL Count: 66**
-  Derived directly from the 66 canonical routes.
+Previous arithmetic (66 - 16 = 50 vs 53) contained three foundational errors:
 
-- **Physical App Router Page Files: 25**
-  There are exactly 25 physical `page.tsx` files inside `src/app`.
-  This consists of:
-  - 1 Admin route (`/admin/comments/page.tsx`)
-  - 16 Static physical public routes
-  - 8 Dynamic template routes
+1. **Incorrect generateStaticParams Claim**: The Next.js implementation does not use `generateStaticParams`; dynamic pages are server-rendered on demand. The reported 53 was derived manually from a flawed template-to-route mapping, not from build outputs.
+2. **Incorrect Template Mapping (+1 error)**: The previous manual mapping attributed 8 routes to `/company/[slug]`. However, one of those (`/company/investment`) is a static physical page, leaving only 7 dynamic company routes. This reduces the artificial 53 count to the correct 52.
+3. **Non-Canonical Static Pages (-2 error)**: The assumption that 66 canonical - 16 static = 50 dynamic assumes all 16 static physical pages are canonical. This is false. `/evaluation` and `/romania/cities` are physical static pages but are NOT included in `ROUTE_REGISTRY`. 
 
-- **Dynamic Templates**
-  The 8 dynamic `[slug]/page.tsx` templates expand via `generateStaticParams` into the remaining canonical routes:
-  - `/legal/[slug]`: 4 canonical routes
-  - `/needs/[slug]`: 12 canonical routes
-  - `/immigration/[slug]`: 5 canonical routes
-  - `/work/[slug]`: 6 canonical routes
-  - `/company/[slug]`: 8 canonical routes
-  - `/study/[slug]`: 6 canonical routes
-  - `/start-here/[slug]`: 5 canonical routes
-  - `/romania/[slug]`: 7 canonical routes
+**The Reconciled Equation:**
+14 Static Canonical Routes + 52 Dynamic Canonical Outputs = 66 Total Canonical Routes.
 
-## Build Output Evidence
+## Dynamic Template Canonical Mapping (52 Outputs)
+- `/legal/[slug]`: 4 routes (`/legal`, `/legal/privacy`, `/legal/terms`, `/legal/disclaimer`)
+- `/needs/[slug]`: 12 routes
+- `/immigration/[slug]`: 5 routes
+- `/work/[slug]`: 6 routes
+- `/company/[slug]`: 7 routes
+- `/study/[slug]`: 6 routes
+- `/start-here/[slug]`: 5 routes
+- `/romania/[slug]`: 7 routes
 
-When running `npm run build`, Next.js shows physical page routes processed. The exact output demonstrates the difference between the base physical page routes and the 66 generated HTML pages:
+## The `/legal/[slug]` Inspection
+There are four canonical routes defined under the legal hub:
+1. `/legal` (DECISION_HUB, Indexable: true, Sitemap: true, Duplicates/Redirects: No) *Note: physically 404s in Next.js as no static file exists and [slug] cannot match root.*
+2. `/legal/privacy` (LEGAL_PAGE, Indexable: true, Sitemap: true, Duplicates/Redirects: No)
+3. `/legal/terms` (LEGAL_PAGE, Indexable: true, Sitemap: true, Duplicates/Redirects: No)
+4. `/legal/disclaimer` (LEGAL_PAGE, Indexable: true, Sitemap: true, Duplicates/Redirects: No)
 
-```
-Route (app)                              Size     First Load JS
-┌ ○ /                                    372 B           321 kB
-├ ○ /_not-found                          876 B          88.2 kB
-├ ○ /about                               3.1 kB          122 kB
-├ ○ /admin/comments                      208 B          87.5 kB
-├ ○ /api/bnr-rates                       0 B                0 B
-├ ƒ /api/evaluation                      0 B                0 B
-├ ○ /articles                            1.43 kB         128 kB
-├ ○ /company                             390 B           137 kB
-├ ƒ /company/[slug]                      395 B           137 kB
-├ ○ /company/investment                  2.85 kB         122 kB
-├ ○ /contact                             1.47 kB         120 kB
-├ ○ /evaluation                          730 B           120 kB
-├ ○ /immigration                         341 B           210 kB
-├ ƒ /immigration/[slug]                  423 B           210 kB
-├ ƒ /legal/[slug]                        4.15 kB         123 kB
-├ ○ /needs                               396 B           231 kB
-├ ƒ /needs/[slug]                        404 B           231 kB
-├ ○ /robots.txt                          0 B                0 B
-├ ○ /romania                             394 B           136 kB
-├ ƒ /romania/[slug]                      400 B           136 kB
-├ ○ /romania/cities                      2.18 kB         128 kB
-├ ○ /services                            1.8 kB          128 kB
-├ ○ /sitemap.xml                         0 B                0 B
-├ ○ /start-here                          395 B           134 kB
-├ ƒ /start-here/[slug]                   394 B           134 kB
-├ ○ /study                               372 B           321 kB
-├ ƒ /study/[slug]                        438 B           135 kB
-├ ○ /universities                        2.51 kB         129 kB
-├ ○ /work                                332 B           137 kB
-└ ƒ /work/[slug]                         394 B           137 kB
-```
-Next.js outputs: `✓ Generating static pages (24/24)` for the base template iterations, while `generateStaticParams` actually generates the 66 static HTML outputs during build.
-Do not claim 66 physical page files.
+This reconciles why four slugs correspond to exactly 3 `LEGAL_PAGE` classifications.
