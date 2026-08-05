@@ -181,11 +181,77 @@ function scanDir(dir: string) {
   }
 }
 
-console.log('Running Content Validation...');
-scanDir(guidesDir);
 
-if (hasErrors) {
-  process.exit(1);
-} else {
-  console.log('All content validated successfully.');
+// ROUTE VALIDATION
+const nextConfig = require('../next.config.js');
+const { ROUTE_REGISTRY } = require('../src/lib/routeRegistry');
+
+async function validateRoutes() {
+  let routeErrors: string[] = [];
+  const redirects = await nextConfig.redirects();
+  
+  const canonicalRoutes = Object.values(ROUTE_REGISTRY).map((r: any) => r.canonical);
+  const sitemapRoutes = Object.values(ROUTE_REGISTRY).filter((r: any) => r.inSitemap).map((r: any) => r.canonical);
+  
+  // - A canonical Registry route returns a redirect
+  redirects.forEach((r: any) => {
+    if (canonicalRoutes.includes(r.source)) {
+      routeErrors.push(`Canonical route ${r.source} returns a redirect`);
+    }
+    // - A redirect source is included in Sitemap
+    if (sitemapRoutes.includes(r.source)) {
+      routeErrors.push(`Redirect source ${r.source} is included in Sitemap`);
+    }
+    // - A physical canonical destination is absent from Registry
+    if (!canonicalRoutes.includes(r.destination) && r.destination.startsWith('/')) {
+        if (!canonicalRoutes.includes(r.destination)) {
+          routeErrors.push(`Physical canonical destination ${r.destination} is absent from Registry`);
+        }
+    }
+  });
+
+  // - A legal page canonical contains a Vercel Preview hostname
+  const legalPagePath = path.join(cwd, 'src/app/legal/[slug]/page.tsx');
+  if (fs.existsSync(legalPagePath)) {
+    const legalContent = fs.readFileSync(legalPagePath, 'utf8');
+    if (legalContent.includes('.vercel.app')) {
+      routeErrors.push('A legal page canonical contains a Vercel Preview hostname');
+    }
+  }
+
+  // - /romania/cities is missing
+  if (!canonicalRoutes.includes('/romania/cities')) {
+    routeErrors.push('/romania/cities is missing from Registry');
+  }
+
+  // - /legal is present as canonical
+  if (canonicalRoutes.includes('/legal')) {
+    routeErrors.push('/legal is present as canonical in Registry');
+  }
+
+  if (routeErrors.length > 0) {
+    console.error('❌ Route Validation Errors:');
+    routeErrors.forEach((e: string) => console.error('  - ' + e));
+    hasErrors = true;
+  } else {
+    console.log('✅ Route Validation Passed.');
+  }
 }
+
+async function main() {
+  console.log('Running Content Validation...');
+  scanDir(guidesDir);
+
+  await validateRoutes();
+
+  if (hasErrors) {
+    process.exit(1);
+  }
+
+  console.log('All content and route validations passed.');
+}
+
+main().catch(error => {
+  console.error(error);
+  process.exit(1);
+});
