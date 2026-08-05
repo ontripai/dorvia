@@ -36,6 +36,7 @@ export interface CostEstimate {
   currency: 'RON' | 'EUR' | 'USD';
   description: string;
   sourceId?: string;
+  claimId?: string;
   isFixed: boolean;
 }
 
@@ -43,6 +44,7 @@ export interface TimelineEstimate {
   duration: string;
   description: string;
   sourceId?: string;
+  claimId?: string;
   isGuaranteed: boolean;
 }
 
@@ -98,6 +100,7 @@ export interface OperationalGuide {
   generalExceptions: string[];
   commonProblems: string[];
   warnings: string[];
+  publicDisclosure?: string;
   officialSources: OfficialSource[];
   relatedGuides: Array<{
     route: string;

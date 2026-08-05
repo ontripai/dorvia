@@ -30,6 +30,15 @@ interface OperationalGuideLayoutProps {
     sourcesTitle: string;
     accessedOn: string;
     lastReviewed: string;
+    statusLabel: string;
+    factCheckLabel: string;
+    smeReviewLabel: string;
+    statusDraft: string;
+    statusPublished: string;
+    factCheckVerified: string;
+    factCheckPartially: string;
+    smeReviewPending: string;
+    smeReviewApproved: string;
   };
 }
 
@@ -56,9 +65,9 @@ export const OperationalGuideLayout: React.FC<OperationalGuideLayoutProps> = ({ 
         <div className="bg-white rounded-2xl p-6 border border-[#dfe6ef] shadow-sm space-y-4">
           <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#142033] border-b border-[#dfe6ef] pb-3">
             <span className="text-lg">📋</span>
-            <h3 className="font-extrabold text-base sm:text-lg">
+            <h2 className="font-extrabold text-base sm:text-lg">
               {translations.tocTitle}
-            </h3>
+            </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs sm:text-sm font-semibold">
             {guide.situations.map((sit, idx) => (
@@ -95,7 +104,10 @@ export const OperationalGuideLayout: React.FC<OperationalGuideLayoutProps> = ({ 
       {/* Meta Footer */}
       <div className="text-xs text-slate-500 text-center space-y-1">
         <p>{translations.lastReviewed}: {guide.lastReviewed}</p>
-        <p>Status: {guide.contentStatus} | Fact Check: {guide.factCheckStatus}</p>
+        <p>{translations.statusLabel}: {guide.contentStatus === 'draft' ? translations.statusDraft : translations.statusPublished} | {translations.factCheckLabel}: {guide.factCheckStatus === 'partially-verified' ? translations.factCheckPartially : translations.factCheckVerified}</p>
+        {guide.smeReviewStatus && (
+          <p>{translations.smeReviewLabel}: {guide.smeReviewStatus === 'PENDING' ? translations.smeReviewPending : translations.smeReviewApproved}</p>
+        )}
       </div>
 
     </div>

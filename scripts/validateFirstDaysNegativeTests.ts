@@ -7,54 +7,34 @@ const originalContent = fs.readFileSync(targetFile, 'utf8');
 
 const tests = [
   {
-    name: 'Verified Step without sourceId',
-    replace: /status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'anaf-contracts'/g,
-    with: `status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05'`
+    name: 'Missing applicableClaimIds on a VERIFIED step',
+    replace: /applicableClaimIds: \['c-student-doc-1', 'c-student-doc-2', 'c-student-doc-4', 'c-student-step-4', 'timeline-igi-student-1'\]/g,
+    with: `// deleted applicableClaimIds`
   },
   {
-    name: 'Verified Document without sourceId',
-    replace: `{ name: 'Passport with valid Type D/SD visa', isMandatory: true, claimId: 'c-student-doc-1', sourceId: 'igi-student', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' }`,
-    with: `{ name: 'Passport with valid Type D/SD visa', isMandatory: true, claimId: 'c-student-doc-1', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' }`
+    name: 'A source missing applicableClaimIds entirely',
+    replace: /applicableClaimIds: \['fee-residence-card-265', 'fee-consular-tax-120'\]/g,
+    with: `// missing`
   },
   {
-    name: 'Unknown sourceId',
-    replace: /sourceId: 'igi-student'/g,
-    with: `sourceId: 'fake-source-999'`
+    name: 'A source with an empty applicableClaimIds array',
+    replace: /applicableClaimIds: \['fee-residence-card-265', 'fee-consular-tax-120'\]/g,
+    with: `applicableClaimIds: []`
   },
   {
-    name: 'Source not applicable to scenario',
-    replace: `sourceId: 'igi-student', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT'`,
-    with: `sourceId: 'igi-eu', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT'`
+    name: 'A source where applicableScenarioIds lacks the current scenario ID',
+    replace: /applicableScenarioIds: \['student-arrival'\]/g,
+    with: `applicableScenarioIds: ['some-other-scenario']`
   },
   {
-    name: 'Source not applicable to claim',
-    replace: `applicableScenarioIds: ['student-arrival']`,
-    with: `applicableScenarioIds: ['student-arrival'], applicableClaimIds: ['some-other-claim-id']`
+    name: 'The general non-EU family reunification source URL pointing to the beneficiaries-of-international-protection page',
+    replace: /url: 'https:\/\/igi\.mai\.gov\.ro\/en\/family-reunification-2\/'/g,
+    with: `url: 'https://igi.mai.gov.ro/en/beneficiaries-of-international-protection/'`
   },
   {
-    name: 'Outdated 259 RON residence-document cost',
-    replace: /amount: '265'/g,
-    with: `amount: '259'`
-  },
-  {
-    name: 'Generic CNAS homepage used as verified entitlement evidence',
-    replace: /status: 'QUALIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'cnas-insurance-general'/g,
-    with: `status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'cnas-insurance-general'`
-  },
-  {
-    name: 'Absolute accommodation claim requiring only an ANAF-registered long-term lease',
-    replace: `limitations: ['Cannot apply for a residence permit until acceptable proof of legal accommodation is secured. The required document varies depending on your specific procedure.']`,
-    with: `limitations: ['Cannot apply for residence permit until long-term housing is secured and registered at ANAF.']`
-  },
-  {
-    name: 'Incorrect family-reunification source',
-    replace: `url: 'https://igi.mai.gov.ro/en/family-reunification/',`,
-    with: `url: 'https://igi.mai.gov.ro/en/beneficiaries-of-international-protection/',`
-  },
-  {
-    name: 'FA/EN mismatch',
-    replace: /id: 'student-arrival',/g,
-    with: `id: 'student-arrival-fake',`
+    name: 'Source not applicable to claim (Step)',
+    replace: /claimId: 'c-student-step-4'/g,
+    with: `claimId: 'c-fake-claim-999'`
   }
 ];
 

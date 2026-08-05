@@ -276,7 +276,16 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
         warningsTitle: 'هشدارهای مهم',
         sourcesTitle: 'منابع رسمی استناد شده',
         accessedOn: 'تاریخ دسترسی',
-        lastReviewed: 'آخرین بازبینی'
+        lastReviewed: 'آخرین بازبینی',
+        statusLabel: 'وضعیت محتوا',
+        factCheckLabel: 'وضعیت راستی‌آزمایی',
+        smeReviewLabel: 'بازبینی تخصصی/حقوقی',
+        statusDraft: 'پیشنویس',
+        statusPublished: 'منتشر شده',
+        factCheckVerified: 'تایید شده',
+        factCheckPartially: 'بخشی تأیید شده',
+        smeReviewPending: 'در انتظار بررسی',
+        smeReviewApproved: 'تایید شده'
       } : {
         tocTitle: 'Table of Contents',
         quickOverview: 'Quick Overview: ',
@@ -294,7 +303,16 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
         warningsTitle: 'Important Warnings',
         sourcesTitle: 'Official Sources Cited',
         accessedOn: 'Accessed on',
-        lastReviewed: 'Last Reviewed'
+        lastReviewed: 'Last Reviewed',
+        statusLabel: 'Content status',
+        factCheckLabel: 'Fact-check status',
+        smeReviewLabel: 'SME/legal review',
+        statusDraft: 'Draft',
+        statusPublished: 'Published',
+        factCheckVerified: 'Verified',
+        factCheckPartially: 'Partially verified',
+        smeReviewPending: 'Pending',
+        smeReviewApproved: 'Approved'
       };
 
       return (
@@ -596,7 +614,16 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
         warningsTitle: 'هشدارهای مهم',
         sourcesTitle: 'منابع رسمی استناد شده',
         accessedOn: 'تاریخ دسترسی',
-        lastReviewed: 'آخرین بازبینی'
+        lastReviewed: 'آخرین بازبینی',
+        statusLabel: 'وضعیت محتوا',
+        factCheckLabel: 'وضعیت راستی‌آزمایی',
+        smeReviewLabel: 'بازبینی تخصصی/حقوقی',
+        statusDraft: 'پیشنویس',
+        statusPublished: 'منتشر شده',
+        factCheckVerified: 'تایید شده',
+        factCheckPartially: 'بخشی تأیید شده',
+        smeReviewPending: 'در انتظار بررسی',
+        smeReviewApproved: 'تایید شده'
       } : {
         tocTitle: 'Table of Contents',
         quickOverview: 'Quick Overview: ',
@@ -614,7 +641,16 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
         warningsTitle: 'Important Warnings',
         sourcesTitle: 'Official Sources Cited',
         accessedOn: 'Accessed on',
-        lastReviewed: 'Last Reviewed'
+        lastReviewed: 'Last Reviewed',
+        statusLabel: 'Content status',
+        factCheckLabel: 'Fact-check status',
+        smeReviewLabel: 'SME/legal review',
+        statusDraft: 'Draft',
+        statusPublished: 'Published',
+        factCheckVerified: 'Verified',
+        factCheckPartially: 'Partially verified',
+        smeReviewPending: 'Pending',
+        smeReviewApproved: 'Approved'
       };
 
       return (

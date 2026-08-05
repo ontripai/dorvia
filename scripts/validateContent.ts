@@ -77,6 +77,17 @@ async function validateFile(fullPath: string, file: string) {
     errors.push(`Duplicate source IDs found in officialSources: ${duplicates.join(', ')}`);
   }
 
+  if (route === '/needs/first-days-checklist') {
+    guideData.officialSources?.forEach((src: any) => {
+      if (!src.applicableClaimIds || src.applicableClaimIds.length === 0) {
+        errors.push(`Source ${src.id} claims broad procedure coverage without an explicit claim group`);
+      }
+      if (!src.applicableScenarioIds || src.applicableScenarioIds.length === 0) {
+        errors.push(`Source ${src.id} missing applicableScenarioIds`);
+      }
+    });
+  }
+
   // Claim IDs
   const allClaimIds: string[] = [];
   
@@ -99,8 +110,17 @@ async function validateFile(fullPath: string, file: string) {
         if (src && src.applicableScenarioIds && !src.applicableScenarioIds.includes(situation.id)) {
            errors.push(`Source ${doc.sourceId} is not applicable to scenario ${situation.id} (Document)`);
         }
-        if (src && src.applicableClaimIds && doc.claimId && !src.applicableClaimIds.includes(doc.claimId)) {
-           errors.push(`Source ${doc.sourceId} is not applicable to claim ${doc.claimId} (Document)`);
+        if (doc.sourceId && route === '/needs/first-days-checklist') {
+           const src = guideData.officialSources.find((s: any) => s.id === doc.sourceId);
+           if (!src) {
+              errors.push(`Source ${doc.sourceId} not found`);
+           } else {
+              if (!src.applicableClaimIds) {
+                 errors.push(`VERIFIED legal Document uses a source without applicableClaimIds: ${doc.name}`);
+              } else if (doc.claimId && !src.applicableClaimIds.includes(doc.claimId)) {
+                 errors.push(`Source ${doc.sourceId} is not applicable to claim ${doc.claimId} (Document)`);
+              }
+           }
         }
       }
     });
@@ -132,8 +152,17 @@ async function validateFile(fullPath: string, file: string) {
         if (src && src.applicableScenarioIds && !src.applicableScenarioIds.includes(situation.id)) {
            errors.push(`Source ${step.sourceId} is not applicable to scenario ${situation.id} (Step)`);
         }
-        if (src && src.applicableClaimIds && step.claimId && !src.applicableClaimIds.includes(step.claimId)) {
-           errors.push(`Source ${step.sourceId} is not applicable to claim ${step.claimId} (Step)`);
+        if (step.sourceId && route === '/needs/first-days-checklist') {
+           const src = guideData.officialSources.find((s: any) => s.id === step.sourceId);
+           if (!src) {
+              errors.push(`Source ${step.sourceId} not found`);
+           } else {
+              if (!src.applicableClaimIds) {
+                 errors.push(`VERIFIED legal Step uses a source without applicableClaimIds: ${step.title}`);
+              } else if (step.claimId && !src.applicableClaimIds.includes(step.claimId)) {
+                 errors.push(`Source ${step.sourceId} is not applicable to claim ${step.claimId} (Step)`);
+              }
+           }
         }
       }
       

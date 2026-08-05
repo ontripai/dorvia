@@ -6,6 +6,7 @@ export const firstDaysChecklistFA: OperationalGuide = {
   title: 'چک‌لیست روزهای اول ورود به رومانی',
   shortDescription: 'مراحل ضروری برای ۷۲ ساعت، ۷ روز اول و پس از آن در رومانی، شامل اقدامات عملی فوری و مهلت‌های قانونی.',
   mainQuestion: 'بلافاصله پس از ورود به رومانی چه اقدامات اداری و عملی باید انجام دهم؟',
+  publicDisclosure: 'این راهنما هنوز در انتظار بازبینی تخصصی و حقوقی نهایی است. پیش از اقدام، الزامات جاری را با مرجع رسمی یا متخصص واجد صلاحیت بررسی کنید.',
   quickAnswer: 'ابتدا اتصال اینترنت و ارز محلی را تامین کنید. قرارداد مسکن بلندمدت خود را نهایی کنید تا ثبت نام امکان‌پذیر شود. باید درخواست اقامت خود را حداقل ۳۰ روز قبل از انقضای حق اقامت قانونی فعلی خود (در صورت لزوم) ارسال کنید.',
   targetAudience: ['دانشجویان بین‌المللی', 'کارگران خارجی', 'اعضای خانواده', 'شهروندان اتحادیه اروپا', 'بازدیدکنندگان کوتاه‌مدت'],
   generalExceptions: [
@@ -31,7 +32,8 @@ export const firstDaysChecklistFA: OperationalGuide = {
       dateAccessed: '2026-08-05',
       status: 'primary',
       volatility: 'medium',
-      applicableScenarioIds: ['student-arrival', 'employee-arrival', 'family-reunification', 'family-romanian-citizen', 'company-owner']
+      applicableScenarioIds: ['student-arrival', 'employee-arrival', 'family-reunification', 'family-romanian-citizen', 'company-owner'],
+      applicableClaimIds: ['fee-residence-card-265', 'fee-consular-tax-120']
     },
     {
       id: 'igi-student',
@@ -43,7 +45,8 @@ export const firstDaysChecklistFA: OperationalGuide = {
       dateAccessed: '2026-08-05',
       status: 'primary',
       volatility: 'medium',
-      applicableScenarioIds: ['student-arrival']
+      applicableScenarioIds: ['student-arrival'],
+      applicableClaimIds: ['c-student-doc-1', 'c-student-doc-2', 'c-student-doc-4', 'c-student-step-4', 'timeline-igi-student-1']
     },
     {
       id: 'igi-work',
@@ -55,43 +58,60 @@ export const firstDaysChecklistFA: OperationalGuide = {
       dateAccessed: '2026-08-05',
       status: 'primary',
       volatility: 'medium',
-      applicableScenarioIds: ['employee-arrival']
+      applicableScenarioIds: ['employee-arrival'],
+      applicableClaimIds: ['c-work-doc-1', 'c-work-doc-2', 'c-work-doc-3', 'c-work-step-1', 'c-work-step-4', 'timeline-igi-work-2']
     },
     {
-      id: 'mae-family-visa',
-      sourceTitle: 'MAE - Family Reunification Visa',
-      organization: 'وزارت امور خارجه',
-      url: 'https://www.mae.ro/en/node/2051',
+      id: 'igi-long-stay-visa',
+      sourceTitle: 'IGI - Long Stay Visa',
+      organization: 'Inspectoratul General pentru Imigrări',
+      url: 'https://igi.mai.gov.ro/en/long-stay-visa/',
       sourceType: 'official-website',
       language: 'en',
       dateAccessed: '2026-08-05',
       status: 'primary',
       volatility: 'medium',
-      applicableScenarioIds: ['family-reunification']
+      applicableScenarioIds: ['family-reunification'],
+      applicableClaimIds: ['c-fam1-doc-1']
     },
     {
-      id: 'igi-family-permit',
-      sourceTitle: 'IGI - Family Reunification Residence Permit',
-      organization: 'اداره کل مهاجرت',
-      url: 'https://igi.mai.gov.ro/en/family-reunification/',
+      id: 'igi-residence-permit',
+      sourceTitle: 'IGI - Residence Permit',
+      organization: 'Inspectoratul General pentru Imigrări',
+      url: 'https://igi.mai.gov.ro/en/residence-permit/',
       sourceType: 'official-website',
       language: 'en',
       dateAccessed: '2026-08-05',
       status: 'primary',
       volatility: 'medium',
-      applicableScenarioIds: ['family-reunification']
+      applicableScenarioIds: ['family-reunification'],
+      applicableClaimIds: ['c-fam1-doc-3', 'c-fam1-doc-4', 'c-fam1-step-3', 'timeline-igi-residence-permit-3']
+    },
+    {
+      id: 'igi-family-reunification-approval',
+      sourceTitle: 'IGI - Family Reunification Approval',
+      organization: 'Inspectoratul General pentru Imigrări',
+      url: 'https://igi.mai.gov.ro/en/family-reunification-2/',
+      sourceType: 'official-website',
+      language: 'en',
+      dateAccessed: '2026-08-05',
+      status: 'primary',
+      volatility: 'medium',
+      applicableScenarioIds: ['family-reunification'],
+      applicableClaimIds: ['c-fam1-doc-2']
     },
     {
       id: 'igi-family-ro-permit',
       sourceTitle: 'IGI - اعضای خانواده شهروندان رومانی',
       organization: 'اداره کل مهاجرت',
-      url: 'https://igi.mai.gov.ro/en/family-members-of-romanian-citizens/',
+      url: 'https://igi.mai.gov.ro/en/family-reunification-for-romanian-citizens/',
       sourceType: 'official-website',
       language: 'en',
       dateAccessed: '2026-08-05',
       status: 'primary',
       volatility: 'medium',
-      applicableScenarioIds: ['family-romanian-citizen']
+      applicableScenarioIds: ['family-romanian-citizen'],
+      applicableClaimIds: ['c-fam2-doc-1', 'c-fam2-doc-2', 'c-fam2-doc-3', 'c-fam2-step-1', 'timeline-igi-family-ro-permit-4']
     },
     {
       id: 'igi-eu',
@@ -103,7 +123,8 @@ export const firstDaysChecklistFA: OperationalGuide = {
       dateAccessed: '2026-08-05',
       status: 'primary',
       volatility: 'low',
-      applicableScenarioIds: ['eu-citizen-arrival']
+      applicableScenarioIds: ['eu-citizen-arrival'],
+      applicableClaimIds: ['c-eu-doc-1', 'c-eu-doc-2', 'c-eu-doc-3', 'c-eu-step-2', 'timeline-igi-eu-6']
     },
     {
       id: 'igi-business',
@@ -115,7 +136,8 @@ export const firstDaysChecklistFA: OperationalGuide = {
       dateAccessed: '2026-08-05',
       status: 'primary',
       volatility: 'medium',
-      applicableScenarioIds: ['company-owner']
+      applicableScenarioIds: ['company-owner'],
+      applicableClaimIds: ['c-biz-doc-1', 'c-biz-doc-2', 'c-biz-doc-3', 'c-biz-step-2', 'timeline-igi-business-5']
     },
     {
       id: 'mae-visas',
@@ -127,7 +149,8 @@ export const firstDaysChecklistFA: OperationalGuide = {
       dateAccessed: '2026-08-05',
       status: 'primary',
       volatility: 'low',
-      applicableScenarioIds: ['short-stay-visitor']
+      applicableScenarioIds: ['short-stay-visitor'],
+      applicableClaimIds: ['c-short-doc-1', 'c-short-doc-2']
     },
     {
       id: 'igi-hosting-notification',
@@ -139,7 +162,8 @@ export const firstDaysChecklistFA: OperationalGuide = {
       dateAccessed: '2026-08-05',
       status: 'primary',
       volatility: 'medium',
-      applicableScenarioIds: ['short-stay-visitor']
+      applicableScenarioIds: ['short-stay-visitor'],
+      applicableClaimIds: ['c-short-step-2']
     },
     {
       id: 'igi-general-renewal',
@@ -151,7 +175,8 @@ export const firstDaysChecklistFA: OperationalGuide = {
       dateAccessed: '2026-08-05',
       status: 'primary',
       volatility: 'medium',
-      applicableScenarioIds: ['existing-residence-holder']
+      applicableScenarioIds: ['existing-residence-holder'],
+      applicableClaimIds: ['c-exist-doc-1', 'c-exist-doc-2', 'c-exist-step-2']
     },
     {
       id: 'anaf-contracts',
@@ -161,7 +186,9 @@ export const firstDaysChecklistFA: OperationalGuide = {
       sourceType: 'official-website',
       language: 'ro',
       dateAccessed: '2026-08-05',
-      status: 'primary'
+      status: 'primary',
+      applicableClaimIds: ['c-student-doc-3', 'c-student-step-2', 'c-work-doc-4', 'c-work-step-2'],
+      applicableScenarioIds: ['student-arrival', 'employee-arrival']
     },
     {
       id: 'cnas-insurance-general',
@@ -174,7 +201,8 @@ export const firstDaysChecklistFA: OperationalGuide = {
       status: 'primary',
       volatility: 'high',
       scopeAndExceptions: 'نیاز به بررسی حقوقی حرفه‌ای برای تعیین دقیق شرایط واجد شرایط بودن دارد.',
-      applicableScenarioIds: ['family-reunification']
+      applicableScenarioIds: ['family-reunification'],
+      applicableClaimIds: ['c-fam1-step-2']
     }
   ],
   relatedGuides: [
@@ -212,11 +240,11 @@ export const firstDaysChecklistFA: OperationalGuide = {
         { title: 'مهلت قانونی: درخواست اقامت IGI', description: 'حداقل ۳۰ روز قبل از انقضای حق اقامت فعلی خود، درخواست اقامت را از طریق پورتال IGI ثبت کنید.', claimId: 'c-student-step-4', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-student', authority: 'IGI' }
       ],
       fees: [
-        { amount: '265', currency: 'RON', description: 'هزینه صدور کارت اقامت', isFixed: true, sourceId: 'igi-fees-august-2025' },
-        { amount: '120', currency: 'EUR', description: 'معادل مالیات کنسولی', isFixed: true, sourceId: 'igi-fees-august-2025' }
+        { amount: '265', currency: 'RON', description: 'هزینه صدور کارت اقامت', isFixed: true, sourceId: 'igi-fees-august-2025', claimId: 'fee-residence-card-265' },
+        { amount: '120', currency: 'EUR', description: 'معادل مالیات کنسولی', isFixed: true, sourceId: 'igi-fees-august-2025', claimId: 'fee-consular-tax-120' }
       ],
       timeline: [
-        { duration: '۳۰-۴۵ روز', description: 'زمان تقریبی پردازش IGI پس از ارسال مدارک.', isGuaranteed: false, sourceId: 'igi-student' }
+        { duration: '۳۰-۴۵ روز', description: 'زمان تقریبی پردازش IGI پس از ارسال مدارک.', isGuaranteed: false, sourceId: 'igi-student', claimId: 'timeline-igi-student-1' }
       ],
       exceptions: ['دانشجویان بورسیه ممکن است از هزینه‌های کنسولی معاف باشند.'],
       limitations: []
@@ -243,11 +271,11 @@ export const firstDaysChecklistFA: OperationalGuide = {
         { title: 'مهلت قانونی: درخواست اقامت IGI', description: 'حداقل ۳۰ روز قبل از انقضای ویزای خود، درخواست اقامت را در پورتال IGI ثبت کنید.', claimId: 'c-work-step-4', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-work', authority: 'IGI' }
       ],
       fees: [
-        { amount: '265', currency: 'RON', description: 'هزینه صدور کارت اقامت', isFixed: true, sourceId: 'igi-fees-august-2025' },
-        { amount: '120', currency: 'EUR', description: 'معادل مالیات کنسولی', isFixed: true, sourceId: 'igi-fees-august-2025' }
+        { amount: '265', currency: 'RON', description: 'هزینه صدور کارت اقامت', isFixed: true, sourceId: 'igi-fees-august-2025', claimId: 'fee-residence-card-265' },
+        { amount: '120', currency: 'EUR', description: 'معادل مالیات کنسولی', isFixed: true, sourceId: 'igi-fees-august-2025', claimId: 'fee-consular-tax-120' }
       ],
       timeline: [
-        { duration: '۳۰ روز', description: 'زمان پردازش تخمینی IGI پس از مصاحبه.', isGuaranteed: false, sourceId: 'igi-work' }
+        { duration: '۳۰ روز', description: 'زمان پردازش تخمینی IGI پس از مصاحبه.', isGuaranteed: false, sourceId: 'igi-work', claimId: 'timeline-igi-work-2' }
       ],
       exceptions: ['متقاضیان کارت آبی اتحادیه اروپا ممکن است زمان پردازش متفاوتی داشته باشند.'],
       limitations: ['شما فقط می‌توانید برای کارفرمای مشخص شده در مجوز کار خود کار کنید.']
@@ -262,22 +290,22 @@ export const firstDaysChecklistFA: OperationalGuide = {
       requiresMedical: 'conditional',
       medicalConditionText: 'گواهی پزشکی مبنی بر عدم ابتلا به بیماری‌های مسری الزامی است.',
       documents: [
-        { name: 'پاسپورت با ویزای معتبر D/VF', isMandatory: true, claimId: 'c-fam1-doc-1', sourceId: 'mae-family-visa', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'مجوز اقامت اسپانسر', isMandatory: true, claimId: 'c-fam1-doc-2', sourceId: 'igi-family-permit', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'گواهی ازدواج یا تولد (ترجمه شده و آپوستیل)', isMandatory: true, claimId: 'c-fam1-doc-3', sourceId: 'igi-family-permit', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'اثبات مسکن و تمکن مالی', isMandatory: true, claimId: 'c-fam1-doc-4', sourceId: 'igi-family-permit', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' }
+        { name: 'پاسپورت با ویزای معتبر D/VF', isMandatory: true, claimId: 'c-fam1-doc-1', sourceId: 'igi-long-stay-visa', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'مجوز اقامت اسپانسر', isMandatory: true, claimId: 'c-fam1-doc-2', sourceId: 'igi-family-reunification-approval', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'گواهی ازدواج یا تولد (ترجمه شده و آپوستیل)', isMandatory: true, claimId: 'c-fam1-doc-3', sourceId: 'igi-residence-permit', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'اثبات مسکن و تمکن مالی', isMandatory: true, claimId: 'c-fam1-doc-4', sourceId: 'igi-residence-permit', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
         { title: 'عملی: استقرار', description: 'یک سیم کارت محلی تهیه کنید و در صورت نیاز برای اثبات مسکن، نام عضو خانواده را به قبوض خدماتی اضافه کنید.', claimId: 'c-fam1-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
         { title: 'بیمه درمانی (Co-asigurat)', description: 'برای وضعیت بیمه مشترک (هم‌پوشانی) در CNAS جهت پوشش بهداشت عمومی اقدام کنید.', claimId: 'c-fam1-step-2', status: 'QUALIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'cnas-insurance-general', authority: 'CNAS' },
-        { title: 'مهلت قانونی: درخواست اقامت IGI', description: 'درخواست مجوز اقامت برای پیوستن خانواده را حداقل ۳۰ روز قبل از انقضای ویزا از طریق پورتال IGI ارسال کنید.', claimId: 'c-fam1-step-3', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-family-permit', authority: 'IGI' }
+        { title: 'مهلت قانونی: درخواست اقامت IGI', description: 'درخواست مجوز اقامت برای پیوستن خانواده را حداقل ۳۰ روز قبل از انقضای ویزا از طریق پورتال IGI ارسال کنید.', claimId: 'c-fam1-step-3', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-residence-permit', authority: 'IGI' }
       ],
       fees: [
-        { amount: '265', currency: 'RON', description: 'هزینه صدور کارت اقامت', isFixed: true, sourceId: 'igi-fees-august-2025' },
-        { amount: '120', currency: 'EUR', description: 'معادل مالیات کنسولی', isFixed: true, sourceId: 'igi-fees-august-2025' }
+        { amount: '265', currency: 'RON', description: 'هزینه صدور کارت اقامت', isFixed: true, sourceId: 'igi-fees-august-2025', claimId: 'fee-residence-card-265' },
+        { amount: '120', currency: 'EUR', description: 'معادل مالیات کنسولی', isFixed: true, sourceId: 'igi-fees-august-2025', claimId: 'fee-consular-tax-120' }
       ],
       timeline: [
-        { duration: '۳۰-۶۰ روز', description: 'زمان پردازش تخمینی IGI.', isGuaranteed: false, sourceId: 'igi-family-permit' }
+        { duration: '۳۰-۶۰ روز', description: 'زمان پردازش تخمینی IGI.', isGuaranteed: false, sourceId: 'igi-residence-permit', claimId: 'timeline-igi-residence-permit-3' }
       ],
       exceptions: [],
       limitations: []
@@ -299,10 +327,10 @@ export const firstDaysChecklistFA: OperationalGuide = {
         { title: 'مهلت قانونی: درخواست اقامت IGI', description: 'حداقل ۳۰ روز قبل از انقضای اقامت قانونی فعلی، درخواست مجوز اقامت را در پورتال IGI ثبت کنید.', claimId: 'c-fam2-step-1', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-family-ro-permit', authority: 'IGI' }
       ],
       fees: [
-        { amount: '265', currency: 'RON', description: 'هزینه صدور کارت اقامت', isFixed: true, sourceId: 'igi-fees-august-2025' }
+        { amount: '265', currency: 'RON', description: 'هزینه صدور کارت اقامت', isFixed: true, sourceId: 'igi-fees-august-2025', claimId: 'fee-residence-card-265' }
       ],
       timeline: [
-        { duration: '۳۰-۹۰ روز', description: 'زمان پردازش تخمینی IGI.', isGuaranteed: false, sourceId: 'igi-family-ro-permit' }
+        { duration: '۳۰-۹۰ روز', description: 'زمان پردازش تخمینی IGI.', isGuaranteed: false, sourceId: 'igi-family-ro-permit', claimId: 'timeline-igi-family-ro-permit-4' }
       ],
       exceptions: ['اعضای خانواده که به شهروند رومانیایی می‌پیوندند از پرداخت مالیات کنسولی معاف هستند.'],
       limitations: []
@@ -325,11 +353,11 @@ export const firstDaysChecklistFA: OperationalGuide = {
         { title: 'مهلت قانونی: درخواست اقامت IGI', description: 'درخواست اقامت را حداقل ۳۰ روز قبل از انقضای ویزای خود از طریق پورتال IGI ارسال کنید.', claimId: 'c-biz-step-2', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-business', authority: 'IGI' }
       ],
       fees: [
-        { amount: '265', currency: 'RON', description: 'هزینه صدور کارت اقامت', isFixed: true, sourceId: 'igi-fees-august-2025' },
-        { amount: '120', currency: 'EUR', description: 'معادل مالیات کنسولی', isFixed: true, sourceId: 'igi-fees-august-2025' }
+        { amount: '265', currency: 'RON', description: 'هزینه صدور کارت اقامت', isFixed: true, sourceId: 'igi-fees-august-2025', claimId: 'fee-residence-card-265' },
+        { amount: '120', currency: 'EUR', description: 'معادل مالیات کنسولی', isFixed: true, sourceId: 'igi-fees-august-2025', claimId: 'fee-consular-tax-120' }
       ],
       timeline: [
-        { duration: '۳۰-۴۵ روز', description: 'زمان پردازش تخمینی IGI.', isGuaranteed: false, sourceId: 'igi-business' }
+        { duration: '۳۰-۴۵ روز', description: 'زمان پردازش تخمینی IGI.', isGuaranteed: false, sourceId: 'igi-business', claimId: 'timeline-igi-business-5' }
       ],
       exceptions: [],
       limitations: []
@@ -353,7 +381,7 @@ export const firstDaysChecklistFA: OperationalGuide = {
       ],
       fees: [],
       timeline: [
-        { duration: 'همان روز', description: 'گواهی ثبت نام معمولا همان روزی که پرونده تکمیل شده ارسال می‌شود صادر می‌شود.', isGuaranteed: true, sourceId: 'igi-eu' }
+        { duration: 'همان روز', description: 'گواهی ثبت نام معمولا همان روزی که پرونده تکمیل شده ارسال می‌شود صادر می‌شود.', isGuaranteed: true, sourceId: 'igi-eu', claimId: 'timeline-igi-eu-6' }
       ],
       exceptions: ['شهروندان اتحادیه اروپا "Permis de Ședere" کلاسیک دریافت نمی‌کنند، آنها "Certificat de Înregistrare" می‌گیرند.'],
       limitations: []
