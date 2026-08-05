@@ -102,6 +102,23 @@ function runValidation() {
     }
   }
 
+
+  // Markdown checks
+  const inventoryContent = fs.readFileSync(path.join(process.cwd(), 'docs/content-rollout/route-inventory.md'), 'utf8');
+  const countsContent = fs.readFileSync(path.join(process.cwd(), 'docs/content-rollout/route-and-build-counts.md'), 'utf8');
+
+  const inventoryLines = inventoryContent.split('\n');
+  const legalInventoryLine = inventoryLines.find(l => l.startsWith('- **/legal**') || l.startsWith('- /legal '));
+  if (legalInventoryLine) errors.push('route-inventory.md contains a canonical /legal entry');
+  
+  if (!inventoryContent.includes('/romania/cities')) errors.push('route-inventory.md omits /romania/cities');
+
+  if (countsContent.includes('/legal/[slug]`: 4')) errors.push('route-and-build-counts.md states /legal/[slug] = 4');
+  if (countsContent.includes('dynamic canonical = 52') || countsContent.includes('52 Dynamic Canonical')) errors.push('route-and-build-counts.md states dynamic canonical = 52');
+  if (countsContent.includes('/romania/cities is noncanonical') || countsContent.includes('/romania/cities are physical static pages but are NOT included in `ROUTE_REGISTRY`')) errors.push('route-and-build-counts.md states /romania/cities is noncanonical');
+
+  if (!countsContent.includes('15 Static Canonical + 51 Dynamic Canonical = 66 Canonical Routes')) errors.push('documented equation differs from 15 + 51 = 66 in route-and-build-counts.md');
+
   if (errors.length > 0) {
     console.error('Content Rollout Audit Validation Failed:');
     errors.forEach(e => console.error('- ' + e));

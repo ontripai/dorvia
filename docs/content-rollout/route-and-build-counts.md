@@ -18,13 +18,13 @@ Previous arithmetic (66 - 16 = 50 vs 53) contained three foundational errors:
 
 1. **Incorrect generateStaticParams Claim**: The Next.js implementation does not use `generateStaticParams`; dynamic pages are server-rendered on demand. The reported 53 was derived manually from a flawed template-to-route mapping, not from build outputs.
 2. **Incorrect Template Mapping (+1 error)**: The previous manual mapping attributed 8 routes to `/company/[slug]`. However, one of those (`/company/investment`) is a static physical page, leaving only 7 dynamic company routes. This reduces the artificial 53 count to the correct 52.
-3. **Non-Canonical Static Pages (-2 error)**: The assumption that 66 canonical - 16 static = 50 dynamic assumes all 16 static physical pages are canonical. This is false. `/evaluation` and `/romania/cities` are physical static pages but are NOT included in `ROUTE_REGISTRY`. 
+3. **Non-Canonical Static Pages (-2 error)**: The assumption that 66 canonical - 16 static = 50 dynamic assumes all 16 static physical pages are canonical. This is false. `/evaluation` is a physical static page but is NOT included in `ROUTE_REGISTRY`. Also `/romania/cities` is a static canonical route. 
 
 **The Reconciled Equation:**
 15 Static Canonical + 51 Dynamic Canonical = 66 Canonical Routes
 
 ## Dynamic Template Canonical Mapping (51 Outputs)
-- `/legal/[slug]`: 4 routes (`/legal`, `/legal/privacy`, `/legal/terms`, `/legal/disclaimer`)
+- `/legal/[slug]`: 3 routes
 - `/needs/[slug]`: 12 routes
 - `/immigration/[slug]`: 5 routes
 - `/work/[slug]`: 6 routes
@@ -34,10 +34,9 @@ Previous arithmetic (66 - 16 = 50 vs 53) contained three foundational errors:
 - `/romania/[slug]`: 7 routes
 
 ## The `/legal/[slug]` Inspection
-There are four canonical routes defined under the legal hub:
-1. `/legal` (DECISION_HUB, Indexable: true, Sitemap: true, Duplicates/Redirects: No) *Note: physically 404s in Next.js as no static file exists and [slug] cannot match root.*
-2. `/legal/privacy` (LEGAL_PAGE, Indexable: true, Sitemap: true, Duplicates/Redirects: No)
-3. `/legal/terms` (LEGAL_PAGE, Indexable: true, Sitemap: true, Duplicates/Redirects: No)
-4. `/legal/disclaimer` (LEGAL_PAGE, Indexable: true, Sitemap: true, Duplicates/Redirects: No)
+`/legal/[slug]` canonical routes are exactly:
+- `/legal/privacy`
+- `/legal/terms`
+- `/legal/disclaimer`
 
-This reconciles why four slugs correspond to exactly 3 `LEGAL_PAGE` classifications.
+`/legal` is only an alias and permanent redirect to `/legal/privacy`.
