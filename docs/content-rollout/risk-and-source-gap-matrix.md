@@ -1,0 +1,68 @@
+# Risk and Source Gap Matrix
+
+- **/**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/about**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/contact**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/universities**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/services**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/articles**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/needs**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/immigration**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/work**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/company**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/study**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/romania**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/start-here**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/legal**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/needs/driving-license**: Risk: MEDIUM (LOCAL_ADMINISTRATION), Authority: Various
+- **/needs/first-days-checklist**: Risk: MEDIUM (LOCAL_ADMINISTRATION), Authority: Various
+- **/needs/housing**: Risk: MEDIUM (LOCAL_ADMINISTRATION), Authority: Various
+- **/needs/banking**: Risk: MEDIUM (LOCAL_ADMINISTRATION), Authority: Various
+- **/needs/certified-translation**: Risk: MEDIUM (LOCAL_ADMINISTRATION), Authority: Various
+- **/needs/notary-public**: Risk: MEDIUM (LOCAL_ADMINISTRATION), Authority: Various
+- **/needs/iranian-embassy-and-mikhak**: Risk: MEDIUM (LOCAL_ADMINISTRATION), Authority: Various
+- **/needs/health**: Risk: MEDIUM (LOCAL_ADMINISTRATION), Authority: Various
+- **/needs/school**: Risk: MEDIUM (LOCAL_ADMINISTRATION), Authority: Various
+- **/needs/telecom**: Risk: MEDIUM (LOCAL_ADMINISTRATION), Authority: Various
+- **/needs/currency-exchange**: Risk: MEDIUM (LOCAL_ADMINISTRATION), Authority: Various
+- **/needs/transportation**: Risk: MEDIUM (LOCAL_ADMINISTRATION), Authority: Various
+- **/immigration/igi-process**: Risk: CRITICAL (IMMIGRATION), Authority: IGI / MAI
+- **/immigration/residence-renewal**: Risk: CRITICAL (IMMIGRATION), Authority: IGI / MAI
+- **/immigration/family-reunification**: Risk: CRITICAL (IMMIGRATION), Authority: IGI / MAI
+- **/immigration/long-term-residence**: Risk: CRITICAL (IMMIGRATION), Authority: IGI / MAI
+- **/immigration/citizenship**: Risk: CRITICAL (IMMIGRATION), Authority: IGI / MAI
+- **/work/finding-job**: Risk: HIGH (EMPLOYMENT), Authority: IGI / ITM
+- **/work/work-permit**: Risk: HIGH (EMPLOYMENT), Authority: IGI / ITM
+- **/work/work-visa**: Risk: HIGH (EMPLOYMENT), Authority: IGI / ITM
+- **/work/employment-contract**: Risk: HIGH (EMPLOYMENT), Authority: IGI / ITM
+- **/work/taxes-salaries**: Risk: HIGH (EMPLOYMENT), Authority: IGI / ITM
+- **/work/insurance**: Risk: HIGH (EMPLOYMENT), Authority: IGI / ITM
+- **/company/registration**: Risk: HIGH (FINANCIAL), Authority: ONRC / ANAF
+- **/company/tax-types**: Risk: HIGH (FINANCIAL), Authority: ONRC / ANAF
+- **/company/bank-account**: Risk: HIGH (FINANCIAL), Authority: ONRC / ANAF
+- **/company/residency**: Risk: HIGH (FINANCIAL), Authority: ONRC / ANAF
+- **/company/real-estate-investment**: Risk: HIGH (FINANCIAL), Authority: ONRC / ANAF
+- **/company/startup-tech-investment**: Risk: HIGH (FINANCIAL), Authority: ONRC / ANAF
+- **/company/annual-tax-reporting**: Risk: HIGH (FINANCIAL), Authority: ONRC / ANAF
+- **/company/investment**: Risk: HIGH (FINANCIAL), Authority: ONRC / ANAF
+- **/study/requirements**: Risk: MEDIUM (EDUCATION), Authority: Ministry of Education
+- **/study/visa-type-d**: Risk: MEDIUM (EDUCATION), Authority: Ministry of Education
+- **/study/tuition-overview**: Risk: MEDIUM (EDUCATION), Authority: Ministry of Education
+- **/study/preparatory-year**: Risk: MEDIUM (EDUCATION), Authority: Ministry of Education
+- **/study/scholarships**: Risk: MEDIUM (EDUCATION), Authority: Ministry of Education
+- **/study/part-time-work**: Risk: MEDIUM (EDUCATION), Authority: Ministry of Education
+- **/start-here/planning-to-come**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/start-here/newly-arrived**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/start-here/settling-in**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/start-here/long-term-stay**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/start-here/citizenship-goal**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/romania/economy**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/romania/society**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/romania/culture-and-arts**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/romania/laws-and-regulations**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/romania/tourism**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/romania/geography**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/romania/history**: Risk: LOW (LOW_RISK_REFERENCE), Authority: N/A
+- **/legal/privacy**: Risk: CRITICAL (LEGAL), Authority: Legal Counsel
+- **/legal/terms**: Risk: CRITICAL (LEGAL), Authority: Legal Counsel
+- **/legal/disclaimer**: Risk: CRITICAL (LEGAL), Authority: Legal Counsel
