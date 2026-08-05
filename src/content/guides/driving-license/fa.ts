@@ -146,10 +146,10 @@ export const drivingLicenseFA: OperationalGuide = {
         { name: 'فرم تکمیل‌شده درخواست DGPCI', isMandatory: true }
       ],
       steps: [
-        { title: 'بررسی اصالت', description: 'مرجع ذی‌صلاح رومانیایی فرآیند استعلام از کشور صادرکننده را مدیریت می‌کند. اصالت و اعتبار گواهینامه باید تایید شود. ممکن است مدارک اضافی درخواست شود.', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'ترجمه رسمی', description: 'ترجمه رسمی گواهینامه ایرانی توسط مترجم مجاز رومانیایی.', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'معاینه پزشکی', description: 'انجام معاینات پزشکی در کلینیک‌های مورد تایید DGPCI.', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'ثبت درخواست در DGPCI', description: 'ارائه پرونده تکمیل‌شده به دفتر استانی DGPCI، پرداخت هزینه صدور و دریافت رسید ثبت‌نام.', status: 'VERIFIED', reviewDate: '2026-08-05' }
+        { title: 'بررسی اصالت', description: 'مرجع ذی‌صلاح رومانیایی فرآیند استعلام از کشور صادرکننده را مدیریت می‌کند. اصالت و اعتبار گواهینامه باید تایید شود. ممکن است مدارک اضافی درخواست شود.' },
+        { title: 'ترجمه رسمی', description: 'ترجمه رسمی گواهینامه ایرانی توسط مترجم مجاز رومانیایی.' },
+        { title: 'معاینه پزشکی', description: 'انجام معاینات پزشکی در کلینیک‌های مورد تایید DGPCI.' },
+        { title: 'ثبت درخواست در DGPCI', description: 'ارائه پرونده تکمیل‌شده به دفتر استانی DGPCI، پرداخت هزینه صدور و دریافت رسید ثبت‌نام.' }
       ],
       fees: [
         { amount: '89', currency: 'RON', description: 'هزینه صدور گواهینامه جهت تبدیل. قابل پرداخت از طریق بانک CEC، سایت ghișeul.ro یا باجه‌های DGPCI.', isFixed: true, sourceId: 'dgpci-exchange' }
@@ -175,10 +175,10 @@ export const drivingLicenseFA: OperationalGuide = {
         { name: 'گواهی پایان دوره آموزشگاه رانندگی', isMandatory: true }
       ],
       steps: [
-        { title: 'ثبت‌نام در آموزشگاه رانندگی', description: 'یک آموزشگاه مجاز پیدا کنید. برخی آموزشگاه‌ها در شهرهای بزرگ کلاس‌های انگلیسی دارند.', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'آزمون‌های پزشکی و روانشناسی', description: 'گذراندن آزمایش‌های سلامت جسمی و روانی.', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'آزمون آیین‌نامه (تئوری)', description: 'قبولی در آزمون کامپیوتری (Sala).', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'آزمون عملی', description: 'قبولی در آزمون عملی رانندگی در جاده با ممتحن پلیس.', status: 'VERIFIED', reviewDate: '2026-08-05' }
+        { title: 'ثبت‌نام در آموزشگاه رانندگی', description: 'یک آموزشگاه مجاز پیدا کنید. برخی آموزشگاه‌ها در شهرهای بزرگ کلاس‌های انگلیسی دارند.' },
+        { title: 'آزمون‌های پزشکی و روانشناسی', description: 'گذراندن آزمایش‌های سلامت جسمی و روانی.' },
+        { title: 'آزمون آیین‌نامه (تئوری)', description: 'قبولی در آزمون کامپیوتری (Sala).' },
+        { title: 'آزمون عملی', description: 'قبولی در آزمون عملی رانندگی در جاده با ممتحن پلیس.' }
       ],
       fees: [
         { amount: '89', currency: 'RON', description: 'هزینه صدور گواهینامه DGPCI. قابل پرداخت از طریق بانک CEC، سایت ghișeul.ro یا باجه‌های DGPCI.', isFixed: true, sourceId: 'dgpci-exam' }

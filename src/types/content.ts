@@ -4,17 +4,31 @@ export type ContentStatus = 'draft' | 'editorial-review' | 'fact-check-review' |
 export type FactCheckStatus = 'unchecked' | 'partially-verified' | 'source-verified' | 'requires-legal-review';
 export type RiskCategory = 'IMMIGRATION' | 'LEGAL' | 'TAX' | 'FINANCIAL' | 'MEDICAL' | 'EDUCATION' | 'PRIVACY' | 'CONSUMER' | 'OUTDATED' | 'UNSUPPORTED';
 
+export type ClaimStatus =
+  | 'VERIFIED_LEGAL_REQUIREMENT'
+  | 'QUALIFIED_LEGAL_REQUIREMENT'
+  | 'RECOMMENDED_PRACTICAL_ACTION'
+  | 'PROVIDER_DEPENDENT'
+  | 'OPTIONAL'
+  | 'REMOVED'
+  | 'PROFESSIONAL_REVIEW_REQUIRED'
+  | 'VERIFIED'
+  | 'OWNER_REVIEW_REQUIRED';
+
 export interface OfficialSource {
   id: string;
   sourceTitle: string;
   organization: string;
   url: string;
-  sourceType: 'legislation' | 'official-website' | 'embassy' | 'international-convention' | 'other';
+  sourceType: 'official-website' | 'legislation' | 'official-pdf' | 'embassy' | 'professional-counsel' | 'provider';
   language: 'ro' | 'en' | 'fa';
   dateAccessed: string;
-  publicationDate?: string;
   applicableSection?: string;
-  status: 'primary' | 'secondary';
+  status: 'primary' | 'secondary' | 'deprecated';
+  volatility?: 'high' | 'medium' | 'low';
+  scopeAndExceptions?: string;
+  applicableScenarioIds?: string[];
+  applicableClaimIds?: string[];
 }
 
 export interface CostEstimate {
@@ -32,6 +46,17 @@ export interface TimelineEstimate {
   isGuaranteed: boolean;
 }
 
+export interface Step {
+  title: string;
+  description: string;
+  claimId?: string;
+  status?: ClaimStatus;
+  reviewDate?: string;
+  sourceId?: string;
+  authority?: string;
+  jurisdiction?: string;
+}
+
 export interface ScenarioDefinition {
   id: string;
   title: string;
@@ -47,17 +72,9 @@ export interface ScenarioDefinition {
     isMandatory: boolean;
     claimId?: string;
     sourceId?: string;
+    status?: ClaimStatus;
   }>;
-  steps: Array<{
-    title: string;
-    description: string;
-    claimId?: string;
-    sourceId?: string;
-    authority?: string;
-    jurisdiction?: string;
-    status?: 'VERIFIED' | 'QUALIFIED' | 'REMOVED' | 'OWNER_REVIEW_REQUIRED' | 'PROFESSIONAL_REVIEW_REQUIRED';
-    reviewDate?: string;
-  }>;
+  steps: Step[];
   fees: CostEstimate[];
   timeline: TimelineEstimate[];
   exceptions: string[];

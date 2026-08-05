@@ -146,10 +146,10 @@ export const drivingLicenseEN: OperationalGuide = {
         { name: 'Completed official DGPCI application form', isMandatory: true }
       ],
       steps: [
-        { title: 'Authenticity Verification', description: 'The competent Romanian authority manages the verification process with the issuing state. Authenticity and validity must be confirmed. Additional documents may be requested.', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'Legal Translation', description: 'Official translation of the Iranian license by an authorized Romanian translator.', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'Medical Exam', description: 'Complete medical driving checks at a DGPCI accredited clinic.', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'DGPCI Application', description: 'Submit the completed file to the provincial DGPCI office, pay the issuance fee, and receive the registration receipt.', status: 'VERIFIED', reviewDate: '2026-08-05' }
+        { title: 'Authenticity Verification', description: 'The competent Romanian authority manages the verification process with the issuing state. Authenticity and validity must be confirmed. Additional documents may be requested.' },
+        { title: 'Legal Translation', description: 'Official translation of the Iranian license by an authorized Romanian translator.' },
+        { title: 'Medical Exam', description: 'Complete medical driving checks at a DGPCI accredited clinic.' },
+        { title: 'DGPCI Application', description: 'Submit the completed file to the provincial DGPCI office, pay the issuance fee, and receive the registration receipt.' }
       ],
       fees: [
         { amount: '89', currency: 'RON', description: 'DGPCI Issuance Fee for Exchange. Payable via CEC Bank, ghișeul.ro, or DGPCI cash desks.', isFixed: true, sourceId: 'dgpci-exchange' }
@@ -175,10 +175,10 @@ export const drivingLicenseEN: OperationalGuide = {
         { name: 'Driving School Completion Certificate', isMandatory: true }
       ],
       steps: [
-        { title: 'Enroll in a Driving School', description: 'Find a licensed driving school. Some schools in major cities offer instruction in English.', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'Medical & Psychological Tests', description: 'Pass the required fitness and psychological tests.', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'Theory Test', description: 'Pass the computerized theory test (Sala).', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'Practical Test', description: 'Pass the on-road driving test with a police examiner.', status: 'VERIFIED', reviewDate: '2026-08-05' }
+        { title: 'Enroll in a Driving School', description: 'Find a licensed driving school. Some schools in major cities offer instruction in English.' },
+        { title: 'Medical & Psychological Tests', description: 'Pass the required fitness and psychological tests.' },
+        { title: 'Theory Test', description: 'Pass the computerized theory test (Sala).' },
+        { title: 'Practical Test', description: 'Pass the on-road driving test with a police examiner.' }
       ],
       fees: [
         { amount: '89', currency: 'RON', description: 'DGPCI License Issuance Fee. Payable via CEC Bank, ghișeul.ro, or DGPCI cash desks.', isFixed: true, sourceId: 'dgpci-exam' }

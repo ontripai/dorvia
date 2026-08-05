@@ -4,31 +4,106 @@ export const firstDaysChecklistEN: OperationalGuide = {
   canonicalRoute: '/needs/first-days-checklist',
   locale: 'en',
   title: 'First-Days Arrival Checklist in Romania',
-  shortDescription: 'Essential steps for your first 72 hours, 7 days, and 30 days in Romania, including SIM cards, bank accounts, housing, and IGI residence registration.',
+  shortDescription: 'Essential steps for your first 72 hours, 7 days, and beyond in Romania, covering immediate practicalities and legal deadlines.',
   mainQuestion: 'What administrative and practical steps must I take immediately after arriving in Romania?',
-  quickAnswer: 'Start by securing a local SIM card and converting a small amount of currency. Within the first week, finalize your housing contract and open a bank account if your status allows. By day 30, you must register your address and apply for your residence permit at IGI, depending on your visa type.',
-  targetAudience: ['International Students', 'Foreign Workers', 'Family Members', 'EU/EEA Citizens'],
+  quickAnswer: 'Start by securing connectivity and local currency. Finalize your long-term housing contract to enable registration. You must submit your residence application at least 30 days before the expiry of your current legal right of stay (if required by your visa).',
+  targetAudience: ['International Students', 'Foreign Workers', 'Family Members', 'EU/EEA Citizens', 'Short-Stay Visitors'],
   generalExceptions: [
-    'Short-stay visa holders (Type C) are not required to apply for a residence permit (Permis de Ședere) and cannot open a standard resident bank account.',
-    'EU/EEA citizens do not need a visa but must register their residence (CNP for EU citizens) if staying longer than 3 months.'
+    'Short-stay visa holders (Type C) are not eligible to apply for a residence permit (Permis de Ședere) and cannot open a standard resident bank account.',
+    'EU/EEA citizens do not need a visa but must register their residence (CNP) if staying longer than 3 months.'
   ],
   commonProblems: [
     'Attempting to open a bank account without a finalized housing contract or official ANAF registration.',
-    'Missing the 30-day deadline before visa expiry to apply for a residence permit at IGI.'
+    'Missing the legal deadline to apply for a residence permit before the current visa expires.'
   ],
   warnings: [
-    'Do not wait until the last week of your visa to apply for a residence permit. IGI appointments can be booked up weeks in advance.'
+    'Do not wait until the last week of your visa to apply for a residence permit. IGI appointments must be booked in advance, and late applications may incur fines or deportation.',
+    'Health insurance coverage rules for dependents and students are complex and strictly enforced. Confirm your status with CNAS directly.'
   ],
   officialSources: [
     {
-      id: 'igi-residence-general',
-      sourceTitle: 'General Inspectorate for Immigration (IGI) - Residence Permits',
+      id: 'igi-student',
+      sourceTitle: 'IGI - Residence Permits for Studies',
       organization: 'Inspectoratul General pentru Imigrări',
-      url: 'https://igi.mai.gov.ro/en/residence-permits/',
+      url: 'https://igi.mai.gov.ro/en/studies/',
       sourceType: 'official-website',
       language: 'en',
       dateAccessed: '2026-08-05',
-      status: 'primary'
+      status: 'primary',
+      volatility: 'medium',
+      applicableScenarioIds: ['student-arrival']
+    },
+    {
+      id: 'igi-work',
+      sourceTitle: 'IGI - Residence Permits for Employment',
+      organization: 'Inspectoratul General pentru Imigrări',
+      url: 'https://igi.mai.gov.ro/en/employment/',
+      sourceType: 'official-website',
+      language: 'en',
+      dateAccessed: '2026-08-05',
+      status: 'primary',
+      volatility: 'medium',
+      applicableScenarioIds: ['employee-arrival']
+    },
+    {
+      id: 'igi-family',
+      sourceTitle: 'IGI - Family Reunification',
+      organization: 'Inspectoratul General pentru Imigrări',
+      url: 'https://igi.mai.gov.ro/en/family-reunification/',
+      sourceType: 'official-website',
+      language: 'en',
+      dateAccessed: '2026-08-05',
+      status: 'primary',
+      volatility: 'medium',
+      applicableScenarioIds: ['family-reunification']
+    },
+    {
+      id: 'igi-family-ro',
+      sourceTitle: 'IGI - Family Members of Romanian Citizens',
+      organization: 'Inspectoratul General pentru Imigrări',
+      url: 'https://igi.mai.gov.ro/en/family-members-of-romanian-citizens/',
+      sourceType: 'official-website',
+      language: 'en',
+      dateAccessed: '2026-08-05',
+      status: 'primary',
+      volatility: 'medium',
+      applicableScenarioIds: ['family-romanian-citizen']
+    },
+    {
+      id: 'igi-eu',
+      sourceTitle: 'IGI - Citizens of EU/EEA and Swiss Confederation',
+      organization: 'Inspectoratul General pentru Imigrări',
+      url: 'https://igi.mai.gov.ro/en/citizens-of-the-eu-eea-and-the-swiss-confederation/',
+      sourceType: 'official-website',
+      language: 'en',
+      dateAccessed: '2026-08-05',
+      status: 'primary',
+      volatility: 'low',
+      applicableScenarioIds: ['eu-citizen-arrival']
+    },
+    {
+      id: 'igi-business',
+      sourceTitle: 'IGI - Commercial Activities',
+      organization: 'Inspectoratul General pentru Imigrări',
+      url: 'https://igi.mai.gov.ro/en/commercial-activities/',
+      sourceType: 'official-website',
+      language: 'en',
+      dateAccessed: '2026-08-05',
+      status: 'primary',
+      volatility: 'medium',
+      applicableScenarioIds: ['company-owner']
+    },
+    {
+      id: 'mae-visas',
+      sourceTitle: 'MAE - Short Stay Visas',
+      organization: 'Ministry of Foreign Affairs',
+      url: 'https://www.mae.ro/en/node/2035',
+      sourceType: 'official-website',
+      language: 'en',
+      dateAccessed: '2026-08-05',
+      status: 'primary',
+      volatility: 'low',
+      applicableScenarioIds: ['short-stay-visitor']
     },
     {
       id: 'anaf-contracts',
@@ -41,14 +116,16 @@ export const firstDaysChecklistEN: OperationalGuide = {
       status: 'primary'
     },
     {
-      id: 'cnas-insurance',
+      id: 'cnas-insurance-general',
       sourceTitle: 'CNAS - National Health Insurance General Info',
       organization: 'Casa Națională de Asigurări de Sănătate',
       url: 'https://cnas.ro/',
       sourceType: 'official-website',
       language: 'ro',
       dateAccessed: '2026-08-05',
-      status: 'primary'
+      status: 'primary',
+      volatility: 'high',
+      scopeAndExceptions: 'Requires professional legal review for specific eligibility mapping.'
     }
   ],
   relatedGuides: [
@@ -58,9 +135,9 @@ export const firstDaysChecklistEN: OperationalGuide = {
   ],
   lastReviewed: '2026-08-05',
   nextReview: '2027-02-05',
-  contentOwner: 'DORVIA EUROP Legal Team',
-  contentStatus: 'published',
-  factCheckStatus: 'source-verified',
+  contentOwner: 'DORVIA EUROP Content Team',
+  contentStatus: 'draft',
+  factCheckStatus: 'partially-verified',
   riskCategory: ['IMMIGRATION', 'LEGAL', 'FINANCIAL'],
   
   situations: [
@@ -73,86 +150,138 @@ export const firstDaysChecklistEN: OperationalGuide = {
       requiresExamination: false,
       requiresMedical: 'not-required',
       documents: [
-        { name: 'Passport with valid Type D/SD visa', isMandatory: true, claimId: 'c-student-doc-1' },
-        { name: 'University Acceptance Letter (Letter of Acceptance)', isMandatory: true, claimId: 'c-student-doc-2' },
-        { name: 'Housing contract (registered at ANAF or notarized if free accommodation)', isMandatory: true, claimId: 'c-student-doc-3', sourceId: 'anaf-contracts' },
-        { name: 'Medical certificate from a university clinic or public hospital', isMandatory: true, claimId: 'c-student-doc-4' }
+        { name: 'Passport with valid Type D/SD visa', isMandatory: true, claimId: 'c-student-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'University Acceptance Letter', isMandatory: true, claimId: 'c-student-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Housing contract (registered at ANAF or notarized)', isMandatory: true, claimId: 'c-student-doc-3', sourceId: 'anaf-contracts', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Medical certificate from a clinic', isMandatory: true, claimId: 'c-student-doc-4', status: 'VERIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
-        { title: 'First 72 Hours: Communication & Finance', description: 'Purchase a local SIM card (e.g., Orange, Vodafone) using your passport. Exchange a small amount of cash to RON for immediate expenses like transport.', claimId: 'c-student-step-1', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'First 7 Days: University Registration & Housing', description: 'Visit your university\'s international office to formalize your enrollment. Finalize your long-term housing contract; ensure the landlord registers it with ANAF.', claimId: 'c-student-step-2', status: 'VERIFIED', reviewDate: '2026-08-05', sourceId: 'anaf-contracts' },
-        { title: 'First 14 Days: Bank Account', description: 'Open a Romanian bank account. Most banks require your passport, visa, housing contract, and university enrollment certificate. Note: Some banks may refuse students from certain jurisdictions without a residence permit.', claimId: 'c-student-step-3', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'First 30 Days: IGI Residence Permit', description: 'Submit your application for a student residence permit (Permis de Ședere) via the IGI portal at least 30 days before your visa expires.', claimId: 'c-student-step-4', status: 'VERIFIED', reviewDate: '2026-08-05', sourceId: 'igi-residence-general', authority: 'IGI' }
+        { title: 'Upon Arrival: Connectivity', description: 'Purchase a local SIM card.', claimId: 'c-student-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
+        { title: 'First 7 Days: University & Housing', description: 'Formalize enrollment at your university and ensure the landlord registers your housing contract with ANAF.', claimId: 'c-student-step-2', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'anaf-contracts' },
+        { title: 'Practical: Bank Account', description: 'Open a local bank account to handle tuition and living expenses.', claimId: 'c-student-step-3', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
+        { title: 'Legal Deadline: IGI Residence Application', description: 'Submit the residence application via the IGI portal at least 30 days before the expiry of your current legal right of stay.', claimId: 'c-student-step-4', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-student', authority: 'IGI' }
       ],
       fees: [
-        { amount: '259', currency: 'RON', description: 'Residence permit issuance fee (Taxa permis ședere)', isFixed: true, sourceId: 'igi-residence-general' },
-        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent in RON (Taxa consulara) - Exceptions apply for scholarship students', isFixed: true, sourceId: 'igi-residence-general' }
+        { amount: '259', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-student' },
+        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent', isFixed: true, sourceId: 'igi-student' }
       ],
       timeline: [
-        { duration: '30-45 Days', description: 'Standard IGI processing time for student residence permits after document submission.', isGuaranteed: false, sourceId: 'igi-residence-general' }
+        { duration: '30-45 Days', description: 'Estimated IGI processing time after document submission.', isGuaranteed: false, sourceId: 'igi-student' }
       ],
-      exceptions: ['Students on Romanian government scholarships are exempt from the consular tax.', 'Students under 26 are typically exempt from paying public health insurance (CNAS) contributions.'],
+      exceptions: ['Scholarship students may be exempt from consular fees.'],
       limitations: []
     },
     {
       id: 'employee-arrival',
       title: 'Foreign Workers (Type D/AM Visa)',
-      appliesTo: ['Employees with an Aviz de Muncă', 'Highly skilled workers (EU Blue Card)'],
+      appliesTo: ['Employees with an Aviz de Muncă', 'Highly skilled workers'],
       residenceCondition: 'Entering Romania on a Type D/AM visa',
-      authority: 'IGI & ITM (Territorial Labor Inspectorate)',
+      authority: 'IGI & ITM',
       requiresExamination: false,
       requiresMedical: 'required',
       medicalConditionText: 'Occupational health check required for employment contract.',
       documents: [
-        { name: 'Passport with valid Type D/AM visa', isMandatory: true, claimId: 'c-work-doc-1' },
-        { name: 'Work Permit (Aviz de Muncă)', isMandatory: true, claimId: 'c-work-doc-2' },
-        { name: 'Employment Contract registered in REVISAL', isMandatory: true, claimId: 'c-work-doc-3' },
-        { name: 'Housing contract registered at ANAF', isMandatory: true, claimId: 'c-work-doc-4', sourceId: 'anaf-contracts' }
+        { name: 'Passport with valid Type D/AM visa', isMandatory: true, claimId: 'c-work-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Work Permit (Aviz de Muncă)', isMandatory: true, claimId: 'c-work-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Employment Contract registered in REVISAL', isMandatory: true, claimId: 'c-work-doc-3', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Housing contract registered at ANAF', isMandatory: true, claimId: 'c-work-doc-4', sourceId: 'anaf-contracts', status: 'VERIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
-        { title: 'First 72 Hours: Arrival & Contract', description: 'Report to your employer immediately. You must sign the individual employment contract (CIM) and the employer must register it in REVISAL.', claimId: 'c-work-step-1', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'First 7 Days: Medical Check & Housing', description: 'Complete the occupational health exam (Medicina Muncii) arranged by your employer. Secure a long-term rental and ensure ANAF registration.', claimId: 'c-work-step-2', status: 'VERIFIED', reviewDate: '2026-08-05', sourceId: 'anaf-contracts' },
-        { title: 'First 14 Days: Bank Account (Salary)', description: 'Open a bank account to receive your salary. Your employer will usually provide a certificate stating you are employed to facilitate this.', claimId: 'c-work-step-3', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'First 30 Days: IGI Residence Permit', description: 'Submit your application for a work purposes residence permit via the IGI portal at least 30 days before your 90-day visa expires.', claimId: 'c-work-step-4', status: 'VERIFIED', reviewDate: '2026-08-05', sourceId: 'igi-residence-general', authority: 'IGI' }
+        { title: 'Upon Arrival: Contract Signing', description: 'Report to your employer to sign the individual employment contract (CIM).', claimId: 'c-work-step-1', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-work' },
+        { title: 'First 7 Days: Medical Check & Housing', description: 'Complete the occupational health exam (Medicina Muncii) arranged by your employer. Ensure housing ANAF registration.', claimId: 'c-work-step-2', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'anaf-contracts' },
+        { title: 'Practical: Salary Account', description: 'Open a bank account to receive your salary.', claimId: 'c-work-step-3', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
+        { title: 'Legal Deadline: IGI Residence Application', description: 'Submit the residence application via the IGI portal at least 30 days before the expiry of your visa.', claimId: 'c-work-step-4', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-work', authority: 'IGI' }
       ],
       fees: [
-        { amount: '259', currency: 'RON', description: 'Residence permit issuance fee (Taxa permis ședere)', isFixed: true, sourceId: 'igi-residence-general' },
-        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent in RON (Taxa consulara)', isFixed: true, sourceId: 'igi-residence-general' }
+        { amount: '259', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-work' },
+        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent', isFixed: true, sourceId: 'igi-work' }
       ],
       timeline: [
-        { duration: '30 Days', description: 'Standard IGI processing time for employment residence permits after interview.', isGuaranteed: false, sourceId: 'igi-residence-general' }
+        { duration: '30 Days', description: 'Estimated IGI processing time after interview.', isGuaranteed: false, sourceId: 'igi-work' }
       ],
-      exceptions: ['EU Blue Card applicants may have slightly different processing times and fee structures.'],
+      exceptions: ['EU Blue Card applicants may have different processing times.'],
       limitations: ['You may only work for the employer specified on your Aviz de Muncă.']
     },
     {
-      id: 'family-arrival',
-      title: 'Family Reunification (Type D/VF Visa)',
-      appliesTo: ['Spouses of residents or citizens', 'Dependent children'],
-      residenceCondition: 'Entering Romania on a Type D/VF visa',
+      id: 'family-reunification',
+      title: 'Family Reunification (Non-EU Sponsor)',
+      appliesTo: ['Spouses of non-EU residents', 'Dependent children of non-EU residents'],
+      residenceCondition: 'Entering on a Type D/VF visa',
       authority: 'IGI',
       requiresExamination: false,
       requiresMedical: 'conditional',
       medicalConditionText: 'A medical certificate proving you do not suffer from contagious diseases is required.',
       documents: [
-        { name: 'Passport with valid Type D/VF visa', isMandatory: true, claimId: 'c-fam-doc-1' },
-        { name: 'Sponsor\'s Residence Permit or ID (Copy)', isMandatory: true, claimId: 'c-fam-doc-2' },
-        { name: 'Marriage or Birth Certificate (Apostilled/Translated)', isMandatory: true, claimId: 'c-fam-doc-3' },
-        { name: 'Proof of housing and sufficient funds', isMandatory: true, claimId: 'c-fam-doc-4' }
+        { name: 'Passport with valid Type D/VF visa', isMandatory: true, claimId: 'c-fam1-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Sponsor\'s Residence Permit', isMandatory: true, claimId: 'c-fam1-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Marriage or Birth Certificate (Apostilled/Translated)', isMandatory: true, claimId: 'c-fam1-doc-3', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Proof of housing and sufficient funds', isMandatory: true, claimId: 'c-fam1-doc-4', status: 'VERIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
-        { title: 'First 72 Hours: Settling In', description: 'Obtain a local SIM card. The sponsor should add the family member to the household expenses/utility bills if required for proof of housing.', claimId: 'c-fam-step-1', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'First 14 Days: Health Insurance', description: 'Depending on the sponsor\'s status, apply for co-insured status (co-asigurat) at CNAS so the family member has public health coverage.', claimId: 'c-fam-step-2', status: 'VERIFIED', reviewDate: '2026-08-05', sourceId: 'cnas-insurance', authority: 'CNAS' },
-        { title: 'First 30 Days: IGI Residence Permit', description: 'Submit the application for a family reunification residence permit via the IGI portal at least 30 days before the visa expires.', claimId: 'c-fam-step-3', status: 'VERIFIED', reviewDate: '2026-08-05', sourceId: 'igi-residence-general', authority: 'IGI' }
+        { title: 'Practical: Settling In', description: 'Obtain a local SIM card and add the family member to household utility bills if required for proof of housing.', claimId: 'c-fam1-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
+        { title: 'Health Insurance (Co-asigurat)', description: 'Apply for co-insured status at CNAS for public health coverage.', claimId: 'c-fam1-step-2', status: 'QUALIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'cnas-insurance-general', authority: 'CNAS' },
+        { title: 'Legal Deadline: IGI Residence Application', description: 'Submit the application for a family reunification residence permit via the IGI portal at least 30 days before the visa expires.', claimId: 'c-fam1-step-3', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-family', authority: 'IGI' }
       ],
       fees: [
-        { amount: '259', currency: 'RON', description: 'Residence permit issuance fee (Taxa permis ședere)', isFixed: true, sourceId: 'igi-residence-general' },
-        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent in RON (Taxa consulara) - Exempt if joining a Romanian citizen', isFixed: true, sourceId: 'igi-residence-general' }
+        { amount: '259', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-family' },
+        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent', isFixed: true, sourceId: 'igi-family' }
       ],
       timeline: [
-        { duration: '30-60 Days', description: 'Standard IGI processing time.', isGuaranteed: false, sourceId: 'igi-residence-general' }
+        { duration: '30-60 Days', description: 'Estimated IGI processing time.', isGuaranteed: false, sourceId: 'igi-family' }
       ],
-      exceptions: ['Family members joining a Romanian citizen are exempt from the 120 EUR consular tax.'],
+      exceptions: [],
+      limitations: []
+    },
+    {
+      id: 'family-romanian-citizen',
+      title: 'Family of Romanian Citizens',
+      appliesTo: ['Spouses of Romanian citizens', 'Dependent children of Romanian citizens'],
+      residenceCondition: 'Applying for residence based on marriage/relation to a RO citizen',
+      authority: 'IGI',
+      requiresExamination: false,
+      requiresMedical: 'not-required',
+      documents: [
+        { name: 'Passport (Visa if required by nationality)', isMandatory: true, claimId: 'c-fam2-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Romanian ID of the sponsor', isMandatory: true, claimId: 'c-fam2-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Romanian Marriage/Birth Certificate', isMandatory: true, claimId: 'c-fam2-doc-3', status: 'VERIFIED_LEGAL_REQUIREMENT' }
+      ],
+      steps: [
+        { title: 'Legal Deadline: IGI Residence Application', description: 'Submit the application for residence permit via the IGI portal at least 30 days before the expiry of your current legal right of stay.', claimId: 'c-fam2-step-1', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-family-ro', authority: 'IGI' }
+      ],
+      fees: [
+        { amount: '259', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-family-ro' }
+      ],
+      timeline: [
+        { duration: '30-90 Days', description: 'Estimated IGI processing time.', isGuaranteed: false, sourceId: 'igi-family-ro' }
+      ],
+      exceptions: ['Family members joining a Romanian citizen are exempt from the consular tax.'],
+      limitations: []
+    },
+    {
+      id: 'company-owner',
+      title: 'Company Owners / Investors',
+      appliesTo: ['Administrators or shareholders of a Romanian SRL'],
+      residenceCondition: 'Applying for residence based on commercial activities',
+      authority: 'IGI & Ministry of Economy',
+      requiresExamination: false,
+      requiresMedical: 'not-required',
+      documents: [
+        { name: 'Passport with Type D visa (if applicable)', isMandatory: true, claimId: 'c-biz-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'ONRC Company Registration Documents', isMandatory: true, claimId: 'c-biz-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'FDI Approval (if required)', isMandatory: true, claimId: 'c-biz-doc-3', status: 'QUALIFIED_LEGAL_REQUIREMENT' }
+      ],
+      steps: [
+        { title: 'Practical: Corporate Bank Account', description: 'Finalize corporate banking arrangements for share capital and operations.', claimId: 'c-biz-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
+        { title: 'Legal Deadline: IGI Residence Application', description: 'Submit the application for residence via the IGI portal at least 30 days before your visa expires.', claimId: 'c-biz-step-2', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-business', authority: 'IGI' }
+      ],
+      fees: [
+        { amount: '259', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-business' },
+        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent', isFixed: true, sourceId: 'igi-business' }
+      ],
+      timeline: [
+        { duration: '30-45 Days', description: 'Estimated IGI processing time.', isGuaranteed: false, sourceId: 'igi-business' }
+      ],
+      exceptions: [],
       limitations: []
     },
     {
@@ -164,19 +293,19 @@ export const firstDaysChecklistEN: OperationalGuide = {
       requiresExamination: false,
       requiresMedical: 'not-required',
       documents: [
-        { name: 'Valid National ID or Passport', isMandatory: true, claimId: 'c-eu-doc-1' },
-        { name: 'Proof of employment, study, or sufficient funds', isMandatory: true, claimId: 'c-eu-doc-2' },
-        { name: 'Proof of housing (contract or property deed)', isMandatory: true, claimId: 'c-eu-doc-3' }
+        { name: 'Valid National ID or Passport', isMandatory: true, claimId: 'c-eu-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Proof of employment, study, or sufficient funds', isMandatory: true, claimId: 'c-eu-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Proof of housing', isMandatory: true, claimId: 'c-eu-doc-3', status: 'VERIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
-        { title: 'First 72 Hours: Basic Setup', description: 'Purchase a local SIM card if your home plan does not cover extended EU roaming. Most EU citizens can use their home bank accounts temporarily.', claimId: 'c-eu-step-1', status: 'VERIFIED', reviewDate: '2026-08-05' },
-        { title: 'Before 90 Days: IGI Registration Certificate (CNP)', description: 'If you intend to stay longer than 3 months, you must register at IGI to obtain a Registration Certificate (Certificat de Înregistrare), which assigns you a CNP (Personal Numeric Code).', claimId: 'c-eu-step-2', status: 'VERIFIED', reviewDate: '2026-08-05', sourceId: 'igi-residence-general', authority: 'IGI' }
+        { title: 'Practical: Basic Setup', description: 'Purchase a local SIM card if needed. Use your home EU bank accounts freely.', claimId: 'c-eu-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
+        { title: 'Legal Deadline: IGI Registration (CNP)', description: 'If intending to stay longer than 3 months, apply for a Registration Certificate (Certificat de Înregistrare) before the 90-day mark.', claimId: 'c-eu-step-2', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-eu', authority: 'IGI' }
       ],
       fees: [],
       timeline: [
-        { duration: 'Same day', description: 'The Registration Certificate is usually issued on the same day the complete file is submitted.', isGuaranteed: true, sourceId: 'igi-residence-general' }
+        { duration: 'Same day', description: 'The Registration Certificate is usually issued on the same day the complete file is submitted.', isGuaranteed: true, sourceId: 'igi-eu' }
       ],
-      exceptions: ['EU citizens do not need a visa or a classic "Permis de Ședere", they receive a "Certificat de Înregistrare".'],
+      exceptions: ['EU citizens do not receive a classic "Permis de Ședere", they receive a "Certificat de Înregistrare".'],
       limitations: []
     },
     {
@@ -184,20 +313,59 @@ export const firstDaysChecklistEN: OperationalGuide = {
       title: 'Short-Stay Visitors (Type C Visa / Visa-Exempt)',
       appliesTo: ['Tourists', 'Business visitors', 'Short-term family visits (under 90 days)'],
       residenceCondition: 'Maximum 90 days in any 180-day period.',
-      authority: 'Border Police',
+      authority: 'Border Police & MAE',
       requiresExamination: false,
       requiresMedical: 'not-required',
       documents: [
-        { name: 'Valid Passport and Visa (if applicable)', isMandatory: true, claimId: 'c-short-doc-1' },
-        { name: 'Travel Medical Insurance', isMandatory: true, claimId: 'c-short-doc-2' }
+        { name: 'Valid Passport and Visa (if applicable)', isMandatory: true, claimId: 'c-short-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Travel Medical Insurance', isMandatory: true, claimId: 'c-short-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
-        { title: 'First 72 Hours: Connectivity & Accommodation', description: 'Obtain a prepaid SIM card (does not require a residence permit). Ensure your hotel or host registers your stay, as required by law for tourists.', claimId: 'c-short-step-1', status: 'VERIFIED', reviewDate: '2026-08-05' }
+        { title: 'Practical: Connectivity', description: 'Obtain a prepaid SIM card (does not require a residence permit).', claimId: 'c-short-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
+        { title: 'Legal: Accommodation Registration', description: 'Ensure your hotel or host registers your stay, as required by law for tourists within 3 days.', claimId: 'c-short-step-2', status: 'QUALIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'mae-visas' }
       ],
       fees: [],
       timeline: [],
-      exceptions: ['You cannot apply for a residence permit (Permis de Ședere) while on a Type C short-stay visa.', 'You generally cannot open a standard local resident bank account.'],
+      exceptions: ['You cannot apply for a residence permit while on a Type C short-stay visa.'],
       limitations: ['Cannot work legally.', 'Cannot extend stay beyond 90 days in a 180-day period.']
+    },
+    {
+      id: 'existing-residence-holder',
+      title: 'Existing Residence Document Holder',
+      appliesTo: ['Individuals returning to Romania with a valid permit'],
+      residenceCondition: 'Re-entry with a valid Permis de Ședere',
+      authority: 'IGI',
+      requiresExamination: false,
+      requiresMedical: 'not-required',
+      documents: [
+        { name: 'Valid Passport', isMandatory: true, claimId: 'c-exist-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Valid Residence Permit', isMandatory: true, claimId: 'c-exist-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' }
+      ],
+      steps: [
+        { title: 'Practical: Verify Expiry', description: 'Check the expiry date of your residence permit. Renewal applications must be submitted at least 30 days before expiry.', claimId: 'c-exist-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' }
+      ],
+      fees: [],
+      timeline: [],
+      exceptions: [],
+      limitations: []
+    },
+    {
+      id: 'no-accommodation',
+      title: 'Arrival without Finalized Accommodation',
+      appliesTo: ['New arrivals staying in hotels or temporary Airbnbs'],
+      residenceCondition: 'Seeking long-term rent',
+      authority: 'None',
+      requiresExamination: false,
+      requiresMedical: 'not-required',
+      documents: [],
+      steps: [
+        { title: 'Practical: Search for Housing', description: 'Use platforms like Imobiliare.ro or Storia to find long-term housing. Do not sign a lease without viewing the property.', claimId: 'c-noacc-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
+        { title: 'Dependency: Bank Account', description: 'Be aware that most banks require a finalized registered rental contract to open a resident account.', claimId: 'c-noacc-step-2', status: 'PROVIDER_DEPENDENT', reviewDate: '2026-08-05' }
+      ],
+      fees: [],
+      timeline: [],
+      exceptions: [],
+      limitations: ['Cannot apply for residence permit until long-term housing is secured and registered at ANAF.']
     }
   ]
 };
