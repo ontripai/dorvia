@@ -1,12 +1,7 @@
-# First Days Checklist: Language Parity Report
+# First Days Checklist: Language Parity
 
-## Parity Validation
-- The content validator successfully asserted structural parity between `src/content/guides/first-days-checklist/en.ts` and `fa.ts`.
-- **Scenarios**: Exactly matched (5 scenarios: `student-arrival`, `employee-arrival`, `family-arrival`, `eu-citizen-arrival`, `short-stay-visitor`).
-- **Sources**: Exactly matched (`igi-residence-general`, `anaf-contracts`, `cnas-insurance`).
-- **Claim IDs**: Exactly matched across all documents and steps.
-
-## Content Translation
-- The English strings have been fully translated into Persian.
-- Operational paragraphs in FA mode are entirely in Persian. No untranslated statements remain.
-- The `NeedsContent.tsx` router has been updated to provide localized labels for the `OperationalGuideLayout` (e.g., Table of Contents, Process Timelines, Required Documents).
+## Status
+- **Exact Parity Achieved**: Yes.
+- The `en.ts` and `fa.ts` files contain the exact same 9 scenarios in the exact same order.
+- The `validateContent.ts` script successfully verifies the parity of the scenario IDs between both files.
+- The translations in `fa.ts` are conceptually faithful and do not introduce extra claims or omit legal steps present in the English version.

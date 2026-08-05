@@ -1,19 +1,13 @@
 # First Days Checklist: Guide Standard
 
-## Operational Context
-The First Days Checklist guide is structured temporally (First 72 Hours, First 7 Days, First 30 Days) rather than strictly functionally, to reflect the immediate triage needs of new arrivals. 
+## Structure
+The `first-days-checklist` guide conforms strictly to the `OperationalGuide` interface defined in `src/types/content.ts`.
 
-## Source Governance
-- All timelines for legal registrations (like the 30-day IGI deadline and the 3-day tourist registration rule) are strictly bound to official sources.
-- No legal mandates are presented in React components. All claims reside in `firstDaysChecklistEN` and `firstDaysChecklistFA`.
+## Enhancements over Pilot
+- Added `reviewDate` to `ScenarioDefinition.documents` schema to enable full traceability for each individual verified legal requirement.
+- Implemented robust `sourceId` applicability checks (Scenario-level and Claim-level) within the data structure rather than relying solely on global IDs.
+- Distinguished clearly between the types of accommodation proof (e.g., ANAF-registered long-term lease vs. 3-day tourist hosting notification).
 
-## Scenario Matrix Enforcement
-The guide enforces 5 primary entry scenarios that dictate the initial checklist:
-1. `student-arrival` (Type D/SD Visa)
-2. `employee-arrival` (Type D/AM Visa)
-3. `family-arrival` (Type D/VF Visa)
-4. `eu-citizen-arrival` (Visa Exempt)
-5. `short-stay-visitor` (Type C Visa)
-
-## Future Extensibility
-New scenarios (e.g., Digital Nomad, Investor) can be added by extending the `situations` array.
+## Current Validation Stance
+- The global `validateContent.ts` script checks for the existence of `sourceId` for all `VERIFIED_LEGAL_REQUIREMENT` documents and steps.
+- Validates the exact 265 RON cost for residence permits based on the August 2025 IGI fee announcement.

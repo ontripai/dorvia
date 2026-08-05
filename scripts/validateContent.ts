@@ -87,9 +87,21 @@ async function validateFile(fullPath: string, file: string) {
       if (doc.claimId) allClaimIds.push(doc.claimId);
       
       if (doc.status === 'VERIFIED_LEGAL_REQUIREMENT' || doc.status === 'VERIFIED') {
-        // Document sources are sometimes inherited from the scenario or missing if it's universal. We only enforce sourceId explicitly if there's a strict requirement, but wait, the prompt says: VERIFIED legal claim without sourceId.
-        // Actually the prompt says: VERIFIED legal claim lacks sourceId.
-        // For documents we usually don't have sourceId directly unless specific.
+        if (!doc.sourceId && route === '/needs/first-days-checklist') {
+           errors.push(`VERIFIED legal document lacks sourceId: ${doc.name}`);
+        }
+      }
+      if (doc.sourceId && !sourceIds.includes(doc.sourceId)) {
+        errors.push(`Document sourceId does not exist in officialSources: ${doc.sourceId}`);
+      }
+      if (doc.sourceId && route === '/needs/first-days-checklist') {
+        const src = guideData.officialSources.find((s: any) => s.id === doc.sourceId);
+        if (src && src.applicableScenarioIds && !src.applicableScenarioIds.includes(situation.id)) {
+           errors.push(`Source ${doc.sourceId} is not applicable to scenario ${situation.id} (Document)`);
+        }
+        if (src && src.applicableClaimIds && doc.claimId && !src.applicableClaimIds.includes(doc.claimId)) {
+           errors.push(`Source ${doc.sourceId} is not applicable to claim ${doc.claimId} (Document)`);
+        }
       }
     });
 
@@ -115,6 +127,16 @@ async function validateFile(fullPath: string, file: string) {
         errors.push(`sourceId does not exist in officialSources: ${step.sourceId}`);
       }
       
+      if (step.sourceId && route === '/needs/first-days-checklist') {
+        const src = guideData.officialSources.find((s: any) => s.id === step.sourceId);
+        if (src && src.applicableScenarioIds && !src.applicableScenarioIds.includes(situation.id)) {
+           errors.push(`Source ${step.sourceId} is not applicable to scenario ${situation.id} (Step)`);
+        }
+        if (src && src.applicableClaimIds && step.claimId && !src.applicableClaimIds.includes(step.claimId)) {
+           errors.push(`Source ${step.sourceId} is not applicable to claim ${step.claimId} (Step)`);
+        }
+      }
+      
       // Published guide contains QUALIFIED or review-required claims without visible disclosure
       if (guideData.contentStatus === 'published') {
         if (step.status === 'QUALIFIED_LEGAL_REQUIREMENT' || step.status === 'PROFESSIONAL_REVIEW_REQUIRED' || step.status === 'OWNER_REVIEW_REQUIRED') {
@@ -138,6 +160,9 @@ async function validateFile(fullPath: string, file: string) {
       if (fee.sourceId && !sourceIds.includes(fee.sourceId)) {
         errors.push(`Fee sourceId does not exist in officialSources: ${fee.sourceId}`);
       }
+      if (fee.amount === '259' && route === '/needs/first-days-checklist') {
+        errors.push(`Outdated 259 RON residence document cost found in situation ${situation.id}`);
+      }
     });
 
     // 4d. Timeline
@@ -151,11 +176,25 @@ async function validateFile(fullPath: string, file: string) {
         errors.push(`Timeline sourceId does not exist in officialSources: ${tl.sourceId}`);
       }
     });
+
+    situation.limitations?.forEach((lim: string) => {
+      if (lim === 'Cannot apply for residence permit until long-term housing is secured and registered at ANAF.' && route === '/needs/first-days-checklist') {
+        errors.push(`Absolute accommodation claim requiring only an ANAF-registered long-term lease found in ${situation.id}`);
+      }
+    });
   });
 
   const claimDuplicates = allClaimIds.filter((item: string, index: number) => allClaimIds.indexOf(item) !== index);
   if (claimDuplicates.length > 0) {
     errors.push(`Duplicate claim IDs found: ${claimDuplicates.join(', ')}`);
+  }
+
+  if (route === '/needs/first-days-checklist') {
+    guideData.officialSources?.forEach((src: any) => {
+      if (src.url.includes('beneficiaries-of-international-protection') || src.sourceTitle.includes('international protection')) {
+         errors.push(`Incorrect family-reunification source used: ${src.url}`);
+      }
+    });
   }
 
   // CNAS claim supported only by a generic homepage

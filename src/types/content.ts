@@ -73,6 +73,7 @@ export interface ScenarioDefinition {
     claimId?: string;
     sourceId?: string;
     status?: ClaimStatus;
+    reviewDate?: string;
   }>;
   steps: Step[];
   fees: CostEstimate[];

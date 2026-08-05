@@ -22,6 +22,18 @@ export const firstDaysChecklistEN: OperationalGuide = {
   ],
   officialSources: [
     {
+      id: 'igi-fees-august-2025',
+      sourceTitle: 'IGI - Official August 2025 Fee Announcement',
+      organization: 'Inspectoratul General pentru Imigrări',
+      url: 'https://igi.mai.gov.ro/en/taxes/',
+      sourceType: 'official-website',
+      language: 'en',
+      dateAccessed: '2026-08-05',
+      status: 'primary',
+      volatility: 'medium',
+      applicableScenarioIds: ['student-arrival', 'employee-arrival', 'family-reunification', 'family-romanian-citizen', 'company-owner']
+    },
+    {
       id: 'igi-student',
       sourceTitle: 'IGI - Residence Permits for Studies',
       organization: 'Inspectoratul General pentru Imigrări',
@@ -46,8 +58,20 @@ export const firstDaysChecklistEN: OperationalGuide = {
       applicableScenarioIds: ['employee-arrival']
     },
     {
-      id: 'igi-family',
-      sourceTitle: 'IGI - Family Reunification',
+      id: 'mae-family-visa',
+      sourceTitle: 'MAE - Family Reunification Visa',
+      organization: 'Ministry of Foreign Affairs',
+      url: 'https://www.mae.ro/en/node/2051',
+      sourceType: 'official-website',
+      language: 'en',
+      dateAccessed: '2026-08-05',
+      status: 'primary',
+      volatility: 'medium',
+      applicableScenarioIds: ['family-reunification']
+    },
+    {
+      id: 'igi-family-permit',
+      sourceTitle: 'IGI - Family Reunification Residence Permit',
       organization: 'Inspectoratul General pentru Imigrări',
       url: 'https://igi.mai.gov.ro/en/family-reunification/',
       sourceType: 'official-website',
@@ -58,7 +82,7 @@ export const firstDaysChecklistEN: OperationalGuide = {
       applicableScenarioIds: ['family-reunification']
     },
     {
-      id: 'igi-family-ro',
+      id: 'igi-family-ro-permit',
       sourceTitle: 'IGI - Family Members of Romanian Citizens',
       organization: 'Inspectoratul General pentru Imigrări',
       url: 'https://igi.mai.gov.ro/en/family-members-of-romanian-citizens/',
@@ -106,6 +130,30 @@ export const firstDaysChecklistEN: OperationalGuide = {
       applicableScenarioIds: ['short-stay-visitor']
     },
     {
+      id: 'igi-hosting-notification',
+      sourceTitle: 'IGI - Hosting and Accommodation Notification',
+      organization: 'Inspectoratul General pentru Imigrări',
+      url: 'https://igi.mai.gov.ro/en/hosting-foreigners/',
+      sourceType: 'official-website',
+      language: 'en',
+      dateAccessed: '2026-08-05',
+      status: 'primary',
+      volatility: 'medium',
+      applicableScenarioIds: ['short-stay-visitor']
+    },
+    {
+      id: 'igi-general-renewal',
+      sourceTitle: 'IGI - General Extension of Right of Stay',
+      organization: 'Inspectoratul General pentru Imigrări',
+      url: 'https://igi.mai.gov.ro/en/extension-of-the-right-of-stay/',
+      sourceType: 'official-website',
+      language: 'en',
+      dateAccessed: '2026-08-05',
+      status: 'primary',
+      volatility: 'medium',
+      applicableScenarioIds: ['existing-residence-holder']
+    },
+    {
       id: 'anaf-contracts',
       sourceTitle: 'ANAF - Registration of Rental Contracts',
       organization: 'Agentia Nationala de Administrare Fiscala',
@@ -125,7 +173,8 @@ export const firstDaysChecklistEN: OperationalGuide = {
       dateAccessed: '2026-08-05',
       status: 'primary',
       volatility: 'high',
-      scopeAndExceptions: 'Requires professional legal review for specific eligibility mapping.'
+      scopeAndExceptions: 'Requires professional legal review for specific eligibility mapping.',
+      applicableScenarioIds: ['family-reunification']
     }
   ],
   relatedGuides: [
@@ -150,10 +199,10 @@ export const firstDaysChecklistEN: OperationalGuide = {
       requiresExamination: false,
       requiresMedical: 'not-required',
       documents: [
-        { name: 'Passport with valid Type D/SD visa', isMandatory: true, claimId: 'c-student-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'University Acceptance Letter', isMandatory: true, claimId: 'c-student-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'Housing contract (registered at ANAF or notarized)', isMandatory: true, claimId: 'c-student-doc-3', sourceId: 'anaf-contracts', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'Medical certificate from a clinic', isMandatory: true, claimId: 'c-student-doc-4', status: 'VERIFIED_LEGAL_REQUIREMENT' }
+        { name: 'Passport with valid Type D/SD visa', isMandatory: true, claimId: 'c-student-doc-1', sourceId: 'igi-student', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'University Acceptance Letter', isMandatory: true, claimId: 'c-student-doc-2', sourceId: 'igi-student', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Housing contract (registered at ANAF or notarized)', isMandatory: true, claimId: 'c-student-doc-3', sourceId: 'anaf-contracts', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Medical certificate from a clinic', isMandatory: true, claimId: 'c-student-doc-4', sourceId: 'igi-student', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
         { title: 'Upon Arrival: Connectivity', description: 'Purchase a local SIM card.', claimId: 'c-student-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
@@ -162,8 +211,8 @@ export const firstDaysChecklistEN: OperationalGuide = {
         { title: 'Legal Deadline: IGI Residence Application', description: 'Submit the residence application via the IGI portal at least 30 days before the expiry of your current legal right of stay.', claimId: 'c-student-step-4', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-student', authority: 'IGI' }
       ],
       fees: [
-        { amount: '259', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-student' },
-        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent', isFixed: true, sourceId: 'igi-student' }
+        { amount: '265', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-fees-august-2025' },
+        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent', isFixed: true, sourceId: 'igi-fees-august-2025' }
       ],
       timeline: [
         { duration: '30-45 Days', description: 'Estimated IGI processing time after document submission.', isGuaranteed: false, sourceId: 'igi-student' }
@@ -181,10 +230,10 @@ export const firstDaysChecklistEN: OperationalGuide = {
       requiresMedical: 'required',
       medicalConditionText: 'Occupational health check required for employment contract.',
       documents: [
-        { name: 'Passport with valid Type D/AM visa', isMandatory: true, claimId: 'c-work-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'Work Permit (Aviz de Muncă)', isMandatory: true, claimId: 'c-work-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'Employment Contract registered in REVISAL', isMandatory: true, claimId: 'c-work-doc-3', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'Housing contract registered at ANAF', isMandatory: true, claimId: 'c-work-doc-4', sourceId: 'anaf-contracts', status: 'VERIFIED_LEGAL_REQUIREMENT' }
+        { name: 'Passport with valid Type D/AM visa', isMandatory: true, claimId: 'c-work-doc-1', sourceId: 'igi-work', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Work Permit (Aviz de Muncă)', isMandatory: true, claimId: 'c-work-doc-2', sourceId: 'igi-work', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Employment Contract registered in REVISAL', isMandatory: true, claimId: 'c-work-doc-3', sourceId: 'igi-work', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Housing contract registered at ANAF', isMandatory: true, claimId: 'c-work-doc-4', sourceId: 'anaf-contracts', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
         { title: 'Upon Arrival: Contract Signing', description: 'Report to your employer to sign the individual employment contract (CIM).', claimId: 'c-work-step-1', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-work' },
@@ -193,8 +242,8 @@ export const firstDaysChecklistEN: OperationalGuide = {
         { title: 'Legal Deadline: IGI Residence Application', description: 'Submit the residence application via the IGI portal at least 30 days before the expiry of your visa.', claimId: 'c-work-step-4', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-work', authority: 'IGI' }
       ],
       fees: [
-        { amount: '259', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-work' },
-        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent', isFixed: true, sourceId: 'igi-work' }
+        { amount: '265', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-fees-august-2025' },
+        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent', isFixed: true, sourceId: 'igi-fees-august-2025' }
       ],
       timeline: [
         { duration: '30 Days', description: 'Estimated IGI processing time after interview.', isGuaranteed: false, sourceId: 'igi-work' }
@@ -212,22 +261,22 @@ export const firstDaysChecklistEN: OperationalGuide = {
       requiresMedical: 'conditional',
       medicalConditionText: 'A medical certificate proving you do not suffer from contagious diseases is required.',
       documents: [
-        { name: 'Passport with valid Type D/VF visa', isMandatory: true, claimId: 'c-fam1-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'Sponsor\'s Residence Permit', isMandatory: true, claimId: 'c-fam1-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'Marriage or Birth Certificate (Apostilled/Translated)', isMandatory: true, claimId: 'c-fam1-doc-3', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'Proof of housing and sufficient funds', isMandatory: true, claimId: 'c-fam1-doc-4', status: 'VERIFIED_LEGAL_REQUIREMENT' }
+        { name: 'Passport with valid Type D/VF visa', isMandatory: true, claimId: 'c-fam1-doc-1', sourceId: 'mae-family-visa', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Sponsor\'s Residence Permit', isMandatory: true, claimId: 'c-fam1-doc-2', sourceId: 'igi-family-permit', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Marriage or Birth Certificate (Apostilled/Translated)', isMandatory: true, claimId: 'c-fam1-doc-3', sourceId: 'igi-family-permit', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Proof of housing and sufficient funds', isMandatory: true, claimId: 'c-fam1-doc-4', sourceId: 'igi-family-permit', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
         { title: 'Practical: Settling In', description: 'Obtain a local SIM card and add the family member to household utility bills if required for proof of housing.', claimId: 'c-fam1-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
         { title: 'Health Insurance (Co-asigurat)', description: 'Apply for co-insured status at CNAS for public health coverage.', claimId: 'c-fam1-step-2', status: 'QUALIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'cnas-insurance-general', authority: 'CNAS' },
-        { title: 'Legal Deadline: IGI Residence Application', description: 'Submit the application for a family reunification residence permit via the IGI portal at least 30 days before the visa expires.', claimId: 'c-fam1-step-3', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-family', authority: 'IGI' }
+        { title: 'Legal Deadline: IGI Residence Application', description: 'Submit the application for a family reunification residence permit via the IGI portal at least 30 days before the visa expires.', claimId: 'c-fam1-step-3', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-family-permit', authority: 'IGI' }
       ],
       fees: [
-        { amount: '259', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-family' },
-        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent', isFixed: true, sourceId: 'igi-family' }
+        { amount: '265', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-fees-august-2025' },
+        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent', isFixed: true, sourceId: 'igi-fees-august-2025' }
       ],
       timeline: [
-        { duration: '30-60 Days', description: 'Estimated IGI processing time.', isGuaranteed: false, sourceId: 'igi-family' }
+        { duration: '30-60 Days', description: 'Estimated IGI processing time.', isGuaranteed: false, sourceId: 'igi-family-permit' }
       ],
       exceptions: [],
       limitations: []
@@ -241,18 +290,18 @@ export const firstDaysChecklistEN: OperationalGuide = {
       requiresExamination: false,
       requiresMedical: 'not-required',
       documents: [
-        { name: 'Passport (Visa if required by nationality)', isMandatory: true, claimId: 'c-fam2-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'Romanian ID of the sponsor', isMandatory: true, claimId: 'c-fam2-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'Romanian Marriage/Birth Certificate', isMandatory: true, claimId: 'c-fam2-doc-3', status: 'VERIFIED_LEGAL_REQUIREMENT' }
+        { name: 'Passport (Visa if required by nationality)', isMandatory: true, claimId: 'c-fam2-doc-1', sourceId: 'igi-family-ro-permit', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Romanian ID of the sponsor', isMandatory: true, claimId: 'c-fam2-doc-2', sourceId: 'igi-family-ro-permit', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Romanian Marriage/Birth Certificate', isMandatory: true, claimId: 'c-fam2-doc-3', sourceId: 'igi-family-ro-permit', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
-        { title: 'Legal Deadline: IGI Residence Application', description: 'Submit the application for residence permit via the IGI portal at least 30 days before the expiry of your current legal right of stay.', claimId: 'c-fam2-step-1', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-family-ro', authority: 'IGI' }
+        { title: 'Legal Deadline: IGI Residence Application', description: 'Submit the application for residence permit via the IGI portal at least 30 days before the expiry of your current legal right of stay.', claimId: 'c-fam2-step-1', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-family-ro-permit', authority: 'IGI' }
       ],
       fees: [
-        { amount: '259', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-family-ro' }
+        { amount: '265', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-fees-august-2025' }
       ],
       timeline: [
-        { duration: '30-90 Days', description: 'Estimated IGI processing time.', isGuaranteed: false, sourceId: 'igi-family-ro' }
+        { duration: '30-90 Days', description: 'Estimated IGI processing time.', isGuaranteed: false, sourceId: 'igi-family-ro-permit' }
       ],
       exceptions: ['Family members joining a Romanian citizen are exempt from the consular tax.'],
       limitations: []
@@ -266,17 +315,17 @@ export const firstDaysChecklistEN: OperationalGuide = {
       requiresExamination: false,
       requiresMedical: 'not-required',
       documents: [
-        { name: 'Passport with Type D visa (if applicable)', isMandatory: true, claimId: 'c-biz-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'ONRC Company Registration Documents', isMandatory: true, claimId: 'c-biz-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'FDI Approval (if required)', isMandatory: true, claimId: 'c-biz-doc-3', status: 'QUALIFIED_LEGAL_REQUIREMENT' }
+        { name: 'Passport with Type D visa (if applicable)', isMandatory: true, claimId: 'c-biz-doc-1', sourceId: 'igi-business', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'ONRC Company Registration Documents', isMandatory: true, claimId: 'c-biz-doc-2', sourceId: 'igi-business', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'FDI Approval (if required)', isMandatory: true, claimId: 'c-biz-doc-3', sourceId: 'igi-business', reviewDate: '2026-08-05', status: 'QUALIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
         { title: 'Practical: Corporate Bank Account', description: 'Finalize corporate banking arrangements for share capital and operations.', claimId: 'c-biz-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
         { title: 'Legal Deadline: IGI Residence Application', description: 'Submit the application for residence via the IGI portal at least 30 days before your visa expires.', claimId: 'c-biz-step-2', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-business', authority: 'IGI' }
       ],
       fees: [
-        { amount: '259', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-business' },
-        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent', isFixed: true, sourceId: 'igi-business' }
+        { amount: '265', currency: 'RON', description: 'Residence permit issuance fee', isFixed: true, sourceId: 'igi-fees-august-2025' },
+        { amount: '120', currency: 'EUR', description: 'Consular tax equivalent', isFixed: true, sourceId: 'igi-fees-august-2025' }
       ],
       timeline: [
         { duration: '30-45 Days', description: 'Estimated IGI processing time.', isGuaranteed: false, sourceId: 'igi-business' }
@@ -293,9 +342,9 @@ export const firstDaysChecklistEN: OperationalGuide = {
       requiresExamination: false,
       requiresMedical: 'not-required',
       documents: [
-        { name: 'Valid National ID or Passport', isMandatory: true, claimId: 'c-eu-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'Proof of employment, study, or sufficient funds', isMandatory: true, claimId: 'c-eu-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'Proof of housing', isMandatory: true, claimId: 'c-eu-doc-3', status: 'VERIFIED_LEGAL_REQUIREMENT' }
+        { name: 'Valid National ID or Passport', isMandatory: true, claimId: 'c-eu-doc-1', sourceId: 'igi-eu', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Proof of employment, study, or sufficient funds', isMandatory: true, claimId: 'c-eu-doc-2', sourceId: 'igi-eu', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Proof of housing', isMandatory: true, claimId: 'c-eu-doc-3', sourceId: 'igi-eu', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
         { title: 'Practical: Basic Setup', description: 'Purchase a local SIM card if needed. Use your home EU bank accounts freely.', claimId: 'c-eu-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
@@ -317,12 +366,12 @@ export const firstDaysChecklistEN: OperationalGuide = {
       requiresExamination: false,
       requiresMedical: 'not-required',
       documents: [
-        { name: 'Valid Passport and Visa (if applicable)', isMandatory: true, claimId: 'c-short-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'Travel Medical Insurance', isMandatory: true, claimId: 'c-short-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' }
+        { name: 'Valid Passport and Visa (if applicable)', isMandatory: true, claimId: 'c-short-doc-1', sourceId: 'mae-visas', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Travel Medical Insurance', isMandatory: true, claimId: 'c-short-doc-2', sourceId: 'mae-visas', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
         { title: 'Practical: Connectivity', description: 'Obtain a prepaid SIM card (does not require a residence permit).', claimId: 'c-short-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
-        { title: 'Legal: Accommodation Registration', description: 'Ensure your hotel or host registers your stay, as required by law for tourists within 3 days.', claimId: 'c-short-step-2', status: 'QUALIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'mae-visas' }
+        { title: 'Legal: Accommodation Registration', description: 'Any foreigner entering Romania who does not stay in a hotel or licensed tourism accommodation must declare their stay to the local police within 3 days. Hotels register tourists automatically.', claimId: 'c-short-step-2', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-hosting-notification', authority: 'IGI' }
       ],
       fees: [],
       timeline: [],
@@ -338,11 +387,12 @@ export const firstDaysChecklistEN: OperationalGuide = {
       requiresExamination: false,
       requiresMedical: 'not-required',
       documents: [
-        { name: 'Valid Passport', isMandatory: true, claimId: 'c-exist-doc-1', status: 'VERIFIED_LEGAL_REQUIREMENT' },
-        { name: 'Valid Residence Permit', isMandatory: true, claimId: 'c-exist-doc-2', status: 'VERIFIED_LEGAL_REQUIREMENT' }
+        { name: 'Valid Passport', isMandatory: true, claimId: 'c-exist-doc-1', sourceId: 'igi-general-renewal', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' },
+        { name: 'Valid Residence Permit', isMandatory: true, claimId: 'c-exist-doc-2', sourceId: 'igi-general-renewal', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
-        { title: 'Practical: Verify Expiry', description: 'Check the expiry date of your residence permit. Renewal applications must be submitted at least 30 days before expiry.', claimId: 'c-exist-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' }
+        { title: 'Practical: Verify Expiry', description: 'Check the physical expiry date printed on your residence permit immediately upon arrival.', claimId: 'c-exist-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
+        { title: 'Legal: Renewal Deadline', description: 'Renewal applications must be submitted at least 30 days before the expiry date of your current residence permit.', claimId: 'c-exist-step-2', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-general-renewal', authority: 'IGI' }
       ],
       fees: [],
       timeline: [],
@@ -365,7 +415,7 @@ export const firstDaysChecklistEN: OperationalGuide = {
       fees: [],
       timeline: [],
       exceptions: [],
-      limitations: ['Cannot apply for residence permit until long-term housing is secured and registered at ANAF.']
+      limitations: ['Cannot apply for a residence permit until acceptable proof of legal accommodation is secured. The required document varies depending on your specific procedure.']
     }
   ]
 };

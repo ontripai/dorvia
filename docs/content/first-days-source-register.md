@@ -1,26 +1,28 @@
 # First Days Checklist: Source Register
 
-## Primary Official Sources
+## Total Official Sources: 13
 
-1. **igi-residence-general**
-   - **Source Title**: General Inspectorate for Immigration (IGI) - Residence Permits
-   - **Organization**: Inspectoratul General pentru Imigrări
-   - **URL**: `https://igi.mai.gov.ro/en/residence-permits/`
-   - **Type**: Official Website (Primary)
-   - **Accessed**: 2026-08-05
+### Ministry of Foreign Affairs (MAE)
+- `mae-visas`: MAE - Short Stay Visas
+- `mae-family-visa`: MAE - Family Reunification Visa
 
-2. **anaf-contracts**
-   - **Source Title**: ANAF - Registration of Rental Contracts
-   - **Organization**: Agentia Nationala de Administrare Fiscala
-   - **URL**: `https://www.anaf.ro/anaf/internet/ANAF/asistenta_contribuabili/servicii_oferite_contribuabililor/inregistrare_contracte_locatiune`
-   - **Type**: Official Website (Primary)
-   - **Accessed**: 2026-08-05
+### Inspectoratul General pentru Imigrări (IGI)
+- `igi-fees-august-2025`: IGI - Official August 2025 Fee Announcement
+- `igi-student`: IGI - Residence Permits for Studies
+- `igi-work`: IGI - Residence Permits for Employment
+- `igi-family-permit`: IGI - Family Reunification Residence Permit
+- `igi-family-ro-permit`: IGI - Family Members of Romanian Citizens
+- `igi-eu`: IGI - Citizens of EU/EEA and Swiss Confederation
+- `igi-business`: IGI - Commercial Activities
+- `igi-hosting-notification`: IGI - Hosting and Accommodation Notification
+- `igi-general-renewal`: IGI - General Extension of Right of Stay
 
-3. **cnas-insurance**
-   - **Source Title**: CNAS - National Health Insurance General Info
-   - **Organization**: Casa Națională de Asigurări de Sănătate
-   - **URL**: `https://cnas.ro/`
-   - **Type**: Official Website (Primary)
-   - **Accessed**: 2026-08-05
+### Other Institutions
+- `anaf-contracts`: ANAF - Registration of Rental Contracts
+- `cnas-insurance-general`: CNAS - National Health Insurance General Info (Qualified Usage)
 
-*Note: All sources are currently marked as primary and have been successfully linked to relevant material claims and fixed fees within the guide.*
+## Traceability
+- Every primary fee (e.g., 265 RON permit fee, 120 EUR consular tax) strictly maps to `igi-fees-august-2025`.
+- Every legal claim or document requirement is mapped to a specific procedure page (e.g., `igi-student`, `mae-family-visa`).
+- `cnas-insurance-general` is used exclusively for qualified practical advice due to the complexity of individual health insurance determinations.
+- Generic IGI homepages and broad informational hubs are explicitly avoided in favor of direct procedure URLs.

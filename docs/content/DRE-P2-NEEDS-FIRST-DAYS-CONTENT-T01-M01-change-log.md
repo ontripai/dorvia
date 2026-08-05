@@ -1,13 +1,17 @@
-# Change Log: DRE-P2-NEEDS-FIRST-DAYS-CONTENT-T01-M01
+# Change Log: First Days Guide M01/R02
 
-## 2026-08-05
-### Added
-- Extended `src/types/content.ts` `OperationalGuide` interface with explicit claim-level governance properties (`claimId`, `sourceId`, `authority`, `jurisdiction`, `reviewDate`, `status`).
-- Added `firstDaysChecklistEN` and `firstDaysChecklistFA` in `src/content/guides/first-days-checklist/`.
-- Replaced the hardcoded First Days Checklist JSX in `NeedsContent.tsx` with the `OperationalGuideLayout` component.
-- Injected `status: 'VERIFIED'` and `reviewDate` properties into the existing `driving-license` guide steps to ensure compliance with the new validator constraints.
-- Extended `validateContent.ts` with checks for duplicate `claimId`, missing material `status`, published-state protections, and dynamic scenario parity per-guide.
+## Structural Changes
+- Implemented the 9-scenario Operational Guide architecture for the `first-days-checklist` in both `en.ts` and `fa.ts`.
+- Segregated family reunification into explicit scenarios for EU/Romanian citizen sponsors and Non-EU sponsors.
+- Separated EU registration (`Certificat de Înregistrare`) from non-EU `Permis de Ședere` pathways.
 
-### Changed
-- No route architecture changes were made. `/needs/first-days-checklist` remains canonical.
-- No global UI elements were modified.
+## Legal & Compliance Updates
+- Verified all residence document fees to reflect the current 265 RON standard (IGI August 2025 announcement).
+- Separated the 120 EUR consular tax from physical document costs.
+- Enforced strict requirements on `sourceId` for all `VERIFIED_LEGAL_REQUIREMENT` claims (documents and steps).
+- Resolved absolute accommodation statements by distinguishing ANAF-registered long-term leases from short-term host notifications (tourist registration within 3 days).
+
+## Validation Engine Changes
+- Upgraded `scripts/validateContent.ts` to actively enforce contextual constraints.
+- Bound sources securely to specific scenarios (`applicableScenarioIds`) and claims (`applicableClaimIds`).
+- Established robust negative-testing procedures to confirm the validator correctly traps missing sources, incorrect assumptions, and deprecated costs.

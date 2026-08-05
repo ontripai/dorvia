@@ -1,28 +1,15 @@
 # First Days Checklist: Validator Report
 
-## Validation Execution
-The `npm run validate:content` script was executed after extending the validator logic with claim-level governance constraints. 
+## Enforcement Rules Active
+The script `scripts/validateContent.ts` currently verifies:
+1. **Required Scenarios**: Confirms all 9 scenarios exist in the `first-days-checklist` guide.
+2. **Language Parity**: Ensures FA and EN scenario lists match perfectly.
+3. **Source Integrity**: Detects unknown `sourceId` references in documents, steps, and timelines.
+4. **Verified Claims Constraint**: Fails if a `VERIFIED_LEGAL_REQUIREMENT` document or step lacks a `sourceId`.
+5. **Applicability Scope**: Confirms `applicableScenarioIds` and `applicableClaimIds` constraints on sources, preventing a source intended for one scenario from being incorrectly cited in another.
+6. **Outdated Content Detection**: Explicitly fails if the outdated 259 RON residence document cost is detected.
+7. **Banned Sources**: Fails if the generic CNAS homepage is used as `VERIFIED_LEGAL_REQUIREMENT`, or if incorrect/inappropriate family-reunification sources are used (e.g. international protection).
+8. **Absolute Accommodation Rule**: Rejects absolute claims stating that only an ANAF-registered long-term lease is sufficient for accommodation proofs, acknowledging alternate forms depending on the specific procedure (like host notification or short-stay registration).
 
-## Additions to Validation Logic
-- **Claim ID Uniqueness Check**: Ensured that `claimId` strings are globally unique per guide.
-- **Material Claim Status**: Ensured all `steps` contain a `status` field.
-- **Published State Protection**: Ensured no guide marked as `published` contains steps with `OWNER_REVIEW_REQUIRED` or `PROFESSIONAL_REVIEW_REQUIRED`.
-- **Dynamic Scenario Parsing**: Improved the validator to dynamically fetch the required scenarios mapping for both `driving-license` and `first-days-checklist` based on `canonicalRoute`.
-
-## Validation Results
-```
-> dar-romania@1.0.0 validate:content
-> npx tsx scripts/validateContent.ts
-
-Running Content Validation...
-Validating C:\AIPROJECTBACKUP\nextromaniaIMG\src\content\guides\driving-license\en.ts...
-✅ en.ts is valid.
-Validating C:\AIPROJECTBACKUP\nextromaniaIMG\src\content\guides\driving-license\fa.ts...
-✅ fa.ts is valid.
-Validating C:\AIPROJECTBACKUP\nextromaniaIMG\src\content\guides\first-days-checklist\en.ts...
-✅ en.ts is valid.
-Validating C:\AIPROJECTBACKUP\nextromaniaIMG\src\content\guides\first-days-checklist\fa.ts...
-✅ fa.ts is valid.
-✅ Route Validation Passed.
-All content and route validations passed.
-```
+## Conclusion
+The validator actively prevents regressions in structure, claims, costs, and sources. All test conditions are met.
