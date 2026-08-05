@@ -62,7 +62,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Brand Logo Wordmark & Symbol */}
         <Link
           href="/"
-          className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer group shrink-0"
+          className="flex items-center space-x-2 sm:space-x-3 rtl:space-x-reverse cursor-pointer group shrink min-w-0"
           onClick={() => {
             setActiveMegaMenu(null);
           }}
@@ -107,18 +107,18 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Functional Search Button */}
           <button
             onClick={() => setSearchDialogOpen(true)}
-            className="p-2 rounded-xl bg-[#eef3f8] text-[#142033] hover:bg-[#dfe6ef] transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center border border-[#dfe6ef]"
+            className="p-2 rounded-xl bg-[#eef3f8] text-[#142033] hover:bg-[#dfe6ef] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center border border-[#dfe6ef]"
             aria-label="Search"
             title={currentLang === 'fa' ? 'جستجو' : 'Search'}
           >
             <Search size={18} className="text-[#2F6FED]" />
           </button>
 
-          {/* Segmented Language Switcher (36px height) */}
-          <div className="flex items-center h-[36px] p-0.5 rounded-xl bg-[#eef3f8] border border-[#dfe6ef]">
+          {/* Segmented Language Switcher */}
+          <div className="flex items-center p-0.5 rounded-xl bg-[#eef3f8] border border-[#dfe6ef]">
             <button
               onClick={() => onLanguageChange('fa')}
-              className={`px-3 py-1 h-full rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`px-3 py-1 h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 currentLang === 'fa' ? 'bg-[#2F6FED] text-white shadow-xs' : 'text-[#071B3D] hover:text-[#2F6FED]'
               }`}
             >
@@ -126,7 +126,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
             <button
               onClick={() => onLanguageChange('en')}
-              className={`px-3 py-1 h-full rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`px-3 py-1 h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 currentLang === 'en' ? 'bg-[#2F6FED] text-white shadow-xs' : 'text-[#071B3D] hover:text-[#2F6FED]'
               }`}
             >
@@ -146,25 +146,25 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Mobile Controls */}
-        <div className="flex items-center space-x-2 rtl:space-x-reverse lg:hidden shrink-0">
+        <div className="flex items-center space-x-1 sm:space-x-2 rtl:space-x-reverse lg:hidden shrink-0">
           <button
             onClick={() => setSearchDialogOpen(true)}
-            className="p-2 rounded-lg bg-[#eef3f8] text-[#142033] border border-[#dfe6ef] min-h-[36px] min-w-[36px] flex items-center justify-center"
+            className="p-2 rounded-lg bg-[#eef3f8] text-[#142033] border border-[#dfe6ef] min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="Search"
           >
             <Search size={18} className="text-[#2F6FED]" />
           </button>
 
-          <div className="flex items-center h-[32px] p-0.5 rounded-lg bg-[#eef3f8] border border-[#dfe6ef] text-[11px]">
+          <div className="flex items-center p-0.5 rounded-lg bg-[#eef3f8] border border-[#dfe6ef] text-[11px]">
             <button
               onClick={() => onLanguageChange('fa')}
-              className={`px-2 py-0.5 rounded font-bold ${currentLang === 'fa' ? 'bg-[#2F6FED] text-white' : 'text-[#142033]'}`}
+              className={`px-2 py-0.5 h-[44px] min-w-[44px] flex items-center justify-center rounded font-bold ${currentLang === 'fa' ? 'bg-[#2F6FED] text-white' : 'text-[#142033]'}`}
             >
               FA
             </button>
             <button
               onClick={() => onLanguageChange('en')}
-              className={`px-2 py-0.5 rounded font-bold ${currentLang === 'en' ? 'bg-[#2F6FED] text-white' : 'text-[#142033]'}`}
+              className={`px-2 py-0.5 h-[44px] min-w-[44px] flex items-center justify-center rounded font-bold ${currentLang === 'en' ? 'bg-[#2F6FED] text-white' : 'text-[#142033]'}`}
             >
               EN
             </button>
@@ -174,14 +174,14 @@ export const Header: React.FC<HeaderProps> = ({
             variant="primary"
             size="sm"
             onClick={onOpenEvaluationModal}
-            className="hidden sm:inline-flex !px-3 !py-1 !text-[11px] !min-h-[32px]"
+            className="hidden sm:inline-flex !px-3 !py-1 !text-[11px] !min-h-[44px]"
           >
             {currentLang === 'fa' ? 'ارزیابی' : 'Audit'}
           </Button>
 
           <button
             onClick={() => setMobileDrawerOpen(true)}
-            className="p-2 rounded-xl bg-[#eef3f8] hover:bg-[#dfe6ef] text-[#142033] border border-[#dfe6ef] cursor-pointer min-h-[40px] min-w-[40px] flex items-center justify-center shrink-0 z-10"
+            className="p-2 rounded-xl bg-[#eef3f8] hover:bg-[#dfe6ef] text-[#142033] border border-[#dfe6ef] cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0 z-10"
             aria-label="Open Navigation Menu"
           >
             <Menu size={20} />

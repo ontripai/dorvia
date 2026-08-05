@@ -62,7 +62,7 @@ export const OperationalGuideLayout: React.FC<OperationalGuideLayoutProps> = ({ 
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs sm:text-sm font-semibold">
             {guide.situations.map((sit, idx) => (
-              <a key={idx} href={`#scenario-${sit.id}`} className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#2F6FED] rounded-xl border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse transition-colors">
+              <a key={idx} href={`#scenario-${sit.id}`} className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#2F6FED] rounded-xl border border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse transition-colors min-h-[44px]">
                 <span>{idx + 1}. {sit.title}</span>
               </a>
             ))}
@@ -72,7 +72,7 @@ export const OperationalGuideLayout: React.FC<OperationalGuideLayoutProps> = ({ 
 
       {/* Scenarios */}
       {guide.situations?.map((scenario, idx) => (
-        <div key={scenario.id} id={`scenario-${scenario.id}`} className="editorial-card p-6 sm:p-8 bg-white border border-[#dfe6ef] space-y-6 shadow-sm scroll-mt-24">
+        <div key={scenario.id} id={`scenario-${scenario.id}`} className="editorial-card p-6 sm:p-8 bg-white border border-[#dfe6ef] space-y-6 shadow-sm scroll-mt-32">
           <h2 className="text-xl font-extrabold text-[#142033] border-b border-[#dfe6ef] pb-3">
             {idx + 1}. {scenario.title}
           </h2>

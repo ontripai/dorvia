@@ -16,7 +16,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ currentLang,
           <button
             key={lang.id}
             onClick={() => onLanguageChange(lang.id)}
-            className={`px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 flex items-center space-x-1.5 rtl:space-x-reverse ${
+            className={`px-3 py-1.5 min-h-[44px] min-w-[44px] justify-center text-xs sm:text-sm font-medium rounded-md transition-all duration-200 flex items-center space-x-1.5 rtl:space-x-reverse ${
               isActive
                 ? 'bg-[#071B3D] text-white shadow-sm font-bold'
                 : 'text-slate-700 hover:text-[#071B3D] hover:bg-slate-200/60'

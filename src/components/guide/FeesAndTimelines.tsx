@@ -38,7 +38,7 @@ export const FeesAndTimelines: React.FC<FeesAndTimelinesProps> = ({ fees, timeli
               <tbody className="divide-y divide-[#dfe6ef] bg-white">
                 {fees.map((fee, idx) => (
                   <tr key={idx}>
-                    <td className="p-3 font-extrabold text-[#2F6FED] bg-[#f8fafc] whitespace-nowrap">
+                    <td className="p-3 font-extrabold text-[#2F6FED] bg-[#f8fafc] whitespace-normal sm:whitespace-nowrap break-words">
                       {fee.amount} {fee.currency} {!fee.isFixed && (isRtl ? '(تخمینی)' : '(est.)')}
                     </td>
                     <td className="p-3">{fee.description}</td>
@@ -66,7 +66,7 @@ export const FeesAndTimelines: React.FC<FeesAndTimelinesProps> = ({ fees, timeli
               <tbody className="divide-y divide-[#dfe6ef] bg-white">
                 {timelines.map((time, idx) => (
                   <tr key={idx}>
-                    <td className="p-3 font-extrabold text-[#2F6FED] bg-[#f8fafc] whitespace-nowrap">
+                    <td className="p-3 font-extrabold text-[#2F6FED] bg-[#f8fafc] whitespace-normal sm:whitespace-nowrap break-words">
                       {time.duration} {!time.isGuaranteed && (isRtl ? '(متغیر)' : '(variable)')}
                     </td>
                     <td className="p-3">{time.description}</td>
