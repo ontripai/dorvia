@@ -188,6 +188,57 @@ assert(testMatchesAreaLang('medicine_dentistry', ''), "Must match Medicine");
 assert(testMatchesAreaLang('management_business', 'EN'), "Must match Business + EN");
 assert(!testMatchesAreaLang('medicine_dentistry', 'EN'), "Must not match Medicine + EN");
 
+// Test Normalization Pure Functions
+function getValidStudyAreas() {
+  return ['medicine_dentistry', 'computer_it', 'engineering', 'management_business', 'law_political_science', 'foreign_languages', 'other'];
+}
+function normalizeQuery(rawArea: string | null, rawLang: string | null, universitiesData: any[]) {
+  const isValidArea = rawArea && getValidStudyAreas().includes(rawArea);
+  const normalizedArea = isValidArea ? rawArea : '';
+
+  const availableLanguages = Array.from(new Set(
+    universitiesData.flatMap(uni =>
+      uni.programs
+        .filter((p: any) => !normalizedArea || p.studyAreaId === normalizedArea)
+        .flatMap((p: any) => p.languages)
+    )
+  )).filter(lang => lang !== 'UNKNOWN');
+
+  const isValidLang = rawLang && availableLanguages.includes(rawLang);
+  const normalizedLang = isValidLang ? rawLang : '';
+
+  return { normalizedArea, normalizedLang };
+}
+
+console.log('Testing normalization...');
+// Test 1: computer_it + UNKNOWN normalizes to computer_it with no language
+let norm1 = normalizeQuery('computer_it', 'UNKNOWN', universitiesData);
+assert(norm1.normalizedArea === 'computer_it' && norm1.normalizedLang === '', "computer_it + UNKNOWN should normalize to computer_it with empty lang");
+
+// Test 2: unsupported areas never remain active internally
+let norm2 = normalizeQuery('fake_area', 'EN', universitiesData);
+assert(norm2.normalizedArea === '', "unsupported area must normalize to empty");
+assert(norm2.normalizedLang === 'EN', "EN is valid when area normalizes to empty (all areas)");
+
+// Test 3: Medicine+EN -> Computer IT (simulating changing study area in UI without clearing lang)
+let norm3 = normalizeQuery('computer_it', 'EN', universitiesData);
+assert(norm3.normalizedArea === 'computer_it' && norm3.normalizedLang === '', "EN must clear if not valid for Computer IT");
+
+// Test 4: valid direct query values survive refresh
+let norm4 = normalizeQuery('medicine_dentistry', 'EN', universitiesData);
+assert(norm4.normalizedArea === 'medicine_dentistry' && norm4.normalizedLang === 'EN', "valid direct query values survive refresh");
+
+// Test 5: Verify counts
+const defRes = simulateFilter(null, null);
+assert(defRes.length === 9, "default view contains 9");
+const medRes = simulateFilter('medicine_dentistry', null);
+assert(medRes.length === 5, "medicine_dentistry contains 5");
+const medEnRes = simulateFilter('medicine_dentistry', 'EN');
+assert(medEnRes.length === 1, "medicine_dentistry + EN contains 1");
+const compRes = simulateFilter('computer_it', null);
+assert(compRes.length === 2, "computer_it contains 2");
+
+console.log('Normalization tests passed.');
 if (hasErrors) {
   console.error('\n❌ University validation failed.');
   process.exit(1);
