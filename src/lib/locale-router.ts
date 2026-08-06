@@ -9,7 +9,20 @@ export function isValidLocale(locale: string): locale is Locale {
   return LOCALES.includes(locale as Locale);
 }
 
-export function parseLocale(locale: string | undefined | null): Locale {
+/**
+ * Strictly parses a URL locale parameter.
+ * Returns null if the locale is unsupported or missing, allowing layouts to call notFound().
+ */
+export function parseUrlLocale(locale: string | undefined | null): Locale | null {
+  if (locale && isValidLocale(locale)) return locale;
+  return null;
+}
+
+/**
+ * Resolves a fallback preference for client state or optional preferences.
+ * Safely defaults to fa if absent or unsupported.
+ */
+export function getFallbackPreference(locale: string | undefined | null): Locale {
   if (locale && isValidLocale(locale)) return locale;
   return DEFAULT_LOCALE;
 }
