@@ -1,5 +1,5 @@
-import LegacyPage from '@/app/(legacy)/page';
+import { SharedHomePage } from '@/components/SharedHomePage';
 
 export default function LocalizedHomePage() {
-  return <LegacyPage />;
+  return <SharedHomePage />;
 }

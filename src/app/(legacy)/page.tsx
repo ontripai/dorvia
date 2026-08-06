@@ -1,17 +1,5 @@
-'use client';
-
-import { useAppContext } from '@/components/AppLayout';
-import { MainContent } from '@/components/MainContent';
+import { SharedHomePage } from '@/components/SharedHomePage';
 
 export default function Home() {
-  const { currentLang, onNavigate, onOpenEvaluationModal } = useAppContext();
-
-  return (
-    <MainContent
-      currentLang={currentLang}
-      activeRoute="home"
-      onNavigate={onNavigate}
-      onOpenEvaluationModal={onOpenEvaluationModal}
-    />
-  );
+  return <SharedHomePage />;
 }
