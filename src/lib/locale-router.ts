@@ -54,18 +54,29 @@ export function stripLocalePrefix(pathname: string): string {
  * Does NOT rely on unsafe string replacement.
  */
 export function getLocalizedRoute(path: string, targetLocale: Locale): RouteMappingResult {
-  // 1. Ignore API routes, Next.js internals, and static assets
-  if (path.startsWith('/api/') || path.startsWith('/_next/') || path.match(/\.(ico|png|jpg|jpeg|svg|css|js|json|xml|txt)$/i)) {
-    return { status: 'ignored', path };
-  }
-
   let urlObj;
   try {
     urlObj = new URL(path, 'http://localhost');
   } catch {
     return { status: 'unavailable', reason: 'unknown_route' };
   }
-  
+
+  // 1. External absolute URLs
+  if (urlObj.origin !== 'http://localhost') {
+    return { status: 'ignored', path };
+  }
+
+  const p = urlObj.pathname;
+  // 2. Ignore API routes, Next.js internals, and static assets
+  if (
+    p === '/api' || p.startsWith('/api/') ||
+    p === '/_next' || p.startsWith('/_next/') ||
+    p.match(/\.(ico|png|jpg|jpeg|svg|css|js|json|xml|txt)$/i)
+  ) {
+    return { status: 'ignored', path };
+  }
+
+
   let barePathname = stripLocalePrefix(urlObj.pathname);
 
   // 2. Find the route in the registry to ensure it's a known, valid route
@@ -85,8 +96,8 @@ export function getLocalizedRoute(path: string, targetLocale: Locale): RouteMapp
     return { status: 'unavailable', reason: 'unknown_route' };
   }
 
-  // 3. Check for explicit missing translation
-  if ((foundConfig as any).missingTranslations?.includes(targetLocale)) {
+  // 4. Check for explicit missing translation
+  if (foundConfig.missingTranslations?.includes(targetLocale)) {
     return { status: 'unavailable', reason: 'missing_translation' };
   }
 
