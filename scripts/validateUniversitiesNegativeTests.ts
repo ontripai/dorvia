@@ -85,6 +85,24 @@ const tests = [
 let allPassed = true;
 
 console.log('--- CONTENT MUTATION TESTS ---');
+
+const restoreAndExit = () => {
+  try {
+    const current = fs.readFileSync(targetFile, 'utf8');
+    if (current !== originalContent) {
+      fs.writeFileSync(targetFile, originalContent);
+    }
+  } catch (e) {}
+  process.exit(1);
+};
+
+process.on('SIGINT', restoreAndExit);
+process.on('SIGTERM', restoreAndExit);
+process.on('uncaughtException', (err) => {
+  console.error(err);
+  restoreAndExit();
+});
+
 try {
   for (const t of tests) {
     console.log(`Running Negative Test: ${t.name}`);

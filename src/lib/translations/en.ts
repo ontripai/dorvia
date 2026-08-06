@@ -1,4 +1,30 @@
 export const enTranslations = {
+  directory: {
+    filters: {
+      studyArea: "Study Area",
+      allStudyAreas: "All Areas",
+      language: "Teaching Language",
+      allLanguages: "All Languages",
+      city: "City",
+      allCities: "All Cities"
+    },
+    studyAreas: {
+      medicine_dentistry: "Medicine & Dentistry",
+      computer_it: "Computer Engineering & IT",
+      engineering: "Electrical & Mechanical Engineering",
+      management_business: "Management & International Business",
+      law_political_science: "Law & Political Science",
+      foreign_languages: "Foreign Languages",
+      other: "Other Programs"
+    },
+    languages: {
+      RO: "Romanian",
+      EN: "English",
+      FR: "French",
+      DE: "German",
+      UNKNOWN: "Unknown / Needs Verification"
+    }
+  },
   brand: {
     name: "DORVIA EUROP",
     siteName: "In Romania",

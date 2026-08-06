@@ -1,4 +1,30 @@
 export const faTranslations = {
+  directory: {
+    filters: {
+      studyArea: "زمینه تحصیلی",
+      allStudyAreas: "همه زمینه‌ها",
+      language: "زبان تدریس",
+      allLanguages: "همه زبان‌ها",
+      city: "شهر",
+      allCities: "همه شهرها"
+    },
+    studyAreas: {
+      medicine_dentistry: "پزشکی و دندانپزشکی",
+      computer_it: "مهندسی کامپیوتر و فناوری اطلاعات",
+      engineering: "مهندسی برق و مکانیک",
+      management_business: "مدیریت و تجارت بین‌الملل",
+      law_political_science: "حقوق و علوم سیاسی",
+      foreign_languages: "زبان‌های خارجی",
+      other: "سایر رشته‌ها"
+    },
+    languages: {
+      RO: "رومانیایی",
+      EN: "انگلیسی",
+      FR: "فرانسوی",
+      DE: "آلمانی",
+      UNKNOWN: "نامشخص / نیازمند بررسی"
+    }
+  },
   brand: {
     name: "DORVIA EUROP",
     siteName: "در رومانی",

@@ -40,6 +40,23 @@ export interface RecognitionSource {
   officialFlag: boolean;
 }
 
+export type StudyAreaId =
+  | 'medicine_dentistry'
+  | 'computer_it'
+  | 'engineering'
+  | 'management_business'
+  | 'law_political_science'
+  | 'foreign_languages'
+  | 'other';
+
+export type TeachingLanguage = 'RO' | 'EN' | 'FR' | 'UNKNOWN';
+
+export interface VerifiedProgram {
+  name: { fa: string; en: string };
+  studyAreaId: StudyAreaId;
+  languages: TeachingLanguage[];
+}
+
 export interface University {
   id: string;
   displayOrder: number;
@@ -50,8 +67,7 @@ export interface University {
   cityFa: string;
   cityEn: string;
   institutionType: { fa: string; en: string };
-  studyFieldsFa: string[];
-  studyFieldsEn: string[];
+  programs: VerifiedProgram[];
   tuitionItems: TuitionItem[];
   tuitionAcademicYear: string;
   tuitionVerificationStatus: TuitionVerificationStatus;

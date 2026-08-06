@@ -18,6 +18,7 @@ import { FAQAccordion } from './FAQAccordion';
 import { OfficialResourceCard } from './OfficialResourceCard';
 import { NeedsContent } from './NeedsContent';
 import { RomaniaOverviewContent } from './RomaniaOverviewContent';
+import UniversitiesPage from '../app/universities/page';
 import { WorkOverviewContent } from './WorkOverviewContent';
 import { StartHereContent } from './StartHereContent';
 import { IgiProcessContent } from './IgiProcessContent';
@@ -969,57 +970,7 @@ export const MainContent: React.FC<MainContentProps> = ({
       );
 
     case 'universities':
-      const filteredUnis = featuredUniversities.filter((uni) => {
-        const normalizedSearch = uniSearch.trim().toLowerCase();
-
-        const localizedName =
-          currentLang === 'fa' ? uni.nameFa : uni.nameEn;
-
-        const localizedCity =
-          currentLang === 'fa' ? uni.cityFa : uni.cityEn;
-
-        const nameMatches = localizedName
-          .toLowerCase()
-          .includes(normalizedSearch);
-
-        const cityMatches = localizedCity
-          .toLowerCase()
-          .includes(normalizedSearch);
-
-        const romanianNameMatches = uni.officialRomanianName
-          .toLowerCase()
-          .includes(normalizedSearch);
-
-        return nameMatches || cityMatches || romanianNameMatches;
-
-      });
-
-      return (
-        <div className="space-y-8 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#142033]">{t.nav.universities}</h1>
-            <p className="text-[#526174] text-xs sm:text-sm mt-1">
-              {currentLang === 'fa' ? 'فهرست دانشگاه‌های معتبر رومانی' : 'Accredited Romanian Universities'}
-            </p>
-          </div>
-
-          <div className="bg-[#eef3f8] p-4 rounded-2xl border border-[#dfe6ef]">
-            <input
-              type="text"
-              value={uniSearch}
-              onChange={(e) => setUniSearch(e.target.value)}
-              placeholder={currentLang === 'fa' ? 'جستجوی دانشگاه یا شهر...' : 'Search university or city...'}
-              className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredUnis.map((uni) => (
-              <UniversityCard key={uni.id} university={uni} currentLang={currentLang} />
-            ))}
-          </div>
-        </div>
-      );
+      return <UniversitiesPage />;
 
     case 'cities':
       const filteredCities = featuredCities.filter((c) =>
