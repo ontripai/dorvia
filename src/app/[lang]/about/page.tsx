@@ -1,5 +1,5 @@
-'use client';
 import { SharedAboutPage } from '@/components/SharedAboutPage';
-export default function AboutPage() {
+
+export default function LocalizedAboutPage() {
   return <SharedAboutPage />;
 }

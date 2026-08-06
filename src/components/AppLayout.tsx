@@ -4,6 +4,7 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Language } from '../types';
 import { getDirection } from '../lib/i18n';
+import { getLocalizedRoute } from '../lib/locale-router';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { LeadForm } from './LeadForm';
@@ -41,6 +42,13 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
 
   const handleLanguageChange = (newLang: Language) => {
     setCurrentLang(newLang);
+    // Route-specific correction for About migration
+    if (pathname === '/about' || pathname === '/fa/about' || pathname === '/en/about') {
+      const result = getLocalizedRoute('/about', newLang);
+      if (result.status === 'success') {
+        router.push(result.path);
+      }
+    }
   };
 
   const handleNavigate = (route: string) => {
