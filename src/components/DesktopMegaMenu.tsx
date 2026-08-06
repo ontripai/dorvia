@@ -212,10 +212,10 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 {currentLang === 'fa' ? 'رشته‌های اصلی' : 'Popular Fields'}
               </h4>
               <ul className="space-y-2 text-[#526174] font-medium">
-                <li><Link href="/study" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🩺 {currentLang === 'fa' ? 'پزشکی و دندانپزشکی (انگلیسی/فرانسوی)' : 'Medicine & Dentistry (EN/FR)'}</Link></li>
-                <li><Link href="/study" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>💻 {currentLang === 'fa' ? 'مهندسی کامپیوتر و IT' : 'Computer Science & IT'}</Link></li>
-                <li><Link href="/study" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>⚙️ {currentLang === 'fa' ? 'مهندسی برق و مکانیک' : 'Engineering Degrees'}</Link></li>
-                <li><Link href="/study" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>📊 {currentLang === 'fa' ? 'مدیریت و تجارت بین‌الملل' : 'Management & Business'}</Link></li>
+                <li><Link href="/universities?area=medicine_dentistry" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🩺 {currentLang === 'fa' ? 'پزشکی و دندانپزشکی (انگلیسی/فرانسوی)' : 'Medicine & Dentistry (EN/FR)'}</Link></li>
+                <li><Link href="/universities?area=computer_it" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>💻 {currentLang === 'fa' ? 'مهندسی کامپیوتر و IT' : 'Computer Science & IT'}</Link></li>
+                <li><Link href="/universities?area=engineering" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>⚙️ {currentLang === 'fa' ? 'مهندسی برق و مکانیک' : 'Engineering Degrees'}</Link></li>
+                <li><Link href="/universities?area=management_business" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>📊 {currentLang === 'fa' ? 'مدیریت و تجارت بین‌الملل' : 'Management & Business'}</Link></li>
               </ul>
             </div>
 
@@ -224,6 +224,7 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 {currentLang === 'fa' ? 'دانشگاه‌های برجسته' : 'Featured Universities'}
               </h4>
               <ul className="space-y-2 text-[#526174] font-medium">
+                <li><Link href="/universities" className="font-bold text-[#2F6FED] py-1 cursor-pointer block mb-2" onClick={onClose}>🇷🇴 {currentLang === 'fa' ? 'دانشگاه‌های رومانی' : 'Universities in Romania'}</Link></li>
                 <li><Link href="/universities" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🎓 University of Bucharest</Link></li>
                 <li><Link href="/universities" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🎓 Babeș-Bolyai University (Cluj)</Link></li>
                 <li><Link href="/universities" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🩺 Carol Davila Medicine (Bucharest)</Link></li>

@@ -21,8 +21,66 @@ const pageContent = fs.readFileSync(pagePath, 'utf8');
 const cardContent = fs.readFileSync(cardPath, 'utf8');
 
 assert(
-  pageContent.includes(".filter(lang => lang !== 'UNKNOWN')"),
-  "UNKNOWN must be excluded from language filter dropdown"
+  pageContent.includes("const orderedLanguages = [\"RO\", \"EN\", \"FR\", \"DE\"]") || pageContent.includes("const orderedLanguages = ['RO', 'EN', 'FR', 'DE']"),
+  "Teaching Language must strictly contain RO, EN, FR, DE"
+);
+
+assert(
+  pageContent.includes(".includes(rawLang as TeachingLanguage)") && !pageContent.includes("filter(lang => lang !== 'UNKNOWN')"),
+  "UNKNOWN must not be selectable and logic should not rely on dynamic extraction that includes UNKNOWN"
+);
+
+const desktopMenuPath = path.resolve(__dirname, '../src/components/DesktopMegaMenu.tsx');
+const mobileMenuPath = path.resolve(__dirname, '../src/components/MobileDrawer.tsx');
+const desktopMenuContent = fs.readFileSync(desktopMenuPath, 'utf8');
+const mobileMenuContent = fs.readFileSync(mobileMenuPath, 'utf8');
+
+assert(
+  pageContent.includes("dirKeys.filters.city") && pageContent.includes("value={normalizedCity}"),
+  "City control must be rendered"
+);
+
+assert(
+  pageContent.includes("dirKeys.filters.allCities"),
+  "All Cities option must be present"
+);
+
+const cleanPageContent = pageContent.replace(/\s+/g, '');
+assert(
+  cleanPageContent.includes("newSet(featuredUniversities.map(") && cleanPageContent.includes("cityEn"),
+  "City options must be derived from university data"
+);
+
+assert(
+  (pageContent.includes("const rawCity = searchParams.get('city') || '';") || pageContent.includes("const rawCity = searchParams.get(\"city\") || \"\";")) && (pageContent.includes("params.set('city', normalizedCity)") || pageContent.includes("params.set(\"city\", normalizedCity)")),
+  "City must be synchronized with the URL"
+);
+
+assert(
+  pageContent.includes("const isValidCity = rawCity && validCitySlugs.includes(rawCity);"),
+  "Invalid city parameters must not be canonicalized"
+);
+
+assert(
+  desktopMenuContent.includes('href="/universities"') && desktopMenuContent.includes('Universities in Romania'),
+  "Desktop menu must contain direct university-directory navigation"
+);
+
+assert(
+  desktopMenuContent.includes('href="/universities?area=medicine_dentistry"') &&
+  desktopMenuContent.includes('href="/universities?area=computer_it"') &&
+  desktopMenuContent.includes('href="/universities?area=engineering"') &&
+  desktopMenuContent.includes('href="/universities?area=management_business"'),
+  "Desktop menu must have the exact four parameterized study-area shortcuts"
+);
+
+assert(
+  mobileMenuContent.includes('id: \'universities\'') &&
+  mobileMenuContent.includes('id: \'universities?area=medicine_dentistry\'') &&
+  mobileMenuContent.includes('id: \'universities?area=computer_it\'') &&
+  mobileMenuContent.includes('id: \'universities?area=engineering\'') &&
+  mobileMenuContent.includes('id: \'universities?area=management_business\''),
+  "Mobile menu must have direct and parameterized university links equivalent to desktop"
 );
 
 assert(

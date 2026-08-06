@@ -4,7 +4,9 @@ export const faTranslations = {
       studyArea: "زمینه تحصیلی",
       allStudyAreas: "همه زمینه‌ها",
       language: "زبان تدریس",
-      allLanguages: "همه زبان‌ها"
+      allLanguages: "همه زبان‌ها",
+      city: "شهر",
+      allCities: "همه شهرها"
     },
     studyAreas: {
       medicine_dentistry: "پزشکی و دندانپزشکی",
@@ -19,6 +21,7 @@ export const faTranslations = {
       RO: "رومانیایی",
       EN: "انگلیسی",
       FR: "فرانسوی",
+      DE: "آلمانی",
       UNKNOWN: "نامشخص / نیازمند بررسی"
     }
   },

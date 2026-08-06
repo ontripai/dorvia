@@ -4,7 +4,9 @@ export const enTranslations = {
       studyArea: "Study Area",
       allStudyAreas: "All Areas",
       language: "Teaching Language",
-      allLanguages: "All Languages"
+      allLanguages: "All Languages",
+      city: "City",
+      allCities: "All Cities"
     },
     studyAreas: {
       medicine_dentistry: "Medicine & Dentistry",
@@ -19,6 +21,7 @@ export const enTranslations = {
       RO: "Romanian",
       EN: "English",
       FR: "French",
+      DE: "German",
       UNKNOWN: "Unknown / Needs Verification"
     }
   },
