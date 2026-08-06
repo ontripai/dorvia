@@ -68,7 +68,7 @@ export const Header: React.FC<HeaderProps> = ({
             setActiveMegaMenu(null);
           }}
         >
-          <img src="/images/logo/dorvia-logo-primary-transparent-3000.png" alt="DORVIA EUROP" className="h-[32px] sm:h-[36px] w-auto group-hover:scale-105 transition-transform" />
+          <Image src="/images/logo/dorvia-logo-primary-transparent-3000.png" alt="DORVIA EUROP" width={3000} height={679} priority className="h-[32px] sm:h-[36px] w-auto group-hover:scale-105 transition-transform" />
         </Link>
 
         {/* Primary Desktop Navigation (Exact 6 Items) */}

@@ -16,18 +16,20 @@ import { AudienceSelector } from './AudienceSelector';
 import { ProcessTimeline } from './ProcessTimeline';
 import { FAQAccordion } from './FAQAccordion';
 import { OfficialResourceCard } from './OfficialResourceCard';
-import { NeedsContent } from './NeedsContent';
-import { RomaniaOverviewContent } from './RomaniaOverviewContent';
-import UniversitiesPage from '../app/universities/page';
-import { WorkOverviewContent } from './WorkOverviewContent';
-import { StartHereContent } from './StartHereContent';
-import { IgiProcessContent } from './IgiProcessContent';
-import { PreparatoryYearContent } from './PreparatoryYearContent';
-import { StudyDetailsContent } from './StudyDetailsContent';
-import { CompanyOverviewContent } from './CompanyOverviewContent';
-import { ImmigrationOverviewContent } from './ImmigrationOverviewContent';
-import { ScholarshipOverviewContent } from './ScholarshipOverviewContent';
-import { InvestmentOverviewContent } from './InvestmentOverviewContent';
+import dynamic from 'next/dynamic';
+
+const NeedsContent = dynamic(() => import('./NeedsContent').then(m => m.NeedsContent));
+const RomaniaOverviewContent = dynamic(() => import('./RomaniaOverviewContent').then(m => m.RomaniaOverviewContent));
+const UniversitiesPage = dynamic(() => import('../app/universities/page'));
+const WorkOverviewContent = dynamic(() => import('./WorkOverviewContent').then(m => m.WorkOverviewContent));
+const StartHereContent = dynamic(() => import('./StartHereContent').then(m => m.StartHereContent));
+const IgiProcessContent = dynamic(() => import('./IgiProcessContent').then(m => m.IgiProcessContent));
+const PreparatoryYearContent = dynamic(() => import('./PreparatoryYearContent').then(m => m.PreparatoryYearContent));
+const StudyDetailsContent = dynamic(() => import('./StudyDetailsContent').then(m => m.StudyDetailsContent));
+const CompanyOverviewContent = dynamic(() => import('./CompanyOverviewContent').then(m => m.CompanyOverviewContent));
+const ImmigrationOverviewContent = dynamic(() => import('./ImmigrationOverviewContent').then(m => m.ImmigrationOverviewContent));
+const ScholarshipOverviewContent = dynamic(() => import('./ScholarshipOverviewContent').then(m => m.ScholarshipOverviewContent));
+const InvestmentOverviewContent = dynamic(() => import('./InvestmentOverviewContent').then(m => m.InvestmentOverviewContent));
 import { Button } from './Button';
 import {
   GraduationCap,
@@ -687,7 +689,7 @@ export const MainContent: React.FC<MainContentProps> = ({
           <section className="py-20 bg-[#f7f9fc]">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
               <div className="text-center space-y-2 max-w-2xl mx-auto">
-                <span className="text-xs font-extrabold uppercase tracking-widest text-[#2F6FED]">
+                <span className="text-xs font-extrabold uppercase tracking-widest text-[#1554bd]">
                   {currentLang === 'fa' ? 'پرسش‌های متداول' : 'Frequently Asked Questions'}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142033]">

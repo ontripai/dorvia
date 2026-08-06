@@ -15,11 +15,11 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
     ? 'bg-amber-100 text-amber-800 border-amber-300'
     : 'bg-emerald-50 text-emerald-700 border-emerald-200';
   const headerColors = isWarning
-    ? 'bg-gradient-to-r from-amber-700 to-amber-600'
+    ? 'bg-gradient-to-r from-amber-800 to-amber-700'
     : 'bg-gradient-to-r from-[#071B3D] to-[#2F6FED]';
 
   const hoverClasses = isWarning
-    ? 'hover:bg-amber-600 hover:border-amber-600'
+    ? 'hover:bg-amber-700 hover:border-amber-700'
     : 'hover:bg-[#071B3D] hover:border-[#071B3D]';
 
   const formatAmount = (amount?: number, maxAmount?: number, currency?: string, period?: string, feeType?: string) => {
@@ -158,11 +158,11 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
       {/* Action Footer */}
       <div className="p-5 pt-0 mt-auto">
         {university.ctaType === 'internal' ? (
-          <Link href={university.ctaHref} className={`block w-full py-2.5 px-4 rounded-xl text-center text-sm font-bold border transition-colors ${isWarning ? 'bg-amber-700 border-amber-700 text-white hover:bg-amber-600 hover:border-amber-600' : 'bg-white border-[#071B3D] text-[#071B3D] ' + hoverClasses + ' hover:text-white'}`}>
+          <Link href={university.ctaHref} aria-label={`${currentLang === 'fa' ? university.ctaLabelFa : university.ctaLabelEn} - ${currentLang === 'fa' ? university.nameFa : university.nameEn}`} className={`block w-full py-2.5 px-4 rounded-xl text-center text-sm font-bold border transition-colors ${isWarning ? 'bg-amber-800 border-amber-800 text-white hover:bg-amber-700 hover:border-amber-700' : 'bg-white border-[#071B3D] text-[#071B3D] ' + hoverClasses + ' hover:text-white'}`}>
             {currentLang === 'fa' ? university.ctaLabelFa : university.ctaLabelEn}
           </Link>
         ) : (
-          <a href={university.ctaHref} target="_blank" rel="noopener noreferrer" className={`block w-full py-2.5 px-4 rounded-xl text-center text-sm font-bold border transition-colors ${isWarning ? 'bg-amber-700 border-amber-700 text-white hover:bg-amber-600 hover:border-amber-600' : 'bg-white border-[#071B3D] text-[#071B3D] ' + hoverClasses + ' hover:text-white'}`}>
+          <a href={university.ctaHref} target="_blank" rel="noopener noreferrer" aria-label={`${currentLang === 'fa' ? university.ctaLabelFa : university.ctaLabelEn} - ${currentLang === 'fa' ? university.nameFa : university.nameEn}`} className={`block w-full py-2.5 px-4 rounded-xl text-center text-sm font-bold border transition-colors ${isWarning ? 'bg-amber-800 border-amber-800 text-white hover:bg-amber-700 hover:border-amber-700' : 'bg-white border-[#071B3D] text-[#071B3D] ' + hoverClasses + ' hover:text-white'}`}>
             {currentLang === 'fa' ? university.ctaLabelFa : university.ctaLabelEn} ↗
           </a>
         )}

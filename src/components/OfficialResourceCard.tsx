@@ -27,7 +27,7 @@ export const OfficialResourceCard: React.FC<OfficialResourceCardProps> = ({
       className="editorial-card p-5 bg-white border border-[#dfe6ef] flex flex-col justify-between space-y-4 hover:border-[#2F6FED] group transition-all"
     >
       <div className="space-y-2">
-        <div className="flex items-center justify-between text-xs text-[#788697]">
+        <div className="flex items-center justify-between text-xs text-[#526174]">
           <span className="bg-[#eef3f8] px-2.5 py-0.5 rounded-full text-[11px] font-bold text-[#142033]">
             {category}
           </span>
@@ -39,15 +39,15 @@ export const OfficialResourceCard: React.FC<OfficialResourceCardProps> = ({
             <Landmark size={18} />
           </div>
           <div>
-            <h4 className="font-extrabold text-sm text-[#142033] group-hover:text-[#2F6FED] transition-colors leading-snug">
+            <h3 className="font-extrabold text-sm text-[#142033] group-hover:text-[#2F6FED] transition-colors leading-snug">
               {title}
-            </h4>
+            </h3>
             <span className="text-[11px] text-[#2F6FED] font-semibold">{domain}</span>
           </div>
         </div>
       </div>
 
-      <div className="pt-3 border-t border-[#dfe6ef] flex items-center justify-between text-[11px] text-[#788697]">
+      <div className="pt-3 border-t border-[#dfe6ef] flex items-center justify-between text-[11px] text-[#526174]">
         <span>{currentLang === 'fa' ? 'تایید منبع رسمی' : 'Verified Official Portal'}</span>
         <span>{lastChecked}</span>
       </div>

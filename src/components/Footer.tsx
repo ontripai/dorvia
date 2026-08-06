@@ -29,7 +29,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
           {/* Col 1: Brand Statement */}
           <div className="space-y-4 lg:col-span-1">
             <Link href="/" aria-label="DORVIA EUROP" className="inline-block cursor-pointer" >
-                <img src="/images/logo/dorvia-logo-reversed-transparent-3000.png" alt="DORVIA EUROP" className="h-[28px] sm:h-[32px] w-auto" />
+                <Image src="/images/logo/dorvia-logo-reversed-transparent-3000.png" alt="DORVIA EUROP" width={3000} height={679} className="h-[28px] sm:h-[32px] w-auto" />
             </Link>
 
             <p className="text-[#788697] leading-relaxed mt-4">
@@ -45,9 +45,9 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
 
           {/* Col 2: Pathways */}
           <div className="space-y-3">
-            <h4 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
+            <h3 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
               {currentLang === 'fa' ? 'مسیرهای مهاجرت' : 'Pathways'}
-            </h4>
+            </h3>
             <ul className="space-y-2 text-slate-300">
               <li><Link href="/study" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.study.title}</Link></li>
               <li><Link href="/work" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.work.title}</Link></li>
@@ -59,9 +59,9 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
 
           {/* Col 3: Essentials in Romania */}
           <div className="space-y-3">
-            <h4 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
+            <h3 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
               {currentLang === 'fa' ? 'نیازها در رومانی' : 'Essentials'}
-            </h4>
+            </h3>
             <ul className="space-y-2 text-slate-300">
               <li><Link href="/needs/currency-exchange" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'صرافی و نرخ BNR' : 'Currency & BNR Rates'}</Link></li>
               <li><Link href="/needs/driving-license" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'گواهینامه رانندگی' : 'Driving License'}</Link></li>
@@ -74,9 +74,9 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
 
           {/* Col 4: Romania & Legal */}
           <div className="space-y-3">
-            <h4 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
+            <h3 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
               {currentLang === 'fa' ? 'شناخت رومانی و حقوقی' : 'Romania & Legal'}
-            </h4>
+            </h3>
             <ul className="space-y-2 text-slate-300">
               <li><Link href="/romania/economy" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'اقتصاد و صنایع رومانی' : 'Economy & Industries'}</Link></li>
               <li><Link href="/romania/cities" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'شهرهای رومانی' : 'Key Cities'}</Link></li>
@@ -90,9 +90,9 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
 
           {/* Col 5: Contact Info */}
           <div className="space-y-3">
-            <h4 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
+            <h3 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
               {t.footer.contactInfo}
-            </h4>
+            </h3>
             <ul className="space-y-2 text-slate-300">
               <li>📍 {t.footer.address}</li>
               <li>✉️ <a href="mailto:ontrip.ai@gmail.com" dir="ltr" className="inline-block hover:text-[#2F6FED] transition-colors">{t.footer.email}</a></li>

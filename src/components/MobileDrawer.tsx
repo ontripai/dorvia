@@ -7,6 +7,7 @@ import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
 import { X, ChevronDown } from './Icons';
 import { Button } from './Button';
+import Image from 'next/image';
 
 interface MobileDrawerProps {
   currentLang: Language;
@@ -123,7 +124,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             onNavigate('home');
           }}
         >
-          <img src="/images/logo/dorvia-logo-primary-transparent-3000.png" alt="DORVIA EUROP" className="h-[28px] w-auto brightness-0 invert" />
+          <Image src="/images/logo/dorvia-logo-primary-transparent-3000.png" alt="DORVIA EUROP" width={3000} height={679} className="h-[28px] w-auto brightness-0 invert" />
         </Link>
 
         <button
