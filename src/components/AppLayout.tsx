@@ -42,9 +42,15 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
 
   const handleLanguageChange = (newLang: Language) => {
     setCurrentLang(newLang);
-    // Route-specific correction for About migration
+    // Route-specific correction for About and Contact migration
     if (pathname === '/about' || pathname === '/fa/about' || pathname === '/en/about') {
       const result = getLocalizedRoute('/about', newLang);
+      if (result.status === 'success') {
+        router.push(result.path);
+      }
+    }
+    else if (pathname === '/contact' || pathname === '/fa/contact' || pathname === '/en/contact') {
+      const result = getLocalizedRoute('/contact', newLang);
       if (result.status === 'success') {
         router.push(result.path);
       }
