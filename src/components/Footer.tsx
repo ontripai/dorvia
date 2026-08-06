@@ -2,8 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
+import { getNavPath } from '../lib/navigation';
 import { ShieldCheck } from './Icons';
 import Image from 'next/image';
 
@@ -15,6 +17,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, onNavigate }) => {
   const t = getTranslations(currentLang);
+  const pathname = usePathname() || '/';
 
   return (
     <footer className="bg-[#071B3D] text-white pt-0 pb-12 relative border-t border-[#0b2b55] overflow-hidden">
@@ -28,7 +31,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
           
           {/* Col 1: Brand Statement */}
           <div className="space-y-4 lg:col-span-1">
-            <Link href="/" aria-label="DORVIA EUROP" className="inline-block cursor-pointer" >
+            <Link href={getNavPath('home', pathname)} aria-label="DORVIA EUROP" className="inline-block cursor-pointer" >
                 <Image src="/images/logo/dorvia-logo-reversed-transparent-3000.png" alt="DORVIA EUROP" width={3000} height={679} className="h-[28px] sm:h-[32px] w-auto" />
             </Link>
 

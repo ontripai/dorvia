@@ -2,8 +2,10 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
+import { getNavPath } from '../lib/navigation';
 import { DesktopMegaMenu } from './DesktopMegaMenu';
 import { MobileDrawer } from './MobileDrawer';
 import { SearchDialog } from './SearchDialog';
@@ -30,6 +32,7 @@ export const Header: React.FC<HeaderProps> = ({
   const [activeMegaMenu, setActiveMegaMenu] = useState<'starthere' | 'immigration' | 'study' | 'work-business' | 'needs' | 'romania' | null>(null);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [searchDialogOpen, setSearchDialogOpen] = useState(false);
+  const pathname = usePathname() || '/';
 
   // EXACT 7 PRIMARY NAVIGATION ITEMS
   const primaryNavItems = [
@@ -61,7 +64,7 @@ export const Header: React.FC<HeaderProps> = ({
         
         {/* Brand Logo Wordmark & Symbol */}
         <Link
-          href="/"
+          href={getNavPath('home', pathname)}
           aria-label="DORVIA EUROP"
           className="flex items-center space-x-2 sm:space-x-3 rtl:space-x-reverse cursor-pointer group shrink min-w-0"
           onClick={() => {
@@ -78,7 +81,7 @@ export const Header: React.FC<HeaderProps> = ({
             return (
               <div key={item.id} className="relative">
                 <Link
-                  href={`/${item.id === 'home' ? '' : item.id}`}
+                  href={getNavPath(item.id, pathname)}
                   onClick={() => {
                     if (item.megaMenu) {
                       setActiveMegaMenu(activeMegaMenu === item.megaMenu ? null : item.megaMenu);

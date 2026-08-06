@@ -4,7 +4,8 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Language } from '../types';
 import { getDirection } from '../lib/i18n';
-import { getLocalizedRoute } from '../lib/locale-router';
+import { getLocalizedRoute, stripLocalePrefix } from '../lib/locale-router';
+import { getNavPath } from '../lib/navigation';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { LeadForm } from './LeadForm';
@@ -31,7 +32,8 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
   const router = useRouter();
 
   // Derive activeRoute from pathname to keep compatibility with Header/Footer props
-  let activeRoute = pathname === '/' ? 'home' : pathname.substring(1);
+  const barePath = stripLocalePrefix(pathname);
+  let activeRoute = barePath === '/' ? 'home' : barePath.substring(1);
 
   useEffect(() => {
     const dir = getDirection(currentLang);
@@ -64,7 +66,7 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
   };
 
   const handleNavigate = (route: string) => {
-    const targetPath = route === 'home' ? '/' : `/${route}`;
+    const targetPath = getNavPath(route, pathname);
     router.push(targetPath);
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });

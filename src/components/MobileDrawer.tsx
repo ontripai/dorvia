@@ -3,8 +3,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
+import { getNavPath } from '../lib/navigation';
 import { X, ChevronDown } from './Icons';
 import { Button } from './Button';
 import Image from 'next/image';
@@ -26,6 +28,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
 }) => {
   const t = getTranslations(currentLang);
   const [mounted, setMounted] = useState(false);
+  const pathname = usePathname() || '/';
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -116,7 +119,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
       {/* Top Mobile Bar */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-4 px-6 pt-4">
         <Link
-          href="/"
+          href={getNavPath('home', pathname)}
           aria-label="DORVIA EUROP"
           className="flex items-center space-x-2 sm:space-x-3 rtl:space-x-reverse cursor-pointer shrink min-w-0"
           onClick={() => {
@@ -142,7 +145,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
         {navItems.map((item) => (
           <Link
             key={item.id}
-            href={`/${item.id === 'home' ? '' : item.id}`}
+            href={getNavPath(item.id, pathname)}
             onClick={() => {
               onClose();
               onNavigate(item.id);
@@ -174,7 +177,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
         <Button
           variant="outline"
           size="md"
-          href="/contact"
+          href={getNavPath('contact', pathname)}
           onClick={() => {
             onClose();
             onNavigate('contact');
