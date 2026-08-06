@@ -1,5 +1,6 @@
 import { getDirection } from '@/lib/i18n';
-import { isValidLocale } from '@/lib/locale-router';
+import { parseUrlLocale } from '@/lib/locale-router';
+import { Language } from '@/types';
 import { notFound } from 'next/navigation';
 import '@/app/globals.css';
 import { AppLayout } from '@/components/AppLayout';
@@ -15,16 +16,18 @@ export default function RootLayout({
   children: React.ReactNode;
   params: { lang: string };
 }) {
-  if (!isValidLocale(params.lang)) {
+  const locale = parseUrlLocale(params.lang);
+
+  if (!locale) {
     notFound();
   }
 
-  const dir = getDirection(params.lang as any);
+  const dir = getDirection(locale as Language);
 
   return (
-    <html lang={params.lang} dir={dir}>
+    <html lang={locale} dir={dir}>
       <body>
-        <AppLayout>{children}</AppLayout>
+        <AppLayout initialLang={locale as Language}>{children}</AppLayout>
       </body>
     </html>
   );

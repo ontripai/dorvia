@@ -22,8 +22,8 @@ export const AppContext = createContext<{
 
 export const useAppContext = () => useContext(AppContext);
 
-export function AppLayout({ children }: { children: React.ReactNode }) {
-  const [currentLang, setCurrentLang] = useState<Language>('fa');
+export function AppLayout({ children, initialLang }: { children: React.ReactNode; initialLang?: Language }) {
+  const [currentLang, setCurrentLang] = useState<Language>(initialLang || 'fa');
   const [isEvaluationModalOpen, setIsEvaluationModalOpen] = useState(false);
   
   const pathname = usePathname() || '/';
