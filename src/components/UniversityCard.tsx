@@ -98,7 +98,7 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
         )}
 
         <div className="space-y-1.5 pt-2">
-          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+          <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
             {currentLang === 'fa' ? 'زمینه‌های تحصیلی مرتبط:' : 'Relevant Study Areas:'}
           </div>
           <div className="flex flex-wrap gap-1.5">
@@ -112,7 +112,7 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
 
         {(uniqueLanguages.filter(l => l !== 'UNKNOWN').length > 0 || uniqueLanguages.includes('UNKNOWN')) && (
           <div className="space-y-1.5 pt-2">
-            <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+            <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
               {currentLang === 'fa' ? 'زبان‌های تدریس:' : 'Teaching Languages:'}
             </div>
             <div className="flex flex-wrap gap-1.5">
@@ -131,7 +131,7 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
         )}
 
         <div className="pt-3 border-t border-slate-100 space-y-2">
-          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+          <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
             {currentLang === 'fa' ? 'شهریه و هزینه‌ها:' : 'Tuition & Fees:'}
           </div>
           {university.tuitionItems.map((item, idx) => (
@@ -144,7 +144,7 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
               </span>
             </div>
           ))}
-          <div className="flex justify-between text-[10px] text-slate-400 pt-1">
+          <div className="flex justify-between text-[10px] text-slate-500 pt-1">
             <span>{currentLang === 'fa' ? 'سال تحصیلی:' : 'Academic Year:'} {university.tuitionAcademicYear}</span>
             <span>
               {university.tuitionVerificationStatus === 'OFFICIAL_FIXED' && (currentLang === 'fa' ? '✓ سند رسمی' : '✓ Official Document')}

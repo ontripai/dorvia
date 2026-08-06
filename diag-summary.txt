@@ -1,0 +1,6 @@
+--- Long Tasks ---
+1067.9579999999999ms | 406ms | https://romania-5yfphtrib-ontrip.vercel.app/
+2422.6779999999994ms | 118ms | https://romania-5yfphtrib-ontrip.vercel.app/_next/static/chunks/fd9d1056-991471371c0764c0.js
+988.9579999999999ms | 79ms | https://romania-5yfphtrib-ontrip.vercel.app/
+
+--- Unused JS ---

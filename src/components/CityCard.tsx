@@ -33,7 +33,7 @@ export const CityCard: React.FC<CityCardProps> = ({ city, currentLang, onSelect,
         </p>
 
         <div className="space-y-1.5 pt-2">
-          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+          <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
             {currentLang === 'fa' ? 'ویژگی‌های کلیدی:' : 'Key Highlights:'}
           </div>
           <ul className="space-y-1 text-xs text-slate-700">
