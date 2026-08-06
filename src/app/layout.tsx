@@ -24,6 +24,11 @@ export const metadata: Metadata = {
   } : {
     index: false,
     follow: false,
+  },
+  icons: {
+    icon: '/images/logo/dorvia-logo-primary-transparent-3000.png',
+    shortcut: '/favicon.ico',
+    apple: '/images/logo/dorvia-logo-primary-transparent-3000.png',
   }
 };
 
