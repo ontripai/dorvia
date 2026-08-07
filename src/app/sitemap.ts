@@ -20,10 +20,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const route of routes) {
     if (migratedCanonicalPaths.includes(route.canonical)) {
       const cleanPath = route.canonical === '/' ? '' : route.canonical;
-      
+
       const faUrl = `${baseUrl}/fa${cleanPath}`;
       const enUrl = `${baseUrl}/en${cleanPath}`;
-      
+
       const alternates = {
         languages: {
           'fa': faUrl,

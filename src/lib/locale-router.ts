@@ -31,7 +31,7 @@ export function getLocaleDirection(locale: Locale): 'rtl' | 'ltr' {
   return locale === 'fa' ? 'rtl' : 'ltr';
 }
 
-export type RouteMappingResult = 
+export type RouteMappingResult =
   | { status: 'success'; path: string }
   | { status: 'unavailable'; reason: 'missing_translation' | 'unknown_route' }
   | { status: 'ignored'; path: string };
@@ -81,7 +81,7 @@ export function getLocalizedRoute(path: string, targetLocale: Locale): RouteMapp
 
   // 2. Find the route in the registry to ensure it's a known, valid route
   let foundConfig: RouteConfig | null = null;
-  
+
   // Exact canonical match
   for (const config of Object.values(ROUTE_REGISTRY)) {
     if (config.canonical === barePathname) {
@@ -103,9 +103,9 @@ export function getLocalizedRoute(path: string, targetLocale: Locale): RouteMapp
 
   // 4. Construct the localized path safely
   const newPathname = barePathname === '/' ? `/${targetLocale}` : `/${targetLocale}${barePathname}`;
-  
-  return { 
-    status: 'success', 
-    path: newPathname + urlObj.search + urlObj.hash 
+
+  return {
+    status: 'success',
+    path: newPathname + urlObj.search + urlObj.hash
   };
 }

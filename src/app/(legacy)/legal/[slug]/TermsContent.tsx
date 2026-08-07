@@ -2,13 +2,13 @@ import React from 'react';
 
 export const TermsContent = ({ currentLang }: { currentLang: string }) => {
   const isFa = currentLang === 'fa';
-  
+
   return (
     <div className={`space-y-6 text-sm text-[#526174] leading-relaxed ${isFa ? 'rtl text-right' : 'ltr text-left'}`}>
       <h1 className="text-3xl font-extrabold text-[#142033] border-b border-[#dfe6ef] pb-4">
         {isFa ? 'شرایط و قوانین استفاده (Terms of Use)' : 'Terms of Use'}
       </h1>
-      
+
       <div className="bg-[#eef3f8] border-l-4 border-[#2F6FED] p-4 rounded-r-xl">
         <p className="font-bold text-[#142033] text-xs">
           {isFa
@@ -71,7 +71,7 @@ export const TermsContent = ({ currentLang }: { currentLang: string }) => {
             : 'Submitting an assessment form does not constitute entering into a service agreement. Agreements for legal, immigration, or business services are formalized only after signing a separate written contract.'}
         </p>
       </section>
-      
+
       <section className="space-y-2">
         <h2 className="text-xl font-bold text-[#142033]">
           {isFa ? '۶. خدمات اشخاص ثالث (Provider / Marketplace placeholder)' : '6. Third-Party Services (Provider / Marketplace placeholder)'}

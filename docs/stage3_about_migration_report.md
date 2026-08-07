@@ -78,4 +78,3 @@ pm run validate:universities\ -> Success (Exit code 0)
 ## 7. Remaining Decisions or Blockers
 * **Blocker**: Case-sensitive production evidence is unavailable in the current Windows environment. Cannot verify \/FA/about\ returns 404.
 * **SEO Decision Point**: Localized routes have no custom metadata pending a global hreflang/SEO directive.
-

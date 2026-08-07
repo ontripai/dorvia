@@ -16,7 +16,7 @@ export function getNavPath(targetPath: string, currentPathname: string): string 
   } catch {
     return targetPath; // fallback for invalid URLs
   }
-  
+
   let barePath = urlObj.pathname;
   if (barePath === 'home' || barePath === '/home') {
     barePath = '/';
@@ -29,7 +29,7 @@ export function getNavPath(targetPath: string, currentPathname: string): string 
   const prefix = isEn ? '/en' : '/fa';
 
   // 4. Avoid double-prefixing
-  if (barePath.startsWith('/fa/') || barePath === '/fa' || 
+  if (barePath.startsWith('/fa/') || barePath === '/fa' ||
       barePath.startsWith('/en/') || barePath === '/en') {
     return targetPath;
   }

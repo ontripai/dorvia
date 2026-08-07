@@ -22,7 +22,7 @@ A robust `getCanonicalOrigin` helper ensures absolutely safe URL origin generati
 1. Use `process.env.NEXT_PUBLIC_SITE_URL` when it is present and valid.
 2. Otherwise, fall back strictly to: `https://romania-eight.vercel.app`
 3. The trailing slash is actively normalized (`replace(/\/+$/, '')`).
-4. **Invalid-Input Behavior**: 
+4. **Invalid-Input Behavior**:
    - If `NEXT_PUBLIC_SITE_URL` is omitted, absent, or an empty string, it safely falls back.
    - If `NEXT_PUBLIC_SITE_URL` does not start with `https://` (e.g. `http://localhost:3000`), it is forcefully rejected, falling back safely.
    - If `NEXT_PUBLIC_SITE_URL` is syntactically invalid (throws a parsing error via `new URL()`), it safely catches the error and falls back.

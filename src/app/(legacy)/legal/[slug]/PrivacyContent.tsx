@@ -3,16 +3,16 @@ import React from 'react';
 
 export const PrivacyContent = ({ currentLang }: { currentLang: string }) => {
   const isFa = currentLang === 'fa';
-  
+
   return (
     <div className={`space-y-6 text-sm text-[#526174] leading-relaxed ${isFa ? 'rtl text-right' : 'ltr text-left'}`}>
       <h1 className="text-3xl font-extrabold text-[#142033] border-b border-[#dfe6ef] pb-4">
         {isFa ? 'سیاست حفظ حریم خصوصی' : 'Privacy Policy'}
       </h1>
-      
+
       <div className="bg-[#eef3f8] border-l-4 border-[#2F6FED] p-4 rounded-r-xl">
         <p className="font-bold text-[#142033] text-xs">
-          {isFa 
+          {isFa
             ? 'اطلاعات حقوقی مجری (شرکت) به زودی پس از تایید نهایی در این بخش قرار می‌گیرد.'
             : 'Legal operator (company) information will be provided in this section upon final approval.'}
         </p>
@@ -23,8 +23,8 @@ export const PrivacyContent = ({ currentLang }: { currentLang: string }) => {
           {isFa ? '۱. هویت پلتفرم (Identity of the Platform)' : '1. Identity of the Platform'}
         </h2>
         <p>
-          {isFa 
-            ? 'پلتفرم DORVIA EUROP به عنوان یک پلتفرم اطلاعاتی و تسهیل‌گر خدمات در رومانی فعالیت می‌کند.' 
+          {isFa
+            ? 'پلتفرم DORVIA EUROP به عنوان یک پلتفرم اطلاعاتی و تسهیل‌گر خدمات در رومانی فعالیت می‌کند.'
             : 'The DORVIA EUROP platform operates as an informational and service facilitation platform in Romania.'}
         </p>
       </section>
@@ -195,7 +195,7 @@ export const PrivacyContent = ({ currentLang }: { currentLang: string }) => {
           {isFa ? '۱۷. تاریخ به‌روزرسانی (Policy Update Date)' : '17. Policy Update Date'}
         </h2>
         <p>
-          {isFa 
+          {isFa
             ? `این سند آخرین بار در تاریخ ${legalOperatorConfig.privacyPolicyUpdatedAt} به‌روزرسانی شده است.`
             : `This document was last updated on ${legalOperatorConfig.privacyPolicyUpdatedAt}.`}
         </p>

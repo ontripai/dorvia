@@ -8,13 +8,13 @@ Stage 8 expands the internationalized routing architecture to the Legal route fa
 ## Route Scope & Canonical Mappings
 
 The following routes were migrated and localized:
-- **Privacy Policy**: 
+- **Privacy Policy**:
   - Localized: `/fa/legal/privacy`, `/en/legal/privacy`
   - Canonical: `/fa/legal/privacy` (fallback x-default)
-- **Terms of Use**: 
+- **Terms of Use**:
   - Localized: `/fa/legal/terms`, `/en/legal/terms`
   - Canonical: `/fa/legal/terms` (fallback x-default)
-- **Disclaimer**: 
+- **Disclaimer**:
   - Localized: `/fa/legal/disclaimer`, `/en/legal/disclaimer`
   - Canonical: `/fa/legal/disclaimer` (fallback x-default)
 
@@ -62,7 +62,7 @@ All 6 localized routes reported:
 The legacy routes (`/legal/privacy`, `/legal/terms`, `/legal/disclaimer`) successfully returned HTTP 200 with no redirects. They emitted exactly 1 canonical tag mapped strictly to their localized `/fa/` counterparts (Self-referencing bare canonical: `true` for delegating indexing).
 
 ### Production Sitemap & Robots.txt
-- **Sitemap.xml**: HTTP 200, `application/xml`. Total primary `<loc>` count: 72. Duplicate loc count: 0. 
+- **Sitemap.xml**: HTTP 200, `application/xml`. Total primary `<loc>` count: 72. Duplicate loc count: 0.
   - Each of the 6 localized legal URLs appeared exactly once (Count: 1).
   - Each of the 3 bare legal URLs appeared zero times (Count: 0).
   - All legal documents had correct `fa`/`en`/`x-default` alternates.

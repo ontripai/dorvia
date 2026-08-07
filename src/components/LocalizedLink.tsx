@@ -15,7 +15,7 @@ export const LocalizedLink = React.forwardRef<HTMLAnchorElement, LocalizedLinkPr
     const pathname = usePathname() || '/';
     // Use getNavPath to safely localize the href based on current pathname
     const localizedHref = getNavPath(href, pathname);
-    
+
     return <NextLink href={localizedHref} ref={ref} {...props} />;
   }
 );

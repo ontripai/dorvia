@@ -2,13 +2,13 @@ import React from 'react';
 
 export const DisclaimerContent = ({ currentLang }: { currentLang: string }) => {
   const isFa = currentLang === 'fa';
-  
+
   return (
     <div className={`space-y-6 text-sm text-[#526174] leading-relaxed ${isFa ? 'rtl text-right' : 'ltr text-left'}`}>
       <h1 className="text-3xl font-extrabold text-[#142033] border-b border-[#dfe6ef] pb-4">
         {isFa ? 'سلب مسئولیت (Disclaimer)' : 'Disclaimer'}
       </h1>
-      
+
       <section className="space-y-2">
         <h2 className="text-xl font-bold text-[#142033]">
           {isFa ? '۱. عدم تضمین نتیجه پرونده (No Guarantee of Outcome)' : '1. No Guarantee of Outcome'}
@@ -52,7 +52,7 @@ export const DisclaimerContent = ({ currentLang }: { currentLang: string }) => {
             : 'Information regarding investments or company registration is not investment advice, and DORVIA EUROP bears no responsibility for any business risks or losses you may incur.'}
         </p>
       </section>
-      
+
       <section className="space-y-2">
         <h2 className="text-xl font-bold text-[#142033]">
           {isFa ? '۵. تغییرات قوانین دولتی' : '5. Changes to Government Laws'}
