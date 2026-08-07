@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { ROUTE_REGISTRY } from './routeRegistry';
+import { PAGE_META } from './pageMeta';
 
 export function getCanonicalOrigin(): string {
   const fallback = 'https://romania-eight.vercel.app';
@@ -42,9 +43,15 @@ export function getLocalizedMetadata(routeKey: string, lang: string): Metadata {
     title = `${title} | DORVIA EUROP`;
   }
 
+  const metaItem = PAGE_META[routeKey];
+  if (metaItem) {
+    if (isFa && metaItem.seoTitleFa) title = metaItem.seoTitleFa;
+    if (!isFa && metaItem.seoTitleEn) title = metaItem.seoTitleEn;
+  }
+
   const description = isFa 
-    ? 'اپلیکیشن جامع برای ارزیابی و مشاوره رایگان مهاجرت به رومانی و اتحادیه اروپا.'
-    : 'Comprehensive portal for free assessment and consultation for immigration to Romania and the EU.';
+    ? (metaItem?.seoDescFa || 'اپلیکیشن جامع برای ارزیابی و مشاوره رایگان مهاجرت به رومانی و اتحادیه اروپا.')
+    : (metaItem?.seoDescEn || 'Comprehensive portal for free assessment and consultation for immigration to Romania and the EU.');
 
   return {
     title,

@@ -1,40 +1,23 @@
 import { Metadata } from 'next';
 import { PAGE_META } from '@/lib/pageMeta';
 import { LegalContentWrapper } from './LegalContentWrapper';
-import { SITE_URL } from '@/config';
+import { getLocalizedMetadata } from '@/lib/metadata';
+import { LOCALES } from '@/lib/locale-router';
+import { notFound } from 'next/navigation';
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const meta = PAGE_META[`legal/${params.slug}`] || PAGE_META['legal'];
-  
-  const titleMap: Record<string, string> = {
-    privacy: 'سیاست حفظ حریم خصوصی | DORVIA EUROP',
-    terms: 'شرایط و قوانین استفاده | DORVIA EUROP',
-    disclaimer: 'سلب مسئولیت | DORVIA EUROP'
-  };
+const VALID_SLUGS = ['privacy', 'terms', 'disclaimer'];
 
-  const descMap: Record<string, string> = {
-    privacy: 'اطلاعات مربوط به نحوه جمع‌آوری، پردازش و نگهداری اطلاعات شما توسط DORVIA EUROP.',
-    terms: 'قوانین و شرایط استفاده از خدمات و پلتفرم در رومانی (DORVIA EUROP).',
-    disclaimer: 'سلب مسئولیت حقوقی در خصوص تضمین نتایج مهاجرتی، تحصیلی و حقوقی.'
-  };
-
-  const title = titleMap[params.slug] || meta?.titleFa || 'Legal';
-  const description = descMap[params.slug] || 'Legal documentation for DORVIA EUROP.';
-
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: `${SITE_URL}/legal/${params.slug}`
-    },
-    openGraph: {
-      title,
-      description,
-      url: `${SITE_URL}/legal/${params.slug}`
-    }
-  };
+export function generateStaticParams() {
+  return VALID_SLUGS.map((slug) => ({ slug }));
 }
 
-export default function LegalPage({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  if (!VALID_SLUGS.includes(params.slug)) notFound();
+  // Always map bare legacy routes to the primary 'fa' locale for SEO
+  return getLocalizedMetadata(`legal/${params.slug}`, 'fa');
+}
+
+export default function LegacyLegalPage({ params }: { params: { slug: string } }) {
+  if (!VALID_SLUGS.includes(params.slug)) notFound();
   return <LegalContentWrapper slug={params.slug} />;
 }

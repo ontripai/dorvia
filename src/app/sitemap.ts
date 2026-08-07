@@ -12,7 +12,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const sitemapItems: MetadataRoute.Sitemap = [];
 
-  const migratedCanonicalPaths = ['/', '/about', '/contact'];
+  const migratedCanonicalPaths = [
+    '/', '/about', '/contact',
+    '/legal/privacy', '/legal/terms', '/legal/disclaimer'
+  ];
 
   for (const route of routes) {
     if (migratedCanonicalPaths.includes(route.canonical)) {

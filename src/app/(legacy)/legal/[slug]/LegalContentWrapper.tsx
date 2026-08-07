@@ -17,7 +17,7 @@ export const LegalContentWrapper = ({ slug }: { slug: string }) => {
       
       <div className="pt-8 border-t border-[#dfe6ef] text-center">
         <button onClick={onOpenEvaluationModal} className="text-sm font-bold text-[#2F6FED] hover:underline">
-          {currentLang === 'fa' ? 'تماس با ما' : 'Contact Us'}
+          {currentLang === 'fa' ? 'ارزیابی اولیه رایگان' : 'Free Evaluation'}
         </button>
       </div>
     </div>

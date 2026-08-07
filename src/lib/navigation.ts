@@ -2,8 +2,12 @@ export function getNavPath(targetPath: string, currentPathname: string): string 
   // 1. Normalize targetPath to have a leading slash
   const barePath = targetPath === 'home' ? '/' : (targetPath.startsWith('/') ? targetPath : `/${targetPath}`);
   
-  // 2. Identify if the destination is one of our three migrated routes
-  const isMigratedRoute = barePath === '/' || barePath === '/about' || barePath === '/contact';
+  // 2. Identify if the destination is one of our migrated routes
+  const isMigratedRoute = 
+    barePath === '/' || 
+    barePath === '/about' || 
+    barePath === '/contact' ||
+    barePath.startsWith('/legal/');
   
   if (isMigratedRoute) {
     // 3. Check localized context of the CURRENT pathname
