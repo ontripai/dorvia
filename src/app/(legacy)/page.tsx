@@ -1,5 +1,5 @@
-import { SharedHomePage } from '@/components/SharedHomePage';
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  return <SharedHomePage />;
+  redirect('/fa');
 }

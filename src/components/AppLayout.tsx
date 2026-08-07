@@ -36,6 +36,19 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
   let activeRoute = barePath === '/' ? 'home' : barePath.substring(1);
 
   useEffect(() => {
+    // Sync currentLang with pathname for client-side navigation
+    const localeMatch = pathname.split('/')[1];
+    let newLang: Language = initialLang || 'fa';
+    if (localeMatch === 'fa' || localeMatch === 'en') {
+      newLang = localeMatch as Language;
+    }
+
+    if (currentLang !== newLang) {
+      setCurrentLang(newLang);
+    }
+  }, [pathname, initialLang, currentLang]);
+
+  useEffect(() => {
     const dir = getDirection(currentLang);
     document.documentElement.dir = dir;
     document.documentElement.lang = currentLang;
