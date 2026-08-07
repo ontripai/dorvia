@@ -1,9 +1,11 @@
-import { SITE_URL } from '@/config';
 import { MetadataRoute } from 'next';
 import { ROUTE_REGISTRY } from '../lib/routeRegistry';
 
+let BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://romania-eight.vercel.app';
+BASE_URL = BASE_URL.replace(/\/+$/, '');
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = SITE_URL;
+  const baseUrl = BASE_URL;
 
   const routes = Object.values(ROUTE_REGISTRY)
     .filter(route => route.indexable && route.inSitemap);

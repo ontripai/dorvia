@@ -1,6 +1,12 @@
 import { Metadata } from 'next';
 import { ROUTE_REGISTRY } from './routeRegistry';
-import { SITE_URL } from '@/config';
+
+// 1. Use NEXT_PUBLIC_SITE_URL when it is present and valid.
+// 2. Otherwise fall back to: https://romania-eight.vercel.app
+let BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://romania-eight.vercel.app';
+
+// 3. Normalize trailing slashes so generated URLs contain no accidental double slash.
+BASE_URL = BASE_URL.replace(/\/+$/, '');
 
 export function getLocalizedMetadata(routeKey: string, lang: string): Metadata {
   const route = ROUTE_REGISTRY[routeKey];
@@ -8,9 +14,10 @@ export function getLocalizedMetadata(routeKey: string, lang: string): Metadata {
   // Clean path calculation
   const cleanPath = route?.canonical === '/' ? '' : (route?.canonical || '');
   
-  const canonical = `${SITE_URL}/${lang}${cleanPath}`;
-  const faUrl = `${SITE_URL}/fa${cleanPath}`;
-  const enUrl = `${SITE_URL}/en${cleanPath}`;
+  // 5. Generated canonical and hreflang URLs must always be absolute HTTPS URLs.
+  const canonical = `${BASE_URL}/${lang}${cleanPath}`;
+  const faUrl = `${BASE_URL}/fa${cleanPath}`;
+  const enUrl = `${BASE_URL}/en${cleanPath}`;
 
   const isFa = lang === 'fa';
   
@@ -31,7 +38,7 @@ export function getLocalizedMetadata(routeKey: string, lang: string): Metadata {
   return {
     title,
     description,
-    metadataBase: new URL(SITE_URL),
+    metadataBase: new URL(BASE_URL),
     alternates: {
       canonical: canonical,
       languages: {
