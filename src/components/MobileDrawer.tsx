@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import Link from 'next/link';
+import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { usePathname } from 'next/navigation';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';

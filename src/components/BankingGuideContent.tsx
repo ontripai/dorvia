@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Language } from '../types';
 import { CommentsSection } from './CommentsSection';
 import { ExternalLink, CheckCircle, ShieldCheck, Clock, FileCheck2, AlertCircle, Landmark } from './Icons';

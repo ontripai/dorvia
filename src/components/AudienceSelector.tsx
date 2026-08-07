@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
+import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Language } from '../types';
 import { GraduationCap, BriefcaseBusiness, Building2, Users, House, ArrowRight, ArrowLeft } from './Icons';
 

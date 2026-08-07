@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
+import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
 import { featuredUniversities, featuredCities, mainServices, sampleArticles } from '../lib/data';

@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { University, Language, StudyAreaId, TeachingLanguage } from '../types';
 
 interface UniversityCardProps {

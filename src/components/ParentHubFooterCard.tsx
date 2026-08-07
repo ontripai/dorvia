@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Language } from '../types';
 import { PAGE_META } from '../lib/pageMeta';
 import { ArrowLeft, ArrowRight, Layers } from './Icons';

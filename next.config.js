@@ -5,6 +5,20 @@ const nextConfig = {
   images: {
     domains: ['images.unsplash.com', 'your-supabase-project.supabase.co'],
   },
+  async rewrites() {
+    return {
+      fallback: [
+        {
+          source: '/:locale(fa|en)/:path(articles|company|immigration|needs|romania|services|start-here|study|universities|work)',
+          destination: '/:path',
+        },
+        {
+          source: '/:locale(fa|en)/:path(articles|company|immigration|needs|romania|services|start-here|study|universities|work)/:slug*',
+          destination: '/:path/:slug*',
+        },
+      ],
+    };
+  },
   async redirects() {
     return [
       {

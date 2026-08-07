@@ -1,27 +1,40 @@
 export function getNavPath(targetPath: string, currentPathname: string): string {
-  // 1. Normalize targetPath to have a leading slash
-  const barePath = targetPath === 'home' ? '/' : (targetPath.startsWith('/') ? targetPath : `/${targetPath}`);
-  
-  // 2. Identify if the destination is one of our migrated routes
-  const isMigratedRoute = 
-    barePath === '/' || 
-    barePath === '/about' || 
-    barePath === '/contact' ||
-    barePath.startsWith('/legal/');
-  
-  if (isMigratedRoute) {
-    // 3. Check localized context of the CURRENT pathname
-    // Next.js standardizes trailing slashes, but we check both safely
-    if (currentPathname.startsWith('/en/') || currentPathname === '/en') {
-      return barePath === '/' ? '/en' : `/en${barePath}`;
-    }
-    if (currentPathname.startsWith('/fa/') || currentPathname === '/fa') {
-      return barePath === '/' ? '/fa' : `/fa${barePath}`;
-    }
-    // 4. Legacy context (no /fa or /en prefix in current URL)
-    return barePath;
+  // 1. External URLs, mailto, tel, anchors remain untouched
+  if (
+    targetPath.startsWith('http') ||
+    targetPath.startsWith('mailto:') ||
+    targetPath.startsWith('tel:') ||
+    targetPath.startsWith('#')
+  ) {
+    return targetPath;
+  }
+
+  // 2. Parse URL to separate path from query/hash
+  let urlObj;
+  try {
+    urlObj = new URL(targetPath, 'http://localhost');
+  } catch {
+    return targetPath; // fallback for invalid URLs
   }
   
-  // 5. Unmigrated destinations (e.g. /study, /work) remain exactly as they were
-  return barePath;
+  let barePath = urlObj.pathname;
+  if (barePath === 'home' || barePath === '/home') {
+    barePath = '/';
+  } else if (!barePath.startsWith('/')) {
+    barePath = '/' + barePath;
+  }
+
+  // 3. Determine current locale prefix
+  const isEn = currentPathname.startsWith('/en/') || currentPathname === '/en';
+  const prefix = isEn ? '/en' : '/fa';
+
+  // 4. Avoid double-prefixing
+  if (barePath.startsWith('/fa/') || barePath === '/fa' || 
+      barePath.startsWith('/en/') || barePath === '/en') {
+    return targetPath;
+  }
+
+  // 5. Construct new path preserving search and hash
+  const newPath = barePath === '/' ? prefix : `${prefix}${barePath}`;
+  return newPath + urlObj.search + urlObj.hash;
 }
