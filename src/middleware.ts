@@ -3,7 +3,19 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  
+
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.delete('x-dorvia-locale');
+
+  const firstSegment = pathname.split('/')[1];
+  if (firstSegment === 'fa' || firstSegment === 'en') {
+    requestHeaders.set('x-dorvia-locale', firstSegment);
+  }
+
+  const nextWithHeaders = () => NextResponse.next({
+    request: { headers: requestHeaders }
+  });
+
   // Ignore static assets, next internals, and already localized paths
   if (
     pathname.startsWith('/_next') ||
@@ -11,22 +23,22 @@ export function middleware(request: NextRequest) {
     pathname.startsWith('/fa/') || pathname === '/fa' ||
     pathname.startsWith('/en/') || pathname === '/en' ||
     pathname.match(/\.(.*)$/) ||
-    pathname === '/' || 
+    pathname === '/' ||
     pathname.startsWith('/admin')
   ) {
-    return NextResponse.next();
+    return nextWithHeaders();
   }
 
   // Only redirect known unprefixed legacy routes to /fa equivalents
   const knownRoutes = ['/articles', '/company', '/immigration', '/needs', '/romania', '/services', '/start-here', '/study', '/universities', '/work'];
-  
+
   if (knownRoutes.some(route => pathname === route || pathname.startsWith(`${route}/`))) {
     const url = request.nextUrl.clone();
     url.pathname = `/fa${pathname}`;
     return NextResponse.redirect(url, 307);
   }
 
-  return NextResponse.next();
+  return nextWithHeaders();
 }
 
 export const config = {

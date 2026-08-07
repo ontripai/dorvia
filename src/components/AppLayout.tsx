@@ -4,7 +4,7 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Language } from '../types';
 import { getDirection } from '../lib/i18n';
-import { getLocalizedRoute, stripLocalePrefix } from '../lib/locale-router';
+import { stripLocalePrefix } from '../lib/locale-router';
 import { getNavPath } from '../lib/navigation';
 import { Header } from './Header';
 import { Footer } from './Footer';
@@ -27,7 +27,7 @@ export const useAppContext = () => useContext(AppContext);
 export function AppLayout({ children, initialLang }: { children: React.ReactNode; initialLang?: Language }) {
   const [currentLang, setCurrentLang] = useState<Language>(initialLang || 'fa');
   const [isEvaluationModalOpen, setIsEvaluationModalOpen] = useState(false);
-  
+
   const pathname = usePathname() || '/';
   const router = useRouter();
 
@@ -36,17 +36,17 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
   let activeRoute = barePath === '/' ? 'home' : barePath.substring(1);
 
   useEffect(() => {
-    // Sync currentLang with pathname for client-side navigation
-    const localeMatch = pathname.split('/')[1];
-    let newLang: Language = initialLang || 'fa';
-    if (localeMatch === 'fa' || localeMatch === 'en') {
-      newLang = localeMatch as Language;
-    }
+    // Only synchronize currentLang if the Next.js pathname explicitly contains a locale prefix
+    const explicitLocale = pathname.split('/')[1];
 
-    if (currentLang !== newLang) {
-      setCurrentLang(newLang);
+    if (explicitLocale === 'fa' || explicitLocale === 'en') {
+      if (currentLang !== explicitLocale) {
+        setCurrentLang(explicitLocale as Language);
+      }
     }
-  }, [pathname, initialLang, currentLang]);
+    // If there is no explicit prefix (e.g. rewritten legacy route like /start-here),
+    // we preserve the current authoritative language state (currentLang) and do not force a fallback to fa.
+  }, [pathname, currentLang]);
 
   useEffect(() => {
     const dir = getDirection(currentLang);
@@ -56,25 +56,13 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
   }, [currentLang]);
 
   const handleLanguageChange = (newLang: Language) => {
-    setCurrentLang(newLang);
-    // Route-specific correction for About, Contact, and Home migration
-    if (pathname === '/about' || pathname === '/fa/about' || pathname === '/en/about') {
-      const result = getLocalizedRoute('/about', newLang);
-      if (result.status === 'success') {
-        router.push(result.path);
-      }
-    }
-    else if (pathname === '/contact' || pathname === '/fa/contact' || pathname === '/en/contact') {
-      const result = getLocalizedRoute('/contact', newLang);
-      if (result.status === 'success') {
-        router.push(result.path);
-      }
-    }
-    else if (pathname === '/' || pathname === '/fa' || pathname === '/en' || pathname === '/fa/' || pathname === '/en/') {
-      const result = getLocalizedRoute('/', newLang);
-      if (result.status === 'success') {
-        router.push(result.path);
-      }
+    // Avoid transient state flashes before hard navigation
+    if (typeof window !== 'undefined') {
+      const currentUrl = window.location.pathname;
+      const bare = stripLocalePrefix(currentUrl);
+      const newPath = bare === '/' ? `/${newLang}` : `/${newLang}${bare}`;
+      const searchAndHash = window.location.search + window.location.hash;
+      window.location.assign(newPath + searchAndHash);
     }
   };
 
@@ -95,7 +83,7 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
   return (
     <AppContext.Provider value={contextValue}>
       <div className="min-h-screen flex flex-col justify-between bg-[#f7f9fc] text-[#142033] font-sans selection:bg-[#2F6FED] selection:text-white pb-16 lg:pb-0">
-        
+
         {/* Header */}
         <Header
           currentLang={currentLang}

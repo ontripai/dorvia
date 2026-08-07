@@ -1,5 +1,8 @@
 import { SITE_URL } from '@/config';
 import type { Metadata, Viewport } from 'next';
+import { headers } from 'next/headers';
+import { getDirection } from '@/lib/i18n';
+import type { Language } from '@/types';
 import '../globals.css';
 import { AppLayout } from '@/components/AppLayout';
 
@@ -49,10 +52,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const headersList = headers();
+  const internalLocale = headersList.get('x-dorvia-locale');
+  const locale: Language = internalLocale === 'en' ? 'en' : 'fa';
+
   return (
-    <html lang="fa" dir="rtl">
+    <html lang={locale} dir={getDirection(locale)}>
       <body className={`${inter.variable} ${manrope.variable} ${vazirmatn.variable} min-h-screen bg-slate-50 antialiased text-slate-900 selection:bg-[#002B7F] selection:text-white`}>
-        <AppLayout>
+        <AppLayout initialLang={locale}>
           {children}
         </AppLayout>
       </body>
