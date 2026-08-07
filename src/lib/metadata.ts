@@ -1,12 +1,23 @@
 import { Metadata } from 'next';
 import { ROUTE_REGISTRY } from './routeRegistry';
 
-// 1. Use NEXT_PUBLIC_SITE_URL when it is present and valid.
-// 2. Otherwise fall back to: https://romania-eight.vercel.app
-let BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://romania-eight.vercel.app';
+export function getCanonicalOrigin(): string {
+  const fallback = 'https://romania-eight.vercel.app';
+  const rawUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  
+  if (!rawUrl) return fallback;
+  if (!rawUrl.startsWith('https://')) return fallback;
+  
+  try {
+    const url = new URL(rawUrl);
+    if (url.protocol !== 'https:') return fallback;
+    return url.origin.replace(/\/+$/, '');
+  } catch (e) {
+    return fallback;
+  }
+}
 
-// 3. Normalize trailing slashes so generated URLs contain no accidental double slash.
-BASE_URL = BASE_URL.replace(/\/+$/, '');
+const BASE_URL = getCanonicalOrigin();
 
 export function getLocalizedMetadata(routeKey: string, lang: string): Metadata {
   const route = ROUTE_REGISTRY[routeKey];

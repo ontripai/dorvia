@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
 import { ROUTE_REGISTRY } from '../lib/routeRegistry';
+import { getCanonicalOrigin } from '../lib/metadata';
 
-let BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://romania-eight.vercel.app';
-BASE_URL = BASE_URL.replace(/\/+$/, '');
+const BASE_URL = getCanonicalOrigin();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = BASE_URL;
