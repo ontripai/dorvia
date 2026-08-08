@@ -50,8 +50,8 @@ export function getLocalizedMetadata(routeKey: string, lang: string): Metadata {
   }
 
   const description = isFa
-    ? (metaItem?.seoDescFa || 'اپلیکیشن جامع برای ارزیابی و مشاوره رایگان مهاجرت به رومانی و اتحادیه اروپا.')
-    : (metaItem?.seoDescEn || 'Comprehensive portal for free assessment and consultation for immigration to Romania and the EU.');
+    ? (metaItem?.seoDescFa || 'پورتال جامع اطلاعات و خدمات برای ارزیابی و مشاوره رایگان مهاجرت به رومانی و اتحادیه اروپا.')
+    : (metaItem?.seoDescEn || 'Comprehensive information and service portal for free assessment and consultation for immigration to Romania and the EU.');
 
   return {
     title,

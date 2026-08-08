@@ -69,16 +69,7 @@ const nextConfig = {
   },
   async rewrites() {
     return {
-      fallback: [
-        {
-          source: '/:locale(fa|en)/:path(articles|company|immigration|needs|romania|services|start-here|study|universities|work)',
-          destination: '/:path',
-        },
-        {
-          source: '/:locale(fa|en)/:path(articles|company|immigration|needs|romania|services|start-here|study|universities|work)/:slug*',
-          destination: '/:path/:slug*',
-        },
-      ],
+      fallback: [],
     };
   },
   async redirects() {

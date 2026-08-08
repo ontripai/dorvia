@@ -15,9 +15,9 @@ import fs from 'fs';
 import path from 'path';
 
 // UI checks
-const pagePath = path.resolve(__dirname, '../src/app/(legacy)/universities/page.tsx');
+const uiContent = fs.readFileSync(path.join(process.cwd(), 'src', 'app', '[lang]', 'universities', 'page.tsx'), 'utf-8');
 const cardPath = path.resolve(__dirname, '../src/components/UniversityCard.tsx');
-const pageContent = fs.readFileSync(pagePath, 'utf8');
+const pageContent = uiContent;
 const cardContent = fs.readFileSync(cardPath, 'utf8');
 
 assert(

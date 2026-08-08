@@ -8,9 +8,6 @@ export function middleware(request: NextRequest) {
   requestHeaders.delete('x-dorvia-locale');
 
   const firstSegment = pathname.split('/')[1];
-  if (firstSegment === 'fa' || firstSegment === 'en') {
-    requestHeaders.set('x-dorvia-locale', firstSegment);
-  }
 
   const nextWithHeaders = () => NextResponse.next({
     request: { headers: requestHeaders }

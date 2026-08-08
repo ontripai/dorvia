@@ -12,47 +12,39 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const sitemapItems: MetadataRoute.Sitemap = [];
 
-  const migratedCanonicalPaths = [
-    '/', '/about', '/contact',
-    '/legal/privacy', '/legal/terms', '/legal/disclaimer'
-  ];
-
   for (const route of routes) {
-    if (migratedCanonicalPaths.includes(route.canonical)) {
-      const cleanPath = route.canonical === '/' ? '' : route.canonical;
+    const cleanPath = route.canonical === '/' ? '' : route.canonical;
+    const hasEn = !route.missingTranslations?.includes('en');
+    const hasFa = !route.missingTranslations?.includes('fa');
 
-      const faUrl = `${baseUrl}/fa${cleanPath}`;
-      const enUrl = `${baseUrl}/en${cleanPath}`;
+    const faUrl = `${baseUrl}/fa${cleanPath}`;
+    const enUrl = `${baseUrl}/en${cleanPath}`;
 
-      const alternates = {
-        languages: {
-          'fa': faUrl,
-          'en': enUrl,
-          'x-default': faUrl,
-        }
-      };
+    const alternates = {
+      languages: {} as Record<string, string>
+    };
 
+    if (hasFa) alternates.languages['fa'] = faUrl;
+    if (hasEn) alternates.languages['en'] = enUrl;
+    if (hasFa) alternates.languages['x-default'] = faUrl;
+
+    if (hasFa) {
       sitemapItems.push({
         url: faUrl,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: route.canonical === '/' ? 1 : 0.8,
-        alternates,
+        alternates: Object.keys(alternates.languages).length > 0 ? alternates : undefined,
       });
+    }
 
+    if (hasEn) {
       sitemapItems.push({
         url: enUrl,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: route.canonical === '/' ? 1 : 0.8,
-        alternates,
-      });
-    } else {
-      sitemapItems.push({
-        url: `${baseUrl}${route.canonical}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.8,
+        alternates: Object.keys(alternates.languages).length > 0 ? alternates : undefined,
       });
     }
   }

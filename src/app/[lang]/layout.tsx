@@ -4,6 +4,7 @@ import { Language } from '@/types';
 import { notFound } from 'next/navigation';
 import '@/app/globals.css';
 import { AppLayout } from '@/components/AppLayout';
+import { StructuredData } from '@/components/StructuredData';
 
 export async function generateStaticParams() {
   return [{ lang: 'fa' }, { lang: 'en' }];
@@ -26,6 +27,9 @@ export default function RootLayout({
 
   return (
     <html lang={locale} dir={dir}>
+      <head>
+        <StructuredData />
+      </head>
       <body>
         <AppLayout initialLang={locale as Language}>{children}</AppLayout>
       </body>
