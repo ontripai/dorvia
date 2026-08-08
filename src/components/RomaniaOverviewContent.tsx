@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Language } from '../types';
 import { Button } from './Button';
 import { Landmark, Building2, ShieldCheck, Scale, FileCheck2, ExternalLink, ArrowRight, ArrowLeft } from './Icons';
@@ -49,67 +49,67 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
             <Link href="/romania/economy" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">📈</span>
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#1554bd] flex items-center justify-center">📈</span>
                   <span>{currentLang === 'fa' ? 'اقتصاد و بازار کار' : 'Economy & Industries'}</span>
                 </h4>
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'تحلیل ساختار اقتصادی، قطب‌های فناوری و متوسط درآمد قانونی.' : 'Economic structure, IT hubs, and wage standards.'}</p>
               </div>
-              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+              <span className="text-xs font-bold text-[#1554bd] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
             </Link>
 
             <Link href="/romania/society" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">👥</span>
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#1554bd] flex items-center justify-center">👥</span>
                   <span>{currentLang === 'fa' ? 'جامعه و زندگی اجتماعی' : 'Society & Demographics'}</span>
                 </h4>
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'آشنایی با مردم رومانی، زبان رسمی، آداب اجتماعی و سیستم آموزش.' : 'Population dynamics, social life, and expat integration.'}</p>
               </div>
-              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+              <span className="text-xs font-bold text-[#1554bd] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
             </Link>
 
             <Link href="/romania/culture-and-arts" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🏛️</span>
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#1554bd] flex items-center justify-center">🏛️</span>
                   <span>{currentLang === 'fa' ? 'فرهنگ، هنر و میراث' : 'Culture, Arts & Heritage'}</span>
                 </h4>
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'تاریخ غنی، قلعه‌های ترانسیلوانیا، موسیقی کلاسیک و آیین‌های سنتی.' : 'Carpathian folklore, historical landmarks, and classical music.'}</p>
               </div>
-              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+              <span className="text-xs font-bold text-[#1554bd] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
             </Link>
 
             <Link href="/romania/laws-and-regulations" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">⚖️</span>
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#1554bd] flex items-center justify-center">⚖️</span>
                   <span>{currentLang === 'fa' ? 'قوانین و مقررات عمومی' : 'Key Laws & Regulations'}</span>
                 </h4>
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'حقوق مصرف‌کننده، اصول قراردادها و حریم خصوصی (GDPR) در رومانی.' : 'General civil code, consumer rights, and GDPR standards.'}</p>
               </div>
-              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+              <span className="text-xs font-bold text-[#1554bd] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
             </Link>
 
             <Link href="/romania/cities" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🏙️</span>
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#1554bd] flex items-center justify-center">🏙️</span>
                   <span>{currentLang === 'fa' ? 'شهرهای مهم رومانی' : 'Key Cities of Romania'}</span>
                 </h4>
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'راهنمای بخارست، کلوژ-نپوکا، یاش، تیمیشوارا و براشوف برای اقامت.' : 'Guides for Bucharest, Cluj-Napoca, Timișoara, Iași, and Brașov.'}</p>
               </div>
-              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+              <span className="text-xs font-bold text-[#1554bd] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
             </Link>
 
             <Link href="/romania/tourism" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">✈️</span>
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#1554bd] flex items-center justify-center">✈️</span>
                   <span>{currentLang === 'fa' ? 'جاذبه‌های گردشگری' : 'Tourism & Travel'}</span>
                 </h4>
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'معرفی قلعه‌های تاریخی، طبیعت کارپات و دلتای دانوب.' : 'Danube delta, Carpathian ski resorts, and historical castles.'}</p>
               </div>
-              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+              <span className="text-xs font-bold text-[#1554bd] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
             </Link>
           </div>
         </div>
@@ -139,7 +139,7 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="editorial-card p-5 bg-white text-center space-y-1">
               <div className="text-xs text-[#788697] font-bold">عضویت در اتحادیه اروپا</div>
-              <div className="text-lg font-extrabold text-[#2F6FED]">کامل (EU)</div>
+              <div className="text-lg font-extrabold text-[#1554bd]">کامل (EU)</div>
             </div>
             <div className="editorial-card p-5 bg-white text-center space-y-1">
               <div className="text-xs text-[#788697] font-bold">منطقه شنگن</div>
@@ -147,11 +147,11 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
             </div>
             <div className="editorial-card p-5 bg-white text-center space-y-1">
               <div className="text-xs text-[#788697] font-bold">صنایع پیشرو</div>
-              <div className="text-lg font-extrabold text-[#2F6FED]">IT & Auto</div>
+              <div className="text-lg font-extrabold text-[#1554bd]">IT & Auto</div>
             </div>
             <div className="editorial-card p-5 bg-white text-center space-y-1">
               <div className="text-xs text-[#788697] font-bold">واحد پول ملی</div>
-              <div className="text-lg font-extrabold text-[#2F6FED]">RON (Leu)</div>
+              <div className="text-lg font-extrabold text-[#1554bd]">RON (Leu)</div>
             </div>
           </div>
 

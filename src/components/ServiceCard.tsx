@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ServiceItem, Language } from '../types';
 
 interface ServiceCardProps {

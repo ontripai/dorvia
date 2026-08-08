@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Language } from '../types';
 import { EvaluationCTA } from './EvaluationCTA';
 import { Breadcrumb } from './Breadcrumb';
@@ -54,10 +54,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
                 <span>{currentLang === 'fa' ? 'نقش کارفرما' : 'Employer\'s Role'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'درخواست مجوز کار توسط کارفرمای رومانیایی نزد IGI ثبت می‌شود، نه خودِ متقاضی.' : 'The work permit application is submitted by the Romanian employer to IGI, not by the applicant.'}</li>
                 <li>{currentLang === 'fa' ? 'معمولاً کارفرما باید نشان دهد این جایگاه شغلی توسط شهروند رومانی/اتحادیه اروپا/فضای اقتصادی اروپا پر نشده است.' : 'Generally, the employer must demonstrate that the position could not be filled by a Romanian/EU/EEA citizen.'}</li>
@@ -66,10 +66,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
                 <span>{currentLang === 'fa' ? 'مدارک موردنیاز متقاضی' : 'Applicant\'s Required Documents'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'قرارداد کاری یا پیشنهاد رسمی استخدام.' : 'Employment contract or official job offer.'}</li>
                 <li>{currentLang === 'fa' ? 'مدارک تحصیلی و/یا سوابق کاری مرتبط با جایگاه شغلی.' : 'Educational degrees and/or work experience relevant to the position.'}</li>
@@ -79,10 +79,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
                 <span>{currentLang === 'fa' ? 'پس از صدور مجوز' : 'After Issuance'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'مجوز کار، پایه‌ی درخواست ویزای بلندمدت کاری (نوع D/AM) نزد سفارت رومانی است.' : 'The work permit serves as the basis for the long-stay work visa (Type D/AM) application at the Romanian embassy.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
@@ -91,16 +91,16 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
-            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+            <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
-            </h3>
+            </h2>
             <div className="space-y-6">
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم خودم مستقیماً برای مجوز کار درخواست دهم؟' : 'Can I apply for the work permit directly by myself?'}</h4>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم خودم مستقیماً برای مجوز کار درخواست دهم؟' : 'Can I apply for the work permit directly by myself?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. درخواست مجوز کار منحصراً باید توسط کارفرمای رومانیایی شما به اداره مهاجرت (IGI) ارائه شود.' : 'No. The work permit application must be submitted exclusively by your Romanian employer to IGI.'}</p>
               </div>
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بررسی درخواست مجوز چقدر طول می‌کشد؟' : 'How long does the permit application process take?'}</h4>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بررسی درخواست مجوز چقدر طول می‌کشد؟' : 'How long does the permit application process take?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'این زمان بسته به حجم پرونده‌های IGI متغیر است، اما معمولاً رسیدگی به آن چند هفته تا چند ماه زمان می‌برد.' : 'The timeline varies depending on IGI\'s workload, but it typically takes from a few weeks to several months.'}</p>
               </div>
             </div>
@@ -131,10 +131,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
                 <span>{currentLang === 'fa' ? 'مراحل درخواست' : 'Application Process'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'پس از دریافت مجوز کار توسط کارفرما، متقاضی می‌تواند برای ویزای بلندمدت کاری در سفارت/کنسولگری رومانی اقدام کند.' : 'After the employer obtains the work permit, the applicant can apply for the long-stay work visa at the Romanian embassy/consulate.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
@@ -142,10 +142,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
                 <span>{currentLang === 'fa' ? 'پس از ورود به رومانی' : 'After Arrival in Romania'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'درخواست کارت اقامت موقت برای اشتغال نزد ادارات محلی IGI، حداقل ۳۰ روز قبل از پایان اعتبار حق اقامت اولیه.' : 'Apply for a temporary residence permit for employment at local IGI offices, at least 30 days before the initial right of stay expires.'}</li>
                 <li>{currentLang === 'fa' ? 'رسیدگی معمولاً ظرف ۳۰ روز (قابل تمدید تا ۱۵ روز در صورت نیاز به بررسی بیشتر).' : 'Processing typically takes 30 days (extendable by up to 15 days for further checks).'}</li>
@@ -153,10 +153,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
                 <span>{currentLang === 'fa' ? 'تغییر کارفرما' : 'Changing Employers'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'تغییر کارفرما معمولاً نیازمند بازبینی یا صدور مجدد مجوز کار است.' : 'Changing employers usually requires a review or re-issuance of the work permit.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
@@ -165,16 +165,16 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
-            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+            <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
-            </h3>
+            </h2>
             <div className="space-y-6">
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا با ویزای D/AM می‌توانم کارفرمای خود را تغییر دهم؟' : 'Can I change employers with a D/AM visa?'}</h4>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا با ویزای D/AM می‌توانم کارفرمای خود را تغییر دهم؟' : 'Can I change employers with a D/AM visa?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'تغییر کارفرما معمولاً نیازمند طی کردن مجدد روند قانونی و صدور مجوز کار جدید توسط کارفرمای جدید است.' : 'Changing employers usually requires going through the legal process again and issuing a new work permit by the new employer.'}</p>
               </div>
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چه زمانی باید برای کارت اقامت موقت اقدام کنم؟' : 'When should I apply for the temporary residence permit?'}</h4>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چه زمانی باید برای کارت اقامت موقت اقدام کنم؟' : 'When should I apply for the temporary residence permit?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'شما موظفید حداقل ۳۰ روز پیش از به پایان رسیدن اعتبار ویزای نوع D خود، درخواست کارت اقامت را به IGI تحویل دهید.' : 'You must submit your temporary residence permit application to IGI at least 30 days before your Type D visa expires.'}</p>
               </div>
             </div>
@@ -209,10 +209,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
                 <span>{currentLang === 'fa' ? 'منابع رسمی کاریابی' : 'Official Job Search Resources'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'پورتال EURES رومانی (eures.europa.eu / eures.anofm.ro)، بخشی از شبکه رسمی کاریابی اتحادیه اروپا، آگهی‌های تأییدشده را نمایش می‌دهد.' : 'The Romanian EURES portal (eures.europa.eu / eures.anofm.ro), part of the official EU employment network, displays verified job postings.'}</li>
                 <li>{currentLang === 'fa' ? 'آژانس ملی استخدام رومانی (ANOFM، anofm.ro) زیر نظر وزارت کار رومانی فعالیت می‌کند و آگهی‌های داخلی کشور را منتشر می‌کند.' : 'The National Agency for Employment (ANOFM, anofm.ro) operates under the Romanian Ministry of Labor and publishes domestic job advertisements.'}</li>
@@ -220,10 +220,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
                 <span>{currentLang === 'fa' ? 'شرایط برای اتباع خارج از اتحادیه اروپا' : 'Conditions for Non-EU Citizens'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'اتباع خارج از اتحادیه اروپا/منطقه اقتصادی اروپا برای اشتغال قانونی نیاز به ' : 'Non-EU/EEA citizens require a '}
@@ -238,10 +238,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
                 <span>{currentLang === 'fa' ? 'نکات عملی' : 'Practical Considerations'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'حداقل حقوق قانونی رومانی: ۴,۳۲۵ لئو در ماه (حدود ۸۵۰ یورو)، معتبر از ۱ ژوئیه ۲۰۲۶ به بعد.' : 'Minimum legal salary in Romania: 4,325 RON per month (approx. €850), valid from July 1, 2026 onwards.'}</li>
                 <li>{currentLang === 'fa' ? 'تسلط به زبان رومانیایی یا انگلیسی مزیت رقابتی مهمی در بازار کار محسوب می‌شود.' : 'Proficiency in Romanian or English is considered a significant competitive advantage in the job market.'}</li>
@@ -251,16 +251,16 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
-            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+            <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
-            </h3>
+            </h2>
             <div className="space-y-6">
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'حداقل حقوق قانونی در رومانی چقدر است؟' : 'What is the minimum legal salary in Romania?'}</h4>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'حداقل حقوق قانونی در رومانی چقدر است؟' : 'What is the minimum legal salary in Romania?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بر اساس نرخ تعیین شده، حداقل حقوق ناخالص ۴,۳۲۵ لئو در ماه است که از ۱ ژوئیه ۲۰۲۶ در رومانی اعمال می‌شود.' : 'Based on the set rate, the minimum gross salary is 4,325 RON per month, applicable from July 1, 2026, in Romania.'}</p>
               </div>
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا دانستن زبان رومانیایی برای استخدام الزامی است؟' : 'Is knowing the Romanian language mandatory for employment?'}</h4>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا دانستن زبان رومانیایی برای استخدام الزامی است؟' : 'Is knowing the Romanian language mandatory for employment?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'اگرچه برای بسیاری از مشاغل بین‌المللی و شرکت‌های چندملیتی تسلط به زبان انگلیسی کافیست، اما دانستن زبان رومانیایی مزیت رقابتی بسیار بزرگی در کاریابی محسوب می‌شود.' : 'While English is sufficient for many international roles and multinational companies, proficiency in Romanian is a massive competitive advantage in finding a job.'}</p>
               </div>
             </div>
@@ -295,10 +295,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
                 <span>{currentLang === 'fa' ? 'الزامات قانونی قرارداد' : 'Legal Contract Requirements'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'طبق قانون کار رومانی (Legea 53/2003 – Codul Muncii)، هر قرارداد استخدام باید پیش از شروع فعالیت در سامانه ملی ثبت کارکنان (Registrul General de Evidenţă a Salariaţilor / REVISAL) ثبت شود.' : 'According to the Romanian Labor Code (Legea 53/2003 – Codul Muncii), every employment contract must be registered in the National Register of Employees (Registrul General de Evidenţă a Salariaţilor / REVISAL) prior to starting work.'}</li>
                 <li>{currentLang === 'fa' ? 'کارفرما موظف است پیش از شروع کار، یک نسخه از قرارداد را به کارمند تحویل دهد.' : 'The employer is obligated to provide the employee with a copy of the contract before they commence work.'}</li>
@@ -306,10 +306,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
                 <span>{currentLang === 'fa' ? 'دوره آزمایشی (Perioada de Probă)' : 'Probationary Period (Perioada de Probă)'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'در طول یک قرارداد استخدام، فقط یک دوره آزمایشی مجاز است، مگر در موارد استثنا (مثل شروع در سمت یا حرفه جدید نزد همان کارفرما، یا مشاغل با شرایط سخت/مضر/خطرناک).' : 'During an employment contract, only one probationary period is permitted, except in special cases (such as starting a new position/profession with the same employer, or jobs with difficult/harmful/dangerous conditions).'}</li>
                 <li>{currentLang === 'fa' ? 'دوره آزمایشی به‌عنوان سابقه کار محسوب می‌شود.' : 'The probationary period is counted as official employment history.'}</li>
@@ -318,10 +318,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
                 <span>{currentLang === 'fa' ? 'نظارت و مرجع رسمی' : 'Supervision and Official Authority'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'بازرسی کار رومانی (Inspecţia Muncii) و ادارات منطقه‌ای آن (Inspectoratul Teritorial de Muncă) مرجع رسمی نظارت بر اجرای صحیح قراردادهای کار هستند.' : 'The Romanian Labor Inspection (Inspecţia Muncii) and its regional offices (Inspectoratul Teritorial de Muncă) are the official authorities overseeing the proper execution of labor contracts.'}</li>
                 <li>{currentLang === 'fa' ? 'هرگونه تغییر در بندهای قرارداد در طول اجرای آن نیاز به الحاقیه رسمی (act adiţional) دارد، مگر در مواردی که قانون صراحتاً استثنا کرده باشد.' : 'Any modification to contract clauses during its execution requires a formal addendum (act adiţional), unless the law explicitly provides an exception.'}</li>
@@ -331,16 +331,16 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
-            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+            <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
-            </h3>
+            </h2>
             <div className="space-y-6">
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا قرارداد کاری می‌تواند بیش از یک دوره آزمایشی داشته باشد؟' : 'Can an employment contract have more than one probationary period?'}</h4>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا قرارداد کاری می‌تواند بیش از یک دوره آزمایشی داشته باشد؟' : 'Can an employment contract have more than one probationary period?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'اصولاً فقط یک دوره آزمایشی مجاز است، مگر در موارد خاص مانند ارتقاء شغلی یا تغییر سمت نزد همان کارفرما.' : 'Generally, only one probationary period is permitted, except in special cases like a promotion or changing positions with the same employer.'}</p>
               </div>
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر شرایط کارم تغییر کند چه اتفاقی می‌افتد؟' : 'What happens if my working conditions change?'}</h4>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر شرایط کارم تغییر کند چه اتفاقی می‌افتد؟' : 'What happens if my working conditions change?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'هرگونه تغییر در حقوق و دستمزد یا شرایط اصلی کار باید از طریق ثبت و امضای یک الحاقیه رسمی (act adițional) انجام شود.' : 'Any changes to your salary or main working conditions must be recorded and signed through a formal addendum (act adițional).'}</p>
               </div>
             </div>
@@ -375,10 +375,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
                 <span>{currentLang === 'fa' ? 'کسورات قانونی از حقوق' : 'Statutory Salary Deductions'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'از حقوق ناخالص (Salariu Brut) هر کارمند سه کسر اجباری انجام می‌شود: مالیات بر درآمد ۱۰٪، سهم بازنشستگی (CAS) ۲۵٪، و سهم بیمه سلامت (CASS) ۱۰٪.' : 'Three mandatory deductions are made from each employee\'s gross salary (Salariu Brut): 10% income tax, 25% pension contribution (CAS), and 10% health insurance contribution (CASS).'}</li>
                 <li>{currentLang === 'fa' ? 'این کسورات توسط کارفرما محاسبه و مستقیماً به سازمان امور مالیاتی (ANAF) پرداخت می‌شود؛ کارمند حقوق خالص (Net) را دریافت می‌کند.' : 'These deductions are calculated by the employer and paid directly to the National Agency for Fiscal Administration (ANAF); the employee receives the net salary (Net).'}</li>
@@ -386,10 +386,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
                 <span>{currentLang === 'fa' ? 'سهم کارفرما' : 'Employer Contributions'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'علاوه بر کسورات کارمند، کارفرما موظف است سهم بیمه کار (CAM) به میزان ۲.۲۵٪ روی حقوق ناخالص بپردازد که صرف بیمه بیکاری و حوادث کاری می‌شود.' : 'In addition to employee deductions, the employer is obligated to pay a 2.25% work insurance contribution (CAM) on the gross salary, covering unemployment and workplace accidents.'}</li>
                 <li>{currentLang === 'fa' ? 'حقوق خالص معمولاً حدود ۵۷ تا ۶۰ درصد حقوق ناخالص است.' : 'The net salary is typically around 57 to 60 percent of the gross salary.'}</li>
@@ -398,10 +398,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
                 <span>{currentLang === 'fa' ? 'تکالیف اظهارنامه' : 'Declaration Obligations'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'کارفرما موظف است هرماه اظهارنامه ۱۱۲ (Declarația 112) شامل کسورات و بیمه کارکنان را به‌صورت الکترونیکی به ANAF ارسال کند.' : 'The employer must electronically submit Declaration 112 (Declarația 112), detailing employee deductions and insurance, to ANAF on a monthly basis.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
@@ -410,16 +410,16 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
-            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+            <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
-            </h3>
+            </h2>
             <div className="space-y-6">
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'تفاوت حقوق ناخالص و خالص چقدر است؟' : 'What is the difference between gross and net salary?'}</h4>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'تفاوت حقوق ناخالص و خالص چقدر است؟' : 'What is the difference between gross and net salary?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'پس از کسر مالیات و بیمه‌های اجباری، حقوق خالصی که دریافت می‌کنید معمولاً حدود ۵۷ تا ۶۰ درصد حقوق ناخالص قرارداد شما خواهد بود.' : 'After mandatory tax and insurance deductions, the net salary you receive is typically around 57% to 60% of your gross contract salary.'}</p>
               </div>
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا کارمند باید مالیات خود را جداگانه به دولت بپردازد؟' : 'Does the employee have to pay their taxes separately to the government?'}</h4>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا کارمند باید مالیات خود را جداگانه به دولت بپردازد؟' : 'Does the employee have to pay their taxes separately to the government?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، نیازی به پرداخت جداگانه نیست؛ تمام کسورات قانونی برای کارمندان مستقیماً توسط کارفرما محاسبه، کسر و به اداره مالیات پرداخت می‌شود.' : 'No, separate payment is not required; all statutory deductions for employees are calculated, withheld, and paid directly to the tax authorities by the employer.'}</p>
               </div>
             </div>
@@ -453,10 +453,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
                 <span>{currentLang === 'fa' ? 'بیمه سلامت خودکار' : 'Automatic Health Insurance'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'هر فردی که در رومانی به‌صورت قانونی استخدام باشد و سهم CASS از حقوقش کسر شود، به‌طور خودکار تحت پوشش بیمه سلامت عمومی (Casa Națională de Asigurări de Sănătate / CNAS) قرار می‌گیرد.' : 'Anyone legally employed in Romania with the CASS contribution deducted from their salary is automatically covered by the public health insurance system (Casa Națională de Asigurări de Sănătate / CNAS).'}</li>
                 <li>{currentLang === 'fa' ? 'کارت ملی بیمه سلامت (Cardul Național de Asigurări de Sănătate) برای دریافت خدمات درمانی در مراکز طرف‌قرارداد استفاده می‌شود.' : 'The National Health Insurance Card (Cardul Național de Asigurări de Sănătate) is used to access medical services at contracted facilities.'}</li>
@@ -464,10 +464,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
                 <span>{currentLang === 'fa' ? 'بیمه بازنشستگی' : 'Pension Insurance'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'سهم CAS کسرشده از حقوق به صندوق ملی بازنشستگی عمومی (Casa Națională de Pensii Publice / CNPP) واریز می‌شود و سابقه بیمه بازنشستگی فرد را می‌سازد.' : 'The CAS contribution deducted from the salary is deposited into the National Public Pension House (Casa Națională de Pensii Publice / CNPP), building the individual\'s pension history.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
@@ -475,10 +475,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
-              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
                 <span>{currentLang === 'fa' ? 'وضعیت افراد بدون قرارداد کاری' : 'Status of Non-Employees'}</span>
-              </h3>
+              </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'افرادی که کارمند نیستند نیز می‌توانند با ارائه اظهارنامه واحد (Declarația Unică / فرم D212) به‌صورت داوطلبانه در سیستم بیمه سلامت ثبت‌نام کنند.' : 'Non-employees can also voluntarily enroll in the health insurance system by submitting the Single Declaration (Declarația Unică / Form D212).'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
@@ -487,16 +487,16 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
-            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+            <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
-            </h3>
+            </h2>
             <div className="space-y-6">
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا دریافت خدمات درمانی با بیمه کارمندی رایگان است؟' : 'Are medical services free with employee health insurance?'}</h4>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا دریافت خدمات درمانی با بیمه کارمندی رایگان است؟' : 'Are medical services free with employee health insurance?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'در بیمارستان‌ها و کلینیک‌های دولتی یا خصوصیِ طرف قرارداد با CNAS، خدمات پایه و اورژانسی عموماً رایگان یا با پوشش بسیار بالایی ارائه می‌شوند.' : 'In public hospitals and private clinics contracted with CNAS, basic and emergency services are generally free or highly subsidized.'}</p>
               </div>
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر کارمند نباشم، آیا می‌توانم بیمه دولتی داشته باشم؟' : 'Can I get state insurance if I am not an employee?'}</h4>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر کارمند نباشم، آیا می‌توانم بیمه دولتی داشته باشم؟' : 'Can I get state insurance if I am not an employee?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، افراد بدون قرارداد کاری نیز می‌توانند از طریق ارسال اظهارنامه واحد (Declarația Unică) و پرداخت حق بیمه معادل، به‌صورت داوطلبانه خود را بیمه کنند.' : 'Yes, non-employees can voluntarily enroll in the health insurance system by submitting the Single Declaration (Declarația Unică) and paying the equivalent premium.'}</p>
               </div>
             </div>
@@ -531,9 +531,9 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <Link href="/work/finding-job" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
                 <div className="space-y-2">
                   <span className="text-2xl">🔍</span>
-                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                  <h3 className="font-extrabold text-[#142033] text-sm sm:text-base">
                     {currentLang === 'fa' ? 'به دنبال کار هستم' : 'I am looking for a job'}
-                  </h4>
+                  </h3>
                   <p className="text-xs text-[#526174] leading-relaxed">
                     {currentLang === 'fa' ? 'سایت‌های کاریابی رومانی و رزومه‌نویسی پوزیشنی.' : 'Job search portals & CV standards.'}
                   </p>
@@ -546,9 +546,9 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <Link href="/work/work-permit" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
                 <div className="space-y-2">
                   <span className="text-2xl">📄</span>
-                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                  <h3 className="font-extrabold text-[#142033] text-sm sm:text-base">
                     {currentLang === 'fa' ? 'مجوز کار لازم دارم' : 'I need a Work Permit'}
-                  </h4>
+                  </h3>
                   <p className="text-xs text-[#526174] leading-relaxed">
                     {currentLang === 'fa' ? 'فرآیند صدور Aviz de Muncă توسط کارفرما نزد IGI.' : 'Employer application for Aviz de Muncă at IGI.'}
                   </p>
@@ -561,9 +561,9 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <Link href="/company/registration" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
                 <div className="space-y-2">
                   <span className="text-2xl">🏢</span>
-                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                  <h3 className="font-extrabold text-[#142033] text-sm sm:text-base">
                     {currentLang === 'fa' ? 'می‌خواهم کسب‌وکار راه‌اندازی کنم' : 'I want to start a business'}
-                  </h4>
+                  </h3>
                   <p className="text-xs text-[#526174] leading-relaxed">
                     {currentLang === 'fa' ? 'ثبت شرکت (SRL) در ONRC و اخذ سرمایه‌گذاری.' : 'SRL company setup via ONRC registry.'}
                   </p>
@@ -576,9 +576,9 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <Link href="/work/taxes-salaries" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
                 <div className="space-y-2">
                   <span className="text-2xl">💰</span>
-                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                  <h3 className="font-extrabold text-[#142033] text-sm sm:text-base">
                     {currentLang === 'fa' ? 'درباره مالیات و حقوق می‌پرسم' : 'Tax & Salary Info'}
-                  </h4>
+                  </h3>
                   <p className="text-xs text-[#526174] leading-relaxed">
                     {currentLang === 'fa' ? 'محاسبه حقوق خالص و مالیات ۱۰٪ درآمد.' : 'Calculating net wage & 10% income tax.'}
                   </p>
@@ -591,9 +591,9 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <Link href="/work/insurance" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
                 <div className="space-y-2">
                   <span className="text-2xl">🏥</span>
-                  <h4 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                  <h3 className="font-extrabold text-[#142033] text-sm sm:text-base">
                     {currentLang === 'fa' ? 'درباره بیمه کاری و درمانی می‌پرسم' : 'Work & Health Insurance'}
-                  </h4>
+                  </h3>
                   <p className="text-xs text-[#526174] leading-relaxed">
                     {currentLang === 'fa' ? 'سهم بیمه CASS و پوشش خدمات پزشکی.' : 'CASS contribution & medical rights.'}
                   </p>
@@ -607,10 +607,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
 
           {/* 3. WHERE SHOULD I START? (از کجا شروع کنم؟ - DECISION HELPER) */}
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 sm:p-8 rounded-2xl border border-blue-100 space-y-4">
-            <h3 className="text-lg font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+            <h2 className="text-lg font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
               <span>💡</span>
               <span>{currentLang === 'fa' ? 'از کجا شروع کنم؟ (راهنمای تصمیم‌گیری)' : 'Where Should I Start? (Decision Helper)'}</span>
-            </h3>
+            </h2>
             <div className="space-y-3 text-xs sm:text-sm text-[#526174]">
               <div className="flex items-start space-x-2 rtl:space-x-reverse">
                 <span className="text-[#2F6FED] font-bold">▪</span>
@@ -644,32 +644,32 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
 
           {/* 4. PATHWAYS SECTION (MANDATORY PRESERVED) */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-[#142033]">
+            <h2 className="text-lg font-bold text-[#142033]">
               {currentLang === 'fa' ? 'مسیرهای اشتغال' : 'Employment Pathways'}
-            </h3>
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <Link href="/work/finding-job" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
-                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'پیدا کردن کار' : 'Finding a Job'}</h4>
+                <h3 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'پیدا کردن کار' : 'Finding a Job'}</h3>
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'سایت‌های کاریابی و نگارش رزومه استاندارد' : 'Job portals and standard CV writing'}</p>
               </Link>
               <Link href="/work/work-permit" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
-                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'مجوز کار' : 'Work Permit'}</h4>
+                <h3 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'مجوز کار' : 'Work Permit'}</h3>
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'فرآیند دریافت Aviz de Munca توسط کارفرما' : 'The process for employers to get Aviz de Munca'}</p>
               </Link>
               <Link href="/work/work-visa" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
-                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'ویزای کاری' : 'Work Visa'}</h4>
+                <h3 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'ویزای کاری' : 'Work Visa'}</h3>
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'اقدام برای ویزای نوع D/AM پس از دریافت مجوز' : 'Applying for the D/AM visa after permit approval'}</p>
               </Link>
               <Link href="/work/employment-contract" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
-                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'قرارداد استخدام' : 'Employment Contract'}</h4>
+                <h3 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'قرارداد استخدام' : 'Employment Contract'}</h3>
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'انواع قرارداد کاری و حقوق کارمند' : 'Types of contracts and employee rights'}</p>
               </Link>
               <Link href="/work/taxes-salaries" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
-                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'حقوق و مالیات' : 'Taxes & Salaries'}</h4>
+                <h3 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'حقوق و مالیات' : 'Taxes & Salaries'}</h3>
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'نحوه محاسبه حقوق خالص و کسورات قانونی' : 'Calculating net salary and legal deductions'}</p>
               </Link>
               <Link href="/work/insurance" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
-                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'بیمه' : 'Insurance'}</h4>
+                <h3 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'بیمه' : 'Insurance'}</h3>
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'پوشش بیمه تامین اجتماعی و درمانی' : 'Social and health insurance coverage'}</p>
               </Link>
             </div>

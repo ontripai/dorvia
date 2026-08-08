@@ -4,6 +4,8 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Language } from '../types';
 import { getDirection } from '../lib/i18n';
+import { stripLocalePrefix } from '../lib/locale-router';
+import { getNavPath } from '../lib/navigation';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { LeadForm } from './LeadForm';
@@ -22,15 +24,29 @@ export const AppContext = createContext<{
 
 export const useAppContext = () => useContext(AppContext);
 
-export function AppLayout({ children }: { children: React.ReactNode }) {
-  const [currentLang, setCurrentLang] = useState<Language>('fa');
+export function AppLayout({ children, initialLang }: { children: React.ReactNode; initialLang?: Language }) {
+  const [currentLang, setCurrentLang] = useState<Language>(initialLang || 'fa');
   const [isEvaluationModalOpen, setIsEvaluationModalOpen] = useState(false);
-  
+
   const pathname = usePathname() || '/';
   const router = useRouter();
 
   // Derive activeRoute from pathname to keep compatibility with Header/Footer props
-  let activeRoute = pathname === '/' ? 'home' : pathname.substring(1);
+  const barePath = stripLocalePrefix(pathname);
+  let activeRoute = barePath === '/' ? 'home' : barePath.substring(1);
+
+  useEffect(() => {
+    // Only synchronize currentLang if the Next.js pathname explicitly contains a locale prefix
+    const explicitLocale = pathname.split('/')[1];
+
+    if (explicitLocale === 'fa' || explicitLocale === 'en') {
+      if (currentLang !== explicitLocale) {
+        setCurrentLang(explicitLocale as Language);
+      }
+    }
+    // If there is no explicit prefix (e.g. rewritten legacy route like /start-here),
+    // we preserve the current authoritative language state (currentLang) and do not force a fallback to fa.
+  }, [pathname, currentLang]);
 
   useEffect(() => {
     const dir = getDirection(currentLang);
@@ -40,11 +56,18 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
   }, [currentLang]);
 
   const handleLanguageChange = (newLang: Language) => {
-    setCurrentLang(newLang);
+    // Avoid transient state flashes before hard navigation
+    if (typeof window !== 'undefined') {
+      const currentUrl = window.location.pathname;
+      const bare = stripLocalePrefix(currentUrl);
+      const newPath = bare === '/' ? `/${newLang}` : `/${newLang}${bare}`;
+      const searchAndHash = window.location.search + window.location.hash;
+      window.location.assign(newPath + searchAndHash);
+    }
   };
 
   const handleNavigate = (route: string) => {
-    const targetPath = route === 'home' ? '/' : `/${route}`;
+    const targetPath = getNavPath(route, pathname);
     router.push(targetPath);
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -60,7 +83,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <AppContext.Provider value={contextValue}>
       <div className="min-h-screen flex flex-col justify-between bg-[#f7f9fc] text-[#142033] font-sans selection:bg-[#2F6FED] selection:text-white pb-16 lg:pb-0">
-        
+
         {/* Header */}
         <Header
           currentLang={currentLang}

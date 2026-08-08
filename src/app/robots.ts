@@ -1,13 +1,11 @@
 import { MetadataRoute } from 'next';
+import { getCanonicalOrigin } from '../lib/metadata';
 
 export default function robots(): MetadataRoute.Robots {
   const isProduction = process.env.VERCEL_ENV === 'production' || process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
   
   if (isProduction) {
-    if (!process.env.NEXT_PUBLIC_SITE_URL) {
-      throw new Error('NEXT_PUBLIC_SITE_URL is mandatory for Production SEO canonicals.');
-    }
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+    const siteUrl = getCanonicalOrigin();
     
     return {
       rules: {

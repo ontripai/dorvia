@@ -188,6 +188,18 @@ export const enTranslations = {
       title: "Driving Licence in Romania: Exchange, Issuance and Rules | DORVIA EUROP",
       description: "Complete operational guide to Romanian driving licences: rules, exchanges, new issuance, and International Driving Permits (IDP).",
       h1: "Driving Licence in Romania"
+    },
+    "legal/privacy": {
+      title: "Privacy Policy | DORVIA EUROP",
+      description: "Privacy policy detailing how DORVIA EUROP processes user data, protects personal information, and upholds your legal rights."
+    },
+    "legal/terms": {
+      title: "Terms and Conditions | DORVIA EUROP",
+      description: "Terms, conditions, and rules governing the use of DORVIA EUROP's consultation and evaluation services in Romania."
+    },
+    "legal/disclaimer": {
+      title: "Legal Disclaimer | DORVIA EUROP",
+      description: "Legal disclaimer from DORVIA EUROP addressing the absence of guaranteed immigration outcomes and our commitment to transparency."
     }
   }
 };

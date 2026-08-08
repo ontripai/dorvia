@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { University, Language, StudyAreaId, TeachingLanguage } from '../types';
 
 interface UniversityCardProps {
@@ -15,11 +15,11 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
     ? 'bg-amber-100 text-amber-800 border-amber-300'
     : 'bg-emerald-50 text-emerald-700 border-emerald-200';
   const headerColors = isWarning
-    ? 'bg-gradient-to-r from-amber-700 to-amber-600'
+    ? 'bg-gradient-to-r from-amber-800 to-amber-700'
     : 'bg-gradient-to-r from-[#071B3D] to-[#2F6FED]';
 
   const hoverClasses = isWarning
-    ? 'hover:bg-amber-600 hover:border-amber-600'
+    ? 'hover:bg-amber-700 hover:border-amber-700'
     : 'hover:bg-[#071B3D] hover:border-[#071B3D]';
 
   const formatAmount = (amount?: number, maxAmount?: number, currency?: string, period?: string, feeType?: string) => {
@@ -98,7 +98,7 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
         )}
 
         <div className="space-y-1.5 pt-2">
-          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+          <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
             {currentLang === 'fa' ? 'زمینه‌های تحصیلی مرتبط:' : 'Relevant Study Areas:'}
           </div>
           <div className="flex flex-wrap gap-1.5">
@@ -112,7 +112,7 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
 
         {(uniqueLanguages.filter(l => l !== 'UNKNOWN').length > 0 || uniqueLanguages.includes('UNKNOWN')) && (
           <div className="space-y-1.5 pt-2">
-            <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+            <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
               {currentLang === 'fa' ? 'زبان‌های تدریس:' : 'Teaching Languages:'}
             </div>
             <div className="flex flex-wrap gap-1.5">
@@ -131,7 +131,7 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
         )}
 
         <div className="pt-3 border-t border-slate-100 space-y-2">
-          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+          <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
             {currentLang === 'fa' ? 'شهریه و هزینه‌ها:' : 'Tuition & Fees:'}
           </div>
           {university.tuitionItems.map((item, idx) => (
@@ -144,7 +144,7 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
               </span>
             </div>
           ))}
-          <div className="flex justify-between text-[10px] text-slate-400 pt-1">
+          <div className="flex justify-between text-[10px] text-slate-500 pt-1">
             <span>{currentLang === 'fa' ? 'سال تحصیلی:' : 'Academic Year:'} {university.tuitionAcademicYear}</span>
             <span>
               {university.tuitionVerificationStatus === 'OFFICIAL_FIXED' && (currentLang === 'fa' ? '✓ سند رسمی' : '✓ Official Document')}
@@ -158,11 +158,11 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
       {/* Action Footer */}
       <div className="p-5 pt-0 mt-auto">
         {university.ctaType === 'internal' ? (
-          <Link href={university.ctaHref} className={`block w-full py-2.5 px-4 rounded-xl text-center text-sm font-bold border transition-colors ${isWarning ? 'bg-amber-700 border-amber-700 text-white hover:bg-amber-600 hover:border-amber-600' : 'bg-white border-[#071B3D] text-[#071B3D] ' + hoverClasses + ' hover:text-white'}`}>
+          <Link href={university.ctaHref} aria-label={`${currentLang === 'fa' ? university.ctaLabelFa : university.ctaLabelEn} - ${currentLang === 'fa' ? university.nameFa : university.nameEn}`} className={`block w-full py-2.5 px-4 rounded-xl text-center text-sm font-bold border transition-colors ${isWarning ? 'bg-amber-800 border-amber-800 text-white hover:bg-amber-700 hover:border-amber-700' : 'bg-white border-[#071B3D] text-[#071B3D] ' + hoverClasses + ' hover:text-white'}`}>
             {currentLang === 'fa' ? university.ctaLabelFa : university.ctaLabelEn}
           </Link>
         ) : (
-          <a href={university.ctaHref} target="_blank" rel="noopener noreferrer" className={`block w-full py-2.5 px-4 rounded-xl text-center text-sm font-bold border transition-colors ${isWarning ? 'bg-amber-700 border-amber-700 text-white hover:bg-amber-600 hover:border-amber-600' : 'bg-white border-[#071B3D] text-[#071B3D] ' + hoverClasses + ' hover:text-white'}`}>
+          <a href={university.ctaHref} target="_blank" rel="noopener noreferrer" aria-label={`${currentLang === 'fa' ? university.ctaLabelFa : university.ctaLabelEn} - ${currentLang === 'fa' ? university.nameFa : university.nameEn}`} className={`block w-full py-2.5 px-4 rounded-xl text-center text-sm font-bold border transition-colors ${isWarning ? 'bg-amber-800 border-amber-800 text-white hover:bg-amber-700 hover:border-amber-700' : 'bg-white border-[#071B3D] text-[#071B3D] ' + hoverClasses + ' hover:text-white'}`}>
             {currentLang === 'fa' ? university.ctaLabelFa : university.ctaLabelEn} ↗
           </a>
         )}

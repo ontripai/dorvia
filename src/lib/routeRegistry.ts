@@ -1,3 +1,5 @@
+import { Locale } from './locale-router';
+
 export interface RouteConfig {
   canonical: string;
   aliases: string[];
@@ -9,6 +11,7 @@ export interface RouteConfig {
   indexable: boolean;
   inSitemap: boolean;
   pageType: 'hub' | 'content' | 'legal' | 'admin' | 'api' | 'special';
+  missingTranslations?: Locale[];
 }
 
 export const ROUTE_REGISTRY: Record<string, RouteConfig> = {

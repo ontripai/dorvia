@@ -1,9 +1,11 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import { LocalizedLink as Link } from '@/components/LocalizedLink';
+import { usePathname } from 'next/navigation';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
+import { getNavPath } from '../lib/navigation';
 import { ShieldCheck } from './Icons';
 import Image from 'next/image';
 
@@ -15,6 +17,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, onNavigate }) => {
   const t = getTranslations(currentLang);
+  const pathname = usePathname() || '/';
 
   return (
     <footer className="bg-[#071B3D] text-white pt-0 pb-12 relative border-t border-[#0b2b55] overflow-hidden">
@@ -28,8 +31,8 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
           
           {/* Col 1: Brand Statement */}
           <div className="space-y-4 lg:col-span-1">
-            <Link href="/" aria-label="DORVIA EUROP" className="inline-block cursor-pointer" >
-                <img src="/images/logo/dorvia-logo-reversed-transparent-3000.png" alt="DORVIA EUROP" className="h-[28px] sm:h-[32px] w-auto" />
+            <Link href={getNavPath('home', pathname)} aria-label="DORVIA EUROP" className="inline-block cursor-pointer" >
+                <Image src="/images/logo/dorvia-logo-reversed-transparent-3000.png" alt="DORVIA EUROP" width={3000} height={679} className="h-[28px] sm:h-[32px] w-auto" />
             </Link>
 
             <p className="text-[#788697] leading-relaxed mt-4">
@@ -45,9 +48,9 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
 
           {/* Col 2: Pathways */}
           <div className="space-y-3">
-            <h4 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
+            <h3 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
               {currentLang === 'fa' ? 'مسیرهای مهاجرت' : 'Pathways'}
-            </h4>
+            </h3>
             <ul className="space-y-2 text-slate-300">
               <li><Link href="/study" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.study.title}</Link></li>
               <li><Link href="/work" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{t.pathways.work.title}</Link></li>
@@ -59,9 +62,9 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
 
           {/* Col 3: Essentials in Romania */}
           <div className="space-y-3">
-            <h4 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
+            <h3 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
               {currentLang === 'fa' ? 'نیازها در رومانی' : 'Essentials'}
-            </h4>
+            </h3>
             <ul className="space-y-2 text-slate-300">
               <li><Link href="/needs/currency-exchange" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'صرافی و نرخ BNR' : 'Currency & BNR Rates'}</Link></li>
               <li><Link href="/needs/driving-license" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'گواهینامه رانندگی' : 'Driving License'}</Link></li>
@@ -74,25 +77,25 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
 
           {/* Col 4: Romania & Legal */}
           <div className="space-y-3">
-            <h4 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
+            <h3 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
               {currentLang === 'fa' ? 'شناخت رومانی و حقوقی' : 'Romania & Legal'}
-            </h4>
+            </h3>
             <ul className="space-y-2 text-slate-300">
               <li><Link href="/romania/economy" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'اقتصاد و صنایع رومانی' : 'Economy & Industries'}</Link></li>
               <li><Link href="/romania/cities" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'شهرهای رومانی' : 'Key Cities'}</Link></li>
               <li><Link href="/romania/tourism" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'راهنمای گردشگری' : 'Tourism Guide'}</Link></li>
-              <li><Link href="/legal/privacy" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سیاست حریم خصوصی' : 'Privacy Policy'}</Link></li>
-              <li><Link href="/legal/terms" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'شرایط استفاده' : 'Terms of Use'}</Link></li>
-              <li><Link href="/legal/disclaimer" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سلب مسئولیت قانونی' : 'Legal Disclaimer'}</Link></li>
-              <li><Link href="/legal/privacy" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'اطلاعات کوکی‌ها' : 'Cookie Information'}</Link></li>
+              <li><Link href={getNavPath('/legal/privacy', pathname)} className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سیاست حریم خصوصی' : 'Privacy Policy'}</Link></li>
+              <li><Link href={getNavPath('/legal/terms', pathname)} className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'شرایط استفاده' : 'Terms of Use'}</Link></li>
+              <li><Link href={getNavPath('/legal/disclaimer', pathname)} className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سلب مسئولیت قانونی' : 'Legal Disclaimer'}</Link></li>
+              <li><Link href={getNavPath('/legal/privacy#cookies', pathname)} className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'اطلاعات کوکی‌ها' : 'Cookie Information'}</Link></li>
             </ul>
           </div>
 
           {/* Col 5: Contact Info */}
           <div className="space-y-3">
-            <h4 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
+            <h3 className="font-extrabold text-white text-sm uppercase tracking-wider border-b border-slate-800 pb-2">
               {t.footer.contactInfo}
-            </h4>
+            </h3>
             <ul className="space-y-2 text-slate-300">
               <li>📍 {t.footer.address}</li>
               <li>✉️ <a href="mailto:ontrip.ai@gmail.com" dir="ltr" className="inline-block hover:text-[#2F6FED] transition-colors">{t.footer.email}</a></li>
@@ -109,7 +112,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
               ? 'این وب‌سایت نتیجه صدور ویزا، پذیرش یا اقامت را تضمین نمی‌کند. تصمیم‌گیری نهایی در صلاحیت سفارت و اداره کل مهاجرت رومانی (IGI) است.'
               : 'This platform does not guarantee visa, admission, or residency outcomes. Final approvals belong to official Romanian authorities.'}
           </span>
-          <Link href="/legal/disclaimer"
+          <Link href={getNavPath('/legal/disclaimer', pathname)}
             className="text-[#F4F7FC] font-bold hover:underline shrink-0 cursor-pointer"
           >
             {currentLang === 'fa' ? 'مطالعه سلب مسئولیت کامل' : 'Read Full Disclaimer'}
