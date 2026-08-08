@@ -1,9 +1,71 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production';
+
+let supabaseHost = '';
+if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+  try {
+    const url = new URL(process.env.NEXT_PUBLIC_SUPABASE_URL);
+    supabaseHost = url.protocol + '//' + url.host;
+  } catch (e) {
+    // Graceful fallback
+  }
+}
+const supabaseConnectSrc = supabaseHost ? ` ${supabaseHost}` : '';
+
+const cspHeader = `
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' ${!isProd ? "'unsafe-eval'" : ""};
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data: blob: https://images.unsplash.com;
+    font-src 'self' data:;
+    connect-src 'self'${supabaseConnectSrc};
+    frame-src 'none';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+`;
+
+const securityHeaders = [
+  {
+    key: 'Content-Security-Policy',
+    value: cspHeader.replace(/\n/g, '').replace(/\s+/g, ' ').trim(),
+  },
+  {
+    key: 'X-Content-Type-Options',
+    value: 'nosniff',
+  },
+  {
+    key: 'Referrer-Policy',
+    value: 'strict-origin-when-cross-origin',
+  },
+  {
+    key: 'Permissions-Policy',
+    value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()',
+  },
+  {
+    key: 'X-Frame-Options',
+    value: 'DENY',
+  },
+  {
+    key: 'Cross-Origin-Opener-Policy',
+    value: 'same-origin',
+  }
+];
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['images.unsplash.com', 'your-supabase-project.supabase.co'],
+    domains: ['images.unsplash.com'],
+  },
+  async headers() {
+    return [
+      {
+        source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+        headers: securityHeaders,
+      },
+    ];
   },
   async rewrites() {
     return {
