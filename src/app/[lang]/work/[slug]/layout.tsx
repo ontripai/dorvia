@@ -1,0 +1,33 @@
+import { getLocalizedMetadata } from '@/lib/metadata';
+import { Language } from '@/types';
+import { SITE_URL, isProduction } from '@/config';
+import type { Metadata } from 'next';
+import { PAGE_META } from '@/lib/pageMeta';
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const fullPath = `work/${params.slug}`;
+  const meta = PAGE_META[fullPath] || PAGE_META[params.slug] || PAGE_META['work'];
+  
+  const title = meta?.seoTitleFa || (meta?.titleFa ? `${meta.titleFa} | در رومانی – DORVIA EUROP` : 'در رومانی – DORVIA EUROP');
+  const description = meta?.seoDescFa || 'راهنمای جامع خدمات حقوقی، تحصیلی و مهاجرتی در کشور رومانی.';
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${SITE_URL}/${fullPath}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${SITE_URL}/${fullPath}`,
+    },
+    robots: isProduction 
+      ? (!meta?.indexable ? { index: false, follow: true } : { index: true, follow: true }) 
+      : { index: false, follow: false }
+  };
+}
+
+export default function SubLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+}

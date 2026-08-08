@@ -1,39 +1,37 @@
 import { SITE_URL } from '@/config';
 import type { Metadata, Viewport } from 'next';
-import { headers } from 'next/headers';
+
 import { getDirection } from '@/lib/i18n';
 import type { Language } from '@/types';
 import '../globals.css';
 import { AppLayout } from '@/components/AppLayout';
+import { StructuredData } from '@/components/StructuredData';
+
+import { getLocalizedMetadata } from '@/lib/metadata';
 
 const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' || process.env.VERCEL_ENV === 'production';
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: 'دوریا اروپا | DORVIA EUROP - مرجع مهاجرت، اقامت، کار و ویزای تحصیلی در رومانی',
-  description: 'اپلیکیشن جامع برای ارزیابی و مشاوره رایگان مهاجرت به رومانی و اتحادیه اروپا. دریافت اطلاعات به‌روز درباره شرایط کار، تحصیل، ثبت شرکت (سرمایه‌گذاری) و پیوست خانواده.',
-  keywords: ['مهاجرت به رومانی', 'اقامت در رومانی', 'کاریابی رومانی', 'ویزای تحصیلی در رومانی', 'ثبت شرکت رومانی', 'DORVIA EUROP', 'Immigration to Romania'],
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    title: 'دوریا اروپا | DORVIA EUROP - مرجع مهاجرت، اقامت، کار و ویزای تحصیلی در رومانی',
-    description: 'اپلیکیشن جامع برای ارزیابی و مشاوره رایگان مهاجرت به رومانی و اتحادیه اروپا. دریافت اطلاعات به‌روز درباره شرایط کار، تحصیل، ثبت شرکت (سرمایه‌گذاری) و پیوست خانواده.',
-    url: '/',
-  },
-  robots: isProduction ? {
-    index: true,
-    follow: true,
-  } : {
-    index: false,
-    follow: false,
-  },
-  icons: {
-    icon: '/images/logo/dorvia-logo-primary-transparent-3000.png',
-    shortcut: '/favicon.ico',
-    apple: '/images/logo/dorvia-logo-primary-transparent-3000.png',
-  }
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale: Language = 'fa';
+
+  const baseMeta = getLocalizedMetadata('home', locale);
+
+  return {
+    ...baseMeta,
+    robots: isProduction ? {
+      index: true,
+      follow: true,
+    } : {
+      index: false,
+      follow: false,
+    },
+    icons: {
+      icon: '/images/logo/dorvia-logo-primary-transparent-3000.png',
+      shortcut: '/favicon.ico',
+      apple: '/images/logo/dorvia-logo-primary-transparent-3000.png',
+    }
+  };
+}
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -52,12 +50,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const headersList = headers();
-  const internalLocale = headersList.get('x-dorvia-locale');
-  const locale: Language = internalLocale === 'en' ? 'en' : 'fa';
+  const locale: Language = 'fa';
 
   return (
     <html lang={locale} dir={getDirection(locale)}>
+      <head>
+        <StructuredData />
+      </head>
       <body className={`${inter.variable} ${manrope.variable} ${vazirmatn.variable} min-h-screen bg-slate-50 antialiased text-slate-900 selection:bg-[#002B7F] selection:text-white`}>
         <AppLayout initialLang={locale}>
           {children}

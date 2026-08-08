@@ -11,7 +11,7 @@ import { CityCard } from './CityCard';
 import { ServiceCard } from './ServiceCard';
 import { NeedsContent } from './NeedsContent';
 import { RomaniaOverviewContent } from './RomaniaOverviewContent';
-import UniversitiesPage from '@/app/(legacy)/universities/page';
+import UniversitiesPage from '@/app/[lang]/universities/page';
 import { WorkOverviewContent } from './WorkOverviewContent';
 import { StartHereContent } from './StartHereContent';
 import { IgiProcessContent } from './IgiProcessContent';

@@ -1,11 +1,12 @@
+import { getLocalizedMetadata } from '@/lib/metadata';
+import { Language } from '@/types';
 import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale: Language = 'fa';
+  return getLocalizedMetadata('evaluation', locale);
+}
+
 
 export default function EvaluationLayout({
   children,
