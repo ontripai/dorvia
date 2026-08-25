@@ -9,7 +9,7 @@ import { getNavPath } from '../lib/navigation';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { LeadForm } from './LeadForm';
-import { PhoneCall, Sparkles } from './Icons';
+import { PhoneCall, Sparkles, Menu, Search } from './Icons';
 
 // Create a context so page components can access global state and functions
 export const AppContext = createContext<{
@@ -27,6 +27,8 @@ export const useAppContext = () => useContext(AppContext);
 export function AppLayout({ children, initialLang }: { children: React.ReactNode; initialLang?: Language }) {
   const [currentLang, setCurrentLang] = useState<Language>(initialLang || 'fa');
   const [isEvaluationModalOpen, setIsEvaluationModalOpen] = useState(false);
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const [searchDialogOpen, setSearchDialogOpen] = useState(false);
 
   const pathname = usePathname() || '/';
   const router = useRouter();
@@ -82,7 +84,7 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
 
   return (
     <AppContext.Provider value={contextValue}>
-      <div className="min-h-screen flex flex-col justify-between bg-[#f7f9fc] text-[#142033] font-sans selection:bg-[#2F6FED] selection:text-white pb-16 lg:pb-0">
+      <div className="min-h-screen flex flex-col justify-between bg-[#f7f9fc] text-[#142033] font-sans selection:bg-[#2F6FED] selection:text-white pb-20 lg:pb-0">
 
         {/* Header */}
         <Header
@@ -91,6 +93,10 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
           activeRoute={activeRoute}
           onNavigate={handleNavigate}
           onOpenEvaluationModal={() => setIsEvaluationModalOpen(true)}
+          mobileDrawerOpen={mobileDrawerOpen}
+          onMobileDrawerOpenChange={setMobileDrawerOpen}
+          searchDialogOpen={searchDialogOpen}
+          onSearchDialogOpenChange={setSearchDialogOpen}
         />
 
         {/* Main Content Area */}
@@ -105,24 +111,52 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
           onNavigate={handleNavigate}
         />
 
-        {/* Mobile Sticky Action Bar */}
-        <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-[#071B3D]/95 backdrop-blur-md border-t border-white/10 px-4 py-2.5 flex items-center justify-between gap-3 shadow-2xl max-h-[64px]">
+        {/* Mobile Sticky Bottom Navigation */}
+        <nav
+          className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-[#071B3D]/97 backdrop-blur-md border-t border-white/10 shadow-2xl grid grid-cols-4 items-stretch"
+          style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+          aria-label={currentLang === 'fa' ? 'ناوبری پایین صفحه' : 'Bottom navigation'}
+        >
           <button
-            onClick={() => handleNavigate('contact')}
-            className="flex-1 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold py-2.5 rounded-xl flex items-center justify-center space-x-1.5 rtl:space-x-reverse border border-white/15 cursor-pointer"
+            onClick={() => setMobileDrawerOpen(true)}
+            className="flex flex-col items-center justify-center gap-1 py-2 min-h-[56px] text-slate-300 hover:text-white cursor-pointer"
+            aria-label={currentLang === 'fa' ? 'باز کردن منو' : 'Open menu'}
           >
-            <PhoneCall size={14} className="text-[#2F6FED]" />
-            <span>{currentLang === 'fa' ? 'تماس / مشاوره' : 'Call Advisory'}</span>
+            <Menu size={19} />
+            <span className="text-[10px] font-semibold">{currentLang === 'fa' ? 'منو' : 'Menu'}</span>
+          </button>
+
+          <button
+            onClick={() => setSearchDialogOpen(true)}
+            className="flex flex-col items-center justify-center gap-1 py-2 min-h-[56px] text-slate-300 hover:text-white cursor-pointer"
+            aria-label={currentLang === 'fa' ? 'جستجو' : 'Search'}
+          >
+            <Search size={19} />
+            <span className="text-[10px] font-semibold">{currentLang === 'fa' ? 'جستجو' : 'Search'}</span>
           </button>
 
           <button
             onClick={() => setIsEvaluationModalOpen(true)}
-            className="flex-1 bg-[#2F6FED] hover:bg-[#1A5BB8] text-white text-xs font-extrabold py-2.5 rounded-xl flex items-center justify-center space-x-1.5 rtl:space-x-reverse shadow-md cursor-pointer"
+            className="relative flex flex-col items-center justify-center gap-1 py-2 min-h-[56px] cursor-pointer"
+            aria-label={currentLang === 'fa' ? 'فرم ارزیابی رایگان' : 'Free Assessment'}
           >
-            <Sparkles size={14} />
-            <span>{currentLang === 'fa' ? 'فرم ارزیابی رایگان' : 'Free Assessment'}</span>
+            <span className="absolute top-1 flex items-center justify-center w-9 h-9 rounded-full bg-[#2F6FED] shadow-lg -translate-y-2.5">
+              <Sparkles size={16} className="text-white" />
+            </span>
+            <span className="text-[10px] font-extrabold text-[#5B93F5] mt-4">
+              {currentLang === 'fa' ? 'ارزیابی رایگان' : 'Assessment'}
+            </span>
           </button>
-        </div>
+
+          <button
+            onClick={() => handleNavigate('contact')}
+            className="flex flex-col items-center justify-center gap-1 py-2 min-h-[56px] text-slate-300 hover:text-white cursor-pointer"
+            aria-label={currentLang === 'fa' ? 'تماس با ما' : 'Contact us'}
+          >
+            <PhoneCall size={19} />
+            <span className="text-[10px] font-semibold">{currentLang === 'fa' ? 'تماس' : 'Contact'}</span>
+          </button>
+        </nav>
 
         {/* Evaluation Modal */}
         {isEvaluationModalOpen && (

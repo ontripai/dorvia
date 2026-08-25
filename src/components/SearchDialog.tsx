@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Language } from '../types';
-import { Search, X, ChevronLeft, Landmark, GraduationCap, BriefcaseBusiness, Building2, House } from './Icons';
+import { Search, X, ChevronLeft, Landmark, GraduationCap, BriefcaseBusiness, Building2, House, Users, Home, Scale, MessageSquare, PhoneCall } from './Icons';
 
 interface SearchItem {
   id: string;
@@ -36,6 +36,104 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
   }, [onClose]);
 
   const searchItems: SearchItem[] = [
+    {
+      id: 'start-here',
+      title: { fa: 'شروع از اینجا — راهنمای گام به گام مهاجرت', en: 'Start Here — Step-by-step Relocation Guide' },
+      category: { fa: 'شروع از اینجا', en: 'Start Here' },
+      route: 'start-here',
+      icon: <Home size={16} className="text-[#2F6FED]" />
+    },
+    {
+      id: 'planning-to-come',
+      title: { fa: 'قصد آمدن به رومانی دارم — چک‌لیست قبل از سفر', en: 'Planning to come to Romania — Pre-departure' },
+      category: { fa: 'شروع از اینجا', en: 'Start Here' },
+      route: 'start-here/planning-to-come',
+      icon: <Home size={16} className="text-[#2F6FED]" />
+    },
+    {
+      id: 'newly-arrived',
+      title: { fa: 'به‌تازگی وارد رومانی شده‌ام — سه روز اول', en: 'Just arrived in Romania — First 3 Days' },
+      category: { fa: 'شروع از اینجا', en: 'Start Here' },
+      route: 'start-here/newly-arrived',
+      icon: <Home size={16} className="text-[#2F6FED]" />
+    },
+    {
+      id: 'immigration',
+      title: { fa: 'مهاجرت و اقامت در رومانی — مسیرها و مراحل IGI', en: 'Immigration & Residence in Romania — IGI Pathways' },
+      category: { fa: 'مهاجرت و اقامت', en: 'Immigration' },
+      route: 'immigration',
+      icon: <Users size={16} className="text-[#2F6FED]" />
+    },
+    {
+      id: 'citizenship',
+      title: { fa: 'تابعیت رومانی — شرایط و مراحل درخواست', en: 'Romanian Citizenship — Requirements & Process' },
+      category: { fa: 'مهاجرت و اقامت', en: 'Immigration' },
+      route: 'immigration/citizenship',
+      icon: <Users size={16} className="text-[#2F6FED]" />
+    },
+    {
+      id: 'family-reunification',
+      title: { fa: 'پیوست خانواده — اقامت برای همسر و فرزندان', en: 'Family Reunification — Spouse & Children Residence' },
+      category: { fa: 'مهاجرت و اقامت', en: 'Immigration' },
+      route: 'immigration/family-reunification',
+      icon: <Users size={16} className="text-[#2F6FED]" />
+    },
+    {
+      id: 'long-term-residence',
+      title: { fa: 'اقامت بلندمدت (دائم) در رومانی', en: 'Long-term Residence in Romania' },
+      category: { fa: 'مهاجرت و اقامت', en: 'Immigration' },
+      route: 'immigration/long-term-residence',
+      icon: <Users size={16} className="text-[#2F6FED]" />
+    },
+    {
+      id: 'universities',
+      title: { fa: 'دانشگاه‌های رومانی — همه رشته‌ها و شهریه‌ها', en: 'Universities in Romania — Fields & Tuition' },
+      category: { fa: 'تحصیل', en: 'Study' },
+      route: 'universities',
+      icon: <GraduationCap size={16} className="text-[#2F6FED]" />
+    },
+    {
+      id: 'scholarships',
+      title: { fa: 'بورسیه تحصیلی دولتی رومانی', en: 'Romanian Government Scholarships' },
+      category: { fa: 'تحصیل', en: 'Study' },
+      route: 'study/scholarships',
+      icon: <GraduationCap size={16} className="text-[#2F6FED]" />
+    },
+    {
+      id: 'cities',
+      title: { fa: 'شهرهای اصلی رومانی — بخارست، کلوژ، تیمیشوارا', en: 'Key Romanian Cities — Bucharest, Cluj, Timișoara' },
+      category: { fa: 'شناخت رومانی', en: 'Discover Romania' },
+      route: 'romania/cities',
+      icon: <Building2 size={16} className="text-[#2F6FED]" />
+    },
+    {
+      id: 'legal-privacy',
+      title: { fa: 'حریم خصوصی، شرایط استفاده و سلب مسئولیت', en: 'Privacy, Terms & Disclaimer' },
+      category: { fa: 'صفحات حقوقی', en: 'Legal' },
+      route: 'legal/privacy',
+      icon: <Scale size={16} className="text-[#2F6FED]" />
+    },
+    {
+      id: 'articles',
+      title: { fa: 'مقالات و راهنماهای تکمیلی', en: 'Articles & Additional Guides' },
+      category: { fa: 'مقالات', en: 'Articles' },
+      route: 'articles',
+      icon: <MessageSquare size={16} className="text-[#2F6FED]" />
+    },
+    {
+      id: 'about',
+      title: { fa: 'درباره ما — تیم DORVIA EUROP', en: 'About Us — The DORVIA EUROP Team' },
+      category: { fa: 'درباره ما', en: 'About' },
+      route: 'about',
+      icon: <Landmark size={16} className="text-[#2F6FED]" />
+    },
+    {
+      id: 'contact',
+      title: { fa: 'تماس با ما و مشاوره', en: 'Contact Us & Consultation' },
+      category: { fa: 'تماس', en: 'Contact' },
+      route: 'contact',
+      icon: <PhoneCall size={16} className="text-[#2F6FED]" />
+    },
     {
       id: 'currency',
       title: { fa: 'صرافی، تبدیل پول و نرخ مرجع بانک ملی رومانی', en: 'Currency Exchange & BNR Rates' },
