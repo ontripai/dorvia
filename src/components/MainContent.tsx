@@ -231,7 +231,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                     <Button
                       variant="outline"
                       size="lg"
-                      href="/services"
+                      href="/start-here"
                       className="w-full sm:w-auto"
                     >
                       {currentLang === 'fa' ? 'مشاهده مسیرها' : 'Explore Pathways'}

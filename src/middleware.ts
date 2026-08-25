@@ -27,12 +27,16 @@ export function middleware(request: NextRequest) {
   }
 
   // Only redirect known unprefixed legacy routes to /fa equivalents
-  const knownRoutes = ['/articles', '/company', '/immigration', '/needs', '/romania', '/services', '/start-here', '/study', '/universities', '/work'];
+  const exactRoutes = ['/about', '/contact', '/legal/privacy', '/legal/terms', '/legal/disclaimer'];
+  const knownPrefixes = ['/articles', '/company', '/immigration', '/needs', '/romania', '/services', '/start-here', '/study', '/universities', '/work'];
 
-  if (knownRoutes.some(route => pathname === route || pathname.startsWith(`${route}/`))) {
+  if (
+    exactRoutes.includes(pathname) ||
+    knownPrefixes.some(route => pathname === route || pathname.startsWith(`${route}/`))
+  ) {
     const url = request.nextUrl.clone();
     url.pathname = `/fa${pathname}`;
-    return NextResponse.redirect(url, 307);
+    return NextResponse.redirect(url, 308);
   }
 
   return nextWithHeaders();

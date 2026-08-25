@@ -66,10 +66,10 @@ export const enTranslations = {
     },
     work: {
       title: "Employment & Work Permits",
-      desc: "Tech, engineering, and skilled career opportunities backed by official work authorizations (Aviz de Munca) leading to permanent residency."
+      desc: "Career opportunities in fields such as IT, engineering, manufacturing, and services, tailored to professional specialization and employer demand."
     },
     company: {
-      title: "Corporate Formation (SRL)",
+      title: "Company Registration & Business Setup",
       desc: "Establish your business in a dynamic EU market. Note: Company registration alone does not grant residency; a separate commercial residency permit from IGI is required."
     },
     investment: {
@@ -100,7 +100,7 @@ export const enTranslations = {
       },
       {
         title: "Globally Accredited Higher Education",
-        desc: "Internationally recognized degrees in Medicine, Dentistry, Engineering, and Business without complex entrance exams."
+        desc: "Admission criteria, language requirements, and entrance exams or interviews depend on the university, study program, and academic year."
       },
       {
         title: "Low Taxes & Business Hub",

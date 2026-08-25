@@ -76,13 +76,16 @@ export async function GET() {
     });
 
   } catch (error: any) {
-    console.error('[BNR Feed Error]:', error?.message || error);
-    
     return NextResponse.json({
       success: false,
       error: 'در حال حاضر امکان دریافت نرخ زنده وجود ندارد',
       officialSiteUrl: 'https://www.bnr.ro/Cursul-de-schimb-514.aspx',
       timestamp: new Date().toISOString()
-    }, { status: 502 });
+    }, {
+      status: 200,
+      headers: {
+        'Cache-Control': 'no-store'
+      }
+    });
   }
 }
