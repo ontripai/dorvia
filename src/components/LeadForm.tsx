@@ -118,7 +118,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ currentLang, isModal = false
             : 'Online submission is temporarily unavailable. Please contact us via WhatsApp, phone, or email.'}
         </p>
         <div className="space-y-2 text-sm font-bold text-[#2F6FED]">
-          <p>📞 +40 700 000 000</p>
+          <p>📞 +40 727 348 009</p>
           <p>✉️ ontrip.ai@gmail.com</p>
         </div>
       </div>
