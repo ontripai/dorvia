@@ -7,9 +7,10 @@ interface ServiceCardProps {
   currentLang: Language;
   onSelect?: (service: ServiceItem) => void;
   href?: string;
+  expanded?: boolean;
 }
 
-export const ServiceCard: React.FC<ServiceCardProps> = ({ service, currentLang, onSelect, href }) => {
+export const ServiceCard: React.FC<ServiceCardProps> = ({ service, currentLang, onSelect, href, expanded }) => {
   return (
     <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
       <div>
@@ -21,11 +22,17 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, currentLang, 
           {service.title[currentLang]}
         </h3>
 
-        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">
+        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
           {service.shortDesc[currentLang]}
         </p>
 
-        <div className="space-y-2 mb-6">
+        {expanded && service.fullDesc?.[currentLang] && (
+          <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-3">
+            {service.fullDesc[currentLang]}
+          </p>
+        )}
+
+        <div className="space-y-2 mb-6 mt-3">
           {service.features[currentLang].map((feat, idx) => (
             <div key={idx} className="flex items-center space-x-2 rtl:space-x-reverse text-xs text-slate-700">
               <span className="w-4 h-4 rounded-full bg-blue-100 text-[#071B3D] flex items-center justify-center text-[10px] font-bold">✓</span>
