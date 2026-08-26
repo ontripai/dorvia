@@ -560,6 +560,166 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
         </div>
       );
 
+    case 'long-term-stay':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="start-here/long-term-stay" currentLang={currentLang} onNavigate={onNavigate} />
+
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <span className="text-[#2F6FED] font-bold text-xs uppercase tracking-wider">
+              {currentLang === 'fa' ? 'از کجا شروع کنم' : 'Start Here'}
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'مسیر اقامت و زندگی بلندمدت در رومانی' : 'The Long-Term Life Path in Romania'}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa'
+                ? 'نقشه راه رسیدن به اقامت دائم (بلندمدت) پس از چند سال زندگی قانونی در رومانی.'
+                : 'The roadmap to permanent (long-term) residence after several years of lawful stay in Romania.'}
+            </p>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منبع: اداره کل مهاجرت رومانی (IGI) — igi.mai.gov.ro — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: General Inspectorate for Immigration (IGI) — igi.mai.gov.ro — Last reviewed: August 2026'}
+            </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa'
+              ? 'اقامت بلندمدت (Rezidență pe Termen Lung) گام میانی بین یک اقامت موقت (کاری/تحصیلی) و تابعیت رومانی است. برخلاف اقامت موقت که هرساله یا هر چند سال باید تمدید شود، اقامت بلندمدت برای سال‌های بیشتری معتبر است و برخی محدودیت‌های اقامت موقت (مثل برخی شرایط کاری) را از بین می‌برد. این صفحه فقط نقشه راه کلی است؛ برای مدارک و مراحل دقیق به صفحه اختصاصی «اقامت بلندمدت» در بخش مهاجرت مراجعه کنید.'
+              : "Long-term residence (Rezidență pe Termen Lung) is the middle step between a temporary (work/study) residence permit and Romanian citizenship. Unlike temporary residence, which must be renewed every year or two, long-term residence is valid for several years and removes some of the restrictions temporary permits carry. This page is only the roadmap — for the exact documents and steps, see the dedicated Long-Term Residence page in the Immigration section."}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'شرط اصلی: ۵ سال اقامت قانونی مستمر' : 'The Core Requirement: 5 Years of Continuous Legal Stay'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'باید ۵ سال متوالی با اقامت موقت معتبر در رومانی زندگی کرده باشید؛ غیبت از کشور نباید بیش از ۶ ماه متوالی یا ۱۰ ماه مجموع در این ۵ سال باشد.' : 'You must have lived in Romania continuously for 5 years on a valid temporary permit; absences cannot exceed 6 consecutive months or 10 months total across those 5 years.'}</li>
+                <li>{currentLang === 'fa' ? 'دوره تحصیل دانشجویی فقط نصف محاسبه می‌شود — یعنی ۲ سال تحصیل معادل ۱ سال از سهمیه ۵ ساله است، نکته‌ای که بسیاری از دانشجویان اشتباه می‌گیرند.' : "Time spent as a student counts at only half rate — 2 years of study equals 1 year toward the 5-year requirement, a nuance many students get wrong."}</li>
+                <li>{currentLang === 'fa' ? 'ویزاهای کوتاه‌مدت، دیپلماتیک، پناهندگی/حمایت انسان‌دوستانه، کار فصلی و Au-pair معمولاً در این محاسبه لحاظ نمی‌شوند.' : 'Short-stay, diplomatic, asylum/humanitarian-protection, seasonal-work, and au-pair permits generally do not count toward this calculation.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'اعتبار و زمان بررسی' : 'Validity & Processing Time'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'کارت اقامت بلندمدت معمولاً ۵ سال اعتبار دارد؛ برای اعضای خانواده شهروند رومانیایی این مدت به ۱۰ سال می‌رسد.' : 'The long-term residence card is generally valid for 5 years; for family members of a Romanian citizen it extends to 10 years.'}</li>
+                <li>{currentLang === 'fa' ? 'بررسی درخواست معمولاً تا ۶ ماه طول می‌کشد و در موارد خاص تا ۳ ماه دیگر قابل تمدید است؛ پاسخ کتبی ظرف ۱۵ روز و کارت ظرف ۳۰ روز پس از تایید صادر می‌شود.' : 'Review typically takes up to 6 months, extendable by another 3 months in special cases; written notice comes within 15 days and the card is issued within 30 days of approval.'}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا زمان تحصیل دانشجویی به‌طور کامل جزو ۵ سال محاسبه می‌شود؟' : 'Does student time count fully toward the 5 years?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، فقط نصف. اگر ۴ سال به‌عنوان دانشجو در رومانی بوده‌اید، تنها ۲ سال از سهمیه ۵ ساله محاسبه می‌شود.' : "No, only half. If you've been a student in Romania for 4 years, only 2 years count toward the 5-year requirement."}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بعد از اقامت بلندمدت، مرحله بعدی چیست؟' : 'What comes after long-term residence?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'مرحله بعدی معمولاً درخواست تابعیت رومانی است که شرایط و زمان‌بندی جداگانه‌ای دارد — برای جزئیات به صفحه «هدف‌گذاری تابعیت» مراجعه کنید.' : 'The next step is typically applying for Romanian citizenship, which has its own separate conditions and timeline — see the Citizenship Path page for details.'}</p>
+              </div>
+            </div>
+          </div>
+
+          <ParentHubFooterCard slugRoute="start-here/long-term-stay" currentLang={currentLang} onNavigate={onNavigate} />
+        </div>
+      );
+
+    case 'citizenship-goal':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="start-here/citizenship-goal" currentLang={currentLang} onNavigate={onNavigate} />
+
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <span className="text-[#2F6FED] font-bold text-xs uppercase tracking-wider">
+              {currentLang === 'fa' ? 'از کجا شروع کنم' : 'Start Here'}
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'هدف‌گذاری تابعیت رومانی' : 'Setting a Path Toward Romanian Citizenship'}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa'
+                ? 'نقشه راه کلی رسیدن به تابعیت رومانی، از اقامت اولیه تا مصاحبه و سوگند شهروندی.'
+                : 'The overall roadmap to Romanian citizenship, from initial residence to the interview and oath.'}
+            </p>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منابع: اداره ملی تابعیت رومانی (ANC) — cetatenie.just.ro، قانون ۲۱/۱۹۹۱ — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Sources: National Authority for Citizenship (ANC) — cetatenie.just.ro, Law 21/1991 — Last reviewed: August 2026'}
+            </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa'
+              ? 'تابعیت رومانی آخرین مرحله مسیر مهاجرتی است و شرایط سخت‌گیرانه‌تری نسبت به اقامت بلندمدت دارد. این صفحه فقط چارچوب کلی و زمان‌بندی را نشان می‌دهد؛ برای فهرست دقیق مدارک به صفحه اختصاصی «تابعیت» در بخش مهاجرت مراجعه کنید. توجه داشته باشید که شرایط واجد شرایط بودن اخیراً سخت‌گیرانه‌تر شده است، پس اطلاعات را همیشه از سایت رسمی ANC تأیید کنید.'
+              : 'Romanian citizenship is the final stage of the immigration path and has stricter conditions than long-term residence. This page shows only the overall framework and timeline — for the exact document list, see the dedicated Citizenship page in the Immigration section. Note that eligibility conditions have recently been tightened, so always confirm details on the official ANC site.'}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'حداقل مدت اقامت لازم' : 'Minimum Residence Required'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'مسیر عادی: ۸ سال اقامت قانونی مستمر در رومانی (قانون ۲۱/۱۹۹۱، ماده ۸).' : 'Ordinary route: 8 years of continuous legal residence in Romania (Law 21/1991, Art. 8).'}</li>
+                <li>{currentLang === 'fa' ? 'مسیر کوتاه‌تر: ۵ سال در صورت ازدواج با شهروند رومانیایی (به شرط ۵ سال زناشویی)؛ ۳ سال برای دارندگان وضعیت پناهندگی شناخته‌شده.' : 'Shorter routes: 5 years if married to a Romanian citizen (for 5+ years of marriage); 3 years for recognized refugees.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'مصاحبه و آزمون شهروندی' : 'Interview & Citizenship Test'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'مصاحبه اجباری شامل ارزیابی زبان رومانیایی (سطح A2)، اطلاعات عمومی درباره تاریخ، جغرافیا و قانون اساسی رومانی است.' : "A mandatory interview assesses Romanian language ability (A2 level) plus general knowledge of Romania's history, geography, and Constitution."}</li>
+                <li>{currentLang === 'fa' ? 'بخشی از مصاحبه شامل خواندن متن سوگند شهروندی و گاهی تکمیل یک فرم مکتوب است؛ در صورت رد شدن، پس از یک دوره انتظار می‌توان دوباره شرکت کرد.' : 'Part of the interview includes reading the citizenship oath text aloud and sometimes filling out a written form; if you fail, you can retake it after a waiting period.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4 md:col-span-2">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'زمان‌بندی و اعتراض به تأخیر' : 'Timeline & Delay Remedies'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'بررسی پرونده از تاریخ ثبت در دبیرخانه فنی کمیسیون، طبق قانون حداکثر ۲ سال طول می‌کشد و در موارد موجه تا ۶ ماه دیگر قابل تمدید است.' : "Case review from the registration date with the Commission's technical secretariat legally takes up to 2 years, extendable by 6 months in justified cases."}</li>
+                <li>{currentLang === 'fa' ? 'در صورت تأخیر غیرموجه ANC، متقاضی می‌تواند از طریق دادگاه الزام اداره به رسیدگی به پرونده را درخواست کند — این مسیر بارها در رومانی مورد استفاده قرار گرفته است.' : 'If ANC delays unjustifiably, applicants can file a lawsuit compelling ANC to process the file — courts have repeatedly ordered this in Romania.'}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا اقامت بلندمدت پیش‌نیاز تابعیت است؟' : 'Is long-term residence a prerequisite for citizenship?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'رسماً پیش‌نیاز مستقیم نیست، اما در عمل اکثر متقاضیان ابتدا اقامت بلندمدت می‌گیرند چون شرط ۸ سال اقامت مستمر معمولاً از همان مسیر تامین می‌شود.' : "It's not formally a direct prerequisite, but in practice most applicants first obtain long-term residence, since the 8-year continuous-residence requirement is usually satisfied through that same track."}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر ANC پاسخ ندهد یا تأخیر کند چه باید کرد؟' : 'What if ANC is unresponsive or delays my case?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'در صورت گذشتن مدت قانونی بدون پاسخ، می‌توانید با کمک وکیل دادخواستی برای الزام ANC به رسیدگی به دادگاه اداری ارائه دهید.' : "If the legal timeframe passes without a response, you can, with a lawyer's help, file an administrative-court petition compelling ANC to act."}</p>
+              </div>
+            </div>
+          </div>
+
+          <ParentHubFooterCard slugRoute="start-here/citizenship-goal" currentLang={currentLang} onNavigate={onNavigate} />
+        </div>
+      );
+
     default:
       return null;
   }
