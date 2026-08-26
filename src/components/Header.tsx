@@ -19,6 +19,10 @@ interface HeaderProps {
   activeRoute: string;
   onNavigate: (route: string) => void;
   onOpenEvaluationModal: () => void;
+  mobileDrawerOpen: boolean;
+  onMobileDrawerOpenChange: (open: boolean) => void;
+  searchDialogOpen: boolean;
+  onSearchDialogOpenChange: (open: boolean) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -26,12 +30,16 @@ export const Header: React.FC<HeaderProps> = ({
   onLanguageChange,
   activeRoute,
   onNavigate,
-  onOpenEvaluationModal
+  onOpenEvaluationModal,
+  mobileDrawerOpen,
+  onMobileDrawerOpenChange,
+  searchDialogOpen,
+  onSearchDialogOpenChange
 }) => {
   const t = getTranslations(currentLang);
   const [activeMegaMenu, setActiveMegaMenu] = useState<'starthere' | 'immigration' | 'study' | 'work-business' | 'needs' | 'romania' | null>(null);
-  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
-  const [searchDialogOpen, setSearchDialogOpen] = useState(false);
+  const setMobileDrawerOpen = onMobileDrawerOpenChange;
+  const setSearchDialogOpen = onSearchDialogOpenChange;
   const pathname = usePathname() || '/';
 
   // EXACT 7 PRIMARY NAVIGATION ITEMS
@@ -213,6 +221,7 @@ export const Header: React.FC<HeaderProps> = ({
           onNavigate={onNavigate}
           onClose={() => setMobileDrawerOpen(false)}
           onOpenEvaluationModal={onOpenEvaluationModal}
+          onOpenSearch={() => setSearchDialogOpen(true)}
         />
       )}
 
