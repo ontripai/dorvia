@@ -5,11 +5,11 @@ import { InvestmentOverviewContent } from '@/components/InvestmentOverviewConten
 import { EvaluationCTA } from '@/components/EvaluationCTA';
 
 export default function CompanyInvestmentPage() {
-  const { currentLang , onOpenEvaluationModal } = useAppContext();
+  const { currentLang, onNavigate, onOpenEvaluationModal } = useAppContext();
 
   return (
     <div className="space-y-12">
-      <InvestmentOverviewContent currentLang={currentLang} />
+      <InvestmentOverviewContent currentLang={currentLang} onNavigate={onNavigate} />
       <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
     </div>
   );

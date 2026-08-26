@@ -260,12 +260,12 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'چگونگی دسترسی به خدمات درمانی اورژانسی در روزهای اول (پیش از تکمیل بیمه رسمی CASS). اطلاعات در بخش ' : 'How to access emergency medical services in the first days (before CASS insurance). See '}
-                  <Link href="/needs/insurance" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'بیمه' : 'Insurance'}</Link>
+                  <Link href="/needs/health" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'سلامت و CNAS' : 'Health & CNAS'}</Link>
                   {currentLang === 'fa' ? '.' : '.'}
                 </li>
               </ul>
             </div>
-            
+
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">6</span>
@@ -274,7 +274,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'شماره اورژانس رومانی (112) و دسترسی به کنسولگری ایران. ' : 'Romanian emergency number (112) and Iranian consulate access. '}
-                  <Link href="/romania/embassy-iran" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'سفارت ایران و سامانه میخک' : 'Embassy of Iran & Mikhak'}</Link>
+                  <Link href="/needs/iranian-embassy-and-mikhak" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'سفارت ایران و سامانه میخک' : 'Embassy of Iran & Mikhak'}</Link>
                 </li>
               </ul>
             </div>
@@ -407,7 +407,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>
                   {currentLang === 'fa' ? 'دسترسی به نظام سلامت عمومی (' : 'Accessing the public health system ('}
-                  <Link href="/needs/insurance" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'بیمه' : 'Insurance'}</Link>
+                  <Link href="/needs/health" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'سلامت و CNAS' : 'Health & CNAS'}</Link>
                   {currentLang === 'fa' ? ')، امکان یادگیری زبان رومانیایی، و شبکه‌های جامعه ایرانیان مقیم.' : '), learning the Romanian language, and Iranian community networks.'}
                 </li>
               </ul>
