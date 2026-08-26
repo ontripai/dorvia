@@ -519,7 +519,19 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
       );
 
     // 6. HOUSING (RENT & BUY)
-    case 'housing':
+    case 'housing': {
+      const housingDisclaimer = currentLang === 'fa'
+        ? 'این مورد باید بر اساس مقررات جاری و شرایط فردی (از جمله تابعیت شما و نوع دقیق ملک) با یک وکیل یا نوتار رومانیایی بررسی شود.'
+        : 'This must be verified based on current regulations and your individual circumstances (including your citizenship and the exact property type) with a Romanian lawyer or notary.';
+
+      const housingSourceLine = (
+        <div className="text-[11px] text-slate-400 mt-2">
+          {currentLang === 'fa'
+            ? 'منابع: قانون ۳۱۲/۲۰۰۵ (تملک زمین توسط اتباع خارجی)، اداره کل مالیات رومانی (ANAF) — anaf.ro، اداره کل مهاجرت رومانی (IGI) — igi.mai.gov.ro — آخرین بررسی: مرداد ۱۴۰۵ / آگوست ۲۰۲۶'
+            : 'Sources: Law 312/2005 (land acquisition by foreign citizens), Romanian Tax Authority (ANAF) — anaf.ro, General Inspectorate for Immigration (IGI) — igi.mai.gov.ro — Last reviewed: August 2026'}
+        </div>
+      );
+
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <Breadcrumb slugRoute="needs/housing" currentLang={currentLang} onNavigate={onNavigate} />
@@ -530,15 +542,16 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             </h1>
             <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
               {currentLang === 'fa'
-                ? 'چک‌لیست قراردادهای اجاره، ثبت آدرس مسکونی برای کارت اقامت و ضوابط خرید ملک.'
-                : 'Rental contracts, residence address registration, and property acquisition rules.'}
+                ? 'مدارک اجاره، ثبت قرارداد نزد ANAF، ثبت آدرس برای کارت اقامت نزد IGI، و ضوابط دقیق خرید آپارتمان و زمین برای اتباع غیر اتحادیه اروپا.'
+                : 'Rental documents, ANAF contract registration, address registration for your IGI residence permit, and the precise rules for non-EU citizens buying apartments and land.'}
             </p>
+            {housingSourceLine}
           </div>
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-            {currentLang === 'fa' 
-              ? 'پیدا کردن محل سکونت مناسب یکی از مهم‌ترین دغدغه‌های مهاجران تازه‌وارد در رومانی است. بازار مسکن گزینه‌های متنوعی از آپارتمان‌های مدرن تا خانه‌های حومه‌شهری را پیش روی شما می‌گذارد. در زمان اجاره، پرداخت یک ماه پیش‌پرداخت و یک ماه ودیعه (Garantie) امری رایج است و حتماً باید بر امضای یک قرارداد رسمی و ثبت‌شده پافشاری کنید تا از آن برای تشکیل پرونده اقامت خود در اداره مهاجرت بهره ببرید. شرایط خرید ملک و زمین برای اتباع کشورهای خارج از اتحادیه اروپا به تابعیت، نوع ملک، ساختار معامله و مقررات جاری بستگی دارد. پیش از پرداخت بیعانه یا امضای قرارداد، بررسی مستقل حقوقی و ثبتی ضروری است.'
-              : 'Finding a suitable place to live is one of the most critical steps for newcomers to Romania. The housing market offers a variety of options, from modern apartments in vibrant city centers to quieter suburban houses. When renting, it is standard practice to pay one month\'s rent upfront alongside a security deposit, and it is crucial to insist on a formal, written contract registered with the tax authorities (ANAF). For those looking to buy, non-EU citizens can freely purchase the physical building (apartments/houses), though direct ownership of land requires a registered Romanian company or a specific bilateral treaty.'}
+            {currentLang === 'fa'
+              ? 'پیدا کردن محل سکونت مناسب یکی از مهم‌ترین دغدغه‌های مهاجران تازه‌وارد در رومانی است. بازار مسکن گزینه‌های متنوعی از آپارتمان‌های مدرن تا خانه‌های حومه‌شهری را پیش روی شما می‌گذارد. آدرس محل سکونت شما فقط یک موضوع مسکن نیست؛ چون قرارداد اجاره‌ی ثبت‌شده، مدرک اصلی «اثبات محل سکونت» برای پرونده‌ی کارت اقامت شما نزد اداره کل مهاجرت (IGI) است. برای خرید ملک، تفاوت اساسی بین مالکیت «ساختمان/آپارتمان» و مالکیت «زمین» وجود دارد؛ اتباع غیر اتحادیه اروپا (از جمله اکثر شهروندان ایرانی) در مالکیت زمین با محدودیت قانونی مواجه‌اند، مگر از طریق ثبت شرکت رومانیایی. پیش از پرداخت بیعانه یا امضای هر قراردادی، بررسی مستقل حقوقی و ثبتی ضروری است.'
+              : 'Finding a suitable place to live is one of the most critical steps for newcomers to Romania. The housing market offers a variety of options, from modern apartments in vibrant city centers to quieter suburban houses. Your address is not just a housing matter — a registered rental contract is the primary "proof of dwelling" document for your residence permit file at the General Inspectorate for Immigration (IGI). For buying property, there is a fundamental distinction between owning a "building/apartment" and owning "land": non-EU citizens (including most Iranian nationals) face a legal restriction on direct land ownership, unless they go through a Romanian-registered company. Before paying a deposit or signing any contract, independent legal and land-registry review is essential.'}
           </div>
 
           <div className="flex border-b border-[#dfe6ef] space-x-4 rtl:space-x-reverse">
@@ -558,19 +571,115 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
 
           {housingTab === 'rent' ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="editorial-card p-6 bg-white space-y-3 border border-[#dfe6ef]">
-                <h4 className="font-extrabold text-base text-[#142033]">چک‌لیست قرارداد اجاره (Contract de Inchiriere)</h4>
-                <p className="text-sm text-[#526174] leading-relaxed">ثبت قرارداد در اداره مالیات (ANAF)، تصریح مبلغ اجاره به RON، تعیین تکلیف شارژ ساختمان (Intretinere) و حق ثبت آدرس برای اقامت.</p>
+              <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+                <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                  <span>{currentLang === 'fa' ? 'مدارک لازم برای اجاره' : 'Documents Needed to Rent'}</span>
+                </h2>
+                <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                  <li>{currentLang === 'fa' ? 'پاسپورت یا کارت شناسایی معتبر؛ در صورت وجود، کپی کارت اقامت یا ویزا.' : 'A valid passport or ID card; a copy of your residence permit or visa, if you already have one.'}</li>
+                  <li>{currentLang === 'fa' ? 'در صورت داشتن، کد شناسایی مالیاتی (CNP) — نداشتن آن معمولاً مانع امضای قرارداد اولیه نیست.' : 'Your personal tax number (CNP), if you have one — not having it yet usually doesn\'t block signing an initial contract.'}</li>
+                  <li>{currentLang === 'fa' ? 'اثبات درآمد یا اشتغال/تحصیل (پذیرش دانشگاه، قرارداد کار)، و گاهی یک نامه‌ی کوتاه معرفی خود به موجر.' : 'Proof of income or your employment/study status (admission letter, work contract), and sometimes a short letter of introduction to the landlord.'}</li>
+                  <li><span className="text-[11px] italic text-slate-400">{currentLang === 'fa' ? 'برخی موجران یا آژانس‌ها مدارک اضافه (مثل گواهی عدم سوءپیشینه) درخواست می‌کنند؛ این یک رویه رسمی و اجباری سراسری نیست.' : 'Some landlords or agencies request extra documents (e.g. a criminal record certificate); this is not a mandatory nationwide requirement.'}</span></li>
+                </ul>
               </div>
-              <div className="editorial-card p-6 bg-white space-y-3 border border-[#dfe6ef]">
-                <h4 className="font-extrabold text-base text-[#142033]">ودیعه و پیش‌پرداخت</h4>
-                <p className="text-sm text-[#526174] leading-relaxed">معمولاً ۱ ماه اجاره به‌عنوان ودیعه (Garantie) دریافت می‌شود. حتماً صورت‌جلسه تحویل اثاثیه (Proces Verbal) را امضا کنید.</p>
+
+              <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+                <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                  <span>{currentLang === 'fa' ? 'قرارداد و ثبت نزد ANAF (فرم C168)' : 'Contract & ANAF Registration (Form C168)'}</span>
+                </h2>
+                <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                  <li>{currentLang === 'fa' ? 'قرارداد اجاره (Contract de Închiriere) باید مشخصات کامل طرفین، کد ملی (CNP) مستأجر، آدرس دقیق و ترجیحاً شماره پرونده ثبتی ملک (Carte Funciară) را داشته باشد.' : 'The rental contract (Contract de Închiriere) must state full identification of both parties, the tenant\'s national ID (CNP), the exact address, and ideally the property\'s Land Registry (Carte Funciară) number.'}</li>
+                  <li>{currentLang === 'fa' ? 'موجر موظف است ظرف ۳۰ روز از امضا، قرارداد را با فرم C168 نزد ANAF ثبت کند؛ این وظیفه‌ی قانونی موجر است، نه مستأجر.' : 'The landlord is legally required to register the contract with ANAF using Form C168 within 30 days of signing — this is the landlord\'s obligation, not the tenant\'s.'}</li>
+                  <li>{currentLang === 'fa' ? 'ثبت قرارداد آن را به «سند لازم‌الاجرا» تبدیل می‌کند (امکان وصول اجاره بدون نیاز به حکم دادگاه جداگانه) و برای شما مدرک رسمی اثبات آدرس است.' : 'Registration turns the contract into an "enforceable title" (rent can be pursued without a separate court judgment) and serves as your official proof-of-address document.'}</li>
+                </ul>
+              </div>
+
+              <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+                <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                  <span>{currentLang === 'fa' ? 'ودیعه، کمیسیون و تحویل' : 'Deposit, Commission & Handover'}</span>
+                </h2>
+                <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                  <li>{currentLang === 'fa' ? 'ودیعه (Garanție) معمولاً معادل ۱ تا ۲ ماه اجاره است و در پایان قرارداد، در صورت نبود خسارت، بازگردانده می‌شود.' : 'The security deposit (Garanție) is typically equal to 1–2 months\' rent and is refunded at the end of the contract if there is no damage.'}</li>
+                  <li>{currentLang === 'fa' ? 'در صورت استفاده از آژانس املاک، کمیسیون رایج معادل یک ماه اجاره است؛ اما مسئول پرداخت (موجر یا مستأجر) و مبلغ دقیق، تابع توافق است، نه نرخ ثابت قانونی.' : 'When a real estate agency is involved, a commission of around one month\'s rent is common; but who pays it and the exact amount depend on the agreement, not a fixed legal rate.'}</li>
+                  <li>{currentLang === 'fa' ? 'در روز تحویل، صورت‌جلسه تحویل ملک (Proces Verbal de Predare-Primire) را با ثبت کنتورهای برق/گاز/آب امضا کنید، و انتقال قبوض به نام خودتان را نزد شرکت‌های آب/برق/گاز محلی پیگیری کنید.' : 'On move-in day, sign a handover protocol (Proces Verbal de Predare-Primire) that records the electricity/gas/water meter readings, and follow up with the local utility providers to transfer the bills into your name.'}</li>
+                  <li>{currentLang === 'fa' ? 'در قرارداد باید مشخص شود شارژ ساختمان/انجمن مالکین (Întreținere) — که هزینه‌های مشترک نظیر نظافت راه‌پله، آسانسور و گرمایش مرکزی را پوشش می‌دهد — بر عهده چه کسی است.' : 'The contract should clarify who is responsible for the building/homeowners\' association fee (Întreținere), which covers shared costs like stairwell cleaning, elevator maintenance, and central heating.'}</li>
+                </ul>
+              </div>
+
+              <div className="editorial-card p-6 bg-[#071B3D] text-white space-y-4">
+                <h2 className="text-lg font-bold flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
+                  <span>{currentLang === 'fa' ? 'ثبت آدرس برای کارت اقامت (IGI)' : 'Registering Your Address for the IGI Residence Permit'}</span>
+                </h2>
+                <ul className="space-y-2 text-sm text-slate-300 list-disc list-inside">
+                  <li>{currentLang === 'fa' ? 'برای هر درخواست یا تمدید کارت اقامت، IGI «اثبات تصرف قانونی محل سکونت» را به‌صورت اصل و کپی می‌خواهد؛ قرارداد اجاره‌ی ثبت‌شده نزد ANAF معمولاً برای این منظور کافی است.' : 'For any residence permit application or renewal, IGI requires "proof of legal possession of the living space" in original and copy; an ANAF-registered rental contract is generally sufficient for this.'}</li>
+                  <li>{currentLang === 'fa' ? 'اگر صاحب‌خانه نیستید، ممکن است علاوه بر قرارداد، یک اعلامیه یا رضایت مالک (که برخی ادارات آن را نزد نوتار می‌خواهند) نیز لازم شود؛ این جزئیات بین شهرها و ادارات محلی IGI کمی متفاوت است — پیش از مراجعه با اداره محلی خود هماهنگ کنید.' : 'If you are not the owner, some IGI territorial offices may also ask for a landlord\'s consent/hosting declaration (sometimes notarized) in addition to the contract; this detail varies somewhat by city and local office — confirm with your local IGI office before your appointment.'}</li>
+                  <li className="font-bold">{currentLang === 'fa' ? 'اگر آدرس محل سکونت خود را تغییر دهید، طبق مقررات IGI موظفید ظرف ۳۰ روز آن را به اداره محلی مهاجرت اطلاع دهید و برای صدور کارت اقامت جدید با آدرس به‌روز اقدام کنید.' : 'If you change your address, IGI regulations require you to notify your local immigration office within 30 days and apply for a new residence permit reflecting the updated address.'}</li>
+                  <li><span className="text-[11px] italic text-slate-400">{housingDisclaimer}</span></li>
+                </ul>
               </div>
             </div>
           ) : (
-            <div className="editorial-card p-6 bg-white space-y-3 border border-[#dfe6ef]">
-              <h4 className="font-extrabold text-base text-[#142033]">ضوابط خرید ملک برای اتباع غیر EU</h4>
-              <p className="text-sm text-[#526174] leading-relaxed">شرایط خرید ملک و زمین برای اتباع کشورهای خارج از اتحادیه اروپا به تابعیت، نوع ملک، ساختار معامله و مقررات جاری بستگی دارد. پیش از پرداخت بیعانه یا امضای قرارداد، بررسی مستقل حقوقی و ثبتی ضروری است.</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+                <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                  <span>{currentLang === 'fa' ? 'خرید آپارتمان و ساختمان' : 'Buying an Apartment or Building'}</span>
+                </h2>
+                <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                  <li>{currentLang === 'fa' ? 'اتباع اتحادیه اروپا/فضای اقتصادی اروپا دقیقاً مانند شهروندان رومانیایی، بدون هیچ محدودیتی می‌توانند آپارتمان، خانه یا زمین بخرند.' : 'EU/EEA citizens can buy an apartment, house, or land exactly like Romanian citizens, with no restrictions.'}</li>
+                  <li>{currentLang === 'fa' ? 'اتباع غیر اتحادیه اروپا (از جمله اکثر شهروندان ایرانی) می‌توانند مالکیت «ساختمان» — یعنی خودِ واحد آپارتمانی یا بنا — را آزادانه و بدون نیاز به مجوز خاص خریداری کنند.' : 'Non-EU citizens (including most Iranian nationals) may freely buy ownership of the "building" itself — i.e. the apartment unit or the structure — without needing any special permit.'}</li>
+                  <li>{currentLang === 'fa' ? 'نکته‌ی مهم: هر آپارتمان به‌طور طبیعی شامل یک سهم مشاع از زمین زیربنا هم می‌شود. سازوکار رایج برای این مورد، «حق سطحی» (Drept de Superficie) است: شما مالک واحد هستید و حق استفاده از زمین را دارید، بدون آنکه لزوماً مالک رسمی سهم زمین باشید — جزئیات دقیق در هر معامله باید توسط نوتار بررسی شود.' : 'Important nuance: every apartment naturally includes a share of the land underneath the building. The common legal mechanism for this is the "right of superficies" (Drept de Superficie): you own the unit and hold a right to use the land, without necessarily being the formal owner of that land share — the exact structure must be reviewed by a notary in each transaction.'}</li>
+                </ul>
+              </div>
+
+              <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+                <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                  <span>{currentLang === 'fa' ? 'زمین و اصل «تقابل تابعیتی» (Reciprocity)' : 'Land & the "Reciprocity" Principle'}</span>
+                </h2>
+                <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                  <li>{currentLang === 'fa' ? 'طبق قانون ۳۱۲/۲۰۰۵، اتباع کشورهای خارج از اتحادیه اروپا فقط در صورت وجود یک «معاهده تقابل تابعیتی» (Reciprocity Treaty) بین رومانی و کشور متبوع‌شان می‌توانند مستقیماً مالک زمین (کشاورزی، جنگل یا زمین خالی) شوند.' : 'Under Law 312/2005, non-EU citizens can only directly own land (agricultural, forest, or bare land) if a "reciprocity treaty" exists between Romania and their home country.'}</li>
+                  <li className="font-bold">{currentLang === 'fa' ? 'در حال حاضر رومانی چنین معاهده‌ای با اکثر کشورهای غیر اروپایی — از جمله ایران — ندارد؛ یعنی برای اکثریت قریب‌به‌اتفاق شهروندان ایرانی، مالکیت مستقیم زمین به‌عنوان شخص حقیقی عملاً ممکن نیست.' : 'Romania currently has no such treaty with most non-European countries — including Iran — meaning direct land ownership as an individual is, in practice, not available to the vast majority of Iranian nationals.'}</li>
+                  <li className="font-bold">{currentLang === 'fa' ? 'مهم: این محدودیت بر اساس «تابعیت» شماست، نه وضعیت اقامتی. داشتن کارت اقامت رومانی (تحصیلی، کاری یا هر نوع دیگر) به‌تنهایی این محدودیت زمین را برطرف نمی‌کند.' : 'Important: this restriction is based on your citizenship, not your residency status. Holding a Romanian residence permit (study, work, or otherwise) does not by itself remove this land restriction.'}</li>
+                </ul>
+              </div>
+
+              <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+                <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                  <span>{currentLang === 'fa' ? 'راه‌حل رایج: ثبت شرکت رومانیایی (SRL)' : 'The Common Solution: A Romanian Company (SRL)'}</span>
+                </h2>
+                <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                  <li>{currentLang === 'fa' ? 'یک شرکت ثبت‌شده در رومانی (مثلاً SRL) از نظر قانونی «تابعیت رومانیایی» دارد و طبق قوانین عمومی مالکیت (نه قوانین محدودکننده اتباع خارجی) عمل می‌کند — صرف‌نظر از تابعیت سهامداران آن.' : 'A company registered in Romania (e.g. an SRL) legally holds "Romanian nationality" and is governed by general property law (not the foreign-ownership restrictions) — regardless of the nationality of its shareholders.'}</li>
+                  <li>{currentLang === 'fa' ? 'این یعنی یک شهروند ایرانی می‌تواند با ثبت یک SRL (حتی با مالکیت ۱۰۰٪ خودش)، از طریق آن شرکت زمین، خانه ویلایی یا هر نوع ملکی را بخرد — این روشی است که سرمایه‌گذاران خارجی سال‌هاست به‌طور رایج از آن استفاده می‌کنند.' : 'This means an Iranian citizen can register an SRL (even 100% owned by themselves) and use that company to buy land, a villa, or any type of property — this is a route foreign investors have long used routinely.'}</li>
+                  <li>{currentLang === 'fa' ? 'این مسیر هزینه و تعهدات نگهداری شرکت (حسابداری، اظهارنامه مالیاتی سالانه و غیره) را هم به همراه دارد و باید در تصمیم‌گیری لحاظ شود.' : 'This route also comes with company-maintenance costs and obligations (bookkeeping, annual tax filings, etc.) that should factor into the decision.'}</li>
+                  <li>
+                    <button
+                      onClick={() => onNavigate('company/registration')}
+                      className="text-[#2F6FED] font-bold hover:underline cursor-pointer text-sm"
+                    >
+                      {currentLang === 'fa' ? '← مراحل ثبت شرکت (SRL) را ببینید' : '→ See the SRL Company Registration Steps'}
+                    </button>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+                <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
+                  <span>{currentLang === 'fa' ? 'فرآیند رسمی خرید ملک' : 'The Official Purchase Process'}</span>
+                </h2>
+                <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                  <li>{currentLang === 'fa' ? 'استعلام سابقه ثبتی ملک (Extras de Carte Funciară) از دفتر ثبت املاک برای اطمینان از نبود بدهی، رهن یا ادعای مالکیت دیگران.' : 'Requesting a Land Registry extract (Extras de Carte Funciară) to confirm the property is free of debts, mortgages, or competing ownership claims.'}</li>
+                  <li>{currentLang === 'fa' ? 'تنظیم سند نهایی خرید (Contract de Vânzare-Cumpărare) الزاماً نزد یک نوتار عمومی (Notar Public)؛ معاملات ملکی در رومانی بدون سند نوتاری رسمی و قابل‌ثبت نیستند.' : 'The final sale-purchase contract (Contract de Vânzare-Cumpărare) must be executed before a Public Notary; property transactions in Romania are not valid/registrable without a notarial deed.'}</li>
+                  <li>{currentLang === 'fa' ? 'هزینه‌های معامله معمولاً شامل حق‌الزحمه نوتار، مالیات نقل‌وانتقال و هزینه ثبت در دفتر املاک است؛ نرخ‌های دقیق را باید از نوتار طرف معامله استعلام کنید، نه از منابع عمومی.' : 'Transaction costs typically include the notary fee, a transfer tax, and a land-registry filing fee; get exact current rates from the notary handling your transaction, not from general sources.'}</li>
+                  <li><span className="text-[11px] italic text-slate-400">{housingDisclaimer}</span></li>
+                </ul>
+              </div>
             </div>
           )}
 
@@ -581,11 +690,19 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             <div className="space-y-6">
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'کمیسیون آژانس املاک را چه کسی پرداخت می‌کند؟' : 'Who pays the real estate agency fee?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'مبلغ و مسئول پرداخت کمیسیون به قرارداد آژانس و شرایط معامله بستگی دارد و یک نرخ ثابت قانونی برای همه معاملات نیست.' : 'Typically, the tenant and the landlord each pay a commission to the agency, usually equivalent to 50% of one month\'s rent.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'مبلغ و مسئول پرداخت کمیسیون به قرارداد آژانس و شرایط معامله بستگی دارد و یک نرخ ثابت قانونی برای همه معاملات نیست؛ رقم رایج نزدیک به یک ماه اجاره است.' : 'The amount and who pays the commission depends on the agency agreement and deal terms — there is no fixed legal rate for all transactions; a commission near one month\'s rent is common.'}</p>
               </div>
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم با قرارداد اجاره برای اقامت درخواست دهم؟' : 'Can I use my rental contract for my residence permit application?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، یک قرارداد اجاره رسمی که در اداره مالیات ثبت شده باشد، از مدارک اصلی و الزامی برای تایید آدرس توسط اداره مهاجرت است.' : 'Yes, a legally registered rental contract is a mandatory document for proving your address to IGI for your residence card.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، یک قرارداد اجاره رسمی که نزد ANAF ثبت شده باشد، از مدارک اصلی و معمولاً کافی برای اثبات آدرس نزد اداره مهاجرت (IGI) است.' : 'Yes, a formal rental contract registered with ANAF is a primary document and is generally sufficient to prove your address to the Immigration Office (IGI).'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'با کارت اقامت رومانی می‌توانم مثل یک رومانیایی زمین بخرم؟' : 'Can I buy land like a Romanian citizen if I hold a Romanian residence permit?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. محدودیت مالکیت زمین بر اساس تابعیت شماست، نه وضعیت اقامتی. کارت اقامت این محدودیت را برطرف نمی‌کند؛ راه رایج، خرید از طریق یک شرکت رومانیایی (SRL) است.' : 'No. The land-ownership restriction is based on your citizenship, not your residency status. A residence permit does not remove it; the common route is buying through a Romanian company (SRL).'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم آپارتمان بخرم بدون اینکه نگران محدودیت زمین باشم؟' : 'Can I buy an apartment without worrying about the land restriction?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'در عمل بله؛ مالکیت خودِ واحد آپارتمانی برای اتباع غیر اتحادیه اروپا آزاد است و سهم زمین معمولاً از طریق «حق سطحی» مدیریت می‌شود، نه مالکیت مستقیم. با این حال، سازوکار دقیق را نوتار طرف معامله باید در سند خرید مشخص کند.' : 'In practice, yes — non-EU citizens can freely own the apartment unit itself, and the land share is typically handled via a "right of superficies" rather than direct ownership. Even so, the exact mechanism must be specified by your notary in the purchase deed.'}</p>
               </div>
             </div>
           </div>
@@ -593,6 +710,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
           <ParentHubFooterCard slugRoute="needs/housing" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
+    }
 
     // 7. FIRST DAYS CHECKLIST
     case 'first-days-checklist': {
