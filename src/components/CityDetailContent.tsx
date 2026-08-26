@@ -112,6 +112,73 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
                 <li>{currentLang === 'fa' ? 'به‌عنوان پایتخت و بزرگ‌ترین بازار کار کشور، بخارست بیشترین تراکم شرکت‌های بین‌المللی و فرصت‌های شغلی را دارد.' : "As the capital and largest job market in the country, Bucharest has the highest concentration of multinational companies and job opportunities."}</li>
               </ul>
             </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
+                <span>{currentLang === 'fa' ? 'موزه‌ها و فرهنگ' : 'Museums & Culture'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'موزه ملی هنر رومانی (در کاخ سلطنتی سابق، میدان انقلاب) — آثار هنری رومانیایی و اروپایی از جمله برانکوزی و رامبراند.' : 'National Museum of Art of Romania (former Royal Palace, Revolution Square) — Romanian and European art, including Brâncuși and Rembrandt.'}</li>
+                <li>{currentLang === 'fa' ? 'موزه ملی تاریخ رومانی (خیابان کالئا ویکتوریه) — جواهرات سلطنتی رومانی و گنجینه پیتروآسله.' : "National History Museum of Romania (Calea Victoriei) — home to Romania's Crown Jewels and the Pietroasele treasure."}</li>
+                <li>{currentLang === 'fa' ? 'موزه ملی روستایی دیمیتریه گوستی (داخل پارک شاه میهای اول) — موزه روباز با ۱۲۳ خانه و بنای سنتی از سراسر رومانی.' : "Dimitrie Gusti National Village Museum (inside King Michael I Park) — an open-air museum with 123 traditional houses and structures from across Romania."}</li>
+                <li>{currentLang === 'fa' ? 'موزه ملی تاریخ طبیعی گریگوره آنتیپا — بیش از ۲ میلیون نمونه، از جمله تنها اسکلت کامل دینوتریوم جهان.' : "Grigore Antipa National Museum of Natural History — over 2 million specimens, including the world's only intact Deinotherium skeleton."}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">6</span>
+                <span>{currentLang === 'fa' ? 'مراکز خرید و فروشگاه‌ها' : 'Shopping & Malls'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'ای‌اف‌آی کوتروچنی (AFI Cotroceni) — بزرگ‌ترین مرکز خرید رومانی (حدود ۹۰,۰۰۰ متر مربع)، غرب شهر.' : "AFI Cotroceni — Romania's largest mall (~90,000 m²), western Bucharest."}</li>
+                <li>{currentLang === 'fa' ? 'باندئاسا شاپینگ سیتی (Băneasa Shopping City) — شمال شهر، بیش از ۲۸۰ فروشگاه.' : 'Băneasa Shopping City — northern Bucharest, 280+ stores.'}</li>
+                <li>{currentLang === 'fa' ? 'سان پلازا (Sun Plaza) — جنوب شهر؛ پرومنادا مال (Promenada Mall) — شمال‌شرق، مرکز خریدی لوکس‌تر.' : 'Sun Plaza — southern Bucharest; Promenada Mall — northeast, a more upscale option.'}</li>
+                <li>{currentLang === 'fa' ? 'برای خرید روزانه مواد غذایی: زنجیره‌های کافلند، لیدل، کارفور، مگا ایمیج، پروفی، اوشان و پنی در سراسر شهر فعال هستند.' : 'For everyday groceries: Kaufland, Lidl, Carrefour, Mega Image, Profi, Auchan, and Penny all operate widely across the city.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">7</span>
+                <span>{currentLang === 'fa' ? 'پارک‌ها و تفرجگاه‌ها' : 'Parks & Recreation'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'باغ چیشمیجیو (Cișmigiu Gardens) — قدیمی‌ترین پارک مرکز شهر (از ۱۸۴۷)، با دریاچه؛ محل معمول گردهمایی ساکنان.' : 'Cișmigiu Gardens — the city center\'s oldest park (since 1847), with a lake; a common everyday gathering spot for residents.'}</li>
+                <li>{currentLang === 'fa' ? 'پارک شاه میهای اول (هرستراو سابق) — حدود ۱۸۷ هکتار، بزرگ‌ترین فضای سبز تفریحی شهر با قایقرانی.' : "King Michael I Park (formerly Herăstrău) — roughly 187 hectares, the city's largest recreational green space, with boating."}</li>
+                <li>{currentLang === 'fa' ? 'بازار اوبور (Obor) — یکی از قدیمی‌ترین و بزرگ‌ترین بازارهای سنتی شهر برای خرید محصولات تازه.' : "Obor Market — one of the city's oldest and largest traditional markets for fresh produce."}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">8</span>
+                <span>{currentLang === 'fa' ? 'بیمارستان‌ها و درمان' : 'Hospitals & Healthcare'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'بیمارستان اورژانس دانشگاهی بخارست (SUUB) و بیمارستان اورژانس فلوریاسکا — دو بیمارستان اصلی دولتی برای موارد اورژانسی.' : 'University Emergency Hospital of Bucharest (SUUB) and Floreasca Emergency Clinical Hospital — the two main public emergency hospitals.'}</li>
+                <li>{currentLang === 'fa' ? 'شبکه خصوصی رجینا ماریا (بیمارستان پوندراس، یوروکلینیک) و شبکه مدلایف، گزینه‌های رایج درمان خصوصی برای مهاجران هستند.' : 'The private Regina Maria network (Ponderas Academic Hospital, Euroclinic) and the MedLife network are common private-care options for foreign residents.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">9</span>
+                <span>{currentLang === 'fa' ? 'فرودگاه، ایستگاه قطار و اتوبوس' : 'Airport, Train & Bus Stations'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'فرودگاه بین‌المللی هنری کواندا (OTP) — حدود ۱۶.۵ کیلومتری شمال شهر در اوتوپنی؛ اصلی‌ترین دروازه بین‌المللی رومانی. با قطار حدود ۲۰-۲۵ دقیقه و با اتوبوس خط ۱۰۰ حدود ۳۵-۵۰ دقیقه تا مرکز شهر.' : "Henri Coandă International Airport (OTP) — about 16.5 km north of the city in Otopeni; Romania's main international gateway. About 20–25 min to center by train, or 35–50 min by bus line 100."}</li>
+                <li>{currentLang === 'fa' ? 'گارا دو نورد (Gara de Nord) — بزرگ‌ترین ایستگاه راه‌آهن کشور، مرکز اتصال به تمام شهرهای بزرگ و چند کشور همسایه.' : "Gara de Nord (Bucharest North) — Romania's largest railway station, the hub connecting all major cities and several neighboring countries."}</li>
+                <li>{currentLang === 'fa' ? 'برای اتوبوس‌های بین‌شهری/بین‌المللی، اتوگارا میلیتاری (Autogara Militari) پرکاربردترین ترمینال است.' : 'For intercity/international coaches, Autogara Militari is the most-used terminal.'}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="text-[11px] text-slate-400 -mt-4">
+            {currentLang === 'fa'
+              ? 'منابع بخش فرهنگ/خرید/سلامت/حمل‌ونقل: ویکی‌پدیا و سایت‌های رسمی موزه‌ها، مراکز خرید، بیمارستان‌ها و فرودگاه — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶. آدرس‌ها، ساعات کاری و پروازها ممکن است تغییر کنند؛ پیش از مراجعه از سایت رسمی هر مکان استعلام بگیرید.'
+              : "Sources for culture/shopping/healthcare/transit: Wikipedia and official museum, mall, hospital, and airport sites — Last reviewed: August 2026. Addresses, hours, and flight routes may change; check each venue's official site before visiting."}
           </div>
 
           {faqBlock([
@@ -203,6 +270,71 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
                 <li>{currentLang === 'fa' ? 'بازار کار فناوری اطلاعات قوی، حقوق‌های بالاتر از میانگین ملی، اما هزینه مسکن نیز بالاتر است.' : 'A strong IT job market with above-national-average salaries, but also higher housing costs.'}</li>
               </ul>
             </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
+                <span>{currentLang === 'fa' ? 'موزه‌ها و فرهنگ' : 'Museums & Culture'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'موزه ملی تاریخ ترانسیلوانیا (میدان موزه) — بزرگ‌ترین مجموعه اشیای برنزی اروپا و آثار دوران داکیایی/رومی.' : "National Museum of Transylvanian History (Piața Muzeului) — Europe's largest bronze-artifact collection and Dacian/Roman-era finds."}</li>
+                <li>{currentLang === 'fa' ? 'موزه هنر کلوژ-نپوکا (کاخ بارکو، میدان اتحاد) — هنر رومانیایی و اروپایی از قرن ۱۵ تا ۲۰.' : 'Art Museum of Cluj-Napoca (Bánffy Palace, Union Square) — Romanian and European fine art from the 15th–20th centuries.'}</li>
+                <li>{currentLang === 'fa' ? 'موزه قوم‌نگاری ترانسیلوانیا — بیش از ۴۰,۰۰۰ شیء فرهنگ عامه، همراه با پارک روباز «رومولوس ووئیا».' : "Ethnographic Museum of Transylvania — 40,000+ folk-culture artifacts, plus the open-air \"Romulus Vuia\" park."}</li>
+                <li>{currentLang === 'fa' ? 'خانه هینتز (Casa Hintz)، مجموعه تاریخ داروسازی — میدان اتحاد، داخل یک داروخانه قدیمی قرن ۱۸.' : 'Hintz House (Casa Hintz) Pharmacy History Collection — Union Square, inside a preserved 18th-century pharmacy.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">6</span>
+                <span>{currentLang === 'fa' ? 'مراکز خرید و فروشگاه‌ها' : 'Shopping & Malls'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'یولیوس مال کلوژ (Iulius Mall) — بزرگ‌ترین مرکز خرید شهر (حدود ۶۴,۰۰۰ متر مربع)، محله گئورگنی.' : 'Iulius Mall Cluj — the city\'s largest mall (~64,000 m²), in the Gheorgheni district.'}</li>
+                <li>{currentLang === 'fa' ? 'ویوو کلوژ-نپوکا (VIVO!) — حومه فلورشتی؛ پلاتینیا (Platinia) — محله مناشتور.' : 'VIVO! Cluj-Napoca — in suburban Florești; Platinia Shopping Center — in the Mănăștur district.'}</li>
+                <li>{currentLang === 'fa' ? 'برای خرید روزانه مواد غذایی: کافلند، لیدل، کارفور، اوشان، مگا ایمیج و پروفی همگی در سطح شهر فعال هستند.' : 'For everyday groceries: Kaufland, Lidl, Carrefour, Auchan, Mega Image, and Profi all operate across the city.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">7</span>
+                <span>{currentLang === 'fa' ? 'پارک‌ها و تفرجگاه‌ها' : 'Parks & Recreation'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'پارک مرکزی «سیمیون بارنوتسیو» (پارک بزرگ) — از سال ۱۸۳۰، با دریاچه قایقرانی؛ میزبان جشنواره‌های آنتولد (Untold) و جاز.' : 'Central Park "Simion Bărnuțiu" (Great Park) — dating to 1830, with a boating lake; hosts the Untold and Jazz in the Park festivals.'}</li>
+                <li>{currentLang === 'fa' ? 'پارک/تپه چتاتسویا (Cetățuia) — فضای سبز بالای شهر با استحکامات قرن ۱۸ و چشم‌انداز پانورامیک.' : 'Cetățuia Park/Hill — a hilltop green space with an 18th-century fortification and panoramic city views.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">8</span>
+                <span>{currentLang === 'fa' ? 'بیمارستان‌ها و درمان' : 'Hospitals & Healthcare'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'بیمارستان بالینی اورژانس شهرستان کلوژ (خیابان کلینیچیلور) — بزرگ‌ترین بیمارستان دولتی ترانسیلوانیا.' : "County Emergency Clinical Hospital Cluj-Napoca (Str. Clinicilor) — the largest public hospital in Transylvania."}</li>
+                <li>{currentLang === 'fa' ? 'بیمارستان خصوصی رجینا ماریا کلوژ (کالئا دوروبانتسیلور) — تنها بیمارستان دارای اعتبار بین‌المللی JCI در ترانسیلوانیا؛ بیمارستان مدلایف هومانیتاس نیز در شهر فعال است.' : "Regina Maria Hospital Cluj (Calea Dorobanților) — the only JCI-accredited hospital in Transylvania; MedLife Humanitas Cluj also operates in the city."}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">9</span>
+                <span>{currentLang === 'fa' ? 'فرودگاه، ایستگاه قطار و اتوبوس' : 'Airport, Train & Bus Stations'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'فرودگاه بین‌المللی آورام یانکو کلوژ (CLJ) — حدود ۹ کیلومتر (۲۰ دقیقه) شرق شهر؛ دومین فرودگاه پرترافیک رومانی با پروازهایی به لندن، پاریس، مونیخ، بارسلون و استانبول.' : "Avram Iancu Cluj International Airport (CLJ) — about 9 km (20 min) east of the city; Romania's 2nd-busiest airport, with routes to London, Paris, Munich, Barcelona, and Istanbul."}</li>
+                <li>{currentLang === 'fa' ? 'ایستگاه راه‌آهن کلوژ-نپوکا (میدان گاری) — حدود ۱۰۰ قطار روزانه به اکثر شهرهای رومانی، به‌همراه خطوط فرامرزی به بوداپست و وین.' : 'Cluj-Napoca railway station (Piața Gării) — about 100 daily trains to most Romanian cities, plus cross-border service to Budapest and Vienna.'}</li>
+                <li>{currentLang === 'fa' ? 'اتوبوس‌های بین‌شهری/بین‌المللی از سه ترمینال اصلی حرکت می‌کنند: اتوگارا فنی، اتوگارا بتا و اتوگارا سنس وست.' : 'Intercity/international coaches depart from three main terminals: Autogara Fany, Autogara Beta, and Autogara Sens Vest.'}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="text-[11px] text-slate-400 -mt-4">
+            {currentLang === 'fa'
+              ? 'منابع بخش فرهنگ/خرید/سلامت/حمل‌ونقل: ویکی‌پدیا و سایت‌های رسمی موزه‌ها، مراکز خرید، بیمارستان‌ها و فرودگاه — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶. آدرس‌ها، ساعات کاری و پروازها ممکن است تغییر کنند؛ پیش از مراجعه از سایت رسمی هر مکان استعلام بگیرید.'
+              : "Sources for culture/shopping/healthcare/transit: Wikipedia and official museum, mall, hospital, and airport sites — Last reviewed: August 2026. Addresses, hours, and flight routes may change; check each venue's official site before visiting."}
           </div>
 
           {faqBlock([
@@ -294,6 +426,73 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
                 <li>{currentLang === 'fa' ? 'موقعیت جغرافیایی نزدیک به مجارستان و صربستان، دسترسی زمینی سریع به اروپای مرکزی را فراهم می‌کند.' : "Its location near Hungary and Serbia provides fast overland access to Central Europe."}</li>
               </ul>
             </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
+                <span>{currentLang === 'fa' ? 'موزه‌ها و فرهنگ' : 'Museums & Culture'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'موزه ملی بانات (داخل قلعه هونیاده) — بزرگ‌ترین مجموعه باستان‌شناسی منطقه، شامل بازسازی معبد نوسنگی پارتسا.' : "National Museum of Banat (inside Huniade Castle) — the region's largest archaeology collection, including a reconstruction of the Parța Neolithic Sanctuary."}</li>
+                <li>{currentLang === 'fa' ? 'موزه هنر تیمیشوارا (کاخ باروک، میدان اتحاد) — نقاشی‌های ایتالیایی، فلاندری، آلمانی و رومانیایی.' : 'Art Museum Timișoara (Baroque Palace, Union Square) — Italian, Flemish, German, and Romanian paintings.'}</li>
+                <li>{currentLang === 'fa' ? 'موزه یادبود انقلاب ۱۹۸۹ (خیابان پوپا شاپکا) — روایت قیام مردمی که از تیمیشوارا آغاز شد.' : "Memorial Museum of the 1989 Revolution (Popa Șapca St.) — documents the anti-Ceaușescu uprising that began in Timișoara."}</li>
+                <li>{currentLang === 'fa' ? 'موزه روباز روستایی بانات — در حاشیه جنگل سبز (Pădurea Verde)، خانه‌های سنتی اقوام منطقه بانات.' : "Banat Village Museum (open-air) — on the edge of the Green Forest (Pădurea Verde), with traditional houses from Banat's ethnic groups."}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">6</span>
+                <span>{currentLang === 'fa' ? 'مراکز خرید و فروشگاه‌ها' : 'Shopping & Malls'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'یولیوس تاون (Iulius Town) — بزرگ‌ترین مجتمع خرید ترکیبی خارج از بخارست (حدود ۱۰۲,۰۰۰ متر مربع).' : "Iulius Town — the largest mixed-use retail complex outside Bucharest (~102,000 m²)."}</li>
+                <li>{currentLang === 'fa' ? 'شاپینگ سیتی تیمیشوارا (Shopping City) — ۱۱۰ فروشگاه، تنها سینمای IMAX/4DX رومانی.' : "Shopping City Timișoara — 110 shops, Romania's only IMAX/4DX cinema."}</li>
+                <li>{currentLang === 'fa' ? 'بگا شاپینگ سنتر (Bega Shopping Center) — در مرکز تاریخی شهر، یکی از قدیمی‌ترین مراکز خرید رومانی (از ۱۹۷۳).' : "Bega Shopping Center — in the historic center, one of Romania's oldest shopping centers (since 1973)."}</li>
+                <li>{currentLang === 'fa' ? 'برای خرید روزانه مواد غذایی: کافلند، اوشان و کارفور با چند شعبه فعال‌اند؛ لیدل، مگا ایمیج و پروفی نیز در سطح شهر حضور دارند.' : 'For everyday groceries: Kaufland, Auchan, and Carrefour have multiple branches; Lidl, Mega Image, and Profi are also present citywide.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">7</span>
+                <span>{currentLang === 'fa' ? 'پارک‌ها و تفرجگاه‌ها' : 'Parks & Recreation'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'پارک رزها (Parcul Rozelor) — از سال ۱۸۹۱، بیش از ۹,۰۰۰ رقم گل رز؛ منشأ لقب «شهر رزها».' : 'Roses Park (Parcul Rozelor) — established 1891, with over 9,000 rose varieties; the source of Timișoara\'s "City of Roses" nickname.'}</li>
+                <li>{currentLang === 'fa' ? 'میدان اتحاد (Piața Unirii) — قدیمی‌ترین میدان شهر، محل گردهمایی روزمره ساکنان.' : "Union Square (Piața Unirii) — the city's oldest square, an everyday local gathering spot."}</li>
+                <li>{currentLang === 'fa' ? 'کناره رودخانه بگا — مسیرهای پیاده‌روی و دویدن در دل شهر.' : 'Bega River banks/promenade — walking and running paths running through the city.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">8</span>
+                <span>{currentLang === 'fa' ? 'بیمارستان‌ها و درمان' : 'Hospitals & Healthcare'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'بیمارستان بالینی اورژانس شهرستان «پیوس برین‌زئو» — بیمارستان اصلی دولتی؛ بیمارستان کودکان لوئی تسورکانو نیز در شهر فعال است.' : 'County Emergency Clinical Hospital "Pius Brînzeu" — the main public hospital; Louis Țurcanu Children\'s Hospital (pediatric) also operates in the city.'}</li>
+                <li>{currentLang === 'fa' ? 'شبکه‌های خصوصی رجینا ماریا (از جمله درمانگاهی داخل یولیوس تاون) و مدلایف (منطقه دراگالینا) در دسترس هستند.' : 'Private networks Regina Maria (including a policlinic inside Iulius Town) and MedLife (Dragalina area) are also available.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">9</span>
+                <span>{currentLang === 'fa' ? 'فرودگاه، ایستگاه قطار و اتوبوس' : 'Airport, Train & Bus Stations'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'فرودگاه بین‌المللی تیمیشوارا «تریان وویا» (TSR) — حدود ۱۲ کیلومتر شمال‌شرق شهر؛ پروازهایی به لندن، مونیخ، میلان، بروکسل، استانبول و دبی.' : 'Timișoara Traian Vuia International Airport (TSR) — about 12 km northeast of the city; routes to London, Munich, Milan, Brussels, Istanbul, and Dubai.'}</li>
+                <li>{currentLang === 'fa' ? 'ایستگاه راه‌آهن تیمیشوارا نورد — بزرگ‌ترین ایستگاه غرب رومانی، با خطوط به اوردیا، بخارست و یاش.' : 'Timișoara Nord railway station — the largest station in western Romania, with lines to Oradea, Bucharest, and Iași.'}</li>
+                <li>{currentLang === 'fa' ? 'برای اتوبوس‌های بین‌شهری/بین‌المللی، اتوگارا نورماندیا و اتوگارا اتوتیم اصلی‌ترین ترمینال‌ها هستند (مسیرهایی به برلین، بوداپست، وین، پاریس و لندن).' : 'For intercity/international coaches, Autogara Normandia and Autogara Autotim are the main terminals (routes to Berlin, Budapest, Vienna, Paris, and London).'}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="text-[11px] text-slate-400 -mt-4">
+            {currentLang === 'fa'
+              ? 'منابع بخش فرهنگ/خرید/سلامت/حمل‌ونقل: ویکی‌پدیا و سایت‌های رسمی موزه‌ها، مراکز خرید، بیمارستان‌ها و فرودگاه — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶. آدرس‌ها، ساعات کاری و پروازها ممکن است تغییر کنند؛ پیش از مراجعه از سایت رسمی هر مکان استعلام بگیرید.'
+              : "Sources for culture/shopping/healthcare/transit: Wikipedia and official museum, mall, hospital, and airport sites — Last reviewed: August 2026. Addresses, hours, and flight routes may change; check each venue's official site before visiting."}
           </div>
 
           {faqBlock([
@@ -385,6 +584,71 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
                 <li>{currentLang === 'fa' ? 'به دلیل جمعیت بزرگ دانشجویی، فضای شهر دانشجومحور و پرتحرک است.' : 'Thanks to its large student population, the city has a lively, student-centered atmosphere.'}</li>
               </ul>
             </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
+                <span>{currentLang === 'fa' ? 'موزه‌ها و فرهنگ' : 'Museums & Culture'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'کاخ فرهنگ (مرکز مدنی شهر) — یک بنا با چهار موزه ملی: تاریخ مولداوی، هنر، قوم‌نگاری و علم و فناوری «استفان پروکوپیو».' : "Palace of Culture (Civic Centre) — a single building housing four national museums: Moldavia History, Art, Ethnographic, and \"Ștefan Procopiu\" Science & Technology."}</li>
+                <li>{currentLang === 'fa' ? 'موزه اتحاد (خیابان الکساندرو لاپوشنیانو) — در محل اقامت سابق شاهزاده الکساندرو یوان کوزا.' : 'Union Museum (Al. Lăpușneanu St.) — housed in the former residence of Prince Alexandru Ioan Cuza.'}</li>
+                <li>{currentLang === 'fa' ? 'خانه یادبود میهای امینسکو (داخل پارک کوپو) — موزه ادبی شاعر ملی رومانی.' : 'Mihai Eminescu Memorial House (inside Copou Park) — a literary museum dedicated to Romania\'s national poet.'}</li>
+                <li>{currentLang === 'fa' ? 'باغ گیاه‌شناسی یاش «آناستازیه فاتو» (کوپو) — قدیمی‌ترین و بزرگ‌ترین باغ گیاه‌شناسی رومانی (بیش از ۸۰ هکتار).' : 'Iași Botanical Garden "Anastasie Fătu" (Copou) — Romania\'s oldest and largest botanical garden (80+ hectares).'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">6</span>
+                <span>{currentLang === 'fa' ? 'مراکز خرید و فروشگاه‌ها' : 'Shopping & Malls'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'پالاس مال (Palas Mall) — مرکز مدنی شهر، مجاور کاخ فرهنگ؛ بیش از ۲۷۰ فروشگاه و رستوران.' : 'Palas Mall — in the Civic Centre, next to the Palace of Culture; 270+ shops and restaurants.'}</li>
+                <li>{currentLang === 'fa' ? 'یولیوس مال یاش (Iulius Mall) — بیش از ۲۰۰ فروشگاه، سینمای چندسالنه.' : 'Iulius Mall Iași — 200+ stores, a multi-screen cinema.'}</li>
+                <li>{currentLang === 'fa' ? 'برای خرید روزانه مواد غذایی: کافلند، لیدل (بیش از ۸ شعبه)، کارفور، اوشان (داخل پالاس مال)، پروفی و مگا ایمیج در سطح شهر فعال هستند.' : 'For everyday groceries: Kaufland, Lidl (8+ locations), Carrefour, Auchan (inside Palas Mall), Profi, and Mega Image all operate citywide.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">7</span>
+                <span>{currentLang === 'fa' ? 'پارک‌ها و تفرجگاه‌ها' : 'Parks & Recreation'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'پارک کوپو — قدیمی‌ترین پارک عمومی یاش (از ۱۸۳۴)، خانه «نارون امینسکو» و بنای یادبود شیرها.' : 'Copou Park — the oldest public park in Iași (since 1834), home to the "Eminescu Linden Tree" and the Lions\' Obelisk.'}</li>
+                <li>{currentLang === 'fa' ? 'مجموعه پالاس — علاوه بر مرکز خرید، فضای باغ عمومی هم دارد که محل رفت‌وآمد روزمره ساکنان است.' : 'The Palas complex — beyond shopping, includes a public garden that functions as a daily gathering spot for residents.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">8</span>
+                <span>{currentLang === 'fa' ? 'بیمارستان‌ها و درمان' : 'Hospitals & Healthcare'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'بیمارستان بالینی اورژانس شهرستان «سفنتول اسپیریدون» (بلوار استقلال) — بزرگ‌ترین بیمارستان دولتی اورژانس منطقه.' : 'County Emergency Hospital "Sf. Spiridon" (Bd. Independenței) — the largest public emergency hospital in the region.'}</li>
+                <li>{currentLang === 'fa' ? 'شبکه‌های خصوصی رجینا ماریا (کمپوس مدیکال) و مدلایف نیز درمانگاه‌های فعال در شهر دارند.' : 'The private Regina Maria (Campus Medical) and MedLife networks also operate clinics in the city.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">9</span>
+                <span>{currentLang === 'fa' ? 'فرودگاه، ایستگاه قطار و اتوبوس' : 'Airport, Train & Bus Stations'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'فرودگاه بین‌المللی یاش (IAS) — حدود ۸ کیلومتری شرق شهر؛ ترمینال جدید در مارس ۲۰۲۴ افتتاح شد؛ پروازهایی به پاریس، بروکسل و وین.' : 'Iași International Airport (IAS) — about 8 km east of the city; a new terminal opened in March 2024; routes to Paris, Brussels, and Vienna.'}</li>
+                <li>{currentLang === 'fa' ? 'ایستگاه راه‌آهن یاش — روی کریدور پان‌اروپایی نهم، با حدود ۱۱۰ قطار روزانه به بخارست، کونستانتسا، براشوف و مسیرهایی به سمت کیشیناو (مولداوی).' : 'Gara Iași railway station — on Pan-European Corridor IX, with about 110 daily trains to Bucharest, Constanța, Brașov, and routes toward Chișinău (Moldova).'}</li>
+                <li>{currentLang === 'fa' ? 'اتوگارا یاش وست (Autogara Iași Vest) — ترمینال اصلی اتوبوس‌های بین‌شهری/بین‌المللی با بیش از ۳۰۰ حرکت روزانه.' : 'Autogara Iași Vest — the main intercity/international coach terminal, with 300+ daily departures.'}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="text-[11px] text-slate-400 -mt-4">
+            {currentLang === 'fa'
+              ? 'منابع بخش فرهنگ/خرید/سلامت/حمل‌ونقل: ویکی‌پدیا و سایت‌های رسمی موزه‌ها، مراکز خرید، بیمارستان‌ها و فرودگاه — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶. آدرس‌ها، ساعات کاری و پروازها ممکن است تغییر کنند؛ پیش از مراجعه از سایت رسمی هر مکان استعلام بگیرید.'
+              : "Sources for culture/shopping/healthcare/transit: Wikipedia and official museum, mall, hospital, and airport sites — Last reviewed: August 2026. Addresses, hours, and flight routes may change; check each venue's official site before visiting."}
           </div>
 
           {faqBlock([
@@ -476,6 +740,71 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
                 <li>{currentLang === 'fa' ? 'سبک زندگی کوهستانی و نزدیکی به پیست اسکی پویانا براشوف، جذابیتی منحصربه‌فرد در میان شهرهای این راهنما ایجاد می‌کند.' : "Its mountain lifestyle and proximity to the Poiana Brașov ski resort give it a lifestyle appeal unique among the cities in this guide."}</li>
               </ul>
             </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
+                <span>{currentLang === 'fa' ? 'موزه‌ها و بناهای تاریخی' : 'Museums & Landmarks'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'کلیسای سیاه (Biserica Neagră) — بزرگ‌ترین بنای گوتیک رومانی (قرن ۱۴-۱۵)، در قلب شهر قدیم.' : 'The Black Church (Biserica Neagră) — Romania\'s largest Gothic monument (14th–15th century), in the heart of the Old Town.'}</li>
+                <li>{currentLang === 'fa' ? 'میدان شورا (Piața Sfatului) — میدان تاریخی مرکز شهر با حق بازاری از سال ۱۵۲۰.' : 'Council Square (Piața Sfatului) — the historic central square, with market rights dating to 1520.'}</li>
+                <li>{currentLang === 'fa' ? 'موزه تاریخ شهرستان براشوف — داخل خانه شورای سابق (۱۴۲۰)، در همان میدان شورا.' : 'Brașov County Museum of History — housed in the former Council House (1420), on Council Square.'}</li>
+                <li>{currentLang === 'fa' ? 'قلعه براشوف (Cetățuia) — استحکامات قرن ۱۶ بر فراز تپه‌ای مشرف به شهر.' : 'Brașov Citadel (Cetățuia) — a 16th-century fortification on a hill overlooking the city.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">6</span>
+                <span>{currentLang === 'fa' ? 'مراکز خرید و فروشگاه‌ها' : 'Shopping & Malls'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'کورسی شاپینگ ریزورت (Coresi) — بزرگ‌ترین مرکز خرید براشوف، با هایپرمارکت اوشان و تنها سینمای مولتی‌پلکس شهر.' : "Coresi Shopping Resort — Brașov's largest mall, with an Auchan hypermarket and the city's only multiplex cinema."}</li>
+                <li>{currentLang === 'fa' ? 'ای‌اف‌آی براشوف (AFI Brașov) — برندهایی مثل سفورا و آندر آرمور، به‌همراه سینما و باشگاه ورزشی.' : 'AFI Brașov — with brands like Sephora and Under Armour, plus a cinema and gym.'}</li>
+                <li>{currentLang === 'fa' ? 'برای خرید روزانه مواد غذایی: کافلند، لیدل، پروفی و کارفور در سطح شهر فعال‌اند.' : 'For everyday groceries: Kaufland, Lidl, Profi, and Carrefour all operate across the city.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">7</span>
+                <span>{currentLang === 'fa' ? 'کوهستان و تفرجگاه‌ها' : 'Mountains & Recreation'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'تله‌کابین کوه تامپا — از ارتفاع ۶۴۰ به ۹۶۰ متر، با مسیرهای پیاده‌روی در منطقه حفاظت‌شده قله.' : 'Tâmpa Mountain cable car — rising from 640 m to 960 m, with hiking trails in the protected summit area.'}</li>
+                <li>{currentLang === 'fa' ? 'پویانا براشوف — پیست اسکی ۱۲ کیلومتری با حدود ۱۲۰ روز برف در سال، مقصد اصلی زمستانی ساکنان.' : 'Poiana Brașov — a ski resort 12 km away with about 120 days of snow cover per year, the main winter destination for residents.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">8</span>
+                <span>{currentLang === 'fa' ? 'بیمارستان‌ها و درمان' : 'Hospitals & Healthcare'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'بیمارستان بالینی اورژانس شهرستان براشوف (کالئا بوکورشتی) — بیمارستان اصلی دولتی.' : 'County Emergency Clinical Hospital Brașov (Calea București) — the main public hospital.'}</li>
+                <li>{currentLang === 'fa' ? 'شبکه‌های خصوصی رجینا ماریا (از جمله کمپوس مدیکال براشوف) و مدلایف نیز در شهر فعال هستند.' : 'The private Regina Maria (including Campus Medical Brașov) and MedLife networks also operate in the city.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">9</span>
+                <span>{currentLang === 'fa' ? 'فرودگاه، ایستگاه قطار و اتوبوس' : 'Airport, Train & Bus Stations'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'فرودگاه بین‌المللی براشوف-گیمباو (GHV) — از سال ۲۰۲۳ فعال، حدود ۱۲ کیلومتری شهر؛ عمدتاً پروازهای ویزایر به بوداپست، لندن-لوتون و میلان. فرودگاه اوتوپنی بخارست همچنان دروازه اصلی بین‌المللی رومانی محسوب می‌شود (حدود ۲.۵ تا ۳ ساعت با ماشین یا حدود ۲ ساعت و ۱۶ دقیقه با قطار سریع‌السیر).' : "Brașov-Ghimbav International Airport (GHV) — operating since 2023, about 12 km from the city; mainly Wizz Air routes to Budapest, London-Luton, and Milan. Bucharest's Otopeni Airport remains Romania's main international gateway (about 2.5–3 hours by car, or ~2h16m by fast train)."}</li>
+                <li>{currentLang === 'fa' ? 'ایستگاه راه‌آهن براشوف — با خطوطی به بخارست، سیگیشوارا، کلوژ و سیبیو.' : 'Brașov railway station — with lines to Bucharest, Sighișoara, Cluj, and Sibiu.'}</li>
+                <li>{currentLang === 'fa' ? 'اتوگارا ۱ (بارتولومئو، حرکات بین‌المللی) و اتوگارا ۲ — دو ترمینال اصلی اتوبوس بین‌شهری.' : 'Autogara 1 (Bartolomeu, international departures) and Autogara 2 — the two main intercity bus terminals.'}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="text-[11px] text-slate-400 -mt-4">
+            {currentLang === 'fa'
+              ? 'منابع بخش فرهنگ/خرید/سلامت/حمل‌ونقل: ویکی‌پدیا و سایت‌های رسمی موزه‌ها، مراکز خرید، بیمارستان‌ها و فرودگاه — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶. آدرس‌ها، ساعات کاری و پروازها ممکن است تغییر کنند؛ پیش از مراجعه از سایت رسمی هر مکان استعلام بگیرید.'
+              : "Sources for culture/shopping/healthcare/transit: Wikipedia and official museum, mall, hospital, and airport sites — Last reviewed: August 2026. Addresses, hours, and flight routes may change; check each venue's official site before visiting."}
           </div>
 
           {faqBlock([
@@ -567,6 +896,72 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
                 <li>{currentLang === 'fa' ? 'اقتصاد شهر به‌شدت فصلی است؛ تابستان‌ها با رونق گردشگری و بندری همراه است.' : "The city's economy is highly seasonal, with summer bringing a surge in tourism and port activity."}</li>
               </ul>
             </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
+                <span>{currentLang === 'fa' ? 'موزه‌ها و بناهای تاریخی' : 'Museums & Landmarks'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'موزه تاریخ و باستان‌شناسی کونستانتسا (میدان اوویدیو) — مجسمه مار «گلیکون» و آثار یونانی-رومی.' : "Constanța History and Archaeology Museum (Piața Ovidiu) — home to the 'Glykon' serpent statue and Greco-Roman artifacts."}</li>
+                <li>{currentLang === 'fa' ? 'کازینوی کونستانتسا (بلوار رجینا الیزابتا) — بنای آرت‌نوو کنار دریا؛ بعد از بازسازی در مه ۲۰۲۵ به‌عنوان مکان فرهنگی بازگشایی شد.' : 'Constanța Casino (Bd. Regina Elisabeta) — an Art Nouveau seafront landmark, reopened as a cultural site in May 2025 after restoration.'}</li>
+                <li>{currentLang === 'fa' ? 'فانوس دریایی ژنوی و مسجد بزرگ محمودیه (میدان اوویدیو) — از نمادهای تاریخی شهر بندری.' : 'The Genoese Lighthouse and the Great Mahmudiye Mosque (Ovidiu Square) — historic landmarks of the port city.'}</li>
+                <li>{currentLang === 'fa' ? 'آکواریوم کونستانتسا — کنار دریا، بیش از ۶۰ گونه ماهی.' : 'Constanța Aquarium — on the seafront, with 60+ fish species.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">6</span>
+                <span>{currentLang === 'fa' ? 'مراکز خرید و فروشگاه‌ها' : 'Shopping & Malls'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'سیتی پارک مال (City Park Mall) — بزرگ‌ترین مرکز خرید شهر (حدود ۵۹,۰۰۰ متر مربع)، محله توميس نورد.' : "City Park Mall — the city's largest mall (~59,000 m²), in the Tomis Nord district."}</li>
+                <li>{currentLang === 'fa' ? 'توميس مال (Tomis Mall) — در مرکز شهر، از نخستین مراکز خرید کونستانتسا.' : "Tomis Mall — in the city center, one of Constanța's first shopping centers."}</li>
+                <li>{currentLang === 'fa' ? 'برای خرید روزانه مواد غذایی: کافلند، لیدل، کارفور و پروفی بیشترین شعبه را دارند؛ مگا ایمیج، اوشان، کورا و پنی هم فعال‌اند.' : 'For everyday groceries: Kaufland, Lidl, Carrefour, and Profi have the widest footprint; Mega Image, Auchan, Cora, and Penny are also present.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">7</span>
+                <span>{currentLang === 'fa' ? 'ساحل و تفرجگاه‌ها' : 'Beach & Recreation'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'ماماییا — نوار ساحلی حدود ۵ کیلومتری شمال شهر، با پیاده‌راه، هتل‌ها و تله‌کابین.' : 'Mamaia — a beach resort strip about 5 km north of the city, with a promenade, hotels, and a cable car.'}</li>
+                <li>{currentLang === 'fa' ? 'پیاده‌راه کازینو — گذرگاه ساحلی محبوب برای پیاده‌روی روزمره ساکنان.' : "The Casino promenade/seafront — a popular boardwalk for residents' everyday walks."}</li>
+                <li>{currentLang === 'fa' ? 'گرویتی پارک (Gravity Park) — بزرگ‌ترین پارک ورزش‌های اکستریم رومانی (اسکیت‌بورد، بی‌ام‌ایکس، سنگ‌نوردی).' : "Gravity Park — Romania's largest extreme-sports park (skateboarding, BMX, climbing)."}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">8</span>
+                <span>{currentLang === 'fa' ? 'بیمارستان‌ها و درمان' : 'Hospitals & Healthcare'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'بیمارستان بالینی اورژانس شهرستان «سفنتول آپوستول آندره‌ای» (بلوار توميس) — بیمارستان اصلی دولتی.' : 'County Emergency Hospital "Sf. Apostol Andrei" (Bd. Tomis) — the main public hospital.'}</li>
+                <li>{currentLang === 'fa' ? 'بیمارستان خصوصی اوویدیوس (OCH) و شبکه‌های رجینا ماریا و مدلایف نیز گزینه‌های درمان خصوصی در شهر هستند.' : 'Ovidius Clinical Hospital (OCH), along with the Regina Maria and MedLife networks, are private-care options in the city.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">9</span>
+                <span>{currentLang === 'fa' ? 'فرودگاه، ایستگاه قطار و اتوبوس' : 'Airport, Train & Bus Stations'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'فرودگاه بین‌المللی میهایل کوگالنیچانو (CND) — حدود ۲۶ کیلومتری شهر؛ پروازهایی از جمله ترکیش ایرلاینز و بلو ایر.' : 'Mihail Kogălniceanu International Airport (CND) — about 26 km from the city; served by carriers including Turkish Airlines and Blue Air.'}</li>
+                <li>{currentLang === 'fa' ? 'ایستگاه راه‌آهن کونستانتسا — روی خط اصلی بخارست-فتشتی-کونستانتسا-مانگالیا، با حدود ۵۰ قطار روزانه به شهرهای بزرگ رومانی.' : 'Constanța railway station — on the main Bucharest–Fetești–Constanța–Mangalia line, with about 50 daily trains to major Romanian cities.'}</li>
+                <li>{currentLang === 'fa' ? 'اتوگارا سود (Autogara Sud، نزدیک ایستگاه قطار) — ترمینال اصلی اتوبوس بین‌شهری؛ اتوگارا توميس نورد به‌عنوان ترمینال فرعی.' : 'Autogara Sud (near the train station) — the main intercity bus terminal; Autogara Tomis Nord serves as a secondary hub.'}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="text-[11px] text-slate-400 -mt-4">
+            {currentLang === 'fa'
+              ? 'منابع بخش فرهنگ/خرید/سلامت/حمل‌ونقل: ویکی‌پدیا و سایت‌های رسمی موزه‌ها، مراکز خرید، بیمارستان‌ها و فرودگاه — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶. آدرس‌ها، ساعات کاری و پروازها ممکن است تغییر کنند؛ پیش از مراجعه از سایت رسمی هر مکان استعلام بگیرید.'
+              : "Sources for culture/shopping/healthcare/transit: Wikipedia and official museum, mall, hospital, and airport sites — Last reviewed: August 2026. Addresses, hours, and flight routes may change; check each venue's official site before visiting."}
           </div>
 
           {faqBlock([
