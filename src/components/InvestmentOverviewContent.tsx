@@ -2,18 +2,23 @@
 
 import React from 'react';
 import { Language } from '../types';
+import { Breadcrumb } from './Breadcrumb';
+import { ParentHubFooterCard } from './ParentHubFooterCard';
 
 interface InvestmentOverviewContentProps {
   currentLang: Language;
+  onNavigate?: (route: string) => void;
 }
 
-export const InvestmentOverviewContent: React.FC<InvestmentOverviewContentProps> = ({ currentLang }) => {
+export const InvestmentOverviewContent: React.FC<InvestmentOverviewContentProps> = ({ currentLang, onNavigate }) => {
   const disclaimer = currentLang === 'fa'
     ? 'این مورد باید بر اساس مقررات جاری و شرایط فردی بررسی شود.'
     : 'This must be verified based on current regulations and individual circumstances.';
 
   return (
     <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+      <Breadcrumb slugRoute="company/investment" currentLang={currentLang} onNavigate={onNavigate} />
+
       <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
           {currentLang === 'fa' ? 'اقامت از طریق سرمایه‌گذاری و تجارت' : 'Residency through Investment and Business'}
@@ -60,6 +65,24 @@ export const InvestmentOverviewContent: React.FC<InvestmentOverviewContentProps>
           </ul>
         </div>
       </div>
+
+      <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+        <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+          {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+        </h3>
+        <div className="space-y-6">
+          <div>
+            <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا رومانی برنامه «اقامت طلایی» (Golden Visa) دارد؟' : 'Does Romania have a "Golden Visa" program?'}</h4>
+            <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، در حال حاضر رومانی هیچ برنامه رسمی اقامت طلایی مبتنی بر خرید ملک یا سپرده‌گذاری صرف ندارد؛ مسیر رسمی همچنان از طریق فعالیت تجاری واقعی و تاییدیه ARICE است.' : 'No, Romania currently has no official golden-visa program based on simply buying property or making a deposit; the formal pathway remains genuine commercial activity endorsed by ARICE.'}</p>
+          </div>
+          <div>
+            <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا صرفِ ثبت شرکت برای اقامت کافی است؟' : 'Is registering a company alone enough for residency?'}</h4>
+            <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، ثبت شرکت گام اول است؛ برای اقامت تجاری باید طرح کسب‌وکار به ARICE ارائه و درخواست مجزا نزد اداره مهاجرت (IGI) ثبت شود. برای جزئیات بیشتر به' : 'No, company registration is only the first step; for commercial residency you must submit a business plan to ARICE and file a separate application with the Immigration Office (IGI). See'} <a href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('company/residency'); }} className="text-[#2F6FED] font-bold hover:underline">{currentLang === 'fa' ? 'صفحه اقامت شرکتی' : 'the company-residency page'}</a> {currentLang === 'fa' ? 'مراجعه کنید.' : 'for details.'}</p>
+          </div>
+        </div>
+      </div>
+
+      <ParentHubFooterCard slugRoute="company/investment" currentLang={currentLang} onNavigate={onNavigate} />
     </div>
   );
 };

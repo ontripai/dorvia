@@ -129,10 +129,10 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
-                <span>{currentLang === 'fa' ? 'مشاوره مالیاتی و حسابداری' : 'Tax & Accounting Consultation'}</span>
+                <span>{currentLang === 'fa' ? 'نرخ ۱٪ میکرو-شرکت و شرایط بهره‌مندی' : '1% Micro-Enterprise Rate & Eligibility'}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'فقط برای شرکت‌هایی با گردش مالی سالانه زیر ۱۰۰,۰۰۰ یورو و حداقل یک کارمند تمام‌وقت.' : 'Only for companies with an annual turnover under €100,000 and at least one full-time employee.'}</li>
+                <li>{currentLang === 'fa' ? 'نرخ ترجیحی ۱٪ بر درآمد (نه سود) فقط برای شرکت‌هایی با گردش مالی سالانه زیر ۱۰۰,۰۰۰ یورو و حداقل یک کارمند تمام‌وقت قابل استفاده است.' : 'The preferential 1% rate — applied to revenue, not profit — is only available to companies with an annual turnover under €100,000 and at least one full-time employee.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
             </div>
@@ -189,9 +189,9 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               {currentLang === 'fa' ? 'افتتاح حساب بانکی برای شرکت در رومانی' : 'Opening a Corporate Bank Account in Romania'}
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
-              {currentLang === 'fa' 
-                ? 'این بخش راهنمای عمومی است؛ شرایط دقیق هر بانک باید مستقیماً از آن بانک استعلام شود.'
-                : 'This section is a general guide; exact conditions should be verified directly with each respective bank.'}
+              {currentLang === 'fa'
+                ? 'منابع: بانک ملی رومانی (BNR) — bnr.ro، اداره ملی ثبت شرکت‌ها (ONRC) — onrc.ro — این بخش راهنمای عمومی است؛ شرایط دقیق هر بانک باید مستقیماً از آن بانک استعلام شود. آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Sources: National Bank of Romania (BNR) — bnr.ro, National Trade Register Office (ONRC) — onrc.ro — this section is a general guide; exact conditions should be verified directly with each respective bank. Last reviewed: August 2026'}
             </div>
           </div>
 

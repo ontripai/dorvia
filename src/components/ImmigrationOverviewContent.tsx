@@ -305,6 +305,23 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </div>
           </div>
 
+          {/* SECTION 8.5: FAQ */}
+          <div className="mt-2 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چند وقت قبل از انقضای کارت اقامت باید برای تمدید اقدام کنم؟' : 'How long before my residence card expires should I apply for renewal?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'درخواست تمدید باید حداقل ۳۰ روز پیش از تاریخ انقضای کارت فعلی نزد اداره محلی IGI ثبت شود؛ ثبت دیرهنگام می‌تواند منجر به وقفه در وضعیت قانونی اقامت شود.' : 'The renewal application must be filed with your local IGI office at least 30 days before your current card expires; filing late can create a gap in your legal residence status.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر آدرس محل سکونتم عوض شده چه مدرکی لازم دارم؟' : 'What proof do I need if I changed my address?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'باید مدرک به‌روز اثبات محل سکونت (مثلاً قرارداد اجاره‌ی ثبت‌شده نزد ANAF) ارائه دهید؛ برای جزئیات کامل به' : 'You must present up-to-date proof of address (e.g. a rental contract registered with ANAF); see'} <Link href="/needs/housing" className="text-[#2F6FED] font-bold hover:underline">{currentLang === 'fa' ? 'صفحه مسکن' : 'the housing page'}</Link> {currentLang === 'fa' ? 'مراجعه کنید.' : 'for full details.'}</p>
+              </div>
+            </div>
+          </div>
+
           {/* SECTION 9: COMMENTS SECTION */}
           <ParentHubFooterCard slugRoute="immigration/residence-renewal" currentLang={currentLang} onNavigate={onNavigate} />
           <CommentsSection pagePath="immigration/residence-renewal" currentLang={currentLang} />
@@ -365,6 +382,22 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 <li>{currentLang === 'fa' ? 'اثبات تمکن مالی و بیمه درمانی فعال' : 'Proof of financial means & health insurance'}</li>
                 <li>{currentLang === 'fa' ? 'آزمون مقدماتی زبان رومانیایی نزد کمیسیون IGI' : 'Basic Romanian language exam at IGI'}</li>
               </ul>
+            </div>
+          </div>
+
+          <div className="mt-2 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا اقامت بلندمدت همان تابعیت رومانی است؟' : 'Is long-term residence the same as Romanian citizenship?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. اقامت بلندمدت یک وضعیت اقامتی (نه شهروندی) است که حقوق گسترده‌ای می‌دهد اما شامل حق رأی یا پاسپورت رومانیایی نمی‌شود؛ برای تابعیت باید مسیر جداگانه‌ای طی شود.' : 'No. Long-term residence is a residency status (not citizenship) that grants broad rights but not voting rights or a Romanian passport; citizenship requires a separate application path.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا هر نوع کارت اقامت موقت برای این مسیر شمارش می‌شود؟' : 'Does every type of temporary residence permit count toward this?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، برخی وضعیت‌های اقامتی کوتاه‌مدت یا استثنایی ممکن است در محاسبه ۵ سال لحاظ نشوند؛ وضعیت دقیق پرونده شما را باید IGI بر اساس نوع اجازه اقامتتان بررسی کند.' : 'No, some short-term or exceptional residence statuses may not count toward the 5-year total; IGI must review your specific case based on your permit type.'}</p>
+              </div>
             </div>
           </div>
 

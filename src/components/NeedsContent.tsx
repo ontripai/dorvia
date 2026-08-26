@@ -208,6 +208,11 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 ? 'راهنمای نرخ‌های مرجع بانک ملی رومانی (BNR)، تفکیک بانک‌ها و صرافی‌های مجاز، و انتقال قانونی پول.'
                 : 'Guide to BNR reference rates, licensed banks vs exchange offices, and legal funds transfers.'}
             </p>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منبع: بانک ملی رومانی (BNR) — bnr.ro — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: National Bank of Romania (BNR) — bnr.ro — Last reviewed: August 2026'}
+            </div>
           </div>
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
@@ -344,6 +349,11 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 ? 'معرفی مترجمین مجاز دادگستری (Traducator Autorizat) و تاییدیه دفاتر اسناد رسمی.'
                 : 'Ministry of Justice authorized translators and notarization steps.'}
             </p>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منبع: وزارت دادگستری رومانی (just.ro)، اتحادیه ملی نوتاری‌های رومانی (UNNPR) — uniuneanotarilor.ro — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: Romanian Ministry of Justice (just.ro), National Union of Romanian Public Notaries (UNNPR) — uniuneanotarilor.ro — Last reviewed: August 2026'}
+            </div>
           </div>
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
@@ -409,6 +419,11 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 ? 'تنظیم وکالت‌نامه، تایید امضا، گواهی مطابقت تصویر با اصل مدارک و ثبت قراردادها.'
                 : 'Powers of attorney, signature legalizations, and real estate notarial deeds.'}
             </p>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منبع: اتحادیه ملی نوتاری‌های رومانی (UNNPR) — uniuneanotarilor.ro — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: National Union of Romanian Public Notaries (UNNPR) — uniuneanotarilor.ro — Last reviewed: August 2026'}
+            </div>
           </div>
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
@@ -465,6 +480,11 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 ? 'راهنمای ثبت درخواست‌های گذرنامه، تشکیل پرونده دانشجویی و تایید مدارک.'
                 : 'Official consular guide for passport renewals, and student files via Mikhak.'}
             </p>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منبع: سامانه رسمی میخک وزارت امور خارجه ایران — mikhak.mfa.gov.ro — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: Official Mikhak system of the Iranian Ministry of Foreign Affairs — mikhak.mfa.gov.ro — Last reviewed: August 2026'}
+            </div>
           </div>
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">

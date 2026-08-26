@@ -418,6 +418,22 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
           </div>
         </div>
 
+        <div className="bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+          <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+            {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+          </h3>
+          <div className="space-y-6">
+            <div>
+              <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بررسی پرونده پیوست خانواده چقدر طول می‌کشد؟' : 'How long does IGI take to process a family reunification file?'}</h4>
+              <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق مقررات رسمی IGI، رسیدگی حداکثر ظرف سه ماه از تاریخ ثبت پرونده انجام می‌شود؛ این مهلت «۳ ماه تقویمی» است، نه ۹۰ روز کاری.' : 'Per official IGI rules, processing takes a maximum of 3 calendar months from the file registration date — this is 3 months, not 90 working days.'}</p>
+            </div>
+            <div>
+              <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بعد از تایید IGI چقدر وقت برای اقدام در سفارت دارم؟' : 'How much time do I have to act at the embassy after IGI approval?'}</h4>
+              <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'دقیقاً ۶۰ روز از تاریخ صدور تاییدیه کتبی IGI فرصت دارید تا برای ویزای بلندمدت نوع D در سفارت یا کنسولگری رومانی اقدام کنید.' : 'You have exactly 60 days from the date of IGI\'s written approval to apply for the Type D long-stay visa at a Romanian embassy or consulate.'}</p>
+            </div>
+          </div>
+        </div>
+
         <ParentHubFooterCard slugRoute="immigration/family-reunification" currentLang={currentLang} onNavigate={onNavigate} />
 
         {/* COMMENTS SECTION */}

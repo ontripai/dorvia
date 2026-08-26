@@ -327,6 +327,23 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
         </div>
       </div>
 
+      {/* SECTION 8.5: FAQ */}
+      <div className="bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+        <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+          {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+        </h3>
+        <div className="space-y-6">
+          <div>
+            <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'صدور اولین کارت اقامت چقدر طول می‌کشد؟' : 'How long does the first residence card take to issue?'}</h4>
+            <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق مقررات IGI، صدور کارت برای اعضای خانواده غیر اتحادیه اروپا معمولاً ظرف ۹۰ روز از ثبت درخواست کامل انجام می‌شود.' : 'Under IGI regulations, issuance for non-EU family members is typically completed within 90 days of a complete application being registered.'}</p>
+          </div>
+          <div>
+            <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر مدارکم ناقص باشد چه اتفاقی می‌افتد؟' : 'What happens if my documents are incomplete?'}</h4>
+            <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'IGI حداکثر تا ۳۰ روز مهلت اضافه برای تکمیل مدارک می‌دهد؛ این بازه رسماً زمان‌بندی رسیدگی به پرونده را متوقف می‌کند تا مدارک کامل شود.' : 'IGI grants up to 30 extra days to complete the file; this period officially suspends the processing timeline until the documents are complete.'}</p>
+          </div>
+        </div>
+      </div>
+
       {/* SECTION 9: COMMENTS SECTION */}
       <ParentHubFooterCard slugRoute="immigration/igi-process" currentLang={currentLang} />
       <CommentsSection pagePath="immigration/igi-process" currentLang={currentLang} />
