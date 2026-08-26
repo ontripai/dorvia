@@ -504,7 +504,7 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {featuredCities.map((city) => (
-              <CityCard key={city.id} city={city} currentLang={currentLang} onSelect={() => {}} />
+              <CityCard key={city.id} city={city} currentLang={currentLang} href={`/romania/cities/${city.id}`} />
             ))}
           </div>
         </div>
