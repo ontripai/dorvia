@@ -795,4 +795,76 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     inSitemap: true,
     pageType: 'hub'
   },
+  'romania/cities/bucharest': {
+    canonical: '/romania/cities/bucharest',
+    aliases: [],
+    parentHub: '/romania/cities',
+    titleFa: 'راهنمای زندگی و تحصیل در بخارست',
+    titleEn: 'Living & Studying Guide: Bucharest',
+    parentTitleFa: 'شهرهای رومانی',
+    parentTitleEn: 'Cities of Romania',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'content'
+  },
+  'romania/cities/cluj-napoca': {
+    canonical: '/romania/cities/cluj-napoca',
+    aliases: [],
+    parentHub: '/romania/cities',
+    titleFa: 'راهنمای زندگی و تحصیل در کلوژ-نپوکا',
+    titleEn: 'Living & Studying Guide: Cluj-Napoca',
+    parentTitleFa: 'شهرهای رومانی',
+    parentTitleEn: 'Cities of Romania',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'content'
+  },
+  'romania/cities/timisoara': {
+    canonical: '/romania/cities/timisoara',
+    aliases: [],
+    parentHub: '/romania/cities',
+    titleFa: 'راهنمای زندگی و تحصیل در تیمیشوارا',
+    titleEn: 'Living & Studying Guide: Timișoara',
+    parentTitleFa: 'شهرهای رومانی',
+    parentTitleEn: 'Cities of Romania',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'content'
+  },
+  'romania/cities/iasi': {
+    canonical: '/romania/cities/iasi',
+    aliases: [],
+    parentHub: '/romania/cities',
+    titleFa: 'راهنمای زندگی و تحصیل در یاش',
+    titleEn: 'Living & Studying Guide: Iași',
+    parentTitleFa: 'شهرهای رومانی',
+    parentTitleEn: 'Cities of Romania',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'content'
+  },
+  'romania/cities/brasov': {
+    canonical: '/romania/cities/brasov',
+    aliases: [],
+    parentHub: '/romania/cities',
+    titleFa: 'راهنمای زندگی و تحصیل در براشوف',
+    titleEn: 'Living & Studying Guide: Brașov',
+    parentTitleFa: 'شهرهای رومانی',
+    parentTitleEn: 'Cities of Romania',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'content'
+  },
+  'romania/cities/constanta': {
+    canonical: '/romania/cities/constanta',
+    aliases: [],
+    parentHub: '/romania/cities',
+    titleFa: 'راهنمای زندگی و تحصیل در کونستانتسا',
+    titleEn: 'Living & Studying Guide: Constanța',
+    parentTitleFa: 'شهرهای رومانی',
+    parentTitleEn: 'Cities of Romania',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'content'
+  },
 };

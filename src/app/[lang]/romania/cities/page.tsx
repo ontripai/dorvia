@@ -38,7 +38,7 @@ export default function CitiesPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredCities.map((city) => (
-          <CityCard key={city.id} city={city} currentLang={currentLang} onSelect={() => {}} />
+          <CityCard key={city.id} city={city} currentLang={currentLang} href={`/romania/cities/${city.id}`} />
         ))}
       </div>
       <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
