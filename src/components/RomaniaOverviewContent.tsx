@@ -111,6 +111,28 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
               </div>
               <span className="text-xs font-bold text-[#1554bd] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
             </Link>
+
+            <Link href="/romania/geography" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#1554bd] flex items-center justify-center">🗺️</span>
+                  <span>{currentLang === 'fa' ? 'جغرافیا و مناطق' : 'Geography & Regions'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'مناطق تاریخی، تفاوت آب‌وهوا و فاصله بین شهرهای اصلی.' : 'Historic regions, climate differences, and city-to-city distances.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#1554bd] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </Link>
+
+            <Link href="/romania/history" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#1554bd] flex items-center justify-center">📜</span>
+                  <span>{currentLang === 'fa' ? 'تاریخ رومانی' : 'History of Romania'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'از داکیای رومی تا امروز — زمینه‌ای برای درک جامعه فعلی.' : 'From Roman Dacia to today — context for understanding modern society.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#1554bd] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </Link>
           </div>
         </div>
       );
@@ -413,6 +435,19 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
                 <li>{currentLang === 'fa' ? 'به‌عنوان تبعه اتحادیه اروپا یا مقیم آن، از حقوق استاندارد مصرف‌کننده اروپا (مانند حق بازگشت کالا در خریدهای آنلاین) برخوردار خواهید بود.' : 'As an EU resident, you benefit from standard EU consumer rights (such as the right to return goods purchased online).'}</li>
               </ul>
             </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4 md:col-span-3">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
+                <span>{currentLang === 'fa' ? 'قوانین ایمنی روزمره‌ای که باید بدانید' : 'Everyday Safety Laws You Should Know'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'رانندگی: سطح مجاز الکل خون صفر مطلق است (۰.۰۰ در هزار) — حتی یک نوشیدنی هم تخلف محسوب می‌شود؛ جریمه‌ها از حدود ۱,۳۰۰ تا ۲,۹۰۰ لئو به‌همراه ابطال ۹۰ روزه گواهینامه شروع می‌شود و در سطوح بالاتر جرم کیفری با حبس تا ۵ سال است.' : 'Driving: the legal blood-alcohol limit is absolute zero (0.00‰) — even one drink is an offense; fines start around 1,300–2,900 RON plus a 90-day license suspension, escalating to a criminal offense with up to 5 years imprisonment at higher levels.'}</li>
+                <li>{currentLang === 'fa' ? 'مواد مخدر: نگهداری هر مقدار برای مصرف شخصی — حتی CBD/حشیش — می‌تواند تا ۳ سال حبس داشته باشد؛ رومانی برخلاف برخی همسایگان اروپایی، سیاست تحمل صفر دارد.' : 'Drugs: possession for personal use — of any type or quantity, including CBD/cannabis — can mean up to 3 years imprisonment; unlike some EU neighbors, Romania has a zero-tolerance policy.'}</li>
+                <li>{currentLang === 'fa' ? 'نوشیدن الکل در معابر عمومی در اکثر شهرهای رومانی ممنوع است (خارج از تراس کافه/بار مجاز)؛ جریمه معمولاً بین ۱۱۰ تا ۵۰۰ لئو است.' : 'Drinking alcohol in public streets is banned in most Romanian cities (outside a licensed café/bar terrace); fines are typically 110–500 RON.'}</li>
+                <li>{currentLang === 'fa' ? <>شماره تلفن اورژانس سراسری و رایگان رومانی <strong>۱۱۲</strong> است (پلیس، آمبولانس، آتش‌نشانی) — از هر خطی حتی بدون سیم‌کارت هم قابل تماس است و اپراتورها معمولاً انگلیسی هم صحبت می‌کنند.</> : <>Romania's unified, free emergency number is <strong>112</strong> (police, ambulance, fire) — reachable from any phone, even without a SIM card, and operators typically speak English.</>}</li>
+              </ul>
+            </div>
           </div>
 
           <ParentHubFooterCard slugRoute="romania/laws-and-regulations" currentLang={currentLang} onNavigate={onNavigate} />
@@ -480,9 +515,163 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
                 <li><span className="text-[11px] italic text-slate-400">{currentLang === 'fa' ? 'بهترین فصل سفر برای اکثر جاذبه‌ها بهار تا اوایل پاییز است؛ برای پیست‌های اسکی، فصل زمستان مناسب‌تر است.' : 'The best travel season for most attractions is spring through early autumn; for ski resorts, winter is preferable.'}</span></li>
               </ul>
             </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4 md:col-span-3">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
+                <span>{currentLang === 'fa' ? 'ویزا برای گردشگر ایرانی و مسیر فرودگاه' : 'Visa for Iranian Tourists & Airport Transfer'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'شهروندان ایرانی از معافیت ویزای شنگن برخوردار نیستند و برای سفر گردشگری به رومانی نیاز به ویزای شنگن دارند که باید حضوری در کنسولگری/مرکز ویزا ثبت شود؛ برای شرایط دقیق و مدارک مورد نیاز (از جمله احتمال نیاز به دعوت‌نامه) حتماً مستقیماً با کنسولگری رومانی تماس بگیرید، چون رویه‌ها تغییر می‌کند.' : 'Iranian citizens are not Schengen visa-exempt and need a Schengen visa for tourist travel to Romania, applied for in person at a consulate/visa center; contact the Romanian consulate directly for exact current requirements (including any invitation-letter rule), as procedures change.'}</li>
+                <li>{currentLang === 'fa' ? 'از فرودگاه هنری کواندا (بخارست) تا مرکز شهر: قطار مستقیم تا گارا دو نورد حدود ۲۰-۲۵ دقیقه (ارزان‌ترین)، اتوبوس اکسپرس ۷۸۳ حدود ۴۰-۶۰ دقیقه، یا تاکسی/اوبر/بولت حدود ۱۰-۲۰ یورو.' : 'From Henri Coandă Airport (Bucharest) to the city center: direct train to Gara de Nord in ~20–25 min (cheapest), express bus 783 in ~40–60 min, or taxi/Uber/Bolt for ~€10–20.'}</li>
+                <li>{currentLang === 'fa' ? 'اوبر و بولت در اکثر شهرهای بزرگ رومانی (بخارست، کلوژ، تیمیشوارا و دیگران) فعال هستند و گزینه‌ای مطمئن برای جابجایی درون‌شهری‌اند.' : 'Uber and Bolt operate in most major Romanian cities (Bucharest, Cluj, Timișoara, and others) and are a reliable option for getting around.'}</li>
+              </ul>
+            </div>
           </div>
 
           <ParentHubFooterCard slugRoute="romania/tourism" currentLang={currentLang} onNavigate={onNavigate} />
+        </div>
+      );
+
+    // GEOGRAPHY
+    case 'geography':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="romania/geography" currentLang={currentLang} onNavigate={onNavigate} />
+
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <span className="text-[#F4F7FC] font-bold text-xs uppercase tracking-wider">
+              {currentLang === 'fa' ? 'شناخت کشور رومانی' : 'Discover Romania'}
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'جغرافیای رومانی: مناطق، آب‌وهوا و فاصله شهرها' : 'Geography of Romania: Regions, Climate & City Distances'}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa'
+                ? 'اطلاعات کاربردی جغرافیایی برای تصمیم‌گیری درباره محل اقامت و سفر — نه فقط اطلاعات دایره‌المعارفی.'
+                : "Practical geographic facts for deciding where to live and travel — not just encyclopedia trivia."}
+            </p>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منابع: مؤسسه ملی آمار رومانی (INS)، ویکی‌پدیا — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Sources: National Institute of Statistics Romania (INS), Wikipedia — Last reviewed: August 2026'}
+            </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa'
+              ? 'رومانی سومین کشور بزرگ اروپای مرکزی-شرقی از نظر مساحت است و جغرافیای متنوعی از دشت‌های جنوبی گرم تا کوهستان‌های سرد کارپات دارد. این تنوع مستقیماً روی تجربه زندگی شما تأثیر می‌گذارد: تابستان بخارست با تابستان کلوژ یکی نیست، و انتخاب شهر محل زندگی باید این تفاوت‌ها را در نظر بگیرد.'
+              : "Romania is the third-largest country in East-Central Europe by area, with geography ranging from hot southern plains to the cold Carpathian Mountains. This diversity directly shapes daily life: a Bucharest summer is not the same as a Cluj summer, and choosing where to live should factor these differences in."}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'سه منطقه تاریخی و تفاوت آب‌وهوا' : 'Three Historic Regions & Climate Differences'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'ترانسیلوانیا (شمال/مرکز، شامل کلوژ و براشوف) — کوهستانی و خنک‌تر، فضایی شبیه اروپای مرکزی.' : 'Transylvania (north/center, incl. Cluj and Brașov) — hilly and cooler, a more Central European feel.'}</li>
+                <li>{currentLang === 'fa' ? 'والاچیا (جنوب، شامل بخارست) — دشت، تابستان‌های گرم و مرطوب، زمستان‌های نسبتاً ملایم‌تر.' : 'Wallachia (south, incl. Bucharest) — plains, hot humid summers, comparatively milder winters.'}</li>
+                <li>{currentLang === 'fa' ? 'مولداوی (شمال‌شرق، شامل یاش) — آب‌وهوای قاره‌ای با نوسان دمای بیشتر بین فصول.' : 'Moldavia (northeast, incl. Iași) — continental climate with wider seasonal temperature swings.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'کوهستان، مرزها و دریای سیاه' : 'Mountains, Borders & the Black Sea'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'بلندترین نقطه کشور قله مولدووآنو (۲,۵۴۵ متر) در کوه‌های فاگاراش (بخش جنوبی کارپات) است — مقصد کوهنوردان و طبیعت‌گردان.' : 'The highest point is Moldoveanu Peak (2,545 m) in the Făgăraș Mountains (Southern Carpathians) — a hiking/mountaineering destination.'}</li>
+                <li>{currentLang === 'fa' ? 'رومانی با ۵ کشور هم‌مرز است: مجارستان، صربستان، بلغارستان، اوکراین و مولداوی؛ همچنین نوار ساحلی دریای سیاه (کونستانتسا و ماماییا) را دارد.' : 'Romania borders 5 countries — Hungary, Serbia, Bulgaria, Ukraine, and Moldova — plus a Black Sea coastline (Constanța/Mamaia).'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4 md:col-span-2">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'فاصله و زمان سفر بین شهرهای اصلی' : 'Distance & Travel Time Between Major Cities'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'بخارست تا کلوژ-نپوکا: حدود ۴۵۰ کیلومتر — با ماشین/قطار حدود ۵-۶ ساعت، با پرواز حدود ۱ ساعت.' : 'Bucharest to Cluj-Napoca: ~450 km — about 5–6 hours by car/train, ~1 hour by flight.'}</li>
+                <li>{currentLang === 'fa' ? 'بخارست تا براشوف: حدود ۱۷۰ کیلومتر — با ماشین/قطار حدود ۲.۵ ساعت؛ مقصد محبوب سفر یک‌روزه از بخارست.' : 'Bucharest to Brașov: ~170 km — about 2.5 hours by car/train; a popular day-trip destination from Bucharest.'}</li>
+                <li>{currentLang === 'fa' ? 'منطقه زمانی رومانی: EET/EEST (UTC+2 زمستان، UTC+3 تابستان)، با همان قواعد تغییر ساعت اتحادیه اروپا.' : "Romania's time zone: EET/EEST (UTC+2 winter, UTC+3 summer), following the same EU daylight-saving rules."}</li>
+                <li><span className="text-[11px] italic text-slate-400">{currentLang === 'fa' ? 'زمان‌های سفر تخمینی‌اند و به شرایط جاده/ترافیک بستگی دارند؛ برای برنامه‌ریزی دقیق از سایت CFR یا اپلیکیشن نقشه استفاده کنید.' : 'Travel times are estimates and depend on road/traffic conditions; use the CFR site or a maps app for exact planning.'}</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <ParentHubFooterCard slugRoute="romania/geography" currentLang={currentLang} onNavigate={onNavigate} />
+        </div>
+      );
+
+    // HISTORY
+    case 'history':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="romania/history" currentLang={currentLang} onNavigate={onNavigate} />
+
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <span className="text-[#F4F7FC] font-bold text-xs uppercase tracking-wider">
+              {currentLang === 'fa' ? 'شناخت کشور رومانی' : 'Discover Romania'}
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'تاریخ رومانی: از دوران داکیا تا امروز' : 'History of Romania: From Dacia to Today'}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa'
+                ? 'زمینه فرهنگی و تاریخی کافی برای درک بهتر جامعه امروز رومانی — نه یک خلاصه دانشنامه‌ای.'
+                : 'Enough cultural/historical context to better understand Romanian society today — not a textbook summary.'}
+            </p>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منابع: romaniatourism.com، ویکی‌پدیا — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Sources: romaniatourism.com, Wikipedia — Last reviewed: August 2026'}
+            </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa'
+              ? 'دانستن خطوط کلی تاریخ رومانی به شما کمک می‌کند بسیاری از جزئیات روزمره را بهتر بفهمید: چرا زبان رومانیایی لاتین است، چرا معماری برخی محله‌های بخارست دوره کمونیستی است، و چرا عضویت در ناتو و اتحادیه اروپا برای بسیاری از رومانیایی‌ها نمادین و مهم است.'
+              : 'Knowing the broad strokes of Romanian history helps make sense of a lot of everyday details: why Romanian is a Latin-based language, why parts of Bucharest look distinctly Communist-era, and why NATO and EU membership carry real symbolic weight for many Romanians.'}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'ریشه‌های داکیایی-رومی' : 'Dacian-Roman Roots'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'رومی‌ها در سال ۱۰۶ میلادی داکیا (رومانی امروزی) را فتح کردند؛ زبان لاتین باقی‌مانده از آن دوره، پایه زبان رومانیایی امروزی و حتی نام «رومانیا» است.' : 'The Romans conquered Dacia (modern-day Romania) in 106 AD; the Latin left behind from that era is the basis of the modern Romanian language and even the name "Romania" itself.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'شکل‌گیری رومانی مدرن' : 'Formation of Modern Romania'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? '۱۸۵۹: اتحاد والاچیا و مولداوی به رهبری الکساندرو یوان کوزا — تولد دولت مدرن رومانی.' : '1859: Union of Wallachia and Moldavia under Alexandru Ioan Cuza — the birth of the modern Romanian state.'}</li>
+                <li>{currentLang === 'fa' ? '۱۸۷۷: استقلال از امپراتوری عثمانی؛ ۱۹۱۸: اتحاد با ترانسیلوانیا، بسارابیا و بوکووینا («رومانیای بزرگ»).' : '1877: Independence from the Ottoman Empire; 1918: Union with Transylvania, Bessarabia, and Bucovina ("Greater Romania").'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4 md:col-span-2">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'دوران کمونیستی و رومانی امروز' : 'The Communist Era & Modern Romania'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'رومانی از ۱۹۴۷ تا ۱۹۸۹ زیر حکومت کمونیستی بود (چائوشسکو از ۱۹۶۵)؛ این دوره با انقلاب دسامبر ۱۹۸۹ به پایان رسید — این زمینه به درک نگرش نسل مسن‌تر رومانیایی‌ها و معماری برخی محله‌ها کمک می‌کند.' : 'Romania was under Communist rule from 1947 to 1989 (Ceaușescu from 1965), ending with the December 1989 revolution — useful context for understanding older Romanians\' attitudes and some neighborhoods\' architecture.'}</li>
+                <li>{currentLang === 'fa' ? 'رومانی در ۲۰۰۴ به ناتو و در ۲۰۰۷ به اتحادیه اروپا پیوست؛ این دو عضویت برای بسیاری از رومانیایی‌ها نمادی از بازگشت قطعی به «اروپای غربی» پس از دوران کمونیستی محسوب می‌شود.' : 'Romania joined NATO in 2004 and the EU in 2007 — both memberships carry real symbolic weight for many Romanians as a definitive post-Communist "return to the West."'}</li>
+              </ul>
+            </div>
+          </div>
+
+          <ParentHubFooterCard slugRoute="romania/history" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 

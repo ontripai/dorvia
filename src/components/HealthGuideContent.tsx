@@ -49,6 +49,16 @@ export const HealthGuideContent: React.FC<HealthGuideContentProps> = ({ currentL
         </div>
       </div>
 
+      {/* EMERGENCY NUMBER CALLOUT */}
+      <div className="p-5 bg-red-50 border border-red-200 rounded-2xl flex items-center gap-3 text-red-900">
+        <span className="text-2xl">🚨</span>
+        <p className="text-sm font-semibold leading-relaxed">
+          {currentLang === 'fa'
+            ? <>شماره تلفن اورژانس سراسری و رایگان رومانی <strong className="text-lg">۱۱۲</strong> است (پلیس، آمبولانس، آتش‌نشانی) — از هر خطی حتی بدون سیم‌کارت هم قابل تماس است و اپراتورها معمولاً انگلیسی هم صحبت می‌کنند. این شماره را همین حالا در گوشی خود ذخیره کنید.</>
+            : <>Romania's unified, free emergency number is <strong className="text-lg">112</strong> (police, ambulance, fire) — reachable from any phone, even without a SIM card, and operators typically speak English. Save this number now.</>}
+        </p>
+      </div>
+
       {/* SECTION 1: TABLE OF CONTENTS (پرش سریع) */}
       <div className="bg-white p-6 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
         <h2 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">

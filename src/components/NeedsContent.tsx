@@ -177,6 +177,17 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
             </Link>
+
+            <Link href="/needs/transportation" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🚌</span>
+                  <span>{currentLang === 'fa' ? 'حمل‌ونقل عمومی و بین‌شهری' : 'Public Transportation'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'فرودگاه تا شهر، مترو و اتوبوس شهری، قطار و اتوبوس بین‌شهری.' : 'Airport to city, city metro/bus, and intercity train & coach.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </Link>
           </div>
         </div>
       );
@@ -482,8 +493,8 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             </p>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa'
-                ? 'منبع: سامانه رسمی میخک وزارت امور خارجه ایران — mikhak.mfa.gov.ro — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
-                : 'Source: Official Mikhak system of the Iranian Ministry of Foreign Affairs — mikhak.mfa.gov.ro — Last reviewed: August 2026'}
+                ? 'منبع: سامانه رسمی میخک وزارت امور خارجه ایران — mikhak.mfa.gov.ir — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: Official Mikhak system of the Iranian Ministry of Foreign Affairs — mikhak.mfa.gov.ir — Last reviewed: August 2026'}
             </div>
           </div>
 
@@ -804,6 +815,107 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
         </div>
       );
     }
+    // 9. TRANSPORTATION
+    case 'transportation':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="needs/transportation" currentLang={currentLang} onNavigate={onNavigate} />
+
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <span className="text-[#2F6FED] font-bold text-xs uppercase tracking-wider">
+              {currentLang === 'fa' ? 'جابجایی درون‌شهری و بین‌شهری' : 'Getting Around Romania'}
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'حمل‌ونقل عمومی و بین‌شهری در رومانی' : 'Public Transportation & Intercity Travel'}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa'
+                ? 'از فرودگاه تا شهر، درون شهر و بین شهرها — با اپراتورهای واقعی و نکات عملی.'
+                : 'From the airport to the city, around town, and between cities — with real operators and practical tips.'}
+            </p>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منابع: راه‌آهن رومانی (CFR Călători) — cfrcalatori.ro، متروی بخارست (Metrorex)، فرودگاه هنری کواندا — bucharestairports.ro — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Sources: CFR Călători (national rail) — cfrcalatori.ro, Metrorex (Bucharest metro), Henri Coandă Airport — bucharestairports.ro — Last reviewed: August 2026'}
+            </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa'
+              ? 'رومانی شبکه حمل‌ونقل عمومی به‌نسبت گسترده‌ای دارد: راه‌آهن ملی تقریباً همه شهرهای بزرگ را به هم وصل می‌کند، هر شهر بزرگ اتوبوس/تراموای شهری خودش را دارد (بخارست تنها شهر دارای مترو است)، و اتوبوس‌های بین‌شهری خصوصی گزینه‌ای ارزان‌تر برای مسیرهای کوتاه‌تر هستند. برای تازه‌واردان، دانستن نام اپراتورهای واقعی و نحوه خرید بلیت از سردرگمی اولیه جلوگیری می‌کند.'
+              : "Romania has a reasonably extensive public transit network: national rail connects nearly all major cities, every major city runs its own city bus/tram network (Bucharest is the only one with a metro), and private intercity coaches are a cheaper option for shorter routes. For newcomers, knowing the real operator names and how to actually buy a ticket avoids a lot of early confusion."}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'فرودگاه تا مرکز شهر (بخارست)' : 'Airport to City Center (Bucharest)'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'خط ریلی مستقیم فرودگاه هنری کواندا (OTP) به گارا دو نورد — حدود ۲۰-۲۵ دقیقه، ارزان‌ترین گزینه.' : 'Direct rail link from Henri Coandă Airport (OTP) to Gara de Nord — about 20–25 min, the cheapest option.'}</li>
+                <li>{currentLang === 'fa' ? 'اتوبوس اکسپرس خط ۷۸۰/۷۸۳ — حدود ۴۰-۶۰ دقیقه بسته به ترافیک.' : 'Express bus line 780/783 — about 40–60 min depending on traffic.'}</li>
+                <li>{currentLang === 'fa' ? 'تاکسی/اوبر/بولت از فرودگاه — حدود ۱۰-۲۰ یورو تا مرکز؛ فقط از باجه رسمی تاکسی داخل ترمینال سوار شوید تا از کرایه‌های غیررسمی جلوگیری کنید.' : 'Taxi/Uber/Bolt from the airport — roughly €10–20 to the center; use only the official taxi booth inside the terminal to avoid unofficial/overpriced rides.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'حمل‌ونقل درون‌شهری' : 'City Public Transit'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'بخارست: تنها شهر با مترو (Metrorex، ۵ خط) + اتوبوس/تراموا/ترالی‌بوس (STB).' : 'Bucharest: the only city with a metro (Metrorex, 5 lines) plus bus/tram/trolleybus (STB).'}</li>
+                <li>{currentLang === 'fa' ? 'سایر شهرهای بزرگ اپراتور محلی خودشان را دارند (مثلاً CTP Cluj، STPT تیمیشوارا، RATBV براشوف) — بلیت معمولاً از طریق اپلیکیشن اپراتور یا دستگاه داخل وسیله خریداری می‌شود.' : 'Other major cities have their own local operator (e.g. CTP Cluj, STPT in Timișoara, RATBV in Brașov) — tickets are usually bought via the operator\'s app or an on-board machine.'}</li>
+                <li>{currentLang === 'fa' ? 'دانشجویان معمولاً با کارت دانشجویی معتبر تخفیف ۵۰٪ یا بیشتر روی بلیت ماهانه دریافت می‌کنند؛ رقم دقیق را از دانشگاه یا اپراتور محلی استعلام کنید.' : 'Students with a valid student card typically get 50% or more off monthly passes; check the exact figure with your university or the local operator.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'قطار بین‌شهری' : 'Intercity Train'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'اپراتور ملی راه‌آهن CFR Călători (cfrcalatori.ro) تقریباً همه شهرهای بزرگ را به هم وصل می‌کند؛ بلیت آنلاین یا در باجه ایستگاه قابل خرید است.' : 'National rail operator CFR Călători (cfrcalatori.ro) connects nearly all major cities; tickets can be bought online or at the station counter.'}</li>
+                <li>{currentLang === 'fa' ? 'قطارهای اینترسیتی (IC) سریع‌تر و گران‌تر از قطارهای اینترریجیو (IR) هستند؛ رزرو صندلی برای IC توصیه می‌شود.' : 'InterCity (IC) trains are faster and pricier than InterRegio (IR) trains; seat reservation is recommended for IC.'}</li>
+                <li>{currentLang === 'fa' ? 'شرکت خصوصی Softrans/دیگر اپراتورهای خصوصی هم روی برخی مسیرها فعالند و ممکن است ارزان‌تر باشند.' : 'Private operators also run on some routes and can be cheaper than CFR — worth comparing before booking.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
+                <span>{currentLang === 'fa' ? 'اتوبوس بین‌شهری و بین‌المللی' : 'Intercity & International Coach'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'FlixBus و BlaBlaCar Bus شبکه گسترده‌ای بین شهرهای رومانی و کشورهای همسایه (مجارستان، بلغارستان، صربستان، مولداوی) دارند؛ بلیت فقط آنلاین.' : 'FlixBus and BlaBlaCar Bus run extensive routes between Romanian cities and neighboring countries (Hungary, Bulgaria, Serbia, Moldova); tickets are booked online.'}</li>
+                <li>{currentLang === 'fa' ? 'هر شهر معمولاً چند «اتوگارا» (ترمینال اتوبوس بین‌شهری) محلی هم دارد که اپراتورهای منطقه‌ای کوچک‌تر از آنجا حرکت می‌کنند — نام و آدرس دقیق هر ترمینال در صفحه راهنمای همان شهر آمده است.' : 'Each city also has one or more local "autogara" (intercity coach terminals) used by smaller regional operators — the exact name and address for each city is listed on that city\'s guide page.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{currentLang === 'fa' ? 'ساعت حرکت و قیمت بلیت به‌طور مکرر تغییر می‌کند؛ همیشه از سایت رسمی اپراتور استعلام بگیرید.' : 'Departure times and fares change frequently; always check the operator\'s official site before travel.'}</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا رومانی کارت حمل‌ونقل یکپارچه سراسری دارد؟' : 'Does Romania have one nationwide transit card?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر؛ هر شهر اپراتور و کارت/اپلیکیشن بلیت جداگانه خودش را دارد. برای قطار بین‌شهری، بلیت CFR جداست و ارتباطی به کارت شهری ندارد.' : 'No; each city has its own operator and ticket card/app. Intercity rail tickets (CFR) are separate and unrelated to any city transit card.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'کدام گزینه برای سفر بین شهرهای نزدیک ارزان‌تر است، قطار یا اتوبوس؟' : 'Which is cheaper for travel between nearby cities, train or bus?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'برای مسیرهای کوتاه‌تر، اتوبوس‌های خصوصی معمولاً ارزان‌تر و گاهی سریع‌تر از قطار اینترریجیو هستند؛ برای مسیرهای طولانی‌تر بین شهرهای بزرگ، قطار اینترسیتی معمولاً راحت‌تر و قابل‌اعتمادتر است.' : 'For shorter routes, private coaches are often cheaper and sometimes faster than InterRegio trains; for longer routes between major cities, InterCity trains are usually more comfortable and reliable.'}</p>
+              </div>
+            </div>
+          </div>
+
+          <ParentHubFooterCard slugRoute="needs/transportation" currentLang={currentLang} onNavigate={onNavigate} />
+        </div>
+      );
+
     default:
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">

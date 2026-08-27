@@ -49,6 +49,16 @@ export const TelecomGuideContent: React.FC<TelecomGuideContentProps> = ({ curren
         </div>
       </div>
 
+      {/* MANDATORY ID REGISTRATION NOTICE */}
+      <div className="p-5 bg-amber-50 border border-amber-200 rounded-2xl flex items-center gap-3 text-amber-900">
+        <span className="text-2xl">⚠️</span>
+        <p className="text-sm font-semibold leading-relaxed">
+          {currentLang === 'fa'
+            ? 'برخلاف بسیاری از کشورها، در رومانی از سال ۲۰۱۹ حتی سیم‌کارت‌های اعتباری (Prepaid) هم باید با مدرک شناسایی معتبر ثبت شوند — سیم‌کارت ناشناس/بدون ثبت وجود ندارد. برای خرید هر نوع سیم‌کارت، پاسپورت یا کارت اقامت خود را همراه داشته باشید.'
+            : "Unlike many countries, Romania has required ID registration for all SIM cards — including prepaid — since 2019; there is no anonymous/unregistered SIM option. Bring your passport or residence card to buy any SIM card."}
+        </p>
+      </div>
+
       {/* SECTION 1: TABLE OF CONTENTS (پرش سریع) */}
       <div className="bg-white p-6 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
         <h2 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
