@@ -68,6 +68,9 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
           <a href="#required-docs" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۴. مدارک لازم' : '4. Required Documents'}
           </a>
+          <a href="#iran-doc-chain" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۴.۵ زنجیره تایید مدارک ایرانی' : '4.5 Iranian Document Chain'}
+          </a>
           <a href="#timelines" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۵. زمان‌بندی قانونی (۳ ماه)' : '5. Official Timelines (3 Mos)'}
           </a>
@@ -281,6 +284,35 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
         </ul>
       </div>
 
+      {/* SECTION 4.5: IRANIAN DOCUMENT LEGALIZATION CHAIN — NARRATIVE */}
+      <div id="iran-doc-chain" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-5">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <span>📜</span>
+          <span>{currentLang === 'fa' ? 'چرا سند ازدواج ایرانی شما نمی‌تواند فقط با آپوستیل تایید شود' : 'Why Your Iranian Marriage Certificate Can\'t Just Get an Apostille'}</span>
+        </h2>
+        <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'ایران عضو کنوانسیون آپوستیل لاهه نیست — دقیقاً همان مشکلی که در صفحه مدارک تحصیلی این سایت هم توضیح داده شده. برای همین، سند ازدواج یا شناسنامه فرزندان صادرشده در ایران نمی‌تواند با یک مهر آپوستیل ساده در رومانی معتبر شود، و باید مسیر «تصدیق کنسولی» (Supralegalizare) را طی کند: ابتدا مدرک باید نزد مرجع صالح ایرانی (وزارت دادگستری و/یا وزارت امور خارجه ایران) تایید شود، سپس توسط سفارت یا کنسولگری رومانی در تهران مهر تاییدیه بخورد، و در نهایت در رومانی توسط مترجم رسمی سوگندخورده ترجمه و نزد دفترخانه اسناد رسمی رومانیایی تصدیق شود.'
+            : 'Iran is not a member of the Hague Apostille Convention — the same issue already documented on this site\'s study-documents page. That means an Iranian marriage certificate or children\'s birth certificate cannot be validated in Romania with a simple apostille stamp; it must go through the "consular legalization" (Supralegalizare) chain instead: first authenticated by the competent Iranian authority (Ministry of Justice and/or Iranian Ministry of Foreign Affairs), then legalized by the Romanian Embassy/Consulate in Tehran, and finally translated by a certified sworn translator and notarized at a Romanian notary public.'}
+        </p>
+        <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl text-xs sm:text-sm text-[#142033] leading-relaxed">
+          <strong className="block font-bold mb-1">{currentLang === 'fa' ? 'یک سوال مهم که باید از وکیل خود بپرسید:' : 'An important question to ask your lawyer:'}</strong>
+          {currentLang === 'fa'
+            ? 'اگر ازدواج شما فقط به‌صورت عقد شرعی/مذهبی انجام شده و به‌طور رسمی نزد سازمان ثبت احوال ایران ثبت نشده، پیش از هرگونه اقدام حتماً با یک وکیل مهاجرت بررسی کنید که آیا این سند برای پرونده پیوست خانواده نزد IGI پذیرفته می‌شود یا خیر. این سایت نتوانست منبع رسمی روشنی برای این حالت خاص پیدا کند — پس این نکته را به‌عنوان یک ریسک احتمالی، نه یک قانون قطعی، در نظر بگیرید و حتماً پیش از اقدام شخصاً تایید بگیرید.'
+            : 'If your marriage was performed only as a religious ceremony (aghd) and was not formally registered with Iran\'s civil registry (Sabt-e Ahval), check with an immigration lawyer before proceeding whether IGI will accept this certificate for a family reunification file. This site could not find a clear official source addressing this specific scenario — treat this as a potential risk to verify personally, not a settled rule.'}
+        </div>
+        <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'یک نکته مهم دیگر برای برنامه‌ریزی: پلتفرم جدید و یکپارچه دولتی WorkinRomania.gov.ro (که در ۸ اوت ۲۰۲۶ به‌طور کامل راه‌اندازی شد) صراحتاً پرونده‌های پیوست خانواده را پوشش نمی‌دهد — طبق تایید شرکت مهاجرتی بین‌المللی Fragomen، این فرآیند همچنان کاملاً حضوری و کاغذی باقی می‌ماند. پس اگر انتظار یک فرآیند کاملاً آنلاین مشابه اجازه کار دارید، این انتظار برای پیوست خانواده درست نیست.'
+            : 'One more planning note: the new unified government platform WorkinRomania.gov.ro (fully launched August 8, 2026) explicitly does not cover family reunification cases — per international immigration firm Fragomen, this process remains entirely in-person and paper-based. So if you were expecting a fully online process similar to work permits, that expectation does not hold for family reunification.'}
+        </p>
+        <p className="text-xs text-[#788697] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'منابع: Schmidt & Schmidt (راهنمای تصدیق کنسولی ایران)، CNRED (صفحه رسمی Supralegalizare)، centruldevize.ro، Fragomen (تحلیل راه‌اندازی WorkinRomania.gov.ro، ۲۰۲۶). جزئیات پذیرش یا رد ازدواج غیرثبتی مذهبی توسط IGI در منبع رسمی یافت نشد.'
+            : 'Sources: Schmidt & Schmidt (Iran consular legalization guide), CNRED (official Supralegalizare page), centruldevize.ro, Fragomen (WorkinRomania.gov.ro launch analysis, 2026). No official source was found addressing IGI\'s acceptance or rejection of unregistered religious marriages specifically.'}
+        </p>
+      </div>
+
       {/* SECTION 6: OFFICIAL TIMELINES */}
       <div id="timelines" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
         <div className="flex items-center space-x-3 rtl:space-x-reverse text-[#2F6FED]">
@@ -462,6 +494,14 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
             <div>
               <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر IGI به مهلت ۳ ماهه عمل نکند چه گزینه‌ای دارم؟' : 'What can I do if IGI misses the 3-month deadline?'}</h4>
               <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون ۵۵۴/۲۰۰۴، می‌توانید ظرف ۶ ماه از سکوت یا تاخیر غیرموجه، با کمک وکیل حقوق اداری علیه IGI در دادگاه اداری شکایت کنید.' : 'Under Law 554/2004, you can sue IGI in the administrative court within 6 months of its unjustified silence or delay, with the help of an administrative-law attorney.'}</p>
+            </div>
+            <div>
+              <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چرا سند ازدواج ایرانی من فقط با آپوستیل قبول نمی‌شود؟' : 'Why isn\'t a simple apostille enough for my Iranian marriage certificate?'}</h4>
+              <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'چون ایران عضو کنوانسیون آپوستیل لاهه نیست؛ به‌جای آن باید مسیر تصدیق کنسولی (تایید مرجع ایرانی + مهر سفارت رومانی در تهران + ترجمه رسمی و تصدیق نزد دفترخانه رومانیایی) طی شود.' : 'Because Iran is not a member of the Hague Apostille Convention; instead you must go through consular legalization (Iranian authority authentication + Romanian Embassy in Tehran stamp + certified translation and notarization in Romania).'}</p>
+            </div>
+            <div>
+              <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم از پلتفرم WorkinRomania.gov.ro برای پرونده پیوست خانواده استفاده کنم؟' : 'Can I use the WorkinRomania.gov.ro platform for my family reunification case?'}</h4>
+              <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. این پلتفرم یکپارچه دولتی که در اوت ۲۰۲۶ کامل راه‌اندازی شد، پرونده‌های پیوست خانواده را پوشش نمی‌دهد؛ این فرآیند همچنان کاملاً حضوری و کاغذی نزد دفتر استانی IGI انجام می‌شود.' : 'No. This unified government platform, fully launched in August 2026, does not cover family reunification cases; this process remains entirely in-person and paper-based at your regional IGI office.'}</p>
             </div>
           </div>
         </div>
