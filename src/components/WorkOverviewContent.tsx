@@ -146,6 +146,30 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* NARRATIVE: THE REAL WORKINROMANIA.GOV.RO ROLLOUT & PERMIT BACKLOG */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-5">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>⚠️</span>
+              <span>{currentLang === 'fa' ? 'واقعیت راه‌اندازی workinromania.gov.ro: چرا کارفرمای شما ممکن است دچار مشکل شود' : 'The Real workinromania.gov.ro Rollout: Why Your Employer Might Hit Trouble'}</span>
+            </h2>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'پلتفرم جدید workinromania.gov.ro طبق فرمان فوری دولت شماره ۳۲/۲۰۲۶ (اجرایی از ۲۷ آوریل ۲۰۲۶، با دوره گذار تا ۷ آگوست ۲۰۲۶) راه‌اندازی شد، اما راه‌اندازی آن با مشکلات واقعی همراه بوده است. طبق گزارش Economica.net، دو نهاد دولتی درگیر (IGI و وزارت امور خارجه) قوانین OUG 32/2026 را متفاوت تفسیر می‌کنند — مدارکی که IGI تایید کرده، توسط سفارت‌ها و MAE پذیرفته نمی‌شود. طبق گزارش Wall-Street.ro، صدها پرونده که از مارس تا آوریل ۲۰۲۶ (پیش از راه‌اندازی پلتفرم) ثبت شده بودند، پس از فعال شدن سامانه جدید، مجبور به شروع مجدد از صفر شدند؛ کارفرمایان هزینه‌ای معادل ~۱۰۰ یورو به‌ازای هر پرونده از دست دادند بدون سازوکار بازپرداخت اعلام‌شده.'
+                : 'The new workinromania.gov.ro platform launched under Emergency Government Ordinance 32/2026 (in force since April 27, 2026, with a transition period through August 7, 2026), but its rollout has come with real problems. Per Economica.net, the two government bodies involved (IGI and the Ministry of Foreign Affairs) are interpreting OUG 32/2026 differently — documents IGI has approved are not being accepted by embassies/MAE. Per Wall-Street.ro, hundreds of files submitted between March and April 2026 (before the platform launched) were forced to restart from scratch once the new system went live; employers lost roughly €100 per file with no announced refund mechanism.'}
+            </p>
+            <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs sm:text-sm text-amber-950 leading-relaxed">
+              <strong className="block font-bold mb-1">{currentLang === 'fa' ? 'یک مثال واقعی از اندازه مشکل:' : 'A real example of the scale:'}</strong>
+              {currentLang === 'fa'
+                ? 'طبق گزارش Digi24، سیستم مرکزی صدور مجوز کار حدود آوریل ۲۰۲۶ عملاً به‌خاطر بازنگری قانونی متوقف شد و زمان رسیدگی به حدود ۴ تا ۵ ماه از تاریخ ثبت مدارک رسید. یک کارفرمای بخش ساخت‌وساز که ۴۵۰ کارگر آزمایش کرده و ۱۳۰ نفر را انتخاب کرده بود، نتوانست به‌خاطر کمبود مجوز آن‌ها را وارد رومانی کند. این یعنی نه فقط شما، بلکه خود کارفرمای شما هم ممکن است در این فرآیند با تاخیر غیرمنتظره مواجه شود — پیگیری منظم و مستندسازی هر مرحله (رسید ثبت، شماره پرونده) اهمیت زیادی دارد.'
+                : 'Per Digi24, the central work-permit issuance system was effectively suspended around April 2026 amid a legislative overhaul, pushing processing to roughly 4-5 months from document submission. One construction employer who screened 450 workers and selected 130 could not bring them into Romania due to the permit shortage. This means your employer — not just you — may hit unexpected delays in this process; keeping your own records (submission receipt, file number) at every stage is worth doing.'}
+            </div>
+            <p className="text-xs text-[#788697] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'منابع: Economica.net، Wall-Street.ro، Adevărul، Digi24، PwC Romania (تحلیل OUG 32/2026)، Romania-Insider، mai.gov.ro. طبق تحلیل PwC، OUG 32/2026 همچنین شرایط جدیدی برای کارفرمایان (حداقل ۲۴ ماه سابقه فعالیت، حداقل ۵۰ کارمند به‌طور میانگین، تضمین مالی ۱٬۰۰۰ یورو به‌ازای هر کارگر خارجی) و انواع ویزای جدید D/AM1 (متخصص) و D/AM2 (مشاغل کمبود نیرو) معرفی کرده است.'
+                : 'Sources: Economica.net, Wall-Street.ro, Adevărul, Digi24, PwC Romania (OUG 32/2026 analysis), Romania-Insider, mai.gov.ro. Per PwC\'s analysis, OUG 32/2026 also introduced new employer eligibility requirements (minimum 24 months in business, minimum 50 average employees, a €1,000-per-worker financial guarantee) and new visa subtypes D/AM1 (skilled) and D/AM2 (shortage-occupation).'}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -157,11 +181,15 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               </div>
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بررسی درخواست مجوز چقدر طول می‌کشد؟' : 'How long does the permit application process take?'}</h3>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'این زمان بسته به حجم پرونده‌های IGI و سقف سهمیه سالانه متغیر است؛ منبع رسمی زمان دقیق منتشر نکرده، اما معمولاً چند هفته تا چند ماه طول می‌کشد.' : 'The timeline varies depending on IGI\'s workload and the annual quota; no official source publishes an exact figure, but it typically takes from a few weeks to several months.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق گزارش‌های خبری ۲۰۲۶ (Digi24)، در دوره بازنگری سیستم، زمان رسیدگی تا ۴-۵ ماه هم گزارش شده؛ این عدد رسمی نیست اما نشان می‌دهد «چند هفته تا چند ماه» می‌تواند در عمل به سمت انتهای بازه یا فراتر از آن برود.' : 'Per 2026 news coverage (Digi24), during the system overhaul period, processing times of up to 4-5 months have been reported; this is not an official figure but shows "a few weeks to several months" can in practice run toward the long end or beyond.'}</p>
               </div>
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'کارت آبی اتحادیه اروپا با مجوز کار عادی چه فرقی دارد؟' : 'How is the EU Blue Card different from a standard work permit?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'کارت آبی مخصوص متخصصان با مدرک تحصیلات تکمیلی یا سابقه تخصصی است و اعتبار طولانی‌تر (تا ۳ سال) و مسیر ساده‌تر پیوست خانواده دارد.' : 'The Blue Card is for specialists with an advanced degree or specialized experience and offers longer validity (up to 3 years) and a simpler family-reunification path.'}</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر پرونده من قبل از راه‌اندازی پلتفرم جدید ثبت شده بود چه می‌شود؟' : 'What happens if my file was submitted before the new platform launched?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق گزارش‌های رسانه‌ای، صدها پرونده ثبت‌شده پیش از راه‌اندازی کامل پلتفرم (اوت ۲۰۲۶) مجبور به شروع مجدد شدند. با کارفرمای خود پیگیری کنید که پرونده شما تحت روال جدید هم معتبر شناخته شده یا نیاز به ثبت مجدد دارد.' : 'Per media reports, hundreds of files submitted before the platform\'s full launch (August 2026) were forced to restart. Check with your employer whether your file is recognized under the new procedure or needs to be resubmitted.'}</p>
               </div>
             </div>
           </div>
@@ -224,6 +252,24 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* NARRATIVE: THE TEHRAN EMBASSY PROCESS FOR THIS VISA */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🇮🇷</span>
+              <span>{currentLang === 'fa' ? 'دریافت ویزای D/AM از سفارت رومانی در تهران' : 'Getting the D/AM Visa at the Romanian Embassy in Tehran'}</span>
+            </h2>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'همانند ویزای نوع D عمومی، ویزای کاری D/AM هم باید در خود سفارت رومانی در تهران دریافت شود چون هیچ مرکز خدمات ویزای VFS Global در ایران وجود ندارد. فرآیند از طریق سامانه آنلاین eViza شروع می‌شود: ابتدا پرونده و مدارک را در این سامانه بارگذاری می‌کنید، و فقط پس از آنکه وضعیت پرونده به «Valid» تغییر کرد، امکان رزرو نوبت حضوری در سفارت فراهم می‌شود — یعنی نمی‌توانید همزمان با ثبت اولیه نوبت بگیرید. هزینه استاندارد ویزای نوع D حدود ۱۲۰ یورو گزارش شده است.'
+                : 'Just like the general Type D visa, the D/AM work visa must also be obtained in person at the Romanian Embassy in Tehran, since Iran has no VFS Global visa service center. The process starts through the online eViza system: you first upload your file and documents there, and only once the file status changes to "Valid" can you book an in-person embassy appointment — you cannot book a slot at the same time as your initial submission. The standard Type D visa fee is reported at around €120.'}
+            </p>
+            <p className="text-xs text-[#788697] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'منابع: stinwo.ro، mae.ro. زمان انتظار واقعی برای نوبت‌دهی در سفارت تهران در منابع رسمی/خبری یافت نشد؛ این بخش رو برای برنامه‌ریزی زودتر از موعد، نه به‌عنوان تضمین زمانی، در نظر بگیرید.'
+                : 'Sources: stinwo.ro, mae.ro. Real-world wait times for Tehran embassy appointments were not found in official/news sources; treat this section as a reason to plan early, not as a timing guarantee.'}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -236,6 +282,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چه زمانی باید برای کارت اقامت موقت اقدام کنم؟' : 'When should I apply for the temporary residence permit?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'شما موظفید حداقل ۳۰ روز پیش از به پایان رسیدن اعتبار ویزای نوع D خود، درخواست کارت اقامت را به IGI تحویل دهید.' : 'You must submit your temporary residence permit application to IGI at least 30 days before your Type D visa expires.'}</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم برای ویزای D/AM از مرکز VFS در تهران اقدام کنم؟' : 'Can I apply for the D/AM visa through a VFS center in Tehran?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. رومانی هیچ مرکز VFS Global در ایران ندارد؛ باید از طریق سامانه eViza پرونده بسازید و سپس شخصاً به سفارت رومانی در تهران مراجعه کنید.' : 'No. Romania has no VFS Global center in Iran; you must build your file through the eViza system and then attend the Romanian Embassy in Tehran in person.'}</p>
               </div>
             </div>
           </div>
@@ -368,6 +418,24 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* NARRATIVE: THE REAL LABOR-MARKET FRICTION FOR NON-EU JOBSEEKERS */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🗣️</span>
+              <span>{currentLang === 'fa' ? 'بزرگ‌ترین مانع واقعی برای کارجویان غیر اتحادیه اروپا' : 'The Real Biggest Barrier for Non-EU Jobseekers'}</span>
+            </h2>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'طبق گزارش‌های سازمانی درباره دسترسی اتباع خارجی به بازار کار رومانی (AIDA/ECRE)، «زبان» به‌صراحت به‌عنوان بزرگ‌ترین مانع دسترسی به بازار کار توصیف شده — کلاس‌های زبان رومانیایی رایگان دولتی اغلب در ساعات کاری برگزار می‌شوند (که برای شاغلان عملاً غیرقابل استفاده است)، و بسیاری از خدمات رسمی کاریابی فقط به زبان رومانیایی ارائه می‌شوند. این گزارش همچنین به وجود «گفتمان‌های بیگانه‌هراسانه» در برخی محیط‌های کاری اشاره می‌کند. توجه: این یافته مربوط به پناهندگان/دارندگان حمایت بین‌المللی است، اما به‌طور منطقی برای هر کارجوی غیر اتحادیه اروپا هم صادق است.'
+                : 'Per reports on foreign nationals\' labor-market access in Romania (AIDA/ECRE), language is explicitly described as the biggest access barrier — free state Romanian classes are often scheduled during working hours (effectively unusable for employed people), and many official employment services are only offered in Romanian. The report also notes the presence of "xenophobic discourses" in some workplaces. Note: this specific finding is documented for refugees/international-protection holders, but it logically extends to any non-EU jobseeker.'}
+            </p>
+            <p className="text-xs text-[#788697] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'منابع: AIDA/ECRE (asylumineurope.org). این سایت نتوانست آمار یا گزارش مشخصی درباره حضور یا برتری حرفه‌ای ایرانیان در بخش خاصی از بازار کار رومانی (مثل IT یا نفت‌وگاز) پیدا کند — پس چنین ادعایی را بدون منبع معتبر منتشر نمی‌کنیم.'
+                : 'Sources: AIDA/ECRE (asylumineurope.org). This site could not find specific data or reports on Iranian professional presence or advantage in any particular sector of the Romanian labor market (e.g. IT or oil & gas) — so no such claim is published without a credible source.'}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -483,6 +551,35 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </p>
           </div>
 
+          {/* NARRATIVE: REAL LABOR-RIGHTS VIOLATIONS & ENFORCEMENT REALITY */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-5">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🚧</span>
+              <span>{currentLang === 'fa' ? 'موارد واقعی نقض حقوق کار خارجیان — و آنچه بازرسی کار انجام می‌دهد' : 'Real Documented Labor-Rights Violations — and What the Labor Inspection Does About It'}</span>
+            </h2>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'قوانین کار بالا روی کاغذ محکم هستند، اما گزارش‌های خبری نشان می‌دهند برخی کارفرمایان، به‌ویژه در بخش‌های ساخت‌وساز و خدماتی، این قوانین را رعایت نمی‌کنند. طبق تحقیق Business & Human Rights Centre (بر پایه گزارش Beet/Meduza، آوریل ۲۰۲۳)، ۱۱ کارگر نپالی ماه‌ها بدون حقوق کار کردند و کارفرما برای فسخ قرارداد از آن‌ها پول مطالبه کرد؛ ۴ نفر دیگر اجاره‌ای دو برابر نرخ بازار از حقوقشان کسر شده داشتند. طبق گزارش الجزیره (دسامبر ۲۰۲۳)، یک کارگر سریلانکایی ۳٬۰۰۰ یورو کارمزد آژانس پرداخت کرده بود اما فقط ۵۰۰ یورو در ماه (به‌جای ۸۰۰ یورو وعده‌داده‌شده) دریافت می‌کرد؛ NGO ضدقاچاق eLiberare هم از شرایط «وخیم» کارگران سریلانکایی در یک کارخانه گوشت خبر داده است.'
+                : 'The labor laws above are solid on paper, but news investigations show some employers — particularly in construction and service sectors — don\'t follow them. Per the Business & Human Rights Centre (based on a Beet/Meduza investigation, April 2023), 11 Nepali workers went unpaid for months, with their employer demanding money to let them break their contracts; 4 others had rent deducted at roughly double the market rate. Per Al Jazeera (December 2023), one Sri Lankan worker paid a €3,000 agency fee but received only €500/month against a promised €800; anti-trafficking NGO eLiberare also reported "terrible" conditions for Sri Lankan workers at a meat-processing factory.'}
+            </p>
+            <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs sm:text-sm text-emerald-950 leading-relaxed">
+              <strong className="block font-bold mb-1">{currentLang === 'fa' ? 'خبر خوب: بازرسی کار واقعاً وارد عمل می‌شود' : 'The good news: the Labor Inspection does act'}</strong>
+              {currentLang === 'fa'
+                ? 'طبق گزارش Gandul.ro، در یک کارزار هدفمند (۲۸ ژوئیه تا ۱ آگوست ۲۰۲۵)، بازرسی کار (Inspecția Muncii) بیش از ۱٬۰۰۰ بازرسی از کارفرمایان دارای کارگر خارجی انجام داد: از ۶۵۸ بازرسی روابط کاری، ۲۰۷ مورد جریمه شدند؛ از ۴۲۹ بازرسی ایمنی، ۴۲۳ مورد جریمه شدند؛ ۶۴ کارگر غیرقانونی (۴۰ نفر خارجی) کشف شد؛ مجموع جرایم بیش از ۲ میلیون لئو بود و ۲ محل کار تعطیل شدند. اگر کارفرمای شما قرارداد کتبی رسمی به شما نداد یا شرایط قانونی بالا را رعایت نکرد، می‌توانید شکایت را به دفتر منطقه‌ای بازرسی کار (Inspectoratul Teritorial de Muncă) گزارش دهید.'
+                : 'Per Gandul.ro, in one targeted campaign (July 28 – August 1, 2025), the Labor Inspection (Inspecția Muncii) ran over 1,000 inspections of employers with foreign workers: of 658 labor-relations checks, 207 resulted in sanctions; of 429 safety checks, 423 resulted in sanctions; 64 undeclared workers were found (40 foreign nationals); total fines exceeded 2 million RON and 2 workplaces were suspended. If your employer doesn\'t give you a formal written contract or doesn\'t follow the legal requirements above, you can report it to your regional Labor Inspection office (Inspectoratul Teritorial de Muncă).'}
+            </div>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'یک تغییر قانونی مهم دیگر از OUG 32/2026: قراردادهای کاری که به زبان رومانیایی تنظیم نشده باشند، جریمه‌ای تا ۶٬۰۰۰ لئو به‌ازای هر تخلف برای کارفرما دارد — یعنی شما حق دارید یک نسخه رومانیایی رسمی از قرارداد خود بخواهید، حتی اگر نسخه انگلیسی یا فارسی هم به شما داده شده باشد.'
+                : 'One more important regulatory change from OUG 32/2026: employment contracts not drafted in Romanian carry a fine of up to 6,000 RON per violation for the employer — meaning you have the right to request an official Romanian-language version of your contract, even if you were also given an English or Persian copy.'}
+            </p>
+            <p className="text-xs text-[#788697] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'منابع: Business & Human Rights Centre، Al Jazeera، Gandul.ro، PwC Romania (تحلیل OUG 32/2026). موارد بالا مربوط به کارگران نپالی و سریلانکایی است، نه لزوماً ایرانی — اما الگوی سوءاستفاده و راهکار قانونی شکایت برای هر تبعه خارجی یکسان است.'
+                : 'Sources: Business & Human Rights Centre, Al Jazeera, Gandul.ro, PwC Romania (OUG 32/2026 analysis). The cases above concern Nepali and Sri Lankan workers, not necessarily Iranian ones — but the abuse pattern and the legal complaint route are the same for any foreign national.'}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -499,6 +596,14 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'کارفرما تا کی باید مرا در REVISAL ثبت کند؟' : 'By when must my employer register me in REVISAL?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'حداقل یک روز کاری پیش از شروع کار شما. کار کردن بدون این ثبت قبلی، کارفرما را مشمول جریمه‌ای تا ۲۰,۰۰۰ لئو به‌ازای هر کارمند می‌کند.' : 'At least one working day before your first day of work. Letting you work without this prior registration exposes the employer to a fine of up to 20,000 RON per employee.'}</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر کارفرمایم حقوقم را ندهد یا شرایط قرارداد را نقض کند چه کار کنم؟' : 'What if my employer doesn\'t pay me or violates my contract terms?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'می‌توانید شکایت را مستقیماً به دفتر منطقه‌ای بازرسی کار (Inspectoratul Teritorial de Muncă) گزارش دهید؛ این نهاد کارزارهای بازرسی مشخصی برای کارفرمایان دارای کارگر خارجی دارد و جرایم واقعی صادر می‌کند.' : 'You can report it directly to your regional Labor Inspection office (Inspectoratul Teritorial de Muncă); this authority runs targeted inspection campaigns for employers of foreign workers and does issue real fines.'}</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا حق دارم نسخه رومانیایی رسمی از قراردادم داشته باشم؟' : 'Am I entitled to an official Romanian-language version of my contract?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله. طبق OUG 32/2026، قراردادهایی که به زبان رومانیایی تنظیم نشوند برای کارفرما جریمه‌ای تا ۶٬۰۰۰ لئو به‌ازای هر تخلف دارند؛ همیشه یک نسخه رومانیایی رسمی درخواست کنید، حتی اگر ترجمه انگلیسی یا فارسی هم داشته باشید.' : 'Yes. Under OUG 32/2026, contracts not drafted in Romanian carry a fine of up to 6,000 RON per violation for the employer; always request an official Romanian-language version, even if you also have an English or Persian translation.'}</p>
               </div>
             </div>
           </div>
@@ -573,6 +678,24 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               : 'You may have heard that Pillar II private pension participation became mandatory from January 2025. This is not a separate, additional deduction on top of the 25% CAS contribution; a portion of that same 25% (currently around 4.75 percentage points) is automatically redirected to your individual Pillar II account, with the rest funding the public Pillar I pension system. Your total pension contribution from salary stays 25%.'}
           </div>
 
+          {/* NARRATIVE: THE IRAN-ROMANIA DOUBLE TAXATION TREATY — A GENUINELY REASSURING FACT */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🤝</span>
+              <span>{currentLang === 'fa' ? 'اگر همچنان درآمدی از ایران دارید: خبر خوب درباره مالیات مضاعف' : 'If You Still Have Income From Iran: Good News on Double Taxation'}</span>
+            </h2>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'اگر ملک اجاره‌ای، کسب‌وکار خانوادگی یا مشتریان فریلنس در ایران دارید در حالی که در رومانی مقیم مالیاتی هستید، نگران مالیات مضاعف نباشید: بین ایران و رومانی یک «موافقت‌نامه اجتناب از اخذ مالیات مضاعف» واقعی و فعال وجود دارد. این توافق در ۳ اکتبر ۲۰۰۱ امضا، با قانون شماره ۲۷۹/۲۰۰۲ توسط رومانی تصویب، و از ۱ ژانویه ۲۰۰۸ لازم‌الاجرا شده است — صفحه رسمی آن هنوز روی سایت سازمان امور مالیاتی رومانی (ANAF) در دسترس است. اصل کلی این نوع توافق‌ها این است که کشور محل اقامت مالیاتی شما (اینجا: رومانی، اگر بیش از ۱۸۳ روز در سال آنجا باشید یا مرکز منافع حیاتی‌تان آنجا باشد) باید مالیات پرداخت‌شده در کشور دیگر را از طریق اعتبار مالیاتی یا معافیت، از مالیات نهایی شما کسر کند — یعنی روی یک درآمد دوبار به‌طور کامل مالیات پرداخت نمی‌کنید.'
+                : 'If you have rental property, a family business, or freelance clients in Iran while being a Romanian tax resident, don\'t worry about double taxation: a real, active double-taxation avoidance treaty exists between Iran and Romania. It was signed October 3, 2001, ratified by Romania under Law 279/2002, and has been in force since January 1, 2008 — its official page is still live on the Romanian tax authority\'s (ANAF) website. The general principle of this kind of treaty is that your tax-residence country (here: Romania, if you spend over 183 days/year there or your center of vital interests is there) must credit or exempt tax already paid in the other country from your final bill — meaning you don\'t pay full tax twice on the same income.'}
+            </p>
+            <p className="text-xs text-[#788697] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'منابع: صفحه رسمی ANAF برای ایران (static.anaf.ro)، فهرست تلفیقی noulcodfiscal.ro و infofisc.ro. جزئیات دقیق ماده‌به‌ماده این توافق (مثلاً روش دقیق اعمال آن برای هر نوع درآمد خاص) در این صفحه پوشش داده نشده — برای پرونده شخصی خود حتماً با یک مشاور مالیاتی متخصص در قوانین بین‌المللی مشورت کنید.'
+                : 'Sources: official ANAF page for Iran (static.anaf.ro), consolidated lists at noulcodfiscal.ro and infofisc.ro. The precise article-by-article details of the treaty (e.g. exactly how it applies to each specific income type) are not covered on this page — consult a tax advisor specializing in international law for your specific case.'}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -589,6 +712,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا پیلار دوم بازنشستگی سهم CAS من را افزایش می‌دهد؟' : 'Does Pillar II increase my CAS contribution?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. پیلار دوم بخشی از همان سهم ۲۵٪ CAS است که به یک حساب شخصی هدایت می‌شود، نه کسر اضافه.' : 'No. Pillar II is a carve-out within the same 25% CAS contribution redirected to a personal account, not an additional deduction.'}</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر همچنان درآمدی از ایران داشته باشم، آیا هم در ایران و هم در رومانی مالیات می‌دهم؟' : 'If I still have income from Iran, will I be taxed in both Iran and Romania?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، نه به‌طور کامل. یک موافقت‌نامه اجتناب از مالیات مضاعف بین ایران و رومانی از سال ۲۰۰۸ فعال است (قانون ۲۷۹/۲۰۰۲)؛ کشور محل اقامت مالیاتی شما باید مالیات پرداخت‌شده در کشور دیگر را از طریق اعتبار یا معافیت مالیاتی لحاظ کند. برای پرونده شخصی خود با یک مشاور مالیاتی متخصص مشورت کنید.' : 'No, not fully. A double-taxation avoidance treaty between Iran and Romania has been in force since 2008 (Law 279/2002); your tax-residence country must credit or exempt tax already paid in the other country. Consult a specialized tax advisor for your specific case.'}</p>
               </div>
             </div>
           </div>
@@ -678,6 +805,30 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* NARRATIVE: REAL CNAS ACCESS FRICTION + PENSION TOTALIZATION REALITY */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-5">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🩺</span>
+              <span>{currentLang === 'fa' ? 'واقعیت گزارش‌شده دریافت کارت بیمه سلامت به‌عنوان خارجی' : 'The Reported Reality of Getting Your Health Card as a Foreigner'}</span>
+            </h2>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'روی کاغذ، بیمه CASS برای همه کارمندان با قرارداد رسمی خودکار است. اما در انجمن‌های مهاجران (مثل Expat.com)، برخی خارجیان گزارش داده‌اند که وقتی برای کارت ملی بیمه سلامت فیزیکی مراجعه کرده‌اند، اداره CNAS محلی به آن‌ها گفته «فعلاً به اتباع خارجی کارت صادر نمی‌شود» — یک کاربر گزارش داد از سال ۲۰۱۵ در لیست انتظار مانده است. راه‌حل موقتی که اغلب استفاده می‌شود، دریافت یک «Adeverință» (گواهی بیمه) با اعتبار ۳ ماهه قابل تمدید است که باید مکرراً از اداره تمدید شود؛ برخی داروخانه‌ها و پزشکان این گواهی را به‌جای کارت فیزیکی می‌پذیرند، برخی دیگر خیر. این گزارش‌ها از انجمن‌های عمومی است، نه آمار رسمی — اما نشان می‌دهد بهتر است از همان روز اول کار، این گواهی موقت را از اداره محلی CNAS بگیرید و آن را همراه داشته باشید، به‌جای اینکه منتظر کارت فیزیکی بمانید.'
+                : 'On paper, CASS insurance is automatic for any employee with a formal contract. But on migrant forums (like Expat.com), some foreigners have reported that when they went in person for the physical National Health Insurance Card, their local CNAS office told them "no cards have been issued to foreign citizens at present" — one user reported being on a waitlist since 2015. The common workaround is a renewable 3-month "Adeverință" (insurance certificate) that must be re-collected from the office repeatedly; some pharmacies and doctors accept this certificate in place of the physical card, others don\'t. These are forum reports, not official statistics — but they suggest getting this temporary certificate from your local CNAS office from your first day of work, and keeping it on hand, rather than waiting for the physical card.'}
+            </p>
+            <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl text-xs sm:text-sm text-[#142033] leading-relaxed">
+              <strong className="block font-bold mb-1">{currentLang === 'fa' ? 'اگر روزی برای همیشه از رومانی بروید: چه اتفاقی برای سهم بازنشستگی می‌افتد؟' : 'If you eventually leave Romania for good: what happens to your pension contributions?'}</strong>
+              {currentLang === 'fa'
+                ? 'طبق فهرست رسمی توافق‌نامه‌های دوجانبه تامین اجتماعی سازمان ملی بازنشستگی رومانی (CNPP)، این سازمان فقط با ارمنستان، روسیه، اوکراین، بلاروس (کنوانسیون دوران شوروی ۱۹۶۰) و چند کشور دیگر (مثل آمریکا از ۲۰۲۳) توافق «تجمیع بیمه» (Totalization) دارد — ایران در این فهرست نیست. یعنی سهم CAS که در رومانی پرداخت می‌کنید، به‌طور خودکار به بازنشستگی ایران منتقل یا محاسبه نمی‌شود. این سایت نتوانست منبع رسمی روشنی پیدا کند که دقیقاً چه اتفاقی برای این سهم می‌افتد اگر شخص رومانی را برای همیشه ترک کند و به حداقل ۱۵ سال سابقه بیمه نرسیده باشد (آیا این سهم برای همیشه از دست می‌رود یا به‌صورت غیرفعال باقی می‌ماند) — برای وضعیت دقیق خودتان مستقیماً با CNPP تماس بگیرید.'
+                : 'Per the official bilateral social-security agreement list of Romania\'s National Pension House (CNPP), it only has "totalization" agreements with Armenia, Russia, Ukraine, Belarus (a 1960 Soviet-era convention), and a few other countries (e.g. the US since 2023) — Iran is not on this list. That means the CAS contributions you pay in Romania are not automatically transferred to or counted toward an Iranian pension. This site could not find a clear official source on exactly what happens to those contributions if someone leaves Romania permanently without reaching the minimum 15-year vesting period (whether they are forfeited or remain a dormant entitlement) — contact CNPP directly for your specific situation.'}
+            </div>
+            <p className="text-xs text-[#788697] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'منابع: انجمن Expat.com (گزارش کاربران، نه آمار رسمی)، فهرست رسمی توافق‌های دوجانبه CNPP (cnpp.ro).'
+                : 'Sources: Expat.com forum (user reports, not official statistics), official CNPP bilateral agreements list (cnpp.ro).'}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -694,6 +845,14 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا بیمه خصوصی جایگزین بیمه دولتی CASS می‌شود؟' : 'Does private insurance replace mandatory state CASS insurance?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. بیمه خصوصی همیشه مکمل است، نه جایگزین؛ سهم CASS از حقوق شما همچنان طبق قانون کسر می‌شود، فارغ از اینکه اشتراک خصوصی هم داشته باشید یا نه.' : 'No. Private insurance is always supplemental, never a substitute; the CASS contribution is still deducted from your salary by law regardless of whether you also hold a private subscription.'}</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر اداره CNAS به من گفت کارت فیزیکی صادر نمی‌شود چه کنم؟' : 'What if my CNAS office tells me physical cards aren\'t being issued?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'برخی خارجیان این تجربه را در انجمن‌های مهاجران گزارش کرده‌اند. در این حالت، گواهی موقت بیمه (Adeverință) با اعتبار ۳ ماهه قابل تمدید را از همان اداره درخواست کنید و آن را همراه داشته باشید تا زمانی که کارت فیزیکی صادر شود.' : 'Some foreigners have reported this experience on migrant forums. In that case, request the temporary insurance certificate (Adeverință), valid for a renewable 3 months, from the same office and keep it on hand until the physical card is issued.'}</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا سهم بازنشستگی من در رومانی به بازنشستگی ایران منتقل می‌شود؟' : 'Do my Romanian pension contributions transfer to an Iranian pension?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. رومانی هیچ توافق «تجمیع بیمه بازنشستگی» با ایران ندارد (طبق فهرست رسمی CNPP)؛ سهم CAS شما فقط در سیستم بازنشستگی رومانی محاسبه می‌شود.' : 'No. Romania has no pension "totalization" agreement with Iran (per the official CNPP list); your CAS contributions only count within the Romanian pension system.'}</p>
               </div>
             </div>
           </div>
