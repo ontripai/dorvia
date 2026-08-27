@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { University, Language, StudyAreaId, TeachingLanguage } from '../types';
 
@@ -10,6 +10,9 @@ interface UniversityCardProps {
 }
 
 export const UniversityCard: React.FC<UniversityCardProps> = ({ university, currentLang, activeStudyAreaId, activeLanguage }) => {
+  // Real photos are self-hosted under /public/images/universities (see scripts/fetch-wikimedia-photos.js).
+  // If a photo file is ever missing, this hides the photo block gracefully instead of showing a broken-image icon.
+  const [photoFailed, setPhotoFailed] = useState(false);
   const isWarning = university.warningLevel !== 'none';
   const badgeColors = isWarning
     ? 'bg-amber-100 text-amber-800 border-amber-300'
@@ -67,14 +70,14 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
   return (
     <div className={`bg-white rounded-2xl border ${isWarning ? 'border-amber-300' : 'border-slate-200'} shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col justify-between group`}>
 
-      {/* Real Campus Photo (when a verified Wikimedia Commons photo is available) */}
-      {university.photoUrl && (
+      {/* Real Campus Photo (self-hosted; only when a verified Wikimedia Commons photo is available) */}
+      {university.photoUrl && !photoFailed && (
         <div className="relative">
           <img
             src={university.photoUrl}
             alt={currentLang === 'fa' ? university.photoCaptionFa : university.photoCaptionEn}
             className="w-full h-36 object-cover"
-            onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+            onError={() => setPhotoFailed(true)}
           />
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-3 py-1.5">
             <p className="text-white text-[10px] leading-tight">

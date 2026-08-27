@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Language } from '../types';
 import { CommentsSection } from './CommentsSection';
@@ -13,6 +13,10 @@ interface IgiProcessContentProps {
 }
 
 export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLang }) => {
+  // Real photo is self-hosted under /public/images (see scripts/fetch-wikimedia-photos.js).
+  // If it's ever missing, this hides the photo block gracefully instead of showing a broken-image icon.
+  const [photoFailed, setPhotoFailed] = useState(false);
+
   return (
     <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8 text-right rtl">
       <Breadcrumb slugRoute="immigration/igi-process" currentLang={currentLang} />
@@ -292,14 +296,15 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
           <span>{currentLang === 'fa' ? 'تجربه واقعی: چیزی که سایت‌های عمومی درباره IGI نمی‌گویند' : 'Real Experience: What Generic Sites Don\'t Tell You About IGI'}</span>
         </h2>
 
+        {!photoFailed && (
         <div className="relative rounded-2xl overflow-hidden border border-[#dfe6ef]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://commons.wikimedia.org/wiki/Special:FilePath/Carrefour%20Grand%20Arena%2C%20Berceni%2C%20Bucuresti%20(4657140692).jpg?width=1200"
+            src="/images/immigration/igi-process-carrefour.jpg"
             alt={currentLang === 'fa' ? 'مجتمع Grand Arena Mall در بخارست، محل اداره مهاجرت (IGI) بخارست' : 'The Grand Arena Mall complex in Bucharest, home to the Bucharest Immigration Directorate (IGI)'}
             loading="lazy"
             className="w-full h-56 sm:h-72 object-cover bg-[#f0f4f9]"
-            onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+            onError={() => setPhotoFailed(true)}
           />
           <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent p-3 text-[10px] sm:text-xs text-white/90">
             {currentLang === 'fa'
@@ -307,6 +312,7 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
               : 'Grand Arena Mall complex (Bd. Metalurgiei, Sector 4) — the Bucharest IGI office has been housed here since 2023. Photo: Wikimedia Commons.'}
           </div>
         </div>
+        )}
 
         <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
           {currentLang === 'fa'
