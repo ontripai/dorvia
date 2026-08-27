@@ -72,6 +72,9 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
               <a href="#renewal-prerequisites" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
                 {currentLang === 'fa' ? '۲. جدول شرایط تمدید' : '2. Renewal Table'}
               </a>
+              <a href="#renewal-reality" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+                {currentLang === 'fa' ? '۲.۵ واقعیت صف و تاخیر IGI' : '2.5 Real Queues & Delays'}
+              </a>
               <a href="#renewal-steps" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
                 {currentLang === 'fa' ? '۳. مراحل گام‌به‌گام' : '3. Step-by-Step'}
               </a>
@@ -143,6 +146,39 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 </tbody>
               </table>
             </div>
+          </div>
+
+          {/* SECTION 2.5: THE REAL EXPERIENCE — QUEUES, BACKLOG, AND REGIONAL GAPS */}
+          <div id="renewal-reality" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-5">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🕰️</span>
+              <span>{currentLang === 'fa' ? 'واقعیت میدانی: چرا نوبت‌دهی IGI گاهی خیلی طول می‌کشد؟' : 'The Real Experience: Why IGI Appointments Sometimes Take So Long'}</span>
+            </h2>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'قوانین بالا مهلت‌های رسمی هستند، اما تجربه واقعی متقاضیان همیشه با همین سرعت پیش نمی‌رود. بر اساس تحلیل رسمی خود اداره کل مهاجرت (IGI) که در سال ۲۰۲۶ منتشر شد، جمعیت اتباع خارجی تحت پوشش این اداره در ۵ سال اخیر حدود ۴ برابر شده و به نزدیک ۲۹۹ هزار نفر رسیده، در حالی که تعداد کارکنان اداره از ۱٬۸۰۰ نفر فراتر نرفته است. همین گزارش نشان می‌دهد از ۱۳۲٬۳۴۷ درخواست مجوز کار سال ۲۰۲۴، فقط ۱۰۵٬۹۸۸ مورد (حدود ۸۰٪) تایید شده — نشانه‌ای روشن از حجم بالای پرونده‌های معطل در سیستم.'
+                : 'The rules above are the official deadlines, but real applicant experience does not always move that fast. According to IGI\'s own official 2026 analysis, the number of foreign nationals under its management grew roughly 4x in five years to nearly 299,000, while staffing has stayed under 1,800 people. The same report shows that of 132,347 work-permit applications filed in 2024, only 105,988 (~80%) were approved — a clear sign of a system carrying a heavy backlog.'}
+            </p>
+            <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs sm:text-sm text-amber-950 leading-relaxed">
+              <strong className="block font-bold mb-1">{currentLang === 'fa' ? 'یک مورد واقعی گزارش‌شده:' : 'A reported real case:'}</strong>
+              {currentLang === 'fa'
+                ? 'طبق گزارش نشریه The Bite (وابسته به مدرسه بین‌المللی بخارست)، یکی از کارمندان خارجی شرکت Dacia/Renault با وجود ثبت درخواست تمدید ۳ ماه پیش از انقضا، تا ۲ ماه پس از انقضای کارت نوبتی دریافت نکرد و ناچار به مراجعه حضوری چندروزه شد؛ در همین بازه، حساب‌های بانکی او (از جمله Revolut) به‌طور موقت مسدود شدند تا کارت جدید صادر شود. این نمونه نشان می‌دهد چرا داشتن نسخه چاپی رسید ثبت درخواست (نه فقط اعتماد به تاریخ انقضای کارت قدیم) در این بازه گذار اهمیت دارد.'
+                : 'Per a report from The Bite (affiliated with the American International School of Bucharest), a foreign employee at Dacia/Renault filed her renewal 3 months before expiry but received no appointment until 2 months after her card had already expired, and had to queue in person for several days. During that gap her bank accounts (including Revolut) were temporarily frozen until the new card was issued — a concrete illustration of why keeping your renewal filing receipt on hand matters during this transition window, not just trusting the old card\'s expiry date.'}
+            </div>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'خبر خوب: در تاریخ ۳۰ اکتبر ۲۰۲۴، اداره IGI به‌طور رسمی محدودیت قبلی «حداکثر ۹۰ روز پیش از نوبت» را در پورتال آنلاین (portal.igi.mai.gov.ro) حذف کرد و یک ایمیل اختصاصی برای گزارش مشکلات فنی پورتال راه‌اندازی نمود: '
+                : 'The good news: on October 30, 2024, IGI officially removed the portal\'s previous "book at most 90 days ahead" restriction on portal.igi.mai.gov.ro, and set up a dedicated email address for reporting portal technical issues: '}
+              <span className="font-mono font-bold text-[#142033]">sesizariportal.igi@mai.gov.ro</span>
+              {currentLang === 'fa'
+                ? '. اگر پورتال خطا داد یا نوبت خالی پیدا نکردید، پیش از ناامید شدن، مستقیماً از همین ایمیل استفاده کنید. همچنین طبق قانون شماره ۲۸/۲۰۲۴ (اصلاحیه OUG 194/2002، اجرایی از ۵ مارس ۲۰۲۴)، مهلت ۳۰ روزه تکمیل مدارک ناقص که در بخش ۶ همین صفحه توضیح داده شد، رسماً در قانون تثبیت شده است.'
+                : '. If the portal errors out or shows no available slots, use this email directly before giving up. Separately, under Law 28/2024 (amending OUG 194/2002, effective March 5, 2024), the 30-day incomplete-file cure period described in Section 6 below was formally written into law.'}
+            </p>
+            <p className="text-xs text-[#788697] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'منابع: HotNews (مارس و می ۲۰۲۶)، The Bite – AISB، پورتال رسمی IGI (اطلاعیه ۳۰ اکتبر ۲۰۲۴)، Universul Juridic (تحلیل قانون ۲۸/۲۰۲۴). داده‌های تفاوت زمان انتظار بین استان‌ها (مثلاً بخارست در برابر شهرهای کوچک‌تر) برای دسته‌های اقامتی متفاوت است و به‌روز نمی‌شود؛ آنچه بالا آمد میانگین کلی سیستم است، نه تضمین برای هر پرونده.'
+                : 'Sources: HotNews (March & May 2026), The Bite – AISB, official IGI portal notice (Oct 30, 2024), Universul Juridic (Law 28/2024 analysis). County-to-county wait-time gaps vary by permit category and are not tracked in real time; the figures above describe overall system strain, not a guarantee for any specific case.'}
+            </p>
           </div>
 
           {/* SECTION 3: STEP-BY-STEP RENEWAL */}
@@ -335,6 +371,14 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر آدرس محل سکونتم عوض شده چه مدرکی لازم دارم؟' : 'What proof do I need if I changed my address?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'باید مدرک به‌روز اثبات محل سکونت (مثلاً قرارداد اجاره‌ی ثبت‌شده نزد ANAF) ارائه دهید؛ برای جزئیات کامل به' : 'You must present up-to-date proof of address (e.g. a rental contract registered with ANAF); see'} <Link href="/needs/housing" className="text-[#2F6FED] font-bold hover:underline">{currentLang === 'fa' ? 'صفحه مسکن' : 'the housing page'}</Link> {currentLang === 'fa' ? 'مراجعه کنید.' : 'for full details.'}</p>
               </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر پورتال IGI خطا داد یا نوبت خالی پیدا نکردم چه کنم؟' : 'What if the IGI portal errors out or shows no available appointments?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'از ۳۰ اکتبر ۲۰۲۴ اداره IGI یک ایمیل رسمی برای گزارش مشکلات فنی پورتال راه‌اندازی کرده: sesizariportal.igi@mai.gov.ro — پیش از تسلیم شدن، مشکل را دقیق (با اسکرین‌شات) به همین ایمیل گزارش دهید.' : 'Since October 30, 2024, IGI has run a dedicated email for reporting portal technical issues: sesizariportal.igi@mai.gov.ro — describe the problem in detail (with a screenshot) before assuming there is nothing you can do.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چرا گاهی نوبت تمدید حتی تا ماه‌ها بعد از انقضای کارت داده می‌شود؟' : 'Why can renewal appointments sometimes fall months after the card expires?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق تحلیل رسمی IGI برای سال ۲۰۲۶، جمعیت خارجیان تحت پوشش این اداره در ۵ سال حدود ۴ برابر شده در حالی که تعداد کارکنان ثابت مانده؛ این فشار سیستمی می‌تواند در برخی مواقع و برخی استان‌ها به تاخیر منجر شود. رسید ثبت درخواست خود را همیشه همراه داشته باشید.' : 'Per IGI\'s own official 2026 analysis, the foreign population it manages grew roughly 4x in five years while staffing stayed flat — this systemic pressure can cause delays in some periods and counties. Always keep your application receipt on hand as proof you filed on time.'}</p>
+              </div>
             </div>
           </div>
 
@@ -403,12 +447,41 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
 
           <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 sm:p-6 text-xs sm:text-sm text-amber-950 leading-relaxed">
             {currentLang === 'fa'
-              ? 'توجه: مبلغ دقیق عوارض صدور کارت اقامت بلندمدت و سطح دقیق آزمون زبان رومانیایی (مثلاً A1 یا A2) ممکن است بسته به دسته اقامتی متفاوت باشد و به‌روزرسانی شود؛ برای مبلغ و سطح دقیق در پرونده خودتان با اداره محلی IGI تماس بگیرید یا از صفحه '
-              : 'Note: the exact fee for long-term residence issuance and the exact required Romanian language level (e.g. A1 vs A2) can vary by category and are periodically updated; confirm the precise figures for your case with your local IGI office, or see the '}
+              ? 'توجه: مبلغ دقیق عوارض صدور کارت اقامت بلندمدت ممکن است بسته به دسته اقامتی متفاوت باشد و به‌روزرسانی شود؛ برای مبلغ دقیق در پرونده خودتان با اداره محلی IGI تماس بگیرید یا از صفحه '
+              : 'Note: the exact fee for long-term residence issuance can vary by category and is periodically updated; confirm the precise figure for your case with your local IGI office, or see the '}
             <Link href="/immigration/igi-process" className="text-amber-900 font-bold hover:underline">
               {currentLang === 'fa' ? 'راهنمای عمومی هزینه‌های IGI' : 'general IGI fee guide'}
             </Link>
             {currentLang === 'fa' ? ' برای بازه هزینه‌های استاندارد استفاده کنید.' : ' for the standard fee range.'}
+          </div>
+
+          {/* NARRATIVE: WHAT THE LANGUAGE TEST ACTUALLY IS, SCHENGEN MYTH, AND THE 5-YEAR CALCULATION TRAP */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-5">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🔍</span>
+              <span>{currentLang === 'fa' ? 'نکاتی که در آزمون زبان و محاسبه ۵ سال معمولاً اشتباه فهمیده می‌شود' : 'What Gets Commonly Misunderstood About the Language Test & the 5-Year Count'}</span>
+            </h2>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'برخلاف تصور رایج، «آزمون زبان رومانیایی» برای اقامت بلندمدت یک آزمون رسمی مجزا با سطح مشخص (مثل A1 یا A2 چارچوب اروپایی CEFR) نیست. متن قانون فقط عبارت «آشنایی حداقل در سطح رضایت‌بخش با زبان رومانیایی» را به کار می‌برد، و طبق اطلاعیه‌های رسمی IGI، این ارزیابی معمولاً به‌صورت غیررسمی و در همان جلسه تحویل مدارک توسط کارمند IGI انجام می‌شود — نه یک آزمون کتبی استاندارد جداگانه. این بدان معناست که تشخیص «کافی بودن» سطح زبان تا حدی به صلاحدید همان کارمند بستگی دارد، پس توصیه می‌شود پیش از مراجعه، حداقل توانایی مکالمه ساده و خواندن مدارک رسمی رومانیایی را تمرین کنید.'
+                : 'Contrary to common belief, the "Romanian language test" for long-term residence is not a separate, formally certified exam with a defined level (like CEFR A1 or A2). The law\'s actual wording only requires "at least a satisfactory level" of Romanian, and per official IGI guidance this is typically assessed informally by the IGI officer during the same document-submission appointment — not a standardized written test. That means the officer retains some discretion in judging what counts as "satisfactory," so it is worth practicing basic conversation and reading official Romanian documents before your appointment.'}
+            </p>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'یک تصور غلط رایج دیگر: پیوستن رومانی به منطقه شنگن (مرزهای هوایی/دریایی از مارس ۲۰۲۴، مرزهای زمینی از ژانویه ۲۰۲۵) هیچ تغییری در قوانین یا حقوق جابجایی اقامت بلندمدت ایجاد نکرده است. حقوق محدود جابجایی برای دارندگان اقامت بلندمدت اتحادیه اروپا (طبق دستورالعمل ۲۰۰۳/۱۰۹/EC) از زمان پیوستن رومانی به اتحادیه اروپا در سال ۲۰۰۷ برقرار بوده، کاملاً مستقل از شنگن. عضویت شنگن فقط کنترل‌های مرزی فیزیکی بین کشورها را حذف کرده، نه چارچوب قانونی وضعیت اقامت بلندمدت را.'
+                : 'Another common misconception: Romania joining the Schengen Area (air/sea borders since March 2024, land borders since January 2025) did not change any rules or mobility rights tied to long-term residence status. The limited EU mobility right for holders of EU long-term resident status (under Directive 2003/109/EC) has existed since Romania joined the EU in 2007 — entirely separate from Schengen. Schengen membership only removed physical border checks between countries; it did not amend the long-term residence legal framework.'}
+            </p>
+            <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs sm:text-sm text-amber-950 leading-relaxed">
+              <strong className="block font-bold mb-1">{currentLang === 'fa' ? 'تله‌ی رایج در محاسبه ۵ سال:' : 'The common 5-year calculation trap:'}</strong>
+              {currentLang === 'fa'
+                ? 'طبق اطلاعیه رسمی IGI، مدت زمانی که با ویزای کوتاه‌مدت، ویزای دیپلماتیک/خدماتی یا وضعیت کارگر فصلی/Au Pair سپری شده اصلاً در محاسبه ۵ سال لحاظ نمی‌شود. مهم‌تر برای دانشجویان: مدت اقامت با کارت اقامت دانشجویی فقط ۵۰٪ از مدت واقعی آن محاسبه می‌شود — یعنی ۴ سال تحصیل فقط معادل ۲ سال برای این هدف حساب می‌شود. همچنین قانون غیبت هم‌زمان دو شرط دارد: نه هیچ غیبت منفردی بیش از ۶ ماه متوالی، و نه مجموع غیبت‌ها بیش از ۱۰ ماه در کل ۵ سال — هر دو شرط باید همزمان رعایت شوند.'
+                : 'Per official IGI guidance, time spent on a short-stay visa, diplomatic/service visa, or seasonal-worker/au-pair status does not count toward the 5 years at all. More importantly for students: time held on a student residence permit counts at only 50% of its actual duration — so 4 years of study only counts as 2 years toward this total. The absence rule also has two simultaneous conditions: no single absence over 6 consecutive months, AND total absences must stay under 10 months across the full 5 years — both must hold at once, not either/or.'}
+            </div>
+            <p className="text-xs text-[#788697] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'منابع: اطلاعیه رسمی IGI درباره اقامت بلندمدت (igi.mai.gov.ro)، متن تلفیقی OUG 194/2002 (تا ۶ مارس ۲۰۲۴)، Ziua Constanța، Fragomen و شورای اتحادیه اروپا (اعلامیه پیوستن به شنگن، دسامبر ۲۰۲۴). آمار دقیق نرخ تایید یا رد پرونده‌های اقامت بلندمدت به تفکیک ملیت (از جمله ایرانیان) در منابع رسمی یافت نشد — تحلیل سالانه ۲۰۲۵ اداره IGI ملیت‌های نپال، ترکیه و سریلانکا را در صدر آمار عمومی اقامت ذکر می‌کند.'
+                : 'Sources: official IGI notice on long-term residence (igi.mai.gov.ro), consolidated OUG 194/2002 text (as of March 6, 2024), Ziua Constanța, Fragomen, and the Council of the EU (Schengen accession announcement, December 2024). Nationality-specific approval/rejection statistics for long-term residence (including Iranian applicants) were not found in official sources — IGI\'s 2025 annual analysis lists Nepal, Turkey, and Sri Lanka as the top overall resident nationalities.'}
+            </p>
           </div>
 
           <div className="bg-white p-6 sm:p-8 rounded-2xl border-2 border-[#2F6FED]/30 shadow-sm space-y-3">
@@ -434,7 +507,11 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
               </div>
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا هر نوع کارت اقامت موقت برای این مسیر شمارش می‌شود؟' : 'Does every type of temporary residence permit count toward this?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، برخی وضعیت‌های اقامتی کوتاه‌مدت یا استثنایی ممکن است در محاسبه ۵ سال لحاظ نشوند؛ وضعیت دقیق پرونده شما را باید IGI بر اساس نوع اجازه اقامتتان بررسی کند.' : 'No, some short-term or exceptional residence statuses may not count toward the 5-year total; IGI must review your specific case based on your permit type.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. ویزای کوتاه‌مدت، دیپلماتیک/خدماتی و وضعیت کارگر فصلی/Au Pair اصلاً محاسبه نمی‌شوند، و اقامت با کارت اقامت دانشجویی فقط ۵۰٪ مدت واقعی خود را می‌سازد؛ وضعیت دقیق پرونده شما را باید IGI بر اساس نوع اجازه اقامتتان بررسی کند.' : 'No. Short-stay, diplomatic/service visas, and seasonal-worker/au-pair status do not count at all, and time on a student residence permit only counts at 50% of its actual duration; IGI must review your specific case based on your permit type.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا برای این اقامت باید در آزمون زبان رسمی A1 یا A2 قبول شوم؟' : 'Do I need to pass a formal A1 or A2 language exam for this?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. قانون فقط «سطح رضایت‌بخش» زبان رومانیایی را می‌خواهد و این معمولاً طی همان جلسه تحویل مدارک و به تشخیص کارمند IGI ارزیابی می‌شود، نه یک آزمون کتبی جداگانه با سطح CEFR مشخص.' : 'No. The law only requires a "satisfactory level" of Romanian, typically assessed informally by the IGI officer during the document-submission appointment itself, not a separate written exam with a defined CEFR level.'}</p>
               </div>
             </div>
           </div>
@@ -496,10 +573,39 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'درخواست‌ها نزد سازمان ملی تابعیت (Autoritatea Națională pentru Cetățenie / ANC) ثبت می‌شود.' : 'Applications are submitted to the National Authority for Citizenship (Autoritatea Națională pentru Cetățenie / ANC).'}</li>
-                <li>{currentLang === 'fa' ? 'میانگین زمان رسیدگی به پرونده‌های ماده ۸ در حال حاضر حدود ۲ سال است (بر اساس آمار رسمی ANC).' : 'The average processing time for Article 8 cases is currently around 2 years (based on official ANC statistics).'}</li>
+                <li>{currentLang === 'fa' ? 'طبق قانون ۱۴/۲۰۲۵ (اصلاحیه قانون ۲۱/۱۹۹۱)، مهلت قانونی رسیدگی ANC از ۵ ماه به ۲ سال افزایش یافت (با امکان تمدید ۶ ماهه در موارد موجه) — این عدد اکنون سقف رسمی است، نه صرفاً میانگین آماری.' : 'Under Law 14/2025 (amending Law 21/1991), ANC\'s statutory processing deadline was extended from 5 months to 2 years (with a possible 6-month extension in justified cases) — this is now the official legal ceiling, not just a statistical average.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
             </div>
+          </div>
+
+          {/* NARRATIVE: REAL ANC BACKLOG DATA + IRAN DUAL-CITIZENSHIP INTERSECTION */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-5">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>📈</span>
+              <span>{currentLang === 'fa' ? '«۲ سال» واقعاً یعنی چه؟ آمار واقعی رسیدگی ANC' : 'What "2 Years" Actually Means: ANC\'s Real Backlog'}</span>
+            </h2>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'مهلت ۲ ساله دقیقاً به این دلیل در قانون ۱۴/۲۰۲۵ گنجانده شد که ANC دیگر قادر به رعایت مهلت قبلی ۵ ماهه نبود و با شکایات متعدد بابت تاخیر مواجه شده بود. آمار واقعی نگران‌کننده‌تر از این عدد است: طبق تحلیل حقوقی Legal500، از ۳۸٬۹۸۱ درخواست ثبت‌شده در سال ۲۰۲۳، فقط ۰٫۳۷٪ تا پایان همان سال تایید نهایی شدند؛ در سال ۲۰۲۴، از ۵۰٬۳۵۰ درخواست جدید، تا پایان سال هیچ پرونده‌ای تایید نشد؛ و تا مارس ۲۰۲۵، با وجود ۳٬۹۷۶ درخواست تازه دیگر، همچنان هیچ‌کدام تایید نشده بود. این یعنی «۲ سال» را باید یک کف انتظار در نظر گرفت، نه سقف تضمین‌شده.'
+                : 'The 2-year deadline was written into Law 14/2025 precisely because ANC could no longer meet its previous 5-month deadline and was facing repeated lawsuits over delays. The actual backlog data is more sobering than that number suggests: per Legal500\'s legal analysis, of 38,981 applications filed in 2023, only 0.37% received final approval by year-end; of 50,350 new applications filed in 2024, none were approved by year-end; and through March 2025, with 3,976 more applications filed, still none had been approved. In practice, treat "2 years" as a floor for realistic planning, not a guaranteed ceiling.'}
+            </p>
+            <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl text-xs sm:text-sm text-[#142033] leading-relaxed">
+              <strong className="block font-bold mb-1">{currentLang === 'fa' ? 'مهم‌ترین نکته برای ایرانیان: تابعیت دوگانه' : 'The Most Important Point for Iranians: Dual Citizenship'}</strong>
+              {currentLang === 'fa'
+                ? 'قانون رومانی (ماده ۸ قانون ۲۱/۱۹۹۱) نیازی به انصراف از تابعیت قبلی برای اخذ تابعیت رومانی ندارد — رومانی به‌صراحت تابعیت چندگانه را برای تازه‌تابعیت‌شدگان می‌پذیرد. اما نکته کلیدی از سمت ایران است: قانون ایران به‌طور خودکار تابعیت ایرانی کسی که تابعیت کشور دیگری می‌گیرد را باطل نمی‌کند؛ در واقع اگر این کار بدون طی تشریفات رسمی ترک تابعیت انجام شود، دولت ایران عملاً آن تابعیت خارجی را نادیده می‌گیرد و همچنان فرد را صرفاً ایرانی می‌داند. ترک رسمی تابعیت ایران نیازمند رأی هیئت وزیران، حداقل ۲۵ سال سن، انجام خدمت سربازی (برای آقایان)، انتقال املاک ایرانی به اتباع ایرانی ظرف یک سال، و خروج از ایران ظرف سه ماه پس از ترک تابعیت است — فرآیندی که اغلب برای مردان مشمول سربازی رد می‌شود. پیش از هرگونه اقدام، حتماً با یک وکیل متخصص حقوق تابعیت مشورت کنید؛ شماره دقیق ماده قانونی ایران در منابع مختلف متفاوت ذکر شده (برخی ماده ۹۸۸ قانون تابعیت ۱۹۳۴، برخی ماده ۹۷۶ قانون مدنی) و نیاز به تایید نهایی حقوقی دارد.'
+                : 'Romanian law (Article 8 of Law 21/1991) does not require renouncing your prior citizenship to acquire Romanian citizenship — Romania explicitly permits multiple nationality for newly naturalized citizens. But the key issue is on Iran\'s side: Iranian law does not automatically strip Iranian citizenship from someone who acquires another nationality; if done without following Iran\'s own formal renunciation procedure, the Iranian government simply disregards the new foreign nationality and continues to treat the person as solely Iranian. Formally renouncing Iranian citizenship requires Council of Ministers approval, being over 25, having completed military service (for men), transferring any Iranian real estate to Iranian nationals within one year, and leaving Iran within three months of renunciation — a process frequently denied for men of military-service age. Consult a citizenship-law attorney before taking any action; the exact Iranian legal article is cited differently across sources (some cite Article 988 of the 1934 Citizenship Law, others Article 976 of the Civil Code) and needs final legal confirmation for your specific case.'}
+            </div>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'مصاحبه/آزمون این مرحله رسماً یک «مصاحبه» نزد کمیسیون تابعیت است، نه یک آزمون کتبی استاندارد: طبق صفحه رسمی ماده ۸ در cetatenie.just.ro، محتوای آن شامل خواندن و نوشتن رومانیایی، آشنایی با اصول قانون اساسی، خواندن سرود ملی، و اطلاعات مقدماتی از فرهنگ، تاریخ و جغرافیای رومانی است. همان سایت رسمی بانک سوالات نمونه را نیز برای دانلود و آمادگی منتشر کرده است.'
+                : 'This stage is officially an "interview" before the Citizenship Commission, not a standardized written exam: per the official Article 8 page on cetatenie.just.ro, it covers reading/writing Romanian, familiarity with constitutional principles, reciting the national anthem, and elementary knowledge of Romanian culture, history, and geography. The same official site publishes a downloadable sample question bank for preparation.'}
+            </p>
+            <p className="text-xs text-[#788697] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'منابع: avocatpavel.com (تحلیل قانون ۱۴/۲۰۲۵)، Legal500 (تحلیل آماری رسیدگی ANC)، cetatenie.just.ro (صفحه رسمی ماده ۸)، Library of Congress – گزارش قوانین تابعیت ایران، globalcit.eu (متن تلفیقی قانون ۲۱/۱۹۹۱). شماره دقیق ماده قانون تابعیت ایران بین منابع متفاوت است و نیاز به تایید حقوقی نهایی دارد؛ نرخ قبولی مصاحبه ANC در منابع رسمی منتشر نشده است.'
+                : 'Sources: avocatpavel.com (Law 14/2025 analysis), Legal500 (ANC processing statistics analysis), cetatenie.just.ro (official Article 8 page), Library of Congress — report on Iranian citizenship law, globalcit.eu (consolidated Law 21/1991 text). The exact Iranian legal article number varies across sources and needs final legal confirmation; ANC interview pass rates are not published in official sources.'}
+            </p>
           </div>
 
           <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 sm:p-6 text-xs sm:text-sm text-amber-950 leading-relaxed">
@@ -515,8 +621,8 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </h3>
             <p className="text-xs sm:text-sm text-[#526174] leading-relaxed">
               {currentLang === 'fa'
-                ? 'همانند IGI، سازمان ملی تابعیت (ANC) نیز یک نهاد دولتی است و مشمول قانون دادرسی اداری رومانی (Legea nr. 554/2004) می‌شود. اگر پرونده شما فراتر از مدت متعارف رسیدگی (حدود ۲ سال) بدون توضیح معلق بماند، حق دارید با کمک وکیل حقوق اداری علیه این سکوت یا تاخیر به دادگاه اداری شکایت کنید — این ابزار قانونی کمتر شناخته‌شده اما واقعی است.'
-                : 'Like IGI, the National Authority for Citizenship (ANC) is a public authority subject to the Administrative Contentious Law (Legea nr. 554/2004). If your file remains pending beyond the typical processing time (around 2 years) without explanation, you have the right to sue this silence or delay in the administrative court with the help of an administrative-law attorney — a real, under-publicized legal tool.'}
+                ? 'همانند IGI، سازمان ملی تابعیت (ANC) نیز یک نهاد دولتی است و مشمول قانون دادرسی اداری رومانی (Legea nr. 554/2004) می‌شود. اگر پرونده شما فراتر از مهلت قانونی جدید ۲ ساله (با احتساب تمدید احتمالی ۶ ماهه) بدون توضیح معلق بماند، حق دارید با کمک وکیل حقوق اداری علیه این سکوت یا تاخیر به دادگاه اداری شکایت کنید — این ابزار قانونی کمتر شناخته‌شده اما واقعی است.'
+                : 'Like IGI, the National Authority for Citizenship (ANC) is a public authority subject to the Administrative Contentious Law (Legea nr. 554/2004). If your file remains pending beyond the new 2-year statutory deadline (plus any 6-month extension) without explanation, you have the right to sue this silence or delay in the administrative court with the help of an administrative-law attorney — a real, under-publicized legal tool.'}
             </p>
           </div>
 
@@ -527,15 +633,19 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             <div className="space-y-6">
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'پروسه بررسی پرونده تابعیت چقدر زمان می‌برد؟' : 'How long does the citizenship application process take?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بر اساس روال قانونی و آمارهای فعلی سازمان ملی تابعیت (ANC)، رسیدگی به درخواست‌های ماده ۸ معمولاً حدود ۲ سال زمان می‌برد.' : 'Based on legal procedures and current ANC statistics, processing Article 8 applications typically takes around 2 years.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون ۱۴/۲۰۲۵، مهلت قانونی رسمی ۲ سال است (با امکان تمدید ۶ ماهه)؛ اما آمار واقعی ANC نشان می‌دهد بسیاری از پرونده‌های ۲۰۲۳ و ۲۰۲۴ حتی تا پایان همان بازه هم تایید نشدند، پس بهتر است این عدد را یک کف انتظار در نظر بگیرید نه یک تضمین.' : 'Under Law 14/2025, the official statutory deadline is 2 years (with a possible 6-month extension); but ANC\'s actual data shows many 2023 and 2024 applications were still not approved even by the end of that window, so treat this figure as a floor for planning, not a guarantee.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر تابعیت رومانی را بگیرم، آیا تابعیت ایرانی‌ام را از دست می‌دهم؟' : 'If I acquire Romanian citizenship, do I lose my Iranian citizenship?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'رومانی نیازی به انصراف از تابعیت قبلی ندارد. اما ایران هم به‌طور خودکار تابعیت شما را باطل نمی‌کند مگر از طریق فرآیند رسمی و دشوار ترک تابعیت (تایید هیئت وزیران) اقدام کنید؛ در عمل بسیاری افراد بدون طی این فرآیند، از دید ایران همچنان صرفاً ایرانی محسوب می‌شوند. پیش از تصمیم‌گیری حتماً با وکیل متخصص مشورت کنید.' : 'Romania does not require you to renounce your prior citizenship. Iran also does not automatically revoke your citizenship unless you go through its formal, difficult renunciation process (Council of Ministers approval); in practice, many people who don\'t complete that process remain considered solely Iranian by Iran. Consult a specialized attorney before deciding.'}</p>
               </div>
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا آزمون زبان و قانون اساسی برای دریافت تابعیت دشوار است؟' : 'Is the language and constitution exam difficult?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'متقاضی باید توانایی خواندن، نوشتن و مکالمه روان به زبان رومانیایی را داشته باشد و به پرسش‌هایی درباره تاریخ، جغرافیا و قانون اساسی پاسخ دهد که نیازمند مطالعه و آمادگی کامل است.' : 'The applicant must demonstrate the ability to read, write, and converse fluently in Romanian, and answer questions regarding the country\'s history, geography, and constitution, which requires thorough preparation.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'این مرحله رسماً یک مصاحبه نزد کمیسیون تابعیت است (نه آزمون کتبی استاندارد) و شامل خواندن/نوشتن رومانیایی، اصول قانون اساسی، سرود ملی و اطلاعات مقدماتی فرهنگ/تاریخ/جغرافیای رومانی است؛ ANC بانک سوالات نمونه را روی cetatenie.just.ro منتشر کرده که می‌توانید از قبل مطالعه کنید.' : 'This stage is officially an interview before the Citizenship Commission (not a standardized written exam) covering Romanian reading/writing, constitutional principles, the national anthem, and elementary Romanian culture/history/geography; ANC publishes a sample question bank on cetatenie.just.ro that you can study in advance.'}</p>
               </div>
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر پرونده‌ام بیش از حد معمول طول کشید چه اقدامی می‌توانم انجام دهم؟' : 'What can I do if my file takes far longer than usual?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون ۵۵۴/۲۰۰۴، می‌توانید ظرف ۶ ماه از تاخیر یا سکوت غیرموجه، با کمک وکیل متخصص حقوق اداری علیه ANC در دادگاه اداری شکایت کنید.' : 'Under Law 554/2004, you can sue ANC in the administrative court within 6 months of an unjustified delay or silence, with the help of an administrative-law attorney.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون ۵۵۴/۲۰۰۴، می‌توانید ظرف ۶ ماه از تاخیر یا سکوت غیرموجه فراتر از مهلت ۲ ساله جدید، با کمک وکیل متخصص حقوق اداری علیه ANC در دادگاه اداری شکایت کنید.' : 'Under Law 554/2004, you can sue ANC in the administrative court within 6 months of an unjustified delay or silence beyond the new 2-year deadline, with the help of an administrative-law attorney.'}</p>
               </div>
             </div>
           </div>
