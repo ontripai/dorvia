@@ -85,8 +85,64 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'مجوز کار، پایه‌ی درخواست ویزای بلندمدت کاری (نوع D/AM) نزد سفارت رومانی است.' : 'The work permit serves as the basis for the long-stay work visa (Type D/AM) application at the Romanian embassy.'}</li>
+                <li>
+                  {currentLang === 'fa'
+                    ? 'از آگوست ۲۰۲۶ کارفرما موظف است این درخواست را از طریق پلتفرم دولتی جدید workinromania.gov.ro پیش ببرد.'
+                    : 'Since August 2026, employers must process this application through the new mandatory government platform workinromania.gov.ro.'}
+                </li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
+            </div>
+          </div>
+
+          {/* REAL AVIZ DE MUNCĂ CATEGORIES */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>📂</span>
+              <span>{currentLang === 'fa' ? '۸ نوع واقعی مجوز کار طبق قانون رومانی' : 'The 8 Real Aviz de Muncă Categories Under Romanian Law'}</span>
+            </h2>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'برخلاف تصور رایج که «مجوز کار» یک نوع واحد است، قانون رومانی (OG 25/2014، ماده ۲) هشت دسته متمایز از مجوز کار تعریف می‌کند که هر کدام مسیر و شرایط خاص خود را دارند:'
+                : 'Contrary to the common assumption that "work permit" is a single category, Romanian law (OG 25/2014, Art. 2) defines eight distinct work-permit categories, each with its own pathway and conditions:'}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-[#526174]">
+              <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">{currentLang === 'fa' ? '۱. دائمی (Lucrător permanent)' : '1. Permanent (Lucrător permanent)'}</strong> — {currentLang === 'fa' ? 'رایج‌ترین دسته؛ قرارداد کار نامحدود یا محدود با کارفرمای رومانیایی.' : 'the most common category; indefinite or fixed-term contract with a Romanian employer.'}</div>
+              <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">{currentLang === 'fa' ? '۲. کارآموز (Lucrător stagiar)' : '2. Trainee (Lucrător stagiar)'}</strong> — {currentLang === 'fa' ? 'دوره کارآموزی حرفه‌ای در یک شرکت رومانیایی.' : 'a professional traineeship placement at a Romanian company.'}</div>
+              <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">{currentLang === 'fa' ? '۳. فصلی (Lucrător sezonier)' : '3. Seasonal (Lucrător sezonier)'}</strong> — {currentLang === 'fa' ? 'مشاغل فصلی مانند کشاورزی یا گردشگری.' : 'seasonal work such as agriculture or tourism.'}</div>
+              <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">{currentLang === 'fa' ? '۴. مرزنشین (Lucrător transfrontalier)' : '4. Cross-border (Lucrător transfrontalier)'}</strong> — {currentLang === 'fa' ? 'مخصوص اتباع کشورهای هم‌مرز با رومانی.' : 'for citizens of countries bordering Romania.'}</div>
+              <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">{currentLang === 'fa' ? '۵. اعزامی (Lucrător detașat)' : '5. Posted worker (Lucrător detașat)'}</strong> — {currentLang === 'fa' ? 'اعزام‌شده توسط یک شرکت خارج از رومانی برای پروژه‌ای در رومانی.' : 'posted by a company outside Romania to work on a project inside Romania.'}</div>
+              <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">{currentLang === 'fa' ? '۶. انتقالی درون‌شرکتی (ICT)' : '6. Intra-corporate transferee (ICT)'}</strong> — {currentLang === 'fa' ? 'انتقال مدیر یا متخصص از شعبه خارجی همان شرکت به شعبه رومانیایی.' : 'transferred from a foreign branch of the same company to its Romanian branch.'}</div>
+              <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">{currentLang === 'fa' ? '۷. متخصص عالی‌رتبه (کارت آبی اتحادیه اروپا)' : '7. Highly-qualified worker (EU Blue Card)'}</strong> — {currentLang === 'fa' ? 'مسیر ویژه با مزایای بیشتر، جزئیات در ادامه.' : 'the special-track route with extra benefits, detailed below.'}</div>
+              <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">{currentLang === 'fa' ? '۸. اوپر (Au pair)' : '8. Au pair'}</strong> — {currentLang === 'fa' ? 'اقامت و کار محدود نزد یک خانواده میزبان رومانیایی.' : 'live-in, limited work arrangement with a Romanian host family.'}</div>
+            </div>
+            <p className="text-[11px] text-slate-400">
+              {currentLang === 'fa'
+                ? 'منبع: igi.mai.gov.ro و متن رسمی OG 25/2014. (فعالیت اقتصادی مستقل اتباع خارجی یک رژیم اقامتی جداگانه است، نه یک دسته «Aviz de Muncă»؛ اگر این مسیر برای شما مطرح است، حتماً موردی جداگانه با IGI بررسی کنید.)'
+                : 'Source: igi.mai.gov.ro and the official text of OG 25/2014. (Independent economic activity by a foreigner is a separate residence-status regime, not an "Aviz de Muncă" category — if this route applies to you, verify it separately with IGI.)'}
+            </p>
+          </div>
+
+          {/* EU BLUE CARD */}
+          <div className="bg-[#071B3D] text-white rounded-2xl p-6 sm:p-8 space-y-4">
+            <h3 className="text-lg sm:text-xl font-extrabold flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🔷</span>
+              <span>{currentLang === 'fa' ? 'کارت آبی اتحادیه اروپا (EU Blue Card) — مسیر متخصصان عالی‌رتبه' : 'EU Blue Card — The High-Skilled Track'}</span>
+            </h3>
+            <p className="text-sm text-slate-300 leading-relaxed">
+              {currentLang === 'fa'
+                ? 'اگر مدرک تحصیلات تکمیلی یا سابقه کاری تخصصی دارید، مسیر کارت آبی معمولاً سریع‌تر و با مزایای بیشتری همراه است. طبق قانون ۲۸/۲۰۲۴ (اجرایی از مارس ۲۰۲۴)، حداقل حقوق ناخالص لازم برای واجد شرایط بودن از «۲ برابر میانگین حقوق ناخالص کشوری» به «۱ برابر میانگین حقوق ناخالص کشوری» کاهش یافت. طبق آخرین آمار رسمی (مرکز آمار ملی، مه ۲۰۲۶)، میانگین حقوق ناخالص کشوری حدود ۹,۴۸۳ لئو در ماه است — این رقم را حتماً پیش از اقدام با IGI/کارفرمای خود تایید کنید چون به‌روزرسانی می‌شود.'
+                : 'If you hold an advanced degree or specialized professional experience, the EU Blue Card route is typically faster and comes with more benefits. Under Law 28/2024 (effective March 2024), the minimum gross salary threshold to qualify was reduced from "2× the average national gross salary" to "1× the average national gross salary." Per the latest official statistics (National Statistics Institute, May 2026), the average national gross salary is around 9,483 RON/month — always confirm this current figure with IGI/your employer before applying, since it updates periodically.'}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+              <div className="p-4 bg-[#0b2b55] rounded-xl space-y-1">
+                <span className="font-extrabold text-blue-300">{currentLang === 'fa' ? 'شرایط احراز' : 'Eligibility'}</span>
+                <p className="text-slate-300">{currentLang === 'fa' ? 'مدرک تحصیلات تکمیلی، یا ۵ سال سابقه کاری تخصصی مرتبط (۳ سال برای متخصصان IT)، به‌همراه قرارداد کاری حداقل ۶ ماهه تمام‌وقت.' : 'An advanced degree, or 5 years of relevant professional experience (3 years for IT specialists), plus a full-time contract of at least 6 months.'}</p>
+              </div>
+              <div className="p-4 bg-[#0b2b55] rounded-xl space-y-1">
+                <span className="font-extrabold text-blue-300">{currentLang === 'fa' ? 'مزایا نسبت به مجوز عادی' : 'Advantages over Standard Permit'}</span>
+                <p className="text-slate-300">{currentLang === 'fa' ? 'اعتبار تا ۳ سال (به‌جای ۱ سال معمول)، امکان ثبت هم‌زمان درخواست پیوست خانواده، و امکان جابجایی درون اتحادیه اروپا بدون نیاز به مجوز جدید پس از مدتی.' : 'Validity up to 3 years (vs. the usual 1 year), simultaneous family-reunification filing, and EU intra-mobility without needing a fresh permit after a qualifying period.'}</p>
+              </div>
             </div>
           </div>
 
@@ -101,7 +157,11 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               </div>
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بررسی درخواست مجوز چقدر طول می‌کشد؟' : 'How long does the permit application process take?'}</h3>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'این زمان بسته به حجم پرونده‌های IGI متغیر است، اما معمولاً رسیدگی به آن چند هفته تا چند ماه زمان می‌برد.' : 'The timeline varies depending on IGI\'s workload, but it typically takes from a few weeks to several months.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'این زمان بسته به حجم پرونده‌های IGI و سقف سهمیه سالانه متغیر است؛ منبع رسمی زمان دقیق منتشر نکرده، اما معمولاً چند هفته تا چند ماه طول می‌کشد.' : 'The timeline varies depending on IGI\'s workload and the annual quota; no official source publishes an exact figure, but it typically takes from a few weeks to several months.'}</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'کارت آبی اتحادیه اروپا با مجوز کار عادی چه فرقی دارد؟' : 'How is the EU Blue Card different from a standard work permit?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'کارت آبی مخصوص متخصصان با مدرک تحصیلات تکمیلی یا سابقه تخصصی است و اعتبار طولانی‌تر (تا ۳ سال) و مسیر ساده‌تر پیوست خانواده دارد.' : 'The Blue Card is for specialists with an advanced degree or specialized experience and offers longer validity (up to 3 years) and a simpler family-reunification path.'}</p>
               </div>
             </div>
           </div>
@@ -211,11 +271,16 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
-                <span>{currentLang === 'fa' ? 'منابع رسمی کاریابی' : 'Official Job Search Resources'}</span>
+                <span>{currentLang === 'fa' ? 'سایت‌های کاریابی واقعی رومانی' : 'Real Romanian Job Search Sites'}</span>
               </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'پورتال EURES رومانی (eures.europa.eu / eures.anofm.ro)، بخشی از شبکه رسمی کاریابی اتحادیه اروپا، آگهی‌های تأییدشده را نمایش می‌دهد.' : 'The Romanian EURES portal (eures.europa.eu / eures.anofm.ro), part of the official EU employment network, displays verified job postings.'}</li>
-                <li>{currentLang === 'fa' ? 'آژانس ملی استخدام رومانی (ANOFM، anofm.ro) زیر نظر وزارت کار رومانی فعالیت می‌کند و آگهی‌های داخلی کشور را منتشر می‌کند.' : 'The National Agency for Employment (ANOFM, anofm.ro) operates under the Romanian Ministry of Labor and publishes domestic job advertisements.'}</li>
+                <li>{currentLang === 'fa' ? 'پورتال EURES رومانی (eures.europa.eu / eures.anofm.ro) — بخش رسمی شبکه کاریابی اتحادیه اروپا؛ و آژانس ملی استخدام (ANOFM، anofm.ro) با آگهی‌های داخلی.' : 'The Romanian EURES portal (eures.europa.eu / eures.anofm.ro) — the official EU employment network; and the National Agency for Employment (ANOFM, anofm.ro) with domestic listings.'}</li>
+                <li><strong className="text-[#142033]">eJobs.ro</strong> {currentLang === 'fa' ? '— پرترافیک‌ترین پورتال عمومی رومانی با بیش از ۳ میلیون رزومه فعال.' : '— Romania\'s highest-traffic general portal, 3M+ active CVs.'}</li>
+                <li><strong className="text-[#142033]">BestJobs.ro</strong> {currentLang === 'fa' ? '— پورتال عمومی پرحجم دیگر با محتوای آموزشی رزومه/مصاحبه.' : '— another high-volume general portal, with CV/interview coaching content.'}</li>
+                <li><strong className="text-[#142033]">Hipo.ro</strong> {currentLang === 'fa' ? '— مخصوص فارغ‌التحصیلان و سطوح حرفه‌ای، با فهرست «۵۰۰ کارفرمای برتر رومانی».' : '— targets graduates & professionals, publishes Romania\'s "Top 500 Employers" list.'}</li>
+                <li><strong className="text-[#142033]">Undelucram.ro</strong> {currentLang === 'fa' ? '— ترکیب آگهی شغلی + نظرات کارمندان درباره کارفرما (شبیه Glassdoor) با ابزار مقایسه حقوق.' : '— job board + employee employer-reviews (Glassdoor-style) with a salary-comparison tool.'}</li>
+                <li><strong className="text-[#142033]">Jobber.ro</strong> {currentLang === 'fa' ? '— تخصصی حوزه IT (توسعه، ادمین سیستم، تست).' : '— IT-specific (dev, sysadmin, QA/testing).'}</li>
+                <li>{currentLang === 'fa' ? 'Posturi.gov.ro برای مشاغل دولتی رسمی، و Careerjet.ro/Indeed.com به‌عنوان تجمیع‌کننده آگهی از چند منبع.' : 'Posturi.gov.ro for official public-sector jobs, and aggregators like Careerjet.ro/Indeed.com.'}</li>
               </ul>
             </div>
 
@@ -233,6 +298,11 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                   {currentLang === 'fa' ? ' دارند که باید توسط کارفرما از اداره کل مهاجرت (IGI) درخواست شود.' : ' for legal employment, which must be requested by the employer from the General Inspectorate for Immigration (IGI).'}
                 </li>
                 <li>{currentLang === 'fa' ? 'پیش‌نیاز شروع این فرآیند، داشتن پیشنهاد شغلی رسمی از یک کارفرمای ثبت‌شده در رومانی است.' : 'A prerequisite to initiating this process is having an official job offer from a registered employer in Romania.'}</li>
+                <li>
+                  {currentLang === 'fa'
+                    ? 'از آگوست ۲۰۲۶، کارفرمایان و آژانس‌های کاریابی موظفند استخدام اتباع غیر اتحادیه اروپا را از طریق پلتفرم دولتی جدید و اجباری workinromania.gov.ro ثبت کنند (خودتان به‌عنوان کارجو مستقیماً از این سامانه استفاده نمی‌کنید، اما بدانید کارفرمای شما باید از آن عبور کند).'
+                    : 'Since August 2026, employers and staffing agencies are required to process non-EU hiring through the new mandatory government platform workinromania.gov.ro (you as the job seeker don\'t use it directly, but your employer must go through it).'}
+                </li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
             </div>
@@ -243,8 +313,56 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                 <span>{currentLang === 'fa' ? 'نکات عملی' : 'Practical Considerations'}</span>
               </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'حداقل حقوق قانونی رومانی: ۴,۳۲۵ لئو در ماه (حدود ۸۵۰ یورو)، معتبر از ۱ ژوئیه ۲۰۲۶ به بعد.' : 'Minimum legal salary in Romania: 4,325 RON per month (approx. €850), valid from July 1, 2026 onwards.'}</li>
+                <li>{currentLang === 'fa' ? 'حداقل حقوق قانونی رومانی: ۴,۳۲۵ لئو ناخالص در ماه (حدود ۸۵۰ یورو)، طبق تصمیم دولت شماره ۱۴۶/۲۰۲۶، معتبر از ژوئیه ۲۰۲۶ به بعد.' : 'Minimum legal gross salary in Romania: 4,325 RON per month (approx. €850), per Government Decision 146/2026, effective July 2026.'}</li>
+                <li>{currentLang === 'fa' ? 'رزومه به فرمت اروپاس (Europass CV) در سراسر اتحادیه اروپا و رومانی رایج و مرسوم است — الزام قانونی نیست، اما انتظار می‌رود.' : 'The Europass CV format is customary and widely expected across the EU and Romania — not a strict legal requirement, but expected.'}</li>
                 <li>{currentLang === 'fa' ? 'تسلط به زبان رومانیایی یا انگلیسی مزیت رقابتی مهمی در بازار کار محسوب می‌شود.' : 'Proficiency in Romanian or English is considered a significant competitive advantage in the job market.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span>🏗️</span>
+                <span>{currentLang === 'fa' ? 'آژانس‌های کاریابی برای اتباع غیر اتحادیه اروپا' : 'Recruitment Agencies for Non-EU Workers'}</span>
+              </h2>
+              <p className="text-sm text-[#526174] leading-relaxed">
+                {currentLang === 'fa'
+                  ? 'برای مشاغل غیرتخصصی (ساخت‌وساز، کشاورزی، هتلداری، لجستیک)، برخلاف پورتال‌های عمومی بالا، معمولاً کارفرمایان از طریق آژانس‌های استخدام تخصصی نیروی خارجی به شما دسترسی پیدا می‌کنند — یعنی شما مستقیماً برای این آژانس‌ها درخواست نمی‌دهید، بلکه آن‌ها با کارفرمایان قرارداد دارند و افراد را معرفی می‌کنند. نمونه‌های واقعی فعال در رومانی:'
+                  : 'For non-specialist roles (construction, agriculture, hospitality, logistics), unlike the general portals above, employers typically source foreign candidates through specialized foreign-worker recruitment agencies — you don\'t apply to these agencies directly; they are contracted by employers and place candidates. Real, currently active examples in Romania:'}
+              </p>
+              <ul className="space-y-1.5 text-sm text-[#526174] list-disc list-inside">
+                <li><strong className="text-[#142033]">GlobalWorker.ro</strong> {currentLang === 'fa' ? '— استخدام برای ساخت‌وساز، کشاورزی، هتلداری و لجستیک.' : '— placements for construction, agriculture, hospitality, logistics.'}</li>
+                <li><strong className="text-[#142033]">GoBester.com</strong> {currentLang === 'fa' ? '— آژانس نیروی کار برای اتباع غیراروپایی.' : '— staffing agency for non-European workers.'}</li>
+                <li><strong className="text-[#142033]">AtoZSerwisPlus.ro</strong> {currentLang === 'fa' ? '— آژانس استخدام نیروی خارجی.' : '— foreign-worker recruitment agency.'}</li>
+              </ul>
+              <p className="text-[11px] italic text-slate-400">
+                {currentLang === 'fa' ? 'قبل از پرداخت هرگونه هزینه به یک آژانس، اعتبار آن را با دقت بررسی کنید؛ آژانس‌های قانونی معمولاً هزینه اصلی را از کارفرما دریافت می‌کنند، نه از کارجو.' : 'Verify any agency\'s legitimacy carefully before paying it anything; legitimate agencies are typically paid by the employer, not the job seeker.'}
+              </p>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span>📋</span>
+                <span>{currentLang === 'fa' ? 'مشاغل کمبود نیرو و سهمیه سالانه' : 'Shortage Occupations & Annual Quota'}</span>
+              </h2>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>
+                  {currentLang === 'fa'
+                    ? 'وزارت کار رومانی هر سال «فهرست مشاغل کمبود نیرو» (Lista ocupațiilor deficitare) را منتشر می‌کند؛ برای سال ۲۰۲۶ این فهرست ۲۳۶ شغل را دربرمی‌گیرد (فرمان فوری دولت شماره ۳۲/۲۰۲۶)، عمدتاً در ساخت‌وساز (جوشکار، بنا، برقکار، لوله‌کش)، هتلداری/غذایی، حمل‌ونقل، تولید، نظافت و مراقبت سالمندان/بهداشت.'
+                    : 'Romania\'s Ministry of Labor publishes an annual "shortage occupations list" (Lista ocupațiilor deficitare); for 2026 it covers 236 occupations (Emergency Ordinance 32/2026), mainly in construction (welders, masons, electricians, plumbers), hospitality/food service, transport/logistics, manufacturing, cleaning, and elder care/healthcare.'}
+                </li>
+                <li>
+                  {currentLang === 'fa'
+                    ? 'داشتن مهارتی که در این فهرست باشد، عملاً احتمال یافتن کارفرمایی که مایل به طی کردن مراحل مجوز کار باشد را افزایش می‌دهد.'
+                    : 'Holding a skill on this list practically increases the chance of finding an employer willing to go through the work permit process.'}
+                </li>
+                <li>
+                  {currentLang === 'fa'
+                    ? 'رومانی برای سال ۲۰۲۶ سهمیه‌ای معادل ۹۰,۰۰۰ کارگر جدید غیر اتحادیه اروپا تعیین کرده است (تصمیم دولت شماره ۱۱۶۹/۲۰۲۵)؛ طبق آمار خودِ IGI، در چهار ماه اول ۲۰۲۶ حدود ۴۹,۶۷۶ مجوز کار صادر شده که بخش عمده آن از نوع دائمی بوده است.'
+                    : 'Romania set a quota of 90,000 new non-EU workers for 2026 (Government Decision 1169/2025); per IGI\'s own statistics, roughly 49,676 work permits were issued in the first four months of 2026, the large majority being permanent-worker permits.'}
+                </li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
             </div>
@@ -257,11 +375,15 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             <div className="space-y-6">
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'حداقل حقوق قانونی در رومانی چقدر است؟' : 'What is the minimum legal salary in Romania?'}</h3>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بر اساس نرخ تعیین شده، حداقل حقوق ناخالص ۴,۳۲۵ لئو در ماه است که از ۱ ژوئیه ۲۰۲۶ در رومانی اعمال می‌شود.' : 'Based on the set rate, the minimum gross salary is 4,325 RON per month, applicable from July 1, 2026, in Romania.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بر اساس تصمیم دولت شماره ۱۴۶/۲۰۲۶، حداقل حقوق ناخالص ۴,۳۲۵ لئو در ماه است که از ژوئیه ۲۰۲۶ در رومانی اعمال می‌شود.' : 'Per Government Decision 146/2026, the minimum gross salary is 4,325 RON per month, applicable from July 2026 in Romania.'}</p>
               </div>
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا دانستن زبان رومانیایی برای استخدام الزامی است؟' : 'Is knowing the Romanian language mandatory for employment?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'اگرچه برای بسیاری از مشاغل بین‌المللی و شرکت‌های چندملیتی تسلط به زبان انگلیسی کافیست، اما دانستن زبان رومانیایی مزیت رقابتی بسیار بزرگی در کاریابی محسوب می‌شود.' : 'While English is sufficient for many international roles and multinational companies, proficiency in Romanian is a massive competitive advantage in finding a job.'}</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'workinromania.gov.ro چیست و آیا خودم باید در آن ثبت‌نام کنم؟' : 'What is workinromania.gov.ro, and do I need to register on it myself?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'این سامانه دولتی (فعال از آگوست ۲۰۲۶) اجباری برای کارفرمایان و آژانس‌های کاریابی است که نیروی غیر اتحادیه اروپا استخدام می‌کنند؛ کارجو مستقیماً در آن ثبت‌نام نمی‌کند، اما خوب است بدانید کارفرمای آینده شما موظف است از این مسیر رسمی عبور کند.' : 'This government platform (active since August 2026) is mandatory for employers and staffing agencies hiring non-EU workers; job seekers don\'t register on it directly, but it\'s worth knowing your future employer is required to go through this official channel.'}</p>
               </div>
             </div>
           </div>
@@ -297,10 +419,12 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
-                <span>{currentLang === 'fa' ? 'الزامات قانونی قرارداد' : 'Legal Contract Requirements'}</span>
+                <span>{currentLang === 'fa' ? 'الزامات قانونی قرارداد و ثبت REVISAL' : 'Legal Contract Requirements & REVISAL Registration'}</span>
               </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'طبق قانون کار رومانی (Legea 53/2003 – Codul Muncii)، هر قرارداد استخدام باید پیش از شروع فعالیت در سامانه ملی ثبت کارکنان (Registrul General de Evidenţă a Salariaţilor / REVISAL) ثبت شود.' : 'According to the Romanian Labor Code (Legea 53/2003 – Codul Muncii), every employment contract must be registered in the National Register of Employees (Registrul General de Evidenţă a Salariaţilor / REVISAL) prior to starting work.'}</li>
+                <li><strong className="text-[#142033]">{currentLang === 'fa' ? 'مهلت دقیق: ' : 'Exact deadline: '}</strong>{currentLang === 'fa' ? 'کارفرما موظف است حداقل یک روز کاری پیش از شروع کار شما، ثبت REVISAL را انجام دهد.' : 'the employer must complete the REVISAL registration at least one working day before your first day of work.'}</li>
+                <li>{currentLang === 'fa' ? 'در صورت به‌کارگیری فرد بدون ثبت قبلی، جریمه می‌تواند تا ۲۰,۰۰۰ لئو به‌ازای هر کارمند (سقف ۲۰۰,۰۰۰ لئو) برسد؛ اگر کارفرما ظرف ۴۸ ساعت جریمه را بپردازد، مبلغ به ۱۰,۰۰۰ لئو کاهش می‌یابد.' : 'Letting someone work without prior registration can carry a fine of up to 20,000 RON per employee (capped at 200,000 RON); paying within 48 hours reduces it to 10,000 RON.'}</li>
                 <li>{currentLang === 'fa' ? 'کارفرما موظف است پیش از شروع کار، یک نسخه از قرارداد را به کارمند تحویل دهد.' : 'The employer is obligated to provide the employee with a copy of the contract before they commence work.'}</li>
               </ul>
             </div>
@@ -312,8 +436,8 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               </h2>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'در طول یک قرارداد استخدام، فقط یک دوره آزمایشی مجاز است، مگر در موارد استثنا (مثل شروع در سمت یا حرفه جدید نزد همان کارفرما، یا مشاغل با شرایط سخت/مضر/خطرناک).' : 'During an employment contract, only one probationary period is permitted, except in special cases (such as starting a new position/profession with the same employer, or jobs with difficult/harmful/dangerous conditions).'}</li>
+                <li><strong className="text-[#142033]">{currentLang === 'fa' ? 'سقف قانونی (ماده ۳۱ قانون کار): ' : 'Legal maximum (Codul Muncii Art. 31): '}</strong>{currentLang === 'fa' ? 'حداکثر ۹۰ روز تقویمی برای مشاغل اجرایی معمولی، ۱۲۰ روز برای سمت‌های مدیریتی، و ۳۰ روز برای افراد دارای معلولیت.' : 'up to 90 calendar days for standard execution roles, 120 days for management positions, and 30 days for persons with disabilities.'}</li>
                 <li>{currentLang === 'fa' ? 'دوره آزمایشی به‌عنوان سابقه کار محسوب می‌شود.' : 'The probationary period is counted as official employment history.'}</li>
-                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
             </div>
 
@@ -330,6 +454,35 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* BASIC LABOR RIGHTS EVERY FIRST-TIME EMPLOYEE SHOULD KNOW */}
+          <div className="bg-[#f0f4f9] p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] space-y-4">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>📋</span>
+              <span>{currentLang === 'fa' ? 'حقوق پایه‌ای کار که هر کارمند تازه‌وارد باید بداند' : 'Basic Labor Rights Every First-Time Employee Should Know'}</span>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+              <div className="p-4 bg-white rounded-xl border border-[#dfe6ef] space-y-1">
+                <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'مرخصی سالانه (ماده ۱۴۵)' : 'Annual Leave (Art. 145)'}</span>
+                <p className="text-[#526174]">{currentLang === 'fa' ? 'حداقل ۲۰ روز کاری مرخصی استحقاقی با حقوق در سال، طبق قانون کار.' : 'A statutory minimum of 20 paid working days of annual leave per year.'}</p>
+              </div>
+              <div className="p-4 bg-white rounded-xl border border-[#dfe6ef] space-y-1">
+                <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'سقف ساعات کاری (ماده ۱۱۴)' : 'Working Hours Cap (Art. 114)'}</span>
+                <p className="text-[#526174]">{currentLang === 'fa' ? 'حداکثر ۴۸ ساعت در هفته شامل اضافه‌کاری (معمولاً ۴۰ ساعت + حداکثر ۸ ساعت اضافه‌کاری)، به‌طور میانگین در بازه ۴ ماهه.' : 'Up to 48 hours/week including overtime (typically 40h + up to 8h OT), averaged over a 4-month reference period.'}</p>
+              </div>
+              <div className="p-4 bg-white rounded-xl border border-[#dfe6ef] space-y-1">
+                <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'مهلت اطلاع فسخ (ماده ۷۵ و ۸۱)' : 'Notice Period (Art. 75 & 81)'}</span>
+                <p className="text-[#526174]">{currentLang === 'fa' ? 'استعفای کارمند: حداکثر ۲۰ روز کاری برای مشاغل اجرایی (تا ۴۵ روز برای مدیریت)؛ اخراج غیرانضباطی توسط کارفرما: حداقل ۲۰ روز کاری اطلاع قبلی.' : 'Employee resignation: up to 20 working days for execution roles (up to 45 for management); employer non-disciplinary termination: minimum 20 working days\' notice.'}</p>
+              </div>
+              <div className="p-4 bg-white rounded-xl border border-[#dfe6ef] space-y-1">
+                <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'حداقل سن اشتغال' : 'Minimum Employment Age'}</span>
+                <p className="text-[#526174]">{currentLang === 'fa' ? '۱۶ سال برای اشتغال تمام‌وقت؛ از ۱۵ سالگی با رضایت والدین/سرپرست قانونی فقط برای کارهای متناسب با سن.' : '16 for full-time employment; from age 15 with parental/guardian consent, only for age-appropriate work.'}</p>
+              </div>
+            </div>
+            <p className="text-[11px] text-slate-400">
+              {currentLang === 'fa' ? 'منبع: قانون کار رومانی (Codul Muncii) — مواد ۳۱، ۷۵، ۸۱(۴)، ۱۱۴، ۱۴۵.' : 'Source: Romanian Labor Code (Codul Muncii) — Articles 31, 75, 81(4), 114, 145.'}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -337,11 +490,15 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             <div className="space-y-6">
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا قرارداد کاری می‌تواند بیش از یک دوره آزمایشی داشته باشد؟' : 'Can an employment contract have more than one probationary period?'}</h3>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'اصولاً فقط یک دوره آزمایشی مجاز است، مگر در موارد خاص مانند ارتقاء شغلی یا تغییر سمت نزد همان کارفرما.' : 'Generally, only one probationary period is permitted, except in special cases like a promotion or changing positions with the same employer.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'اصولاً فقط یک دوره آزمایشی مجاز است، مگر در موارد خاص مانند ارتقاء شغلی یا تغییر سمت نزد همان کارفرما. سقف قانونی ۹۰ روز (اجرایی) یا ۱۲۰ روز (مدیریتی) است.' : 'Generally, only one probationary period is permitted, except in special cases like a promotion or changing positions with the same employer. The legal cap is 90 days (execution roles) or 120 days (management).'}</p>
               </div>
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر شرایط کارم تغییر کند چه اتفاقی می‌افتد؟' : 'What happens if my working conditions change?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'هرگونه تغییر در حقوق و دستمزد یا شرایط اصلی کار باید از طریق ثبت و امضای یک الحاقیه رسمی (act adițional) انجام شود.' : 'Any changes to your salary or main working conditions must be recorded and signed through a formal addendum (act adițional).'}</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'کارفرما تا کی باید مرا در REVISAL ثبت کند؟' : 'By when must my employer register me in REVISAL?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'حداقل یک روز کاری پیش از شروع کار شما. کار کردن بدون این ثبت قبلی، کارفرما را مشمول جریمه‌ای تا ۲۰,۰۰۰ لئو به‌ازای هر کارمند می‌کند.' : 'At least one working day before your first day of work. Letting you work without this prior registration exposes the employer to a fine of up to 20,000 RON per employee.'}</p>
               </div>
             </div>
           </div>
@@ -409,6 +566,13 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 sm:p-6 text-xs sm:text-sm text-amber-950 leading-relaxed">
+            <strong className="block font-bold mb-1">{currentLang === 'fa' ? 'توضیح در مورد پیلار دوم بازنشستگی خصوصی' : 'Clarification: Pillar II Private Pension'}</strong>
+            {currentLang === 'fa'
+              ? 'ممکن است شنیده باشید که مشارکت در «پیلار دوم» بازنشستگی خصوصی از ژانویه ۲۰۲۵ اجباری شده است. این یک کسر جداگانه و اضافه بر ۲۵٪ سهم CAS نیست؛ بخشی از همان ۲۵٪ (در حال حاضر حدود ۴.۷۵ درصد از کل ۲۵٪) به‌طور خودکار به حساب شخصی پیلار دوم شما هدایت می‌شود و باقی‌مانده صرف صندوق عمومی بازنشستگی (پیلار اول) می‌گردد. یعنی مجموع سهم بازنشستگی از حقوق شما همان ۲۵٪ باقی می‌ماند.'
+              : 'You may have heard that Pillar II private pension participation became mandatory from January 2025. This is not a separate, additional deduction on top of the 25% CAS contribution; a portion of that same 25% (currently around 4.75 percentage points) is automatically redirected to your individual Pillar II account, with the rest funding the public Pillar I pension system. Your total pension contribution from salary stays 25%.'}
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -421,6 +585,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا کارمند باید مالیات خود را جداگانه به دولت بپردازد؟' : 'Does the employee have to pay their taxes separately to the government?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، نیازی به پرداخت جداگانه نیست؛ تمام کسورات قانونی برای کارمندان مستقیماً توسط کارفرما محاسبه، کسر و به اداره مالیات پرداخت می‌شود.' : 'No, separate payment is not required; all statutory deductions for employees are calculated, withheld, and paid directly to the tax authorities by the employer.'}</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا پیلار دوم بازنشستگی سهم CAS من را افزایش می‌دهد؟' : 'Does Pillar II increase my CAS contribution?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. پیلار دوم بخشی از همان سهم ۲۵٪ CAS است که به یک حساب شخصی هدایت می‌شود، نه کسر اضافه.' : 'No. Pillar II is a carve-out within the same 25% CAS contribution redirected to a personal account, not an additional deduction.'}</p>
               </div>
             </div>
           </div>
@@ -486,6 +654,30 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* PRIVATE SUPPLEMENTAL INSURANCE — NAMED PROVIDERS */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🏥</span>
+              <span>{currentLang === 'fa' ? 'بیمه تکمیلی خصوصی — گزینه‌های واقعی' : 'Private Supplemental Insurance — Real Options'}</span>
+            </h2>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'بیمه دولتی CNAS خدمات پایه و اورژانسی را پوشش می‌دهد، اما نوبت‌دهی طولانی در بخش دولتی رایج است. بسیاری از کارمندان (و برخی کارفرمایان به‌عنوان مزیت شغلی) در یکی از شبکه‌های بیمه/کلینیک خصوصی زیر عضو می‌شوند تا به نوبت‌دهی سریع‌تر و پزشک انتخابی دسترسی داشته باشند:'
+                : 'State CNAS insurance covers basic and emergency care, but long wait times in the public system are common. Many employees (and some employers, as a job perk) also subscribe to one of the private clinic/insurance networks below for faster appointments and choice of doctor:'}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-[#526174]">
+              <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">Regina Maria</strong></div>
+              <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">MedLife</strong></div>
+              <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">Sanador</strong></div>
+              <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">Medicover</strong></div>
+            </div>
+            <div className="p-4 bg-[#eef3f8] rounded-xl text-xs sm:text-sm text-[#142033]">
+              {currentLang === 'fa'
+                ? 'بازه هزینه تقریبی اشتراک فردی: از حدود ۸۰-۱۴۰ لئو در ماه برای پلن پایه، تا ۳۶۰-۵۶۰+ لئو در ماه برای پلن‌های پیشرفته (برخی ارائه‌دهندگان مانند Medicover قیمت‌گذاری یورویی هم دارند، حدود ۲۹-۷۲ یورو در ماه). این ارقام تقریبی و بر اساس سایت‌های مقایسه‌گر است — پیش از تصمیم‌گیری، لیست قیمت رسمی هر ارائه‌دهنده را مستقیماً بررسی کنید.'
+                : 'Rough individual subscription cost range: about 80–140 RON/month for entry-tier plans, up to 360–560+ RON/month for premium tiers (some providers like Medicover price in EUR, roughly €29–72/month). These figures come from comparison sites and are approximate — check each provider\'s official current price list before deciding.'}
+            </div>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -498,6 +690,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر کارمند نباشم، آیا می‌توانم بیمه دولتی داشته باشم؟' : 'Can I get state insurance if I am not an employee?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، افراد بدون قرارداد کاری نیز می‌توانند از طریق ارسال اظهارنامه واحد (Declarația Unică) و پرداخت حق بیمه معادل، به‌صورت داوطلبانه خود را بیمه کنند.' : 'Yes, non-employees can voluntarily enroll in the health insurance system by submitting the Single Declaration (Declarația Unică) and paying the equivalent premium.'}</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا بیمه خصوصی جایگزین بیمه دولتی CASS می‌شود؟' : 'Does private insurance replace mandatory state CASS insurance?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. بیمه خصوصی همیشه مکمل است، نه جایگزین؛ سهم CASS از حقوق شما همچنان طبق قانون کسر می‌شود، فارغ از اینکه اشتراک خصوصی هم داشته باشید یا نه.' : 'No. Private insurance is always supplemental, never a substitute; the CASS contribution is still deducted from your salary by law regardless of whether you also hold a private subscription.'}</p>
               </div>
             </div>
           </div>
