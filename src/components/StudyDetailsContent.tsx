@@ -74,6 +74,42 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             </div>
           </div>
 
+          {/* IRAN-SPECIFIC: NO APOSTILLE — FULL CONSULAR LEGALIZATION REQUIRED */}
+          <div className="bg-[#071B3D] text-white rounded-2xl p-6 sm:p-8 space-y-4">
+            <h3 className="text-lg sm:text-xl font-extrabold flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🇮🇷</span>
+              <span>{currentLang === 'fa' ? 'نکته مخصوص متقاضیان ایرانی: ایران عضو کنوانسیون آپوستیل نیست' : 'Iran-Specific: No Apostille — Full Consular Legalization Is Required'}</span>
+            </h3>
+            <p className="text-sm text-slate-300 leading-relaxed">
+              {currentLang === 'fa'
+                ? 'این نکته‌ای است که اکثر راهنماهای عمومی «تحصیل در رومانی» اصلاً به آن اشاره نمی‌کنند چون برای شهروندان کشورهای عضو کنوانسیون لاهه ۱۹۶۱ صدق نمی‌کند. ایران عضو این کنوانسیون نیست (بر اساس جدول رسمی اعضای کنفرانس لاهه حقوق بین‌الملل خصوصی، HCCH)؛ بنابراین مدرک تحصیلی شما را نمی‌توان صرفاً «آپوستیل» کرد — باید مسیر کامل «تصدیق کنسولی» (Legalization) طی شود که طولانی‌تر و چندمرحله‌ای است:'
+                : 'This is a fact most generic "study in Romania" guides skip entirely, because it doesn\'t apply to citizens of countries party to the 1961 Hague Convention. Iran is not a party to that Convention (per the official Hague Conference on Private International Law / HCCH status table); so your academic documents cannot simply be "apostilled" — they must go through the full, multi-step consular legalization chain instead:'}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+              <div className="p-4 bg-[#0b2b55] rounded-xl space-y-1">
+                <span className="font-extrabold text-blue-300">{currentLang === 'fa' ? '۱. تایید در ایران' : '1. Authentication in Iran'}</span>
+                <p className="text-slate-300">{currentLang === 'fa' ? 'مدرک باید توسط مرجع صالح ایرانی (وزارت دادگستری / وزارت امور خارجه) تایید صحت امضا و مهر شود.' : 'The document must be authenticated by the competent Iranian authority (Ministry of Justice / Ministry of Foreign Affairs).'}</p>
+              </div>
+              <div className="p-4 bg-[#0b2b55] rounded-xl space-y-1">
+                <span className="font-extrabold text-blue-300">{currentLang === 'fa' ? '۲. تایید سفارت رومانی در تهران' : '2. Romanian Embassy in Tehran'}</span>
+                <p className="text-slate-300">{currentLang === 'fa' ? 'سفارت/بخش کنسولی رومانی در تهران مدرک را تصدیق (Legalize) می‌کند؛ سفارت رومانی در تهران فعال است.' : 'The Romanian Embassy/Consular Section in Tehran legalizes the document; the Romanian mission in Tehran is currently active.'}</p>
+              </div>
+              <div className="p-4 bg-[#0b2b55] rounded-xl space-y-1">
+                <span className="font-extrabold text-blue-300">{currentLang === 'fa' ? '۳. تصدیق نهایی در رومانی (رایگان)' : '3. Final Legalization in Romania (Free)'}</span>
+                <p className="text-slate-300">{currentLang === 'fa' ? 'پس از ورود مدرک به رومانی، مرحله «Supralegalizare» نزد وزارت امور خارجه رومانی در بخارست انجام می‌شود — این مرحله رایگان است و معمولاً همان روز تکمیل می‌شود.' : 'Once the document is in Romania, the "Supralegalizare" step happens at the Romanian MFA\'s Document Legalization Bureau in Bucharest — this step is free and typically completed same-day.'}</p>
+              </div>
+              <div className="p-4 bg-[#0b2b55] rounded-xl space-y-1">
+                <span className="font-extrabold text-blue-300">{currentLang === 'fa' ? '۴. ترجمه رسمی + شناسایی مدرک (CNRED)' : '4. Sworn Translation + CNRED Recognition'}</span>
+                <p className="text-slate-300">{currentLang === 'fa' ? 'ترجمه باید توسط مترجم رسمی مجاز وزارت دادگستری رومانی انجام شود (نه هر مترجمی)؛ برای مدارک دانشگاهی، مرکز ملی شناسایی و معادل‌سازی مدارک (CNRED) همین زنجیره را برای معادل‌سازی می‌پذیرد.' : 'Translation must be done by a translator specifically authorized by the Romanian Ministry of Justice (not any translator); for university-level degrees, the National Center for Recognition and Equivalence of Diplomas (CNRED) accepts this same chain for equivalence review.'}</p>
+              </div>
+            </div>
+            <p className="text-[11px] text-slate-400">
+              {currentLang === 'fa'
+                ? 'زمان کل این زنجیره معمولاً چند هفته طول می‌کشد و هزینه هر مرحله متفاوت است (مرحله رومانی رایگان است، مراحل ایران و سفارت هزینه دارند) — پیش از سفر یا اقدام، ساعات کاری و هزینه دقیق را مستقیماً از سفارت رومانی در تهران و CNRED استعلام بگیرید. منبع: HCCH، وزارت امور خارجه رومانی (mae.ro)، CNRED (cnred.edu.ro).'
+                : 'The full chain typically takes several weeks, and cost varies per step (the Romania-side step is free; the Iran-side and embassy steps carry fees) — confirm exact hours and costs directly with the Romanian Embassy in Tehran and CNRED before traveling or applying. Source: HCCH, Romanian Ministry of Foreign Affairs (mae.ro), CNRED (cnred.edu.ro).'}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -85,7 +121,11 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
               </div>
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا باید تمام مدارک دبیرستان را ترجمه کنم؟' : 'Do I need to translate all my high school transcripts?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، تمامی مدارک تحصیلی پایه باید به‌صورت رسمی به انگلیسی یا رومانیایی ترجمه شده و در صورت نیاز آپوستیل یا تأیید سفارت شوند.' : 'Yes, usually all previous academic transcripts and diplomas must be officially translated into Romanian or English and legalized/apostilled.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، تمامی مدارک تحصیلی پایه باید به‌صورت رسمی ترجمه شوند. برای متقاضیان ایرانی، چون ایران عضو کنوانسیون آپوستیل نیست، به‌جای آپوستیل ساده باید زنجیره کامل تصدیق کنسولی طی شود (جزئیات در باکس بالا).' : 'Yes, all academic transcripts must be officially translated. For Iranian applicants specifically, since Iran is not an Apostille Convention member, a simple apostille is not possible — the full consular legalization chain must be followed instead (see the box above).'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا سفارت رومانی در تهران فعال است؟' : 'Is the Romanian Embassy in Tehran operating?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، بر اساس اطلاعات رسمی وزارت امور خارجه رومانی، سفارت رومانی در تهران فعال است؛ با این حال پیش از مراجعه حضوری، ساعات کاری و ظرفیت پذیرش را مستقیماً از سفارت استعلام بگیرید.' : 'Yes, per official Romanian Ministry of Foreign Affairs information, the Romanian Embassy in Tehran is active; however, confirm current opening hours and appointment capacity directly with the embassy before visiting in person.'}</p>
               </div>
             </div>
           </div>
@@ -152,6 +192,36 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             </div>
           </div>
 
+          {/* FINANCIAL PROOF REQUIREMENT */}
+          <div className="bg-[#f0f4f9] p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] space-y-3">
+            <h3 className="text-lg sm:text-xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>💰</span>
+              <span>{currentLang === 'fa' ? 'اثبات تمکن مالی — چقدر لازم است؟' : 'Proof of Financial Means — How Much Do You Need?'}</span>
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'طبق سند رسمی IGI، اثبات تمکن مالی برای دانشجویان به «حداقل حقوق خالص کشوری» گره خورده است — یعنی باید نشان دهید برای هر ماه از دوره اعتبار اقامت خود، معادل حداقل حقوق خالص در حساب خود دارید یا دریافت می‌کنید. حداقل حقوق خالص فعلی (۲۰۲۶) حدود ۲,۶۹۹ لئو در ماه است (معادل تقریبی ۵۳۰-۵۴۰ یورو — این تبدیل تقریبی است و باید نرخ روز را در نظر گرفت).'
+                : 'Per an official IGI document, the financial proof requirement for students is tied to the "net national minimum wage" — meaning you must show, for each month of your residence permit validity, funds equal to at least the net minimum wage available or being received. The current (2026) net minimum wage is around 2,699 RON/month (roughly €530-540 — an approximate conversion; check the current exchange rate).'}
+            </p>
+            <p className="text-[11px] text-slate-400">
+              {currentLang === 'fa' ? 'منبع: igi.mai.gov.ro (سند رسمی «Dovada mijloacelor de întreținere pentru studii»).' : 'Source: igi.mai.gov.ro (official document "Dovada mijloacelor de întreținere pentru studii").'}
+            </p>
+          </div>
+
+          {/* IRAN-SPECIFIC CROSS-LINK */}
+          <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl text-xs sm:text-sm text-[#142033] flex items-start space-x-3 rtl:space-x-reverse">
+            <span className="text-base mt-0.5">🇮🇷</span>
+            <span>
+              {currentLang === 'fa'
+                ? 'متقاضیان ایرانی: مدارک تحصیلی شما نیاز به زنجیره کامل تصدیق کنسولی دارد، نه آپوستیل ساده — جزئیات کامل را در صفحه '
+                : 'Iranian applicants: your academic documents require the full consular legalization chain, not a simple apostille — see full details on the '}
+              <a href="/study/requirements" className="text-[#2F6FED] font-bold hover:underline">
+                {currentLang === 'fa' ? 'مدارک و الزامات پذیرش' : 'Admission Requirements'}
+              </a>
+              {currentLang === 'fa' ? ' ببینید.' : ' page.'}
+            </span>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -164,6 +234,10 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'صدور ویزا در سفارت چقدر طول می‌کشد؟' : 'How long does the embassy take to issue the visa?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'به‌طور معمول بررسی پرونده پس از مصاحبه و تحویل کامل مدارک در سفارت می‌تواند تا ۶۰ روز زمان ببرد.' : 'Processing can typically take up to 60 days from the date of your interview and full document submission at the consulate.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'برای اثبات تمکن مالی چه مبلغی نیاز دارم؟' : 'How much money do I need for financial proof?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'به‌ازای هر ماه از دوره اقامت، معادل حداقل حقوق خالص کشوری (حدود ۲,۶۹۹ لئو در ماه در سال ۲۰۲۶) باید نشان داده شود.' : 'For each month of your residence period, you must show funds equal to the net national minimum wage (around 2,699 RON/month in 2026).'}</p>
               </div>
             </div>
           </div>

@@ -66,6 +66,22 @@ export const ScholarshipOverviewContent: React.FC<ScholarshipOverviewContentProp
         </div>
       </div>
 
+      {/* CONFIRMED 2026-2027 CYCLE STATUS */}
+      <div className="bg-[#071B3D] text-white rounded-2xl p-6 sm:p-8 space-y-3">
+        <h3 className="text-lg sm:text-xl font-extrabold flex items-center space-x-2 rtl:space-x-reverse">
+          <span>✅</span>
+          <span>{currentLang === 'fa' ? 'وضعیت تایید‌شده چرخه ۲۰۲۶-۲۰۲۷' : 'Confirmed 2026-2027 Cycle Status'}</span>
+        </h3>
+        <p className="text-sm text-slate-300 leading-relaxed">
+          {currentLang === 'fa'
+            ? 'طبق صفحه رسمی برنامه (scholarships.studyinromania.gov.ro)، این بورسیه برای چرخه تحصیلی ۲۰۲۶-۲۰۲۷ فعال بوده و بازه ثبت‌نام آن ۱۶ فوریه تا ۳۱ مارس ۲۰۲۶ اعلام شده بود. یک نکته مهم که کمتر جایی به آن اشاره می‌شود: پوشش خوابگاه «یارانه‌دار» است، نه لزوماً کاملاً رایگان — یعنی دانشجوی بورسیه بخشی از هزینه خوابگاه را با نرخ تخفیف‌دار خودش می‌پردازد، نه صفر مطلق. مبلغ دقیق کمک‌هزینه ماهانه (Stipend) به‌صورت رسمی روی همان صفحه اعلام نشده بود؛ ارقام غیررسمی که در برخی سایت‌های واسط دیده می‌شود را بدون تایید مستقیم از پلتفرم رسمی منتشر نکنید.'
+            : 'Per the program\'s official page (scholarships.studyinromania.gov.ro), this scholarship was active for the 2026-2027 academic cycle, with an application window of February 16 to March 31, 2026. An important nuance rarely mentioned elsewhere: dormitory coverage is "subsidized," not necessarily fully free — the scholarship student still pays a discounted portion of the dorm fee, not zero. The exact monthly stipend amount was not officially published on that page; unofficial figures found on some third-party sites should not be treated as confirmed without checking the official platform directly.'}
+        </p>
+        <p className="text-[11px] text-slate-400">
+          {currentLang === 'fa' ? 'منبع: scholarships.studyinromania.gov.ro/scholarship-about — این تاریخ‌ها مخصوص یک چرخه هستند و هرساله تغییر می‌کنند؛ برای فراخوان جاری همیشه همان صفحه رسمی را چک کنید.' : 'Source: scholarships.studyinromania.gov.ro/scholarship-about — these dates are cycle-specific and change every year; always check that official page for the current call.'}
+        </p>
+      </div>
+
       <ParentHubFooterCard slugRoute="study/scholarships" currentLang={currentLang} />
     </div>
   );

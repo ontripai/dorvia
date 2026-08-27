@@ -72,6 +72,28 @@ export const PreparatoryYearContent: React.FC<PreparatoryYearContentProps> = ({ 
         </div>
       </div>
 
+      {/* REAL NAMED FEE EXAMPLE */}
+      <div className="bg-[#f0f4f9] p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] space-y-3">
+        <h3 className="text-lg sm:text-xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <span>💶</span>
+          <span>{currentLang === 'fa' ? 'نمونه واقعی هزینه (دانشگاه بابش-بویای کلوژ)' : 'A Real Fee Example (Babeș-Bolyai University, Cluj)'}</span>
+        </h3>
+        <p className="text-sm text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'به‌عنوان یک نمونه واقعی و منبع‌دار: دانشگاه بابش-بویای کلوژ (UBB) هزینه سال آماده‌سازی زبان را ۳,۰۱۵ یورو به‌علاوه ۵۰ یورو هزینه ثبت‌نام اعلام کرده است. این رقم فقط برای این دانشگاه است — سایر دانشگاه‌ها (به‌خصوص دانشکده‌های پزشکی) معمولاً هزینه متفاوت و اغلب بالاتری دارند که باید مستقیماً از سایت بین‌الملل همان دانشگاه استعلام شود.'
+            : 'As one real, sourced example: Babeș-Bolyai University (UBB) Cluj lists its preparatory year fee at 3,015 EUR plus a 50 EUR enrollment fee. This figure is specific to UBB only — other universities (especially medical schools) typically charge different, often higher fees, which should be confirmed directly on that university\'s international office website.'}
+        </p>
+        <p className="text-[11px] text-slate-400">
+          {currentLang === 'fa' ? 'منبع: cci.ubbcluj.ro (دفتر بین‌الملل دانشگاه بابش-بویای کلوژ).' : 'Source: cci.ubbcluj.ro (Babeș-Bolyai University international office).'}
+        </p>
+      </div>
+
+      <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 sm:p-6 text-xs sm:text-sm text-amber-950 leading-relaxed">
+        {currentLang === 'fa'
+          ? 'توجه: نام دقیق مدرک پایان دوره (مثلاً «گواهی صلاحیت زبانی») و اینکه آیا کارت اقامت جداگانه‌ای برای خود سال آماده‌سازی لازم است یا همان اقامت تحصیلی اصلی آن را پوشش می‌دهد، در منابع رسمی قابل دسترس این سایت به‌روشنی مشخص نشد؛ حتماً این دو مورد را مستقیماً از دانشگاه و IGI استعلام بگیرید.'
+          : 'Note: the exact name of the completion certificate (e.g. "language competency certificate") and whether the preparatory year requires its own separate residence permit or is covered under the main study residence permit were not clearly confirmable from the official sources accessible to this site; confirm both directly with your university and IGI.'}
+      </div>
+
       <ParentHubFooterCard slugRoute="study/preparatory-year" currentLang={currentLang} />
     </div>
   );
