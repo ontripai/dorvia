@@ -346,6 +346,34 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
         </div>
       </div>
 
+      {/* SECTION 7.5: FEES & LEGAL REMEDY */}
+      <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-3">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <span>💳</span>
+          <span>{currentLang === 'fa' ? 'هزینه صدور کارت اقامت اعضای خانواده' : 'Family Member Residence Card Fee'}</span>
+        </h2>
+        <p className="text-xs sm:text-sm text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'طبق جدول تعرفه سال ۲۰۲۵ اداره کل مهاجرت، هزینه صدور کارت اقامت برای عضو خانواده پس از تایید IGI و ورود با ویزای نوع D، همانند سایر دسته‌های رایج، معمولاً ۲۶۵ لئو عوارض دولتی + ۱۲۰ یورو کارمزد صدور کارت است؛ برای مبلغ دقیق در پرونده خودتان با اداره محلی IGI تماس بگیرید — '
+            : 'Per the General Inspectorate for Immigration\'s 2025 fee schedule, the residence card fee for a family member — after IGI approval and entry on a Type D visa — is typically the same as other common categories: 265 RON state tax + 120 EUR card-issuance fee; confirm the exact amount for your case with your local IGI office — '}
+          <Link href="/immigration/igi-process" className="text-[#2F6FED] font-bold hover:underline">
+            {currentLang === 'fa' ? 'جزئیات کامل هزینه‌ها ←' : 'full fee details →'}
+          </Link>
+        </p>
+      </div>
+
+      <div className="bg-white p-6 sm:p-8 rounded-2xl border-2 border-[#2F6FED]/30 shadow-sm space-y-3">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <span>⚖️</span>
+          <span>{currentLang === 'fa' ? 'اگر IGI بیش از ۳ ماه بدون دلیل تاخیر کرد چه کنم؟' : 'What If IGI Delays Beyond 3 Months Without Reason?'}</span>
+        </h2>
+        <p className="text-xs sm:text-sm text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'اگر پرونده پیوست خانواده شما بدون توضیح از مهلت قانونی ۳ ماهه فراتر رفت، طبق قانون دادرسی اداری رومانی (Legea nr. 554/2004) حق دارید ظرف ۶ ماه از سررسید مهلت، با کمک وکیل متخصص حقوق اداری علیه سکوت یا تاخیر IGI به دادگاه اداری شکایت کنید.'
+            : 'If your family reunification file exceeds the 3-month legal deadline without explanation, under the Administrative Contentious Law (Legea nr. 554/2004) you have the right to sue IGI\'s silence or delay in the administrative court within 6 months of the deadline, with the help of an administrative-law attorney.'}
+        </p>
+      </div>
+
       {/* SECTION 8: OFFICIAL SOURCES */}
       <div id="official-sources" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
         <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -430,6 +458,10 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
             <div>
               <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بعد از تایید IGI چقدر وقت برای اقدام در سفارت دارم؟' : 'How much time do I have to act at the embassy after IGI approval?'}</h4>
               <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'دقیقاً ۶۰ روز از تاریخ صدور تاییدیه کتبی IGI فرصت دارید تا برای ویزای بلندمدت نوع D در سفارت یا کنسولگری رومانی اقدام کنید.' : 'You have exactly 60 days from the date of IGI\'s written approval to apply for the Type D long-stay visa at a Romanian embassy or consulate.'}</p>
+            </div>
+            <div>
+              <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر IGI به مهلت ۳ ماهه عمل نکند چه گزینه‌ای دارم؟' : 'What can I do if IGI misses the 3-month deadline?'}</h4>
+              <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون ۵۵۴/۲۰۰۴، می‌توانید ظرف ۶ ماه از سکوت یا تاخیر غیرموجه، با کمک وکیل حقوق اداری علیه IGI در دادگاه اداری شکایت کنید.' : 'Under Law 554/2004, you can sue IGI in the administrative court within 6 months of its unjustified silence or delay, with the help of an administrative-law attorney.'}</p>
             </div>
           </div>
         </div>
