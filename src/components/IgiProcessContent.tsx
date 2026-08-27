@@ -61,17 +61,23 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
           <a href="#required-docs" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۴. مدارک لازم' : '4. Required Documents'}
           </a>
+          <a href="#fees-and-office" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۵. هزینه‌ها و آدرس اداره بخارست' : '5. Fees & Bucharest Office'}
+          </a>
           <a href="#official-timelines" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
-            {currentLang === 'fa' ? '۵. مهلت‌های ۹۰ و ۳۰ روزه' : '5. Official Timelines'}
+            {currentLang === 'fa' ? '۶. مهلت‌های ۹۰ و ۳۰ روزه' : '6. Official Timelines'}
           </a>
           <a href="#common-issues" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
-            {currentLang === 'fa' ? '۶. نقص مدارک و توقف' : '6. Incomplete Files'}
+            {currentLang === 'fa' ? '۷. نقص مدارک و توقف' : '7. Incomplete Files'}
+          </a>
+          <a href="#legal-remedy" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۸. اعتراض قانونی به تاخیر' : '8. Legal Remedy for Delays'}
           </a>
           <a href="#official-references" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
-            {currentLang === 'fa' ? '۷. منابع رسمی' : '7. Official References'}
+            {currentLang === 'fa' ? '۹. منابع رسمی' : '9. Official References'}
           </a>
           <a href="#related-content" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
-            {currentLang === 'fa' ? '۸. مطالب مرتبط' : '8. Related Content'}
+            {currentLang === 'fa' ? '۱۰. مطالب مرتبط' : '10. Related Content'}
           </a>
         </div>
       </div>
@@ -233,6 +239,73 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
         </div>
       </div>
 
+      {/* SECTION 4.5: FEES & BUCHAREST OFFICE */}
+      <div id="fees-and-office" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-5">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <span>💳</span>
+          <span>{currentLang === 'fa' ? 'هزینه‌های رسمی صدور کارت اقامت' : 'Official Residence Permit Fees'}</span>
+        </h2>
+        <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'طبق جدول تعرفه سال ۲۰۲۵ اداره کل مهاجرت (igi.mai.gov.ro)، هزینه استاندارد صدور یا تمدید کارت اقامت موقت (Permis de Ședere) برای بیشتر دسته‌های اتباع کشورهای ثالث (کار، تحصیل، پیوست خانواده) از دو بخش تشکیل می‌شود: '
+            : 'Per the General Inspectorate for Immigration\'s official 2025 fee schedule (igi.mai.gov.ro), the standard cost of issuing or renewing a temporary residence permit (Permis de Ședere) for most third-country categories (work, study, family reunification) has two components: '}
+          <strong className="text-[#142033]">{currentLang === 'fa' ? '۲۶۵ لئو (عوارض دولتی) + ۱۲۰ یورو (کارمزد صدور کارت با تراشه)' : '265 RON (state tax) + 120 EUR (chip-card issuance fee)'}</strong>.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+          <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
+            <span className="font-extrabold text-[#2F6FED]">265 RON</span>
+            <p className="text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'عوارض دولتی (taxă) که نزد خزانه‌داری یا از طریق پورتال ghiseul.ro قابل پرداخت است.'
+                : 'State tax (taxă), payable at the treasury or online via ghiseul.ro.'}
+            </p>
+          </div>
+          <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
+            <span className="font-extrabold text-[#2F6FED]">120 EUR</span>
+            <p className="text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'کارمزد صدور کارت اقامت بیومتریک (معادل ریالی به لئو در روز پرداخت محاسبه می‌شود).'
+                : 'Biometric residence-card issuance fee (charged in RON equivalent on the day of payment).'}
+            </p>
+          </div>
+        </div>
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs sm:text-sm text-amber-950 leading-relaxed">
+          {currentLang === 'fa'
+            ? 'توجه: این تعرفه برای اکثر دسته‌های رایج (کار، تحصیل، پیوست خانواده، تمدید) صدق می‌کند، اما برخی مسیرها (مثلاً برخی پرونده‌های پناهندگی یا موارد استثنایی خانوادگی) تعرفه متفاوتی دارند و ممکن است دوره‌ای تجدیدنظر شوند. پیش از پرداخت، مبلغ دقیق را از اداره IGI محل خود یا پورتال رسمی استعلام بگیرید.'
+            : 'Note: this fee applies to most common categories (work, study, family reunification, renewal), but some pathways (e.g. certain asylum or exceptional family cases) carry different rates, and fees are periodically revised. Confirm the exact current amount with your local IGI office or the official portal before paying.'}
+        </div>
+
+        <h3 className="text-lg font-extrabold text-[#142033] pt-2 flex items-center space-x-2 rtl:space-x-reverse">
+          <span>📍</span>
+          <span>{currentLang === 'fa' ? 'آدرس و ساعات کاری اداره IGI بخارست' : 'Bucharest IGI Office — Address & Hours'}</span>
+        </h3>
+        <div className="p-5 bg-[#071B3D] text-white rounded-2xl space-y-2 text-xs sm:text-sm">
+          <p>
+            <strong>{currentLang === 'fa' ? 'آدرس: ' : 'Address: '}</strong>
+            {currentLang === 'fa'
+              ? 'مجتمع Grand Arena Mall، بلوار Metalurgiei شماره ۱۲-۱۸، بخش ۴، بخارست (اداره مهاجرت بخارست — DIMB).'
+              : 'Grand Arena Mall complex, Bd. Metalurgiei nr. 12-18, Sector 4, Bucharest (Bucharest Immigration Directorate — DIMB).'}
+          </p>
+          <p>
+            <strong>{currentLang === 'fa' ? 'تلفن: ' : 'Phone: '}</strong>021.303.70.80
+          </p>
+          <p>
+            <strong>{currentLang === 'fa' ? 'ایمیل: ' : 'Email: '}</strong>dimb.igi@mai.gov.ro
+          </p>
+          <p>
+            <strong>{currentLang === 'fa' ? 'ساعات کاری با مراجعه‌کننده: ' : 'Public visiting hours: '}</strong>
+            {currentLang === 'fa'
+              ? 'دوشنبه، سه‌شنبه و پنج‌شنبه ۸:۳۰ تا ۱۳:۳۰ — چهارشنبه ۱۲:۳۰ تا ۱۸:۰۰ (جمعه بدون مراجعه حضوری عمومی).'
+              : 'Monday, Tuesday & Thursday 8:30–13:30 — Wednesday 12:30–18:00 (no public walk-in hours on Friday).'}
+          </p>
+          <p className="text-[11px] text-slate-400 pt-1">
+            {currentLang === 'fa'
+              ? 'اکثر مراجعات نیازمند نوبت قبلی از طریق portal.igi.mai.gov.ro هستند؛ ساعات کاری بر اساس اطلاعیه‌های اداره ممکن است تغییر کند.'
+              : 'Most visits require a prior appointment via portal.igi.mai.gov.ro; hours may change per office announcements.'}
+          </p>
+        </div>
+      </div>
+
       {/* SECTION 5: OFFICIAL TIMELINES */}
       <div id="official-timelines" className="bg-[#f0f4f9] p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] space-y-4">
         <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -271,6 +344,42 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
         </p>
       </div>
 
+      {/* SECTION 6.5: LEGAL REMEDY FOR DELAYS */}
+      <div id="legal-remedy" className="bg-white p-6 sm:p-8 rounded-2xl border-2 border-[#2F6FED]/30 shadow-sm space-y-4">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <span>⚖️</span>
+          <span>{currentLang === 'fa' ? 'اگر IGI بدون دلیل تاخیر کرد یا پاسخ نداد چه کنم؟' : 'What If IGI Delays or Fails to Respond?'}</span>
+        </h2>
+        <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'بسیاری از سایت‌ها فقط می‌گویند «صبر کنید»، اما قانون رومانی یک راه‌حل مشخص در اختیار شما می‌گذارد. طبق قانون دادرسی اداری رومانی (Legea contenciosului administrativ nr. 554/2004)، اگر یک نهاد دولتی مانند IGI یا ANC در مهلت قانونی به درخواست شما پاسخ ندهد یا تاخیر غیرموجه داشته باشد، شما حق دارید علیه این «سکوت اداری» (tăcere administrativă) یا امتناع بدون توجیه، به دادگاه اداری (Tribunalul de Contencios Administrativ) شکایت کنید.'
+            : 'Most sites simply say "wait," but Romanian law gives you a concrete remedy. Under the Administrative Contentious Law (Legea contenciosului administrativ nr. 554/2004), if a public authority like IGI or ANC fails to respond within its legal deadline, or unjustifiably delays or refuses your file, you have the right to sue that "administrative silence" (tăcere administrativă) or unjustified refusal before the Administrative Contentious Court (Tribunalul de Contencios Administrativ).'}
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
+            <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'مهلت شکایت' : 'Filing Deadline'}</span>
+            <p className="text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'طبق ماده ۱۱ قانون ۵۵۴/۲۰۰۴، شکایت باید ظرف حداکثر ۶ ماه از تاریخی که پاسخ می‌بایست دریافت می‌شد یا از تاریخ ابلاغ رد درخواست ثبت شود.'
+                : 'Under Article 11 of Law 554/2004, the lawsuit must be filed within a maximum of 6 months from the date a response was legally due, or from the date the refusal was communicated.'}
+            </p>
+          </div>
+          <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
+            <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'مرحله پیش از دادگاه' : 'Prior Administrative Complaint'}</span>
+            <p className="text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'معمولاً پیش از مراجعه به دادگاه باید یک «شکایت اداری قبلی» (plângere prealabilă) کتباً به همان نهاد ارسال شود تا فرصت اصلاح داشته باشد.'
+                : 'Before going to court, a written "prior administrative complaint" (plângere prealabilă) is typically sent to the same authority, giving it a chance to correct the issue.'}
+            </p>
+          </div>
+        </div>
+        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-xs sm:text-sm text-blue-950 leading-relaxed">
+          {currentLang === 'fa'
+            ? 'این یک ابزار حقوقی واقعی و کمتر شناخته‌شده است، اما تشکیل پرونده دادرسی اداری نیازمند دقت رویه‌ای است. توصیه می‌شود برای طرح این نوع شکایت با یک وکیل متخصص حقوق اداری رومانی (avocat specializat în drept administrativ) مشورت کنید؛ این صفحه راهنمای عمومی است، نه مشاوره حقوقی فردی.'
+            : 'This is a real and under-publicized legal tool, but filing an administrative-contentious case requires procedural precision. It is recommended to consult a Romanian administrative-law attorney (avocat specializat în drept administrativ) to pursue this remedy; this page is general guidance, not individual legal advice.'}
+        </div>
+      </div>
+
       {/* SECTION 7: OFFICIAL REFERENCES */}
       <div id="official-references" className="bg-[#071B3D] text-white rounded-2xl p-6 sm:p-8 space-y-4">
         <h3 className="text-lg sm:text-xl font-extrabold border-b border-slate-700 pb-3 flex items-center space-x-2 rtl:space-x-reverse">
@@ -290,6 +399,10 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
             <span>{currentLang === 'fa' ? 'وزارت کشور رومانی (MAI)' : 'Ministry of Internal Affairs (MAI)'}</span>
             <ExternalLink size={14} />
           </a>
+          <a href="https://legislatie.just.ro/Public/DetaliiDocument/58323" target="_blank" rel="noopener noreferrer" className="p-3 bg-[#0b2b55] hover:bg-[#2F6FED] rounded-xl flex items-center justify-between transition-colors">
+            <span>{currentLang === 'fa' ? 'متن کامل قانون ۵۵۴/۲۰۰۴ (دادرسی اداری)' : 'Full Text: Law 554/2004 (Administrative Contentious)'}</span>
+            <ExternalLink size={14} />
+          </a>
         </div>
       </div>
 
@@ -297,8 +410,8 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
       <div id="related-content" className="space-y-6">
         <div className="p-4 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl text-center text-xs text-[#788697] font-semibold">
           {currentLang === 'fa'
-            ? 'آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶. منبع: آیین‌نامه اتباع خارجی رومانی (OUG 194/2002) و igi.mai.gov.ro.'
-            : 'Last Review: August 2026. Source: OUG 194/2002 & igi.mai.gov.ro.'}
+            ? 'آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶. منبع: آیین‌نامه اتباع خارجی رومانی (OUG 194/2002)، جدول تعرفه ۲۰۲۵ و قانون ۵۵۴/۲۰۰۴ — igi.mai.gov.ro.'
+            : 'Last Review: August 2026. Source: OUG 194/2002, the 2025 fee schedule, and Law 554/2004 — igi.mai.gov.ro.'}
         </div>
 
         {/* RELATED CONTENT BOX */}
@@ -340,6 +453,14 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
           <div>
             <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر مدارکم ناقص باشد چه اتفاقی می‌افتد؟' : 'What happens if my documents are incomplete?'}</h4>
             <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'IGI حداکثر تا ۳۰ روز مهلت اضافه برای تکمیل مدارک می‌دهد؛ این بازه رسماً زمان‌بندی رسیدگی به پرونده را متوقف می‌کند تا مدارک کامل شود.' : 'IGI grants up to 30 extra days to complete the file; this period officially suspends the processing timeline until the documents are complete.'}</p>
+          </div>
+          <div>
+            <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'هزینه صدور کارت اقامت چقدر است؟' : 'How much does the residence card cost?'}</h4>
+            <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'برای بیشتر دسته‌ها (کار، تحصیل، پیوست خانواده) هزینه استاندارد ۲۶۵ لئو عوارض دولتی به‌علاوه ۱۲۰ یورو کارمزد صدور کارت است؛ برخی مسیرها تعرفه متفاوت دارند و مبلغ دقیق باید نزد IGI محل خود استعلام شود.' : 'For most categories (work, study, family reunification) the standard cost is 265 RON state tax plus 120 EUR card-issuance fee; some pathways carry different rates, so confirm the exact amount with your local IGI office.'}</p>
+          </div>
+          <div>
+            <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر IGI به مهلت قانونی عمل نکند چه گزینه‌ای دارم؟' : 'What can I do if IGI misses its legal deadline?'}</h4>
+            <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون ۵۵۴/۲۰۰۴، می‌توانید ظرف ۶ ماه از سکوت یا رد غیرموجه اداره، با کمک وکیل حقوق اداری علیه IGI در دادگاه اداری شکایت کنید.' : 'Under Law 554/2004, you can sue IGI in the administrative court within 6 months of its silence or unjustified refusal, with the help of an administrative-law attorney.'}</p>
           </div>
         </div>
       </div>

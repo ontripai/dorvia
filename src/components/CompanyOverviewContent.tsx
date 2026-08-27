@@ -388,37 +388,43 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa'
-                ? 'منبع: قانون مالیاتی رومانی (Legea 227/2015)، سازمان امور مالیاتی رومانی (ANAF) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
-                : 'Source: Romanian Fiscal Code (Legea 227/2015), National Agency for Fiscal Administration (ANAF) — Last reviewed: August 2026'}
+                ? 'منبع: قانون مالیاتی رومانی (Legea 227/2015)، OUG 156/2024، سازمان امور مالیاتی رومانی (ANAF) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: Romanian Fiscal Code (Legea 227/2015), OUG 156/2024, National Agency for Fiscal Administration (ANAF) — Last reviewed: August 2026'}
             </div>
           </div>
 
+          <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl text-xs text-amber-900 leading-relaxed font-semibold">
+            ⚠️ {currentLang === 'fa'
+              ? 'به‌روزرسانی مهم: معافیت مالیات بر درآمد ۱۰٪ برای برنامه‌نویسان که سال‌ها یکی از مشوق‌های شناخته‌شده رومانی بود، از ۱ ژانویه ۲۰۲۵ طبق OUG 156/2024 لغو شده است. اگر جایی (حتی در همین سایت‌های رقیب) هنوز این معافیت را به‌عنوان مزیت فعلی می‌بینید، منسوخ است — حقوق کارکنان بخش نرم‌افزار اکنون دقیقاً مانند سایر مشاغل مالیات می‌گیرد.'
+              : "Important update: the 10% income-tax exemption for software developers — long one of Romania's best-known incentives — was abolished effective January 1, 2025, under OUG 156/2024. If you see this exemption described elsewhere as still active, that source is outdated: software-sector salaries are now taxed exactly like any other role."}
+          </div>
+
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-            {currentLang === 'fa' 
-              ? 'رومانی با بهره‌گیری از سیاست‌های حمایتی و نیروی کار بسیار متخصص، به‌سرعت در حال تبدیل‌شدن به یکی از قطب‌های مهم فناوری در اروپاست. یکی از جذاب‌ترین مشوق‌های دولتی برای استارت‌آپ‌های حوزه IT، معافیت کارمندان بخش «تولید نرم‌افزار» از پرداخت مالیات ۱۰ درصدی بر درآمد حقوق است. کارآفرینانی که شرکت خود را با کدهای فعالیت (CAEN) اختصاصی مانند 6201 (برنامه‌نویسی) ثبت کنند، می‌توانند از این امتیاز قانونی برای کاهش هزینه‌ها و جذب بهترین استعدادها بهره‌مند شوند.'
-              : 'Romania has rapidly emerged as a prominent tech hub in Europe, heavily supported by favorable state policies and a highly skilled workforce. One of the most significant incentives is the tax exemption for IT professionals; employees working in specific software creation roles are completely exempt from the 10% income tax. For tech startups, properly registering the company with the correct CAEN codes (such as 6201 for custom software development) is the first critical step to unlocking these financial benefits and attracting top talent.'}
+            {currentLang === 'fa'
+              ? 'رومانی همچنان یکی از قطب‌های مهم فناوری اروپاست، اما مسیر واقعی صرفه‌جویی مالیاتی برای بنیان‌گذاران استارت‌آپ دیگر معافیت مالیاتی برنامه‌نویسان نیست (که لغو شده)، بلکه رژیم مالیاتی «میکرو-شرکت» (Microîntreprindere) است: نرخ ۱٪ روی گردش مالی به‌جای ۱۶٪ روی سود، تا سقف ۱۰۰,۰۰۰ یورو گردش سالانه، به شرط داشتن حداقل یک کارمند تمام‌وقت. برای جزئیات کامل این رژیم به صفحه «انواع مالیات شرکتی» مراجعه کنید.'
+              : "Romania remains a major European tech hub, but the real tax-planning lever for startup founders is no longer the (now-defunct) developer tax exemption — it's the micro-enterprise regime (Microîntreprindere): a flat 1% tax on revenue instead of 16% on profit, up to €100,000 in annual turnover, provided the company has at least one full-time employee. See the \"Company Tax Types\" page for full details on this regime."}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
-                <span>{currentLang === 'fa' ? 'معافیت مالیاتی برنامه‌نویسان' : 'Tax Exemption for Programmers'}</span>
+                <span>{currentLang === 'fa' ? 'چه چیزی واقعاً باقی مانده' : "What's Actually Still In Effect"}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'طبق قانون مالیاتی رومانی (Legea 227/2015، ماده ۶۰)، کارکنان شاغل در شرکت‌هایی که فعالیت اصلی یا فرعی‌شان «تولید نرم‌افزار» است (با کدهای فعالیت CAEN مشخص: 5821، 5829، 6201، 6202، 6209) از پرداخت مالیات ۱۰٪ بر درآمد حقوق معاف هستند.' : 'According to the Romanian Fiscal Code (Law 227/2015, Article 60), employees working in companies whose main or secondary activity is "software creation" (specific CAEN codes: 5821, 5829, 6201, 6202, 6209) are exempt from the 10% income tax on salaries.'}</li>
-                <li>{currentLang === 'fa' ? 'این معافیت فقط مالیات بر درآمد را پوشش می‌دهد؛ کارمند همچنان باید سهم کامل بازنشستگی (CAS) و بیمه سلامت (CASS) را بپردازد.' : 'This exemption only covers income tax; the employee must still pay the full pension (CAS) and health insurance (CASS) contributions.'}</li>
+                <li>{currentLang === 'fa' ? 'رژیم میکرو-شرکت (نرخ ۱٪ گردش مالی) همچنان برای اکثر استارت‌آپ‌های نوپای فناوری بهترین گزینه مالیاتی محسوب می‌شود — نه از طریق کد فعالیت (CAEN) خاص، بلکه از طریق سطح گردش مالی و ساختار شرکت.' : "The micro-enterprise regime (1% revenue tax) remains the best available tax structure for most early-stage tech startups — driven by revenue level and company structure, not by a special CAEN code."}</li>
+                <li>{currentLang === 'fa' ? 'نرخ استاندارد مالیات بر سود شرکتی (۱۶٪) برای شرکت‌هایی که از سقف میکرو-شرکت عبور می‌کنند اعمال می‌شود؛ حقوق کارکنان بخش نرم‌افزار (از جمله برنامه‌نویسان) اکنون مانند سایر کارکنان مشمول ۱۰٪ مالیات بر درآمد + سهم کامل CAS/CASS است.' : "The standard 16% corporate profit tax applies once a company exceeds the micro-enterprise threshold; software-sector salaries (including programmers) are now subject to the standard 10% income tax plus full CAS/CASS contributions, same as any other role."}</li>
               </ul>
             </div>
 
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
-                <span>{currentLang === 'fa' ? 'شرایط شرکت و کارمند' : 'Company and Employee Requirements'}</span>
+                <span>{currentLang === 'fa' ? 'چه چیزی حذف شده' : "What Was Removed"}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'شرکت باید حداقل درآمد ۱۰,۰۰۰ یورو (معادل به لئو) به‌ازای هر کارمند مشمول در سال مالی قبل کسب کرده باشد (شرکت‌های تازه‌تاسیس از این شرط معاف‌اند).' : 'The company must have generated a minimum revenue of €10,000 (equivalent in RON) per eligible employee in the previous fiscal year (newly established companies are exempt from this condition).'}</li>
-                <li>{currentLang === 'fa' ? 'سمت کارمند باید در فهرست مشخص‌شده قانونی باشد (مثل برنامه‌نویس، مهندس نرم‌افزار، تحلیلگر سیستم، مدیر پروژه فناوری اطلاعات).' : 'The employee\'s position must be on the legally specified list (e.g., programmer, software engineer, systems analyst, IT project manager).'}</li>
+                <li>{currentLang === 'fa' ? 'معافیت مالیات بر درآمد ۱۰٪ برای مشاغل «تولید نرم‌افزار» (قانون مالیاتی، ماده ۶۰، کدهای CAEN مانند 6201) از ۱ ژانویه ۲۰۲۵ به‌طور کامل لغو شده است.' : 'The 10% income-tax exemption for "software creation" roles (Fiscal Code Art. 60, CAEN codes like 6201) was fully repealed on January 1, 2025.'}</li>
+                <li>{currentLang === 'fa' ? 'در همان تاریخ، سهم کامل بازنشستگی (پیلار دوم) روی کل حقوق این کارکنان نیز اجباری شد — پیش‌تر بخشی از این سهم به‌طور غیرمستقیم از طریق همین معافیت پوشش داده می‌شد.' : "As of the same date, mandatory Pillar II pension contributions on the full salary also became compulsory for these employees — previously offset in part by the exemption itself."}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
             </div>
@@ -429,7 +435,7 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 <span>{currentLang === 'fa' ? 'نکته برای کارآفرینان استارت‌آپی' : 'Tip for Startup Entrepreneurs'}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'ثبت شرکت با کد فعالیت مناسب (CAEN) اولین قدم برای بهره‌مندی از این معافیت است؛ جزئیات ثبت شرکت در صفحه «مراحل ثبت شرکت» موجود است.' : 'Registering a company with the appropriate activity code (CAEN) is the first step to benefit from this exemption; details are available on the "Registration Steps" page.'}</li>
+                <li>{currentLang === 'fa' ? 'برنامه‌ریزی مالیاتی خود را بر اساس رژیم میکرو-شرکت و نه یک معافیت بخشی خاص انجام دهید؛ جزئیات ثبت شرکت در صفحه «مراحل ثبت شرکت» موجود است.' : 'Base your tax planning on the micro-enterprise regime rather than any sector-specific exemption; company registration details are on the "Registration Steps" page.'}</li>
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
             </div>
@@ -441,12 +447,12 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </h3>
             <div className="space-y-6">
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا تمام کارمندان یک شرکت IT معاف از مالیات هستند؟' : 'Are all tech company employees exempt from income tax?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، این معافیت منحصراً شامل سِمت‌هایی می‌شود که در قانون مشخص شده‌اند (مانند مهندس نرم‌افزار یا تحلیلگر) و مشاغل اداری یا مالیِ همان شرکت را شامل نمی‌شود.' : 'No, the exemption applies only to specific software creation roles outlined in the law (like programmers and system analysts) and does not cover administrative or financial staff.'}</p>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا کارمندان شرکت‌های IT هنوز از مالیات معاف هستند؟' : 'Are IT company employees still tax-exempt?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. این معافیت از ۱ ژانویه ۲۰۲۵ به‌طور کامل لغو شده و حقوق کارکنان بخش نرم‌افزار اکنون دقیقاً مانند سایر مشاغل مالیات می‌گیرد.' : 'No. This exemption was fully repealed on January 1, 2025, and software-sector salaries are now taxed exactly like any other role.'}</p>
               </div>
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا خود من به‌عنوان بنیان‌گذار از این معافیت برخوردار می‌شوم؟' : 'Do founders get this tax cut?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'تنها در صورتی که با شرکت خود قرارداد کاری رسمی برای یک سمت فنی (تولید نرم‌افزار) ببندید و شرایط تحصیلی/حقوقی آن را داشته باشید.' : 'Only if you are officially employed by your company with a formal labor contract in an eligible technical role and meet the educational/legal requirements.'}</p>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'پس چه چیزی برای صرفه‌جویی مالیاتی استارت‌آپ باقی مانده؟' : 'So what tax-saving option is left for a startup?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'رژیم میکرو-شرکت (نرخ ۱٪ روی گردش مالی تا سقف ۱۰۰,۰۰۰ یورو در سال) اصلی‌ترین ابزار قانونی صرفه‌جویی مالیاتی برای اکثر استارت‌آپ‌های نوپا باقی مانده است.' : 'The micro-enterprise regime (1% tax on revenue up to €100,000/year) remains the main legal tax-saving tool available to most early-stage startups.'}</p>
               </div>
             </div>
           </div>

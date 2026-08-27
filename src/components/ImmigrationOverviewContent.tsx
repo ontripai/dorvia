@@ -253,6 +253,22 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </p>
           </div>
 
+          {/* SECTION 6.5: LEGAL REMEDY FOR UNJUSTIFIED DELAY */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border-2 border-[#2F6FED]/30 shadow-sm space-y-3">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>⚖️</span>
+              <span>{currentLang === 'fa' ? 'اگر تمدید بدون دلیل به تاخیر افتاد چه کنم؟' : 'What If My Renewal Is Unjustifiably Delayed?'}</span>
+            </h2>
+            <p className="text-xs sm:text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'اگر پرونده تمدید شما فراتر از مهلت‌های قانونی ذکرشده بدون توضیح معلق بماند، طبق قانون دادرسی اداری رومانی (Legea nr. 554/2004) حق دارید ظرف ۶ ماه از تاریخ سررسید پاسخ، علیه این تاخیر یا سکوت اداری IGI به دادگاه اداری شکایت کنید. این مسیر نیازمند مشورت با وکیل متخصص حقوق اداری است — '
+                : 'If your renewal file remains pending beyond the legal deadlines above without explanation, under the Administrative Contentious Law (Legea nr. 554/2004) you have the right to sue IGI\'s delay or administrative silence in the administrative court within 6 months of the deadline. This route requires consulting an administrative-law attorney — '}
+              <Link href="/immigration/igi-process" className="text-[#2F6FED] font-bold hover:underline">
+                {currentLang === 'fa' ? 'جزئیات این راهکار قانونی را در راهنمای IGI ببینید ←' : 'see full details in the IGI process guide →'}
+              </Link>
+            </p>
+          </div>
+
           {/* SECTION 7: OFFICIAL REFERENCES */}
           <div id="renewal-references" className="bg-[#071B3D] text-white rounded-2xl p-6 sm:p-8 space-y-4">
             <h3 className="text-lg sm:text-xl font-extrabold border-b border-slate-700 pb-3 flex items-center space-x-2 rtl:space-x-reverse">
@@ -385,6 +401,28 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </div>
           </div>
 
+          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 sm:p-6 text-xs sm:text-sm text-amber-950 leading-relaxed">
+            {currentLang === 'fa'
+              ? 'توجه: مبلغ دقیق عوارض صدور کارت اقامت بلندمدت و سطح دقیق آزمون زبان رومانیایی (مثلاً A1 یا A2) ممکن است بسته به دسته اقامتی متفاوت باشد و به‌روزرسانی شود؛ برای مبلغ و سطح دقیق در پرونده خودتان با اداره محلی IGI تماس بگیرید یا از صفحه '
+              : 'Note: the exact fee for long-term residence issuance and the exact required Romanian language level (e.g. A1 vs A2) can vary by category and are periodically updated; confirm the precise figures for your case with your local IGI office, or see the '}
+            <Link href="/immigration/igi-process" className="text-amber-900 font-bold hover:underline">
+              {currentLang === 'fa' ? 'راهنمای عمومی هزینه‌های IGI' : 'general IGI fee guide'}
+            </Link>
+            {currentLang === 'fa' ? ' برای بازه هزینه‌های استاندارد استفاده کنید.' : ' for the standard fee range.'}
+          </div>
+
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border-2 border-[#2F6FED]/30 shadow-sm space-y-3">
+            <h3 className="text-lg font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>⚖️</span>
+              <span>{currentLang === 'fa' ? 'در صورت تاخیر غیرموجه IGI' : 'If IGI Unjustifiably Delays Your File'}</span>
+            </h3>
+            <p className="text-xs sm:text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'طبق قانون ۵۵۴/۲۰۰۴، در صورت سکوت یا تاخیر بدون توجیه IGI فراتر از مهلت قانونی، می‌توانید ظرف ۶ ماه با کمک وکیل حقوق اداری علیه این تاخیر به دادگاه اداری شکایت کنید.'
+                : 'Under Law 554/2004, if IGI is unjustifiably silent or delayed beyond its legal deadline, you may sue this delay in the administrative court within 6 months, with the help of an administrative-law attorney.'}
+            </p>
+          </div>
+
           <div className="mt-2 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -464,6 +502,24 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </div>
           </div>
 
+          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 sm:p-6 text-xs sm:text-sm text-amber-950 leading-relaxed">
+            {currentLang === 'fa'
+              ? 'توجه: مبلغ دقیق عوارض پرونده تابعیت و آدرس/ساعات کاری دقیق دفاتر سازمان ملی تابعیت (ANC) به‌صورت رسمی روی cetatenie.just.ro منتشر می‌شود و ممکن است به‌روزرسانی شود؛ پیش از اقدام، مبلغ و آدرس دقیق را از همان سایت یا با تماس تلفنی با ANC تایید کنید.'
+              : 'Note: the exact citizenship application fee and the precise address/hours of the National Authority for Citizenship (ANC) offices are published officially on cetatenie.just.ro and may be updated; confirm the exact figures and address there or by calling ANC before proceeding.'}
+          </div>
+
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border-2 border-[#2F6FED]/30 shadow-sm space-y-3">
+            <h3 className="text-lg font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>⚖️</span>
+              <span>{currentLang === 'fa' ? 'در صورت تاخیر غیرموجه ANC' : 'If ANC Unjustifiably Delays Your File'}</span>
+            </h3>
+            <p className="text-xs sm:text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'همانند IGI، سازمان ملی تابعیت (ANC) نیز یک نهاد دولتی است و مشمول قانون دادرسی اداری رومانی (Legea nr. 554/2004) می‌شود. اگر پرونده شما فراتر از مدت متعارف رسیدگی (حدود ۲ سال) بدون توضیح معلق بماند، حق دارید با کمک وکیل حقوق اداری علیه این سکوت یا تاخیر به دادگاه اداری شکایت کنید — این ابزار قانونی کمتر شناخته‌شده اما واقعی است.'
+                : 'Like IGI, the National Authority for Citizenship (ANC) is a public authority subject to the Administrative Contentious Law (Legea nr. 554/2004). If your file remains pending beyond the typical processing time (around 2 years) without explanation, you have the right to sue this silence or delay in the administrative court with the help of an administrative-law attorney — a real, under-publicized legal tool.'}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -476,6 +532,10 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا آزمون زبان و قانون اساسی برای دریافت تابعیت دشوار است؟' : 'Is the language and constitution exam difficult?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'متقاضی باید توانایی خواندن، نوشتن و مکالمه روان به زبان رومانیایی را داشته باشد و به پرسش‌هایی درباره تاریخ، جغرافیا و قانون اساسی پاسخ دهد که نیازمند مطالعه و آمادگی کامل است.' : 'The applicant must demonstrate the ability to read, write, and converse fluently in Romanian, and answer questions regarding the country\'s history, geography, and constitution, which requires thorough preparation.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر پرونده‌ام بیش از حد معمول طول کشید چه اقدامی می‌توانم انجام دهم؟' : 'What can I do if my file takes far longer than usual?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون ۵۵۴/۲۰۰۴، می‌توانید ظرف ۶ ماه از تاخیر یا سکوت غیرموجه، با کمک وکیل متخصص حقوق اداری علیه ANC در دادگاه اداری شکایت کنید.' : 'Under Law 554/2004, you can sue ANC in the administrative court within 6 months of an unjustified delay or silence, with the help of an administrative-law attorney.'}</p>
               </div>
             </div>
           </div>
