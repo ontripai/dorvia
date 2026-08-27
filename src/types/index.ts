@@ -85,6 +85,9 @@ export interface University {
   ctaHref: string;
   ctaType: CTAType;
   disclaimer?: { fa: string; en: string };
+  photoUrl?: string;
+  photoCaptionFa?: string;
+  photoCaptionEn?: string;
 }
 
 export interface City {

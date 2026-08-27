@@ -44,8 +44,8 @@ export const universitiesData: University[] = [
     badgeTextFa: '✓ تأییدیه وزارت بهداشت ایران',
     badgeTextEn: '✓ Listed by Iran’s Ministry of Health',
     warningLevel: 'none',
-    descriptionFa: 'قدیمی‌ترین دانشگاه پزشکی رومانی در پایتخت.',
-    descriptionEn: 'The oldest medical university in Romania, located in the capital.',
+    descriptionFa: 'قدیمی‌ترین دانشگاه پزشکی رومانی در پایتخت. نیکولای پائولسکو، دانشمند رومانیایی، انسولین را برای نخستین‌بار در سال ۱۹۲۱ در همین دانشگاه استخراج کرد — یکی از شناخته‌شده‌ترین رویدادهای تاریخ علمی رومانی.',
+    descriptionEn: "The oldest medical university in Romania, located in the capital. Romanian scientist Nicolae Paulescu first isolated insulin here in 1921 — one of the best-known milestones in Romanian scientific history.",
     sourceRecords: [
       { name: { fa: 'سایت رسمی', en: 'Official Site' }, url: 'https://umfcd.ro/' }
     ],
@@ -53,7 +53,10 @@ export const universitiesData: University[] = [
     ctaLabelFa: 'مشاهده شرایط ثبت‌نام',
     ctaLabelEn: 'View Admission Requirements',
     ctaHref: '/study',
-    ctaType: 'internal'
+    ctaType: 'internal',
+    photoUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/8%20Bulevardul%20Eroii%20Sanitari%2C%20Bucharest%20(01).jpg?width=800',
+    photoCaptionFa: 'بنای تاریخی دانشکده پزشکی کارول داویلا (۱۹۰۳) — عکس: ویکی‌مدیا کامنز',
+    photoCaptionEn: 'The historic Faculty of Medicine building, Carol Davila University (built 1903) — Photo: Wikimedia Commons'
   },
   {
     id: 'umf-victor-babes',
@@ -96,8 +99,8 @@ export const universitiesData: University[] = [
     badgeTextFa: '✓ تأییدیه وزارت بهداشت ایران',
     badgeTextEn: '✓ Listed by Iran’s Ministry of Health',
     warningLevel: 'none',
-    descriptionFa: 'دانشگاهی پیشرو در زمینه پزشکی در غرب رومانی.',
-    descriptionEn: 'A leading medical university in western Romania.',
+    descriptionFa: 'دانشگاهی پیشرو در زمینه پزشکی در غرب رومانی. این دانشگاه به نام ویکتور بابش، دانشمند بنیان‌گذار مکتب میکروب‌شناسی رومانی و نویسنده یکی از نخستین کتاب‌های جامع باکتری‌شناسی جهان، نام‌گذاری شده است.',
+    descriptionEn: "A leading medical university in western Romania, named after Victor Babeș, the scientist who founded Romania's school of microbiology and authored one of the world's first comprehensive treatises on bacteriology.",
     sourceRecords: [
       { name: { fa: 'سایت رسمی', en: 'Official Site' }, url: 'https://www.umft.ro/' }
     ],
@@ -147,8 +150,8 @@ export const universitiesData: University[] = [
     badgeTextFa: '✓ تأییدیه وزارت بهداشت ایران',
     badgeTextEn: '✓ Listed by Iran’s Ministry of Health',
     warningLevel: 'none',
-    descriptionFa: 'یکی از تاریخی‌ترین دانشگاه‌های پزشکی در منطقه مولداوی رومانی.',
-    descriptionEn: 'One of the most historic medical universities in the Moldavia region of Romania.',
+    descriptionFa: 'یکی از تاریخی‌ترین دانشگاه‌های پزشکی در منطقه مولداوی رومانی. ریشه این دانشگاه به مدرسه جراحی یاش در سال ۱۸۵۹ بازمی‌گردد که نخستین مدرسه پزشکی رومانی‌زبان کشور بود.',
+    descriptionEn: "One of the most historic medical universities in the Moldavia region of Romania. Its roots trace back to the 1859 Surgery School of Iași, the country's first Romanian-language medical school.",
     sourceRecords: [
       { name: { fa: 'سایت رسمی', en: 'Official Site' }, url: 'https://www.umfiasi.ro/' }
     ],
@@ -156,7 +159,10 @@ export const universitiesData: University[] = [
     ctaLabelFa: 'سایت رسمی دانشگاه',
     ctaLabelEn: 'Official University Website',
     ctaHref: 'https://www.umfiasi.ro/',
-    ctaType: 'external'
+    ctaType: 'external',
+    photoUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/UMF%20Ia%C8%99i.jpg?width=800',
+    photoCaptionFa: 'ساختمان دانشگاه علوم پزشکی گریگوره ت. پوپا یاش — عکس: ویکی‌مدیا کامنز',
+    photoCaptionEn: 'A building of Grigore T. Popa University of Medicine and Pharmacy, Iași — Photo: Wikimedia Commons'
   },
   {
     id: 'umf-iuliu-hatieganu',
@@ -198,8 +204,8 @@ export const universitiesData: University[] = [
     badgeTextFa: '✓ تأییدیه وزارت بهداشت ایران',
     badgeTextEn: '✓ Listed by Iran’s Ministry of Health',
     warningLevel: 'none',
-    descriptionFa: 'دانشگاهی با بالاترین استانداردهای آموزشی در قلب ترانسیلوانیا.',
-    descriptionEn: 'A university with the highest educational standards in the heart of Transylvania.',
+    descriptionFa: 'دانشگاهی با بالاترین استانداردهای آموزشی در قلب ترانسیلوانیا. قدمت آموزش پزشکی در این نهاد به مدرسه پزشکی-جراحی کلوژ در سال ۱۷۷۵ بازمی‌گردد که آن را به قدیمی‌ترین مرکز آموزش پزشکی ترانسیلوانیا تبدیل می‌کند.',
+    descriptionEn: "A university with the highest educational standards in the heart of Transylvania. Medical education at this institution traces back to the 1775 Medical-Surgical School of Cluj, making it Transylvania's oldest center of medical education.",
     sourceRecords: [
       { name: { fa: 'سایت رسمی', en: 'Official Site' }, url: 'https://umfcluj.ro/' }
     ],
@@ -245,8 +251,8 @@ export const universitiesData: University[] = [
     badgeTextFa: 'دانشگاه جامع دولتی',
     badgeTextEn: 'Public Comprehensive',
     warningLevel: 'none',
-    descriptionFa: 'قدیمی‌ترین و برجسته‌ترین دانشگاه جامع رومانی. متقاضیان ایرانی با احراز شرایط رسمی امکان استفاده از ۵٪ تخفیف شهریه را دارند.',
-    descriptionEn: 'Romania’s premier comprehensive public university. Iranian citizens are eligible for a 5% tuition discount according to official conditions.',
+    descriptionFa: 'قدیمی‌ترین و برجسته‌ترین دانشگاه جامع رومانی. متقاضیان ایرانی با احراز شرایط رسمی امکان استفاده از ۵٪ تخفیف شهریه را دارند. ریشه این نهاد به آکادمی سلطنتی سال ۱۶۹۴ بازمی‌گردد و در میان فارغ‌التحصیلان آن جورج امیل پالاده (برنده جایزه نوبل پزشکی) و اوژن یونسکو (نمایشنامه‌نویس مشهور) دیده می‌شوند.',
+    descriptionEn: "Romania's premier comprehensive public university. Iranian citizens are eligible for a 5% tuition discount according to official conditions. Its roots trace back to the 1694 Princely Academy, and its alumni include Nobel Prize–winning scientist George Emil Palade and playwright Eugène Ionesco.",
     sourceRecords: [
       { name: { fa: 'سایت بین‌الملل', en: 'International Site' }, url: 'https://international.unibuc.ro' }
     ],
@@ -254,7 +260,10 @@ export const universitiesData: University[] = [
     ctaLabelFa: 'اطلاعات تحصیل در رومانی',
     ctaLabelEn: 'Study in Romania Info',
     ctaHref: '/study',
-    ctaType: 'internal'
+    ctaType: 'internal',
+    photoUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Universitatea%20Bucuresti%2C%20Piata%20Universitatii%20(1).JPG?width=800',
+    photoCaptionFa: 'بنای اصلی دانشگاه بخارست در میدان دانشگاه — عکس: ویکی‌مدیا کامنز',
+    photoCaptionEn: 'The main University of Bucharest building on University Square — Photo: Wikimedia Commons'
   },
   {
     id: 'upb-polytechnic',
@@ -292,8 +301,8 @@ export const universitiesData: University[] = [
     badgeTextFa: 'برترین دانشگاه فنی',
     badgeTextEn: 'Top Technological University',
     warningLevel: 'none',
-    descriptionFa: 'بزرگترین و معتبرترین دانشگاه فنی مهندسی در رومانی.',
-    descriptionEn: 'The largest and most prestigious technical university in Romania.',
+    descriptionFa: 'بزرگترین و معتبرترین دانشگاه فنی مهندسی در رومانی. این نهاد در سال ۱۸۱۸ توسط گئورگه لازار بنیان‌گذاری شد و نخستین مدرسه فنی عالی والاخیا بود؛ دومیترو پرونارو، فارغ‌التحصیل این دانشگاه، نخستین رومانیایی بود که به فضا سفر کرد.',
+    descriptionEn: 'The largest and most prestigious technical university in Romania. Founded in 1818 by Gheorghe Lazăr as the first higher technical school in Wallachia, its alumni include Dumitru Prunariu, the first Romanian to travel to space.',
     sourceRecords: [
       { name: { fa: 'سند رسمی', en: 'Official Document' }, url: 'https://international.upb.ro/assets/docs/2026/regulations/POLITEHNICA_Bucharest_tuition_fees.pdf' }
     ],
@@ -301,7 +310,10 @@ export const universitiesData: University[] = [
     ctaLabelFa: 'مسیر تحصیل',
     ctaLabelEn: 'Study Pathway',
     ctaHref: '/study',
-    ctaType: 'internal'
+    ctaType: 'internal',
+    photoUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Politehnica%20University%20of%20Bucharest.jpg?width=800',
+    photoCaptionFa: 'دانشگاه ملی علوم و فناوری پلی‌تکنیک بخارست — عکس: ویکی‌مدیا کامنز',
+    photoCaptionEn: 'National University of Science and Technology POLITEHNICA Bucharest — Photo: Wikimedia Commons'
   },
   {
     id: 'ase-bucharest',
@@ -347,8 +359,8 @@ export const universitiesData: University[] = [
     badgeTextFa: 'دانشگاه برتر اقتصاد',
     badgeTextEn: 'Top Economics University',
     warningLevel: 'none',
-    descriptionFa: 'معتبرترین دانشگاه اقتصاد و مدیریت بازرگانی در رومانی.',
-    descriptionEn: 'The most prestigious university for economics and business administration in Romania.',
+    descriptionFa: 'معتبرترین دانشگاه اقتصاد و مدیریت بازرگانی در رومانی. این دانشگاه در ۶ آوریل ۱۹۱۳ با فرمان سلطنتی کارول اول تأسیس شد و نخستین نهاد آموزش عالی اقتصاد در رومانی محسوب می‌شود.',
+    descriptionEn: "The most prestigious university for economics and business administration in Romania. It was founded on April 6, 1913 by royal decree under King Carol I, making it Romania's first institution of higher economic education.",
     sourceRecords: [
       { name: { fa: 'پذیرش بین‌الملل', en: 'International Admission' }, url: 'https://international.ase.ro' }
     ],
@@ -356,7 +368,10 @@ export const universitiesData: University[] = [
     ctaLabelFa: 'شرایط تحصیل',
     ctaLabelEn: 'Study Requirements',
     ctaHref: '/study',
-    ctaType: 'internal'
+    ctaType: 'internal',
+    photoUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cladirea%20ASE%20Bucuresti.jpg?width=800',
+    photoCaptionFa: 'بنای تاریخی دانشگاه مطالعات اقتصادی بخارست (ASE) در میدان رومانا — عکس: ویکی‌مدیا کامنز',
+    photoCaptionEn: 'The historic ASE building on Piața Romană, Bucharest — Photo: Wikimedia Commons'
   },
   {
     id: 'rau-bucharest',
@@ -392,8 +407,8 @@ export const universitiesData: University[] = [
     badgeTextFa: 'دانشگاه خصوصی',
     badgeTextEn: 'Private University',
     warningLevel: 'none',
-    descriptionFa: 'یک دانشگاه خصوصی معتبر در بخارست با برنامه‌های تجاری بین‌المللی.',
-    descriptionEn: 'A reputable private university in Bucharest with international business programs.',
+    descriptionFa: 'یک دانشگاه خصوصی معتبر در بخارست با برنامه‌های تجاری بین‌المللی. این دانشگاه در سال ۱۹۹۱ توسط اقتصاددان یون اسمدسکو تأسیس شد؛ نکته مهم: با وجود نام آن، طبق اعلام رسمی خودِ دانشگاه، این نهاد به‌طور رسمی وابسته به یا مورد حمایت هیچ دانشگاه آمریکایی نیست و به‌صورت مستقل فعالیت می‌کند.',
+    descriptionEn: "A reputable private university in Bucharest with international business programs. Founded in 1991 by economist Ion Smedescu, it's worth noting that — despite its name — the university's own materials state it operates as an independent institution, without formal affiliation to or sponsorship by any American university.",
     sourceRecords: [
       { name: { fa: 'لینک شهریه رسمی', en: 'Official Tuition Link' }, url: 'https://www.rau.ro/tuition-fees-and-finances/?lang=en' }
     ],
@@ -444,8 +459,8 @@ export const universitiesData: University[] = [
     badgeTextFa: '⚠ در فهرست فعلی مورد تأیید نیست',
     badgeTextEn: '⚠ Not currently listed as approved',
     warningLevel: 'warning',
-    descriptionFa: 'یک دانشگاه خصوصی محبوب در میان برخی متقاضیان ایرانی، اما فاقد تأییدیه تضمین‌شده وزارت بهداشت.',
-    descriptionEn: 'A popular private university among some Iranian applicants, but lacking guaranteed MOH approval.',
+    descriptionFa: 'یک دانشگاه خصوصی محبوب در میان برخی متقاضیان ایرانی، اما فاقد تأییدیه تضمین‌شده وزارت بهداشت. این دانشگاه در سال ۱۹۹۰ تأسیس شد و یکی از نخستین دانشگاه‌های خصوصی رومانی پس از سقوط کمونیسم بود؛ نام آن برگرفته از تیتو مایورسکو، منتقد ادبی تأثیرگذار قرن نوزدهم است که مدتی کوتاه نخست‌وزیر رومانی نیز بود.',
+    descriptionEn: 'A popular private university among some Iranian applicants, but lacking guaranteed MOH approval. Founded in 1990, it was one of Romania\'s earliest private universities established after the fall of communism; it is named after Titu Maiorescu, the influential 19th-century literary critic who also briefly served as Prime Minister of Romania.',
     sourceRecords: [
       { name: { fa: 'سایت رسمی', en: 'TMU Official' }, url: 'https://www.utm.ro/' }
     ],

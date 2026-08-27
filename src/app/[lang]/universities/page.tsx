@@ -186,6 +186,12 @@ function UniversitiesContent() {
         </p>
       </div>
 
+      <div className="prose prose-slate max-w-none text-[#526174] text-sm leading-relaxed bg-white p-5 sm:p-6 rounded-2xl border border-[#dfe6ef] shadow-sm">
+        {currentLang === "fa"
+          ? "این فهرست به سه گروه تقسیم شده است: دانشگاه‌های علوم پزشکی که در فهرست رسمی وزارت بهداشت ایران قرار دارند (گروه اول)، دانشگاه‌های جامع، فنی و اقتصادی محبوب برای رشته‌های غیرپزشکی (گروه دوم)، و دانشگاه‌هایی که نیازمند بررسی مجدد وضعیت تأییدشان هستند (گروه سوم، با نشان هشدار). برای رشته پزشکی، همیشه پیش از تصمیم‌گیری نهایی، آخرین نسخه فهرست رسمی وزارت بهداشت را از سایت edd.behdasht.gov.ir استعلام کنید، چون این فهرست هر سال به‌روزرسانی می‌شود."
+          : "This list is organized into three groups: medical universities currently listed by Iran's Ministry of Health (Group 1), popular comprehensive, technical, and economic universities for non-medical fields (Group 2), and universities whose approval status needs re-verification (Group 3, flagged with a warning). For medical programs, always check the latest version of the official Ministry of Health list at edd.behdasht.gov.ir before making a final decision, since that list is updated annually."}
+      </div>
+
       <div className="bg-[#eef3f8] p-4 rounded-2xl border border-[#dfe6ef] space-y-4">
         <input
           type="text"

@@ -67,6 +67,23 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
   return (
     <div className={`bg-white rounded-2xl border ${isWarning ? 'border-amber-300' : 'border-slate-200'} shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col justify-between group`}>
 
+      {/* Real Campus Photo (when a verified Wikimedia Commons photo is available) */}
+      {university.photoUrl && (
+        <div className="relative">
+          <img
+            src={university.photoUrl}
+            alt={currentLang === 'fa' ? university.photoCaptionFa : university.photoCaptionEn}
+            className="w-full h-36 object-cover"
+            onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-3 py-1.5">
+            <p className="text-white text-[10px] leading-tight">
+              {currentLang === 'fa' ? university.photoCaptionFa : university.photoCaptionEn}
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Visual Header Banner */}
       <div className={`${headerColors} p-5 text-white relative`}>
         <div className={`inline-block px-2.5 py-1 rounded-md text-[11px] font-bold border mb-3 ${badgeColors}`}>
