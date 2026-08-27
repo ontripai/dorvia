@@ -52,6 +52,9 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
           <a href="#quick-answer" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۱. پاسخ سریع' : '1. Quick Answer'}
           </a>
+          <a href="#pre-arrival-docs" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۱.۵. پیش از سفر: مدارک و ویزای D' : '1.5 Before You Travel: Docs & Type D Visa'}
+          </a>
           <a href="#prerequisites-table" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۲. جدول شرایط اولیه' : '2. Prerequisites Table'}
           </a>
@@ -103,6 +106,77 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
             ? 'برای یک تبعه ایرانی، IGI معمولاً اولین نهاد دولتی رومانی است که به‌صورت حضوری و مکرر با آن سروکار خواهید داشت — نه فقط یک‌بار برای گرفتن کارت، بلکه هر بار که کارت اقامت منقضی می‌شود (معمولاً سالانه در سال‌های اول). به همین دلیل، درک اینکه این اداره واقعاً چطور کار می‌کند (نه فقط چه چیزی روی کاغذ نوشته شده) اهمیت زیادی دارد. حجم پرونده‌های IGI در چند سال اخیر به‌شدت افزایش یافته — تعداد کارگران خارجی دارای مجوز رسمی از حدود ۵٬۵۰۰ نفر در سال ۲۰۱۶ به نزدیک ۱۰۰٬۰۰۰ نفر در سال‌های ۲۰۲۲-۲۰۲۳ رسید — و همین رشد است که هم باعث شلوغی روزافزون دفاتر شده و هم دلیل اصلی سرمایه‌گذاری IGI روی دفتر جدید و بزرگ‌تر بخارست بوده است (به بخش ۳.۵ زیر مراجعه کنید).'
             : 'For an Iranian applicant, IGI is usually the Romanian government body you deal with in person, repeatedly — not once for a single card, but every time your permit expires (typically annually in the first years). That is why understanding how this office actually functions — not just what the rulebook says — matters. Case volume at IGI has grown sharply: officially registered foreign workers rose from roughly 5,500 in 2016 to nearly 100,000 in 2022–2023 — a surge that both crowded existing offices and is the direct reason IGI invested in a larger new Bucharest office (see section 3.5 below).'}
         </p>
+      </div>
+
+      {/* SECTION 1.5: BEFORE YOU TRAVEL — DOCUMENT EVALUATION & TYPE D VISA */}
+      <div id="pre-arrival-docs" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-6">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <span>✈️</span>
+          <span>{currentLang === 'fa' ? 'پیش از سفر: ارزیابی مدارک و ویزای بلندمدت نوع D' : 'Before You Travel: Document Evaluation & the Type D Visa'}</span>
+        </h2>
+        <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'همه چیزی که در این صفحه تا اینجا خواندید (پورتال، مراجعه به اداره، بیومتریک) مربوط به مرحله‌ای است که شما از قبل وارد رومانی شده‌اید. اما برای اکثر ایرانیان، دو گام دیگر باید زودتر از آن، هنوز در ایران، طی شود: ارزیابی مدارک و گرفتن ویزای بلندمدت نوع D از سفارت رومانی.'
+            : 'Everything you\'ve read on this page so far (the portal, the office visit, biometrics) happens after you\'re already inside Romania. But for most Iranians, two earlier steps happen first — while still in Iran: evaluating your documents, and obtaining the Type D long-stay visa from the Romanian Embassy.'}
+        </p>
+
+        <div>
+          <h3 className="text-base sm:text-lg font-extrabold text-[#142033] mb-2">
+            {currentLang === 'fa' ? '۱. ارزیابی اولیه مدارک' : '1. Initial Document Evaluation'}
+          </h3>
+          <p className="text-sm text-[#526174] leading-relaxed mb-3">
+            {currentLang === 'fa'
+              ? 'پیش از مراجعه به سفارت، مدارک زیر معمولاً لازم هستند — اما دقیقاً کدام‌ها لازم است به هدف شما (تحصیل، کار، پیوست خانواده، سرمایه‌گذاری) بستگی دارد؛ فهرست کامل و رسمی را باید از سفارت یا evisa.mae.ro استعلام بگیرید:'
+              : 'Before your embassy appointment, the following are commonly required — but exactly which ones apply depends on your purpose (study, work, family reunification, investment); get the full official list from the embassy or evisa.mae.ro:'}
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-[#526174]">
+            <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl flex items-center space-x-3 rtl:space-x-reverse">
+              <CheckCircle size={18} className="text-emerald-600 shrink-0" />
+              <span>{currentLang === 'fa' ? 'پاسپورت معتبر (حداقل ۳ ماه بیشتر از مدت اقامت، حداقل ۲ صفحه خالی)' : 'Valid passport (min. 3 months beyond stay, at least 2 blank pages)'}</span>
+            </div>
+            <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl flex items-center space-x-3 rtl:space-x-reverse">
+              <CheckCircle size={18} className="text-emerald-600 shrink-0" />
+              <span>{currentLang === 'fa' ? 'مدرک هدف اقامت (پذیرش دانشگاه، قرارداد کار + مجوز کار، یا مدرک خویشاوندی)' : 'Proof of purpose (university admission, work contract + permit, or proof of family relationship)'}</span>
+            </div>
+            <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl flex items-center space-x-3 rtl:space-x-reverse">
+              <CheckCircle size={18} className="text-emerald-600 shrink-0" />
+              <span>{currentLang === 'fa' ? 'مدرک محل اسکان در رومانی و تمکن مالی' : 'Proof of accommodation in Romania and financial means'}</span>
+            </div>
+            <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl flex items-center space-x-3 rtl:space-x-reverse">
+              <CheckCircle size={18} className="text-emerald-600 shrink-0" />
+              <span>{currentLang === 'fa' ? 'بیمه درمانی معتبر برای رومانی، و برای برخی مسیرها گواهی عدم سوءپیشینه' : 'Valid health insurance for Romania, and for some pathways a criminal-record certificate'}</span>
+            </div>
+          </div>
+          <p className="text-[11px] text-slate-400 mt-2 leading-snug">
+            {currentLang === 'fa'
+              ? 'برای فهرست دقیق مدارک بر اساس هدف خودتان، به راهنمای همان بخش مراجعه کنید: '
+              : 'For the exact document list based on your purpose, see the relevant section guide: '}
+            <Link href="/study/requirements" className="text-[#2F6FED] font-bold hover:underline">{currentLang === 'fa' ? 'تحصیل' : 'Study'}</Link>
+            {' · '}
+            <Link href="/work/work-permit" className="text-[#2F6FED] font-bold hover:underline">{currentLang === 'fa' ? 'کار' : 'Work'}</Link>
+            {' · '}
+            <Link href="/immigration/family-reunification" className="text-[#2F6FED] font-bold hover:underline">{currentLang === 'fa' ? 'پیوست خانواده' : 'Family Reunification'}</Link>
+          </p>
+        </div>
+
+        <div id="visa-type-d-issuance">
+          <h3 className="text-base sm:text-lg font-extrabold text-[#142033] mb-2">
+            {currentLang === 'fa' ? '۲. صدور ویزای بلندمدت نوع D در سفارت رومانی تهران' : '2. Type D Long-Stay Visa Issuance at the Romanian Embassy in Tehran'}
+          </h3>
+          <p className="text-sm text-[#526174] leading-relaxed mb-3">
+            {currentLang === 'fa'
+              ? 'برخلاف حدود ۲۶ کشور اروپایی دیگر که برای متقاضیان ایرانی از مرکز خدمات ویزا (VFS Global) در تهران استفاده می‌کنند، رومانی در این فهرست دیده نمی‌شود — یعنی درخواست ویزای نوع D معمولاً باید مستقیماً و حضوری در خود سفارت رومانی در تهران ثبت شود، نه یک مرکز واسط. ویزای نوع D معمولاً یک بازه ۹۰ روزه برای ورود به رومانی و ثبت‌نام نزد IGI می‌دهد؛ درخواست کارت اقامت باید طبق همان قاعده «حداقل ۳۰ روز پیش از پایان اعتبار» (که در گام ۲ بخش ۳ بالا هم دیدید) ثبت شود.'
+              : 'Unlike roughly 26 other European countries that use a Visa Application Center (VFS Global) in Tehran for Iranian applicants, Romania does not appear on that list — meaning the Type D visa application typically must be lodged directly and in person at the Romanian Embassy in Tehran, not an intermediary center. The Type D visa generally grants a 90-day window to enter Romania and register with IGI; the residence-card application should follow the same "at least 30 days before expiration" rule you saw in Step 2 of Section 3 above.'}
+          </p>
+          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs sm:text-sm text-amber-950 leading-relaxed space-y-1">
+            <p className="font-bold">{currentLang === 'fa' ? 'این بخش را حتماً مستقیماً با سفارت تایید کنید' : 'Confirm this section directly with the embassy'}</p>
+            <p>
+              {currentLang === 'fa'
+                ? 'زمان رسیدگی برای ویزای نوع D در منابع مختلف بین ۴۵ تا ۶۰ روز گزارش شده، و رقم هزینه رایج‌ذکرشده در منابع غیررسمی حدود ۱۲۰ یورو است (این رقم متفاوت از هزینه ۱۲۰ یورویی صدور کارت اقامت داخل رومانی است که در بخش ۵ پایین آمده) — اما هیچ‌کدام از این دو رقم را نتوانستیم مستقیماً از سایت سفارت یا mae.ro تایید کنیم. پیش از اقدام، حتماً هزینه، زمان رسیدگی و فهرست دقیق مدارک را مستقیماً از سفارت رومانی در تهران یا evisa.mae.ro استعلام بگیرید.'
+                : 'Reported processing time for the Type D visa ranges from 45 to 60 days across secondary sources, and an unofficial commonly-cited fee figure is around 120 EUR (a different figure from the 120 EUR in-Romania residence-card issuance fee covered in Section 5 below) — but we could not directly confirm either figure against the embassy\'s own site or mae.ro. Before applying, confirm the fee, processing time, and exact document list directly with the Romanian Embassy in Tehran or evisa.mae.ro.'}
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* SECTION 2: PREREQUISITES TABLE */}
@@ -197,7 +271,7 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
                 : 'In-person submission at the provincial IGI office of residence, presenting originals and receiving registration receipt.'}
             </p>
           </div>
-          <div className="p-5 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-2">
+          <div id="step-4-biometrics" className="p-5 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-2 scroll-mt-24">
             <span className="font-extrabold text-[#2F6FED] flex items-center space-x-2 rtl:space-x-reverse">
               <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-xs">۴</span>
               <span>{currentLang === 'fa' ? 'گام ۴: بیومتریک و صدور کارت' : 'Step 4: Biometrics & Card Issuance'}</span>

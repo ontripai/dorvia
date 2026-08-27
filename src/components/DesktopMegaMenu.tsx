@@ -134,10 +134,10 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 {currentLang === 'fa' ? 'مراحل اقامتی IGI' : 'IGI Residency Steps'}
               </h4>
               <ul className="space-y-2 text-[#526174] font-medium">
-                <li><Link href="/immigration/igi-process" className="hover:text-[#2F6FED] py-1 cursor-pointer text-right w-full" onClick={onClose}>{currentLang === 'fa' ? '۱. ارزیابی اولیه مدارک' : '1. Initial Document Audit'}</Link></li>
-                <li><Link href="/immigration/igi-process" className="hover:text-[#2F6FED] py-1 cursor-pointer text-right w-full" onClick={onClose}>{currentLang === 'fa' ? '۲. صدور ویزای بلندمدت (نوع D)' : '2. Long-stay Visa (Type D)'}</Link></li>
-                <li><Link href="/immigration/igi-process" className="hover:text-[#2F6FED] py-1 cursor-pointer text-right w-full" onClick={onClose}>{currentLang === 'fa' ? '۳. درخواست کارت اقامت موقت' : '3. Temporary Residence Permit'}</Link></li>
-                <li><Link href="/immigration/igi-process" className="hover:text-[#2F6FED] py-1 cursor-pointer text-right w-full" onClick={onClose}>{currentLang === 'fa' ? '۴. ورود و صدور کارت اقامت' : '4. Arrival & Permit Issuance'}</Link></li>
+                <li><Link href="/immigration/igi-process#pre-arrival-docs" className="hover:text-[#2F6FED] py-1 cursor-pointer text-right w-full" onClick={onClose}>{currentLang === 'fa' ? '۱. ارزیابی اولیه مدارک' : '1. Initial Document Audit'}</Link></li>
+                <li><Link href="/immigration/igi-process#visa-type-d-issuance" className="hover:text-[#2F6FED] py-1 cursor-pointer text-right w-full" onClick={onClose}>{currentLang === 'fa' ? '۲. صدور ویزای بلندمدت (نوع D)' : '2. Long-stay Visa (Type D)'}</Link></li>
+                <li><Link href="/immigration/igi-process#step-by-step" className="hover:text-[#2F6FED] py-1 cursor-pointer text-right w-full" onClick={onClose}>{currentLang === 'fa' ? '۳. درخواست کارت اقامت موقت' : '3. Temporary Residence Permit'}</Link></li>
+                <li><Link href="/immigration/igi-process#step-4-biometrics" className="hover:text-[#2F6FED] py-1 cursor-pointer text-right w-full" onClick={onClose}>{currentLang === 'fa' ? '۴. ورود و صدور کارت اقامت' : '4. Arrival & Permit Issuance'}</Link></li>
               </ul>
 
             </div>
