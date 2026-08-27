@@ -57,10 +57,33 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('اداره مترو بخارست (Metrorex) — metroulbucuresti.org', 'Bucharest Metro Authority (Metrorex) — metroulbucuresti.org')}
           </div>
 
-          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-            {currentLang === 'fa'
-              ? 'بخارست، پایتخت و بزرگ‌ترین شهر رومانی، مرکز اصلی اقتصاد، آموزش عالی و فرصت‌های شغلی بین‌المللی کشور است. برخلاف سایر شهرهای رومانی، بخارست تنها شهری است که سیستم مترو دارد و همراه با شبکه گسترده اتوبوس و تراموا، جابجایی درون‌شهری را نسبتاً آسان می‌کند.'
-              : "Bucharest, Romania's capital and largest city, is the country's main hub for economic activity, higher education, and international job opportunities. Unlike other Romanian cities, Bucharest is the only one with a metro system, which alongside its extensive bus and tram network makes intra-city travel relatively easy."}
+          <div className="relative rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Romanian%20Athenaeum%20-%20Ateneul%20Rom%C3%A2n.JPG?width=1200"
+              alt={currentLang === 'fa' ? 'تالار آتنیوم رومانی در بخارست' : 'The Romanian Athenaeum in Bucharest'}
+              className="w-full h-64 sm:h-80 object-cover"
+              onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+              <p className="text-white text-xs">
+                {currentLang === 'fa'
+                  ? 'تالار آتنیوم رومانی (۱۸۸۸)، یکی از نمادهای معماری بخارست — عکس: ویکی‌مدیا کامنز'
+                  : "The Romanian Athenaeum (built 1888), one of Bucharest's architectural icons — Photo: Wikimedia Commons"}
+              </p>
+            </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+            <p>
+              {currentLang === 'fa'
+                ? 'بخارست، پایتخت و بزرگ‌ترین شهر رومانی، مرکز اصلی اقتصاد، آموزش عالی و فرصت‌های شغلی بین‌المللی کشور است. برخلاف سایر شهرهای رومانی، بخارست تنها شهری است که سیستم مترو دارد و همراه با شبکه گسترده اتوبوس و تراموا، جابجایی درون‌شهری را نسبتاً آسان می‌کند.'
+                : "Bucharest, Romania's capital and largest city, is the country's main hub for economic activity, higher education, and international job opportunities. Unlike other Romanian cities, Bucharest is the only one with a metro system, which alongside its extensive bus and tram network makes intra-city travel relatively easy."}
+            </p>
+            <p>
+              {currentLang === 'fa'
+                ? 'با این حال، بخارست به‌دلیل ترافیک سنگین و آلودگی هوا نسبت به سایر شهرهای این راهنما شناخته می‌شود — نکته‌ای که در کنار هزینه‌های بالاتر مسکن باید در تصمیم‌گیری لحاظ شود. جالب اینکه بر اساس داده‌های فوریه ۲۰۲۶، میانگین قیمت آپارتمان در برخی مناطق کلوژ-نپوکا حتی از بخارست هم پیشی گرفته است.'
+                : "That said, Bucharest is known for heavier traffic and air pollution than the other cities in this guide — worth weighing alongside its higher housing costs. Interestingly, as of February 2026 data, average apartment prices in parts of Cluj-Napoca have even overtaken Bucharest's."}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -216,10 +239,33 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی کلوژ (CTP Cluj) — ctpcj.ro', 'Cluj Public Transport Company (CTP Cluj) — ctpcj.ro')}
           </div>
 
-          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-            {currentLang === 'fa'
-              ? 'کلوژ-نپوکا، پایتخت غیررسمی ترانسیلوانیا، محبوب‌ترین شهر رومانی برای مهندسان نرم‌افزار، استارتاپ‌ها و دانشجویان بین‌المللی است. تقاضای بالا برای مسکن (ناشی از جمعیت دانشجویی و شاغلان فناوری) باعث شده اجاره در کلوژ گاهی به سطح بخارست نزدیک یا حتی بالاتر برود.'
-              : "Cluj-Napoca, the unofficial capital of Transylvania, is Romania's most popular city for software engineers, startups, and international students. High demand for housing (driven by its student population and tech workforce) means rents in Cluj sometimes run close to or even above Bucharest's."}
+          <div className="relative rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Saint%20Michael%20Church%20in%20Cluj-Napoca.jpg?width=1200"
+              alt={currentLang === 'fa' ? 'کلیسای سنت میکائیل در میدان اتحاد کلوژ-نپوکا' : "St. Michael's Church on Union Square, Cluj-Napoca"}
+              className="w-full h-64 sm:h-80 object-cover"
+              onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+              <p className="text-white text-xs">
+                {currentLang === 'fa'
+                  ? 'کلیسای سنت میکائیل در میدان اتحاد کلوژ-نپوکا — عکس: ویکی‌مدیا کامنز'
+                  : "St. Michael's Church on Union Square, Cluj-Napoca — Photo: Wikimedia Commons"}
+              </p>
+            </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+            <p>
+              {currentLang === 'fa'
+                ? 'کلوژ-نپوکا، پایتخت غیررسمی ترانسیلوانیا، محبوب‌ترین شهر رومانی برای مهندسان نرم‌افزار، استارتاپ‌ها و دانشجویان بین‌المللی است. تقاضای بالا برای مسکن (ناشی از جمعیت دانشجویی و شاغلان فناوری) باعث شده اجاره در کلوژ گاهی به سطح بخارست نزدیک یا حتی بالاتر برود.'
+                : "Cluj-Napoca, the unofficial capital of Transylvania, is Romania's most popular city for software engineers, startups, and international students. High demand for housing (driven by its student population and tech workforce) means rents in Cluj sometimes run close to or even above Bucharest's."}
+            </p>
+            <p>
+              {currentLang === 'fa'
+                ? 'کلوژ-نپوکا در چند رتبه‌بندی مستقل به‌عنوان برترین شهر دانشجویی رومانی معرفی شده و شهرت قوی به‌عنوان قطب فناوری کشور دارد — همین موقعیت بخشی از دلیل تقاضای بالای مسکن در این شهر است.'
+                : "Cluj-Napoca has repeatedly ranked as Romania's top student city in independent rankings and carries a strong reputation as the country's leading tech hub — a status that helps explain its high housing demand."}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -372,10 +418,33 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی تیمیشوارا (STPT) — stpt.ro', 'Timișoara Public Transport Company (STPT) — stpt.ro')}
           </div>
 
-          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-            {currentLang === 'fa'
-              ? 'تیمیشوارا در غرب رومانی و نزدیک مرزهای مجارستان و صربستان واقع شده و به دلیل معماری کلاسیک اروپایی و فضای شهری آرام، اغلب «اروپایی‌ترین» شهر رومانی توصیف می‌شود. هزینه زندگی در تیمیشوارا معمولاً پایین‌تر از بخارست و کلوژ-نپوکا است.'
-              : 'Timișoara, located in western Romania near the Hungarian and Serbian borders, is often described as the "most European-feeling" Romanian city thanks to its classical European architecture and relaxed urban atmosphere. Its cost of living is typically lower than Bucharest and Cluj-Napoca.'}
+          <div className="relative rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Timisoara%20-%20Piata%20Unirii.jpg?width=1200"
+              alt={currentLang === 'fa' ? 'میدان اتحاد در تیمیشوارا' : 'Piața Unirii (Union Square), Timișoara'}
+              className="w-full h-64 sm:h-80 object-cover"
+              onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+              <p className="text-white text-xs">
+                {currentLang === 'fa'
+                  ? 'میدان اتحاد (Piața Unirii) در تیمیشوارا — عکس: ویکی‌مدیا کامنز'
+                  : 'Piața Unirii (Union Square), Timișoara — Photo: Wikimedia Commons'}
+              </p>
+            </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+            <p>
+              {currentLang === 'fa'
+                ? 'تیمیشوارا در غرب رومانی و نزدیک مرزهای مجارستان و صربستان واقع شده و به دلیل معماری کلاسیک اروپایی و فضای شهری آرام، اغلب «اروپایی‌ترین» شهر رومانی توصیف می‌شود. هزینه زندگی در تیمیشوارا معمولاً پایین‌تر از بخارست و کلوژ-نپوکا است.'
+                : 'Timișoara, located in western Romania near the Hungarian and Serbian borders, is often described as the "most European-feeling" Romanian city thanks to its classical European architecture and relaxed urban atmosphere. Its cost of living is typically lower than Bucharest and Cluj-Napoca.'}
+            </p>
+            <p>
+              {currentLang === 'fa'
+                ? 'در سال ۱۸۸۴، تیمیشوارا نخستین شهر اروپای قاره‌ای بود که روشنایی خیابانی برقی عمومی دریافت کرد — میراثی پیشگام که هنوز بخشی از هویت شهری آن است. این شهر همچنین در سال ۲۰۲۳ به‌عنوان پایتخت فرهنگی اروپا انتخاب شد و میراث فرهنگی ماندگاری از آن دوره به‌جا مانده است.'
+                : "In 1884, Timișoara became the first city in continental Europe to have public electric street lighting — a pioneering legacy that remains part of its civic identity. The city also served as European Capital of Culture in 2023, leaving a lasting cultural legacy behind."}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -530,10 +599,33 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی یاش (CTP Iași) — sctpiasi.ro', 'Iași Public Transport Company (CTP Iași) — sctpiasi.ro')}
           </div>
 
-          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-            {currentLang === 'fa'
-              ? 'یاش، پایتخت تاریخی و فرهنگی منطقه مولداوی، میزبان اولین و یکی از بزرگ‌ترین دانشگاه‌های رومانی است. نسبت به بخارست و کلوژ-نپوکا، منابع موجود به‌طور مستمر یاش را در ردیف شهرهای مقرون‌به‌صرفه‌تر برای هزینه زندگی قرار می‌دهند، هرچند رتبه‌بندی دقیق و رسمی «ارزان‌ترین شهر» یافت نشد.'
-              : "Iași, the historic and cultural capital of the Moldavia region, is home to Romania's first and one of its largest universities. Compared to Bucharest and Cluj-Napoca, available sources consistently place Iași among the more affordable cities for cost of living, though no single authoritative \"cheapest city\" ranking was found."}
+          <div className="relative rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Palace%20of%20Culture%2C%20Iasi.JPG?width=1200"
+              alt={currentLang === 'fa' ? 'کاخ فرهنگ یاش' : 'The Palace of Culture, Iași'}
+              className="w-full h-64 sm:h-80 object-cover"
+              onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+              <p className="text-white text-xs">
+                {currentLang === 'fa'
+                  ? 'کاخ فرهنگ یاش (Palatul Culturii) — عکس: ویکی‌مدیا کامنز'
+                  : 'The Palace of Culture (Palatul Culturii), Iași — Photo: Wikimedia Commons'}
+              </p>
+            </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+            <p>
+              {currentLang === 'fa'
+                ? 'یاش، پایتخت تاریخی و فرهنگی منطقه مولداوی، میزبان اولین و یکی از بزرگ‌ترین دانشگاه‌های رومانی است. نسبت به بخارست و کلوژ-نپوکا، منابع موجود به‌طور مستمر یاش را در ردیف شهرهای مقرون‌به‌صرفه‌تر برای هزینه زندگی قرار می‌دهند، هرچند رتبه‌بندی دقیق و رسمی «ارزان‌ترین شهر» یافت نشد.'
+                : "Iași, the historic and cultural capital of the Moldavia region, is home to Romania's first and one of its largest universities. Compared to Bucharest and Cluj-Napoca, available sources consistently place Iași among the more affordable cities for cost of living, though no single authoritative \"cheapest city\" ranking was found."}
+            </p>
+            <p>
+              {currentLang === 'fa'
+                ? 'در آوریل ۲۰۲۳، مجتمع پالاس (Palas Campus) در یاش افتتاح شد که بزرگ‌ترین ساختمان اداری رومانی محسوب می‌شود و رشد سریع بخش خدمات و فناوری در این شهر را نشان می‌دهد — نشانه‌ای از اینکه یاش دیگر فقط یک شهر دانشگاهی سنتی نیست.'
+                : "In April 2023, the Palas Campus office complex opened in Iași — Romania's largest office building — reflecting the city's fast-growing services and tech sector, a sign that Iași is no longer just a traditional university town."}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -686,10 +778,33 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی براشوف (RATBV) — ratbv.ro', 'Brașov Public Transport Company (RATBV) — ratbv.ro')}
           </div>
 
-          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-            {currentLang === 'fa'
-              ? 'براشوف، محصور در کوهستان‌های سرسبز کارپات، توریستی‌ترین شهر رومانی و دروازه اصلی پیست اسکی پویانا براشوف است. توجه: بر اساس داده‌های موجود، اجاره مسکن در براشوف نسبت به جمعیت شهر بالاست که احتمالاً ناشی از تقاضای گردشگری است — پیش از تصمیم‌گیری حتماً قیمت‌های روز را از سایت‌های آگهی محلی استعلام کنید.'
-              : "Brașov, nestled in the green Carpathian Mountains, is Romania's most touristic city and the main gateway to the Poiana Brașov ski resort. Note: based on available data, housing rent in Brașov runs high relative to the city's population, likely driven by tourism demand — be sure to check current listing-site prices before making a decision."}
+          <div className="relative rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Brasov%2C%20Piata%20Sfatului.jpg?width=1200"
+              alt={currentLang === 'fa' ? 'میدان شورا در براشوف با پس‌زمینه کوه تامپا' : 'Piața Sfatului (Council Square), Brașov, with Mount Tâmpa behind it'}
+              className="w-full h-64 sm:h-80 object-cover"
+              onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+              <p className="text-white text-xs">
+                {currentLang === 'fa'
+                  ? 'میدان شورا (Piața Sfatului) در براشوف، با کوه تامپا در پس‌زمینه — عکس: ویکی‌مدیا کامنز'
+                  : 'Piața Sfatului (Council Square), Brașov, with Mount Tâmpa in the background — Photo: Wikimedia Commons'}
+              </p>
+            </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+            <p>
+              {currentLang === 'fa'
+                ? 'براشوف، محصور در کوهستان‌های سرسبز کارپات، توریستی‌ترین شهر رومانی و دروازه اصلی پیست اسکی پویانا براشوف است. توجه: بر اساس داده‌های موجود، اجاره مسکن در براشوف نسبت به جمعیت شهر بالاست که احتمالاً ناشی از تقاضای گردشگری است — پیش از تصمیم‌گیری حتماً قیمت‌های روز را از سایت‌های آگهی محلی استعلام کنید.'
+                : "Brașov, nestled in the green Carpathian Mountains, is Romania's most touristic city and the main gateway to the Poiana Brașov ski resort. Note: based on available data, housing rent in Brașov runs high relative to the city's population, likely driven by tourism demand — be sure to check current listing-site prices before making a decision."}
+            </p>
+            <p>
+              {currentLang === 'fa'
+                ? 'در دوران کمونیستی، براشوف با نام «اوراشول استالین» (شهر استالین) شناخته می‌شد و در آن دوره به‌عنوان یک مرکز صنعتی بزرگ توسعه یافت؛ این پیشینه صنعتی هنوز تا حد زیادی الگوی محله‌بندی امروزی شهر را شکل می‌دهد.'
+                : 'During the communist era, Brașov was known as "Orașul Stalin" (Stalin City) and was developed into a major industrial center — a history that still shapes much of the city\'s neighborhood layout today.'}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -842,10 +957,33 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی کونستانتسا (CT BUS) — ctbus.ro', 'Constanța Public Transport Company (CT BUS) — ctbus.ro')}
           </div>
 
-          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-            {currentLang === 'fa'
-              ? 'کونستانتسا، بزرگ‌ترین بندر دریای سیاه رومانی و مرکز اصلی صنایع دریانوردی و لجستیک کشور است. همسایگی با منطقه ساحلی ماماییا، آن را به یک شهر با اقتصاد فصلی گردشگری نیز تبدیل کرده که این ویژگی آن را از سایر شهرهای این راهنما متمایز می‌کند.'
-              : "Constanța, Romania's largest Black Sea port, is the country's main hub for maritime and logistics industries. Its proximity to the Mamaia coastal resort area also gives it a seasonal tourism economy, a character distinct from the other cities in this guide."}
+          <div className="relative rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Constanta%20Casino.JPG?width=1200"
+              alt={currentLang === 'fa' ? 'کازینوی تاریخی کونستانتسا در کنار دریای سیاه' : 'The historic Constanța Casino on the Black Sea waterfront'}
+              className="w-full h-64 sm:h-80 object-cover"
+              onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+              <p className="text-white text-xs">
+                {currentLang === 'fa'
+                  ? 'کازینوی تاریخی کونستانتسا (۱۹۱۰) در کنار دریای سیاه — عکس: ویکی‌مدیا کامنز'
+                  : 'The historic Constanța Casino (built 1910) on the Black Sea waterfront — Photo: Wikimedia Commons'}
+              </p>
+            </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+            <p>
+              {currentLang === 'fa'
+                ? 'کونستانتسا، بزرگ‌ترین بندر دریای سیاه رومانی و مرکز اصلی صنایع دریانوردی و لجستیک کشور است. همسایگی با منطقه ساحلی ماماییا، آن را به یک شهر با اقتصاد فصلی گردشگری نیز تبدیل کرده که این ویژگی آن را از سایر شهرهای این راهنما متمایز می‌کند.'
+                : "Constanța, Romania's largest Black Sea port, is the country's main hub for maritime and logistics industries. Its proximity to the Mamaia coastal resort area also gives it a seasonal tourism economy, a character distinct from the other cities in this guide."}
+            </p>
+            <p>
+              {currentLang === 'fa'
+                ? 'از سال ۲۰۲۲ به بعد، بندر کونستانتسا به یکی از مسیرهای اصلی جایگزین برای صادرات غلات اوکراین از طریق دریای سیاه تبدیل شده که اهمیت لجستیکی و اقتصادی این شهر را به‌طور چشمگیری افزایش داده است.'
+                : "Since 2022, the port of Constanța has become one of Ukraine's key alternative Black Sea grain-export routes, significantly boosting the city's logistical and economic importance."}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
