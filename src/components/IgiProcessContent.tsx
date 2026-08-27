@@ -58,6 +58,9 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
           <a href="#step-by-step" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۳. مراحل گام‌به‌گام' : '3. Step-by-Step'}
           </a>
+          <a href="#real-experience" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۳.۵. تجربه واقعی مراجعه‌کنندگان' : '3.5 Real Applicant Experience'}
+          </a>
           <a href="#required-docs" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۴. مدارک لازم' : '4. Required Documents'}
           </a>
@@ -94,6 +97,11 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
           {currentLang === 'fa'
             ? 'اداره کل مهاجرت رومانی (Inspectoratul General pentru Imigrări – IGI) زیرمجموعه وزارت کشور رومانی (MAI)، مرجع نهادهای اجرایی ثبت اقامت، صدور گواهی اتباع اتحادیه اروپا (Certificat de Înregistrare) و کارت اقامت (Cartea de Rezidență) برای اتباع خارجی و اعضای خانواده آن‌هاست. تمامی متقاضیان موظفند درخواست‌های اولیه یا تمدید خود را نزد اداره منطقه‌ای IGI محل سکونت خود ثبت نمایند.'
             : 'The General Inspectorate for Immigration (IGI), under the Romanian Ministry of Internal Affairs, is the sole authority managing foreign residency, EU registration certificates, and residence cards. All applicants must register their initial or renewal applications at their regional IGI office.'}
+        </p>
+        <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'برای یک تبعه ایرانی، IGI معمولاً اولین نهاد دولتی رومانی است که به‌صورت حضوری و مکرر با آن سروکار خواهید داشت — نه فقط یک‌بار برای گرفتن کارت، بلکه هر بار که کارت اقامت منقضی می‌شود (معمولاً سالانه در سال‌های اول). به همین دلیل، درک اینکه این اداره واقعاً چطور کار می‌کند (نه فقط چه چیزی روی کاغذ نوشته شده) اهمیت زیادی دارد. حجم پرونده‌های IGI در چند سال اخیر به‌شدت افزایش یافته — تعداد کارگران خارجی دارای مجوز رسمی از حدود ۵٬۵۰۰ نفر در سال ۲۰۱۶ به نزدیک ۱۰۰٬۰۰۰ نفر در سال‌های ۲۰۲۲-۲۰۲۳ رسید — و همین رشد است که هم باعث شلوغی روزافزون دفاتر شده و هم دلیل اصلی سرمایه‌گذاری IGI روی دفتر جدید و بزرگ‌تر بخارست بوده است (به بخش ۳.۵ زیر مراجعه کنید).'
+            : 'For an Iranian applicant, IGI is usually the Romanian government body you deal with in person, repeatedly — not once for a single card, but every time your permit expires (typically annually in the first years). That is why understanding how this office actually functions — not just what the rulebook says — matters. Case volume at IGI has grown sharply: officially registered foreign workers rose from roughly 5,500 in 2016 to nearly 100,000 in 2022–2023 — a surge that both crowded existing offices and is the direct reason IGI invested in a larger new Bucharest office (see section 3.5 below).'}
         </p>
       </div>
 
@@ -201,6 +209,77 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
             </p>
           </div>
         </div>
+      </div>
+
+      {/* SECTION 3.5: REAL APPLICANT EXPERIENCE (BEYOND THE OFFICIAL RULEBOOK) */}
+      <div id="real-experience" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-6">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <span>🔎</span>
+          <span>{currentLang === 'fa' ? 'تجربه واقعی: چیزی که سایت‌های عمومی درباره IGI نمی‌گویند' : 'Real Experience: What Generic Sites Don\'t Tell You About IGI'}</span>
+        </h2>
+
+        <div className="relative rounded-2xl overflow-hidden border border-[#dfe6ef]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Carrefour%20Grand%20Arena%2C%20Berceni%2C%20Bucuresti%20(4657140692).jpg?width=1200"
+            alt={currentLang === 'fa' ? 'مجتمع Grand Arena Mall در بخارست، محل اداره مهاجرت (IGI) بخارست' : 'The Grand Arena Mall complex in Bucharest, home to the Bucharest Immigration Directorate (IGI)'}
+            loading="lazy"
+            className="w-full h-56 sm:h-72 object-cover bg-[#f0f4f9]"
+            onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+          />
+          <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent p-3 text-[10px] sm:text-xs text-white/90">
+            {currentLang === 'fa'
+              ? 'مجتمع Grand Arena Mall (بلوار Metalurgiei، بخش ۴) — دفتر IGI بخارست از سال ۲۰۲۳ در همین ساختمان مستقر است. عکس: Wikimedia Commons.'
+              : 'Grand Arena Mall complex (Bd. Metalurgiei, Sector 4) — the Bucharest IGI office has been housed here since 2023. Photo: Wikimedia Commons.'}
+          </div>
+        </div>
+
+        <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'تا نوامبر ۲۰۲۳، دفتر مهاجرت بخارست فقط ۱۰ باجه در یک ساختمان کانتینری کوچک در خیابان Nicolae Iorga داشت که به‌وضوح جوابگوی حجم متقاضیان نبود. IGI رسماً اعلام کرد که با رشد متقاضیان از حدود ۵٬۵۰۰ نفر در سال ۲۰۱۶ به نزدیک ۱۰۰٬۰۰۰ نفر، دفتر جدیدی با ۳۰ باجه در ۵۰۰ مترمربع، همراه با سیستم نوبت‌دهی خودکار متصل به پورتال آنلاین، در مجتمع Grand Arena Mall راه‌اندازی کرد. این یعنی تجربه مراجعه به دفتر بخارست امروز به‌طور محسوسی بهتر از قبل از ۲۰۲۳ است.'
+            : 'Until November 2023, the Bucharest immigration office had only 10 counters in a small container building on Nicolae Iorga Street — clearly insufficient for the volume of applicants. IGI officially cited growth from around 5,500 applicants in 2016 to nearly 100,000, and opened a new office with 30 counters across 500 m² inside the Grand Arena Mall complex, with an automated queue system tied to the online booking portal. In practice, this means the Bucharest office experience today is noticeably better than it was before 2023.'}
+        </p>
+
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs sm:text-sm text-amber-950 leading-relaxed space-y-1">
+          <p className="font-bold">{currentLang === 'fa' ? 'دفاتر شهرستان می‌توانند تجربه‌ی بسیار متفاوتی داشته باشند' : 'Regional offices can be a very different experience'}</p>
+          <p>
+            {currentLang === 'fa'
+              ? 'در پاییز ۲۰۲۲، رسانه Romania Insider گزارش داد دفتر مهاجرت کلوژ (در مجتمع Iulius Mall) تنها ۲ باجه فعال داشت و روزانه فقط ۱۳ تا ۱۵ متقاضی غیر اتحادیه اروپا را از میان صف ۴۰ تا ۵۰ نفره پذیرش می‌کرد؛ برخی متقاضیان برای رسیدن به نوبت مجبور شدند شب را با پتو در تراس مجتمع سپری کنند. این گزارش مربوط به سال ۲۰۲۲ است و ما گزارش تازه‌تری (۲۰۲۴-۲۰۲۶) که وضعیت فعلی کلوژ یا سایر شهرها مثل تیمیشوارا و یاش را تایید کند پیدا نکردیم — پس این را به‌عنوان هشدار برای «آماده بودن برای احتمال صف طولانی در دفاتر کوچک‌تر» در نظر بگیرید، نه وضعیت قطعی امروز. توصیه عملی: اگر در شهری غیر از بخارست هستید، حتماً نوبت آنلاین را ماه‌ها زودتر رزرو کنید و از دانشگاه یا کارفرمای خود درباره تجربه اخیر دیگران در همان دفتر بپرسید.'
+              : 'In autumn 2022, Romania Insider reported that the Cluj immigration office (inside Iulius Mall) had only 2 active counters and processed just 13–15 non-EU applicants per day against a queue of 40–50, with some applicants sleeping overnight on the mall terrace with blankets to secure a spot. That report is from 2022, and we could not find a more recent (2024–2026) update confirming Cluj\'s current state, or data for other cities like Timișoara or Iași — so treat this as a warning to "be prepared for a possibly long queue at smaller offices," not a confirmed picture of today. Practical tip: if you\'re outside Bucharest, book your online appointment months in advance and ask your university or employer about others\' recent experience at that specific office.'}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
+            <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'قرارداد اجاره غیررسمی، دلیل رایج توقف پرونده' : 'An unregistered rental contract is a common stopper'}</span>
+            <p className="text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'برخلاف تصور رایج، «قرارداد اجاره ساده» همیشه کافی نیست. طبق تجربه گزارش‌شده مهاجران، قرارداد اجاره باید نزد اداره مالیات محلی (ANAF) ثبت (înregistrat) شده باشد؛ توافق‌های غیررسمی یا ثبت‌نشده یکی از رایج‌ترین نقاط گیر پرونده‌هاست.'
+                : 'Contrary to common assumption, a simple rental agreement is not always enough. Based on reported migrant experience, the rental contract should be registered (înregistrat) with the local tax authority (ANAF); informal or unregistered arrangements are a commonly reported sticking point.'}
+            </p>
+          </div>
+          <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
+            <span className="font-extrabold text-[#2F6FED]">{currentLang === 'fa' ? 'نوع بیمه درمانی می‌تواند رد شود' : 'The type of health insurance can get rejected'}</span>
+            <p className="text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'برخی مهاجران گزارش کرده‌اند که بیمه خصوصی به‌تنهایی برای این مرحله پذیرفته نشده و بیمه مرتبط با سیستم دولتی (CNAS) درخواست شده است. این یک قاعده رسمی سراسری تایید‌شده نیست، اما نشان می‌دهد که نباید فرض کرد هر بیمه خصوصی معتبری لزوماً کافی خواهد بود — پیش از مراجعه، نوع بیمه مورد نیاز را از همان دفتر IGI استعلام بگیرید.'
+                : 'Some migrants have reported that private insurance alone was not accepted at this step, and state-system (CNAS-linked) coverage was requested instead. This is not a confirmed nationwide official rule, but it shows you shouldn\'t assume any valid private policy will automatically be sufficient — confirm the accepted insurance type with your specific IGI office before your visit.'}
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-xs sm:text-sm text-red-950 leading-relaxed">
+          <p className="font-bold mb-1">{currentLang === 'fa' ? '⚠️ هشدار: پرداخت غیررسمی برای «سریع‌تر شدن» یک جرم است، نه یک راه‌حل' : '⚠️ Warning: paying to "speed things up" is a crime, not a workaround'}</p>
+          {currentLang === 'fa'
+            ? 'در اکتبر ۲۰۲۴، اداره مبارزه با فساد رومانی (DNA) دو مأمور مهاجرت — یکی در اداره مهاجرت بخارست و دیگری در اداره ایالمیتسا — را به اتهام دریافت رشوه (به‌طور میانگین حدود ۶۸۰ یورو در هر پرونده، در مجموع نزدیک به ۴۳٬۰۰۰ یورو طی ۶۳ پرونده) برای تسریع صدور مجوز کار متهم کرد. این یعنی «واسطه غیررسمی برای سریع‌تر شدن کار» نه‌تنها تضمینی نیست، بلکه هم برای گیرنده و هم دهنده رشوه پیامد قانونی جدی دارد. اگر به کمک نیاز دارید، از یک وکیل یا مشاور مهاجرت رسمی و دارای مجوز استفاده کنید، نه واسطه غیررسمی.'
+            : 'In October 2024, Romania\'s anti-corruption directorate (DNA) charged two immigration officers — one at the Bucharest Immigration Directorate, one at the Ialomița County office — with taking bribes (averaging roughly EUR 680 per case, about EUR 43,000 total across 63 cases) to expedite work-permit processing. In other words, an "informal facilitator to speed things up" is not a safe shortcut — it carries real legal consequences for both sides. If you need help, use a licensed immigration lawyer or consultant, not an informal intermediary.'}
+        </div>
+
+        <p className="text-xs sm:text-sm text-[#788697] leading-relaxed border-t border-[#dfe6ef] pt-4">
+          {currentLang === 'fa'
+            ? 'نکته مهم دیگر برای سال ۲۰۲۶: طبق یک فرمان فوری دولت که سامانه صدور مجوز کار و اقامت را در بستر جدید workinromania.gov.ro یکپارچه می‌کند، یک دوره گذار تا ۳۰ ژوئن ۲۰۲۶ در نظر گرفته شده که خود دولت رسماً هشدار داده طی آن «تاخیرهای عملیاتی احتمالی» در رسیدگی به پرونده‌ها ممکن است رخ دهد؛ این موضوع بیشتر مسیرهای مرتبط با کارفرما/مجوز کار را تحت تاثیر قرار می‌دهد. همچنین، اگر تمدید کارت شما با تاخیر مواجه شود، برخی متقاضیان گزارش کرده‌اند که در فاصله انقضای کارت قدیمی و صدور کارت جدید، حساب بانکی‌شان به‌طور موقت مسدود شده — پس تمدید هرچه زودتر (نه در آخرین روزها) واقعاً اهمیت عملی دارد، نه فقط توصیه‌ای احتیاطی.'
+            : 'One more thing worth knowing for 2026: an Emergency Government Ordinance is merging work-permit and residence-permit processing into the new workinromania.gov.ro platform, with a transition period through June 30, 2026 during which the government itself has flagged "possible operational delays" — this mainly affects employer/work-permit-linked pathways. Separately, if your renewal is delayed, some applicants have reported their bank account being temporarily frozen during the gap between an expired card and the new one — so renewing early (not in the final days) is a genuinely practical safeguard, not just a cautious suggestion.'}
+        </p>
       </div>
 
       {/* SECTION 4: REQUIRED DOCUMENTS CHECKLIST */}
@@ -410,8 +489,8 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
       <div id="related-content" className="space-y-6">
         <div className="p-4 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl text-center text-xs text-[#788697] font-semibold">
           {currentLang === 'fa'
-            ? 'آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶. منبع: آیین‌نامه اتباع خارجی رومانی (OUG 194/2002)، جدول تعرفه ۲۰۲۵ و قانون ۵۵۴/۲۰۰۴ — igi.mai.gov.ro.'
-            : 'Last Review: August 2026. Source: OUG 194/2002, the 2025 fee schedule, and Law 554/2004 — igi.mai.gov.ro.'}
+            ? 'آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶. منبع: آیین‌نامه اتباع خارجی رومانی (OUG 194/2002)، جدول تعرفه ۲۰۲۵، قانون ۵۵۴/۲۰۰۴ (igi.mai.gov.ro)، و گزارش‌های AGERPRES و Romania Insider درباره دفاتر IGI (نکته: برخی جزئیات تجربی این بخش مبتنی بر گزارش‌های خبری/مهاجران است، نه سند رسمی IGI؛ در متن مشخص شده است).'
+            : 'Last Review: August 2026. Source: OUG 194/2002, the 2025 fee schedule, Law 554/2004 (igi.mai.gov.ro), and AGERPRES / Romania Insider reporting on IGI offices (note: some experiential details in this section come from news/migrant reports, not an official IGI document — this is flagged in the text).'}
         </div>
 
         {/* RELATED CONTENT BOX */}
@@ -461,6 +540,14 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
           <div>
             <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر IGI به مهلت قانونی عمل نکند چه گزینه‌ای دارم؟' : 'What can I do if IGI misses its legal deadline?'}</h4>
             <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون ۵۵۴/۲۰۰۴، می‌توانید ظرف ۶ ماه از سکوت یا رد غیرموجه اداره، با کمک وکیل حقوق اداری علیه IGI در دادگاه اداری شکایت کنید.' : 'Under Law 554/2004, you can sue IGI in the administrative court within 6 months of its silence or unjustified refusal, with the help of an administrative-law attorney.'}</p>
+          </div>
+          <div>
+            <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا پرداخت به یک واسطه برای سریع‌تر شدن کار جواب می‌دهد؟' : 'Does paying an informal facilitator to speed things up work?'}</h4>
+            <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر و این کار غیرقانونی است. در اکتبر ۲۰۲۴ دو مأمور اداره مهاجرت به اتهام دریافت رشوه برای تسریع مجوز کار تحت تعقیب قانونی قرار گرفتند. برای کمک واقعی، از وکیل یا مشاور مهاجرت دارای مجوز رسمی استفاده کنید.' : 'No, and it is illegal. In October 2024, two immigration officers were prosecuted for taking bribes to expedite work permits. For real help, use a licensed immigration lawyer or consultant instead.'}</p>
+          </div>
+          <div>
+            <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چرا انتظار در دفتر بخارست با دفاتر شهرستان فرق دارد؟' : 'Why is the wait at the Bucharest office different from regional offices?'}</h4>
+            <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'دفتر بخارست از سال ۲۰۲۳ با ۳۰ باجه و نوبت‌دهی خودکار به مجتمع Grand Arena Mall منتقل شد، اما دفاتر کوچک‌تر (مثل کلوژ) ظرفیت محدودتری داشته‌اند. اگر خارج از بخارست هستید، نوبت آنلاین را زودتر رزرو کنید.' : 'Since 2023 the Bucharest office moved to the Grand Arena Mall complex with 30 counters and automated queuing, while smaller offices (like Cluj) have historically had far more limited capacity. If you\'re outside Bucharest, book your online appointment well in advance.'}</p>
           </div>
         </div>
       </div>
