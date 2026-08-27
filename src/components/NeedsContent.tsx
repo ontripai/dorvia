@@ -254,6 +254,28 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             </div>
           </div>
 
+          <div className="editorial-card p-6 sm:p-8 bg-white space-y-4 border border-amber-200 bg-amber-50/40">
+            <h3 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>⚠️</span>
+              <span>{currentLang === 'fa' ? 'چالش ویژه: انتقال پول از/به ایران زیر سایه تحریم‌ها' : 'The Iran-Specific Challenge: Moving Money Under Sanctions'}</span>
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'این بخشی است که در راهنماهای عمومی رومانی معمولاً دیده نمی‌شود، اما برای شهروندان ایرانی اهمیت عملی زیادی دارد. سیستم بانکی ایران از نوامبر ۲۰۱۸ از شبکه سوئیفت (SWIFT) قطع است، و در ۲۹ سپتامبر ۲۰۲۵ اتحادیه اروپا پس از فعال‌سازی مکانیزم «بازگشت تحریم‌ها» (Snapback) توسط شورای امنیت سازمان ملل، تحریم‌های مالی علیه نهادهای بانکی ایران را به‌طور کامل احیا کرد (مقررات EU 2025/1975). این تحریم‌ها عمدتاً بانک‌ها و نهادهای ایرانی را هدف می‌گیرند، نه لزوماً شهروندان عادی ایرانی مقیم اتحادیه اروپا؛ حواله‌های شخصی زیر حدود ۱۰,۰۰۰ یورو معمولاً از این محدودیت‌ها معاف هستند. با این حال، در عمل این وضعیت باعث شده سرویس‌های محبوب انتقال پول بین‌المللی مانند Western Union، Wise و Remitly قادر به پردازش مستقیم حواله به/از ایران نباشند (چون این شرکت‌ها تحت مقررات آمریکا فعالیت می‌کنند و مجوز صادراتی OFAC ندارند)؛ راهکار رایج، انتقال از طریق یک حساب یا صرافی در یک کشور ثالث (مانند ترکیه یا امارات) است.'
+                : 'This is a gap most general Romania guides miss, but it matters in practice for Iranian nationals. Iran\'s banking system has been disconnected from SWIFT since November 2018, and on September 29, 2025 the EU fully reimposed financial sanctions on Iranian banking institutions after the UN Security Council\'s "snapback" mechanism was triggered (EU Regulation 2025/1975). These measures mainly target Iranian banks and institutions, not individual Iranian nationals resident in the EU personally — personal remittances under roughly €10,000 are generally exempt. In practice, however, this means popular transfer services like Western Union, Wise, and Remitly cannot process direct transfers to/from Iran (they operate under US regulation and lack an OFAC export license); the common workaround is routing through an account or exchange bureau in a third country such as Turkey or the UAE.'}
+            </p>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'نکته دیگر: صرافی‌های ایرانی سبک «حواله» که در شهرهایی مانند لندن، فرانکفورت، هامبورگ، استکهلم و اسلو فعالیت می‌کنند و وجه را با تطبیق سفارش‌های خرید/فروش بین دو طرف (بدون عبور واقعی پول از مرز) جابه‌جا می‌کنند، تا زمان تهیه این راهنما هیچ نمونه شناخته‌شده و مستندی در رومانی برای‌مان پیدا نشد — اگر به چنین خدماتی نیاز دارید، نزدیک‌ترین مراکز شناخته‌شده این نوع صرافی آلمان، بریتانیا و کشورهای اسکاندیناوی هستند. درباره استفاده از رمزارز (مانند تتر/USDT) به‌عنوان جایگزین هم هشیار باشید: در آگوست ۲۰۲۶ وزارت خزانه‌داری آمریکا (OFAC) دو صرافی مرتبط با ایران (Shelbit و Aban Tether) را به‌دلیل تراکنش با صرافی‌های داخلی ایران (نوبیتکس، والکس، بیت‌پین، رمزینکس) تحریم کرد، و در ژوئیه ۲۰۲۶ شرکت Tether حدود ۱۳۱ میلیون دلار دارایی USDT مرتبط با بانک مرکزی ایران را مسدود کرد. نتیجه عملی: تتری که سابقه تراکنش آن به یک صرافی ایرانی برسد، حتی بدون اینکه شخص شما تحریم باشید، ممکن است هنگام تبدیل در صرافی مقصد مسدود یا رد شود — این راهنما به‌عمد هیچ صرافی خاصی را توصیه نمی‌کند چون این مقررات به‌سرعت در حال تغییرند.'
+                : 'Also worth knowing: Iranian "hawala-style" exchange bureaus operating in cities like London, Frankfurt, Hamburg, Stockholm, and Oslo move funds by matching buy/sell orders between two parties (without money physically crossing the border) — as of this writing we could not find a documented example of this kind of service in Romania itself; if you need it, the nearest known hubs are Germany, the UK, and the Nordic countries. Be cautious about crypto (e.g. USDT) as a workaround too: in August 2026, the US Treasury (OFAC) sanctioned two Iran-linked exchanges (Shelbit and Aban Tether) over transactions with Iranian domestic exchanges (Nobitex, Wallex, Bitpin, Ramzinex), and in July 2026 Tether froze roughly $131 million in USDT linked to Iran\'s central bank. The practical effect: USDT with a transaction history tracing to an Iranian exchange can be frozen or rejected at the receiving exchange even if you personally are not sanctioned — this guide deliberately does not recommend a specific platform, since the rules here are shifting quickly.'}
+            </p>
+            <div className="p-4 bg-white border border-amber-200 rounded-xl text-xs text-[#142033]">
+              {currentLang === 'fa'
+                ? '💶 یادآوری قانونی مهم: طبق مقررات اتحادیه اروپا، ورود یا خروج نقدینگی به ارزش ۱۰,۰۰۰ یورو یا بیشتر از مرزهای خارجی اتحادیه اروپا (از جمله فرودگاه‌های رومانی) باید اظهار شود. در رومانی عدم اظهار جریمه‌ای بین ۳,۰۰۰ تا ۵۰,۰۰۰ لئو (حداکثر ۶۰٪ مبلغ اظهارنشده) دارد؛ برخلاف قوانین قبلی، پول دیگر به‌طور خودکار ضبط نمی‌شود (تصمیم HG 1.184/2021). عضویت رومانی در شینگن برای مرزهای زمینی (از ۱ ژانویه ۲۰۲۵) این آستانه را تغییر نمی‌دهد چون قانون مربوط به مرز خارجی اتحادیه اروپاست، یعنی جایی که پول برای اولین بار وارد فضای شینگن می‌شود.'
+                : '💶 Important legal reminder: under EU rules, entering or leaving the EU\'s external border (including Romanian airports) with €10,000 or more in cash must be declared. In Romania, failing to declare carries a fine of 3,000–50,000 RON (capped at 60% of the undeclared amount); unlike older rules, cash is no longer automatically confiscated (Government Decision HG 1.184/2021). Romania joining Schengen at land borders (since January 1, 2025) does not change this threshold, since the rule applies at the EU\'s external border — wherever the cash first enters the Schengen area.'}
+            </div>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -266,6 +288,10 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم از Revolut یا Wise در رومانی استفاده کنم؟' : 'Can I use Revolut or Wise in Romania?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، این نئوبانک‌ها در رومانی بسیار محبوب هستند و نرخ تبدیل بسیار خوبی برای مصارف روزمره ارائه می‌دهند.' : 'Yes, these digital banks are extremely popular in Romania and offer excellent exchange rates for daily use.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا صرافی ایرانی (سبک حواله) در رومانی وجود دارد؟' : 'Is there an Iranian-style hawala exchange bureau in Romania?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'در تحقیق ما نمونه مستند و شناخته‌شده‌ای در رومانی پیدا نشد؛ نزدیک‌ترین مراکز شناخته‌شده این نوع خدمات در آلمان، بریتانیا و کشورهای اسکاندیناوی فعال‌اند.' : 'Our research did not find a documented, known example in Romania; the nearest known hubs for this kind of service are in Germany, the UK, and the Nordic countries.'}</p>
               </div>
             </div>
           </div>
@@ -395,6 +421,23 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             </div>
           </div>
 
+          <div className="editorial-card p-6 sm:p-8 bg-white space-y-4 border border-amber-200 bg-amber-50/40">
+            <h3 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🇮🇷</span>
+              <span>{currentLang === 'fa' ? 'ویژه ایرانیان: ترجمه فارسی-رومانیایی نایاب است' : 'Iran-Specific: Persian-Romanian Translation Is Rare'}</span>
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'برخلاف زبان‌های پرکاربردی مانند انگلیسی یا فرانسوی که ده‌ها مترجم مجاز دارند، فارسی یک زبان کاملاً کمیاب در فهرست مترجمین رسمی رومانی است. بررسی چند فهرست عمومی مترجمین (که فهرست رسمی و کامل وزارت دادگستری نیست) تنها یک تا دو نام برای کل کشور نشان داد — از جمله مترجمی در بخارست. به همین دلیل، برخلاف زبان‌های رایج که نرخ ثابت حدود ۱۵ تا ۳۵ لِی به‌ازای هر صفحه دارند، برای فارسی هیچ دفتر ترجمه‌ای نرخ ثابتی اعلام نمی‌کند — انتظار داشته باشید که استعلام قیمت اختصاصی بگیرید و معمولاً هزینه بالاتری نسبت به زبان‌های رایج پرداخت کنید. توصیه می‌شود در صورت امکان، زودتر (پیش از نیاز فوری) با یک مترجم تماس بگیرید، چون تعداد گزینه‌ها محدود است.'
+                : 'Unlike widely-used languages such as English or French, which have dozens of authorized translators, Persian is a genuinely scarce language pair in Romania\'s official translator registry. Checking several public translator directories (not the complete official Ministry of Justice list) turned up only one or two names for the entire country — including one based in Bucharest. As a result, unlike common languages that publish baseline rates around 15–35 RON per page, no bureau we found lists a fixed Persian rate — expect to request a custom quote, typically at a premium over common-language pricing. It\'s worth reaching out to a translator well before you actually need the documents, since the pool of options is small.'}
+            </p>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'نکته حقوقی مهم دیگر: ایران عضو کنوانسیون آپوستیل لاهه نیست. بنابراین مدارک ایرانی (شناسنامه، سند ازدواج، دیپلم و غیره) با آپوستیل ساده قابل قبول نیستند و باید مسیر «تصدیق کنسولی» را طی کنند. بر اساس الگوی استاندارد مستندشده برای مدارک خروجی از ایران، این مسیر معمولاً شامل ترجمه رسمی و تاییدیه دادگستری در ایران، سپس تاییدیه وزارت امور خارجه ایران، و در نهایت تصدیق سفارت رومانی در تهران است؛ پس از آن، مدرک در رومانی نیازمند ترجمه رسمی به زبان رومانیایی و تصدیق امضای مترجم نزد دفتر اسناد رسمی (Notar Public) خواهد بود. این زنجیره کلی برای مدارک ایرانی است، اما اکیداً توصیه می‌شود پیش از اقدام، جزئیات دقیق و فعلی را مستقیماً از سفارت رومانی در تهران استعلام بگیرید، چون این نوع رویه‌ها می‌توانند تغییر کنند.'
+                : 'Another important legal point: Iran is not a member of the Hague Apostille Convention. This means Iranian civil documents (birth certificates, marriage certificates, diplomas, etc.) cannot simply be apostilled — they require the "consular legalization" route instead. Based on the standard documented pattern for documents leaving Iran, this typically involves an official translation and Ministry of Justice (Dadgostari) attestation in Iran, then Iranian Ministry of Foreign Affairs attestation, and finally legalization by the Romanian Embassy in Tehran; the document then needs a certified Romanian translation and notarization of the translator\'s signature once in Romania. This is the general chain for Iranian documents, but we strongly recommend confirming the exact, current requirements directly with the Romanian Embassy in Tehran before you begin, since these procedures can change.'}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -407,6 +450,10 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چگونه یک مترجم مجاز زبان خودم را پیدا کنم؟' : 'Where can I find an authorized translator?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'شما می‌توانید در وب‌سایت وزارت دادگستری رومانی جستجو کنید یا به دفاتر اسناد رسمی (Notar Public) مراجعه نمایید که معمولاً با شبکه‌ای از مترجمین معتبر همکاری دارند.' : 'You can search the official registry on the Ministry of Justice website or visit local notary offices, which often have authorized translators on call.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چرا مترجم فارسی پیدا کردن این‌قدر سخت است؟' : 'Why is finding a Persian translator so hard?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'فارسی در مقایسه با زبان‌های اروپایی رایج، تقاضای بسیار کمتری در رومانی دارد؛ در نتیجه تعداد مترجمین مجاز دادگستری برای این زبان بسیار محدود است. جستجوی زودهنگام و تماس مستقیم با دفاتر اسناد رسمی توصیه می‌شود.' : 'Persian has far lower demand in Romania than common European languages, so the pool of Ministry-of-Justice-authorized translators for it is very small. Search early and consider contacting notary offices directly, as they often work with an authorized translator network.'}</p>
               </div>
             </div>
           </div>
@@ -453,6 +500,48 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             </ul>
           </div>
 
+          <div className="editorial-card p-6 bg-white space-y-4 border border-[#dfe6ef]">
+            <h3 className="font-extrabold text-base text-[#142033]">{currentLang === 'fa' ? 'حداقل تعرفه‌های رسمی نوتاری (۲۰۲۴)' : 'Official Minimum Notary Fees (2024)'}</h3>
+            <p className="text-xs text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'طبق آیین‌نامه تعرفه‌های حداقل خدمات نوتاری (Ordinul MJ 177/C/2024)، این ارقام کف قانونی هستند — دفاتر واقعی در بخارست و شهرهای بزرگ می‌توانند بیشتر از این دریافت کنند؛ پیش از مراجعه حتماً استعلام بگیرید.'
+                : 'Per the official minimum-fee regulation (Ordinul MJ 177/C/2024), these are legal floors — actual Bucharest and major-city offices may charge more; always confirm before your visit.'}
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-right rtl text-xs border-collapse">
+                <thead>
+                  <tr className="bg-[#071B3D] text-white">
+                    <th className="p-2.5 rounded-r-xl">{currentLang === 'fa' ? 'خدمت' : 'Service'}</th>
+                    <th className="p-2.5 rounded-l-xl">{currentLang === 'fa' ? 'حداقل هزینه' : 'Minimum Fee'}</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#dfe6ef]">
+                  <tr><td className="p-2.5 font-bold text-[#142033]">{currentLang === 'fa' ? 'تأیید صحت امضا (نسخه اول)' : 'Signature authentication (first copy)'}</td><td className="p-2.5">50 RON</td></tr>
+                  <tr><td className="p-2.5 font-bold text-[#142033]">{currentLang === 'fa' ? 'کپی برابر اصل (هر صفحه)' : 'Certified true copy (per page)'}</td><td className="p-2.5">3–5 RON</td></tr>
+                  <tr><td className="p-2.5 font-bold text-[#142033]">{currentLang === 'fa' ? 'وکالت‌نامه عمومی (نسخه اول)' : 'General power of attorney (first copy)'}</td><td className="p-2.5">30 RON</td></tr>
+                  <tr><td className="p-2.5 font-bold text-[#142033]">{currentLang === 'fa' ? 'وکالت‌نامه ملکی/ارثیه (نسخه اول)' : 'Real-estate / inheritance POA (first copy)'}</td><td className="p-2.5">70 RON</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="editorial-card p-6 sm:p-8 bg-white space-y-4 border border-amber-200 bg-amber-50/40">
+            <h3 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🇮🇷</span>
+              <span>{currentLang === 'fa' ? 'ویژه ایرانیان: وکالت‌نامه به ایران و اعتبار مدارک ایرانی' : 'Iran-Specific: Power of Attorney to Iran & Validating Iranian Documents'}</span>
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'اگر می‌خواهید از رومانی وکالت‌نامه‌ای برای انجام کاری در ایران (مثل فروش ملک) بدهید، یک دفتر اسناد رسمی رومانیایی به‌تنهایی کافی نیست — چون ایران عضو کنوانسیون آپوستیل لاهه نیست. دو مسیر شناخته‌شده وجود دارد: (۱) ثبت مستقیم درخواست وکالت‌نامه از طریق سامانه میخک سفارت ایران («mikhak.mfa.gov.ir») و حضور در سفارت/کنسولگری با پاسپورت معتبر ایرانی و مشخصات کامل وکیل در ایران (نام، کد ملی، نام پدر، تاریخ تولد، آدرس)؛ یا (۲) تنظیم سند نزد نوتاری رومانیایی، سپس تصدیق (Supralegalizare) در وزارت امور خارجه رومانی، و در نهایت تصدیق نهایی توسط سفارت ایران در بخارست. جزئیات دقیق هزینه و وقت ملاقات سفارت را مستقیماً از سفارت ایران در بخارست استعلام بگیرید.'
+                : 'If you need to issue a power of attorney from Romania for something in Iran (e.g. selling property there), a Romanian notary alone is not enough — because Iran is not a Hague Apostille Convention member. Two known routes exist: (1) apply directly through the Iranian Embassy\'s Mikhak system (mikhak.mfa.gov.ir) and attend in person with a valid Iranian passport and your representative\'s full details in Iran (name, national ID, father\'s name, date of birth, address); or (2) have the deed drawn up at a Romanian notary, then legalized ("supralegalizare") at Romania\'s Ministry of Foreign Affairs, and finally legalized by the Iranian Embassy in Bucharest. Confirm exact fees and appointment requirements directly with the Iranian Embassy in Bucharest.'}
+            </p>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'در جهت عکس هم همین منطق برقرار است: مدارک صادرشده در ایران (مثل وکالت‌نامه یا سند رسمی) برای اعتبار در رومانی نمی‌توانند صرفاً آپوستیل بگیرند و باید مسیر تصدیق کنسولی را طی کنند (تاییدیه دادگستری ایران → تاییدیه وزارت امور خارجه ایران → تصدیق سفارت رومانی در تهران)، پیش از آنکه یک نوتاری رومانیایی بتواند ترجمه رسمی آن را تصدیق کند. طبق ماده ۸۲ قانون ۳۶/۱۹۹۵ رومانی، اگر به زبان رومانیایی مسلط نباشید، نوتاری موظف است یا خودش به زبان شما مسلط باشد یا مترجم رسمی مجاز را در جلسه حاضر کند و ترجمه او را به پرونده ضمیمه نماید — این هزینه‌ای اضافه بر تعرفه‌های بالا خواهد بود.'
+                : 'The reverse direction follows the same logic: documents issued in Iran (like a power of attorney or official deed) cannot simply be apostilled to be valid in Romania — they must go through consular legalization (Iranian Ministry of Justice attestation → Iranian Ministry of Foreign Affairs attestation → legalization by the Romanian Embassy in Tehran) before a Romanian notary can certify a translation of it. Under Article 82 of Romanian Law 36/1995, if you are not fluent in Romanian, the notary must either be personally fluent in your language or bring in an authorized interpreter and attach their translation to the file — this is an added cost on top of the fee table above.'}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -464,7 +553,11 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               </div>
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر من به زبان رومانیایی مسلط نباشم چه اتفاقی می‌افتد؟' : 'What if I don\'t speak Romanian?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون، حضور یک مترجم شفاهی مجاز (Translator Autorizat) در زمان امضای اسناد برای تفهیم کامل مفاد قرارداد به زبان مادری شما یا انگلیسی الزامی است.' : 'If you do not speak Romanian, the law requires an authorized interpreter to be present at the notary office to translate the document verbally before you sign.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون (ماده ۸۲ قانون ۳۶/۱۹۹۵)، حضور یک مترجم شفاهی مجاز (Traducator Autorizat) در زمان امضای اسناد برای تفهیم کامل مفاد قرارداد به زبان مادری شما یا انگلیسی الزامی است.' : 'By law (Article 82, Law 36/1995), an authorized interpreter (Traducator Autorizat) must be present when you sign documents, to fully explain the contract terms in your native language or English.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'می‌خواهم به کسی در ایران وکالت بدهم؛ آیا یک نوتاری رومانیایی کافی است؟' : 'I need to give someone in Iran power of attorney — is a Romanian notary enough?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'به‌تنهایی نه. چون ایران عضو کنوانسیون آپوستیل نیست، یا باید مستقیماً از طریق سامانه میخک سفارت ایران اقدام کنید، یا سند نوتاری رومانیایی را از مسیر وزارت امور خارجه رومانی و سپس سفارت ایران در بخارست تصدیق کنید.' : 'Not by itself. Since Iran is not an Apostille Convention member, either apply directly through the Iranian Embassy\'s Mikhak system, or have the Romanian notarial deed legalized via Romania\'s Ministry of Foreign Affairs and then the Iranian Embassy in Bucharest.'}</p>
               </div>
             </div>
           </div>

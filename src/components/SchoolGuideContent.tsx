@@ -276,6 +276,29 @@ export const SchoolGuideContent: React.FC<SchoolGuideContentProps> = ({ currentL
         </p>
       </div>
 
+      {/* SECTION 6.5: IRAN-SPECIFIC CONTEXT */}
+      <div id="iran-specific-context" className="bg-white p-6 sm:p-8 rounded-2xl border border-amber-200 bg-amber-50/40 shadow-sm space-y-4">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <span>🇮🇷</span>
+          <span>{currentLang === 'fa' ? 'ویژه خانواده‌های ایرانی' : 'Iran-Specific Context'}</span>
+        </h2>
+        <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'یک خبر خوب برای خانواده‌هایی که در میانه سال تحصیلی وارد رومانی می‌شوند: طبق مقررات وزارت آموزش رومانی (edu.ro)، ثبت‌نام دانش‌آموزان غیر اتحادیه اروپا محدود به آغاز سال تحصیلی (شهریور/سپتامبر) نیست و می‌تواند در طول سال، از طریق بازرسی آموزشی (ISJ/ISMB) و اداره کل روابط بین‌الملل وزارت آموزش (DGRIAE)، بر اساس مدارک تحصیلی موجود انجام شود. این یعنی لازم نیست منتظر سال تحصیلی بعد بمانید — از همان روزهای اول ورود می‌توانید روند ثبت‌نام را آغاز کنید.'
+            : 'Good news for families arriving mid-school-year: under Romanian Ministry of Education (edu.ro) rules, enrollment for non-EU students is not restricted to the September start of the school year — it can happen during the year, through the School Inspectorate (ISJ/ISMB) and the Ministry\'s international relations directorate (DGRIAE), based on the student\'s existing academic records. You do not need to wait for the next school year to start — you can begin the enrollment process as soon as you arrive.'}
+        </p>
+        <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'نکته دیگر: چون ایران عضو کنوانسیون آپوستیل لاهه نیست، کارنامه‌ها و مدارک تحصیلی صادرشده در ایران معمولاً نمی‌توانند صرفاً با آپوستیل تایید شوند و باید مسیر تصدیق کنسولی را طی کنند — معمولاً از طریق تاییدیه وزارت آموزش ایران، سپس وزارت امور خارجه ایران، و در نهایت تصدیق سفارت رومانی در تهران، پیش از آنکه ترجمه رسمی رومانیایی و تصدیق نوتاری در رومانی انجام شود. توصیه می‌شود این زنجیره را پیش از سفر، مستقیماً با سفارت رومانی در تهران هماهنگ کنید. از نظر ساختاری هم بدانید که نظام آموزشی فعلی ایران (از حدود سال ۱۳۹۲) بر پایه ۶ سال دبستان + ۳ سال متوسطه اول + ۳ سال متوسطه دوم است، هفته تحصیلی از شنبه تا پنج‌شنبه (نه دوشنبه تا جمعه مثل رومانی) است، و نمرات روی مقیاس ۰ تا ۲۰ محاسبه می‌شوند — بازرسی آموزشی رومانی این تفاوت‌ها را در ارزیابی معادلسازی در نظر می‌گیرد.'
+            : 'Another point: since Iran is not a Hague Apostille Convention member, transcripts and academic records issued in Iran generally cannot simply be apostilled — they need the consular legalization route, typically Iranian Ministry of Education attestation, then Iranian Ministry of Foreign Affairs attestation, and finally legalization by the Romanian Embassy in Tehran, before a certified Romanian translation and notarization can happen in Romania. We recommend coordinating this chain directly with the Romanian Embassy in Tehran before you travel. Structurally, it also helps to know that Iran\'s current school system (since roughly 2013) is 6 years primary + 3 years lower secondary + 3 years upper secondary, the school week runs Saturday–Thursday (not Monday–Friday like Romania), and grades are calculated on a 0–20 scale — Romanian school inspectorates account for these differences during the equivalency evaluation.'}
+        </p>
+        <div className="p-4 bg-white border border-amber-200 rounded-xl text-xs text-[#142033]">
+          {currentLang === 'fa'
+            ? 'در تحقیق ما هیچ مدرسه یا کلاس تکمیلی زبان فارسی رسمی و فعال در رومانی (برای حفظ سواد فارسی فرزندان) پیدا نشد. اگر این موضوع برای شما اهمیت دارد، می‌توانید با بخش فرهنگی سفارت ایران در بخارست تماس بگیرید یا از برنامه‌های آنلاین آموزش زبان فارسی که برای ایرانیان خارج از کشور طراحی شده‌اند استفاده کنید.'
+            : 'Our research did not find an active, organized Persian-language supplementary school in Romania (for maintaining children\'s Persian literacy). If this matters to you, consider contacting the Iranian Embassy\'s cultural section in Bucharest, or using online Persian-language programs designed for Iranian diaspora children.'}
+        </div>
+      </div>
+
       {/* SECTION 7: COMMON TROUBLESHOOTING */}
       <div id="common-issues" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
         <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
