@@ -300,6 +300,30 @@ export const BankingGuideContent: React.FC<BankingGuideContentProps> = ({ curren
         </div>
       </div>
 
+      {/* SECTION 6.5: IRAN-SPECIFIC SANCTIONS CONTEXT */}
+      <div id="iran-sanctions-context" className="bg-white p-6 sm:p-8 rounded-2xl border border-amber-200 bg-amber-50/40 shadow-sm space-y-4">
+        <div className="flex items-center space-x-3 rtl:space-x-reverse text-amber-700">
+          <AlertCircle size={24} />
+          <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033]">
+            {currentLang === 'fa' ? 'ویژه ایرانیان: چرا افتتاح حساب گاهی سخت‌تر به‌نظر می‌رسد' : 'Iran-Specific: Why Account Opening Can Feel Harder'}
+          </h2>
+        </div>
+        <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'این نکته‌ای است که در راهنماهای عمومی بانکی رومانی معمولاً دیده نمی‌شود. در سپتامبر ۲۰۲۵، پس از فعال‌سازی مکانیزم «بازگشت تحریم‌ها» (Snapback) توسط شورای امنیت سازمان ملل، اتحادیه اروپا تحریم‌های مالی علیه بانک‌ها و نهادهای ایرانی را به‌طور کامل احیا کرد. این تحریم‌ها عمدتاً نهادهای بانکی ایران را هدف می‌گیرند، نه لزوماً شهروندان عادی ایرانی که به‌طور قانونی در رومانی اقامت دارند — اما به‌دلیل همین فضای مقرراتی حساس، بانک‌های تجاری معمولاً محتاط‌تر عمل می‌کنند و ممکن است مدارک تکمیلی (اثبات منبع درآمد، توضیح تراکنش‌ها) از متقاضیان ایرانی درخواست کنند. یک نمونه مستند: در سال ۲۰۲۱، First Bank رومانی به‌دلیل ۷۰ تراکنش مرتبط با ایران و سوریه بیش از ۸۵۰,۰۰۰ دلار به وزارت خزانه‌داری آمریکا (OFAC) جریمه پرداخت کرد — همین موضوع توضیح می‌دهد چرا بانک‌های رومانیایی نسبت به تراکنش‌های مرتبط با ایران محتاط‌اند.'
+            : 'This is a point most general Romanian banking guides skip. In September 2025, after the UN Security Council\'s "snapback" mechanism was triggered, the EU fully reimposed financial sanctions on Iranian banks and institutions. These measures mainly target Iranian financial institutions, not individual Iranian nationals legally resident in Romania — but because of this sensitive regulatory climate, commercial banks tend to act more cautiously and may ask Iranian applicants for extra documentation (proof of income source, explanation of transaction history). One documented example: in 2021, First Bank Romania paid over $850,000 to the US Treasury (OFAC) over 70 Iran- and Syria-related transactions — which helps explain why Romanian banks are cautious around anything Iran-linked.'}
+        </p>
+        <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'ما هیچ سند یا گزارش رسمی پیدا نکردیم که نشان دهد یک بانک خاص رومانیایی به‌طور رسمی از افتتاح حساب برای دارندگان پاسپورت ایرانی خودداری می‌کند؛ اما در کشورهای دیگر اتحادیه اروپا (مثلاً ایتالیا و آلمان) گزارش‌های مستند از بستن یا رد حساب اتباع ایرانی توسط برخی بانک‌ها به‌دلیل ملیت وجود دارد. توصیه عملی: مدارک اثبات منبع درآمد و اقامت قانونی خود را کامل و آماده داشته باشید، و اگر یک شعبه درخواست شما را رد کرد، شعبه یا بانک دیگری را امتحان کنید — رویه‌های داخلی می‌توانند بین بانک‌ها و حتی بین شعب یک بانک متفاوت باشند. برای انتقال پول بین‌المللی هم توجه داشته باشید که سرویس‌هایی مانند Western Union، Wise و Remitly قادر به پردازش مستقیم حواله به/از ایران نیستند (چون تحت مقررات آمریکا و بدون مجوز OFAC فعالیت می‌کنند)؛ برای جزئیات بیشتر به راهنمای '
+            : 'We found no official record of any specific Romanian bank formally refusing to open accounts for Iranian passport holders; however, other EU countries (e.g. Italy and Germany) have documented reports of banks closing or rejecting accounts for Iranian nationals specifically due to nationality. Practical advice: have your proof-of-income and legal-residence documents complete and ready, and if one branch declines your application, try another branch or bank — internal policies can differ between banks and even between branches of the same bank. For international transfers, note that services like Western Union, Wise, and Remitly cannot process direct transfers to/from Iran (they operate under US regulation without an OFAC license); see the '}
+            <Link href="/needs/currency-exchange" className="text-[#2F6FED] font-bold hover:underline">
+              {currentLang === 'fa' ? 'راهنمای صرافی و پرداخت‌ها' : 'Currency Exchange & Payments guide'}
+            </Link>
+          {currentLang === 'fa' ? ' مراجعه کنید.' : ' for more.'}
+        </p>
+      </div>
+
       {/* SECTION 7: COMMON TROUBLESHOOTING */}
       <div id="common-issues" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
         <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
