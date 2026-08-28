@@ -54,7 +54,7 @@ export const universitiesData: University[] = [
     ctaLabelEn: 'View Admission Requirements',
     ctaHref: '/study',
     ctaType: 'internal',
-    photoUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/8%20Bulevardul%20Eroii%20Sanitari%2C%20Bucharest%20(01).jpg?width=800',
+    photoUrl: '/images/universities/carol-davila.jpg',
     photoCaptionFa: 'بنای تاریخی دانشکده پزشکی کارول داویلا (۱۹۰۳) — عکس: ویکی‌مدیا کامنز',
     photoCaptionEn: 'The historic Faculty of Medicine building, Carol Davila University (built 1903) — Photo: Wikimedia Commons'
   },
@@ -160,7 +160,7 @@ export const universitiesData: University[] = [
     ctaLabelEn: 'Official University Website',
     ctaHref: 'https://www.umfiasi.ro/',
     ctaType: 'external',
-    photoUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/UMF%20Ia%C8%99i.jpg?width=800',
+    photoUrl: '/images/universities/umf-iasi.jpg',
     photoCaptionFa: 'ساختمان دانشگاه علوم پزشکی گریگوره ت. پوپا یاش — عکس: ویکی‌مدیا کامنز',
     photoCaptionEn: 'A building of Grigore T. Popa University of Medicine and Pharmacy, Iași — Photo: Wikimedia Commons'
   },
@@ -261,7 +261,7 @@ export const universitiesData: University[] = [
     ctaLabelEn: 'Study in Romania Info',
     ctaHref: '/study',
     ctaType: 'internal',
-    photoUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Universitatea%20Bucuresti%2C%20Piata%20Universitatii%20(1).JPG?width=800',
+    photoUrl: '/images/universities/bucharest.jpg',
     photoCaptionFa: 'بنای اصلی دانشگاه بخارست در میدان دانشگاه — عکس: ویکی‌مدیا کامنز',
     photoCaptionEn: 'The main University of Bucharest building on University Square — Photo: Wikimedia Commons'
   },
@@ -311,7 +311,7 @@ export const universitiesData: University[] = [
     ctaLabelEn: 'Study Pathway',
     ctaHref: '/study',
     ctaType: 'internal',
-    photoUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Politehnica%20University%20of%20Bucharest.jpg?width=800',
+    photoUrl: '/images/universities/politehnica.jpg',
     photoCaptionFa: 'دانشگاه ملی علوم و فناوری پلی‌تکنیک بخارست — عکس: ویکی‌مدیا کامنز',
     photoCaptionEn: 'National University of Science and Technology POLITEHNICA Bucharest — Photo: Wikimedia Commons'
   },
@@ -369,7 +369,7 @@ export const universitiesData: University[] = [
     ctaLabelEn: 'Study Requirements',
     ctaHref: '/study',
     ctaType: 'internal',
-    photoUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cladirea%20ASE%20Bucuresti.jpg?width=800',
+    photoUrl: '/images/universities/ase.jpg',
     photoCaptionFa: 'بنای تاریخی دانشگاه مطالعات اقتصادی بخارست (ASE) در میدان رومانا — عکس: ویکی‌مدیا کامنز',
     photoCaptionEn: 'The historic ASE building on Piața Romană, Bucharest — Photo: Wikimedia Commons'
   },

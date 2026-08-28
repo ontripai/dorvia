@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Language } from '../types';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
@@ -12,6 +12,10 @@ interface CityDetailContentProps {
 }
 
 export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, currentLang, onNavigate }) => {
+  // Real photos are self-hosted under /public/images/cities (see scripts/fetch-wikimedia-photos.js).
+  // If a photo file is ever missing, this hides the photo block gracefully instead of showing a broken-image icon.
+  const [photoFailed, setPhotoFailed] = useState(false);
+
   const disclaimer = currentLang === 'fa'
     ? 'ارقام اجاره و هزینه زندگی به‌طور مداوم تغییر می‌کنند و بر اساس داده‌های خودگزارشی (نه آمار رسمی دولتی) تخمین زده شده‌اند؛ پیش از هر تصمیم، قیمت‌های روز را از سایت‌های آگهی املاک محلی یا دانشگاه مقصد استعلام کنید.'
     : 'Rent and cost-of-living figures change constantly and are estimated from self-reported (not official government) data; before making any decision, check current prices via local property-listing sites or your destination university.';
@@ -57,12 +61,13 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('اداره مترو بخارست (Metrorex) — metroulbucuresti.org', 'Bucharest Metro Authority (Metrorex) — metroulbucuresti.org')}
           </div>
 
+          {!photoFailed && (
           <div className="relative rounded-2xl overflow-hidden shadow-lg">
             <img
-              src="https://commons.wikimedia.org/wiki/Special:FilePath/Romanian%20Athenaeum%20-%20Ateneul%20Rom%C3%A2n.JPG?width=1200"
+              src="/images/cities/bucharest.jpg"
               alt={currentLang === 'fa' ? 'تالار آتنیوم رومانی در بخارست' : 'The Romanian Athenaeum in Bucharest'}
               className="w-full h-64 sm:h-80 object-cover"
-              onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+              onError={() => setPhotoFailed(true)}
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
               <p className="text-white text-xs">
@@ -72,6 +77,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
               </p>
             </div>
           </div>
+          )}
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <p>
@@ -239,12 +245,13 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی کلوژ (CTP Cluj) — ctpcj.ro', 'Cluj Public Transport Company (CTP Cluj) — ctpcj.ro')}
           </div>
 
+          {!photoFailed && (
           <div className="relative rounded-2xl overflow-hidden shadow-lg">
             <img
-              src="https://commons.wikimedia.org/wiki/Special:FilePath/Saint%20Michael%20Church%20in%20Cluj-Napoca.jpg?width=1200"
+              src="/images/cities/cluj-napoca.jpg"
               alt={currentLang === 'fa' ? 'کلیسای سنت میکائیل در میدان اتحاد کلوژ-نپوکا' : "St. Michael's Church on Union Square, Cluj-Napoca"}
               className="w-full h-64 sm:h-80 object-cover"
-              onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+              onError={() => setPhotoFailed(true)}
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
               <p className="text-white text-xs">
@@ -254,6 +261,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
               </p>
             </div>
           </div>
+          )}
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <p>
@@ -418,12 +426,13 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی تیمیشوارا (STPT) — stpt.ro', 'Timișoara Public Transport Company (STPT) — stpt.ro')}
           </div>
 
+          {!photoFailed && (
           <div className="relative rounded-2xl overflow-hidden shadow-lg">
             <img
-              src="https://commons.wikimedia.org/wiki/Special:FilePath/Timisoara%20-%20Piata%20Unirii.jpg?width=1200"
+              src="/images/cities/timisoara.jpg"
               alt={currentLang === 'fa' ? 'میدان اتحاد در تیمیشوارا' : 'Piața Unirii (Union Square), Timișoara'}
               className="w-full h-64 sm:h-80 object-cover"
-              onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+              onError={() => setPhotoFailed(true)}
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
               <p className="text-white text-xs">
@@ -433,6 +442,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
               </p>
             </div>
           </div>
+          )}
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <p>
@@ -599,12 +609,13 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی یاش (CTP Iași) — sctpiasi.ro', 'Iași Public Transport Company (CTP Iași) — sctpiasi.ro')}
           </div>
 
+          {!photoFailed && (
           <div className="relative rounded-2xl overflow-hidden shadow-lg">
             <img
-              src="https://commons.wikimedia.org/wiki/Special:FilePath/Palace%20of%20Culture%2C%20Iasi.JPG?width=1200"
+              src="/images/cities/iasi.jpg"
               alt={currentLang === 'fa' ? 'کاخ فرهنگ یاش' : 'The Palace of Culture, Iași'}
               className="w-full h-64 sm:h-80 object-cover"
-              onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+              onError={() => setPhotoFailed(true)}
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
               <p className="text-white text-xs">
@@ -614,6 +625,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
               </p>
             </div>
           </div>
+          )}
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <p>
@@ -778,12 +790,13 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی براشوف (RATBV) — ratbv.ro', 'Brașov Public Transport Company (RATBV) — ratbv.ro')}
           </div>
 
+          {!photoFailed && (
           <div className="relative rounded-2xl overflow-hidden shadow-lg">
             <img
-              src="https://commons.wikimedia.org/wiki/Special:FilePath/Brasov%2C%20Piata%20Sfatului.jpg?width=1200"
+              src="/images/cities/brasov.jpg"
               alt={currentLang === 'fa' ? 'میدان شورا در براشوف با پس‌زمینه کوه تامپا' : 'Piața Sfatului (Council Square), Brașov, with Mount Tâmpa behind it'}
               className="w-full h-64 sm:h-80 object-cover"
-              onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+              onError={() => setPhotoFailed(true)}
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
               <p className="text-white text-xs">
@@ -793,6 +806,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
               </p>
             </div>
           </div>
+          )}
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <p>
@@ -957,12 +971,13 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی کونستانتسا (CT BUS) — ctbus.ro', 'Constanța Public Transport Company (CT BUS) — ctbus.ro')}
           </div>
 
+          {!photoFailed && (
           <div className="relative rounded-2xl overflow-hidden shadow-lg">
             <img
-              src="https://commons.wikimedia.org/wiki/Special:FilePath/Constanta%20Casino.JPG?width=1200"
+              src="/images/cities/constanta.jpg"
               alt={currentLang === 'fa' ? 'کازینوی تاریخی کونستانتسا در کنار دریای سیاه' : 'The historic Constanța Casino on the Black Sea waterfront'}
               className="w-full h-64 sm:h-80 object-cover"
-              onError={(e) => { (e.currentTarget.closest('.relative') as HTMLElement).style.display = 'none'; }}
+              onError={() => setPhotoFailed(true)}
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
               <p className="text-white text-xs">
@@ -972,6 +987,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
               </p>
             </div>
           </div>
+          )}
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <p>
