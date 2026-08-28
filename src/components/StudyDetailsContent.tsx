@@ -208,6 +208,36 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             </p>
           </div>
 
+          {/* GENERAL D VISA DOCUMENT CHECKLIST */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+            <h3 className="text-lg sm:text-xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>📋</span>
+              <span>{currentLang === 'fa' ? 'چک‌لیست عمومی مدارک ویزای D (وزارت امور خارجه رومانی)' : 'General D Visa Document Checklist (Romanian MFA)'}</span>
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'مهم: این فهرست، چک‌لیست عمومی و کشوری وزارت امور خارجه رومانی (mae.ro) برای ویزای تحصیلی D است، نه لیستی که مستقیماً از خودِ سفارت رومانی در تهران تایید شده باشد (دسترسی مستقیم و تایید‌شده به صفحهٔ teheran.mae.ro در این تحقیق ممکن نشد). سفارت‌خانه‌ها گاهی مدارک اضافی یا مراحل خاص کشور (مثلاً مصاحبه اضافه، قوانین ترجمه/تصدیق ویژه) دارند — پیش از اقدام حتماً با خودِ سفارت رومانی در تهران یا سایت teheran.mae.ro تماس بگیرید.'
+                : "Important: this is Romania's general, nationwide MFA (mae.ro) checklist for the D student visa, not a list directly confirmed against the Romanian Embassy in Tehran's own page (direct, verified access to teheran.mae.ro was not achieved in this research). Embassies sometimes add country-specific documents or steps (an extra interview, specific translation/legalization rules) — always confirm directly with the Romanian Embassy in Tehran or teheran.mae.ro before applying."}
+            </p>
+            <ol className="space-y-2 text-sm text-[#526174] list-decimal list-inside">
+              <li>{currentLang === 'fa' ? 'فرم درخواست ویزا (کاغذی از mae.ro یا از طریق پرتال آنلاین evisa.mae.ro).' : 'Visa application form (paper form from mae.ro, or via the online eVisa portal at evisa.mae.ro).'}</li>
+              <li>{currentLang === 'fa' ? 'پاسپورت معتبر با حداقل ۲ صفحه خالی، صادرشده در ۱۰ سال اخیر، و اعتبار حداقل ۳ ماه بیشتر از اعتبار ویزا.' : 'Valid passport with at least 2 blank pages, issued within the last 10 years, valid at least 3 months beyond the visa\'s validity.'}</li>
+              <li>{currentLang === 'fa' ? 'دو قطعه عکس رنگی ۳×۴ سانتی‌متر اخیر.' : 'Two recent color photographs, 3×4 cm.'}</li>
+              <li>{currentLang === 'fa' ? 'نامه/گواهی پذیرش تحصیلی، صادرشده توسط دانشگاه یا وزارت آموزش رومانی.' : 'Letter/proof of acceptance for studies, issued by the university or Romania\'s Ministry of Education.'}</li>
+              <li>{currentLang === 'fa' ? 'مدرک پرداخت شهریه حداقل یک سال تحصیلی.' : 'Proof of tuition payment for at least one academic year.'}</li>
+              <li>{currentLang === 'fa' ? 'اثبات تمکن مالی (به بخش «اثبات تمکن مالی» بالا مراجعه کنید).' : 'Proof of financial means (see the "Proof of Financial Means" section above).'}</li>
+              <li>{currentLang === 'fa' ? 'بیمه مسافرتی/درمانی برای کل مدت اقامت، با پوشش حداقل ۳۰,۰۰۰ یورو.' : 'Travel/medical insurance covering the full stay, with minimum €30,000 coverage.'}</li>
+              <li>{currentLang === 'fa' ? 'گواهی عدم سوءپیشینه.' : 'Criminal record certificate.'}</li>
+              <li>{currentLang === 'fa' ? 'مدرک محل اقامت در رومانی.' : 'Proof of accommodation in Romania.'}</li>
+              <li>{currentLang === 'fa' ? 'مدرک تسلط زبانی مرتبط با برنامه تحصیلی (در صورت ثبت‌نام در سال آماده‌سازی زبان، این مورد لازم نیست).' : 'Proof of language proficiency relevant to the study program (waived if enrolling in the Romanian-language preparatory year).'}</li>
+              <li>{currentLang === 'fa' ? 'رضایت‌نامه والدین/سرپرست، در صورتی که متقاضی زیر سن قانونی باشد.' : 'Parental/guardian consent, if the applicant is a minor.'}</li>
+              <li>{currentLang === 'fa' ? 'هزینه ویزا (~۱۲۰ یورو؛ برای دارندگان بورسیه دولتی رومانی معاف است).' : 'Visa fee (~€120; waived for holders of the Romanian government scholarship).'}</li>
+            </ol>
+            <p className="text-[11px] text-slate-400">
+              {currentLang === 'fa' ? 'منبع: mae.ro (چک‌لیست عمومی ویزای D/SD تحصیلی)، تایید‌شده توسط uefiscdi.ro (سازمان دولتی تحقیقات/آموزش رومانی)، دفتر بین‌الملل دانشگاه پلی‌تکنیک تیمیشوارا، و دانشگاه رومانیایی-آمریکایی. تایید‌نشده مستقیماً در برابر صفحهٔ سفارت رومانی در تهران.' : 'Source: mae.ro (general D/SD student visa checklist), corroborated by UEFISCDI (Romania\'s state research/education funding agency), Politehnica Timișoara\'s international office, and Romanian-American University. Not directly verified against the Romanian Embassy in Tehran\'s own page.'}
+            </p>
+          </div>
+
           {/* IRAN-SPECIFIC CROSS-LINK */}
           <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl text-xs sm:text-sm text-[#142033] flex items-start space-x-3 rtl:space-x-reverse">
             <span className="text-base mt-0.5">🇮🇷</span>
