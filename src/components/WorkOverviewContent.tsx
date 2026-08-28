@@ -95,16 +95,16 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
-          {/* REAL AVIZ DE MUNCĂ CATEGORIES */}
+          {/* FORMER AVIZ DE MUNCĂ CATEGORIES (PRE-OUG 32/2026) */}
           <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
               <span>📂</span>
-              <span>{currentLang === 'fa' ? '۸ نوع واقعی مجوز کار طبق قانون رومانی' : 'The 8 Real Aviz de Muncă Categories Under Romanian Law'}</span>
+              <span>{currentLang === 'fa' ? 'دسته‌بندی سابق ۸ نوع مجوز کار (OG 25/2014) — چه نوع اشتغالی هستید' : 'The Former 8 Aviz de Muncă Categories (OG 25/2014) — What Type of Employment Are You'}</span>
             </h2>
             <p className="text-sm text-[#526174] leading-relaxed">
               {currentLang === 'fa'
-                ? 'برخلاف تصور رایج که «مجوز کار» یک نوع واحد است، قانون رومانی (OG 25/2014، ماده ۲) هشت دسته متمایز از مجوز کار تعریف می‌کند که هر کدام مسیر و شرایط خاص خود را دارند:'
-                : 'Contrary to the common assumption that "work permit" is a single category, Romanian law (OG 25/2014, Art. 2) defines eight distinct work-permit categories, each with its own pathway and conditions:'}
+                ? 'تا پیش از اصلاحات ۲۰۲۶، قانون رومانی (OG 25/2014) اشتغال اتباع خارجی را به هشت دسته تقسیم می‌کرد: شش نوع «Aviz de angajare» (استخدام مستقیم توسط کارفرمای رومانیایی) + دو نوع «Aviz de detașare» (اعزام از شرکت خارجی). این تقسیم‌بندی هنوز برای فهمیدن اینکه «کدام نوع اشتغال شما هستید» مفید است، حتی اگر رویه‌ی صدور مجوز اکنون تغییر کرده باشد (به هشدار زیر جدول مراجعه کنید):'
+                : 'Until the 2026 reform, Romanian law (OG 25/2014) divided foreign employment into eight categories: six "Aviz de angajare" types (direct hiring by a Romanian employer) plus two "Aviz de detașare" types (posting from a foreign company). This breakdown is still useful for understanding what kind of employment situation you are in, even though the permit-issuance procedure itself has since changed (see the notice below the table):'}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-[#526174]">
               <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">{currentLang === 'fa' ? '۱. دائمی (Lucrător permanent)' : '1. Permanent (Lucrător permanent)'}</strong> — {currentLang === 'fa' ? 'رایج‌ترین دسته؛ قرارداد کار نامحدود یا محدود با کارفرمای رومانیایی.' : 'the most common category; indefinite or fixed-term contract with a Romanian employer.'}</div>
@@ -116,10 +116,16 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">{currentLang === 'fa' ? '۷. متخصص عالی‌رتبه (کارت آبی اتحادیه اروپا)' : '7. Highly-qualified worker (EU Blue Card)'}</strong> — {currentLang === 'fa' ? 'مسیر ویژه با مزایای بیشتر، جزئیات در ادامه.' : 'the special-track route with extra benefits, detailed below.'}</div>
               <div className="p-3.5 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl"><strong className="text-[#142033]">{currentLang === 'fa' ? '۸. اوپر (Au pair)' : '8. Au pair'}</strong> — {currentLang === 'fa' ? 'اقامت و کار محدود نزد یک خانواده میزبان رومانیایی.' : 'live-in, limited work arrangement with a Romanian host family.'}</div>
             </div>
+            <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs sm:text-sm text-amber-950 leading-relaxed">
+              <strong className="block font-bold mb-1">{currentLang === 'fa' ? '⚠️ این هشت دسته دیگر فرم درخواست جداگانه ندارند:' : '⚠️ These eight categories no longer have separate application forms:'}</strong>
+              {currentLang === 'fa'
+                ? 'فصل اول OG 25/2014 (که این هشت دسته را تعریف می‌کرد) طبق فرمان فوری دولت شماره ۳۲/۲۰۲۶ (اجرایی از ۲۷ آوریل ۲۰۲۶، اجباری از ۷/۸ آگوست ۲۰۲۶) لغو شد. رویه‌ی فعلی این هشت وضعیت اشتغال را در دو نوع ویزای واحد ادغام کرده: «D/AM1» (متخصصان عالی‌رتبه/مشاغل خاص، بدون سهمیه) و «D/AM2» (کار دائمی، فصلی و مرزنشین، مبتنی بر سهمیه/فهرست مشاغل کمبود نیرو)، هر دو با یک «درخواست واحد» از طریق workinromania.gov.ro. یعنی کارفرمای شما دیگر باید بفهمد وضعیت شما به کدام یک از این دو نوع نزدیک‌تر است، نه اینکه از میان همان هشت فرم قدیمی انتخاب کند.'
+                : 'Chapter I of OG 25/2014 (which defined these eight categories) was abrogated by Emergency Government Ordinance 32/2026 (in force since April 27, 2026, mandatory since August 7-8, 2026). Current procedure consolidates these eight employment situations into two unified visa types: "D/AM1" (highly-qualified/special-category workers, no quota) and "D/AM2" (permanent, seasonal, and cross-border work, quota-based via the shortage-occupation list), both filed as a single application through workinromania.gov.ro. In practice, your employer now needs to determine which of these two new types your situation maps to, rather than choosing among the old eight forms.'}
+            </div>
             <p className="text-[11px] text-slate-400">
               {currentLang === 'fa'
-                ? 'منبع: igi.mai.gov.ro و متن رسمی OG 25/2014. (فعالیت اقتصادی مستقل اتباع خارجی یک رژیم اقامتی جداگانه است، نه یک دسته «Aviz de Muncă»؛ اگر این مسیر برای شما مطرح است، حتماً موردی جداگانه با IGI بررسی کنید.)'
-                : 'Source: igi.mai.gov.ro and the official text of OG 25/2014. (Independent economic activity by a foreigner is a separate residence-status regime, not an "Aviz de Muncă" category — if this route applies to you, verify it separately with IGI.)'}
+                ? 'منبع: igi.mai.gov.ro، متن رسمی OG 25/2014 (نسخه پیش از اصلاح)، و تحلیل PwC Romania از OUG 32/2026. (فعالیت اقتصادی مستقل اتباع خارجی یک رژیم اقامتی جداگانه است، نه یک دسته «Aviz de Muncă»؛ اگر این مسیر برای شما مطرح است، حتماً موردی جداگانه با IGI بررسی کنید.)'
+                : 'Source: igi.mai.gov.ro, the official text of OG 25/2014 (pre-amendment version), and PwC Romania\'s analysis of OUG 32/2026. (Independent economic activity by a foreigner is a separate residence-status regime, not an "Aviz de Muncă" category — if this route applies to you, verify it separately with IGI.)'}
             </p>
           </div>
 
