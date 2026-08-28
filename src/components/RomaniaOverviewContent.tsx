@@ -281,6 +281,8 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'دست دادن هنگام معارفه رسمی رایج است؛ در محیط‌های کاری، وقت‌شناسی برای جلسات ارزش زیادی دارد.' : 'A handshake is common when formally meeting someone; punctuality for meetings is highly valued in professional settings.'}</li>
                 <li>{currentLang === 'fa' ? 'انعام (Bacșiș) در رستوران‌ها رایج است، معمولاً حدود ۱۰٪ صورت‌حساب، هرچند اجباری نیست.' : 'Tipping (Bacșiș) at restaurants is customary, typically around 10% of the bill, though not obligatory.'}</li>
+                <li>{currentLang === 'fa' ? 'هنگام هدیه دادن (مثلاً گل)، همیشه تعداد فرد انتخاب کنید — تعداد زوج گل مخصوص مراسم تدفین است. هدیه معمولاً همان‌جا و جلوی هدیه‌دهنده باز می‌شود.' : "When giving flowers, always choose an odd number — an even number is specifically associated with funerals. Gifts are typically opened right away, in front of the giver."}</li>
+                <li>{currentLang === 'fa' ? 'سر میز غذا: دست‌ها روی میز باشد نه آرنج؛ غذا فقط بعد از این‌که میزبان «Poftă bună» (نوش جان) گفت شروع می‌شود؛ تمام کردن بشقاب، تعریف از آشپز محسوب می‌شود؛ تست رایج «Noroc!» (به سلامتی) است — اگر نمی‌خواهید بیشتر بنوشید، کافی است لیوانتان را نیمه‌پر نگه دارید.' : "At the table: hands stay on the table, not elbows; the meal starts only after the host says \"Poftă bună\"; finishing your plate is taken as a compliment to the cook; the standard toast is \"Noroc!\" — if you'd rather not keep drinking, simply leave your glass half-full."}</li>
               </ul>
             </div>
 
@@ -303,7 +305,88 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'بخارست و کلوژ-نپوکا میزبان جوامع بزرگ دانشجویی و کاری بین‌المللی هستند، با گروه‌های آنلاین فعال ایرانیان مقیم برای تبادل تجربه.' : 'Bucharest and Cluj-Napoca host large international student and professional communities, with active online groups of resident Iranians for exchanging experience.'}</li>
                 <li>{currentLang === 'fa' ? 'یادگیری حداقل عبارات پایه رومانیایی، حتی برای کسانی که در محیط‌های انگلیسی‌زبان کار/تحصیل می‌کنند، در تعاملات روزمره (مانند اداره‌ها، فروشگاه‌ها) بسیار کمک‌کننده است.' : 'Learning at least basic Romanian phrases, even for those working/studying in English-speaking environments, is very helpful for everyday interactions (offices, shops).'}</li>
+                <li>{currentLang === 'fa' ? 'رومانی‌ها را با سایر کشورهای اروپای شرقی یا یوگسلاوی سابق اشتباه نگیرید (زبان رومانیایی، رومنس است و به ایتالیایی/فرانسوی نزدیک‌تر است تا زبان‌های اسلاوی)؛ همچنین رومانیایی‌ها و روما (کولی) دو هویت قومی کاملاً جدا هستند. برخورد اولیه رسمی و کمی سرد طبیعی است و نشانه بی‌ادبی نیست — با اعتماد، گرم‌تر می‌شود.' : "Don't confuse Romanians with other Eastern European nationalities or the former Yugoslavia (Romanian is a Romance language, closer to Italian/French than Slavic languages); also, Romanians and Roma (an ethnic minority) are entirely separate identities. An initially formal, somewhat reserved first impression is normal and not rudeness — it warms up with trust."}</li>
               </ul>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto rounded-2xl border border-[#dfe6ef] shadow-sm">
+            <table className="w-full text-sm text-[#526174] bg-white">
+              <thead>
+                <tr className="bg-[#F8FAFC] border-b border-[#dfe6ef]">
+                  <th className="p-4 text-start font-bold text-[#142033]">{currentLang === 'fa' ? 'تعطیلات ارتدوکس ۲۰۲۶' : 'Orthodox Holiday, 2026'}</th>
+                  <th className="p-4 text-start font-bold text-[#142033]">{currentLang === 'fa' ? 'تاریخ' : 'Date'}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-[#eef2f6]"><td className="p-4">{currentLang === 'fa' ? 'تعمید (Bobotează)' : 'Epiphany (Bobotează)'}</td><td className="p-4">6–7 {currentLang === 'fa' ? 'ژانویه' : 'January'}</td></tr>
+                <tr className="border-b border-[#eef2f6]"><td className="p-4">{currentLang === 'fa' ? 'جمعه مقدس تا دوشنبه عید پاک' : 'Good Friday – Easter Monday'}</td><td className="p-4">10–13 {currentLang === 'fa' ? 'آوریل' : 'April'}</td></tr>
+                <tr className="border-b border-[#eef2f6]"><td className="p-4">{currentLang === 'fa' ? 'پنطیکاست (Rusalii)' : 'Pentecost (Rusalii)'}</td><td className="p-4">31 {currentLang === 'fa' ? 'مه' : 'May'} – 1 {currentLang === 'fa' ? 'ژوئن' : 'June'}</td></tr>
+                <tr className="border-b border-[#eef2f6]"><td className="p-4">{currentLang === 'fa' ? 'اعتلای مریم مقدس' : 'Dormition of the Mother of God'}</td><td className="p-4">15 {currentLang === 'fa' ? 'اوت' : 'August'}</td></tr>
+                <tr><td className="p-4">{currentLang === 'fa' ? 'روز سنت آندره (قدیس حامی رومانی)' : "St. Andrew's Day (patron saint)"}</td><td className="p-4">30 {currentLang === 'fa' ? 'نوامبر' : 'November'}</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-slate-500 italic px-2">
+            {currentLang === 'fa'
+              ? 'همه این‌ها تعطیل رسمی و غیرکاری هستند — بانک‌ها، ادارات دولتی و دفاتر نوتاری بسته می‌شوند. عید پاک ارتدوکس هر سال با تقویم غربی/کاتولیک فرق دارد (در ۲۰۲۷ مثلاً ۲ مه است، نه تاریخ عید پاک کاتولیک) — اگر با تقویم عید پاک غربی برنامه‌ریزی کنید، در تاریخ اشتباه گرفتار می‌شوید. بازه جمعه مقدس تا دوشنبه عید پاک (۴ روز) و کریسمس، دو دوره‌ای هستند که عملاً همه‌چیز، حتی زندگی اجتماعی غیررسمی، متوقف می‌شود چون بسیاری به روستای خانوادگی سفر می‌کنند.'
+              : "All of these are official non-working holidays — banks, government offices, and notary offices close. Orthodox Easter falls on a different date each year than the Western/Catholic calendar (in 2027, for instance, it's May 2, not the Catholic Easter date) — planning around the Western Easter date will get you the wrong day. The Good Friday–Easter Monday stretch (4 days) and Christmas are the two periods when practically everything, even informal social life, pauses, as many people travel to their family village."}
+          </p>
+
+          <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-3">
+            <h3 className="text-lg font-bold text-[#142033]">
+              {currentLang === 'fa' ? 'دین‌داری: هویت قوی، زندگی روزمره سکولار' : 'Religiosity: Strong Identity, Secular Daily Life'}
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'طبق نظرسنجی معتبر Pew Research (۲۰۱۸)، رومانی از میان ۳۴ کشور اروپایی بررسی‌شده، رتبه اول «تعهد دینی» را دارد (۵۰٪ می‌گویند دین برایشان بسیار مهم است، ۵۰٪ حداقل ماهی یک‌بار به کلیسا می‌روند) — رقمی که یک نظرسنجی داخلی رومانیایی در سال ۲۰۲۵ هم با عدد مشابه (~۴۷٪ حضور ماهانه) تایید کرد. اما نکته مهم برای یک تازه‌وارد ایرانی: این دین‌داری بالا (کلیسای ارتدوکس) به‌معنای تنظیم دینی زندگی عمومی نیست — پوشش، اختلاط زن و مرد، و مصرف الکل عمدتاً بر اساس هنجارهای سکولار اروپایی است، نه قوانین یا فشار اجتماعی دینی.'
+                : "According to the well-established Pew Research survey (2018), Romania ranks first in \"religious commitment\" among 34 European countries surveyed (50% say religion is very important to them, 50% attend church at least monthly) — a figure a 2025 domestic Romanian survey largely confirmed (~47% monthly attendance). But the key point for an Iranian newcomer: this high religiosity (Orthodox Christianity) does not translate into religious regulation of public life — dress, gender-mixing, and alcohol consumption are governed mainly by secular European norms, not religious law or social pressure."}
+            </p>
+          </div>
+
+          <div className="p-6 sm:p-8 bg-white border border-[#dfe6ef] rounded-2xl shadow-sm space-y-4">
+            <h3 className="text-lg font-bold text-[#142033]">
+              {currentLang === 'fa' ? '🇮🇷 ویژه ایرانیان: غذای حلال، مسجد، الکل، و نوروز در رومانی' : '🇮🇷 Iran-Specific: Halal Food, Mosques, Alcohol & Nowruz in Romania'}
+            </h3>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'غذای حلال: چند رستوران واقعی و فعال در بخارست وجود دارد (Beyti، Saray، Divan، Sfeir Lebanese، Zaitoone، Duman و چند رستوران هندی/آسیایی)، و در کلوژ-نپوکا رستوران Mesopotamia (داخل مول Iulius) و Berrak Kebab. برای قصابی حلال، منابع مستند و به‌روز محدودند — بهتر است پیش از اعتماد به یک آدرس قدیمی، وضعیت فعلی را بررسی کنید.'
+                : 'Halal food: several real, active restaurants exist in Bucharest (Beyti, Saray, Divan, Sfeir Lebanese, Zaitoone, Duman, and a few Indian/Asian options), and in Cluj-Napoca, Mesopotamia (inside Iulius Mall) and Berrak Kebab. Documented, up-to-date sources for halal butchers are limited — verify the current status before relying on an old listing.'}
+            </p>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'مسجد: مسجد کارول-هونکیار (معروف به «جامع پیپتاناری») در خیابان Constantin Mănescu بخارست، فعال و باز به روی همه، با ۵ نماز روزانه — قدیمی‌ترین و اصلی‌ترین مسجد فعال شهر (از ۱۹۰۰-۱۹۰۶). نکته جالب: پروژه یک «مسجد بزرگ» مدرن با بودجه دولت ترکیه در ۲۰۱۵ تایید شد، اما در ۲۰۱۸ به‌خاطر مخالفت محلی و کمبود بودجه لغو شد — یعنی بخارست هنوز مسجد بزرگ مدرنی ندارد. در کلوژ-نپوکا، مرکز فرهنگی اسلامی «Islam Cluj» (از ۲۰۰۳) نماز روزانه و خطبه جمعه برگزار می‌کند. جمعیت مسلمانان کل رومانی طبق سرشماری ۲۰۲۱ نزدیک ۷۶ هزار نفر (~۰.۴٪) است که ~۹۷٪ آن در منطقه دوبروجا (کنستانتا/تولچا) با جامعه تاریخی تاتار/ترک متمرکز است — یعنی جامعه بخارست (شامل ایرانیان) نسبتاً کوچک و پراکنده است.'
+                : "Mosque: the Carol-Hunchiar Mosque (known as the \"Pieptănari mosque\") on Strada Constantin Mănescu in Bucharest is active and open to everyone, holding all five daily prayers — the city's oldest and main active mosque (built 1900–1906). An interesting detail: a modern \"grand mosque\" project funded by the Turkish government was approved in 2015 but cancelled in 2018 due to local opposition and funding shortfalls — meaning Bucharest still has no large modern mosque. In Cluj-Napoca, the Islam Cluj cultural center (since 2003) holds daily prayers and Friday sermons. Romania's total Muslim population, per the 2021 census, is around 76,000 (~0.4%), with about 97% concentrated in the Dobrogea region (Constanța/Tulcea) around its historic Tatar/Turkish community — meaning Bucharest's community, including Iranians, is relatively small and dispersed."}
+            </p>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'الکل: طبق گزارش OECD (۲۰۲۵، داده ۲۰۲۳)، رومانی یکی از بالاترین مصرف سرانه الکل اتحادیه اروپا را دارد (بیش از ۱۱.۵ لیتر الکل خالص سالانه، در برابر میانگین OECD حدود ۸.۵ لیتر). تسویکا و پالینکا (عرق آلوی خانگی) و شراب بخش اصلی مهمان‌نوازی رومانیایی هستند، نه یک فعالیت حاشیه‌ای — اگر به دلایل شخصی/مذهبی نمی‌نوشید، بهتر است صریح و از همان ابتدا بگویید، چون میزبان معمولاً برای ادب اصرار می‌کند.'
+                : "Alcohol: per an OECD report (2025, 2023 data), Romania has one of the highest per-capita alcohol consumption rates in the EU (over 11.5 litres of pure alcohol annually, versus an OECD average of about 8.5 litres). Homemade țuică and palincă (plum brandy) and wine are a core part of Romanian hospitality, not a marginal activity — if you don't drink for personal or religious reasons, it's best to say so clearly from the start, since a host will typically keep insisting out of politeness."}
+            </p>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'نوروز: موزه ملی روستا «دیمیتری گوستی» در بخارست در مارس ۲۰۲۴ جشنواره نوروز را با همکاری مستقیم سفارت ایران (همراه سفارت‌های هند، قزاقستان، ترکمنستان و ترکیه) برگزار کرد — نمایش لباس سنتی، فرش و موسیقی. رسانه‌های رسمی رومانی (خبرگزاری آژرپرس، تلویزیون ملی) هم هرساله درباره «۲۱ مارس، روز جهانی نوروز سازمان ملل» می‌نویسند، یعنی آگاهی نهادی از این مناسبت در رومانی وجود دارد. تکرار سالانه دقیق رویداد موزه تایید نشده، اما این نشان می‌دهد نوروز کاملاً ناشناخته نیست.'
+                : "Nowruz: Bucharest's National Village Museum \"Dimitrie Gusti\" held a Nowruz festival in March 2024 directly co-organized with the Iranian Embassy (alongside the embassies of India, Kazakhstan, Turkmenistan, and Turkey) — featuring traditional dress, carpets, and music. Romania's official media (the AGERPRES news agency, national television) also write about \"March 21, UN International Nowruz Day\" every year, showing there's institutional awareness of the occasion in Romania. Whether the museum event recurs annually every year isn't confirmed, but it shows Nowruz isn't entirely unknown here."}
+            </p>
+          </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا در رومانی دسترسی به غذا و رستوران حلال آسان است؟' : 'Is halal food easily accessible in Romania?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'در بخارست و کلوژ-نپوکا چندین رستوران حلال فعال (عمدتاً ترکی/خاورمیانه‌ای) وجود دارد، اما نسبت به کشورهای با جامعه مسلمان بزرگ‌تر، گزینه‌ها محدودتر است؛ برای قصابی حلال باید وضعیت فعلی را جداگانه بررسی کنید.' : 'Several active halal restaurants (mostly Turkish/Middle Eastern) exist in both Bucharest and Cluj-Napoca, though options are more limited than in countries with a larger Muslim community; for halal butchers, verify current status separately.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چرا میزبان رومانیایی مدام اصرار می‌کند بنوشم؟' : "Why does my Romanian host keep insisting I drink?"}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'چون تعارف نوشیدنی (به‌خصوص تسویکا/شراب خانگی) بخش اصلی مهمان‌نوازی رومانیایی است، نه یک پیشنهاد جانبی. گفتن صریح و مودبانه «من نمی‌نوشم» از همان ابتدا معمولاً به‌سرعت پذیرفته می‌شود.' : "Because offering a drink (especially homemade țuică or wine) is a core part of Romanian hospitality, not a side offer. Saying clearly and politely \"I don't drink\" from the start is usually accepted quickly."}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا تاریخ عید پاک رومانی با تقویم معمول غربی یکی است؟' : "Does Romanian Easter fall on the same date as the Western calendar?"}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'نه لزوماً — رومانی از تقویم عید پاک ارتدوکس پیروی می‌کند که اغلب چند هفته با تقویم کاتولیک/پروتستان فرق دارد؛ همیشه تاریخ دقیق سال مورد نظر را جداگانه چک کنید، چون در این بازه بانک‌ها و ادارات تعطیل‌اند.' : "Not necessarily — Romania follows the Orthodox Easter calendar, which often falls several weeks apart from the Catholic/Protestant date; always check the exact date for the year in question separately, since banks and offices close during that period."}</p>
+              </div>
             </div>
           </div>
 
