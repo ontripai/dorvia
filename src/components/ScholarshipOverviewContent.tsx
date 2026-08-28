@@ -80,6 +80,11 @@ export const ScholarshipOverviewContent: React.FC<ScholarshipOverviewContentProp
         <p className="text-[11px] text-slate-400">
           {currentLang === 'fa' ? 'منبع: scholarships.studyinromania.gov.ro/scholarship-about — این تاریخ‌ها مخصوص یک چرخه هستند و هرساله تغییر می‌کنند؛ برای فراخوان جاری همیشه همان صفحه رسمی را چک کنید.' : 'Source: scholarships.studyinromania.gov.ro/scholarship-about — these dates are cycle-specific and change every year; always check that official page for the current call.'}
         </p>
+        <p className="text-sm text-amber-300 leading-relaxed border-t border-white/10 pt-3">
+          {currentLang === 'fa'
+            ? '⚠️ به‌روزرسانی: بازه بالا مربوط به چرخه ۲۰۲۶-۲۰۲۷ است و اکنون بسته شده (نتایج آن حدود میانه ژوئیه ۲۰۲۶ اعلام شد). تا لحظه انتشار این صفحه، تاریخ رسمی چرخهٔ بعدی هنوز روی پلتفرم منتشر نشده بود؛ بر اساس الگوی سال‌های قبل، فراخوان بعدی معمولاً حدود بهمن/فوریه شروع می‌شود، اما این فقط یک الگوی تقریبی است، نه تاریخ تایید‌شده — پیش از برنامه‌ریزی حتماً خودِ scholarships.studyinromania.gov.ro را برای اعلامیه رسمی چرخهٔ بعدی چک کنید.'
+            : '⚠️ Update: the window above was for the 2026-2027 cycle and is now closed (results were announced around mid-July 2026). As of this page\'s publication, the next cycle\'s official dates had not yet been posted on the platform; based on the pattern of prior years, the next call typically opens around February, but that is only an approximate pattern, not a confirmed date — always check scholarships.studyinromania.gov.ro directly for the official announcement of the next cycle before planning around it.'}
+        </p>
       </div>
 
       <ParentHubFooterCard slugRoute="study/scholarships" currentLang={currentLang} />

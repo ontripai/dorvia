@@ -200,11 +200,11 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             </h3>
             <p className="text-sm text-[#526174] leading-relaxed">
               {currentLang === 'fa'
-                ? 'طبق سند رسمی IGI، اثبات تمکن مالی برای دانشجویان به «حداقل حقوق خالص کشوری» گره خورده است — یعنی باید نشان دهید برای هر ماه از دوره اعتبار اقامت خود، معادل حداقل حقوق خالص در حساب خود دارید یا دریافت می‌کنید. حداقل حقوق خالص فعلی (۲۰۲۶) حدود ۲,۶۹۹ لئو در ماه است (معادل تقریبی ۵۳۰-۵۴۰ یورو — این تبدیل تقریبی است و باید نرخ روز را در نظر گرفت).'
-                : 'Per an official IGI document, the financial proof requirement for students is tied to the "net national minimum wage" — meaning you must show, for each month of your residence permit validity, funds equal to at least the net minimum wage available or being received. The current (2026) net minimum wage is around 2,699 RON/month (roughly €530-540 — an approximate conversion; check the current exchange rate).'}
+                ? 'اصلاحیه مهم: این الزام دو مرحله متفاوت دارد که با ارقام متفاوتی سنجیده می‌شوند — با هم اشتباه گرفته نشوند. (۱) برای دریافت ویزای D در سفارت/کنسولگری، طبق راهنمای رسمی IGI باید تمکن مالی معادل «حداقل حقوق خالص کشوری» برای کل دوره اعتبار ویزا اثبات شود؛ حداقل حقوق خالص تقریبی فعلی (۲۰۲۶) حدود ۲,۶۹۹ لئو در ماه است (رقمی محاسبه‌شده بر پایه حداقل حقوق ناخالص، نه رقمی که خودِ IGI مستقیماً اعلام کند — پیش از اقدام حتماً نرخ روز را چک کنید). (۲) برای تمدید اقامت داخل رومانی نزد IGI، طبق مادهٔ ۵۸ آیین‌نامه اتباع خارجی (OUG 194/2002) و اطلاعیهٔ رسمی IGI (۹ دسامبر ۲۰۲۴)، الزام به «حداقل حقوق ناخالص کشوری» (نه خالص) تغییر کرده و باید این مبلغ حداقل ۶ ماه در حساب نگه‌داری/دریافت شده باشد؛ حداقل حقوق ناخالص از ژوئیهٔ ۲۰۲۶ برابر ۴,۳۲۵ لئو در ماه است.'
+                : 'Important correction: this requirement actually has two distinct stages measured by different figures — don\'t confuse them. (1) To obtain the D visa at the embassy/consulate, IGI\'s official guidance requires proof of funds equal to the net national minimum wage for the whole visa validity period; the current approximate net minimum wage (2026) is around 2,699 RON/month (a figure calculated from the gross minimum wage, not one IGI itself publishes directly — always check the current exchange rate before applying). (2) To extend your residence permit inside Romania at IGI, per Article 58 of the foreigners\' status ordinance (OUG 194/2002) and IGI\'s official notice of December 9, 2024, the requirement switched to the gross national minimum wage (not net), held for at least 6 months; the gross minimum wage has been 4,325 RON/month since July 2026.'}
             </p>
             <p className="text-[11px] text-slate-400">
-              {currentLang === 'fa' ? 'منبع: igi.mai.gov.ro (سند رسمی «Dovada mijloacelor de întreținere pentru studii»).' : 'Source: igi.mai.gov.ro (official document "Dovada mijloacelor de întreținere pentru studii").'}
+              {currentLang === 'fa' ? 'منبع: igi.mai.gov.ro (راهنمای ویزای تحصیلی + اطلاعیهٔ تمدید اقامت تحصیلی، دسامبر ۲۰۲۴؛ ماده ۵۸ OUG 194/2002).' : 'Source: igi.mai.gov.ro (student visa guide + student residence extension notice, Dec 2024; Article 58, OUG 194/2002).'}
             </p>
           </div>
 
@@ -237,7 +237,7 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
               </div>
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'برای اثبات تمکن مالی چه مبلغی نیاز دارم؟' : 'How much money do I need for financial proof?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'به‌ازای هر ماه از دوره اقامت، معادل حداقل حقوق خالص کشوری (حدود ۲,۶۹۹ لئو در ماه در سال ۲۰۲۶) باید نشان داده شود.' : 'For each month of your residence period, you must show funds equal to the net national minimum wage (around 2,699 RON/month in 2026).'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'برای خودِ ویزای D در سفارت: معادل حداقل حقوق خالص کشوری (حدود ۲,۶۹۹ لئو در ماه، ۲۰۲۶). برای تمدید اقامت داخل رومانی: معادل حداقل حقوق ناخالص کشوری (۴,۳۲۵ لئو در ماه از ژوئیه ۲۰۲۶)، حداقل ۶ ماه نگه‌داری‌شده — این دو رقم متفاوت‌اند، با هم اشتباه نگیرید.' : 'For the D visa itself at the embassy: the net national minimum wage (around 2,699 RON/month, 2026). For extending residence inside Romania: the gross national minimum wage (4,325 RON/month as of July 2026), held for at least 6 months — these are two different figures, don\'t confuse them.'}</p>
               </div>
             </div>
           </div>
@@ -340,15 +340,15 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">
               {currentLang === 'fa'
-                ? 'منبع: اداره کل مهاجرت رومانی (IGI)، وزارت کار رومانی — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
-                : 'Source: General Inspectorate for Immigration (IGI), Ministry of Labor — Last reviewed: August 2026'}
+                ? 'منبع: قانون OG 25/2014 (ماده ۳ بند ۳)، اصلاح‌شده با قانون ۲۸/۲۰۲۴ — اداره کل مهاجرت رومانی (IGI) — آخرین بررسی: مرداد ۱۴۰۵ / اوت ۲۰۲۶'
+                : 'Source: OG 25/2014 (Art. 3(3)), as amended by Law 28/2024 — General Inspectorate for Immigration (IGI) — Last reviewed: August 2026'}
             </div>
           </div>
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
-            {currentLang === 'fa' 
-              ? 'کسب تجربه کاری در حین تحصیل، مزیت بزرگی برای دانشجویان بین‌المللی در رومانی است. طبق قانون، دانشجویان خارج از اتحادیه اروپا که کارت اقامت موقت تحصیلی دارند، حق کار پاره‌وقت را بدون نیاز به طی کردن پروسه پیچیده اخذ مجوز کار (Aviz de Muncă) دارا هستند. این قانون به دانشجویان اجازه می‌دهد تا حداکثر ۴ ساعت در روز مشغول به کار شوند که راهی عالی برای پوشش بخشی از هزینه‌های زندگی و آشنایی با بازار کار محلی است. البته بسیار مهم است که روی کارت اقامت شما عبارت «حق کار» (Drept de Muncă) قید شده باشد.'
-              : 'Gaining practical work experience while studying is a major advantage for international students in Romania. By law, non-EU students holding a valid temporary residence permit for studies are permitted to work part-time without needing to go through the complex process of obtaining a separate work permit (Aviz de Muncă). This right allows students to work up to 4 hours per day, helping them offset living expenses while integrating into the local professional environment. However, it is crucial to ensure that the "Right to Work" (Drept de Muncă) is explicitly stated on your residence card.'}
+            {currentLang === 'fa'
+              ? 'کسب تجربه کاری در حین تحصیل، مزیت بزرگی برای دانشجویان بین‌المللی در رومانی است. طبق قانون، دانشجویان خارج از اتحادیه اروپا که کارت اقامت موقت تحصیلی دارند، حق کار پاره‌وقت را بدون نیاز به طی کردن پروسه پیچیده اخذ مجوز کار (Aviz de Muncă) دارا هستند. طبق اصلاحیه قانون ۲۸/۲۰۲۴ (اجرایی از ۸ مارس ۲۰۲۴)، این حق به دانشجویان اجازه می‌دهد تا حداکثر ۶ ساعت در روز مشغول به کار شوند که راهی عالی برای پوشش بخشی از هزینه‌های زندگی و آشنایی با بازار کار محلی است. البته بسیار مهم است که روی کارت اقامت شما عبارت «حق کار» (Drept de Muncă) قید شده باشد.'
+              : 'Gaining practical work experience while studying is a major advantage for international students in Romania. By law, non-EU students holding a valid temporary residence permit for studies are permitted to work part-time without needing to go through the complex process of obtaining a separate work permit (Aviz de Muncă). Per the amendment introduced by Law 28/2024 (effective March 8, 2024), this right allows students to work up to 6 hours per day, helping them offset living expenses while integrating into the local professional environment. However, it is crucial to ensure that the "Right to Work" (Drept de Muncă) is explicitly stated on your residence card.'}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -359,7 +359,7 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'دانشجویان دارای اقامت موقت تحصیلی می‌توانند بدون نیاز به مجوز کار جداگانه (Aviz de Muncă)، صرفاً با قرارداد کار پاره‌وقت فعالیت کنند.' : 'Students holding a temporary study residence permit can work without needing a separate work permit (Aviz de Muncă), simply based on a part-time employment contract.'}</li>
-                <li>{currentLang === 'fa' ? 'حداکثر ساعت مجاز کار ۴ ساعت در روز است (نه در دو شغل همزمان به‌طور جداگانه؛ مجموع ساعات کار در همه مشاغل نباید از ۴ ساعت در روز بیشتر شود).' : 'The maximum allowed working time is 4 hours per day (this applies cumulatively; the total working hours across all jobs must not exceed 4 hours per day).'}</li>
+                <li>{currentLang === 'fa' ? 'حداکثر ساعت مجاز کار ۶ ساعت در روز است (طبق ماده ۳ بند ۳ قانون OG 25/2014، اصلاح‌شده با قانون ۲۸/۲۰۲۴؛ این محدودیت مجموع همه مشاغل همزمان است، نه هرکدام به‌طور جداگانه).' : 'The maximum allowed working time is 6 hours per day (per Article 3(3) of OG 25/2014, as amended by Law 28/2024; this cap applies cumulatively across all jobs, not to each one separately).'}</li>
               </ul>
             </div>
 
@@ -393,11 +393,11 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             <div className="space-y-6">
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا در تعطیلات تابستانی می‌توانم تمام‌وقت کار کنم؟' : 'Can I work full-time during summer holidays?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'برخلاف برخی کشورهای دیگر اتحادیه اروپا، قوانین رومانی در حال حاضر سقف ۴ ساعت در روز را حتی در ایام تعطیلات تابستانی برای دانشجویان غیراروپایی حفظ می‌کند.' : 'Unlike some other EU countries, Romanian law currently maintains the strict 4-hour daily limit for non-EU students even during the summer academic holidays.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'برخلاف برخی کشورهای دیگر اتحادیه اروپا، قوانین رومانی در حال حاضر سقف ۶ ساعت در روز را حتی در ایام تعطیلات تابستانی برای دانشجویان غیراروپایی حفظ می‌کند.' : 'Unlike some other EU countries, Romanian law currently maintains the 6-hour daily limit for non-EU students even during the summer academic holidays.'}</p>
               </div>
               <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا کار فریلنسری یا دورکاری هم جزو این ۴ ساعت حساب می‌شود؟' : 'Does freelance or remote work count towards the 4 hours?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، هرگونه اشتغال قانونی و ثبت‌شده در رومانی مشمول این محدودیت روزانه ۴ ساعته برای دانشجویان است.' : 'Yes, any legal employment registered in Romania is subject to the 4-hour daily limit for students.'}</p>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا کار فریلنسری یا دورکاری هم جزو این ۶ ساعت حساب می‌شود؟' : 'Does freelance or remote work count towards the 6 hours?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، هرگونه اشتغال قانونی و ثبت‌شده در رومانی مشمول این محدودیت روزانه ۶ ساعته برای دانشجویان است.' : 'Yes, any legal employment registered in Romania is subject to the 6-hour daily limit for students.'}</p>
               </div>
             </div>
           </div>
