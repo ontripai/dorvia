@@ -83,6 +83,23 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl text-xs text-amber-900 leading-relaxed font-semibold">
+            ⚠️ {currentLang === 'fa'
+              ? 'به‌روزرسانی مهم (قانون ۲۳۹/۲۰۲۵، از ۱۸ دسامبر ۲۰۲۵): حداقل سرمایه ثبت SRL که از سال ۲۰۲۰ فقط نمادین (۱ لئو) بود، به ۵۰۰ لئو افزایش یافت (۵,۰۰۰ لئو برای شرکت‌هایی با گردش مالی سالانه بیش از ۴۰۰,۰۰۰ لئو). شرکت‌های ثبت‌شده قبل از این تاریخ تا ۱۸ دسامبر ۲۰۲۷ فرصت دارند سرمایه را به سطح جدید برسانند. همچنین از ۱ ژانویه ۲۰۲۶، هر SRL تازه‌ثبت‌شده موظف است ظرف ۶۰ روز کاری از ثبت، یک حساب بانکی پرداختی (نزد بانک، Revolut Business، یا خزانه‌داری) باز کند و ظرف ۱۵ روز از افتتاح، آن را از طریق پورتال SPV به سازمان امور مالیاتی (ANAF) اعلام کند؛ عدم رعایت این الزام می‌تواند جریمه ۳,۰۰۰ تا ۱۰,۰۰۰ لئو و اعلام «غیرفعال مالیاتی» شرکت را در پی داشته باشد.'
+              : "Important update (Law 239/2025, effective December 18, 2025): the minimum SRL share capital, which had been a purely symbolic 1 RON since 2020, was raised to 500 RON (5,000 RON for companies with annual turnover above 400,000 RON). Companies registered before this date have until December 18, 2027 to bring their capital up to the new threshold. Also effective January 1, 2026, every newly registered SRL must open a payment account (at a bank, Revolut Business, or the State Treasury) within 60 working days of registration and report it to the tax authority (ANAF) via the SPV portal within 15 days of opening it — failure to comply can trigger a fine of 3,000 to 10,000 RON and the company being declared \"fiscally inactive\"."}
+          </div>
+
+          <div className="p-6 sm:p-8 bg-white border border-[#dfe6ef] rounded-2xl shadow-sm space-y-4">
+            <h3 className="text-lg font-bold text-[#142033]">
+              {currentLang === 'fa' ? '🇮🇷 ویژه ایرانیان: وکالت‌نامه از ایران و مهلت ۶۰ روزه حساب بانکی' : '🇮🇷 Iran-Specific: Power of Attorney from Iran & the 60-Day Bank Account Deadline'}
+            </h3>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'اگر نمی‌خواهید شخصاً برای ثبت شرکت به رومانی سفر کنید، باید به یک وکیل یا حسابدار در رومانی وکالت‌نامه بدهید. چون ایران عضو کنوانسیون آپوستیل لاهه نیست، این وکالت‌نامه هم باید همان زنجیره تصدیق کنسولی را طی کند که برای سایر مدارک ایرانی لازم است (ترجمه رسمی در ایران، تایید وزارت دادگستری و وزارت امور خارجه ایران، و در نهایت تایید سفارت رومانی در تهران) — برای جزئیات کامل این زنجیره به صفحه «دفاتر اسناد رسمی» مراجعه کنید. نکته عملی‌تر و فوری‌تر: قانون جدید مهلت ۶۰ روزه‌ای برای باز کردن حساب بانکی شرکتی تعیین کرده، در حالی که تجربه مستند‌شده در چند کشور اروپایی نشان می‌دهد بانک‌ها گاهی نسبت به متقاضیان با پیشینه ایرانی محتاط‌تر عمل می‌کنند (به‌خاطر سیاست‌های داخلی ریسک‌گریزی، نه یک ممنوعیت مستقیم قانونی) — این یعنی بهتر است فرآیند افتتاح حساب شرکتی را از همان روز اول ثبت شرکت، بدون تاخیر، شروع کنید. جزئیات کامل در صفحه «حساب بانکی شرکتی» زیر آمده است.'
+                : "If you don't want to travel to Romania in person to register the company, you'll need to give power of attorney to a lawyer or accountant there. Because Iran is not party to the Hague Apostille Convention, that power of attorney must go through the same consular legalization chain required for other Iranian documents (official translation in Iran, endorsement by Iran's Ministry of Justice and Ministry of Foreign Affairs, and final legalization at the Romanian Embassy in Tehran) — see the \"Notary Public\" page for the full chain. The more time-sensitive point: the new law sets a hard 60-working-day deadline to open the company's bank account, while documented experience in several European countries shows banks are sometimes more cautious with applicants of Iranian background (from internal risk-averse policies, not a direct legal ban) — so it's worth starting the corporate account-opening process the same day the company is registered, without delay. Full details are on the \"Corporate Bank Account\" page below."}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -95,6 +112,14 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا برای ثبت شرکت به شریک رومانیایی نیاز دارم؟' : 'Do I need a local Romanian partner?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، اتباع خارجی می‌توانند به تنهایی مالک ۱۰۰٪ سهام شرکت و مدیرعامل آن باشند.' : 'No, foreign nationals can own 100% of the company shares and act as the sole director.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'حداقل سرمایه ثبت شرکت الان چقدر است؟' : "What's the current minimum share capital?"}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'از ۱۸ دسامبر ۲۰۲۵ (قانون ۲۳۹/۲۰۲۵)، ۵۰۰ لئو برای اکثر SRLهای تازه‌ثبت‌شده (۵,۰۰۰ لئو اگر گردش مالی سالانه از ۴۰۰,۰۰۰ لئو بیشتر باشد) — پیش از این فقط ۱ لئوی نمادین کافی بود.' : "Since December 18, 2025 (Law 239/2025), 500 RON for most newly registered SRLs (5,000 RON if annual turnover exceeds 400,000 RON) — before that, a symbolic 1 RON was sufficient."}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا باید فوراً حساب بانکی شرکتی باز کنم؟' : 'Do I need to open a corporate bank account right away?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'قانوناً ۶۰ روز کاری از تاریخ ثبت شرکت فرصت دارید، اما با توجه به احتمال طولانی‌تر شدن فرآیند برای متقاضیان با پیشینه ایرانی، بهتر است بلافاصله شروع کنید.' : "Legally you have 60 working days from registration, but given the account-opening process can take longer for applicants of Iranian background, it's best to start immediately."}</p>
               </div>
             </div>
           </div>
@@ -159,6 +184,39 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033]">
+                {currentLang === 'fa' ? 'مالیات بر ارزش افزوده (VAT) — از اوت ۲۰۲۵' : 'VAT — Since August 2025'}
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'نرخ استاندارد VAT از ۱۹٪ به ۲۱٪ افزایش یافت (از ۱ اوت ۲۰۲۵، طبق قانون ۱۴۱/۲۰۲۵)؛ نرخ‌های کاهش‌یافته قبلی (۵٪ و ۹٪) هم در یک نرخ واحد ۱۱٪ ادغام شدند.' : 'The standard VAT rate rose from 19% to 21% (effective August 1, 2025, under Law 141/2025); the former reduced rates (5% and 9%) were also unified into a single 11% rate.'}</li>
+                <li>{currentLang === 'fa' ? 'سقف ثبت‌نام اجباری VAT از ۱ سپتامبر ۲۰۲۵ به ۳۹۵,۰۰۰ لئو افزایش یافت (معادل تقریبی ۷۸ تا ۸۰ هزار یورو به نرخ بازار امروز).' : 'The mandatory VAT registration threshold rose to RON 395,000 effective September 1, 2025 (roughly €78,000–80,000 at today\'s market exchange rate).'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033]">
+                {currentLang === 'fa' ? 'مالیات بر سود سهام (Dividend Tax) — از ژانویه ۲۰۲۶' : 'Dividend Withholding Tax — Since January 2026'}
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'از ۱ ژانویه ۲۰۲۶، نرخ مالیات کسر از منبع سود سهام برای سهامداران حقیقی (چه مقیم و چه غیرمقیم رومانی) از ۱۰٪ به ۱۶٪ افزایش یافت (طبق همان قانون ۱۴۱/۲۰۲۵).' : 'Effective January 1, 2026, the withholding tax rate on dividends paid to individual shareholders (both resident and non-resident) rose from 10% to 16% (under the same Law 141/2025).'}</li>
+                <li>{currentLang === 'fa' ? 'سهامداران مقیم رومانی، علاوه بر مالیات ۱۶٪، مشمول حق بیمه سلامت (CASS) ۱۰٪ هم می‌شوند، اما فقط اگر مجموع درآمد غیرحقوقی سالانه (سود سهام + بهره + سایر) به ۶ برابر حداقل دستمزد ناخالص برسد؛ سهامداران غیرمقیم مشمول CASS نیستند.' : 'Romanian-resident shareholders also owe a 10% health-insurance contribution (CASS) on top of the 16% tax, but only once total annual non-salary income (dividends + interest + other) reaches 6× the gross minimum wage; non-resident shareholders are not subject to CASS.'}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="p-6 sm:p-8 bg-white border border-[#dfe6ef] rounded-2xl shadow-sm space-y-4">
+            <h3 className="text-lg font-bold text-[#142033]">
+              {currentLang === 'fa' ? '🇮🇷 ویژه ایرانیان: نرخ کاهش‌یافته سود سهام طبق معاهده مالیاتی ایران-رومانی' : '🇮🇷 Iran-Specific: The Reduced Dividend Rate Under the Iran-Romania Tax Treaty'}
+            </h3>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'معاهده اجتناب از اخذ مالیات مضاعف ایران-رومانی (امضا ۲۰۰۱، قانون ۲۷۹/۲۰۰۲، همان معاهده‌ای که در بخش «کار» درباره حقوق کارکنان توضیح داده شد) در ماده ۱۰ خودش، سقف مالیات کسر از منبع سود سهام را ۱۰٪ تعیین کرده — یعنی پایین‌تر از نرخ داخلی جدید ۱۶٪ رومانی. به این معنا که یک سهامدار مقیم مالیاتی ایران که از شرکت رومانیایی خود سود سهام دریافت می‌کند، در اصل می‌تواند با ارائه «گواهی اقامت مالیاتی» از مقامات ایرانی به سازمان امور مالیاتی رومانی (ANAF)، از نرخ کاهش‌یافته ۱۰٪ به‌جای ۱۶٪ استفاده کند. توجه: این یک حق قانونی مالیاتی است و کاملاً جدا از مشکل عملی انتقال خودِ پول است (که در صفحه «صرافی و انتقال ارز» توضیح داده شده) — داشتن حق قانونی به نرخ پایین‌تر به‌معنای ساده‌تر شدن انتقال واقعی وجه نیست.'
+                : "The Iran-Romania double taxation treaty (signed 2001, ratified by Law 279/2002 — the same treaty already covered on the Work section for salary income) caps dividend withholding tax at 10% under its own Article 10, below Romania's new 16% domestic rate. In practice, an Iranian tax resident receiving dividends from their Romanian company can claim the reduced 10% treaty rate instead of 16% by submitting a Certificate of Tax Residency from Iranian authorities to Romania's tax agency (ANAF). Note: this is a distinct legal tax entitlement, separate from the practical difficulty of actually transferring the money (covered on the \"Currency Exchange\" page) — being legally entitled to the lower rate doesn't make the physical transfer any easier."}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -171,6 +229,10 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر درآمد من از ۱۰۰ هزار یورو بیشتر شود چه اتفاقی می‌افتد؟' : 'What happens if revenue exceeds €100k?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'شرکت شما به‌طور خودکار از رژیم میکرو خارج شده و مشمول پرداخت مالیات ۱۶ درصدی بر سود خالص خواهد شد.' : 'Your company will automatically exit the micro-enterprise regime and become subject to the 16% tax on net corporate profit.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'نرخ مالیات سود سهام الان چقدر است؟' : "What's the current dividend tax rate?"}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'به‌طور کلی ۱۶٪ از ۱ ژانویه ۲۰۲۶ (قبلاً ۱۰٪ بود)؛ اما سهامداران مقیم مالیاتی ایران می‌توانند با گواهی اقامت مالیاتی، طبق معاهده مالیاتی دوجانبه، از نرخ ۱۰٪ استفاده کنند.' : "Generally 16% since January 1, 2026 (previously 10%); however, Iranian tax residents can use the 10% treaty rate instead, with a Certificate of Tax Residency, under the bilateral tax treaty."}</p>
               </div>
             </div>
           </div>
@@ -227,6 +289,17 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          <div className="p-6 sm:p-8 bg-white border border-[#dfe6ef] rounded-2xl shadow-sm space-y-4">
+            <h3 className="text-lg font-bold text-[#142033]">
+              {currentLang === 'fa' ? '🇮🇷 ویژه ایرانیان: چرا افتتاح حساب بانکی شرکتی ممکن است زمان بیشتری ببرد' : '🇮🇷 Iran-Specific: Why Opening a Corporate Account May Take Longer'}
+            </h3>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'در اوت ۲۰۲۱، «فرست بانک» (First Bank SA) رومانی — با مالکیت آمریکایی — بیش از ۸۵۰,۰۰۰ دلار به سازمان کنترل دارایی‌های خارجی آمریکا (OFAC) جریمه پرداخت کرد، به‌خاطر ۷۰ تراکنش مرتبط با اشخاص مستقر در ایران و سوریه. این تنها مورد مستند از جریمه یک بانک رومانیایی به‌خاطر تراکنش‌های مرتبط با ایران است، و به‌طور معقول توضیح می‌دهد چرا بانک‌های رومانیایی امروز نسبت به مشتریان و تراکنش‌های مرتبط با ایران محتاط‌تر از میانگین عمل می‌کنند. تحریم‌های اتحادیه اروپا که در سپتامبر ۲۰۲۵ دوباره علیه ایران برقرار شدند (snapback)، عمدتاً بانک‌های ایرانی و نهادهای مالی مرتبط را هدف گرفته‌اند، نه لزوماً حساب شخصی/شرکتی اشخاص ایرانی مقیم رومانی — با این حال، تجربه مستند‌شده در کشورهای دیگر اتحادیه اروپا (مثلاً ایتالیا و آلمان، جایی که چند بانک به‌صراحت حساب مشتریان ایرانی را به‌خاطر ملیت بسته یا رد کرده‌اند) نشان می‌دهد این نوع محافظه‌کاری بانکی («ریسک‌گریزی» یا de-risking) در سطح اتحادیه اروپا رایج است، هرچند هیچ گزارش مشخصی از رد درخواست در خودِ رومانی پیدا نشد. نکته مثبت: طبق یک منبع حقوقی تخصصی، اشخاص حقوقی ایرانی (شرکت‌ها) هم می‌توانند در رومانی حساب باز کنند، به شرط ارائه مدارک کامل — پس این یک مانع مطلق نیست، بلکه یک فرآیند کندتر و با بررسی دقیق‌تر (KYC/AML) است. برای بهترین نتیجه: مدارک منبع سرمایه (proof of source of funds) را از همان ابتدا کامل و شفاف آماده کنید، و فرآیند را بلافاصله بعد از ثبت شرکت شروع کنید — قانون جدید فقط ۶۰ روز کاری فرصت می‌دهد (به صفحه «ثبت شرکت» مراجعه کنید).'
+                : "In August 2021, First Bank SA (a Romanian bank with US ownership) paid a fine of over $850,000 to the US Office of Foreign Assets Control (OFAC) over 70 transactions linked to persons based in Iran and Syria. This is the only documented case of a Romanian bank being fined specifically over Iran-linked transactions, and it reasonably explains why Romanian banks today may be more cautious than average with Iran-connected customers and transactions. The EU sanctions reimposed on Iran in September 2025 (the \"snapback\") mainly target Iranian banks and related financial entities, not necessarily the personal or corporate accounts of Iranian nationals resident in Romania — however, documented experience in other EU countries (for instance Italy and Germany, where several banks have explicitly closed or refused accounts for Iranian customers over nationality) shows this kind of bank caution (\"de-risking\") is common across the EU, though no specific report of a refusal in Romania itself was found. The positive counterpoint: according to one specialist legal source, Iranian legal entities (companies) can open accounts in Romania, provided full documentation is submitted — so this isn't an absolute barrier, just a slower process with closer KYC/AML scrutiny. For the best outcome: prepare complete, transparent proof-of-source-of-funds documentation from the start, and begin the process immediately after company registration — the new law only allows 60 working days (see the \"Company Registration\" page)."}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -235,6 +308,10 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم از راه دور حساب بانکی شرکتی باز کنم؟' : 'Can I open a corporate account entirely online as a foreigner?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'با وجود ارائه خدمات آنلاین توسط برخی بانک‌ها، برای اتباع کشورهای غیراروپایی معمولاً حضور فیزیکی مدیرعامل جهت احراز هویت در شعبه الزامی است.' : 'While some banks offer online services, foreign directors from non-EU countries are often required to visit the branch in person for KYC procedures.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا تحریم‌ها به‌طور مستقیم مانع افتتاح حساب شرکتی اشخاص ایرانی می‌شوند؟' : 'Do the sanctions directly block Iranian nationals from opening a corporate account?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'متن تحریم‌های اتحادیه اروپا صراحتاً حساب اشخاص حقیقی/حقوقی ایرانی مقیم اتحادیه اروپا را هدف نگرفته؛ مشکلاتی که در عمل پیش می‌آید بیشتر از محافظه‌کاری داخلی بانک‌ها (ریسک‌گریزی) ناشی می‌شود، نه یک ممنوعیت مستقیم قانونی.' : "The text of the EU sanctions doesn't explicitly target the accounts of Iranian individuals or companies resident in the EU; the friction that occurs in practice mostly comes from banks' own internal risk-averse policies, not a direct legal prohibition."}</p>
               </div>
             </div>
           </div>
@@ -279,6 +356,50 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          <div className="overflow-x-auto rounded-2xl border border-[#dfe6ef] shadow-sm">
+            <table className="w-full text-sm text-[#526174] bg-white">
+              <thead>
+                <tr className="bg-[#F8FAFC] border-b border-[#dfe6ef]">
+                  <th className="p-4 text-start font-bold text-[#142033]">{currentLang === 'fa' ? 'نقش شما در شرکت' : 'Your Role in the Company'}</th>
+                  <th className="p-4 text-start font-bold text-[#142033]">{currentLang === 'fa' ? 'حداقل سرمایه‌گذاری (طبق ماده ۵۵ OUG 194/2002)' : 'Minimum Investment (per Art. 55, OUG 194/2002)'}</th>
+                  <th className="p-4 text-start font-bold text-[#142033]">{currentLang === 'fa' ? 'یا حداقل اشتغال‌زایی' : 'Or Minimum Jobs Created'}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-[#eef2f6]">
+                  <td className="p-4">{currentLang === 'fa' ? 'شریک/سهامدار SRL (asociat)' : 'SRL Partner/Associate (asociat)'}</td>
+                  <td className="p-4">€50,000</td>
+                  <td className="p-4">{currentLang === 'fa' ? '۱۰ شغل تمام‌وقت' : '10 full-time jobs'}</td>
+                </tr>
+                <tr className="border-b border-[#eef2f6]">
+                  <td className="p-4">{currentLang === 'fa' ? 'سهامدار SA (acționar)' : 'SA Shareholder (acționar)'}</td>
+                  <td className="p-4">€70,000</td>
+                  <td className="p-4">{currentLang === 'fa' ? '۱۵ شغل تمام‌وقت' : '15 full-time jobs'}</td>
+                </tr>
+                <tr>
+                  <td className="p-4">{currentLang === 'fa' ? 'سطح ارتقاءیافته (اقامت ۳ ساله به‌جای سالانه)' : 'Enhanced tier (3-year permit instead of annual)'}</td>
+                  <td className="p-4">€500,000</td>
+                  <td className="p-4">{currentLang === 'fa' ? '۵۰+ شغل تمام‌وقت' : '50+ full-time jobs'}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-slate-500 italic px-2">
+            {currentLang === 'fa'
+              ? 'این ارقام مربوط به تمدید اقامت (ماده ۵۵) است — یا سرمایه‌گذاری یا اشتغال‌زایی کافی است، نیازی به هر دو نیست. توجه: آستانه ورودی اولیه نزد آژانس ARICE (پیش از سفر) کمی بالاتر است — €۱۰۰,۰۰۰/۱۰ شغل برای SRL و €۱۵۰,۰۰۰/۱۵ شغل برای SA — برای جزئیات کامل مسیر ARICE به صفحه «اقامت از طریق سرمایه‌گذاری» مراجعه کنید. مبلغ‌ها متناسب با سهم مالکیت شما محاسبه می‌شود.'
+              : "These figures apply to the residency renewal stage (Art. 55) — either the investment OR the job-creation threshold is sufficient, not both. Note: the initial entry threshold with ARICE (before travel) is somewhat higher — €100,000/10 jobs for an SRL and €150,000/15 jobs for an SA — see the \"Investment Residency\" page for the full ARICE pathway. Amounts are calculated proportionally to your ownership share."}
+          </p>
+
+          <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+            <h3 className="text-lg font-bold text-[#142033]">
+              {currentLang === 'fa' ? 'روند و مهلت‌ها' : 'Process & Timeline'}
+            </h3>
+            <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+              <li>{currentLang === 'fa' ? 'درخواست تمدید باید نزد اداره کل مهاجرت (IGI) — بر اساس اطلاعات موجود، دفتر بخش ۵ بخارست برای متقاضیان مقیم بخارست — ثبت شود، همراه با گواهی اداره کار محلی درباره تعداد کارکنان.' : 'The renewal application must be filed with IGI — based on available information, the Sector 5 Bucharest office for applicants resident in Bucharest — along with a certificate from the local labor inspectorate on employee headcount.'}</li>
+              <li>{currentLang === 'fa' ? 'مهلت رسیدگی IGI طبق متن رسمی «ظرف ۳۰ روز» است، با امکان تمدید تا ۱۵ روز دیگر در صورت نیاز به مدارک تکمیلی.' : "IGI's official processing timeline is stated as \"within 30 days,\" extendable by up to 15 more days if supplementary documents are needed."}</li>
+            </ul>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -290,7 +411,11 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </div>
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'حداقل سرمایه مورد نیاز چقدر است؟' : 'How much investment is required?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بسته به نوع و مسیر دقیق اقامت (مثلاً به عنوان مدیر یا سرمایه‌گذار عمده)، قوانین متغیر است، اما معمولاً سرمایه‌گذاری‌های بالای ۵۰,۰۰۰ یورو یا ایجاد حداقل ۱۰ شغل تمام‌وقت مد نظر IGI قرار می‌گیرد.' : 'Depending on the exact legal pathway (e.g., as a director or major investor), requirements vary, but typically investments over €50,000 or creating at least 10 full-time jobs are scrutinized favorably by IGI.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'برای شریک SRL: ۵۰,۰۰۰ یورو یا ۱۰ شغل تمام‌وقت. برای سهامدار SA: ۷۰,۰۰۰ یورو یا ۱۵ شغل تمام‌وقت — این ارقام مستقیماً از ماده ۵۵ آیین‌نامه اتباع خارجی (OUG 194/2002) گرفته شده‌اند.' : 'For an SRL partner: €50,000 or 10 full-time jobs. For an SA shareholder: €70,000 or 15 full-time jobs — these figures come directly from Article 55 of the Foreigners Regime (OUG 194/2002).'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چرا رقمی که در صفحه «اقامت از طریق سرمایه‌گذاری» دیدم بالاتر است؟' : 'Why is the figure on the "Investment Residency" page higher?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'چون آن صفحه درباره آستانه ورودی اولیه نزد ARICE است (پیش از دریافت ویزا و سفر)، در حالی که این صفحه درباره تمدید سالانه اقامت پس از استقرار در رومانی است — دو مرحله متفاوت با دو آستانه متفاوت.' : "Because that page covers the initial entry threshold with ARICE (before getting the visa and traveling), while this page covers the annual residency renewal after you're already established in Romania — two different stages with two different thresholds."}</p>
               </div>
             </div>
           </div>
@@ -357,6 +482,39 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          <div className="overflow-x-auto rounded-2xl border border-[#dfe6ef] shadow-sm">
+            <table className="w-full text-sm text-[#526174] bg-white">
+              <thead>
+                <tr className="bg-[#F8FAFC] border-b border-[#dfe6ef]">
+                  <th className="p-4 text-start font-bold text-[#142033]">{currentLang === 'fa' ? 'ارزش ملک (لئو)' : 'Property Value (RON)'}</th>
+                  <th className="p-4 text-start font-bold text-[#142033]">{currentLang === 'fa' ? 'حداقل حق‌الزحمه نوتاری (Ordin MJ 177/C/2024)' : 'Minimum Notary Fee (Ordin MJ 177/C/2024)'}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-[#eef2f6]"><td className="p-4">≤ 20,000</td><td className="p-4">2.2%، {currentLang === 'fa' ? 'حداقل ۲۳۰ لئو' : 'min. 230 RON'}</td></tr>
+                <tr className="border-b border-[#eef2f6]"><td className="p-4">20,001–65,000</td><td className="p-4">440–725 {currentLang === 'fa' ? 'لئو + ۱.۶٪ تا ۱.۹٪ مازاد' : 'RON + 1.6%–1.9% over threshold'}</td></tr>
+                <tr className="border-b border-[#eef2f6]"><td className="p-4">65,001–200,000</td><td className="p-4">1,205–1,705 {currentLang === 'fa' ? 'لئو + ۱.۱٪ تا ۱.۵٪ مازاد' : 'RON + 1.1%–1.5% over threshold'}</td></tr>
+                <tr><td className="p-4">&gt; 200,000</td><td className="p-4">2,805 {currentLang === 'fa' ? 'لئو + ۰.۶٪ تا ۰.۹٪ مازاد' : 'RON + 0.6%–0.9% over threshold'}</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-slate-500 italic px-2">
+            {currentLang === 'fa'
+              ? 'این ارقام حداقل قانونی هستند (نوتاری‌ها می‌توانند بیشتر بگیرند) و مالیات بر ارزش افزوده ۲۱٪ (از اوت ۲۰۲۵) روی آن‌ها اضافه می‌شود. علاوه بر این: ثبت در دفتر املاک (Carte Funciară) نزد OCPI برای اشخاص حقیقی ۰.۱۵٪ ارزش سند (حداقل ۶۰ لئو) و برای اشخاص حقوقی (شرکت) ۰.۵۰٪ هزینه دارد؛ فروشنده هم مالیات بر انتقال (۳٪ اگر ملک کمتر از ۳ سال مالکیت داشته، ۱٪ اگر بیشتر) را پرداخت می‌کند که نوتاری در همان جلسه کسر و به حساب دولت واریز می‌کند.'
+              : 'These are legal minimums (notaries may charge more), and 21% VAT (since August 2025) is added on top. In addition: Land Registry (Carte Funciară) registration with OCPI costs 0.15% of the deed value for individuals (min. 60 RON) and 0.50% for legal entities (companies); the seller also pays a transfer tax (3% if the property was owned under 3 years, 1% if longer), which the notary deducts and remits to the state at signing.'}
+          </p>
+
+          <div className="p-6 sm:p-8 bg-white border border-[#dfe6ef] rounded-2xl shadow-sm space-y-4">
+            <h3 className="text-lg font-bold text-[#142033]">
+              {currentLang === 'fa' ? '🇮🇷 ویژه ایرانیان: عدم وجود معاهده متقابل مالکیت زمین با ایران' : '🇮🇷 Iran-Specific: No Land-Ownership Reciprocity Treaty With Iran'}
+            </h3>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'یک منبع تخصصی حقوقی رومانیایی، ایران را صراحتاً در فهرست کشورهایی نام می‌برد که تاکنون هیچ معاهده متقابل مالکیت زمین با رومانی امضا نکرده‌اند (در کنار کشورهایی مانند آمریکا، چین، ترکیه و ژاپن) — یعنی اتباع ایرانی، مثل اکثر اتباع غیراتحادیه‌اروپایی، فقط می‌توانند مالک بنا (آپارتمان/ساختمان) باشند و روی زمینِ زیر آن فقط «حق انتفاع» (drept de superficie) دارند، نه مالکیت کامل. راه‌حل رایج همان است که در بالا توضیح داده شد: خرید ملک (همراه با زمین) از طریق یک شرکت رومانیایی (SRL) که خودتان مالک آن هستید. نکته جداگانه: ایران در فهرست «کشورهای پرریسک» اتحادیه اروپا از نظر پول‌شویی (AML) قرار دارد که طبق قانون به نوتاری‌ها و بانک‌ها الزام می‌کند بررسی دقیق‌تری (Enhanced Due Diligence) روی تراکنش‌های مرتبط با این کشورها انجام دهند — این یک واقعیت حقوقی کلی است، نه گزارشی مستند از مانع خاص برای خریداران ایرانی در دفتر یک نوتاری مشخص، اما در برنامه‌ریزی زمانی معامله باید در نظر گرفته شود.'
+                : 'One specialist Romanian legal source explicitly names Iran among the countries that have not signed a reciprocal land-ownership treaty with Romania (alongside countries like the US, China, Turkey, and Japan) — meaning Iranian nationals, like most non-EU citizens, can only own the building itself (apartment/structure) and hold a "right of superficies" (drept de superficie), not full ownership, over the land beneath it. The common workaround remains the one described above: buying the property (land included) through a Romanian company (SRL) that you own. A separate point: Iran is on the EU\'s AML "high-risk country" list, which legally requires notaries and banks to apply Enhanced Due Diligence to transactions connected to such countries — this is a general legal fact, not a documented report of a specific hurdle for Iranian buyers at any particular notary\'s office, but it is worth factoring into your transaction timeline.'}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -369,6 +527,10 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا با خرید ملک به من اقامت رومانی داده می‌شود؟' : 'Does buying real estate grant me residency?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. رومانی در حال حاضر برنامه «ویزای طلایی» (Golden Visa) بابت خرید ملک شخصی ندارد و خرید ملک مستقیماً منجر به صدور اقامت نمی‌شود.' : 'No. Romania does not currently have a "Golden Visa" program; buying real estate does not automatically grant a residence permit.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا ایران با رومانی معاهده مالکیت زمین دارد؟' : 'Does Iran have a land-ownership treaty with Romania?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. ایران در فهرست کشورهای بدون معاهده متقابل قرار دارد؛ راه‌حل رایج، خرید از طریق یک شرکت رومانیایی (SRL) است که شرکت‌ها هیچ محدودیتی در مالکیت زمین ندارند.' : "No. Iran is on the list of countries without a reciprocal treaty; the common workaround is buying through a Romanian company (SRL), since companies face no land-ownership restrictions."}</p>
               </div>
             </div>
           </div>
