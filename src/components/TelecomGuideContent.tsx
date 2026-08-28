@@ -49,13 +49,13 @@ export const TelecomGuideContent: React.FC<TelecomGuideContentProps> = ({ curren
         </div>
       </div>
 
-      {/* MANDATORY ID REGISTRATION NOTICE */}
+      {/* ID AT PURCHASE NOTICE (CORRECTED — see below) */}
       <div className="p-5 bg-amber-50 border border-amber-200 rounded-2xl flex items-center gap-3 text-amber-900">
         <span className="text-2xl">⚠️</span>
         <p className="text-sm font-semibold leading-relaxed">
           {currentLang === 'fa'
-            ? 'برخلاف بسیاری از کشورها، در رومانی از سال ۲۰۱۹ حتی سیم‌کارت‌های اعتباری (Prepaid) هم باید با مدرک شناسایی معتبر ثبت شوند — سیم‌کارت ناشناس/بدون ثبت وجود ندارد. برای خرید هر نوع سیم‌کارت، پاسپورت یا کارت اقامت خود را همراه داشته باشید.'
-            : "Unlike many countries, Romania has required ID registration for all SIM cards — including prepaid — since 2019; there is no anonymous/unregistered SIM option. Bring your passport or residence card to buy any SIM card."}
+            ? 'اصلاحیه مهم: برخلاف آنچه پیش‌تر روی این صفحه نوشته شده بود، ثبت اجباری هویت خریداران سیم‌کارت اعتباری (Prepaid) هرگز به‌طور قانونی در رومانی اجرا نشد — دو تلاش قانون‌گذاری برای این کار (۲۰۱۴ و ۲۰۱۹) هر دو توسط دادگاه قانون اساسی رومانی (CCR) به‌طور کامل لغو شدند (آخرین بار فوریه ۲۰۲۰). با این حال، در عمل بیشتر فروشندگان همچنان از روی سیاست داخلی خودشان (نه الزام قانونی) برای هر نوع سیم‌کارت پاسپورت یا کارت اقامت می‌خواهند — پس همراه داشتن آن هنوز عملاً توصیه می‌شود، فقط این‌که «قانون» نیست.'
+            : "Correction: contrary to what this page previously stated, mandatory ID registration for prepaid SIM buyers was never actually enforced in Romania — two legislative attempts to require it (2014 and 2019) were both struck down in full by Romania's Constitutional Court (CCR), most recently in February 2020. In practice, though, most retailers still ask for a passport or residence card for any SIM purchase as their own internal policy, not a legal requirement — so it's still practically worth bringing one, just not because it's \"the law\"."}
         </p>
       </div>
 

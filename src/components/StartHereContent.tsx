@@ -101,7 +101,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
                 <span>{currentLang === 'fa' ? 'اشتباهات رایج متقاضیان' : 'Common Mistakes'}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'شروع دیرهنگام فرآیند، عدم تطبیق مدارک ترجمه‌شده با استانداردهای رومانی، و نداشتن بیمه معتبر بین‌المللی.' : 'Starting late, failing to match translated documents with Romanian standards, and lacking valid international insurance.'}</li>
+                <li>{currentLang === 'fa' ? 'جزئیات کامل ۵ اشتباه رایج مستند در بخش جدول زیر آمده — از تصدیق اشتباه مدارک تا بیمه‌ای که استاندارد IGI را برآورده نمی‌کند.' : 'The 5 documented common mistakes are detailed in the table below — from wrong document legalization to insurance that fails to meet IGI\'s standard.'}</li>
               </ul>
             </div>
 
@@ -171,6 +171,50 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             </div>
           </div>
           
+          <h3 className="text-2xl font-bold text-[#142033] mt-12 mb-6 px-2">{currentLang === 'fa' ? '۵ اشتباه رایج و مستند متقاضیان' : '5 Documented Common Applicant Mistakes'}</h3>
+          <div className="overflow-x-auto rounded-2xl border border-[#dfe6ef] shadow-sm">
+            <table className="w-full text-sm text-[#526174] bg-white">
+              <thead>
+                <tr className="bg-[#F8FAFC] border-b border-[#dfe6ef]">
+                  <th className="p-4 text-start font-bold text-[#142033]">{currentLang === 'fa' ? 'اشتباه' : 'Mistake'}</th>
+                  <th className="p-4 text-start font-bold text-[#142033]">{currentLang === 'fa' ? 'چرا مشکل‌ساز می‌شود' : 'Why It Causes Problems'}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-[#eef2f6]">
+                  <td className="p-4 font-semibold text-[#142033]">{currentLang === 'fa' ? 'استفاده از آپوستیل به‌جای زنجیره تصدیق کامل' : 'Using an apostille instead of full consular legalization'}</td>
+                  <td className="p-4">{currentLang === 'fa' ? 'ایران عضو کنوانسیون آپوستیل لاهه نیست، پس مهر آپوستیل روی مدارک ایرانی (شناسنامه، سند ازدواج، گواهی عدم سوءپیشینه) در رومانی معتبر نیست — باید زنجیره کامل «سوپرالگالیزاره» طی شود (تایید وزارت خارجه ایران → تایید سفارت رومانی در تهران → ترجمه رسمی و تصدیق در رومانی).' : "Iran isn't party to the Hague Apostille Convention, so an apostille stamp on Iranian documents (birth/marriage certificates, police clearance) is not valid in Romania — the full \"supralegalizare\" chain is required instead (Iranian Foreign Ministry legalization → Romanian Embassy in Tehran legalization → certified translation and notarization in Romania)."}</td>
+                </tr>
+                <tr className="border-b border-[#eef2f6]">
+                  <td className="p-4 font-semibold text-[#142033]">{currentLang === 'fa' ? 'ترجمه‌ای که با استاندارد مترجم رسمی رومانی مطابقت ندارد' : "A translation that doesn't meet Romania's certified-translator standard"}</td>
+                  <td className="p-4">{currentLang === 'fa' ? 'ترجمه باید توسط مترجم رسمی مورد تایید دادگستری رومانی انجام شود — تعداد مترجمین رسمی فارسی-رومانیایی بسیار محدود است (جزئیات کامل در صفحه «ترجمه رسمی»)، پس این مرحله را دیر شروع نکنید.' : 'The translation must be done by a translator officially authorized by Romanian courts — the number of authorized Persian-Romanian translators is very limited (full details on the "Certified Translation" page), so don\'t leave this step until late.'}</td>
+                </tr>
+                <tr className="border-b border-[#eef2f6]">
+                  <td className="p-4 font-semibold text-[#142033]">{currentLang === 'fa' ? 'واریز ناگهانی و بدون سابقه به حساب بانکی' : 'A sudden, unexplained bank deposit'}</td>
+                  <td className="p-4">{currentLang === 'fa' ? 'یک واریز بزرگ چند روز قبل از ارسال مدارک به‌عنوان «پول نمایشی» تلقی می‌شود، نه دارایی واقعی — بهتر است ۳ تا ۶ ماه سابقه ثابت گردش حساب داشته باشید تا واریز یک‌باره.' : "A large deposit made just days before submitting your application reads as \"show money,\" not genuine funds — a consistent 3–6 month statement history looks far stronger than a single large deposit."}</td>
+                </tr>
+                <tr className="border-b border-[#eef2f6]">
+                  <td className="p-4 font-semibold text-[#142033]">{currentLang === 'fa' ? 'خرید بیمه‌ای که با مدت اقامت هم‌خوانی ندارد' : "Buying insurance that doesn't match your residency duration"}</td>
+                  <td className="p-4">{currentLang === 'fa' ? 'بیمه اقامت باید هزینه‌های اورژانسی/پزشکی را برای کل مدت اقامت درخواستی پوشش دهد — یک بیمه مسافرتی کوتاه‌مدت معمولی این استاندارد را برآورده نمی‌کند و می‌تواند باعث رد پرونده شود.' : "Residency insurance must cover emergency/medical costs for your full requested stay — an ordinary short-term travel policy doesn't meet this standard and can get an application rejected."}</td>
+                </tr>
+                <tr>
+                  <td className="p-4 font-semibold text-[#142033]">{currentLang === 'fa' ? 'ارقام ناهماهنگ بین مدارک مختلف' : 'Inconsistent figures across different documents'}</td>
+                  <td className="p-4">{currentLang === 'fa' ? 'مبلغ حمایت مالی، آدرس، یا تاریخ‌ها باید در تمام مدارک ارسالی (نامه حمایت مالی، صورت‌حساب بانکی، فرم درخواست) دقیقاً یکسان باشد — کوچک‌ترین ناهماهنگی می‌تواند باعث تاخیر یا رد شود.' : 'The financial-support amount, address, and dates must match exactly across every submitted document (sponsorship letter, bank statement, application form) — even a small mismatch can cause delay or rejection.'}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="p-6 sm:p-8 bg-white border border-[#dfe6ef] rounded-2xl shadow-sm space-y-3">
+            <h3 className="text-lg font-bold text-[#142033]">
+              {currentLang === 'fa' ? '🇮🇷 ویژه ایرانیان: نوبت سفارت تهران و پرواز' : '🇮🇷 Iran-Specific: The Tehran Embassy Appointment & Your Flight'}
+            </h3>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'نوبت‌های ویزای D نزد سفارت رومانی در تهران محدودند، و منطقه در سال‌های ۲۰۲۵-۲۰۲۶ چند بار دستخوش وقفه‌های موقت در خدمات کنسولی اروپایی شده (چند سفارت اروپایی دیگر، نه لزوماً رومانی، به‌طور موقت خدمات ویزا را متوقف کردند) — این دلیل خوبی برای شروع زودهنگام درخواست نوبت است، نه فقط یک توصیه کلی. همچنین توجه کنید: پرواز مستقیم تهران-بخارست وجود ندارد؛ مسیر معمول از طریق استانبول (ترکیش ایرلاینز یا پگاسوس) است. مسیرهای جایگزین از طریق دبی/دوحه گاهی به‌خاطر تحولات منطقه‌ای موقتاً مختل می‌شوند — نزدیک تاریخ سفرتان وضعیت را دوباره چک کنید.' : "D-visa appointment slots at the Romanian Embassy in Tehran are limited, and the region saw several temporary disruptions to European consular services during 2025–2026 (several other European embassies, not necessarily Romania's, temporarily paused visa services) — this is a genuine, specific reason to request your appointment early, not just generic advice. Also note: there is no direct Tehran–Bucharest flight; the usual route transits through Istanbul (Turkish Airlines or Pegasus). Alternative routes via Dubai/Doha have occasionally been disrupted by regional events — recheck conditions close to your travel date."}
+            </p>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -183,6 +227,10 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا برای مهاجرت به وکیل نیاز دارم؟' : 'Do I need an immigration lawyer to move to Romania?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'اگرچه از نظر قانونی اجباری نیست، اما برای مسیرهای پیچیده‌ای مانند ثبت شرکت یا مجوز کار، داشتن یک مشاور یا وکیل مهاجرتی به‌شدت توصیه می‌شود.' : 'While not legally required, hiring a specialized consultant or lawyer is highly recommended for complex pathways like company registration or work permits.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا پرواز مستقیم از تهران به بخارست وجود دارد؟' : 'Is there a direct flight from Tehran to Bucharest?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. پرواز مستقیمی بین تهران و بخارست وجود ندارد؛ باید از طریق استانبول (یا گاهی دبی/دوحه) ترانزیت کنید.' : 'No. There is no direct flight between Tehran and Bucharest; you must transit through Istanbul (or occasionally Dubai/Doha).'}</p>
               </div>
             </div>
           </div>
@@ -227,7 +275,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
                 <span>{currentLang === 'fa' ? 'کارهای عملی روزهای اول' : 'Practical First Tasks'}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'تهیه سیم‌کارت محلی، افتتاح حساب بانکی (نیاز به CNP یا مدرک اقامت دارد)، و پیدا کردن محل اسکان موقت.' : 'Getting a local SIM card, opening a bank account (requires CNP or residency document), and finding temporary accommodation.'}</li>
+                <li>{currentLang === 'fa' ? 'تهیه سیم‌کارت محلی، افتتاح حساب بانکی (نیاز به CNP یا مدرک اقامت دارد)، و پیدا کردن محل اسکان موقت. جزئیات اپراتورها در جدول زیر آمده است.' : 'Getting a local SIM card, opening a bank account (requires CNP or residency document), and finding temporary accommodation. Operator details are in the table below.'}</li>
               </ul>
             </div>
 
@@ -237,7 +285,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
                 <span>{currentLang === 'fa' ? 'نکته مهم آدرس' : 'Important Address Note'}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
-                <li>{currentLang === 'fa' ? 'آدرس محل سکونت باید در مدارک اقامتی ثبت شود؛ تغییر آدرس باید به IGI اطلاع داده شود.' : 'Your residential address must be registered on your residency documents; any change of address must be reported to IGI.'}</li>
+                <li>{currentLang === 'fa' ? 'آدرس محل سکونت باید در مدارک اقامتی ثبت شود؛ تغییر آدرس باید به IGI اطلاع داده شود. مدارک قابل قبول برای اثبات آدرس در جدول زیر فهرست شده‌اند.' : 'Your residential address must be registered on your residency documents; any change of address must be reported to IGI. Accepted proof-of-address documents are listed in the table below.'}</li>
               </ul>
             </div>
             
@@ -280,7 +328,108 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             </div>
           </div>
 
-          
+          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#dfe6ef] shadow-sm space-y-4">
+            <h3 className="text-xl font-bold text-[#142033]">
+              {currentLang === 'fa' ? 'اپراتورهای موبایل رومانی و سیم‌کارت پیش‌پرداخت' : 'Romanian Mobile Operators & Prepaid SIM Cards'}
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'چهار اپراتور فعال در رومانی وجود دارد: Orange Romania، Vodafone Romania، Telekom Romania (Telekom Mobile) و Digi Mobil (نهاد حقوقی RCS&RDS). برای خرید سیم‌کارت پیش‌پرداخت به‌عنوان تبعهٔ خارجی، معمولاً فقط نشان‌دادن پاسپورت کافی است — نیازی به CNP یا مدرک اقامت نیست.'
+                : 'Romania has four active mobile operators: Orange Romania, Vodafone Romania, Telekom Romania (Telekom Mobile), and Digi Mobil (legal entity RCS&RDS). As a foreigner, buying a prepaid SIM generally only requires showing your passport — no CNP or residency document needed.'}
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-[#F1F5F9] text-[#334155]">
+                    <th className="p-3 text-start border border-[#e2e8f0] font-bold">{currentLang === 'fa' ? 'اپراتور' : 'Operator'}</th>
+                    <th className="p-3 text-start border border-[#e2e8f0] font-bold">{currentLang === 'fa' ? 'شروع قیمت بستهٔ پیش‌پرداخت (تقریبی)' : 'Approx. Starting Prepaid Price'}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="p-3 border border-[#e2e8f0] font-semibold">Orange Romania</td>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'حدود ۵ یورو (تقریباً ۵ گیگابایت)' : '≈ €5 (around 5GB)'}</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border border-[#e2e8f0] font-semibold">Vodafone Romania</td>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'حدود ۹ یورو (تقریباً ۱۰ گیگابایت)' : '≈ €9 (around 10GB)'}</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border border-[#e2e8f0] font-semibold">Telekom Romania</td>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'حدود ۵ یورو (اینترنت ۴G نامحدود در برخی بسته‌ها)' : '≈ €5 (unlimited 4G data in some plans)'}</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border border-[#e2e8f0] font-semibold">Digi Mobil</td>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'در محدودهٔ مشابه (۵ تا ۱۵ یورو)' : 'Similar range (€5–€15)'}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-[11px] italic text-slate-400">{disclaimer}</p>
+            <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-amber-900 text-sm leading-relaxed">
+              {currentLang === 'fa'
+                ? '⚠️ برخلاف آنچه ممکن است شنیده باشید، ثبت اجباری هویت خریدار سیم‌کارت پیش‌پرداخت هرگز قانوناً در رومانی اجرا نشد (دو تلاش قانون‌گذاری در ۲۰۱۴ و ۲۰۱۹ هر دو توسط دادگاه قانون اساسی رومانی لغو شدند). با این حال، بیشتر فروشندگان همچنان از روی سیاست داخلی خودشان پاسپورت می‌خواهند — پس همراه داشتن آن توصیه می‌شود. جزئیات کامل در بخش '
+                : "⚠️ Contrary to what you may have heard, mandatory ID registration for prepaid SIM buyers was never actually enforced in Romania (two legislative attempts, in 2014 and 2019, were both struck down by Romania's Constitutional Court). Most retailers still ask for your passport as their own store policy, though — so bring it along. Full details in "}
+              <Link href="/needs/telecom" className="text-[#2F6FED] hover:underline font-medium">{currentLang === 'fa' ? 'راهنمای مخابرات' : 'the Telecom Guide'}</Link>
+              {currentLang === 'fa' ? ' آمده است.' : '.'}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#dfe6ef] shadow-sm space-y-4">
+            <h3 className="text-xl font-bold text-[#142033]">
+              {currentLang === 'fa' ? 'مدارک قابل‌قبول برای اثبات آدرس نزد IGI' : 'Documents IGI Accepts as Proof of Address'}
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'طبق سند رسمی اداره کل مهاجرت (IGI) با عنوان «dovada spațiului de locuit»، یکی از مدارک زیر برای اثبات آدرس محل سکونت در درخواست اقامت پذیرفته می‌شود:'
+                : 'Per IGI\'s own official document ("dovada spațiului de locuit" — proof of housing), one of the following is accepted as address proof on a residency application:'}
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-[#F1F5F9] text-[#334155]">
+                    <th className="p-3 text-start border border-[#e2e8f0] font-bold">#</th>
+                    <th className="p-3 text-start border border-[#e2e8f0] font-bold">{currentLang === 'fa' ? 'نوع مدرک' : 'Document Type'}</th>
+                    <th className="p-3 text-start border border-[#e2e8f0] font-bold">{currentLang === 'fa' ? 'نکته' : 'Note'}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">1</td>
+                    <td className="p-3 border border-[#e2e8f0] font-semibold">{currentLang === 'fa' ? 'قرارداد خرید ملک' : 'Property sale contract'}</td>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'اگر ملک را خریده‌اید' : 'If you own the property'}</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">2</td>
+                    <td className="p-3 border border-[#e2e8f0] font-semibold">{currentLang === 'fa' ? 'قرارداد اجاره' : 'Rental agreement'}</td>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'اگر موجر شخص حقیقی است، باید نزد ادارهٔ مالیاتی محلی (Administrația Financiară) ثبت شده باشد' : "If the landlord is a natural person, must be registered with the local tax authority (Administrația Financiară)"}</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">3</td>
+                    <td className="p-3 border border-[#e2e8f0] font-semibold">{currentLang === 'fa' ? 'قرارداد کومودات' : 'Comodatum (free-loan) contract'}</td>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'استفادهٔ رایگان از ملک با اجازهٔ مالک' : 'Free use of a property with the owner\'s permission'}</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">4</td>
+                    <td className="p-3 border border-[#e2e8f0] font-semibold">{currentLang === 'fa' ? 'رأی دادگاه' : 'Court decision'}</td>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'در موارد اختلاف یا وضعیت خاص حقوقی' : 'For disputed or special legal situations'}</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">5</td>
+                    <td className="p-3 border border-[#e2e8f0] font-semibold">{currentLang === 'fa' ? 'اظهارنامهٔ پذیرش در فضا' : 'Notarized hosting declaration'}</td>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'از صاحب‌ملک، به‌همراه سند مالکیت او؛ فقط نزد نوتار عمومی رومانیایی قابل صدور است' : "From the property owner, plus their proof of ownership; can only be issued before a Romanian public notary"}</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">6</td>
+                    <td className="p-3 border border-[#e2e8f0] font-semibold">{currentLang === 'fa' ? 'گواهی شهردار' : "Mayor's certificate"}</td>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'فقط در مناطق روستایی، از دفتر ثبت کشاورزی محلی' : 'Rural areas only, from the local agricultural registry office'}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-[11px] italic text-slate-400">{disclaimer}</p>
+          </div>
+
           <h3 className="text-2xl font-bold text-[#142033] mt-12 mb-6 px-2">{currentLang === 'fa' ? 'راهنمای ۷۲ ساعت نخست' : 'First 72 Hours Guide'}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
