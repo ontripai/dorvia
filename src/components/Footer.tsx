@@ -41,6 +41,12 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
                 : 'Guidance for entry, residence, study, work and life in Romania'}
             </p>
 
+            <ul className="space-y-2 text-slate-300 pt-2">
+              <li><Link href="/services" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'خدمات ما' : 'Our Services'}</Link></li>
+              <li><Link href="/articles" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'مقالات' : 'Articles'}</Link></li>
+              <li><Link href="/contact" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'تماس با ما' : 'Contact Us'}</Link></li>
+            </ul>
+
             <div className="flex items-center space-x-2 rtl:space-x-reverse text-[11px] text-slate-400">
               {/* EU GDPR Removed */}
             </div>

@@ -67,6 +67,8 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             { id: 'start-here/planning-to-come', label: isFa ? 'قصد آمدن به رومانی دارم' : 'Planning to come' },
             { id: 'start-here/newly-arrived', label: isFa ? 'به‌تازگی وارد شده‌ام' : 'Just arrived' },
             { id: 'start-here/settling-in', label: isFa ? 'استقرار و ماه اول' : 'Settling In' },
+            { id: 'start-here/long-term-stay', label: isFa ? 'اقامت بلندمدت می‌خواهم' : 'Looking for long-term stay' },
+            { id: 'start-here/citizenship-goal', label: isFa ? 'هدفم تابعیت رومانی است' : 'My goal is citizenship' },
           ]
         }
       ]
