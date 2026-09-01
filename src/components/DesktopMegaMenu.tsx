@@ -59,6 +59,9 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 <li><Link href="/start-here/planning-to-come" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🎯 {currentLang === 'fa' ? 'قصد آمدن به رومانی دارم' : 'Planning to come'}</Link></li>
                 <li><Link href="/start-here/newly-arrived" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🛬 {currentLang === 'fa' ? 'به‌تازگی وارد شده‌ام' : 'Just arrived'}</Link></li>
                 <li><Link href="/start-here/settling-in" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🏠 {currentLang === 'fa' ? 'در رومانی زندگی می‌کنم' : 'Living in Romania'}</Link></li>
+                <li><Link href="/start-here/long-term-stay" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>📆 {currentLang === 'fa' ? 'اقامت بلندمدت می‌خواهم' : 'Looking for long-term stay'}</Link></li>
+                <li><Link href="/start-here/citizenship-goal" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🛂 {currentLang === 'fa' ? 'هدفم تابعیت رومانی است' : 'My goal is citizenship'}</Link></li>
+                <li><Link href="/start-here" className="hover:text-[#2F6FED] py-1 cursor-pointer font-bold" onClick={onClose}>{currentLang === 'fa' ? 'مشاهده همه مراحل ←' : 'See all stages →'}</Link></li>
               </ul>
             </div>
 

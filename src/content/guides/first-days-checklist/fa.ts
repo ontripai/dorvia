@@ -400,7 +400,7 @@ export const firstDaysChecklistFA: OperationalGuide = {
       ],
       steps: [
         { title: 'عملی: ارتباطات', description: 'تهیه یک سیم کارت اعتباری (نیازی به مجوز اقامت ندارد).', claimId: 'c-short-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
-        { title: 'Legal: Accommodation Registration', description: 'Any foreigner entering Romania who does not stay in a hotel or licensed tourism accommodation must declare their stay to the local police within 3 days. Hotels register tourists automatically.', claimId: 'c-short-step-2', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-hosting-notification', authority: 'IGI' }
+        { title: 'الزام قانونی: اعلام محل اقامت', description: 'هر فرد خارجی که وارد رومانی می‌شود و در هتل یا اقامتگاه گردشگری دارای مجوز اقامت نمی‌کند، باید ظرف ۳ روز محل اقامت خود را به پلیس محلی اعلام کند. هتل‌ها به‌طور خودکار گردشگران را ثبت می‌کنند.', claimId: 'c-short-step-2', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-hosting-notification', authority: 'IGI' }
       ],
       fees: [],
       timeline: [],
@@ -420,8 +420,8 @@ export const firstDaysChecklistFA: OperationalGuide = {
         { name: 'کارت اقامت معتبر', isMandatory: true, claimId: 'c-exist-doc-2', sourceId: 'igi-general-renewal', reviewDate: '2026-08-05', status: 'VERIFIED_LEGAL_REQUIREMENT' }
       ],
       steps: [
-        { title: 'Practical: Verify Expiry', description: 'Check the physical expiry date printed on your residence permit immediately upon arrival.', claimId: 'c-exist-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
-        { title: 'Legal: Renewal Deadline', description: 'Renewal applications must be submitted at least 30 days before the expiry date of your current residence permit.', claimId: 'c-exist-step-2', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-general-renewal', authority: 'IGI' }
+        { title: 'عملی: بررسی تاریخ انقضا', description: 'بلافاصله پس از ورود، تاریخ انقضای چاپ‌شده روی کارت اقامت خود را بررسی کنید.', claimId: 'c-exist-step-1', status: 'RECOMMENDED_PRACTICAL_ACTION', reviewDate: '2026-08-05' },
+        { title: 'الزام قانونی: مهلت تمدید', description: 'درخواست تمدید باید حداقل ۳۰ روز پیش از تاریخ انقضای کارت اقامت فعلی شما ارائه شود.', claimId: 'c-exist-step-2', status: 'VERIFIED_LEGAL_REQUIREMENT', reviewDate: '2026-08-05', sourceId: 'igi-general-renewal', authority: 'IGI' }
       ],
       fees: [],
       timeline: [],

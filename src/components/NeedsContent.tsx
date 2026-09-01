@@ -516,10 +516,10 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#dfe6ef]">
-                  <tr><td className="p-2.5 font-bold text-[#142033]">{currentLang === 'fa' ? 'تأیید صحت امضا (نسخه اول)' : 'Signature authentication (first copy)'}</td><td className="p-2.5">50 RON</td></tr>
-                  <tr><td className="p-2.5 font-bold text-[#142033]">{currentLang === 'fa' ? 'کپی برابر اصل (هر صفحه)' : 'Certified true copy (per page)'}</td><td className="p-2.5">3–5 RON</td></tr>
-                  <tr><td className="p-2.5 font-bold text-[#142033]">{currentLang === 'fa' ? 'وکالت‌نامه عمومی (نسخه اول)' : 'General power of attorney (first copy)'}</td><td className="p-2.5">30 RON</td></tr>
-                  <tr><td className="p-2.5 font-bold text-[#142033]">{currentLang === 'fa' ? 'وکالت‌نامه ملکی/ارثیه (نسخه اول)' : 'Real-estate / inheritance POA (first copy)'}</td><td className="p-2.5">70 RON</td></tr>
+                  <tr><td className="p-2.5 font-bold text-[#142033]">{currentLang === 'fa' ? 'تأیید صحت امضا روی اسناد' : 'Signature authentication on documents'}</td><td className="p-2.5">250 RON</td></tr>
+                  <tr><td className="p-2.5 font-bold text-[#142033]">{currentLang === 'fa' ? 'کپی برابر اصل (هر صفحه، مدرک ارائه‌شده توسط متقاضی)' : 'Certified true copy (per page, document supplied by applicant)'}</td><td className="p-2.5">5 RON</td></tr>
+                  <tr><td className="p-2.5 font-bold text-[#142033]">{currentLang === 'fa' ? 'کپی برابر اصل از آرشیو نوتاری (هر صفحه)' : 'Certified copy from notary archive (per page)'}</td><td className="p-2.5">7 RON</td></tr>
+                  <tr><td className="p-2.5 font-bold text-[#142033]">{currentLang === 'fa' ? 'وکالت‌نامه (انتقال/تحصیل اموال منقول یا غیرمنقول، نمایندگی در ارث)' : 'Power of attorney (transfer/acquisition of movable or immovable assets, inheritance representation)'}</td><td className="p-2.5">100 RON</td></tr>
                 </tbody>
               </table>
             </div>

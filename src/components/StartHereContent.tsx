@@ -7,6 +7,7 @@ import { Button } from './Button';
 import { ArrowRight, ArrowLeft } from './Icons';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { EvaluationCTA } from './EvaluationCTA';
 
 interface StartHereContentProps {
   subRoute: string;
@@ -211,7 +212,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             </h3>
             <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
               {currentLang === 'fa'
-                ? 'نوبت‌های ویزای D نزد سفارت رومانی در تهران محدودند، و منطقه در سال‌های ۲۰۲۵-۲۰۲۶ چند بار دستخوش وقفه‌های موقت در خدمات کنسولی اروپایی شده (چند سفارت اروپایی دیگر، نه لزوماً رومانی، به‌طور موقت خدمات ویزا را متوقف کردند) — این دلیل خوبی برای شروع زودهنگام درخواست نوبت است، نه فقط یک توصیه کلی. همچنین توجه کنید: پرواز مستقیم تهران-بخارست وجود ندارد؛ مسیر معمول از طریق استانبول (ترکیش ایرلاینز یا پگاسوس) است. مسیرهای جایگزین از طریق دبی/دوحه گاهی به‌خاطر تحولات منطقه‌ای موقتاً مختل می‌شوند — نزدیک تاریخ سفرتان وضعیت را دوباره چک کنید.' : "D-visa appointment slots at the Romanian Embassy in Tehran are limited, and the region saw several temporary disruptions to European consular services during 2025–2026 (several other European embassies, not necessarily Romania's, temporarily paused visa services) — this is a genuine, specific reason to request your appointment early, not just generic advice. Also note: there is no direct Tehran–Bucharest flight; the usual route transits through Istanbul (Turkish Airlines or Pegasus). Alternative routes via Dubai/Doha have occasionally been disrupted by regional events — recheck conditions close to your travel date."}
+                ? 'نوبت‌های ویزای D نزد سفارت رومانی در تهران محدودند، و منطقه در سال‌های ۲۰۲۵-۲۰۲۶ چند بار دستخوش وقفه‌های موقت در خدمات کنسولی اروپایی شده (چند سفارت اروپایی دیگر، نه لزوماً رومانی، به‌طور موقت خدمات ویزا را متوقف کردند) — این دلیل خوبی برای شروع زودهنگام درخواست نوبت است، نه فقط یک توصیه کلی. همچنین توجه کنید: پرواز مستقیم تهران-بخارست وجود ندارد؛ مسیر معمول از طریق استانبول (ترکیش ایرلاینز یا پگاسوس) است — این مسیر پایدار مانده و تحت‌تاثیر قرار نگرفته. اما مسیرهای جایگزین از طریق دبی/دوحه در حال حاضر با اختلال واقعی و ادامه‌دار مواجه‌اند: پس از یک درگیری بزرگ‌تر ایران-اسرائیل-آمریکا که از ۷-۸ ژوئیه ۲۰۲۶ دوباره آغاز شد، چندین شرکت هواپیمایی پروازهای خود به دبی/دوحه را تعلیق کردند (برخی تا اکتبر ۲۰۲۶، برخی مثل ویرجین آتلانتیک تا اکتبر ۲۰۲۷، فین‌ایر به دوحه تا مارس ۲۰۲۷) و تا سپتامبر ۲۰۲۶ هیچ تاریخ مشخصی برای عادی‌سازی کامل اعلام نشده. توصیه عملی: روی مسیر استانبول (که پایدار مانده) برنامه‌ریزی کنید، نه دبی/دوحه، و در هر صورت نزدیک تاریخ سفرتان وضعیت پرواز را مجدداً بررسی کنید.' : "D-visa appointment slots at the Romanian Embassy in Tehran are limited, and the region saw several temporary disruptions to European consular services during 2025–2026 (several other European embassies, not necessarily Romania's, temporarily paused visa services) — this is a genuine, specific reason to request your appointment early, not just generic advice. Also note: there is no direct Tehran–Bucharest flight; the usual route transits through Istanbul (Turkish Airlines or Pegasus) — this route has stayed stable and unaffected. Alternative routes via Dubai/Doha, however, currently face real, ongoing disruption: after a larger Iran-Israel-US conflict resumed on July 7-8, 2026, several airlines suspended Dubai/Doha service (some through October 2026, some like Virgin Atlantic through October 2027, Finnair to Doha through March 2027), and as of September 2026 no firm date for full normalization has been announced. Practical advice: plan around the Istanbul route (which has remained stable) rather than Dubai/Doha, and in any case recheck flight conditions close to your travel date."}
             </p>
           </div>
 
@@ -348,24 +349,24 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
                 <tbody>
                   <tr>
                     <td className="p-3 border border-[#e2e8f0] font-semibold">Orange Romania</td>
-                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'حدود ۵ یورو (تقریباً ۵ گیگابایت)' : '≈ €5 (around 5GB)'}</td>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? '۳ یورو (۱۵۰ گیگابایت با سرعت 5G) یا ۵ یورو (اینترنت 5G+ نامحدود)' : '€3 (150GB at 5G speed) or €5 (unlimited 5G+ data)'}</td>
                   </tr>
                   <tr>
                     <td className="p-3 border border-[#e2e8f0] font-semibold">Vodafone Romania</td>
-                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'حدود ۹ یورو (تقریباً ۱۰ گیگابایت)' : '≈ €9 (around 10GB)'}</td>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'ما نتوانستیم بسته‌های حجمی فعلی این اپراتور را از سایت رسمی تایید کنیم — رقم دقیق را مستقیماً از vodafone.ro استعلام بگیرید.' : "We could not confirm this operator's current bundled data plans from its official site — check vodafone.ro directly for exact current pricing."}</td>
                   </tr>
                   <tr>
                     <td className="p-3 border border-[#e2e8f0] font-semibold">Telekom Romania</td>
-                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'حدود ۵ یورو (اینترنت ۴G نامحدود در برخی بسته‌ها)' : '≈ €5 (unlimited 4G data in some plans)'}</td>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? '۵ یورو (بسته «Mobil Nelimitat 5»، اینترنت نامحدود)' : '€5 ("Mobil Nelimitat 5" package, unlimited data)'}</td>
                   </tr>
                   <tr>
                     <td className="p-3 border border-[#e2e8f0] font-semibold">Digi Mobil</td>
-                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'در محدودهٔ مشابه (۵ تا ۱۵ یورو)' : 'Similar range (€5–€15)'}</td>
+                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? '۲.۵ یورو در ماه (۱۰۰ گیگابایت) یا ۵ یورو در ماه (اینترنت نامحدود)' : '€2.5/month (100GB) or €5/month (unlimited data)'}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <p className="text-[11px] italic text-slate-400">{disclaimer}</p>
+            <p className="text-[11px] italic text-slate-400">{currentLang === 'fa' ? 'منبع: صفحات رسمی و بروشور تعرفه Orange (ژانویه ۲۰۲۶)، Telekom.ro، و پوشش خبری Gadget.ro از راه‌اندازی مجدد Digi Mobil — آخرین بررسی: سپتامبر ۲۰۲۶. این ارقام به‌سرعت تغییر می‌کنند؛ پیش از خرید حتماً از سایت رسمی همان اپراتور تایید بگیرید.' : 'Source: official Orange pages and tariff brochure (January 2026), Telekom.ro, and Gadget.ro coverage of Digi Mobil\'s prepaid relaunch — last checked: September 2026. These figures change quickly; always confirm on the operator\'s own site before buying.'}</p>
             <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-amber-900 text-sm leading-relaxed">
               {currentLang === 'fa'
                 ? '⚠️ برخلاف آنچه ممکن است شنیده باشید، ثبت اجباری هویت خریدار سیم‌کارت پیش‌پرداخت هرگز قانوناً در رومانی اجرا نشد (دو تلاش قانون‌گذاری در ۲۰۱۴ و ۲۰۱۹ هر دو توسط دادگاه قانون اساسی رومانی لغو شدند). با این حال، بیشتر فروشندگان همچنان از روی سیاست داخلی خودشان پاسپورت می‌خواهند — پس همراه داشتن آن توصیه می‌شود. جزئیات کامل در بخش '
@@ -870,6 +871,55 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
       );
 
     default:
-      return null;
+      return (
+        <div className="space-y-12 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          {/* 1. HERO PANEL */}
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'شروع کنید' : 'Start Here'}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa'
+                ? 'هر مرحله از مهاجرت به رومانی نیازهای متفاوتی دارد — از برنامه‌ریزی پیش از سفر تا روزهای اول ورود، جاافتادن در زندگی روزمره، تمدید بلندمدت اقامت، و در نهایت مسیر تابعیت. راهنمای مرحله‌ای که با وضعیت فعلی شما مطابقت دارد را انتخاب کنید.'
+                : "Every stage of moving to Romania has different needs — from planning before you travel, to your first days after arrival, settling into daily life, renewing your residence long-term, and eventually the path to citizenship. Pick the stage guide that matches where you are right now."}
+            </p>
+          </div>
+
+          {/* 2. STAGE CARDS */}
+          <div className="space-y-4">
+            <h2 className="text-xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🧭</span>
+              <span>{currentLang === 'fa' ? 'در کدام مرحله هستید؟' : 'Which stage are you at?'}</span>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <Link href="/start-here/planning-to-come" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors">
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'قصد آمدن به رومانی را دارم' : 'Planning to come to Romania'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'انتخاب مسیر ورود، هزینه‌ها و زمان‌بندی پیش از سفر' : 'Choosing your entry pathway, costs, and pre-travel timeline'}</p>
+              </Link>
+              <Link href="/start-here/newly-arrived" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors">
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'تازه وارد شده‌ام' : 'Newly arrived'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'کارهای فوری روزهای اول: سیم‌کارت، اثبات آدرس و بیشتر' : 'Urgent first-days tasks: SIM card, proof of address, and more'}</p>
+              </Link>
+              <Link href="/start-here/settling-in" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors">
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'در حال جاافتادن هستم' : 'Settling in'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'زندگی روزمره، خدمات و جاافتادن در جامعه رومانی' : 'Daily life, services, and integrating into Romanian society'}</p>
+              </Link>
+              <Link href="/start-here/long-term-stay" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors">
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'اقامت بلندمدت می‌خواهم' : 'Looking for long-term stay'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'تمدید و تثبیت اقامت شما در رومانی برای سال‌های آینده' : 'Renewing and securing your residence in Romania for years ahead'}</p>
+              </Link>
+              <Link href="/start-here/citizenship-goal" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors">
+                <h4 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'هدفم تابعیت رومانی است' : 'My goal is Romanian citizenship'}</h4>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'مسیر کامل، مدارک و زمان‌بندی رسیدن به پاسپورت رومانیایی' : 'The full pathway, documents, and timeline to a Romanian passport'}</p>
+              </Link>
+            </div>
+          </div>
+
+          {/* 3. EVALUATION CTA AT BOTTOM */}
+          <div className="pt-6">
+            <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
+          </div>
+        </div>
+      );
   }
 };
