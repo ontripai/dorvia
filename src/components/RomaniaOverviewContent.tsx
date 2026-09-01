@@ -457,6 +457,37 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* PRACTICAL VISITING INFO — MUSEUMS & FESTIVAL */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-5">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🎟️</span>
+              <span>{currentLang === 'fa' ? 'اطلاعات عملی بازدید: آدرس، ساعات کاری و قیمت بلیت' : 'Practical Visiting Info: Address, Hours & Ticket Prices'}</span>
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl space-y-2 text-sm text-[#526174]">
+                <strong className="block text-[#142033]">{currentLang === 'fa' ? 'موزه ملی هنر رومانی (MNAR)' : 'National Museum of Art of Romania (MNAR)'}</strong>
+                <p>{currentLang === 'fa' ? 'آدرس: Calea Victoriei ۴۹-۵۳، بخارست. ساعات کاری: چهارشنبه تا جمعه ۱۰-۱۸، شنبه و یکشنبه ۱۱-۱۹؛ دوشنبه و سه‌شنبه تعطیل.' : 'Address: Calea Victoriei 49-53, Bucharest. Hours: Wed–Fri 10:00–18:00, Sat–Sun 11:00–19:00; closed Mon–Tue.'}</p>
+                <p>{currentLang === 'fa' ? 'بلیت (طبق منابع غیررسمی گردشگری): گالری ملی یا گالری هنر اروپا به‌تنهایی حدود ۲۴ لئو (بزرگسال) / ۶ لئو (دانشجو)؛ بلیت ترکیبی هر دو گالری حدود ۳۲ لئو (بزرگسال). سایت رسمی موزه (mnar.ro) هنگام تهیه این صفحه در دسترس نبود تا این ارقام مستقیماً تایید شود — پیش از بازدید، نرخنامه فعلی را در mnar.ro بررسی کنید.' : 'Tickets (per unofficial tourism sources): National Gallery or European Art Gallery alone ~24 RON (adult) / ~6 RON (student); combined ticket for both galleries ~32 RON (adult). The museum\'s official site (mnar.ro) was unreachable while researching this page, so these figures are not independently confirmed — check current pricing directly at mnar.ro before visiting.'}</p>
+              </div>
+              <div className="p-4 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl space-y-2 text-sm text-[#526174]">
+                <strong className="block text-[#142033]">{currentLang === 'fa' ? 'موزه روستا «دیمیتری گوستی» (Muzeul Satului)' : 'Village Museum "Dimitrie Gusti" (Muzeul Satului)'}</strong>
+                <p>{currentLang === 'fa' ? 'آدرس: Șoseaua Kiseleff ۲۸-۳۰، بخارست (کنار پارک هرستراو). ساعات کاری: چهارشنبه تا یکشنبه؛ تابستان ۹-۱۹، زمستان ۹-۱۷؛ دوشنبه و سه‌شنبه تعطیل. آخرین بلیت ۶۰ دقیقه پیش از بسته‌شدن صادر می‌شود.' : 'Address: Șoseaua Kiseleff 28-30, Bucharest (next to Herăstrău Park). Hours: Wed–Sun; summer 9:00–19:00, winter 9:00–17:00; closed Mon–Tue. Last ticket issued 60 minutes before closing.'}</p>
+                <p>{currentLang === 'fa' ? 'بلیت (طبق سایت رسمی موزه، muzeul-satului.ro): بزرگسال ۴۰ لئو، بازنشسته ۲۰ لئو (با مدرک)، دانش‌آموز/دانشجو ۱۰ لئو (با مدرک معتبر سال جاری). روزهای دوشنبه و سه‌شنبه که بیشتر بناها تعطیل‌اند، ۵۰٪ تخفیف روی بلیت کامل اعمال می‌شود.' : 'Tickets (per the museum\'s official site, muzeul-satului.ro): adults 40 RON, pensioners 20 RON (with ID), students/pupils 10 RON (with valid current-year ID). On Mondays and Tuesdays, when most structures are closed, a 50% discount applies to the full-price ticket.'}</p>
+              </div>
+            </div>
+            <div className="p-4 bg-[#eef3f8] rounded-xl text-xs sm:text-sm text-[#142033] leading-relaxed">
+              <strong className="block font-bold mb-1">{currentLang === 'fa' ? 'جشنواره بین‌المللی جورج انسکو — چه زمانی برگزار می‌شود؟' : 'The George Enescu International Festival — when does it happen?'}</strong>
+              {currentLang === 'fa'
+                ? 'این جشنواره هر دو سال یک‌بار (در سال‌های فرد) در بخارست برگزار می‌شود. بیست‌وهفتمین دوره آن از ۲۴ اوت تا ۲۱ سپتامبر ۲۰۲۵ برگزار شد؛ بر این اساس، دوره بعدی (بیست‌وهشتم) به‌احتمال زیاد در تابستان/پاییز ۲۰۲۷ خواهد بود، هرچند تا زمان نگارش این صفحه تاریخ دقیق آن رسماً اعلام نشده بود. برای تاریخ‌های قطعی، نزدیک به موعد، وب‌سایت رسمی festivalenescu.ro را بررسی کنید.'
+                : 'The festival runs biennially — every two years, in odd-numbered years — in Bucharest. Its 27th edition ran August 24 to September 21, 2025; based on that pattern, the next (28th) edition would likely fall in summer/autumn 2027, though organizers had not formally announced exact dates as of this writing. Check the official festivalenescu.ro site closer to the date for confirmed dates.'}
+            </div>
+            <p className="text-[11px] text-[#788697] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'منابع: muzeul-satului.ro (رسمی)، bucharest.net (قیمت بلیت MNAR، غیررسمی)، festivalenescu.ro. آخرین بررسی: شهریور ۱۴۰۵ / سپتامبر ۲۰۲۶.'
+                : 'Sources: muzeul-satului.ro (official), bucharest.net (MNAR ticket pricing, unofficial), festivalenescu.ro. Last reviewed: September 2026.'}
+            </p>
+          </div>
+
           <ParentHubFooterCard slugRoute="romania/culture-and-arts" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
