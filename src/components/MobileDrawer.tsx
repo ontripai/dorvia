@@ -86,6 +86,14 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             { id: 'immigration/citizenship', label: isFa ? 'تابعیت' : 'Citizenship' },
             { id: 'immigration/family-reunification', label: isFa ? 'پیوست خانواده' : 'Family Reunification' },
           ]
+        },
+        {
+          heading: isFa ? 'اقدام بر اساس محل سکونت' : 'Based on Current Location',
+          items: [
+            { id: 'immigration/apply-from-iran', label: isFa ? 'اقدام از داخل ایران (سفارت تهران)' : 'Applying from Iran' },
+            { id: 'immigration/apply-from-uae-gulf', label: isFa ? 'اقدام از امارات و حوزه خلیج فارس' : 'Applying from UAE / Gulf' },
+            { id: 'immigration/apply-from-turkey-europe', label: isFa ? 'اقدام از ترکیه و کشورهای اروپایی' : 'Applying from Turkey / Europe' },
+          ]
         }
       ]
     },
