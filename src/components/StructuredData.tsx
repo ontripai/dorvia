@@ -10,10 +10,6 @@ export function StructuredData() {
         "@type": "Organization",
         "@id": `${baseUrl}/#organization`,
         "name": "DORVIA EUROP",
-        "parentOrganization": {
-          "@type": "Organization",
-          "name": "NAVAN"
-        },
         "url": baseUrl,
         "logo": `${baseUrl}/images/logo/dorvia-logo-primary-transparent-3000.png`,
         "contactPoint": [

@@ -27,8 +27,8 @@ export const faTranslations = {
   },
   brand: {
     name: "DORVIA EUROP",
-    siteName: "در رومانی",
-    subtitle: "DORVIA EUROP — A NAVAN Brand",
+    siteName: "DORVIA EUROP",
+    subtitle: "DORVIA EUROP | راهنمای رسمی",
     tagline: "مرجع تخصصی اطلاعات و روش‌های قانونی مهاجرت، تحصیل، کار و سرمایه‌گذاری در رومانی",
     description: "پلتفرم جامع راهنمایی و ارزیابی اولیه برای ایرانیان سراسر جهان (ایران، امارات، ترکیه و...) جهت ورود قانونی، تحصیل، اشتغال و ثبت شرکت در اتحادیه اروپا و کشور رومانی."
   },
@@ -167,7 +167,7 @@ export const faTranslations = {
     quickLinks: "دسترسی سریع",
     servicesTitle: "خدمات تخصصی",
     legalTitle: "صفحات قانونی",
-    copyright: "کلیه حقوق مادی و معنوی این وب‌سایت متعلق به پلتفرم DORVIA EUROP — A NAVAN Brand است.",
+    copyright: "کلیه حقوق مادی و معنوی این وب‌سایت متعلق به پلتفرم DORVIA EUROP است.",
     contactInfo: "ارتباط با ما",
     address: "بخارست، رومانی",
     email: "ontrip.ai@gmail.com",

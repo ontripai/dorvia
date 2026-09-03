@@ -49,8 +49,8 @@ export const TrustSection: React.FC<TrustSectionProps> = ({ currentLang }) => {
           </h2>
           <p className="mt-3 text-slate-400 text-sm sm:text-base">
             {currentLang === 'fa' 
-              ? 'پلتفرم «در رومانی» با رویکردی کاملاً خدمات‌محور و شفاف، شما را از نخستین قدم تا استقرار نهایی راهنمایی می‌کند.'
-              : 'Dar Romania operates with full compliance, providing objective advisory without unrealistic promises.'}
+              ? 'پلتفرم DORVIA EUROP با رویکردی کاملاً خدمات‌محور و شفاف، شما را از نخستین قدم تا استقرار نهایی راهنمایی می‌کند.'
+              : 'DORVIA EUROP operates with full compliance, providing objective advisory without unrealistic promises.'}
           </p>
         </div>
 
