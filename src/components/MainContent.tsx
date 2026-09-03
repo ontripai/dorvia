@@ -698,13 +698,13 @@ export const MainContent: React.FC<MainContentProps> = ({
                   <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'پیش از شروع همکاری، محدوده خدمات، هزینه‌ها و مسئولیت‌های طرفین توضیح داده می‌شود.' : 'Scope of service, timelines, and costs defined clearly in advance.'}</p>
                 </Link>
 
-                <Link href="/legal/terms-of-service" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-colors block cursor-pointer">
+                <Link href="/legal/terms" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-colors block cursor-pointer">
                   <ShieldCheck size={24} className="text-[#1554bd]" />
                   <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'عدم تضمین نتیجه' : 'Honest Legal Limits'}</h3>
                   <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'تصمیم نهایی درباره پذیرش، ویزا و اقامت صراحتاً در اختیار مراجع مربوطه است.' : 'Legal honesty acknowledging that visa issuance rests strictly with authorities.'}</p>
                 </Link>
 
-                <Link href="/legal/privacy-policy" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-colors block cursor-pointer">
+                <Link href="/legal/privacy" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-colors block cursor-pointer">
                   <LockKeyhole size={24} className="text-[#1554bd]" />
                   <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'حفظ حریم خصوصی' : 'GDPR Compliance'}</h3>
                   <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'اطلاعات شما با رعایت سیاست حفظ حریم خصوصی سایت و منحصراً برای بررسی درخواست و ارتباطات مربوط به خدمات پردازش می‌شود.' : "Your information is processed in accordance with the site's privacy policy and solely for reviewing requests and service-related communication."}</p>
