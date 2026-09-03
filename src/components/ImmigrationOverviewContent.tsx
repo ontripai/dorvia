@@ -9,6 +9,7 @@ import { FamilyReunificationContent } from './FamilyReunificationContent';
 import { EvaluationCTA } from './EvaluationCTA';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { SectionPhoto } from './SectionPhoto';
 
 interface ImmigrationOverviewContentProps {
   subRoute: string;
@@ -536,6 +537,14 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </div>
           </div>
 
+          <SectionPhoto
+            src="/images/immigration/citizenship.jpg"
+            alt={currentLang === 'fa' ? 'پاسپورت جدید رومانی' : 'The new Romanian passport'}
+            captionFa="پاسپورت رومانی — عکس: ویکیمدیا کامنز"
+            captionEn="The Romanian passport — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
+
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
             {currentLang === 'fa' 
               ? 'دریافت تابعیت رومانی بالاترین سطح ادغام در این کشور است که به شما پاسپورت رومانیایی و تمامی حقوق شهروندی اتحادیه اروپا را اعطا می‌کند. مسیر اصلی برای اتباع خارجی جهت کسب این تابعیت، تقاضا بر اساس قانون تابعیت رومانی (ماده ۸ قانون ۲۱/۱۹۹۱) است که نیازمند حداقل ۸ سال اقامت قانونی مستمر (یا ۵ سال در صورت ازدواج با شهروند رومانیایی) می‌باشد. علاوه بر رعایت مدت زمان حضور، سازمان ملی تابعیت (ANC) متقاضیان را از نظر وفاداری به دولت، نداشتن سابقه کیفری، استقلال مالی، و موفقیت در آزمون زبان، فرهنگ و قانون اساسی رومانی مورد ارزیابی دقیق قرار می‌دهد.'
@@ -671,6 +680,14 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 : 'An overview of legal residence pathways, renewal procedures, family reunification, and acquiring Romanian citizenship.'}
             </p>
           </div>
+
+          <SectionPhoto
+            src="/images/immigration/hub.jpg"
+            alt={currentLang === 'fa' ? 'سالن ورود فرودگاه هنری کواندا بخارست' : 'Arrivals hall at Henri Coandă International Airport, Bucharest'}
+            captionFa="سالن ورود فرودگاه بینالمللی هنری کواندا، بخارست — عکس: ویکیمدیا کامنز"
+            captionEn="Arrivals hall, Henri Coandă International Airport, Bucharest — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
 
           {/* 2. WHICH SITUATION ARE YOU IN? (کدام وضعیت شمایید؟) */}
           <div className="space-y-4">

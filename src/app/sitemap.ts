@@ -4,6 +4,12 @@ import { getCanonicalOrigin } from '../lib/metadata';
 
 const BASE_URL = getCanonicalOrigin();
 
+// A fixed build-time date, not `new Date()` evaluated per-request: reporting every
+// URL as "modified right now" on every crawl gives Google no real freshness signal
+// and can even look suspicious. Bump this manually when a broad content pass ships
+// (e.g. a dre-pNN patch that touches many pages at once).
+const SITE_LAST_MODIFIED = new Date('2026-09-03');
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = BASE_URL;
 
@@ -31,7 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     if (hasFa) {
       sitemapItems.push({
         url: faUrl,
-        lastModified: new Date(),
+        lastModified: SITE_LAST_MODIFIED,
         changeFrequency: 'weekly',
         priority: route.canonical === '/' ? 1 : 0.8,
         alternates: Object.keys(alternates.languages).length > 0 ? alternates : undefined,
@@ -41,7 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     if (hasEn) {
       sitemapItems.push({
         url: enUrl,
-        lastModified: new Date(),
+        lastModified: SITE_LAST_MODIFIED,
         changeFrequency: 'weekly',
         priority: route.canonical === '/' ? 1 : 0.8,
         alternates: Object.keys(alternates.languages).length > 0 ? alternates : undefined,

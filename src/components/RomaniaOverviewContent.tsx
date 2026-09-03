@@ -9,6 +9,7 @@ import { featuredCities } from '../lib/data';
 import { CityCard } from './CityCard';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { SectionPhoto } from './SectionPhoto';
 
 interface RomaniaOverviewContentProps {
   subRoute: string;
@@ -44,6 +45,14 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
                 : 'Introduction to Romania’s growing EU economy, diverse society, rich cultural heritage, and key urban centers.'}
             </p>
           </div>
+
+          <SectionPhoto
+            src="/images/romania/hub.jpg"
+            alt={currentLang === 'fa' ? 'کاخ پارلمان رومانی در شب' : 'The Palace of the Parliament in Bucharest'}
+            captionFa="کاخ پارلمان، بخارست — عکس: ویکیمدیا کامنز"
+            captionEn="Palace of the Parliament, Bucharest — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Link href="/romania/economy" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
@@ -596,6 +605,14 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
             </div>
           </div>
 
+          <SectionPhoto
+            src="/images/romania/tourism.jpg"
+            alt={currentLang === 'fa' ? 'قلعه بران در ترانسیلوانیا' : 'Bran Castle in Transylvania'}
+            captionFa="قلعه بران، ترانسیلوانیا — عکس: ویکیمدیا کامنز"
+            captionEn="Bran Castle, Transylvania — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
+
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
             {currentLang === 'fa'
               ? 'از آنجا که رومانی از ژانویه ۲۰۲۵ عضو کامل فضای شنگن است، سفر گردشگری به این کشور برای دارندگان ویزا یا اقامت معتبر شنگن بدون کنترل مرزی داخلی امکان‌پذیر است. رومانی طیف گسترده‌ای از جاذبه‌ها را ارائه می‌دهد: از قلعه‌های افسانه‌ای ترانسیلوانیا تا سواحل دریای سیاه، رشته‌کوه‌های کارپات و دلتای دانوب که یکی از بزرگ‌ترین ذخیره‌گاه‌های زیست‌کره جهان محسوب می‌شود.'
@@ -771,6 +788,17 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
                 <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'سه اصل‌نشین قرون‌وسطایی' : 'The Three Medieval Principalities'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'پیش از تشکیل رومانی مدرن، این سرزمین سه اصل‌نشین جداگانه بود: والاچیا، مولداوی و ترانسیلوانیا — هرکدام با حاکمان، آداب و حتی معماری متفاوت، که هنوز در تفاوت‌های منطقه‌ای امروز (مثلاً غذای ترانسیلوانیا در برابر بخارست) قابل مشاهده است.' : 'Before modern Romania existed, the territory was three separate principalities — Wallachia, Moldavia, and Transylvania — each with its own rulers, customs, and architecture, a legacy still visible in regional differences today (Transylvanian cuisine and towns feel distinctly different from Bucharest).'}</li>
+                <li>{currentLang === 'fa' ? 'مایکل شجاع (میهای ویتیازول) در سال ۱۶۰۰ برای مدت کوتاهی هر سه اصل‌نشین را زیر یک حکومت متحد کرد — این اتحاد کوتاه‌مدت بود، اما بعدها به‌عنوان نماد ملی‌گرایانه وحدت رومانیایی مورد استناد قرار گرفت (مجسمه او در میدان دانشگاه بخارست قابل مشاهده است).' : 'Michael the Brave (Mihai Viteazul) briefly united all three principalities under one rule in 1600 — the union didn\'t last, but it later became a national symbol of Romanian unity (his statue stands in University Square, Bucharest).'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
                 <span>{currentLang === 'fa' ? 'شکل‌گیری رومانی مدرن' : 'Formation of Modern Romania'}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
@@ -779,14 +807,38 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
               </ul>
             </div>
 
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">4</span>
+                <span>{currentLang === 'fa' ? 'جنگ جهانی دوم' : 'World War II'}</span>
+              </h3>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'رومانی ابتدا در کنار آلمان نازی وارد جنگ شد، اما در ۲۳ اوت ۱۹۴۴ ناگهان طرف را عوض کرد و به متفقین پیوست — تصمیمی که مسیر بعدی کشور را به‌کلی تغییر داد.' : "Romania initially fought alongside Nazi Germany, but on 23 August 1944 abruptly switched sides to join the Allies — a decision that reshaped the country's entire postwar trajectory."}</li>
+                <li>{currentLang === 'fa' ? 'در پایان جنگ، رومانی زیر نفوذ اتحاد جماهیر شوروی قرار گرفت که مقدمه دوران کمونیستی بود.' : 'By the war\'s end, Romania fell under Soviet influence, setting the stage for the Communist era that followed.'}</li>
+              </ul>
+            </div>
+
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4 md:col-span-2">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
-                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">5</span>
                 <span>{currentLang === 'fa' ? 'دوران کمونیستی و رومانی امروز' : 'The Communist Era & Modern Romania'}</span>
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'رومانی از ۱۹۴۷ تا ۱۹۸۹ زیر حکومت کمونیستی بود (چائوشسکو از ۱۹۶۵)؛ این دوره با انقلاب دسامبر ۱۹۸۹ به پایان رسید — این زمینه به درک نگرش نسل مسن‌تر رومانیایی‌ها و معماری برخی محله‌ها کمک می‌کند.' : 'Romania was under Communist rule from 1947 to 1989 (Ceaușescu from 1965), ending with the December 1989 revolution — useful context for understanding older Romanians\' attitudes and some neighborhoods\' architecture.'}</li>
+                <li>{currentLang === 'fa' ? 'انقلاب رومانی از تظاهرات در تیمیشوارا در ۱۶-۱۷ دسامبر ۱۹۸۹ آغاز شد و طی چند روز به بخارست رسید؛ نیکلای و النا چائوشسکو در ۲۵ دسامبر ۱۹۸۹ پس از یک محاکمه سریع نظامی اعدام شدند — این یکی از خشن‌ترین گذارهای پساکمونیستی در اروپای شرقی بود.' : "The Romanian Revolution began with protests in Timișoara on 16–17 December 1989 and reached Bucharest within days; Nicolae and Elena Ceaușescu were executed on 25 December 1989 after a rapid military trial — one of the most violent post-Communist transitions in Eastern Europe."}</li>
+                <li>{currentLang === 'fa' ? 'کاخ پارلمان بخارست (که امروز محل مجلس رومانی است) نمادی از دوران چائوشسکو باقی مانده — دومین ساختمان اداری بزرگ جهان، ساخته‌شده در دهه ۱۹۸۰ با ویرانی بخش بزرگی از بافت تاریخی محله برای ساخت آن.' : "Bucharest's Palace of the Parliament (today home to the Romanian parliament) remains the era's most visible legacy — the world's second-largest administrative building, built in the 1980s at the cost of demolishing a large swath of the historic neighborhood that once stood there."}</li>
                 <li>{currentLang === 'fa' ? 'رومانی در ۲۰۰۴ به ناتو و در ۲۰۰۷ به اتحادیه اروپا پیوست؛ این دو عضویت برای بسیاری از رومانیایی‌ها نمادی از بازگشت قطعی به «اروپای غربی» پس از دوران کمونیستی محسوب می‌شود.' : 'Romania joined NATO in 2004 and the EU in 2007 — both memberships carry real symbolic weight for many Romanians as a definitive post-Communist "return to the West."'}</li>
+                <li className="pt-1">
+                  {currentLang === 'fa'
+                    ? 'برای دیدن این تاریخ به‌صورت ملموس: '
+                    : 'To see this history up close: '}
+                  <Link href="/romania/culture-and-arts" className="text-[#2F6FED] hover:underline font-medium">
+                    {currentLang === 'fa' ? 'موزه ملی تاریخ رومانی' : 'the National History Museum of Romania'}
+                  </Link>
+                  {currentLang === 'fa'
+                    ? ' در خیابان کالئا ویکتوریه بخارست و بازدید از خودِ کاخ پارلمان هر دو گزینه‌های واقعی و در دسترس‌اند.'
+                    : ", on Calea Victoriei in Bucharest, and a guided tour of the Palace of the Parliament itself, are both real, accessible options."}
+                </li>
               </ul>
             </div>
           </div>

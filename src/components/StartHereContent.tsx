@@ -8,6 +8,7 @@ import { ArrowRight, ArrowLeft } from './Icons';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { EvaluationCTA } from './EvaluationCTA';
+import { SectionPhoto } from './SectionPhoto';
 
 interface StartHereContentProps {
   subRoute: string;
@@ -40,6 +41,14 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             </h1>
             <div className="text-[11px] text-slate-400 mt-2">{disclaimer}</div>
           </div>
+
+          <SectionPhoto
+            src="/images/start-here/planning-to-come.jpg"
+            alt={currentLang === 'fa' ? 'ورودی فرودگاه بین‌المللی هنری کواندا اوتوپنی' : 'Entrance to Henri Coandă Otopeni International Airport'}
+            captionFa="فرودگاه بین‌المللی هنری کواندا، بخارست — عکس: ویکیمدیا کامنز"
+            captionEn="Henri Coandă International Airport, Bucharest — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
             {currentLang === 'fa' 

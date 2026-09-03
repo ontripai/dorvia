@@ -7,6 +7,7 @@ import { CommentsSection } from './CommentsSection';
 import { ExternalLink, CheckCircle, ShieldCheck, Clock, FileCheck2, AlertCircle, Landmark } from './Icons';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { SectionPhoto } from './SectionPhoto';
 
 interface BankingGuideContentProps {
   currentLang: Language;
@@ -48,6 +49,14 @@ export const BankingGuideContent: React.FC<BankingGuideContentProps> = ({ curren
           </span>
         </div>
       </div>
+
+      <SectionPhoto
+        src="/images/needs/banking.jpg"
+        alt={currentLang === 'fa' ? 'ورودی ساختمان مرکزی بانک BCR در بخارست' : 'Gate of the BCR headquarters building in Bucharest'}
+        captionFa="ساختمان مرکزی بانک BCR، بخارست — عکس: ویکیمدیا کامنز"
+        captionEn="BCR headquarters building, Bucharest — Photo: Wikimedia Commons"
+        currentLang={currentLang}
+      />
 
       {/* SECTION 1: TABLE OF CONTENTS (پرش سریع) */}
       <div className="bg-white p-6 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
