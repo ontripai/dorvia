@@ -150,9 +150,9 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 {currentLang === 'fa' ? 'اقدام بر اساس محل سکونت' : 'Based on Current Location'}
               </h4>
               <ul className="space-y-2 text-[#526174] font-medium">
-                <li><Link href="/immigration" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'اقدام از داخل ایران (سفارت تهران)' : 'Applying from Iran'}</Link></li>
-                <li><Link href="/immigration" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'اقدام از امارات و حوزه خلیج فارس' : 'Applying from UAE / Gulf'}</Link></li>
-                <li><Link href="/immigration" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'اقدام از ترکیه و کشورهای اروپایی' : 'Applying from Turkey / Europe'}</Link></li>
+                <li><Link href="/immigration/apply-from-iran" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'اقدام از داخل ایران (سفارت تهران)' : 'Applying from Iran'}</Link></li>
+                <li><Link href="/immigration/apply-from-uae-gulf" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'اقدام از امارات و حوزه خلیج فارس' : 'Applying from UAE / Gulf'}</Link></li>
+                <li><Link href="/immigration/apply-from-turkey-europe" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>{currentLang === 'fa' ? 'اقدام از ترکیه و کشورهای اروپایی' : 'Applying from Turkey / Europe'}</Link></li>
               </ul>
             </div>
 

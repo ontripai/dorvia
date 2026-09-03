@@ -364,6 +364,42 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     inSitemap: true,
     pageType: 'content'
   },
+  'immigration/apply-from-iran': {
+    canonical: '/immigration/apply-from-iran',
+    aliases: [],
+    parentHub: '/immigration',
+    titleFa: 'اقدام از ایران (سفارت تهران)',
+    titleEn: 'Applying from Iran',
+    parentTitleFa: 'مهاجرت و اقامت',
+    parentTitleEn: 'Immigration & Residence',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'content'
+  },
+  'immigration/apply-from-uae-gulf': {
+    canonical: '/immigration/apply-from-uae-gulf',
+    aliases: [],
+    parentHub: '/immigration',
+    titleFa: 'اقدام از امارات و حوزه خلیج فارس',
+    titleEn: 'Applying from UAE & the Gulf',
+    parentTitleFa: 'مهاجرت و اقامت',
+    parentTitleEn: 'Immigration & Residence',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'content'
+  },
+  'immigration/apply-from-turkey-europe': {
+    canonical: '/immigration/apply-from-turkey-europe',
+    aliases: [],
+    parentHub: '/immigration',
+    titleFa: 'اقدام از ترکیه و کشورهای اروپایی',
+    titleEn: 'Applying from Turkey & Europe',
+    parentTitleFa: 'مهاجرت و اقامت',
+    parentTitleEn: 'Immigration & Residence',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'content'
+  },
   'work/finding-job': {
     canonical: '/work/finding-job',
     aliases: [],

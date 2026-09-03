@@ -6,6 +6,9 @@ import { Language } from '../types';
 import { CommentsSection } from './CommentsSection';
 import { IgiProcessContent } from './IgiProcessContent';
 import { FamilyReunificationContent } from './FamilyReunificationContent';
+import { ApplyFromIranContent } from './ApplyFromIranContent';
+import { ApplyFromUaeGulfContent } from './ApplyFromUaeGulfContent';
+import { ApplyFromTurkeyEuropeContent } from './ApplyFromTurkeyEuropeContent';
 import { EvaluationCTA } from './EvaluationCTA';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
@@ -737,6 +740,15 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
 
     case 'family-reunification':
       return <FamilyReunificationContent currentLang={currentLang} onNavigate={onNavigate} />;
+
+    case 'apply-from-iran':
+      return <ApplyFromIranContent currentLang={currentLang} onNavigate={onNavigate} />;
+
+    case 'apply-from-uae-gulf':
+      return <ApplyFromUaeGulfContent currentLang={currentLang} onNavigate={onNavigate} />;
+
+    case 'apply-from-turkey-europe':
+      return <ApplyFromTurkeyEuropeContent currentLang={currentLang} onNavigate={onNavigate} />;
 
     default:
       return (
