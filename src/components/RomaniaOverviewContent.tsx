@@ -10,6 +10,7 @@ import { CityCard } from './CityCard';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { SectionPhoto } from './SectionPhoto';
+import { FaqSchema } from './FaqSchema';
 
 interface RomaniaOverviewContentProps {
   subRoute: string;
@@ -255,6 +256,21 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا رومانی از یورو استفاده می‌کند؟' : 'Does Romania use the euro?',
+              a: currentLang === 'fa' ? 'خیر. واحد پول رسمی رومانی همچنان لئو (RON) است. پیوستن به یورو موضوعی سیاسی و در حال بحث است و تاریخ قطعی ندارد.' : 'No. Romania\'s official currency remains the Leu (RON). Euro adoption is a politically debated topic with no confirmed date.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا برای سفر به رومانی نیاز به ویزای شنگن جداگانه دارم؟' : 'Do I need a separate Schengen visa to enter Romania?',
+              a: currentLang === 'fa' ? 'خیر؛ از ژانویه ۲۰۲۵ رومانی عضو کامل فضای شنگن است، بنابراین ویزای شنگن معتبر یا اقامت شنگن برای ورود کافی است و کنترل مرزی داخلی وجود ندارد.' : 'No; since January 2025 Romania is a full Schengen member, so a valid Schengen visa or Schengen residence permit is sufficient for entry, with no internal border checks.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا هزینه زندگی در رومانی رو به افزایش است؟' : 'Is the cost of living in Romania rising?',
+              a: currentLang === 'fa' ? 'بله، به‌طور محسوس. نرخ تورم رومانی (۸.۲٪ در ژوئیه ۲۰۲۶) بالاترین نرخ در کل اتحادیه اروپاست، هرچند میانگین حقوق هم رشد داشته (حدود ۳.۵٪ نسبت به سال قبل). برای برنامه‌ریزی مالی بلندمدت (اجاره، قرارداد کار)، بهتر است این شکاف را در نظر بگیرید.' : 'Yes, noticeably. Romania\'s inflation rate (8.2% in July 2026) is the highest in the entire EU, though average wages have also grown (about 3.5% year-on-year). For long-term financial planning (rent, employment contracts), it\'s worth factoring in this gap.'
+            }
+          ]} />
+
           <ParentHubFooterCard slugRoute="romania/economy" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -404,6 +420,21 @@ export const RomaniaOverviewContent: React.FC<RomaniaOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا در رومانی دسترسی به غذا و رستوران حلال آسان است؟' : 'Is halal food easily accessible in Romania?',
+              a: currentLang === 'fa' ? 'در بخارست و کلوژ-نپوکا چندین رستوران حلال فعال (عمدتاً ترکی/خاورمیانه‌ای) وجود دارد، اما نسبت به کشورهای با جامعه مسلمان بزرگ‌تر، گزینه‌ها محدودتر است؛ برای قصابی حلال باید وضعیت فعلی را جداگانه بررسی کنید.' : 'Several active halal restaurants (mostly Turkish/Middle Eastern) exist in both Bucharest and Cluj-Napoca, though options are more limited than in countries with a larger Muslim community; for halal butchers, verify current status separately.'
+            },
+            {
+              q: currentLang === 'fa' ? 'چرا میزبان رومانیایی مدام اصرار می‌کند بنوشم؟' : "Why does my Romanian host keep insisting I drink?",
+              a: currentLang === 'fa' ? 'چون تعارف نوشیدنی (به‌خصوص تسویکا/شراب خانگی) بخش اصلی مهمان‌نوازی رومانیایی است، نه یک پیشنهاد جانبی. گفتن صریح و مودبانه «من نمی‌نوشم» از همان ابتدا معمولاً به‌سرعت پذیرفته می‌شود.' : "Because offering a drink (especially homemade țuică or wine) is a core part of Romanian hospitality, not a side offer. Saying clearly and politely \"I don't drink\" from the start is usually accepted quickly."
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا تاریخ عید پاک رومانی با تقویم معمول غربی یکی است؟' : "Does Romanian Easter fall on the same date as the Western calendar?",
+              a: currentLang === 'fa' ? 'نه لزوماً — رومانی از تقویم عید پاک ارتدوکس پیروی می‌کند که اغلب چند هفته با تقویم کاتولیک/پروتستان فرق دارد؛ همیشه تاریخ دقیق سال مورد نظر را جداگانه چک کنید، چون در این بازه بانک‌ها و ادارات تعطیل‌اند.' : "Not necessarily — Romania follows the Orthodox Easter calendar, which often falls several weeks apart from the Catholic/Protestant date; always check the exact date for the year in question separately, since banks and offices close during that period."
+            }
+          ]} />
 
           <ParentHubFooterCard slugRoute="romania/society" currentLang={currentLang} onNavigate={onNavigate} />
         </div>

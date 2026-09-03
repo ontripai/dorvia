@@ -60,7 +60,7 @@ export const AudienceSelector: React.FC<AudienceSelectorProps> = ({
       id: 'living',
       icon: House,
       title: currentLang === 'fa' ? 'زندگی و استقرار' : 'Living & Relocation',
-      route: 'living',
+      route: 'start-here/settling-in',
       summary: currentLang === 'fa'
         ? 'هزینه‌های زندگی مقرون‌به‌صرفه و امنیت اجتماعی بالا.'
         : 'Affordable lifestyle, safety standards, and full Schengen zone mobility.'

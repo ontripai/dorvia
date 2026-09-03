@@ -4,6 +4,7 @@ import React from 'react';
 import { Language } from '../types';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { RelatedGuidesCard, RelatedGuideItem } from './RelatedGuidesCard';
 
 interface ScholarshipOverviewContentProps {
   currentLang: Language;
@@ -86,6 +87,43 @@ export const ScholarshipOverviewContent: React.FC<ScholarshipOverviewContentProp
             : '⚠️ Update: the window above was for the 2026-2027 cycle and is now closed (results were announced around mid-July 2026). As of this page\'s publication, the next cycle\'s official dates had not yet been posted on the platform; based on the pattern of prior years, the next call typically opens around February, but that is only an approximate pattern, not a confirmed date — always check scholarships.studyinromania.gov.ro directly for the official announcement of the next cycle before planning around it.'}
         </p>
       </div>
+
+      {/* RELATED GUIDES CARD */}
+      <RelatedGuidesCard
+        currentLang={currentLang}
+        items={[
+          {
+            route: 'study/preparatory-year',
+            icon: '🗣️',
+            titleFa: 'سال آماده‌سازی زبان رومانیایی',
+            titleEn: 'Romanian Preparatory Year',
+            descriptionFa: 'دوره ۱ ساله آموزش زبان برای پذیرفته‌شدگان بورسیه کارشناسی و ارشد.',
+            descriptionEn: '1-year preparatory language course included in the scholarship program.',
+            badgeFa: 'پیش‌نیاز زبان',
+            badgeEn: 'Language Prep'
+          },
+          {
+            route: 'study/visa-type-d',
+            icon: '🛂',
+            titleFa: 'ویزای تحصیلی نوع D/SD',
+            titleEn: 'Type D/SD Student Visa',
+            descriptionFa: 'مدارک و مراحل دریافت ویزای بلندمدت دانشجویی سفارت پس از قبولی در بورسیه.',
+            descriptionEn: 'Requirements and consular steps for the long-stay student visa.',
+            badgeFa: 'ویزای سفارت',
+            badgeEn: 'Embassy Visa'
+          },
+          {
+            route: 'universities',
+            icon: '🏛️',
+            titleFa: 'دانشگاه‌های برتر رومانی',
+            titleEn: 'Top Romanian Universities',
+            descriptionFa: 'بررسی دانشگاه‌های دولتی معتبر بخارست، کلوژ، تیمیشوارا و یاش.',
+            descriptionEn: 'Explore accredited public institutions in Bucharest, Cluj, and Iasi.',
+            badgeFa: 'دانشگاه‌ها',
+            badgeEn: 'Universities'
+          }
+        ]}
+      />
 
       <ParentHubFooterCard slugRoute="study/scholarships" currentLang={currentLang} />
     </div>

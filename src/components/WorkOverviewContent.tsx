@@ -6,7 +6,9 @@ import { Language } from '../types';
 import { EvaluationCTA } from './EvaluationCTA';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { RelatedGuidesCard } from './RelatedGuidesCard';
 import { SectionPhoto } from './SectionPhoto';
+import { FaqSchema } from './FaqSchema';
 
 interface WorkOverviewContentProps {
   subRoute: string;
@@ -225,6 +227,26 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم خودم مستقیماً برای مجوز کار درخواست دهم؟' : 'Can I apply for the work permit directly by myself?',
+              a: currentLang === 'fa' ? 'خیر. درخواست مجوز کار منحصراً باید توسط کارفرمای رومانیایی شما به اداره مهاجرت (IGI) ارائه شود.' : 'No. The work permit application must be submitted exclusively by your Romanian employer to IGI.'
+            },
+            {
+              q: currentLang === 'fa' ? 'بررسی درخواست مجوز چقدر طول می‌کشد؟' : 'How long does the permit application process take?',
+              a: currentLang === 'fa' ? 'طبق گزارش‌های خبری ۲۰۲۶ (Digi24)، در دوره بازنگری سیستم، زمان رسیدگی تا ۴-۵ ماه هم گزارش شده؛ این عدد رسمی نیست اما نشان می‌دهد «چند هفته تا چند ماه» می‌تواند در عمل به سمت انتهای بازه یا فراتر از آن برود.' : 'Per 2026 news coverage (Digi24), during the system overhaul period, processing times of up to 4-5 months have been reported; this is not an official figure but shows "a few weeks to several months" can in practice run toward the long end or beyond.'
+            },
+            {
+              q: currentLang === 'fa' ? 'کارت آبی اتحادیه اروپا با مجوز کار عادی چه فرقی دارد؟' : 'How is the EU Blue Card different from a standard work permit?',
+              a: currentLang === 'fa' ? 'کارت آبی مخصوص متخصصان با مدرک تحصیلات تکمیلی یا سابقه تخصصی است و اعتبار طولانی‌تر (تا ۳ سال) و مسیر ساده‌تر پیوست خانواده دارد.' : 'The Blue Card is for specialists with an advanced degree or specialized experience and offers longer validity (up to 3 years) and a simpler family-reunification path.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر پرونده من قبل از راه‌اندازی پلتفرم جدید ثبت شده بود چه می‌شود؟' : 'What happens if my file was submitted before the new platform launched?',
+              a: currentLang === 'fa' ? 'طبق گزارش‌های رسانه‌ای، صدها پرونده ثبت‌شده پیش از راه‌اندازی کامل پلتفرم (اوت ۲۰۲۶) مجبور به شروع مجدد شدند. با کارفرمای خود پیگیری کنید که پرونده شما تحت روال جدید هم معتبر شناخته شده یا نیاز به ثبت مجدد دارد.' : 'Per media reports, hundreds of files submitted before the platform\'s full launch (August 2026) were forced to restart. Check with your employer whether your file is recognized under the new procedure or needs to be resubmitted.'
+            }
+          ]} />
+
+          <RelatedGuidesCard items={['immigration/long-term-residence']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="work/work-permit" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -320,6 +342,21 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا با ویزای D/AM می‌توانم کارفرمای خود را تغییر دهم؟' : 'Can I change employers with a D/AM visa?',
+              a: currentLang === 'fa' ? 'تغییر کارفرما معمولاً نیازمند طی کردن مجدد روند قانونی و صدور مجوز کار جدید توسط کارفرمای جدید است.' : 'Changing employers usually requires going through the legal process again and issuing a new work permit by the new employer.'
+            },
+            {
+              q: currentLang === 'fa' ? 'چه زمانی باید برای کارت اقامت موقت اقدام کنم؟' : 'When should I apply for the temporary residence permit?',
+              a: currentLang === 'fa' ? 'شما موظفید حداقل ۳۰ روز پیش از به پایان رسیدن اعتبار ویزای نوع D خود، درخواست کارت اقامت را به IGI تحویل دهید.' : 'You must submit your temporary residence permit application to IGI at least 30 days before your Type D visa expires.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم برای ویزای D/AM از مرکز VFS در تهران اقدام کنم؟' : 'Can I apply for the D/AM visa through a VFS center in Tehran?',
+              a: currentLang === 'fa' ? 'خیر. رومانی هیچ مرکز VFS Global در ایران ندارد؛ باید از طریق سامانه eViza پرونده بسازید و سپس شخصاً به سفارت رومانی در تهران مراجعه کنید.' : 'No. Romania has no VFS Global center in Iran; you must build your file through the eViza system and then attend the Romanian Embassy in Tehran in person.'
+            }
+          ]} />
 
           <ParentHubFooterCard slugRoute="work/work-visa" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
@@ -487,6 +524,21 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'حداقل حقوق قانونی در رومانی چقدر است؟' : 'What is the minimum legal salary in Romania?',
+              a: currentLang === 'fa' ? 'بر اساس تصمیم دولت شماره ۱۴۶/۲۰۲۶، حداقل حقوق ناخالص ۴,۳۲۵ لئو در ماه است که از ژوئیه ۲۰۲۶ در رومانی اعمال می‌شود.' : 'Per Government Decision 146/2026, the minimum gross salary is 4,325 RON per month, applicable from July 2026 in Romania.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا دانستن زبان رومانیایی برای استخدام الزامی است؟' : 'Is knowing the Romanian language mandatory for employment?',
+              a: currentLang === 'fa' ? 'اگرچه برای بسیاری از مشاغل بین‌المللی و شرکت‌های چندملیتی تسلط به زبان انگلیسی کافیست، اما دانستن زبان رومانیایی مزیت رقابتی بسیار بزرگی در کاریابی محسوب می‌شود.' : 'While English is sufficient for many international roles and multinational companies, proficiency in Romanian is a massive competitive advantage in finding a job.'
+            },
+            {
+              q: currentLang === 'fa' ? 'workinromania.gov.ro چیست و آیا خودم باید در آن ثبت‌نام کنم؟' : 'What is workinromania.gov.ro, and do I need to register on it myself?',
+              a: currentLang === 'fa' ? 'این سامانه دولتی (فعال از آگوست ۲۰۲۶) اجباری برای کارفرمایان و آژانس‌های کاریابی است که نیروی غیر اتحادیه اروپا استخدام می‌کنند؛ کارجو مستقیماً در آن ثبت‌نام نمی‌کند، اما خوب است بدانید کارفرمای آینده شما موظف است از این مسیر رسمی عبور کند.' : 'This government platform (active since August 2026) is mandatory for employers and staffing agencies hiring non-EU workers; job seekers don\'t register on it directly, but it\'s worth knowing your future employer is required to go through this official channel.'
+            }
+          ]} />
+
           <ParentHubFooterCard slugRoute="work/finding-job" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -639,6 +691,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا قرارداد کاری می‌تواند بیش از یک دوره آزمایشی داشته باشد؟' : 'Can an employment contract have more than one probationary period?',
+              a: currentLang === 'fa' ? 'اصولاً فقط یک دوره آزمایشی مجاز است، مگر در موارد خاص مانند ارتقاء شغلی یا تغییر سمت نزد همان کارفرما. سقف قانونی ۹۰ روز (اجرایی) یا ۱۲۰ روز (مدیریتی) است.' : 'Generally, only one probationary period is permitted, except in special cases like a promotion or changing positions with the same employer. The legal cap is 90 days (execution roles) or 120 days (management).'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر شرایط کارم تغییر کند چه اتفاقی می‌افتد؟' : 'What happens if my working conditions change?',
+              a: currentLang === 'fa' ? 'هرگونه تغییر در حقوق و دستمزد یا شرایط اصلی کار باید از طریق ثبت و امضای یک الحاقیه رسمی (act adițional) انجام شود.' : 'Any changes to your salary or main working conditions must be recorded and signed through a formal addendum (act adițional).'
+            },
+            {
+              q: currentLang === 'fa' ? 'کارفرما تا کی باید مرا در REVISAL ثبت کند؟' : 'By when must my employer register me in REVISAL?',
+              a: currentLang === 'fa' ? 'حداقل یک روز کاری پیش از شروع کار شما. کار کردن بدون این ثبت قبلی، کارفرما را مشمول جریمه‌ای تا ۲۰,۰۰۰ لئو به‌ازای هر کارمند می‌کند.' : 'At least one working day before your first day of work. Letting you work without this prior registration exposes the employer to a fine of up to 20,000 RON per employee.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر کارفرمایم حقوقم را ندهد یا شرایط قرارداد را نقض کند چه کار کنم؟' : 'What if my employer doesn\'t pay me or violates my contract terms?',
+              a: currentLang === 'fa' ? 'می‌توانید شکایت را مستقیماً به دفتر منطقه‌ای بازرسی کار (Inspectoratul Teritorial de Muncă) گزارش دهید؛ این نهاد کارزارهای بازرسی مشخصی برای کارفرمایان دارای کارگر خارجی دارد و جرایم واقعی صادر می‌کند.' : 'You can report it directly to your regional Labor Inspection office (Inspectoratul Teritorial de Muncă); this authority runs targeted inspection campaigns for employers of foreign workers and does issue real fines.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا حق دارم نسخه رومانیایی رسمی از قراردادم داشته باشم؟' : 'Am I entitled to an official Romanian-language version of my contract?',
+              a: currentLang === 'fa' ? 'بله. طبق OUG 32/2026، قراردادهایی که به زبان رومانیایی تنظیم نشوند برای کارفرما جریمه‌ای تا ۶٬۰۰۰ لئو به‌ازای هر تخلف دارند؛ همیشه یک نسخه رومانیایی رسمی درخواست کنید، حتی اگر ترجمه انگلیسی یا فارسی هم داشته باشید.' : 'Yes. Under OUG 32/2026, contracts not drafted in Romanian carry a fine of up to 6,000 RON per violation for the employer; always request an official Romanian-language version, even if you also have an English or Persian translation.'
+            }
+          ]} />
+
           <ParentHubFooterCard slugRoute="work/employment-contract" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -751,6 +826,26 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'تفاوت حقوق ناخالص و خالص چقدر است؟' : 'What is the difference between gross and net salary?',
+              a: currentLang === 'fa' ? 'پس از کسر مالیات و بیمه‌های اجباری، حقوق خالصی که دریافت می‌کنید معمولاً حدود ۵۷ تا ۶۰ درصد حقوق ناخالص قرارداد شما خواهد بود.' : 'After mandatory tax and insurance deductions, the net salary you receive is typically around 57% to 60% of your gross contract salary.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا کارمند باید مالیات خود را جداگانه به دولت بپردازد؟' : 'Does the employee have to pay their taxes separately to the government?',
+              a: currentLang === 'fa' ? 'خیر، نیازی به پرداخت جداگانه نیست؛ تمام کسورات قانونی برای کارمندان مستقیماً توسط کارفرما محاسبه، کسر و به اداره مالیات پرداخت می‌شود.' : 'No, separate payment is not required; all statutory deductions for employees are calculated, withheld, and paid directly to the tax authorities by the employer.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا پیلار دوم بازنشستگی سهم CAS من را افزایش می‌دهد؟' : 'Does Pillar II increase my CAS contribution?',
+              a: currentLang === 'fa' ? 'خیر. پیلار دوم بخشی از همان سهم ۲۵٪ CAS است که به یک حساب شخصی هدایت می‌شود، نه کسر اضافه.' : 'No. Pillar II is a carve-out within the same 25% CAS contribution redirected to a personal account, not an additional deduction.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر همچنان درآمدی از ایران داشته باشم، آیا هم در ایران و هم در رومانی مالیات می‌دهم؟' : 'If I still have income from Iran, will I be taxed in both Iran and Romania?',
+              a: currentLang === 'fa' ? 'خیر، نه به‌طور کامل. یک موافقت‌نامه اجتناب از مالیات مضاعف بین ایران و رومانی از سال ۲۰۰۸ فعال است (قانون ۲۷۹/۲۰۰۲)؛ کشور محل اقامت مالیاتی شما باید مالیات پرداخت‌شده در کشور دیگر را از طریق اعتبار یا معافیت مالیاتی لحاظ کند. برای پرونده شخصی خود با یک مشاور مالیاتی متخصص مشورت کنید.' : 'No, not fully. A double-taxation avoidance treaty between Iran and Romania has been in force since 2008 (Law 279/2002); your tax-residence country must credit or exempt tax already paid in the other country. Consult a specialized tax advisor for your specific case.'
+            }
+          ]} />
+
+          <RelatedGuidesCard items={['company/tax-types']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="work/taxes-salaries" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -888,6 +983,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا دریافت خدمات درمانی با بیمه کارمندی رایگان است؟' : 'Are medical services free with employee health insurance?',
+              a: currentLang === 'fa' ? 'در بیمارستان‌ها و کلینیک‌های دولتی یا خصوصیِ طرف قرارداد با CNAS، خدمات پایه و اورژانسی عموماً رایگان یا با پوشش بسیار بالایی ارائه می‌شوند.' : 'In public hospitals and private clinics contracted with CNAS, basic and emergency services are generally free or highly subsidized.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر کارمند نباشم، آیا می‌توانم بیمه دولتی داشته باشم؟' : 'Can I get state insurance if I am not an employee?',
+              a: currentLang === 'fa' ? 'بله، افراد بدون قرارداد کاری نیز می‌توانند از طریق ارسال اظهارنامه واحد (Declarația Unică) و پرداخت حق بیمه معادل، به‌صورت داوطلبانه خود را بیمه کنند.' : 'Yes, non-employees can voluntarily enroll in the health insurance system by submitting the Single Declaration (Declarația Unică) and paying the equivalent premium.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا بیمه خصوصی جایگزین بیمه دولتی CASS می‌شود؟' : 'Does private insurance replace mandatory state CASS insurance?',
+              a: currentLang === 'fa' ? 'خیر. بیمه خصوصی همیشه مکمل است، نه جایگزین؛ سهم CASS از حقوق شما همچنان طبق قانون کسر می‌شود، فارغ از اینکه اشتراک خصوصی هم داشته باشید یا نه.' : 'No. Private insurance is always supplemental, never a substitute; the CASS contribution is still deducted from your salary by law regardless of whether you also hold a private subscription.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر اداره CNAS به من گفت کارت فیزیکی صادر نمی‌شود چه کنم؟' : 'What if my CNAS office tells me physical cards aren\'t being issued?',
+              a: currentLang === 'fa' ? 'برخی خارجیان این تجربه را در انجمن‌های مهاجران گزارش کرده‌اند. در این حالت، گواهی موقت بیمه (Adeverință) با اعتبار ۳ ماهه قابل تمدید را از همان اداره درخواست کنید و آن را همراه داشته باشید تا زمانی که کارت فیزیکی صادر شود.' : 'Some foreigners have reported this experience on migrant forums. In that case, request the temporary insurance certificate (Adeverință), valid for a renewable 3 months, from the same office and keep it on hand until the physical card is issued.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا سهم بازنشستگی من در رومانی به بازنشستگی ایران منتقل می‌شود؟' : 'Do my Romanian pension contributions transfer to an Iranian pension?',
+              a: currentLang === 'fa' ? 'خیر. رومانی هیچ توافق «تجمیع بیمه بازنشستگی» با ایران ندارد (طبق فهرست رسمی CNPP)؛ سهم CAS شما فقط در سیستم بازنشستگی رومانی محاسبه می‌شود.' : 'No. Romania has no pension "totalization" agreement with Iran (per the official CNPP list); your CAS contributions only count within the Romanian pension system.'
+            }
+          ]} />
+
           <ParentHubFooterCard slugRoute="work/insurance" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -1000,6 +1118,22 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا برای این ویزا به پیشنهاد شغلی از یک شرکت رومانیایی نیاز دارم؟' : 'Do I need a job offer from a Romanian company for this visa?',
+              a: currentLang === 'fa' ? 'خیر. این مسیر دقیقاً برای کسانی طراحی شده که برای یک کارفرما یا کسب‌وکار خارج از رومانی کار می‌کنند و نیازی به Aviz de Muncă یا کارفرمای رومانیایی ندارند.' : 'No. This route is specifically designed for people who work for an employer or business outside Romania and need no Aviz de Muncă or Romanian employer.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم همسر و فرزندانم را همراه بیاورم؟' : 'Can I bring my spouse and children with me?',
+              a: currentLang === 'fa' ? 'طبق قواعد فعلی پیوست خانواده IGI، این مجوز در فهرست استثناهای مجاز نیست و اولین دوره‌اش هم فقط ۶ ماه است، پس عملاً این مسیر برای پیوست خانواده طراحی نشده — این وضعیت را مستقیماً از IGI تایید بگیرید.' : 'Under IGI\'s current family-reunification rules, this permit is not on the list of named exceptions and its first period is only 6 months, so in practice this route is not built for family reunification — confirm this directly with IGI.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا باید در رومانی مالیات بدهم اگر قبلاً در کشور خودم مالیات پرداخته‌ام؟' : 'Do I owe Romanian tax if I already pay tax in my home country?',
+              a: currentLang === 'fa' ? 'معافیت رومانی بر اساس شمارش روز است، نه محل پرداخت مالیات: تا ۶ ماه در بازه ۱۲ ماهه معاف هستید، به‌شرط ماندن زیر ۱۸۳ روز اقامت در سال؛ عبور از این مرز شما را مقیم مالیاتی رومانی می‌کند صرف‌نظر از مالیات پرداختی جای دیگر.' : 'Romania\'s exemption is based on a day-count, not on where you already pay tax: you\'re exempt for up to 6 months within a 12-month period, provided you stay under 183 days per year; crossing that line makes you a Romanian tax resident regardless of tax paid elsewhere.'
+            }
+          ]} />
+
+          <RelatedGuidesCard items={['needs/banking', 'needs/health']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="work/digital-nomad" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );

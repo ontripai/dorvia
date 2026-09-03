@@ -7,6 +7,8 @@ import { CommentsSection } from './CommentsSection';
 import { ExternalLink, CheckCircle, ShieldCheck, Clock, FileCheck2, AlertCircle } from './Icons';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { RelatedGuidesCard } from './RelatedGuidesCard';
+import { FaqSchema } from './FaqSchema';
 
 interface IgiProcessContentProps {
   currentLang: Language;
@@ -632,7 +634,35 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
         </div>
       </div>
 
+      <FaqSchema items={[
+        {
+          q: currentLang === 'fa' ? 'صدور اولین کارت اقامت چقدر طول می‌کشد؟' : 'How long does the first residence card take to issue?',
+          a: currentLang === 'fa' ? 'طبق مقررات IGI، صدور کارت برای اعضای خانواده غیر اتحادیه اروپا معمولاً ظرف ۹۰ روز از ثبت درخواست کامل انجام می‌شود.' : 'Under IGI regulations, issuance for non-EU family members is typically completed within 90 days of a complete application being registered.'
+        },
+        {
+          q: currentLang === 'fa' ? 'اگر مدارکم ناقص باشد چه اتفاقی می‌افتد؟' : 'What happens if my documents are incomplete?',
+          a: currentLang === 'fa' ? 'IGI حداکثر تا ۳۰ روز مهلت اضافه برای تکمیل مدارک می‌دهد؛ این بازه رسماً زمان‌بندی رسیدگی به پرونده را متوقف می‌کند تا مدارک کامل شود.' : 'IGI grants up to 30 extra days to complete the file; this period officially suspends the processing timeline until the documents are complete.'
+        },
+        {
+          q: currentLang === 'fa' ? 'هزینه صدور کارت اقامت چقدر است؟' : 'How much does the residence card cost?',
+          a: currentLang === 'fa' ? 'برای بیشتر دسته‌ها (کار، تحصیل، پیوست خانواده) هزینه استاندارد ۲۶۵ لئو عوارض دولتی به‌علاوه ۱۲۰ یورو کارمزد صدور کارت است؛ برخی مسیرها تعرفه متفاوت دارند و مبلغ دقیق باید نزد IGI محل خود استعلام شود.' : 'For most categories (work, study, family reunification) the standard cost is 265 RON state tax plus 120 EUR card-issuance fee; some pathways carry different rates, so confirm the exact amount with your local IGI office.'
+        },
+        {
+          q: currentLang === 'fa' ? 'اگر IGI به مهلت قانونی عمل نکند چه گزینه‌ای دارم؟' : 'What can I do if IGI misses its legal deadline?',
+          a: currentLang === 'fa' ? 'طبق قانون ۵۵۴/۲۰۰۴، می‌توانید ظرف ۶ ماه از سکوت یا رد غیرموجه اداره، با کمک وکیل حقوق اداری علیه IGI در دادگاه اداری شکایت کنید.' : 'Under Law 554/2004, you can sue IGI in the administrative court within 6 months of its silence or unjustified refusal, with the help of an administrative-law attorney.'
+        },
+        {
+          q: currentLang === 'fa' ? 'آیا پرداخت به یک واسطه برای سریع‌تر شدن کار جواب می‌دهد؟' : 'Does paying an informal facilitator to speed things up work?',
+          a: currentLang === 'fa' ? 'خیر و این کار غیرقانونی است. در اکتبر ۲۰۲۴ دو مأمور اداره مهاجرت به اتهام دریافت رشوه برای تسریع مجوز کار تحت تعقیب قانونی قرار گرفتند. برای کمک واقعی، از وکیل یا مشاور مهاجرت دارای مجوز رسمی استفاده کنید.' : 'No, and it is illegal. In October 2024, two immigration officers were prosecuted for taking bribes to expedite work permits. For real help, use a licensed immigration lawyer or consultant instead.'
+        },
+        {
+          q: currentLang === 'fa' ? 'چرا انتظار در دفتر بخارست با دفاتر شهرستان فرق دارد؟' : 'Why is the wait at the Bucharest office different from regional offices?',
+          a: currentLang === 'fa' ? 'دفتر بخارست از سال ۲۰۲۳ با ۳۰ باجه و نوبت‌دهی خودکار به مجتمع Grand Arena Mall منتقل شد، اما دفاتر کوچک‌تر (مثل کلوژ) ظرفیت محدودتری داشته‌اند. اگر خارج از بخارست هستید، نوبت آنلاین را زودتر رزرو کنید.' : 'Since 2023 the Bucharest office moved to the Grand Arena Mall complex with 30 counters and automated queuing, while smaller offices (like Cluj) have historically had far more limited capacity. If you\'re outside Bucharest, book your online appointment well in advance.'
+        }
+      ]} />
+
       {/* SECTION 9: COMMENTS SECTION */}
+      <RelatedGuidesCard items={['start-here/newly-arrived', 'needs/first-days-checklist']} currentLang={currentLang} />
       <ParentHubFooterCard slugRoute="immigration/igi-process" currentLang={currentLang} />
       <CommentsSection pagePath="immigration/igi-process" currentLang={currentLang} />
     </div>

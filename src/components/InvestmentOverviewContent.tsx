@@ -4,6 +4,8 @@ import React from 'react';
 import { Language } from '../types';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { RelatedGuidesCard } from './RelatedGuidesCard';
+import { FaqSchema } from './FaqSchema';
 
 interface InvestmentOverviewContentProps {
   currentLang: Language;
@@ -132,6 +134,22 @@ export const InvestmentOverviewContent: React.FC<InvestmentOverviewContentProps>
         </div>
       </div>
 
+      <FaqSchema items={[
+        {
+          q: currentLang === 'fa' ? 'آیا رومانی برنامه «اقامت طلایی» (Golden Visa) دارد؟' : 'Does Romania have a "Golden Visa" program?',
+          a: currentLang === 'fa' ? 'خیر، در حال حاضر رومانی هیچ برنامه رسمی اقامت طلایی مبتنی بر خرید ملک یا سپرده‌گذاری صرف ندارد؛ مسیر رسمی همچنان از طریق فعالیت تجاری واقعی و تاییدیه ARICE است. طرحی مشابه در اکتبر ۲۰۲۵ پیشنهاد شد ولی در دسامبر ۲۰۲۵ به‌خاطر ملاحظات امنیت ملی پس گرفته شد.' : 'No, Romania currently has no official golden-visa program based on simply buying property or making a deposit; the formal pathway remains genuine commercial activity endorsed by ARICE. A similar scheme was proposed in October 2025 but withdrawn in December 2025 over national-security concerns.'
+        },
+        {
+          q: currentLang === 'fa' ? 'آیا صرفِ ثبت شرکت برای اقامت کافی است؟' : 'Is registering a company alone enough for residency?',
+          a: currentLang === 'fa' ? 'خیر، ثبت شرکت گام اول است؛ برای اقامت تجاری باید طرح کسب‌وکار به ARICE ارائه و درخواست مجزا نزد اداره مهاجرت (IGI) ثبت شود. برای جزئیات بیشتر به صفحه اقامت شرکتی مراجعه کنید.' : 'No, company registration is only the first step; for commercial residency you must submit a business plan to ARICE and file a separate application with the Immigration Office (IGI). See the company-residency page for details.'
+        },
+        {
+          q: currentLang === 'fa' ? 'دقیقاً چقدر باید سرمایه‌گذاری کنم؟' : 'Exactly how much do I need to invest?',
+          a: currentLang === 'fa' ? 'برای دریافت تاییدیه اولیه ARICE: ۱۰۰,۰۰۰ یورو (SRL) یا ۱۵۰,۰۰۰ یورو (SA)، یا به‌جای آن ایجاد ۱۰ تا ۱۵ شغل تمام‌وقت. توجه: این آستانه با آستانه تمدید سالانه اقامت (که پایین‌تر است) فرق دارد — برای جزئیات به صفحه «اقامت مدیرعامل و سهامدار» مراجعه کنید.' : "For the initial ARICE endorsement: €100,000 (SRL) or €150,000 (SA), or alternatively creating 10-15 full-time jobs. Note this differs from the annual residency-renewal threshold (which is lower) — see the \"Director & Shareholder Residency\" page for details."
+        }
+      ]} />
+
+      <RelatedGuidesCard items={['company/real-estate-investment', 'company/residency']} currentLang={currentLang} onNavigate={onNavigate} />
       <ParentHubFooterCard slugRoute="company/investment" currentLang={currentLang} onNavigate={onNavigate} />
     </div>
   );

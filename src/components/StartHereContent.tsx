@@ -9,6 +9,7 @@ import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { EvaluationCTA } from './EvaluationCTA';
 import { SectionPhoto } from './SectionPhoto';
+import { FaqSchema } from './FaqSchema';
 
 interface StartHereContentProps {
   subRoute: string;
@@ -244,6 +245,21 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </div>
             </div>
           </div>
+
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'کل فرآیند مهاجرت چقدر طول می‌کشد؟' : 'How long does the entire relocation process take?',
+              a: currentLang === 'fa' ? 'بسته به مسیر انتخابی (مثل انتظار برای پذیرش دانشگاه یا مجوز کار)، کل فرآیند از برنامه‌ریزی تا رسیدن به رومانی می‌تواند بین ۳ تا ۸ ماه زمان ببرد.' : 'Depending on your pathway—such as waiting for university acceptance or a work permit—the entire process from planning to arriving can take anywhere from 3 to 8 months.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا برای مهاجرت به وکیل نیاز دارم؟' : 'Do I need an immigration lawyer to move to Romania?',
+              a: currentLang === 'fa' ? 'اگرچه از نظر قانونی اجباری نیست، اما برای مسیرهای پیچیده‌ای مانند ثبت شرکت یا مجوز کار، داشتن یک مشاور یا وکیل مهاجرتی به‌شدت توصیه می‌شود.' : 'While not legally required, hiring a specialized consultant or lawyer is highly recommended for complex pathways like company registration or work permits.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا پرواز مستقیم از تهران به بخارست وجود دارد؟' : 'Is there a direct flight from Tehran to Bucharest?',
+              a: currentLang === 'fa' ? 'خیر. پرواز مستقیمی بین تهران و بخارست وجود ندارد؛ باید از طریق استانبول (یا گاهی دبی/دوحه) ترانزیت کنید.' : 'No. There is no direct flight between Tehran and Bucharest; you must transit through Istanbul (or occasionally Dubai/Doha).'
+            }
+          ]} />
 
           <ParentHubFooterCard slugRoute="start-here/planning-to-come" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
@@ -520,6 +536,17 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم بلافاصله پس از ورود کار کنم؟' : 'Can I start working immediately after I arrive?',
+              a: currentLang === 'fa' ? 'تنها در صورتی که با ویزای کاری مرتبط با مجوز کار از پیش تاییدشده وارد شده باشید؛ دانشجویان و همراهان خانواده شرایط متفاوتی برای کار دارند.' : 'Only if you arrived on a specific work visa with a pre-approved work permit; students and family members have different working rights.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر ویزای من پیش از صدور کارت اقامت منقضی شود چه؟' : 'What happens if my visa expires before I get my residence card?',
+              a: currentLang === 'fa' ? 'مادامی که درخواست اقامت خود را پیش از انقضای ویزا به‌طور رسمی در سامانه IGI ثبت کرده باشید، اقامت شما تا زمان صدور رای نهایی به‌صورت خودکار تمدید می‌شود.' : 'As long as you have officially submitted your residence permit application to IGI before your visa expires, your legal stay is automatically extended until a decision is made.'
+            }
+          ]} />
+
           <ParentHubFooterCard slugRoute="start-here/newly-arrived" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -715,6 +742,17 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'چه زمانی می‌توانم برای اقامت دائم درخواست دهم؟' : 'How soon can I apply for permanent residency?',
+              a: currentLang === 'fa' ? 'اتباع غیراروپایی عموماً می‌توانند پس از ۵ سال اقامت قانونی و مستمر در رومانی، مشروط به احراز شرایط خاص، برای اقامت بلندمدت اقدام کنند.' : 'Non-EU citizens can generally apply for long-term residency after 5 years of continuous, legal stay in Romania, subject to specific conditions.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم خانواده‌ام را برای زندگی به رومانی بیاورم؟' : 'Can I bring my family to live with me?',
+              a: currentLang === 'fa' ? 'بله، در صورتی که کارت اقامتی با اعتبار حداقل یک سال داشته باشید، ممکن است واجد شرایط ثبت درخواست پیوست خانواده برای همسر و فرزندان زیر سن قانونی خود باشید.' : 'Yes, if you hold a valid residence permit valid for at least one year, you may be eligible to apply for Family Reunification for your spouse and minor children.'
+            }
+          ]} />
+
           <ParentHubFooterCard slugRoute="start-here/settling-in" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -789,6 +827,17 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </div>
             </div>
           </div>
+
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا زمان تحصیل دانشجویی به‌طور کامل جزو ۵ سال محاسبه می‌شود؟' : 'Does student time count fully toward the 5 years?',
+              a: currentLang === 'fa' ? 'خیر، فقط نصف. اگر ۴ سال به‌عنوان دانشجو در رومانی بوده‌اید، تنها ۲ سال از سهمیه ۵ ساله محاسبه می‌شود.' : "No, only half. If you've been a student in Romania for 4 years, only 2 years count toward the 5-year requirement."
+            },
+            {
+              q: currentLang === 'fa' ? 'بعد از اقامت بلندمدت، مرحله بعدی چیست؟' : 'What comes after long-term residence?',
+              a: currentLang === 'fa' ? 'مرحله بعدی معمولاً درخواست تابعیت رومانی است که شرایط و زمان‌بندی جداگانه‌ای دارد — برای جزئیات به صفحه «هدف‌گذاری تابعیت» مراجعه کنید.' : 'The next step is typically applying for Romanian citizenship, which has its own separate conditions and timeline — see the Citizenship Path page for details.'
+            }
+          ]} />
 
           <ParentHubFooterCard slugRoute="start-here/long-term-stay" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
@@ -874,6 +923,17 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </div>
             </div>
           </div>
+
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا اقامت بلندمدت پیش‌نیاز تابعیت است؟' : 'Is long-term residence a prerequisite for citizenship?',
+              a: currentLang === 'fa' ? 'رسماً پیش‌نیاز مستقیم نیست، اما در عمل اکثر متقاضیان ابتدا اقامت بلندمدت می‌گیرند چون شرط ۸ سال اقامت مستمر معمولاً از همان مسیر تامین می‌شود.' : "It's not formally a direct prerequisite, but in practice most applicants first obtain long-term residence, since the 8-year continuous-residence requirement is usually satisfied through that same track."
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر ANC پاسخ ندهد یا تأخیر کند چه باید کرد؟' : 'What if ANC is unresponsive or delays my case?',
+              a: currentLang === 'fa' ? 'در صورت گذشتن مدت قانونی بدون پاسخ، می‌توانید با کمک وکیل دادخواستی برای الزام ANC به رسیدگی به دادگاه اداری ارائه دهید.' : "If the legal timeframe passes without a response, you can, with a lawyer's help, file an administrative-court petition compelling ANC to act."
+            }
+          ]} />
 
           <ParentHubFooterCard slugRoute="start-here/citizenship-goal" currentLang={currentLang} onNavigate={onNavigate} />
         </div>

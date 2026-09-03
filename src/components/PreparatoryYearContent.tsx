@@ -5,6 +5,7 @@ import { Language } from '../types';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { SectionPhoto } from './SectionPhoto';
+import { RelatedGuidesCard } from './RelatedGuidesCard';
 
 interface PreparatoryYearContentProps {
   currentLang: Language;
@@ -102,6 +103,43 @@ export const PreparatoryYearContent: React.FC<PreparatoryYearContentProps> = ({ 
           ? 'به‌روزرسانی: طبق چند دانشگاه رومانیایی (پلی‌تکنیک بخارست، اوویدیوس کنستانتا، UMF یاش)، مدرک پایان دوره معمولاً «certificat/atestat de absolvire a anului pregătitor» نامیده می‌شود (دانشگاه‌های مختلف از «certificat» یا «atestat» استفاده می‌کنند) و پس از گذراندن ۶۰ واحد و قبولی در آزمون نهایی زبان صادر می‌شود؛ اما نام انگلیسی این مدرک استاندارد نیست — دانشگاه‌ها آن را متفاوت ترجمه می‌کنند (مثلاً «Certificate of Proficiency in Romanian Language» یا «certificate of linguistic competence»). این نام‌گذاری بر اساس منبع اولیهٔ متن آیین‌نامهٔ وزارتی (شماره ۵۵۱۶/۲۰۲۴) تایید مستقیم نشده، بلکه از چند صفحه دانشگاهی مستقل استخراج شده. نکته دوم (آیا کارت اقامت جداگانه‌ای لازم است) هنوز به‌روشنی مشخص نشد؛ هر دو مورد را مستقیماً از دانشگاه و IGI استعلام بگیرید.'
           : 'Update: per several Romanian universities (Politehnica București, Ovidius Constanța, UMF Iași), the completion certificate is typically called "certificat/atestat de absolvire a anului pregătitor" (institutions use either "certificat" or "atestat"), issued after completing 60 credits and passing the final language exam — but there is no standardized English name; universities translate it differently (e.g., "Certificate of Proficiency in Romanian Language" or "certificate of linguistic competence"). This naming is not confirmed against the primary text of the governing ministerial order (No. 5516/2024) itself, but drawn from several independent university pages. The second question (whether a separate residence permit is required) remains unclear; confirm both directly with your university and IGI.'}
       </div>
+
+      {/* RELATED GUIDES CARD */}
+      <RelatedGuidesCard
+        currentLang={currentLang}
+        items={[
+          {
+            route: 'study/scholarships',
+            icon: '🎓',
+            titleFa: 'بورسیه تحصیلی دولت رومانی',
+            titleEn: 'Romanian Government Scholarship',
+            descriptionFa: 'شرایط بورسیه کامل دولتی وزارت امور خارجه شامل دوره رایگان کالج زبان.',
+            descriptionEn: 'Full government scholarship program covering the preparatory language course.',
+            badgeFa: 'بورسیه کامل',
+            badgeEn: 'Scholarship'
+          },
+          {
+            route: 'study/visa-type-d',
+            icon: '🛂',
+            titleFa: 'ویزای تحصیلی نوع D/SD',
+            titleEn: 'Type D/SD Student Visa',
+            descriptionFa: 'راهنمای اخذ ویزای دانشجویی برای حضور در دوره یک ساله زبان.',
+            descriptionEn: 'Student visa checklist and consular requirements for the prep year.',
+            badgeFa: 'ویزای سفارت',
+            badgeEn: 'Student Visa'
+          },
+          {
+            route: 'study/part-time-work',
+            icon: '💼',
+            titleFa: 'کار دانشجویی در رومانی',
+            titleEn: 'Part-Time Student Work',
+            descriptionFa: 'قوانین اشتغال پاره‌وقت دانشجویان در حین تحصیل (تا ۲۰ ساعت در هفته).',
+            descriptionEn: 'Part-time student employment regulations and legal work limits.',
+            badgeFa: 'قوانین کار',
+            badgeEn: 'Student Work'
+          }
+        ]}
+      />
 
       <ParentHubFooterCard slugRoute="study/preparatory-year" currentLang={currentLang} />
     </div>

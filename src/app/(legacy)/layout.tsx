@@ -34,9 +34,8 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-import { Inter, Manrope, Vazirmatn } from 'next/font/google';
+import { Manrope, Vazirmatn } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-inter' });
 const manrope = Manrope({ subsets: ['latin'], display: 'swap', variable: '--font-manrope' });
 const vazirmatn = Vazirmatn({ subsets: ['arabic'], display: 'swap', variable: '--font-vazirmatn' });
 
@@ -52,7 +51,7 @@ export default function RootLayout({
       <head>
         <StructuredData />
       </head>
-      <body className={`${inter.variable} ${manrope.variable} ${vazirmatn.variable} min-h-screen bg-slate-50 antialiased text-slate-900 selection:bg-[#002B7F] selection:text-white`}>
+      <body className={`${manrope.variable} ${vazirmatn.variable} min-h-screen bg-slate-50 antialiased text-slate-900 selection:bg-[#002B7F] selection:text-white`}>
         <AppLayout initialLang={locale}>
           {children}
         </AppLayout>

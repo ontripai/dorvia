@@ -5,7 +5,9 @@ import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Language } from '../types';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { RelatedGuidesCard } from './RelatedGuidesCard';
 import { SectionPhoto } from './SectionPhoto';
+import { FaqSchema } from './FaqSchema';
 
 interface CompanyOverviewContentProps {
   subRoute: string;
@@ -130,6 +132,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'پروسه ثبت شرکت چقدر زمان می‌برد؟' : 'How long does the registration take?',
+              a: currentLang === 'fa' ? 'پس از آماده‌سازی و ارسال کامل مدارک به ONRC، خودِ ثبت نهایی معمولاً بین ۳ تا ۵ روز کاری زمان می‌برد. اما این فقط زمان رسیدگی ONRC است، نه کل مسیر عملیاتی شدن: با احتساب افتتاح حساب بانکی و ثبت‌نام مالیاتی، منابع رومانیایی زمان واقعی را حدود ۵ تا ۱۰ روز کاری برای یک متقاضی مقیم با مدارک کامل تخمین می‌زنند. برای متقاضیان ایرانی این رقم معمولاً واقع‌بینانه‌تر نیست، چون زنجیره تصدیق کنسولی وکالت‌نامه/مدارک (ایران عضو کنوانسیون آپوستیل لاهه نیست) و مهلت قانونی ۶۰ روزه افتتاح حساب بانکی (که در عمل می‌تواند برای متقاضیان ایرانی طولانی‌تر شود) هر دو زمان کل را افزایش می‌دهند — این یک برآورد منطقی است، نه رقم رسمی مستندشده برای این گروه خاص.' : "Once all documents are prepared and submitted to ONRC, the registration itself typically takes 3 to 5 working days. But that's only ONRC's own processing time, not the full path to being fully operational: factoring in bank account opening and tax registration, Romanian sources estimate a realistic total of roughly 5 to 10 working days for a resident applicant with complete documentation. For Iranian applicants, this figure is usually not realistic, since both the consular legalization chain for the power of attorney/documents (Iran is not a Hague Apostille signatory) and the legal 60-working-day bank account deadline (which can in practice run longer for Iranian applicants) extend the overall timeline — this is a reasoned estimate, not an officially documented figure for this specific group."
+            },
+            {
+              q: currentLang === 'fa' ? 'هزینه دولتی ثبت شرکت دقیقاً چقدر است؟' : "What exactly is the government registration fee?",
+              a: currentLang === 'fa' ? 'از ۱ ژانویه ۲۰۲۶ این هزینه به‌صورت اجزای جدا محاسبه می‌شود (حدود ۱۱۵ تا ۲۳۰ لئو بسته به روش ارسال) — جزئیات کامل در کارت «آماده‌سازی مقدماتی» بالا آمده. این رقم به‌تازگی تغییر کرده؛ رقم دقیق روز را از onrc.ro بگیرید.' : 'Since January 1, 2026, this fee is calculated as separate line items (roughly 115 to 230 RON depending on filing method) — full breakdown in the "Preliminary Preparation" card above. This figure changed recently; get the exact current amount from onrc.ro.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا برای ثبت شرکت به شریک رومانیایی نیاز دارم؟' : 'Do I need a local Romanian partner?',
+              a: currentLang === 'fa' ? 'خیر، اتباع خارجی می‌توانند به تنهایی مالک ۱۰۰٪ سهام شرکت و مدیرعامل آن باشند.' : 'No, foreign nationals can own 100% of the company shares and act as the sole director.'
+            },
+            {
+              q: currentLang === 'fa' ? 'حداقل سرمایه ثبت شرکت الان چقدر است؟' : "What's the current minimum share capital?",
+              a: currentLang === 'fa' ? 'از ۱۸ دسامبر ۲۰۲۵ (قانون ۲۳۹/۲۰۲۵)، ۵۰۰ لئو برای اکثر SRLهای تازه‌ثبت‌شده (۵,۰۰۰ لئو اگر گردش مالی سالانه از ۴۰۰,۰۰۰ لئو بیشتر باشد) — پیش از این فقط ۱ لئوی نمادین کافی بود.' : "Since December 18, 2025 (Law 239/2025), 500 RON for most newly registered SRLs (5,000 RON if annual turnover exceeds 400,000 RON) — before that, a symbolic 1 RON was sufficient."
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا باید فوراً حساب بانکی شرکتی باز کنم؟' : 'Do I need to open a corporate bank account right away?',
+              a: currentLang === 'fa' ? 'قانوناً ۶۰ روز کاری از تاریخ ثبت شرکت فرصت دارید، اما با توجه به احتمال طولانی‌تر شدن فرآیند برای متقاضیان با پیشینه ایرانی، بهتر است بلافاصله شروع کنید.' : "Legally you have 60 working days from registration, but given the account-opening process can take longer for applicants of Iranian background, it's best to start immediately."
+            }
+          ]} />
+
           <ParentHubFooterCard slugRoute="company/registration" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -244,6 +269,22 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا بدون استخدام کارمند می‌توانم از مالیات ۱٪ استفاده کنم؟' : 'Can I pay 1% tax with 0 employees?',
+              a: currentLang === 'fa' ? 'خیر، بر اساس قوانین جدید، داشتن حداقل یک کارمند تمام‌وقت برای بهره‌مندی از نرخ ۱٪ میکرو-شرکت الزامی است.' : 'No, under current laws, having at least one full-time employee is mandatory to qualify for the 1% micro-enterprise rate.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر درآمد من از ۱۰۰ هزار یورو بیشتر شود چه اتفاقی می‌افتد؟' : 'What happens if revenue exceeds €100k?',
+              a: currentLang === 'fa' ? 'شرکت شما به‌طور خودکار از رژیم میکرو خارج شده و مشمول پرداخت مالیات ۱۶ درصدی بر سود خالص خواهد شد.' : 'Your company will automatically exit the micro-enterprise regime and become subject to the 16% tax on net corporate profit.'
+            },
+            {
+              q: currentLang === 'fa' ? 'نرخ مالیات سود سهام الان چقدر است؟' : "What's the current dividend tax rate?",
+              a: currentLang === 'fa' ? 'به‌طور کلی ۱۶٪ از ۱ ژانویه ۲۰۲۶ (قبلاً ۱۰٪ بود)؛ اما سهامداران مقیم مالیاتی ایران می‌توانند با گواهی اقامت مالیاتی، طبق معاهده مالیاتی دوجانبه، از نرخ ۱۰٪ استفاده کنند.' : "Generally 16% since January 1, 2026 (previously 10%); however, Iranian tax residents can use the 10% treaty rate instead, with a Certificate of Tax Residency, under the bilateral tax treaty."
+            }
+          ]} />
+
+          <RelatedGuidesCard items={['work/taxes-salaries']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="company/tax-types" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -336,6 +377,18 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم از راه دور حساب بانکی شرکتی باز کنم؟' : 'Can I open a corporate account entirely online as a foreigner?',
+              a: currentLang === 'fa' ? 'با وجود ارائه خدمات آنلاین توسط برخی بانک‌ها، برای اتباع کشورهای غیراروپایی معمولاً حضور فیزیکی مدیرعامل جهت احراز هویت در شعبه الزامی است.' : 'While some banks offer online services, foreign directors from non-EU countries are often required to visit the branch in person for KYC procedures.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا تحریم‌ها به‌طور مستقیم مانع افتتاح حساب شرکتی اشخاص ایرانی می‌شوند؟' : 'Do the sanctions directly block Iranian nationals from opening a corporate account?',
+              a: currentLang === 'fa' ? 'متن تحریم‌های اتحادیه اروپا صراحتاً حساب اشخاص حقیقی/حقوقی ایرانی مقیم اتحادیه اروپا را هدف نگرفته؛ مشکلاتی که در عمل پیش می‌آید بیشتر از محافظه‌کاری داخلی بانک‌ها (ریسک‌گریزی) ناشی می‌شود، نه یک ممنوعیت مستقیم قانونی.' : "The text of the EU sanctions doesn't explicitly target the accounts of Iranian individuals or companies resident in the EU; the friction that occurs in practice mostly comes from banks' own internal risk-averse policies, not a direct legal prohibition."
+            }
+          ]} />
+
+          <RelatedGuidesCard items={['needs/banking']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="company/bank-account" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -440,6 +493,22 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا تنها با خرید سهام یک شرکت رومانیایی می‌توانم اقامت بگیرم؟' : 'Does buying shares in a Romanian company give me residency?',
+              a: currentLang === 'fa' ? 'خیر، صرفِ داشتن سهام کافی نیست؛ شما باید اثبات کنید که سرمایه‌گذاری قابل توجهی انجام داده‌اید و در مدیریت کسب‌وکار به‌طور فعال مشارکت دارید.' : 'No, simply holding shares is insufficient; you must prove substantial investment and active involvement in managing the business.'
+            },
+            {
+              q: currentLang === 'fa' ? 'حداقل سرمایه مورد نیاز چقدر است؟' : 'How much investment is required?',
+              a: currentLang === 'fa' ? 'برای شریک SRL: ۵۰,۰۰۰ یورو یا ۱۰ شغل تمام‌وقت. برای سهامدار SA: ۷۰,۰۰۰ یورو یا ۱۵ شغل تمام‌وقت — این ارقام مستقیماً از ماده ۵۵ آیین‌نامه اتباع خارجی (OUG 194/2002) گرفته شده‌اند.' : 'For an SRL partner: €50,000 or 10 full-time jobs. For an SA shareholder: €70,000 or 15 full-time jobs — these figures come directly from Article 55 of the Foreigners Regime (OUG 194/2002).'
+            },
+            {
+              q: currentLang === 'fa' ? 'چرا رقمی که در صفحه «اقامت از طریق سرمایه‌گذاری» دیدم بالاتر است؟' : 'Why is the figure on the "Investment Residency" page higher?',
+              a: currentLang === 'fa' ? 'چون آن صفحه درباره آستانه ورودی اولیه نزد ARICE است (پیش از دریافت ویزا و سفر)، در حالی که این صفحه درباره تمدید سالانه اقامت پس از استقرار در رومانی است — دو مرحله متفاوت با دو آستانه متفاوت.' : "Because that page covers the initial entry threshold with ARICE (before getting the visa and traveling), while this page covers the annual residency renewal after you're already established in Romania — two different stages with two different thresholds."
+            }
+          ]} />
+
+          <RelatedGuidesCard items={['immigration/long-term-residence', 'immigration/citizenship']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="company/residency" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -555,6 +624,21 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم آپارتمانی در بخارست به نام خودم بخرم؟' : 'Can I buy an apartment in Bucharest as a non-EU citizen?',
+              a: currentLang === 'fa' ? 'بله، شما می‌توانید مالکیت خودِ آپارتمان را به‌طور کامل به نام شخصی خود ثبت کنید، اما زمینِ زیر مجتمع ممکن است به‌صورت اجاره‌ای (Concession) ثبت شود.' : 'Yes, you can fully own the apartment unit itself under your personal name, though the land beneath the building may be held in concession.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا با خرید ملک به من اقامت رومانی داده می‌شود؟' : 'Does buying real estate grant me residency?',
+              a: currentLang === 'fa' ? 'خیر. رومانی در حال حاضر برنامه «ویزای طلایی» (Golden Visa) بابت خرید ملک شخصی ندارد و خرید ملک مستقیماً منجر به صدور اقامت نمی‌شود.' : 'No. Romania does not currently have a "Golden Visa" program; buying real estate does not automatically grant a residence permit.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا ایران با رومانی معاهده مالکیت زمین دارد؟' : 'Does Iran have a land-ownership treaty with Romania?',
+              a: currentLang === 'fa' ? 'خیر. ایران در فهرست کشورهای بدون معاهده متقابل قرار دارد؛ راه‌حل رایج، خرید از طریق یک شرکت رومانیایی (SRL) است که شرکت‌ها هیچ محدودیتی در مالکیت زمین ندارند.' : "No. Iran is on the list of countries without a reciprocal treaty; the common workaround is buying through a Romanian company (SRL), since companies face no land-ownership restrictions."
+            }
+          ]} />
+
           <ParentHubFooterCard slugRoute="company/real-estate-investment" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -639,6 +723,17 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا کارمندان شرکت‌های IT هنوز از مالیات معاف هستند؟' : 'Are IT company employees still tax-exempt?',
+              a: currentLang === 'fa' ? 'خیر. این معافیت از ۱ ژانویه ۲۰۲۵ به‌طور کامل لغو شده و حقوق کارکنان بخش نرم‌افزار اکنون دقیقاً مانند سایر مشاغل مالیات می‌گیرد.' : 'No. This exemption was fully repealed on January 1, 2025, and software-sector salaries are now taxed exactly like any other role.'
+            },
+            {
+              q: currentLang === 'fa' ? 'پس چه چیزی برای صرفه‌جویی مالیاتی استارت‌آپ باقی مانده؟' : 'So what tax-saving option is left for a startup?',
+              a: currentLang === 'fa' ? 'رژیم میکرو-شرکت (نرخ ۱٪ روی گردش مالی تا سقف ۱۰۰,۰۰۰ یورو در سال) اصلی‌ترین ابزار قانونی صرفه‌جویی مالیاتی برای اکثر استارت‌آپ‌های نوپا باقی مانده است.' : 'The micro-enterprise regime (1% tax on revenue up to €100,000/year) remains the main legal tax-saving tool available to most early-stage startups.'
+            }
+          ]} />
+
           <ParentHubFooterCard slugRoute="company/startup-tech-investment" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -715,6 +810,17 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               </div>
             </div>
           </div>
+
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'اگر موعد ارسال گزارش سالانه را از دست بدهم چه می‌شود؟' : 'What happens if I miss the annual reporting deadline?',
+              a: currentLang === 'fa' ? 'تأخیر در ارسال جریمه‌های نقدی بین ۲,۰۰۰ تا ۵,۰۰۰ لئو به دنبال دارد و تاخیر بیش از ۵ ماه منجر به قرار گرفتن در لیست غیرفعال‌های مالیاتی می‌شود.' : 'Late submissions lead to fines between 2,000 and 5,000 RON, and prolonged delays over 5 months can result in the company being declared "fiscally inactive".'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا شرکت بدون هیچ فعالیتی هم به حسابدار نیاز دارد؟' : 'Do I need an accountant if my company has no activity?',
+              a: currentLang === 'fa' ? 'شما همچنان برای ارسال اظهارنامه عدم‌فعالیت با امضای دیجیتالِ تأییدشده به یک شخص مجاز نیاز دارید، هرچند هزینه آن بسیار ناچیز است.' : 'You still need an authorized person with a digital signature to submit the declaration of inactivity, though the accounting cost is minimal.'
+            }
+          ]} />
 
           <ParentHubFooterCard slugRoute="company/annual-tax-reporting" currentLang={currentLang} onNavigate={onNavigate} />
         </div>

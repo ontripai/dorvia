@@ -4,6 +4,8 @@ import React from 'react';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Language } from '../types';
 import { PAGE_META } from '../lib/pageMeta';
+import { getCanonicalOrigin } from '../lib/metadata';
+import { ROUTE_REGISTRY } from '../lib/routeRegistry';
 import { ChevronRight, ChevronLeft, ArrowLeft, ArrowRight, Home } from './Icons';
 
 interface BreadcrumbProps {
@@ -31,8 +33,42 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ slugRoute, currentLang, 
     }
   };
 
+  const baseUrl = getCanonicalOrigin();
+  const canonicalPath = ROUTE_REGISTRY[slugRoute]?.canonical || `/${slugRoute}`;
+  const cleanPath = canonicalPath === '/' ? '' : canonicalPath;
+  const parentCanonical = meta.parentPath === '/' ? '' : meta.parentPath;
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: homeTitle,
+        item: `${baseUrl}/${currentLang}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: parentTitle,
+        item: `${baseUrl}/${currentLang}${parentCanonical}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: currentTitle,
+        item: `${baseUrl}/${currentLang}${cleanPath}`,
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* MOBILE STICKY PARENT BACK BAR (موبایل و تبلت - چسبان زیر هدر) */}
       <div className="md:hidden sticky top-[80px] z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 py-2.5 shadow-sm text-xs transition-all">
         <div className="flex items-center justify-between max-w-[1280px] mx-auto">
