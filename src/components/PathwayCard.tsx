@@ -3,6 +3,17 @@ import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Language } from '../types';
 import { ArrowLeft, ArrowRight } from './Icons';
 
+export type PathwayAccent = 'blue' | 'emerald' | 'amber' | 'violet' | 'rose' | 'teal';
+
+const ACCENT_STYLES: Record<PathwayAccent, { bg: string; text: string; hoverBg: string }> = {
+  blue:    { bg: 'bg-blue-50',    text: 'text-[#2F6FED]', hoverBg: 'group-hover:bg-[#2F6FED]' },
+  emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', hoverBg: 'group-hover:bg-emerald-600' },
+  amber:   { bg: 'bg-amber-50',   text: 'text-amber-600',  hoverBg: 'group-hover:bg-amber-600' },
+  violet:  { bg: 'bg-violet-50',  text: 'text-violet-600', hoverBg: 'group-hover:bg-violet-600' },
+  rose:    { bg: 'bg-rose-50',    text: 'text-rose-600',   hoverBg: 'group-hover:bg-rose-600' },
+  teal:    { bg: 'bg-teal-50',    text: 'text-teal-600',   hoverBg: 'group-hover:bg-teal-600' },
+};
+
 interface PathwayCardProps {
   currentLang: Language;
   title: string;
@@ -10,6 +21,7 @@ interface PathwayCardProps {
   icon: React.ComponentType<{ size?: number; className?: string }>;
   badge?: string;
   href: string;
+  accentColor?: PathwayAccent;
 }
 
 export const PathwayCard: React.FC<PathwayCardProps> = ({
@@ -18,9 +30,11 @@ export const PathwayCard: React.FC<PathwayCardProps> = ({
   desc,
   icon: IconComp,
   badge,
-  href
+  href,
+  accentColor = 'blue',
 }) => {
   const ArrowIcon = currentLang === 'fa' ? ArrowLeft : ArrowRight;
+  const accent = ACCENT_STYLES[accentColor];
 
   return (
     <Link
@@ -32,7 +46,7 @@ export const PathwayCard: React.FC<PathwayCardProps> = ({
 
       <div>
         <div className="flex items-center justify-between mb-4">
-          <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#2F6FED] flex items-center justify-center group-hover:bg-[#2F6FED] group-hover:text-white transition-colors">
+          <div className={`w-12 h-12 rounded-xl ${accent.bg} ${accent.text} flex items-center justify-center ${accent.hoverBg} group-hover:text-white transition-colors`}>
             <IconComp size={22} />
           </div>
 

@@ -1,0 +1,92 @@
+<svg viewBox="0 0 1200 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="bld-back" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4E86F2" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#4E86F2" stop-opacity="0.12"/>
+    </linearGradient>
+    <linearGradient id="bld-front" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5C93F5" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#1E4FB8" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="bld-landmark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7FA6F7"/>
+      <stop offset="100%" stop-color="#2F6FED"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Back row (soft, distant) -->
+  <g fill="url(#bld-back)">
+    <rect x="20"  y="150" width="60" height="150" rx="3"/>
+    <rect x="95"  y="120" width="46" height="180" rx="3"/>
+    <rect x="960" y="140" width="55" height="160" rx="3"/>
+    <rect x="1040" y="110" width="48" height="190" rx="3"/>
+    <rect x="1110" y="160" width="60" height="140" rx="3"/>
+  </g>
+
+  <!-- Front row (closer, more solid) -->
+  <g fill="url(#bld-front)">
+    <rect x="150" y="195" width="70" height="105" rx="3"/>
+    <rect x="230" y="150" width="52" height="150" rx="3"/>
+    <rect x="620" y="175" width="58" height="125" rx="3"/>
+    <rect x="690" y="130" width="80" height="170" rx="3"/>
+    <rect x="785" y="185" width="46" height="115" rx="3"/>
+    <rect x="845" y="145" width="90" height="155" rx="3"/>
+  </g>
+  <!-- small antenna on one front building -->
+  <rect x="887" y="118" width="4" height="30" fill="#5C93F5" opacity="0.8"/>
+
+  <!-- Landmark building: stepped silhouette evoking the Palace of Parliament -->
+  <g fill="url(#bld-landmark)">
+    <rect x="330" y="235" width="240" height="65" rx="3"/>
+    <rect x="355" y="190" width="190" height="50" rx="3"/>
+    <rect x="380" y="150" width="140" height="45" rx="3"/>
+    <rect x="410" y="115" width="80" height="40" rx="3"/>
+    <rect x="446" y="90" width="8" height="28"/>
+  </g>
+
+  <!-- lit windows: warm accent for a "living city" feel -->
+  <g fill="#F5B942" opacity="0.85">
+    <rect x="360" y="205" width="7" height="7" rx="1"/>
+    <rect x="385" y="205" width="7" height="7" rx="1"/>
+    <rect x="410" y="205" width="7" height="7" rx="1"/>
+    <rect x="435" y="205" width="7" height="7" rx="1"/>
+    <rect x="460" y="205" width="7" height="7" rx="1"/>
+    <rect x="490" y="205" width="7" height="7" rx="1"/>
+    <rect x="395" y="165" width="6" height="6" rx="1"/>
+    <rect x="420" y="165" width="6" height="6" rx="1"/>
+    <rect x="450" y="165" width="6" height="6" rx="1"/>
+    <rect x="475" y="165" width="6" height="6" rx="1"/>
+    <rect x="710" y="150" width="6" height="6" rx="1"/>
+    <rect x="730" y="150" width="6" height="6" rx="1"/>
+    <rect x="865" y="165" width="6" height="6" rx="1"/>
+    <rect x="895" y="165" width="6" height="6" rx="1"/>
+  </g>
+
+  <!-- Flight path: dashed arc suggesting the journey -->
+  <path d="M60 90 C 320 -20, 780 -20, 1015 60" stroke="#F5B942" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round" opacity="0.65"/>
+
+  <!-- Paper-plane icon riding the path -->
+  <g transform="translate(1000,58) rotate(18)">
+    <path d="M0 0 L34 -6 L6 8 L2 22 L-4 9 L-20 4 Z" fill="#F5B942"/>
+    <path d="M6 8 L2 22 L-4 9 Z" fill="#C98A1F"/>
+  </g>
+
+  <!-- EU stars motif: ring of 12 dots -->
+  <g fill="#F5B942" opacity="0.8">
+    <circle cx="1030.0" cy="36.0" r="2.6"/>
+    <circle cx="1045.0" cy="40.0" r="2.6"/>
+    <circle cx="1056.0" cy="51.0" r="2.6"/>
+    <circle cx="1060.0" cy="66.0" r="2.6"/>
+    <circle cx="1056.0" cy="81.0" r="2.6"/>
+    <circle cx="1045.0" cy="92.0" r="2.6"/>
+    <circle cx="1030.0" cy="96.0" r="2.6"/>
+    <circle cx="1015.0" cy="92.0" r="2.6"/>
+    <circle cx="1004.0" cy="81.0" r="2.6"/>
+    <circle cx="1000.0" cy="66.0" r="2.6"/>
+    <circle cx="1004.0" cy="51.0" r="2.6"/>
+    <circle cx="1015.0" cy="40.0" r="2.6"/>
+  </g>
+
+  <!-- ground line -->
+  <rect x="0" y="299" width="1200" height="1" fill="#5C93F5" opacity="0.25"/>
+</svg>

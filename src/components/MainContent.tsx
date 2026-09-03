@@ -194,6 +194,14 @@ export const MainContent: React.FC<MainContentProps> = ({
             <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-[#2f6bd1]/30 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-[#2F6FED]/10 rounded-full blur-3xl pointer-events-none" />
 
+            {/* Decorative Bucharest skyline illustration */}
+            <img
+              src="/images/illustrations/hero-skyline.svg"
+              alt=""
+              aria-hidden="true"
+              className="absolute bottom-0 left-0 w-full h-[140px] sm:h-[200px] lg:h-[260px] object-cover object-bottom opacity-90 pointer-events-none select-none"
+            />
+
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
@@ -358,6 +366,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   icon={GraduationCap}
                   badge={currentLang === 'fa' ? 'مسیر تحصیلی' : 'Academic'}
                   href="/study"
+                  accentColor="blue"
                 />
                 <PathwayCard
                   currentLang={currentLang}
@@ -366,6 +375,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   icon={BriefcaseBusiness}
                   badge={currentLang === 'fa' ? 'مسیر کاری' : 'Careers'}
                   href="/work"
+                  accentColor="emerald"
                 />
                 <PathwayCard
                   currentLang={currentLang}
@@ -374,6 +384,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   icon={Building2}
                   badge={currentLang === 'fa' ? 'فعالیت تجاری' : 'Corporate'}
                   href="/company"
+                  accentColor="amber"
                 />
                 <PathwayCard
                   currentLang={currentLang}
@@ -382,6 +393,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   icon={ChartNoAxesCombined}
                   badge={currentLang === 'fa' ? 'سرمایه‌گذاری' : 'Investment'}
                   href="/company/investment"
+                  accentColor="violet"
                 />
                 <PathwayCard
                   currentLang={currentLang}
@@ -390,6 +402,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   icon={Users}
                   badge={currentLang === 'fa' ? 'پیوست خانواده' : 'Family'}
                   href="/immigration/family-reunification"
+                  accentColor="rose"
                 />
                 <PathwayCard
                   currentLang={currentLang}
@@ -398,6 +411,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                   icon={House}
                   badge={currentLang === 'fa' ? 'راهنمای استقرار' : 'Settlement'}
                   href="/start-here/settling-in"
+                  accentColor="teal"
                 />
               </div>
 
