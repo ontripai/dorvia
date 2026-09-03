@@ -3,7 +3,7 @@ import { ROUTE_REGISTRY } from './routeRegistry';
 import { PAGE_META } from './pageMeta';
 
 export function getCanonicalOrigin(): string {
-  const fallback = 'https://romania-eight.vercel.app';
+  const fallback = 'https://dorvia.vercel.app';
   const rawUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
   if (!rawUrl) return fallback;
