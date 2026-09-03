@@ -251,7 +251,14 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
           className="flex items-center space-x-2 sm:space-x-3 rtl:space-x-reverse cursor-pointer shrink min-w-0"
           onClick={() => handleLeafClick('home')}
         >
-          <Image src="/images/logo/dorvia-logo-primary-transparent-3000.png" alt="DORVIA EUROP" width={3000} height={679} className="h-[28px] w-auto brightness-0 invert" />
+          <Image
+            src="/images/logo/dorvia-logo-primary-transparent-3000.png"
+            alt="DORVIA EUROP"
+            width={3000}
+            height={679}
+            sizes="140px"
+            className="h-[28px] w-auto brightness-0 invert"
+          />
         </Link>
 
         <button

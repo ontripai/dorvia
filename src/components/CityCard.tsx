@@ -52,6 +52,7 @@ export const CityCard: React.FC<CityCardProps> = ({ city, currentLang, onSelect,
         {href ? (
           <Link
             href={href}
+            aria-label={currentLang === 'fa' ? `راهنمای زندگی و تحصیل در ${city.name[currentLang]}` : `View detailed guide for ${city.name[currentLang]}`}
             className="w-full py-2.5 bg-slate-50 hover:bg-[#071B3D] text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 hover:border-[#071B3D] flex items-center justify-center space-x-1 rtl:space-x-reverse block text-center"
           >
             <span>{currentLang === 'fa' ? 'راهنمای زندگی و تحصیل در این شهر' : 'View Detailed Guide'}</span>
@@ -59,6 +60,7 @@ export const CityCard: React.FC<CityCardProps> = ({ city, currentLang, onSelect,
         ) : (
           <button
             onClick={() => onSelect && onSelect(city)}
+            aria-label={currentLang === 'fa' ? `راهنمای زندگی و تحصیل در ${city.name[currentLang]}` : `View detailed guide for ${city.name[currentLang]}`}
             className="w-full py-2.5 bg-slate-50 hover:bg-[#071B3D] text-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all border border-slate-200 hover:border-[#071B3D] flex items-center justify-center space-x-1 rtl:space-x-reverse"
           >
             <span>{currentLang === 'fa' ? 'راهنمای زندگی و تحصیل در این شهر' : 'View Detailed Guide'}</span>

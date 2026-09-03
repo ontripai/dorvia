@@ -56,7 +56,9 @@ const securityHeaders = [
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  compress: true,
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -66,6 +68,15 @@ const nextConfig = {
   },
   async headers() {
     return [
+      {
+        source: '/images/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
       {
         source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
         headers: securityHeaders,

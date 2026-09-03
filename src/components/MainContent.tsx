@@ -9,19 +9,20 @@ import { PathwayCard } from './PathwayCard';
 import { UniversityCard } from './UniversityCard';
 import { CityCard } from './CityCard';
 import { ServiceCard } from './ServiceCard';
-import { NeedsContent } from './NeedsContent';
-import { RomaniaOverviewContent } from './RomaniaOverviewContent';
-import UniversitiesPage from '@/app/[lang]/universities/page';
-import { WorkOverviewContent } from './WorkOverviewContent';
-import { StartHereContent } from './StartHereContent';
-import { IgiProcessContent } from './IgiProcessContent';
-import { PreparatoryYearContent } from './PreparatoryYearContent';
-import { StudyDetailsContent } from './StudyDetailsContent';
-import { CompanyOverviewContent } from './CompanyOverviewContent';
-import { ImmigrationOverviewContent } from './ImmigrationOverviewContent';
-import { ScholarshipOverviewContent } from './ScholarshipOverviewContent';
-import { InvestmentOverviewContent } from './InvestmentOverviewContent';
 import dynamic from 'next/dynamic';
+
+const NeedsContent = dynamic(() => import('./NeedsContent').then(m => m.NeedsContent), { ssr: true });
+const RomaniaOverviewContent = dynamic(() => import('./RomaniaOverviewContent').then(m => m.RomaniaOverviewContent), { ssr: true });
+const UniversitiesPage = dynamic(() => import('@/app/[lang]/universities/page'), { ssr: true });
+const WorkOverviewContent = dynamic(() => import('./WorkOverviewContent').then(m => m.WorkOverviewContent), { ssr: true });
+const StartHereContent = dynamic(() => import('./StartHereContent').then(m => m.StartHereContent), { ssr: true });
+const IgiProcessContent = dynamic(() => import('./IgiProcessContent').then(m => m.IgiProcessContent), { ssr: true });
+const PreparatoryYearContent = dynamic(() => import('./PreparatoryYearContent').then(m => m.PreparatoryYearContent), { ssr: true });
+const StudyDetailsContent = dynamic(() => import('./StudyDetailsContent').then(m => m.StudyDetailsContent), { ssr: true });
+const CompanyOverviewContent = dynamic(() => import('./CompanyOverviewContent').then(m => m.CompanyOverviewContent), { ssr: true });
+const ImmigrationOverviewContent = dynamic(() => import('./ImmigrationOverviewContent').then(m => m.ImmigrationOverviewContent), { ssr: true });
+const ScholarshipOverviewContent = dynamic(() => import('./ScholarshipOverviewContent').then(m => m.ScholarshipOverviewContent), { ssr: true });
+const InvestmentOverviewContent = dynamic(() => import('./InvestmentOverviewContent').then(m => m.InvestmentOverviewContent), { ssr: true });
 
 const LeadForm = dynamic(() => import('./LeadForm').then(m => m.LeadForm), { ssr: true });
 const EvaluationCTA = dynamic(() => import('./EvaluationCTA').then(m => m.EvaluationCTA), { ssr: true });
@@ -199,6 +200,10 @@ export const MainContent: React.FC<MainContentProps> = ({
               src="/images/illustrations/hero-skyline.svg"
               alt=""
               aria-hidden="true"
+              width="1440"
+              height="260"
+              fetchPriority="low"
+              loading="eager"
               className="absolute bottom-0 left-0 w-full h-[140px] sm:h-[200px] lg:h-[260px] object-cover object-bottom opacity-90 pointer-events-none select-none"
             />
 
