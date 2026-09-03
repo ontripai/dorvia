@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { recordWebsiteLead } from '../../../lib/supabaseAdmin';
 
 // Simple in-memory rate limiting for best-effort fallback
 const rateLimitMap = new Map<string, { count: number, resetTime: number }>();
@@ -68,6 +69,21 @@ export async function POST(req: Request) {
       message: sanitize(data.message, 1000),
       marketingConsent: Boolean(data.marketingConsent)
     };
+
+    // Best-effort mirror into the unified Supabase leads table (source='website').
+    // Awaited (not truly fire-and-forget) because serverless functions can
+    // freeze once the response is sent, which would cut off an un-awaited
+    // background write. recordWebsiteLead never throws and its own failure
+    // must never block or fail the Telegram-based success response below.
+    await recordWebsiteLead({
+      fullName: safeData.fullName,
+      phone: safeData.phone,
+      email: safeData.email,
+      mainGoal: safeData.mainGoal,
+      message: safeData.message,
+      marketingConsent: safeData.marketingConsent,
+      channelRef: ip,
+    }).catch(() => {});
 
     // Construct Telegram Message safely
     const telegramMessage = `
