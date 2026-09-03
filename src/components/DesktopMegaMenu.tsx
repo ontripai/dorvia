@@ -270,6 +270,7 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 <li><Link href="/work/employment-contract" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>📜</span> <span>{currentLang === 'fa' ? 'قرارداد استخدام' : 'Employment Contract'}</span></Link></li>
                 <li><Link href="/work/taxes-salaries" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>💰</span> <span>{currentLang === 'fa' ? 'حقوق و مالیات' : 'Salary & Tax'}</span></Link></li>
                 <li><Link href="/work/insurance" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>🏥</span> <span>{currentLang === 'fa' ? 'بیمه (اجتماعی/درمانی)' : 'Insurance'}</span></Link></li>
+                <li><Link href="/work/digital-nomad" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>💻</span> <span>{currentLang === 'fa' ? 'ویزای دیجیتال نومد' : 'Digital Nomad Visa'}</span></Link></li>
               </ul>
             </div>
 
