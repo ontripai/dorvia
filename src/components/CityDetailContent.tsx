@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { Language } from '../types';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { RelatedGuidesCard } from './RelatedGuidesCard';
+import { FaqSchema } from './FaqSchema';
 
 interface CityDetailContentProps {
   citySlug: string;
@@ -29,19 +31,25 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
   );
 
   const faqBlock = (items: { qFa: string; qEn: string; aFa: string; aEn: string }[]) => (
-    <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
-      <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
-        {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
-      </h3>
-      <div className="space-y-6">
-        {items.map((item, idx) => (
-          <div key={idx}>
-            <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? item.qFa : item.qEn}</h4>
-            <p className="text-sm text-[#475569]">{currentLang === 'fa' ? item.aFa : item.aEn}</p>
-          </div>
-        ))}
+    <>
+      <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+        <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+          {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+        </h3>
+        <div className="space-y-6">
+          {items.map((item, idx) => (
+            <div key={idx}>
+              <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? item.qFa : item.qEn}</h4>
+              <p className="text-sm text-[#475569]">{currentLang === 'fa' ? item.aFa : item.aEn}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+      <FaqSchema items={items.map((item) => ({
+        q: currentLang === 'fa' ? item.qFa : item.qEn,
+        a: currentLang === 'fa' ? item.aFa : item.aEn,
+      }))} />
+    </>
   );
 
   switch (citySlug) {
@@ -225,6 +233,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             }
           ])}
 
+          <RelatedGuidesCard items={['needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="romania/cities/bucharest" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -406,6 +415,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             }
           ])}
 
+          <RelatedGuidesCard items={['needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="romania/cities/cluj-napoca" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -589,6 +599,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             }
           ])}
 
+          <RelatedGuidesCard items={['needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="romania/cities/timisoara" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -770,6 +781,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             }
           ])}
 
+          <RelatedGuidesCard items={['needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="romania/cities/iasi" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -951,6 +963,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             }
           ])}
 
+          <RelatedGuidesCard items={['needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="romania/cities/brasov" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -1133,6 +1146,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             }
           ])}
 
+          <RelatedGuidesCard items={['needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="romania/cities/constanta" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );

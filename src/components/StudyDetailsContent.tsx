@@ -4,6 +4,8 @@ import React from 'react';
 import { Language } from '../types';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { RelatedGuidesCard } from './RelatedGuidesCard';
+import { FaqSchema } from './FaqSchema';
 
 interface StudyDetailsContentProps {
   subRoute: string;
@@ -130,6 +132,22 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا داشتن مدرک آیلتس یا تافل الزامی است؟' : 'Is IELTS/TOEFL strictly required?',
+              a: currentLang === 'fa' ? 'بستگی به دانشگاه دارد؛ برخی دانشگاه‌ها گواهی تسلط به زبان انگلیسی از مقطع قبلی را می‌پذیرند یا خودشان مصاحبه تعیین سطح برگزار می‌کنند.' : 'It depends on the university and program; some accept a certificate of English proficiency from your previous school or conduct their own online interview.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا باید تمام مدارک دبیرستان را ترجمه کنم؟' : 'Do I need to translate all my high school transcripts?',
+              a: currentLang === 'fa' ? 'بله، تمامی مدارک تحصیلی پایه باید به‌صورت رسمی ترجمه شوند. برای متقاضیان ایرانی، چون ایران عضو کنوانسیون آپوستیل نیست، به‌جای آپوستیل ساده باید زنجیره کامل تصدیق کنسولی طی شود (جزئیات در باکس بالا).' : 'Yes, all academic transcripts must be officially translated. For Iranian applicants specifically, since Iran is not an Apostille Convention member, a simple apostille is not possible — the full consular legalization chain must be followed instead (see the box above).'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا سفارت رومانی در تهران فعال است؟' : 'Is the Romanian Embassy in Tehran operating?',
+              a: currentLang === 'fa' ? 'بله، بر اساس اطلاعات رسمی وزارت امور خارجه رومانی، سفارت رومانی در تهران فعال است؛ با این حال پیش از مراجعه حضوری، ساعات کاری و ظرفیت پذیرش را مستقیماً از سفارت استعلام بگیرید.' : 'Yes, per official Romanian Ministry of Foreign Affairs information, the Romanian Embassy in Tehran is active; however, confirm current opening hours and appointment capacity directly with the embassy before visiting in person.'
+            }
+          ]} />
+
+          <RelatedGuidesCard items={['universities']} currentLang={currentLang} />
           <ParentHubFooterCard slugRoute="study/requirements" currentLang={currentLang} />
         </div>
       );
@@ -272,6 +290,22 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم ویزای توریستی خود را در رومانی به ویزای دانشجویی تبدیل کنم؟' : 'Can I change my tourist visa to a student visa inside Romania?',
+              a: currentLang === 'fa' ? 'خیر، قوانین مهاجرتی رومانی اجازه تبدیل ویزای توریستی (نوع C) به تحصیلی در داخل کشور را نمی‌دهد. شما باید ویزای نوع D را از کشور مبدأ خود دریافت کنید.' : 'No, Romanian immigration laws do not allow converting a short-stay tourist visa (Type C) into a student visa from within the country. You must apply for a Type D student visa from your home country or country of legal residence.'
+            },
+            {
+              q: currentLang === 'fa' ? 'صدور ویزا در سفارت چقدر طول می‌کشد؟' : 'How long does the embassy take to issue the visa?',
+              a: currentLang === 'fa' ? 'به‌طور معمول بررسی پرونده پس از مصاحبه و تحویل کامل مدارک در سفارت می‌تواند تا ۶۰ روز زمان ببرد.' : 'Processing can typically take up to 60 days from the date of your interview and full document submission at the consulate.'
+            },
+            {
+              q: currentLang === 'fa' ? 'برای اثبات تمکن مالی چه مبلغی نیاز دارم؟' : 'How much money do I need for financial proof?',
+              a: currentLang === 'fa' ? 'برای خودِ ویزای D در سفارت: معادل حداقل حقوق خالص کشوری (حدود ۲,۶۹۹ لئو در ماه، ۲۰۲۶). برای تمدید اقامت داخل رومانی: معادل حداقل حقوق ناخالص کشوری (۴,۳۲۵ لئو در ماه از ژوئیه ۲۰۲۶)، حداقل ۶ ماه نگه‌داری‌شده — این دو رقم متفاوت‌اند، با هم اشتباه نگیرید.' : 'For the D visa itself at the embassy: the net national minimum wage (around 2,699 RON/month, 2026). For extending residence inside Romania: the gross national minimum wage (4,325 RON/month as of July 2026), held for at least 6 months — these are two different figures, don\'t confuse them.'
+            }
+          ]} />
+
+          <RelatedGuidesCard items={['needs/housing', 'needs/health', 'start-here/newly-arrived']} currentLang={currentLang} />
           <ParentHubFooterCard slugRoute="study/visa-type-d" currentLang={currentLang} />
         </div>
       );
@@ -355,6 +389,18 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا علاوه بر شهریه، هزینه‌های پنهان دیگری وجود دارد؟' : 'Are there any hidden fees besides tuition?',
+              a: currentLang === 'fa' ? 'هزینه‌های پنهان خیر، اما شما باید مبالغی را برای هزینه بررسی پرونده (Application Fee)، تمدید سالانه کارت اقامت، بیمه درمانی و کتب درسی در نظر بگیرید.' : 'There are no hidden fees, but you should budget for university application fees, annual residence permit taxes, health insurance, and course materials.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم شهریه را به‌صورت قسطی پرداخت کنم؟' : 'Can I pay my tuition in installments?',
+              a: currentLang === 'fa' ? 'معمولاً دانشگاه‌ها پرداخت کامل شهریه سال اول را برای صدور نامه تأییدیه جهت سفارت الزامی می‌دانند، اما در سال‌های بعد ممکن است امکان تقسیط وجود داشته باشد.' : 'Most universities require the first year\'s tuition to be paid in full upfront for the visa application process, but subsequent years might be payable in installments depending on the university.'
+            }
+          ]} />
+
+          <RelatedGuidesCard items={['study/scholarships']} currentLang={currentLang} />
           <ParentHubFooterCard slugRoute="study/tuition-overview" currentLang={currentLang} />
         </div>
       );
@@ -431,6 +477,17 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
               </div>
             </div>
           </div>
+
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا در تعطیلات تابستانی می‌توانم تمام‌وقت کار کنم؟' : 'Can I work full-time during summer holidays?',
+              a: currentLang === 'fa' ? 'برخلاف برخی کشورهای دیگر اتحادیه اروپا، قوانین رومانی در حال حاضر سقف ۶ ساعت در روز را حتی در ایام تعطیلات تابستانی برای دانشجویان غیراروپایی حفظ می‌کند.' : 'Unlike some other EU countries, Romanian law currently maintains the 6-hour daily limit for non-EU students even during the summer academic holidays.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا کار فریلنسری یا دورکاری هم جزو این ۶ ساعت حساب می‌شود؟' : 'Does freelance or remote work count towards the 6 hours?',
+              a: currentLang === 'fa' ? 'بله، هرگونه اشتغال قانونی و ثبت‌شده در رومانی مشمول این محدودیت روزانه ۶ ساعته برای دانشجویان است.' : 'Yes, any legal employment registered in Romania is subject to the 6-hour daily limit for students.'
+            }
+          ]} />
 
           <ParentHubFooterCard slugRoute="study/part-time-work" currentLang={currentLang} />
         </div>

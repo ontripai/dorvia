@@ -9,7 +9,9 @@ import { FamilyReunificationContent } from './FamilyReunificationContent';
 import { EvaluationCTA } from './EvaluationCTA';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { RelatedGuidesCard } from './RelatedGuidesCard';
 import { SectionPhoto } from './SectionPhoto';
+import { FaqSchema } from './FaqSchema';
 
 interface ImmigrationOverviewContentProps {
   subRoute: string;
@@ -383,7 +385,27 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'چند وقت قبل از انقضای کارت اقامت باید برای تمدید اقدام کنم؟' : 'How long before my residence card expires should I apply for renewal?',
+              a: currentLang === 'fa' ? 'درخواست تمدید باید حداقل ۳۰ روز پیش از تاریخ انقضای کارت فعلی نزد اداره محلی IGI ثبت شود؛ ثبت دیرهنگام می‌تواند منجر به وقفه در وضعیت قانونی اقامت شود.' : 'The renewal application must be filed with your local IGI office at least 30 days before your current card expires; filing late can create a gap in your legal residence status.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر آدرس محل سکونتم عوض شده چه مدرکی لازم دارم؟' : 'What proof do I need if I changed my address?',
+              a: currentLang === 'fa' ? 'باید مدرک به‌روز اثبات محل سکونت (مثلاً قرارداد اجاره‌ی ثبت‌شده نزد ANAF) ارائه دهید؛ برای جزئیات کامل به صفحه مسکن مراجعه کنید.' : 'You must present up-to-date proof of address (e.g. a rental contract registered with ANAF); see the housing page for full details.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر پورتال IGI خطا داد یا نوبت خالی پیدا نکردم چه کنم؟' : 'What if the IGI portal errors out or shows no available appointments?',
+              a: currentLang === 'fa' ? 'از ۳۰ اکتبر ۲۰۲۴ اداره IGI یک ایمیل رسمی برای گزارش مشکلات فنی پورتال راه‌اندازی کرده: sesizariportal.igi@mai.gov.ro — پیش از تسلیم شدن، مشکل را دقیق (با اسکرین‌شات) به همین ایمیل گزارش دهید.' : 'Since October 30, 2024, IGI has run a dedicated email for reporting portal technical issues: sesizariportal.igi@mai.gov.ro — describe the problem in detail (with a screenshot) before assuming there is nothing you can do.'
+            },
+            {
+              q: currentLang === 'fa' ? 'چرا گاهی نوبت تمدید حتی تا ماه‌ها بعد از انقضای کارت داده می‌شود؟' : 'Why can renewal appointments sometimes fall months after the card expires?',
+              a: currentLang === 'fa' ? 'طبق تحلیل رسمی IGI برای سال ۲۰۲۶، جمعیت خارجیان تحت پوشش این اداره در ۵ سال حدود ۴ برابر شده در حالی که تعداد کارکنان ثابت مانده؛ این فشار سیستمی می‌تواند در برخی مواقع و برخی استان‌ها به تاخیر منجر شود. رسید ثبت درخواست خود را همیشه همراه داشته باشید.' : 'Per IGI\'s own official 2026 analysis, the foreign population it manages grew roughly 4x in five years while staffing stayed flat — this systemic pressure can cause delays in some periods and counties. Always keep your application receipt on hand as proof you filed on time.'
+            }
+          ]} />
+
           {/* SECTION 9: COMMENTS SECTION */}
+          <RelatedGuidesCard items={['work/work-permit']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="immigration/residence-renewal" currentLang={currentLang} onNavigate={onNavigate} />
           <CommentsSection pagePath="immigration/residence-renewal" currentLang={currentLang} />
         </div>
@@ -517,6 +539,22 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا اقامت بلندمدت همان تابعیت رومانی است؟' : 'Is long-term residence the same as Romanian citizenship?',
+              a: currentLang === 'fa' ? 'خیر. اقامت بلندمدت یک وضعیت اقامتی (نه شهروندی) است که حقوق گسترده‌ای می‌دهد اما شامل حق رأی یا پاسپورت رومانیایی نمی‌شود؛ برای تابعیت باید مسیر جداگانه‌ای طی شود.' : 'No. Long-term residence is a residency status (not citizenship) that grants broad rights but not voting rights or a Romanian passport; citizenship requires a separate application path.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا هر نوع کارت اقامت موقت برای این مسیر شمارش می‌شود؟' : 'Does every type of temporary residence permit count toward this?',
+              a: currentLang === 'fa' ? 'خیر. ویزای کوتاه‌مدت، دیپلماتیک/خدماتی و وضعیت کارگر فصلی/Au Pair اصلاً محاسبه نمی‌شوند، و اقامت با کارت اقامت دانشجویی فقط ۵۰٪ مدت واقعی خود را می‌سازد؛ وضعیت دقیق پرونده شما را باید IGI بر اساس نوع اجازه اقامتتان بررسی کند.' : 'No. Short-stay, diplomatic/service visas, and seasonal-worker/au-pair status do not count at all, and time on a student residence permit only counts at 50% of its actual duration; IGI must review your specific case based on your permit type.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا برای این اقامت باید در آزمون زبان رسمی A1 یا A2 قبول شوم؟' : 'Do I need to pass a formal A1 or A2 language exam for this?',
+              a: currentLang === 'fa' ? 'خیر. قانون فقط «سطح رضایت‌بخش» زبان رومانیایی را می‌خواهد و این معمولاً طی همان جلسه تحویل مدارک و به تشخیص کارمند IGI ارزیابی می‌شود، نه یک آزمون کتبی جداگانه با سطح CEFR مشخص.' : 'No. The law only requires a "satisfactory level" of Romanian, typically assessed informally by the IGI officer during the document-submission appointment itself, not a separate written exam with a defined CEFR level.'
+            }
+          ]} />
+
+          <RelatedGuidesCard items={['company/residency', 'start-here/citizenship-goal']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="immigration/long-term-residence" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -667,6 +705,32 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'پروسه بررسی پرونده تابعیت چقدر زمان می‌برد؟' : 'How long does the citizenship application process take?',
+              a: currentLang === 'fa' ? 'طبق قانون ۱۴/۲۰۲۵، مهلت قانونی رسمی ۲ سال است (با امکان تمدید ۶ ماهه)؛ اما آمار واقعی ANC نشان می‌دهد بسیاری از پرونده‌های ۲۰۲۳ و ۲۰۲۴ حتی تا پایان همان بازه هم تایید نشدند، پس بهتر است این عدد را یک کف انتظار در نظر بگیرید نه یک تضمین.' : 'Under Law 14/2025, the official statutory deadline is 2 years (with a possible 6-month extension); but ANC\'s actual data shows many 2023 and 2024 applications were still not approved even by the end of that window, so treat this figure as a floor for planning, not a guarantee.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر تابعیت رومانی را بگیرم، آیا تابعیت ایرانی‌ام را از دست می‌دهم؟' : 'If I acquire Romanian citizenship, do I lose my Iranian citizenship?',
+              a: currentLang === 'fa' ? 'رومانی نیازی به انصراف از تابعیت قبلی ندارد. اما ایران هم به‌طور خودکار تابعیت شما را باطل نمی‌کند مگر از طریق فرآیند رسمی و دشوار ترک تابعیت (تایید هیئت وزیران) اقدام کنید؛ در عمل بسیاری افراد بدون طی این فرآیند، از دید ایران همچنان صرفاً ایرانی محسوب می‌شوند. پیش از تصمیم‌گیری حتماً با وکیل متخصص مشورت کنید.' : 'Romania does not require you to renounce your prior citizenship. Iran also does not automatically revoke your citizenship unless you go through its formal, difficult renunciation process (Council of Ministers approval); in practice, many people who don\'t complete that process remain considered solely Iranian by Iran. Consult a specialized attorney before deciding.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا آزمون زبان و قانون اساسی برای دریافت تابعیت دشوار است؟' : 'Is the language and constitution exam difficult?',
+              a: currentLang === 'fa' ? 'این مرحله رسماً یک مصاحبه نزد کمیسیون تابعیت است (نه آزمون کتبی استاندارد) و شامل خواندن/نوشتن رومانیایی، اصول قانون اساسی، سرود ملی و اطلاعات مقدماتی فرهنگ/تاریخ/جغرافیای رومانی است؛ ANC بانک سوالات نمونه را روی cetatenie.just.ro منتشر کرده که می‌توانید از قبل مطالعه کنید.' : 'This stage is officially an interview before the Citizenship Commission (not a standardized written exam) covering Romanian reading/writing, constitutional principles, the national anthem, and elementary Romanian culture/history/geography; ANC publishes a sample question bank on cetatenie.just.ro that you can study in advance.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر پرونده‌ام بیش از حد معمول طول کشید چه اقدامی می‌توانم انجام دهم؟' : 'What can I do if my file takes far longer than usual?',
+              a: currentLang === 'fa' ? 'طبق قانون ۵۵۴/۲۰۰۴، می‌توانید ظرف ۶ ماه از تاخیر یا سکوت غیرموجه فراتر از مهلت ۲ ساله جدید، با کمک وکیل متخصص حقوق اداری علیه ANC در دادگاه اداری شکایت کنید.' : 'Under Law 554/2004, you can sue ANC in the administrative court within 6 months of an unjustified delay or silence beyond the new 2-year deadline, with the help of an administrative-law attorney.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا پاسپورت رومانی الان بدون ویزا به آمریکا سفر می‌کند؟' : 'Does a Romanian passport currently allow visa-free travel to the US?',
+              a: currentLang === 'fa'
+                ? 'خیر — با وجود اینکه در برخی سایت‌های دیگر خلاف این عنوان شده. در ۱۰ ژانویه ۲۰۲۵ وزارت امنیت داخلی آمریکا (DHS) عضویت رومانی در برنامه معافیت ویزا (Visa Waiver Program) را با اجرای برنامه‌ریزی‌شده از ۳۱ مارس ۲۰۲۵ اعلام کرد؛ اما پیش از آن تاریخ، DHS این تصمیم را برای بازبینی امنیتی متوقف کرد و در نهایت در ۲ می ۲۰۲۵ رسماً آن را لغو کرد (اعلامیه رسمی dhs.gov). یعنی تا این لحظه شهروندان رومانیایی همچنان باید مانند گذشته ویزای B-1/B-2 آمریکا دریافت کنند. برای رتبه قدرت پاسپورت، طبق شاخص هنلی (Henley Passport Index)، ویرایش ژانویه ۲۰۲۶، رومانی رتبه ۱۱ جهان را با دسترسی بدون ویزا/ویزای فرودگاهی به ۱۷۸ مقصد دارد.'
+                : 'No — despite what a few other sites currently claim. On January 10, 2025, the US Department of Homeland Security (DHS) announced Romania\'s designation into the Visa Waiver Program, planned to take effect March 31, 2025; but before that date, DHS paused the decision for a security review and formally rescinded it on May 2, 2025 (per DHS.gov\'s own announcement). As of now, Romanian citizens still need a standard US B-1/B-2 visa. For passport strength, per the Henley Passport Index\'s January 2026 edition, Romania ranks 11th globally with visa-free/visa-on-arrival access to 178 destinations.'
+            }
+          ]} />
+
+          <RelatedGuidesCard items={['start-here/citizenship-goal']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="immigration/citizenship" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );

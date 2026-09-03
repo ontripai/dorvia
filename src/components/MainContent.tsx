@@ -9,19 +9,21 @@ import { PathwayCard } from './PathwayCard';
 import { UniversityCard } from './UniversityCard';
 import { CityCard } from './CityCard';
 import { ServiceCard } from './ServiceCard';
-import { NeedsContent } from './NeedsContent';
-import { RomaniaOverviewContent } from './RomaniaOverviewContent';
-import UniversitiesPage from '@/app/[lang]/universities/page';
-import { WorkOverviewContent } from './WorkOverviewContent';
-import { StartHereContent } from './StartHereContent';
-import { IgiProcessContent } from './IgiProcessContent';
-import { PreparatoryYearContent } from './PreparatoryYearContent';
-import { StudyDetailsContent } from './StudyDetailsContent';
-import { CompanyOverviewContent } from './CompanyOverviewContent';
-import { ImmigrationOverviewContent } from './ImmigrationOverviewContent';
-import { ScholarshipOverviewContent } from './ScholarshipOverviewContent';
-import { InvestmentOverviewContent } from './InvestmentOverviewContent';
 import dynamic from 'next/dynamic';
+
+const NeedsContent = dynamic(() => import('./NeedsContent').then(m => m.NeedsContent), { ssr: true });
+const RomaniaOverviewContent = dynamic(() => import('./RomaniaOverviewContent').then(m => m.RomaniaOverviewContent), { ssr: true });
+const UniversitiesPage = dynamic(() => import('@/app/[lang]/universities/page'), { ssr: true });
+const WorkOverviewContent = dynamic(() => import('./WorkOverviewContent').then(m => m.WorkOverviewContent), { ssr: true });
+const StartHereContent = dynamic(() => import('./StartHereContent').then(m => m.StartHereContent), { ssr: true });
+const IgiProcessContent = dynamic(() => import('./IgiProcessContent').then(m => m.IgiProcessContent), { ssr: true });
+const PreparatoryYearContent = dynamic(() => import('./PreparatoryYearContent').then(m => m.PreparatoryYearContent), { ssr: true });
+const StudyDetailsContent = dynamic(() => import('./StudyDetailsContent').then(m => m.StudyDetailsContent), { ssr: true });
+const CompanyOverviewContent = dynamic(() => import('./CompanyOverviewContent').then(m => m.CompanyOverviewContent), { ssr: true });
+const ImmigrationOverviewContent = dynamic(() => import('./ImmigrationOverviewContent').then(m => m.ImmigrationOverviewContent), { ssr: true });
+const ScholarshipOverviewContent = dynamic(() => import('./ScholarshipOverviewContent').then(m => m.ScholarshipOverviewContent), { ssr: true });
+const InvestmentOverviewContent = dynamic(() => import('./InvestmentOverviewContent').then(m => m.InvestmentOverviewContent), { ssr: true });
+const ArticlesPage = dynamic(() => import('@/app/[lang]/articles/page'), { ssr: true });
 
 const LeadForm = dynamic(() => import('./LeadForm').then(m => m.LeadForm), { ssr: true });
 const EvaluationCTA = dynamic(() => import('./EvaluationCTA').then(m => m.EvaluationCTA), { ssr: true });
@@ -199,6 +201,10 @@ export const MainContent: React.FC<MainContentProps> = ({
               src="/images/illustrations/hero-skyline.svg"
               alt=""
               aria-hidden="true"
+              width="1440"
+              height="260"
+              fetchPriority="low"
+              loading="eager"
               className="absolute bottom-0 left-0 w-full h-[140px] sm:h-[200px] lg:h-[260px] object-cover object-bottom opacity-90 pointer-events-none select-none"
             />
 
@@ -276,31 +282,34 @@ export const MainContent: React.FC<MainContentProps> = ({
                       </div>
 
                       <div className="space-y-3 pt-1 text-xs">
-                        <div className="p-3.5 rounded-xl bg-white/10 border border-white/15 flex items-center justify-between">
+                        <Link href="/universities" className="p-3.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 flex items-center justify-between transition-colors cursor-pointer block">
                           <span className="font-semibold text-white">🎓 {currentLang === 'fa' ? 'آموزش عالی معتبر' : 'Accredited Higher Education'}</span>
                           <span className="font-extrabold text-[#F4F7FC]">{currentLang === 'fa' ? 'مدارک دانشگاهی اتحادیه اروپا' : 'EU Degrees'}</span>
-                        </div>
-                        <div className="p-3.5 rounded-xl bg-white/10 border border-white/15 flex items-center justify-between">
+                        </Link>
+                        <Link href="/work/work-permit" className="p-3.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 flex items-center justify-between transition-colors cursor-pointer block">
                           <span className="font-semibold text-white">💼 {currentLang === 'fa' ? 'اشتغال و مجوزهای کار' : 'Employment & Work Permits'}</span>
                           <span className="font-extrabold text-[#F4F7FC]">
                             {currentLang === 'fa' ? <>مجوز کار (<span dir="ltr">Aviz de Muncă</span>)</> : 'Aviz de Muncă'}
                           </span>
-                        </div>
-                        <div className="p-3.5 rounded-xl bg-white/10 border border-white/15 flex items-center justify-between">
+                        </Link>
+                        <Link href="/company/investment" className="p-3.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 flex items-center justify-between transition-colors cursor-pointer block">
                           <span className="font-semibold text-white">🏢 {currentLang === 'fa' ? <>ثبت شرکت با مسئولیت محدود (<span dir="ltr">SRL</span>)</> : 'Corporate Registration (SRL)'}</span>
                           <span className="font-extrabold text-[#F4F7FC] leading-snug max-w-[200px] text-right">
                             {currentLang === 'fa'
                               ? 'شرایط مالیاتی شرکت به نوع فعالیت، درآمد، ساختار مالکیت و تعداد کارکنان بستگی دارد و باید توسط حسابدار بررسی شود.'
                               : 'Corporate tax conditions depend on the type of activity, revenue, ownership structure, employees, and current regulations, and must be verified with an accountant.'}
                           </span>
-                        </div>
+                        </Link>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-[#2F6FED]/80 border border-[#2F6FED]/40 text-center text-xs text-slate-100 font-bold shadow-inner">
+                      <button
+                        onClick={onOpenEvaluationModal}
+                        className="w-full p-3 rounded-xl bg-[#2F6FED]/80 hover:bg-[#2F6FED] border border-[#2F6FED]/40 text-center text-xs text-slate-100 font-bold shadow-inner transition-colors cursor-pointer"
+                      >
                         {currentLang === 'fa'
                           ? <>ارزیابی اولیه پرونده براساس مقررات رسمی اداره مهاجرت رومانی (<span dir="ltr">IGI</span>)</>
                           : 'Initial assessment based on official Romanian immigration rules (IGI)'}
-                      </div>
+                      </button>
 
                     </div>
 
@@ -316,20 +325,20 @@ export const MainContent: React.FC<MainContentProps> = ({
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center text-xs font-bold text-[#142033]">
 
-                <div className="flex items-center justify-center space-x-3 rtl:space-x-reverse py-1">
+                <Link href="/about" className="flex items-center justify-center space-x-3 rtl:space-x-reverse py-1 hover:text-[#2F6FED] transition-colors cursor-pointer">
                   <Landmark size={20} className="text-[#1554bd]" />
                   <span>{currentLang === 'fa' ? 'اطلاعات مبتنی بر منابع رسمی' : 'Sourced from Official Portals'}</span>
-                </div>
+                </Link>
 
-                <div className="flex items-center justify-center space-x-3 rtl:space-x-reverse py-1 border-y md:border-y-0 md:border-x border-[#dfe6ef]">
+                <a href="#evaluation-form-section" className="flex items-center justify-center space-x-3 rtl:space-x-reverse py-1 border-y md:border-y-0 md:border-x border-[#dfe6ef] hover:text-[#2F6FED] transition-colors cursor-pointer">
                   <FileCheck2 size={20} className="text-[#1554bd]" />
                   <span>{currentLang === 'fa' ? 'بررسی متناسب با شرایط متقاضی' : 'Tailored Applicant Assessment'}</span>
-                </div>
+                </a>
 
-                <div className="flex items-center justify-center space-x-3 rtl:space-x-reverse py-1">
+                <Link href="/about" className="flex items-center justify-center space-x-3 rtl:space-x-reverse py-1 hover:text-[#2F6FED] transition-colors cursor-pointer">
                   <ShieldCheck size={20} className="text-emerald-700" />
                   <span>{currentLang === 'fa' ? 'عدم ارائه وعده غیرواقعی' : 'No Unverified Promises'}</span>
-                </div>
+                </Link>
 
               </div>
             </div>
@@ -426,23 +435,25 @@ export const MainContent: React.FC<MainContentProps> = ({
                 <div className="lg:col-span-5 space-y-4">
                   <div className="editorial-card p-6 space-y-4 bg-white border border-[#dfe6ef]">
                     <div className="flex items-center justify-between border-b border-[#dfe6ef] pb-3 text-xs font-bold text-[#142033]">
-                      <span>🇷🇴 {currentLang === 'fa' ? 'شناسنامه کشور رومانی' : 'Romania Country Profile'}</span>
-                      <span className="text-[#1554bd]">EU & Schengen</span>
+                      <Link href="/romania" className="hover:text-[#2F6FED] transition-colors">
+                        <span>🇷🇴 {currentLang === 'fa' ? 'شناسنامه کشور رومانی' : 'Romania Country Profile'}</span>
+                      </Link>
+                      <Link href="/immigration/long-term-residence" className="text-[#1554bd] hover:underline">EU & Schengen</Link>
                     </div>
 
                     <div className="space-y-3 text-xs">
-                      <div className="p-3 rounded-xl bg-[#eef3f8] flex items-center justify-between font-medium">
+                      <Link href="/romania/cities/bucharest" className="p-3 rounded-xl bg-[#eef3f8] hover:bg-slate-200 flex items-center justify-between font-medium transition-colors cursor-pointer block">
                         <span>{currentLang === 'fa' ? 'پایتخت:' : 'Capital:'}</span>
                         <span className="font-bold text-[#142033]">Bucharest</span>
-                      </div>
-                      <div className="p-3 rounded-xl bg-[#eef3f8] flex items-center justify-between font-medium">
+                      </Link>
+                      <Link href="/immigration/long-term-residence" className="p-3 rounded-xl bg-[#eef3f8] hover:bg-slate-200 flex items-center justify-between font-medium transition-colors cursor-pointer block">
                         <span>{currentLang === 'fa' ? 'عضویت در شنگن:' : 'Schengen Area:'}</span>
                         <span className="font-bold text-emerald-700">{currentLang === 'fa' ? 'عضو رسمی' : 'Full Member'}</span>
-                      </div>
-                      <div className="p-3 rounded-xl bg-[#eef3f8] flex items-center justify-between font-medium">
+                      </Link>
+                      <Link href="/study" className="p-3 rounded-xl bg-[#eef3f8] hover:bg-slate-200 flex items-center justify-between font-medium transition-colors cursor-pointer block">
                         <span>{currentLang === 'fa' ? 'زبان‌های تدریس:' : 'Languages of Instruction:'}</span>
                         <span className="font-bold text-[#142033]">English, French, Romanian</span>
-                      </div>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -458,12 +469,16 @@ export const MainContent: React.FC<MainContentProps> = ({
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {t.whyRomania.items.slice(0, 4).map((item, idx) => (
-                      <div key={idx} className="editorial-card p-5 space-y-2 bg-white">
-                        <h3 className="text-base font-extrabold text-[#142033]">{item.title}</h3>
-                        <p className="text-xs text-[#526174] leading-relaxed">{item.desc}</p>
-                      </div>
-                    ))}
+                    {t.whyRomania.items.slice(0, 4).map((item, idx) => {
+                      const itemLinks = ['/immigration/long-term-residence', '/needs/housing', '/universities', '/company/investment'];
+                      const targetHref = itemLinks[idx] || '/start-here';
+                      return (
+                        <Link key={idx} href={targetHref} className="editorial-card p-5 space-y-2 bg-white hover:border-[#2F6FED] hover:shadow-xs transition-all cursor-pointer block">
+                          <h3 className="text-base font-extrabold text-[#142033] hover:text-[#2F6FED] transition-colors">{item.title}</h3>
+                          <p className="text-xs text-[#526174] leading-relaxed">{item.desc}</p>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -671,29 +686,29 @@ export const MainContent: React.FC<MainContentProps> = ({
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div className="editorial-card p-6 bg-white space-y-3">
+                <Link href="/about" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-colors block cursor-pointer">
                   <FileCheck2 size={24} className="text-[#1554bd]" />
                   <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'اطلاعات قابل بررسی' : 'Verified Insights'}</h3>
                   <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'مطالب مهم حقوقی و دانشگاهی همراه با منبع و تاریخ آخرین بررسی منتشر می‌شوند.' : 'Sourced from official Romanian embassy and IGI documentation.'}</p>
-                </div>
+                </Link>
 
-                <div className="editorial-card p-6 bg-white space-y-3">
+                <Link href="/services" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-colors block cursor-pointer">
                   <Scale size={24} className="text-[#1554bd]" />
                   <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'شفافیت در حدود خدمات' : 'Scope Transparency'}</h3>
                   <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'پیش از شروع همکاری، محدوده خدمات، هزینه‌ها و مسئولیت‌های طرفین توضیح داده می‌شود.' : 'Scope of service, timelines, and costs defined clearly in advance.'}</p>
-                </div>
+                </Link>
 
-                <div className="editorial-card p-6 bg-white space-y-3">
+                <Link href="/legal/terms-of-service" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-colors block cursor-pointer">
                   <ShieldCheck size={24} className="text-[#1554bd]" />
                   <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'عدم تضمین نتیجه' : 'Honest Legal Limits'}</h3>
                   <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'تصمیم نهایی درباره پذیرش، ویزا و اقامت صراحتاً در اختیار مراجع مربوطه است.' : 'Legal honesty acknowledging that visa issuance rests strictly with authorities.'}</p>
-                </div>
+                </Link>
 
-                <div className="editorial-card p-6 bg-white space-y-3">
+                <Link href="/legal/privacy-policy" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-colors block cursor-pointer">
                   <LockKeyhole size={24} className="text-[#1554bd]" />
                   <h3 className="text-base font-extrabold text-[#142033]">{currentLang === 'fa' ? 'حفظ حریم خصوصی' : 'GDPR Compliance'}</h3>
                   <p className="text-xs text-[#526174] leading-relaxed">{currentLang === 'fa' ? 'اطلاعات شما با رعایت سیاست حفظ حریم خصوصی سایت و منحصراً برای بررسی درخواست و ارتباطات مربوط به خدمات پردازش می‌شود.' : "Your information is processed in accordance with the site's privacy policy and solely for reviewing requests and service-related communication."}</p>
-                </div>
+                </Link>
               </div>
 
             </div>
@@ -1040,26 +1055,7 @@ export const MainContent: React.FC<MainContentProps> = ({
       );
 
     case 'articles':
-      return (
-        <div className="space-y-8 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#142033]">{t.nav.articles}</h1>
-            <p className="text-[#526174] text-xs sm:text-sm mt-1">
-              {currentLang === 'fa' ? 'مقالات و راهنماهای آموزشی و مهاجرتی' : 'Articles & Legal Updates'}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {sampleArticles.map((art) => (
-              <div key={art.id} className="editorial-card p-6 space-y-3 bg-white">
-                <span className="text-xs text-[#1554bd] bg-blue-50 px-2.5 py-1 rounded font-semibold">{art.category[currentLang]}</span>
-                <h3 className="font-bold text-[#142033] text-base">{art.title[currentLang]}</h3>
-                <p className="text-xs text-[#526174] leading-relaxed">{art.excerpt[currentLang]}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      );
+      return <ArticlesPage />;
 
     case 'about-romania':
       return (

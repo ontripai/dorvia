@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
 import { ChevronDown } from './Icons';
+import { FaqSchema } from './FaqSchema';
 
 interface FAQAccordionProps {
   currentLang: Language;
@@ -55,7 +56,9 @@ export const FAQAccordion: React.FC<FAQAccordionProps> = ({ currentLang }) => {
   };
 
   return (
-    <div className="space-y-4 max-w-3xl mx-auto">
+    <>
+      <FaqSchema items={faqs} />
+      <div className="space-y-4 max-w-3xl mx-auto">
       {faqs.map((item, idx) => {
         const isOpen = openIdx === idx;
         return (
@@ -84,5 +87,6 @@ export const FAQAccordion: React.FC<FAQAccordionProps> = ({ currentLang }) => {
         );
       })}
     </div>
-  );
+  </>
+);
 };

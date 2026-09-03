@@ -15,6 +15,7 @@ import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { OperationalGuideLayout } from './guide/OperationalGuideLayout';
 import { SectionPhoto } from './SectionPhoto';
+import { FaqSchema } from './FaqSchema';
 import { drivingLicenseEN } from '../content/guides/driving-license/en';
 import { drivingLicenseFA } from '../content/guides/driving-license/fa';
 import { firstDaysChecklistEN } from '../content/guides/first-days-checklist/en';
@@ -304,6 +305,21 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               </div>
             </div>
           </div>
+
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'همراه داشتن یورو بهتر است یا دلار آمریکا؟' : 'Should I bring euros or US dollars?',
+              a: currentLang === 'fa' ? 'یورو (Euro) بسیار ارجحیت دارد؛ بهترین نرخ‌های تبدیل و کمترین حاشیه ضرر در رومانی به یورو اختصاص دارد.' : 'Euros are highly preferred and offer the best exchange rates and lowest spreads locally compared to US dollars.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم از Revolut یا Wise در رومانی استفاده کنم؟' : 'Can I use Revolut or Wise in Romania?',
+              a: currentLang === 'fa' ? 'بله، این نئوبانک‌ها در رومانی بسیار محبوب هستند و نرخ تبدیل بسیار خوبی برای مصارف روزمره ارائه می‌دهند.' : 'Yes, these digital banks are extremely popular in Romania and offer excellent exchange rates for daily use.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا صرافی ایرانی (سبک حواله) در رومانی وجود دارد؟' : 'Is there an Iranian-style hawala exchange bureau in Romania?',
+              a: currentLang === 'fa' ? 'در تحقیق ما نمونه مستند و شناخته‌شده‌ای در رومانی پیدا نشد؛ نزدیک‌ترین مراکز شناخته‌شده این نوع خدمات در آلمان، بریتانیا و کشورهای اسکاندیناوی فعال‌اند.' : 'Our research did not find a documented, known example in Romania; the nearest known hubs for this kind of service are in Germany, the UK, and the Nordic countries.'
+            }
+          ]} />
         </div>
       );
 
@@ -467,6 +483,21 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم از ترجمه‌های رسمی کشور خودم در رومانی استفاده کنم؟' : 'Can I use translations done in my home country?',
+              a: currentLang === 'fa' ? 'ادارات دولتی رومانی غالباً ترجیح می‌دهند ترجمه‌ها توسط مترجمین مجاز داخلی انجام شود؛ ترجمه‌های خارجی معمولاً نیازمند مهر آپوستیل یا تایید سفارت رومانی هستند تا معتبر شناخته شوند.' : 'Generally, Romanian authorities prefer translations done locally by Romanian-authorized translators, though embassy-legalized translations may be accepted in some cases.'
+            },
+            {
+              q: currentLang === 'fa' ? 'چگونه یک مترجم مجاز زبان خودم را پیدا کنم؟' : 'Where can I find an authorized translator?',
+              a: currentLang === 'fa' ? 'شما می‌توانید در وب‌سایت وزارت دادگستری رومانی جستجو کنید یا به دفاتر اسناد رسمی (Notar Public) مراجعه نمایید که معمولاً با شبکه‌ای از مترجمین معتبر همکاری دارند.' : 'You can search the official registry on the Ministry of Justice website or visit local notary offices, which often have authorized translators on call.'
+            },
+            {
+              q: currentLang === 'fa' ? 'چرا مترجم فارسی پیدا کردن این‌قدر سخت است؟' : 'Why is finding a Persian translator so hard?',
+              a: currentLang === 'fa' ? 'فارسی در مقایسه با زبان‌های اروپایی رایج، تقاضای بسیار کمتری در رومانی دارد؛ در نتیجه تعداد مترجمین مجاز دادگستری برای این زبان بسیار محدود است. جستجوی زودهنگام و تماس مستقیم با دفاتر اسناد رسمی توصیه می‌شود.' : 'Persian has far lower demand in Romania than common European languages, so the pool of Ministry-of-Justice-authorized translators for it is very small. Search early and consider contacting notary offices directly, as they often work with an authorized translator network.'
+            }
+          ]} />
+
           <ParentHubFooterCard slugRoute="needs/certified-translation" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -570,6 +601,21 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               </div>
             </div>
           </div>
+
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا برای مراجعه به دفتر اسناد رسمی باید وقت قبلی بگیرم؟' : 'Do I need an appointment for notary services?',
+              a: currentLang === 'fa' ? 'برای خدمات ساده مثل کپی برابر اصل معمولاً نیازی به وقت قبلی نیست، اما برای تنظیم قراردادهای ملکی یا وکالت‌نامه‌ها رزرو وقت قبلی الزامی است.' : 'For complex acts like property purchases or corporate setups, an appointment is mandatory, but for simple document legalizations, walk-ins are often accepted.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر من به زبان رومانیایی مسلط نباشم چه اتفاقی می‌افتد؟' : 'What if I don\'t speak Romanian?',
+              a: currentLang === 'fa' ? 'طبق قانون (ماده ۸۲ قانون ۳۶/۱۹۹۵)، حضور یک مترجم شفاهی مجاز (Traducator Autorizat) در زمان امضای اسناد برای تفهیم کامل مفاد قرارداد به زبان مادری شما یا انگلیسی الزامی است.' : 'By law (Article 82, Law 36/1995), an authorized interpreter (Traducator Autorizat) must be present when you sign documents, to fully explain the contract terms in your native language or English.'
+            },
+            {
+              q: currentLang === 'fa' ? 'می‌خواهم به کسی در ایران وکالت بدهم؛ آیا یک نوتاری رومانیایی کافی است؟' : 'I need to give someone in Iran power of attorney — is a Romanian notary enough?',
+              a: currentLang === 'fa' ? 'به‌تنهایی نه. چون ایران عضو کنوانسیون آپوستیل نیست، یا باید مستقیماً از طریق سامانه میخک سفارت ایران اقدام کنید، یا سند نوتاری رومانیایی را از مسیر وزارت امور خارجه رومانی و سپس سفارت ایران در بخارست تصدیق کنید.' : 'Not by itself. Since Iran is not an Apostille Convention member, either apply directly through the Iranian Embassy\'s Mikhak system, or have the Romanian notarial deed legalized via Romania\'s Ministry of Foreign Affairs and then the Iranian Embassy in Bucharest.'
+            }
+          ]} />
 
           <ParentHubFooterCard slugRoute="needs/notary-public" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
@@ -710,6 +756,25 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               </div>
             </div>
           </div>
+
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا مراجعه به سفارت نیاز به وقت قبلی دارد؟' : 'Do I need to book an appointment before visiting the embassy?',
+              a: currentLang === 'fa' ? 'بله، برای اکثر خدمات کنسولی داشتن کد رهگیری از سامانه میخک و گرفتن نوبت تلفنی یا اینترنتی الزامی است.' : 'Yes, most consular services require a pre-booked appointment, often initiated after submitting your application on the Mikhak system.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا سفارت خدمات ترجمه رسمی هم ارائه می‌دهد؟' : 'Does the embassy provide translation services?',
+              a: currentLang === 'fa' ? 'خیر، سفارت وظیفه تایید اسناد را برعهده دارد؛ شما باید برای مدارک مورد نیاز دولت رومانی به مترجمین مجاز محلی مراجعه کنید.' : 'No, the embassy does not translate documents; you must use a Romanian-authorized translator for documents submitted to local authorities.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر گذرنامه‌ام مفقود یا سرقت شود چه باید کرد؟' : 'What if my passport is lost or stolen?',
+              a: currentLang === 'fa' ? 'ابتدا باید موضوع را به پلیس محلی رومانی گزارش داده و گزارش رسمی (Poliția Română) دریافت کنید، سپس درخواست صدور گذرنامه جدید را در سامانه میخک با ذکر مفقودی ثبت کنید. هزینه گذرنامه مفقودی معمولاً بیشتر از تمدید عادی است.' : 'First, report the loss to the Romanian police (Poliția Română) and obtain an official report, then file a new passport application on Mikhak, noting it as a loss/theft case. The fee for a lost passport is typically higher than a standard renewal.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توان مدارک را بدون حضور فیزیکی ارسال کرد؟' : 'Can documents be submitted without visiting in person?',
+              a: currentLang === 'fa' ? 'ثبت اولیه و بارگذاری مدارک در میخک آنلاین است، اما ثبت اثرانگشت و عکس بیومتریک برای گذرنامه الکترونیکی معمولاً نیازمند حضور فیزیکی است؛ برخی خدمات غیرگذرنامه‌ای ممکن است امکان ارسال پستی داشته باشند که باید مستقیماً از سفارت بخارست استعلام شود.' : 'Initial registration and document upload on Mikhak is online, but fingerprinting and the biometric photo for an e-passport generally require an in-person visit; some non-passport services may allow mail submission — confirm directly with the Bucharest embassy.'
+            }
+          ]} />
 
           <ParentHubFooterCard slugRoute="needs/iranian-embassy-and-mikhak" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
@@ -904,6 +969,25 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             </div>
           </div>
 
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'کمیسیون آژانس املاک را چه کسی پرداخت می‌کند؟' : 'Who pays the real estate agency fee?',
+              a: currentLang === 'fa' ? 'مبلغ و مسئول پرداخت کمیسیون به قرارداد آژانس و شرایط معامله بستگی دارد و یک نرخ ثابت قانونی برای همه معاملات نیست؛ رقم رایج نزدیک به یک ماه اجاره است.' : 'The amount and who pays the commission depends on the agency agreement and deal terms — there is no fixed legal rate for all transactions; a commission near one month\'s rent is common.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم با قرارداد اجاره برای اقامت درخواست دهم؟' : 'Can I use my rental contract for my residence permit application?',
+              a: currentLang === 'fa' ? 'بله، یک قرارداد اجاره رسمی که نزد ANAF ثبت شده باشد، از مدارک اصلی و معمولاً کافی برای اثبات آدرس نزد اداره مهاجرت (IGI) است.' : 'Yes, a formal rental contract registered with ANAF is a primary document and is generally sufficient to prove your address to the Immigration Office (IGI).'
+            },
+            {
+              q: currentLang === 'fa' ? 'با کارت اقامت رومانی می‌توانم مثل یک رومانیایی زمین بخرم؟' : 'Can I buy land like a Romanian citizen if I hold a Romanian residence permit?',
+              a: currentLang === 'fa' ? 'خیر. محدودیت مالکیت زمین بر اساس تابعیت شماست، نه وضعیت اقامتی. کارت اقامت این محدودیت را برطرف نمی‌کند؛ راه رایج، خرید از طریق یک شرکت رومانیایی (SRL) است.' : 'No. The land-ownership restriction is based on your citizenship, not your residency status. A residence permit does not remove it; the common route is buying through a Romanian company (SRL).'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم آپارتمان بخرم بدون اینکه نگران محدودیت زمین باشم؟' : 'Can I buy an apartment without worrying about the land restriction?',
+              a: currentLang === 'fa' ? 'در عمل بله؛ مالکیت خودِ واحد آپارتمانی برای اتباع غیر اتحادیه اروپا آزاد است و سهم زمین معمولاً از طریق «حق سطحی» مدیریت می‌شود، نه مالکیت مستقیم. با این حال، سازوکار دقیق را نوتار طرف معامله باید در سند خرید مشخص کند.' : 'In practice, yes — non-EU citizens can freely own the apartment unit itself, and the land share is typically handled via a "right of superficies" rather than direct ownership. Even so, the exact mechanism must be specified by your notary in the purchase deed.'
+            }
+          ]} />
+
           <ParentHubFooterCard slugRoute="needs/housing" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -1077,6 +1161,17 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               </div>
             </div>
           </div>
+
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا رومانی کارت حمل‌ونقل یکپارچه سراسری دارد؟' : 'Does Romania have one nationwide transit card?',
+              a: currentLang === 'fa' ? 'خیر؛ هر شهر اپراتور و کارت/اپلیکیشن بلیت جداگانه خودش را دارد. برای قطار بین‌شهری، بلیت CFR جداست و ارتباطی به کارت شهری ندارد.' : 'No; each city has its own operator and ticket card/app. Intercity rail tickets (CFR) are separate and unrelated to any city transit card.'
+            },
+            {
+              q: currentLang === 'fa' ? 'کدام گزینه برای سفر بین شهرهای نزدیک ارزان‌تر است، قطار یا اتوبوس؟' : 'Which is cheaper for travel between nearby cities, train or bus?',
+              a: currentLang === 'fa' ? 'برای مسیرهای کوتاه‌تر، اتوبوس‌های خصوصی معمولاً ارزان‌تر و گاهی سریع‌تر از قطار اینترریجیو هستند؛ برای مسیرهای طولانی‌تر بین شهرهای بزرگ، قطار اینترسیتی معمولاً راحت‌تر و قابل‌اعتمادتر است.' : 'For shorter routes, private coaches are often cheaper and sometimes faster than InterRegio trains; for longer routes between major cities, InterCity trains are usually more comfortable and reliable.'
+            }
+          ]} />
 
           <ParentHubFooterCard slugRoute="needs/transportation" currentLang={currentLang} onNavigate={onNavigate} />
         </div>

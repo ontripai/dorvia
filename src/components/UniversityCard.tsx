@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { University, Language, StudyAreaId, TeachingLanguage } from '../types';
 
@@ -73,10 +74,14 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
       {/* Real Campus Photo (self-hosted; only when a verified Wikimedia Commons photo is available) */}
       {university.photoUrl && !photoFailed && (
         <div className="relative">
-          <img
+          <Image
             src={university.photoUrl}
-            alt={currentLang === 'fa' ? university.photoCaptionFa : university.photoCaptionEn}
+            alt={(currentLang === 'fa' ? university.photoCaptionFa : university.photoCaptionEn) || university.nameEn || 'University Campus'}
+            width={400}
+            height={144}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             className="w-full h-36 object-cover"
+            loading="lazy"
             onError={() => setPhotoFailed(true)}
           />
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-3 py-1.5">

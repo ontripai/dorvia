@@ -7,6 +7,8 @@ import { CommentsSection } from './CommentsSection';
 import { ExternalLink, CheckCircle, ShieldCheck, Clock, FileCheck2, AlertCircle, Users } from './Icons';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { RelatedGuidesCard } from './RelatedGuidesCard';
+import { FaqSchema } from './FaqSchema';
 
 interface FamilyReunificationContentProps {
   currentLang: Language;
@@ -506,6 +508,30 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
           </div>
         </div>
 
+        <FaqSchema items={[
+          {
+            q: currentLang === 'fa' ? 'بررسی پرونده پیوست خانواده چقدر طول می‌کشد؟' : 'How long does IGI take to process a family reunification file?',
+            a: currentLang === 'fa' ? 'طبق مقررات رسمی IGI، رسیدگی حداکثر ظرف سه ماه از تاریخ ثبت پرونده انجام می‌شود؛ این مهلت «۳ ماه تقویمی» است، نه ۹۰ روز کاری.' : 'Per official IGI rules, processing takes a maximum of 3 calendar months from the file registration date — this is 3 months, not 90 working days.'
+          },
+          {
+            q: currentLang === 'fa' ? 'بعد از تایید IGI چقدر وقت برای اقدام در سفارت دارم؟' : 'How much time do I have to act at the embassy after IGI approval?',
+            a: currentLang === 'fa' ? 'دقیقاً ۶۰ روز از تاریخ صدور تاییدیه کتبی IGI فرصت دارید تا برای ویزای بلندمدت نوع D در سفارت یا کنسولگری رومانی اقدام کنید.' : 'You have exactly 60 days from the date of IGI\'s written approval to apply for the Type D long-stay visa at a Romanian embassy or consulate.'
+          },
+          {
+            q: currentLang === 'fa' ? 'اگر IGI به مهلت ۳ ماهه عمل نکند چه گزینه‌ای دارم؟' : 'What can I do if IGI misses the 3-month deadline?',
+            a: currentLang === 'fa' ? 'طبق قانون ۵۵۴/۲۰۰۴، می‌توانید ظرف ۶ ماه از سکوت یا تاخیر غیرموجه، با کمک وکیل حقوق اداری علیه IGI در دادگاه اداری شکایت کنید.' : 'Under Law 554/2004, you can sue IGI in the administrative court within 6 months of its unjustified silence or delay, with the help of an administrative-law attorney.'
+          },
+          {
+            q: currentLang === 'fa' ? 'چرا سند ازدواج ایرانی من فقط با آپوستیل قبول نمی‌شود؟' : 'Why isn\'t a simple apostille enough for my Iranian marriage certificate?',
+            a: currentLang === 'fa' ? 'چون ایران عضو کنوانسیون آپوستیل لاهه نیست؛ به‌جای آن باید مسیر تصدیق کنسولی (تایید مرجع ایرانی + مهر سفارت رومانی در تهران + ترجمه رسمی و تصدیق نزد دفترخانه رومانیایی) طی شود.' : 'Because Iran is not a member of the Hague Apostille Convention; instead you must go through consular legalization (Iranian authority authentication + Romanian Embassy in Tehran stamp + certified translation and notarization in Romania).'
+          },
+          {
+            q: currentLang === 'fa' ? 'آیا می‌توانم از پلتفرم WorkinRomania.gov.ro برای پرونده پیوست خانواده استفاده کنم؟' : 'Can I use the WorkinRomania.gov.ro platform for my family reunification case?',
+            a: currentLang === 'fa' ? 'خیر. این پلتفرم یکپارچه دولتی که در اوت ۲۰۲۶ کامل راه‌اندازی شد، پرونده‌های پیوست خانواده را پوشش نمی‌دهد؛ این فرآیند همچنان کاملاً حضوری و کاغذی نزد دفتر استانی IGI انجام می‌شود.' : 'No. This unified government platform, fully launched in August 2026, does not cover family reunification cases; this process remains entirely in-person and paper-based at your regional IGI office.'
+          }
+        ]} />
+
+        <RelatedGuidesCard items={['needs/school', 'needs/health']} currentLang={currentLang} onNavigate={onNavigate} />
         <ParentHubFooterCard slugRoute="immigration/family-reunification" currentLang={currentLang} onNavigate={onNavigate} />
 
         {/* COMMENTS SECTION */}
