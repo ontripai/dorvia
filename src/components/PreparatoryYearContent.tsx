@@ -4,6 +4,7 @@ import React from 'react';
 import { Language } from '../types';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { SectionPhoto } from './SectionPhoto';
 
 interface PreparatoryYearContentProps {
   currentLang: Language;
@@ -34,6 +35,14 @@ export const PreparatoryYearContent: React.FC<PreparatoryYearContentProps> = ({ 
             : 'Source: University of Bucharest (international.unibuc.ro) — Last reviewed: August 2026'}
         </div>
       </div>
+
+      <SectionPhoto
+        src="/images/study/preparatory-year.jpg"
+        alt={currentLang === 'fa' ? 'دانشگاه بابش-بویای کلوژ-ناپوکا' : 'Babeș-Bolyai University, Cluj-Napoca'}
+        captionFa="دانشگاه بابش-بویای کلوژ-ناپوکا — عکس: ویکیمدیا کامنز"
+        captionEn="Babeș-Bolyai University, Cluj-Napoca — Photo: Wikimedia Commons"
+        currentLang={currentLang}
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">

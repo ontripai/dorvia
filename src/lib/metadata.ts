@@ -53,6 +53,8 @@ export function getLocalizedMetadata(routeKey: string, lang: string): Metadata {
     ? (metaItem?.seoDescFa || 'پورتال جامع اطلاعات و خدمات برای ارزیابی و مشاوره رایگان مهاجرت به رومانی و اتحادیه اروپا.')
     : (metaItem?.seoDescEn || 'Comprehensive information and service portal for free assessment and consultation for immigration to Romania and the EU.');
 
+  const ogImageUrl = `${BASE_URL}/images/og-default.jpg`;
+
   return {
     title,
     description,
@@ -64,6 +66,29 @@ export function getLocalizedMetadata(routeKey: string, lang: string): Metadata {
         'en': enUrl,
         'x-default': faUrl,
       },
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      siteName: 'DORVIA EUROP',
+      locale: isFa ? 'fa_IR' : 'en_US',
+      alternateLocale: isFa ? 'en_US' : 'fa_IR',
+      type: 'website',
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: 'DORVIA EUROP',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImageUrl],
     },
   };
 }

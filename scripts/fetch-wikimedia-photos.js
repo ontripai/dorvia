@@ -42,6 +42,27 @@ const PHOTOS = [
   { file: 'Universitatea Bucuresti, Piata Universitatii (1).JPG', width: 800, out: 'public/images/universities/bucharest.jpg' },
   { file: 'Politehnica University of Bucharest.jpg', width: 800, out: 'public/images/universities/politehnica.jpg' },
   { file: 'Cladirea ASE Bucuresti.jpg', width: 800, out: 'public/images/universities/ase.jpg' },
+
+  // dre-p36: "make every page feel alive" pass — one topical hero photo per major
+  // section hub plus the strongest-matched sub-page in each section. Every filename
+  // below was verified to exist on Commons via search during research (title +
+  // Commons URL recorded in claude/seo-images-text-audit-dre-p36-2026-09-03.md in
+  // the project); this script's own HTTP check below is the final verification that
+  // it actually resolves. If a download fails, DO NOT swap in a guessed replacement
+  // filename — leave it out and flag it instead (the <img> block fails gracefully
+  // via onError, so a missing photo just means that one block quietly disappears).
+  { file: 'Lipscani Street, Bucharest.jpg', width: 1200, out: 'public/images/needs/needs-hub.jpg' },
+  { file: 'Gate of the BCR Headquarters Building (Bucharest, Romania).jpg', width: 1200, out: 'public/images/needs/banking.jpg' },
+  { file: 'HC arrivals.jpg', width: 1200, out: 'public/images/immigration/hub.jpg' },
+  { file: 'New Romanian Passport.jpg', width: 1200, out: 'public/images/immigration/citizenship.jpg' },
+  { file: 'Skyscrapers in Bucharest.jpg', width: 1200, out: 'public/images/work/hub.jpg' },
+  { file: 'Ministerul Muncii si Protectiei Sociale.jpg', width: 1200, out: 'public/images/work/work-permit.jpg' },
+  { file: 'Bucharest Business District (cropped).jpg', width: 1200, out: 'public/images/company/hub.jpg' },
+  { file: 'CEC Palace (11321332233).jpg', width: 1200, out: 'public/images/company/bank-account.jpg' },
+  { file: 'Cluj-Napoca University of Babes-Bolyai.JPG', width: 1200, out: 'public/images/study/preparatory-year.jpg' },
+  { file: 'Palace of the Parliament-balcony-20040801.JPG', width: 1200, out: 'public/images/romania/hub.jpg' },
+  { file: 'Bran Castle - Castelul Bran.JPG', width: 1200, out: 'public/images/romania/tourism.jpg' },
+  { file: 'Henri Coanda Otopeni airport entrance.jpg', width: 1200, out: 'public/images/start-here/planning-to-come.jpg' },
 ];
 
 async function downloadOne({ file, width, out }) {

@@ -6,6 +6,7 @@ import { Language } from '../types';
 import { EvaluationCTA } from './EvaluationCTA';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { SectionPhoto } from './SectionPhoto';
 
 interface WorkOverviewContentProps {
   subRoute: string;
@@ -45,6 +46,14 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </h1>
             {sourceLine}
           </div>
+
+          <SectionPhoto
+            src="/images/work/work-permit.jpg"
+            alt={currentLang === 'fa' ? 'ساختمان وزارت کار و حمایت اجتماعی رومانی' : "Romania's Ministry of Labour and Social Protection building"}
+            captionFa="وزارت کار و حمایت اجتماعی رومانی — عکس: ویکیمدیا کامنز"
+            captionEn="Ministry of Labour and Social Protection, Romania — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
             {currentLang === 'fa' 
@@ -897,6 +906,14 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                 : 'Comprehensive guide to the job market, work permits, business registration, taxes, and insurance.'}
             </p>
           </div>
+
+          <SectionPhoto
+            src="/images/work/hub.jpg"
+            alt={currentLang === 'fa' ? 'برجهای اداری بخارست' : 'Office towers in Bucharest'}
+            captionFa="برجهای اداری بخارست — عکس: ویکیمدیا کامنز"
+            captionEn="Office towers in Bucharest — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
 
           {/* 2. WHICH SITUATION ARE YOU IN? (کدام وضعیت شمایید؟) */}
           <div className="space-y-4">

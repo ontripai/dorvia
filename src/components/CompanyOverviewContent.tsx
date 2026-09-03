@@ -5,6 +5,7 @@ import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Language } from '../types';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { SectionPhoto } from './SectionPhoto';
 
 interface CompanyOverviewContentProps {
   subRoute: string;
@@ -262,6 +263,14 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 : 'Sources: National Bank of Romania (BNR) — bnr.ro, National Trade Register Office (ONRC) — onrc.ro — this section is a general guide; exact conditions should be verified directly with each respective bank. Last reviewed: August 2026'}
             </div>
           </div>
+
+          <SectionPhoto
+            src="/images/company/bank-account.jpg"
+            alt={currentLang === 'fa' ? 'کاخ تاریخی CEC در بخارست' : 'The historic CEC Palace bank building in Bucharest'}
+            captionFa="کاخ CEC، ساختمان تاریخی بانکی در بخارست — عکس: ویکیمدیا کامنز"
+            captionEn="CEC Palace, a historic bank building in Bucharest — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
             {currentLang === 'fa' 
@@ -724,6 +733,14 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 : 'SRL company formation steps, corporate tax rules, and executive residency criteria.'}
             </p>
           </div>
+
+          <SectionPhoto
+            src="/images/company/hub.jpg"
+            alt={currentLang === 'fa' ? 'محله کسبوکار بخارست' : 'Bucharest business district'}
+            captionFa="محله کسبوکار بخارست — عکس: ویکیمدیا کامنز"
+            captionEn="Bucharest business district — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
 
           <div className="space-y-4">
             <h3 className="text-lg font-bold text-[#142033]">

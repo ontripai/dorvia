@@ -14,6 +14,7 @@ import { TelecomGuideContent } from './TelecomGuideContent';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { OperationalGuideLayout } from './guide/OperationalGuideLayout';
+import { SectionPhoto } from './SectionPhoto';
 import { drivingLicenseEN } from '../content/guides/driving-license/en';
 import { drivingLicenseFA } from '../content/guides/driving-license/fa';
 import { firstDaysChecklistEN } from '../content/guides/first-days-checklist/en';
@@ -55,6 +56,14 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 : 'Your comprehensive directory for daily life, banking, renting, healthcare, schooling, and local compliance.'}
             </p>
           </div>
+
+          <SectionPhoto
+            src="/images/needs/needs-hub.jpg"
+            alt={currentLang === 'fa' ? 'خیابان لیپسکانی در بخارست' : 'Lipscani Street in central Bucharest'}
+            captionFa="خیابان لیپسکانی، بخارست — عکس: ویکیمدیا کامنز"
+            captionEn="Lipscani Street, central Bucharest — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Link href="/needs/first-days-checklist" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
@@ -622,6 +631,62 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             </div>
           </div>
 
+          {/* PASSPORT PROCESS — step by step via Mikhak */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-5">
+            <h2 className="text-lg sm:text-xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🛂</span>
+              <span>{currentLang === 'fa' ? 'مراحل تمدید یا صدور گذرنامه از طریق میخک' : 'Steps to renew or issue a passport via Mikhak'}</span>
+            </h2>
+            <ol className="space-y-3 text-sm text-[#526174] list-decimal list-inside marker:font-bold marker:text-[#2F6FED]">
+              <li>{currentLang === 'fa' ? 'ثبتنام در سامانه میخک با مشخصات هویتی و اقامتی خود و دریافت کد رهگیری.' : 'Register on the Mikhak system with your identity and residency details to receive a tracking code.'}</li>
+              <li>{currentLang === 'fa' ? 'بارگذاری مدارک لازم (تصویر شناسنامه، کارت ملی، گذرنامه قبلی، عکس بیومتریک) با فرمت JPG و حجم محدود.' : 'Upload the required documents (birth certificate, national ID, previous passport, biometric photo) as JPG files under the system\'s size limit.'}</li>
+              <li>{currentLang === 'fa' ? 'در صورت نیاز، از طریق همان کد رهگیری برای مراجعه حضوری به سفارت بخارست نوبت بگیرید.' : 'If required, book an in-person appointment at the Bucharest embassy using your tracking code.'}</li>
+              <li>{currentLang === 'fa' ? 'مراجعه حضوری برای ثبت اثرانگشت و عکس بیومتریک (برای گذرنامههای الکترونیکی الزامی است).' : 'Attend in person for fingerprinting and a biometric photo (mandatory for e-passports).'}</li>
+              <li>{currentLang === 'fa' ? 'پرداخت هزینه — روش پرداخت (کارتخوان، واریز بانکی یا نقدی) را از خود سفارت بخارست استعلام بگیرید، چون هزینه به یورو تعیین میشود اما تبدیل به لئو و روش دریافت آن را هر نمایندگی جداگانه مشخص میکند.' : 'Pay the fee — confirm the accepted payment method (card, bank transfer, or cash) directly with the Bucharest embassy, since the fee is set in euros but each mission sets its own RON conversion and collection method.'}</li>
+              <li>{currentLang === 'fa' ? 'دریافت گذرنامه حضوری یا از طریق پست سفارشی (در صورت ارائه این گزینه توسط سفارت).' : 'Collect the passport in person, or by registered mail if the embassy offers that option.'}</li>
+            </ol>
+            <p className="text-xs text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'مدت زمان معمول رسیدگی حدود ۱ تا ۳ هفته است، اما در بازههای پرتردد (نوروز، تابستان) ممکن است به ۴ تا ۶ هفته برسد.'
+                : 'Typical processing time is 1–3 weeks, though busy periods (Nowruz, summer) can extend this to 4–6 weeks.'}
+            </p>
+
+            <div className="pt-4 border-t border-[#dfe6ef] space-y-3">
+              <h3 className="font-bold text-[#142033] text-sm">{currentLang === 'fa' ? 'هزینههای مرجع سامانه میخک (بر اساس مصوبه هیئت وزیران، مهر ۱۴۰۴)' : 'Reference Mikhak fees (per the Cabinet decree, October 2025)'}</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs sm:text-sm text-[#526174] border-collapse">
+                  <tbody>
+                    <tr className="border-b border-[#eef3f8]">
+                      <td className="py-2 pr-2">{currentLang === 'fa' ? 'صدور یا تمدید گذرنامه' : 'Passport issuance / renewal'}</td>
+                      <td className="py-2 font-bold text-[#142033] text-left" dir="ltr">115 EUR</td>
+                    </tr>
+                    <tr className="border-b border-[#eef3f8]">
+                      <td className="py-2 pr-2">{currentLang === 'fa' ? 'اولین گذرنامه کودک زیر ۲ سال' : 'First passport for a child under 2'}</td>
+                      <td className="py-2 font-bold text-[#142033] text-left" dir="ltr">58 EUR</td>
+                    </tr>
+                    <tr className="border-b border-[#eef3f8]">
+                      <td className="py-2 pr-2">{currentLang === 'fa' ? 'گذرنامه مفقودی/آسیبدیده (بار اول)' : 'Lost/damaged passport (1st occurrence)'}</td>
+                      <td className="py-2 font-bold text-[#142033] text-left" dir="ltr">207 EUR</td>
+                    </tr>
+                    <tr className="border-b border-[#eef3f8]">
+                      <td className="py-2 pr-2">{currentLang === 'fa' ? 'ثبت ازدواج' : 'Marriage registration'}</td>
+                      <td className="py-2 font-bold text-[#142033] text-left" dir="ltr">40 EUR</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-2">{currentLang === 'fa' ? 'وکالتنامه امور اداری/بانکی' : 'Power of attorney (admin/banking matters)'}</td>
+                      <td className="py-2 font-bold text-[#142033] text-left" dir="ltr">23 EUR</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-relaxed">
+                {currentLang === 'fa'
+                  ? 'این ارقام یورویی مصوبه سراسری وزارت امور خارجه است؛ هر سفارت (از جمله بخارست) آن را به لئوی رومانی تبدیل میکند و ممکن است مبلغ نهایی کمی متفاوت باشد — پیش از پرداخت حتماً مبلغ دقیق را از خود سفارت بخارست استعلام بگیرید. منبع: مصوبه هیئت وزیران مورخ ۱۴۰۴/۷/۱۶ (نقلشده توسط رسانههای واسطه؛ برای تایید نهایی به bucharest.mfa.ir مراجعه شود).'
+                  : 'These are the ministry-wide euro figures; each embassy (Bucharest included) converts them to Romanian lei, so the final charged amount may vary slightly — confirm the exact figure with the Bucharest embassy before paying. Source: Cabinet decree dated 1404/7/16 (Oct 2025), as reported by intermediary outlets; for final confirmation see bucharest.mfa.ir.'}
+              </p>
+            </div>
+          </div>
+
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
             <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
@@ -634,6 +699,14 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا سفارت خدمات ترجمه رسمی هم ارائه می‌دهد؟' : 'Does the embassy provide translation services?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، سفارت وظیفه تایید اسناد را برعهده دارد؛ شما باید برای مدارک مورد نیاز دولت رومانی به مترجمین مجاز محلی مراجعه کنید.' : 'No, the embassy does not translate documents; you must use a Romanian-authorized translator for documents submitted to local authorities.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر گذرنامه‌ام مفقود یا سرقت شود چه باید کرد؟' : 'What if my passport is lost or stolen?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'ابتدا باید موضوع را به پلیس محلی رومانی گزارش داده و گزارش رسمی (Poliția Română) دریافت کنید، سپس درخواست صدور گذرنامه جدید را در سامانه میخک با ذکر مفقودی ثبت کنید. هزینه گذرنامه مفقودی معمولاً بیشتر از تمدید عادی است.' : 'First, report the loss to the Romanian police (Poliția Română) and obtain an official report, then file a new passport application on Mikhak, noting it as a loss/theft case. The fee for a lost passport is typically higher than a standard renewal.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توان مدارک را بدون حضور فیزیکی ارسال کرد؟' : 'Can documents be submitted without visiting in person?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'ثبت اولیه و بارگذاری مدارک در میخک آنلاین است، اما ثبت اثرانگشت و عکس بیومتریک برای گذرنامه الکترونیکی معمولاً نیازمند حضور فیزیکی است؛ برخی خدمات غیرگذرنامه‌ای ممکن است امکان ارسال پستی داشته باشند که باید مستقیماً از سفارت بخارست استعلام شود.' : 'Initial registration and document upload on Mikhak is online, but fingerprinting and the biometric photo for an e-passport generally require an in-person visit; some non-passport services may allow mail submission — confirm directly with the Bucharest embassy.'}</p>
               </div>
             </div>
           </div>
