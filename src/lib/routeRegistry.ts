@@ -436,6 +436,18 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     inSitemap: true,
     pageType: 'content'
   },
+  'work/digital-nomad': {
+    canonical: '/work/digital-nomad',
+    aliases: [],
+    parentHub: '/work',
+    titleFa: 'ویزای دیجیتال نومد رومانی',
+    titleEn: 'Romania Digital Nomad Visa',
+    parentTitleFa: 'کار و اشتغال',
+    parentTitleEn: 'Work & Employment',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'content'
+  },
   'company/registration': {
     canonical: '/company/registration',
     aliases: [],

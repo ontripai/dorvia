@@ -291,13 +291,13 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </h2>
             <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
               {currentLang === 'fa'
-                ? 'همانند ویزای نوع D عمومی، ویزای کاری D/AM هم باید در خود سفارت رومانی در تهران دریافت شود چون هیچ مرکز خدمات ویزای VFS Global در ایران وجود ندارد. فرآیند از طریق سامانه آنلاین eViza شروع می‌شود: ابتدا پرونده و مدارک را در این سامانه بارگذاری می‌کنید، و فقط پس از آنکه وضعیت پرونده به «Valid» تغییر کرد، امکان رزرو نوبت حضوری در سفارت فراهم می‌شود — یعنی نمی‌توانید همزمان با ثبت اولیه نوبت بگیرید. هزینه استاندارد ویزای نوع D حدود ۱۲۰ یورو گزارش شده است.'
-                : 'Just like the general Type D visa, the D/AM work visa must also be obtained in person at the Romanian Embassy in Tehran, since Iran has no VFS Global visa service center. The process starts through the online eViza system: you first upload your file and documents there, and only once the file status changes to "Valid" can you book an in-person embassy appointment — you cannot book a slot at the same time as your initial submission. The standard Type D visa fee is reported at around €120.'}
+                ? 'همانند ویزای نوع D عمومی، ویزای کاری D/AM هم باید در خود سفارت رومانی در تهران دریافت شود چون هیچ مرکز خدمات ویزای VFS Global در ایران وجود ندارد. فرآیند از طریق سامانه آنلاین eViza شروع می‌شود: ابتدا پرونده و مدارک را در این سامانه بارگذاری می‌کنید، و فقط پس از آنکه وضعیت پرونده به «Valid» تغییر کرد، امکان رزرو نوبت حضوری در سفارت فراهم می‌شود — یعنی نمی‌توانید همزمان با ثبت اولیه نوبت بگیرید. هزینه ویزای نوع D از ۲۷ آوریل ۲۰۲۶ به ۳۰۰ یورو افزایش یافته (پیشتر ۱۲۰ یورو بود؛ سفارت تهران آن را به دلار آمریکا دریافت می‌کند).'
+                : 'Just like the general Type D visa, the D/AM work visa must also be obtained in person at the Romanian Embassy in Tehran, since Iran has no VFS Global visa service center. The process starts through the online eViza system: you first upload your file and documents there, and only once the file status changes to "Valid" can you book an in-person embassy appointment — you cannot book a slot at the same time as your initial submission. The Type D visa fee rose to €300 as of April 27, 2026 (previously €120; the Tehran embassy collects it in US dollars).'}
             </p>
             <p className="text-xs text-[#788697] leading-relaxed">
               {currentLang === 'fa'
-                ? 'منابع: stinwo.ro، mae.ro. زمان انتظار واقعی برای نوبت‌دهی در سفارت تهران در منابع رسمی/خبری یافت نشد؛ این بخش رو برای برنامه‌ریزی زودتر از موعد، نه به‌عنوان تضمین زمانی، در نظر بگیرید.'
-                : 'Sources: stinwo.ro, mae.ro. Real-world wait times for Tehran embassy appointments were not found in official/news sources; treat this section as a reason to plan early, not as a timing guarantee.'}
+                ? 'منابع: stinwo.ro، mae.ro، eviza.mae.ro/VisaFees (مبلغ هزینه، به‌روزرسانی ۲۷ آوریل ۲۰۲۶). زمان انتظار واقعی برای نوبت‌دهی در سفارت تهران در منابع رسمی/خبری یافت نشد؛ این بخش رو برای برنامه‌ریزی زودتر از موعد، نه به‌عنوان تضمین زمانی، در نظر بگیرید.'
+                : 'Sources: stinwo.ro, mae.ro, eviza.mae.ro/VisaFees (fee amount, updated April 27, 2026). Real-world wait times for Tehran embassy appointments were not found in official/news sources; treat this section as a reason to plan early, not as a timing guarantee.'}
             </p>
           </div>
 
@@ -892,6 +892,118 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
         </div>
       );
 
+    case 'digital-nomad':
+    case 'nomad':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="work/digital-nomad" currentLang={currentLang} onNavigate={onNavigate} />
+
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'ویزای دیجیتال نومد رومانی' : 'Romania Digital Nomad Visa'}
+            </h1>
+            {sourceLine}
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa'
+              ? 'رومانی از دسامبر ۲۰۲۱ (بر اساس قانون ۲۲/۲۰۲۲، مصوب ۱۷ ژانویه ۲۰۲۲) یک ویزای بلندمدت مخصوص «دورکاران دیجیتال» دارد — برای کسانی که برای یک کارفرما یا کسب‌وکار خارج از رومانی کار می‌کنند و می‌خواهند از داخل رومانی به این کار ادامه دهند. این مسیر برخلاف ویزای کاری معمولی، نیازی به پیشنهاد شغلی از یک کارفرمای رومانیایی یا طی‌کردن فرآیند Aviz de Muncă ندارد.'
+              : 'Since December 2021 (formalized under Law 22/2022, adopted January 17, 2022), Romania has offered a dedicated long-stay visa for "digital nomads" — people employed by, or running a business registered in, a country outside Romania who want to continue that work while living in Romania. Unlike a standard work visa, this route requires no job offer from a Romanian employer and no Aviz de Muncă process.'}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">1</span>
+                <span>{currentLang === 'fa' ? 'شرط اصلی احراز' : 'Core Eligibility'}</span>
+              </h2>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'شهروند خارج از اتحادیه اروپا/فضای اقتصادی اروپا/سوئیس باشید.' : 'Be a citizen of a country outside the EU/EEA/Switzerland.'}</li>
+                <li>{currentLang === 'fa' ? 'به‌صورت دورکاری برای یک شرکت ثبت‌شده خارج از رومانی کار کنید، یا مالک/سهامدار چنین شرکتی باشید.' : 'Work remotely for a company registered outside Romania, or own/hold shares in such a company.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">2</span>
+                <span>{currentLang === 'fa' ? 'حداقل درآمد لازم' : 'Minimum Income'}</span>
+              </h2>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'درآمد شما باید حداقل ۳ برابر میانگین حقوق ناخالص ماهانه رومانی باشد.' : 'Your income must be at least 3× Romania\'s average gross monthly salary.'}</li>
+                <li>{currentLang === 'fa' ? 'این آستانه باید برای هر یک از ۶ ماه پیش از درخواست، و برای کل بازه اعتبار ویزا، اثبات شود. چون میانگین حقوق سالانه تغییر می‌کند، رقم دقیق یورویی/لئویی آستانه نیز هرسال جابه‌جا می‌شود — رقم به‌روز را از IGI یا evisa.mae.ro استعلام بگیرید.' : 'This threshold must be proven for each of the 6 months before applying, and for the full requested visa period. Because Romania\'s average salary changes yearly, the exact EUR/RON threshold shifts too — confirm the current figure with IGI or evisa.mae.ro.'}</li>
+              </ul>
+            </div>
+
+            <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
+              <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="w-6 h-6 rounded-full bg-[#2F6FED] text-white flex items-center justify-center text-sm">3</span>
+                <span>{currentLang === 'fa' ? 'مدت اعتبار ویزا و اقامت' : 'Visa & Residence Duration'}</span>
+              </h2>
+              <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+                <li>{currentLang === 'fa' ? 'ویزای بلندمدت دیجیتال نومد ابتدا برای ۹۰ روز صادر می‌شود؛ پس از ورود، برای مجوز اقامت اقدام می‌کنید.' : 'The long-stay digital nomad visa is initially issued for 90 days; after entering Romania, you apply for a residence permit.'}</li>
+                <li>{currentLang === 'fa' ? 'اولین تمدید فقط ۶ ماه است، نه یک سال کامل — این نکته‌ای است که برخی منابع غیررسمی اشتباه ذکر می‌کنند.' : 'The first renewal is only 6 months, not a full year — a detail some informal sources get wrong.'}</li>
+                <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-3">
+              <h3 className="text-lg font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span>💶</span>
+                <span>{currentLang === 'fa' ? 'مالیات: قاعده واقعی چیست؟' : 'Taxes: What the Rule Actually Is'}</span>
+              </h3>
+              <p className="text-sm text-[#526174] leading-relaxed">
+                {currentLang === 'fa'
+                  ? 'برخلاف تصور رایج («اگر جای دیگری مالیات می‌دهید، در رومانی معاف هستید»)، قاعده قانونی بر اساس شمارش روزهای اقامت است، نه محل پرداخت مالیات: درآمد خارجی شما تا ۶ ماه در بازه ۱۲ ماهه از مالیات و حق بیمه رومانی معاف است، به‌شرطی که مجموع اقامتتان زیر ۱۸۳ روز در سال بماند. اگر از ۱۸۳ روز عبور کنید، طبق قانون به مقیم مالیاتی رومانی تبدیل می‌شوید و مشمول مالیات معمول رومانی خواهید شد — صرف‌نظر از اینکه در کشور دیگری هم مالیات پرداخت کرده باشید یا نه.'
+                  : 'Contrary to the common claim ("if you already pay tax elsewhere, you\'re exempt in Romania"), the actual legal rule is a day-count test, not a where-you-pay-tax test: your foreign-sourced income is exempt from Romanian tax and social contributions for up to 6 months within a 12-month period, provided your total stay remains under 183 days per year. Exceeding 183 days makes you a Romanian tax resident by law, subject to normal Romanian taxation — regardless of tax already paid elsewhere.'}
+              </p>
+            </div>
+
+            <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-3">
+              <h3 className="text-lg font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                <span>👨‍👩‍👧</span>
+                <span>{currentLang === 'fa' ? 'پیوست خانواده: ممکن نیست' : 'Family Reunification: Not Available'}</span>
+              </h3>
+              <p className="text-sm text-[#526174] leading-relaxed">
+                {currentLang === 'fa'
+                  ? 'برخلاف ادعایی که در برخی سایت‌های دیگر دیده می‌شود، صفحه رسمی پیوست خانواده IGI، مجوز اقامت دیجیتال نومد را در فهرست استثناهای مجاز (مانند کارت آبی اتحادیه اروپا یا مجوز محقق) قرار نداده و شرط عمومی «حداقل ۱ سال اعتبار مجوز اقامت فرد حامی» را می‌طلبد — در حالی که اولین دوره این مجوز فقط ۶ ماه است. عملاً یعنی این مسیر برای پیوست همسر/فرزندان طراحی نشده. پیش از هر برنامه‌ریزی خانوادگی، حتماً وضعیت دقیق را از IGI استعلام بگیرید.'
+                  : 'Contrary to a claim repeated on some other sites, IGI\'s own family-reunification page does not list the digital nomad residence permit among its named exceptions (such as the EU Blue Card or researcher permit), and requires the general rule of the sponsor holding a permit valid for at least 1 year — while this permit\'s first period is only 6 months. In practice, this route is not designed for bringing a spouse or children along. Confirm the exact current position with IGI before making any family plans around it.'}
+              </p>
+            </div>
+          </div>
+
+          <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs sm:text-sm text-amber-950 leading-relaxed">
+            {currentLang === 'fa'
+              ? 'منابع: قانون ۲۲/۲۰۲۲ (اصلاحیه OUG 194/2002)، PwC Romania، صفحه پیوست خانواده IGI (igi.mai.gov.ro)، و چند دفتر حقوقی مهاجرتی رومانیایی. ارقام حقوق ناخالص میانگین رومانی سالانه تغییر می‌کند؛ پیش از اقدام، آستانه دقیق درآمد را از IGI یا evisa.mae.ro استعلام بگیرید.'
+              : 'Sources: Law 22/2022 (amending OUG 194/2002), PwC Romania, IGI\'s official family-reunification page (igi.mai.gov.ro), and several Romanian immigration law firms. Romania\'s average gross salary figure changes yearly; confirm the exact current income threshold with IGI or evisa.mae.ro before applying.'}
+          </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h2 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h2>
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا برای این ویزا به پیشنهاد شغلی از یک شرکت رومانیایی نیاز دارم؟' : 'Do I need a job offer from a Romanian company for this visa?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. این مسیر دقیقاً برای کسانی طراحی شده که برای یک کارفرما یا کسب‌وکار خارج از رومانی کار می‌کنند و نیازی به Aviz de Muncă یا کارفرمای رومانیایی ندارند.' : 'No. This route is specifically designed for people who work for an employer or business outside Romania and need no Aviz de Muncă or Romanian employer.'}</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم همسر و فرزندانم را همراه بیاورم؟' : 'Can I bring my spouse and children with me?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قواعد فعلی پیوست خانواده IGI، این مجوز در فهرست استثناهای مجاز نیست و اولین دوره‌اش هم فقط ۶ ماه است، پس عملاً این مسیر برای پیوست خانواده طراحی نشده — این وضعیت را مستقیماً از IGI تایید بگیرید.' : 'Under IGI\'s current family-reunification rules, this permit is not on the list of named exceptions and its first period is only 6 months, so in practice this route is not built for family reunification — confirm this directly with IGI.'}</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا باید در رومانی مالیات بدهم اگر قبلاً در کشور خودم مالیات پرداخته‌ام؟' : 'Do I owe Romanian tax if I already pay tax in my home country?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'معافیت رومانی بر اساس شمارش روز است، نه محل پرداخت مالیات: تا ۶ ماه در بازه ۱۲ ماهه معاف هستید، به‌شرط ماندن زیر ۱۸۳ روز اقامت در سال؛ عبور از این مرز شما را مقیم مالیاتی رومانی می‌کند صرف‌نظر از مالیات پرداختی جای دیگر.' : 'Romania\'s exemption is based on a day-count, not on where you already pay tax: you\'re exempt for up to 6 months within a 12-month period, provided you stay under 183 days per year; crossing that line makes you a Romanian tax resident regardless of tax paid elsewhere.'}</p>
+              </div>
+            </div>
+          </div>
+
+          <ParentHubFooterCard slugRoute="work/digital-nomad" currentLang={currentLang} onNavigate={onNavigate} />
+        </div>
+      );
+
     default:
       return (
         <div className="space-y-12 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
@@ -996,6 +1108,21 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                   {currentLang === 'fa' ? 'قوانین بیمه کارمندی ←' : 'Employee Insurance Rules →'}
                 </span>
               </Link>
+
+              <Link href="/work/digital-nomad" className="editorial-card p-5 bg-white border border-[#dfe6ef] rounded-2xl hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+                <div className="space-y-2">
+                  <span className="text-2xl">💻</span>
+                  <h3 className="font-extrabold text-[#142033] text-sm sm:text-base">
+                    {currentLang === 'fa' ? 'دورکار هستم، کارفرمای رومانیایی ندارم' : 'I work remotely, no Romanian employer'}
+                  </h3>
+                  <p className="text-xs text-[#526174] leading-relaxed">
+                    {currentLang === 'fa' ? 'ویزای دیجیتال نومد برای دورکاران با کارفرما/کسب‌وکار خارج از رومانی.' : 'The digital nomad visa for remote workers employed outside Romania.'}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-[#2F6FED] pt-3 inline-block">
+                  {currentLang === 'fa' ? 'راهنمای ویزای دیجیتال نومد ←' : 'Digital Nomad Visa Guide →'}
+                </span>
+              </Link>
             </div>
           </div>
 
@@ -1065,6 +1192,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               <Link href="/work/insurance" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
                 <h3 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'بیمه' : 'Insurance'}</h3>
                 <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'پوشش بیمه تامین اجتماعی و درمانی' : 'Social and health insurance coverage'}</p>
+              </Link>
+              <Link href="/work/digital-nomad" className="editorial-card p-4 space-y-2 bg-white cursor-pointer hover:border-[#2F6FED] transition-colors" >
+                <h3 className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'ویزای دیجیتال نومد' : 'Digital Nomad Visa'}</h3>
+                <p className="text-xs text-[#526174]">{currentLang === 'fa' ? 'مسیر اقامت برای دورکاران بدون کارفرمای رومانیایی' : 'Residence pathway for remote workers without a Romanian employer'}</p>
               </Link>
             </div>
           </div>
