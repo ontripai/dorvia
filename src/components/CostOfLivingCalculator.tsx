@@ -305,7 +305,8 @@ export const CostOfLivingCalculator: React.FC<CostOfLivingCalculatorProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {(['dorm', 'shared', 'one_bed_center', 'one_bed_suburb', 'two_bed_center', 'three_bed'] as AccommodationType[]).map((type) => {
                 const isSelected = accommodation === type;
-                const costEur = activeCity.rent[type];
+                const costRon = activeCity.rent[type];
+                const isEstimated = type === 'dorm' && activeCity.rent.isDormEstimated;
                 return (
                   <button
                     key={type}
@@ -316,9 +317,16 @@ export const CostOfLivingCalculator: React.FC<CostOfLivingCalculatorProps> = ({
                         : 'bg-slate-50/70 border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-100'
                     }`}
                   >
-                    <span className="font-semibold">{t.costOfLiving.accommodations[type]}</span>
+                    <div className="flex items-center space-x-1.5 rtl:space-x-reverse">
+                      <span className="font-semibold">{t.costOfLiving.accommodations[type]}</span>
+                      {isEstimated && (
+                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">
+                          {t.costOfLiving.results.estimatedTag}
+                        </span>
+                      )}
+                    </div>
                     <span className="text-[11px] font-extrabold px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-600">
-                      {formatMoney(currency === 'RON' ? Math.round(costEur * EUR_TO_RON_RATE) : costEur)}
+                      {formatMoney(currency === 'RON' ? Math.round(costRon) : Math.round(costRon / EUR_TO_RON_RATE))}
                     </span>
                   </button>
                 );
@@ -376,30 +384,39 @@ export const CostOfLivingCalculator: React.FC<CostOfLivingCalculatorProps> = ({
             </div>
 
             {/* Toggles: Transit & Gym */}
-            <div className="pt-2 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <label className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer bg-slate-50 p-3 rounded-2xl border border-slate-200 hover:bg-slate-100/70 transition-all">
-                <input
-                  type="checkbox"
-                  checked={usePublicTransit}
-                  onChange={(e) => setUsePublicTransit(e.target.checked)}
-                  className="w-4 h-4 rounded text-[#2F6FED] focus:ring-[#2F6FED]"
-                />
-                <span className="text-xs font-bold text-slate-700">
-                  {t.costOfLiving.lifestyleDetails.publicTransit}
-                </span>
-              </label>
+            <div className="pt-2 border-t border-slate-100 space-y-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <label className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer bg-slate-50 p-3 rounded-2xl border border-slate-200 hover:bg-slate-100/70 transition-all">
+                  <input
+                    type="checkbox"
+                    checked={usePublicTransit}
+                    onChange={(e) => setUsePublicTransit(e.target.checked)}
+                    className="w-4 h-4 rounded text-[#2F6FED] focus:ring-[#2F6FED]"
+                  />
+                  <span className="text-xs font-bold text-slate-700">
+                    {t.costOfLiving.lifestyleDetails.publicTransit}
+                  </span>
+                </label>
 
-              <label className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer bg-slate-50 p-3 rounded-2xl border border-slate-200 hover:bg-slate-100/70 transition-all">
-                <input
-                  type="checkbox"
-                  checked={includeGym}
-                  onChange={(e) => setIncludeGym(e.target.checked)}
-                  className="w-4 h-4 rounded text-[#2F6FED] focus:ring-[#2F6FED]"
-                />
-                <span className="text-xs font-bold text-slate-700">
-                  {t.costOfLiving.lifestyleDetails.gymMembership}
-                </span>
-              </label>
+                <label className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer bg-slate-50 p-3 rounded-2xl border border-slate-200 hover:bg-slate-100/70 transition-all">
+                  <input
+                    type="checkbox"
+                    checked={includeGym}
+                    onChange={(e) => setIncludeGym(e.target.checked)}
+                    className="w-4 h-4 rounded text-[#2F6FED] focus:ring-[#2F6FED]"
+                  />
+                  <span className="text-xs font-bold text-slate-700">
+                    {t.costOfLiving.lifestyleDetails.gymMembership}
+                  </span>
+                </label>
+              </div>
+
+              {usePublicTransit && (
+                <div className="text-[11px] text-slate-500 bg-blue-50/70 border border-blue-100 p-3 rounded-xl flex items-start space-x-2 rtl:space-x-reverse leading-relaxed">
+                  <Info size={14} className="text-[#2F6FED] shrink-0 mt-0.5" />
+                  <span>{t.costOfLiving.results.studentTransitNote}</span>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -629,10 +646,17 @@ export const CostOfLivingCalculator: React.FC<CostOfLivingCalculatorProps> = ({
         </div>
       </div>
 
-      {/* DISCLAIMER & METHODOLOGY FOOTNOTE */}
-      <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-xs text-slate-500 leading-relaxed flex items-start space-x-3 rtl:space-x-reverse">
+      {/* SOURCE & METHODOLOGY NOTE (DRE-P50) */}
+      <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-xs leading-relaxed flex items-start space-x-3 rtl:space-x-reverse">
         <Info size={18} className="text-slate-400 shrink-0 mt-0.5" />
-        <p>{t.costOfLiving.results.disclaimer}</p>
+        <div className="space-y-1.5 text-slate-600">
+          <p className="font-semibold text-slate-700 leading-relaxed">
+            {t.costOfLiving.results.sourceNote}
+          </p>
+          <p className="text-[11px] text-slate-400 leading-relaxed">
+            {t.costOfLiving.results.disclaimer}
+          </p>
+        </div>
       </div>
 
       {/* FREQUENTLY ASKED QUESTIONS ACCORDION */}

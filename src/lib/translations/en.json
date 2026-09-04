@@ -290,7 +290,10 @@
       "currencySwitch": "Display Currency:",
       "costIndexVsBucharest": "Cost Index vs. Bucharest",
       "rankInRomania": "Expense Ranking in Romania",
-      "disclaimer": "Figures are calculated based on crowdsourced Numbeo indices and local market averages in Romania (updated August 2026). Actual expenses will vary based on individual habits, seasonal utility changes, and exact location."
+      "disclaimer": "Figures are calculated based on crowdsourced Numbeo indices and local market averages in Romania (updated August 2026). Actual expenses will vary based on individual habits, seasonal utility changes, and exact location.",
+      "sourceNote": "Everyday price source: Numbeo (user-reported data, not official government statistics) — currency conversion: National Bank of Romania (BNR) — student dorm costs: official university websites and evz.ro — last reviewed: September 2026. Dorm figures for 4 cities and grocery baskets for 7 cities (other than Bucharest) are estimated/scaled, not directly sourced.",
+      "studentTransitNote": "Romanian law entitles university students to a 90% reimbursement of local transit pass costs via their university (except Brașov where passes are 100% free) — this calculator displays full upfront ticket costs rather than post-reimbursement net amounts.",
+      "estimatedTag": "Estimated"
     },
     "cta": {
       "title": "Need Personalized Budgeting & Relocation Guidance?",

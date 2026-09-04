@@ -1,3 +1,13 @@
+/**
+ * DORVIA COST OF LIVING BENCHMARK DATASET
+ * 
+ * Sources:
+ * 1. Everyday Consumer Prices: Numbeo (numbeo.com/cost-of-living/in/<City>) — Crowd-sourced data, last reviewed: September 2026.
+ * 2. Official Currency Exchange Rate: National Bank of Romania (BNR) via cursbnr.ro — Reference rate: 1 EUR = 5.25 RON (September 3, 2026).
+ * 3. Student Dormitories: Official Romanian university portals (campus.tuiasi.ro, unitbv.ro, ubbcluj.ro, upb.ro) & evz.ro (2025-2026 academic year).
+ * 4. Transit Student Pass: Local public transit operators (STB, CTP, RATBV, STPT) — Full upfront pass cost recorded; statutory 90% reimbursement handled post-purchase by universities.
+ */
+
 export type CityId = 'bucharest' | 'cluj-napoca' | 'timisoara' | 'iasi' | 'brasov' | 'constanta' | 'sibiu' | 'craiova';
 
 export type HouseholdType = 'student' | 'single' | 'couple' | 'family';
@@ -18,82 +28,55 @@ export interface CityCostData {
   };
   isCapital?: boolean;
   costIndexRank: number; // 1 = highest in Romania
-  costIndexVsBucharest: number; // e.g. 100 for Bucharest, 105 for Cluj, 85 for Iasi
+  costIndexVsBucharest: number; // e.g. 100 for Bucharest, 105 for Cluj
   rent: {
-    dorm: number; // monthly EUR
-    shared: number;
-    one_bed_center: number;
-    one_bed_suburb: number;
-    two_bed_center: number;
-    three_bed: number;
+    dorm: number; // monthly RON (sourced or scaled estimate)
+    isDormEstimated?: boolean;
+    shared: number; // derived: 0.55 * rent1BROutside (RON)
+    one_bed_center: number; // direct Numbeo (RON)
+    one_bed_suburb: number; // direct Numbeo (RON)
+    two_bed_center: number; // derived: 1BR_center + 0.65 * (3BR_center - 1BR_center) (RON)
+    three_bed: number; // direct Numbeo 3BR center (RON)
+    three_bed_suburb: number; // direct Numbeo 3BR outside (RON)
   };
   utilities: {
-    baseMonthly1Person: number; // heating, electricity, water, garbage
-    baseMonthlyFamily: number;
-    fiberInternet: number; // 1 Gbps high-speed
-    mobileSim5G: number;
+    baseMonthly1Person: number; // derived: 0.6 * familyUtility (RON)
+    baseMonthlyFamily: number; // direct Numbeo (85m² apartment) (RON)
+    fiberInternet: number; // direct Numbeo (60Mbps+ / fiber) (RON)
+    mobileSim5G: number; // direct Numbeo (10GB+ data plan) (RON)
   };
   food: {
-    basicGroceryMonthly1Person: number;
-    diningOutMealBudget: number;
-    diningOutMealMidRange: number;
-    coffeeCappuccino: number;
+    basicGroceryMonthly1Person: number; // Monthly grocery basket (RON)
+    isGroceryEstimated?: boolean;
+    diningOutMealBudget: number; // direct Numbeo (inexpensive restaurant) (RON)
+    diningOutMealMidRange: number; // direct Numbeo (per-person portion of 3-course mid-range meal = 2-person / 2) (RON)
+    diningOutMealMidRange2P: number; // direct Numbeo 2-person mid-range (RON)
+    coffeeCappuccino: number; // direct Numbeo (RON)
+    milk1L: number; // direct Numbeo (RON)
+    bread500g: number; // direct Numbeo (RON)
   };
   transport: {
-    monthlyPassGeneral: number;
-    monthlyPassStudent: number; // Subsidized (90% discount in RO)
-    taxiPerKm: number;
-    avgBoltUberTrip: number;
+    monthlyPassGeneral: number; // direct Numbeo regular monthly pass (RON)
+    monthlyPassStudent: number; // Upfront full pass cost (reimbursement note provided in UI) (RON)
+    taxiStart: number; // direct Numbeo (RON)
+    taxiPerKm: number; // direct Numbeo approximate (RON)
+    avgBoltUberTrip: number; // typical urban ride-sharing trip (RON)
   };
   lifestyle: {
-    gymMonthly: number;
-    cinemaTicket: number;
-    leisureMonthlyEstimate: number;
+    gymMonthly: number; // direct Numbeo 1 adult fitness club (RON)
+    cinemaTicket: number; // direct Numbeo 1 seat international release (RON)
+    leisureMonthlyEstimate: number; // monthly leisure & personal care estimate (RON)
   };
 }
 
-export const EUR_TO_RON_RATE = 4.97;
+/**
+ * Official BNR reference exchange rate.
+ * Source: cursbnr.ro / BNR (September 3, 2026).
+ * 1 EUR = 5.25 RON
+ */
+export const EUR_TO_RON_RATE = 5.25;
 
 export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
-  'cluj-napoca': {
-    id: 'cluj-napoca',
-    name: { fa: 'کلوژ-نپوکا', en: 'Cluj-Napoca' },
-    romanianName: 'Cluj-Napoca',
-    region: { fa: 'ترانسیلوانیا', en: 'Transylvania' },
-    costIndexRank: 1,
-    costIndexVsBucharest: 105,
-    rent: {
-      dorm: 140,
-      shared: 240,
-      one_bed_center: 550,
-      one_bed_suburb: 420,
-      two_bed_center: 750,
-      three_bed: 1050,
-    },
-    utilities: {
-      baseMonthly1Person: 105,
-      baseMonthlyFamily: 190,
-      fiberInternet: 9,
-      mobileSim5G: 6,
-    },
-    food: {
-      basicGroceryMonthly1Person: 220,
-      diningOutMealBudget: 9.5,
-      diningOutMealMidRange: 22,
-      coffeeCappuccino: 3.2,
-    },
-    transport: {
-      monthlyPassGeneral: 38,
-      monthlyPassStudent: 3.8,
-      taxiPerKm: 0.95,
-      avgBoltUberTrip: 5.5,
-    },
-    lifestyle: {
-      gymMonthly: 52,
-      cinemaTicket: 7.5,
-      leisureMonthlyEstimate: 140,
-    },
-  },
   'bucharest': {
     id: 'bucharest',
     name: { fa: 'بخارست', en: 'Bucharest' },
@@ -103,37 +86,102 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
     costIndexRank: 2,
     costIndexVsBucharest: 100,
     rent: {
-      dorm: 120,
-      shared: 220,
-      one_bed_center: 520,
-      one_bed_suburb: 380,
-      two_bed_center: 700,
-      three_bed: 980,
+      // Source: evz.ro / UPB CPV international student dorms (~550 RON/mo; university range 350-1230 RON)
+      dorm: 550.00,
+      isDormEstimated: false,
+      // Derived: 0.55 * 2184.18 = 1201.30 RON
+      shared: 1201.30,
+      one_bed_center: 3227.85,
+      one_bed_suburb: 2184.18,
+      // Derived: 3227.85 + 0.65 * (5177.81 - 3227.85) = 4495.32 RON
+      two_bed_center: 4495.32,
+      three_bed: 5177.81,
+      three_bed_suburb: 3440.96,
     },
     utilities: {
-      baseMonthly1Person: 100,
-      baseMonthlyFamily: 180,
-      fiberInternet: 9,
-      mobileSim5G: 6,
+      // Derived: 0.6 * 908.79 = 545.27 RON
+      baseMonthly1Person: 545.27,
+      baseMonthlyFamily: 908.79,
+      fiberInternet: 45.46,
+      mobileSim5G: 38.55,
     },
     food: {
-      basicGroceryMonthly1Person: 210,
-      diningOutMealBudget: 9,
-      diningOutMealMidRange: 20,
-      coffeeCappuccino: 3,
+      // Direct basket sum from Numbeo items: eggs, cheese, chicken, apples, potatoes, onion, lettuce, water, beer, milk, bread = 438.04 RON
+      basicGroceryMonthly1Person: 438.04,
+      isGroceryEstimated: false,
+      diningOutMealBudget: 65.00,
+      diningOutMealMidRange: 138.75, // 277.50 / 2
+      diningOutMealMidRange2P: 277.50,
+      coffeeCappuccino: 16.38,
+      milk1L: 8.19,
+      bread500g: 5.87,
     },
     transport: {
-      monthlyPassGeneral: 28, // STB + Metrorex integrated
-      monthlyPassStudent: 2.8, // 90% student reduction
-      taxiPerKm: 0.85,
-      avgBoltUberTrip: 6.0,
+      monthlyPassGeneral: 100.00,
+      monthlyPassStudent: 100.00, // Upfront ticket (90% university reimbursement claimable post-purchase)
+      taxiStart: 3.00,
+      taxiPerKm: 3.00,
+      avgBoltUberTrip: 25.00,
     },
     lifestyle: {
-      gymMonthly: 48,
-      cinemaTicket: 7.5,
-      leisureMonthlyEstimate: 150,
+      gymMonthly: 245.19,
+      cinemaTicket: 40.00,
+      leisureMonthlyEstimate: 600.00,
     },
   },
+
+  'cluj-napoca': {
+    id: 'cluj-napoca',
+    name: { fa: 'کلوژ-نپوکا', en: 'Cluj-Napoca' },
+    romanianName: 'Cluj-Napoca',
+    region: { fa: 'ترانسیلوانیا', en: 'Transylvania' },
+    costIndexRank: 1,
+    costIndexVsBucharest: 105,
+    rent: {
+      // Estimated: Scaled from 3-city average (556.67 RON) with Cluj rent ratio (2999.10 / 2986.46) = 560 RON
+      dorm: 560.00,
+      isDormEstimated: true,
+      // Derived: 0.55 * 2476.64 = 1362.15 RON
+      shared: 1362.15,
+      one_bed_center: 2999.10,
+      one_bed_suburb: 2476.64,
+      // Derived: 2999.10 + 0.65 * (5436.35 - 2999.10) = 4583.31 RON
+      two_bed_center: 4583.31,
+      three_bed: 5436.35,
+      three_bed_suburb: 3889.06,
+    },
+    utilities: {
+      // Derived: 0.6 * 757.30 = 454.38 RON
+      baseMonthly1Person: 454.38,
+      baseMonthlyFamily: 757.30,
+      fiberInternet: 46.79,
+      mobileSim5G: 40.62,
+    },
+    food: {
+      // Scaled by cheap meal ratio vs Bucharest: (60.00 / 65.00) * 438.04 = 404.34 RON
+      basicGroceryMonthly1Person: 404.34,
+      isGroceryEstimated: true,
+      diningOutMealBudget: 60.00,
+      diningOutMealMidRange: 128.19, // 256.37 / 2
+      diningOutMealMidRange2P: 256.37,
+      coffeeCappuccino: 17.44,
+      milk1L: 7.78,
+      bread500g: 6.38,
+    },
+    transport: {
+      monthlyPassGeneral: 146.00,
+      monthlyPassStudent: 146.00,
+      taxiStart: 4.28,
+      taxiPerKm: 4.50,
+      avgBoltUberTrip: 23.00,
+    },
+    lifestyle: {
+      gymMonthly: 221.54,
+      cinemaTicket: 45.00,
+      leisureMonthlyEstimate: 580.00,
+    },
+  },
+
   'brasov': {
     id: 'brasov',
     name: { fa: 'براشوف', en: 'Brașov' },
@@ -142,37 +190,50 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
     costIndexRank: 3,
     costIndexVsBucharest: 92,
     rent: {
-      dorm: 110,
-      shared: 200,
-      one_bed_center: 450,
-      one_bed_suburb: 350,
-      two_bed_center: 620,
-      three_bed: 850,
+      // Source: unitbv.ro & evz.ro (Transilvania Univ Colina/Memorandumului dorms: 725-735 RON)
+      dorm: 730.00,
+      isDormEstimated: false,
+      // Derived: 0.55 * 2211.79 = 1216.48 RON
+      shared: 1216.48,
+      one_bed_center: 3231.41,
+      one_bed_suburb: 2211.79,
+      // Derived: 3231.41 + 0.65 * (6101.91 - 3231.41) = 5097.24 RON
+      two_bed_center: 5097.24,
+      three_bed: 6101.91,
+      three_bed_suburb: 4936.36,
     },
     utilities: {
-      baseMonthly1Person: 95,
-      baseMonthlyFamily: 175,
-      fiberInternet: 8.5,
-      mobileSim5G: 6,
+      // Derived: 0.6 * 852.03 = 511.22 RON
+      baseMonthly1Person: 511.22,
+      baseMonthlyFamily: 852.03,
+      fiberInternet: 43.44,
+      mobileSim5G: 37.08,
     },
     food: {
-      basicGroceryMonthly1Person: 195,
-      diningOutMealBudget: 8.5,
-      diningOutMealMidRange: 18.5,
-      coffeeCappuccino: 2.8,
+      // Scaled by cheap meal ratio vs Bucharest: (55.00 / 65.00) * 438.04 = 370.65 RON
+      basicGroceryMonthly1Person: 370.65,
+      isGroceryEstimated: true,
+      diningOutMealBudget: 55.00,
+      diningOutMealMidRange: 125.00, // 250.00 / 2
+      diningOutMealMidRange2P: 250.00,
+      coffeeCappuccino: 17.32,
+      milk1L: 7.34,
+      bread500g: 6.05,
     },
     transport: {
-      monthlyPassGeneral: 25,
-      monthlyPassStudent: 2.5,
-      taxiPerKm: 0.8,
-      avgBoltUberTrip: 4.5,
+      monthlyPassGeneral: 110.00,
+      monthlyPassStudent: 110.00, // Note: RATBV Brașov municipal council subsidizes 100% locally for active registered students
+      taxiStart: 3.10,
+      taxiPerKm: 3.10,
+      avgBoltUberTrip: 20.00,
     },
     lifestyle: {
-      gymMonthly: 42,
-      cinemaTicket: 6.5,
-      leisureMonthlyEstimate: 120,
+      gymMonthly: 274.45,
+      cinemaTicket: 45.00,
+      leisureMonthlyEstimate: 500.00,
     },
   },
+
   'timisoara': {
     id: 'timisoara',
     name: { fa: 'تیمیشوارا', en: 'Timișoara' },
@@ -181,37 +242,50 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
     costIndexRank: 4,
     costIndexVsBucharest: 89,
     rent: {
-      dorm: 100,
-      shared: 190,
-      one_bed_center: 430,
-      one_bed_suburb: 330,
-      two_bed_center: 590,
-      three_bed: 800,
+      // Estimated: Scaled with rent ratio (2548.76 / 2986.46) * 556.67 = 475 RON
+      dorm: 475.00,
+      isDormEstimated: true,
+      // Derived: 0.55 * 1698.93 = 934.41 RON
+      shared: 934.41,
+      one_bed_center: 2548.76,
+      one_bed_suburb: 1698.93,
+      // Derived: 2548.76 + 0.65 * (3889.07 - 2548.76) = 3419.96 RON
+      two_bed_center: 3419.96,
+      three_bed: 3889.07,
+      three_bed_suburb: 2877.49,
     },
     utilities: {
-      baseMonthly1Person: 92,
-      baseMonthlyFamily: 170,
-      fiberInternet: 8.5,
-      mobileSim5G: 6,
+      // Derived: 0.6 * 807.05 = 484.23 RON
+      baseMonthly1Person: 484.23,
+      baseMonthlyFamily: 807.05,
+      fiberInternet: 40.67,
+      mobileSim5G: 31.42,
     },
     food: {
-      basicGroceryMonthly1Person: 190,
-      diningOutMealBudget: 8.0,
-      diningOutMealMidRange: 18.0,
-      coffeeCappuccino: 2.7,
+      // Scaled: (50.00 / 65.00) * 438.04 = 336.95 RON
+      basicGroceryMonthly1Person: 336.95,
+      isGroceryEstimated: true,
+      diningOutMealBudget: 50.00,
+      diningOutMealMidRange: 110.00, // 220.00 / 2
+      diningOutMealMidRange2P: 220.00,
+      coffeeCappuccino: 14.23,
+      milk1L: 6.60,
+      bread500g: 5.30,
     },
     transport: {
-      monthlyPassGeneral: 26,
-      monthlyPassStudent: 2.6,
-      taxiPerKm: 0.8,
-      avgBoltUberTrip: 4.5,
+      monthlyPassGeneral: 160.00,
+      monthlyPassStudent: 160.00,
+      taxiStart: 3.99,
+      taxiPerKm: 4.00,
+      avgBoltUberTrip: 20.00,
     },
     lifestyle: {
-      gymMonthly: 40,
-      cinemaTicket: 6.5,
-      leisureMonthlyEstimate: 115,
+      gymMonthly: 186.27,
+      cinemaTicket: 40.00,
+      leisureMonthlyEstimate: 480.00,
     },
   },
+
   'iasi': {
     id: 'iasi',
     name: { fa: 'یاش', en: 'Iași' },
@@ -220,37 +294,50 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
     costIndexRank: 5,
     costIndexVsBucharest: 84,
     rent: {
-      dorm: 90,
-      shared: 170,
-      one_bed_center: 400,
-      one_bed_suburb: 300,
-      two_bed_center: 540,
-      three_bed: 750,
+      // Source: campus.tuiasi.ro & evz.ro (Tudor Vladimirescu campus: 385-400 RON)
+      dorm: 390.00,
+      isDormEstimated: false,
+      // Derived: 0.55 * 1991.14 = 1095.13 RON
+      shared: 1095.13,
+      one_bed_center: 2500.11,
+      one_bed_suburb: 1991.14,
+      // Derived: 2500.11 + 0.65 * (4152.64 - 2500.11) = 3574.25 RON
+      two_bed_center: 3574.25,
+      three_bed: 4152.64,
+      three_bed_suburb: 3097.58,
     },
     utilities: {
-      baseMonthly1Person: 88,
-      baseMonthlyFamily: 160,
-      fiberInternet: 8.5,
-      mobileSim5G: 6,
+      // Derived: 0.6 * 837.75 = 502.65 RON
+      baseMonthly1Person: 502.65,
+      baseMonthlyFamily: 837.75,
+      fiberInternet: 39.38,
+      mobileSim5G: 33.30,
     },
     food: {
-      basicGroceryMonthly1Person: 180,
-      diningOutMealBudget: 7.5,
-      diningOutMealMidRange: 16.5,
-      coffeeCappuccino: 2.5,
+      // Scaled: (50.00 / 65.00) * 438.04 = 336.95 RON
+      basicGroceryMonthly1Person: 336.95,
+      isGroceryEstimated: true,
+      diningOutMealBudget: 50.00,
+      diningOutMealMidRange: 100.00, // 200.00 / 2
+      diningOutMealMidRange2P: 200.00,
+      coffeeCappuccino: 13.62,
+      milk1L: 7.45,
+      bread500g: 5.72,
     },
     transport: {
-      monthlyPassGeneral: 24,
-      monthlyPassStudent: 2.4,
-      taxiPerKm: 0.75,
-      avgBoltUberTrip: 4.0,
+      monthlyPassGeneral: 130.00,
+      monthlyPassStudent: 130.00,
+      taxiStart: 4.00,
+      taxiPerKm: 4.00,
+      avgBoltUberTrip: 18.00,
     },
     lifestyle: {
-      gymMonthly: 38,
-      cinemaTicket: 6.0,
-      leisureMonthlyEstimate: 105,
+      gymMonthly: 208.75,
+      cinemaTicket: 40.00,
+      leisureMonthlyEstimate: 450.00,
     },
   },
+
   'constanta': {
     id: 'constanta',
     name: { fa: 'کونستانتسا', en: 'Constanța' },
@@ -259,37 +346,50 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
     costIndexRank: 6,
     costIndexVsBucharest: 86,
     rent: {
-      dorm: 95,
-      shared: 180,
-      one_bed_center: 420,
-      one_bed_suburb: 320,
-      two_bed_center: 570,
-      three_bed: 790,
+      // Estimated: Scaled with rent ratio (2844.77 / 2986.46) * 556.67 = 530 RON
+      dorm: 530.00,
+      isDormEstimated: true,
+      // Derived: 0.55 * 2252.96 = 1239.13 RON
+      shared: 1239.13,
+      one_bed_center: 2844.77,
+      one_bed_suburb: 2252.96,
+      // Derived: 2844.77 + 0.65 * (4989.25 - 2844.77) = 4238.68 RON
+      two_bed_center: 4238.68,
+      three_bed: 4989.25,
+      three_bed_suburb: 3495.51,
     },
     utilities: {
-      baseMonthly1Person: 90,
-      baseMonthlyFamily: 165,
-      fiberInternet: 8.5,
-      mobileSim5G: 6,
+      // Derived: 0.6 * 795.63 = 477.38 RON
+      baseMonthly1Person: 477.38,
+      baseMonthlyFamily: 795.63,
+      fiberInternet: 38.50,
+      mobileSim5G: 36.11,
     },
     food: {
-      basicGroceryMonthly1Person: 185,
-      diningOutMealBudget: 8.0,
-      diningOutMealMidRange: 17.5,
-      coffeeCappuccino: 2.6,
+      // Scaled: (60.00 / 65.00) * 438.04 = 404.34 RON
+      basicGroceryMonthly1Person: 404.34,
+      isGroceryEstimated: true,
+      diningOutMealBudget: 60.00,
+      diningOutMealMidRange: 150.00, // 300.00 / 2
+      diningOutMealMidRange2P: 300.00,
+      coffeeCappuccino: 15.38,
+      milk1L: 7.65,
+      bread500g: 5.25,
     },
     transport: {
-      monthlyPassGeneral: 25,
-      monthlyPassStudent: 2.5,
-      taxiPerKm: 0.8,
-      avgBoltUberTrip: 4.2,
+      monthlyPassGeneral: 80.00,
+      monthlyPassStudent: 80.00,
+      taxiStart: 4.00,
+      taxiPerKm: 3.69,
+      avgBoltUberTrip: 20.00,
     },
     lifestyle: {
-      gymMonthly: 39,
-      cinemaTicket: 6.5,
-      leisureMonthlyEstimate: 110,
+      gymMonthly: 263.00,
+      cinemaTicket: 32.50,
+      leisureMonthlyEstimate: 460.00,
     },
   },
+
   'sibiu': {
     id: 'sibiu',
     name: { fa: 'سیبیو', en: 'Sibiu' },
@@ -298,37 +398,50 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
     costIndexRank: 7,
     costIndexVsBucharest: 87,
     rent: {
-      dorm: 95,
-      shared: 180,
-      one_bed_center: 410,
-      one_bed_suburb: 310,
-      two_bed_center: 560,
-      three_bed: 780,
+      // Source: evz.ro / ULBS student housing (range 300-800 RON, midpoint 550 RON)
+      dorm: 550.00,
+      isDormEstimated: false,
+      // Derived: 0.55 * 1957.20 = 1076.46 RON
+      shared: 1076.46,
+      one_bed_center: 2112.21,
+      one_bed_suburb: 1957.20,
+      // Derived: 2112.21 + 0.65 * (3933.59 - 2112.21) = 3296.11 RON
+      two_bed_center: 3296.11,
+      three_bed: 3933.59,
+      three_bed_suburb: 2812.39,
     },
     utilities: {
-      baseMonthly1Person: 90,
-      baseMonthlyFamily: 165,
-      fiberInternet: 8.5,
-      mobileSim5G: 6,
+      // Derived: 0.6 * 546.52 = 327.91 RON
+      baseMonthly1Person: 327.91,
+      baseMonthlyFamily: 546.52,
+      fiberInternet: 58.20,
+      mobileSim5G: 43.50,
     },
     food: {
-      basicGroceryMonthly1Person: 185,
-      diningOutMealBudget: 8.0,
-      diningOutMealMidRange: 17.0,
-      coffeeCappuccino: 2.6,
+      // Scaled: (40.00 / 65.00) * 438.04 = 269.56 RON
+      basicGroceryMonthly1Person: 269.56,
+      isGroceryEstimated: true,
+      diningOutMealBudget: 40.00,
+      diningOutMealMidRange: 100.00, // 200.00 / 2
+      diningOutMealMidRange2P: 200.00,
+      coffeeCappuccino: 15.11,
+      milk1L: 6.69,
+      bread500g: 4.84,
     },
     transport: {
-      monthlyPassGeneral: 24,
-      monthlyPassStudent: 2.4,
-      taxiPerKm: 0.75,
-      avgBoltUberTrip: 4.0,
+      monthlyPassGeneral: 83.00,
+      monthlyPassStudent: 83.00,
+      taxiStart: 4.50,
+      taxiPerKm: 4.00,
+      avgBoltUberTrip: 18.00,
     },
     lifestyle: {
-      gymMonthly: 38,
-      cinemaTicket: 6.0,
-      leisureMonthlyEstimate: 110,
+      gymMonthly: 165.43,
+      cinemaTicket: 32.50,
+      leisureMonthlyEstimate: 450.00,
     },
   },
+
   'craiova': {
     id: 'craiova',
     name: { fa: 'کرایووا', en: 'Craiova' },
@@ -337,35 +450,47 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
     costIndexRank: 8,
     costIndexVsBucharest: 80,
     rent: {
-      dorm: 85,
-      shared: 160,
-      one_bed_center: 370,
-      one_bed_suburb: 270,
-      two_bed_center: 500,
-      three_bed: 700,
+      // Estimated: Scaled with rent ratio (2406.46 / 2986.46) * 556.67 = 450 RON
+      dorm: 450.00,
+      isDormEstimated: true,
+      // Derived: 0.55 * 1842.54 = 1013.40 RON
+      shared: 1013.40,
+      one_bed_center: 2406.46,
+      one_bed_suburb: 1842.54,
+      // Derived: 2406.46 + 0.65 * (4186.61 - 2406.46) = 3563.56 RON
+      two_bed_center: 3563.56,
+      three_bed: 4186.61,
+      three_bed_suburb: 2867.00,
     },
     utilities: {
-      baseMonthly1Person: 85,
-      baseMonthlyFamily: 155,
-      fiberInternet: 8.5,
-      mobileSim5G: 6,
+      // Derived: 0.6 * 928.00 = 556.80 RON
+      baseMonthly1Person: 556.80,
+      baseMonthlyFamily: 928.00,
+      fiberInternet: 52.50,
+      mobileSim5G: 47.80,
     },
     food: {
-      basicGroceryMonthly1Person: 175,
-      diningOutMealBudget: 7.0,
-      diningOutMealMidRange: 15.5,
-      coffeeCappuccino: 2.3,
+      // Scaled: (35.00 / 65.00) * 438.04 = 235.87 RON
+      basicGroceryMonthly1Person: 235.87,
+      isGroceryEstimated: true,
+      diningOutMealBudget: 35.00,
+      diningOutMealMidRange: 85.00, // 170.00 / 2
+      diningOutMealMidRange2P: 170.00,
+      coffeeCappuccino: 12.75,
+      milk1L: 6.20,
+      bread500g: 3.63,
     },
     transport: {
-      monthlyPassGeneral: 22,
-      monthlyPassStudent: 2.2,
-      taxiPerKm: 0.7,
-      avgBoltUberTrip: 3.8,
+      monthlyPassGeneral: 120.00,
+      monthlyPassStudent: 120.00,
+      taxiStart: 3.00,
+      taxiPerKm: 3.00,
+      avgBoltUberTrip: 16.00,
     },
     lifestyle: {
-      gymMonthly: 35,
-      cinemaTicket: 5.5,
-      leisureMonthlyEstimate: 95,
+      gymMonthly: 185.00,
+      cinemaTicket: 35.00,
+      leisureMonthlyEstimate: 400.00,
     },
   },
 };
@@ -375,9 +500,9 @@ export interface ExpenseCalculationInput {
   household: HouseholdType;
   accommodation: AccommodationType;
   lifestyle: LifestyleLevel;
-  eatingOutWeeklyCount: number; // e.g. 0 to 14
+  eatingOutWeeklyCount: number; // 0 to 14
   usePublicTransit: boolean;
-  rideShareTripsMonthly: number; // e.g. 0 to 30
+  rideShareTripsMonthly: number; // 0 to 30
   includeGym: boolean;
   currency: Currency;
 }
@@ -406,69 +531,72 @@ export interface ExpenseBreakdown {
 
 export function calculateMonthlyCost(input: ExpenseCalculationInput): ExpenseBreakdown {
   const city = ROMANIAN_CITIES_COST[input.cityId] || ROMANIAN_CITIES_COST['bucharest'];
-  const multiplier = input.currency === 'RON' ? EUR_TO_RON_RATE : 1;
+  
+  // Convert native RON base amounts to selected currency
+  const toSelectedCurrency = (amountRon: number) => {
+    return input.currency === 'EUR' ? amountRon / EUR_TO_RON_RATE : amountRon;
+  };
 
-  // 1. Rent calculation (Base in EUR)
-  let rentEur = city.rent[input.accommodation];
+  // 1. Rent calculation (Native RON)
+  const rentRon = city.rent[input.accommodation];
 
-  // 2. Utilities calculation
-  let utilitiesEur = 0;
+  // 2. Utilities calculation (Native RON)
+  let utilitiesRon = 0;
   if (input.accommodation === 'dorm') {
-    // Dorms usually include basic utilities; add mobile SIM
-    utilitiesEur = city.utilities.mobileSim5G + 15;
+    // Dormitories in Romania include heating & water; add mobile SIM & small personal electricity/misc allowance
+    utilitiesRon = city.utilities.mobileSim5G + 40;
   } else if (input.household === 'family' || input.accommodation === 'two_bed_center' || input.accommodation === 'three_bed') {
-    utilitiesEur = city.utilities.baseMonthlyFamily + city.utilities.fiberInternet + (city.utilities.mobileSim5G * (input.household === 'family' ? 2.5 : 2));
+    utilitiesRon = city.utilities.baseMonthlyFamily + city.utilities.fiberInternet + (city.utilities.mobileSim5G * (input.household === 'family' ? 2.5 : 2));
   } else if (input.household === 'couple') {
-    utilitiesEur = (city.utilities.baseMonthly1Person * 1.3) + city.utilities.fiberInternet + (city.utilities.mobileSim5G * 2);
+    utilitiesRon = (city.utilities.baseMonthly1Person * 1.3) + city.utilities.fiberInternet + (city.utilities.mobileSim5G * 2);
   } else {
     // Single / Shared
-    utilitiesEur = (input.accommodation === 'shared' ? city.utilities.baseMonthly1Person * 0.6 : city.utilities.baseMonthly1Person) +
+    utilitiesRon = (input.accommodation === 'shared' ? city.utilities.baseMonthly1Person * 0.6 : city.utilities.baseMonthly1Person) +
       city.utilities.fiberInternet + city.utilities.mobileSim5G;
   }
 
-  // 3. Food & Groceries calculation
+  // 3. Food & Groceries calculation (Native RON)
   let personCount = 1;
   if (input.household === 'couple') personCount = 2;
-  if (input.household === 'family') personCount = 3.2; // 2 adults + 1-2 kids
+  if (input.household === 'family') personCount = 2.6; // Scale factor: 2.6x single basket for family of 3-4
 
-  // Base groceries
   let lifestyleFoodMultiplier = 1.0;
   if (input.lifestyle === 'frugal') lifestyleFoodMultiplier = 0.85;
   if (input.lifestyle === 'comfort') lifestyleFoodMultiplier = 1.25;
 
-  const baseGroceriesEur = city.food.basicGroceryMonthly1Person * personCount * lifestyleFoodMultiplier;
+  const baseGroceriesRon = city.food.basicGroceryMonthly1Person * personCount * lifestyleFoodMultiplier;
   
-  // Dining out: cost per meal * weekly meals * 4.33 weeks
-  const mealCostEur = input.lifestyle === 'comfort' ? city.food.diningOutMealMidRange : city.food.diningOutMealBudget;
-  const diningOutMonthlyEur = input.eatingOutWeeklyCount * 4.33 * mealCostEur * (input.household === 'couple' || input.household === 'family' ? Math.min(2, personCount) : 1);
-  const foodEur = baseGroceriesEur + diningOutMonthlyEur;
+  // Dining out: cost per meal * weekly meals * 4.33 weeks (per month)
+  const mealCostRon = input.lifestyle === 'comfort' ? city.food.diningOutMealMidRange : city.food.diningOutMealBudget;
+  const diningOutMonthlyRon = input.eatingOutWeeklyCount * 4.33 * mealCostRon * (input.household === 'couple' || input.household === 'family' ? Math.min(2, Math.round(personCount)) : 1);
+  const foodRon = baseGroceriesRon + diningOutMonthlyRon;
 
-  // 4. Transportation calculation
-  let transportEur = 0;
-  const isStudent = input.household === 'student';
+  // 4. Transportation calculation (Native RON)
+  let transportRon = 0;
   if (input.usePublicTransit) {
-    const transitPass = isStudent ? city.transport.monthlyPassStudent : city.transport.monthlyPassGeneral;
-    transportEur += transitPass * (input.household === 'couple' ? 2 : input.household === 'family' ? 2.5 : 1);
+    // Display full upfront pass cost; reimbursement details noted in UI as per Romanian student transit policy
+    const transitPass = city.transport.monthlyPassGeneral;
+    transportRon += transitPass * (input.household === 'couple' ? 2 : input.household === 'family' ? 2.5 : 1);
   }
-  // Ride share trips
-  transportEur += input.rideShareTripsMonthly * city.transport.avgBoltUberTrip;
+  // Ride-sharing trips
+  transportRon += input.rideShareTripsMonthly * city.transport.avgBoltUberTrip;
 
-  // 5. Lifestyle & Leisure calculation
-  let lifestyleEur = 0;
+  // 5. Lifestyle & Leisure calculation (Native RON)
+  let lifestyleRon = 0;
   if (input.includeGym) {
-    lifestyleEur += city.lifestyle.gymMonthly * (input.household === 'couple' ? 2 : 1);
+    lifestyleRon += city.lifestyle.gymMonthly * (input.household === 'couple' ? 2 : 1);
   }
   let baseLeisure = city.lifestyle.leisureMonthlyEstimate * (personCount > 1 ? personCount * 0.75 : 1);
   if (input.lifestyle === 'frugal') baseLeisure *= 0.6;
   if (input.lifestyle === 'comfort') baseLeisure *= 1.5;
-  lifestyleEur += baseLeisure;
+  lifestyleRon += baseLeisure;
 
-  // Totals in requested currency
-  const rent = Math.round(rentEur * multiplier);
-  const utilities = Math.round(utilitiesEur * multiplier);
-  const food = Math.round(foodEur * multiplier);
-  const transport = Math.round(transportEur * multiplier);
-  const lifestyle = Math.round(lifestyleEur * multiplier);
+  // Convert to output currency
+  const rent = Math.round(toSelectedCurrency(rentRon));
+  const utilities = Math.round(toSelectedCurrency(utilitiesRon));
+  const food = Math.round(toSelectedCurrency(foodRon));
+  const transport = Math.round(toSelectedCurrency(transportRon));
+  const lifestyle = Math.round(toSelectedCurrency(lifestyleRon));
 
   const totalMonthly = rent + utilities + food + transport + lifestyle;
   const totalAnnual = totalMonthly * 12;
@@ -491,29 +619,29 @@ export function calculateMonthlyCost(input: ExpenseCalculationInput): ExpenseBre
     {
       categoryKey: 'utilities',
       items: [
-        { labelKey: 'utilities_basic', amount: Math.round(utilities * 0.75) },
-        { labelKey: 'utilities_internet_mobile', amount: Math.round(utilities * 0.25) },
+        { labelKey: 'utilities_basic', amount: Math.round(toSelectedCurrency(utilitiesRon * 0.75)) },
+        { labelKey: 'utilities_internet_mobile', amount: Math.round(toSelectedCurrency(utilitiesRon * 0.25)) },
       ],
     },
     {
       categoryKey: 'food',
       items: [
-        { labelKey: 'food_groceries', amount: Math.round(baseGroceriesEur * multiplier) },
-        { labelKey: 'food_dining_out', amount: Math.round(diningOutMonthlyEur * multiplier) },
+        { labelKey: 'food_groceries', amount: Math.round(toSelectedCurrency(baseGroceriesRon)) },
+        { labelKey: 'food_dining_out', amount: Math.round(toSelectedCurrency(diningOutMonthlyRon)) },
       ],
     },
     {
       categoryKey: 'transport',
       items: [
-        { labelKey: 'transport_public', amount: Math.round((input.usePublicTransit ? (isStudent ? city.transport.monthlyPassStudent : city.transport.monthlyPassGeneral) : 0) * multiplier) },
-        { labelKey: 'transport_rideshare', amount: Math.round(input.rideShareTripsMonthly * city.transport.avgBoltUberTrip * multiplier) },
+        { labelKey: 'transport_public', amount: Math.round(toSelectedCurrency(input.usePublicTransit ? (city.transport.monthlyPassGeneral * (input.household === 'couple' ? 2 : input.household === 'family' ? 2.5 : 1)) : 0)) },
+        { labelKey: 'transport_rideshare', amount: Math.round(toSelectedCurrency(input.rideShareTripsMonthly * city.transport.avgBoltUberTrip)) },
       ],
     },
     {
       categoryKey: 'lifestyle',
       items: [
-        { labelKey: 'lifestyle_gym', amount: Math.round((input.includeGym ? city.lifestyle.gymMonthly : 0) * multiplier) },
-        { labelKey: 'lifestyle_leisure', amount: Math.round(baseLeisure * multiplier) },
+        { labelKey: 'lifestyle_gym', amount: Math.round(toSelectedCurrency(input.includeGym ? (city.lifestyle.gymMonthly * (input.household === 'couple' ? 2 : 1)) : 0)) },
+        { labelKey: 'lifestyle_leisure', amount: Math.round(toSelectedCurrency(baseLeisure)) },
       ],
     },
   ];
