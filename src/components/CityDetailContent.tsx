@@ -221,7 +221,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             }
           ])}
 
-          <RelatedGuidesCard items={['needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
+          <RelatedGuidesCard items={['needs/cost-of-living', 'needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="romania/cities/bucharest" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -393,7 +393,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             }
           ])}
 
-          <RelatedGuidesCard items={['needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
+          <RelatedGuidesCard items={['needs/cost-of-living', 'needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="romania/cities/cluj-napoca" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -567,7 +567,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             }
           ])}
 
-          <RelatedGuidesCard items={['needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
+          <RelatedGuidesCard items={['needs/cost-of-living', 'needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="romania/cities/timisoara" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -739,7 +739,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             }
           ])}
 
-          <RelatedGuidesCard items={['needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
+          <RelatedGuidesCard items={['needs/cost-of-living', 'needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="romania/cities/iasi" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -911,7 +911,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             }
           ])}
 
-          <RelatedGuidesCard items={['needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
+          <RelatedGuidesCard items={['needs/cost-of-living', 'needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="romania/cities/brasov" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -1084,7 +1084,7 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             }
           ])}
 
-          <RelatedGuidesCard items={['needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
+          <RelatedGuidesCard items={['needs/cost-of-living', 'needs/housing', 'study/requirements']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="romania/cities/constanta" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );

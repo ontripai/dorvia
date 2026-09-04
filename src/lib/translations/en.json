@@ -216,6 +216,89 @@
     "legal/disclaimer": {
       "title": "Legal Disclaimer | DORVIA EUROP",
       "description": "Legal disclaimer from DORVIA EUROP addressing the absence of guaranteed immigration outcomes and our commitment to transparency."
+    },
+    "needs/cost-of-living": {
+      "title": "Romania Cost of Living Calculator; Bucharest, Cluj, Timisoara & More | DORVIA EUROP",
+      "description": "Interactive Cost of Living Calculator in Romania. Estimate monthly living expenses including rent, groceries, utilities, transit, and leisure tailored to your lifestyle.",
+      "h1": "Interactive Cost of Living Calculator in Romania"
+    }
+  },
+  "costOfLiving": {
+    "badge": "Cost of Living Calculator",
+    "title": "Interactive Cost of Living Calculator in Romania",
+    "subtitle": "Accurately estimate monthly expenses including rent, groceries, utilities, transit, and leisure tailored to your destination city and lifestyle.",
+    "selectCity": "Select City",
+    "cityComparison": "Compare with other Romanian cities",
+    "compareCity": "Second City to Compare",
+    "householdProfile": "Household Profile",
+    "profiles": {
+      "student": "Student (Solo / Dormitory)",
+      "single": "Single Working Professional",
+      "couple": "Couple (2 adults)",
+      "family": "Family (3-4 persons)"
+    },
+    "accommodation": "Accommodation Type",
+    "accommodations": {
+      "dorm": "Student Dormitory / Campus Housing",
+      "shared": "Private Room in Shared Apartment",
+      "one_bed_center": "1-Bedroom Apartment (City Center)",
+      "one_bed_suburb": "1-Bedroom Apartment (Outside Center)",
+      "two_bed_center": "2-Bedroom Apartment",
+      "three_bed": "3-Bedroom Family Apartment"
+    },
+    "lifestyle": "Lifestyle & Spending Habits",
+    "lifestyles": {
+      "frugal": "Frugal / Budget Student",
+      "balanced": "Balanced & Moderate Comfort",
+      "comfort": "Comfortable / Premium Lifestyle"
+    },
+    "lifestyleDetails": {
+      "diningOut": "Dining out / restaurant meals per week",
+      "publicTransit": "Monthly public transit pass",
+      "rideShare": "Monthly ride-sharing trips (Bolt / Uber)",
+      "gymMembership": "Monthly fitness & gym membership"
+    },
+    "categories": {
+      "rent": "Housing & Rent",
+      "utilities": "Utilities, Energy & Internet",
+      "food": "Food, Groceries & Dining",
+      "transport": "Transportation & Commute",
+      "lifestyle": "Fitness, Leisure & Lifestyle"
+    },
+    "itemLabels": {
+      "accommodation_dorm": "Dormitory Monthly Rent",
+      "accommodation_shared": "Shared Room Rent",
+      "accommodation_one_bed_center": "1-Bed Center Rent",
+      "accommodation_one_bed_suburb": "1-Bed Outside Center Rent",
+      "accommodation_two_bed_center": "2-Bed Apartment Rent",
+      "accommodation_three_bed": "3-Bed Family Apartment Rent",
+      "utilities_basic": "Heating, Electricity, Water & Garbage",
+      "utilities_internet_mobile": "Fiber Internet (1Gbps) & 5G SIM",
+      "food_groceries": "Standard Grocery Market Basket",
+      "food_dining_out": "Cafes & Dining Out",
+      "transport_public": "Unlimited Monthly Public Transit Pass",
+      "transport_rideshare": "Bolt / Uber Ride-Sharing Trips",
+      "lifestyle_gym": "Gym & Fitness Club Membership",
+      "lifestyle_leisure": "Cinema, Cultural Events & Personal Care"
+    },
+    "results": {
+      "monthlyTotal": "Estimated Monthly Total",
+      "annualTotal": "Estimated Annual Total",
+      "perPerson": "Per person estimate",
+      "breakdownTitle": "Budget Allocation & Category Breakdown",
+      "detailedTable": "View Itemized Expense Breakdown",
+      "currencySwitch": "Display Currency:",
+      "costIndexVsBucharest": "Cost Index vs. Bucharest",
+      "rankInRomania": "Expense Ranking in Romania",
+      "disclaimer": "Figures are calculated based on crowdsourced Numbeo indices and local market averages in Romania (updated August 2026). Actual expenses will vary based on individual habits, seasonal utility changes, and exact location.",
+      "sourceNote": "Everyday price source: Numbeo (user-reported data, not official government statistics) — currency conversion: National Bank of Romania (BNR) — student dorm costs: official university websites and evz.ro — last reviewed: September 2026. Dorm figures for 4 cities and grocery baskets for 7 cities (other than Bucharest) are estimated/scaled, not directly sourced.",
+      "studentTransitNote": "Romanian law entitles university students to a 90% reimbursement of local transit pass costs via their university (except Brașov where passes are 100% free) — this calculator displays full upfront ticket costs rather than post-reimbursement net amounts.",
+      "estimatedTag": "Estimated"
+    },
+    "cta": {
+      "title": "Need Personalized Budgeting & Relocation Guidance?",
+      "desc": "Our DORVIA advisors analyze your budget and long-term goals to recommend the ideal Romanian city and settlement strategy.",
+      "button": "Book Consultation Session"
     }
   }
 }

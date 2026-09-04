@@ -182,6 +182,18 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     inSitemap: true,
     pageType: 'content'
   },
+  'needs/cost-of-living': {
+    canonical: '/needs/cost-of-living',
+    aliases: ['/cost-of-living'],
+    parentHub: '/needs',
+    titleFa: 'محاسبه‌گر هزینه زندگی',
+    titleEn: 'Cost of Living Calculator',
+    parentTitleFa: 'نیازمندی‌ها و استقرار',
+    parentTitleEn: 'Essentials & Settlement',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'content'
+  },
   'needs/first-days-checklist': {
     canonical: '/needs/first-days-checklist',
     aliases: [],
