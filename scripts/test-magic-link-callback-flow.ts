@@ -193,7 +193,143 @@ async function runTests() {
     process.exit(1);
   }
 
-  console.log('=== All 5 Callback & Session Flow Tests Passed Successfully! ===\n');
+  // -------------------------------------------------------------
+  // Test 6: Real token exchange for invited portal lead (dre-p58)
+  // -------------------------------------------------------------
+  console.log('6. Testing portal magic-link flow for invited lead (dre-p58)...');
+  const portalTestEmail = `portal.test.${Date.now()}@dorvia.com`;
+
+  // Create a verified & invited lead in `leads` table with user_id = null
+  const { data: createdLead, error: createLeadErr } = await supabaseAdmin
+    .from('leads')
+    .insert([
+      {
+        full_name: 'کاربر تستی پورتال (dre-p58)',
+        email: portalTestEmail,
+        phone: '+40727000111',
+        source: 'telegram_bot',
+        site_goal: 'study',
+        status: 'qualified',
+        verified_at: new Date().toISOString(),
+        invited_at: new Date().toISOString(),
+        raw_meta: { testFlow: 'dre-p58' },
+      },
+    ])
+    .select('*')
+    .single();
+
+  if (createLeadErr || !createdLead) {
+    console.error('❌ Failed to insert test lead for portal flow:', createLeadErr);
+    process.exit(1);
+  }
+  console.log('Created test lead record:', createdLead.id, createdLead.email);
+
+  // Generate magic link using supabaseAdmin.auth.admin
+  const portalLinkRes = await supabaseAdmin.auth.admin.generateLink({
+    type: 'magiclink',
+    email: portalTestEmail,
+    options: { redirectTo: 'https://dorvia.ro/fa/portal/callback' },
+  });
+
+  const portalActionLink = portalLinkRes.data?.properties?.action_link;
+  const portalAuthUserId = portalLinkRes.data?.user?.id;
+  if (!portalActionLink || !portalAuthUserId) {
+    console.error('❌ Failed to generate portal action link:', portalLinkRes.error);
+    process.exit(1);
+  }
+
+  // Follow verify endpoint to retrieve hash fragment
+  const portalVerifyRes = await fetch(portalActionLink, { method: 'GET', redirect: 'manual' });
+  const portalLocation = portalVerifyRes.headers.get('location') || '';
+  const portalHash = portalLocation.split('#')[1] || '';
+  const portalParams = new URLSearchParams(portalHash);
+  const portalAccessToken = portalParams.get('access_token');
+  const portalRefreshToken = portalParams.get('refresh_token');
+
+  if (!portalAccessToken) {
+    console.error('❌ Failed to extract access_token from portal magic link redirect.');
+    process.exit(1);
+  }
+
+  console.log('Extracted valid access_token from portal link fragment.');
+
+  // Call POST /api/auth/session with flow: 'portal'
+  const req6 = new Request('https://dorvia.ro/api/auth/session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      access_token: portalAccessToken,
+      refresh_token: portalRefreshToken,
+      flow: 'portal',
+      lang: 'fa',
+    }),
+  });
+
+  const res6 = await sessionHandler.POST(req6);
+  const data6 = await res6.json();
+  console.log('Status:', res6.status);
+  console.log('Body:', data6);
+
+  if (res6.status !== 200 || !data6.success || data6.redirectTo !== '/fa/portal/dashboard') {
+    console.error('❌ FAIL: Portal session establishment did not return success and /fa/portal/dashboard.');
+    process.exit(1);
+  }
+  console.log('✅ PASS: POST /api/auth/session returned success with redirectTo: /fa/portal/dashboard');
+
+  // Verify that leads.user_id is now populated with portalAuthUserId via direct DB query
+  const { data: verifyLead, error: verifyLeadErr } = await supabaseAdmin
+    .from('leads')
+    .select('id, email, user_id, invited_at')
+    .eq('id', createdLead.id)
+    .single();
+
+  if (verifyLeadErr || !verifyLead) {
+    console.error('❌ FAIL: Could not query lead after portal auth:', verifyLeadErr);
+    process.exit(1);
+  }
+
+  console.log('Queried lead from DB:', verifyLead);
+  if (verifyLead.user_id === portalAuthUserId) {
+    console.log(`✅ PASS: leads.user_id was correctly linked to auth.users ID (${portalAuthUserId})!\n`);
+  } else {
+    console.error(`❌ FAIL: leads.user_id is ${verifyLead.user_id}, expected ${portalAuthUserId}`);
+    process.exit(1);
+  }
+
+  // -------------------------------------------------------------
+  // Test 7: GET /api/portal/dashboard with authenticated user session
+  // -------------------------------------------------------------
+  console.log('7. Testing GET /api/portal/dashboard with authenticated user session...');
+  const portalDashboardHandler = await import('../src/app/api/portal/dashboard/route');
+
+  const cookiesList = res6.cookies?.getAll ? res6.cookies.getAll() : [];
+  const cookieHeader = cookiesList.map((c: any) => `${c.name}=${c.value}`).join('; ');
+
+  const req7 = new Request('https://dorvia.ro/api/portal/dashboard', {
+    method: 'GET',
+    headers: {
+      cookie: cookieHeader,
+    },
+  });
+
+  const res7 = await portalDashboardHandler.GET(req7);
+  const data7 = await res7.json();
+  console.log('Status:', res7.status);
+  console.log('Body summary:', { success: data7.success, leadId: data7.lead?.id, messagesCount: data7.messages?.length });
+
+  if (res7.status === 200 && data7.success && data7.lead?.id === createdLead.id) {
+    console.log('✅ PASS: GET /api/portal/dashboard returned authorized lead data using session cookies!\n');
+  } else {
+    console.error('❌ FAIL: GET /api/portal/dashboard did not return expected lead data.');
+    process.exit(1);
+  }
+
+  // Cleanup test user and lead
+  await supabaseAdmin.auth.admin.deleteUser(portalAuthUserId);
+  await supabaseAdmin.from('leads').delete().eq('id', createdLead.id);
+  console.log('Cleaned up test user and lead.\n');
+
+  console.log('=== All 7 Callback, Portal & Session Flow Tests Passed Successfully! ===\n');
 }
 
 runTests().catch((err) => {

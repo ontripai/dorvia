@@ -70,54 +70,52 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // 1. Initial Load: Check Auth & Fetch Lead + Messages via RLS
+  // 1. Initial Load: Authoritative Server API Check (uses secure session cookies)
   useEffect(() => {
     let isMounted = true;
 
     async function loadPortalData() {
-      if (!supabase) {
-        setLoading(false);
-        return;
+      try {
+        const res = await fetch('/api/portal/dashboard');
+
+        if (res.status === 401) {
+          router.replace(`/${currentLang}/portal/login?error=unauthorized`);
+          return;
+        }
+
+        const json = await res.json().catch(() => null);
+
+        if (res.status === 403) {
+          // User is authenticated but has no linked lead profile
+          if (isMounted) {
+            setLead(null);
+            setLoading(false);
+          }
+          return;
+        }
+
+        if (isMounted) {
+          if (json?.lead) {
+            setLead(json.lead as LeadProfile);
+            if (json.messages) {
+              setMessages(json.messages as LeadMessage[]);
+            }
+          } else {
+            setLead(null);
+          }
+          setLoading(false);
+        }
+
+        // Optional: Trigger client-side SDK hydration in background without blocking
+        if (supabase) {
+          await supabase.auth.getUser().catch(() => null);
+        }
+      } catch (err) {
+        console.error('Error loading portal dashboard:', err);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
-
-      const { data: { user }, error: authErr } = await supabase.auth.getUser();
-
-      if (authErr || !user) {
-        router.replace(`/${currentLang}/portal/login`);
-        return;
-      }
-
-      // Fetch own lead record via RLS policy `leads_select_own`
-      const { data: leadData, error: leadErr } = await supabase
-        .from('leads')
-        .select('*')
-        .eq('user_id', user.id)
-        .maybeSingle();
-
-      if (!isMounted) return;
-
-      if (leadErr || !leadData) {
-        // Not linked or not found
-        setLoading(false);
-        return;
-      }
-
-      setLead(leadData as LeadProfile);
-
-      // Fetch messages via RLS policy `lead_messages_select_own`
-      const { data: msgData, error: msgErr } = await supabase
-        .from('lead_messages')
-        .select('*')
-        .eq('lead_id', leadData.id)
-        .order('created_at', { ascending: true });
-
-      if (!isMounted) return;
-
-      if (!msgErr && msgData) {
-        setMessages(msgData as LeadMessage[]);
-      }
-
-      setLoading(false);
     }
 
     loadPortalData();
