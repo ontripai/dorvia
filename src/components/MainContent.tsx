@@ -252,6 +252,15 @@ export const MainContent: React.FC<MainContentProps> = ({
                     </Button>
                   </div>
 
+                  {/* Assessment Trust Note (clarifies time / document sensitivity / result speed) */}
+                  <div className="pt-1 flex flex-wrap items-center justify-center lg:justify-start gap-x-3 gap-y-1 text-[11px] sm:text-xs text-slate-300 font-semibold">
+                    <span className="inline-flex items-center gap-1">⏱ {currentLang === 'fa' ? 'حدود ۳ دقیقه' : 'About 3 minutes'}</span>
+                    <span className="text-slate-500" aria-hidden="true">•</span>
+                    <span className="inline-flex items-center gap-1">🔒 {currentLang === 'fa' ? 'بدون نیاز به مدارک حساس' : 'No sensitive documents required'}</span>
+                    <span className="text-slate-500" aria-hidden="true">•</span>
+                    <span className="inline-flex items-center gap-1">📋 {currentLang === 'fa' ? 'نتیجه اولیه فوری' : 'Instant initial result'}</span>
+                  </div>
+
                   {/* Tertiary Link */}
                   <div className="pt-2 flex items-center justify-center lg:justify-start">
                     <button

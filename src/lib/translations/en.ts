@@ -52,10 +52,10 @@ export const enTranslations = {
   hero: {
     badge: "Official European Union & Schengen Member",
     headline: "Your Reliable Pathway for Education, Career, Business & Life in Romania",
-    subheadline: "Transparent legal guidance and educational advisory tailored for global applicants exploring new European opportunities in Romania.",
+    subheadline: "We review your profile based on your goal, education, work history, budget, and family status, and show you which pathways are worth exploring.",
     ctaPrimary: "Evaluate My Case",
     ctaSecondary: "Book Consultation",
-    trustNote: "Fast Response | Free Case Assessment | Full Legal Transparency"
+    trustNote: "⏱ Takes about 3 minutes  |  🔒 No sensitive documents required  |  📋 Instant initial result"
   },
   pathways: {
     title: "Primary Entry & Residency Pathways in Romania",
@@ -174,6 +174,11 @@ export const enTranslations = {
     phone: "+40 727 348 009"
   },
   seoMetadata: {
+    "assessment": {
+      title: "Find Your Path to Romania | DORVIA PathFinder",
+      description: "Complete the free DORVIA PathFinder assessment in under 5 minutes and see which pathway — study, work, business, family, or relocation — is worth exploring for your profile.",
+      h1: "What is the right path to Romania for you?"
+    },
     "work/work-permit": {
       title: "Romania Work Permit (Aviz de Muncă) | DORVIA EUROP",
       description: "Complete guide to obtaining a work permit in Romania (Aviz de Muncă), requirements, required documents, and work visa steps.",
