@@ -1,4 +1,6 @@
-import { createClient } from '@supabase/supabase-js';
+import { createBrowserClient } from '@supabase/ssr';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { Database } from '@/types/supabase';
 import { LeadFormData } from '../types';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
@@ -6,9 +8,11 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 const isConfigured = supabaseUrl !== '' && supabaseAnonKey !== '';
 
-// Create client conditionally (fails gracefully if unconfigured)
-export const supabase = isConfigured 
-  ? createClient(supabaseUrl, supabaseAnonKey) 
+// Create client conditionally (uses cookie-based browser client in browser for auth session continuity)
+export const supabase: SupabaseClient<Database> | null = isConfigured 
+  ? (typeof window !== 'undefined'
+      ? createBrowserClient<Database>(supabaseUrl, supabaseAnonKey)
+      : createClient<Database>(supabaseUrl, supabaseAnonKey)) 
   : null;
 
 export interface CommentItem {
@@ -19,7 +23,7 @@ export interface CommentItem {
   rating?: number | null;
   status: 'pending' | 'approved' | 'rejected';
   created_at: string;
-  ip_hash?: string;
+  ip_hash?: string | null;
 }
 
 export async function submitLeadForm(formData: LeadFormData) {
@@ -35,9 +39,9 @@ export async function submitLeadForm(formData: LeadFormData) {
           full_name: formData.fullName,
           email: formData.email,
           phone: formData.phone,
-          main_goal: formData.mainGoal,
+          site_goal: formData.mainGoal,
           message: formData.message,
-          privacy_consent: formData.privacyConsent || (formData as any).privacyAcknowledgment,
+          consent_terms: formData.privacyConsent || (formData as any).privacyAcknowledgment || true,
           created_at: new Date().toISOString()
         }
       ]);

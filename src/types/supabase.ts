@@ -270,28 +270,25 @@ export type Database = {
         Row: {
           id: string;
           lead_id: string;
-          sender_role: 'lead' | 'admin' | 'system';
-          sender_admin_id: string | null;
-          message_text: string;
-          is_internal: boolean;
+          sender_role: string;
+          sender_ref: string | null;
+          text: string;
           created_at: string;
         };
         Insert: {
           id?: string;
           lead_id: string;
-          sender_role: 'lead' | 'admin' | 'system';
-          sender_admin_id?: string | null;
-          message_text: string;
-          is_internal?: boolean;
+          sender_role?: string;
+          sender_ref?: string | null;
+          text: string;
           created_at?: string;
         };
         Update: {
           id?: string;
           lead_id?: string;
-          sender_role?: 'lead' | 'admin' | 'system';
-          sender_admin_id?: string | null;
-          message_text?: string;
-          is_internal?: boolean;
+          sender_role?: string;
+          sender_ref?: string | null;
+          text?: string;
           created_at?: string;
         };
         Relationships: [
