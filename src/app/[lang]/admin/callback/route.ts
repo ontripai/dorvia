@@ -11,7 +11,7 @@ export async function GET(request: Request, { params }: { params: { lang: string
   const tokenHash = requestUrl.searchParams.get('token_hash');
   const type = requestUrl.searchParams.get('type');
   const lang = params.lang || 'fa';
-  const origin = requestUrl.origin;
+  const origin = process.env.NEXT_PUBLIC_SITE_URL || requestUrl.origin;
 
   // 1. Server-side PKCE or TokenHash exchange (if query parameters are present)
   if (code || (tokenHash && type)) {

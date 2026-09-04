@@ -47,12 +47,13 @@ async function runManualTest() {
   console.log('✅ Existing lead updated with ID:', leadId, 'and invited_at set.');
 
   // 2. Generate magic link using supabaseAdmin.auth.admin
+  const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL || 'https://dorvia.ro';
   console.log('\nGenerating invitation magic link for:', testEmail);
   const { data: linkData, error: linkErr } = await supabaseAdmin.auth.admin.generateLink({
     type: 'magiclink',
     email: testEmail,
     options: {
-      redirectTo: 'http://localhost:3000/fa/portal/callback',
+      redirectTo: `${siteOrigin}/fa/portal/callback`,
     },
   });
 

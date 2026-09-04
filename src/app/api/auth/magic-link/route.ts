@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 
     // Determine base origin and callback URL
     const url = new URL(request.url);
-    const origin = url.origin;
+    const origin = process.env.NEXT_PUBLIC_SITE_URL || url.origin;
     const callbackUrl = `${origin}/${lang}/${flow}/callback`;
 
     console.log(`[Auth OTP] Requesting magic link for [${email}] with flow [${flow}], redirect: ${callbackUrl}`);

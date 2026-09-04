@@ -40,11 +40,12 @@ async function bootstrapOwner() {
   // 2. Create or invite user in auth.users
   let authUserId: string | null = null;
 
+  const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL || 'https://dorvia.ro';
   console.log(`Attempting to invite/register auth user for: ${email}...`);
   const { data: inviteData, error: inviteError } = await supabaseAdmin.auth.admin.inviteUserByEmail(
     email,
     {
-      redirectTo: 'http://localhost:3000/fa/admin/callback',
+      redirectTo: `${siteOrigin}/fa/admin/callback`,
     }
   );
 
