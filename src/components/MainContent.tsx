@@ -261,15 +261,16 @@ export const MainContent: React.FC<MainContentProps> = ({
                     <span className="inline-flex items-center gap-1">📋 {currentLang === 'fa' ? 'نتیجه اولیه فوری' : 'Instant initial result'}</span>
                   </div>
 
-                  {/* Tertiary Link */}
+                  {/* Tertiary CTA — was a tiny text link, now a real secondary button per user feedback */}
                   <div className="pt-2 flex items-center justify-center lg:justify-start">
-                    <button
+                    <Button
+                      variant="outline"
+                      size="md"
                       onClick={onOpenEvaluationModal}
-                      className="text-xs text-slate-300 hover:text-[#F4F7FC] font-semibold inline-flex items-center space-x-2 rtl:space-x-reverse transition-colors cursor-pointer"
+                      leftIcon={<Calendar size={16} />}
                     >
-                      <Calendar size={14} className="text-[#F4F7FC]" />
-                      <span>{currentLang === 'fa' ? '📅 رزرو مشاوره تخصصی' : '📅 Book Personal Consultation'}</span>
-                    </button>
+                      {currentLang === 'fa' ? '📅 رزرو مشاوره تخصصی' : '📅 Book Personal Consultation'}
+                    </Button>
                   </div>
 
                 </div>

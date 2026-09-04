@@ -12,10 +12,51 @@ export const universitiesData: University[] = [
     cityFa: 'بخارست',
     cityEn: 'Bucharest',
     institutionType: { fa: 'دولتی علوم پزشکی', en: 'Public Medical' },
+    officialWebsite: 'https://umfcd.ro/en/',
+    foundedYear: 1857,
     programs: [
       { name: { fa: 'پزشکی عمومی', en: 'General Medicine' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
       { name: { fa: 'داروسازی', en: 'Pharmacy' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
       { name: { fa: 'دندانپزشکی', en: 'Dentistry' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] }
+    ],
+    rankingFacts: [
+      {
+        labelFa: 'رتبهبندی QS بهتفکیک رشته — پزشکی (۲۰۲۶)',
+        labelEn: 'QS World University Rankings by Subject — Medicine (2026)',
+        valueFa: 'باند ۷۰۱–۸۵۰',
+        valueEn: '701–850 band',
+        sourceUrl: 'https://www.topuniversities.com/universities/carol-davila-university-medicine-pharmacy',
+        sourceLabelFa: 'QS TopUniversities',
+        sourceLabelEn: 'QS TopUniversities'
+      },
+      {
+        labelFa: 'رتبهبندی جهانی THE (۲۰۲۶)',
+        labelEn: 'Times Higher Education World University Rankings (2026)',
+        valueFa: 'باند ۸۰۱–۱۰۰۰',
+        valueEn: '801–1000 band',
+        sourceUrl: 'https://www.timeshighereducation.com/world-university-rankings/university-medicine-and-pharmacy-carol-davila',
+        sourceLabelFa: 'Times Higher Education',
+        sourceLabelEn: 'Times Higher Education'
+      },
+      {
+        labelFa: 'رتبهبندی URAP (۲۰۲۵)',
+        labelEn: 'URAP Ranking (2025)',
+        valueFa: 'رتبه ۷۷۴ جهانی — نخستین دانشگاه رومانی',
+        valueEn: '774th worldwide — 1st among Romanian universities',
+        sourceUrl: 'https://en.wikipedia.org/wiki/Carol_Davila_University_of_Medicine_and_Pharmacy',
+        sourceLabelFa: 'ویکیپدیا به نقل از URAP',
+        sourceLabelEn: 'Wikipedia, citing URAP'
+      }
+    ],
+    degreeLevels: [
+      { levelFa: 'کارشناسی', levelEn: "Bachelor's", fieldsFa: 'پزشکی (شامل برنامه انگلیسیزبان)، دندانپزشکی، داروسازی، پرستاری', fieldsEn: 'Medicine (incl. English-taught program), Dentistry, Pharmacy, Nursing' },
+      { levelFa: 'دکتری', levelEn: 'Doctoral', fieldsFa: 'مطالعات دکتری در چهار دانشکده', fieldsEn: 'Doctoral studies across four faculties' }
+    ],
+    facilities: [
+      { fa: 'قدیمیترین دانشگاه پزشکی رومانی، تأسیس ۱۸۵۷ بهعنوان مدرسه ملی پزشکی و داروسازی', en: "Romania's oldest medical university, founded 1857 as the National School of Medicine and Pharmacy" },
+      { fa: 'استفاده از امکانات بالینی بیش از ۲۰ بیمارستان در سراسر بخارست', en: 'Uses the clinical facilities of over 20 hospitals across Bucharest' },
+      { fa: 'نیکولای پائولسکو انسولین را در سال ۱۹۲۱ در همین دانشگاه استخراج کرد؛ جورج امیل پالاده (برنده جایزه نوبل) در این دانشگاه تحصیل و تدریس کرده است', en: 'Nicolae Paulescu isolated insulin here in 1921; Nobel laureate George Emil Palade studied and taught here' },
+      { fa: 'دارای گواهی ISO 9001:2015 و طبقهبندیشده بهعنوان «دانشگاه پیشرفته پژوهش و آموزش» توسط وزارت آموزش رومانی', en: "ISO 9001:2015 certified; classified as an \"advanced research and education university\" by Romania's Ministry of Education" }
     ],
     tuitionItems: [
       { program: { fa: 'پزشکی', en: 'Medicine' }, amount: 10000, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
@@ -50,9 +91,9 @@ export const universitiesData: University[] = [
       { name: { fa: 'سایت رسمی', en: 'Official Site' }, url: 'https://umfcd.ro/' }
     ],
     reviewedAt: '2026-08-05',
-    ctaLabelFa: 'مشاهده شرایط ثبت‌نام',
-    ctaLabelEn: 'View Admission Requirements',
-    ctaHref: '/study',
+    ctaLabelFa: 'مشاهده پروفایل کامل دانشگاه',
+    ctaLabelEn: 'View Full University Profile',
+    ctaHref: '/universities/umf-carol-davila',
     ctaType: 'internal',
     photoUrl: '/images/universities/carol-davila.jpg',
     photoCaptionFa: 'بنای تاریخی دانشکده پزشکی کارول داویلا (۱۹۰۳) — عکس: ویکی‌مدیا کامنز',
@@ -68,10 +109,41 @@ export const universitiesData: University[] = [
     cityFa: 'تیمیشوارا',
     cityEn: 'Timișoara',
     institutionType: { fa: 'دولتی علوم پزشکی', en: 'Public Medical' },
+    officialWebsite: 'https://umft.ro/en/',
+    foundedYear: 1945,
     programs: [
       { name: { fa: 'پزشکی عمومی', en: 'General Medicine' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
       { name: { fa: 'داروسازی', en: 'Pharmacy' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
       { name: { fa: 'دندانپزشکی', en: 'Dentistry' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] }
+    ],
+    rankingFacts: [
+      {
+        labelFa: 'رتبهبندی نهادی QS Stars',
+        labelEn: 'QS Stars Institutional Rating',
+        valueFa: '۴ ستاره (این یک ارزیابی نهادی QS Stars است، نه جایگاه در رتبهبندی جهانی QS WUR)',
+        valueEn: '4 stars (this is the QS Stars institutional audit product, not a QS World University Rankings position)',
+        sourceUrl: 'https://www.topuniversities.com/universities/victor-babes-university-medicine-pharmacy-timisoara',
+        sourceLabelFa: 'QS TopUniversities',
+        sourceLabelEn: 'QS TopUniversities'
+      },
+      {
+        labelFa: 'رتبهبندی جهانی QS/THE',
+        labelEn: 'QS/THE World Ranking',
+        valueFa: 'در زمان تحقیق (سپتامبر ۲۰۲۶) جایگاه مشخصی در QS WUR یا THE برای این دانشگاه یافت نشد',
+        valueEn: 'As of this research (September 2026), no confirmed QS WUR or THE world-ranking position was found for this university',
+        sourceUrl: 'https://www.topuniversities.com/universities/victor-babes-university-medicine-pharmacy-timisoara',
+        sourceLabelFa: 'بررسی مستقیم QS TopUniversities و THE',
+        sourceLabelEn: 'Direct check of QS TopUniversities and THE'
+      }
+    ],
+    degreeLevels: [
+      { levelFa: 'کارشناسی، کارشناسی ارشد و دکتری (مدرسه دکتری IOSUD)', levelEn: "Bachelor's, Master's, and PhD (IOSUD/PhD School)", fieldsFa: 'پزشکی، دندانپزشکی، داروسازی، پرستاری — به زبانهای رومانیایی، انگلیسی و فرانسوی', fieldsEn: 'Medicine, Dental Medicine, Pharmacy, Nursing — taught in Romanian, English, and French' }
+    ],
+    facilities: [
+      { fa: 'تأسیسشده با فرمان سلطنتی شماره ۶۶۰ مورخ ۲۲ دسامبر ۱۹۴۴ و قانون شماره ۳۶۱ سال ۱۹۴۵', en: 'Founded by Royal Decree No. 660 of 22 December 1944 and Law No. 361 of 1945' },
+      { fa: 'کتابخانه دانشگاه بیش از ۱۸۲٬۰۰۰ جلد کتاب دارد، با ۴۵ شعبه در کلینیکها و آزمایشگاهها', en: 'The university library holds over 182,000 volumes across 45 branch points in clinics and laboratories' },
+      { fa: 'بیش از ۸٬۰۰۰ دانشجو، حدود ۲٬۰۰۰ دانشجوی بینالمللی و حدود ۴٬۰۰۰ دستیار در حال آموزش (طبق سایت رسمی)', en: 'Over 8,000 students, approximately 2,000 of them international, and around 4,000 residents in training (per the official site)' },
+      { fa: 'نامگذاریشده به افتخار ویکتور بابش، بنیانگذار مکتب میکروبشناسی رومانی', en: "Named after Victor Babeș, founder of Romania's school of microbiology" }
     ],
     tuitionItems: [
       { program: { fa: 'پزشکی و دندانپزشکی', en: 'Medicine/Dentistry' }, amount: 9000, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
@@ -105,10 +177,13 @@ export const universitiesData: University[] = [
       { name: { fa: 'سایت رسمی', en: 'Official Site' }, url: 'https://www.umft.ro/' }
     ],
     reviewedAt: '2026-08-05',
-    ctaLabelFa: 'سایت رسمی دانشگاه',
-    ctaLabelEn: 'Official University Website',
-    ctaHref: 'https://www.umft.ro/',
-    ctaType: 'external'
+    ctaLabelFa: 'مشاهده پروفایل کامل دانشگاه',
+    ctaLabelEn: 'View Full University Profile',
+    ctaHref: '/universities/umf-victor-babes',
+    ctaType: 'internal',
+    photoUrl: '/images/universities/victor-babes.jpg',
+    photoCaptionFa: 'ساختمان دانشگاه علوم پزشکی ویکتور بابش در تیمیشوارا — عکس: ویکی‌مدیا کامنز',
+    photoCaptionEn: 'Victor Babeș University of Medicine and Pharmacy building, Timișoara — Photo: Wikimedia Commons'
   },
   {
     id: 'umf-grigore-t-popa',
@@ -120,10 +195,42 @@ export const universitiesData: University[] = [
     cityFa: 'یاش',
     cityEn: 'Iași',
     institutionType: { fa: 'دولتی علوم پزشکی', en: 'Public Medical' },
+    officialWebsite: 'https://www.umfiasi.ro/',
+    foundedYear: 1879,
     programs: [
       { name: { fa: 'پزشکی عمومی', en: 'General Medicine' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
       { name: { fa: 'داروسازی', en: 'Pharmacy' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
       { name: { fa: 'دندانپزشکی', en: 'Dentistry' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] }
+    ],
+    rankingFacts: [
+      {
+        labelFa: 'رتبهبندی جهانی THE (۲۰۲۶)',
+        labelEn: 'Times Higher Education World University Rankings (2026)',
+        valueFa: 'باند کلی ۱۵۰۱ به بالا؛ در حوزه پزشکی و سلامت: باند ۱۰۰۱ به بالا',
+        valueEn: 'Overall 1501+ band; Medical & Health subject: 1001+ band',
+        sourceUrl: 'https://www.timeshighereducation.com/world-university-rankings/grigore-t-popa-university-medicine-and-pharmacy-iasi',
+        sourceLabelFa: 'Times Higher Education',
+        sourceLabelEn: 'Times Higher Education'
+      },
+      {
+        labelFa: 'رتبهبندی نهادی QS Stars',
+        labelEn: 'QS Stars Institutional Rating',
+        valueFa: '۴ ستاره (ارزیابی نهادی، نه جایگاه در رتبهبندی جهانی QS WUR)',
+        valueEn: '4 stars (institutional audit rating, not a QS WUR world-ranking position)',
+        sourceUrl: 'https://www.topuniversities.com/universities/grigore-t-popa-university-medicine-pharmacy-iasi-romania',
+        sourceLabelFa: 'QS TopUniversities',
+        sourceLabelEn: 'QS TopUniversities'
+      }
+    ],
+    degreeLevels: [
+      { levelFa: 'کارشناسی', levelEn: "Bachelor's", fieldsFa: 'پزشکی (۶ سال)، دندانپزشکی (۶ سال)، داروسازی (۵ سال)، مهندسی زیستپزشکی', fieldsEn: 'Medicine (6-year MD), Dental Medicine (6-year DMD), Pharmacy (5-year PharmD), Medical Bioengineering' },
+      { levelFa: 'کارشناسی ارشد و دکتری', levelEn: "Master's and Doctoral", fieldsFa: 'کارشناسی ارشد مهندسی زیستپزشکی؛ دوره دکتری با ۷۱۶ دانشجو', fieldsEn: "Master's in Medical Bioengineering; doctoral program with 716 PhD candidates" }
+    ],
+    facilities: [
+      { fa: 'تأسیس در سال ۱۸۷۹ بهعنوان دانشکده پزشکی؛ ریشه در مدرسه جراحی یاش (۱۸۵۹)، نخستین مدرسه پزشکی رومانیزبان کشور', en: "Founded in 1879 as a Faculty of Medicine; roots trace to the 1859 Surgery School of Iași, the country's first Romanian-language medical school" },
+      { fa: 'بیش از ۱۳٬۰۰۰ دانشجو از رومانی و بیش از ۶۰ کشور دیگر', en: 'Over 13,000 students from Romania and more than 60 other countries' },
+      { fa: 'شش بیمارستان اصلیِ وابسته برای آموزش بالینی، از جمله بیمارستان سنت اسپیریدون و مؤسسه انکولوژی منطقهای', en: 'Six major affiliated teaching hospitals, including St. Spiridon Hospital and the Regional Oncology Institute' },
+      { fa: 'عضو فدراسیون جهانی آموزش پزشکی (WFME) و انجمن دانشگاههای اروپا (EUA)', en: 'Member of the World Federation for Medical Education (WFME) and the European University Association (EUA)' }
     ],
     tuitionItems: [
       { program: { fa: 'همه رشته‌ها', en: 'All Programs' }, feeType: 'contact' }
@@ -156,10 +263,10 @@ export const universitiesData: University[] = [
       { name: { fa: 'سایت رسمی', en: 'Official Site' }, url: 'https://www.umfiasi.ro/' }
     ],
     reviewedAt: '2026-08-05',
-    ctaLabelFa: 'سایت رسمی دانشگاه',
-    ctaLabelEn: 'Official University Website',
-    ctaHref: 'https://www.umfiasi.ro/',
-    ctaType: 'external',
+    ctaLabelFa: 'مشاهده پروفایل کامل دانشگاه',
+    ctaLabelEn: 'View Full University Profile',
+    ctaHref: '/universities/umf-grigore-t-popa',
+    ctaType: 'internal',
     photoUrl: '/images/universities/umf-iasi.jpg',
     photoCaptionFa: 'ساختمان دانشگاه علوم پزشکی گریگوره ت. پوپا یاش — عکس: ویکی‌مدیا کامنز',
     photoCaptionEn: 'A building of Grigore T. Popa University of Medicine and Pharmacy, Iași — Photo: Wikimedia Commons'
@@ -174,10 +281,51 @@ export const universitiesData: University[] = [
     cityFa: 'کلوژ-نپوکا',
     cityEn: 'Cluj-Napoca',
     institutionType: { fa: 'دولتی علوم پزشکی', en: 'Public Medical' },
+    officialWebsite: 'https://umfcluj.ro/en/',
+    foundedYear: 1919,
     programs: [
       { name: { fa: 'پزشکی عمومی', en: 'General Medicine' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
       { name: { fa: 'داروسازی', en: 'Pharmacy' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] },
       { name: { fa: 'دندانپزشکی', en: 'Dentistry' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] }
+    ],
+    rankingFacts: [
+      {
+        labelFa: 'رتبهبندی QS بهتفکیک رشته — پزشکی (۲۰۲۶)',
+        labelEn: 'QS World University Rankings by Subject — Medicine (2026)',
+        valueFa: 'باند ۳۰۱–۳۵۰ (صعود از باند ۴۰۱–۴۵۰ در سال ۲۰۲۵) — این رقم را پیش از انتشار روی صفحه رسمی رتبهبندیهای umfcluj.ro دوباره چک کن',
+        valueEn: '301–350 band (up from 401–450 in 2025) — re-verify this figure on umfcluj.ro’s own rankings page before publishing, as an older 351–400 figure also appears there',
+        sourceUrl: 'https://umfcluj.ro/en/university/about/prestige-rankings-certifications/',
+        sourceLabelFa: 'صفحه رسمی رتبهبندیهای UMF Cluj',
+        sourceLabelEn: "UMF Cluj's official rankings page"
+      },
+      {
+        labelFa: 'ScImago Institutions Rankings',
+        labelEn: 'ScImago Institutions Rankings',
+        valueFa: 'نخستین دانشگاه رومانی',
+        valueEn: '1st among Romanian universities',
+        sourceUrl: 'https://umfcluj.ro/en/university/about/prestige-rankings-certifications/',
+        sourceLabelFa: 'صفحه رسمی رتبهبندیهای UMF Cluj',
+        sourceLabelEn: "UMF Cluj's official rankings page"
+      },
+      {
+        labelFa: 'رتبهبندی جهانی THE (داده ۲۰۲۲ طبق سایت رسمی)',
+        labelEn: 'THE World University Rankings (2022 data per official site)',
+        valueFa: 'باند کلی ۸۰۱–۱۰۰۰',
+        valueEn: 'Overall 801–1000 band',
+        sourceUrl: 'https://umfcluj.ro/en/university/about/prestige-rankings-certifications/',
+        sourceLabelFa: 'صفحه رسمی رتبهبندیهای UMF Cluj',
+        sourceLabelEn: "UMF Cluj's official rankings page"
+      }
+    ],
+    degreeLevels: [
+      { levelFa: 'کارشناسی', levelEn: "Bachelor's", fieldsFa: 'پزشکی (۶ سال)، دندانپزشکی، داروسازی، پرستاری (۴ سال)، رادیولوژی/تصویربرداری پزشکی و بالنئوفیزیوکینتوتراپی (۳ سال)', fieldsEn: 'Medicine (6 years), Dentistry, Pharmacy, Nursing (4 years), Radiology/Medical Imaging and Balneophysiokinetotherapy (3 years)' },
+      { levelFa: 'کارشناسی ارشد و دکتری', levelEn: "Master's and Doctoral", fieldsFa: '۱۳ برنامه کارشناسی ارشد؛ دورههای دکتری و رزیدنتی', fieldsEn: "13 Master's programs; doctoral degrees and residency programs" }
+    ],
+    facilities: [
+      { fa: 'تأسیس در سال ۱۹۱۹ بهعنوان دانشکده پزشکی کلوژ؛ قدیمیترین نهاد آموزش پزشکی ترانسیلوانیا', en: "Founded in 1919 as the Faculty of Medicine of Cluj; the oldest medical education institution in Transylvania" },
+      { fa: 'میزبان موزه تاریخ پزشکی و داروسازی والریو بولوگا؛ ناشر مجله علمی Clujul Medical از سال ۱۹۲۰', en: 'Home to the Valeriu Bologa Museum of the History of Medicine and Pharmacy; publisher of the Clujul Medical journal since 1920' },
+      { fa: 'دو مرکز تعالی و هفت مرکز پژوهشی', en: 'Two excellence centers and seven research centers' },
+      { fa: 'حدود ۸٬۰۰۰ دانشجو (۷٬۱۵۳ کارشناسی و ۸۷۶ تحصیلات تکمیلی)', en: '~8,000 students (7,153 undergraduate and 876 postgraduate)' }
     ],
     tuitionItems: [
       { program: { fa: 'سال اول (پزشکی/دندانپزشکی/داروسازی)', en: 'First-year Medicine/Dentistry/Pharmacy' }, amount: 10000, currency: 'EUR', period: 'academic-year', feeType: 'tuition' }
@@ -210,10 +358,13 @@ export const universitiesData: University[] = [
       { name: { fa: 'سایت رسمی', en: 'Official Site' }, url: 'https://umfcluj.ro/' }
     ],
     reviewedAt: '2026-08-05',
-    ctaLabelFa: 'سایت رسمی دانشگاه',
-    ctaLabelEn: 'Official University Website',
-    ctaHref: 'https://umfcluj.ro/',
-    ctaType: 'external'
+    ctaLabelFa: 'مشاهده پروفایل کامل دانشگاه',
+    ctaLabelEn: 'View Full University Profile',
+    ctaHref: '/universities/umf-iuliu-hatieganu',
+    ctaType: 'internal',
+    photoUrl: '/images/universities/iuliu-hatieganu.jpg',
+    photoCaptionFa: 'ساختمان دانشکده پزشکی دانشگاه یولیو هاتیگانو در کلوژ-نپوکا — عکس: ویکی‌مدیا کامنز',
+    photoCaptionEn: 'Faculty of Medicine building, Iuliu Hațieganu University in Cluj-Napoca — Photo: Wikimedia Commons'
   },
 
   // GROUP 2: Popular general and non-medical universities
@@ -227,11 +378,51 @@ export const universitiesData: University[] = [
     cityFa: 'بخارست',
     cityEn: 'Bucharest',
     institutionType: { fa: 'دولتی جامع', en: 'Public Comprehensive' },
+    officialWebsite: 'https://unibuc.ro/',
+    foundedYear: 1864,
     programs: [
       { name: { fa: 'حقوق و علوم سیاسی', en: 'Law & Political Science' }, studyAreaId: 'law_political_science', languages: ['UNKNOWN'] },
       { name: { fa: 'علوم کامپیوتر و ریاضیات', en: 'Computer Science & Mathematics' }, studyAreaId: 'computer_it', languages: ['UNKNOWN'] },
       { name: { fa: 'زبان‌های خارجی', en: 'Foreign Languages' }, studyAreaId: 'foreign_languages', languages: ['UNKNOWN'] },
       { name: { fa: 'مدیریت', en: 'Management' }, studyAreaId: 'management_business', languages: ['UNKNOWN'] }
+    ],
+    rankingFacts: [
+      {
+        labelFa: 'رتبهبندی جهانی QS (۲۰۲۷)',
+        labelEn: 'QS World University Rankings (2027)',
+        valueFa: 'باند ۸۰۱–۸۵۰ — نخستین دانشگاه رومانی',
+        valueEn: "801–850 band — Romania's #1 university",
+        sourceUrl: 'https://unibuc.ro/qs-world-university-rankings-2027-the-university-of-bucharest-remains-romanias-leading-university-slider/?lang=en',
+        sourceLabelFa: 'اعلامیه رسمی دانشگاه بخارست',
+        sourceLabelEn: "University of Bucharest's official announcement"
+      },
+      {
+        labelFa: 'رتبهبندی جهانی QS (۲۰۲۶)',
+        labelEn: 'QS World University Rankings (2026)',
+        valueFa: 'باند ۷۶۱–۷۷۰؛ رتبه اول رومانی در «چشمانداز اشتغال» (۲۲۶ جهانی) و «اعتبار نزد کارفرمایان» (۴۰۰ جهانی)',
+        valueEn: "761–770 band; #1 in Romania for Employment Outcomes (226th globally) and Employer Reputation (400th globally)",
+        sourceUrl: 'https://unibuc.ro/qs-world-university-rankings-2026-universitatea-din-bucuresti-prima-universitate-din-romania-si-in-primele-770-de-universitati-din-lume/?lang=en',
+        sourceLabelFa: 'اعلامیه رسمی دانشگاه بخارست',
+        sourceLabelEn: "University of Bucharest's official announcement"
+      },
+      {
+        labelFa: 'رتبهبندی QS بهتفکیک رشته (۲۰۲۶)',
+        labelEn: 'QS World University Rankings by Subject (2026)',
+        valueFa: 'رتبه اول رومانی در شش رشته: زبانشناسی، زبانهای مدرن، زبان و ادبیات انگلیسی، علوم سیاسی، شیمی و جغرافیا',
+        valueEn: '#1 in Romania in six fields: Linguistics, Modern Languages, English Language and Literature, Political Science, Chemistry, and Geography',
+        sourceUrl: 'https://unibuc.ro/universitatea-din-bucuresti-prima-universitate-din-romania-in-topul-qs-by-subject-2026-in-sase-domenii-lingvistica-limbi-moderne-limba-si-literatura-engleza-stiinte-politice-chimie-si-geografie/?lang=en',
+        sourceLabelFa: 'اعلامیه رسمی دانشگاه بخارست',
+        sourceLabelEn: "University of Bucharest's official announcement"
+      }
+    ],
+    degreeLevels: [
+      { levelFa: 'کارشناسی، کارشناسی ارشد و دکتری', levelEn: "Bachelor's, Master's, and Doctorate", fieldsFa: '۱۹ دانشکده در حوزههای علوم پایه، علوم انسانی، علوم اجتماعی و الهیات — به رومانیایی و انگلیسی', fieldsEn: '19 faculties spanning natural sciences, humanities, social sciences, and theology — taught in Romanian and English' }
+    ],
+    facilities: [
+      { fa: 'تأسیس رسمی در ۴ ژوئیه ۱۸۶۴ به فرمان شاهزاده الکساندرو یوان کوزا؛ ریشه در آکادمی سلطنتی سال ۱۶۹۴', en: "Formally established on 4 July 1864 by Prince Alexandru Ioan Cuza; roots trace back to the 1694 Princely Academy" },
+      { fa: 'عضو کنسرسیوم «Universitaria» متشکل از دانشگاههای برتر رومانی', en: 'Member of the "Universitaria Consortium" of elite Romanian universities' },
+      { fa: 'حدود ۳۲٬۶۰۰ دانشجو (سال تحصیلی ۲۰۲۲–۲۰۲۳): ۲۲٬۴۲۸ کارشناسی و ۸٬۹۱۱ تحصیلات تکمیلی', en: '~32,600 students (2022–2023 academic year): 22,428 undergraduate and 8,911 postgraduate' },
+      { fa: 'از میان فارغالتحصیلان: جورج امیل پالاده (برنده جایزه نوبل پزشکی)، اوژن یونسکو (نمایشنامهنویس)، امیل کنستانتینسکو (رئیسجمهور اسبق رومانی)', en: 'Notable alumni include Nobel laureate George Emil Palade, playwright Eugène Ionesco, and former Romanian President Emil Constantinescu' }
     ],
     tuitionItems: [
       { program: { fa: 'کارشناسی', en: 'Bachelor' }, amount: 2500, maxAmount: 3150, currency: 'EUR', period: 'academic-year', feeType: 'tuition' }
@@ -257,9 +448,9 @@ export const universitiesData: University[] = [
       { name: { fa: 'سایت بین‌الملل', en: 'International Site' }, url: 'https://international.unibuc.ro' }
     ],
     reviewedAt: '2026-08-05',
-    ctaLabelFa: 'اطلاعات تحصیل در رومانی',
-    ctaLabelEn: 'Study in Romania Info',
-    ctaHref: '/study',
+    ctaLabelFa: 'مشاهده پروفایل کامل دانشگاه',
+    ctaLabelEn: 'View Full University Profile',
+    ctaHref: '/universities/unibuc',
     ctaType: 'internal',
     photoUrl: '/images/universities/bucharest.jpg',
     photoCaptionFa: 'بنای اصلی دانشگاه بخارست در میدان دانشگاه — عکس: ویکی‌مدیا کامنز',
@@ -275,11 +466,42 @@ export const universitiesData: University[] = [
     cityFa: 'بخارست',
     cityEn: 'Bucharest',
     institutionType: { fa: 'دولتی فناوری', en: 'Public Technological' },
+    officialWebsite: 'https://upb.ro/en/',
+    foundedYear: 1818,
     programs: [
       { name: { fa: 'مهندسی کامپیوتر', en: 'Computer Engineering' }, studyAreaId: 'computer_it', languages: ['UNKNOWN'] },
       { name: { fa: 'هوافضا', en: 'Aerospace' }, studyAreaId: 'engineering', languages: ['UNKNOWN'] },
       { name: { fa: 'مهندسی برق', en: 'Electrical Engineering' }, studyAreaId: 'engineering', languages: ['UNKNOWN'] },
       { name: { fa: 'رباتیک', en: 'Robotics' }, studyAreaId: 'engineering', languages: ['UNKNOWN'] }
+    ],
+    rankingFacts: [
+      {
+        labelFa: 'رتبهبندی جهانی QS',
+        labelEn: 'QS World University Rankings',
+        valueFa: 'باند ۱۲۰۱–۱۴۰۰ — سال دقیق ویرایش را پیش از انتشار روی صفحه QS TopUniversities تأیید کن',
+        valueEn: '1201–1400 band — confirm the exact edition year on the QS TopUniversities profile before publishing',
+        sourceUrl: 'https://www.topuniversities.com/universities/university-politehnica-bucharest',
+        sourceLabelFa: 'QS TopUniversities',
+        sourceLabelEn: 'QS TopUniversities'
+      },
+      {
+        labelFa: 'رتبهبندی QS بهتفکیک رشته — مهندسی',
+        labelEn: 'QS World University Rankings by Subject — Engineering',
+        valueFa: 'باند ۳۵۱–۴۰۰',
+        valueEn: '351–400 band',
+        sourceUrl: 'https://www.topuniversities.com/universities/university-politehnica-bucharest',
+        sourceLabelFa: 'QS TopUniversities',
+        sourceLabelEn: 'QS TopUniversities'
+      }
+    ],
+    degreeLevels: [
+      { levelFa: 'کارشناسی، کارشناسی ارشد، دکتری و فوقدکتری', levelEn: "Undergraduate, Master's, Doctoral, and Postdoctoral", fieldsFa: '۱۵ دانشکده شامل مهندسی برق، قدرت، رباتیک، هوافضا، مهندسی پزشکی و دانشکده اختصاصیِ «مهندسی به زبانهای خارجی»', fieldsEn: '15 faculties including Electrical Engineering, Power Engineering, Robotics, Aerospace, Medical Engineering, and a dedicated Faculty of Engineering in Foreign Languages' }
+    ],
+    facilities: [
+      { fa: 'ریشه در سال ۱۸۱۸ («مدرسه مهندسان نقشهبردار»)؛ تأسیس رسمی بهعنوان «مدرسه پلیتکنیک بخارست» در ۱۰ ژوئن ۱۹۲۰', en: 'Traces its origin to 1818 ("School for Surveying Engineers"); formally established as the "Politehnica School of Bucharest" on 10 June 1920' },
+      { fa: 'بزرگترین دانشگاه فنی رومانی', en: 'The largest technical university in Romania' },
+      { fa: 'چندین دانشگاه مستقل امروزیِ رومانی (مهندسی عمران، معماری، علوم کشاورزی) از دانشکدههای پیشین همین دانشگاه شکل گرفتهاند', en: 'Several of today’s standalone Romanian universities (Civil Engineering, Architecture, Agronomic Sciences) originated from its former faculties' },
+      { fa: 'عضو EAIE، EUA، CESAER، EELISA و ENEN', en: 'Member of EAIE, EUA, CESAER, EELISA, and ENEN' }
     ],
     tuitionItems: [
       { program: { fa: 'مهندسی (کارشناسی)', en: 'Engineering Undergraduate' }, amount: 2600, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
@@ -307,9 +529,9 @@ export const universitiesData: University[] = [
       { name: { fa: 'سند رسمی', en: 'Official Document' }, url: 'https://international.upb.ro/assets/docs/2026/regulations/POLITEHNICA_Bucharest_tuition_fees.pdf' }
     ],
     reviewedAt: '2026-08-05',
-    ctaLabelFa: 'مسیر تحصیل',
-    ctaLabelEn: 'Study Pathway',
-    ctaHref: '/study',
+    ctaLabelFa: 'مشاهده پروفایل کامل دانشگاه',
+    ctaLabelEn: 'View Full University Profile',
+    ctaHref: '/universities/upb-polytechnic',
     ctaType: 'internal',
     photoUrl: '/images/universities/politehnica.jpg',
     photoCaptionFa: 'دانشگاه ملی علوم و فناوری پلی‌تکنیک بخارست — عکس: ویکی‌مدیا کامنز',
@@ -325,11 +547,43 @@ export const universitiesData: University[] = [
     cityFa: 'بخارست',
     cityEn: 'Bucharest',
     institutionType: { fa: 'دولتی اقتصاد', en: 'Public Economic' },
+    officialWebsite: 'https://ase.ro/en/',
+    foundedYear: 1913,
     programs: [
       { name: { fa: 'اقتصاد', en: 'Economics' }, studyAreaId: 'management_business', languages: ['UNKNOWN'] },
       { name: { fa: 'تجارت بین‌الملل', en: 'International Business' }, studyAreaId: 'management_business', languages: ['UNKNOWN'] },
       { name: { fa: 'حسابداری', en: 'Accounting' }, studyAreaId: 'management_business', languages: ['UNKNOWN'] },
       { name: { fa: 'مدیریت بازرگانی', en: 'Business Administration' }, studyAreaId: 'management_business', languages: ['UNKNOWN'] }
+    ],
+    rankingFacts: [
+      {
+        labelFa: 'رتبهبندی QS بهتفکیک رشته (۲۰۲۵)',
+        labelEn: 'QS World University Rankings by Subject (2025)',
+        valueFa: 'اقتصاد و اقتصادسنجی: باند ۳۵۱–۴۰۰؛ مدیریت بازرگانی: باند ۵۰۱–۵۵۰ (این دانشگاه رتبه کلی QS WUR ندارد، فقط رتبهبندی بهتفکیک رشته)',
+        valueEn: 'Economics & Econometrics: 351–400 band; Business & Management: 501–550 band (no overall QS WUR rank — subject rankings only)',
+        sourceUrl: 'https://international.ase.ro/21/qs-world-university-rankings/',
+        sourceLabelFa: 'صفحه رسمی رتبهبندیهای ASE',
+        sourceLabelEn: "ASE's official international rankings page"
+      },
+      {
+        labelFa: 'رتبهبندی جهانی THE (۲۰۲۶)',
+        labelEn: 'THE World University Rankings (2026)',
+        valueFa: 'باند ۸۰۱–۱۰۰۰؛ به گفته دانشگاه، برای هفتمین سال متوالی رتبه اول رومانی در THE',
+        valueEn: "801–1000 band; per the university, ranked #1 in Romania on THE for the 7th consecutive year",
+        sourceUrl: 'https://international.ase.ro/21/times-higher-education/',
+        sourceLabelFa: 'صفحه رسمی رتبهبندیهای ASE',
+        sourceLabelEn: "ASE's official international rankings page"
+      }
+    ],
+    degreeLevels: [
+      { levelFa: 'کارشناسی (۳ سال / ۱۸۰ واحد ECTS)', levelEn: "Bachelor's (3 years / 180 ECTS credits)", fieldsFa: '۱۳ دانشکده شامل تجارت بینالملل، حقوق، مالی و بانکداری، مدیریت و بازاریابی، انفورماتیک اقتصادی', fieldsEn: '13 faculties including International Business, Law, Finance and Banking, Management and Marketing, Economic Informatics' },
+      { levelFa: 'کارشناسی ارشد و دکتری', levelEn: "Master's and Doctoral", fieldsFa: 'کارشناسی ارشد (۲ سال / ۱۲۰ واحد ECTS)، دکتری (حداقل ۳ سال) — ۲۵ برنامه به رومانیایی، انگلیسی، فرانسوی یا آلمانی', fieldsEn: "Master's (2 years / 120 ECTS credits), Doctoral (minimum 3 years) — 25 programs taught in Romanian, English, French, or German" }
+    ],
+    facilities: [
+      { fa: 'تأسیس در ۶ آوریل ۱۹۱۳ با فرمان سلطنتی کارول اول؛ نخستین نهاد آموزش عالی اقتصاد در رومانی', en: 'Founded on 6 April 1913 by royal decree under King Carol I; the first institution of higher economic education in Romania' },
+      { fa: '۱۳ مرکز پژوهشی موردتأیید شورای ملی پژوهش علمی آموزش عالی رومانی', en: "13 research centers recognized by Romania's National Council of Scientific Research in Higher Education" },
+      { fa: 'عضو کنسرسیوم «Universitaria» متشکل از دانشگاههای برتر رومانی', en: 'Member of the "Universitaria Consortium" of elite Romanian universities' },
+      { fa: 'حدود ۲۳٬۳۰۰ دانشجو شامل ۱٬۱۱۲ دانشجوی بینالمللی (طبق پروفایل QS TopUniversities — پیش از انتشار با سایت رسمی تطبیق بده)', en: '~23,300 students including 1,112 international students (per the QS TopUniversities profile — verify against the official site before publishing)' }
     ],
     tuitionItems: [
       { program: { fa: 'کارشناسی', en: 'Bachelor' }, amount: 3500, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
@@ -365,9 +619,9 @@ export const universitiesData: University[] = [
       { name: { fa: 'پذیرش بین‌الملل', en: 'International Admission' }, url: 'https://international.ase.ro' }
     ],
     reviewedAt: '2026-08-05',
-    ctaLabelFa: 'شرایط تحصیل',
-    ctaLabelEn: 'Study Requirements',
-    ctaHref: '/study',
+    ctaLabelFa: 'مشاهده پروفایل کامل دانشگاه',
+    ctaLabelEn: 'View Full University Profile',
+    ctaHref: '/universities/ase-bucharest',
     ctaType: 'internal',
     photoUrl: '/images/universities/ase.jpg',
     photoCaptionFa: 'بنای تاریخی دانشگاه مطالعات اقتصادی بخارست (ASE) در میدان رومانا — عکس: ویکی‌مدیا کامنز',
@@ -383,9 +637,41 @@ export const universitiesData: University[] = [
     cityFa: 'بخارست',
     cityEn: 'Bucharest',
     institutionType: { fa: 'خصوصی', en: 'Private' },
+    officialWebsite: 'https://www.rau.ro/en/',
+    foundedYear: 1991,
     programs: [
       { name: { fa: 'کسب و کار', en: 'Business' }, studyAreaId: 'management_business', languages: ['UNKNOWN'] },
       { name: { fa: 'روابط بین‌الملل', en: 'International Relations' }, studyAreaId: 'other', languages: ['UNKNOWN'] }
+    ],
+    rankingFacts: [
+      {
+        labelFa: 'رتبهبندی جهانی QS/THE',
+        labelEn: 'QS/THE World Ranking',
+        valueFa: 'در جستوجوی مستقیم روی سایتهای QS TopUniversities و THE هیچ پروفایل رتبهبندی برای این دانشگاه یافت نشد',
+        valueEn: 'A direct site search on QS TopUniversities and THE found no ranking profile for this university',
+        sourceUrl: 'https://www.topuniversities.com/',
+        sourceLabelFa: 'بررسی مستقیم QS TopUniversities',
+        sourceLabelEn: 'Direct check of QS TopUniversities'
+      },
+      {
+        labelFa: 'ارزیابی ملی رومانی (۲۰۱۱–۲۰۱۲)',
+        labelEn: 'Romanian National Program Evaluation (2011–2012)',
+        valueFa: 'رشته «روابط اقتصادی بینالملل» و «مالی» رتبه A (عالی) و رشتههای مدیریت، بازاریابی، مدیریت بازرگانی و علوم کامپیوتر رتبه B گرفتهاند — این یک رتبهبندی بینالمللی نیست، طبقهبندی کیفیت برنامه در نظام ملی رومانی است',
+        valueEn: 'International Economic Relations and Finance rated Category A (excellence); Management, Marketing, Business Administration, and Computer Science rated Category B — this is a Romanian national program-quality category, not an international ranking',
+        sourceUrl: 'https://en.wikipedia.org/wiki/Romanian-American_University',
+        sourceLabelFa: 'ویکیپدیا',
+        sourceLabelEn: 'Wikipedia'
+      }
+    ],
+    degreeLevels: [
+      { levelFa: 'کارشناسی (شامل برنامه انگلیسیزبان و سال پایه)', levelEn: "Bachelor's (including English-taught programs and a foundation year)", fieldsFa: '۱۰ دانشکده شامل تجارت بینالملل، معماری، حقوق، مالی و حسابداری، علوم پزشکی، گردشگری و مدیریت هتلداری', fieldsEn: '10 faculties including International Business, Architecture, Law, Finance and Accounting, Medical Sciences, Tourism and Hospitality Management' },
+      { levelFa: 'کارشناسی ارشد و تحصیلات تکمیلی', levelEn: "Master's and Postgraduate Studies", fieldsFa: 'برنامههای کارشناسی ارشد (شامل انگلیسیزبان) و دورههای تحصیلات تکمیلی', fieldsEn: "Master's programs (including English-taught) and postgraduate studies" }
+    ],
+    facilities: [
+      { fa: 'تأسیس در ۱۷ آوریل ۱۹۹۱ توسط اقتصاددان یون اسمدسکو', en: 'Founded on 17 April 1991 by economist Ion Smedescu' },
+      { fa: 'یک نهاد مستقل است و — با وجود نام آن — طبق منابع موجود، بهطور رسمی وابسته به یا مورد حمایت هیچ دانشگاه آمریکایی نیست', en: 'An independent institution that — despite its name — is not, per available sources, formally affiliated with or sponsored by any American university' },
+      { fa: 'کمپوس دانشگاه در اکتبر ۲۰۰۳ افتتاح شد', en: 'The university campus was inaugurated in October 2003' },
+      { fa: 'دانشکده حقوق تحت قانون رومانی شماره ۲۷۴ مصوب ۱۵ مه ۲۰۰۲ اعتبارسنجی شده است', en: 'The Faculty of Law is accredited under Romanian Law No. 274 of 15 May 2002' }
     ],
     tuitionItems: [
       { program: { fa: 'دوره پایه', en: 'Foundation' }, amount: 2900, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
@@ -413,10 +699,10 @@ export const universitiesData: University[] = [
       { name: { fa: 'لینک شهریه رسمی', en: 'Official Tuition Link' }, url: 'https://www.rau.ro/tuition-fees-and-finances/?lang=en' }
     ],
     reviewedAt: '2026-08-05',
-    ctaLabelFa: 'سایت رسمی',
-    ctaLabelEn: 'Official Website',
-    ctaHref: 'https://www.rau.ro/tuition-fees-and-finances/?lang=en',
-    ctaType: 'external',
+    ctaLabelFa: 'مشاهده پروفایل کامل دانشگاه',
+    ctaLabelEn: 'View Full University Profile',
+    ctaHref: '/universities/rau-bucharest',
+    ctaType: 'internal',
     disclaimer: {
       fa: 'طبق اطلاعات ارائهشده از سوی دانشگاه، امکان بازپرداخت شهریه در صورت رد ویزا وجود دارد، اما شرایط، مدارک و مهلتهای بازپرداخت باید مستقیماً از دانشگاه بررسی شود.',
       en: 'The university indicates that tuition may be refundable following a visa refusal, subject to its current conditions, required evidence and deadlines. Confirm the policy directly before payment.'
@@ -434,10 +720,32 @@ export const universitiesData: University[] = [
     cityFa: 'بخارست',
     cityEn: 'Bucharest',
     institutionType: { fa: 'خصوصی علوم پزشکی', en: 'Private Medical' },
+    officialWebsite: 'https://www.utm.ro/en/',
+    foundedYear: 1990,
     programs: [
       { name: { fa: 'پزشکی', en: 'Medicine' }, studyAreaId: 'medicine_dentistry', languages: ['EN'] },
       { name: { fa: 'دندانپزشکی', en: 'Dentistry' }, studyAreaId: 'medicine_dentistry', languages: ['EN'] },
       { name: { fa: 'داروسازی', en: 'Pharmacy' }, studyAreaId: 'medicine_dentistry', languages: ['UNKNOWN'] }
+    ],
+    rankingFacts: [
+      {
+        labelFa: 'رتبهبندی جهانی QS/THE',
+        labelEn: 'QS/THE World Ranking',
+        valueFa: 'در جستوجوی مستقیم روی سایتهای QS TopUniversities و THE هیچ پروفایل رتبهبندی برای این دانشگاه یافت نشد',
+        valueEn: 'A direct site search on QS TopUniversities and THE found no ranking profile for this university',
+        sourceUrl: 'https://www.topuniversities.com/',
+        sourceLabelFa: 'بررسی مستقیم QS TopUniversities',
+        sourceLabelEn: 'Direct check of QS TopUniversities'
+      }
+    ],
+    degreeLevels: [
+      { levelFa: 'کارشناسی، کارشناسی ارشد و دکتری', levelEn: "Bachelor's, Master's, and Doctoral", fieldsFa: '۱۱ دانشکده شامل حقوق، روانشناسی، انفورماتیک، پزشکی، دندانپزشکی، داروسازی؛ برنامههای انگلیسیزبان: پزشکی، دندانپزشکی و رشته جدید هوش مصنوعی در مقطع کارشناسی', fieldsEn: '11 faculties including Law, Psychology, Informatics, Medicine, Dental Medicine, Pharmacy; English-taught programs: Medicine, Dental Medicine, and a newly launched Artificial Intelligence bachelor\'s degree' }
+    ],
+    facilities: [
+      { fa: 'تأسیس در ۲۰ سپتامبر ۱۹۹۰، یکی از نخستین دانشگاههای خصوصی رومانی پس از سقوط کمونیسم', en: "Founded on 20 September 1990, one of Romania's earliest private universities established after the fall of communism" },
+      { fa: 'نامگذاریشده به افتخار تیتو مایورسکو، منتقد ادبی و نخستوزیر پیشین رومانی', en: 'Named after Titu Maiorescu, literary critic and former Prime Minister of Romania' },
+      { fa: 'دارای گواهی «سطح بالای اعتماد» از ARACIS (نهاد اعتبارسنجی رومانی) مورخ ۲۰۱۸ — پیش از انتشار، بهروز بودن این گواهی را در سایت رسمی چک کن', en: "Holds an ARACIS (Romania's accreditation body) \"High Level of Trust\" certificate dated 2018 — verify this is still current on the official site before publishing" },
+      { fa: 'در تهران بلوار کاله واکارشتی شماره ۱۸۷، بخارست واقع شده است', en: 'Located at 187 Calea Văcărești, Bucharest' }
     ],
     tuitionItems: [
       { program: { fa: 'پزشکی انگلیسی (سال اول)', en: 'English Medicine, first year' }, amount: 16500, currency: 'EUR', period: 'academic-year', feeType: 'tuition' },
@@ -465,10 +773,13 @@ export const universitiesData: University[] = [
       { name: { fa: 'سایت رسمی', en: 'TMU Official' }, url: 'https://www.utm.ro/' }
     ],
     reviewedAt: '2026-08-05',
-    ctaLabelFa: 'سایت رسمی',
-    ctaLabelEn: 'Official Website',
-    ctaHref: 'https://www.utm.ro/',
-    ctaType: 'external',
+    ctaLabelFa: 'مشاهده پروفایل کامل دانشگاه',
+    ctaLabelEn: 'View Full University Profile',
+    ctaHref: '/universities/titu-maiorescu',
+    ctaType: 'internal',
+    photoUrl: '/images/universities/titu-maiorescu.jpg',
+    photoCaptionFa: 'ساختمان دانشگاه تیتو مایورسکو در بخارست — عکس: ویکی‌مدیا کامنز',
+    photoCaptionEn: 'Titu Maiorescu University building in Bucharest — Photo: Wikimedia Commons',
     disclaimer: {
       fa: 'این دانشگاه در فهرست فعلی دانشگاههای مورد تأیید وزارت بهداشت ایران قرار ندارد. منابع تأییدشده مستقیماً باید چک شوند. توجه: شهریه سالهای بعدی متفاوت است.',
       en: 'This university is not included in the current recognition list supplied for this project. Applicants planning to practise medicine in Iran should verify its latest status through the official Iranian Ministry of Health system before enrollment. Note: Later-year fees differ.'
