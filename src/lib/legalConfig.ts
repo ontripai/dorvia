@@ -10,6 +10,19 @@ export const legalOperatorConfig = {
 };
 
 export const hasVerifiedLegalEntity = () => {
+  // Local dev and Vercel Preview deployments are not public-facing production
+  // traffic, so allow full end-to-end testing there even while the legal
+  // entity is still being registered. Production (the public domain) keeps
+  // the real check — do not bypass it there.
+  const isTestableEnvironment =
+    process.env.NODE_ENV !== 'production' ||
+    process.env.VERCEL_ENV === 'preview' ||
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview';
+
+  if (isTestableEnvironment) {
+    return true;
+  }
+
   return (
     legalOperatorConfig.legalEntityName !== '' &&
     legalOperatorConfig.registrationNumber !== '' &&
