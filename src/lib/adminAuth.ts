@@ -16,9 +16,9 @@ export interface AdminContext {
  * Validates current session against public.admin_users and compiles effective permissions.
  * Returns null if user is unauthenticated, inactive, or not registered as an admin.
  */
-export async function getAdminContext(): Promise<AdminContext | null> {
+export async function getAdminContext(request?: Request): Promise<AdminContext | null> {
   try {
-    const supabase = createServerComponentClient();
+    const supabase = createServerComponentClient(request);
     const { data: { user }, error: authError } = await supabase.auth.getUser();
 
     if (authError || !user) {

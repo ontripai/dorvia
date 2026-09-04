@@ -9,7 +9,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const admin = await getAdminContext();
+    const admin = await getAdminContext(request);
     if (!admin || !hasPermission(admin, 'messages.view')) {
       return NextResponse.json(
         { error: 'Forbidden. You do not have permission to view messages.' },
@@ -49,7 +49,7 @@ export async function POST(
   { params }: { params: { id: string } }
 ) {
   try {
-    const admin = await getAdminContext();
+    const admin = await getAdminContext(request);
     if (!admin || !hasPermission(admin, 'messages.send')) {
       return NextResponse.json(
         { error: 'Forbidden. You do not have permission to send messages.' },

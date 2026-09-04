@@ -9,7 +9,7 @@ export async function POST(
   { params }: { params: { id: string } }
 ) {
   try {
-    const admin = await getAdminContext();
+    const admin = await getAdminContext(request);
     if (!admin || !hasPermission(admin, 'leads.verify')) {
       return NextResponse.json(
         { error: 'Forbidden. You do not have permission to verify leads.' },

@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
   try {
-    const admin = await getAdminContext();
+    const admin = await getAdminContext(request);
     if (!admin || !hasPermission(admin, 'leads.view')) {
       return NextResponse.json(
         { error: 'Forbidden. You do not have permission to view leads.' },

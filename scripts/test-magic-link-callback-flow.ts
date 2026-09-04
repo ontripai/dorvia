@@ -329,7 +329,60 @@ async function runTests() {
   await supabaseAdmin.from('leads').delete().eq('id', createdLead.id);
   console.log('Cleaned up test user and lead.\n');
 
-  console.log('=== All 7 Callback, Portal & Session Flow Tests Passed Successfully! ===\n');
+  // -------------------------------------------------------------
+  // Test 8: Authenticated Admin access to Lead Detail & Messages (dre-p60)
+  // -------------------------------------------------------------
+  console.log('8. Testing authenticated admin access to /api/admin/leads/[id] and messages (dre-p60)...');
+  const adminCookies = res4.cookies?.getAll ? res4.cookies.getAll() : [];
+  const adminCookieHeader = adminCookies.map((c: any) => `${c.name}=${c.value}`).join('; ');
+
+  const leadsRoute = await import('../src/app/api/admin/leads/route');
+  const leadsReq = new Request('https://dorvia.ro/api/admin/leads', {
+    method: 'GET',
+    headers: { cookie: adminCookieHeader },
+  });
+  const leadsRes = await leadsRoute.GET(leadsReq);
+  const leadsJson = await leadsRes.json();
+
+  if (leadsRes.status !== 200 || !leadsJson.leads || leadsJson.leads.length === 0) {
+    console.error('❌ FAIL: Failed to list leads using admin session:', leadsJson);
+    process.exit(1);
+  }
+
+  const sampleLeadId = leadsJson.leads[0].id;
+  console.log(`Fetched lead list successfully. Testing detail for lead: ${sampleLeadId} (${leadsJson.leads[0].full_name})`);
+
+  const leadDetailRoute = await import('../src/app/api/admin/leads/[id]/route');
+  const leadDetailReq = new Request(`https://dorvia.ro/api/admin/leads/${sampleLeadId}`, {
+    method: 'GET',
+    headers: { cookie: adminCookieHeader },
+  });
+  const leadDetailRes = await leadDetailRoute.GET(leadDetailReq, { params: { id: sampleLeadId } });
+  const leadDetailJson = await leadDetailRes.json();
+
+  if (leadDetailRes.status === 200 && leadDetailJson.lead?.id === sampleLeadId) {
+    console.log('✅ PASS: GET /api/admin/leads/[id] returned 200 and valid lead detail with verifier/inviter relations!');
+  } else {
+    console.error('❌ FAIL: GET /api/admin/leads/[id] failed:', leadDetailRes.status, leadDetailJson);
+    process.exit(1);
+  }
+
+  const leadMessagesRoute = await import('../src/app/api/admin/leads/[id]/messages/route');
+  const leadMessagesReq = new Request(`https://dorvia.ro/api/admin/leads/${sampleLeadId}/messages`, {
+    method: 'GET',
+    headers: { cookie: adminCookieHeader },
+  });
+  const leadMessagesRes = await leadMessagesRoute.GET(leadMessagesReq, { params: { id: sampleLeadId } });
+  const leadMessagesJson = await leadMessagesRes.json();
+
+  if (leadMessagesRes.status === 200 && Array.isArray(leadMessagesJson.messages)) {
+    console.log('✅ PASS: GET /api/admin/leads/[id]/messages returned 200 and messages array!\n');
+  } else {
+    console.error('❌ FAIL: GET /api/admin/leads/[id]/messages failed:', leadMessagesRes.status, leadMessagesJson);
+    process.exit(1);
+  }
+
+  console.log('=== All 8 Callback, Portal, Admin & Session Flow Tests Passed Successfully! ===\n');
 }
 
 runTests().catch((err) => {

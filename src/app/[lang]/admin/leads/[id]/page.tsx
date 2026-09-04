@@ -52,11 +52,6 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
 
   const loadLeadData = async () => {
     try {
-      if (!supabase) {
-        router.replace(`/${currentLang}/admin/login`);
-        return;
-      }
-
       // Fetch lead detail
       const res = await fetch(`/api/admin/leads/${leadId}`);
       if (res.status === 401 || res.status === 403) {
@@ -64,23 +59,28 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
         return;
       }
 
-      const json = await res.json();
-      if (json.lead) {
+      const json = await res.json().catch(() => null);
+      if (json?.lead) {
         setLead(json.lead);
       } else {
-        setActionError(json.error || 'Failed to load lead.');
+        setActionError(json?.error || (isFa ? 'پرونده لید یافت نشد.' : 'Failed to load lead.'));
       }
 
       // Fetch messages
       const msgRes = await fetch(`/api/admin/leads/${leadId}/messages`);
-      const msgJson = await msgRes.json();
-      if (msgJson.messages) {
+      const msgJson = await msgRes.json().catch(() => null);
+      if (msgJson?.messages) {
         setMessages(msgJson.messages);
       }
 
       setLoading(false);
+
+      // Optional client SDK hydration fallback without blocking
+      if (supabase) {
+        await supabase.auth.getUser().catch(() => null);
+      }
     } catch (err) {
-      setActionError('Error connecting to admin services.');
+      setActionError(isFa ? 'خطا در برقراری ارتباط با سرور.' : 'Error connecting to admin services.');
       setLoading(false);
     }
   };
