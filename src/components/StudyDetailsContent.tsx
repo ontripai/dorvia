@@ -400,7 +400,7 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             }
           ]} />
 
-          <RelatedGuidesCard items={['needs/housing', 'needs/health', 'start-here/newly-arrived']} currentLang={currentLang} />
+          <RelatedGuidesCard items={['needs/cost-of-living', 'needs/housing', 'start-here/newly-arrived']} currentLang={currentLang} />
           <ParentHubFooterCard slugRoute="study/visa-type-d" currentLang={currentLang} />
         </div>
       );
@@ -541,7 +541,7 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             }
           ]} />
 
-          <RelatedGuidesCard items={['study/scholarships']} currentLang={currentLang} />
+          <RelatedGuidesCard items={['needs/cost-of-living', 'study/scholarships']} currentLang={currentLang} />
           <ParentHubFooterCard slugRoute="study/tuition-overview" currentLang={currentLang} />
         </div>
       );

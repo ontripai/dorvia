@@ -312,6 +312,15 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
       icon: <House size={18} className="text-[#2F6FED]" />
     },
     {
+      id: 'cost-of-living',
+      categoryKey: 'needs',
+      title: { fa: 'محاسبه‌گر هزینه زندگی در شهرهای رومانی', en: 'Cost of Living Calculator in Romanian Cities' },
+      categoryLabel: { fa: 'نیازهای زندگی', en: 'Essentials' },
+      description: { fa: 'محاسبه آنلاین و تخمین هزینه‌های اجاره، خوراک، حمل‌ونقل و قبوض به یورو و لِی', en: 'Interactive calculator estimating rent, groceries, transit & utilities in EUR & RON' },
+      route: 'needs/cost-of-living',
+      icon: <House size={18} className="text-[#2F6FED]" />
+    },
+    {
       id: 'iranian-embassy',
       categoryKey: 'needs',
       title: { fa: 'سفارت ایران در بخارست و خدمات سامانه میخک', en: 'Iranian Embassy in Bucharest & Mikhak Portal' },

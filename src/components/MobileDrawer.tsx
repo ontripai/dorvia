@@ -175,6 +175,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             { id: 'needs/notary-public', label: isFa ? 'دفتر اسناد رسمی' : 'Notary Public' },
             { id: 'needs/iranian-embassy-and-mikhak', label: isFa ? 'سفارت ایران و سامانه میخک' : 'Iranian Embassy & Mikhak' },
             { id: 'needs/housing', label: isFa ? 'اجاره و خرید مسکن' : 'Housing' },
+            { id: 'needs/cost-of-living', label: isFa ? 'محاسبه‌گر هزینه زندگی' : 'Cost of Living Calculator' },
             { id: 'needs/first-days-checklist', label: isFa ? 'چک‌لیست روزهای نخست' : 'First-Days Checklist' },
           ]
         }
