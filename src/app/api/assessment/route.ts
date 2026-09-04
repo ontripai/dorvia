@@ -59,7 +59,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true, message: 'Request processed securely' });
     }
 
-    if (!data.fullName || (!data.whatsapp && !data.email) || !data.result || !isRouteId(data.result.primaryRoute)) {
+    if (!data.fullName || !data.whatsapp || !data.email || !data.result || !isRouteId(data.result.primaryRoute)) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
@@ -72,6 +72,7 @@ export async function POST(req: Request) {
       fullName: sanitize(data.fullName, 100),
       whatsapp: sanitize(data.whatsapp, 50),
       email: sanitize(data.email, 100),
+      telegram: sanitize(data.telegram, 100),
       preferredLanguage: data.preferredLanguage === 'en' ? 'en' : 'fa',
     };
 
@@ -85,6 +86,8 @@ export async function POST(req: Request) {
     // single/multi string values) — safe to store as-is in jsonb without
     // per-field sanitization beyond the overall payload-size cap above.
     const rawMeta = {
+      telegram: safeData.telegram || null,
+      ip,
       answers: data.answers && typeof data.answers === 'object' ? data.answers : {},
       scores: result.scores || {},
       matchLevel: result.matchLevel || {},
@@ -104,7 +107,7 @@ export async function POST(req: Request) {
       secondaryRoute,
       profileScore,
       leadTemperature,
-      channelRef: ip,
+      channelRef: 'pathfinder',
       rawMeta,
     }).catch(() => {});
 
@@ -122,6 +125,7 @@ export async function POST(req: Request) {
 👤 *Name:* ${safeData.fullName}
 📱 *WhatsApp:* ${safeData.whatsapp || 'N/A'}
 📧 *Email:* ${safeData.email || 'N/A'}
+✈️ *Telegram:* ${safeData.telegram || 'N/A'}
 🎯 *Primary Route:* ${routeLabelFa[primaryRoute]} (${primaryRoute}) — ${profileScore}/100
 ${secondaryRoute ? `↪️ *Secondary Route:* ${routeLabelFa[secondaryRoute]} (${secondaryRoute}) — ${result.scores?.[secondaryRoute] ?? '?'}/100\n` : ''}🌡 *Lead Temperature:* ${leadTemperature}
     `.trim();

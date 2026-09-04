@@ -70,6 +70,16 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
+    id: 'gender',
+    type: 'single',
+    required: true,
+    title: { fa: 'جنسیت شما؟', en: 'What is your gender?' },
+    options: [
+      { value: 'male', label: { fa: 'مرد', en: 'Male' } },
+      { value: 'female', label: { fa: 'زن', en: 'Female' } },
+    ],
+  },
+  {
     id: 'family_status',
     type: 'single',
     required: true,
