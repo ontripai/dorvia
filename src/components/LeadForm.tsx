@@ -147,10 +147,10 @@ if (isSubmitted) {
       {/* Form Header */}
       <div className="mb-8 space-y-2 border-b border-[#dfe6ef] pb-6">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-[#2F6FED]">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-[#1554bd]">
             {currentLang === 'fa' ? 'ارزیابی رایگان پرونده' : 'Free Case Evaluation'}
           </span>
-          <span className="text-xs font-bold text-[#526174]">
+          <span className="text-xs font-bold text-[#334155]">
             {currentLang === 'fa' ? `گام ${currentStep} از ۳` : `Step ${currentStep} of 3`}
           </span>
         </div>
@@ -202,7 +202,7 @@ if (isSubmitted) {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-[#142033]">{t.evaluationForm.phone} <span className="text-slate-400 font-normal">({currentLang === 'fa' ? 'الزامی در صورت عدم ثبت ایمیل' : 'Required if no email'})</span></label>
+                  <label className="font-bold text-[#142033]">{t.evaluationForm.phone} <span className="text-slate-600 font-medium">({currentLang === 'fa' ? 'الزامی در صورت عدم ثبت ایمیل' : 'Required if no email'})</span></label>
                   <input
                     type="text"
                     name="phone"
@@ -215,7 +215,7 @@ if (isSubmitted) {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-[#142033]">{t.evaluationForm.email} <span className="text-slate-400 font-normal">({currentLang === 'fa' ? 'الزامی در صورت عدم ثبت تلفن' : 'Required if no phone'})</span></label>
+                  <label className="font-bold text-[#142033]">{t.evaluationForm.email} <span className="text-slate-600 font-medium">({currentLang === 'fa' ? 'الزامی در صورت عدم ثبت تلفن' : 'Required if no phone'})</span></label>
                   <input
                     type="email"
                     name="email"
@@ -319,7 +319,7 @@ if (isSubmitted) {
                     onChange={handleChange}
                     className="mt-1 w-4 h-4 text-[#2F6FED] rounded border-[#dfe6ef] focus:ring-[#2F6FED]"
                   />
-                  <span className="text-[#526174] leading-relaxed text-xs">
+                  <span className="text-[#334155] leading-relaxed text-xs">
                     {currentLang === 'fa' ? 'مایلم اخبار و پیشنهادهای DORVIA EUROP را نیز دریافت کنم.' : 'I would like to receive news and offers from DORVIA EUROP.'}
                   </span>
                 </label>
@@ -367,29 +367,29 @@ if (isSubmitted) {
         {/* Right Info Panel */}
         <div className="lg:col-span-4 bg-[#eef3f8] rounded-2xl p-6 border border-[#dfe6ef] space-y-4 flex flex-col justify-between">
           <div className="space-y-3 text-xs">
-            <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#2F6FED] font-extrabold uppercase tracking-wider">
+            <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#1045A1] font-extrabold uppercase tracking-wider">
               <ShieldCheck size={16} />
               <span>{currentLang === 'fa' ? 'چه اتفاقی پس از ارسال می‌افتد؟' : 'What Happens Next?'}</span>
             </div>
             
-            <ol className="space-y-3 text-[#526174] leading-relaxed pt-1">
+            <ol className="space-y-3 text-[#334155] leading-relaxed pt-1">
               <li className="flex items-start space-x-2 rtl:space-x-reverse">
-                <span className="font-bold text-[#2F6FED]">۱.</span>
+                <span className="font-bold text-[#1045A1]">۱.</span>
                 <span>{currentLang === 'fa' ? 'بررسی اولیه اطلاعات توسط تیم DORVIA EUROP.' : 'Initial review of information by the DORVIA EUROP team.'}</span>
               </li>
               <li className="flex items-start space-x-2 rtl:space-x-reverse">
-                <span className="font-bold text-[#2F6FED]">۲.</span>
+                <span className="font-bold text-[#1045A1]">۲.</span>
                 <span>{currentLang === 'fa' ? 'تماس مستقیم از طریق واتس‌اپ یا ایمیل جهت تکمیل اطلاعات.' : 'Direct contact via WhatsApp or Email to finalize options.'}</span>
               </li>
               <li className="flex items-start space-x-2 rtl:space-x-reverse">
-                <span className="font-bold text-[#2F6FED]">۳.</span>
+                <span className="font-bold text-[#1045A1]">۳.</span>
                 <span>{currentLang === 'fa' ? 'ارائه شفاف‌ترین مسیرهای قانونی بدون ادعاهای غیرواقعی.' : 'Clear pathway recommendation compliant with official IGI standards.'}</span>
               </li>
             </ol>
           </div>
 
-          <div className="pt-4 border-t border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse text-[11px] text-[#788697]">
-            <LockKeyhole size={14} className="shrink-0 text-[#2F6FED]" />
+          <div className="pt-4 border-t border-[#dfe6ef] flex items-center space-x-2 rtl:space-x-reverse text-[11px] text-[#334155]">
+            <LockKeyhole size={14} className="shrink-0 text-[#1045A1]" />
             <span>{currentLang === 'fa' ? 'اطلاعات شما با رعایت سیاست حفظ حریم خصوصی سایت و منحصراً برای بررسی درخواست و ارتباطات مربوط به خدمات پردازش می‌شود.' : "Your information is processed in accordance with the site's privacy policy and solely for reviewing requests and service-related communication."}</span>
           </div>
         </div>

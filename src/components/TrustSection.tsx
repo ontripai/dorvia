@@ -47,7 +47,7 @@ export const TrustSection: React.FC<TrustSectionProps> = ({ currentLang }) => {
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
             {currentLang === 'fa' ? 'تعهد ما: صداقت، اعتبار و مسیر قانونی' : 'Our Commitment: Integrity, Transparency & Legal Rigor'}
           </h2>
-          <p className="mt-3 text-slate-400 text-sm sm:text-base">
+          <p className="mt-3 text-slate-300 text-sm sm:text-base">
             {currentLang === 'fa' 
               ? 'پلتفرم DORVIA EUROP با رویکردی کاملاً خدمات‌محور و شفاف، شما را از نخستین قدم تا استقرار نهایی راهنمایی می‌کند.'
               : 'DORVIA EUROP operates with full compliance, providing objective advisory without unrealistic promises.'}
@@ -59,7 +59,7 @@ export const TrustSection: React.FC<TrustSectionProps> = ({ currentLang }) => {
             <div key={idx} className="bg-slate-800/80 backdrop-blur border border-slate-700/70 p-6 rounded-2xl space-y-3 hover:border-[#2F6FED]/50 transition-colors">
               <div className="text-3xl">{pillar.icon}</div>
               <h3 className="text-lg font-bold text-white">{pillar.title}</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">{pillar.desc}</p>
+              <p className="text-xs text-slate-300 leading-relaxed">{pillar.desc}</p>
             </div>
           ))}
         </div>

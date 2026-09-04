@@ -6,9 +6,20 @@ import { usePathname } from 'next/navigation';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
 import { getNavPath } from '../lib/navigation';
-import { DesktopMegaMenu } from './DesktopMegaMenu';
-import { MobileDrawer } from './MobileDrawer';
-import { SearchDialog } from './SearchDialog';
+import dynamic from 'next/dynamic';
+
+const DesktopMegaMenu = dynamic(
+  () => import('./DesktopMegaMenu').then((m) => m.DesktopMegaMenu),
+  { ssr: false }
+);
+const MobileDrawer = dynamic(
+  () => import('./MobileDrawer').then((m) => m.MobileDrawer),
+  { ssr: false }
+);
+const SearchDialog = dynamic(
+  () => import('./SearchDialog').then((m) => m.SearchDialog),
+  { ssr: false }
+);
 import { Button } from './Button';
 import { ChevronDown, Menu, Search } from './Icons';
 import Image from 'next/image';

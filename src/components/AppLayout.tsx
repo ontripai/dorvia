@@ -8,7 +8,13 @@ import { stripLocalePrefix } from '../lib/locale-router';
 import { getNavPath } from '../lib/navigation';
 import { Header } from './Header';
 import { Footer } from './Footer';
-import { PathFinderAssessment } from './PathFinderAssessment';
+import dynamic from 'next/dynamic';
+
+const PathFinderAssessment = dynamic(
+  () => import('./PathFinderAssessment').then((m) => m.PathFinderAssessment),
+  { ssr: false }
+);
+
 import { I18nParityBanner } from './I18nParityBanner';
 import { PhoneCall, Sparkles, Menu, Search } from './Icons';
 
@@ -55,7 +61,6 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
     const dir = getDirection(currentLang);
     document.documentElement.dir = dir;
     document.documentElement.lang = currentLang;
-    document.body.style.fontFamily = currentLang === 'fa' ? "'Vazirmatn', sans-serif" : "'Manrope', sans-serif";
   }, [currentLang]);
 
   const handleLanguageChange = (newLang: Language) => {
