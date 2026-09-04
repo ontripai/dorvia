@@ -6,12 +6,12 @@ import { ArrowLeft, ArrowRight } from './Icons';
 export type PathwayAccent = 'blue' | 'emerald' | 'amber' | 'violet' | 'rose' | 'teal';
 
 const ACCENT_STYLES: Record<PathwayAccent, { bg: string; text: string; hoverBg: string }> = {
-  blue:    { bg: 'bg-blue-50',    text: 'text-[#2F6FED]', hoverBg: 'group-hover:bg-[#2F6FED]' },
-  emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', hoverBg: 'group-hover:bg-emerald-600' },
-  amber:   { bg: 'bg-amber-50',   text: 'text-amber-600',  hoverBg: 'group-hover:bg-amber-600' },
-  violet:  { bg: 'bg-violet-50',  text: 'text-violet-600', hoverBg: 'group-hover:bg-violet-600' },
-  rose:    { bg: 'bg-rose-50',    text: 'text-rose-600',   hoverBg: 'group-hover:bg-rose-600' },
-  teal:    { bg: 'bg-teal-50',    text: 'text-teal-600',   hoverBg: 'group-hover:bg-teal-600' },
+  blue:    { bg: 'bg-blue-50',    text: 'text-[#1554bd]', hoverBg: 'group-hover:bg-[#1554bd]' },
+  emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', hoverBg: 'group-hover:bg-emerald-700' },
+  amber:   { bg: 'bg-amber-50',   text: 'text-amber-800',  hoverBg: 'group-hover:bg-amber-800' },
+  violet:  { bg: 'bg-violet-50',  text: 'text-violet-700', hoverBg: 'group-hover:bg-violet-700' },
+  rose:    { bg: 'bg-rose-50',    text: 'text-rose-700',   hoverBg: 'group-hover:bg-rose-700' },
+  teal:    { bg: 'bg-teal-50',    text: 'text-teal-700',   hoverBg: 'group-hover:bg-teal-700' },
 };
 
 interface PathwayCardProps {
@@ -66,7 +66,7 @@ export const PathwayCard: React.FC<PathwayCardProps> = ({
         </p>
       </div>
 
-      <div className="pt-4 border-t border-[#dfe6ef] flex items-center justify-between text-xs font-bold text-[#2F6FED]">
+      <div className="pt-4 border-t border-[#dfe6ef] flex items-center justify-between text-xs font-bold text-[#1554bd]">
         <span>{currentLang === 'fa' ? 'بررسی شرایط و اطلاعات بیشتر' : 'Explore Pathway Details'}</span>
         <ArrowIcon size={16} className="transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
       </div>

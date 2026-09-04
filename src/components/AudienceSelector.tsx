@@ -116,7 +116,7 @@ export const AudienceSelector: React.FC<AudienceSelectorProps> = ({
                   </div>
                 </div>
 
-                <div className="pt-6 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#2F6FED]">
+                <div className="pt-6 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#1554bd]">
                   <span>{currentLang === 'fa' ? 'مشاهده و جزئیات مسیر' : 'Explore Pathway'}</span>
                   <ArrowIcon size={14} className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
                 </div>
