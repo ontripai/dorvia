@@ -541,6 +541,37 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
           </div>
 
           <div className="editorial-card p-6 bg-white space-y-4 border border-[#dfe6ef]">
+            <h3 className="font-extrabold text-base text-[#142033]">
+              {currentLang === 'fa' ? 'قوانین حضور مترجم رسمی نزد نوتاری' : 'Rules on Interpreter Presence at the Notary'}
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'طبق مادهٔ ۸۲ بند ۲ قانون شماره ۳۶/۱۹۹۵ (قانون نوتاری‌های رومانی)، اگر طرف یک سند نوتاری به زبان رومانیایی مسلط نباشد یا از اقلیت‌های زبانی باشد، مفاد سند باید از طریق یک مترجم/مفسر رسمی مجاز برایش تفهیم شود؛ این مترجم باید همراه با نوتاری، ذیل سند را امضا کند.'
+                : 'Under Article 82(2) of Law No. 36/1995 (the Romanian Notaries Law), if a party to a notarial act does not know Romanian, or belongs to a national minority, the content of the act must be conveyed to them through an authorized interpreter/translator — who must sign the closing statement alongside the notary.'}
+            </p>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'چه کسی می‌تواند مترجم باشد؟ خودِ نوتاری در صورتی می‌تواند این نقش را ایفا کند که آن زبان خارجی، زبان مادری‌اش باشد یا خودش مترجم رسمی مجاز باشد؛ در غیر این صورت باید یک مترجم رسمی مجاز از سوی وزارت دادگستری رومانی در جلسه حاضر شود. این هزینه‌ای جداگانه و اضافه بر تعرفه‌های جدول بالاست و معمولاً مستقیماً با خودِ مترجم توافق می‌شود.'
+                : 'Who can serve as interpreter? The notary may act as interpreter only if the foreign language is their own mother tongue or they are themselves an authorized translator; otherwise, an interpreter authorized by Romania\'s Ministry of Justice must attend in person. This is a separate cost on top of the fee table above, typically arranged and paid directly with the interpreter.'}
+            </p>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'مدارکی که از قبل به زبان خارجی نوشته شده‌اند: طبق مادهٔ ۸۲ بند ۴، نوتاری فقط در صورتی می‌تواند با چنین سندی کار کند که خودش آن زبان را بداند یا از طریق مترجم رسمی محتوایش را درک کرده باشد — در هر دو حالت، یک ترجمهٔ رومانیایی امضاشده توسط مترجم باید به پرونده ضمیمه شود. برای رونوشت‌های برابر اصل از مدارک خارجی هم طبق مادهٔ ۱۵۲ بند ۱۱، ترجمهٔ رسمی باید همراه رونوشت تصدیق‌شده باشد.'
+                : 'Documents already drafted in a foreign language: per Article 82(4), the notary may only work with such a document if they personally know that language or have understood it via an authorized interpreter — either way, a Romanian translation signed by the translator must be attached to the file. For certified true copies of foreign documents, Article 152(11) likewise requires an official translation to accompany the certified copy.'}
+            </p>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'راه انصراف از مترجم: اگر یک شهروند خارجی خودش اعلام کند که رومانیایی را به‌اندازهٔ کافی می‌داند، می‌تواند طی یک اعلامیهٔ دست‌نویس، حضور مترجم رسمی را نخواهد؛ نوتاری این انصراف را در متن ذیل سند ثبت می‌کند (مادهٔ ۲۲۴ بند ۴ آیین‌نامهٔ اجرایی قانون ۳۶/۱۹۹۵). اسناد دوزبانه هم مجازند — رومانیایی و زبان خارجی در دو ستون یا پشت‌سرهم، با تقدم متن رومانیایی (مادهٔ ۸۲ بند ۵).'
+                : 'Opting out of an interpreter: if a foreign citizen declares that they know Romanian well enough, they may waive the authorized interpreter\'s presence via a handwritten declaration; the notary records this waiver in the act\'s closing statement (Article 224(4) of the Regulation implementing Law 36/1995). Bilingual acts are also permitted — Romanian and the foreign language in two columns or in sequence, with the Romanian text taking precedence (Article 82(5)).'}
+            </p>
+            <div className="text-[11px] text-slate-400 pt-1">
+              {currentLang === 'fa'
+                ? 'منبع: بولتن اتحادیهٔ نوتاری‌های رومانی (Buletinul Notarilor Publici) و مادهٔ ۸۲/۱۵۲ قانون ۳۶/۱۹۹۵ — آخرین بررسی: شهریور ۱۴۰۵ / سپتامبر ۲۰۲۶'
+                : 'Source: Buletinul Notarilor Publici (Romanian Notaries Bulletin) and Articles 82/152 of Law 36/1995 — Last reviewed: September 2026'}
+            </div>
+          </div>
+
+          <div className="editorial-card p-6 bg-white space-y-4 border border-[#dfe6ef]">
             <h3 className="font-extrabold text-base text-[#142033]">{currentLang === 'fa' ? 'حداقل تعرفه‌های رسمی نوتاری (۲۰۲۴)' : 'Official Minimum Notary Fees (2024)'}</h3>
             <p className="text-xs text-[#526174] leading-relaxed">
               {currentLang === 'fa'
@@ -593,7 +624,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               </div>
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر من به زبان رومانیایی مسلط نباشم چه اتفاقی می‌افتد؟' : 'What if I don\'t speak Romanian?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون (ماده ۸۲ قانون ۳۶/۱۹۹۵)، حضور یک مترجم شفاهی مجاز (Traducator Autorizat) در زمان امضای اسناد برای تفهیم کامل مفاد قرارداد به زبان مادری شما یا انگلیسی الزامی است.' : 'By law (Article 82, Law 36/1995), an authorized interpreter (Traducator Autorizat) must be present when you sign documents, to fully explain the contract terms in your native language or English.'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق مادهٔ ۸۲ قانون ۳۶/۱۹۹۵، باید یک مترجم رسمی مجاز حاضر باشد و ذیل سند را امضا کند — مگر آنکه خودِ نوتاری به آن زبان مسلط باشد، یا شما با یک اعلامیهٔ دست‌نویس رسماً از حضور مترجم انصراف دهید (چون رومانیایی را کافی می‌دانید). این خدمت جداگانه هزینه دارد و از قبل باید هماهنگ شود.' : 'Under Article 82 of Law 36/1995, an authorized interpreter must be present and sign the closing statement — unless the notary is personally fluent in your language, or you formally waive the interpreter with a handwritten declaration (because you know Romanian well enough). This is a separately arranged, separately charged service, so coordinate it in advance.'}</p>
               </div>
               <div>
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'می‌خواهم به کسی در ایران وکالت بدهم؛ آیا یک نوتاری رومانیایی کافی است؟' : 'I need to give someone in Iran power of attorney — is a Romanian notary enough?'}</h4>
@@ -609,7 +640,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             },
             {
               q: currentLang === 'fa' ? 'اگر من به زبان رومانیایی مسلط نباشم چه اتفاقی می‌افتد؟' : 'What if I don\'t speak Romanian?',
-              a: currentLang === 'fa' ? 'طبق قانون (ماده ۸۲ قانون ۳۶/۱۹۹۵)، حضور یک مترجم شفاهی مجاز (Traducator Autorizat) در زمان امضای اسناد برای تفهیم کامل مفاد قرارداد به زبان مادری شما یا انگلیسی الزامی است.' : 'By law (Article 82, Law 36/1995), an authorized interpreter (Traducator Autorizat) must be present when you sign documents, to fully explain the contract terms in your native language or English.'
+              a: currentLang === 'fa' ? 'طبق مادهٔ ۸۲ قانون ۳۶/۱۹۹۵، باید یک مترجم رسمی مجاز حاضر باشد و ذیل سند را امضا کند — مگر آنکه خودِ نوتاری به آن زبان مسلط باشد، یا شما با یک اعلامیهٔ دست‌نویس رسماً از حضور مترجم انصراف دهید (چون رومانیایی را کافی می‌دانید). این خدمت جداگانه هزینه دارد و از قبل باید هماهنگ شود.' : 'Under Article 82 of Law 36/1995, an authorized interpreter must be present and sign the closing statement — unless the notary is personally fluent in your language, or you formally waive the interpreter with a handwritten declaration (because you know Romanian well enough). This is a separately arranged, separately charged service, so coordinate it in advance.'
             },
             {
               q: currentLang === 'fa' ? 'می‌خواهم به کسی در ایران وکالت بدهم؛ آیا یک نوتاری رومانیایی کافی است؟' : 'I need to give someone in Iran power of attorney — is a Romanian notary enough?',
