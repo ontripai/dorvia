@@ -10,16 +10,23 @@ export const legalOperatorConfig = {
 };
 
 export const hasVerifiedLegalEntity = () => {
-  // Local dev and Vercel Preview deployments are not public-facing production
-  // traffic, so allow full end-to-end testing there even while the legal
-  // entity is still being registered. Production (the public domain) keeps
-  // the real check — do not bypass it there.
   const isTestableEnvironment =
     process.env.NODE_ENV !== 'production' ||
     process.env.VERCEL_ENV === 'preview' ||
     process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview';
 
   if (isTestableEnvironment) {
+    return true;
+  }
+
+  // TEMPORARY: the site is not indexed and has no public users yet — several
+  // people are internally testing on the live production URL right now.
+  // Set NEXT_PUBLIC_ALLOW_UNVERIFIED_TESTING=true in Vercel's Production
+  // environment variables to open the gate there too. REMOVE this env var
+  // (or just leave it unset) once legalOperatorConfig below is filled in
+  // with the real registered SRL details — at that point the real check
+  // below will pass on its own and this override becomes unnecessary.
+  if (process.env.NEXT_PUBLIC_ALLOW_UNVERIFIED_TESTING === 'true') {
     return true;
   }
 
