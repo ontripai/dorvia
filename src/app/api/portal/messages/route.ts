@@ -5,7 +5,7 @@ import { supabaseAdmin } from '@/lib/supabaseAdmin';
 export async function POST(request: Request) {
   try {
     // 1. Authenticate user from session cookies
-    const supabase = createServerComponentClient();
+    const supabase = createServerComponentClient(request);
     const { data: { user }, error: authError } = await supabase.auth.getUser();
 
     if (authError || !user) {
