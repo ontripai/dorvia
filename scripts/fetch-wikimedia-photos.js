@@ -77,7 +77,7 @@ async function downloadOne({ file, width, out }) {
     redirect: 'follow',
     headers: {
       // A normal browser-like UA; MediaWiki does not require this, but it's good hotlinking etiquette.
-      'User-Agent': 'DORVIA-EUROP-site-build/1.0 (https://dorvia.vercel.app; contact via site)'
+      'User-Agent': 'DORVIA-EUROP-site-build/1.0 (https://dorvia.ro; contact via site)'
     }
   });
 

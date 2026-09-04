@@ -53,7 +53,7 @@ export async function POST(
     }
 
     const url = new URL(request.url);
-    const origin = url.origin;
+    const origin = process.env.NEXT_PUBLIC_SITE_URL || url.origin;
     const callbackUrl = `${origin}/fa/portal/callback`;
 
     // 3. Send magic link invitation via Supabase Auth Admin API
