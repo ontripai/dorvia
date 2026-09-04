@@ -22,32 +22,56 @@ function AdminLoginForm({ currentLang }: { currentLang: Language }) {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [technicalError, setTechnicalError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim() || loading) return;
 
     setLoading(true);
+    setTechnicalError(null);
 
     try {
-      if (supabase) {
-        const origin = window.location.origin;
-        const callbackUrl = `${origin}/${currentLang}/admin/callback`;
-
-        // Request magic link with shouldCreateUser: false
-        await supabase.auth.signInWithOtp({
+      const res = await fetch('/api/auth/magic-link', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           email: email.trim().toLowerCase(),
-          options: {
-            shouldCreateUser: false,
-            emailRedirectTo: callbackUrl,
-          },
-        });
+          flow: 'admin',
+          lang: currentLang,
+        }),
+      });
+
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok || !data?.success) {
+        console.error('[Admin Login] Magic link dispatch failed:', data);
+        if (data?.error === 'rate_limit') {
+          setTechnicalError(
+            isFa
+              ? (data.message || 'تعداد درخواست‌ها بیش از حد مجاز است. لطفاً یک دقیقه صبر نموده و مجدداً تلاش فرمایید.')
+              : 'Too many requests. Please wait a minute before requesting another link.'
+          );
+        } else {
+          setTechnicalError(
+            isFa
+              ? 'متاسفانه در برقراری ارتباط با سامانه ورود مشکلی پیش آمد. لطفاً اتصال اینترنت خود را بررسی نموده و مجدداً تلاش فرمایید.'
+              : 'A technical issue occurred while sending the login link. Please check your connection and try again.'
+          );
+        }
+      } else {
+        // Genuine success or non-revealing generic response
+        setSubmitted(true);
       }
     } catch (err) {
-      // Intentionally silent: security decision to never leak whether an email exists or not
+      console.error('[Admin Login] Unexpected error:', err);
+      setTechnicalError(
+        isFa
+          ? 'خطای ارتباط با سرور رخ داد. لطفاً دوباره تلاش کنید.'
+          : 'Network error occurred. Please try again.'
+      );
     } finally {
       setLoading(false);
-      setSubmitted(true);
     }
   };
 
@@ -81,8 +105,8 @@ function AdminLoginForm({ currentLang }: { currentLang: Language }) {
           </p>
         </div>
 
-        {/* Error Notification */}
-        {errorQuery && !submitted && (
+        {/* Error Notification from URL */}
+        {errorQuery && !submitted && !technicalError && (
           <div className="p-4 rounded-2xl bg-rose-950/80 border border-rose-800 text-rose-200 text-xs sm:text-sm flex items-start space-x-2.5 rtl:space-x-reverse">
             <AlertCircle size={18} className="shrink-0 text-rose-400 mt-0.5" />
             <div className="space-y-1">
@@ -93,6 +117,21 @@ function AdminLoginForm({ currentLang }: { currentLang: Language }) {
                 {errorQuery === 'unauthorized'
                   ? (isFa ? 'این حساب کاربری دسترسی معتبری به پنل مدیریت DORVIA ندارد.' : 'This account is not authorized for DORVIA administration.')
                   : (isFa ? 'لینک ورود نامعتبر یا منقضی شده است.' : 'The login link is invalid or has expired.')}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Technical Error Notification from Form Submission */}
+        {technicalError && !submitted && (
+          <div className="p-4 rounded-2xl bg-amber-950/80 border border-amber-800 text-amber-200 text-xs sm:text-sm flex items-start space-x-2.5 rtl:space-x-reverse animate-fadeIn">
+            <AlertCircle size={18} className="shrink-0 text-amber-400 mt-0.5" />
+            <div className="space-y-1">
+              <span className="font-bold">
+                {isFa ? 'خطا در ارتباط با سرور' : 'Communication Error'}
+              </span>
+              <p className="text-xs text-amber-300 leading-relaxed">
+                {technicalError}
               </p>
             </div>
           </div>
