@@ -8,6 +8,7 @@ import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { RelatedGuidesCard } from './RelatedGuidesCard';
 import { SectionPhoto } from './SectionPhoto';
 import { FaqSchema } from './FaqSchema';
+import { ShieldCheck, FileCheck2 } from './Icons';
 
 interface CompanyOverviewContentProps {
   subRoute: string;
@@ -87,6 +88,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* INLINE CTA 1: MID-ARTICLE */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
+          </div>
+
           <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl text-xs text-amber-900 leading-relaxed font-semibold">
             ⚠️ {currentLang === 'fa'
               ? 'به‌روزرسانی مهم (قانون ۲۳۹/۲۰۲۵، از ۱۸ دسامبر ۲۰۲۵): حداقل سرمایه ثبت SRL که از سال ۲۰۲۰ فقط نمادین (۱ لئو) بود، به ۵۰۰ لئو افزایش یافت (۵,۰۰۰ لئو برای شرکت‌هایی با گردش مالی سالانه بیش از ۴۰۰,۰۰۰ لئو). شرکت‌های ثبت‌شده قبل از این تاریخ تا ۱۸ دسامبر ۲۰۲۷ فرصت دارند سرمایه را به سطح جدید برسانند. همچنین از ۱ ژانویه ۲۰۲۶، هر SRL تازه‌ثبت‌شده موظف است ظرف ۶۰ روز کاری از ثبت، یک حساب پرداخت (cont de plăți، نزد بانک یا خزانه‌داری) باز کند و ظرف ۱۵ روز از افتتاح، آن را از طریق پورتال SPV به سازمان امور مالیاتی (ANAF) اعلام کند؛ عدم رعایت این الزام می‌تواند جریمه ۳,۰۰۰ تا ۱۰,۰۰۰ لئو و اعلام «غیرفعال مالیاتی» شرکت را در پی داشته باشد. نکته درباره حساب‌های fintech: چون متن قانون از عبارت گسترده‌تر «حساب پرداخت» استفاده کرده (نه صرفاً «نهاد اعتباری»)، Revolut Business (که زیرمجموعه یک بانک واقعی دارای مجوز اروپایی، Revolut Bank UAB، است) به‌احتمال زیاد این الزام را برآورده می‌کند؛ ابهام واقعی محدود به موسسات پول الکترونیک بدون مجوز بانکی (مثل Wise Business) است که هنوز هیچ اطلاعیه رسمی ANAF آن را روشن نکرده — پیش از اتکا به چنین حسابی برای این الزام خاص، حتماً با حسابدار خود یا مستقیماً ANAF تایید بگیرید.'
@@ -102,6 +126,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 ? 'اگر نمی‌خواهید شخصاً برای ثبت شرکت به رومانی سفر کنید، باید به یک وکیل یا حسابدار در رومانی وکالت‌نامه بدهید. چون ایران عضو کنوانسیون آپوستیل لاهه نیست، این وکالت‌نامه هم باید همان زنجیره تصدیق کنسولی را طی کند که برای سایر مدارک ایرانی لازم است (ترجمه رسمی در ایران، تایید وزارت دادگستری و وزارت امور خارجه ایران، و در نهایت تایید سفارت رومانی در تهران) — برای جزئیات کامل این زنجیره به صفحه «دفاتر اسناد رسمی» مراجعه کنید. نکته عملی‌تر و فوری‌تر: قانون جدید مهلت ۶۰ روزه‌ای برای باز کردن حساب بانکی شرکتی تعیین کرده، در حالی که تجربه مستند‌شده در چند کشور اروپایی نشان می‌دهد بانک‌ها گاهی نسبت به متقاضیان با پیشینه ایرانی محتاط‌تر عمل می‌کنند (به‌خاطر سیاست‌های داخلی ریسک‌گریزی، نه یک ممنوعیت مستقیم قانونی) — این یعنی بهتر است فرآیند افتتاح حساب شرکتی را از همان روز اول ثبت شرکت، بدون تاخیر، شروع کنید. جزئیات کامل در صفحه «حساب بانکی شرکتی» زیر آمده است.'
                 : "If you don't want to travel to Romania in person to register the company, you'll need to give power of attorney to a lawyer or accountant there. Because Iran is not party to the Hague Apostille Convention, that power of attorney must go through the same consular legalization chain required for other Iranian documents (official translation in Iran, endorsement by Iran's Ministry of Justice and Ministry of Foreign Affairs, and final legalization at the Romanian Embassy in Tehran) — see the \"Notary Public\" page for the full chain. The more time-sensitive point: the new law sets a hard 60-working-day deadline to open the company's bank account, while documented experience in several European countries shows banks are sometimes more cautious with applicants of Iranian background (from internal risk-averse policies, not a direct legal ban) — so it's worth starting the corporate account-opening process the same day the company is registered, without delay. Full details are on the \"Corporate Bank Account\" page below."}
             </p>
+          </div>
+
+          {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                <FileCheck2 size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی' : 'Comprehensive document check and case eligibility review'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
@@ -216,6 +263,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* INLINE CTA 1: MID-ARTICLE */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033]">
@@ -247,6 +317,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 ? 'معاهده اجتناب از اخذ مالیات مضاعف ایران-رومانی (امضا ۲۰۰۱، قانون ۲۷۹/۲۰۰۲، همان معاهده‌ای که در بخش «کار» درباره حقوق کارکنان توضیح داده شد) در ماده ۱۰ خودش، سقف مالیات کسر از منبع سود سهام را ۱۰٪ تعیین کرده — یعنی پایین‌تر از نرخ داخلی جدید ۱۶٪ رومانی. به این معنا که یک سهامدار مقیم مالیاتی ایران که از شرکت رومانیایی خود سود سهام دریافت می‌کند، در اصل می‌تواند با ارائه «گواهی اقامت مالیاتی» از مقامات ایرانی به سازمان امور مالیاتی رومانی (ANAF)، از نرخ کاهش‌یافته ۱۰٪ به‌جای ۱۶٪ استفاده کند. توجه: این یک حق قانونی مالیاتی است و کاملاً جدا از مشکل عملی انتقال خودِ پول است (که در صفحه «صرافی و انتقال ارز» توضیح داده شده) — داشتن حق قانونی به نرخ پایین‌تر به‌معنای ساده‌تر شدن انتقال واقعی وجه نیست.'
                 : "The Iran-Romania double taxation treaty (signed 2001, ratified by Law 279/2002 — the same treaty already covered on the Work section for salary income) caps dividend withholding tax at 10% under its own Article 10, below Romania's new 16% domestic rate. In practice, an Iranian tax resident receiving dividends from their Romanian company can claim the reduced 10% treaty rate instead of 16% by submitting a Certificate of Tax Residency from Iranian authorities to Romania's tax agency (ANAF). Note: this is a distinct legal tax entitlement, separate from the practical difficulty of actually transferring the money (covered on the \"Currency Exchange\" page) — being legally entitled to the lower rate doesn't make the physical transfer any easier."}
             </p>
+          </div>
+
+          {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                <FileCheck2 size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی' : 'Comprehensive document check and case eligibility review'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
@@ -345,6 +438,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* INLINE CTA 1: MID-ARTICLE */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
+          </div>
+
           <div className="p-6 sm:p-8 bg-white border border-[#dfe6ef] rounded-2xl shadow-sm space-y-4">
             <h3 className="text-lg font-bold text-[#142033]">
               {currentLang === 'fa' ? '🇮🇷 ویژه ایرانیان: چرا افتتاح حساب بانکی شرکتی ممکن است زمان بیشتری ببرد' : '🇮🇷 Iran-Specific: Why Opening a Corporate Account May Take Longer'}
@@ -359,6 +475,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 ? 'ما نتوانستیم هیچ منبع عمومی و قابل‌استناد پیدا کنیم که یک بانک مشخص در رومانی را به‌عنوان «پذیرای بیشتر اتباع ایرانی» معرفی کرده باشد — بانک‌ها به دلایل قانونی سیاست‌های ریسک‌پذیری خود را علنی نمی‌کنند، پس از معرفی نام یک بانک خاص در این‌جا خودداری می‌کنیم. در عوض، چند نکته عملی و امن: (۱) به گفته یک منبع حقوقی رومانیایی، بانک‌های بزرگ‌تر با بخش شرکتی/بین‌المللی اختصاصی معمولاً مدارک پیچیده‌تر KYC مشتریان خارجی را کارآمدتر پردازش می‌کنند — این لزوماً به‌معنای «سخت‌گیری کمتر» نیست، بلکه «آشنایی بیشتر با پرونده‌های خارجی» است؛ (۲) همکاری با یک وکیل یا حسابدار رومانیایی که با وکالت‌نامه پرونده را جلو ببرد و به زبان رومانیایی با بانک ارتباط بگیرد، طبق تجربه مستند‌شده روند را قابل‌پیش‌بینی‌تر می‌کند؛ (۳) اصلاحیه مهم درباره حساب‌های fintech: متن دقیق قانون ۲۳۹/۲۰۲۵ (طبق اطلاعیه ANAF) الزام را «داشتن یک حساب پرداخت (cont de plăți) در رومانی یا نزد خزانه‌داری دولتی» بیان می‌کند — نه صراحتاً «نهاد اعتباری»؛ «حساب پرداخت» طبق تعریف قانون خدمات پرداخت اتحادیه اروپا (که رومانی هم پذیرفته) دسته گسترده‌تری است که هم بانک‌ها، هم مؤسسات پرداخت، و هم مؤسسات پول الکترونیک (EMI) را می‌تواند شامل شود. به‌طور مشخص، Revolut Business زیرمجموعه Revolut Bank UAB است که یک مجوز بانکی واقعی اروپایی (صادرشده در لیتوانی، تحت نظارت بانک مرکزی اروپا) دارد و از طریق مقررات پاسپورت اروپایی در رومانی فعالیت می‌کند — یعنی به‌احتمال زیاد، صرف‌نظر از بحث EMI، همچنان «نهاد اعتباری» واقعی محسوب می‌شود. ابهام واقعی و هنوز حل‌نشده محدودتر است: حساب‌های موسسات پول الکترونیک بدون مجوز بانکی (مثل Wise Business، که تحت مجوز EMI نه مجوز بانکی فعالیت می‌کند) — هیچ اطلاعیه رسمی ANAF یا رویه قضایی این مورد خاص را هنوز روشن نکرده؛ پیش از تصمیم‌گیری حتماً تایید بگیرید.'
                 : "We could not find any public, citable source naming a specific bank in Romania as more accommodating toward Iranian nationals — banks generally don't publicize their risk-tolerance policies for legal reasons, so we're deliberately not naming one here. Instead, a few safe, practical pointers: (1) per one Romanian legal source, larger banks with a dedicated corporate/international department tend to process complex foreign-KYC documentation more efficiently — this isn't necessarily about being \"less strict,\" but about being more familiar with foreign case files; (2) working with a Romanian lawyer or accountant who can advance the file under power of attorney and communicate with the bank in Romanian has, per documented experience, made the process more predictable; (3) important correction on fintech accounts: Law 239/2025's actual text (per ANAF's own notice) requires holding \"a payment account (cont de plăți) in Romania or with the State Treasury\" — not explicitly \"a credit institution.\" A \"payment account,\" under the EU payment-services framework Romania has adopted, is a broader category that can include banks, payment institutions, and electronic-money institutions (EMIs) alike. Specifically, Revolut Business runs under Revolut Bank UAB, which holds a genuine European banking license (issued in Lithuania, supervised by the ECB) and operates in Romania under EU passporting rules — meaning it very likely counts as a real \"credit institution\" regardless of the EMI debate. The genuinely open, unresolved ambiguity is narrower: accounts at electronic-money institutions without a banking license (e.g., Wise Business, which operates under an EMI license rather than a bank license) — no ANAF notice or case law has settled that specific case yet; always confirm before deciding."}
             </p>
+          </div>
+
+          {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                <FileCheck2 size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی' : 'Comprehensive document check and case eligibility review'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
@@ -429,6 +568,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* INLINE CTA 1: MID-ARTICLE */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
+          </div>
+
           <div className="overflow-x-auto rounded-2xl border border-[#dfe6ef] shadow-sm">
             <table className="w-full text-sm text-[#526174] bg-white">
               <thead>
@@ -471,6 +633,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               <li>{currentLang === 'fa' ? 'درخواست تمدید باید نزد اداره کل مهاجرت (IGI) — بر اساس اطلاعات موجود، دفتر بخش ۵ بخارست برای متقاضیان مقیم بخارست — ثبت شود، همراه با گواهی اداره کار محلی درباره تعداد کارکنان.' : 'The renewal application must be filed with IGI — based on available information, the Sector 5 Bucharest office for applicants resident in Bucharest — along with a certificate from the local labor inspectorate on employee headcount.'}</li>
               <li>{currentLang === 'fa' ? 'مهلت رسیدگی IGI طبق متن رسمی «ظرف ۳۰ روز» است، با امکان تمدید تا ۱۵ روز دیگر در صورت نیاز به مدارک تکمیلی.' : "IGI's official processing timeline is stated as \"within 30 days,\" extendable by up to 15 more days if supplementary documents are needed."}</li>
             </ul>
+          </div>
+
+          {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                <FileCheck2 size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی' : 'Comprehensive document check and case eligibility review'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
@@ -571,6 +756,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* INLINE CTA 1: MID-ARTICLE */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
+          </div>
+
           <div className="overflow-x-auto rounded-2xl border border-[#dfe6ef] shadow-sm">
             <table className="w-full text-sm text-[#526174] bg-white">
               <thead>
@@ -602,6 +810,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 ? 'یک منبع تخصصی حقوقی رومانیایی، ایران را صراحتاً در فهرست کشورهایی نام می‌برد که تاکنون هیچ معاهده متقابل مالکیت زمین با رومانی امضا نکرده‌اند (در کنار کشورهایی مانند آمریکا، چین، ترکیه و ژاپن) — یعنی اتباع ایرانی، مثل اکثر اتباع غیراتحادیه‌اروپایی، فقط می‌توانند مالک بنا (آپارتمان/ساختمان) باشند و روی زمینِ زیر آن فقط «حق انتفاع» (drept de superficie) دارند، نه مالکیت کامل. راه‌حل رایج همان است که در بالا توضیح داده شد: خرید ملک (همراه با زمین) از طریق یک شرکت رومانیایی (SRL) که خودتان مالک آن هستید. نکته جداگانه: ایران در فهرست «کشورهای پرریسک» اتحادیه اروپا از نظر پول‌شویی (AML) قرار دارد که طبق قانون به نوتاری‌ها و بانک‌ها الزام می‌کند بررسی دقیق‌تری (Enhanced Due Diligence) روی تراکنش‌های مرتبط با این کشورها انجام دهند — این یک واقعیت حقوقی کلی است، نه گزارشی مستند از مانع خاص برای خریداران ایرانی در دفتر یک نوتاری مشخص، اما در برنامه‌ریزی زمانی معامله باید در نظر گرفته شود.'
                 : 'One specialist Romanian legal source explicitly names Iran among the countries that have not signed a reciprocal land-ownership treaty with Romania (alongside countries like the US, China, Turkey, and Japan) — meaning Iranian nationals, like most non-EU citizens, can only own the building itself (apartment/structure) and hold a "right of superficies" (drept de superficie), not full ownership, over the land beneath it. The common workaround remains the one described above: buying the property (land included) through a Romanian company (SRL) that you own. A separate point: Iran is on the EU\'s AML "high-risk country" list, which legally requires notaries and banks to apply Enhanced Due Diligence to transactions connected to such countries — this is a general legal fact, not a documented report of a specific hurdle for Iranian buyers at any particular notary\'s office, but it is worth factoring into your transaction timeline.'}
             </p>
+          </div>
+
+          {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                <FileCheck2 size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی' : 'Comprehensive document check and case eligibility review'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
@@ -671,6 +902,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               : "Romania remains a major European tech hub, but the real tax-planning lever for startup founders is no longer the (now-defunct) developer tax exemption — it's the micro-enterprise regime (Microîntreprindere): a flat 1% tax on revenue instead of 16% on profit, up to €100,000 in annual turnover, provided the company has at least one full-time employee. See the \"Company Tax Types\" page for full details on this regime."}
           </div>
 
+          {/* INLINE CTA 1: MID-ARTICLE */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -705,6 +959,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
             </div>
+          </div>
+
+          {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                <FileCheck2 size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی' : 'Comprehensive document check and case eligibility review'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
@@ -760,6 +1037,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
               : 'Maintaining strict financial compliance is essential for the legal operation of any company in Romania. Every registered entity, regardless of its size or activity level, is legally obligated to submit annual financial statements to the National Agency for Fiscal Administration (ANAF). These reports must be digitally signed and filed by the statutory deadline, usually the end of May. Even dormant companies that have conducted zero transactions must fulfill their reporting duties by submitting a declaration of inactivity to avoid severe penalties.'}
           </div>
 
+          {/* INLINE CTA 1: MID-ARTICLE */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h3 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -793,6 +1093,29 @@ export const CompanyOverviewContent: React.FC<CompanyOverviewContentProps> = ({
                 <li><span className="text-[11px] italic text-slate-400">{disclaimer}</span></li>
               </ul>
             </div>
+          </div>
+
+          {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                <FileCheck2 size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی' : 'Comprehensive document check and case eligibility review'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
