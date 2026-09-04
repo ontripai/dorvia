@@ -7,6 +7,7 @@ import { CommentsSection } from './CommentsSection';
 import { ExternalLink, CheckCircle, ShieldCheck, Clock, FileCheck2, AlertCircle, PhoneCall, Globe } from './Icons';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { FaqSchema } from './FaqSchema';
 
 interface TelecomGuideContentProps {
   currentLang: Language;
@@ -20,8 +21,24 @@ export const TelecomGuideContent: React.FC<TelecomGuideContentProps> = ({ curren
     }
   };
 
+  const telecomFaqs = [
+    {
+      q: currentLang === 'fa' ? 'بهترین اپراتورهای سیم‌کارت و اینترنت در رومانی کدامند؟' : 'Which telecom operators are best in Romania?',
+      a: currentLang === 'fa'
+        ? 'سه اپراتور اصلی Digi (RCS & RDS)، Orange و Vodafone بیشترین پوشش فیبر نوری پرسرعت و اینترنت موبایل 5G را در رومانی ارائه می‌دهند.'
+        : 'Digi (RCS & RDS), Orange, and Vodafone offer the fastest fiber broadband and widest 5G mobile coverage nationwide.'
+    },
+    {
+      q: currentLang === 'fa' ? 'آیا خرید سیم‌کارت اعتباری (Prepaid) در رومانی نیاز به پاسپورت دارد؟' : 'Is passport required for buying a prepaid SIM in Romania?',
+      a: currentLang === 'fa'
+        ? 'اگرچه از نظر قانونی ثبت هویت اجباری نیست، اما بیشتر باجه‌ها و نمایندگی‌ها از روی رویه داخلی پاسپورت خریدار را برای فعال‌سازی دریافت می‌کنند.'
+        : 'While not legally mandated, most official kiosks and shops request a passport or ID as standard retail practice.'
+    }
+  ];
+
   return (
     <div className={`space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8 ${currentLang === 'fa' ? 'text-right rtl' : 'text-left ltr'}`}>
+      <FaqSchema items={telecomFaqs} />
       <Breadcrumb slugRoute="needs/telecom" currentLang={currentLang} onNavigate={onNavigate} />
 
       {/* HERO PANEL */}

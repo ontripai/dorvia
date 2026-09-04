@@ -6,6 +6,8 @@ import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Language } from '../types';
 import { universitiesData } from '@/lib/universities';
 import { EvaluationCTA } from './EvaluationCTA';
+import { Breadcrumb } from './Breadcrumb';
+import { FaqSchema } from './FaqSchema';
 import { ChevronRight, ChevronLeft, ArrowLeft, ArrowRight, Home, ExternalLink } from './Icons';
 
 interface UniversityDetailContentProps {
@@ -88,56 +90,40 @@ export const UniversityDetailContent: React.FC<UniversityDetailContentProps> = (
   const Separator = currentLang === 'fa' ? ChevronLeft : ChevronRight;
   const BackArrow = currentLang === 'fa' ? ArrowRight : ArrowLeft;
 
+  const uniFaqs = [
+    {
+      q: currentLang === 'fa' ? `شهریه دانشگاه ${name} چقدر است؟` : `What is the tuition fee at ${name}?`,
+      a: currentLang === 'fa'
+        ? (uni.tuitionItems && uni.tuitionItems.length > 0 
+            ? `شهریه مقاطع مختلف بین ${uni.tuitionItems.map(t => `${t.program.fa}: ${(t.amount || 0).toLocaleString('fa-IR')} ${t.currency}`).join('، ')} است.`
+            : `شهریه بر اساس رشته تحصیلی و مقطع متغیر است و مستقیماً توسط دانشگاه تعیین می‌شود.`)
+        : (uni.tuitionItems && uni.tuitionItems.length > 0
+            ? `Tuition ranges across programs: ${uni.tuitionItems.map(t => `${t.program.en}: €${(t.amount || 0).toLocaleString()}`).join(', ')}.`
+            : `Tuition varies depending on program and degree level.`)
+    },
+    {
+      q: currentLang === 'fa' ? `آیا دانشگاه ${name} مورد تایید وزارت بهداشت یا علوم ایران است؟` : `Is ${name} accredited internationally?`,
+      a: currentLang === 'fa'
+        ? (uni.recognitionStatus === 'IRAN_MOH_APPROVED' ? `بله، این دانشگاه در لیست رسمی دانشگاه‌های معتبر و مورد تایید وزارت بهداشت و درمان ایران قرار دارد.` : `این دانشگاه به عنوان یکی از مراکز آموزشی معتبر و رسمی کشور رومانی و اتحادیه اروپا فعالیت دارد.`)
+        : `Yes, this institution is fully accredited under Romanian Ministry of Education standards and European Higher Education Area frameworks.`
+    },
+    {
+      q: currentLang === 'fa' ? `آیا امکان تحصیل به زبان انگلیسی در ${name} وجود دارد؟` : `Are English-taught programs available at ${name}?`,
+      a: currentLang === 'fa'
+        ? `بله، در رشته‌های مختلف برنامه‌های آموزشی به زبان‌های انگلیسی، فرانسوی یا رومانیایی (به همراه دوره سال مقدماتی زبان) ارائه می‌شود.`
+        : `Yes, multiple degree programs are available in English, French, or Romanian with preparatory language year options.`
+    }
+  ];
+
   return (
     <div className="space-y-8 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-      
-      {/* MOBILE STICKY BACK BAR */}
-      <div className="md:hidden sticky top-[80px] z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 py-2.5 shadow-sm text-xs transition-all">
-        <div className="flex items-center justify-between max-w-[1280px] mx-auto">
-          <Link
-            href="/universities"
-            className="flex items-center space-x-1.5 rtl:space-x-reverse font-bold text-[#2F6FED] hover:text-blue-700 transition-colors"
-          >
-            <BackArrow size={14} />
-            <span>{parentTitle}</span>
-          </Link>
-          <span className="text-slate-500 font-medium truncate max-w-[160px] text-left rtl:text-right">
-            {name}
-          </span>
-        </div>
-      </div>
-
-      {/* DESKTOP BREADCRUMB BAR */}
-      <nav aria-label="Breadcrumb" className={`hidden md:block py-2 text-xs font-semibold text-slate-500 ${currentLang === 'fa' ? 'text-right rtl' : 'text-left ltr'}`}>
-        <ol className="flex items-center flex-wrap gap-1.5 sm:gap-2">
-          <li>
-            <Link
-              href="/"
-              className="inline-flex items-center space-x-1 rtl:space-x-reverse hover:text-[#2F6FED] transition-colors"
-            >
-              <Home size={13} className="text-slate-400" />
-              <span>{homeTitle}</span>
-            </Link>
-          </li>
-          <li className="flex items-center text-slate-400">
-            <Separator size={12} className="mx-0.5" />
-          </li>
-          <li>
-            <Link
-              href="/universities"
-              className="hover:text-[#2F6FED] transition-colors"
-            >
-              {parentTitle}
-            </Link>
-          </li>
-          <li className="flex items-center text-slate-400">
-            <Separator size={12} className="mx-0.5" />
-          </li>
-          <li className="text-[#142033] font-bold truncate max-w-[320px]" aria-current="page">
-            {name}
-          </li>
-        </ol>
-      </nav>
+      <FaqSchema items={uniFaqs} />
+      <Breadcrumb
+        customTitle={name}
+        customParentPath="/universities"
+        customParentTitle={parentTitle}
+        currentLang={currentLang}
+      />
 
       {/* CAMPUS PHOTO BANNER (if available) */}
       {uni.photoUrl && !photoFailed && (

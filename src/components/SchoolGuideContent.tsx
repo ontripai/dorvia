@@ -7,6 +7,7 @@ import { CommentsSection } from './CommentsSection';
 import { ExternalLink, CheckCircle, ShieldCheck, Clock, FileCheck2, AlertCircle, GraduationCap, Building2 } from './Icons';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { FaqSchema } from './FaqSchema';
 
 interface SchoolGuideContentProps {
   currentLang: Language;
@@ -20,8 +21,24 @@ export const SchoolGuideContent: React.FC<SchoolGuideContentProps> = ({ currentL
     }
   };
 
+  const schoolFaqs = [
+    {
+      q: currentLang === 'fa' ? 'آیا فرزندان اتباع خارجی حق تحصیل در مدارس دولتی رایگان رومانی را دارند؟' : 'Can expat children attend free public schools in Romania?',
+      a: currentLang === 'fa'
+        ? 'بله، طبق قانون اساسی و مقررات آموزشی رومانی، تمامی کودکان دارای اقامت قانونی از حق تحصیل رایگان در سیستم مدارس دولتی برخوردارند.'
+        : 'Yes, children of foreign legal residents have the constitutional right to attend tuition-free Romanian public schools.'
+    },
+    {
+      q: currentLang === 'fa' ? 'معادلسازی کارنامه تحصیلی (Echivalare) توسط چه نهادی انجام می‌شود؟' : 'Which authority handles school report card recognition?',
+      a: currentLang === 'fa'
+        ? 'معادلسازی پایه‌های تحصیلی مدرسه توسط بازرسی آموزش استان مربوطه (ISJ در استان‌ها و ISMB در بخارست) انجام می‌گیرد.'
+        : 'School report card equivalency is processed by County School Inspectorates (ISJ / ISMB in Bucharest).'
+    }
+  ];
+
   return (
     <div className={`space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8 ${currentLang === 'fa' ? 'text-right rtl' : 'text-left ltr'}`}>
+      <FaqSchema items={schoolFaqs} />
       <Breadcrumb slugRoute="needs/school" currentLang={currentLang} onNavigate={onNavigate} />
 
       {/* HERO PANEL */}

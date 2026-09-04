@@ -7,6 +7,8 @@ import { CommentsSection } from './CommentsSection';
 import { ExternalLink, CheckCircle, ShieldCheck, Clock, FileCheck2, AlertCircle, Users } from './Icons';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
+import { FaqSchema } from './FaqSchema';
+import { ContextualLeadCapture } from './ContextualLeadCapture';
 
 interface HealthGuideContentProps {
   currentLang: Language;
@@ -20,8 +22,24 @@ export const HealthGuideContent: React.FC<HealthGuideContentProps> = ({ currentL
     }
   };
 
+  const healthFaqs = [
+    {
+      q: currentLang === 'fa' ? 'آیا دانشجویان خارجی در رومانی تحت پوشش بیمه رایگان قرار دارند؟' : 'Are international students in Romania eligible for free health insurance?',
+      a: currentLang === 'fa'
+        ? 'طبق قانون سلامت رومانی، دانشجویان زیر ۲۶ سال مشغول به تحصیل در دانشگاه‌های معتبر رومانی از پرداخت حق بیمه CASS معاف هستند و تحت پوشش بیمه عمومی CNAS قرار می‌گیرند.'
+        : 'Under Romanian health regulations, enrolled students under age 26 in accredited Romanian universities are exempt from CASS contributions and receive public healthcare coverage.'
+    },
+    {
+      q: currentLang === 'fa' ? 'چگونه می‌توان پزشک خانواده (Medic de Familie) را انتخاب کرد؟' : 'How do expats register with a family doctor in Romania?',
+      a: currentLang === 'fa'
+        ? 'با همراه داشتن کارت اقامت (Permis de Ședere)، شماره CNP و تاییدیه بیمه، می‌توانید به مطب هر پزشک خانواده دارای ظرفیت در منطقه سکونت خود مراجعه و ثبت‌نام کنید.'
+        : 'Present your residence permit card with CNP and insurance proof to any licensed family doctor in your residential district with available registration capacity.'
+    }
+  ];
+
   return (
     <div className={`space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8 ${currentLang === 'fa' ? 'text-right rtl' : 'text-left ltr'}`}>
+      <FaqSchema items={healthFaqs} />
       <Breadcrumb slugRoute="needs/health" currentLang={currentLang} onNavigate={onNavigate} />
 
       {/* HERO PANEL */}
@@ -419,6 +437,8 @@ export const HealthGuideContent: React.FC<HealthGuideContentProps> = ({ currentL
             </p>
           </div>
         </div>
+
+        <ContextualLeadCapture topic="general" currentLang={currentLang} />
 
         <ParentHubFooterCard slugRoute="needs/health" currentLang={currentLang} onNavigate={onNavigate} />
 

@@ -16,6 +16,7 @@ import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { OperationalGuideLayout } from './guide/OperationalGuideLayout';
 import { SectionPhoto } from './SectionPhoto';
 import { FaqSchema } from './FaqSchema';
+import { ContextualLeadCapture } from './ContextualLeadCapture';
 import { drivingLicenseEN } from '../content/guides/driving-license/en';
 import { drivingLicenseFA } from '../content/guides/driving-license/fa';
 import { firstDaysChecklistEN } from '../content/guides/first-days-checklist/en';
@@ -397,6 +398,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <Breadcrumb slugRoute="needs/driving-license" currentLang={currentLang} onNavigate={onNavigate} />
           <OperationalGuideLayout guide={guideData} translations={translations} />
+          <ContextualLeadCapture topic="driving-license" currentLang={currentLang} />
           <ParentHubFooterCard
             currentLang={currentLang}
             slugRoute="needs/driving-license"
@@ -1254,6 +1256,7 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <Breadcrumb slugRoute="needs/first-days-checklist" currentLang={currentLang} onNavigate={onNavigate} />
           <OperationalGuideLayout guide={guideData} translations={translations} />
+          <ContextualLeadCapture topic="first-days-checklist" currentLang={currentLang} />
           <ParentHubFooterCard
             currentLang={currentLang}
             slugRoute="needs/first-days-checklist"
