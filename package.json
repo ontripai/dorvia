@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "validate:content": "npx tsx scripts/validateContent.ts",
+    "validate:translations": "npx tsx scripts/validateTranslationsParity.ts",
     "validate:content-audit": "npx tsx scripts/validateContentRolloutAudit.ts",
     "validate:first-days-negative": "npx tsx scripts/validateFirstDaysNegativeTests.ts",
     "validate:universities": "npx tsx scripts/validateUniversities.ts",
     "validate:universities-negative": "npx tsx scripts/validateUniversitiesNegativeTests.ts",
-    "build": "npm run validate:content && npm run validate:universities && next build",
+    "build": "npm run validate:translations && npm run validate:content && npm run validate:universities && next build",
     "start": "next start",
     "lint": "next lint"
   },
