@@ -60,21 +60,7 @@ export default function AdminLeadsPage({ params }: AdminLeadsPageProps) {
 
     async function loadData() {
       try {
-        // 1. Check user session
-        if (!supabase) {
-          router.replace(`/${currentLang}/admin/login`);
-          return;
-        }
-
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) {
-          router.replace(`/${currentLang}/admin/login`);
-          return;
-        }
-
-        setAdminUser(user);
-
-        // 2. Fetch leads via server API
+        // 1. Authoritative check: Fetch leads and admin profile from server API (uses secure session cookies)
         const res = await fetch('/api/admin/leads');
         if (res.status === 401 || res.status === 403) {
           router.replace(`/${currentLang}/admin/login?error=unauthorized`);
@@ -85,10 +71,21 @@ export default function AdminLeadsPage({ params }: AdminLeadsPageProps) {
         if (isMounted) {
           if (json.leads) {
             setLeads(json.leads);
+            if (json.admin) {
+              setAdminUser(json.admin);
+            }
           } else {
             setFetchError(json.error || 'Failed to load leads');
           }
           setLoading(false);
+        }
+
+        // 2. Client-side SDK hydration fallback
+        if (supabase) {
+          const { data: { user } } = await supabase.auth.getUser();
+          if (user && isMounted) {
+            setAdminUser((prev: any) => prev || user);
+          }
         }
       } catch (err) {
         if (isMounted) {

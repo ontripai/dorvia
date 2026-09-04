@@ -116,8 +116,10 @@ export async function GET(request: Request, { params }: { params: { lang: string
   <script>
     (async function() {
       try {
+        console.log('[Admin Callback] Checking location hash for session tokens...');
         var hash = window.location.hash || '';
         if (!hash || !hash.includes('access_token=')) {
+          console.error('[Admin Callback] No access_token found in URL hash. Hash is empty or invalid.');
           window.location.replace('/${lang}/admin/login?error=invalid_link');
           return;
         }
@@ -127,10 +129,12 @@ export async function GET(request: Request, { params }: { params: { lang: string
         var refreshToken = params.get('refresh_token');
 
         if (!accessToken) {
+          console.error('[Admin Callback] Failed to parse access_token from hash fragment.');
           window.location.replace('/${lang}/admin/login?error=invalid_link');
           return;
         }
 
+        console.log('[Admin Callback] Valid token parsed from hash. Dispatching to /api/auth/session...');
         var res = await fetch('/api/auth/session', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -143,13 +147,18 @@ export async function GET(request: Request, { params }: { params: { lang: string
         });
 
         var data = await res.json().catch(function() { return null; });
+        console.log('[Admin Callback] /api/auth/session response:', res.status, data);
+
         if (res.ok && data && data.success && data.redirectTo) {
+          console.log('[Admin Callback] Session established successfully. Navigating to:', data.redirectTo);
           window.location.replace(data.redirectTo);
         } else {
-          window.location.replace(data && data.redirectTo ? data.redirectTo : ('/${lang}/admin/login?error=' + (data && data.error ? data.error : 'invalid_link')));
+          var errCode = (data && data.error) ? data.error : ('http_' + res.status);
+          console.error('[Admin Callback] Session verification failed with error code:', errCode, 'full response:', data);
+          window.location.replace(data && data.redirectTo ? data.redirectTo : ('/${lang}/admin/login?error=' + errCode));
         }
       } catch (err) {
-        console.error('Callback error:', err);
+        console.error('[Admin Callback] Exception caught during callback processing:', err);
         window.location.replace('/${lang}/admin/login?error=technical_error');
       }
     })();
