@@ -21,6 +21,7 @@ import { drivingLicenseEN } from '../content/guides/driving-license/en';
 import { drivingLicenseFA } from '../content/guides/driving-license/fa';
 import { firstDaysChecklistEN } from '../content/guides/first-days-checklist/en';
 import { firstDaysChecklistFA } from '../content/guides/first-days-checklist/fa';
+import { CostOfLivingCalculator } from './CostOfLivingCalculator';
 
 interface NeedsContentProps {
   subRoute: string;
@@ -68,6 +69,22 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Link href="/needs/cost-of-living" className="editorial-card p-6 bg-gradient-to-br from-blue-50/50 to-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between border-2 border-blue-200/60 shadow-sm">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="w-8 h-8 rounded-lg bg-[#2F6FED] text-white flex items-center justify-center font-bold text-sm shadow-sm">📊</span>
+                  <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-100 text-[#2F6FED] border border-blue-200">
+                    {currentLang === 'fa' ? 'ابزار هوشمند' : 'Interactive Tool'}
+                  </span>
+                </div>
+                <h4 className="font-extrabold text-base text-[#142033]">
+                  <span>{currentLang === 'fa' ? 'محاسبه‌گر هزینه زندگی در رومانی' : 'Cost of Living Calculator'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'تخمین آنلاین هزینه‌های ماهانه مسکن، خوراک، قبوض و جابجایی در بخارست، کلوژ و سایر شهرها.' : 'Estimate monthly rent, food, bills, and commute across Bucharest, Cluj, and other cities.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'شروع محاسبه هزینه‌ها' : 'Calculate Expenses'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </Link>
+
             <Link href="/needs/first-days-checklist" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -1376,6 +1393,11 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
 
           <ParentHubFooterCard slugRoute="needs/transportation" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
+      );
+
+    case 'cost-of-living':
+      return (
+        <CostOfLivingCalculator currentLang={currentLang} />
       );
 
     default:
