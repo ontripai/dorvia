@@ -79,9 +79,11 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
             alt={(currentLang === 'fa' ? university.photoCaptionFa : university.photoCaptionEn) || university.nameEn || 'University Campus'}
             width={400}
             height={144}
+            quality={80}
+            loading="lazy"
+            decoding="async"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             className="w-full h-36 object-cover"
-            loading="lazy"
             onError={() => setPhotoFailed(true)}
           />
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-3 py-1.5">

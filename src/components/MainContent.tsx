@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
@@ -197,14 +198,13 @@ export const MainContent: React.FC<MainContentProps> = ({
             <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-[#2F6FED]/10 rounded-full blur-3xl pointer-events-none" />
 
             {/* Decorative Bucharest skyline illustration */}
-            <img
+            <Image
               src="/images/illustrations/hero-skyline.svg"
               alt=""
               aria-hidden="true"
-              width="1440"
-              height="260"
-              fetchPriority="low"
-              loading="eager"
+              width={1440}
+              height={260}
+              priority
               className="absolute bottom-0 left-0 w-full h-[140px] sm:h-[200px] lg:h-[260px] object-cover object-bottom opacity-90 pointer-events-none select-none"
             />
 

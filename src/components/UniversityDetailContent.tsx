@@ -133,6 +133,7 @@ export const UniversityDetailContent: React.FC<UniversityDetailContentProps> = (
             alt={(currentLang === 'fa' ? uni.photoCaptionFa : uni.photoCaptionEn) || name}
             width={1200}
             height={480}
+            quality={85}
             priority
             sizes="(max-width: 1280px) 100vw, 1200px"
             className="w-full h-64 sm:h-96 object-cover"
