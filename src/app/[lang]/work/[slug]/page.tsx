@@ -15,7 +15,7 @@ export default function WorkSubPage({ params }: { params: { slug: string } }) {
         onNavigate={onNavigate}
         onOpenEvaluationModal={onOpenEvaluationModal}
       />
-      <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
+      <EvaluationCTA variant="work" currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
     </div>
   );
 }

@@ -10,11 +10,14 @@ import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { RelatedGuidesCard } from './RelatedGuidesCard';
 import { FaqSchema } from './FaqSchema';
 
+import { useAppContext } from './AppLayout';
+
 interface IgiProcessContentProps {
   currentLang: Language;
 }
 
 export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLang }) => {
+  const { onOpenEvaluationModal } = useAppContext();
   // Real photo is self-hosted under /public/images (see scripts/fetch-wikimedia-photos.js).
   // If it's ever missing, this hides the photo block gracefully instead of showing a broken-image icon.
   const [photoFailed, setPhotoFailed] = useState(false);
@@ -183,6 +186,29 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
             </p>
           </div>
         </div>
+      </div>
+
+      {/* INLINE CTA 1: MID-ARTICLE */}
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+        <div className="flex items-center space-x-3 rtl:space-x-reverse">
+          <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+            <ShieldCheck size={20} />
+          </div>
+          <div>
+            <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+              {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+            </h4>
+            <p className="text-xs text-[#526174]">
+              {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+            </p>
+          </div>
+        </div>
+        <button
+          onClick={onOpenEvaluationModal}
+          className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+        >
+          <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+        </button>
       </div>
 
       {/* SECTION 2: PREREQUISITES TABLE */}
@@ -599,6 +625,29 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
             </Link>
           </div>
         </div>
+      </div>
+
+      {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+      <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+        <div className="flex items-center space-x-3 rtl:space-x-reverse">
+          <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+            <FileCheck2 size={20} />
+          </div>
+          <div>
+            <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+              {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+            </h4>
+            <p className="text-xs text-[#526174]">
+              {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی IGI' : 'Document verification and profile check according to official IGI guidelines'}
+            </p>
+          </div>
+        </div>
+        <button
+          onClick={onOpenEvaluationModal}
+          className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+        >
+          <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+        </button>
       </div>
 
       {/* SECTION 8.5: FAQ */}

@@ -15,7 +15,7 @@ export default function CompanySubPage({ params }: { params: { slug: string } })
         onNavigate={onNavigate}
         onOpenEvaluationModal={onOpenEvaluationModal}
       />
-      <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
+      <EvaluationCTA variant="business" currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
     </div>
   );
 }

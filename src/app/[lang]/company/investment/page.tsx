@@ -10,7 +10,7 @@ export default function CompanyInvestmentPage() {
   return (
     <div className="space-y-12">
       <InvestmentOverviewContent currentLang={currentLang} onNavigate={onNavigate} />
-      <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
+      <EvaluationCTA variant="business" currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
     </div>
   );
 }

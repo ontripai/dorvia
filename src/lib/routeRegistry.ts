@@ -45,6 +45,16 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     inSitemap: true,
     pageType: 'special'
   },
+  'assessment': {
+    canonical: '/assessment',
+    aliases: [],
+    parentHub: null,
+    titleFa: 'ارزیابی رایگان DORVIA PathFinder',
+    titleEn: 'DORVIA PathFinder Free Assessment',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'special'
+  },
   'universities': {
     canonical: '/universities',
     aliases: [],
