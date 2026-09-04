@@ -38,10 +38,13 @@ const PHOTOS = [
 
   // University campus photos — src/lib/universities.ts
   { file: '8 Bulevardul Eroii Sanitari, Bucharest (01).jpg', width: 800, out: 'public/images/universities/carol-davila.jpg' },
+  { file: 'Victor Babeș University of Medicine and Pharmacy, Timișoara.jpg', width: 800, out: 'public/images/universities/victor-babes.jpg' },
   { file: 'UMF Iași.jpg', width: 800, out: 'public/images/universities/umf-iasi.jpg' },
+  { file: 'Cluj-Napoca- UMF-IMG 1313.JPG', width: 800, out: 'public/images/universities/iuliu-hatieganu.jpg' },
   { file: 'Universitatea Bucuresti, Piata Universitatii (1).JPG', width: 800, out: 'public/images/universities/bucharest.jpg' },
   { file: 'Politehnica University of Bucharest.jpg', width: 800, out: 'public/images/universities/politehnica.jpg' },
   { file: 'Cladirea ASE Bucuresti.jpg', width: 800, out: 'public/images/universities/ase.jpg' },
+  { file: 'Universitatea Titu Maiorescu.jpg', width: 800, out: 'public/images/universities/titu-maiorescu.jpg' },
 
   // dre-p36: "make every page feel alive" pass — one topical hero photo per major
   // section hub plus the strongest-matched sub-page in each section. Every filename

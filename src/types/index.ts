@@ -57,6 +57,23 @@ export interface VerifiedProgram {
   languages: TeachingLanguage[];
 }
 
+export interface UniversityRankingFact {
+  labelFa: string;
+  labelEn: string;
+  valueFa: string;
+  valueEn: string;
+  sourceUrl: string;
+  sourceLabelFa: string;
+  sourceLabelEn: string;
+}
+
+export interface UniversityDegreeLevel {
+  levelFa: string;
+  levelEn: string;
+  fieldsFa: string;
+  fieldsEn: string;
+}
+
 export interface University {
   id: string;
   displayOrder: number;
@@ -88,6 +105,11 @@ export interface University {
   photoUrl?: string;
   photoCaptionFa?: string;
   photoCaptionEn?: string;
+  officialWebsite?: string;
+  foundedYear?: number;
+  rankingFacts?: UniversityRankingFact[];
+  degreeLevels?: UniversityDegreeLevel[];
+  facilities?: { fa: string; en: string }[];
 }
 
 export interface City {
