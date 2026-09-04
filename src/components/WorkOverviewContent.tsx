@@ -1076,7 +1076,7 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             }
           ]} />
 
-          <RelatedGuidesCard items={['company/tax-types']} currentLang={currentLang} onNavigate={onNavigate} />
+          <RelatedGuidesCard items={['needs/cost-of-living', 'company/tax-types']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="work/taxes-salaries" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -1456,7 +1456,7 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             }
           ]} />
 
-          <RelatedGuidesCard items={['needs/banking', 'needs/health']} currentLang={currentLang} onNavigate={onNavigate} />
+          <RelatedGuidesCard items={['needs/cost-of-living', 'needs/banking', 'needs/health']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="work/digital-nomad" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
@@ -1614,6 +1614,15 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                   {currentLang === 'fa' ? 'می‌خواهید کسب‌وکار و شرکت شخصی خودتان را داشته باشید؟ ' : 'Want to incorporate your own business in Romania? '}
                   <Link href="/company/registration" className="text-[#2F6FED] font-bold hover:underline">
                     {currentLang === 'fa' ? 'راهنمای کامل ثبت شرکت (SRL) را ببینید ←' : 'See company registration guide →'}
+                  </Link>
+                </span>
+              </div>
+              <div className="flex items-start space-x-2 rtl:space-x-reverse">
+                <span className="text-[#2F6FED] font-bold">▪</span>
+                <span>
+                  {currentLang === 'fa' ? 'می‌خواهید بدانید درآمد ماهانه پاسخگوی هزینه‌ها در شهر مدنظرتان هست؟ ' : 'Want to know if your income covers living costs in your target city? '}
+                  <Link href="/needs/cost-of-living" className="text-[#2F6FED] font-bold hover:underline">
+                    {currentLang === 'fa' ? 'محاسبه‌گر هزینه زندگی در شهرهای رومانی را ببینید ←' : 'See the Cost of Living Calculator →'}
                   </Link>
                 </span>
               </div>

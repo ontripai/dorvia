@@ -89,6 +89,7 @@ export const UniversityDetailContent: React.FC<UniversityDetailContentProps> = (
   const parentTitle = currentLang === 'fa' ? 'دانشگاه‌ها' : 'Universities';
   const Separator = currentLang === 'fa' ? ChevronLeft : ChevronRight;
   const BackArrow = currentLang === 'fa' ? ArrowRight : ArrowLeft;
+  const ArrowIcon = currentLang === 'fa' ? ArrowLeft : ArrowRight;
 
   const uniFaqs = [
     {
@@ -417,6 +418,33 @@ export const UniversityDetailContent: React.FC<UniversityDetailContentProps> = (
           </div>
         )}
       </section>
+
+      {/* COST OF LIVING CONTEXTUAL CALLOUT */}
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+        <div className="space-y-1.5 text-center sm:text-start">
+          <div className="inline-flex items-center space-x-1.5 rtl:space-x-reverse text-xs font-bold text-[#2F6FED] uppercase tracking-wider">
+            <span>💰</span>
+            <span>{currentLang === 'fa' ? `برآورد هزینه‌های زندگی در ${city}` : `Living Expenses in ${city}`}</span>
+          </div>
+          <h3 className="text-base sm:text-lg font-extrabold text-[#142033]">
+            {currentLang === 'fa'
+              ? `هزینه ماهانه زندگی دانشجویی و اجاره مسکن در ${city} چقدر است؟`
+              : `What does it cost to live and study in ${city}?`}
+          </h3>
+          <p className="text-xs sm:text-sm text-[#526174] max-w-xl">
+            {currentLang === 'fa'
+              ? `برای برآورد دقیق هزینه‌های مسکن، خوابگاه دانشجویی، خوراک، حمل‌ونقل و قبوض در ${city}، از محاسبه‌گر هوشمند هزینه زندگی استفاده کنید.`
+              : `Estimate monthly expenses for housing, student dorms, groceries, public transit, and utilities in ${city} using our interactive calculator.`}
+          </p>
+        </div>
+        <Link
+          href="/needs/cost-of-living"
+          className="flex-shrink-0 inline-flex items-center space-x-2 rtl:space-x-reverse px-6 py-3 bg-[#2F6FED] hover:bg-blue-700 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all hover:-translate-y-0.5 cursor-pointer"
+        >
+          <span>{currentLang === 'fa' ? `محاسبه هزینه زندگی در ${city}` : `Calculate Living Cost`}</span>
+          <ArrowIcon size={14} />
+        </Link>
+      </div>
 
       {/* OFFICIAL ACTIONS BAR */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-[#071B3D] rounded-3xl text-white shadow-lg">
