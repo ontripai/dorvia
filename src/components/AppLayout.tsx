@@ -8,7 +8,7 @@ import { stripLocalePrefix } from '../lib/locale-router';
 import { getNavPath } from '../lib/navigation';
 import { Header } from './Header';
 import { Footer } from './Footer';
-import { LeadForm } from './LeadForm';
+import { PathFinderAssessment } from './PathFinderAssessment';
 import { PhoneCall, Sparkles, Menu, Search } from './Icons';
 
 // Create a context so page components can access global state and functions
@@ -158,7 +158,12 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
           </button>
         </nav>
 
-        {/* Evaluation Modal */}
+        {/* Evaluation Modal — DORVIA PathFinder assessment (replaces the old
+            3-step LeadForm as of the PathFinder Phase 1 rollout; see
+            claude/dorvia-pathfinder-full-spec-v1-2026-09-04.md). Every
+            existing entry point above (Header, Footer, mobile nav) and every
+            <EvaluationCTA> on any page all just call onOpenEvaluationModal(),
+            so this single swap upgrades all of them at once. */}
         {isEvaluationModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fadeIn overflow-y-auto">
             <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white shadow-2xl border border-[#dfe6ef]">
@@ -170,12 +175,10 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
                 ×
               </button>
               <div className="p-2 sm:p-4">
-                <LeadForm
+                <PathFinderAssessment
                   currentLang={currentLang}
                   isModal={true}
-                  onSuccess={() => {
-                    setTimeout(() => setIsEvaluationModalOpen(false), 2500);
-                  }}
+                  onSuccess={() => setIsEvaluationModalOpen(false)}
                 />
               </div>
             </div>

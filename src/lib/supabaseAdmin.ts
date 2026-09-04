@@ -83,3 +83,64 @@ export async function recordWebsiteLead(input: WebsiteLeadInput): Promise<{ succ
     return { success: false };
   }
 }
+
+// ---------------------------------------------------------------------------
+// DORVIA PathFinder — Assessment leads
+// ---------------------------------------------------------------------------
+// Kept as a separate function (rather than extending recordWebsiteLead) so
+// the existing, already-validated /api/evaluation write path is untouched.
+// PathFinder writes to the SAME `leads` table (source='website_pathfinder')
+// per the architecture decision in
+// claude/dorvia-conversion-audit-and-pathfinder-spec-2026-09-03.md — no new
+// table/migration. The full question-by-question answers and computed
+// scores are stored in `raw_meta` (jsonb), which already exists on the
+// table for exactly this kind of structured payload.
+
+export interface PathfinderLeadInput {
+  fullName: string;
+  whatsapp?: string;
+  email?: string;
+  preferredLanguage?: string;
+  primaryRoute: string;
+  secondaryRoute?: string | null;
+  profileScore: number;
+  leadTemperature: string;
+  channelRef?: string;
+  rawMeta: Record<string, unknown>;
+}
+
+export async function recordPathfinderLead(input: PathfinderLeadInput): Promise<{ success: boolean }> {
+  if (!supabaseAdmin) {
+    return { success: false };
+  }
+
+  try {
+    const { error } = await supabaseAdmin.from('leads').insert([
+      {
+        source: 'website_pathfinder',
+        channel_ref: input.channelRef || null,
+        full_name: input.fullName,
+        phone: input.whatsapp || null,
+        email: input.email || null,
+        site_goal: toSiteGoal(input.primaryRoute),
+        unified_category: input.primaryRoute || null,
+        message: `PathFinder — primary: ${input.primaryRoute} (${input.profileScore}/100)${
+          input.secondaryRoute ? `, secondary: ${input.secondaryRoute}` : ''
+        }, lead: ${input.leadTemperature}`,
+        status: input.leadTemperature === 'hot' ? 'new' : 'new',
+        consent_terms: true,
+        marketing_consent: false,
+        raw_meta: input.rawMeta,
+      },
+    ]);
+
+    if (error) {
+      console.error('Supabase PathFinder lead insert error (Internal)');
+      return { success: false };
+    }
+    return { success: true };
+  } catch (err) {
+    console.error('Error recording PathFinder lead to Supabase (Internal)');
+    return { success: false };
+  }
+}
