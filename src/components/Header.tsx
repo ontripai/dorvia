@@ -42,8 +42,9 @@ export const Header: React.FC<HeaderProps> = ({
   const setSearchDialogOpen = onSearchDialogOpenChange;
   const pathname = usePathname() || '/';
 
-  // EXACT 7 PRIMARY NAVIGATION ITEMS
+  // PRIMARY NAVIGATION ITEMS
   const primaryNavItems = [
+    { id: 'assessment', label: currentLang === 'fa' ? 'مسیر من چیست؟' : 'Find My Path' },
     { id: 'start-here', label: currentLang === 'fa' ? 'شروع از اینجا' : 'Start Here', megaMenu: 'starthere' as const },
     { id: 'immigration', label: currentLang === 'fa' ? 'مهاجرت و اقامت' : 'Immigration', megaMenu: 'immigration' as const },
     { id: 'study', label: currentLang === 'fa' ? 'تحصیل و بورسیه' : 'Study', megaMenu: 'study' as const },
@@ -156,7 +157,7 @@ export const Header: React.FC<HeaderProps> = ({
             size="sm"
             onClick={onOpenEvaluationModal}
           >
-            {currentLang === 'fa' ? 'ارزیابی رایگان' : 'Free Assessment'}
+            {currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}
           </Button>
 
         </div>
@@ -192,7 +193,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={onOpenEvaluationModal}
             className="hidden sm:inline-flex !px-3 !py-1 !text-[11px] !min-h-[44px]"
           >
-            {currentLang === 'fa' ? 'ارزیابی' : 'Audit'}
+            {currentLang === 'fa' ? '🔎 ارزیابی' : '🔎 Assessment'}
           </Button>
 
           <button

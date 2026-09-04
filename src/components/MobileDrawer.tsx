@@ -279,8 +279,8 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
         </button>
       </div>
 
-      {/* Search Entry Point */}
-      <div className="px-6 pt-4 shrink-0">
+      {/* Search Entry Point & Find My Path */}
+      <div className="px-6 pt-4 shrink-0 space-y-2.5">
         <button
           onClick={() => {
             onClose();
@@ -291,6 +291,22 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
           <Search size={18} className="text-[#5B93F5] shrink-0" />
           <span>{isFa ? 'جستجوی راهنماها و خدمات...' : 'Search guides & services...'}</span>
         </button>
+
+        <Link
+          href={getNavPath('assessment', pathname)}
+          onClick={() => handleLeafClick('assessment')}
+          className={`w-full flex items-center justify-between px-4 py-3 rounded-xl min-h-[48px] text-sm font-bold transition-all cursor-pointer ${
+            activeRoute === 'assessment'
+              ? 'bg-[#2F6FED] text-white shadow-md'
+              : 'bg-[#2F6FED]/15 text-[#7FA8F7] hover:bg-[#2F6FED]/25 border border-[#2F6FED]/30'
+          }`}
+        >
+          <span className="flex items-center gap-2">
+            <span>🧭</span>
+            <span>{isFa ? 'مسیر من چیست؟' : 'Find My Path'}</span>
+          </span>
+          <ArrowIcon size={14} />
+        </Link>
       </div>
 
       {/* Main Drawer Accordion */}
@@ -404,7 +420,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
           }}
           className="w-full min-h-[44px]"
         >
-          {currentLang === 'fa' ? 'ارزیابی رایگان' : 'Free Assessment'}
+          {currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}
         </Button>
 
         <Button

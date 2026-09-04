@@ -336,6 +336,7 @@ function UniversitiesContent() {
       )}
 
       <EvaluationCTA
+        variant="study"
         currentLang={currentLang}
         onOpenModal={onOpenEvaluationModal}
       />

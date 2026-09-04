@@ -34,6 +34,8 @@ export const enTranslations = {
   },
   nav: {
     home: "Home",
+    assessment: "Find My Path",
+    notSurePath: "Not sure which path fits you?",
     immigration: "Immigration",
     study: "Study in Romania",
     work: "Work Permits",
@@ -46,15 +48,15 @@ export const enTranslations = {
     articles: "Articles & News",
     aboutUs: "About Us",
     contact: "Contact Us",
-    freeEvaluation: "Free Evaluation",
-    bookConsultation: "Book Consultation"
+    freeEvaluation: "🔎 Free Case Evaluation",
+    bookConsultation: "📅 Book Personal Consultation"
   },
   hero: {
     badge: "Official European Union & Schengen Member",
     headline: "Your Reliable Pathway for Education, Career, Business & Life in Romania",
     subheadline: "We review your profile based on your goal, education, work history, budget, and family status, and show you which pathways are worth exploring.",
-    ctaPrimary: "Evaluate My Case",
-    ctaSecondary: "Book Consultation",
+    ctaPrimary: "🔎 Free Case Evaluation",
+    ctaSecondary: "📅 Book Personal Consultation",
     trustNote: "⏱ Takes about 3 minutes  |  🔒 No sensitive documents required  |  📋 Instant initial result"
   },
   pathways: {

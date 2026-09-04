@@ -268,7 +268,7 @@ export const MainContent: React.FC<MainContentProps> = ({
                       className="text-xs text-slate-300 hover:text-[#F4F7FC] font-semibold inline-flex items-center space-x-2 rtl:space-x-reverse transition-colors cursor-pointer"
                     >
                       <Calendar size={14} className="text-[#F4F7FC]" />
-                      <span>{currentLang === 'fa' ? 'رزرو مشاوره تخصصی' : 'Schedule Personal Consultation'}</span>
+                      <span>{currentLang === 'fa' ? '📅 رزرو مشاوره تخصصی' : '📅 Book Personal Consultation'}</span>
                     </button>
                   </div>
 
@@ -757,14 +757,14 @@ export const MainContent: React.FC<MainContentProps> = ({
                   onClick={onOpenEvaluationModal}
                   rightIcon={<ArrowIcon size={16} />}
                 >
-                  {currentLang === 'fa' ? 'شروع ارزیابی رایگان' : 'Start Free Assessment'}
+                  {currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}
                 </Button>
                 <Button
                   variant="outline"
                   size="md"
                   onClick={onOpenEvaluationModal}
                 >
-                  {currentLang === 'fa' ? 'رزرو مشاوره' : 'Schedule Consultation'}
+                  {currentLang === 'fa' ? '📅 رزرو مشاوره تخصصی' : '📅 Book Personal Consultation'}
                 </Button>
               </div>
             </div>
@@ -985,7 +985,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
 
             <div>
-              <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
+              <EvaluationCTA variant="study" currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
             </div>
           </div>
         </div>

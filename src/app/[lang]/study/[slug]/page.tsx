@@ -17,7 +17,7 @@ export default function StudySubPage({ params }: { params: { slug: string } }) {
     return (
       <div className="space-y-12">
         <ScholarshipOverviewContent currentLang={currentLang} />
-        <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
+        <EvaluationCTA variant="study" currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
       </div>
     );
   }

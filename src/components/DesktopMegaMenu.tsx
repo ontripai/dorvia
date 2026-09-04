@@ -99,7 +99,7 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 rightIcon={<ArrowIcon size={14} />}
                 className="mt-4 w-full"
               >
-                {currentLang === 'fa' ? 'شروع ارزیابی رایگان' : 'Start Free Assessment'}
+                {currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}
               </Button>
             </div>
 
@@ -179,7 +179,7 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 rightIcon={<ArrowIcon size={14} />}
                 className="mt-4 w-full"
               >
-                {currentLang === 'fa' ? 'شروع ارزیابی رایگان' : 'Start Free Assessment'}
+                {currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}
               </Button>
             </div>
 

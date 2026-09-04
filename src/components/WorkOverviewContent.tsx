@@ -1336,7 +1336,7 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
 
           {/* 5. EVALUATION CTA AT BOTTOM */}
           <div className="pt-6">
-            <EvaluationCTA currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
+            <EvaluationCTA variant="work" currentLang={currentLang} onOpenModal={onOpenEvaluationModal} />
           </div>
         </div>
       );
