@@ -9,6 +9,7 @@ import { getNavPath } from '../lib/navigation';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { PathFinderAssessment } from './PathFinderAssessment';
+import { I18nParityBanner } from './I18nParityBanner';
 import { PhoneCall, Sparkles, Menu, Search } from './Icons';
 
 // Create a context so page components can access global state and functions
@@ -101,6 +102,7 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
 
         {/* Main Content Area */}
         <main className="flex-1 pt-20 sm:pt-24">
+          <I18nParityBanner currentLang={currentLang} routePath={pathname} />
           {children}
         </main>
 

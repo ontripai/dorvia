@@ -8,6 +8,8 @@ import { ExternalLink, CheckCircle, ShieldCheck, Clock, FileCheck2, AlertCircle,
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { SectionPhoto } from './SectionPhoto';
+import { FaqSchema } from './FaqSchema';
+import { ContextualLeadCapture } from './ContextualLeadCapture';
 
 interface BankingGuideContentProps {
   currentLang: Language;
@@ -21,8 +23,30 @@ export const BankingGuideContent: React.FC<BankingGuideContentProps> = ({ curren
     }
   };
 
+  const bankingFaqs = [
+    {
+      q: currentLang === 'fa' ? 'آیا بدون کارت اقامت (Permis de Ședere) می‌توان در رومانی حساب بانکی باز کرد؟' : 'Can foreign nationals open a Romanian bank account without a residence permit?',
+      a: currentLang === 'fa'
+        ? 'بیشتر بانک‌های تجاری برای فعال‌سازی کامل حساب به ارائه کارت اقامت دارای کد شناسایی ملی (CNP) نیاز دارند؛ با این حال برخی بانک‌ها با ویزای تایپ D و پاسپورت حساب اولیه باز می‌کنند.'
+        : 'Most commercial banks require a physical residence permit card bearing a CNP; however, select branches may open non-resident accounts with a Type D visa and passport.'
+    },
+    {
+      q: currentLang === 'fa' ? 'کدام بانک‌های رومانی بیشترین شعبه و سهولت افتتاح حساب را برای خارجی‌ها دارند؟' : 'Which Romanian banks are most expat-friendly?',
+      a: currentLang === 'fa'
+        ? 'بانک‌های BCR (گروه Erste)، Banca Transilvania (BT)، BRD (گروه سوسته‌ژنرال) و ING رومانی دارای بیشترین شعب و پشتیبانی آنلاین زبان انگلیسی هستند.'
+        : 'BCR (Erste Group), Banca Transilvania (BT), BRD (Société Générale), and ING Romania offer extensive branch networks and English-language mobile banking.'
+    },
+    {
+      q: currentLang === 'fa' ? 'آیا استفاده از نئوبانک‌هایی مانند Revolut در رومانی رایج است؟' : 'Is Revolut widely used in Romania?',
+      a: currentLang === 'fa'
+        ? 'بله، Revolut دارای مجوز رسمی بانکی در رومانی با شماره شبا (IBAN) محلی لئو است و برای پرداخت‌های روزمره بسیار محبوب است.'
+        : 'Yes, Revolut operates with a local Romanian IBAN (via partner banks) and is exceptionally popular for daily transactions.'
+    }
+  ];
+
   return (
     <div className={`space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8 ${currentLang === 'fa' ? 'text-right rtl' : 'text-left ltr'}`}>
+      <FaqSchema items={bankingFaqs} />
       <Breadcrumb slugRoute="needs/banking" currentLang={currentLang} onNavigate={onNavigate} />
 
       {/* HERO PANEL */}
@@ -420,6 +444,8 @@ export const BankingGuideContent: React.FC<BankingGuideContentProps> = ({ curren
             </p>
           </div>
         </div>
+        
+        <ContextualLeadCapture topic="banking" currentLang={currentLang} />
 
         <ParentHubFooterCard slugRoute="needs/banking" currentLang={currentLang} onNavigate={onNavigate} />
 
