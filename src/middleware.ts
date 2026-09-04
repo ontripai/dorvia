@@ -1,41 +1,74 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+const SUPPORTED_LOCALES = ['fa', 'en'] as const;
+const DEFAULT_LOCALE = 'fa';
+
+const KNOWN_SECTIONS = [
+  'about',
+  'articles',
+  'assessment',
+  'company',
+  'contact',
+  'immigration',
+  'legal',
+  'needs',
+  'romania',
+  'services',
+  'start-here',
+  'study',
+  'universities',
+  'work'
+];
+
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, search } = request.nextUrl;
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.delete('x-dorvia-locale');
-
-  const firstSegment = pathname.split('/')[1];
 
   const nextWithHeaders = () => NextResponse.next({
     request: { headers: requestHeaders }
   });
 
-  // Ignore static assets, next internals, and already localized paths
+  // 1. Ignore static assets, Next internals, api endpoints, root, and admin
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
-    pathname.startsWith('/fa/') || pathname === '/fa' ||
-    pathname.startsWith('/en/') || pathname === '/en' ||
-    pathname.match(/\.(.*)$/) ||
     pathname === '/' ||
-    pathname.startsWith('/admin')
+    pathname.startsWith('/admin') ||
+    pathname.match(/\.(.*)$/)
   ) {
     return nextWithHeaders();
   }
 
-  // Only redirect known unprefixed legacy routes to /fa equivalents
-  const exactRoutes = ['/about', '/contact', '/legal/privacy', '/legal/terms', '/legal/disclaimer'];
-  const knownPrefixes = ['/articles', '/company', '/immigration', '/needs', '/romania', '/services', '/start-here', '/study', '/universities', '/work'];
+  // 2. Check if already localized with a supported locale
+  const segments = pathname.split('/').filter(Boolean);
+  const firstSegment = segments[0];
 
-  if (
-    exactRoutes.includes(pathname) ||
-    knownPrefixes.some(route => pathname === route || pathname.startsWith(`${route}/`))
-  ) {
+  if (SUPPORTED_LOCALES.includes(firstSegment as any)) {
+    return nextWithHeaders();
+  }
+
+  // 3. Handle legacy /evaluation route specifically -> /fa/assessment
+  if (pathname === '/evaluation' || pathname.startsWith('/evaluation/')) {
     const url = request.nextUrl.clone();
-    url.pathname = `/fa${pathname}`;
+    url.pathname = `/fa/assessment`;
+    return NextResponse.redirect(url, 308);
+  }
+
+  // 4. Handle known top-level sections without locale prefix (e.g. /study, /needs/driving-license, /assessment)
+  if (KNOWN_SECTIONS.includes(firstSegment)) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/${DEFAULT_LOCALE}${pathname}`;
+    return NextResponse.redirect(url, 308);
+  }
+
+  // 5. Fallback for unrecognized prefixes (e.g., unsupported locale code like /fr/study -> /fa/study)
+  if (segments.length > 1 && KNOWN_SECTIONS.includes(segments[1])) {
+    const cleanPath = '/' + segments.slice(1).join('/');
+    const url = request.nextUrl.clone();
+    url.pathname = `/${DEFAULT_LOCALE}${cleanPath}`;
     return NextResponse.redirect(url, 308);
   }
 
@@ -45,7 +78,7 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     /*
-     * Match all request paths except for the ones starting with:
+     * Match all request paths except for:
      * - api (API routes)
      * - _next/static (static files)
      * - _next/image (image optimization files)

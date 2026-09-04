@@ -1,5 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 
+// Security assertion: Ensure supabaseAdmin is never executed in a client/browser environment
+if (typeof window !== 'undefined') {
+  throw new Error('FATAL SECURITY VIOLATION: supabaseAdmin must NEVER be imported or executed on the client bundle.');
+}
+
 // Server-only admin client for the unified DORVIA leads backend.
 // Deliberately separate from `./supabase.ts` (which uses the public anon key
 // for browser-side reads/writes like page comments): this client uses the
