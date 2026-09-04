@@ -134,8 +134,10 @@ export async function GET(request: Request, { params }: { params: { lang: string
   <script>
     (async function() {
       try {
+        console.log('[Portal Callback] Checking location hash for session tokens...');
         var hash = window.location.hash || '';
         if (!hash || !hash.includes('access_token=')) {
+          console.error('[Portal Callback] No access_token found in URL hash. Hash is empty or invalid.');
           window.location.replace('/${lang}/portal/login?error=invalid_or_expired_link');
           return;
         }
@@ -145,10 +147,12 @@ export async function GET(request: Request, { params }: { params: { lang: string
         var refreshToken = params.get('refresh_token');
 
         if (!accessToken) {
+          console.error('[Portal Callback] Failed to parse access_token from hash fragment.');
           window.location.replace('/${lang}/portal/login?error=invalid_or_expired_link');
           return;
         }
 
+        console.log('[Portal Callback] Valid token parsed from hash. Dispatching to /api/auth/session...');
         var res = await fetch('/api/auth/session', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -161,13 +165,18 @@ export async function GET(request: Request, { params }: { params: { lang: string
         });
 
         var data = await res.json().catch(function() { return null; });
+        console.log('[Portal Callback] /api/auth/session response:', res.status, data);
+
         if (res.ok && data && data.success && data.redirectTo) {
+          console.log('[Portal Callback] Session established successfully. Navigating to:', data.redirectTo);
           window.location.replace(data.redirectTo);
         } else {
-          window.location.replace(data && data.redirectTo ? data.redirectTo : ('/${lang}/portal/login?error=' + (data && data.error ? data.error : 'invalid_or_expired_link')));
+          var errCode = (data && data.error) ? data.error : ('http_' + res.status);
+          console.error('[Portal Callback] Session verification failed with error code:', errCode, 'full response:', data);
+          window.location.replace(data && data.redirectTo ? data.redirectTo : ('/${lang}/portal/login?error=' + errCode));
         }
       } catch (err) {
-        console.error('Portal callback error:', err);
+        console.error('[Portal Callback] Exception caught during callback processing:', err);
         window.location.replace('/${lang}/portal/login?error=technical_error');
       }
     })();

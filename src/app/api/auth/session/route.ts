@@ -106,6 +106,10 @@ export async function POST(request: Request) {
         return createResponse({
           success: true,
           redirectTo: `/${lang}/admin/leads`,
+          user: {
+            id: authUser.id,
+            email: authUser.email,
+          },
         });
       }
 
@@ -142,6 +146,10 @@ export async function POST(request: Request) {
           return createResponse({
             success: true,
             redirectTo: `/${lang}/portal/dashboard`,
+            user: {
+              id: authUser.id,
+              email: authUser.email,
+            },
           });
         }
 
@@ -158,6 +166,10 @@ export async function POST(request: Request) {
             return createResponse({
               success: true,
               redirectTo: `/${lang}/portal/dashboard`,
+              user: {
+                id: authUser.id,
+                email: authUser.email,
+              },
             });
           }
         }

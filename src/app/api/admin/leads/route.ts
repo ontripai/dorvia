@@ -28,7 +28,7 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Failed to fetch leads.' }, { status: 500 });
     }
 
-    return NextResponse.json({ leads: leads || [] });
+    return NextResponse.json({ leads: leads || [], admin });
   } catch (error) {
     console.error('Unexpected error fetching admin leads:', error);
     return NextResponse.json({ error: 'Internal server error.' }, { status: 500 });
