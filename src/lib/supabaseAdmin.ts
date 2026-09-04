@@ -117,8 +117,8 @@ export async function recordPathfinderLead(input: PathfinderLeadInput): Promise<
   try {
     const { error } = await supabaseAdmin.from('leads').insert([
       {
-        source: 'website_pathfinder',
-        channel_ref: input.channelRef || null,
+        source: 'website',
+        channel_ref: input.channelRef || 'pathfinder',
         full_name: input.fullName,
         phone: input.whatsapp || null,
         email: input.email || null,

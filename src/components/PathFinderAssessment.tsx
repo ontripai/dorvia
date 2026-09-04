@@ -43,6 +43,7 @@ export const PathFinderAssessment: React.FC<PathFinderAssessmentProps> = ({ curr
   const [leadName, setLeadName] = useState('');
   const [leadWhatsapp, setLeadWhatsapp] = useState('');
   const [leadEmail, setLeadEmail] = useState('');
+  const [leadTelegram, setLeadTelegram] = useState('');
   const [leadConsent, setLeadConsent] = useState(false);
   const [leadCaptured, setLeadCaptured] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -62,7 +63,7 @@ export const PathFinderAssessment: React.FC<PathFinderAssessmentProps> = ({ curr
           {t(lang, 'نسخه آزمایشی — فرم غیرفعال است', 'Preview Mode — Form Disabled')}
         </h3>
         <p className="text-sm text-[#526174] leading-relaxed mb-6">
-          {t(lang, 'ارسال آنلاین موقتاً در دسترس نیست. لطفاً از واتساپ، تلفن یا ایمیل استفاده کنید.', 'Online submission is temporarily unavailable. Please contact us via WhatsApp, phone, or email.')}
+          {t(lang, 'ارسال آنلاین موقتاً در دسترس نیست. لطفاً از واتساپ، تلفن، ایمیل یا تلگرام استفاده کنید.', 'Online submission is temporarily unavailable. Please contact us via WhatsApp, phone, email, or Telegram.')}
         </p>
         <div className="space-y-2 text-sm font-bold text-[#2F6FED]">
           <p>📞 +40 727 348 009</p>
@@ -128,8 +129,8 @@ export const PathFinderAssessment: React.FC<PathFinderAssessmentProps> = ({ curr
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!leadName.trim() || (!leadWhatsapp.trim() && !leadEmail.trim())) {
-      setErrorMsg(t(lang, 'لطفاً نام و حداقل یک راه ارتباطی (واتساپ یا ایمیل) را وارد کنید.', 'Please enter your name and at least one contact method (WhatsApp or email).'));
+    if (!leadName.trim() || !leadWhatsapp.trim() || !leadEmail.trim()) {
+      setErrorMsg(t(lang, 'لطفاً نام و نام خانوادگی، شماره تلفن و ایمیل را وارد کنید — هر سه مورد الزامی هستند.', 'Please enter your full name, phone number, and email — all three are required.'));
       return;
     }
     if (!leadConsent) {
@@ -146,6 +147,7 @@ export const PathFinderAssessment: React.FC<PathFinderAssessmentProps> = ({ curr
           fullName: leadName,
           whatsapp: leadWhatsapp,
           email: leadEmail,
+          telegram: leadTelegram,
           preferredLanguage: lang,
           answers,
           result,
@@ -385,9 +387,9 @@ export const PathFinderAssessment: React.FC<PathFinderAssessmentProps> = ({ curr
               {errorMsg && (
                 <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold">{errorMsg}</div>
               )}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
                 <div className="space-y-1">
-                  <label className="font-bold text-[#142033]">{t(lang, 'نام', 'Name')} *</label>
+                  <label className="font-bold text-[#142033]">{t(lang, 'نام و نام خانوادگی', 'Full Name')} *</label>
                   <input
                     type="text"
                     value={leadName}
@@ -396,7 +398,7 @@ export const PathFinderAssessment: React.FC<PathFinderAssessmentProps> = ({ curr
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="font-bold text-[#142033]">WhatsApp</label>
+                  <label className="font-bold text-[#142033]">{t(lang, 'شماره تلفن (واتساپ)', 'Phone Number (WhatsApp)')} *</label>
                   <input
                     type="text"
                     dir="ltr"
@@ -407,13 +409,24 @@ export const PathFinderAssessment: React.FC<PathFinderAssessmentProps> = ({ curr
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="font-bold text-[#142033]">Email</label>
+                  <label className="font-bold text-[#142033]">Email *</label>
                   <input
                     type="email"
                     dir="ltr"
                     value={leadEmail}
                     onChange={(e) => setLeadEmail(e.target.value)}
                     placeholder="name@example.com"
+                    className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white text-start"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="font-bold text-[#142033]">{t(lang, 'آیدی تلگرام', 'Telegram Username')} <span className="text-slate-400 font-normal">({t(lang, 'اختیاری', 'optional')})</span></label>
+                  <input
+                    type="text"
+                    dir="ltr"
+                    value={leadTelegram}
+                    onChange={(e) => setLeadTelegram(e.target.value)}
+                    placeholder="@username"
                     className="w-full p-3 rounded-xl border border-[#dfe6ef] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] bg-white text-start"
                   />
                 </div>
