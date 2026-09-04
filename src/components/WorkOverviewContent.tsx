@@ -9,6 +9,7 @@ import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { RelatedGuidesCard } from './RelatedGuidesCard';
 import { SectionPhoto } from './SectionPhoto';
 import { FaqSchema } from './FaqSchema';
+import { ShieldCheck, FileCheck2 } from './Icons';
 
 interface WorkOverviewContentProps {
   subRoute: string;
@@ -106,6 +107,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* INLINE CTA 1: MID-ARTICLE */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
+          </div>
+
           {/* FORMER AVIZ DE MUNCĂ CATEGORIES (PRE-OUG 32/2026) */}
           <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -201,6 +225,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                 ? '، که خدمات جذب نیرو، تهیه مدارک و پیگیری پرونده مجوز کار را در ازای دریافت هزینه ارائه می‌دهد. این یک نهاد دولتی نیست و وابسته به DORVIA هم نیست — صحت اطلاعات، اعتبار شرکت و شرایط قرارداد را پیش از هرگونه پرداخت، مستقل از این صفحه، بررسی کنید.'
                 : ', which offers paid services helping employers source workers and manage work-permit paperwork. This is not a government body and is not affiliated with DORVIA — independently verify the firm\'s credentials and any service agreement before paying for anything.'}
             </div>
+          </div>
+
+          {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                <FileCheck2 size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی' : 'Comprehensive document check and case eligibility review'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
@@ -305,6 +352,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* INLINE CTA 1: MID-ARTICLE */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
+          </div>
+
           {/* NARRATIVE: THE TEHRAN EMBASSY PROCESS FOR THIS VISA */}
           <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -321,6 +391,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                 ? 'منابع: stinwo.ro، mae.ro، eviza.mae.ro/VisaFees (مبلغ هزینه، به‌روزرسانی ۲۷ آوریل ۲۰۲۶). زمان انتظار واقعی برای نوبت‌دهی در سفارت تهران در منابع رسمی/خبری یافت نشد؛ این بخش رو برای برنامه‌ریزی زودتر از موعد، نه به‌عنوان تضمین زمانی، در نظر بگیرید.'
                 : 'Sources: stinwo.ro, mae.ro, eviza.mae.ro/VisaFees (fee amount, updated April 27, 2026). Real-world wait times for Tehran embassy appointments were not found in official/news sources; treat this section as a reason to plan early, not as a timing guarantee.'}
             </p>
+          </div>
+
+          {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                <FileCheck2 size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی' : 'Comprehensive document check and case eligibility review'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
@@ -439,6 +532,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* INLINE CTA 1: MID-ARTICLE */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="editorial-card p-6 bg-white border border-[#dfe6ef] space-y-4">
               <h2 className="text-lg font-bold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -502,6 +618,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                 ? 'منابع: AIDA/ECRE (asylumineurope.org). این سایت نتوانست آمار یا گزارش مشخصی درباره حضور یا برتری حرفه‌ای ایرانیان در بخش خاصی از بازار کار رومانی (مثل IT یا نفت‌وگاز) پیدا کند — پس چنین ادعایی را بدون منبع معتبر منتشر نمی‌کنیم.'
                 : 'Sources: AIDA/ECRE (asylumineurope.org). This site could not find specific data or reports on Iranian professional presence or advantage in any particular sector of the Romanian labor market (e.g. IT or oil & gas) — so no such claim is published without a credible source.'}
             </p>
+          </div>
+
+          {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                <FileCheck2 size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی' : 'Comprehensive document check and case eligibility review'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
@@ -605,6 +744,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* INLINE CTA 1: MID-ARTICLE */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
+          </div>
+
           {/* BASIC LABOR RIGHTS EVERY FIRST-TIME EMPLOYEE SHOULD KNOW */}
           <div className="bg-[#f0f4f9] p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] space-y-4">
             <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -661,6 +823,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                 ? 'منابع: Business & Human Rights Centre، Al Jazeera، Gandul.ro، PwC Romania (تحلیل OUG 32/2026). موارد بالا مربوط به کارگران نپالی و سریلانکایی است، نه لزوماً ایرانی — اما الگوی سوءاستفاده و راهکار قانونی شکایت برای هر تبعه خارجی یکسان است.'
                 : 'Sources: Business & Human Rights Centre, Al Jazeera, Gandul.ro, PwC Romania (OUG 32/2026 analysis). The cases above concern Nepali and Sri Lankan workers, not necessarily Iranian ones — but the abuse pattern and the legal complaint route are the same for any foreign national.'}
             </p>
+          </div>
+
+          {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                <FileCheck2 size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی' : 'Comprehensive document check and case eligibility review'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
@@ -777,6 +962,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* INLINE CTA 1: MID-ARTICLE */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
+          </div>
+
           <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 sm:p-6 text-xs sm:text-sm text-amber-950 leading-relaxed">
             <strong className="block font-bold mb-1">{currentLang === 'fa' ? 'توضیح در مورد پیلار دوم بازنشستگی خصوصی' : 'Clarification: Pillar II Private Pension'}</strong>
             {currentLang === 'fa'
@@ -800,6 +1008,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                 ? 'منابع: صفحه رسمی ANAF برای ایران (static.anaf.ro)، فهرست تلفیقی noulcodfiscal.ro و infofisc.ro. جزئیات دقیق ماده‌به‌ماده این توافق (مثلاً روش دقیق اعمال آن برای هر نوع درآمد خاص) در این صفحه پوشش داده نشده — برای پرونده شخصی خود حتماً با یک مشاور مالیاتی متخصص در قوانین بین‌المللی مشورت کنید.'
                 : 'Sources: official ANAF page for Iran (static.anaf.ro), consolidated lists at noulcodfiscal.ro and infofisc.ro. The precise article-by-article details of the treaty (e.g. exactly how it applies to each specific income type) are not covered on this page — consult a tax advisor specializing in international law for your specific case.'}
             </p>
+          </div>
+
+          {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                <FileCheck2 size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی' : 'Comprehensive document check and case eligibility review'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
@@ -907,6 +1138,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* INLINE CTA 1: MID-ARTICLE */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
+          </div>
+
           {/* PRIVATE SUPPLEMENTAL INSURANCE — NAMED PROVIDERS */}
           <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -953,6 +1207,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                 ? 'منابع: انجمن Expat.com (گزارش کاربران، نه آمار رسمی)، فهرست رسمی توافق‌های دوجانبه CNPP (cnpp.ro).'
                 : 'Sources: Expat.com forum (user reports, not official statistics), official CNPP bilateral agreements list (cnpp.ro).'}
             </p>
+          </div>
+
+          {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                <FileCheck2 size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی' : 'Comprehensive document check and case eligibility review'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
@@ -1066,6 +1343,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             </div>
           </div>
 
+          {/* INLINE CTA 1: MID-ARTICLE */}
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-[#2F6FED]/10 text-[#2F6FED] flex items-center justify-center shrink-0">
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'پرونده شما با این شرایط چگونه خواهد بود؟' : 'What would your case look like?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'ارزیابی رایگان شرایط و گزینه‌های قانونی متناسب با پروفایل شما' : 'Free case evaluation and legal eligibility review for your profile'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-3">
               <h3 className="text-lg font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -1096,6 +1396,29 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             {currentLang === 'fa'
               ? 'منابع: قانون ۲۲/۲۰۲۲ (اصلاحیه OUG 194/2002)، PwC Romania، صفحه پیوست خانواده IGI (igi.mai.gov.ro)، و چند دفتر حقوقی مهاجرتی رومانیایی. ارقام حقوق ناخالص میانگین رومانی سالانه تغییر می‌کند؛ پیش از اقدام، آستانه دقیق درآمد را از IGI یا evisa.mae.ro استعلام بگیرید.'
               : 'Sources: Law 22/2022 (amending OUG 194/2002), PwC Romania, IGI\'s official family-reunification page (igi.mai.gov.ro), and several Romanian immigration law firms. Romania\'s average gross salary figure changes yearly; confirm the exact current income threshold with IGI or evisa.mae.ro before applying.'}
+          </div>
+
+          {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                <FileCheck2 size={20} />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#142033]">
+                  {currentLang === 'fa' ? 'مدارک من کافی است؟' : 'Are my documents sufficient?'}
+                </h4>
+                <p className="text-xs text-[#526174]">
+                  {currentLang === 'fa' ? 'بررسی جامع مدارک و شرایط پرونده بر اساس دستورالعمل‌های رسمی' : 'Comprehensive document check and case eligibility review'}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenEvaluationModal}
+              className="w-full sm:w-auto px-5 py-2.5 bg-[#2F6FED] hover:bg-[#2052b6] text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5 rtl:space-x-reverse"
+            >
+              <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
+            </button>
           </div>
 
           <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
