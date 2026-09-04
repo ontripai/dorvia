@@ -156,6 +156,13 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
       icon: <Landmark size={16} className="text-[#2F6FED]" />
     },
     {
+      id: 'romanian-language',
+      title: { fa: 'آموزش زبان رومانیایی — دوره‌های رایگان و خصوصی', en: 'Romanian Language Courses — Free & Private' },
+      category: { fa: 'نیازها در رومانی', en: 'Essentials' },
+      route: 'needs/romanian-language-courses',
+      icon: <Landmark size={16} className="text-[#2F6FED]" />
+    },
+    {
       id: 'notary',
       title: { fa: 'دفتر اسناد رسمی و خدمات نوتاری در رومانی', en: 'Notary Public Services' },
       category: { fa: 'نیازها در رومانی', en: 'Essentials' },
