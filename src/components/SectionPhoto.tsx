@@ -11,16 +11,12 @@ interface SectionPhotoProps {
   captionEn: string;
   currentLang: Language;
   className?: string;
+  priority?: boolean;
 }
 
 /**
- * A self-hosted real photo (see scripts/fetch-wikimedia-photos.js) rendered as a
- * rounded hero block with a bottom gradient caption crediting the source — the same
- * treatment already used for the city guide photos in CityDetailContent.tsx, pulled
- * out here so every other section can reuse it consistently.
- *
- * Fails gracefully: if the photo file is missing (e.g. the fetch script hasn't been
- * run yet), the whole block just doesn't render instead of showing a broken image.
+ * Optimized photo component with lazy loading, skeleton placeholder shimmer,
+ * responsive sizing and modern WebP/AVIF compression.
  */
 export const SectionPhoto: React.FC<SectionPhotoProps> = ({
   src,
@@ -28,26 +24,40 @@ export const SectionPhoto: React.FC<SectionPhotoProps> = ({
   captionFa,
   captionEn,
   currentLang,
-  className,
+  className = '',
+  priority = false,
 }) => {
   const [failed, setFailed] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   if (failed) return null;
 
   return (
-    <div className={`relative rounded-2xl overflow-hidden shadow-lg ${className || ''}`}>
+    <div className={`relative rounded-2xl overflow-hidden shadow-lg bg-slate-100 border border-[#dfe6ef] ${className}`}>
+      {/* Skeleton Shimmer while loading */}
+      {!isLoaded && (
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 animate-pulse" />
+      )}
+
       <Image
         src={src}
         alt={alt}
         width={900}
         height={320}
-        sizes="(max-width: 768px) 100vw, 900px"
-        className="w-full h-56 sm:h-72 object-cover"
-        loading="lazy"
+        quality={80}
+        priority={priority}
+        loading={priority ? undefined : 'lazy'}
+        decoding="async"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 900px"
+        className={`w-full h-56 sm:h-72 object-cover transition-opacity duration-300 ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+        onLoad={() => setIsLoaded(true)}
         onError={() => setFailed(true)}
       />
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-        <p className="text-white text-xs">
+
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4">
+        <p className="text-white text-xs leading-relaxed font-medium">
           {currentLang === 'fa' ? captionFa : captionEn}
         </p>
       </div>

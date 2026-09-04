@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Language } from '../types';
 import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { RelatedGuidesCard } from './RelatedGuidesCard';
 import { FaqSchema } from './FaqSchema';
+import { SectionPhoto } from './SectionPhoto';
 
 interface CityDetailContentProps {
   citySlug: string;
@@ -14,9 +15,6 @@ interface CityDetailContentProps {
 }
 
 export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, currentLang, onNavigate }) => {
-  // Real photos are self-hosted under /public/images/cities (see scripts/fetch-wikimedia-photos.js).
-  // If a photo file is ever missing, this hides the photo block gracefully instead of showing a broken-image icon.
-  const [photoFailed, setPhotoFailed] = useState(false);
 
   const disclaimer = currentLang === 'fa'
     ? 'ارقام اجاره و هزینه زندگی به‌طور مداوم تغییر می‌کنند و بر اساس داده‌های خودگزارشی (نه آمار رسمی دولتی) تخمین زده شده‌اند؛ پیش از هر تصمیم، قیمت‌های روز را از سایت‌های آگهی املاک محلی یا دانشگاه مقصد استعلام کنید.'
@@ -69,23 +67,13 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('اداره مترو بخارست (Metrorex) — metroulbucuresti.org', 'Bucharest Metro Authority (Metrorex) — metroulbucuresti.org')}
           </div>
 
-          {!photoFailed && (
-          <div className="relative rounded-2xl overflow-hidden shadow-lg">
-            <img
-              src="/images/cities/bucharest.jpg"
-              alt={currentLang === 'fa' ? 'تالار آتنیوم رومانی در بخارست' : 'The Romanian Athenaeum in Bucharest'}
-              className="w-full h-64 sm:h-80 object-cover"
-              onError={() => setPhotoFailed(true)}
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-              <p className="text-white text-xs">
-                {currentLang === 'fa'
-                  ? 'تالار آتنیوم رومانی (۱۸۸۸)، یکی از نمادهای معماری بخارست — عکس: ویکی‌مدیا کامنز'
-                  : "The Romanian Athenaeum (built 1888), one of Bucharest's architectural icons — Photo: Wikimedia Commons"}
-              </p>
-            </div>
-          </div>
-          )}
+          <SectionPhoto
+            src="/images/cities/bucharest.jpg"
+            alt={currentLang === 'fa' ? 'تالار آتنیوم رومانی در بخارست' : 'The Romanian Athenaeum in Bucharest'}
+            captionFa="تالار آتنیوم رومانی (۱۸۸۸)، یکی از نمادهای معماری بخارست — عکس: ویکی‌مدیا کامنز"
+            captionEn="The Romanian Athenaeum (built 1888), one of Bucharest's architectural icons — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <p>
@@ -254,23 +242,13 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی کلوژ (CTP Cluj) — ctpcj.ro', 'Cluj Public Transport Company (CTP Cluj) — ctpcj.ro')}
           </div>
 
-          {!photoFailed && (
-          <div className="relative rounded-2xl overflow-hidden shadow-lg">
-            <img
-              src="/images/cities/cluj-napoca.jpg"
-              alt={currentLang === 'fa' ? 'کلیسای سنت میکائیل در میدان اتحاد کلوژ-نپوکا' : "St. Michael's Church on Union Square, Cluj-Napoca"}
-              className="w-full h-64 sm:h-80 object-cover"
-              onError={() => setPhotoFailed(true)}
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-              <p className="text-white text-xs">
-                {currentLang === 'fa'
-                  ? 'کلیسای سنت میکائیل در میدان اتحاد کلوژ-نپوکا — عکس: ویکی‌مدیا کامنز'
-                  : "St. Michael's Church on Union Square, Cluj-Napoca — Photo: Wikimedia Commons"}
-              </p>
-            </div>
-          </div>
-          )}
+          <SectionPhoto
+            src="/images/cities/cluj-napoca.jpg"
+            alt={currentLang === 'fa' ? 'کلیسای سنت میکائیل در میدان اتحاد کلوژ-نپوکا' : "St. Michael's Church on Union Square, Cluj-Napoca"}
+            captionFa="کلیسای سنت میکائیل در میدان اتحاد کلوژ-نپوکا — عکس: ویکی‌مدیا کامنز"
+            captionEn="St. Michael's Church on Union Square, Cluj-Napoca — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <p>
@@ -436,23 +414,13 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی تیمیشوارا (STPT) — stpt.ro', 'Timișoara Public Transport Company (STPT) — stpt.ro')}
           </div>
 
-          {!photoFailed && (
-          <div className="relative rounded-2xl overflow-hidden shadow-lg">
-            <img
-              src="/images/cities/timisoara.jpg"
-              alt={currentLang === 'fa' ? 'میدان اتحاد در تیمیشوارا' : 'Piața Unirii (Union Square), Timișoara'}
-              className="w-full h-64 sm:h-80 object-cover"
-              onError={() => setPhotoFailed(true)}
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-              <p className="text-white text-xs">
-                {currentLang === 'fa'
-                  ? 'میدان اتحاد (Piața Unirii) در تیمیشوارا — عکس: ویکی‌مدیا کامنز'
-                  : 'Piața Unirii (Union Square), Timișoara — Photo: Wikimedia Commons'}
-              </p>
-            </div>
-          </div>
-          )}
+          <SectionPhoto
+            src="/images/cities/timisoara.jpg"
+            alt={currentLang === 'fa' ? 'میدان اتحاد در تیمیشوارا' : 'Piața Unirii (Union Square), Timișoara'}
+            captionFa="میدان اتحاد (Piața Unirii) در تیمیشوارا — عکس: ویکی‌مدیا کامنز"
+            captionEn="Piața Unirii (Union Square), Timișoara — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <p>
@@ -620,23 +588,13 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی یاش (CTP Iași) — sctpiasi.ro', 'Iași Public Transport Company (CTP Iași) — sctpiasi.ro')}
           </div>
 
-          {!photoFailed && (
-          <div className="relative rounded-2xl overflow-hidden shadow-lg">
-            <img
-              src="/images/cities/iasi.jpg"
-              alt={currentLang === 'fa' ? 'کاخ فرهنگ یاش' : 'The Palace of Culture, Iași'}
-              className="w-full h-64 sm:h-80 object-cover"
-              onError={() => setPhotoFailed(true)}
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-              <p className="text-white text-xs">
-                {currentLang === 'fa'
-                  ? 'کاخ فرهنگ یاش (Palatul Culturii) — عکس: ویکی‌مدیا کامنز'
-                  : 'The Palace of Culture (Palatul Culturii), Iași — Photo: Wikimedia Commons'}
-              </p>
-            </div>
-          </div>
-          )}
+          <SectionPhoto
+            src="/images/cities/iasi.jpg"
+            alt={currentLang === 'fa' ? 'کاخ فرهنگ یاش' : 'The Palace of Culture, Iași'}
+            captionFa="کاخ فرهنگ یاش (Palatul Culturii) — عکس: ویکی‌مدیا کامنز"
+            captionEn="The Palace of Culture (Palatul Culturii), Iași — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <p>
@@ -802,23 +760,13 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی براشوف (RATBV) — ratbv.ro', 'Brașov Public Transport Company (RATBV) — ratbv.ro')}
           </div>
 
-          {!photoFailed && (
-          <div className="relative rounded-2xl overflow-hidden shadow-lg">
-            <img
-              src="/images/cities/brasov.jpg"
-              alt={currentLang === 'fa' ? 'میدان شورا در براشوف با پس‌زمینه کوه تامپا' : 'Piața Sfatului (Council Square), Brașov, with Mount Tâmpa behind it'}
-              className="w-full h-64 sm:h-80 object-cover"
-              onError={() => setPhotoFailed(true)}
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-              <p className="text-white text-xs">
-                {currentLang === 'fa'
-                  ? 'میدان شورا (Piața Sfatului) در براشوف، با کوه تامپا در پس‌زمینه — عکس: ویکی‌مدیا کامنز'
-                  : 'Piața Sfatului (Council Square), Brașov, with Mount Tâmpa in the background — Photo: Wikimedia Commons'}
-              </p>
-            </div>
-          </div>
-          )}
+          <SectionPhoto
+            src="/images/cities/brasov.jpg"
+            alt={currentLang === 'fa' ? 'میدان شورا در براشوف با پس‌زمینه کوه تامپا' : 'Piața Sfatului (Council Square), Brașov, with Mount Tâmpa behind it'}
+            captionFa="میدان شورا (Piața Sfatului) در براشوف، با کوه تامپا در پس‌زمینه — عکس: ویکی‌مدیا کامنز"
+            captionEn="Piața Sfatului (Council Square), Brașov, with Mount Tâmpa in the background — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <p>
@@ -984,23 +932,13 @@ export const CityDetailContent: React.FC<CityDetailContentProps> = ({ citySlug, 
             {sourceLine('شرکت حمل‌ونقل عمومی کونستانتسا (CT BUS) — ctbus.ro', 'Constanța Public Transport Company (CT BUS) — ctbus.ro')}
           </div>
 
-          {!photoFailed && (
-          <div className="relative rounded-2xl overflow-hidden shadow-lg">
-            <img
-              src="/images/cities/constanta.jpg"
-              alt={currentLang === 'fa' ? 'کازینوی تاریخی کونستانتسا در کنار دریای سیاه' : 'The historic Constanța Casino on the Black Sea waterfront'}
-              className="w-full h-64 sm:h-80 object-cover"
-              onError={() => setPhotoFailed(true)}
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-              <p className="text-white text-xs">
-                {currentLang === 'fa'
-                  ? 'کازینوی تاریخی کونستانتسا (۱۹۱۰) در کنار دریای سیاه — عکس: ویکی‌مدیا کامنز'
-                  : 'The historic Constanța Casino (built 1910) on the Black Sea waterfront — Photo: Wikimedia Commons'}
-              </p>
-            </div>
-          </div>
-          )}
+          <SectionPhoto
+            src="/images/cities/constanta.jpg"
+            alt={currentLang === 'fa' ? 'کازینوی تاریخی کونستانتسا در کنار دریای سیاه' : 'The historic Constanța Casino on the Black Sea waterfront'}
+            captionFa="کازینوی تاریخی کونستانتسا (۱۹۱۰) در کنار دریای سیاه — عکس: ویکی‌مدیا کامنز"
+            captionEn="The historic Constanța Casino (built 1910) on the Black Sea waterfront — Photo: Wikimedia Commons"
+            currentLang={currentLang}
+          />
 
           <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
             <p>
