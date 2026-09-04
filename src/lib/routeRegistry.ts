@@ -242,6 +242,18 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     inSitemap: true,
     pageType: 'content'
   },
+  'needs/romanian-language-courses': {
+    canonical: '/needs/romanian-language-courses',
+    aliases: [],
+    parentHub: '/needs',
+    titleFa: 'آموزش زبان رومانیایی',
+    titleEn: 'Romanian Language Courses',
+    parentTitleFa: 'نیازمندی‌ها و استقرار',
+    parentTitleEn: 'Essentials & Settlement',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'content'
+  },
   'needs/iranian-embassy-and-mikhak': {
     canonical: '/needs/iranian-embassy-and-mikhak',
     aliases: [],

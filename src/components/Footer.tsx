@@ -75,6 +75,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
               <li><Link href="/needs/currency-exchange" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'صرافی و نرخ BNR' : 'Currency & BNR Rates'}</Link></li>
               <li><Link href="/needs/driving-license" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'گواهینامه رانندگی' : 'Driving License'}</Link></li>
               <li><Link href="/needs/certified-translation" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'دارالترجمه رسمی' : 'Certified Translation'}</Link></li>
+              <li><Link href="/needs/romanian-language-courses" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'آموزش زبان رومانیایی' : 'Romanian Language Courses'}</Link></li>
               <li><Link href="/needs/notary-public" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'دفتر اسناد رسمی' : 'Notary Public'}</Link></li>
               <li><Link href="/needs/iranian-embassy-and-mikhak" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سفارت ایران و میخک' : 'Iranian Embassy & Mikhak'}</Link></li>
               <li><Link href="/needs/housing" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'اجاره و خرید مسکن' : 'Housing Guide'}</Link></li>

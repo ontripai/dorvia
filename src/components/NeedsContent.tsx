@@ -133,6 +133,17 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
             </Link>
 
+            <Link href="/needs/romanian-language-courses" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">🗣️</span>
+                  <span>{currentLang === 'fa' ? 'آموزش زبان رومانیایی' : 'Romanian Language Courses'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'دوره‌های رایگان دولتی و IOM، و گزینه‌های خصوصی برای یادگیری زبان رومانیایی.' : 'Free government/IOM-backed courses and private options for learning Romanian.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </Link>
+
             <Link href="/needs/notary-public" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -499,6 +510,162 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
           ]} />
 
           <ParentHubFooterCard slugRoute="needs/certified-translation" currentLang={currentLang} onNavigate={onNavigate} />
+        </div>
+      );
+
+    case 'romanian-language-courses':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="needs/romanian-language-courses" currentLang={currentLang} onNavigate={onNavigate} />
+
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'آموزش زبان رومانیایی' : 'Romanian Language Courses'}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa'
+                ? 'برنامه‌های رایگان دولتی و بین‌المللی، و گزینه‌های آموزشی خصوصی برای یادگیری زبان رومانیایی در رومانی.'
+                : 'Free government and international programs, plus private course options for learning Romanian.'}
+            </p>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منابع: اداره کل مهاجرت رومانی (IGI)، سازمان بین‌المللی مهاجرت (IOM Romania)، مؤسسه فرهنگی رومانی (ICR) — آخرین بررسی: شهریور ۱۴۰۵ / سپتامبر ۲۰۲۶'
+                : 'Sources: Romanian General Inspectorate for Immigration (IGI), IOM Romania, Romanian Cultural Institute (ICR) — Last reviewed: September 2026'}
+            </div>
+          </div>
+
+          <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm">
+            {currentLang === 'fa'
+              ? 'دانستن زبان رومانیایی برای پیدا کردن کار، مراجعه به ادارات دولتی و ادغام روزمره در رومانی بسیار کمک‌کننده است. خبر خوب این است که اگر مجوز اقامت معتبر رومانی دارید، معمولاً به یک یا چند برنامهٔ رایگان دسترسی دارید که هم توسط دولت رومانی و هم از طریق سازمان بین‌المللی مهاجرت (IOM) و شرکای اجرایی‌اش تأمین مالی می‌شوند. علاوه بر این، گزینه‌های آموزشی خصوصی و ساختاریافته‌تر (پولی) نیز برای کسانی که به برنامهٔ فشرده‌تر یا مدرک رسمی سطح زبان نیاز دارند، وجود دارد.'
+              : 'Speaking Romanian makes a real difference for finding work, dealing with government offices, and everyday integration in Romania. The good news: if you hold a valid Romanian residence permit, you typically have access to one or more free programs, funded both by the Romanian state and by the International Organization for Migration (IOM) and its implementing partners. Structured private course options (paid) also exist for those who want a faster track or a formal proficiency certificate.'}
+          </div>
+
+          <div className="editorial-card p-6 bg-white space-y-4 border border-[#dfe6ef]">
+            <h3 className="font-extrabold text-base text-[#142033]">
+              {currentLang === 'fa' ? 'برنامهٔ رسمی ادغام اجتماعی اتباع خارجی (رایگان) — اداره کل مهاجرت (IGI)' : 'Official Social Integration Program (Free) — General Inspectorate for Immigration (IGI)'}
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'اداره کل مهاجرت رومانی (IGI) به‌همراه وزارت آموزش رومانی، برای «اتباع خارجی که حق اقامت در رومانی کسب کرده‌اند» (و نیز شهروندان اتحادیه اروپا/EEA/سوئیس) برنامهٔ ادغام اجتماعی برگزار می‌کند که شامل دوره‌های زبان رومانیایی، جلسات آشناسازی فرهنگی با آداب و سنن رومانیایی، و مشاوره است. در پایان دوره، گواهی سطح زبان صادر می‌شود.'
+                : 'IGI, in collaboration with Romania\'s Ministry of Education, runs a social integration program for "foreigners who have acquired a right of residence in Romania" (as well as EU/EEA/Swiss citizens). It includes Romanian language courses, cultural-accommodation sessions on Romanian traditions and customs, and counseling. A language-level certificate is issued on completion.'}
+            </p>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'توجه: این برنامهٔ عمومی را با یک برنامهٔ جداگانه و محدودتر IGI که مخصوص پناهندگان/دارندگان حمایت فرعی است و مهلت ثبت‌نام ۹۰ روزه دارد اشتباه نگیرید — آن برنامه شرایط متفاوتی دارد.'
+                : 'Note: don\'t confuse this general program with a separate, narrower IGI program specifically for refugees/subsidiary-protection holders, which has a strict 90-day enrollment deadline — that program has different conditions.'}
+            </p>
+            <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] text-sm text-[#526174]">
+              {currentLang === 'fa' ? 'آدرس: بخارست، خیابان Lt. Col. Marinescu C-tin، پلاک ۱۵A، بخش ۵ (Sector 5)' : 'Address: Bucharest, str. Lt. Col. Marinescu C-tin, nr. 15A, Sector 5'}
+            </div>
+            <div className="pt-2 flex justify-end">
+              <a href="https://igi.mai.gov.ro/en/the-program-of-social-integration-of-foreigners-who-have-a-right-to-stay-in-romania/" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" size="sm" rightIcon={<ExternalLink size={14} />}>
+                  {currentLang === 'fa' ? 'صفحهٔ رسمی برنامه IGI' : 'Official IGI Program Page'}
+                </Button>
+              </a>
+            </div>
+          </div>
+
+          <div className="editorial-card p-6 bg-white space-y-4 border border-[#dfe6ef]">
+            <h3 className="font-extrabold text-base text-[#142033]">
+              {currentLang === 'fa' ? 'دوره‌های رایگان با تأمین مالی IOM — از طریق مراکز ادغام منطقه‌ای' : 'IOM-Funded Free Courses — via Regional Integration Centers'}
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'سازمان بین‌المللی مهاجرت (IOM Romania) دوره‌های زبان رومانیایی و آشناسازی فرهنگی رایگان را برای «دارندگان حمایت بین‌المللی» (BPI) و «اتباع کشورهای ثالث دارای اقامت قانونی» (RTT) — از طریق مراکز ادغام منطقه‌ای (CRI) و شرکای اجرایی محلی تأمین مالی می‌کند. در بخارست: Fundația Schottener Servicii Sociale مسئول رسیدگی به افراد زیر ۲۶ سال است، و AIDRom (Asociația Ecumenică a Bisericilor din România) مسئول بزرگسالان بالای ۲۶ سال — یعنی گزینهٔ اصلی برای اکثر مهاجران بزرگسال ایرانی.'
+                : 'IOM Romania funds free Romanian language and cultural-orientation courses for "beneficiaries of international protection" (BPI) and "third-country nationals with legal residence" (TCN/RTT), delivered through Regional Integration Centers (CRI) and local implementing partners. In Bucharest: Fundația Schottener Servicii Sociale handles people under 26, and AIDRom (Asociația Ecumenică a Bisericilor din România) handles adults over 26 — the main option for most adult Iranian migrants.'}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
+                <span className="font-bold text-[#2F6FED]">AIDRom {currentLang === 'fa' ? '(بزرگسالان بالای ۲۶ سال)' : '(adults over 26)'}</span>
+                <p className="text-[#526174]">{currentLang === 'fa' ? 'آدرس: بخارست، خیابان Ilarie Chendi، پلاک ۱۴، بخش ۲' : 'Address: Bucharest, Strada Ilarie Chendi, nr. 14, Sector 2'}</p>
+                <p className="text-[#526174]">{currentLang === 'fa' ? 'تلفن: ۴۸.۲۱۲.۴۸ ۰۲۱ ۴+ — ایمیل: aidrom@gmail.com' : 'Phone: +4 021 212 48 68 — Email: aidrom@gmail.com'}</p>
+              </div>
+              <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
+                <span className="font-bold text-[#2F6FED]">Fundația Schottener {currentLang === 'fa' ? '(زیر ۲۶ سال)' : '(under 26)'}</span>
+                <p className="text-[#526174]">{currentLang === 'fa' ? 'تلفن: ۱۱۵-۹۱۴ ۳۷۴ ۴۰+ — ایمیل: info@fundatia-schottener.eu' : 'Phone: +40 374 914-115 — Email: info@fundatia-schottener.eu'}</p>
+              </div>
+            </div>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'برای شروع، می‌توانید همچنین با یکی از ۸ «مرکز منابع مهاجرین» IOM در سراسر رومانی (از جمله بخارست، براشوف و کلوژ-ناپوکا) تماس بگیرید — همهٔ خدمات این مراکز رایگان است.'
+                : 'As a starting point, you can also contact one of IOM\'s 8 Migrant Resource Centres across Romania (including Bucharest, Brașov, and Cluj-Napoca) — all services at these centres are free.'}
+            </p>
+            <div className="pt-2 flex justify-end">
+              <a href="https://romania.iom.int/migrant-resource-centres" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" size="sm" rightIcon={<ExternalLink size={14} />}>
+                  {currentLang === 'fa' ? 'مراکز منابع مهاجرین IOM' : 'IOM Migrant Resource Centres'}
+                </Button>
+              </a>
+            </div>
+          </div>
+
+          <div className="editorial-card p-6 sm:p-8 bg-white space-y-3 border border-amber-200 bg-amber-50/40">
+            <h3 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>ℹ️</span>
+              <span>{currentLang === 'fa' ? 'نکتهٔ مهم: «Fundația România ProCulture» آموزش زبان رومانیایی ارائه نمی‌دهد' : 'Important: "Fundația România ProCulture" does not teach Romanian'}</span>
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'سازمانی واقعی به نام «Fundația România Pro Culture» در بخارست وجود دارد، اما بر اساس معرفی رسمی خودش، فعالیتش حول رهبری کسب‌وکار اخلاقی، رشد شخصیتی جوانان و برنامه‌های تقویت خانواده است — نه آموزش زبان. اگر دنبال یک «فوندیشن» برای آموزش رایگان زبان رومانیایی به مهاجران و پناهندگان می‌گردید، سازمانی که واقعاً این نقش را ایفا می‌کند Fundația Schottener Servicii Sociale (شریک اجرایی IOM، معرفی‌شده در بالا) است.'
+                : 'A real organization called "Fundația România Pro Culture" does exist in Bucharest, but based on its own official description, its work centers on ethical business leadership, youth character development, and family-strengthening programs — not language instruction. If you\'re looking for a foundation that provides free Romanian language teaching to migrants and refugees, the organization that actually does this is Fundația Schottener Servicii Sociale (IOM\'s implementing partner, introduced above).'}
+            </p>
+          </div>
+
+          <div className="editorial-card p-6 bg-white space-y-4 border border-[#dfe6ef]">
+            <h3 className="font-extrabold text-base text-[#142033]">
+              {currentLang === 'fa' ? 'گزینه‌های آموزشی خصوصی (پولی)' : 'Private Course Options (Paid)'}
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
+                <span className="font-bold text-[#2F6FED]">{currentLang === 'fa' ? 'مؤسسه فرهنگی رومانی (ICR) — بخارست' : 'Romanian Cultural Institute (ICR) — Bucharest'}</span>
+                <p className="text-[#526174]">{currentLang === 'fa' ? 'دوره‌های آکادمیک سطح‌بندی‌شده از مبتدی تا پیشرفته؛ هر ماژول ۸۵۰ لِی یا ۲۰۰ یورو. آدرس: خیابان Şcoala Floreasca شماره ۵، بخارست.' : 'Structured academic courses from beginner to advanced; 850 RON or 200 EUR per module. Location: Şcoala Floreasca Street No. 5, Bucharest.'}</p>
+                <p className="text-[#526174]">{currentLang === 'fa' ? 'تماس: ana.borca@icr.ro — تلفن ۰۳۱ ۷۱۰۰ ۶۷۲' : 'Contact: ana.borca@icr.ro — Phone: 031 7100 672'}</p>
+              </div>
+              <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1">
+                <span className="font-bold text-[#2F6FED]">FIDES Centre</span>
+                <p className="text-[#526174]">{currentLang === 'fa' ? 'دوره‌های خصوصی/گروه‌های کوچک، سطوح A1 تا C2، مناسب افراد شاغل و دانشجویان خارجی.' : 'Private/small-group courses, levels A1 through C2, aimed at professionals and foreign students.'}</p>
+                <p className="text-[#526174]">{currentLang === 'fa' ? 'ایمیل: cursuri@fidescentre.ro' : 'Email: cursuri@fidescentre.ro'}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا این دوره‌ها واقعاً رایگان‌اند؟' : 'Are these courses really free?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله — برنامهٔ IGI و برنامه‌های تأمین‌مالی‌شده توسط IOM (از طریق AIDRom و Fundația Schottener) برای افراد واجد شرایط (دارندگان اقامت قانونی یا حمایت بین‌المللی) رایگان هستند. گزینه‌های ICR و FIDES Centre خصوصی و پولی‌اند.' : 'Yes — the IGI program and the IOM-funded programs (via AIDRom and Fundația Schottener) are free for eligible participants (legal residents or international-protection holders). ICR and FIDES Centre are private, paid options.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا با اقامت رومانی (نه پناهندگی) هم می‌توانم در دورهٔ رایگان ثبت‌نام کنم؟' : 'Can I enroll in a free course with a Romanian residence permit (not refugee status)?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله — هم برنامهٔ IGI و هم برنامه‌های IOM/AIDRom صراحتاً شامل «اتباع کشورهای ثالث دارای اقامت قانونی» می‌شوند، نه فقط پناهندگان.' : 'Yes — both the IGI program and the IOM/AIDRom programs explicitly cover "third-country nationals with legal residence," not just refugees.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چرا «Fundația România ProCulture» در این صفحه نیست؟' : 'Why isn\'t "Fundația România ProCulture" listed here?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'این سازمان واقعی است اما — طبق معرفی رسمی خودش — آموزش زبان ارائه نمی‌دهد؛ فعالیتش رهبری، کسب‌وکار اخلاقی و برنامه‌های خانواده است. سازمانی که این نقش را در عمل ایفا می‌کند Fundația Schottener Servicii Sociale است که در بالا معرفی شد.' : 'It\'s a real organization, but — per its own official description — it does not offer language instruction; its work is leadership, ethical business, and family programs. The organization that actually fills this role is Fundația Schottener Servicii Sociale, introduced above.'}</p>
+              </div>
+            </div>
+          </div>
+
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'آیا این دوره‌ها واقعاً رایگان‌اند؟' : 'Are these courses really free?',
+              a: currentLang === 'fa' ? 'بله — برنامهٔ IGI و برنامه‌های تأمین‌مالی‌شده توسط IOM (از طریق AIDRom و Fundația Schottener) برای افراد واجد شرایط (دارندگان اقامت قانونی یا حمایت بین‌المللی) رایگان هستند. گزینه‌های ICR و FIDES Centre خصوصی و پولی‌اند.' : 'Yes — the IGI program and the IOM-funded programs (via AIDRom and Fundația Schottener) are free for eligible participants (legal residents or international-protection holders). ICR and FIDES Centre are private, paid options.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا با اقامت رومانی (نه پناهندگی) هم می‌توانم در دورهٔ رایگان ثبت‌نام کنم؟' : 'Can I enroll in a free course with a Romanian residence permit (not refugee status)?',
+              a: currentLang === 'fa' ? 'بله — هم برنامهٔ IGI و هم برنامه‌های IOM/AIDRom صراحتاً شامل «اتباع کشورهای ثالث دارای اقامت قانونی» می‌شوند، نه فقط پناهندگان.' : 'Yes — both the IGI program and the IOM/AIDRom programs explicitly cover "third-country nationals with legal residence," not just refugees.'
+            },
+            {
+              q: currentLang === 'fa' ? 'چرا «Fundația România ProCulture» در این صفحه نیست؟' : 'Why isn\'t "Fundația România ProCulture" listed here?',
+              a: currentLang === 'fa' ? 'این سازمان واقعی است اما — طبق معرفی رسمی خودش — آموزش زبان ارائه نمی‌دهد؛ فعالیتش رهبری، کسب‌وکار اخلاقی و برنامه‌های خانواده است. سازمانی که این نقش را در عمل ایفا می‌کند Fundația Schottener Servicii Sociale است که در بالا معرفی شد.' : 'It\'s a real organization, but — per its own official description — it does not offer language instruction; its work is leadership, ethical business, and family programs. The organization that actually fills this role is Fundația Schottener Servicii Sociale, introduced above.'
+            }
+          ]} />
+
+          <ParentHubFooterCard slugRoute="needs/romanian-language-courses" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 

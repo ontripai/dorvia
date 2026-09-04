@@ -321,6 +321,7 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 <li><Link href="/needs/currency-exchange" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>💵 {currentLang === 'fa' ? 'صرافی و تبدیل پول (نرخ مرجع BNR)' : 'Currency Exchange & BNR Rates'}</Link></li>
                 <li><Link href="/needs/driving-license" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🚗 {currentLang === 'fa' ? 'گواهینامه رانندگی و شرایط تبدیل' : 'Driving License Exchange'}</Link></li>
                 <li><Link href="/needs/certified-translation" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>📄 {currentLang === 'fa' ? 'دارالترجمه و مترجمین مجاز دادگستری' : 'Authorized Certified Translators'}</Link></li>
+                <li><Link href="/needs/romanian-language-courses" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🗣️ {currentLang === 'fa' ? 'آموزش زبان رومانیایی' : 'Romanian Language Courses'}</Link></li>
               </ul>
             </div>
 
