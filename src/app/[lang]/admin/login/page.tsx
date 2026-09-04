@@ -23,6 +23,43 @@ function AdminLoginForm({ currentLang }: { currentLang: Language }) {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [technicalError, setTechnicalError] = useState<string | null>(null);
+  const [authenticatingToken, setAuthenticatingToken] = useState(false);
+
+  // Auto-recovery: If user lands on /admin/login with #access_token=...
+  // (e.g. from an old link or redirect preservation), exchange tokens and sign in automatically.
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const hash = window.location.hash || '';
+    if (hash.includes('access_token=')) {
+      const params = new URLSearchParams(hash.replace(/^#/, ''));
+      const accessToken = params.get('access_token');
+      const refreshToken = params.get('refresh_token');
+      if (accessToken) {
+        setAuthenticatingToken(true);
+        fetch('/api/auth/session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            access_token: accessToken,
+            refresh_token: refreshToken,
+            flow: 'admin',
+            lang: currentLang,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data?.success && data?.redirectTo) {
+              window.location.replace(data.redirectTo);
+            } else {
+              setAuthenticatingToken(false);
+            }
+          })
+          .catch(() => {
+            setAuthenticatingToken(false);
+          });
+      }
+    }
+  }, [currentLang]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -105,8 +142,18 @@ function AdminLoginForm({ currentLang }: { currentLang: Language }) {
           </p>
         </div>
 
+        {/* Token Auto-Recovery Notice */}
+        {authenticatingToken && (
+          <div className="p-4 rounded-2xl bg-blue-950/80 border border-blue-700 text-blue-200 text-xs sm:text-sm flex items-center space-x-3 rtl:space-x-reverse animate-fadeIn">
+            <div className="w-5 h-5 border-2 border-blue-400 border-t-transparent rounded-full animate-spin shrink-0"></div>
+            <span className="font-bold">
+              {isFa ? 'در حال اعتبارسنجی نشست مدیریت و انتقال به پنل...' : 'Validating admin session and logging in...'}
+            </span>
+          </div>
+        )}
+
         {/* Error Notification from URL */}
-        {errorQuery && !submitted && !technicalError && (
+        {errorQuery && !submitted && !technicalError && !authenticatingToken && (
           <div className="p-4 rounded-2xl bg-rose-950/80 border border-rose-800 text-rose-200 text-xs sm:text-sm flex items-start space-x-2.5 rtl:space-x-reverse">
             <AlertCircle size={18} className="shrink-0 text-rose-400 mt-0.5" />
             <div className="space-y-1">
