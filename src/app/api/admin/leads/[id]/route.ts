@@ -46,7 +46,21 @@ export async function GET(
       return NextResponse.json({ error: 'Lead not found.' }, { status: 404 });
     }
 
-    return NextResponse.json({ lead, currentAdmin: admin });
+    // Fetch family members if this lead is part of a family group
+    let familyMembers: any[] = [];
+    if (lead.family_group_id) {
+      const { data: members, error: famErr } = await supabaseAdmin
+        .from('leads')
+        .select('id, full_name, relation_to_primary, is_family_primary, status, date_of_birth, phone, created_at')
+        .eq('family_group_id', lead.family_group_id)
+        .order('is_family_primary', { ascending: false });
+
+      if (!famErr && members) {
+        familyMembers = members;
+      }
+    }
+
+    return NextResponse.json({ lead, currentAdmin: admin, familyMembers });
   } catch (error) {
     console.error('Unexpected error fetching lead detail:', error);
     return NextResponse.json({ error: 'Internal server error.' }, { status: 500 });

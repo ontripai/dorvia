@@ -481,6 +481,13 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
           </div>
 
           <div className="flex items-center gap-3">
+            <Link
+              href={`/${currentLang}/portal/profile`}
+              className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-[#2F6FED] hover:bg-blue-600 text-white text-xs font-bold shadow-sm transition-all cursor-pointer"
+            >
+              <User size={15} />
+              <span>{isFa ? 'پروفایل و شبکه خانواده' : 'Profile & Family'}</span>
+            </Link>
             <button
               onClick={handleSignOut}
               className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all cursor-pointer"
@@ -525,6 +532,14 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
               </span>
             )}
           </button>
+
+          <Link
+            href={`/${currentLang}/portal/profile`}
+            className="px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center space-x-2 rtl:space-x-reverse bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
+          >
+            <User size={16} />
+            <span>{isFa ? 'پروفایل و شبکه خانواده' : 'Profile & Family Network'}</span>
+          </Link>
         </div>
 
         {/* TAB 1: OVERVIEW & CHAT */}
