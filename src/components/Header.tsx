@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { usePathname } from 'next/navigation';
 import { Language } from '../types';
@@ -21,7 +21,7 @@ const SearchDialog = dynamic(
   { ssr: false }
 );
 import { Button } from './Button';
-import { ChevronDown, Menu, Search } from './Icons';
+import { ChevronDown, Menu, Search, LogIn, User, LockKeyhole } from './Icons';
 import Image from 'next/image';
 
 interface HeaderProps {
@@ -49,9 +49,29 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const t = getTranslations(currentLang);
   const [activeMegaMenu, setActiveMegaMenu] = useState<'starthere' | 'immigration' | 'study' | 'work-business' | 'needs' | 'romania' | null>(null);
+  const [loginMenuOpen, setLoginMenuOpen] = useState(false);
+  const [mobileLoginOpen, setMobileLoginOpen] = useState(false);
+  const loginDropdownRef = useRef<HTMLDivElement>(null);
+  const mobileLoginRef = useRef<HTMLDivElement>(null);
   const setMobileDrawerOpen = onMobileDrawerOpenChange;
   const setSearchDialogOpen = onSearchDialogOpenChange;
   const pathname = usePathname() || '/';
+
+  const isAuthOrPortalPage = pathname.includes('/admin') || pathname.includes('/portal');
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (loginDropdownRef.current && !loginDropdownRef.current.contains(e.target as Node)) {
+        setLoginMenuOpen(false);
+      }
+      if (mobileLoginRef.current && !mobileLoginRef.current.contains(e.target as Node)) {
+        setMobileLoginOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
 
   // PRIMARY NAVIGATION ITEMS
   const primaryNavItems = [
@@ -162,6 +182,80 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           </div>
 
+          {/* Dual Login Dropdown (Desktop) */}
+          {!isAuthOrPortalPage && (
+            <div className="relative" ref={loginDropdownRef}>
+              <button
+                type="button"
+                onClick={() => setLoginMenuOpen((prev) => !prev)}
+                onMouseEnter={() => setLoginMenuOpen(true)}
+                className={`flex items-center space-x-1.5 rtl:space-x-reverse px-3 py-1.5 h-[44px] rounded-xl border transition-all cursor-pointer text-xs font-bold ${
+                  loginMenuOpen
+                    ? 'bg-[#071B3D] text-white border-[#071B3D] shadow-xs'
+                    : 'bg-[#eef3f8] text-[#142033] border-[#dfe6ef] hover:bg-[#dfe6ef]'
+                }`}
+                aria-label="Sign In Menu"
+              >
+                <LogIn size={16} className={loginMenuOpen ? 'text-amber-400' : 'text-[#2F6FED]'} />
+                <span>{currentLang === 'fa' ? 'ورود' : 'Sign In'}</span>
+                <ChevronDown
+                  size={13}
+                  className={`transition-transform duration-200 ${loginMenuOpen ? 'rotate-180 text-white' : 'text-[#788697]'}`}
+                />
+              </button>
+
+              {loginMenuOpen && (
+                <div
+                  onMouseLeave={() => setLoginMenuOpen(false)}
+                  className="absolute top-full mt-2 end-0 w-64 bg-white/98 backdrop-blur-md rounded-2xl shadow-xl border border-[#dfe6ef] p-2 space-y-1 z-50 animate-in fade-in zoom-in-95 duration-150"
+                  dir={currentLang === 'fa' ? 'rtl' : 'ltr'}
+                >
+                  <div className="px-3 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">
+                    {currentLang === 'fa' ? 'ورود به پورتال DORVIA' : 'DORVIA Portal Sign In'}
+                  </div>
+
+                  {/* Client Portal Login */}
+                  <Link
+                    href={`/${currentLang}/portal/login`}
+                    onClick={() => setLoginMenuOpen(false)}
+                    className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-blue-50/80 transition-colors group cursor-pointer"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-blue-100 text-[#2F6FED] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                      <User size={16} />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-[#142033] group-hover:text-[#2F6FED]">
+                        {currentLang === 'fa' ? 'ورود مشتریان' : 'Client Portal'}
+                      </div>
+                      <div className="text-[11px] text-slate-500 line-clamp-1">
+                        {currentLang === 'fa' ? 'مشاهده پرونده و بارگذاری مدارک' : 'Case status, documents & chat'}
+                      </div>
+                    </div>
+                  </Link>
+
+                  {/* Staff Admin Login */}
+                  <Link
+                    href={`/${currentLang}/admin/login`}
+                    onClick={() => setLoginMenuOpen(false)}
+                    className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-amber-50/80 transition-colors group cursor-pointer"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                      <LockKeyhole size={16} />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-[#142033] group-hover:text-amber-800">
+                        {currentLang === 'fa' ? 'ورود کارکنان' : 'Staff Admin'}
+                      </div>
+                      <div className="text-[11px] text-slate-500 line-clamp-1">
+                        {currentLang === 'fa' ? 'پنل مشاوران و تیم حقوقی' : 'Advisors & legal staff access'}
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Primary Header CTA */}
           <Button
             variant="primary"
@@ -197,6 +291,72 @@ export const Header: React.FC<HeaderProps> = ({
               EN
             </button>
           </div>
+
+          {/* Mobile Login Dropdown */}
+          {!isAuthOrPortalPage && (
+            <div className="relative" ref={mobileLoginRef}>
+              <button
+                type="button"
+                onClick={() => setMobileLoginOpen((prev) => !prev)}
+                className={`p-2 rounded-lg border min-h-[44px] min-w-[44px] flex items-center justify-center transition-colors ${
+                  mobileLoginOpen
+                    ? 'bg-[#071B3D] text-white border-[#071B3D]'
+                    : 'bg-[#eef3f8] text-[#142033] border-[#dfe6ef]'
+                }`}
+                aria-label="Sign In"
+                title={currentLang === 'fa' ? 'ورود' : 'Sign In'}
+              >
+                <LogIn size={18} className={mobileLoginOpen ? 'text-amber-400' : 'text-[#2F6FED]'} />
+              </button>
+
+              {mobileLoginOpen && (
+                <div
+                  className="absolute top-full mt-2 end-0 w-64 bg-white/98 backdrop-blur-md rounded-2xl shadow-xl border border-[#dfe6ef] p-2 space-y-1 z-50 animate-in fade-in zoom-in-95 duration-150"
+                  dir={currentLang === 'fa' ? 'rtl' : 'ltr'}
+                >
+                  <div className="px-3 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">
+                    {currentLang === 'fa' ? 'ورود به پورتال DORVIA' : 'DORVIA Portal Sign In'}
+                  </div>
+
+                  <Link
+                    href={`/${currentLang}/portal/login`}
+                    onClick={() => setMobileLoginOpen(false)}
+                    className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-blue-50/80 transition-colors"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-blue-100 text-[#2F6FED] flex items-center justify-center shrink-0">
+                      <User size={16} />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-[#142033]">
+                        {currentLang === 'fa' ? 'ورود متقاضیان' : 'Client Portal'}
+                      </div>
+                      <div className="text-[10px] text-slate-500">
+                        {currentLang === 'fa' ? 'مشاهده پرونده و بارگذاری مدارک' : 'Case status & documents'}
+                      </div>
+                    </div>
+                  </Link>
+
+                  <Link
+                    href={`/${currentLang}/admin/login`}
+                    onClick={() => setMobileLoginOpen(false)}
+                    className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-amber-50/80 transition-colors"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+                      <LockKeyhole size={16} />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-[#142033]">
+                        {currentLang === 'fa' ? 'ورود کارکنان' : 'Staff Admin'}
+                      </div>
+                      <div className="text-[10px] text-slate-500">
+                        {currentLang === 'fa' ? 'پنل مشاوران و تیم حقوقی' : 'Staff & legal portal'}
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
 
           <Button
             variant="primary"

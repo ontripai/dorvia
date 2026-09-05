@@ -27,6 +27,7 @@ import {
   FileText,
   FilePlus,
   Languages,
+  Users,
 } from '@/components/Icons';
 
 interface LeadDetailPageProps {
@@ -89,6 +90,7 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
   const [inviting, setInviting] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
   const [actionSuccess, setActionSuccess] = useState<string | null>(null);
+  const [familyMembers, setFamilyMembers] = useState<any[]>([]);
 
   // Documents State
   const [documents, setDocuments] = useState<AdminDocument[]>([]);
@@ -130,6 +132,9 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
       const json = await res.json().catch(() => null);
       if (json?.lead) {
         setLead(json.lead);
+        if (json.familyMembers) {
+          setFamilyMembers(json.familyMembers);
+        }
       } else {
         setActionError(json?.error || (isFa ? 'پرونده لید یافت نشد.' : 'Failed to load lead.'));
       }
@@ -379,6 +384,23 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
       setEditError(err?.message || (isFa ? 'خطا در ویرایش ترجمه' : 'Update error'));
     } finally {
       setSavingEdit(false);
+    }
+  };
+
+  const getRelationLabel = (relation: string | null) => {
+    switch (relation) {
+      case 'self':
+        return isFa ? 'متقاضی اصلی (سرپرست)' : 'Primary Applicant';
+      case 'spouse':
+        return isFa ? 'همسر' : 'Spouse';
+      case 'child':
+        return isFa ? 'فرزند' : 'Child';
+      case 'parent':
+        return isFa ? 'پدر / مادر' : 'Parent';
+      case 'sibling':
+        return isFa ? 'خواهر / برادر' : 'Sibling';
+      default:
+        return isFa ? 'سایر اعضا' : relation || 'Other';
     }
   };
 
@@ -732,6 +754,50 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
                     <span className="font-mono text-slate-800" dir="ltr">{lead.phone || '—'}</span>
                   </div>
 
+                  {lead.national_id_or_passport && (
+                    <div className="flex items-center justify-between py-1.5 border-b border-slate-100">
+                      <span className="font-semibold text-slate-600">{isFa ? 'کد ملی / گذرنامه' : 'National ID / Passport'}</span>
+                      <span className="font-mono text-slate-800" dir="ltr">{lead.national_id_or_passport}</span>
+                    </div>
+                  )}
+
+                  {lead.date_of_birth && (
+                    <div className="flex items-center justify-between py-1.5 border-b border-slate-100">
+                      <span className="font-semibold text-slate-600">{isFa ? 'تاریخ تولد' : 'Date of Birth'}</span>
+                      <span className="font-mono text-slate-800" dir="ltr">{lead.date_of_birth}</span>
+                    </div>
+                  )}
+
+                  {lead.anniversary_date && (
+                    <div className="flex items-center justify-between py-1.5 border-b border-slate-100">
+                      <span className="font-semibold text-slate-600">{isFa ? 'تاریخ سالگرد ازدواج' : 'Anniversary Date'}</span>
+                      <span className="font-mono text-slate-800" dir="ltr">{lead.anniversary_date}</span>
+                    </div>
+                  )}
+
+                  {(lead.address_city || lead.address_line || lead.address_postal_code) && (
+                    <div className="flex items-start justify-between py-1.5 border-b border-slate-100">
+                      <span className="font-semibold text-slate-600 shrink-0">{isFa ? 'نشانی سکونت' : 'Address'}</span>
+                      <span className="font-medium text-[#142033] text-end leading-relaxed">
+                        {[lead.address_city, lead.address_line, lead.address_postal_code ? `(${lead.address_postal_code})` : ''].filter(Boolean).join('، ')}
+                      </span>
+                    </div>
+                  )}
+
+                  {lead.employment_status && (
+                    <div className="flex items-center justify-between py-1.5 border-b border-slate-100">
+                      <span className="font-semibold text-slate-600">{isFa ? 'وضعیت اشتغال' : 'Employment'}</span>
+                      <span className="font-medium text-[#142033]">{lead.employment_status}</span>
+                    </div>
+                  )}
+
+                  {lead.education_level && (
+                    <div className="flex items-center justify-between py-1.5 border-b border-slate-100">
+                      <span className="font-semibold text-slate-600">{isFa ? 'سطح تحصیلات' : 'Education'}</span>
+                      <span className="font-medium text-[#142033]">{lead.education_level}</span>
+                    </div>
+                  )}
+
                   <div className="flex items-center justify-between py-1.5 border-b border-slate-100">
                     <span className="font-semibold text-slate-600">{isFa ? 'منبع جذب' : 'Source'}</span>
                     <span className="font-mono text-slate-800">{lead.source}</span>
@@ -758,6 +824,71 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
                   </div>
                 )}
               </div>
+
+              {/* Family Group Members Card (dre-p63) */}
+              {lead.family_group_id && (
+                <div className="bg-white border border-[#dfe6ef] rounded-3xl p-6 shadow-sm space-y-4">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 className="text-sm font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                      <Users size={16} className="text-[#2F6FED]" />
+                      <span>{isFa ? 'اعضای همین خانواده' : 'Family Group Members'}</span>
+                    </h3>
+                    <span className="px-2 py-0.5 rounded-full bg-blue-50 text-[#2F6FED] text-[10px] font-mono font-bold">
+                      {familyMembers.length} {isFa ? 'عضو' : 'members'}
+                    </span>
+                  </div>
+
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    {isFa
+                      ? 'پرونده‌های متصل به شناسه گروه خانوادگی مشترک:'
+                      : 'Linked case files in the same family group:'}
+                  </p>
+
+                  <div className="space-y-2">
+                    {familyMembers.map((member) => (
+                      <div
+                        key={member.id}
+                        className={`p-3 rounded-2xl border flex items-center justify-between transition-all ${
+                          member.id === lead.id
+                            ? 'bg-blue-50/50 border-blue-200'
+                            : 'bg-slate-50 border-slate-200 hover:border-slate-300'
+                        }`}
+                      >
+                        <div className="space-y-0.5 min-w-0">
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-xs font-extrabold text-[#142033] truncate">
+                              {member.full_name}
+                            </span>
+                            {member.is_family_primary && (
+                              <span className="px-1.5 py-0.5 rounded-md bg-[#071B3D] text-white text-[9px] font-bold">
+                                {isFa ? 'سرپرست' : 'Primary'}
+                              </span>
+                            )}
+                            {member.id === lead.id && (
+                              <span className="text-[10px] text-blue-600 font-bold">
+                                ({isFa ? 'پرونده فعلی' : 'Current'})
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-[11px] text-[#2F6FED]">
+                            {getRelationLabel(member.relation_to_primary)}
+                            {member.phone ? ` • ${member.phone}` : ''}
+                          </div>
+                        </div>
+
+                        {member.id !== lead.id && (
+                          <Link
+                            href={`/admin/leads/${member.id}`}
+                            className="px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-[11px] font-bold text-[#071B3D] transition-colors shrink-0"
+                          >
+                            {isFa ? 'مشاهده پرونده ←' : 'View Case →'}
+                          </Link>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
             </div>
 

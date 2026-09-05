@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { Language } from '../types';
 import { getTranslations } from '../lib/i18n';
 import { getNavPath } from '../lib/navigation';
-import { X, ChevronDown, Search, ArrowLeft, ArrowRight } from './Icons';
+import { X, ChevronDown, Search, ArrowLeft, ArrowRight, User, LockKeyhole } from './Icons';
 import { Button } from './Button';
 import Image from 'next/image';
 
@@ -309,6 +309,41 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
           </span>
           <ArrowIcon size={14} />
         </Link>
+
+        {/* Dual Login Quick Access for Mobile */}
+        {!pathname.includes('/admin') && !pathname.includes('/portal') && (
+          <div className="grid grid-cols-2 gap-2 pt-1">
+            <Link
+              href={`/${currentLang}/portal/login`}
+              onClick={onClose}
+              className="flex items-center gap-2 p-2.5 rounded-xl bg-blue-500/15 hover:bg-blue-500/25 border border-blue-400/30 text-white min-h-[44px] transition-colors"
+            >
+              <div className="w-7 h-7 rounded-lg bg-[#2F6FED] text-white flex items-center justify-center shrink-0">
+                <User size={14} />
+              </div>
+              <div className="text-start">
+                <div className="text-xs font-bold text-blue-100">
+                  {isFa ? 'ورود مشتریان' : 'Client Portal'}
+                </div>
+              </div>
+            </Link>
+
+            <Link
+              href={`/${currentLang}/admin/login`}
+              onClick={onClose}
+              className="flex items-center gap-2 p-2.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/30 text-white min-h-[44px] transition-colors"
+            >
+              <div className="w-7 h-7 rounded-lg bg-amber-600 text-white flex items-center justify-center shrink-0">
+                <LockKeyhole size={14} />
+              </div>
+              <div className="text-start">
+                <div className="text-xs font-bold text-amber-100">
+                  {isFa ? 'ورود کارکنان' : 'Staff Admin'}
+                </div>
+              </div>
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Main Drawer Accordion */}

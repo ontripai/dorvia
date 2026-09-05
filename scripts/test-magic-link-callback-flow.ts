@@ -795,7 +795,244 @@ async function runTests() {
   await supabaseAdmin.from('leads').delete().eq('id', docLead.id);
   console.log('✅ Test artifacts cleaned up successfully.\n');
 
-  console.log('=== All 11 Callback, Portal, Admin, Lifecycle & Role Enforcement Tests Passed Successfully! ===\n');
+  // -------------------------------------------------------------
+  // Test 12: Customer Profile Whitelist Enforcement & Family Network (dre-p63)
+  // -------------------------------------------------------------
+  console.log('12. Testing Customer Profile Whitelist Enforcement & Family Network (dre-p63)...');
+  const portalProfileRoute = await import('../src/app/api/portal/profile/route');
+  const portalFamilyRoute = await import('../src/app/api/portal/family/route');
+
+  // 1. Create a primary lead record
+  const p63Email = `p63.primary.${Date.now()}@dorvia.com`;
+  const { data: p63Lead, error: p63LeadErr } = await supabaseAdmin
+    .from('leads')
+    .insert({
+      email: p63Email,
+      full_name: 'Mahmoud Test Primary',
+      phone: '09120000001',
+      source: 'website',
+      status: 'contacted',
+      admin_comment: 'Original Admin Comment',
+      verified_at: new Date().toISOString(),
+      invited_at: new Date().toISOString(),
+    })
+    .select()
+    .single();
+
+  if (p63LeadErr || !p63Lead) {
+    console.error('❌ FAIL: Failed to create test primary lead:', p63LeadErr);
+    process.exit(1);
+  }
+  console.log(`Created test primary lead: ${p63Lead.id} (${p63Email})`);
+
+  // 2. Generate magic link and authenticate as customer in portal flow
+  const p63Link = await supabaseAdmin.auth.admin.generateLink({
+    type: 'magiclink',
+    email: p63Email,
+    options: { redirectTo: 'https://dorvia.ro/fa/portal/callback' },
+  });
+  const p63AuthUserId = p63Link.data?.user?.id;
+  const p63ActionLink = p63Link.data?.properties?.action_link;
+  if (!p63ActionLink || !p63AuthUserId) {
+    console.error('❌ Failed to generate portal action link for p63 lead');
+    process.exit(1);
+  }
+
+  const p63VerifyRes = await fetch(p63ActionLink, { method: 'GET', redirect: 'manual' });
+  const p63Hash = (p63VerifyRes.headers.get('location') || '').split('#')[1] || '';
+  const p63Params = new URLSearchParams(p63Hash);
+  const p63AccessToken = p63Params.get('access_token');
+  const p63RefreshToken = p63Params.get('refresh_token');
+
+  const p63SessionReq = new Request('https://dorvia.ro/api/auth/session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      access_token: p63AccessToken,
+      refresh_token: p63RefreshToken,
+      flow: 'portal',
+      lang: 'fa',
+    }),
+  });
+  const p63SessionRes = await sessionHandler.POST(p63SessionReq);
+  const p63Cookies = p63SessionRes.cookies?.getAll ? p63SessionRes.cookies.getAll() : [];
+  const p63CookieHeader = p63Cookies.map((c: any) => `${c.name}=${c.value}`).join('; ');
+
+  // 3. GET /api/portal/profile
+  const pReq = new Request('https://dorvia.ro/api/portal/profile', {
+    method: 'GET',
+    headers: { cookie: p63CookieHeader },
+  });
+  const pRes = await portalProfileRoute.GET(pReq);
+  const pData = await pRes.json();
+  if (pRes.status !== 200 || pData.lead?.id !== p63Lead.id) {
+    console.error('❌ FAIL: GET /api/portal/profile failed:', pRes.status, pData);
+    process.exit(1);
+  }
+  console.log('✅ PASS: GET /api/portal/profile returned authenticated lead profile.');
+
+  // 4. POST /api/portal/profile - Test Whitelist Security Enforcement
+  console.log('Testing customer profile update with forbidden fields injected (status, admin_comment, etc.)...');
+  const updateReq = new Request('https://dorvia.ro/api/portal/profile', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      cookie: p63CookieHeader,
+    },
+    body: JSON.stringify({
+      phone: '09129998877',
+      address_city: 'Bucharest',
+      address_line: 'Bulevardul Unirii 10',
+      address_postal_code: '030167',
+      date_of_birth: '1988-12-01',
+      anniversary_date: '2015-06-20',
+      national_id_or_passport: 'A98765432',
+      employment_status: 'employed',
+      education_level: 'master',
+      // Injected unauthorized/admin fields:
+      status: 'won',
+      admin_comment: 'HACKED_COMMENT',
+      unified_category: 'VIP_CUSTOMER',
+      verified_at: '2025-01-01',
+    }),
+  });
+  const updateRes = await portalProfileRoute.POST(updateReq);
+  const updateData = await updateRes.json();
+
+  if (updateRes.status !== 200 || !updateData.success) {
+    console.error('❌ FAIL: POST /api/portal/profile returned error:', updateRes.status, updateData);
+    process.exit(1);
+  }
+
+  // Verify directly in Supabase DB that whitelist was enforced
+  const { data: dbLeadAfterUpdate, error: dbVerifyErr } = await supabaseAdmin
+    .from('leads')
+    .select('*')
+    .eq('id', p63Lead.id)
+    .single();
+
+  if (dbVerifyErr || !dbLeadAfterUpdate) {
+    console.error('❌ FAIL: Failed to query lead from DB after profile update:', dbVerifyErr);
+    process.exit(1);
+  }
+
+  if (
+    dbLeadAfterUpdate.phone === '09129998877' &&
+    dbLeadAfterUpdate.address_city === 'Bucharest' &&
+    dbLeadAfterUpdate.national_id_or_passport === 'A98765432' &&
+    dbLeadAfterUpdate.education_level === 'master' &&
+    dbLeadAfterUpdate.status === 'contacted' && // Must NOT be 'won'
+    dbLeadAfterUpdate.admin_comment === 'Original Admin Comment' && // Must NOT be 'HACKED_COMMENT'
+    dbLeadAfterUpdate.unified_category === null && // Must NOT be 'VIP_CUSTOMER'
+    dbLeadAfterUpdate.verified_at !== '2025-01-01' // Must NOT be injected '2025-01-01'
+  ) {
+    console.log('✅ PASS: Profile fields updated successfully while unauthorized/admin fields were strictly ignored by whitelist!');
+  } else {
+    console.error('❌ FAIL: Whitelist check failed. DB record contains unauthorized changes:', {
+      status: dbLeadAfterUpdate.status,
+      admin_comment: dbLeadAfterUpdate.admin_comment,
+      address_city: dbLeadAfterUpdate.address_city,
+    });
+    process.exit(1);
+  }
+
+  // 5. POST /api/portal/family - Add a spouse
+  console.log('Testing adding a spouse via POST /api/portal/family...');
+  const addFamReq = new Request('https://dorvia.ro/api/portal/family', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      cookie: p63CookieHeader,
+    },
+    body: JSON.stringify({
+      full_name: 'Sara Rezaei',
+      relation_to_primary: 'spouse',
+      date_of_birth: '1990-04-12',
+      phone: '09127776655',
+      notes: 'Spouse accompanying lead',
+    }),
+  });
+  const addFamRes = await portalFamilyRoute.POST(addFamReq);
+  const addFamData = await addFamRes.json();
+
+  if (addFamRes.status !== 200 || !addFamData.success || !addFamData.member) {
+    console.error('❌ FAIL: POST /api/portal/family returned error:', addFamRes.status, addFamData);
+    process.exit(1);
+  }
+  const spouseId = addFamData.member.id;
+  console.log(`Created spouse lead: ${spouseId}`);
+
+  // Query DB directly to assert family group linkage
+  const { data: primaryAfterFam } = await supabaseAdmin
+    .from('leads')
+    .select('id, family_group_id, is_family_primary, relation_to_primary')
+    .eq('id', p63Lead.id)
+    .single();
+
+  const { data: spouseInDb } = await supabaseAdmin
+    .from('leads')
+    .select('id, full_name, family_group_id, is_family_primary, relation_to_primary, status, user_id')
+    .eq('id', spouseId)
+    .single();
+
+  if (
+    spouseInDb &&
+    primaryAfterFam &&
+    primaryAfterFam.family_group_id &&
+    primaryAfterFam.is_family_primary === true &&
+    spouseInDb.family_group_id === primaryAfterFam.family_group_id &&
+    spouseInDb.relation_to_primary === 'spouse' &&
+    spouseInDb.is_family_primary === false &&
+    spouseInDb.status === 'new' &&
+    spouseInDb.user_id === null
+  ) {
+    console.log('✅ PASS: Family network linkage confirmed in DB: shared family_group_id, primary flag set, spouse status is "new" and user_id is null.');
+  } else {
+    console.error('❌ FAIL: Family linkage DB assertion failed:', { primaryAfterFam, spouseInDb });
+    process.exit(1);
+  }
+
+  // 6. Test GET /api/portal/family
+  const getFamReq = new Request('https://dorvia.ro/api/portal/family', {
+    method: 'GET',
+    headers: { cookie: p63CookieHeader },
+  });
+  const getFamRes = await portalFamilyRoute.GET(getFamReq);
+  const getFamData = await getFamRes.json();
+  if (getFamRes.status === 200 && Array.isArray(getFamData.familyMembers) && getFamData.familyMembers.length >= 2) {
+    console.log(`✅ PASS: GET /api/portal/family returned ${getFamData.familyMembers.length} members in the family group!`);
+  } else {
+    console.error('❌ FAIL: GET /api/portal/family returned unexpected response:', getFamRes.status, getFamData);
+    process.exit(1);
+  }
+
+  // 7. Test Admin view of Family: GET /api/admin/leads/[id]
+  const adminLeadDetailReq = new Request(`https://dorvia.ro/api/admin/leads/${p63Lead.id}`, {
+    method: 'GET',
+    headers: { cookie: adminCookieHeader },
+  });
+  const adminLeadDetailRes = await leadDetailRoute.GET(adminLeadDetailReq, { params: { id: p63Lead.id } });
+  const adminLeadDetailJson = await adminLeadDetailRes.json();
+
+  if (
+    adminLeadDetailRes.status === 200 &&
+    Array.isArray(adminLeadDetailJson.familyMembers) &&
+    adminLeadDetailJson.familyMembers.length >= 2
+  ) {
+    console.log('✅ PASS: GET /api/admin/leads/[id] returned familyMembers array for admin view!\n');
+  } else {
+    console.error('❌ FAIL: Admin lead detail did not return familyMembers:', adminLeadDetailRes.status, adminLeadDetailJson);
+    process.exit(1);
+  }
+
+  // 8. Cleanup Test 12 data
+  console.log('Cleaning up Test 12 data...');
+  await supabaseAdmin.from('leads').delete().eq('id', spouseId);
+  await supabaseAdmin.from('leads').delete().eq('id', p63Lead.id);
+  await supabaseAdmin.auth.admin.deleteUser(p63AuthUserId);
+  console.log('✅ Test 12 artifacts cleaned up successfully.\n');
+
+  console.log('=== All 12 Callback, Portal, Admin, Lifecycle, Role Enforcement & Family Network Tests Passed Successfully! ===\n');
 }
 
 runTests().catch((err) => {
