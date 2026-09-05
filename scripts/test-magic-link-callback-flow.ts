@@ -498,10 +498,308 @@ async function runTests() {
     console.log('Cleaned up temporary test invite user.\n');
   }
 
-  console.log('=== All 9 Callback, Portal, Admin & Session Flow Tests Passed Successfully! ===\n');
+  // -------------------------------------------------------------
+  // Test 10: Document & Translation Lifecycle (dre-p64)
+  // -------------------------------------------------------------
+  console.log('10. Testing Document & Translation Lifecycle (dre-p64)...');
+  const adminDocsRoute = await import('../src/app/api/admin/leads/[id]/documents/route');
+  const adminDocItemRoute = await import('../src/app/api/admin/leads/[id]/documents/[docId]/route');
+  const adminDocDownloadRoute = await import('../src/app/api/admin/leads/[id]/documents/[docId]/download/route');
+
+  // Create test lead for document operations
+  const docTestEmail = `doctest.${Date.now()}@dorvia.com`;
+  const { data: docLead, error: createDocLeadErr } = await supabaseAdmin
+    .from('leads')
+    .insert([
+      {
+        full_name: 'متقاضی تست مدارک و ترجمه (dre-p64)',
+        email: docTestEmail,
+        phone: '+40727000999',
+        source: 'telegram_bot',
+        site_goal: 'study',
+        status: 'qualified',
+        verified_at: new Date().toISOString(),
+        invited_at: new Date().toISOString(),
+        raw_meta: { testSuite: 'dre-p64' },
+      },
+    ])
+    .select('*')
+    .single();
+
+  if (createDocLeadErr || !docLead) {
+    console.error('❌ FAIL: Failed to create test lead for doc lifecycle:', createDocLeadErr);
+    process.exit(1);
+  }
+  console.log(`Created test lead for documents: ${docLead.id} (${docLead.email})`);
+
+  // Step 1: Upload original document via staff endpoint (using admin session cookies from test 4)
+  const originalFileContent = Buffer.from('PDF_SAMPLE_ORIGINAL_NATIONAL_ID_DATA_' + Date.now());
+  const originalFile = new File([originalFileContent], 'national-id-original.pdf', { type: 'application/pdf' });
+  const uploadForm1 = new FormData();
+  uploadForm1.append('file', originalFile);
+  uploadForm1.append('document_type', 'national_id');
+  uploadForm1.append('language', 'فارسی');
+  uploadForm1.append('is_certified_translation', 'false');
+
+  const uploadReq1 = new Request(`https://dorvia.ro/api/admin/leads/${docLead.id}/documents`, {
+    method: 'POST',
+    headers: { cookie: adminCookieHeader },
+    body: uploadForm1,
+  });
+
+  const uploadRes1 = await adminDocsRoute.POST(uploadReq1, { params: { id: docLead.id } });
+  const uploadData1 = await uploadRes1.json();
+  console.log('Upload Original Document Status:', uploadRes1.status, uploadData1.success ? 'Success' : uploadData1);
+
+  if (uploadRes1.status !== 200 || !uploadData1.success || !uploadData1.document?.id) {
+    console.error('❌ FAIL: Failed to upload original document via staff endpoint:', uploadData1);
+    await supabaseAdmin.from('leads').delete().eq('id', docLead.id);
+    process.exit(1);
+  }
+  const originalDoc = uploadData1.document;
+  console.log(`✅ PASS: Original document uploaded: ${originalDoc.id} (${originalDoc.file_name}, storage_path: ${originalDoc.storage_path})`);
+
+  // Step 2: Upload translation document linked to the original document
+  const transFileContent = Buffer.from('PDF_SAMPLE_TRANSLATION_RO_DATA_' + Date.now());
+  const transFile = new File([transFileContent], 'national-id-ro-translation.pdf', { type: 'application/pdf' });
+  const uploadForm2 = new FormData();
+  uploadForm2.append('file', transFile);
+  uploadForm2.append('document_type', 'national_id');
+  uploadForm2.append('language', 'رومانیایی');
+  uploadForm2.append('translation_of_document_id', originalDoc.id);
+  uploadForm2.append('translation_office', 'دارالترجمه رسمی دانشجو');
+  uploadForm2.append('is_certified_translation', 'true');
+
+  const uploadReq2 = new Request(`https://dorvia.ro/api/admin/leads/${docLead.id}/documents`, {
+    method: 'POST',
+    headers: { cookie: adminCookieHeader },
+    body: uploadForm2,
+  });
+
+  const uploadRes2 = await adminDocsRoute.POST(uploadReq2, { params: { id: docLead.id } });
+  const uploadData2 = await uploadRes2.json();
+  console.log('Upload Translation Document Status:', uploadRes2.status, uploadData2.success ? 'Success' : uploadData2);
+
+  if (uploadRes2.status !== 200 || !uploadData2.success || uploadData2.document?.translation_of_document_id !== originalDoc.id) {
+    console.error('❌ FAIL: Failed to upload translation linked to parent document:', uploadData2);
+    await supabaseAdmin.from('leads').delete().eq('id', docLead.id);
+    process.exit(1);
+  }
+  const transDoc = uploadData2.document;
+  console.log(`✅ PASS: Translation uploaded and linked: ${transDoc.id} -> parent ${originalDoc.id}`);
+
+  // Step 3: Fetch list of documents as admin and assert nested structure & counts
+  const listReq = new Request(`https://dorvia.ro/api/admin/leads/${docLead.id}/documents`, {
+    method: 'GET',
+    headers: { cookie: adminCookieHeader },
+  });
+  const listRes = await adminDocsRoute.GET(listReq, { params: { id: docLead.id } });
+  const listData = await listRes.json();
+
+  if (listRes.status !== 200 || !listData.documents || listData.documents.length !== 2) {
+    console.error('❌ FAIL: Admin documents list did not return expected 2 documents:', listData);
+    process.exit(1);
+  }
+  console.log(`✅ PASS: Admin document list returned ${listData.documents.length} documents (original + translation)`);
+
+  // Step 4: Edit translation metadata via PATCH endpoint
+  const patchReq = new Request(`https://dorvia.ro/api/admin/leads/${docLead.id}/documents/${transDoc.id}`, {
+    method: 'PATCH',
+    headers: {
+      cookie: adminCookieHeader,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      is_certified_translation: false,
+      translation_office: 'دارالترجمه رسمی تهران - سعادت‌آباد',
+    }),
+  });
+
+  const patchRes = await adminDocItemRoute.PATCH(patchReq, { params: { id: docLead.id, docId: transDoc.id } });
+  const patchData = await patchRes.json();
+
+  if (patchRes.status !== 200 || !patchData.success || patchData.document?.translation_office !== 'دارالترجمه رسمی تهران - سعادت‌آباد' || patchData.document?.is_certified_translation !== false) {
+    console.error('❌ FAIL: Translation metadata update via PATCH failed:', patchData);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Translation metadata successfully updated via PATCH endpoint (office & certification flag)');
+
+  // Step 5: Download original document via short-lived signed URL and verify content bytes
+  const dlReq = new Request(`https://dorvia.ro/api/admin/leads/${docLead.id}/documents/${originalDoc.id}/download?json=true`, {
+    method: 'GET',
+    headers: { cookie: adminCookieHeader },
+  });
+  const dlRes = await adminDocDownloadRoute.GET(dlReq, { params: { id: docLead.id, docId: originalDoc.id } });
+  const dlData = await dlRes.json();
+
+  if (dlRes.status !== 200 || !dlData.success || !dlData.downloadUrl) {
+    console.error('❌ FAIL: Download endpoint did not return signed downloadUrl:', dlData);
+    process.exit(1);
+  }
+  console.log(`Generated signed download URL: ${dlData.downloadUrl.substring(0, 80)}...`);
+
+  // Fetch file from signed URL to verify it's reachable and content matches
+  const downloadedFileRes = await fetch(dlData.downloadUrl);
+  if (downloadedFileRes.status !== 200) {
+    console.error('❌ FAIL: HTTP GET on signed download URL failed with status:', downloadedFileRes.status);
+    process.exit(1);
+  }
+  const downloadedBytes = Buffer.from(await downloadedFileRes.arrayBuffer());
+  if (!downloadedBytes.equals(originalFileContent)) {
+    console.error('❌ FAIL: Downloaded file content does not match uploaded bytes.');
+    process.exit(1);
+  }
+  console.log('✅ PASS: Verified signed URL download returns exact uploaded binary content!\n');
+
+  // -------------------------------------------------------------
+  // Test 11: Strict Role-Based Document Access Enforcement (dre-p64)
+  // Verification that an unauthorized role (e.g. 'marketing'):
+  // 1. Receives an empty document list (documents excluded on server).
+  // 2. Receives HTTP 403 Forbidden on direct download endpoint.
+  // 3. Receives HTTP 403 Forbidden on staff upload endpoint.
+  // -------------------------------------------------------------
+  console.log('11. Testing Strict Server-Side Role Enforcement (dre-p64)...');
+  const marketingEmail = `marketing.${Date.now()}@dorvia.ro`;
+  
+  // 1. Create temporary auth user for marketing staff
+  const marketingAuthRes = await supabaseAdmin.auth.admin.createUser({
+    email: marketingEmail,
+    email_confirm: true,
+  });
+  const marketingUserId = marketingAuthRes.data?.user?.id;
+  if (!marketingUserId) {
+    console.error('❌ FAIL: Could not create marketing auth user:', marketingAuthRes.error);
+    process.exit(1);
+  }
+
+  // 2. Insert into admin_users with role 'marketing' (id: '94527e85-9881-40d7-b138-2ba83355a251')
+  const { error: insertMarketingErr } = await supabaseAdmin.from('admin_users').insert([
+    {
+      id: marketingUserId,
+      role_id: '94527e85-9881-40d7-b138-2ba83355a251', // marketing role
+      full_name: 'کارشناس بازاریابی آزمایشی (بدون دسترسی مدارک)',
+      is_active: true,
+    },
+  ]);
+  if (insertMarketingErr) {
+    console.error('❌ FAIL: Could not create marketing admin_users record:', insertMarketingErr);
+    await supabaseAdmin.auth.admin.deleteUser(marketingUserId);
+    process.exit(1);
+  }
+
+  // 3. Exchange magic link for marketing session cookies
+  const marketingLinkRes = await supabaseAdmin.auth.admin.generateLink({
+    type: 'magiclink',
+    email: marketingEmail,
+    options: { redirectTo: 'https://dorvia.ro/fa/admin/callback' },
+  });
+  const marketingVerify = await fetch(marketingLinkRes.data?.properties?.action_link!, {
+    method: 'GET',
+    redirect: 'manual',
+  });
+  const marketingHash = (marketingVerify.headers.get('location') || '').split('#')[1] || '';
+  const marketingParams = new URLSearchParams(marketingHash);
+  const marketingToken = marketingParams.get('access_token');
+  const marketingRefresh = marketingParams.get('refresh_token');
+
+  const marketingSessionReq = new Request('https://dorvia.ro/api/auth/session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      access_token: marketingToken,
+      refresh_token: marketingRefresh,
+      flow: 'admin',
+      lang: 'fa',
+    }),
+  });
+  const marketingSessionRes = await sessionHandler.POST(marketingSessionReq);
+  const marketingCookies = marketingSessionRes.cookies?.getAll ? marketingSessionRes.cookies.getAll() : [];
+  const marketingCookieHeader = marketingCookies.map((c: any) => `${c.name}=${c.value}`).join('; ');
+
+  console.log('Established active marketing admin session with role: marketing.');
+
+  // 4. Test List Endpoint: Marketing staff requesting /api/admin/leads/[id]/documents
+  const mListReq = new Request(`https://dorvia.ro/api/admin/leads/${docLead.id}/documents`, {
+    method: 'GET',
+    headers: { cookie: marketingCookieHeader },
+  });
+  const mListRes = await adminDocsRoute.GET(mListReq, { params: { id: docLead.id } });
+  const mListData = await mListRes.json();
+  console.log('Marketing List Status:', mListRes.status, 'Visible Docs Count:', mListData.documents?.length);
+
+  if (mListRes.status !== 200) {
+    console.error('❌ FAIL: Marketing list request failed with status:', mListRes.status);
+    process.exit(1);
+  }
+  if (mListData.documents && mListData.documents.length > 0) {
+    console.error('❌ FAIL: Marketing user was able to view restricted documents in the list:', mListData.documents);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Marketing staff document list is completely empty — restricted documents are hidden server-side!');
+
+  // 5. Test Direct Download Endpoint: Marketing staff requesting direct download of national_id
+  console.log('Testing direct GET /documents/[docId]/download with marketing session (must return 403)...');
+  const mDlReq = new Request(`https://dorvia.ro/api/admin/leads/${docLead.id}/documents/${originalDoc.id}/download?json=true`, {
+    method: 'GET',
+    headers: { cookie: marketingCookieHeader },
+  });
+  const mDlRes = await adminDocDownloadRoute.GET(mDlReq, { params: { id: docLead.id, docId: originalDoc.id } });
+  const mDlData = await mDlRes.json();
+  console.log('Marketing Direct Download Status:', mDlRes.status, 'Body:', mDlData);
+
+  if (mDlRes.status === 403 && mDlData.error?.includes('Access denied')) {
+    console.log('✅ PASS: Direct download strictly returned HTTP 403 Forbidden for unauthorized role (marketing)!');
+  } else {
+    console.error(`❌ FAIL: Expected 403 Forbidden, but received status ${mDlRes.status}:`, mDlData);
+    process.exit(1);
+  }
+
+  // Also test direct download of the translation document
+  const mTransDlReq = new Request(`https://dorvia.ro/api/admin/leads/${docLead.id}/documents/${transDoc.id}/download?json=true`, {
+    method: 'GET',
+    headers: { cookie: marketingCookieHeader },
+  });
+  const mTransDlRes = await adminDocDownloadRoute.GET(mTransDlReq, { params: { id: docLead.id, docId: transDoc.id } });
+  const mTransDlData = await mTransDlRes.json();
+  if (mTransDlRes.status === 403) {
+    console.log('✅ PASS: Direct download of translation also strictly returned HTTP 403 Forbidden!');
+  } else {
+    console.error(`❌ FAIL: Expected 403 Forbidden on translation download, got ${mTransDlRes.status}:`, mTransDlData);
+    process.exit(1);
+  }
+
+  // 6. Test Upload Endpoint: Marketing staff attempting to upload national_id
+  const mUploadForm = new FormData();
+  mUploadForm.append('file', new File([Buffer.from('rogue')], 'rogue.pdf', { type: 'application/pdf' }));
+  mUploadForm.append('document_type', 'national_id');
+  const mUploadReq = new Request(`https://dorvia.ro/api/admin/leads/${docLead.id}/documents`, {
+    method: 'POST',
+    headers: { cookie: marketingCookieHeader },
+    body: mUploadForm,
+  });
+  const mUploadRes = await adminDocsRoute.POST(mUploadReq, { params: { id: docLead.id } });
+  const mUploadData = await mUploadRes.json();
+  if (mUploadRes.status === 403) {
+    console.log('✅ PASS: Staff upload endpoint strictly returned HTTP 403 Forbidden for unauthorized role!\n');
+  } else {
+    console.error(`❌ FAIL: Expected 403 Forbidden on upload, got ${mUploadRes.status}:`, mUploadData);
+    process.exit(1);
+  }
+
+  // 7. Cleanup Test 10 & 11 data
+  console.log('Cleaning up test files, documents, marketing user, and test lead...');
+  await supabaseAdmin.storage.from('lead-documents').remove([originalDoc.storage_path, transDoc.storage_path]);
+  await supabaseAdmin.from('lead_documents').delete().eq('lead_id', docLead.id);
+  await supabaseAdmin.from('admin_users').delete().eq('id', marketingUserId);
+  await supabaseAdmin.auth.admin.deleteUser(marketingUserId);
+  await supabaseAdmin.from('leads').delete().eq('id', docLead.id);
+  console.log('✅ Test artifacts cleaned up successfully.\n');
+
+  console.log('=== All 11 Callback, Portal, Admin, Lifecycle & Role Enforcement Tests Passed Successfully! ===\n');
 }
 
 runTests().catch((err) => {
   console.error('Test suite uncaught error:', err);
   process.exit(1);
 });
+
