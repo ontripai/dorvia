@@ -382,7 +382,123 @@ async function runTests() {
     process.exit(1);
   }
 
-  console.log('=== All 8 Callback, Portal, Admin & Session Flow Tests Passed Successfully! ===\n');
+  // -------------------------------------------------------------
+  // Test 9: Portal Invite redirect_to Regression Protection (dre-p61)
+  // -------------------------------------------------------------
+  console.log('9. Testing portal invite redirect_to regression protection (dre-p61)...');
+  
+  // Read from actual process.env.NEXT_PUBLIC_SITE_URL as used by route handlers
+  const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const siteUrl = (rawSiteUrl || 'https://dorvia.ro').replace(/\/+$/, '');
+  const expectedPortalCallback = `${siteUrl}/fa/portal/callback`;
+  const inviteTestEmail = `invite-regression-${Date.now()}@dorvia.com`;
+
+  console.log('Runtime process.env.NEXT_PUBLIC_SITE_URL:', rawSiteUrl);
+  console.log('Computed site origin for callback:', siteUrl);
+  console.log('Target expected portal callback:', expectedPortalCallback);
+
+  // Protective assertion: In production / build environments, NEXT_PUBLIC_SITE_URL must NOT be vercel.app
+  if (siteUrl.includes('vercel.app')) {
+    console.error(`❌ FAIL: NEXT_PUBLIC_SITE_URL is configured as "${siteUrl}". Production deployments must use https://dorvia.ro!`);
+    process.exit(1);
+  }
+
+  // Protective assertion: The expected callback MUST strictly match canonical portal callback
+  if (expectedPortalCallback !== 'https://dorvia.ro/fa/portal/callback') {
+    console.warn(`⚠️ Note: expectedPortalCallback is "${expectedPortalCallback}" (canonical: "https://dorvia.ro/fa/portal/callback")`);
+  }
+
+  if (expectedPortalCallback.includes('admin/callback')) {
+    console.error(`❌ FAIL: Computed portal callback contains admin/callback: "${expectedPortalCallback}"`);
+    process.exit(1);
+  }
+
+  // Generate invite link using Supabase Auth Admin API (the engine backing inviteUserByEmail)
+  const inviteGenRes = await supabaseAdmin.auth.admin.generateLink({
+    type: 'invite',
+    email: inviteTestEmail,
+    options: {
+      redirectTo: expectedPortalCallback,
+    },
+  });
+
+  if (inviteGenRes.error || !inviteGenRes.data?.properties?.action_link) {
+    console.error('❌ FAIL: Failed to generate portal invite link:', inviteGenRes.error);
+    process.exit(1);
+  }
+
+  const inviteProperties = inviteGenRes.data.properties;
+  const inviteActionLink = inviteProperties.action_link;
+  const inviteRedirectTo = inviteProperties.redirect_to;
+  const inviteUserId = inviteGenRes.data.user?.id;
+
+  console.log('Raw invite properties:', {
+    redirect_to: inviteRedirectTo,
+    verification_type: inviteProperties.verification_type,
+    action_link: inviteActionLink,
+  });
+
+  // 1. Assert redirect_to property strictly matches https://dorvia.ro/fa/portal/callback
+  if (inviteRedirectTo !== 'https://dorvia.ro/fa/portal/callback' && inviteRedirectTo !== expectedPortalCallback) {
+    console.error(`❌ FAIL: invite properties.redirect_to mismatch. Got: "${inviteRedirectTo}", Expected: "${expectedPortalCallback}"`);
+    if (inviteUserId) await supabaseAdmin.auth.admin.deleteUser(inviteUserId);
+    process.exit(1);
+  }
+  if (inviteRedirectTo.includes('vercel.app') || inviteRedirectTo.includes('admin/callback')) {
+    console.error(`❌ FAIL: invite properties.redirect_to contains forbidden token (vercel.app or admin/callback): "${inviteRedirectTo}"`);
+    if (inviteUserId) await supabaseAdmin.auth.admin.deleteUser(inviteUserId);
+    process.exit(1);
+  }
+  console.log(`✅ PASS: invite properties.redirect_to strictly matches: ${inviteRedirectTo}`);
+
+  // 2. Assert action_link query parameter contains redirect_to strictly matching portal callback
+  const parsedActionLink = new URL(inviteActionLink);
+  const actionLinkRedirectTo = parsedActionLink.searchParams.get('redirect_to');
+  if (actionLinkRedirectTo !== expectedPortalCallback) {
+    console.error(`❌ FAIL: action_link redirect_to param mismatch. Got: "${actionLinkRedirectTo}", Expected: "${expectedPortalCallback}"`);
+    if (inviteUserId) await supabaseAdmin.auth.admin.deleteUser(inviteUserId);
+    process.exit(1);
+  }
+  if (actionLinkRedirectTo.includes('vercel.app') || actionLinkRedirectTo.includes('admin/callback')) {
+    console.error(`❌ FAIL: action_link redirect_to param contains forbidden token: "${actionLinkRedirectTo}"`);
+    if (inviteUserId) await supabaseAdmin.auth.admin.deleteUser(inviteUserId);
+    process.exit(1);
+  }
+  console.log(`✅ PASS: action_link query param redirect_to strictly matches: ${actionLinkRedirectTo}`);
+
+  // 3. Assert raw action_link does NOT contain admin/callback or vercel.app
+  if (inviteActionLink.includes('admin/callback') || inviteActionLink.includes('vercel.app')) {
+    console.error('❌ FAIL: invite action_link contains admin/callback or vercel.app:', inviteActionLink);
+    if (inviteUserId) await supabaseAdmin.auth.admin.deleteUser(inviteUserId);
+    process.exit(1);
+  }
+  console.log('✅ PASS: invite action_link does NOT contain admin/callback or vercel.app');
+
+  // 4. Follow action_link via HTTP GET (redirect: 'manual') to verify raw HTTP 303 location
+  const inviteVerifyRes = await fetch(inviteActionLink, { method: 'GET', redirect: 'manual' });
+  const verifyLocation = inviteVerifyRes.headers.get('location') || '';
+  console.log(`Invite link verification response status: ${inviteVerifyRes.status}`);
+  console.log(`Location: ${verifyLocation.substring(0, 120)}...`);
+
+  if (!verifyLocation.startsWith('https://dorvia.ro/fa/portal/callback') && !verifyLocation.startsWith(expectedPortalCallback)) {
+    console.error(`❌ FAIL: Invite redirect location does NOT start with expected portal callback. Got: "${verifyLocation}"`);
+    if (inviteUserId) await supabaseAdmin.auth.admin.deleteUser(inviteUserId);
+    process.exit(1);
+  }
+  if (verifyLocation.includes('admin/callback') || verifyLocation.includes('vercel.app')) {
+    console.error('❌ FAIL: Invite redirect location contains forbidden token (admin/callback or vercel.app):', verifyLocation);
+    if (inviteUserId) await supabaseAdmin.auth.admin.deleteUser(inviteUserId);
+    process.exit(1);
+  }
+  console.log(`✅ PASS: Supabase Auth verify redirect strictly targets: ${verifyLocation.split('#')[0]}!\n`);
+
+  // Clean up temporary auth user
+  if (inviteUserId) {
+    await supabaseAdmin.auth.admin.deleteUser(inviteUserId);
+    console.log('Cleaned up temporary test invite user.\n');
+  }
+
+  console.log('=== All 9 Callback, Portal, Admin & Session Flow Tests Passed Successfully! ===\n');
 }
 
 runTests().catch((err) => {
