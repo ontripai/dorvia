@@ -461,6 +461,66 @@ export type Database = {
         };
         Relationships: [];
       };
+      case_stages: {
+        Row: {
+          id: string;
+          lead_id: string;
+          stage_key: string;
+          label_fa: string;
+          status: 'pending' | 'in_progress' | 'done' | 'blocked';
+          due_date: string;
+          responsible_role: 'agent' | 'consultant' | 'lawyer' | 'notary' | 'finance' | 'marketing' | 'manager' | 'owner';
+          responsible_staff_id: string | null;
+          completed_at: string | null;
+          notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          lead_id: string;
+          stage_key: string;
+          label_fa: string;
+          status?: 'pending' | 'in_progress' | 'done' | 'blocked';
+          due_date: string;
+          responsible_role?: 'agent' | 'consultant' | 'lawyer' | 'notary' | 'finance' | 'marketing' | 'manager' | 'owner';
+          responsible_staff_id?: string | null;
+          completed_at?: string | null;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          lead_id?: string;
+          stage_key?: string;
+          label_fa?: string;
+          status?: 'pending' | 'in_progress' | 'done' | 'blocked';
+          due_date?: string;
+          responsible_role?: 'agent' | 'consultant' | 'lawyer' | 'notary' | 'finance' | 'marketing' | 'manager' | 'owner';
+          responsible_staff_id?: string | null;
+          completed_at?: string | null;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'case_stages_lead_id_fkey';
+            columns: ['lead_id'];
+            isOneToOne: false;
+            referencedRelation: 'leads';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'case_stages_responsible_staff_id_fkey';
+            columns: ['responsible_staff_id'];
+            isOneToOne: false;
+            referencedRelation: 'admin_users';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
     };
     Views: {
       [_ in never]: never;
