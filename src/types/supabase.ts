@@ -212,10 +212,72 @@ export type Database = {
           }
         ];
       };
+      document_types: {
+        Row: {
+          key: string;
+          label_fa: string;
+          allowed_roles: string[];
+        };
+        Insert: {
+          key: string;
+          label_fa: string;
+          allowed_roles: string[];
+        };
+        Update: {
+          key?: string;
+          label_fa?: string;
+          allowed_roles?: string[];
+        };
+        Relationships: [];
+      };
+      lead_assignments: {
+        Row: {
+          id: string;
+          lead_id: string;
+          staff_id: string;
+          assigned_role: string;
+          assigned_at: string;
+        };
+        Insert: {
+          id?: string;
+          lead_id: string;
+          staff_id: string;
+          assigned_role: string;
+          assigned_at?: string;
+        };
+        Update: {
+          id?: string;
+          lead_id?: string;
+          staff_id?: string;
+          assigned_role?: string;
+          assigned_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'lead_assignments_lead_id_fkey';
+            columns: ['lead_id'];
+            isOneToOne: false;
+            referencedRelation: 'leads';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'lead_assignments_staff_id_fkey';
+            columns: ['staff_id'];
+            isOneToOne: false;
+            referencedRelation: 'admin_users';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
       lead_documents: {
         Row: {
           id: string;
           lead_id: string;
+          document_type: string;
+          language: string | null;
+          translation_of_document_id: string | null;
+          translation_office: string | null;
+          is_certified_translation: boolean;
           uploaded_by_role: 'lead' | 'admin';
           uploaded_by_admin_id: string | null;
           storage_path: string;
@@ -228,6 +290,11 @@ export type Database = {
         Insert: {
           id?: string;
           lead_id: string;
+          document_type: string;
+          language?: string | null;
+          translation_of_document_id?: string | null;
+          translation_office?: string | null;
+          is_certified_translation?: boolean;
           uploaded_by_role: 'lead' | 'admin';
           uploaded_by_admin_id?: string | null;
           storage_path: string;
@@ -240,6 +307,11 @@ export type Database = {
         Update: {
           id?: string;
           lead_id?: string;
+          document_type?: string;
+          language?: string | null;
+          translation_of_document_id?: string | null;
+          translation_office?: string | null;
+          is_certified_translation?: boolean;
           uploaded_by_role?: 'lead' | 'admin';
           uploaded_by_admin_id?: string | null;
           storage_path?: string;
@@ -262,6 +334,20 @@ export type Database = {
             columns: ['uploaded_by_admin_id'];
             isOneToOne: false;
             referencedRelation: 'admin_users';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'lead_documents_document_type_fkey';
+            columns: ['document_type'];
+            isOneToOne: false;
+            referencedRelation: 'document_types';
+            referencedColumns: ['key'];
+          },
+          {
+            foreignKeyName: 'lead_documents_translation_of_document_id_fkey';
+            columns: ['translation_of_document_id'];
+            isOneToOne: false;
+            referencedRelation: 'lead_documents';
             referencedColumns: ['id'];
           }
         ];
