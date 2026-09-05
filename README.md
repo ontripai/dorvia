@@ -101,6 +101,8 @@ Simply open `index.html` in any web browser (Chrome, Edge, Firefox, Safari) to t
    npx vercel
    ```
 
+> ⚠️ **توجه مهم دیپلوی:** تغییر هر `NEXT_PUBLIC_*` env var (مثل `NEXT_PUBLIC_SITE_URL`) در Vercel Dashboard به‌تنهایی کافی نیست — **باید حتماً یک Redeploy دستی انجام شود**، زیرا این مقادیر در لحظهٔ build اینلاین می‌شوند. برای توضیحات بیشتر [DEPLOYMENT.md](DEPLOYMENT.md) را ببینید.
+
 ### Supabase Integration Setup
 1. Create a Supabase project at [https://supabase.com](https://supabase.com).
 2. Create a `leads` table with columns matching `LeadFormData`:

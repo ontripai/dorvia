@@ -56,6 +56,8 @@ export async function POST(
     const origin = process.env.NEXT_PUBLIC_SITE_URL || url.origin;
     const callbackUrl = `${origin}/fa/portal/callback`;
 
+    console.log('[Invite] computed callbackUrl:', callbackUrl, '| NEXT_PUBLIC_SITE_URL:', process.env.NEXT_PUBLIC_SITE_URL, '| request origin:', url.origin);
+
     // 3. Send magic link invitation via Supabase Auth Admin API
     const { data: inviteData, error: inviteErr } = await supabaseAdmin.auth.admin.inviteUserByEmail(
       lead.email.trim().toLowerCase(),
@@ -73,6 +75,7 @@ export async function POST(
         inviteErr.message.toLowerCase().includes('already') ||
         inviteErr.message.toLowerCase().includes('registered')
       ) {
+        console.log('[Invite Fallback] computed callbackUrl:', callbackUrl, '| NEXT_PUBLIC_SITE_URL:', process.env.NEXT_PUBLIC_SITE_URL, '| request origin:', url.origin);
         await supabaseAdmin.auth.admin.generateLink({
           type: 'magiclink',
           email: lead.email.trim().toLowerCase(),

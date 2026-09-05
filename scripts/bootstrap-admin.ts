@@ -42,6 +42,7 @@ async function bootstrapOwner() {
 
   const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL || 'https://dorvia.ro';
   console.log(`Attempting to invite/register auth user for: ${email}...`);
+  console.log('[Bootstrap Admin] computed redirectTo:', `${siteOrigin}/fa/admin/callback`, '| NEXT_PUBLIC_SITE_URL:', process.env.NEXT_PUBLIC_SITE_URL);
   const { data: inviteData, error: inviteError } = await supabaseAdmin.auth.admin.inviteUserByEmail(
     email,
     {

@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     const origin = process.env.NEXT_PUBLIC_SITE_URL || url.origin;
     const callbackUrl = `${origin}/${lang}/${flow}/callback`;
 
-    console.log(`[Auth OTP] Requesting magic link for [${email}] with flow [${flow}], redirect: ${callbackUrl}`);
+    console.log('[Auth OTP] computed callbackUrl:', callbackUrl, '| NEXT_PUBLIC_SITE_URL:', process.env.NEXT_PUBLIC_SITE_URL, '| request origin:', url.origin, `| email: [${email}], flow: [${flow}]`);
 
     const { data, error } = await supabaseAdmin.auth.signInWithOtp({
       email,
