@@ -1032,11 +1032,273 @@ async function runTests() {
   await supabaseAdmin.auth.admin.deleteUser(p63AuthUserId);
   console.log('✅ Test 12 artifacts cleaned up successfully.\n');
 
-  console.log('=== All 12 Callback, Portal, Admin, Lifecycle, Role Enforcement & Family Network Tests Passed Successfully! ===\n');
+  // -------------------------------------------------------------
+  // Test 13: Team Governance, Case Assignments & Notification Settings (dre-p65)
+  // -------------------------------------------------------------
+  console.log('13. Testing Team Governance, Case Assignments & Notification Settings (dre-p65)...');
+  const adminTeamRoute = await import('../src/app/api/admin/team/route');
+  const adminTeamInviteRoute = await import('../src/app/api/admin/team/invite/route');
+  const adminTeamPatchRoute = await import('../src/app/api/admin/team/[staffId]/route');
+  const adminAssignmentsRoute = await import('../src/app/api/admin/leads/[id]/assignments/route');
+  const adminDeleteAssignmentRoute = await import('../src/app/api/admin/leads/[id]/assignments/[assignmentId]/route');
+  const adminNotificationsRoute = await import('../src/app/api/admin/me/notifications/route');
+
+  // 1. Fetch 'agent' role
+  const { data: agentRole, error: roleErr } = await supabaseAdmin
+    .from('roles')
+    .select('id, key')
+    .eq('key', 'agent')
+    .single();
+
+  if (roleErr || !agentRole) {
+    console.error('❌ FAIL: Could not find agent role:', roleErr);
+    process.exit(1);
+  }
+
+  // 2. Owner invites a new staff member with role 'agent'
+  const agentEmail = `test.agent.${Date.now()}@dorvia.com`;
+  console.log(`Inviting new staff member: ${agentEmail} with role: agent...`);
+  const inviteReq = new Request('https://dorvia.ro/api/admin/team/invite', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      cookie: adminCookieHeader,
+    },
+    body: JSON.stringify({
+      email: agentEmail,
+      full_name: 'Test Agent Ali',
+      role_id: agentRole.id,
+    }),
+  });
+  const inviteRes = await adminTeamInviteRoute.POST(inviteReq);
+  const inviteJson = await inviteRes.json();
+
+  if (inviteRes.status !== 200 || !inviteJson.success || !inviteJson.member?.id) {
+    console.error('❌ FAIL: POST /api/admin/team/invite failed:', inviteRes.status, inviteJson);
+    process.exit(1);
+  }
+  const agentUserId = inviteJson.member.id;
+  console.log(`✅ PASS: Staff invited successfully with ID: ${agentUserId}`);
+
+  // Query DB directly to verify admin_users row
+  const { data: staffInDb, error: staffInDbErr } = await supabaseAdmin
+    .from('admin_users')
+    .select('id, role_id, full_name, is_active')
+    .eq('id', agentUserId)
+    .single();
+
+  if (staffInDbErr || !staffInDb || staffInDb.role_id !== agentRole.id || !staffInDb.is_active) {
+    console.error('❌ FAIL: admin_users record mismatch in DB:', staffInDbErr, staffInDb);
+    process.exit(1);
+  }
+  console.log('✅ PASS: admin_users record verified in database with role_id and is_active: true');
+
+  // 3. Create a test lead to assign
+  const { data: assignTestLead, error: assignLeadErr } = await supabaseAdmin
+    .from('leads')
+    .insert({
+      full_name: 'Lead for Assignment Test',
+      email: `assign.test.${Date.now()}@dorvia.com`,
+      source: 'website',
+      status: 'new',
+    })
+    .select('id')
+    .single();
+
+  if (assignLeadErr || !assignTestLead) {
+    console.error('❌ FAIL: Failed to create lead for assignment test:', assignLeadErr);
+    process.exit(1);
+  }
+
+  // 4. Owner assigns new agent to the test lead
+  console.log(`Assigning agent ${agentUserId} to lead ${assignTestLead.id}...`);
+  const assignReq = new Request(`https://dorvia.ro/api/admin/leads/${assignTestLead.id}/assignments`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      cookie: adminCookieHeader,
+    },
+    body: JSON.stringify({
+      staff_id: agentUserId,
+      assigned_role: 'agent',
+    }),
+  });
+  const assignRes = await adminAssignmentsRoute.POST(assignReq, { params: { id: assignTestLead.id } });
+  const assignJson = await assignRes.json();
+
+  if (assignRes.status !== 200 || !assignJson.success || !assignJson.assignment?.id) {
+    console.error('❌ FAIL: POST /api/admin/leads/[id]/assignments failed:', assignRes.status, assignJson);
+    process.exit(1);
+  }
+  const assignmentId = assignJson.assignment.id;
+  console.log(`✅ PASS: Assignment created with ID: ${assignmentId}`);
+
+  // Query DB directly to verify lead_assignments row
+  const { data: dbAssignment, error: dbAssignErr } = await supabaseAdmin
+    .from('lead_assignments')
+    .select('id, lead_id, staff_id, assigned_role')
+    .eq('id', assignmentId)
+    .single();
+
+  if (
+    dbAssignErr ||
+    !dbAssignment ||
+    dbAssignment.lead_id !== assignTestLead.id ||
+    dbAssignment.staff_id !== agentUserId ||
+    dbAssignment.assigned_role !== 'agent'
+  ) {
+    console.error('❌ FAIL: lead_assignments row not found or mismatch in DB:', dbAssignErr, dbAssignment);
+    process.exit(1);
+  }
+  console.log('✅ PASS: lead_assignments record verified in DB with matching lead_id, staff_id, and assigned_role');
+
+  // 5. Establish authenticated session for the newly invited Agent
+  const agentLinkRes = await supabaseAdmin.auth.admin.generateLink({
+    type: 'magiclink',
+    email: agentEmail,
+    options: { redirectTo: 'https://dorvia.ro/fa/admin/callback' },
+  });
+  const agentActionLink = agentLinkRes.data?.properties?.action_link;
+  if (!agentActionLink) {
+    console.error('❌ FAIL: Failed to generate magic link for agent');
+    process.exit(1);
+  }
+
+  const agentVerifyRes = await fetch(agentActionLink, { method: 'GET', redirect: 'manual' });
+  const agentHash = (agentVerifyRes.headers.get('location') || '').split('#')[1] || '';
+  const agentParams = new URLSearchParams(agentHash);
+  const agentAccessToken = agentParams.get('access_token');
+  const agentRefreshToken = agentParams.get('refresh_token');
+
+  const agentSessionReq = new Request('https://dorvia.ro/api/auth/session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      access_token: agentAccessToken,
+      refresh_token: agentRefreshToken,
+      flow: 'admin',
+      lang: 'fa',
+    }),
+  });
+  const agentSessionRes = await sessionHandler.POST(agentSessionReq);
+  const agentCookies = agentSessionRes.cookies?.getAll ? agentSessionRes.cookies.getAll() : [];
+  const agentCookieHeader = agentCookies.map((c: any) => `${c.name}=${c.value}`).join('; ');
+  console.log('Established active agent admin session.');
+
+  // 6. Security Check: Agent attempts unauthorized POST /api/admin/team/invite (must return 403)
+  console.log('Testing Agent unauthorized attempt to access /api/admin/team/invite (must return 403)...');
+  const agentInviteReq = new Request('https://dorvia.ro/api/admin/team/invite', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      cookie: agentCookieHeader,
+    },
+    body: JSON.stringify({
+      email: 'hacker@dorvia.ro',
+      role_id: agentRole.id,
+    }),
+  });
+  const agentInviteRes = await adminTeamInviteRoute.POST(agentInviteReq);
+  const agentInviteJson = await agentInviteRes.json();
+  console.log('Agent invite attempt status:', agentInviteRes.status, 'body:', agentInviteJson);
+
+  if (agentInviteRes.status === 403) {
+    console.log('✅ PASS: Unauthorized role (agent) strictly received HTTP 403 Forbidden on team invite endpoint!');
+  } else {
+    console.error(`❌ FAIL: Expected 403 Forbidden, but received status ${agentInviteRes.status}:`, agentInviteJson);
+    process.exit(1);
+  }
+
+  // 7. Test Personal Notification Settings (PATCH /api/admin/me/notifications)
+  console.log('Testing personal notification preferences update for agent...');
+  const notifReq = new Request('https://dorvia.ro/api/admin/me/notifications', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      cookie: agentCookieHeader,
+    },
+    body: JSON.stringify({
+      telegram_chat_id: '987654321',
+      notify_email: false,
+      notify_telegram: true,
+      // Attempt unauthorized field injection:
+      is_active: false,
+      role_id: agentRole.id,
+    }),
+  });
+  const notifRes = await adminNotificationsRoute.PATCH(notifReq);
+  const notifJson = await notifRes.json();
+
+  if (notifRes.status !== 200 || !notifJson.success || notifJson.notifications?.telegram_chat_id !== '987654321') {
+    console.error('❌ FAIL: PATCH /api/admin/me/notifications failed:', notifRes.status, notifJson);
+    process.exit(1);
+  }
+
+  // Query DB directly to assert notification settings updated and whitelist preserved
+  const { data: agentDbAfterNotif, error: notifDbErr } = await supabaseAdmin
+    .from('admin_users')
+    .select('telegram_chat_id, notify_email, notify_telegram, is_active')
+    .eq('id', agentUserId)
+    .single();
+
+  if (
+    notifDbErr ||
+    !agentDbAfterNotif ||
+    agentDbAfterNotif.telegram_chat_id !== '987654321' ||
+    agentDbAfterNotif.notify_email !== false ||
+    agentDbAfterNotif.notify_telegram !== true ||
+    agentDbAfterNotif.is_active !== true // Whitelist guarded against is_active change!
+  ) {
+    console.error('❌ FAIL: Notification DB state assertion failed:', notifDbErr, agentDbAfterNotif);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Notification preferences updated and whitelist protected user status in database!');
+
+  // 8. Owner removes assignment: DELETE /api/admin/leads/[id]/assignments/[assignmentId]
+  console.log('Testing removal of case assignment...');
+  const delAssignReq = new Request(
+    `https://dorvia.ro/api/admin/leads/${assignTestLead.id}/assignments/${assignmentId}`,
+    {
+      method: 'DELETE',
+      headers: { cookie: adminCookieHeader },
+    }
+  );
+  const delAssignRes = await adminDeleteAssignmentRoute.DELETE(delAssignReq, {
+    params: { id: assignTestLead.id, assignmentId },
+  });
+  const delAssignJson = await delAssignRes.json();
+
+  if (delAssignRes.status !== 200 || !delAssignJson.success) {
+    console.error('❌ FAIL: DELETE assignment failed:', delAssignRes.status, delAssignJson);
+    process.exit(1);
+  }
+
+  const { data: verifyDelAssign } = await supabaseAdmin
+    .from('lead_assignments')
+    .select('id')
+    .eq('id', assignmentId)
+    .maybeSingle();
+
+  if (verifyDelAssign) {
+    console.error('❌ FAIL: Assignment still exists in DB after deletion');
+    process.exit(1);
+  }
+  console.log('✅ PASS: Assignment successfully deleted from database.');
+
+  // 9. Cleanup Test 13 data
+  console.log('Cleaning up Test 13 data...');
+  await supabaseAdmin.from('lead_assignments').delete().eq('lead_id', assignTestLead.id);
+  await supabaseAdmin.from('leads').delete().eq('id', assignTestLead.id);
+  await supabaseAdmin.from('admin_users').delete().eq('id', agentUserId);
+  await supabaseAdmin.auth.admin.deleteUser(agentUserId);
+  console.log('✅ Test 13 artifacts cleaned up successfully.\n');
+
+  console.log('=== All 13 Callback, Portal, Admin, Lifecycle, Role Enforcement, Family Network & Team Governance Tests Passed Successfully! ===\n');
 }
 
 runTests().catch((err) => {
   console.error('Test suite uncaught error:', err);
   process.exit(1);
 });
+
 

@@ -19,7 +19,8 @@ import {
   Clock,
   ArrowLeft,
   ArrowRight,
-  LockKeyhole
+  LockKeyhole,
+  Settings,
 } from '@/components/Icons';
 
 interface AdminLeadsPageProps {
@@ -182,7 +183,25 @@ export default function AdminLeadsPage({ params }: AdminLeadsPageProps) {
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            {(adminUser?.roleKey === 'owner' || adminUser?.roleKey === 'manager' || adminUser?.permissions?.includes('team.manage')) && (
+              <Link
+                href="/admin/team"
+                className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all"
+              >
+                <Users size={15} />
+                <span>{isFa ? 'مدیریت تیم' : 'Team'}</span>
+              </Link>
+            )}
+
+            <Link
+              href="/admin/settings"
+              className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all"
+            >
+              <Settings size={15} />
+              <span>{isFa ? 'تنظیمات من' : 'My Settings'}</span>
+            </Link>
+
             <button
               onClick={handleSignOut}
               className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all cursor-pointer"

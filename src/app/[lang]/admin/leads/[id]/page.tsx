@@ -28,6 +28,8 @@ import {
   FilePlus,
   Languages,
   Users,
+  UserPlus,
+  Trash2,
 } from '@/components/Icons';
 
 interface LeadDetailPageProps {
@@ -80,7 +82,7 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
   const router = useRouter();
   const leadId = params.id;
 
-  const [activeTab, setActiveTab] = useState<'details' | 'documents'>('details');
+  const [activeTab, setActiveTab] = useState<'details' | 'documents' | 'assignments'>('details');
   const [loading, setLoading] = useState(true);
   const [lead, setLead] = useState<any>(null);
   const [messages, setMessages] = useState<any[]>([]);
@@ -91,6 +93,17 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
   const [actionError, setActionError] = useState<string | null>(null);
   const [actionSuccess, setActionSuccess] = useState<string | null>(null);
   const [familyMembers, setFamilyMembers] = useState<any[]>([]);
+
+  // Case Staff Assignments State (dre-p65)
+  const [assignments, setAssignments] = useState<any[]>([]);
+  const [availableStaff, setAvailableStaff] = useState<any[]>([]);
+  const [canManageAssignments, setCanManageAssignments] = useState(false);
+  const [assigningStaff, setAssigningStaff] = useState(false);
+  const [selectedStaffId, setSelectedStaffId] = useState('');
+  const [selectedAssignedRole, setSelectedAssignedRole] = useState('agent');
+  const [deletingAssignmentId, setDeletingAssignmentId] = useState<string | null>(null);
+  const [assignmentError, setAssignmentError] = useState<string | null>(null);
+  const [assignmentSuccess, setAssignmentSuccess] = useState<string | null>(null);
 
   // Documents State
   const [documents, setDocuments] = useState<AdminDocument[]>([]);
@@ -148,6 +161,9 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
 
       // Fetch documents
       await loadAdminDocuments();
+
+      // Fetch assignments (dre-p65)
+      await loadLeadAssignments();
 
       setLoading(false);
 
@@ -401,6 +417,103 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
         return isFa ? 'خواهر / برادر' : 'Sibling';
       default:
         return isFa ? 'سایر اعضا' : relation || 'Other';
+    }
+  };
+
+  const getAssignedRoleLabel = (role: string) => {
+    switch (role) {
+      case 'agent':
+        return isFa ? 'مشاور ارشد پرونده' : 'Lead Case Agent';
+      case 'consultant':
+        return isFa ? 'مشاور تخصصی مهاجرت' : 'Immigration Consultant';
+      case 'lawyer':
+        return isFa ? 'وکیل حقوقی پرونده' : 'Case Attorney';
+      case 'notary':
+        return isFa ? 'امور اسناد رسمی و ترجمه' : 'Notary & Translation Specialist';
+      case 'finance':
+        return isFa ? 'کارشناس امور مالی' : 'Financial Specialist';
+      case 'marketing':
+        return isFa ? 'پشتیبانی و ارتباط با متقاضی' : 'Client Success & Relations';
+      default:
+        return role;
+    }
+  };
+
+  const loadLeadAssignments = async () => {
+    try {
+      const res = await fetch(`/api/admin/leads/${leadId}/assignments`);
+      const json = await res.json().catch(() => null);
+      if (json?.success) {
+        setAssignments(json.assignments || []);
+        setAvailableStaff(json.availableStaff || []);
+        setCanManageAssignments(Boolean(json.canManage));
+        if (json.availableStaff?.length > 0 && !selectedStaffId) {
+          setSelectedStaffId(json.availableStaff[0].id);
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load assignments:', err);
+    }
+  };
+
+  const handleCreateAssignment = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedStaffId || !selectedAssignedRole) {
+      setAssignmentError(isFa ? 'لطفاً کارمند و نقش را انتخاب کنید.' : 'Please select staff and role.');
+      return;
+    }
+
+    setAssigningStaff(true);
+    setAssignmentError(null);
+    setAssignmentSuccess(null);
+
+    try {
+      const res = await fetch(`/api/admin/leads/${leadId}/assignments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          staff_id: selectedStaffId,
+          assigned_role: selectedAssignedRole,
+        }),
+      });
+      const json = await res.json();
+
+      if (res.ok && json.success) {
+        setAssignmentSuccess(isFa ? 'کارمند با موفقیت به پرونده تخصیص داده شد.' : 'Staff assigned successfully.');
+        await loadLeadAssignments();
+      } else {
+        setAssignmentError(json.error || (isFa ? 'تخصیص کارمند ناموفق بود.' : 'Failed to assign staff.'));
+      }
+    } catch (err) {
+      console.error('Error assigning staff:', err);
+      setAssignmentError(isFa ? 'خطا در ارتباط با سرور.' : 'Network connection error.');
+    } finally {
+      setAssigningStaff(false);
+    }
+  };
+
+  const handleDeleteAssignment = async (assignmentId: string) => {
+    setDeletingAssignmentId(assignmentId);
+    setAssignmentError(null);
+    setAssignmentSuccess(null);
+
+    try {
+      const res = await fetch(`/api/admin/leads/${leadId}/assignments/${assignmentId}`, {
+        method: 'DELETE',
+      });
+      const json = await res.json();
+
+      if (res.ok && json.success) {
+        setAssignmentSuccess(isFa ? 'تخصیص همکار با موفقیت حذف شد.' : 'Assignment removed successfully.');
+        await loadLeadAssignments();
+      } else {
+        setAssignmentError(json.error || (isFa ? 'حذف تخصیص ناموفق بود.' : 'Failed to remove assignment.'));
+      }
+    } catch (err) {
+      console.error('Error deleting assignment:', err);
+      setAssignmentError(isFa ? 'خطا در ارتباط با سرور.' : 'Network connection error.');
+    } finally {
+      setDeletingAssignmentId(null);
     }
   };
 
@@ -676,6 +789,27 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
               </span>
             )}
           </button>
+
+          <button
+            onClick={() => setActiveTab('assignments')}
+            className={`px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center space-x-2 rtl:space-x-reverse ${
+              activeTab === 'assignments'
+                ? 'bg-[#071B3D] text-white shadow-sm'
+                : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+            }`}
+          >
+            <Users size={16} />
+            <span>{isFa ? 'تیم پرونده و تخصیص‌ها' : 'Case Staff & Team'}</span>
+            {assignments.length > 0 && (
+              <span
+                className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                  activeTab === 'assignments' ? 'bg-white/20 text-white' : 'bg-blue-100 text-blue-700'
+                }`}
+              >
+                {assignments.length}
+              </span>
+            )}
+          </button>
         </div>
 
         {/* TAB 1: CASE DETAILS & MESSAGING */}
@@ -734,6 +868,29 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
                     className="text-xs font-bold text-[#2F6FED] hover:underline cursor-pointer"
                   >
                     {isFa ? 'مشاهده مدارک ←' : 'View Docs →'}
+                  </button>
+                </div>
+
+                {/* Case Staff Team Quick Link Box (dre-p65) */}
+                <div className="p-4 rounded-2xl bg-indigo-50/50 border border-indigo-100 flex items-center justify-between">
+                  <div className="flex items-center space-x-2.5 rtl:space-x-reverse">
+                    <div className="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center">
+                      <Users size={16} />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-[#142033]">
+                        {isFa ? 'تیم رسیدگی به پرونده' : 'Assigned Case Staff'}
+                      </div>
+                      <div className="text-[11px] text-slate-500">
+                        {isFa ? `${assignments.length} همکار تخصیص‌یافته` : `${assignments.length} staff assigned`}
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setActiveTab('assignments')}
+                    className="text-xs font-bold text-[#2F6FED] hover:underline cursor-pointer"
+                  >
+                    {isFa ? 'مشاهده تیم ←' : 'View Team →'}
                   </button>
                 </div>
 
@@ -1262,6 +1419,188 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
                 )}
               </div>
             )}
+
+          </div>
+        )}
+
+        {/* TAB 3: CASE STAFF & ASSIGNMENTS (dre-p65) */}
+        {activeTab === 'assignments' && (
+          <div className="space-y-6">
+            
+            {/* Feedback Alerts */}
+            {assignmentError && (
+              <div className="p-4 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs font-bold flex items-center justify-between">
+                <span>⚠️ {assignmentError}</span>
+                <button onClick={() => setAssignmentError(null)} className="text-red-500 hover:text-red-800">✕</button>
+              </div>
+            )}
+
+            {assignmentSuccess && (
+              <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold flex items-center justify-between">
+                <span>✓ {assignmentSuccess}</span>
+                <button onClick={() => setAssignmentSuccess(null)} className="text-emerald-500 hover:text-emerald-800">✕</button>
+              </div>
+            )}
+
+            {/* Top Row: Info & Assign Form */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              
+              {/* Assign Form (5 Cols) - Only if canManageAssignments */}
+              {canManageAssignments ? (
+                <div className="lg:col-span-5">
+                  <div className="bg-white border border-[#dfe6ef] rounded-3xl p-6 shadow-sm space-y-5 sticky top-6">
+                    <div className="flex items-center space-x-2.5 rtl:space-x-reverse border-b border-slate-100 pb-4">
+                      <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#2F6FED] flex items-center justify-center">
+                        <UserPlus size={18} />
+                      </div>
+                      <div>
+                        <h2 className="text-sm font-extrabold text-[#142033]">
+                          {isFa ? 'تخصیص کارمند به این پرونده' : 'Assign Staff to Case'}
+                        </h2>
+                        <p className="text-[11px] text-slate-500">
+                          {isFa ? 'تعیین همکار مسئول و نقش اجرایی در این پرونده' : 'Designate staff and case responsibility'}
+                        </p>
+                      </div>
+                    </div>
+
+                    <form onSubmit={handleCreateAssignment} className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                          {isFa ? 'انتخاب همکار *' : 'Select Staff Member *'}
+                        </label>
+                        <select
+                          value={selectedStaffId}
+                          onChange={(e) => setSelectedStaffId(e.target.value)}
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold bg-white focus:border-[#2F6FED] focus:outline-none transition-colors"
+                        >
+                          {availableStaff.map((s) => (
+                            <option key={s.id} value={s.id}>
+                              {s.full_name || 'Staff'} ({s.roles?.label_fa || s.roles?.key || 'کارمند'})
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                          {isFa ? 'نقش تخصیص‌یافته در این پرونده *' : 'Assigned Case Role *'}
+                        </label>
+                        <select
+                          value={selectedAssignedRole}
+                          onChange={(e) => setSelectedAssignedRole(e.target.value)}
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold bg-white focus:border-[#2F6FED] focus:outline-none transition-colors"
+                        >
+                          <option value="agent">{isFa ? 'مشاور ارشد پرونده (Agent)' : 'Lead Case Agent'}</option>
+                          <option value="consultant">{isFa ? 'مشاور تخصصی مهاجرت (Consultant)' : 'Immigration Consultant'}</option>
+                          <option value="lawyer">{isFa ? 'وکیل حقوقی پرونده (Lawyer)' : 'Case Attorney'}</option>
+                          <option value="notary">{isFa ? 'امور اسناد رسمی و ترجمه (Notary)' : 'Notary Specialist'}</option>
+                          <option value="finance">{isFa ? 'کارشناس امور مالی (Finance)' : 'Financial Specialist'}</option>
+                          <option value="marketing">{isFa ? 'پشتیبانی و ارتباط با متقاضی (Marketing)' : 'Client Success'}</option>
+                        </select>
+                      </div>
+
+                      <button
+                        type="submit"
+                        disabled={assigningStaff || availableStaff.length === 0}
+                        className="w-full py-3 px-4 rounded-xl bg-[#2F6FED] hover:bg-blue-700 text-white font-extrabold text-xs shadow-sm transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse cursor-pointer disabled:opacity-50"
+                      >
+                        <UserPlus size={15} />
+                        <span>
+                          {assigningStaff
+                            ? (isFa ? 'در حال ثبت تخصیص...' : 'Assigning...')
+                            : (isFa ? 'ثبت تخصیص کارمند' : 'Assign to Case')}
+                        </span>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              ) : null}
+
+              {/* Roster of Assigned Staff (7 or 12 Cols) */}
+              <div className={canManageAssignments ? 'lg:col-span-7' : 'lg:col-span-12'}>
+                <div className="bg-white border border-[#dfe6ef] rounded-3xl p-6 shadow-sm space-y-4">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                      <Users size={16} className="text-[#2F6FED]" />
+                      <h3 className="text-sm font-extrabold text-[#142033]">
+                        {isFa ? 'تیم پرونده و همکاران مسئول' : 'Case Staff Roster'}
+                      </h3>
+                    </div>
+                    <span className="px-2.5 py-0.5 rounded-full bg-blue-50 text-[#2F6FED] text-xs font-mono font-bold">
+                      {assignments.length} {isFa ? 'همکار' : 'staff'}
+                    </span>
+                  </div>
+
+                  {assignments.length === 0 ? (
+                    <div className="py-12 text-center space-y-2">
+                      <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
+                        <Users size={22} />
+                      </div>
+                      <p className="text-xs text-slate-500 font-medium">
+                        {isFa
+                          ? 'هنوز هیچ کارمندی به این پرونده تخصیص داده نشده است.'
+                          : 'No staff members currently assigned to this case file.'}
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      {assignments.map((assign) => (
+                        <div
+                          key={assign.id}
+                          className="p-4 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-slate-300 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                        >
+                          <div className="flex items-center space-x-3 rtl:space-x-reverse min-w-0">
+                            <div className="w-10 h-10 rounded-xl bg-blue-100 text-[#2F6FED] flex items-center justify-center font-bold text-sm shrink-0">
+                              {assign.staff?.full_name ? assign.staff.full_name.charAt(0).toUpperCase() : 'S'}
+                            </div>
+
+                            <div className="space-y-0.5 min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs font-extrabold text-[#142033] truncate">
+                                  {assign.staff?.full_name || (isFa ? 'کارمند DORVIA' : 'Staff Member')}
+                                </span>
+                                <span className="px-2 py-0.5 rounded-md bg-blue-50 text-[#2F6FED] border border-blue-200 text-[10px] font-bold">
+                                  {getAssignedRoleLabel(assign.assigned_role)}
+                                </span>
+                              </div>
+
+                              <div className="text-[11px] text-slate-500">
+                                {isFa ? 'نقش سازمانی:' : 'Role:'}{' '}
+                                <span className="font-semibold text-slate-700">
+                                  {assign.staff?.roles?.label_fa || assign.staff?.roles?.key || '—'}
+                                </span>
+                                {' • '}
+                                <span className="text-[10px]">
+                                  {new Date(assign.assigned_at).toLocaleDateString(isFa ? 'fa-IR' : 'en-US', {
+                                    year: 'numeric',
+                                    month: 'short',
+                                    day: 'numeric',
+                                  })}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {canManageAssignments && (
+                            <button
+                              onClick={() => handleDeleteAssignment(assign.id)}
+                              disabled={deletingAssignmentId === assign.id}
+                              className="px-3 py-1.5 rounded-xl border border-red-200 bg-red-50 hover:bg-red-100 text-red-700 text-xs font-bold transition-all flex items-center space-x-1.5 rtl:space-x-reverse self-end sm:self-center cursor-pointer shrink-0 disabled:opacity-50"
+                              title={isFa ? 'حذف تخصیص' : 'Remove Assignment'}
+                            >
+                              <Trash2 size={13} />
+                              <span>{deletingAssignmentId === assign.id ? (isFa ? 'در حال حذف...' : 'Removing...') : (isFa ? 'حذف' : 'Remove')}</span>
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                </div>
+              </div>
+
+            </div>
 
           </div>
         )}

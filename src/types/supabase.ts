@@ -213,6 +213,9 @@ export type Database = {
           full_name: string | null;
           permission_overrides: Json;
           is_active: boolean;
+          telegram_chat_id: string | null;
+          notify_email: boolean;
+          notify_telegram: boolean;
           created_at: string;
           updated_at: string;
         };
@@ -222,6 +225,9 @@ export type Database = {
           full_name?: string | null;
           permission_overrides?: Json;
           is_active?: boolean;
+          telegram_chat_id?: string | null;
+          notify_email?: boolean;
+          notify_telegram?: boolean;
           created_at?: string;
           updated_at?: string;
         };
@@ -231,6 +237,9 @@ export type Database = {
           full_name?: string | null;
           permission_overrides?: Json;
           is_active?: boolean;
+          telegram_chat_id?: string | null;
+          notify_email?: boolean;
+          notify_telegram?: boolean;
           created_at?: string;
           updated_at?: string;
         };
