@@ -82,7 +82,7 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
   const router = useRouter();
   const leadId = params.id;
 
-  const [activeTab, setActiveTab] = useState<'details' | 'documents' | 'assignments'>('details');
+  const [activeTab, setActiveTab] = useState<'details' | 'documents' | 'assignments' | 'stages'>('details');
   const [loading, setLoading] = useState(true);
   const [lead, setLead] = useState<any>(null);
   const [messages, setMessages] = useState<any[]>([]);
@@ -104,6 +104,33 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
   const [deletingAssignmentId, setDeletingAssignmentId] = useState<string | null>(null);
   const [assignmentError, setAssignmentError] = useState<string | null>(null);
   const [assignmentSuccess, setAssignmentSuccess] = useState<string | null>(null);
+
+  // Case Stages / Milestones State (dre-p66)
+  const [stages, setStages] = useState<any[]>([]);
+  const [loadingStages, setLoadingStages] = useState(false);
+  const [canEditStages, setCanEditStages] = useState(false);
+  const [stageError, setStageError] = useState<string | null>(null);
+  const [stageSuccess, setStageSuccess] = useState<string | null>(null);
+  const [showAddStageForm, setShowAddStageForm] = useState(false);
+  const [newStageKey, setNewStageKey] = useState('company_registration');
+  const [newStageLabelFa, setNewStageLabelFa] = useState('ثبت شرکت تجاری در رومانی (ONRC)');
+  const [newStageDueDate, setNewStageDueDate] = useState('');
+  const [newStageRole, setNewStageRole] = useState('lawyer');
+  const [newStageStaffId, setNewStageStaffId] = useState('');
+  const [newStageNotes, setNewStageNotes] = useState('');
+  const [creatingStage, setCreatingStage] = useState(false);
+
+  // Edit Stage Modal State (dre-p66)
+  const [editingStage, setEditingStage] = useState<any | null>(null);
+  const [editStageStatus, setEditStageStatus] = useState<string>('pending');
+  const [editStageDueDate, setEditStageDueDate] = useState<string>('');
+  const [editStageLabelFa, setEditStageLabelFa] = useState<string>('');
+  const [editStageRole, setEditStageRole] = useState<string>('agent');
+  const [editStageStaffId, setEditStageStaffId] = useState<string>('');
+  const [editStageNotes, setEditStageNotes] = useState<string>('');
+  const [savingStageEdit, setSavingStageEdit] = useState(false);
+  const [editStageError, setEditStageError] = useState<string | null>(null);
+  const [deletingStageId, setDeletingStageId] = useState<string | null>(null);
 
   // Documents State
   const [documents, setDocuments] = useState<AdminDocument[]>([]);
@@ -164,6 +191,9 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
 
       // Fetch assignments (dre-p65)
       await loadLeadAssignments();
+
+      // Fetch case stages (dre-p66)
+      await loadCaseStages();
 
       setLoading(false);
 
@@ -434,8 +464,193 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
         return isFa ? 'کارشناس امور مالی' : 'Financial Specialist';
       case 'marketing':
         return isFa ? 'پشتیبانی و ارتباط با متقاضی' : 'Client Success & Relations';
+      case 'manager':
+        return isFa ? 'مدیر پرونده‌ها' : 'Case Manager';
+      case 'owner':
+        return isFa ? 'مدیریت و مالک سیستم' : 'Platform Owner';
       default:
         return role;
+    }
+  };
+
+  const STAGE_PRESETS = [
+    { key: 'company_registration', labelFa: 'ثبت شرکت تجاری در رومانی (ONRC)', defaultRole: 'lawyer' },
+    { key: 'residency_permit', labelFa: 'اخذ کارت اقامت و ثبت در اداره مهاجرت (IGI)', defaultRole: 'agent' },
+    { key: 'document_translation', labelFa: 'ترجمه رسمی و تایید دادگستری مدارک', defaultRole: 'notary' },
+    { key: 'notary_appointment', labelFa: 'وقت دفتر اسناد رسمی و امضای وکالتنامه', defaultRole: 'notary' },
+    { key: 'visa_application', labelFa: 'تشکیل پرونده و مصاحبه ویزا در سفارت', defaultRole: 'agent' },
+    { key: 'bank_account_opening', labelFa: 'افتتاح حساب بانکی تجاری / شخصی', defaultRole: 'finance' },
+    { key: 'tax_registration', labelFa: 'ثبت‌نام مالیاتی و اخذ شناسه مالیاتی (CIF/CNP)', defaultRole: 'finance' },
+    { key: 'other', labelFa: 'سایر اقدامات پرونده', defaultRole: 'agent' },
+  ];
+
+  const loadCaseStages = async () => {
+    try {
+      setLoadingStages(true);
+      const res = await fetch(`/api/admin/leads/${leadId}/stages`);
+      const json = await res.json().catch(() => null);
+      if (json?.success) {
+        setStages(json.stages || []);
+        setCanEditStages(Boolean(json.canEdit));
+      }
+    } catch (err) {
+      console.error('Failed to load case stages:', err);
+    } finally {
+      setLoadingStages(false);
+    }
+  };
+
+  const handleSelectPreset = (presetKey: string) => {
+    setNewStageKey(presetKey);
+    const preset = STAGE_PRESETS.find((p) => p.key === presetKey);
+    if (preset) {
+      setNewStageLabelFa(preset.labelFa);
+      setNewStageRole(preset.defaultRole);
+    }
+  };
+
+  const handleCreateStage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newStageLabelFa.trim()) {
+      setStageError(isFa ? 'عنوان مرحله الزامی است.' : 'Stage title is required.');
+      return;
+    }
+    if (!newStageDueDate) {
+      setStageError(isFa ? 'تاریخ سررسید الزامی است.' : 'Due date is required.');
+      return;
+    }
+
+    setCreatingStage(true);
+    setStageError(null);
+    setStageSuccess(null);
+
+    try {
+      const res = await fetch(`/api/admin/leads/${leadId}/stages`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          stage_key: newStageKey,
+          label_fa: newStageLabelFa.trim(),
+          due_date: newStageDueDate,
+          responsible_role: newStageRole,
+          responsible_staff_id: newStageStaffId || null,
+          notes: newStageNotes.trim() || null,
+          status: 'pending',
+        }),
+      });
+      const json = await res.json();
+
+      if (res.ok && json.success) {
+        setStageSuccess(isFa ? 'مرحله جدید با موفقیت ثبت شد.' : 'New stage created successfully.');
+        setShowAddStageForm(false);
+        setNewStageNotes('');
+        await loadCaseStages();
+      } else {
+        setStageError(json.error || (isFa ? 'ثبت مرحله ناموفق بود.' : 'Failed to create stage.'));
+      }
+    } catch (err) {
+      console.error('Error creating stage:', err);
+      setStageError(isFa ? 'خطا در برقراری ارتباط با سرور.' : 'Network connection error.');
+    } finally {
+      setCreatingStage(false);
+    }
+  };
+
+  const handleQuickStatusChange = async (stageId: string, newStatus: string) => {
+    setStageError(null);
+    setStageSuccess(null);
+    try {
+      const res = await fetch(`/api/admin/leads/${leadId}/stages/${stageId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      const json = await res.json();
+      if (res.ok && json.success) {
+        await loadCaseStages();
+      } else {
+        setStageError(json.error || (isFa ? 'تغییر وضعیت مرحله ناموفق بود.' : 'Failed to update stage status.'));
+      }
+    } catch (err) {
+      console.error('Error updating stage status:', err);
+      setStageError(isFa ? 'خطا در ارتباط با سرور.' : 'Network connection error.');
+    }
+  };
+
+  const handleOpenEditStageModal = (stage: any) => {
+    setEditingStage(stage);
+    setEditStageStatus(stage.status);
+    setEditStageDueDate(stage.due_date);
+    setEditStageLabelFa(stage.label_fa);
+    setEditStageRole(stage.responsible_role || 'agent');
+    setEditStageStaffId(stage.responsible_staff_id || '');
+    setEditStageNotes(stage.notes || '');
+    setEditStageError(null);
+  };
+
+  const handleSaveStageEdit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingStage) return;
+
+    setSavingStageEdit(true);
+    setEditStageError(null);
+
+    try {
+      const res = await fetch(`/api/admin/leads/${leadId}/stages/${editingStage.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          status: editStageStatus,
+          due_date: editStageDueDate,
+          label_fa: editStageLabelFa.trim(),
+          responsible_role: editStageRole,
+          responsible_staff_id: editStageStaffId || null,
+          notes: editStageNotes.trim() || null,
+        }),
+      });
+      const json = await res.json();
+
+      if (res.ok && json.success) {
+        setEditingStage(null);
+        setStageSuccess(isFa ? 'مشخصات مرحله با موفقیت ویرایش شد.' : 'Stage updated successfully.');
+        await loadCaseStages();
+      } else {
+        setEditStageError(json.error || (isFa ? 'ویرایش مرحله ناموفق بود.' : 'Failed to update stage.'));
+      }
+    } catch (err) {
+      console.error('Error saving stage edit:', err);
+      setEditStageError(isFa ? 'خطا در برقراری ارتباط با سرور.' : 'Network connection error.');
+    } finally {
+      setSavingStageEdit(false);
+    }
+  };
+
+  const handleDeleteStage = async (stageId: string) => {
+    if (!window.confirm(isFa ? 'آیا از حذف این مرحله از پرونده اطمینان دارید؟' : 'Are you sure you want to delete this stage?')) {
+      return;
+    }
+
+    setDeletingStageId(stageId);
+    setStageError(null);
+    setStageSuccess(null);
+
+    try {
+      const res = await fetch(`/api/admin/leads/${leadId}/stages/${stageId}`, {
+        method: 'DELETE',
+      });
+      const json = await res.json();
+
+      if (res.ok && json.success) {
+        setStageSuccess(isFa ? 'مرحله با موفقیت حذف شد.' : 'Stage deleted successfully.');
+        await loadCaseStages();
+      } else {
+        setStageError(json.error || (isFa ? 'حذف مرحله ناموفق بود.' : 'Failed to delete stage.'));
+      }
+    } catch (err) {
+      console.error('Error deleting stage:', err);
+      setStageError(isFa ? 'خطا در ارتباط با سرور.' : 'Network connection error.');
+    } finally {
+      setDeletingStageId(null);
     }
   };
 
@@ -810,6 +1025,29 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
               </span>
             )}
           </button>
+
+          <button
+            onClick={() => setActiveTab('stages')}
+            className={`px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center space-x-2 rtl:space-x-reverse ${
+              activeTab === 'stages'
+                ? 'bg-[#071B3D] text-white shadow-sm'
+                : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+            }`}
+          >
+            <Clock size={16} />
+            <span>{isFa ? 'مراحل و زمان‌بندی پرونده' : 'Case Stages & Milestones'}</span>
+            {stages.length > 0 && (
+              <span
+                className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                  activeTab === 'stages' ? 'bg-white/20 text-white' : 'bg-amber-100 text-amber-800'
+                }`}
+              >
+                {stages.filter((s) => s.status !== 'done').length > 0
+                  ? `${stages.filter((s) => s.status !== 'done').length} فعال`
+                  : stages.length}
+              </span>
+            )}
+          </button>
         </div>
 
         {/* TAB 1: CASE DETAILS & MESSAGING */}
@@ -891,6 +1129,31 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
                     className="text-xs font-bold text-[#2F6FED] hover:underline cursor-pointer"
                   >
                     {isFa ? 'مشاهده تیم ←' : 'View Team →'}
+                  </button>
+                </div>
+
+                {/* Case Stages Quick Link Box (dre-p66) */}
+                <div className="p-4 rounded-2xl bg-amber-50/50 border border-amber-100 flex items-center justify-between">
+                  <div className="flex items-center space-x-2.5 rtl:space-x-reverse">
+                    <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
+                      <Clock size={16} />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-[#142033]">
+                        {isFa ? 'مراحل و زمان‌بندی پرونده' : 'Case Stages & Milestones'}
+                      </div>
+                      <div className="text-[11px] text-slate-500">
+                        {stages.filter((s) => s.status !== 'done').length > 0
+                          ? (isFa ? `${stages.filter((s) => s.status !== 'done').length} مرحله در دست اقدام` : `${stages.filter((s) => s.status !== 'done').length} open stages`)
+                          : (isFa ? 'همه مراحل تکمیل شده یا ثبت نشده' : 'All stages completed')}
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setActiveTab('stages')}
+                    className="text-xs font-bold text-amber-700 hover:underline cursor-pointer"
+                  >
+                    {isFa ? 'مشاهده مراحل ←' : 'View Stages →'}
                   </button>
                 </div>
 
@@ -1602,6 +1865,619 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
 
             </div>
 
+          </div>
+        )}
+
+        {/* TAB 4: CASE STAGES & MILESTONES (dre-p66) */}
+        {activeTab === 'stages' && (
+          <div className="space-y-6">
+            
+            {/* Feedback Alerts */}
+            {stageError && (
+              <div className="p-4 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs font-bold flex items-center justify-between animate-fadeIn">
+                <span>⚠️ {stageError}</span>
+                <button onClick={() => setStageError(null)} className="text-red-500 hover:text-red-800">✕</button>
+              </div>
+            )}
+
+            {stageSuccess && (
+              <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold flex items-center justify-between animate-fadeIn">
+                <span>✓ {stageSuccess}</span>
+                <button onClick={() => setStageSuccess(null)} className="text-emerald-500 hover:text-emerald-800">✕</button>
+              </div>
+            )}
+
+            {/* Stages Summary Header */}
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+              <div className="bg-white border border-[#dfe6ef] rounded-2xl p-4 text-center">
+                <span className="text-[11px] font-bold text-slate-500 block">
+                  {isFa ? 'کل مراحل' : 'Total Stages'}
+                </span>
+                <span className="text-xl font-extrabold text-[#071B3D]">
+                  {stages.length}
+                </span>
+              </div>
+
+              <div className="bg-white border border-blue-200 rounded-2xl p-4 text-center bg-blue-50/20">
+                <span className="text-[11px] font-bold text-blue-600 block">
+                  {isFa ? 'در حال انجام' : 'In Progress'}
+                </span>
+                <span className="text-xl font-extrabold text-blue-700">
+                  {stages.filter((s) => s.status === 'in_progress').length}
+                </span>
+              </div>
+
+              <div className="bg-white border border-amber-200 rounded-2xl p-4 text-center bg-amber-50/20">
+                <span className="text-[11px] font-bold text-amber-600 block">
+                  {isFa ? 'در انتظار اقدام' : 'Pending'}
+                </span>
+                <span className="text-xl font-extrabold text-amber-700">
+                  {stages.filter((s) => s.status === 'pending').length}
+                </span>
+              </div>
+
+              <div className="bg-white border border-emerald-200 rounded-2xl p-4 text-center bg-emerald-50/20">
+                <span className="text-[11px] font-bold text-emerald-600 block">
+                  {isFa ? 'تکمیل شده' : 'Completed'}
+                </span>
+                <span className="text-xl font-extrabold text-emerald-700">
+                  {stages.filter((s) => s.status === 'done').length}
+                </span>
+              </div>
+
+              <div className={`col-span-2 sm:col-span-1 rounded-2xl p-4 text-center border ${
+                stages.filter((s) => s.status !== 'done' && s.due_date < new Date().toISOString().split('T')[0]).length > 0
+                  ? 'bg-rose-50 border-rose-200 text-rose-700'
+                  : 'bg-white border-slate-200 text-slate-500'
+              }`}>
+                <span className="text-[11px] font-bold block">
+                  {isFa ? 'سررسید گذشته' : 'Overdue'}
+                </span>
+                <span className="text-xl font-extrabold">
+                  {stages.filter((s) => s.status !== 'done' && s.due_date < new Date().toISOString().split('T')[0]).length}
+                </span>
+              </div>
+            </div>
+
+            {/* Main Stage Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              
+              {/* Form Column (5 Cols) - Only if canEditStages */}
+              {canEditStages && (
+                <div className="lg:col-span-5 space-y-6">
+                  <div className="bg-white border border-[#dfe6ef] rounded-3xl p-6 shadow-sm space-y-5">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                      <h3 className="text-sm font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                        <Clock size={16} className="text-[#2F6FED]" />
+                        <span>{isFa ? 'افزودن مرحله جدید به پرونده' : 'Add New Milestone / Stage'}</span>
+                      </h3>
+                    </div>
+
+                    <form onSubmit={handleCreateStage} className="space-y-4">
+                      {/* Presets Selector */}
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-slate-700 block">
+                          {isFa ? 'الگوهای رایج مراحل مهاجرت:' : 'Standard Stage Presets:'}
+                        </label>
+                        <select
+                          value={newStageKey}
+                          onChange={(e) => handleSelectPreset(e.target.value)}
+                          className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                        >
+                          {STAGE_PRESETS.map((preset) => (
+                            <option key={preset.key} value={preset.key}>
+                              {preset.labelFa}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {/* Title (label_fa) */}
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-slate-700 block">
+                          {isFa ? 'عنوان مرحله (فارسی) *' : 'Milestone Title (FA) *'}
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={newStageLabelFa}
+                          onChange={(e) => setNewStageLabelFa(e.target.value)}
+                          placeholder={isFa ? 'مثال: اخذ تاییدیه امنیتی و اداری' : 'e.g., Security clearance approval'}
+                          className="w-full p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                        />
+                      </div>
+
+                      {/* Due Date */}
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-slate-700 block">
+                          {isFa ? 'تاریخ سررسید (مهلت انجام) *' : 'Due Date *'}
+                        </label>
+                        <input
+                          type="date"
+                          required
+                          value={newStageDueDate}
+                          onChange={(e) => setNewStageDueDate(e.target.value)}
+                          className="w-full p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                        />
+                      </div>
+
+                      {/* Responsible Role */}
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-slate-700 block">
+                          {isFa ? 'نقش سازمانی مسئول:' : 'Responsible Role:'}
+                        </label>
+                        <select
+                          value={newStageRole}
+                          onChange={(e) => setNewStageRole(e.target.value)}
+                          className="w-full p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                        >
+                          <option value="agent">{isFa ? 'مشاور ارشد پرونده (Agent)' : 'Lead Agent'}</option>
+                          <option value="consultant">{isFa ? 'مشاور تخصصی مهاجرت (Consultant)' : 'Immigration Consultant'}</option>
+                          <option value="lawyer">{isFa ? 'وکیل حقوقی پرونده (Lawyer)' : 'Case Lawyer'}</option>
+                          <option value="notary">{isFa ? 'امور اسناد رسمی و ترجمه (Notary)' : 'Notary Specialist'}</option>
+                          <option value="finance">{isFa ? 'کارشناس امور مالی (Finance)' : 'Finance Specialist'}</option>
+                          <option value="marketing">{isFa ? 'پشتیبانی و ارتباطات (Support)' : 'Client Relations'}</option>
+                          <option value="manager">{isFa ? 'مدیر ارشد پرونده‌ها (Manager)' : 'Case Manager'}</option>
+                          <option value="owner">{isFa ? 'مالک سیستم (Owner)' : 'Platform Owner'}</option>
+                        </select>
+                      </div>
+
+                      {/* Specific Responsible Staff (Optional) */}
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-slate-700 block">
+                          {isFa ? 'همکار مشخص (اختیاری):' : 'Specific Staff Member (Optional):'}
+                        </label>
+                        <select
+                          value={newStageStaffId}
+                          onChange={(e) => setNewStageStaffId(e.target.value)}
+                          className="w-full p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                        >
+                          <option value="">{isFa ? '— بدون فرد خاص (فقط بر اساس نقش مسئول) —' : '— Role only (No specific staff) —'}</option>
+                          {availableStaff.map((staff) => (
+                            <option key={staff.id} value={staff.id}>
+                              {staff.full_name || staff.id} ({staff.roles?.label_fa || staff.roles?.key})
+                            </option>
+                          ))}
+                        </select>
+                        <p className="text-[11px] text-slate-400">
+                          {isFa
+                            ? 'اگر فرد مشخص نشود، هشدار به تمام همکارانِ دارای نقش بالا در این پرونده ارسال خواهد شد.'
+                            : 'If unselected, reminders alert all staff assigned with this role.'}
+                        </p>
+                      </div>
+
+                      {/* Notes */}
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-slate-700 block">
+                          {isFa ? 'یادداشت یا توضیحات مرحله:' : 'Notes / Instructions:'}
+                        </label>
+                        <textarea
+                          rows={2}
+                          value={newStageNotes}
+                          onChange={(e) => setNewStageNotes(e.target.value)}
+                          placeholder={isFa ? 'دستورالعمل‌ها، شماره پیگیری، نکات مهم...' : 'Instructions, reference numbers, etc.'}
+                          className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                        />
+                      </div>
+
+                      {/* Action Button */}
+                      <button
+                        type="submit"
+                        disabled={creatingStage}
+                        className="w-full py-3 px-4 rounded-xl bg-[#071B3D] hover:bg-blue-900 text-white font-extrabold text-xs shadow-md transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse cursor-pointer disabled:opacity-50"
+                      >
+                        {creatingStage ? (
+                          <>
+                            <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            <span>{isFa ? 'در حال ثبت مرحله...' : 'Creating...'}</span>
+                          </>
+                        ) : (
+                          <>
+                            <Clock size={15} />
+                            <span>{isFa ? 'ثبت و زمان‌بندی مرحله' : 'Schedule Milestone'}</span>
+                          </>
+                        )}
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              )}
+
+              {/* Stages List Column (7 or 12 Cols) */}
+              <div className={`${canEditStages ? 'lg:col-span-7' : 'lg:col-span-12'} space-y-4`}>
+                <div className="bg-white border border-[#dfe6ef] rounded-3xl p-6 shadow-sm space-y-4">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 className="text-sm font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                      <Calendar size={16} className="text-[#2F6FED]" />
+                      <span>{isFa ? 'جدول زمان‌بندی و مراحل پرونده' : 'Case Stages & Timeline'}</span>
+                    </h3>
+                    <span className="text-xs text-slate-500 font-bold">
+                      {stages.length} {isFa ? 'اقدام' : 'Milestones'}
+                    </span>
+                  </div>
+
+                  {loadingStages ? (
+                    <div className="py-12 flex flex-col items-center justify-center space-y-3">
+                      <div className="w-8 h-8 border-3 border-[#2F6FED] border-t-transparent rounded-full animate-spin" />
+                      <p className="text-xs text-slate-500 font-medium">
+                        {isFa ? 'در حال دریافت مراحل پرونده...' : 'Loading case stages...'}
+                      </p>
+                    </div>
+                  ) : stages.length === 0 ? (
+                    <div className="py-12 px-4 text-center space-y-3 bg-slate-50/50 rounded-2xl border border-dashed border-slate-200">
+                      <Clock size={36} className="text-slate-300 mx-auto" />
+                      <div className="space-y-1">
+                        <p className="text-xs font-bold text-slate-700">
+                          {isFa ? 'هیچ مرحله‌ای برای این پرونده تعریف نشده است.' : 'No milestones defined yet.'}
+                        </p>
+                        <p className="text-[11px] text-slate-500 max-w-sm mx-auto">
+                          {isFa
+                            ? 'با افزودن مراحل کلیدی (ثبت شرکت، وقت سفارت، دریافت اقامت و...) روند پرونده را زمان‌بندی و هشدارهای روزانه دریافت کنید.'
+                            : 'Add key case stages to schedule milestones and enable automated daily reminders.'}
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-3.5">
+                      {stages.map((stage, idx) => {
+                        const todayStr = new Date().toISOString().split('T')[0];
+                        const isOverdue = stage.status !== 'done' && stage.due_date < todayStr;
+                        const isToday = stage.status !== 'done' && stage.due_date === todayStr;
+
+                        let statusBg = 'bg-slate-100 text-slate-700 border-slate-200';
+                        let statusText = isFa ? 'در انتظار' : 'Pending';
+                        if (stage.status === 'in_progress') {
+                          statusBg = 'bg-blue-50 text-blue-700 border-blue-200';
+                          statusText = isFa ? 'در حال انجام' : 'In Progress';
+                        } else if (stage.status === 'done') {
+                          statusBg = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+                          statusText = isFa ? 'تکمیل شده' : 'Done';
+                        } else if (stage.status === 'blocked') {
+                          statusBg = 'bg-rose-50 text-rose-700 border-rose-200';
+                          statusText = isFa ? 'معلق / متوقف' : 'Blocked';
+                        }
+
+                        return (
+                          <div
+                            key={stage.id}
+                            className={`p-4 rounded-2xl border transition-all ${
+                              stage.status === 'done'
+                                ? 'bg-slate-50/60 border-slate-200 opacity-90'
+                                : isOverdue
+                                ? 'bg-rose-50/30 border-rose-200 shadow-xs'
+                                : 'bg-white border-slate-200 hover:border-slate-300'
+                            }`}
+                          >
+                            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                              {/* Left Info Section */}
+                              <div className="space-y-2">
+                                <div className="flex flex-wrap items-center gap-2">
+                                  <span className="text-xs font-mono text-slate-400 font-bold">
+                                    #{idx + 1}
+                                  </span>
+
+                                  {/* Status Badge */}
+                                  <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-extrabold border ${statusBg}`}>
+                                    {statusText}
+                                  </span>
+
+                                  {/* Overdue / Today Badge */}
+                                  {isOverdue && (
+                                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-500 text-white animate-pulse">
+                                      {isFa ? '⚠️ سررسید گذشته' : '⚠️ Overdue'}
+                                    </span>
+                                  )}
+                                  {isToday && (
+                                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500 text-white">
+                                      {isFa ? '⏰ سررسید امروز' : '⏰ Due Today'}
+                                    </span>
+                                  )}
+
+                                  {/* Role Tag */}
+                                  <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                                    {getAssignedRoleLabel(stage.responsible_role)}
+                                  </span>
+                                </div>
+
+                                <h4 className={`text-sm font-extrabold ${stage.status === 'done' ? 'text-slate-600 line-through' : 'text-[#142033]'}`}>
+                                  {stage.label_fa}
+                                </h4>
+
+                                {/* Staff & Due Date line */}
+                                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500">
+                                  <div className="flex items-center space-x-1.5 rtl:space-x-reverse">
+                                    <Calendar size={13} className="text-slate-400" />
+                                    <span>{isFa ? 'سررسید:' : 'Due:'}</span>
+                                    <span className="font-mono font-bold text-slate-700">{stage.due_date}</span>
+                                  </div>
+
+                                  {stage.responsible_staff?.full_name ? (
+                                    <div className="flex items-center space-x-1.5 rtl:space-x-reverse">
+                                      <User size={13} className="text-slate-400" />
+                                      <span>{isFa ? 'مسئول:' : 'Responsible:'}</span>
+                                      <span className="font-bold text-[#071B3D]">{stage.responsible_staff.full_name}</span>
+                                    </div>
+                                  ) : (
+                                    <span className="text-[11px] text-slate-400">
+                                      {isFa ? '(مسئول عمومی نقش)' : '(General role)'}
+                                    </span>
+                                  )}
+
+                                  {stage.completed_at && (
+                                    <div className="flex items-center space-x-1 rtl:space-x-reverse text-emerald-600 text-[11px] font-bold">
+                                      <CheckCircle size={12} />
+                                      <span>
+                                        {isFa ? 'تکمیل در' : 'Completed:'}{' '}
+                                        {new Date(stage.completed_at).toLocaleDateString(isFa ? 'fa-IR' : 'en-US')}
+                                      </span>
+                                    </div>
+                                  )}
+                                </div>
+
+                                {/* Notes if any */}
+                                {stage.notes && (
+                                  <p className="text-xs text-slate-600 bg-slate-50 p-2 rounded-xl border border-slate-150 leading-relaxed">
+                                    💬 {stage.notes}
+                                  </p>
+                                )}
+                              </div>
+
+                              {/* Right / Actions Section */}
+                              {canEditStages ? (
+                                <div className="flex flex-wrap sm:flex-col items-end gap-2 shrink-0 pt-2 sm:pt-0">
+                                  {/* Quick Status Buttons */}
+                                  <div className="flex items-center gap-1">
+                                    {stage.status !== 'done' && (
+                                      <button
+                                        type="button"
+                                        onClick={() => handleQuickStatusChange(stage.id, 'done')}
+                                        className="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-[11px] font-bold border border-emerald-200 transition-all cursor-pointer"
+                                        title={isFa ? 'علامت‌گذاری به عنوان تکمیل‌شده' : 'Mark as Done'}
+                                      >
+                                        ✓ {isFa ? 'تکمیل' : 'Done'}
+                                      </button>
+                                    )}
+
+                                    {stage.status !== 'in_progress' && (
+                                      <button
+                                        type="button"
+                                        onClick={() => handleQuickStatusChange(stage.id, 'in_progress')}
+                                        className="px-2 py-1 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 text-[11px] font-bold border border-blue-200 transition-all cursor-pointer"
+                                        title={isFa ? 'در حال انجام' : 'In Progress'}
+                                      >
+                                        {isFa ? 'شروع' : 'Progress'}
+                                      </button>
+                                    )}
+
+                                    {stage.status !== 'pending' && stage.status !== 'blocked' && (
+                                      <button
+                                        type="button"
+                                        onClick={() => handleQuickStatusChange(stage.id, 'pending')}
+                                        className="px-2 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-700 text-[11px] font-bold border border-amber-200 transition-all cursor-pointer"
+                                        title={isFa ? 'در انتظار' : 'Pending'}
+                                      >
+                                        {isFa ? 'انتظار' : 'Pending'}
+                                      </button>
+                                    )}
+
+                                    {stage.status !== 'blocked' && (
+                                      <button
+                                        type="button"
+                                        onClick={() => handleQuickStatusChange(stage.id, 'blocked')}
+                                        className="px-2 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-[11px] font-bold border border-rose-200 transition-all cursor-pointer"
+                                        title={isFa ? 'معلق / متوقف' : 'Block'}
+                                      >
+                                        {isFa ? 'توقف' : 'Block'}
+                                      </button>
+                                    )}
+                                  </div>
+
+                                  <div className="flex items-center gap-1.5 pt-1">
+                                    <button
+                                      type="button"
+                                      onClick={() => handleOpenEditStageModal(stage)}
+                                      className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold border border-slate-200 transition-all cursor-pointer"
+                                    >
+                                      ✏️ {isFa ? 'ویرایش' : 'Edit'}
+                                    </button>
+
+                                    <button
+                                      type="button"
+                                      disabled={deletingStageId === stage.id}
+                                      onClick={() => handleDeleteStage(stage.id)}
+                                      className="px-2 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 text-[11px] font-bold border border-rose-200 transition-all cursor-pointer disabled:opacity-50"
+                                      title={isFa ? 'حذف مرحله' : 'Delete Stage'}
+                                    >
+                                      <Trash2 size={12} />
+                                    </button>
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="text-[11px] text-slate-400 font-bold bg-slate-50 px-2 py-1 rounded-md border border-slate-200">
+                                  {isFa ? 'فقط-خواندنی' : 'Read-only'}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        )}
+
+        {/* EDIT STAGE MODAL (dre-p66) */}
+        {editingStage && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-fadeIn">
+            <div
+              className="bg-white border border-[#dfe6ef] rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-6"
+              dir={isFa ? 'rtl' : 'ltr'}
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                  <div className="w-10 h-10 rounded-2xl bg-blue-50 text-[#071B3D] flex items-center justify-center">
+                    <Clock size={20} />
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-extrabold text-[#142033]">
+                      {isFa ? 'ویرایش مرحله و سررسید پرونده' : 'Edit Case Stage'}
+                    </h3>
+                    <p className="text-xs text-slate-500 font-mono">
+                      {editingStage.stage_key}
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setEditingStage(null)}
+                  className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold cursor-pointer"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {editStageError && (
+                <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs">
+                  {editStageError}
+                </div>
+              )}
+
+              <form onSubmit={handleSaveStageEdit} className="space-y-4">
+                {/* Title */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700 block">
+                    {isFa ? 'عنوان مرحله (فارسی)' : 'Milestone Title (FA)'}
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={editStageLabelFa}
+                    onChange={(e) => setEditStageLabelFa(e.target.value)}
+                    className="w-full p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                  />
+                </div>
+
+                {/* Status & Due Date row */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-700 block">
+                      {isFa ? 'وضعیت مرحله:' : 'Status:'}
+                    </label>
+                    <select
+                      value={editStageStatus}
+                      onChange={(e) => setEditStageStatus(e.target.value)}
+                      className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                    >
+                      <option value="pending">{isFa ? 'در انتظار اقدام' : 'Pending'}</option>
+                      <option value="in_progress">{isFa ? 'در حال انجام' : 'In Progress'}</option>
+                      <option value="done">{isFa ? 'تکمیل شده' : 'Done'}</option>
+                      <option value="blocked">{isFa ? 'معلق / متوقف' : 'Blocked'}</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-700 block">
+                      {isFa ? 'تاریخ سررسید:' : 'Due Date:'}
+                    </label>
+                    <input
+                      type="date"
+                      required
+                      value={editStageDueDate}
+                      onChange={(e) => setEditStageDueDate(e.target.value)}
+                      className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                    />
+                  </div>
+                </div>
+
+                {/* Role & Staff row */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-700 block">
+                      {isFa ? 'نقش سازمانی:' : 'Role:'}
+                    </label>
+                    <select
+                      value={editStageRole}
+                      onChange={(e) => setEditStageRole(e.target.value)}
+                      className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                    >
+                      <option value="agent">{isFa ? 'مشاور ارشد پرونده' : 'Lead Agent'}</option>
+                      <option value="consultant">{isFa ? 'مشاور تخصصی مهاجرت' : 'Consultant'}</option>
+                      <option value="lawyer">{isFa ? 'وکیل حقوقی' : 'Lawyer'}</option>
+                      <option value="notary">{isFa ? 'اسناد رسمی و ترجمه' : 'Notary'}</option>
+                      <option value="finance">{isFa ? 'کارشناس امور مالی' : 'Finance'}</option>
+                      <option value="marketing">{isFa ? 'پشتیبانی متقاضی' : 'Support'}</option>
+                      <option value="manager">{isFa ? 'مدیر ارشد پرونده‌ها' : 'Manager'}</option>
+                      <option value="owner">{isFa ? 'مالک سیستم' : 'Owner'}</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-700 block">
+                      {isFa ? 'همکار مسئول:' : 'Staff Member:'}
+                    </label>
+                    <select
+                      value={editStageStaffId}
+                      onChange={(e) => setEditStageStaffId(e.target.value)}
+                      className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                    >
+                      <option value="">{isFa ? '— بدون فرد خاص —' : '— None —'}</option>
+                      {availableStaff.map((staff) => (
+                        <option key={staff.id} value={staff.id}>
+                          {staff.full_name || staff.id}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Notes */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700 block">
+                    {isFa ? 'یادداشت یا توضیحات:' : 'Notes:'}
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={editStageNotes}
+                    onChange={(e) => setEditStageNotes(e.target.value)}
+                    className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                  />
+                </div>
+
+                {/* Actions */}
+                <div className="pt-3 flex items-center justify-end gap-3 border-t border-slate-100">
+                  <button
+                    type="button"
+                    disabled={savingStageEdit}
+                    onClick={() => setEditingStage(null)}
+                    className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold transition-all"
+                  >
+                    {isFa ? 'انصراف' : 'Cancel'}
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={savingStageEdit}
+                    className="px-5 py-2.5 rounded-xl bg-[#071B3D] hover:bg-blue-900 text-white text-xs font-bold transition-all disabled:opacity-50 flex items-center gap-2 cursor-pointer"
+                  >
+                    {savingStageEdit ? (
+                      <>
+                        <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>{isFa ? 'در حال ذخیره...' : 'Saving...'}</span>
+                      </>
+                    ) : (
+                      <span>{isFa ? 'ذخیره تغییرات' : 'Save Changes'}</span>
+                    )}
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         )}
 

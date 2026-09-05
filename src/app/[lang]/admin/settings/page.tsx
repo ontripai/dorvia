@@ -254,18 +254,8 @@ export default function AdminSettingsPage({ params }: SettingsPageProps) {
               </span>
               <p>
                 {isFa
-                  ? '۱. در تلگرام به ربات رسمی شرکت پیام دهید یا دستور /myid را ارسال کنید.'
-                  : '1. Message the official company bot or send the /myid command.'}
-              </p>
-              <p>
-                {isFa
-                  ? '۲. در صورتی که ربات داخلی در دسترس نیست، می‌توانید به ربات شناسه کاربری (مانند @userinfobot) پیام دهید تا عدد شناسه (ID) شما را نشان دهد.'
-                  : '2. Alternatively, message an identity helper bot like @userinfobot to view your numeric Telegram ID.'}
-              </p>
-              <p>
-                {isFa
-                  ? '۳. این عدد را در کادر بالا وارد کرده و کلید «ذخیره تنظیمات» را بزنید.'
-                  : '3. Enter this numeric ID above and click Save Preferences.'}
+                  ? 'برای گرفتن شناسهٔ عددی چت خود در تلگرام، به ربات عمومی @userinfobot پیام دهید و عددی که در پاسخ می‌دهد را اینجا وارد کنید.'
+                  : 'To find your numeric Telegram chat ID, send a message to the public bot @userinfobot and enter the ID number from its reply here.'}
               </p>
             </div>
           </div>

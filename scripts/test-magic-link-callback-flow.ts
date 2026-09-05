@@ -1293,7 +1293,188 @@ async function runTests() {
   await supabaseAdmin.auth.admin.deleteUser(agentUserId);
   console.log('✅ Test 13 artifacts cleaned up successfully.\n');
 
-  console.log('=== All 13 Callback, Portal, Admin, Lifecycle, Role Enforcement, Family Network & Team Governance Tests Passed Successfully! ===\n');
+  // -------------------------------------------------------------
+  // Test 14: Case Stages / Milestones & Daily Reminder Cron (dre-p66)
+  // -------------------------------------------------------------
+  console.log('14. Testing Case Stages & Milestones Scheduling + Daily Reminder Cron (dre-p66)...');
+  const cronRoute = await import('../src/app/api/cron/daily-case-reminders/route');
+  const adminStagesRoute = await import('../src/app/api/admin/leads/[id]/stages/route');
+  const adminStageItemRoute = await import('../src/app/api/admin/leads/[id]/stages/[stageId]/route');
+  const { sendTelegramMessage } = await import('../src/lib/telegram');
+
+  // 1. Cron Security: Expect 401 Unauthorized without valid CRON_SECRET Bearer header
+  console.log('Testing Cron security without Authorization header...');
+  const unauthorizedReq = new Request('https://dorvia.ro/api/cron/daily-case-reminders', {
+    method: 'GET',
+  });
+  const unauthorizedRes = await cronRoute.GET(unauthorizedReq);
+  const unauthorizedJson = await unauthorizedRes.json();
+  console.log('Unauthorized Cron call status:', unauthorizedRes.status, 'body:', unauthorizedJson);
+
+  if (unauthorizedRes.status === 401) {
+    console.log('✅ PASS: Cron endpoint strictly rejected unauthenticated request with 401 Unauthorized!');
+  } else {
+    console.error('❌ FAIL: Expected 401 Unauthorized on unauthenticated cron call, got:', unauthorizedRes.status);
+    process.exit(1);
+  }
+
+  // 2. Telegram Helper: Test fallback behavior when TELEGRAM_BOT_TOKEN is not configured
+  console.log('Testing sendTelegramMessage fallback without bot token...');
+  const tgResult = await sendTelegramMessage('123456789', '<b>Test Alert</b>');
+  if (tgResult.skipped === true || tgResult.success === true) {
+    console.log('✅ PASS: sendTelegramMessage handled gracefully without crashing!');
+  } else {
+    console.error('❌ FAIL: sendTelegramMessage unexpected error:', tgResult);
+    process.exit(1);
+  }
+
+  // 3. Setup Test Lead and Stages
+  const { data: stageTestLead, error: stageLeadErr } = await supabaseAdmin
+    .from('leads')
+    .insert({
+      full_name: 'Lead for Case Stages Test (dre-p66)',
+      email: `stage.test.${Date.now()}@dorvia.com`,
+      source: 'website',
+      status: 'new',
+    })
+    .select('id')
+    .single();
+
+  if (stageLeadErr || !stageTestLead) {
+    console.error('❌ FAIL: Could not create lead for stage test:', stageLeadErr);
+    process.exit(1);
+  }
+
+  // 4. Test POST /api/admin/leads/[id]/stages
+  console.log('Testing POST /api/admin/leads/[id]/stages to create new stage...');
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowStr = tomorrow.toISOString().split('T')[0];
+
+  const createStageReq = new Request(`https://dorvia.ro/api/admin/leads/${stageTestLead.id}/stages`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      cookie: adminCookieHeader,
+    },
+    body: JSON.stringify({
+      stage_key: 'company_registration',
+      label_fa: 'ثبت شرکت تجاری در رومانی',
+      status: 'pending',
+      due_date: tomorrowStr,
+      responsible_role: 'lawyer',
+      notes: 'Test milestone instructions',
+    }),
+  });
+
+  const createStageRes = await adminStagesRoute.POST(createStageReq, {
+    params: { id: stageTestLead.id },
+  });
+  const createStageJson = await createStageRes.json();
+  console.log('Create stage status:', createStageRes.status, 'body:', createStageJson);
+
+  if (createStageRes.status !== 200 || !createStageJson.success || !createStageJson.stage?.id) {
+    console.error('❌ FAIL: POST /api/admin/leads/[id]/stages failed:', createStageRes.status, createStageJson);
+    process.exit(1);
+  }
+
+  const testStageId = createStageJson.stage.id;
+  console.log('✅ PASS: Case stage created via admin API with ID:', testStageId);
+
+  // 5. Test PATCH /api/admin/leads/[id]/stages/[stageId] to update status
+  console.log('Testing PATCH /api/admin/leads/[id]/stages/[stageId] status update...');
+  const patchStageReq = new Request(
+    `https://dorvia.ro/api/admin/leads/${stageTestLead.id}/stages/${testStageId}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        cookie: adminCookieHeader,
+      },
+      body: JSON.stringify({
+        status: 'in_progress',
+        notes: 'Updated progress notes',
+      }),
+    }
+  );
+
+  const patchStageRes = await adminStageItemRoute.PATCH(patchStageReq, {
+    params: { id: stageTestLead.id, stageId: testStageId },
+  });
+  const patchStageJson = await patchStageRes.json();
+
+  if (patchStageRes.status !== 200 || !patchStageJson.success || patchStageJson.stage?.status !== 'in_progress') {
+    console.error('❌ FAIL: PATCH case stage failed:', patchStageRes.status, patchStageJson);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Case stage updated to in_progress via PATCH endpoint!');
+
+  // 6. Test GET /api/admin/leads/[id]/stages
+  console.log('Testing GET /api/admin/leads/[id]/stages...');
+  const getStagesReq = new Request(`https://dorvia.ro/api/admin/leads/${stageTestLead.id}/stages`, {
+    method: 'GET',
+    headers: { cookie: adminCookieHeader },
+  });
+  const getStagesRes = await adminStagesRoute.GET(getStagesReq, {
+    params: { id: stageTestLead.id },
+  });
+  const getStagesJson = await getStagesRes.json();
+
+  if (getStagesRes.status !== 200 || !Array.isArray(getStagesJson.stages) || getStagesJson.stages.length !== 1) {
+    console.error('❌ FAIL: GET case stages failed:', getStagesRes.status, getStagesJson);
+    process.exit(1);
+  }
+  console.log('✅ PASS: GET /api/admin/leads/[id]/stages returned correct stages array!');
+
+  // 7. Test Daily Reminder Cron execution with valid CRON_SECRET
+  console.log('Testing GET /api/cron/daily-case-reminders with valid Bearer secret...');
+  const testCronSecret = process.env.CRON_SECRET || 'dorvia-test-cron-secret-2026';
+  process.env.CRON_SECRET = testCronSecret;
+
+  const validCronReq = new Request('https://dorvia.ro/api/cron/daily-case-reminders', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${testCronSecret}`,
+    },
+  });
+
+  const validCronRes = await cronRoute.GET(validCronReq);
+  const validCronJson = await validCronRes.json();
+  console.log('Valid Cron response status:', validCronRes.status, 'body:', validCronJson);
+
+  if (validCronRes.status !== 200 || !validCronJson.success || validCronJson.stagesCount < 1) {
+    console.error('❌ FAIL: Cron execution failed or did not detect due stage:', validCronRes.status, validCronJson);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Daily reminder cron executed successfully, detected due stage and grouped recipients!');
+
+  // 8. Test DELETE /api/admin/leads/[id]/stages/[stageId]
+  console.log('Testing DELETE /api/admin/leads/[id]/stages/[stageId]...');
+  const delStageReq = new Request(
+    `https://dorvia.ro/api/admin/leads/${stageTestLead.id}/stages/${testStageId}`,
+    {
+      method: 'DELETE',
+      headers: { cookie: adminCookieHeader },
+    }
+  );
+  const delStageRes = await adminStageItemRoute.DELETE(delStageReq, {
+    params: { id: stageTestLead.id, stageId: testStageId },
+  });
+  const delStageJson = await delStageRes.json();
+
+  if (delStageRes.status !== 200 || !delStageJson.success) {
+    console.error('❌ FAIL: DELETE case stage failed:', delStageRes.status, delStageJson);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Case stage successfully deleted.');
+
+  // 9. Cleanup Test 14 data
+  console.log('Cleaning up Test 14 data...');
+  await supabaseAdmin.from('case_stages').delete().eq('lead_id', stageTestLead.id);
+  await supabaseAdmin.from('leads').delete().eq('id', stageTestLead.id);
+  console.log('✅ Test 14 artifacts cleaned up successfully.\n');
+
+  console.log('=== All 14 Callback, Portal, Admin, Lifecycle, Role Enforcement, Family Network, Team Governance & Case Stages Reminders Tests Passed Successfully! ===\n');
 }
 
 runTests().catch((err) => {
