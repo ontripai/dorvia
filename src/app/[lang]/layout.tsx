@@ -22,7 +22,9 @@ export async function generateStaticParams() {
   return [{ lang: 'fa' }, { lang: 'en' }];
 }
 
-export default function RootLayout({
+import { isJobBoardPubliclyEnabled } from '@/lib/jobBoardHelper';
+
+export default async function RootLayout({
   children,
   params,
 }: {
@@ -36,6 +38,7 @@ export default function RootLayout({
   }
 
   const dir = getDirection(locale as Language);
+  const jobBoardEnabled = await isJobBoardPubliclyEnabled();
 
   return (
     <html lang={locale} dir={dir}>
@@ -43,7 +46,7 @@ export default function RootLayout({
         <StructuredData />
       </head>
       <body className={`${manrope.variable} ${vazirmatn.variable} min-h-screen bg-slate-50 antialiased text-slate-900 selection:bg-[#002B7F] selection:text-white`}>
-        <AppLayout initialLang={locale as Language}>{children}</AppLayout>
+        <AppLayout initialLang={locale as Language} jobBoardEnabled={jobBoardEnabled}>{children}</AppLayout>
       </body>
     </html>
   );

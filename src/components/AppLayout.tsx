@@ -33,7 +33,15 @@ export const AppContext = createContext<{
 
 export const useAppContext = () => useContext(AppContext);
 
-export function AppLayout({ children, initialLang }: { children: React.ReactNode; initialLang?: Language }) {
+export function AppLayout({
+  children,
+  initialLang,
+  jobBoardEnabled = false,
+}: {
+  children: React.ReactNode;
+  initialLang?: Language;
+  jobBoardEnabled?: boolean;
+}) {
   const [currentLang, setCurrentLang] = useState<Language>(initialLang || 'fa');
   const [isEvaluationModalOpen, setIsEvaluationModalOpen] = useState(false);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
@@ -116,6 +124,7 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
           onMobileDrawerOpenChange={setMobileDrawerOpen}
           searchDialogOpen={searchDialogOpen}
           onSearchDialogOpenChange={setSearchDialogOpen}
+          jobBoardEnabled={jobBoardEnabled}
         />
 
         {/* Main Content Area */}

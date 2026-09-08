@@ -18,6 +18,7 @@ interface MobileDrawerProps {
   onClose: () => void;
   onOpenEvaluationModal: () => void;
   onOpenSearch: () => void;
+  jobBoardEnabled?: boolean;
 }
 
 interface NavLeaf {
@@ -45,7 +46,8 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   onNavigate,
   onClose,
   onOpenEvaluationModal,
-  onOpenSearch
+  onOpenSearch,
+  jobBoardEnabled = false,
 }) => {
   const t = getTranslations(currentLang);
   const isFa = currentLang === 'fa';
@@ -143,6 +145,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             { id: 'work/taxes-salaries', label: isFa ? 'حقوق و مالیات' : 'Salary & Tax' },
             { id: 'work/insurance', label: isFa ? 'بیمه' : 'Insurance' },
             { id: 'work/digital-nomad', label: isFa ? 'ویزای دیجیتال نومد' : 'Digital Nomad Visa' },
+            ...(jobBoardEnabled ? [{ id: 'work/job-requests', label: isFa ? 'فرصت‌های شغلی (درخواست نیرو)' : 'Job Opportunities' }] : []),
           ]
         },
         {

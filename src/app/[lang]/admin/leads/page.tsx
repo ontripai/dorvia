@@ -23,6 +23,7 @@ import {
   Settings,
   ChartNoAxesCombined,
   BookOpen,
+  BriefcaseBusiness,
 } from '@/components/Icons';
 
 interface AdminLeadsPageProps {
@@ -211,6 +212,16 @@ export default function AdminLeadsPage({ params }: AdminLeadsPageProps) {
               >
                 <BookOpen size={15} />
                 <span>{isFa ? 'مدیریت بلاگ' : 'Blog'}</span>
+              </Link>
+            )}
+
+            {(adminUser?.roleKey === 'owner' || adminUser?.roleKey === 'manager' || adminUser?.roleKey === 'marketing' || adminUser?.permissions?.includes('jobs.edit')) && (
+              <Link
+                href="/admin/jobs"
+                className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all"
+              >
+                <BriefcaseBusiness size={15} />
+                <span>{isFa ? 'فرصت‌های شغلی' : 'Jobs'}</span>
               </Link>
             )}
 

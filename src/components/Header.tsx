@@ -34,6 +34,7 @@ interface HeaderProps {
   onMobileDrawerOpenChange: (open: boolean) => void;
   searchDialogOpen: boolean;
   onSearchDialogOpenChange: (open: boolean) => void;
+  jobBoardEnabled?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -45,7 +46,8 @@ export const Header: React.FC<HeaderProps> = ({
   mobileDrawerOpen,
   onMobileDrawerOpenChange,
   searchDialogOpen,
-  onSearchDialogOpenChange
+  onSearchDialogOpenChange,
+  jobBoardEnabled = false,
 }) => {
   const t = getTranslations(currentLang);
   const [activeMegaMenu, setActiveMegaMenu] = useState<'starthere' | 'immigration' | 'study' | 'work-business' | 'needs' | 'romania' | null>(null);
@@ -390,6 +392,7 @@ export const Header: React.FC<HeaderProps> = ({
           }}
           onClose={() => setActiveMegaMenu(null)}
           onOpenEvaluationModal={onOpenEvaluationModal}
+          jobBoardEnabled={jobBoardEnabled}
         />
       )}
 
@@ -402,6 +405,7 @@ export const Header: React.FC<HeaderProps> = ({
           onClose={() => setMobileDrawerOpen(false)}
           onOpenEvaluationModal={onOpenEvaluationModal}
           onOpenSearch={() => setSearchDialogOpen(true)}
+          jobBoardEnabled={jobBoardEnabled}
         />
       )}
 

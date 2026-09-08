@@ -109,5 +109,93 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
+  // Dynamically include job board catalog & listings ONLY IF gate is enabled
+  try {
+    const { isJobBoardPubliclyEnabled } = await import('../lib/jobBoardHelper');
+    const isJobBoardEnabled = await isJobBoardPubliclyEnabled();
+
+    if (isJobBoardEnabled && supabaseAdmin) {
+      // Add catalog page
+      const catalogFa = `${baseUrl}/fa/work/job-requests`;
+      const catalogEn = `${baseUrl}/en/work/job-requests`;
+      sitemapItems.push({
+        url: catalogFa,
+        lastModified: SITE_LAST_MODIFIED,
+        changeFrequency: 'daily',
+        priority: 0.8,
+        alternates: {
+          languages: {
+            fa: catalogFa,
+            en: catalogEn,
+            'x-default': catalogFa,
+          },
+        },
+      });
+      sitemapItems.push({
+        url: catalogEn,
+        lastModified: SITE_LAST_MODIFIED,
+        changeFrequency: 'daily',
+        priority: 0.8,
+        alternates: {
+          languages: {
+            fa: catalogFa,
+            en: catalogEn,
+            'x-default': catalogFa,
+          },
+        },
+      });
+
+      // Add individual published job listings
+      const { data: jobs } = await supabaseAdmin
+        .from('job_listings')
+        .select('slug_fa, slug_en, title_en, description_en, updated_at, published_at')
+        .eq('status', 'published');
+
+      if (jobs && jobs.length > 0) {
+        for (const job of jobs) {
+          const hasFa = Boolean(job.slug_fa);
+          const hasEn = Boolean(job.slug_en && job.title_en && job.description_en);
+          const jobModified = job.updated_at
+            ? new Date(job.updated_at)
+            : (job.published_at ? new Date(job.published_at) : SITE_LAST_MODIFIED);
+
+          const faUrl = `${baseUrl}/fa/work/job-requests/${job.slug_fa}`;
+          const enUrl = hasEn ? `${baseUrl}/en/work/job-requests/${job.slug_en}` : null;
+
+          const alternates = {
+            languages: {} as Record<string, string>,
+          };
+
+          if (hasFa) alternates.languages['fa'] = faUrl;
+          if (hasEn && enUrl) alternates.languages['en'] = enUrl;
+          if (hasFa) alternates.languages['x-default'] = faUrl;
+
+          if (hasFa) {
+            sitemapItems.push({
+              url: faUrl,
+              lastModified: jobModified,
+              changeFrequency: 'weekly',
+              priority: 0.7,
+              alternates: Object.keys(alternates.languages).length > 0 ? alternates : undefined,
+            });
+          }
+
+          if (hasEn && enUrl) {
+            sitemapItems.push({
+              url: enUrl,
+              lastModified: jobModified,
+              changeFrequency: 'weekly',
+              priority: 0.7,
+              alternates: Object.keys(alternates.languages).length > 0 ? alternates : undefined,
+            });
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.error('Error adding job listings to sitemap:', err);
+  }
+
   return sitemapItems;
 }
+
