@@ -27,6 +27,10 @@ interface StageItem {
   leadGoal: string | null;
 }
 
+function isLeapYear(year: number): boolean {
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+}
+
 /**
  * GET /api/cron/daily-case-reminders
  * 
@@ -65,10 +69,22 @@ export async function GET(request: Request) {
 
     // 2. Calculate target date threshold (today + 1 day = end of tomorrow)
     const now = new Date();
-    const targetDate = new Date(now);
-    targetDate.setDate(targetDate.getDate() + 1);
-    const cutoffDateStr = targetDate.toISOString().split('T')[0];
     const todayDateStr = now.toISOString().split('T')[0];
+    const currentYear = now.getUTCFullYear();
+    const currentMonth = now.getUTCMonth() + 1;
+    const currentDay = now.getUTCDate();
+    const targetDate = new Date(now);
+    targetDate.setUTCDate(targetDate.getUTCDate() + 1);
+    const cutoffDateStr = targetDate.toISOString().split('T')[0];
+
+    let emailsSent = 0;
+    let telegramsSent = 0;
+    const errors: string[] = [];
+    const recipientGroups = new Map<string, { staff: AssignedStaffInfo; items: StageItem[] }>();
+
+    const resend = getResendClient();
+    const emailConfig = getResendConfig();
+    const appBaseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://dorvia.ro';
 
     // 3. Fetch open stages due on or before cutoff date
     const { data: rawStages, error: stagesErr } = await supabaseAdmin
@@ -100,19 +116,8 @@ export async function GET(request: Request) {
     }
 
     const stages = rawStages || [];
-    if (stages.length === 0) {
-      return NextResponse.json({
-        success: true,
-        message: 'No pending or overdue case stages requiring reminders.',
-        stagesCount: 0,
-        recipientsCount: 0,
-        emailsSent: 0,
-        telegramsSent: 0,
-        durationMs: Date.now() - startTime,
-      });
-    }
-
-    // 4. Fetch all active staff members and their roles
+    if (stages.length > 0) {
+      // 4. Fetch all active staff members and their roles
     const { data: rawStaff, error: staffErr } = await supabaseAdmin
       .from('admin_users')
       .select(`
@@ -235,14 +240,6 @@ export async function GET(request: Request) {
     }
 
     // 7. Dispatch grouped notifications
-    let emailsSent = 0;
-    let telegramsSent = 0;
-    const errors: string[] = [];
-
-    const resend = getResendClient();
-    const emailConfig = getResendConfig();
-    const appBaseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://dorvia.ro';
-
     for (const group of recipientGroups.values()) {
       const { staff, items } = group;
       if (items.length === 0) continue;
@@ -306,6 +303,167 @@ export async function GET(request: Request) {
         }
       }
     }
+  }
+
+    // 8. Client Birthday Greetings Automation (dre-p71)
+    let clientBirthdaysGreeted = 0;
+    try {
+      const { data: bdayLeads, error: bdayErr } = await supabaseAdmin
+        .from('leads')
+        .select('id, full_name, email, date_of_birth, last_birthday_greeted_year')
+        .not('date_of_birth', 'is', null)
+        .not('email', 'is', null)
+        .neq('status', 'closed')
+        .neq('status', 'archived');
+
+      if (!bdayErr && bdayLeads && bdayLeads.length > 0) {
+        for (const lead of bdayLeads) {
+          if (!lead.email || !lead.date_of_birth) continue;
+          const [, bMonthStr, bDayStr] = lead.date_of_birth.split('-');
+          const bMonth = parseInt(bMonthStr, 10);
+          const bDay = parseInt(bDayStr, 10);
+
+          const isMatch = (bMonth === currentMonth && bDay === currentDay) ||
+            (bMonth === 2 && bDay === 29 && currentMonth === 2 && currentDay === 28 && !isLeapYear(currentYear));
+
+          if (isMatch) {
+            // Deduplication: only send once per year
+            if (lead.last_birthday_greeted_year !== currentYear) {
+              if (resend && emailConfig.isConfigured) {
+                try {
+                  await resend.emails.send({
+                    from: emailConfig.fromEmail,
+                    to: lead.email,
+                    subject: '🎉 زادروزتان فرخنده باد — گروه مهاجرتی دورویا (DORVIA)',
+                    html: buildClientBirthdayEmailHtml({
+                      clientName: lead.full_name || 'همراه گرامی',
+                      appBaseUrl,
+                    }),
+                  });
+                } catch (sendErr: any) {
+                  errors.push(`Client birthday email error for lead ${lead.id}: ${sendErr?.message}`);
+                }
+              }
+
+              await supabaseAdmin
+                .from('leads')
+                .update({ last_birthday_greeted_year: currentYear })
+                .eq('id', lead.id);
+
+              clientBirthdaysGreeted++;
+            }
+          }
+        }
+      }
+    } catch (bdayEx: any) {
+      console.error('[Cron] Exception in client birthday automation:', bdayEx);
+      errors.push(`Client birthday automation error: ${bdayEx?.message}`);
+    }
+
+    // 9. Client Collaboration Anniversary Greetings Automation (dre-p71)
+    let clientAnniversariesGreeted = 0;
+    try {
+      const { data: anniLeads, error: anniErr } = await supabaseAdmin
+        .from('leads')
+        .select('id, full_name, email, anniversary_date, last_anniversary_greeted_year')
+        .not('anniversary_date', 'is', null)
+        .not('email', 'is', null)
+        .neq('status', 'closed')
+        .neq('status', 'archived');
+
+      if (!anniErr && anniLeads && anniLeads.length > 0) {
+        for (const lead of anniLeads) {
+          if (!lead.email || !lead.anniversary_date) continue;
+          const [, aMonthStr, aDayStr] = lead.anniversary_date.split('-');
+          const aMonth = parseInt(aMonthStr, 10);
+          const aDay = parseInt(aDayStr, 10);
+
+          const isMatch = (aMonth === currentMonth && aDay === currentDay) ||
+            (aMonth === 2 && aDay === 29 && currentMonth === 2 && currentDay === 28 && !isLeapYear(currentYear));
+
+          if (isMatch) {
+            // Deduplication: only send once per year
+            if (lead.last_anniversary_greeted_year !== currentYear) {
+              if (resend && emailConfig.isConfigured) {
+                try {
+                  await resend.emails.send({
+                    from: emailConfig.fromEmail,
+                    to: lead.email,
+                    subject: '💐 سالگرد آغاز همراهی و همکاری‌مان گرامی باد — گروه دورویا (DORVIA)',
+                    html: buildClientAnniversaryEmailHtml({
+                      clientName: lead.full_name || 'همراه گرامی',
+                      appBaseUrl,
+                    }),
+                  });
+                } catch (sendErr: any) {
+                  errors.push(`Client anniversary email error for lead ${lead.id}: ${sendErr?.message}`);
+                }
+              }
+
+              await supabaseAdmin
+                .from('leads')
+                .update({ last_anniversary_greeted_year: currentYear })
+                .eq('id', lead.id);
+
+              clientAnniversariesGreeted++;
+            }
+          }
+        }
+      }
+    } catch (anniEx: any) {
+      console.error('[Cron] Exception in client anniversary automation:', anniEx);
+      errors.push(`Client anniversary automation error: ${anniEx?.message}`);
+    }
+
+    // 10. Staff Birthday Telegram Greetings Automation (dre-p71)
+    let staffBirthdaysGreeted = 0;
+    try {
+      const teamTelegramChatId = process.env.TEAM_TELEGRAM_CHAT_ID?.trim();
+      const { data: staffList, error: staffErr } = await supabaseAdmin
+        .from('admin_users')
+        .select('id, full_name, date_of_birth, last_birthday_greeted_year, is_active')
+        .eq('is_active', true)
+        .not('date_of_birth', 'is', null);
+
+      if (!staffErr && staffList && staffList.length > 0) {
+        for (const staff of staffList) {
+          if (!staff.date_of_birth) continue;
+          const [, sMonthStr, sDayStr] = staff.date_of_birth.split('-');
+          const sMonth = parseInt(sMonthStr, 10);
+          const sDay = parseInt(sDayStr, 10);
+
+          const isMatch = (sMonth === currentMonth && sDay === currentDay) ||
+            (sMonth === 2 && sDay === 29 && currentMonth === 2 && currentDay === 28 && !isLeapYear(currentYear));
+
+          if (isMatch) {
+            if (staff.last_birthday_greeted_year !== currentYear) {
+              if (teamTelegramChatId) {
+                try {
+                  const staffName = staff.full_name || 'همکار گرامی';
+                  const tgText = `🎉🎂 <b>امروز تولد ${escapeHtml(staffName)} عزیز است!</b>\n\nهمکاران گرامی، زادروز ${escapeHtml(staffName)} را تبریک می‌گوییم و برای ایشان سلامتی، نشاط و موفقیت‌های روزافزون در خانواده دورویا آرزومندیم. ✨💐🎈`;
+                  const tgRes = await sendTelegramMessage(teamTelegramChatId, tgText, 'HTML');
+                  if (!tgRes.success && !tgRes.skipped && tgRes.error) {
+                    errors.push(`Team telegram birthday error for ${staff.id}: ${tgRes.error}`);
+                  }
+                } catch (tgErr: any) {
+                  errors.push(`Team telegram birthday exception for ${staff.id}: ${tgErr?.message}`);
+                }
+              }
+
+              await supabaseAdmin
+                .from('admin_users')
+                .update({ last_birthday_greeted_year: currentYear })
+                .eq('id', staff.id);
+
+              staffBirthdaysGreeted++;
+            }
+          }
+        }
+      }
+    } catch (stBdayEx: any) {
+      console.error('[Cron] Exception in staff birthday automation:', stBdayEx);
+      errors.push(`Staff birthday automation error: ${stBdayEx?.message}`);
+    }
 
     return NextResponse.json({
       success: true,
@@ -314,6 +472,9 @@ export async function GET(request: Request) {
       recipientsCount: recipientGroups.size,
       emailsSent,
       telegramsSent,
+      clientBirthdaysGreeted,
+      clientAnniversariesGreeted,
+      staffBirthdaysGreeted,
       errors: errors.length > 0 ? errors : undefined,
       durationMs: Date.now() - startTime,
     });
@@ -492,3 +653,148 @@ function escapeHtml(str: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 }
+
+/**
+ * Builds an elegant Persian HTML email template for client birthday greetings.
+ * Clean DORVIA brand styling, strictly no case details mentioned.
+ */
+function buildClientBirthdayEmailHtml(params: {
+  clientName: string;
+  appBaseUrl: string;
+}): string {
+  const { clientName, appBaseUrl } = params;
+
+  return `
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>زادروزتان فرخنده باد</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f8fafc;font-family:Tahoma,Arial,sans-serif;direction:rtl;text-align:right;">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f8fafc;padding:30px 10px;">
+    <tr>
+      <td align="center">
+        <table width="100%" max-width="600" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;background-color:#ffffff;border-radius:18px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.06);border:1px solid #e2e8f0;">
+          <!-- Header Banner -->
+          <tr>
+            <td style="background:linear-gradient(135deg, #071B3D 0%, #1e3a8a 100%);padding:36px 30px;text-align:center;">
+              <div style="font-size:36px;margin-bottom:12px;">🎉🎂</div>
+              <h1 style="color:#ffffff;font-size:24px;margin:0 0 8px 0;font-weight:bold;">زادروزتان فرخنده و همایون باد</h1>
+              <p style="color:#93c5fd;font-size:14px;margin:0;font-weight:normal;">گروه خدمات مهاجرتی و سرمایه‌گذاری دورویا (DORVIA)</p>
+            </td>
+          </tr>
+
+          <!-- Message Body -->
+          <tr>
+            <td style="padding:36px 30px;color:#334155;line-height:1.8;font-size:15px;">
+              <p style="font-size:16px;font-weight:bold;color:#0f172a;margin-top:0;">
+                جناب آقای / سرکار خانم ${escapeHtml(clientName)} گرامی،
+              </p>
+              <p style="margin:16px 0;color:#475569;">
+                فرارسیدن سالروز تولدتان را از صمیم قلب شادباش و تبریک می‌گوییم.
+              </p>
+              <p style="margin:16px 0;color:#475569;">
+                آرزومندیم سال پیش‌رو برای شما آکنده از سلامتی پایدار، روزهای درخشان، آرامش خاطر و دستیابی به والاترین آرزوها و اهداف فردی و حرفه‌ای باشد.
+              </p>
+              <div style="background-color:#eff6ff;border-right:4px solid #2563eb;padding:16px 20px;border-radius:8px;margin:24px 0;">
+                <p style="margin:0;color:#1e40af;font-size:14px;font-style:italic;">
+                  «هر آغاز تازه، نویدبخش افق‌هایی روشن‌تر و فرصت‌هایی بی‌کران است.»
+                </p>
+              </div>
+              <p style="margin:24px 0 0 0;color:#64748b;font-size:14px;">
+                با کمال احترام و بهترین درودها،<br>
+                <strong style="color:#071B3D;">خانواده دورویا (DORVIA)</strong>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#f1f5f9;padding:20px 30px;text-align:center;border-top:1px solid #e2e8f0;">
+              <p style="margin:0;font-size:12px;color:#64748b;">
+                بخارست، رومانی | وب‌سایت: <a href="${appBaseUrl}" style="color:#2563eb;text-decoration:none;">dorvia.ro</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `.trim();
+}
+
+/**
+ * Builds an elegant Persian HTML email template for client collaboration anniversary greetings.
+ * Clean DORVIA brand styling, celebration of trust and partnership.
+ */
+function buildClientAnniversaryEmailHtml(params: {
+  clientName: string;
+  appBaseUrl: string;
+}): string {
+  const { clientName, appBaseUrl } = params;
+
+  return `
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>سالگرد آغاز همکاری‌مان گرامی باد</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f8fafc;font-family:Tahoma,Arial,sans-serif;direction:rtl;text-align:right;">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f8fafc;padding:30px 10px;">
+    <tr>
+      <td align="center">
+        <table width="100%" max-width="600" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;background-color:#ffffff;border-radius:18px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.06);border:1px solid #e2e8f0;">
+          <!-- Header Banner -->
+          <tr>
+            <td style="background:linear-gradient(135deg, #071B3D 0%, #047857 100%);padding:36px 30px;text-align:center;">
+              <div style="font-size:36px;margin-bottom:12px;">💐✨</div>
+              <h1 style="color:#ffffff;font-size:24px;margin:0 0 8px 0;font-weight:bold;">سالگرد آغاز همراهی و همکاری‌مان گرامی باد</h1>
+              <p style="color:#a7f3d0;font-size:14px;margin:0;font-weight:normal;">گروه دورویا (DORVIA) — همراه مطمئن شما در رومانی</p>
+            </td>
+          </tr>
+
+          <!-- Message Body -->
+          <tr>
+            <td style="padding:36px 30px;color:#334155;line-height:1.8;font-size:15px;">
+              <p style="font-size:16px;font-weight:bold;color:#0f172a;margin-top:0;">
+                همراه گرامی، جناب آقای / سرکار خانم ${escapeHtml(clientName)}،
+              </p>
+              <p style="margin:16px 0;color:#475569;">
+                امروز، سالروز پیوند اعتماد و آغاز مسیر مشترک همراهی شما با مجموعهٔ دورویا است.
+              </p>
+              <p style="margin:16px 0;color:#475569;">
+                حضور ارزشمند و اعتمادی که در این مسیر به ما سپردید، گرانبهاترین سرمایهٔ ماست. از همراهی مستمر و دلگرم‌کنندهٔ شما بی‌نهایت سپاسگزاریم و افتخار می‌کنیم که در گام‌های مهم زندگی و پیشرفت شما در کنارتان هستیم.
+              </p>
+              <div style="background-color:#ecfdf5;border-right:4px solid #059669;padding:16px 20px;border-radius:8px;margin:24px 0;">
+                <p style="margin:0;color:#065f46;font-size:14px;font-weight:bold;">
+                  «تعهد ما، پشتیبانی استوار و ارائه بالاترین استانداردهای همراهی با شماست.»
+                </p>
+              </div>
+              <p style="margin:24px 0 0 0;color:#64748b;font-size:14px;">
+                با صمیمانه‌ترین سپاس‌ها و احترام،<br>
+                <strong style="color:#071B3D;">تیم و خانواده دورویا (DORVIA)</strong>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#f1f5f9;padding:20px 30px;text-align:center;border-top:1px solid #e2e8f0;">
+              <p style="margin:0;font-size:12px;color:#64748b;">
+                بخارست، رومانی | وب‌سایت: <a href="${appBaseUrl}" style="color:#059669;text-decoration:none;">dorvia.ro</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `.trim();
+}
+

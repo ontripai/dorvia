@@ -24,6 +24,8 @@ import {
   ChartNoAxesCombined,
   BookOpen,
   BriefcaseBusiness,
+  Handshake,
+  Plus,
 } from '@/components/Icons';
 
 interface AdminLeadsPageProps {
@@ -45,6 +47,11 @@ interface LeadRecord {
   invited_by: string | null;
   created_at: string;
   raw_meta: any;
+  referred_by_partner_id?: string | null;
+  referral_partner?: {
+    id: string;
+    full_name: string;
+  } | null;
 }
 
 export default function AdminLeadsPage({ params }: AdminLeadsPageProps) {
@@ -58,6 +65,21 @@ export default function AdminLeadsPage({ params }: AdminLeadsPageProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [fetchError, setFetchError] = useState<string | null>(null);
+
+  // New Lead Modal State (dre-p71)
+  const [showAddLeadModal, setShowAddLeadModal] = useState(false);
+  const [availablePartners, setAvailablePartners] = useState<{ id: string; full_name: string }[]>([]);
+  const [newLeadData, setNewLeadData] = useState({
+    full_name: '',
+    phone: '',
+    email: '',
+    site_goal: '',
+    referred_by_partner_id: '',
+    message: '',
+  });
+  const [addingLead, setAddingLead] = useState(false);
+  const [addLeadError, setAddLeadError] = useState<string | null>(null);
+  const [addLeadSuccess, setAddLeadSuccess] = useState<string | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -111,6 +133,62 @@ export default function AdminLeadsPage({ params }: AdminLeadsPageProps) {
       await supabase.auth.signOut();
     }
     router.replace(`/${currentLang}/admin/login`);
+  };
+
+  const handleOpenAddLead = async () => {
+    setNewLeadData({
+      full_name: '',
+      phone: '',
+      email: '',
+      site_goal: '',
+      referred_by_partner_id: '',
+      message: '',
+    });
+    setAddLeadError(null);
+    setShowAddLeadModal(true);
+
+    try {
+      const res = await fetch('/api/admin/referral-partners?is_active=true');
+      const json = await res.json().catch(() => null);
+      if (json?.success && Array.isArray(json.partners)) {
+        setAvailablePartners(json.partners.map((p: any) => ({ id: p.id, full_name: p.full_name })));
+      }
+    } catch (err) {
+      console.error('Error fetching referral partners for lead form:', err);
+    }
+  };
+
+  const handleCreateLead = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newLeadData.full_name.trim()) {
+      setAddLeadError(isFa ? 'نام و نام‌خانوادگی متقاضی الزامی است.' : 'Applicant name is required.');
+      return;
+    }
+
+    try {
+      setAddingLead(true);
+      setAddLeadError(null);
+
+      const res = await fetch('/api/admin/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newLeadData),
+      });
+
+      const json = await res.json().catch(() => null);
+      if (res.ok && json?.success && json?.lead) {
+        setLeads((prev) => [json.lead, ...prev]);
+        setShowAddLeadModal(false);
+        setAddLeadSuccess(isFa ? 'پرونده متقاضی جدید با موفقیت ایجاد شد.' : 'Lead created successfully.');
+        setTimeout(() => setAddLeadSuccess(null), 4000);
+      } else {
+        setAddLeadError(json?.error || (isFa ? 'خطا در ایجاد پرونده.' : 'Failed to create lead.'));
+      }
+    } catch (err: any) {
+      setAddLeadError(err?.message || (isFa ? 'خطای سرور.' : 'Server exception.'));
+    } finally {
+      setAddingLead(false);
+    }
   };
 
   // Filter leads
@@ -215,13 +293,23 @@ export default function AdminLeadsPage({ params }: AdminLeadsPageProps) {
               </Link>
             )}
 
-            {(adminUser?.roleKey === 'owner' || adminUser?.roleKey === 'manager' || adminUser?.roleKey === 'marketing' || adminUser?.permissions?.includes('jobs.edit')) && (
+            {(adminUser?.roleKey === 'owner' || adminUser?.roleKey === 'manager' || adminUser?.permissions?.includes('jobs.edit')) && (
               <Link
                 href="/admin/jobs"
                 className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all"
               >
                 <BriefcaseBusiness size={15} />
                 <span>{isFa ? 'فرصت‌های شغلی' : 'Jobs'}</span>
+              </Link>
+            )}
+
+            {(adminUser?.roleKey === 'owner' || adminUser?.roleKey === 'manager' || adminUser?.permissions?.includes('finance.view') || adminUser?.permissions?.includes('finance.edit')) && (
+              <Link
+                href="/admin/referral-partners"
+                className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all"
+              >
+                <Handshake size={15} />
+                <span>{isFa ? 'همکاران معرف' : 'Referrals'}</span>
               </Link>
             )}
 
@@ -293,27 +381,39 @@ export default function AdminLeadsPage({ params }: AdminLeadsPageProps) {
             <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
           </div>
 
-          {/* Status Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 text-xs font-bold">
-            {[
-              { key: 'all', label: isFa ? 'همه' : 'All' },
-              { key: 'new', label: isFa ? 'جدید' : 'New' },
-              { key: 'contacted', label: isFa ? 'مکاتبه' : 'Contacted' },
-              { key: 'qualified', label: isFa ? 'واجد شرایط' : 'Qualified' },
-              { key: 'closed', label: isFa ? 'بسته' : 'Closed' },
-            ].map((tab) => (
+          {/* Status Filter Tabs & Add Lead Button */}
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+              {[
+                { key: 'all', label: isFa ? 'همه' : 'All' },
+                { key: 'new', label: isFa ? 'جدید' : 'New' },
+                { key: 'contacted', label: isFa ? 'مکاتبه' : 'Contacted' },
+                { key: 'qualified', label: isFa ? 'واجد شرایط' : 'Qualified' },
+                { key: 'closed', label: isFa ? 'بسته' : 'Closed' },
+              ].map((tab) => (
+                <button
+                  key={tab.key}
+                  onClick={() => setStatusFilter(tab.key)}
+                  className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                    statusFilter === tab.key
+                      ? 'bg-[#2F6FED] text-white shadow-xs'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            {(adminUser?.roleKey === 'owner' || adminUser?.roleKey === 'manager' || adminUser?.permissions?.includes('leads.edit')) && (
               <button
-                key={tab.key}
-                onClick={() => setStatusFilter(tab.key)}
-                className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
-                  statusFilter === tab.key
-                    ? 'bg-[#2F6FED] text-white shadow-xs'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
+                onClick={handleOpenAddLead}
+                className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2 rounded-xl bg-[#071B3D] hover:bg-blue-900 text-white text-xs font-bold shadow-xs transition-all whitespace-nowrap cursor-pointer"
               >
-                {tab.label}
+                <Plus size={14} />
+                <span>{isFa ? 'ثبت متقاضی جدید' : 'New Lead'}</span>
               </button>
-            ))}
+            )}
           </div>
 
         </div>
@@ -383,11 +483,17 @@ export default function AdminLeadsPage({ params }: AdminLeadsPageProps) {
                           )}
                         </td>
 
-                        {/* Source */}
+                        {/* Source & Referral Partner */}
                         <td className="py-4 px-4">
-                          <span className="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 font-mono text-[11px] font-medium">
+                          <span className="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 font-mono text-[11px] font-medium block w-fit">
                             {item.source}
                           </span>
+                          {item.referral_partner?.full_name && (
+                            <span className="inline-flex items-center space-x-1 rtl:space-x-reverse px-2 py-0.5 mt-1 rounded bg-amber-50 text-amber-800 text-[10px] font-bold border border-amber-200 block w-fit">
+                              <span>🤝</span>
+                              <span>{item.referral_partner.full_name}</span>
+                            </span>
+                          )}
                         </td>
 
                         {/* Status */}
@@ -447,7 +553,148 @@ export default function AdminLeadsPage({ params }: AdminLeadsPageProps) {
 
         </div>
 
+        {/* Global Feedback Notifications */}
+        {addLeadSuccess && (
+          <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-800 text-sm flex items-center space-x-2 rtl:space-x-reverse animate-fadeIn">
+            <CheckCircle size={18} />
+            <span>{addLeadSuccess}</span>
+          </div>
+        )}
+
       </div>
+
+      {/* MODAL: ADD NEW LEAD (dre-p71) */}
+      {showAddLeadModal && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-6 border border-slate-200 animate-scaleUp">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <h2 className="text-lg sm:text-xl font-extrabold text-[#071B3D] flex items-center space-x-2 rtl:space-x-reverse">
+                <Plus size={20} className="text-[#2F6FED]" />
+                <span>{isFa ? 'ثبت متقاضی جدید در پنل' : 'New Applicant Entry'}</span>
+              </h2>
+              <button
+                onClick={() => setShowAddLeadModal(false)}
+                className="text-slate-400 hover:text-slate-600 text-lg font-bold"
+              >
+                ✕
+              </button>
+            </div>
+
+            {addLeadError && (
+              <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs font-medium">
+                {addLeadError}
+              </div>
+            )}
+
+            <form onSubmit={handleCreateLead} className="space-y-4 text-xs sm:text-sm">
+              <div>
+                <label className="block text-slate-700 font-bold mb-1">
+                  {isFa ? 'نام و نام‌خانوادگی متقاضی *' : 'Applicant Full Name *'}
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={newLeadData.full_name}
+                  onChange={(e) => setNewLeadData({ ...newLeadData, full_name: e.target.value })}
+                  placeholder={isFa ? 'مثال: علی احمدی' : 'e.g. John Doe'}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-slate-700 font-bold mb-1">
+                    {isFa ? 'شماره تماس / واتس‌اپ' : 'Phone / WhatsApp'}
+                  </label>
+                  <input
+                    type="text"
+                    value={newLeadData.phone}
+                    onChange={(e) => setNewLeadData({ ...newLeadData, phone: e.target.value })}
+                    placeholder="+98 912 000 0000"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-slate-700 font-bold mb-1">
+                    {isFa ? 'ایمیل' : 'Email Address'}
+                  </label>
+                  <input
+                    type="email"
+                    value={newLeadData.email}
+                    onChange={(e) => setNewLeadData({ ...newLeadData, email: e.target.value })}
+                    placeholder="applicant@example.com"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-slate-700 font-bold mb-1">
+                    {isFa ? 'هدف / مسیر پرونده' : 'Service Goal'}
+                  </label>
+                  <input
+                    type="text"
+                    value={newLeadData.site_goal}
+                    onChange={(e) => setNewLeadData({ ...newLeadData, site_goal: e.target.value })}
+                    placeholder={isFa ? 'تحصیلی، ثبت شرکت، اقامت کاری...' : 'Study, Work, Business...'}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-slate-700 font-bold mb-1">
+                    {isFa ? 'معرفی‌شده توسط (همکار معرف)' : 'Referred By Partner'}
+                  </label>
+                  <select
+                    value={newLeadData.referred_by_partner_id}
+                    onChange={(e) => setNewLeadData({ ...newLeadData, referred_by_partner_id: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
+                  >
+                    <option value="">{isFa ? '— بدون همکار معرف (ورود مستقیم) —' : '— Direct / None —'}</option>
+                    {availablePartners.map((partner) => (
+                      <option key={partner.id} value={partner.id}>
+                        🤝 {partner.full_name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-slate-700 font-bold mb-1">
+                  {isFa ? 'توضیحات و پیام اولیه متقاضی' : 'Initial Message / Notes'}
+                </label>
+                <textarea
+                  rows={3}
+                  value={newLeadData.message}
+                  onChange={(e) => setNewLeadData({ ...newLeadData, message: e.target.value })}
+                  placeholder={isFa ? 'خلاصه وضعیت یا درخواست پرونده...' : 'Initial notes...'}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
+                />
+              </div>
+
+              <div className="flex justify-end space-x-3 rtl:space-x-reverse pt-4 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setShowAddLeadModal(false)}
+                  className="px-5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 font-bold text-xs"
+                >
+                  {isFa ? 'انصراف' : 'Cancel'}
+                </button>
+                <button
+                  type="submit"
+                  disabled={addingLead}
+                  className="px-6 py-2.5 rounded-xl bg-[#2F6FED] hover:bg-blue-600 text-white font-bold text-xs shadow-md transition-all disabled:opacity-50"
+                >
+                  {addingLead ? (isFa ? 'در حال ثبت...' : 'Creating...') : isFa ? 'ثبت متقاضی' : 'Create Lead'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

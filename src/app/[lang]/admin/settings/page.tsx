@@ -18,6 +18,7 @@ import {
   ChartNoAxesCombined,
   BookOpen,
   BriefcaseBusiness,
+  Handshake,
 } from '@/components/Icons';
 
 interface SettingsPageProps {
@@ -170,6 +171,14 @@ export default function AdminSettingsPage({ params }: SettingsPageProps) {
             >
               <BriefcaseBusiness size={15} />
               <span>{isFa ? 'فرصت‌های شغلی' : 'Jobs'}</span>
+            </Link>
+
+            <Link
+              href="/admin/referral-partners"
+              className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all"
+            >
+              <Handshake size={15} />
+              <span>{isFa ? 'همکاران معرف' : 'Referral Partners'}</span>
             </Link>
 
             <button

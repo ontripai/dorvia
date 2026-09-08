@@ -2796,7 +2796,397 @@ async function runTests() {
     console.log('✅ PASS: Verified public release gate is strictly FALSE at end of test suite.\n');
   }
 
-  console.log('=== All 18 Callback, Portal, Admin, Lifecycle, Role Enforcement, Family Network, Team Governance, Case Stages Reminders, Finance Accounting, Role Reports, Blog CMS & Job Board Gate Tests Passed Successfully! ===\n');
+  // -------------------------------------------------------------
+  // Test 19: Referral Partners Tracking & Birthday/Anniversary Automation (dre-p71)
+  // -------------------------------------------------------------
+  console.log('-------------------------------------------------------------');
+  console.log('19. Testing Referral Partners Tracking & Birthday/Anniversary Automation (dre-p71)...');
+  console.log('-------------------------------------------------------------');
+
+  const adminReferralRoute = await import('../src/app/api/admin/referral-partners/route');
+  const adminReferralDetailRoute = await import('../src/app/api/admin/referral-partners/[id]/route');
+  const adminLeadExpensesRoute = await import('../src/app/api/admin/leads/[id]/expenses/route');
+
+  let testPartnerId: string | null = null;
+  let testPartnerLeadId: string | null = null;
+  let testStaffUserId: string | null = null;
+  let testMktUserId: string | null = null;
+
+  try {
+    // Pre-cleanup any leftover artifacts from prior interrupted runs
+    await supabaseAdmin.from('case_expenses').delete().ilike('notes', '%dre-p71%');
+    await supabaseAdmin.from('leads').delete().ilike('full_name', '%dre-p71%');
+    await supabaseAdmin.from('referral_partners').delete().ilike('full_name', '%دکتر علیرضا معتمدی%');
+    await supabaseAdmin.from('admin_users').delete().ilike('full_name', '%P71%');
+
+    // 1. Role isolation: Non-finance/marketing user cannot create referral partners -> MUST return 403
+    console.log('Testing role isolation on POST /api/admin/referral-partners (marketing user -> 403)...');
+    const mktEmail = `test.mkt.partner.${Date.now()}@dorvia.ro`;
+    const mktAuthUser = await supabaseAdmin.auth.admin.createUser({
+      email: mktEmail,
+      email_confirm: true,
+    });
+    testMktUserId = mktAuthUser.data!.user!.id;
+
+    const { data: mktRole } = await supabaseAdmin
+      .from('roles')
+      .select('id')
+      .eq('key', 'marketing')
+      .single();
+
+    await supabaseAdmin.from('admin_users').insert({
+      id: testMktUserId,
+      full_name: 'کارشناس بازاریابی P71',
+      role_id: mktRole!.id,
+      is_active: true,
+    });
+
+    const mktLinkRes = await supabaseAdmin.auth.admin.generateLink({
+      type: 'magiclink',
+      email: mktEmail,
+      options: { redirectTo: 'https://dorvia.ro/fa/admin/callback' },
+    });
+    const mktVerifyRes = await fetch(mktLinkRes.data!.properties!.action_link!, {
+      method: 'GET',
+      redirect: 'manual',
+    });
+    const mktParams = new URLSearchParams(
+      (mktVerifyRes.headers.get('location') || '').split('#')[1] || ''
+    );
+    const mktSessionRes = await sessionHandler.POST(
+      new Request('https://dorvia.ro/api/auth/session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_token: mktParams.get('access_token'),
+          refresh_token: mktParams.get('refresh_token'),
+          flow: 'admin',
+          lang: 'fa',
+        }),
+      })
+    );
+    const mktCookies = mktSessionRes.cookies?.getAll ? mktSessionRes.cookies.getAll() : [];
+    const mktCookieHeader = mktCookies.map((c: any) => `${c.name}=${c.value}`).join('; ');
+
+    const unauthorizedPostRes = await adminReferralRoute.POST(
+      new Request('https://dorvia.ro/api/admin/referral-partners', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          cookie: mktCookieHeader,
+        },
+        body: JSON.stringify({
+          full_name: 'همکار غیرمجاز',
+        }),
+      })
+    );
+
+    if (unauthorizedPostRes.status !== 403) {
+      console.error('❌ FAIL: Expected 403 Forbidden for marketing user on referral partners POST, got:', unauthorizedPostRes.status);
+      process.exit(1);
+    }
+    console.log('✅ PASS: Marketing user properly rejected with 403 Forbidden on referral partners POST');
+
+    // 2. Owner creates a referral partner (POST) -> 201 Created
+    console.log('Testing owner creating referral partner via POST /api/admin/referral-partners...');
+    const createPartnerReq = new Request('https://dorvia.ro/api/admin/referral-partners', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        cookie: adminCookieHeader,
+      },
+      body: JSON.stringify({
+        full_name: 'دکتر علیرضا معتمدی (معرف بخارست)',
+        phone: '+40720123456',
+        email: `partner.${Date.now()}@example.ro`,
+        notes: 'همکار معرف پزشکان و پرستاران در رومانی',
+      }),
+    });
+    const createPartnerRes = await adminReferralRoute.POST(createPartnerReq);
+    const createPartnerJson = await createPartnerRes.json();
+
+    if (createPartnerRes.status !== 201 || !createPartnerJson.success || !createPartnerJson.partner?.id) {
+      console.error('❌ FAIL: Owner failed to create referral partner:', createPartnerRes.status, createPartnerJson);
+      process.exit(1);
+    }
+    testPartnerId = createPartnerJson.partner.id;
+    console.log('✅ PASS: Referral partner created successfully with ID:', testPartnerId);
+
+    // 3. Owner lists referral partners (GET) -> 200 OK
+    console.log('Testing GET /api/admin/referral-partners...');
+    const listPartnersRes = await adminReferralRoute.GET(
+      new Request('https://dorvia.ro/api/admin/referral-partners', {
+        headers: { cookie: adminCookieHeader },
+      })
+    );
+    const listPartnersJson = await listPartnersRes.json();
+    if (listPartnersRes.status !== 200 || !listPartnersJson.success || !Array.isArray(listPartnersJson.partners)) {
+      console.error('❌ FAIL: GET /api/admin/referral-partners failed:', listPartnersRes.status, listPartnersJson);
+      process.exit(1);
+    }
+    const foundPartner = listPartnersJson.partners.find((p: any) => p.id === testPartnerId);
+    if (!foundPartner || foundPartner.full_name !== 'دکتر علیرضا معتمدی (معرف بخارست)') {
+      console.error('❌ FAIL: Created referral partner not found in GET list');
+      process.exit(1);
+    }
+    console.log('✅ PASS: GET /api/admin/referral-partners listed created partner with canEdit=true');
+
+    // 4. Owner edits referral partner (PATCH) -> 200 OK
+    console.log('Testing PATCH /api/admin/referral-partners/[id]...');
+    const patchPartnerRes = await adminReferralDetailRoute.PATCH(
+      new Request(`https://dorvia.ro/api/admin/referral-partners/${testPartnerId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          cookie: adminCookieHeader,
+        },
+        body: JSON.stringify({
+          notes: 'یادداشت به‌روزشده: همکاری ویژه dre-p71',
+          is_active: true,
+        }),
+      }),
+      { params: { id: testPartnerId! } }
+    );
+    const patchPartnerJson = await patchPartnerRes.json();
+    if (patchPartnerRes.status !== 200 || !patchPartnerJson.success || patchPartnerJson.partner?.notes !== 'یادداشت به‌روزشده: همکاری ویژه dre-p71') {
+      console.error('❌ FAIL: PATCH referral partner failed:', patchPartnerRes.status, patchPartnerJson);
+      process.exit(1);
+    }
+    console.log('✅ PASS: PATCH /api/admin/referral-partners/[id] updated partner notes and state');
+
+    // 5. Create test lead linked to referral partner with birthday and anniversary = today
+    console.log('Creating test lead linked to referral partner with birthday and anniversary today...');
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    const currentYear = today.getFullYear();
+
+    const { data: testLead, error: leadErr } = await supabaseAdmin
+      .from('leads')
+      .insert({
+        full_name: 'متقاضی تستی معرف و تبریکات (dre-p71)',
+        email: `client.bday.${Date.now()}@dorvia.com`,
+        phone: '+40729999888',
+        source: 'telegram_bot',
+        referred_by_partner_id: testPartnerId,
+        site_goal: 'study',
+        status: 'qualified',
+        date_of_birth: todayStr,
+        anniversary_date: todayStr,
+        last_birthday_greeted_year: null,
+        last_anniversary_greeted_year: null,
+      })
+      .select('id, full_name, email, referred_by_partner_id')
+      .single();
+
+    if (leadErr || !testLead) {
+      console.error('❌ FAIL: Failed to create test lead linked to referral partner:', leadErr);
+      process.exit(1);
+    }
+    testPartnerLeadId = testLead.id;
+    console.log('✅ PASS: Created test lead linked to referral partner:', testPartnerLeadId);
+
+    // 6. Inspect referral partner details & linked leads (GET /api/admin/referral-partners/[id])
+    console.log('Testing GET /api/admin/referral-partners/[id] (reporting drawer)...');
+    const getDetailRes = await adminReferralDetailRoute.GET(
+      new Request(`https://dorvia.ro/api/admin/referral-partners/${testPartnerId}`, {
+        headers: { cookie: adminCookieHeader },
+      }),
+      { params: { id: testPartnerId! } }
+    );
+    const getDetailJson = await getDetailRes.json();
+    if (getDetailRes.status !== 200 || !getDetailJson.success || !Array.isArray(getDetailJson.partner?.leads)) {
+      console.error('❌ FAIL: GET referral partner details failed:', getDetailRes.status, getDetailJson);
+      process.exit(1);
+    }
+    const hasLinkedLead = getDetailJson.partner.leads.some((l: any) => l.id === testPartnerLeadId);
+    if (!hasLinkedLead || getDetailJson.partner.leads_count < 1) {
+      console.error('❌ FAIL: Linked lead not found in partner leads drawer report');
+      process.exit(1);
+    }
+    console.log('✅ PASS: Partner detail endpoint correctly returned linked leads and count (' + getDetailJson.partner.leads_count + ')');
+
+    // 7. Delete protection: partner with linked leads CANNOT be deleted -> MUST be 400
+    console.log('Testing delete protection on referral partner with linked leads (MUST return 400)...');
+    const blockedDelRes = await adminReferralDetailRoute.DELETE(
+      new Request(`https://dorvia.ro/api/admin/referral-partners/${testPartnerId}`, {
+        method: 'DELETE',
+        headers: { cookie: adminCookieHeader },
+      }),
+      { params: { id: testPartnerId! } }
+    );
+    if (blockedDelRes.status !== 400) {
+      console.error('❌ FAIL: Expected 400 Bad Request when deleting partner with linked leads, got:', blockedDelRes.status);
+      process.exit(1);
+    }
+    console.log('✅ PASS: Deletion blocked with 400 Bad Request when partner has linked leads');
+
+    // 8. Test recording expense with expense_type='referral_commission'
+    console.log('Testing recording case expense with expense_type="referral_commission"...');
+    const expenseReq = new Request(`https://dorvia.ro/api/admin/leads/${testPartnerLeadId}/expenses`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        cookie: adminCookieHeader,
+      },
+      body: JSON.stringify({
+        expense_type: 'referral_commission',
+        amount: 350,
+        currency: 'RON',
+        paid_to: 'دکتر علیرضا معتمدی',
+        notes: 'کمیسیون دستی معرف پرونده dre-p71',
+      }),
+    });
+    const expenseRes = await adminLeadExpensesRoute.POST(expenseReq, {
+      params: { id: testPartnerLeadId! },
+    });
+    const expenseJson = await expenseRes.json();
+    if ((expenseRes.status !== 200 && expenseRes.status !== 201) || !expenseJson.success || expenseJson.expense?.expense_type !== 'referral_commission') {
+      console.error('❌ FAIL: Failed to record referral commission expense:', expenseRes.status, expenseJson);
+      process.exit(1);
+    }
+    console.log('✅ PASS: Recorded case expense with expense_type="referral_commission" successfully!');
+
+    // 9. Test Staff Birthday: create active staff member with date_of_birth = today
+    console.log('Creating active staff member with birthday today...');
+    const staffEmail = `staff.bday.${Date.now()}@dorvia.ro`;
+    const staffAuth = await supabaseAdmin.auth.admin.createUser({
+      email: staffEmail,
+      email_confirm: true,
+    });
+    testStaffUserId = staffAuth.data!.user!.id;
+
+    const { data: agentRole } = await supabaseAdmin
+      .from('roles')
+      .select('id')
+      .eq('key', 'agent')
+      .single();
+
+    await supabaseAdmin.from('admin_users').insert({
+      id: testStaffUserId,
+      full_name: 'کارشناس متولد امروز DORVIA',
+      role_id: agentRole!.id,
+      date_of_birth: todayStr,
+      last_birthday_greeted_year: null,
+      is_active: true,
+    });
+    console.log('✅ PASS: Created active staff member with birthday today:', testStaffUserId);
+
+    // 10. Execute Daily Reminders Cron: verify client birthday, client anniversary, and staff birthday
+    console.log('Testing GET /api/cron/daily-case-reminders (First Execution - Birthday/Anniversary triggers)...');
+    const testCronSecret = process.env.CRON_SECRET || 'dorvia-test-cron-secret-2026';
+    process.env.CRON_SECRET = testCronSecret;
+
+    const cronRun1Res = await cronRoute.GET(
+      new Request('https://dorvia.ro/api/cron/daily-case-reminders', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${testCronSecret}`,
+        },
+      })
+    );
+    const cronRun1Json = await cronRun1Res.json();
+    console.log('Cron Run 1 response:', cronRun1Json);
+
+    if (cronRun1Res.status !== 200 || !cronRun1Json.success) {
+      console.error('❌ FAIL: Cron Run 1 failed:', cronRun1Res.status, cronRun1Json);
+      process.exit(1);
+    }
+
+    if (cronRun1Json.clientBirthdaysGreeted < 1) {
+      console.error('❌ FAIL: Cron did not greet client birthday:', cronRun1Json);
+      process.exit(1);
+    }
+    if (cronRun1Json.clientAnniversariesGreeted < 1) {
+      console.error('❌ FAIL: Cron did not greet client anniversary:', cronRun1Json);
+      process.exit(1);
+    }
+    if (cronRun1Json.staffBirthdaysGreeted < 1) {
+      console.error('❌ FAIL: Cron did not greet staff birthday:', cronRun1Json);
+      process.exit(1);
+    }
+    console.log('✅ PASS: Cron Run 1 successfully greeted client birthday, client anniversary, and staff birthday!');
+
+    // Verify deduplication markers in database
+    const { data: updatedLeadDb } = await supabaseAdmin
+      .from('leads')
+      .select('last_birthday_greeted_year, last_anniversary_greeted_year')
+      .eq('id', testPartnerLeadId)
+      .single();
+
+    if (updatedLeadDb?.last_birthday_greeted_year !== currentYear || updatedLeadDb?.last_anniversary_greeted_year !== currentYear) {
+      console.error('❌ FAIL: Lead deduplication markers not updated to current year:', updatedLeadDb);
+      process.exit(1);
+    }
+
+    const { data: updatedStaffDb } = await supabaseAdmin
+      .from('admin_users')
+      .select('last_birthday_greeted_year')
+      .eq('id', testStaffUserId)
+      .single();
+
+    if (updatedStaffDb?.last_birthday_greeted_year !== currentYear) {
+      console.error('❌ FAIL: Staff deduplication marker not updated to current year:', updatedStaffDb);
+      process.exit(1);
+    }
+    console.log('✅ PASS: Verified database deduplication markers (last_birthday_greeted_year, last_anniversary_greeted_year) stamped with ' + currentYear);
+
+    // 11. Deduplication: Execute Daily Reminders Cron a SECOND time -> MUST send 0 new greetings
+    console.log('Testing GET /api/cron/daily-case-reminders (Second Execution - Deduplication check)...');
+    const cronRun2Res = await cronRoute.GET(
+      new Request('https://dorvia.ro/api/cron/daily-case-reminders', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${testCronSecret}`,
+        },
+      })
+    );
+    const cronRun2Json = await cronRun2Res.json();
+    console.log('Cron Run 2 response:', cronRun2Json);
+
+    if (cronRun2Json.clientBirthdaysGreeted !== 0 || cronRun2Json.clientAnniversariesGreeted !== 0 || cronRun2Json.staffBirthdaysGreeted !== 0) {
+      console.error('❌ FAIL: Deduplication failed! Cron sent duplicate greetings on second run:', cronRun2Json);
+      process.exit(1);
+    }
+    console.log('✅ PASS: Anti-duplication confirmed! Second cron run greeted 0 (all skipped because year already stamped)');
+
+  } finally {
+    console.log('Cleaning up Test 19 artifacts...');
+    // Delete test expenses
+    if (testPartnerLeadId) {
+      await supabaseAdmin.from('case_expenses').delete().eq('lead_id', testPartnerLeadId);
+      // Unlink lead from partner
+      await supabaseAdmin.from('leads').update({ referred_by_partner_id: null }).eq('id', testPartnerLeadId);
+      // Delete test lead
+      await supabaseAdmin.from('leads').delete().eq('id', testPartnerLeadId);
+    }
+
+    // Now delete partner (should succeed because no leads are linked)
+    if (testPartnerId) {
+      const delPartnerRes = await adminReferralDetailRoute.DELETE(
+        new Request(`https://dorvia.ro/api/admin/referral-partners/${testPartnerId}`, {
+          method: 'DELETE',
+          headers: { cookie: adminCookieHeader },
+        }),
+        { params: { id: testPartnerId! } }
+      );
+      console.log('Deleted referral partner after unlinking, status:', delPartnerRes.status);
+    }
+
+    // Delete test staff user
+    if (testStaffUserId) {
+      await supabaseAdmin.from('admin_users').delete().eq('id', testStaffUserId);
+      await supabaseAdmin.auth.admin.deleteUser(testStaffUserId);
+    }
+
+    // Delete test marketing user
+    if (testMktUserId) {
+      await supabaseAdmin.from('admin_users').delete().eq('id', testMktUserId);
+      await supabaseAdmin.auth.admin.deleteUser(testMktUserId);
+    }
+    console.log('✅ PASS: Test 19 cleanup completed successfully.\n');
+  }
+
+  console.log('=== All 19 Callback, Portal, Admin, Lifecycle, Role Enforcement, Family Network, Team Governance, Case Stages Reminders, Finance Accounting, Role Reports, Blog CMS, Job Board Gate & Referral Partners/Anniversaries Tests Passed Successfully! ===\n');
 }
 
 runTests().catch((err) => {

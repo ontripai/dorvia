@@ -422,6 +422,18 @@ export const Plus: React.FC<IconProps> = ({ size = 20, ...props }) => (
   </svg>
 );
 
+export const Handshake: React.FC<IconProps> = ({ size = 20, ...props }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="m11 17 2 2a1 1 0 0 0 1.4 0l4.3-4.3a1 1 0 0 0 0-1.4l-2-2" />
+    <path d="m14 14 2.5 2.5a1 1 0 0 0 1.4 0l2.8-2.8a1 1 0 0 0 0-1.4l-3.3-3.3" />
+    <path d="M18 10 14 6l-3 3 2 2" />
+    <path d="m6 18 3-3" />
+    <path d="M11 3 6 8l4 4" />
+    <path d="M2 12l5 5" />
+  </svg>
+);
+
+
 
 
 

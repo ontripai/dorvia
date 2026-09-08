@@ -17,6 +17,7 @@ import {
   Clock,
   BriefcaseBusiness,
   BookOpen,
+  Handshake,
 } from '@/components/Icons';
 import {
   ResponsiveContainer,
@@ -390,6 +391,16 @@ export default function AdminReportsPage({ params }: ReportsPageProps) {
               >
                 <BriefcaseBusiness size={15} />
                 <span>{isFa ? 'فرصت‌های شغلی' : 'Jobs'}</span>
+              </Link>
+            )}
+
+            {(adminUser?.roleKey === 'owner' || adminUser?.roleKey === 'manager' || adminUser?.roleKey === 'finance') && (
+              <Link
+                href="/admin/referral-partners"
+                className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all"
+              >
+                <Handshake size={15} />
+                <span>{isFa ? 'همکاران معرف' : 'Referral Partners'}</span>
               </Link>
             )}
 
