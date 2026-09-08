@@ -1474,7 +1474,352 @@ async function runTests() {
   await supabaseAdmin.from('leads').delete().eq('id', stageTestLead.id);
   console.log('✅ Test 14 artifacts cleaned up successfully.\n');
 
-  console.log('=== All 14 Callback, Portal, Admin, Lifecycle, Role Enforcement, Family Network, Team Governance & Case Stages Reminders Tests Passed Successfully! ===\n');
+  // -------------------------------------------------------------
+  // Test 15: Finance & Accounting Infrastructure (dre-p67)
+  // -------------------------------------------------------------
+  console.log('15. Testing Finance & Accounting Infrastructure (Invoices, Installments, Expenses, Net Profit) (dre-p67)...');
+  const adminInvoiceRoute = await import('../src/app/api/admin/leads/[id]/invoice/route');
+  const adminInstallmentsRoute = await import('../src/app/api/admin/leads/[id]/invoice/installments/route');
+  const adminInstallmentItemRoute = await import('../src/app/api/admin/leads/[id]/invoice/installments/[installmentId]/route');
+  const adminExpensesRoute = await import('../src/app/api/admin/leads/[id]/expenses/route');
+  const adminExpenseItemRoute = await import('../src/app/api/admin/leads/[id]/expenses/[expenseId]/route');
+
+  // 1. Create a temporary test lead for finance tests
+  const { data: financeTestLead, error: fLeadErr } = await supabaseAdmin
+    .from('leads')
+    .insert({
+      full_name: 'کاربر تستی حسابداری (dre-p67)',
+      email: `finance.test.${Date.now()}@dorvia.com`,
+      source: 'website',
+      status: 'qualified',
+    })
+    .select('id')
+    .single();
+
+  if (fLeadErr || !financeTestLead) {
+    console.error('❌ FAIL: Could not create lead for finance test:', fLeadErr);
+    process.exit(1);
+  }
+  console.log('Created test lead for finance:', financeTestLead.id);
+
+  // 2. Setup a marketing user (without finance.view/edit permissions) to test 403 Forbidden
+  const { data: marketingRole } = await supabaseAdmin
+    .from('roles')
+    .select('id, key')
+    .eq('key', 'marketing')
+    .single();
+
+  if (!marketingRole) {
+    console.error('❌ FAIL: Marketing role not found in DB');
+    process.exit(1);
+  }
+
+  const financeTestMarketingEmail = `marketing.finance.test.${Date.now()}@dorvia.ro`;
+  const mktAuthRes = await supabaseAdmin.auth.admin.createUser({
+    email: financeTestMarketingEmail,
+    email_confirm: true,
+  });
+  const financeTestMarketingUserId = mktAuthRes.data.user!.id;
+
+  await supabaseAdmin.from('admin_users').insert({
+    id: financeTestMarketingUserId,
+    full_name: 'کارشناس بازاریابی تستی مالی',
+    role_id: marketingRole.id,
+    is_active: true,
+  });
+
+  const mktLinkRes = await supabaseAdmin.auth.admin.generateLink({
+    type: 'magiclink',
+    email: financeTestMarketingEmail,
+    options: { redirectTo: 'https://dorvia.ro/fa/admin/callback' },
+  });
+  const mktVerifyRes = await fetch(mktLinkRes.data!.properties!.action_link!, { method: 'GET', redirect: 'manual' });
+  const mktParams = new URLSearchParams((mktVerifyRes.headers.get('location') || '').split('#')[1] || '');
+  const mktSessionRes = await sessionHandler.POST(new Request('https://dorvia.ro/api/auth/session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      access_token: mktParams.get('access_token'),
+      refresh_token: mktParams.get('refresh_token'),
+      flow: 'admin',
+      lang: 'fa',
+    }),
+  }));
+  const mktCookies = mktSessionRes.cookies?.getAll ? mktSessionRes.cookies.getAll() : [];
+  const financeTestMarketingCookieHeader = mktCookies.map((c: any) => `${c.name}=${c.value}`).join('; ');
+
+  // 3. Security Assertions: Marketing user attempts to view invoices and add expenses (must return 403)
+  console.log('Testing security: Marketing user calling GET /api/admin/leads/[id]/invoice (must return 403)...');
+  const unauthInvoiceReq = new Request(`https://dorvia.ro/api/admin/leads/${financeTestLead.id}/invoice`, {
+    method: 'GET',
+    headers: { cookie: financeTestMarketingCookieHeader },
+  });
+  const unauthInvoiceRes = await adminInvoiceRoute.GET(unauthInvoiceReq, { params: { id: financeTestLead.id } });
+  if (unauthInvoiceRes.status !== 403) {
+    console.error('❌ FAIL: Expected 403 Forbidden for marketing user on invoice GET, got:', unauthInvoiceRes.status);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Marketing user strictly received HTTP 403 Forbidden on invoice endpoint!');
+
+  console.log('Testing security: Marketing user calling POST /api/admin/leads/[id]/expenses (must return 403)...');
+  const unauthExpenseReq = new Request(`https://dorvia.ro/api/admin/leads/${financeTestLead.id}/expenses`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      cookie: financeTestMarketingCookieHeader,
+    },
+    body: JSON.stringify({
+      expense_type: 'notary_fee',
+      amount: 100,
+      paid_to: 'Test Notary',
+    }),
+  });
+  const unauthExpenseRes = await adminExpensesRoute.POST(unauthExpenseReq, { params: { id: financeTestLead.id } });
+  if (unauthExpenseRes.status !== 403) {
+    console.error('❌ FAIL: Expected 403 Forbidden for marketing user on expense POST, got:', unauthExpenseRes.status);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Marketing user strictly received HTTP 403 Forbidden on expense endpoint!');
+
+  // 4. Server Validation: Rejection of non-positive amounts (total_amount <= 0, amount <= 0, paid_amount < 0)
+  console.log('Testing server-side validation on zero/negative amounts...');
+  const invalidInvReq = new Request(`https://dorvia.ro/api/admin/leads/${financeTestLead.id}/invoice`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', cookie: adminCookieHeader },
+    body: JSON.stringify({ total_amount: 0 }),
+  });
+  const invalidInvRes = await adminInvoiceRoute.POST(invalidInvReq, { params: { id: financeTestLead.id } });
+  if (invalidInvRes.status !== 400) {
+    console.error('❌ FAIL: Server did not reject total_amount = 0 with 400 Bad Request');
+    process.exit(1);
+  }
+
+  const negInvReq = new Request(`https://dorvia.ro/api/admin/leads/${financeTestLead.id}/invoice`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', cookie: adminCookieHeader },
+    body: JSON.stringify({ total_amount: -500 }),
+  });
+  const negInvRes = await adminInvoiceRoute.POST(negInvReq, { params: { id: financeTestLead.id } });
+  if (negInvRes.status !== 400) {
+    console.error('❌ FAIL: Server did not reject negative total_amount with 400 Bad Request');
+    process.exit(1);
+  }
+  console.log('✅ PASS: Server strictly rejected zero and negative invoice amounts with 400 Bad Request!');
+
+  // 5. Owner creates invoice (total_amount = 5000 RON)
+  console.log('Owner creating invoice of 5000 RON...');
+  const createInvReq = new Request(`https://dorvia.ro/api/admin/leads/${financeTestLead.id}/invoice`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', cookie: adminCookieHeader },
+    body: JSON.stringify({
+      total_amount: 5000,
+      currency: 'RON',
+      notes: 'قرارداد خدمات مهاجرت تحصیلی و اقامت',
+    }),
+  });
+  const createInvRes = await adminInvoiceRoute.POST(createInvReq, { params: { id: financeTestLead.id } });
+  const createInvJson = await createInvRes.json();
+
+  if (createInvRes.status !== 200 || !createInvJson.success || !createInvJson.invoice?.id) {
+    console.error('❌ FAIL: Invoice creation failed:', createInvRes.status, createInvJson);
+    process.exit(1);
+  }
+  const testInvoiceId = createInvJson.invoice.id;
+  console.log('✅ PASS: Invoice created with ID:', testInvoiceId, 'and status:', createInvJson.invoice.status);
+
+  // Verify second invoice on same lead is rejected (one invoice per case)
+  const duplicateInvReq = new Request(`https://dorvia.ro/api/admin/leads/${financeTestLead.id}/invoice`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', cookie: adminCookieHeader },
+    body: JSON.stringify({ total_amount: 2000 }),
+  });
+  const duplicateInvRes = await adminInvoiceRoute.POST(duplicateInvReq, { params: { id: financeTestLead.id } });
+  if (duplicateInvRes.status !== 400) {
+    console.error('❌ FAIL: Duplicate invoice creation was not rejected with 400');
+    process.exit(1);
+  }
+  console.log('✅ PASS: Duplicate case invoice creation was correctly rejected with 400!');
+
+  // 6. Add two installments: 3000 RON and 2000 RON
+  console.log('Adding installment 1 (3000 RON)...');
+  const inst1Req = new Request(`https://dorvia.ro/api/admin/leads/${financeTestLead.id}/invoice/installments`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', cookie: adminCookieHeader },
+    body: JSON.stringify({
+      amount: 3000,
+      due_date: '2026-10-01',
+      notes: 'قسط اول پیش‌پرداخت',
+    }),
+  });
+  const inst1Res = await adminInstallmentsRoute.POST(inst1Req, { params: { id: financeTestLead.id } });
+  const inst1Json = await inst1Res.json();
+  if (inst1Res.status !== 200 || !inst1Json.success || !inst1Json.installment?.id) {
+    console.error('❌ FAIL: Adding installment 1 failed:', inst1Res.status, inst1Json);
+    process.exit(1);
+  }
+  const installment1Id = inst1Json.installment.id;
+
+  console.log('Adding installment 2 (2000 RON)...');
+  const inst2Req = new Request(`https://dorvia.ro/api/admin/leads/${financeTestLead.id}/invoice/installments`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', cookie: adminCookieHeader },
+    body: JSON.stringify({
+      amount: 2000,
+      due_date: '2026-11-01',
+      notes: 'قسط دوم تسویه نهایی',
+    }),
+  });
+  const inst2Res = await adminInstallmentsRoute.POST(inst2Req, { params: { id: financeTestLead.id } });
+  const inst2Json = await inst2Res.json();
+  if (inst2Res.status !== 200 || !inst2Json.success || !inst2Json.installment?.id) {
+    console.error('❌ FAIL: Adding installment 2 failed:', inst2Res.status, inst2Json);
+    process.exit(1);
+  }
+  const installment2Id = inst2Json.installment.id;
+  console.log('✅ PASS: Both installments created successfully (3000 RON & 2000 RON)!');
+
+  // 7. Record full payment on Installment 1 (3000 RON)
+  console.log('Recording payment of 3000 RON on installment 1...');
+  const payInst1Req = new Request(
+    `https://dorvia.ro/api/admin/leads/${financeTestLead.id}/invoice/installments/${installment1Id}`,
+    {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', cookie: adminCookieHeader },
+      body: JSON.stringify({
+        paid_amount: 3000,
+        payment_method: 'bank_transfer',
+        notes: 'واریز به حساب بانکی شرکت',
+      }),
+    }
+  );
+  const payInst1Res = await adminInstallmentItemRoute.PATCH(payInst1Req, {
+    params: { id: financeTestLead.id, installmentId: installment1Id },
+  });
+  const payInst1Json = await payInst1Res.json();
+  if (payInst1Res.status !== 200 || !payInst1Json.success || payInst1Json.installment?.status !== 'paid') {
+    console.error('❌ FAIL: Recording payment on installment 1 failed:', payInst1Res.status, payInst1Json);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Installment 1 status automatically transitioned to "paid"!');
+
+  // Verify parent invoice auto-transitioned from 'draft' to 'partially_paid'
+  const { data: dbInvoiceCheck } = await supabaseAdmin
+    .from('case_invoices')
+    .select('status')
+    .eq('id', testInvoiceId)
+    .single();
+
+  if (dbInvoiceCheck?.status !== 'partially_paid') {
+    console.error('❌ FAIL: Parent invoice status expected "partially_paid", got:', dbInvoiceCheck?.status);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Parent invoice status automatically transitioned to "partially_paid" in database!');
+
+  // 8. Add Case Expense (500 RON, notary_fee)
+  console.log('Recording case expense (500 RON, notary_fee)...');
+  const expenseReq = new Request(`https://dorvia.ro/api/admin/leads/${financeTestLead.id}/expenses`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', cookie: adminCookieHeader },
+    body: JSON.stringify({
+      expense_type: 'notary_fee',
+      amount: 500,
+      currency: 'RON',
+      paid_to: 'دفتر اسناد رسمی بخارست',
+      incurred_at: '2026-09-08',
+      notes: 'هزینه تصدیق امضا و وکالتنامه',
+    }),
+  });
+  const expenseRes = await adminExpensesRoute.POST(expenseReq, { params: { id: financeTestLead.id } });
+  const expenseJson = await expenseRes.json();
+  if (expenseRes.status !== 200 || !expenseJson.success || !expenseJson.expense?.id) {
+    console.error('❌ FAIL: Expense creation failed:', expenseRes.status, expenseJson);
+    process.exit(1);
+  }
+  const testExpenseId = expenseJson.expense.id;
+  console.log('✅ PASS: Case expense created with ID:', testExpenseId);
+
+  // 9. Fetch GET /api/admin/leads/[id]/invoice and verify Server-Computed Net Profit: 3000 - 500 = 2500
+  console.log('Fetching invoice & financial summary via GET API to verify net profit calculation...');
+  const getFinReq = new Request(`https://dorvia.ro/api/admin/leads/${financeTestLead.id}/invoice`, {
+    method: 'GET',
+    headers: { cookie: adminCookieHeader },
+  });
+  const getFinRes = await adminInvoiceRoute.GET(getFinReq, { params: { id: financeTestLead.id } });
+  const getFinJson = await getFinRes.json();
+
+  console.log('Financial Summary received from server:', getFinJson.summary);
+
+  if (
+    getFinRes.status !== 200 ||
+    !getFinJson.success ||
+    getFinJson.summary?.total_paid !== 3000 ||
+    getFinJson.summary?.total_expenses !== 500 ||
+    getFinJson.summary?.net_profit !== 2500 ||
+    getFinJson.summary?.remaining_balance !== 2000
+  ) {
+    console.error('❌ FAIL: Server-side financial calculations mismatch:', getFinJson);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Server-calculated Net Profit = 3000 - 500 = 2500 RON, and Remaining = 2000 RON verified!');
+
+  // 10. Direct Database Query Verification
+  console.log('Performing direct database query verification...');
+  const { data: dbInv } = await supabaseAdmin.from('case_invoices').select('*').eq('id', testInvoiceId).single();
+  const { data: dbInsts } = await supabaseAdmin.from('invoice_installments').select('*').eq('invoice_id', testInvoiceId);
+  const { data: dbExps } = await supabaseAdmin.from('case_expenses').select('*').eq('id', testExpenseId).single();
+
+  const dbTotalPaid = (dbInsts || []).reduce((sum, i) => sum + Number(i.paid_amount), 0);
+  const dbTotalExpense = Number(dbExps?.amount || 0);
+  const dbNetProfit = dbTotalPaid - dbTotalExpense;
+
+  if (dbTotalPaid !== 3000 || dbTotalExpense !== 500 || dbNetProfit !== 2500) {
+    console.error('❌ FAIL: Direct DB calculation mismatch:', { dbTotalPaid, dbTotalExpense, dbNetProfit });
+    process.exit(1);
+  }
+  console.log('✅ PASS: Direct DB verification confirmed: Collections=3000, Expenses=500, Net Profit=2500!');
+
+  // 11. Test Manual Invoice Status Guard: If manually set to 'sent' or 'cancelled', payment updates must NOT overwrite it
+  console.log('Testing manual status protection (sent/cancelled guard)...');
+  await supabaseAdmin.from('case_invoices').update({ status: 'sent' }).eq('id', testInvoiceId);
+
+  const payInst2Req = new Request(
+    `https://dorvia.ro/api/admin/leads/${financeTestLead.id}/invoice/installments/${installment2Id}`,
+    {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', cookie: adminCookieHeader },
+      body: JSON.stringify({
+        paid_amount: 1000,
+        payment_method: 'cash',
+      }),
+    }
+  );
+  await adminInstallmentItemRoute.PATCH(payInst2Req, {
+    params: { id: financeTestLead.id, installmentId: installment2Id },
+  });
+
+  const { data: guardedInvoice } = await supabaseAdmin
+    .from('case_invoices')
+    .select('status')
+    .eq('id', testInvoiceId)
+    .single();
+
+  if (guardedInvoice?.status !== 'sent') {
+    console.error('❌ FAIL: Auto-sync overwrote manual "sent" status! Current:', guardedInvoice?.status);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Manual invoice status "sent" was strictly preserved and NOT overwritten by auto-sync!');
+
+  // 12. Cleanup Test 15 data
+  console.log('Cleaning up Test 15 data...');
+  await supabaseAdmin.from('case_expenses').delete().eq('lead_id', financeTestLead.id);
+  await supabaseAdmin.from('invoice_installments').delete().eq('invoice_id', testInvoiceId);
+  await supabaseAdmin.from('case_invoices').delete().eq('id', testInvoiceId);
+  await supabaseAdmin.from('leads').delete().eq('id', financeTestLead.id);
+  await supabaseAdmin.from('admin_users').delete().eq('id', financeTestMarketingUserId);
+  await supabaseAdmin.auth.admin.deleteUser(financeTestMarketingUserId);
+  console.log('✅ Test 15 artifacts cleaned up successfully.\n');
+
+  console.log('=== All 15 Callback, Portal, Admin, Lifecycle, Role Enforcement, Family Network, Team Governance, Case Stages Reminders & Finance Accounting Tests Passed Successfully! ===\n');
 }
 
 runTests().catch((err) => {

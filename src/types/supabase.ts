@@ -521,6 +521,177 @@ export type Database = {
           }
         ];
       };
+      case_invoices: {
+        Row: {
+          id: string;
+          lead_id: string;
+          currency: string;
+          total_amount: number;
+          status: 'draft' | 'sent' | 'partially_paid' | 'paid' | 'cancelled';
+          created_by: string | null;
+          notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          lead_id: string;
+          currency?: string;
+          total_amount: number;
+          status?: 'draft' | 'sent' | 'partially_paid' | 'paid' | 'cancelled';
+          created_by?: string | null;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          lead_id?: string;
+          currency?: string;
+          total_amount?: number;
+          status?: 'draft' | 'sent' | 'partially_paid' | 'paid' | 'cancelled';
+          created_by?: string | null;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'case_invoices_lead_id_fkey';
+            columns: ['lead_id'];
+            isOneToOne: false;
+            referencedRelation: 'leads';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'case_invoices_created_by_fkey';
+            columns: ['created_by'];
+            isOneToOne: false;
+            referencedRelation: 'admin_users';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      invoice_installments: {
+        Row: {
+          id: string;
+          invoice_id: string;
+          installment_no: number;
+          amount: number;
+          due_date: string;
+          paid_amount: number;
+          paid_at: string | null;
+          status: 'pending' | 'paid' | 'partial' | 'overdue';
+          payment_method: string | null;
+          notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          invoice_id: string;
+          installment_no: number;
+          amount: number;
+          due_date: string;
+          paid_amount?: number;
+          paid_at?: string | null;
+          status?: 'pending' | 'paid' | 'partial' | 'overdue';
+          payment_method?: string | null;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          invoice_id?: string;
+          installment_no?: number;
+          amount?: number;
+          due_date?: string;
+          paid_amount?: number;
+          paid_at?: string | null;
+          status?: 'pending' | 'paid' | 'partial' | 'overdue';
+          payment_method?: string | null;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'invoice_installments_invoice_id_fkey';
+            columns: ['invoice_id'];
+            isOneToOne: false;
+            referencedRelation: 'case_invoices';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      case_expenses: {
+        Row: {
+          id: string;
+          lead_id: string;
+          case_stage_id: string | null;
+          expense_type: 'notary_fee' | 'translation_fee' | 'lawyer_fee' | 'government_fee' | 'other';
+          amount: number;
+          currency: string;
+          paid_to: string | null;
+          incurred_at: string;
+          notes: string | null;
+          created_by: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          lead_id: string;
+          case_stage_id?: string | null;
+          expense_type: 'notary_fee' | 'translation_fee' | 'lawyer_fee' | 'government_fee' | 'other';
+          amount: number;
+          currency?: string;
+          paid_to?: string | null;
+          incurred_at?: string;
+          notes?: string | null;
+          created_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          lead_id?: string;
+          case_stage_id?: string | null;
+          expense_type?: 'notary_fee' | 'translation_fee' | 'lawyer_fee' | 'government_fee' | 'other';
+          amount?: number;
+          currency?: string;
+          paid_to?: string | null;
+          incurred_at?: string;
+          notes?: string | null;
+          created_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'case_expenses_lead_id_fkey';
+            columns: ['lead_id'];
+            isOneToOne: false;
+            referencedRelation: 'leads';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'case_expenses_case_stage_id_fkey';
+            columns: ['case_stage_id'];
+            isOneToOne: false;
+            referencedRelation: 'case_stages';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'case_expenses_created_by_fkey';
+            columns: ['created_by'];
+            isOneToOne: false;
+            referencedRelation: 'admin_users';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
     };
     Views: {
       [_ in never]: never;
