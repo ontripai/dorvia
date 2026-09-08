@@ -9,6 +9,7 @@ const VALID_EXPENSE_TYPES = [
   'translation_fee',
   'lawyer_fee',
   'government_fee',
+  'referral_commission',
   'other',
 ] as const;
 

@@ -14,6 +14,7 @@ import {
   CheckCircle,
   Clock,
   BriefcaseBusiness,
+  Handshake,
 } from '@/components/Icons';
 
 // Lucide-style icons
@@ -275,6 +276,16 @@ export default function AdminBlogPage({ params }: { params: { lang: Language } }
                 <BriefcaseBusiness size={14} />
                 <span>{isFa ? 'فرصت‌های شغلی' : 'Jobs'}</span>
               </Link>
+
+              {(adminUser?.roleKey === 'owner' || adminUser?.roleKey === 'manager' || adminUser?.roleKey === 'finance') && (
+                <Link
+                  href="/admin/referral-partners"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-medium border border-slate-800 transition-all"
+                >
+                  <Handshake size={14} />
+                  <span>{isFa ? 'همکاران معرف' : 'Referral Partners'}</span>
+                </Link>
+              )}
 
               <Link
                 href="/admin/settings"

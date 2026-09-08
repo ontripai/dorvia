@@ -33,6 +33,9 @@ export type Database = {
           is_family_primary: boolean;
           date_of_birth: string | null;
           anniversary_date: string | null;
+          referred_by_partner_id: string | null;
+          last_birthday_greeted_year: number | null;
+          last_anniversary_greeted_year: number | null;
           national_id_or_passport: string | null;
           address_line: string | null;
           address_city: string | null;
@@ -66,6 +69,9 @@ export type Database = {
           is_family_primary?: boolean;
           date_of_birth?: string | null;
           anniversary_date?: string | null;
+          referred_by_partner_id?: string | null;
+          last_birthday_greeted_year?: number | null;
+          last_anniversary_greeted_year?: number | null;
           national_id_or_passport?: string | null;
           address_line?: string | null;
           address_city?: string | null;
@@ -99,6 +105,9 @@ export type Database = {
           is_family_primary?: boolean;
           date_of_birth?: string | null;
           anniversary_date?: string | null;
+          referred_by_partner_id?: string | null;
+          last_birthday_greeted_year?: number | null;
+          last_anniversary_greeted_year?: number | null;
           national_id_or_passport?: string | null;
           address_line?: string | null;
           address_city?: string | null;
@@ -121,6 +130,13 @@ export type Database = {
             columns: ['invited_by'];
             isOneToOne: false;
             referencedRelation: 'admin_users';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'leads_referred_by_partner_id_fkey';
+            columns: ['referred_by_partner_id'];
+            isOneToOne: false;
+            referencedRelation: 'referral_partners';
             referencedColumns: ['id'];
           }
         ];
@@ -214,6 +230,8 @@ export type Database = {
           permission_overrides: Json;
           is_active: boolean;
           telegram_chat_id: string | null;
+          date_of_birth: string | null;
+          last_birthday_greeted_year: number | null;
           notify_email: boolean;
           notify_telegram: boolean;
           created_at: string;
@@ -226,6 +244,8 @@ export type Database = {
           permission_overrides?: Json;
           is_active?: boolean;
           telegram_chat_id?: string | null;
+          date_of_birth?: string | null;
+          last_birthday_greeted_year?: number | null;
           notify_email?: boolean;
           notify_telegram?: boolean;
           created_at?: string;
@@ -238,6 +258,8 @@ export type Database = {
           permission_overrides?: Json;
           is_active?: boolean;
           telegram_chat_id?: string | null;
+          date_of_birth?: string | null;
+          last_birthday_greeted_year?: number | null;
           notify_email?: boolean;
           notify_telegram?: boolean;
           created_at?: string;
@@ -630,7 +652,7 @@ export type Database = {
           id: string;
           lead_id: string;
           case_stage_id: string | null;
-          expense_type: 'notary_fee' | 'translation_fee' | 'lawyer_fee' | 'government_fee' | 'other';
+          expense_type: 'notary_fee' | 'translation_fee' | 'lawyer_fee' | 'government_fee' | 'referral_commission' | 'other';
           amount: number;
           currency: string;
           paid_to: string | null;
@@ -644,7 +666,7 @@ export type Database = {
           id?: string;
           lead_id: string;
           case_stage_id?: string | null;
-          expense_type: 'notary_fee' | 'translation_fee' | 'lawyer_fee' | 'government_fee' | 'other';
+          expense_type: 'notary_fee' | 'translation_fee' | 'lawyer_fee' | 'government_fee' | 'referral_commission' | 'other';
           amount: number;
           currency?: string;
           paid_to?: string | null;
@@ -658,7 +680,7 @@ export type Database = {
           id?: string;
           lead_id?: string;
           case_stage_id?: string | null;
-          expense_type?: 'notary_fee' | 'translation_fee' | 'lawyer_fee' | 'government_fee' | 'other';
+          expense_type?: 'notary_fee' | 'translation_fee' | 'lawyer_fee' | 'government_fee' | 'referral_commission' | 'other';
           amount?: number;
           currency?: string;
           paid_to?: string | null;
@@ -691,6 +713,39 @@ export type Database = {
             referencedColumns: ['id'];
           }
         ];
+      };
+      referral_partners: {
+        Row: {
+          id: string;
+          full_name: string;
+          phone: string | null;
+          email: string | null;
+          notes: string | null;
+          is_active: boolean;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          full_name: string;
+          phone?: string | null;
+          email?: string | null;
+          notes?: string | null;
+          is_active?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          full_name?: string;
+          phone?: string | null;
+          email?: string | null;
+          notes?: string | null;
+          is_active?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
       };
     };
     Views: {

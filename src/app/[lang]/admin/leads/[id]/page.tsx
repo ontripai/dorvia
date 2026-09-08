@@ -33,6 +33,7 @@ import {
   Receipt,
   CreditCard,
   Plus,
+  Handshake,
 } from '@/components/Icons';
 
 interface LeadDetailPageProps {
@@ -207,6 +208,61 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
   const [editOffice, setEditOffice] = useState<string>('');
   const [savingEdit, setSavingEdit] = useState(false);
   const [editError, setEditError] = useState<string | null>(null);
+
+  // Referral Partner State (dre-p71)
+  const [partnersList, setPartnersList] = useState<Array<{ id: string; full_name: string }>>([]);
+  const [loadingPartners, setLoadingPartners] = useState(false);
+  const [showPartnerModal, setShowPartnerModal] = useState(false);
+  const [selectedPartnerId, setSelectedPartnerId] = useState('');
+  const [savingPartner, setSavingPartner] = useState(false);
+  const [partnerError, setPartnerError] = useState<string | null>(null);
+
+  const openPartnerModal = async () => {
+    setSelectedPartnerId(lead?.referred_by_partner_id || '');
+    setPartnerError(null);
+    setShowPartnerModal(true);
+    if (partnersList.length === 0) {
+      setLoadingPartners(true);
+      try {
+        const res = await fetch('/api/admin/referral-partners');
+        const json = await res.json().catch(() => null);
+        if (json?.partners) {
+          setPartnersList(json.partners);
+        }
+      } catch (err) {
+        console.error('Failed to load partners list:', err);
+      } finally {
+        setLoadingPartners(false);
+      }
+    }
+  };
+
+  const handleSavePartner = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!leadId) return;
+    setSavingPartner(true);
+    setPartnerError(null);
+    try {
+      const res = await fetch(`/api/admin/leads/${leadId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          referred_by_partner_id: selectedPartnerId ? selectedPartnerId : null,
+        }),
+      });
+      const json = await res.json().catch(() => null);
+      if (res.ok && !json.error) {
+        setShowPartnerModal(false);
+        await loadLeadData();
+      } else {
+        setPartnerError(json?.error || (isFa ? 'خطا در تغییر همکار معرف.' : 'Failed to update referral partner.'));
+      }
+    } catch (err) {
+      setPartnerError(isFa ? 'خطا در ارتباط با سرور.' : 'Network connection error.');
+    } finally {
+      setSavingPartner(false);
+    }
+  };
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -1026,6 +1082,8 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
         return isFa ? 'حق‌الوکاله و مشاوره حقوقی' : 'Lawyer Fee';
       case 'government_fee':
         return isFa ? 'عوارض و مالیات دولتی' : 'Government Fee';
+      case 'referral_commission':
+        return isFa ? 'کمیسیون همکار معرف' : 'Referral Commission';
       case 'other':
       default:
         return isFa ? 'سایر هزینه‌های اداری' : 'Other Expense';
@@ -1597,6 +1655,29 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
                   <div className="flex items-center justify-between py-1.5 border-b border-slate-100">
                     <span className="font-semibold text-slate-600">{isFa ? 'کانال ارجاع' : 'Channel Ref'}</span>
                     <span className="font-mono text-slate-800">{lead.channel_ref || '—'}</span>
+                  </div>
+
+                  <div className="flex items-center justify-between py-1.5 border-b border-slate-100">
+                    <span className="font-semibold text-slate-600 flex items-center space-x-1.5 rtl:space-x-reverse">
+                      <Handshake size={14} className="text-[#071B3D]" />
+                      <span>{isFa ? 'همکار معرف' : 'Referral Partner'}</span>
+                    </span>
+                    <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                      {lead.referral_partner ? (
+                        <span className="font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded text-xs">
+                          {lead.referral_partner.full_name}
+                        </span>
+                      ) : (
+                        <span className="text-slate-400 text-xs">{isFa ? 'مستقیم (بدون معرف)' : 'Direct (None)'}</span>
+                      )}
+                      <button
+                        type="button"
+                        onClick={openPartnerModal}
+                        className="text-[11px] text-[#2F6FED] hover:underline font-bold cursor-pointer"
+                      >
+                        {lead.referral_partner ? (isFa ? 'تغییر' : 'Change') : (isFa ? 'افزودن معرف' : 'Assign')}
+                      </button>
+                    </div>
                   </div>
 
                   <div className="flex items-center justify-between py-1.5">
@@ -3528,6 +3609,7 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
                     <option value="translation_fee">{isFa ? 'دارالترجمه رسمی و تاییدات' : 'Translation Fee'}</option>
                     <option value="lawyer_fee">{isFa ? 'حق‌الوکاله و مشاوره حقوقی' : 'Lawyer Fee'}</option>
                     <option value="government_fee">{isFa ? 'عوارض و مالیات‌های دولتی' : 'Government Fee'}</option>
+                    <option value="referral_commission">{isFa ? 'کمیسیون همکار معرف' : 'Referral Commission'}</option>
                     <option value="other">{isFa ? 'سایر هزینه‌های اداری' : 'Other Expense'}</option>
                   </select>
                 </div>
@@ -4128,6 +4210,98 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
                     className="px-5 py-2.5 rounded-xl bg-[#071B3D] hover:bg-blue-900 text-white text-xs font-bold transition-all disabled:opacity-50 flex items-center gap-2 cursor-pointer"
                   >
                     {savingEdit ? (
+                      <>
+                        <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>{isFa ? 'در حال ذخیره...' : 'Saving...'}</span>
+                      </>
+                    ) : (
+                      <span>{isFa ? 'ذخیره تغییرات' : 'Save Changes'}</span>
+                    )}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* CHANGE REFERRAL PARTNER MODAL (dre-p71) */}
+        {showPartnerModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-fadeIn">
+            <div
+              className="bg-white border border-[#dfe6ef] rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl space-y-6"
+              dir={isFa ? 'rtl' : 'ltr'}
+            >
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                  <div className="w-10 h-10 rounded-2xl bg-blue-50 text-blue-700 flex items-center justify-center">
+                    <Handshake size={20} />
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-extrabold text-[#142033]">
+                      {isFa ? 'تخصیص یا تغییر همکار معرف' : 'Assign Referral Partner'}
+                    </h3>
+                    <p className="text-xs text-slate-500">
+                      {isFa ? 'مشخص کنید این متقاضی توسط کدام همکار معرفی شده است' : 'Select the partner who referred this applicant'}
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setShowPartnerModal(false)}
+                  className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold cursor-pointer"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {partnerError && (
+                <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs">
+                  {partnerError}
+                </div>
+              )}
+
+              <form onSubmit={handleSavePartner} className="space-y-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700 block">
+                    {isFa ? 'انتخاب همکار معرف:' : 'Select Partner:'}
+                  </label>
+                  {loadingPartners ? (
+                    <div className="p-3 text-xs text-slate-500 flex items-center gap-2">
+                      <div className="w-3.5 h-3.5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
+                      <span>{isFa ? 'در حال دریافت فهرست همکاران...' : 'Loading partners...'}</span>
+                    </div>
+                  ) : (
+                    <select
+                      value={selectedPartnerId}
+                      onChange={(e) => setSelectedPartnerId(e.target.value)}
+                      className="w-full p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                    >
+                      <option value="">{isFa ? '— بدون همکار معرف (جذب مستقیم) —' : '— No Partner (Direct) —'}</option>
+                      {partnersList.map((p) => (
+                        <option key={p.id} value={p.id}>
+                          {p.full_name}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                </div>
+
+                <div className="pt-3 flex items-center justify-end gap-3 border-t border-slate-100">
+                  <button
+                    type="button"
+                    disabled={savingPartner}
+                    onClick={() => setShowPartnerModal(false)}
+                    className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold transition-all cursor-pointer"
+                  >
+                    {isFa ? 'انصراف' : 'Cancel'}
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={savingPartner}
+                    className="px-5 py-2.5 rounded-xl bg-[#071B3D] hover:bg-blue-900 text-white text-xs font-bold transition-all disabled:opacity-50 flex items-center gap-2 cursor-pointer"
+                  >
+                    {savingPartner ? (
                       <>
                         <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                         <span>{isFa ? 'در حال ذخیره...' : 'Saving...'}</span>
