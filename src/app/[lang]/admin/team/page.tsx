@@ -17,6 +17,7 @@ import {
   Settings,
   ArrowRight,
   ArrowLeft,
+  ChartNoAxesCombined,
 } from '@/components/Icons';
 
 interface TeamPageProps {
@@ -285,6 +286,14 @@ export default function AdminTeamPage({ params }: TeamPageProps) {
               className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all"
             >
               <span>{isFa ? 'پرونده‌های متقاضیان' : 'Case Files'}</span>
+            </Link>
+
+            <Link
+              href="/admin/reports"
+              className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all"
+            >
+              <ChartNoAxesCombined size={15} />
+              <span>{isFa ? 'گزارش‌ها و آمار' : 'Reports'}</span>
             </Link>
 
             <Link
