@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Language } from '@/types';
 import ReactMarkdown from 'react-markdown';
-import { slugifyJob } from '@/lib/jobBoardHelper';
+import { slugifyJob } from '@/lib/slugHelper';
 import {
   ArrowRight,
   ArrowLeft,
