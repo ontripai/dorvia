@@ -2151,7 +2151,228 @@ async function runTests() {
   await supabaseAdmin.auth.admin.deleteUser(p68MktUserId);
   console.log('✅ Test 16 artifacts cleaned up successfully.\n');
 
-  console.log('=== All 16 Callback, Portal, Admin, Lifecycle, Role Enforcement, Family Network, Team Governance, Case Stages Reminders, Finance Accounting & Role Reports Tests Passed Successfully! ===\n');
+  // -------------------------------------------------------------
+  // Test 17: Blog CMS & Public Module (dre-p69)
+  // -------------------------------------------------------------
+  console.log('17. Testing Blog CMS & Public Module (dre-p69)...');
+
+  const adminBlogRoute = await import('../src/app/api/admin/blog/route');
+  const adminBlogIdRoute = await import('../src/app/api/admin/blog/[id]/route');
+  const adminBlogPublishRoute = await import('../src/app/api/admin/blog/[id]/publish/route');
+  const adminBlogUnpublishRoute = await import('../src/app/api/admin/blog/[id]/unpublish/route');
+  const publicBlogPostsRoute = await import('../src/app/api/blog/posts/route');
+  const publicBlogCategoriesRoute = await import('../src/app/api/blog/categories/route');
+
+  // 1. Create a marketing user
+  const p69MktEmail = `test.mkt.blog.${Date.now()}@dorvia.ro`;
+  console.log('Creating marketing staff user for blog testing:', p69MktEmail);
+  const p69MktUser = await supabaseAdmin.auth.admin.createUser({
+    email: p69MktEmail,
+    email_confirm: true,
+  });
+  const p69MktUserId = p69MktUser.data!.user!.id;
+
+  const { data: p69MktRole } = await supabaseAdmin
+    .from('roles')
+    .select('id')
+    .eq('key', 'marketing')
+    .single();
+
+  const { error: p69InsertErr } = await supabaseAdmin.from('admin_users').insert({
+    id: p69MktUserId,
+    full_name: 'کارشناس تست بازاریابی P69',
+    role_id: p69MktRole!.id,
+    is_active: true,
+  });
+
+  if (p69InsertErr) {
+    console.error('Failed to insert admin_user for Test 17:', p69InsertErr);
+    process.exit(1);
+  }
+
+  // Login marketing user
+  const p69MktLinkRes = await supabaseAdmin.auth.admin.generateLink({
+    type: 'magiclink',
+    email: p69MktEmail,
+    options: { redirectTo: 'https://dorvia.ro/fa/admin/callback' },
+  });
+  const p69MktVerifyRes = await fetch(p69MktLinkRes.data!.properties!.action_link!, {
+    method: 'GET',
+    redirect: 'manual',
+  });
+  const p69MktParams = new URLSearchParams(
+    (p69MktVerifyRes.headers.get('location') || '').split('#')[1] || ''
+  );
+  const p69MktSessionRes = await sessionHandler.POST(
+    new Request('https://dorvia.ro/api/auth/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_token: p69MktParams.get('access_token'),
+        refresh_token: p69MktParams.get('refresh_token'),
+        flow: 'admin',
+        lang: 'fa',
+      }),
+    })
+  );
+  const p69MktCookies = p69MktSessionRes.cookies?.getAll ? p69MktSessionRes.cookies.getAll() : [];
+  const p69MktCookieHeader = p69MktCookies.map((c: any) => `${c.name}=${c.value}`).join('; ');
+
+  // 2. Fetch categories
+  const catRes = await publicBlogCategoriesRoute.GET();
+  const catJson = await catRes.json();
+  if (catRes.status !== 200 || !Array.isArray(catJson.categories) || catJson.categories.length === 0) {
+    console.error('❌ FAIL: Failed to fetch blog categories:', catJson);
+    process.exit(1);
+  }
+  const testCategoryId = catJson.categories[0].id;
+  console.log('✅ PASS: Public blog categories loaded (' + catJson.categories.length + ' categories)');
+
+  // 3. Marketing user creates draft article (status MUST be draft)
+  console.log('Testing marketing user creating draft article...');
+  const testSlugFa = `test-blog-post-${Date.now()}`;
+  const p69CreateReq = new Request('https://dorvia.ro/api/admin/blog', {
+    method: 'POST',
+    headers: {
+      cookie: p69MktCookieHeader,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      title_fa: 'مقاله تستی بلاگ دورویا',
+      slug_fa: testSlugFa,
+      category_id: testCategoryId,
+      excerpt_fa: 'این یک خلاصه تستی است.',
+      content_fa: '## تیتر تست\n\nمتن مارک‌داون برای تست.',
+      status: 'published', // Malicious attempt to force publish directly on creation!
+    }),
+  });
+  const p69CreateRes = await adminBlogRoute.POST(p69CreateReq);
+  const p69CreateJson = await p69CreateRes.json();
+  if (p69CreateRes.status !== 201 || !p69CreateJson.post || p69CreateJson.post.status !== 'draft') {
+    console.error('❌ FAIL: Expected 201 Created with status=draft, got:', p69CreateRes.status, p69CreateJson);
+    process.exit(1);
+  }
+  const createdPostId = p69CreateJson.post.id;
+  console.log('✅ PASS: Article created successfully with enforced status "draft" (attempt to bypass ignored)');
+
+  // 4. Role enforcement: Marketing user attempts to publish directly -> MUST BE 403 Forbidden!
+  console.log('Testing marketing user calling /api/admin/blog/[id]/publish (MUST be 403 Forbidden)...');
+  const p69MktPubReq = new Request(`https://dorvia.ro/api/admin/blog/${createdPostId}/publish`, {
+    method: 'POST',
+    headers: { cookie: p69MktCookieHeader },
+  });
+  const p69MktPubRes = await adminBlogPublishRoute.POST(p69MktPubReq, { params: { id: createdPostId } });
+  if (p69MktPubRes.status !== 403) {
+    console.error('❌ FAIL: Expected 403 Forbidden for marketing user on publish, got:', p69MktPubRes.status);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Marketing user received 403 Forbidden on /publish as required!');
+
+  // 5. Owner user publishes the article -> 200 OK
+  console.log('Testing owner user calling /api/admin/blog/[id]/publish (MUST be 200 OK)...');
+  const p69OwnerPubReq = new Request(`https://dorvia.ro/api/admin/blog/${createdPostId}/publish`, {
+    method: 'POST',
+    headers: { cookie: adminCookieHeader },
+  });
+  const p69OwnerPubRes = await adminBlogPublishRoute.POST(p69OwnerPubReq, { params: { id: createdPostId } });
+  const p69OwnerPubJson = await p69OwnerPubRes.json();
+  if (p69OwnerPubRes.status !== 200 || p69OwnerPubJson.post?.status !== 'published') {
+    console.error('❌ FAIL: Owner failed to publish article:', p69OwnerPubRes.status, p69OwnerPubJson);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Owner successfully published article!');
+
+  // 6. Public catalog verification (Language completeness test)
+  console.log('Testing public /api/blog/posts visibility...');
+  const pubFaReq = new Request('https://dorvia.ro/api/blog/posts?lang=fa');
+  const pubFaRes = await publicBlogPostsRoute.GET(pubFaReq);
+  const pubFaJson = await pubFaRes.json();
+  const foundFa = (pubFaJson.posts || []).some((p: any) => p.id === createdPostId);
+  if (!foundFa) {
+    console.error('❌ FAIL: Published article not visible in public Persian posts list');
+    process.exit(1);
+  }
+  console.log('✅ PASS: Published article is visible in Persian public catalog');
+
+  // English public catalog: post does NOT have English content yet -> MUST NOT be in English list!
+  const pubEnReq = new Request('https://dorvia.ro/api/blog/posts?lang=en');
+  const pubEnRes = await publicBlogPostsRoute.GET(pubEnReq);
+  const pubEnJson = await pubEnRes.json();
+  const foundEn = (pubEnJson.posts || []).some((p: any) => p.id === createdPostId);
+  if (foundEn) {
+    console.error('❌ FAIL: Article without English translation appeared in English public posts list');
+    process.exit(1);
+  }
+  console.log('✅ PASS: Untranslated article correctly hidden from English public catalog (Language completeness enforced)');
+
+  // 7. Test PATCH updates (cannot alter status directly, only content)
+  console.log('Testing PATCH /api/admin/blog/[id] with content update...');
+  const p69PatchReq = new Request(`https://dorvia.ro/api/admin/blog/${createdPostId}`, {
+    method: 'PATCH',
+    headers: {
+      cookie: p69MktCookieHeader,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      title_fa: 'عنوان بروزرسانی‌شده مقاله تستی',
+      status: 'draft', // Attempt to reset status via PATCH -> MUST BE IGNORED
+    }),
+  });
+  const p69PatchRes = await adminBlogIdRoute.PATCH(p69PatchReq, { params: { id: createdPostId } });
+  const p69PatchJson = await p69PatchRes.json();
+  if (p69PatchRes.status !== 200 || p69PatchJson.post.status !== 'published') {
+    console.error('❌ FAIL: PATCH must not change status, got status:', p69PatchJson.post?.status);
+    process.exit(1);
+  }
+  console.log('✅ PASS: PATCH updated title while keeping status="published" strictly intact');
+
+  // 8. Delete protection: Attempt to delete published article -> MUST be 400
+  console.log('Testing DELETE on published article (MUST be rejected with 400)...');
+  const p69DelPubReq = new Request(`https://dorvia.ro/api/admin/blog/${createdPostId}`, {
+    method: 'DELETE',
+    headers: { cookie: adminCookieHeader },
+  });
+  const p69DelPubRes = await adminBlogIdRoute.DELETE(p69DelPubReq, { params: { id: createdPostId } });
+  if (p69DelPubRes.status !== 400) {
+    console.error('❌ FAIL: Expected 400 Bad Request when deleting published article, got:', p69DelPubRes.status);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Published article deletion blocked with 400 Bad Request as expected');
+
+  // 9. Owner unpublishes the article -> 200 OK, status="draft"
+  console.log('Testing owner calling /unpublish...');
+  const p69UnpubReq = new Request(`https://dorvia.ro/api/admin/blog/${createdPostId}/unpublish`, {
+    method: 'POST',
+    headers: { cookie: adminCookieHeader },
+  });
+  const p69UnpubRes = await adminBlogUnpublishRoute.POST(p69UnpubReq, { params: { id: createdPostId } });
+  const p69UnpubJson = await p69UnpubRes.json();
+  if (p69UnpubRes.status !== 200 || p69UnpubJson.post?.status !== 'draft') {
+    console.error('❌ FAIL: Failed to unpublish article:', p69UnpubRes.status, p69UnpubJson);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Article moved back to "draft" via /unpublish');
+
+  // 10. Delete the article now that it is draft -> 200 OK
+  console.log('Testing DELETE on draft article...');
+  const p69DelDraftReq = new Request(`https://dorvia.ro/api/admin/blog/${createdPostId}`, {
+    method: 'DELETE',
+    headers: { cookie: adminCookieHeader },
+  });
+  const p69DelDraftRes = await adminBlogIdRoute.DELETE(p69DelDraftReq, { params: { id: createdPostId } });
+  if (p69DelDraftRes.status !== 200) {
+    console.error('❌ FAIL: Failed to delete draft article:', p69DelDraftRes.status);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Draft article deleted cleanly');
+
+  // 11. Cleanup test marketing user
+  console.log('Cleaning up Test 17 marketing user...');
+  await supabaseAdmin.from('admin_users').delete().eq('id', p69MktUserId);
+  await supabaseAdmin.auth.admin.deleteUser(p69MktUserId);
+  console.log('✅ Test 17 artifacts cleaned up successfully.\n');
+
+  console.log('=== All 17 Callback, Portal, Admin, Lifecycle, Role Enforcement, Family Network, Team Governance, Case Stages Reminders, Finance Accounting, Role Reports & Blog CMS Tests Passed Successfully! ===\n');
 }
 
 runTests().catch((err) => {

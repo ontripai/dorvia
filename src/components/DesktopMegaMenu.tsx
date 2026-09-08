@@ -378,6 +378,7 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
               {currentLang === 'fa' ? 'شناخت رومانی' : 'Discover Romania'}
             </h4>
             <ul className="space-y-2 text-[#526174] font-medium">
+              <li><Link href="/romania/blog" className="hover:text-[#2F6FED] py-1 cursor-pointer font-bold text-[#2F6FED] flex items-center gap-1.5" onClick={onClose}><span>📰</span><span>{currentLang === 'fa' ? 'بلاگ و مقالات تخصصی' : 'Blog & Strategic Articles'}</span></Link></li>
               <li><Link href="/romania/economy" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>📊 {currentLang === 'fa' ? 'اقتصاد، صنایع و درآمدها' : 'Economy, Industries & Wages'}</Link></li>
               <li><Link href="/romania/society" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>👥 {currentLang === 'fa' ? 'جامعه، زبان و زندگی اجتماعی' : 'Society & Social Etiquette'}</Link></li>
               <li><Link href="/romania/culture-and-arts" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🎨 {currentLang === 'fa' ? 'فرهنگ، هنر و تاریخ رومانی' : 'Culture, Arts & Heritage'}</Link></li>
