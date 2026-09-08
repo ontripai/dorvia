@@ -19,6 +19,7 @@ import {
   ArrowLeft,
   ChartNoAxesCombined,
   BookOpen,
+  BriefcaseBusiness,
 } from '@/components/Icons';
 
 interface TeamPageProps {
@@ -303,6 +304,14 @@ export default function AdminTeamPage({ params }: TeamPageProps) {
             >
               <BookOpen size={15} />
               <span>{isFa ? 'مدیریت بلاگ' : 'Blog'}</span>
+            </Link>
+
+            <Link
+              href="/admin/jobs"
+              className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all"
+            >
+              <BriefcaseBusiness size={15} />
+              <span>{isFa ? 'فرصت‌های شغلی' : 'Jobs'}</span>
             </Link>
 
             <Link

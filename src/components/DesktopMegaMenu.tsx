@@ -12,6 +12,7 @@ interface DesktopMegaMenuProps {
   onNavigate: (route: string) => void;
   onClose: () => void;
   onOpenEvaluationModal: () => void;
+  jobBoardEnabled?: boolean;
 }
 
 export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
@@ -19,7 +20,8 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
   currentLang,
   onNavigate,
   onClose,
-  onOpenEvaluationModal
+  onOpenEvaluationModal,
+  jobBoardEnabled = false,
 }) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const ArrowIcon = currentLang === 'fa' ? ArrowLeft : ArrowRight;
@@ -271,6 +273,18 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 <li><Link href="/work/taxes-salaries" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>💰</span> <span>{currentLang === 'fa' ? 'حقوق و مالیات' : 'Salary & Tax'}</span></Link></li>
                 <li><Link href="/work/insurance" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>🏥</span> <span>{currentLang === 'fa' ? 'بیمه (اجتماعی/درمانی)' : 'Insurance'}</span></Link></li>
                 <li><Link href="/work/digital-nomad" className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse" onClick={onClose}><span>💻</span> <span>{currentLang === 'fa' ? 'ویزای دیجیتال نومد' : 'Digital Nomad Visa'}</span></Link></li>
+                {jobBoardEnabled && (
+                  <li>
+                    <Link
+                      href="/work/job-requests"
+                      className="hover:text-[#2F6FED] py-1 cursor-pointer flex items-center space-x-1.5 rtl:space-x-reverse font-bold text-[#2F6FED]"
+                      onClick={onClose}
+                    >
+                      <span>📋</span>
+                      <span>{currentLang === 'fa' ? 'فرصت‌های شغلی (درخواست نیرو)' : 'Job Opportunities'}</span>
+                    </Link>
+                  </li>
+                )}
               </ul>
             </div>
 

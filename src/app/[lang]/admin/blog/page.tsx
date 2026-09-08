@@ -269,6 +269,14 @@ export default function AdminBlogPage({ params }: { params: { lang: Language } }
               </span>
 
               <Link
+                href="/admin/jobs"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-medium border border-slate-800 transition-all"
+              >
+                <BriefcaseBusiness size={14} />
+                <span>{isFa ? 'فرصت‌های شغلی' : 'Jobs'}</span>
+              </Link>
+
+              <Link
                 href="/admin/settings"
                 className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-medium border border-slate-800 transition-all"
               >

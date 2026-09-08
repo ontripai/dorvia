@@ -518,6 +518,18 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     inSitemap: true,
     pageType: 'content'
   },
+  'work/job-requests': {
+    canonical: '/work/job-requests',
+    aliases: [],
+    parentHub: '/work',
+    titleFa: 'فرصت‌های شغلی و استخدام',
+    titleEn: 'Job Opportunities',
+    parentTitleFa: 'کار و اشتغال',
+    parentTitleEn: 'Work & Employment',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
   'company/registration': {
     canonical: '/company/registration',
     aliases: [],
