@@ -1819,12 +1819,345 @@ async function runTests() {
   await supabaseAdmin.auth.admin.deleteUser(financeTestMarketingUserId);
   console.log('✅ Test 15 artifacts cleaned up successfully.\n');
 
-  console.log('=== All 15 Callback, Portal, Admin, Lifecycle, Role Enforcement, Family Network, Team Governance, Case Stages Reminders & Finance Accounting Tests Passed Successfully! ===\n');
+  // -------------------------------------------------------------
+  // Test 16: Role-Specific Reports & Analytics Dashboard (dre-p68)
+  // -------------------------------------------------------------
+  console.log('16. Testing Role-Specific Reports & Analytics Dashboard (dre-p68)...');
+
+  const p68OverviewRoute = await import('../src/app/api/admin/reports/overview/route');
+  const p68MyCasesRoute = await import('../src/app/api/admin/reports/my-cases/route');
+  const p68FinanceRoute = await import('../src/app/api/admin/reports/finance/route');
+  const p68MarketingRoute = await import('../src/app/api/admin/reports/marketing/route');
+  const p68ContextRoute = await import('../src/app/api/admin/reports/context/route');
+
+  const p68Today = new Date().toISOString().split('T')[0];
+  const p68ThirtyDaysAgo = new Date(Date.now() - 29 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+
+  // 1. Context API check for Owner
+  console.log('Testing GET /api/admin/reports/context with owner session...');
+  const p68CtxReq = new Request('https://dorvia.ro/api/admin/reports/context', {
+    method: 'GET',
+    headers: { cookie: adminCookieHeader },
+  });
+  const p68CtxRes = await p68ContextRoute.GET(p68CtxReq);
+  const p68CtxJson = await p68CtxRes.json();
+  if (p68CtxRes.status !== 200 || !p68CtxJson.admin || !p68CtxJson.availableTabs) {
+    console.error('❌ FAIL: Reports context route failed:', p68CtxRes.status, p68CtxJson);
+    process.exit(1);
+  }
+  const p68OwnerTabIds = p68CtxJson.availableTabs.map((t: any) => t.id);
+  if (
+    !p68OwnerTabIds.includes('overview') ||
+    !p68OwnerTabIds.includes('my-cases') ||
+    !p68OwnerTabIds.includes('finance') ||
+    !p68OwnerTabIds.includes('marketing')
+  ) {
+    console.error('❌ FAIL: Owner must have access to all 4 tabs:', p68OwnerTabIds);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Owner context returned all 4 report tabs:', p68OwnerTabIds);
+
+  // 2. Overview Report check for Owner
+  console.log('Testing GET /api/admin/reports/overview with owner session...');
+  const p68OvReq = new Request(
+    `https://dorvia.ro/api/admin/reports/overview?from=${p68ThirtyDaysAgo}&to=${p68Today}`,
+    {
+      method: 'GET',
+      headers: { cookie: adminCookieHeader },
+    }
+  );
+  const p68OvRes = await p68OverviewRoute.GET(p68OvReq);
+  const p68OvJson = await p68OvRes.json();
+  if (
+    p68OvRes.status !== 200 ||
+    typeof p68OvJson.summary?.totalLeads !== 'number' ||
+    !Array.isArray(p68OvJson.dailyTrend) ||
+    !Array.isArray(p68OvJson.statusBreakdown) ||
+    !Array.isArray(p68OvJson.staffWorkload)
+  ) {
+    console.error('❌ FAIL: Invalid response structure from overview report:', p68OvRes.status, p68OvJson);
+    process.exit(1);
+  }
+  console.log(
+    '✅ PASS: Overview report response structure verified with',
+    p68OvJson.summary.totalLeads,
+    'total leads.'
+  );
+
+  // Compare overview total leads against direct database count
+  console.log('Comparing overview numbers with direct database query...');
+  const { count: p68DbLeadsCount } = await supabaseAdmin
+    .from('leads')
+    .select('*', { count: 'exact', head: true });
+  if (p68OvJson.summary.totalLeads !== p68DbLeadsCount) {
+    console.error('❌ FAIL: Overview total leads mismatch with DB count:', {
+      server: p68OvJson.summary.totalLeads,
+      db: p68DbLeadsCount,
+    });
+    process.exit(1);
+  }
+  console.log(
+    '✅ PASS: Overview numbers match direct DB count exactly (' + p68DbLeadsCount + ' leads)!'
+  );
+
+  // 3. My Cases Report check for Owner
+  console.log('Testing GET /api/admin/reports/my-cases with owner session...');
+  const p68McReq = new Request(
+    `https://dorvia.ro/api/admin/reports/my-cases?from=${p68ThirtyDaysAgo}&to=${p68Today}`,
+    {
+      method: 'GET',
+      headers: { cookie: adminCookieHeader },
+    }
+  );
+  const p68McRes = await p68MyCasesRoute.GET(p68McReq);
+  const p68McJson = await p68McRes.json();
+  if (
+    p68McRes.status !== 200 ||
+    typeof p68McJson.summary?.totalAssignedCases !== 'number' ||
+    !Array.isArray(p68McJson.assignedCases) ||
+    !Array.isArray(p68McJson.pendingStages)
+  ) {
+    console.error('❌ FAIL: Invalid response from my-cases report:', p68McRes.status, p68McJson);
+    process.exit(1);
+  }
+  console.log('✅ PASS: My Cases report verified for logged in admin!');
+
+  // 4. Finance Report check for Owner
+  console.log('Testing GET /api/admin/reports/finance with owner session...');
+  const p68FinReq = new Request(
+    `https://dorvia.ro/api/admin/reports/finance?from=${p68ThirtyDaysAgo}&to=${p68Today}`,
+    {
+      method: 'GET',
+      headers: { cookie: adminCookieHeader },
+    }
+  );
+  const p68FinRes = await p68FinanceRoute.GET(p68FinReq);
+  const p68FinJson = await p68FinRes.json();
+  if (
+    p68FinRes.status !== 200 ||
+    typeof p68FinJson.summary?.totalRevenue !== 'number' ||
+    typeof p68FinJson.summary?.totalExpenses !== 'number' ||
+    typeof p68FinJson.summary?.netProfit !== 'number' ||
+    !Array.isArray(p68FinJson.timeSeries) ||
+    !Array.isArray(p68FinJson.outstandingInvoices)
+  ) {
+    console.error('❌ FAIL: Invalid response from finance report:', p68FinRes.status, p68FinJson);
+    process.exit(1);
+  }
+  console.log(
+    '✅ PASS: Finance report verified. Revenue:',
+    p68FinJson.summary.totalRevenue,
+    'Expenses:',
+    p68FinJson.summary.totalExpenses,
+    'Net Profit:',
+    p68FinJson.summary.netProfit
+  );
+
+  // 5. Marketing Report check for Owner
+  console.log('Testing GET /api/admin/reports/marketing with owner session...');
+  const p68MktReq = new Request(
+    `https://dorvia.ro/api/admin/reports/marketing?from=${p68ThirtyDaysAgo}&to=${p68Today}`,
+    {
+      method: 'GET',
+      headers: { cookie: adminCookieHeader },
+    }
+  );
+  const p68MktRes = await p68MarketingRoute.GET(p68MktReq);
+  const p68MktJson = await p68MktRes.json();
+  if (
+    p68MktRes.status !== 200 ||
+    typeof p68MktJson.summary?.totalLeadsInRange !== 'number' ||
+    typeof p68MktJson.summary?.conversionRatePercent !== 'number' ||
+    !Array.isArray(p68MktJson.sourcesBreakdown) ||
+    !Array.isArray(p68MktJson.dailyTrendBySource)
+  ) {
+    console.error('❌ FAIL: Invalid response from marketing report:', p68MktRes.status, p68MktJson);
+    process.exit(1);
+  }
+  console.log(
+    '✅ PASS: Marketing report verified. Conversion rate:',
+    p68MktJson.summary.conversionRatePercent + '%'
+  );
+
+  // 6. CSV Format & UTF-8 BOM verification across all 4 endpoints
+  console.log('Testing CSV Export (?format=csv) with UTF-8 BOM on all 4 endpoints...');
+  const p68Endpoints = [
+    { name: 'overview', route: p68OverviewRoute },
+    { name: 'my-cases', route: p68MyCasesRoute },
+    { name: 'finance', route: p68FinanceRoute },
+    { name: 'marketing', route: p68MarketingRoute },
+  ];
+
+  for (const ep of p68Endpoints) {
+    const csvReq = new Request(
+      `https://dorvia.ro/api/admin/reports/${ep.name}?format=csv&from=${p68ThirtyDaysAgo}&to=${p68Today}`,
+      {
+        method: 'GET',
+        headers: { cookie: adminCookieHeader },
+      }
+    );
+    const csvRes = await ep.route.GET(csvReq);
+    if (csvRes.status !== 200) {
+      console.error(`❌ FAIL: CSV export for ${ep.name} returned status ${csvRes.status}`);
+      process.exit(1);
+    }
+    const contentType = csvRes.headers.get('content-type') || '';
+    const contentDisposition = csvRes.headers.get('content-disposition') || '';
+    if (!contentType.includes('text/csv')) {
+      console.error(`❌ FAIL: CSV export for ${ep.name} missing text/csv header:`, contentType);
+      process.exit(1);
+    }
+    if (!contentDisposition.includes('attachment') || !contentDisposition.includes('.csv')) {
+      console.error(
+        `❌ FAIL: CSV export for ${ep.name} missing valid disposition header:`,
+        contentDisposition
+      );
+      process.exit(1);
+    }
+
+    const csvBuf = Buffer.from(await csvRes.arrayBuffer());
+    // Validate UTF-8 BOM presence (0xEF, 0xBB, 0xBF)
+    const hasBom = csvBuf[0] === 0xef && csvBuf[1] === 0xbb && csvBuf[2] === 0xbf;
+    if (!hasBom) {
+      console.error(`❌ FAIL: CSV export for ${ep.name} missing UTF-8 BOM (0xEF, 0xBB, 0xBF) bytes at start of file!`);
+      process.exit(1);
+    }
+    console.log(
+      `✅ PASS: CSV export for /api/admin/reports/${ep.name} verified with UTF-8 BOM (0xEF, 0xBB, 0xBF) and valid attachment header.`
+    );
+  }
+
+  // 7. Role Isolation & 403 Forbidden Security Verification
+  console.log('Testing role isolation and 403 security checks...');
+
+  // Setup a test marketing user
+  const { data: p68MarketingRole } = await supabaseAdmin
+    .from('roles')
+    .select('id, key')
+    .eq('key', 'marketing')
+    .single();
+
+  const p68MktEmail = `p68.marketing.test.${Date.now()}@dorvia.ro`;
+  const p68MktAuthRes = await supabaseAdmin.auth.admin.createUser({
+    email: p68MktEmail,
+    email_confirm: true,
+  });
+  const p68MktUserId = p68MktAuthRes.data.user!.id;
+  await supabaseAdmin.from('admin_users').insert({
+    id: p68MktUserId,
+    full_name: 'کارشناس تست بازاریابی P68',
+    role_id: p68MarketingRole!.id,
+    is_active: true,
+  });
+
+  const p68MktLinkRes = await supabaseAdmin.auth.admin.generateLink({
+    type: 'magiclink',
+    email: p68MktEmail,
+    options: { redirectTo: 'https://dorvia.ro/fa/admin/callback' },
+  });
+  const p68MktVerifyRes = await fetch(p68MktLinkRes.data!.properties!.action_link!, {
+    method: 'GET',
+    redirect: 'manual',
+  });
+  const p68MktParams = new URLSearchParams(
+    (p68MktVerifyRes.headers.get('location') || '').split('#')[1] || ''
+  );
+  const p68MktSessionRes = await sessionHandler.POST(
+    new Request('https://dorvia.ro/api/auth/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_token: p68MktParams.get('access_token'),
+        refresh_token: p68MktParams.get('refresh_token'),
+        flow: 'admin',
+        lang: 'fa',
+      }),
+    })
+  );
+  const p68MktCookies = p68MktSessionRes.cookies?.getAll ? p68MktSessionRes.cookies.getAll() : [];
+  const p68MktCookieHeader = p68MktCookies.map((c: any) => `${c.name}=${c.value}`).join('; ');
+
+  // 7a. Marketing user tries to access /api/admin/reports/finance -> MUST be 403
+  console.log('Testing marketing user calling /api/admin/reports/finance (must be 403)...');
+  const p68MktFinReq = new Request(`https://dorvia.ro/api/admin/reports/finance`, {
+    method: 'GET',
+    headers: { cookie: p68MktCookieHeader },
+  });
+  const p68MktFinRes = await p68FinanceRoute.GET(p68MktFinReq);
+  if (p68MktFinRes.status !== 403) {
+    console.error(
+      '❌ FAIL: Expected 403 Forbidden for marketing user on finance report, got:',
+      p68MktFinRes.status
+    );
+    process.exit(1);
+  }
+  console.log('✅ PASS: Marketing user received 403 Forbidden on /api/admin/reports/finance!');
+
+  // 7b. Marketing user tries to access /api/admin/reports/overview -> MUST be 403
+  console.log('Testing marketing user calling /api/admin/reports/overview (must be 403)...');
+  const p68MktOvReq = new Request(`https://dorvia.ro/api/admin/reports/overview`, {
+    method: 'GET',
+    headers: { cookie: p68MktCookieHeader },
+  });
+  const p68MktOvRes = await p68OverviewRoute.GET(p68MktOvReq);
+  if (p68MktOvRes.status !== 403) {
+    console.error(
+      '❌ FAIL: Expected 403 Forbidden for marketing user on overview report, got:',
+      p68MktOvRes.status
+    );
+    process.exit(1);
+  }
+  console.log('✅ PASS: Marketing user received 403 Forbidden on /api/admin/reports/overview!');
+
+  // 7c. Marketing user calls /api/admin/reports/marketing -> MUST be 200 OK
+  console.log('Testing marketing user calling /api/admin/reports/marketing (must be 200 OK)...');
+  const p68MktMktReq = new Request(`https://dorvia.ro/api/admin/reports/marketing`, {
+    method: 'GET',
+    headers: { cookie: p68MktCookieHeader },
+  });
+  const p68MktMktRes = await p68MarketingRoute.GET(p68MktMktReq);
+  if (p68MktMktRes.status !== 200) {
+    console.error(
+      '❌ FAIL: Expected 200 OK for marketing user on marketing report, got:',
+      p68MktMktRes.status
+    );
+    process.exit(1);
+  }
+  console.log('✅ PASS: Marketing user successfully accessed /api/admin/reports/marketing!');
+
+  // 7d. Marketing user calls /api/admin/reports/context -> Should only see ['my-cases', 'marketing']
+  console.log('Testing marketing user calling /api/admin/reports/context...');
+  const p68MktCtxReq = new Request(`https://dorvia.ro/api/admin/reports/context`, {
+    method: 'GET',
+    headers: { cookie: p68MktCookieHeader },
+  });
+  const p68MktCtxRes = await p68ContextRoute.GET(p68MktCtxReq);
+  const p68MktCtxJson = await p68MktCtxRes.json();
+  const p68MktTabIds = (p68MktCtxJson.availableTabs || []).map((t: any) => t.id);
+  if (
+    p68MktTabIds.includes('overview') ||
+    p68MktTabIds.includes('finance') ||
+    !p68MktTabIds.includes('marketing') ||
+    !p68MktTabIds.includes('my-cases')
+  ) {
+    console.error('❌ FAIL: Marketing user context tabs mismatch:', p68MktTabIds);
+    process.exit(1);
+  }
+  console.log('✅ PASS: Marketing user context tabs strictly restricted to:', p68MktTabIds);
+
+  // 8. Cleanup Test 16 data
+  console.log('Cleaning up Test 16 data...');
+  await supabaseAdmin.from('admin_users').delete().eq('id', p68MktUserId);
+  await supabaseAdmin.auth.admin.deleteUser(p68MktUserId);
+  console.log('✅ Test 16 artifacts cleaned up successfully.\n');
+
+  console.log('=== All 16 Callback, Portal, Admin, Lifecycle, Role Enforcement, Family Network, Team Governance, Case Stages Reminders, Finance Accounting & Role Reports Tests Passed Successfully! ===\n');
 }
 
 runTests().catch((err) => {
   console.error('Test suite uncaught error:', err);
   process.exit(1);
 });
+
 
 
