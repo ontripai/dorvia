@@ -79,8 +79,8 @@ export async function GET(request: Request) {
 
     let emailsSent = 0;
     let telegramsSent = 0;
+    let recipientsCount = 0;
     const errors: string[] = [];
-    const recipientGroups = new Map<string, { staff: AssignedStaffInfo; items: StageItem[] }>();
 
     const resend = getResendClient();
     const emailConfig = getResendConfig();
@@ -239,6 +239,8 @@ export async function GET(request: Request) {
       }
     }
 
+    recipientsCount = recipientGroups.size;
+
     // 7. Dispatch grouped notifications
     for (const group of recipientGroups.values()) {
       const { staff, items } = group;
@@ -329,9 +331,10 @@ export async function GET(request: Request) {
           if (isMatch) {
             // Deduplication: only send once per year
             if (lead.last_birthday_greeted_year !== currentYear) {
+              let sentOk = false;
               if (resend && emailConfig.isConfigured) {
                 try {
-                  await resend.emails.send({
+                  const res = await resend.emails.send({
                     from: emailConfig.fromEmail,
                     to: lead.email,
                     subject: '🎉 زادروزتان فرخنده باد — گروه مهاجرتی دورویا (DORVIA)',
@@ -340,17 +343,24 @@ export async function GET(request: Request) {
                       appBaseUrl,
                     }),
                   });
+                  if (!res.error) {
+                    sentOk = true;
+                  } else {
+                    errors.push(`Client birthday email error for lead ${lead.id}: ${res.error.message}`);
+                  }
                 } catch (sendErr: any) {
                   errors.push(`Client birthday email error for lead ${lead.id}: ${sendErr?.message}`);
                 }
               }
 
-              await supabaseAdmin
-                .from('leads')
-                .update({ last_birthday_greeted_year: currentYear })
-                .eq('id', lead.id);
+              if (sentOk) {
+                await supabaseAdmin
+                  .from('leads')
+                  .update({ last_birthday_greeted_year: currentYear })
+                  .eq('id', lead.id);
 
-              clientBirthdaysGreeted++;
+                clientBirthdaysGreeted++;
+              }
             }
           }
         }
@@ -384,9 +394,10 @@ export async function GET(request: Request) {
           if (isMatch) {
             // Deduplication: only send once per year
             if (lead.last_anniversary_greeted_year !== currentYear) {
+              let sentOk = false;
               if (resend && emailConfig.isConfigured) {
                 try {
-                  await resend.emails.send({
+                  const res = await resend.emails.send({
                     from: emailConfig.fromEmail,
                     to: lead.email,
                     subject: '💐 سالگرد آغاز همراهی و همکاری‌مان گرامی باد — گروه دورویا (DORVIA)',
@@ -395,17 +406,24 @@ export async function GET(request: Request) {
                       appBaseUrl,
                     }),
                   });
+                  if (!res.error) {
+                    sentOk = true;
+                  } else {
+                    errors.push(`Client anniversary email error for lead ${lead.id}: ${res.error.message}`);
+                  }
                 } catch (sendErr: any) {
                   errors.push(`Client anniversary email error for lead ${lead.id}: ${sendErr?.message}`);
                 }
               }
 
-              await supabaseAdmin
-                .from('leads')
-                .update({ last_anniversary_greeted_year: currentYear })
-                .eq('id', lead.id);
+              if (sentOk) {
+                await supabaseAdmin
+                  .from('leads')
+                  .update({ last_anniversary_greeted_year: currentYear })
+                  .eq('id', lead.id);
 
-              clientAnniversariesGreeted++;
+                clientAnniversariesGreeted++;
+              }
             }
           }
         }
@@ -437,12 +455,15 @@ export async function GET(request: Request) {
 
           if (isMatch) {
             if (staff.last_birthday_greeted_year !== currentYear) {
+              let sentOk = false;
               if (teamTelegramChatId) {
                 try {
                   const staffName = staff.full_name || 'همکار گرامی';
                   const tgText = `🎉🎂 <b>امروز تولد ${escapeHtml(staffName)} عزیز است!</b>\n\nهمکاران گرامی، زادروز ${escapeHtml(staffName)} را تبریک می‌گوییم و برای ایشان سلامتی، نشاط و موفقیت‌های روزافزون در خانواده دورویا آرزومندیم. ✨💐🎈`;
                   const tgRes = await sendTelegramMessage(teamTelegramChatId, tgText, 'HTML');
-                  if (!tgRes.success && !tgRes.skipped && tgRes.error) {
+                  if (tgRes.success) {
+                    sentOk = true;
+                  } else if (!tgRes.skipped && tgRes.error) {
                     errors.push(`Team telegram birthday error for ${staff.id}: ${tgRes.error}`);
                   }
                 } catch (tgErr: any) {
@@ -450,12 +471,14 @@ export async function GET(request: Request) {
                 }
               }
 
-              await supabaseAdmin
-                .from('admin_users')
-                .update({ last_birthday_greeted_year: currentYear })
-                .eq('id', staff.id);
+              if (sentOk) {
+                await supabaseAdmin
+                  .from('admin_users')
+                  .update({ last_birthday_greeted_year: currentYear })
+                  .eq('id', staff.id);
 
-              staffBirthdaysGreeted++;
+                staffBirthdaysGreeted++;
+              }
             }
           }
         }
@@ -469,7 +492,7 @@ export async function GET(request: Request) {
       success: true,
       processedAt: new Date().toISOString(),
       stagesCount: stages.length,
-      recipientsCount: recipientGroups.size,
+      recipientsCount,
       emailsSent,
       telegramsSent,
       clientBirthdaysGreeted,
