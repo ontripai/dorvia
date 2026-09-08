@@ -23,10 +23,12 @@ export const AppContext = createContext<{
   currentLang: Language;
   onNavigate: (route: string) => void;
   onOpenEvaluationModal: () => void;
+  setAlternateLanguageUrls?: (urls: { fa?: string; en?: string } | null) => void;
 }>({
   currentLang: 'fa',
   onNavigate: () => {},
   onOpenEvaluationModal: () => {},
+  setAlternateLanguageUrls: () => {},
 });
 
 export const useAppContext = () => useContext(AppContext);
@@ -36,17 +38,23 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
   const [isEvaluationModalOpen, setIsEvaluationModalOpen] = useState(false);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [searchDialogOpen, setSearchDialogOpen] = useState(false);
+  const [alternateLanguageUrls, setAlternateLanguageUrls] = useState<{ fa?: string; en?: string } | null>(null);
 
   const pathname = usePathname() || '/';
   const router = useRouter();
+
+  // Reset alternate URLs on navigation
+  useEffect(() => {
+    setAlternateLanguageUrls(null);
+  }, [pathname]);
 
   // Derive activeRoute from pathname to keep compatibility with Header/Footer props
   const barePath = stripLocalePrefix(pathname);
   let activeRoute = barePath === '/' ? 'home' : barePath.substring(1);
 
   useEffect(() => {
-    // Only synchronize currentLang if the Next.js pathname explicitly contains a locale prefix
-    const explicitLocale = pathname.split('/')[1];
+    const segments = pathname.split('/').filter(Boolean);
+    const explicitLocale = segments[0];
 
     if (explicitLocale === 'fa' || explicitLocale === 'en') {
       if (currentLang !== explicitLocale) {
@@ -66,6 +74,10 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
   const handleLanguageChange = (newLang: Language) => {
     // Avoid transient state flashes before hard navigation
     if (typeof window !== 'undefined') {
+      if (alternateLanguageUrls && alternateLanguageUrls[newLang]) {
+        window.location.assign(alternateLanguageUrls[newLang]!);
+        return;
+      }
       const currentUrl = window.location.pathname;
       const bare = stripLocalePrefix(currentUrl);
       const newPath = bare === '/' ? `/${newLang}` : `/${newLang}${bare}`;
@@ -85,7 +97,8 @@ export function AppLayout({ children, initialLang }: { children: React.ReactNode
   const contextValue = {
     currentLang,
     onNavigate: handleNavigate,
-    onOpenEvaluationModal: () => setIsEvaluationModalOpen(true)
+    onOpenEvaluationModal: () => setIsEvaluationModalOpen(true),
+    setAlternateLanguageUrls,
   };
 
   return (

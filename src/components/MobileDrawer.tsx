@@ -189,6 +189,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
       sections: [
         {
           items: [
+            { id: 'romania/blog', label: isFa ? 'بلاگ و مقالات تخصصی' : 'Blog & Strategic Articles' },
             { id: 'romania/cities', label: t.nav.cities },
             { id: 'romania/economy', label: isFa ? 'اقتصاد و درآمدها' : 'Economy & Wages' },
             { id: 'romania/society', label: isFa ? 'جامعه و زندگی اجتماعی' : 'Society & Etiquette' },

@@ -16,6 +16,7 @@ import {
   CheckCircle,
   Clock,
   BriefcaseBusiness,
+  BookOpen,
 } from '@/components/Icons';
 import {
   ResponsiveContainer,
@@ -369,6 +370,16 @@ export default function AdminReportsPage({ params }: ReportsPageProps) {
               >
                 <Users size={15} />
                 <span>{isFa ? 'تیم' : 'Team'}</span>
+              </Link>
+            )}
+
+            {(adminUser?.roleKey === 'owner' || adminUser?.roleKey === 'manager' || adminUser?.roleKey === 'marketing' || adminUser?.permissions?.includes('blog.edit')) && (
+              <Link
+                href="/admin/blog"
+                className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all"
+              >
+                <BookOpen size={15} />
+                <span>{isFa ? 'مدیریت بلاگ' : 'Blog'}</span>
               </Link>
             )}
 

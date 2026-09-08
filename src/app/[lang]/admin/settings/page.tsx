@@ -16,6 +16,7 @@ import {
   ArrowLeft,
   LockKeyhole,
   ChartNoAxesCombined,
+  BookOpen,
 } from '@/components/Icons';
 
 interface SettingsPageProps {
@@ -152,6 +153,14 @@ export default function AdminSettingsPage({ params }: SettingsPageProps) {
             >
               <ChartNoAxesCombined size={15} />
               <span>{isFa ? 'گزارش‌ها و آمار' : 'Reports'}</span>
+            </Link>
+
+            <Link
+              href="/admin/blog"
+              className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all"
+            >
+              <BookOpen size={15} />
+              <span>{isFa ? 'مدیریت بلاگ' : 'Blog'}</span>
             </Link>
 
             <button

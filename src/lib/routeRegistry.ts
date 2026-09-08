@@ -949,4 +949,16 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     inSitemap: true,
     pageType: 'content'
   },
+  'romania/blog': {
+    canonical: '/romania/blog',
+    aliases: [],
+    parentHub: '/romania',
+    titleFa: 'بلاگ و مقالات تخصصی رومانی',
+    titleEn: 'Romania Blog & Articles',
+    parentTitleFa: 'شناخت رومانی',
+    parentTitleEn: 'Romania Overview',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'hub'
+  },
 };
