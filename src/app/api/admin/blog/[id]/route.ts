@@ -3,6 +3,7 @@ import { getAdminContext, hasPermission } from '@/lib/adminAuth';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
 import { deleteBlogImageFromStorage } from '@/lib/blogHelper';
 import { slugify } from '@/lib/slugHelper';
+import { translateBlogContentToEnglish, resolveUniqueEnSlug } from '@/lib/aiTranslate';
 
 export const dynamic = 'force-dynamic';
 
@@ -195,6 +196,102 @@ export async function PATCH(request: Request, { params }: RouteParams) {
         await deleteBlogImageFromStorage(currentPost.cover_image_url);
       }
       updates.cover_image_url = newCoverUrl;
+    }
+
+    // Automated English Translation for empty fields
+    const isTitleEnEmpty =
+      (updates.title_en === undefined || updates.title_en === null || !String(updates.title_en).trim()) &&
+      (!currentPost.title_en || !currentPost.title_en.trim());
+
+    const isContentEnEmpty =
+      (updates.content_en === undefined || updates.content_en === null || !String(updates.content_en).trim()) &&
+      (!currentPost.content_en || !currentPost.content_en.trim());
+
+    const isExcerptEnEmpty =
+      (updates.excerpt_en === undefined || updates.excerpt_en === null || !String(updates.excerpt_en).trim()) &&
+      (!currentPost.excerpt_en || !currentPost.excerpt_en.trim());
+
+    const isMetaTitleEnEmpty =
+      (updates.meta_title_en === undefined || updates.meta_title_en === null || !String(updates.meta_title_en).trim()) &&
+      (!currentPost.meta_title_en || !currentPost.meta_title_en.trim());
+
+    const isMetaDescEnEmpty =
+      (updates.meta_description_en === undefined || updates.meta_description_en === null || !String(updates.meta_description_en).trim()) &&
+      (!currentPost.meta_description_en || !currentPost.meta_description_en.trim());
+
+    const isSlugEnEmpty =
+      (updates.slug_en === undefined || updates.slug_en === null || !String(updates.slug_en).trim()) &&
+      (!currentPost.slug_en || !currentPost.slug_en.trim());
+
+    const effectiveTitleFa = (updates.title_fa !== undefined ? updates.title_fa : currentPost.title_fa) || '';
+    const effectiveContentFa = (updates.content_fa !== undefined ? updates.content_fa : currentPost.content_fa) || '';
+    const effectiveExcerptFa = (updates.excerpt_fa !== undefined ? updates.excerpt_fa : currentPost.excerpt_fa) || '';
+    const effectiveMetaTitleFa = (updates.meta_title_fa !== undefined ? updates.meta_title_fa : currentPost.meta_title_fa) || '';
+    const effectiveMetaDescFa = (updates.meta_description_fa !== undefined ? updates.meta_description_fa : currentPost.meta_description_fa) || '';
+
+    const needTitle = isTitleEnEmpty && Boolean(effectiveTitleFa.trim());
+    const needContent = isContentEnEmpty && Boolean(effectiveContentFa.trim());
+    const needExcerpt = isExcerptEnEmpty && Boolean(effectiveExcerptFa.trim());
+    const needMetaTitle = isMetaTitleEnEmpty && Boolean(effectiveMetaTitleFa.trim());
+    const needMetaDesc = isMetaDescEnEmpty && Boolean(effectiveMetaDescFa.trim());
+
+    if (needTitle || needContent || needExcerpt || needMetaTitle || needMetaDesc) {
+      try {
+        const translated = await translateBlogContentToEnglish(
+          {
+            title_fa: effectiveTitleFa,
+            content_fa: effectiveContentFa,
+            excerpt_fa: effectiveExcerptFa,
+            meta_title_fa: effectiveMetaTitleFa,
+            meta_description_fa: effectiveMetaDescFa,
+          },
+          {
+            title: needTitle,
+            content: needContent,
+            excerpt: needExcerpt,
+            meta_title: needMetaTitle,
+            meta_description: needMetaDesc,
+          }
+        );
+
+        if (translated) {
+          if (needTitle && translated.title_en) {
+            updates.title_en = translated.title_en;
+          }
+          if (needContent && translated.content_en) {
+            updates.content_en = translated.content_en;
+          }
+          if (needExcerpt && translated.excerpt_en) {
+            updates.excerpt_en = translated.excerpt_en;
+          }
+          if (needMetaTitle && translated.meta_title_en) {
+            updates.meta_title_en = translated.meta_title_en;
+          }
+          if (needMetaDesc && translated.meta_description_en) {
+            updates.meta_description_en = translated.meta_description_en;
+          }
+          if (isSlugEnEmpty && (translated.slug_en || updates.title_en || currentPost.title_en)) {
+            updates.slug_en = await resolveUniqueEnSlug(
+              supabaseAdmin,
+              translated.slug_en || updates.title_en || currentPost.title_en || '',
+              params.id
+            );
+          }
+        }
+      } catch (aiErr: any) {
+        console.error(
+          `[PATCH /api/admin/blog/${params.id}] Non-fatal error during AI translation:`,
+          aiErr?.message || aiErr
+        );
+      }
+    }
+
+    if (isSlugEnEmpty && (updates.title_en || currentPost.title_en) && !updates.slug_en) {
+      updates.slug_en = await resolveUniqueEnSlug(
+        supabaseAdmin,
+        updates.title_en || currentPost.title_en || '',
+        params.id
+      );
     }
 
     if (Object.keys(updates).length === 0) {

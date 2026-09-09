@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { getAdminContext, hasPermission } from '@/lib/adminAuth';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
 import { slugify } from '@/lib/slugHelper';
+import { translateBlogContentToEnglish, resolveUniqueEnSlug } from '@/lib/aiTranslate';
 
 export const dynamic = 'force-dynamic';
 
@@ -158,6 +159,12 @@ export async function POST(request: Request) {
     }
 
     let slugEn: string | null = null;
+    let titleEn = typeof body.title_en === 'string' && body.title_en.trim() ? body.title_en.trim() : null;
+    let excerptEn = typeof body.excerpt_en === 'string' && body.excerpt_en.trim() ? body.excerpt_en.trim() : null;
+    let contentEn = typeof body.content_en === 'string' && body.content_en.trim() ? body.content_en : null;
+    let metaTitleEn = typeof body.meta_title_en === 'string' && body.meta_title_en.trim() ? body.meta_title_en.trim() : null;
+    let metaDescEn = typeof body.meta_description_en === 'string' && body.meta_description_en.trim() ? body.meta_description_en.trim() : null;
+
     if (typeof body.slug_en === 'string' && body.slug_en.trim()) {
       slugEn = slugify(body.slug_en);
       const { data: existingEnSlug } = await supabaseAdmin
@@ -174,22 +181,78 @@ export async function POST(request: Request) {
       }
     }
 
+    // Determine empty English fields that have Persian counterparts for auto-translation
+    const needTitle = !titleEn && Boolean(titleFa);
+    const needContent = !contentEn && Boolean(body.content_fa && typeof body.content_fa === 'string' && body.content_fa.trim());
+    const needExcerpt = !excerptEn && Boolean(body.excerpt_fa && typeof body.excerpt_fa === 'string' && body.excerpt_fa.trim());
+    const needMetaTitle = !metaTitleEn && Boolean(body.meta_title_fa && typeof body.meta_title_fa === 'string' && body.meta_title_fa.trim());
+    const needMetaDesc = !metaDescEn && Boolean(body.meta_description_fa && typeof body.meta_description_fa === 'string' && body.meta_description_fa.trim());
+
+    if (needTitle || needContent || needExcerpt || needMetaTitle || needMetaDesc) {
+      try {
+        const translated = await translateBlogContentToEnglish(
+          {
+            title_fa: titleFa,
+            content_fa: typeof body.content_fa === 'string' ? body.content_fa : null,
+            excerpt_fa: typeof body.excerpt_fa === 'string' ? body.excerpt_fa : null,
+            meta_title_fa: typeof body.meta_title_fa === 'string' ? body.meta_title_fa : null,
+            meta_description_fa: typeof body.meta_description_fa === 'string' ? body.meta_description_fa : null,
+          },
+          {
+            title: needTitle,
+            content: needContent,
+            excerpt: needExcerpt,
+            meta_title: needMetaTitle,
+            meta_description: needMetaDesc,
+          }
+        );
+
+        if (translated) {
+          if (needTitle && translated.title_en) {
+            titleEn = translated.title_en;
+          }
+          if (needContent && translated.content_en) {
+            contentEn = translated.content_en;
+          }
+          if (needExcerpt && translated.excerpt_en) {
+            excerptEn = translated.excerpt_en;
+          }
+          if (needMetaTitle && translated.meta_title_en) {
+            metaTitleEn = translated.meta_title_en;
+          }
+          if (needMetaDesc && translated.meta_description_en) {
+            metaDescEn = translated.meta_description_en;
+          }
+          if (!slugEn && (translated.slug_en || titleEn)) {
+            slugEn = await resolveUniqueEnSlug(supabaseAdmin, translated.slug_en || titleEn || '');
+          }
+        }
+      } catch (aiErr: any) {
+        console.error('[POST /api/admin/blog] Non-fatal error during AI translation:', aiErr?.message || aiErr);
+      }
+    }
+
+    // If title_en exists (either manually provided or translated) and slug_en is still empty, auto-generate unique slug
+    if (!slugEn && titleEn) {
+      slugEn = await resolveUniqueEnSlug(supabaseAdmin, titleEn);
+    }
+
     const newPostData = {
       category_id: categoryId,
       status: 'draft', // Forced to draft on create
       title_fa: titleFa,
-      title_en: typeof body.title_en === 'string' && body.title_en.trim() ? body.title_en.trim() : null,
+      title_en: titleEn,
       slug_fa: slugFa,
       slug_en: slugEn,
       excerpt_fa: typeof body.excerpt_fa === 'string' ? body.excerpt_fa.trim() : null,
-      excerpt_en: typeof body.excerpt_en === 'string' ? body.excerpt_en.trim() : null,
+      excerpt_en: excerptEn,
       content_fa: typeof body.content_fa === 'string' ? body.content_fa : '',
-      content_en: typeof body.content_en === 'string' ? body.content_en : null,
+      content_en: contentEn,
       cover_image_url: typeof body.cover_image_url === 'string' ? body.cover_image_url.trim() : null,
       meta_title_fa: typeof body.meta_title_fa === 'string' ? body.meta_title_fa.trim() : null,
-      meta_title_en: typeof body.meta_title_en === 'string' ? body.meta_title_en.trim() : null,
+      meta_title_en: metaTitleEn,
       meta_description_fa: typeof body.meta_description_fa === 'string' ? body.meta_description_fa.trim() : null,
-      meta_description_en: typeof body.meta_description_en === 'string' ? body.meta_description_en.trim() : null,
+      meta_description_en: metaDescEn,
       tags: Array.isArray(body.tags) ? body.tags.map((t: any) => String(t).trim()).filter(Boolean) : [],
       author_admin_id: admin.adminUserId,
     };

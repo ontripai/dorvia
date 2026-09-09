@@ -268,6 +268,19 @@ export default function EditBlogPostPage({ params }: { params: { lang: Language;
         throw new Error(data.error || 'Failed to update article');
       }
 
+      // If server auto-translated empty English fields, update state & reveal English section
+      if (data.post) {
+        if (!titleEn && data.post.title_en) setTitleEn(data.post.title_en);
+        if (!slugEn && data.post.slug_en) setSlugEn(data.post.slug_en);
+        if (!excerptEn && data.post.excerpt_en) setExcerptEn(data.post.excerpt_en);
+        if (!contentEn && data.post.content_en) setContentEn(data.post.content_en);
+        if (!metaTitleEn && data.post.meta_title_en) setMetaTitleEn(data.post.meta_title_en);
+        if (!metaDescEn && data.post.meta_description_en) setMetaDescEn(data.post.meta_description_en);
+        if (data.post.title_en || data.post.content_en) {
+          setShowEnSection(true);
+        }
+      }
+
       setSuccessMessage(isFa ? 'تغییرات مقاله با موفقیت ذخیره شد.' : 'Article updated successfully.');
       setTimeout(() => setSuccessMessage(null), 4000);
     } catch (err: any) {
