@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getAdminContext, hasPermission } from '@/lib/adminAuth';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
-import { slugifyJob } from '@/lib/jobBoardHelper';
+import { slugifyJob } from '@/lib/slugHelper';
 
 export const dynamic = 'force-dynamic';
 
