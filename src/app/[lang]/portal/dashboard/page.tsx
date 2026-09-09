@@ -488,10 +488,15 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
 
   // 4. Sign Out Handler
   const handleSignOut = async () => {
+    try {
+      await fetch('/api/auth/signout', { method: 'POST' });
+    } catch {}
     if (supabase) {
-      await supabase.auth.signOut();
+      try {
+        await supabase.auth.signOut();
+      } catch {}
     }
-    router.replace(`/${currentLang}/portal/login`);
+    window.location.replace(`/${currentLang}/portal/login`);
   };
 
   const getPathwayTitle = (goal: string | null) => {
