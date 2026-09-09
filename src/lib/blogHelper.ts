@@ -1,7 +1,6 @@
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
 
-import { slugify, extractBlogImagePath } from './slugHelper';
-export { slugify, extractBlogImagePath };
+import { extractBlogImagePath } from './slugHelper';
 
 /**
  * Deletes a cover image from the 'blog-images' bucket to prevent orphan files.
