@@ -9,7 +9,7 @@
 // instances across pages) instantly gets the smarter multi-step assessment
 // instead of the old 3-step contact form, with zero per-page rewiring.
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Language } from '../types';
 import { hasVerifiedLegalEntity } from '../lib/legalConfig';
 import { LocalizedLink as Link } from './LocalizedLink';
@@ -18,7 +18,15 @@ import {
 } from './Icons';
 import { getVisibleQuestions } from '../lib/assessment/questions';
 import { buildAssessmentResult } from '../lib/assessment/scoring';
-import { ROUTE_META, matchMeta, whyThisPath, needsReview, whatsappLink } from '../lib/assessment/recommendations';
+import {
+  ROUTE_META,
+  matchMeta,
+  whyThisPath,
+  needsReview,
+  whatsappLink,
+  ROUTE_SERVICES,
+  getLongTermRoadmap,
+} from '../lib/assessment/recommendations';
 import { AssessmentAnswers } from '../lib/assessment/types';
 
 interface PathFinderAssessmentProps {
@@ -30,6 +38,8 @@ interface PathFinderAssessmentProps {
 type Phase = 'intro' | 'questions' | 'result';
 
 const t = (lang: Language, fa: string, en: string) => (lang === 'fa' ? fa : en);
+
+const DRAFT_STORAGE_KEY = 'dorvia_pathfinder_draft';
 
 export const PathFinderAssessment: React.FC<PathFinderAssessmentProps> = ({ currentLang, isModal = false, onSuccess }) => {
   const lang = currentLang;
@@ -45,9 +55,59 @@ export const PathFinderAssessment: React.FC<PathFinderAssessmentProps> = ({ curr
   const [leadEmail, setLeadEmail] = useState('');
   const [leadTelegram, setLeadTelegram] = useState('');
   const [leadConsent, setLeadConsent] = useState(false);
+  const [marketingConsent, setMarketingConsent] = useState(false);
+  const [hasSavedDraft, setHasSavedDraft] = useState(false);
   const [leadCaptured, setLeadCaptured] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+
+  // Check and restore draft from localStorage on client mount
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(DRAFT_STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed.answers && Object.keys(parsed.answers).length > 0) {
+          setHasSavedDraft(true);
+        }
+      }
+    } catch {}
+  }, []);
+
+  const resumeDraft = () => {
+    try {
+      const raw = localStorage.getItem(DRAFT_STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed.answers) setAnswers(parsed.answers);
+        if (typeof parsed.stepIndex === 'number') setStepIndex(parsed.stepIndex);
+        if (parsed.phase) setPhase(parsed.phase);
+        setHasSavedDraft(false);
+      }
+    } catch {}
+  };
+
+  const discardDraft = () => {
+    try {
+      localStorage.removeItem(DRAFT_STORAGE_KEY);
+    } catch {}
+    setHasSavedDraft(false);
+    setAnswers({});
+    setStepIndex(0);
+    setPhase('intro');
+  };
+
+  // Auto-save draft when answers change
+  useEffect(() => {
+    if (Object.keys(answers).length > 0 && !leadCaptured) {
+      try {
+        localStorage.setItem(
+          DRAFT_STORAGE_KEY,
+          JSON.stringify({ answers, stepIndex, phase })
+        );
+      } catch {}
+    }
+  }, [answers, stepIndex, phase, leadCaptured]);
 
   const visibleQuestions = useMemo(() => getVisibleQuestions(answers), [answers]);
   const currentQuestion = visibleQuestions[stepIndex];
@@ -148,6 +208,7 @@ export const PathFinderAssessment: React.FC<PathFinderAssessmentProps> = ({ curr
           whatsapp: leadWhatsapp,
           email: leadEmail,
           telegram: leadTelegram,
+          marketing_consent: marketingConsent,
           preferredLanguage: lang,
           answers,
           result,
@@ -156,6 +217,9 @@ export const PathFinderAssessment: React.FC<PathFinderAssessmentProps> = ({ curr
       if (!response.ok) throw new Error('Submission failed');
       setIsSubmitting(false);
       setLeadCaptured(true);
+      try {
+        localStorage.removeItem(DRAFT_STORAGE_KEY);
+      } catch {}
       if (onSuccess) {
         // Give the user time to read the result and click through to
         // WhatsApp before the host (AppLayout's modal) auto-closes.
@@ -174,6 +238,33 @@ export const PathFinderAssessment: React.FC<PathFinderAssessmentProps> = ({ curr
     return (
       <div className={cardClass}>
         <div className="text-center max-w-xl mx-auto space-y-5">
+          {hasSavedDraft && (
+            <div className="p-4 rounded-2xl bg-blue-50/80 border border-blue-200/80 flex items-center justify-between gap-3 flex-wrap text-start">
+              <div className="flex items-center gap-2.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#2F6FED] animate-pulse shrink-0" />
+                <span className="text-xs font-bold text-[#142033]">
+                  {t(lang, 'یک پیش‌نویس ارزیابی تکمیل‌نشده از قبل ذخیره شده است.', 'You have an unfinished assessment draft saved.')}
+                </span>
+              </div>
+              <div className="flex items-center gap-2 text-xs">
+                <button
+                  type="button"
+                  onClick={resumeDraft}
+                  className="px-3.5 py-1.5 rounded-xl bg-[#2F6FED] text-white font-bold hover:bg-[#1A5BB8] transition-colors cursor-pointer"
+                >
+                  {t(lang, 'ادامه ارزیابی', 'Resume')}
+                </button>
+                <button
+                  type="button"
+                  onClick={discardDraft}
+                  className="px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-slate-600 font-semibold hover:bg-slate-50 transition-colors cursor-pointer"
+                >
+                  {t(lang, 'شروع جدید', 'Start fresh')}
+                </button>
+              </div>
+            </div>
+          )}
+
           <span className="inline-block text-xs font-extrabold uppercase tracking-widest text-[#2F6FED]">
             DORVIA PathFinder™
           </span>
@@ -362,6 +453,52 @@ export const PathFinderAssessment: React.FC<PathFinderAssessmentProps> = ({ curr
             </div>
           </div>
 
+          {answers['primary_goal'] === 'long_term' && (
+            <div className="bg-gradient-to-br from-indigo-50/70 to-blue-50/40 border border-indigo-100 rounded-2xl p-5 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-indigo-100 text-indigo-700">
+                  {getLongTermRoadmap().badge[lang]}
+                </span>
+              </div>
+              <h4 className="text-sm font-extrabold text-[#142033]">
+                {getLongTermRoadmap().title[lang]}
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                {getLongTermRoadmap().steps.map((s, idx) => (
+                  <div key={idx} className="bg-white/90 border border-indigo-100/80 rounded-xl p-3 space-y-1">
+                    <span className="text-[10px] font-mono font-bold text-indigo-600 uppercase">{s.year}</span>
+                    <p className="text-xs font-bold text-[#142033]">{s.title[lang]}</p>
+                    <p className="text-[11px] text-[#526174] leading-relaxed">{s.desc[lang]}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {ROUTE_SERVICES[primary] && (
+            <div className="space-y-3 pt-2">
+              <h4 className="text-sm font-extrabold text-[#142033]">
+                {t(lang, 'بسته‌های خدمات مرتبط دورویا برای این مسیر', 'DORVIA Tailored Services for this Pathway')}
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {ROUTE_SERVICES[primary].map((srv) => (
+                  <Link
+                    key={srv.serviceSlug}
+                    href={srv.href}
+                    className="p-4 rounded-xl bg-[#f8fafc] border border-[#e2e8f0] hover:border-[#2F6FED] hover:bg-blue-50/30 transition-all group block"
+                  >
+                    <p className="text-xs font-bold text-[#142033] group-hover:text-[#2F6FED] transition-colors">
+                      {srv.title[lang]} →
+                    </p>
+                    <p className="text-[11px] text-[#64748b] mt-1 leading-relaxed">
+                      {srv.description[lang]}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
           {secondary && (
             <div className="bg-[#f7f9fc] border border-[#dfe6ef] rounded-2xl p-5 flex items-center justify-between gap-4 flex-wrap">
               <div className="flex items-center gap-3">
@@ -431,17 +568,30 @@ export const PathFinderAssessment: React.FC<PathFinderAssessmentProps> = ({ curr
                   />
                 </div>
               </div>
-              <label className="flex items-start space-x-3 rtl:space-x-reverse cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={leadConsent}
-                  onChange={(e) => setLeadConsent(e.target.checked)}
-                  className="mt-1 w-4 h-4 text-[#2F6FED] rounded border-[#dfe6ef] focus:ring-[#2F6FED]"
-                />
-                <span className="text-[#142033] font-bold leading-relaxed text-xs">
-                  {t(lang, 'سیاست حریم خصوصی و نحوه پردازش درخواست را مطالعه کردم.', 'I have read the Privacy Policy and how this request is processed.')} *
-                </span>
-              </label>
+              <div className="space-y-2">
+                <label className="flex items-start space-x-3 rtl:space-x-reverse cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={leadConsent}
+                    onChange={(e) => setLeadConsent(e.target.checked)}
+                    className="mt-1 w-4 h-4 text-[#2F6FED] rounded border-[#dfe6ef] focus:ring-[#2F6FED]"
+                  />
+                  <span className="text-[#142033] font-bold leading-relaxed text-xs">
+                    {t(lang, 'سیاست حریم خصوصی و نحوه پردازش اطلاعات را مطالعه کردم و می‌پذیرم.', 'I have read and agree to the Privacy Policy and processing of my request.')} *
+                  </span>
+                </label>
+                <label className="flex items-start space-x-3 rtl:space-x-reverse cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={marketingConsent}
+                    onChange={(e) => setMarketingConsent(e.target.checked)}
+                    className="mt-1 w-4 h-4 text-[#2F6FED] rounded border-[#dfe6ef] focus:ring-[#2F6FED]"
+                  />
+                  <span className="text-[#526174] font-medium leading-relaxed text-xs">
+                    {t(lang, 'مایلم تحلیل‌های حقوقی و به‌روزرسانی‌های قوانین مهاجرتی رومانی را دریافت کنم. (اختیاری)', 'I would like to receive Romanian immigration updates and legal insights. (Optional)')}
+                  </span>
+                </label>
+              </div>
               <div className="flex items-center gap-2 text-[11px] text-[#788697] pt-1">
                 <LockKeyhole size={13} className="shrink-0 text-[#2F6FED]" />
                 <span>{t(lang, 'اطلاعات شما فقط برای بررسی این درخواست استفاده می‌شود.', 'Your information is used only to review this request.')}</span>

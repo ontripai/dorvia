@@ -34,6 +34,18 @@ export async function middleware(request: NextRequest) {
     request: { headers: requestHeaders }
   });
 
+  // 0. Canonical Domain Enforcement: Redirect *.vercel.app to https://dorvia.ro
+  const xForwardedHost = request.headers.get('x-forwarded-host') || '';
+  const reqHost = request.headers.get('host') || '';
+  const nextHost = request.nextUrl.host || '';
+  const host = (xForwardedHost || reqHost || nextHost).toLowerCase();
+  const isVercelHost = host.includes('vercel.app');
+
+  if (isVercelHost && !pathname.startsWith('/_next')) {
+    const destination = new URL(pathname + search, 'https://dorvia.ro');
+    return NextResponse.redirect(destination, 301);
+  }
+
   // 1. Ignore static assets, Next internals, api endpoints, and root
   if (
     pathname.startsWith('/_next') ||

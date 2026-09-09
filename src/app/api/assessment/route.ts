@@ -84,6 +84,7 @@ export async function POST(req: Request) {
       secondaryRoute,
       leadScore: result.leadScore ?? null,
       leadTemperature,
+      marketing_consent: Boolean(data.marketing_consent),
       submittedAt,
     };
 
