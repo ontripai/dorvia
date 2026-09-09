@@ -1,3 +1,9 @@
+-- STATUS: NOT YET APPLIED. This migration targets a `page_comments` table
+-- that does not exist in the live database as of 2026-09-09. Do not assume
+-- these RLS policies are active. If/when the page_comments feature is
+-- actually built, this file must be explicitly run via Supabase MCP
+-- (apply_migration) — being present in the repo does not mean it ran.
+--
 -- ==============================================================================
 -- DORVIA Database Security Hardening & Row Level Security (RLS) Policy Suite
 -- ==============================================================================

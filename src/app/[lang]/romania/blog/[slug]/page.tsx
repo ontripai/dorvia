@@ -158,6 +158,8 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const baseUrl = getCanonicalOrigin();
   const pageUrl = `${baseUrl}/${lang}/romania/blog/${slug}`;
+  const categoryLabel = isFa ? post.category?.label_fa : (post.category?.label_en || post.category?.label_fa);
+  const categoryKey = post.category?.key;
 
   return (
     <>
@@ -165,11 +167,13 @@ export default async function BlogPostPage({ params }: PageProps) {
         headline={title}
         description={description}
         image={post.cover_image_url || undefined}
-        datePublished={post.published_at || new Date().toISOString()}
+        datePublished={post.published_at || undefined}
         dateModified={post.updated_at || undefined}
         authorName={post.author?.full_name || 'DORVIA Editorial Team'}
         url={pageUrl}
         inLanguage={lang}
+        categoryLabel={categoryLabel}
+        categoryKey={categoryKey}
       />
       <BlogPostView post={post} lang={lang} />
     </>
