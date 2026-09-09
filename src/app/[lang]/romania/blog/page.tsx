@@ -49,9 +49,15 @@ function ArrowUpRightIcon({ size = 16, className = '' }: { size?: number; classN
 interface PublicBlogPost {
   id: string;
   category_id: string;
-  title: string;
-  slug: string;
-  excerpt: string | null;
+  title?: string;
+  title_fa?: string;
+  title_en?: string;
+  slug?: string;
+  slug_fa?: string;
+  slug_en?: string;
+  excerpt?: string | null;
+  excerpt_fa?: string | null;
+  excerpt_en?: string | null;
   cover_image_url: string | null;
   published_at: string | null;
   category?: {
@@ -107,14 +113,16 @@ export default function BlogCatalogPage({ params }: { params: { lang: Language }
   // Filter posts
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
+      const title = (isFa ? (post.title || post.title_fa) : (post.title || post.title_en || post.title_fa)) || '';
+      const excerpt = (isFa ? (post.excerpt || post.excerpt_fa) : (post.excerpt || post.excerpt_en || post.excerpt_fa)) || '';
       const matchCat = selectedCategory === 'all' || post.category_id === selectedCategory;
       const matchSearch =
         !searchQuery.trim() ||
-        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (post.excerpt && post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()));
+        title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        excerpt.toLowerCase().includes(searchQuery.toLowerCase());
       return matchCat && matchSearch;
     });
-  }, [posts, selectedCategory, searchQuery]);
+  }, [posts, selectedCategory, searchQuery, isFa]);
 
   return (
     <div className="space-y-12">
@@ -220,6 +228,20 @@ export default function BlogCatalogPage({ params }: { params: { lang: Language }
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredPosts.map((post) => {
+              const postSlug =
+                (isFa
+                  ? (post.slug || post.slug_fa)
+                  : (post.slug || post.slug_en || post.slug_fa)) || '';
+
+              const postTitle =
+                (isFa
+                  ? (post.title || post.title_fa)
+                  : (post.title || post.title_en || post.title_fa)) || '';
+
+              const postExcerpt = isFa
+                ? (post.excerpt || post.excerpt_fa || null)
+                : (post.excerpt || post.excerpt_en || post.excerpt_fa || null);
+
               const categoryLabel = post.category
                 ? isFa
                   ? post.category.label_fa
@@ -241,13 +263,13 @@ export default function BlogCatalogPage({ params }: { params: { lang: Language }
                 >
                   {/* Article Cover */}
                   <Link
-                    href={`/romania/blog/${post.slug}`}
+                    href={`/romania/blog/${postSlug}`}
                     className="relative aspect-video w-full overflow-hidden bg-slate-100 block"
                   >
                     {post.cover_image_url ? (
                       <img
                         src={post.cover_image_url}
-                        alt={post.title}
+                        alt={postTitle}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                         loading="lazy"
                       />
@@ -279,26 +301,29 @@ export default function BlogCatalogPage({ params }: { params: { lang: Language }
 
                       {/* Title */}
                       <h2 className="text-base sm:text-lg font-bold text-[#142033] group-hover:text-[#2F6FED] transition-colors line-clamp-2 leading-snug">
-                        <Link href={`/romania/blog/${post.slug}`}>
-                          {post.title}
+                        <Link href={`/romania/blog/${postSlug}`}>
+                          {postTitle}
                         </Link>
                       </h2>
 
                       {/* Excerpt */}
-                      {post.excerpt && (
+                      {postExcerpt && (
                         <p className="text-xs text-slate-500 line-clamp-3 leading-relaxed">
-                          {post.excerpt}
+                          {postExcerpt}
                         </p>
                       )}
                     </div>
 
                     {/* Footer / Read Link */}
-                    <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#2F6FED]">
+                    <Link
+                      href={`/romania/blog/${postSlug}`}
+                      className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#2F6FED] group-hover:text-[#1d50b3] transition-colors"
+                    >
                       <span>{isFa ? 'مطالعه مقاله' : 'Read Article'}</span>
                       <span className="transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform">
                         <ArrowUpRightIcon size={14} />
                       </span>
-                    </div>
+                    </Link>
                   </div>
                 </article>
               );

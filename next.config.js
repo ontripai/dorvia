@@ -16,7 +16,7 @@ const cspHeader = `
     default-src 'self';
     script-src 'self' 'unsafe-inline' ${!isProd ? "'unsafe-eval'" : ""};
     style-src 'self' 'unsafe-inline';
-    img-src 'self' data: blob: https://images.unsplash.com;
+    img-src 'self' data: blob: https://images.unsplash.com https://*.supabase.co${supabaseConnectSrc};
     font-src 'self' data:;
     connect-src 'self'${supabaseConnectSrc};
     frame-src 'none';
@@ -66,6 +66,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.supabase.co',
       },
     ],
   },
