@@ -1,6 +1,7 @@
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { Database } from '@/types/supabase';
+import { getSupabaseAnonKey, getSupabaseUrl } from './supabaseConfig';
 
 /**
  * Creates a server-side Supabase client with cookie access for Server Components and Route Handlers.
@@ -13,12 +14,8 @@ export function createServerComponentClient(request?: Request) {
     // May be invoked outside Next.js requestAsyncStorage context (e.g. in test suites)
   }
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  if (!supabaseAnonKey) {
-    throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY is not set — refusing to fall back to a higher-privilege key.');
-  }
+  const supabaseUrl = getSupabaseUrl();
+  const supabaseAnonKey = getSupabaseAnonKey();
 
   return createServerClient<Database>(supabaseUrl, supabaseAnonKey, {
     cookies: {

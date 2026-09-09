@@ -20,7 +20,10 @@ if (typeof window !== 'undefined') {
 // (source='whatsapp') — see claude/dorvia-supabase-schema-v1-2026-09-03.sql
 // in the project docs.
 
-const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseUrl =
+  process.env.SUPABASE_URL ||
+  process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  'https://eufjxgjlahqupxsxmfem.supabase.co';
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
 const isConfigured = supabaseUrl !== '' && supabaseServiceRoleKey !== '';

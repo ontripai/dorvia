@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
+import { getSupabaseAnonKey, getSupabaseUrl } from './lib/supabaseConfig';
 
 const SUPPORTED_LOCALES = ['fa', 'en'] as const;
 const DEFAULT_LOCALE = 'fa';
@@ -63,16 +64,8 @@ export async function middleware(request: NextRequest) {
   if (SUPPORTED_LOCALES.includes(firstSegment as any)) {
     // Protected route check for /portal/dashboard
     if (pathname.includes('/portal/dashboard')) {
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
-      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-      if (!supabaseAnonKey) {
-        console.error('[Middleware Auth] NEXT_PUBLIC_SUPABASE_ANON_KEY is not set — refusing to fall back to a higher-privilege key.');
-        const url = request.nextUrl.clone();
-        url.pathname = `/${firstSegment}/portal/login`;
-        url.searchParams.set('redirect', pathname);
-        return NextResponse.redirect(url);
-      }
+      const supabaseUrl = getSupabaseUrl();
+      const supabaseAnonKey = getSupabaseAnonKey();
 
       let response = nextWithHeaders();
       const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
@@ -115,16 +108,8 @@ export async function middleware(request: NextRequest) {
       !pathname.includes('/admin/login') &&
       !pathname.includes('/admin/callback')
     ) {
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
-      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-      if (!supabaseAnonKey) {
-        console.error('[Middleware Auth] NEXT_PUBLIC_SUPABASE_ANON_KEY is not set — refusing to fall back to a higher-privilege key.');
-        const url = request.nextUrl.clone();
-        url.pathname = `/${firstSegment}/admin/login`;
-        url.searchParams.set('redirect', pathname);
-        return NextResponse.redirect(url);
-      }
+      const supabaseUrl = getSupabaseUrl();
+      const supabaseAnonKey = getSupabaseAnonKey();
 
       let response = nextWithHeaders();
       const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {

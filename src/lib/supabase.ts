@@ -2,9 +2,10 @@ import { createBrowserClient } from '@supabase/ssr';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { Database } from '@/types/supabase';
 import { LeadFormData } from '../types';
+import { getSupabaseAnonKey, getSupabaseUrl } from './supabaseConfig';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabaseUrl = getSupabaseUrl();
+const supabaseAnonKey = getSupabaseAnonKey();
 
 const isConfigured = supabaseUrl !== '' && supabaseAnonKey !== '';
 
