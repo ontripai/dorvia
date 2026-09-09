@@ -29,23 +29,5 @@ export async function isJobBoardPubliclyEnabled(): Promise<boolean> {
   }
 }
 
-/**
- * Normalizes text to a URL-friendly slug.
- * Supports Persian and Latin characters, numbers, and hyphens.
- */
-export function slugifyJob(text: string): string {
-  if (!text) return '';
-
-  return text
-    .toString()
-    .trim()
-    .toLowerCase()
-    // Replace spaces and special characters with hyphens
-    .replace(/\s+/g, '-')
-    // Remove unwanted punctuation except hyphens and letters/numbers
-    .replace(/[^\u0600-\u06FFa-z0-9\-_]/g, '')
-    // Collapse multiple hyphens
-    .replace(/-+/g, '-')
-    // Trim hyphens from ends
-    .replace(/^-+|-+$/g, '');
-}
+// Re-export client-safe utilities from slugHelper
+export { slugifyJob } from './slugHelper';
