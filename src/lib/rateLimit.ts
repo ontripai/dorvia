@@ -10,14 +10,15 @@ export interface RateLimitResult {
 
 export interface RateLimitOptions {
   endpoint: string;
-  ip: string;
+  ip?: string;
+  identifier?: string;
   maxRequests: number;
   windowSeconds: number;
 }
 
 /**
- * Anonymizes client IP address using SHA-256 with a fixed salt.
- * Ensures zero raw IP addresses are persisted into the database.
+ * Anonymizes client IP address or identifier using SHA-256 with a fixed salt.
+ * Ensures zero raw IP addresses or email PII are persisted into the database.
  */
 export function hashClientIp(rawIp: string): string {
   // Extract first IP in case of x-forwarded-for comma-separated chain
@@ -39,10 +40,12 @@ let lastCleanupTime = 0;
 export async function checkRateLimit({
   endpoint,
   ip,
+  identifier,
   maxRequests,
   windowSeconds,
 }: RateLimitOptions): Promise<RateLimitResult> {
-  const ipHash = hashClientIp(ip);
+  const rawTarget = identifier || ip || '127.0.0.1';
+  const ipHash = hashClientIp(rawTarget);
   const bucketKey = `${endpoint}:${ipHash}`;
   const now = Date.now();
 
