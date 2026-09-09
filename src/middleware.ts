@@ -102,11 +102,12 @@ export async function middleware(request: NextRequest) {
       return response;
     }
 
-    // Protected route check for /admin (excluding /admin/login and /admin/callback)
+    // Protected route check for /admin (excluding /admin/login, /admin/callback, and /admin/recovery-login)
     if (
       pathname.includes('/admin') &&
       !pathname.includes('/admin/login') &&
-      !pathname.includes('/admin/callback')
+      !pathname.includes('/admin/callback') &&
+      !pathname.includes('/admin/recovery-login')
     ) {
       const supabaseUrl = getSupabaseUrl();
       const supabaseAnonKey = getSupabaseAnonKey();
