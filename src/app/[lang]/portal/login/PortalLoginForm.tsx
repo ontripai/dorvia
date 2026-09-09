@@ -128,45 +128,27 @@ function LoginFormContent({ currentLang }: { currentLang: Language }) {
     setTechnicalError(null);
 
     try {
-      if (!supabase) {
-        throw new Error('Supabase client unconfigured');
-      }
-
-      // 1. Authenticate with Supabase Auth Email/Password
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email.trim().toLowerCase(),
-        password,
-      });
-
-      if (error || !data.session) {
-        console.warn('[Portal Login] Password authentication rejected:', error?.message);
-        // dre-p55 & dre-p80 rule: Never swallow error, show clear error message
-        setTechnicalError(
-          isFa
-            ? 'ایمیل یا رمز عبور نادرست است.'
-            : 'Invalid email or password.'
-        );
-        setLoading(false);
-        return;
-      }
-
-      // 2. Pass tokens to server session route to establish authoritative cookies
-      const sessionRes = await fetch('/api/auth/session', {
+      const res = await fetch('/api/auth/password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_token: data.session.access_token,
-          refresh_token: data.session.refresh_token,
+          email: email.trim().toLowerCase(),
+          password,
           flow: 'portal',
           lang: currentLang,
         }),
       });
 
-      const sessionData = await sessionRes.json().catch(() => null);
+      const data = await res.json().catch(() => null);
 
-      if (!sessionRes.ok || !sessionData?.success) {
-        console.error('[Portal Login] Session cookie sync failed:', sessionData);
-        if (sessionData?.error === 'account_not_found') {
+      if (!res.ok || !data?.success) {
+        if (data?.error === 'invalid_credentials' || res.status === 401) {
+          setTechnicalError(
+            isFa
+              ? 'ایمیل یا رمز عبور نادرست است.'
+              : 'Invalid email or password.'
+          );
+        } else if (data?.error === 'account_not_found') {
           setTechnicalError(
             isFa
               ? 'حساب کاربری یا دعوت‌نامه معتبری برای این پرونده یافت نشد. لطفاً با پشتیبانی تماس بگیرید.'
@@ -174,23 +156,20 @@ function LoginFormContent({ currentLang }: { currentLang: Language }) {
           );
         } else {
           setTechnicalError(
-            isFa
-              ? 'خطا در ثبت نشست کاربری در سرور. لطفاً مجدداً تلاش کنید.'
-              : 'Failed to establish secure session cookies. Please try again.'
+            data?.message || (isFa ? 'خطا در احراز هویت. لطفاً دوباره تلاش کنید.' : 'Authentication failed. Please try again.')
           );
         }
         setLoading(false);
         return;
       }
 
-      // 3. Success -> Redirect to dashboard
-      window.location.href = sessionData.redirectTo || `/${currentLang}/portal/dashboard`;
-    } catch (err: any) {
-      console.error('[Portal Login] Password sign-in error:', err);
+      window.location.replace(data.redirectTo || `/${currentLang}/portal/dashboard`);
+    } catch (err) {
+      console.error('[Portal Login] Unexpected password auth exception:', err);
       setTechnicalError(
         isFa
-          ? 'خطایی در ورود رخ داد. لطفاً اتصال اینترنت خود را بررسی و دوباره تلاش فرمایید.'
-          : 'Sign-in error occurred. Please check your connection and try again.'
+          ? 'خطای ارتباط با سرور رخ داد. لطفاً دوباره تلاش کنید.'
+          : 'Network error occurred. Please try again.'
       );
       setLoading(false);
     }

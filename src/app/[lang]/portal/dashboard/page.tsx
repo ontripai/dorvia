@@ -318,16 +318,23 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
     setSavingPassword(true);
 
     try {
-      if (!supabase) {
-        throw new Error('Supabase client unconfigured');
-      }
-
-      const { error } = await supabase.auth.updateUser({
-        password: newPassword,
+      const res = await fetch('/api/portal/password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: newPassword }),
       });
 
-      if (error) {
-        throw error;
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok || !data?.success) {
+        if (supabase) {
+          const { error } = await supabase.auth.updateUser({
+            password: newPassword,
+          });
+          if (error) throw error;
+        } else {
+          throw new Error(data?.error || (isFa ? 'خطا در ثبت رمز عبور.' : 'Failed to update password.'));
+        }
       }
 
       setPasswordSuccess(
