@@ -1,10 +1,9 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
 import { isJobBoardPubliclyEnabled } from '@/lib/jobBoardHelper';
+import { checkRateLimit } from '@/lib/rateLimit';
 
 export const dynamic = 'force-dynamic';
-
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
 /**
  * POST /api/jobs/apply
@@ -28,20 +27,20 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Database service unconfigured.' }, { status: 500 });
     }
 
-    // IP-based Rate Limiting (5 requests per 10 minutes)
+    // IP-based Rate Limiting (5 requests per 10 minutes, persistent via database)
     const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
-    const now = Date.now();
-    const rlData = rateLimitMap.get(ip);
-    if (rlData && now < rlData.resetTime) {
-      if (rlData.count >= 5) {
-        return NextResponse.json(
-          { error: 'Too many requests. Please try again in a few minutes.' },
-          { status: 429 }
-        );
-      }
-      rlData.count += 1;
-    } else {
-      rateLimitMap.set(ip, { count: 1, resetTime: now + 10 * 60 * 1000 });
+    const rateLimit = await checkRateLimit({
+      endpoint: 'jobs_apply',
+      ip,
+      maxRequests: 5,
+      windowSeconds: 10 * 60,
+    });
+
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again in a few minutes.' },
+        { status: 429 }
+      );
     }
 
     let body: any;

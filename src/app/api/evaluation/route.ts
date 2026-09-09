@@ -1,32 +1,29 @@
 import { NextResponse } from 'next/server';
 import { recordWebsiteLead } from '../../../lib/supabaseAdmin';
-
-// Simple in-memory rate limiting for best-effort fallback
-const rateLimitMap = new Map<string, { count: number, resetTime: number }>();
+import { checkRateLimit } from '@/lib/rateLimit';
 
 export async function POST(req: Request) {
   try {
+    const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
+    
+    // Rate Limiting: Max 3 requests per 5 minutes per IP (persistent database store)
+    const rateLimit = await checkRateLimit({
+      endpoint: 'evaluation',
+      ip,
+      maxRequests: 3,
+      windowSeconds: 5 * 60,
+    });
+
+    if (!rateLimit.allowed) {
+      return NextResponse.json({ error: 'Too Many Requests' }, { status: 429 });
+    }
+
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
 
     if (!botToken || !chatId) {
       console.error('API Error: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is missing');
       return NextResponse.json({ error: 'Service Unavailable' }, { status: 503 });
-    }
-
-    const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
-    
-    // Rate Limiting Logic: Max 3 requests per 5 minutes per IP
-    const now = Date.now();
-    const rlData = rateLimitMap.get(ip);
-    if (rlData && now < rlData.resetTime) {
-      if (rlData.count >= 3) {
-        // We drop it but still return a 429 for genuine clients to respect
-        return NextResponse.json({ error: 'Too Many Requests' }, { status: 429 });
-      }
-      rlData.count += 1;
-    } else {
-      rateLimitMap.set(ip, { count: 1, resetTime: now + 5 * 60 * 1000 });
     }
 
     // Parse JSON safely

@@ -163,16 +163,31 @@ export async function POST(request: Request) {
       );
     }
 
-    // Validate size limit
-    if (typeof size_bytes === 'number' && size_bytes > MAX_FILE_SIZE_BYTES) {
+    // Verify file actually exists in Supabase Storage and retrieve authoritative metadata
+    const { data: storageInfo, error: storageInfoErr } = await supabaseAdmin.storage
+      .from('lead-documents')
+      .info(storage_path);
+
+    if (storageInfoErr || !storageInfo) {
+      return NextResponse.json(
+        { error: 'File not found in storage. Please upload the file before registering.' },
+        { status: 404 }
+      );
+    }
+
+    const actualSizeBytes = typeof storageInfo.size === 'number' ? storageInfo.size : (typeof size_bytes === 'number' ? size_bytes : 0);
+    const actualMimeType = (storageInfo.contentType || mime_type || '').toLowerCase();
+
+    // Validate size limit against actual stored bytes
+    if (actualSizeBytes > MAX_FILE_SIZE_BYTES) {
       return NextResponse.json(
         { error: 'File exceeds 50MB limit.' },
         { status: 400 }
       );
     }
 
-    // Validate MIME type if provided
-    if (mime_type && !ALLOWED_MIME_TYPES.includes(mime_type.toLowerCase())) {
+    // Validate MIME type against allowed types using actual storage contentType
+    if (actualMimeType && !ALLOWED_MIME_TYPES.includes(actualMimeType)) {
       return NextResponse.json(
         { error: 'Disallowed file type.' },
         { status: 400 }
@@ -196,7 +211,7 @@ export async function POST(request: Request) {
       }
     }
 
-    // Insert metadata record in lead_documents
+    // Insert metadata record in lead_documents with authoritative storage values
     const { data: insertedDoc, error: insertErr } = await supabaseAdmin
       .from('lead_documents')
       .insert({
@@ -210,8 +225,8 @@ export async function POST(request: Request) {
         uploaded_by_admin_id: null,
         storage_path,
         file_name: file_name.trim(),
-        mime_type: mime_type || null,
-        size_bytes: typeof size_bytes === 'number' ? size_bytes : null,
+        mime_type: actualMimeType || null,
+        size_bytes: actualSizeBytes,
         label: label?.trim() || null,
       })
       .select('*, document_types(key, label_fa, allowed_roles)')

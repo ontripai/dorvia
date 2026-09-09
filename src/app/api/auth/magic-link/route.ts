@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
+import { maskEmail } from '@/lib/privacy';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,7 +30,7 @@ export async function POST(request: Request) {
     const origin = process.env.NEXT_PUBLIC_SITE_URL || url.origin;
     const callbackUrl = `${origin}/${lang}/${flow}/callback`;
 
-    console.log('[Auth OTP] computed callbackUrl:', callbackUrl, '| NEXT_PUBLIC_SITE_URL:', process.env.NEXT_PUBLIC_SITE_URL, '| request origin:', url.origin, `| email: [${email}], flow: [${flow}]`);
+    console.log('[Auth OTP] computed callbackUrl:', callbackUrl, '| NEXT_PUBLIC_SITE_URL:', process.env.NEXT_PUBLIC_SITE_URL, '| request origin:', url.origin, `| email: [${maskEmail(email)}], flow: [${flow}]`);
 
     const { data, error } = await supabaseAdmin.auth.signInWithOtp({
       email,
@@ -47,7 +48,7 @@ export async function POST(request: Request) {
         (error as any).code === 'otp_disabled';
 
       if (isSignupNotAllowed) {
-        console.log(`[Auth OTP] Email [${email}] is not registered in auth.users (non-revealing response).`);
+        console.log(`[Auth OTP] Email [${maskEmail(email)}] is not registered in auth.users (non-revealing response).`);
         // Non-revealing: Return success so an attacker cannot probe registered emails
         return NextResponse.json({ success: true });
       }
@@ -59,7 +60,7 @@ export async function POST(request: Request) {
         error.message?.toLowerCase().includes('rate limit');
 
       if (isRateLimit) {
-        console.warn(`[Auth OTP] Rate limit exceeded for [${email}]`);
+        console.warn(`[Auth OTP] Rate limit exceeded for [${maskEmail(email)}]`);
         return NextResponse.json(
           {
             error: 'rate_limit',
@@ -77,7 +78,7 @@ export async function POST(request: Request) {
       );
     }
 
-    console.log(`[Auth OTP] Successfully sent magic link to [${email}]`);
+    console.log(`[Auth OTP] Successfully sent magic link to [${maskEmail(email)}]`);
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('[Auth OTP] Unexpected server exception:', err);
