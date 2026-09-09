@@ -200,8 +200,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             {/* Decorative Bucharest skyline illustration */}
             <Image
               src="/images/illustrations/hero-skyline.svg"
-              alt=""
-              aria-hidden="true"
+              alt="Bucharest Skyline Illustration"
               width={1440}
               height={260}
               priority

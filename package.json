@@ -11,6 +11,7 @@
     "validate:universities": "npx tsx scripts/validateUniversities.ts",
     "validate:universities-negative": "npx tsx scripts/validateUniversitiesNegativeTests.ts",
     "build": "npm run validate:translations && npm run validate:content && npm run validate:universities && next build",
+    "sweep": "npx tsx scripts/comprehensive-page-sweep.ts",
     "start": "next start",
     "lint": "next lint"
   },

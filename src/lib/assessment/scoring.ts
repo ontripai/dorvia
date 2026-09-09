@@ -72,6 +72,7 @@ function workScore(answers: AssessmentAnswers): number {
   if (timelineUnder6Months(answers)) s += 8;
   if (documentsReady(answers)) s += 7;
   if (answers['work_experience'] === '6_10' || answers['work_experience'] === '10_plus') s += 5;
+  if (answers['primary_goal'] === 'long_term') s += 10;
   return clamp(s);
 }
 
@@ -84,7 +85,8 @@ function businessScore(answers: AssessmentAnswers): number {
   if (answers['has_existing_business'] === 'yes') s += 10;
   if (answers['business_goal'] && answers['business_goal'] !== 'not_sure') s += 10;
   if (timelineUnder6Months(answers)) s += 8;
-  if (answers['has_existing_business'] === 'yes' || answers['work_experience'] === '6_10' || answers['work_experience'] === '10_plus') s += 10;
+  if (answers['has_existing_business'] !== 'yes' && (answers['work_experience'] === '6_10' || answers['work_experience'] === '10_plus')) s += 10;
+  if (answers['primary_goal'] === 'long_term') s += 10;
   if (documentsReady(answers)) s += 5;
   return clamp(s);
 }

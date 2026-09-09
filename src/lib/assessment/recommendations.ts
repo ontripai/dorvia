@@ -143,3 +143,111 @@ export function whatsappLink(route: RouteId, lang: 'fa' | 'en'): string {
   const text = encodeURIComponent(whatsappMessage(route, lang));
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
 }
+
+export interface RouteServiceInfo {
+  serviceSlug: string;
+  title: Bilingual;
+  description: Bilingual;
+  href: string;
+}
+
+export const ROUTE_SERVICES: Record<RouteId, RouteServiceInfo[]> = {
+  study: [
+    {
+      serviceSlug: 'admission',
+      title: { fa: 'مشاوره و پذیرش دانشگاهی', en: 'University Admissions Support' },
+      description: { fa: 'انتخاب رشته، اخذ نامه پذیرش (Acceptance Letter) و تایید مدارک', en: 'Course selection, acceptance letter issuance, and document equivalency' },
+      href: '/services',
+    },
+    {
+      serviceSlug: 'student-visa',
+      title: { fa: 'ویزای تحصیلی رومانی (نوع D/AM)', en: 'Romanian Student Visa (Type D/AM)' },
+      description: { fa: 'آماده‌سازی پرونده سفارت، تمکن مالی و راهنمای وقت مصاحبه', en: 'Embassy file preparation, proof of funds, and interview guide' },
+      href: '/study',
+    },
+  ],
+  work: [
+    {
+      serviceSlug: 'work-permit',
+      title: { fa: 'اخذ مجوز کار (Aviz de Muncă)', en: 'Work Permit Application' },
+      description: { fa: 'پیگیری سهمیه و پرونده در اداره مهاجرت رومانی (IGI)', en: 'IGI submission, quota tracking, and official permit issuance' },
+      href: '/work/work-permit',
+    },
+    {
+      serviceSlug: 'work-visa',
+      title: { fa: 'ویزای کار و اقامت شغلی', en: 'Employment Visa & Residence' },
+      description: { fa: 'تشکیل پرونده ویزای کاری و کارت اقامت سالانه', en: 'Type D/AM visa file and annual residency card (Permis de Ședere)' },
+      href: '/services',
+    },
+  ],
+  business: [
+    {
+      serviceSlug: 'company-formation',
+      title: { fa: 'ثبت شرکت (SRL) در رومانی', en: 'Romanian Company Formation (SRL)' },
+      description: { fa: 'افتتاح حساب بانکی تجاری، ثبت در ONRC و اخذ کد مالیاتی', en: 'Corporate bank account, Trade Register (ONRC), and VAT/tax registration' },
+      href: '/company',
+    },
+    {
+      serviceSlug: 'business-immigration',
+      title: { fa: 'اقامت سهام‌داری و مدیریت', en: 'Director / Shareholder Residency' },
+      description: { fa: 'طرح تجاری، تاییدیه سرمایه‌گذاری و ویزای اقامت کاری نوع D/AC', en: 'Business plan endorsement, capital investment, and D/AC visa' },
+      href: '/services',
+    },
+  ],
+  family: [
+    {
+      serviceSlug: 'family-reunification',
+      title: { fa: 'پرونده پیوست خانواده در IGI', en: 'IGI Family Reunification File' },
+      description: { fa: 'اخذ تاییدیه اداره مهاجرت برای همسر و فرزندان', en: 'Immigration approval for spouse and dependent children' },
+      href: '/immigration/family-reunification',
+    },
+    {
+      serviceSlug: 'family-visa',
+      title: { fa: 'ویزای ورود و کارت اقامت همراه', en: 'Family Entry Visa & Residence' },
+      description: { fa: 'وقت سفارت، ترجمه مدارک و کارت اقامت همراهان', en: 'Embassy appointment, sworn translations, and dependant residency permit' },
+      href: '/services',
+    },
+  ],
+  relocation: [
+    {
+      serviceSlug: 'settling-in',
+      title: { fa: 'بسته استقرار و اسکان اولیه', en: 'Settling-in & Housing Package' },
+      description: { fa: 'اجاره مسکن ثبتی (ANAF)، سیم‌کارت و افتتاح حساب بانکی', en: 'Registered rental lease, Romanian SIM/Internet, and personal bank account' },
+      href: '/needs',
+    },
+    {
+      serviceSlug: 'legal-orientation',
+      title: { fa: 'مشاوره حقوقی و تمدید اقامت', en: 'Legal Orientation & Residency Renewal' },
+      description: { fa: 'بررسی رجیستری آدرس، تمدید اقامت و انطباق با قوانین محلی', en: 'Address registration, residency renewals, and local legal compliance' },
+      href: '/services',
+    },
+  ],
+};
+
+export function getLongTermRoadmap(): {
+  badge: Bilingual;
+  title: Bilingual;
+  steps: { year: string; title: Bilingual; desc: Bilingual }[];
+} {
+  return {
+    badge: { fa: 'نقشه راه ۵ ساله', en: '5-Year Roadmap' },
+    title: { fa: 'مسیر دستیابی به اقامت دائم و تابعیت رومانی', en: 'Pathway to Permanent Residency & Romanian Citizenship' },
+    steps: [
+      {
+        year: 'سال ۱–۲',
+        title: { fa: 'ورود قانونی و تمدید کارت اقامت موقت', en: 'Legal Entry & Temporary Residence Renewals' },
+        desc: { fa: 'ثبت آدرس در اداره مهاجرت (IGI)، حفظ قرارداد قانونی/بیمه و رعایت حد غیبت (کمتر از ۶ ماه متوالی).', en: 'IGI address registration, legal income & social health insurance, staying under absence limits.' },
+      },
+      {
+        year: 'سال ۳–۴',
+        title: { fa: 'تثبیت سوابق مالیاتی و تقویت زبان رومانیایی', en: 'Tax Consolidation & Language Proficiency' },
+        desc: { fa: 'ارتقای زبان رومانیایی به سطح مکالمه و تکمیل پرونده سوابق پرداخت مالیات و بیمه.', en: 'Developing conversational Romanian and accumulating continuous tax & social security records.' },
+      },
+      {
+        year: 'سال ۵+',
+        title: { fa: 'درخواست اقامت دائم (Rezidență Permanentă)', en: 'Permanent Residency Application' },
+        desc: { fa: 'امکان اخذ کارت اقامت بلندمدت اتحادیه اروپا با اعتبار ۵ یا ۱۰ ساله، و واجد شرایط بودن برای شهروندی پس از ۸ سال.', en: 'Eligible for long-term EU permanent residency permit, and eligible for full citizenship after 8 years.' },
+      },
+    ],
+  };
+}
