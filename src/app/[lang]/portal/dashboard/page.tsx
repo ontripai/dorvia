@@ -29,6 +29,9 @@ import {
   FileText,
   FilePlus,
   Languages,
+  Lock,
+  KeyRound,
+  AlertCircle,
 } from '@/components/Icons';
 
 interface PortalDashboardProps {
@@ -46,6 +49,12 @@ interface LeadProfile {
   message: string | null;
   created_at: string;
   raw_meta: any;
+  iran_address?: string | null;
+  other_residency_address?: string | null;
+  romania_address?: string | null;
+  address_line?: string | null;
+  address_city?: string | null;
+  address_postal_code?: string | null;
 }
 
 interface LeadMessage {
@@ -96,13 +105,30 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
   const isFa = currentLang === 'fa';
   const router = useRouter();
 
-  const [activeTab, setActiveTab] = useState<'overview' | 'documents'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'documents' | 'profile'>('overview');
   const [loading, setLoading] = useState(true);
   const [lead, setLead] = useState<LeadProfile | null>(null);
   const [messages, setMessages] = useState<LeadMessage[]>([]);
   const [newMessageText, setNewMessageText] = useState('');
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
+
+  // Profile & Address Form State (dre-p80)
+  const [profileFullName, setProfileFullName] = useState('');
+  const [profilePhone, setProfilePhone] = useState('');
+  const [profileIranAddress, setProfileIranAddress] = useState('');
+  const [profileOtherResidencyAddress, setProfileOtherResidencyAddress] = useState('');
+  const [profileRomaniaAddress, setProfileRomaniaAddress] = useState('');
+  const [savingProfile, setSavingProfile] = useState(false);
+  const [profileSuccess, setProfileSuccess] = useState<string | null>(null);
+  const [profileError, setProfileError] = useState<string | null>(null);
+
+  // Password Security Form State (dre-p80)
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [savingPassword, setSavingPassword] = useState(false);
+  const [passwordSuccess, setPasswordSuccess] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
 
   // Documents State
   const [documents, setDocuments] = useState<LeadDocument[]>([]);
@@ -211,6 +237,113 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
       setSendError(isFa ? 'خطای شبکه در ارتباط با سرور' : 'Network error while sending message');
     } finally {
       setSending(false);
+    }
+  };
+
+  // Synchronize profile form when lead profile is loaded
+  useEffect(() => {
+    if (lead) {
+      setProfileFullName(lead.full_name || '');
+      setProfilePhone(lead.phone || '');
+      setProfileIranAddress(lead.iran_address || '');
+      setProfileOtherResidencyAddress(lead.other_residency_address || '');
+      setProfileRomaniaAddress(lead.romania_address || '');
+    }
+  }, [lead]);
+
+  // Handle Profile Save (dre-p80)
+  const handleProfileSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!lead || savingProfile) return;
+
+    setSavingProfile(true);
+    setProfileError(null);
+    setProfileSuccess(null);
+
+    try {
+      const res = await fetch('/api/portal/profile', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          full_name: profileFullName.trim(),
+          phone: profilePhone.trim() || null,
+          iran_address: profileIranAddress.trim() || null,
+          other_residency_address: profileOtherResidencyAddress.trim() || null,
+          romania_address: profileRomaniaAddress.trim() || null,
+        }),
+      });
+
+      const json = await res.json().catch(() => null);
+
+      if (!res.ok || !json?.success) {
+        throw new Error(json?.error || (isFa ? 'خطا در ذخیره مشخصات' : 'Failed to update profile'));
+      }
+
+      setLead((prev) => (prev ? { ...prev, ...json.lead } : null));
+      setProfileSuccess(isFa ? 'مشخصات و آدرس‌ها با موفقیت ذخیره شد.' : 'Profile and addresses updated successfully.');
+      setTimeout(() => setProfileSuccess(null), 4000);
+    } catch (err: any) {
+      setProfileError(err?.message || (isFa ? 'خطایی در ثبت اطلاعات رخ داد.' : 'Failed to save profile.'));
+    } finally {
+      setSavingProfile(false);
+    }
+  };
+
+  // Handle Password Save (dre-p80)
+  const handlePasswordSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (savingPassword) return;
+
+    setPasswordError(null);
+    setPasswordSuccess(null);
+
+    if (newPassword.length < 8) {
+      setPasswordError(
+        isFa
+          ? 'رمز عبور باید حداقل ۸ کاراکتر باشد.'
+          : 'Password must be at least 8 characters long.'
+      );
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setPasswordError(
+        isFa
+          ? 'رمز عبور جدید و تکرار آن یکسان نیستند.'
+          : 'Passwords do not match.'
+      );
+      return;
+    }
+
+    setSavingPassword(true);
+
+    try {
+      if (!supabase) {
+        throw new Error('Supabase client unconfigured');
+      }
+
+      const { error } = await supabase.auth.updateUser({
+        password: newPassword,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      setPasswordSuccess(
+        isFa
+          ? 'رمز عبور شما با موفقیت ثبت شد. اکنون می‌توانید علاوه بر لینک ایمیل، با این رمز نیز وارد شوید.'
+          : 'Password updated successfully. You can now use it to sign in.'
+      );
+      setNewPassword('');
+      setConfirmPassword('');
+      setTimeout(() => setPasswordSuccess(null), 6000);
+    } catch (err: any) {
+      setPasswordError(
+        err?.message || (isFa ? 'خطا در تغییر رمز عبور. لطفاً دوباره تلاش کنید.' : 'Failed to set password.')
+      );
+    } finally {
+      setSavingPassword(false);
     }
   };
 
@@ -481,13 +614,13 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
           </div>
 
           <div className="flex items-center gap-3">
-            <Link
-              href={`/${currentLang}/portal/profile`}
+            <button
+              onClick={() => setActiveTab('profile')}
               className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-[#2F6FED] hover:bg-blue-600 text-white text-xs font-bold shadow-sm transition-all cursor-pointer"
             >
               <User size={15} />
-              <span>{isFa ? 'پروفایل و شبکه خانواده' : 'Profile & Family'}</span>
-            </Link>
+              <span>{isFa ? 'پروفایل و رمز عبور' : 'Profile & Security'}</span>
+            </button>
             <button
               onClick={handleSignOut}
               className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all cursor-pointer"
@@ -499,7 +632,7 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
         </div>
 
         {/* NAVIGATION TABS */}
-        <div className="flex items-center gap-3 border-b border-[#dfe6ef] pb-3">
+        <div className="flex items-center gap-3 border-b border-[#dfe6ef] pb-3 flex-wrap">
           <button
             onClick={() => setActiveTab('overview')}
             className={`px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center space-x-2 rtl:space-x-reverse ${
@@ -533,18 +666,62 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
             )}
           </button>
 
+          <button
+            onClick={() => setActiveTab('profile')}
+            className={`px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center space-x-2 rtl:space-x-reverse ${
+              activeTab === 'profile'
+                ? 'bg-[#2F6FED] text-white shadow-sm'
+                : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+            }`}
+          >
+            <User size={16} />
+            <span>{isFa ? 'تکمیل مشخصات و رمز عبور' : 'Profile & Security'}</span>
+            {(!lead.iran_address || !lead.romania_address) && (
+              <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+            )}
+          </button>
+
           <Link
             href={`/${currentLang}/portal/profile`}
             className="px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center space-x-2 rtl:space-x-reverse bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
           >
-            <User size={16} />
-            <span>{isFa ? 'پروفایل و شبکه خانواده' : 'Profile & Family Network'}</span>
+            <Building2 size={16} />
+            <span>{isFa ? 'شبکه خانواده' : 'Family Network'}</span>
           </Link>
         </div>
 
         {/* TAB 1: OVERVIEW & CHAT */}
         {activeTab === 'overview' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="space-y-6">
+            {/* Gentle Profile Completion Encouragement Banner (dre-p80) */}
+            {(!lead.iran_address || !lead.romania_address) && (
+              <div className="bg-gradient-to-r from-blue-50/90 via-indigo-50/70 to-blue-50/90 border border-blue-200/80 rounded-3xl p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fadeIn">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-10 h-10 rounded-2xl bg-blue-100/80 text-[#2F6FED] flex items-center justify-center shrink-0 mt-0.5">
+                    <Sparkles size={20} />
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="text-sm font-extrabold text-[#142033]">
+                      {isFa ? 'پروفایل خود را کامل کنید' : 'Complete your profile'}
+                    </h3>
+                    <p className="text-xs text-slate-600 leading-relaxed max-w-2xl">
+                      {isFa
+                        ? 'برای ثبت دقیق‌تر پرونده و هماهنگی‌های بعدی، لطفاً آدرس محل سکونت در ایران و آدرس مقصد در رومانی را در بخش مشخصات ثبت فرمایید.'
+                        : 'To help our legal advisors coordinate your file, please provide your home address in Iran and expected address in Romania.'}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('profile')}
+                  className="px-4 py-2.5 rounded-xl bg-[#2F6FED] hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-xs shrink-0 cursor-pointer self-start sm:self-auto"
+                >
+                  {isFa ? 'تکمیل مشخصات و آدرس‌ها ←' : 'Complete Profile →'}
+                </button>
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
             {/* LEFT/PRIMARY COLUMN (5 Cols): Case Status & Assessment Overview */}
             <div className="lg:col-span-5 space-y-6">
@@ -824,6 +1001,7 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
             </div>
 
           </div>
+        </div>
         )}
 
         {/* TAB 2: MY DOCUMENTS & TRANSLATIONS */}
@@ -1050,6 +1228,212 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
               </div>
             )}
 
+          </div>
+        )}
+
+        {/* TAB 3: PROFILE & SECURITY (dre-p80) */}
+        {activeTab === 'profile' && (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 animate-fadeIn">
+            {/* Left/Main Column: Profile Completion & Addresses (7 cols) */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="bg-white border border-[#dfe6ef] rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+                <div className="border-b border-[#dfe6ef] pb-4">
+                  <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                    <User size={20} className="text-[#2F6FED]" />
+                    <h2 className="text-base sm:text-lg font-extrabold text-[#142033]">
+                      {isFa ? 'تکمیل مشخصات و نشانی‌ها' : 'Profile & Addresses'}
+                    </h2>
+                  </div>
+                  <p className="text-xs text-[#526174] mt-1 leading-relaxed">
+                    {isFa
+                      ? 'نشانی‌های اقامت فعلی در ایران و آدرس پیش‌بینی‌شده در رومانی به تسریع کارهای اجرایی و حقوقی پرونده شما کمک می‌کند.'
+                      : 'Provide your residential addresses to assist our legal team with official documentation.'}
+                  </p>
+                </div>
+
+                {profileSuccess && (
+                  <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs sm:text-sm flex items-center space-x-2.5 rtl:space-x-reverse animate-fadeIn">
+                    <CheckCircle size={18} className="text-emerald-600 shrink-0" />
+                    <span>{profileSuccess}</span>
+                  </div>
+                )}
+
+                {profileError && (
+                  <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900 text-xs sm:text-sm flex items-center space-x-2.5 rtl:space-x-reverse animate-fadeIn">
+                    <AlertCircle size={18} className="text-rose-600 shrink-0" />
+                    <span>{profileError}</span>
+                  </div>
+                )}
+
+                <form onSubmit={handleProfileSave} className="space-y-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Full Name */}
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-bold text-[#142033]">
+                        {isFa ? 'نام و نام خانوادگی' : 'Full Name'}
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={profileFullName}
+                        onChange={(e) => setProfileFullName(e.target.value)}
+                        placeholder={isFa ? 'مثال: علیرضا محمدی' : 'e.g. John Doe'}
+                        className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-sm text-[#142033] focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
+                      />
+                    </div>
+
+                    {/* Phone */}
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-bold text-[#142033]">
+                        {isFa ? 'شماره تماس همراه' : 'Phone Number'}
+                      </label>
+                      <input
+                        type="text"
+                        dir="ltr"
+                        value={profilePhone}
+                        onChange={(e) => setProfilePhone(e.target.value)}
+                        placeholder="+98 912 000 0000"
+                        className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-sm text-[#142033] focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Iran Address */}
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-bold text-[#142033]">
+                      {isFa ? 'آدرس در ایران (محل اقامت مبدأ):' : 'Home Address in Iran:'}
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={profileIranAddress}
+                      onChange={(e) => setProfileIranAddress(e.target.value)}
+                      placeholder={isFa ? 'استان، شهر، خیابان، پلاک، واحد...' : 'Province, City, Street, Unit...'}
+                      className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-sm text-[#142033] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] resize-none"
+                    />
+                  </div>
+
+                  {/* Other Residency Address (Optional) */}
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-bold text-[#142033]">
+                      {isFa ? 'آدرس در کشور دیگر (اختیاری، در صورت داشتن اقامت):' : 'Address in Another Country (Optional):'}
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={profileOtherResidencyAddress}
+                      onChange={(e) => setProfileOtherResidencyAddress(e.target.value)}
+                      placeholder={isFa ? 'کشور، شهر، نشانی اقامت دوم (در صورت وجود)...' : 'Country, City, Address (if applicable)...'}
+                      className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-sm text-[#142033] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] resize-none"
+                    />
+                  </div>
+
+                  {/* Romania Address */}
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-bold text-[#142033]">
+                      {isFa ? 'آدرس در رومانی (محل سکونت پس از ورود به رومانی):' : 'Address in Romania (After Arrival):'}
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={profileRomaniaAddress}
+                      onChange={(e) => setProfileRomaniaAddress(e.target.value)}
+                      placeholder={isFa ? 'شهر، خیابان، ساختمان، شماره آپارتمان در رومانی...' : 'City, Street, Building, Apartment in Romania...'}
+                      className="w-full px-4 py-3 rounded-xl border border-[#dfe6ef] text-sm text-[#142033] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] resize-none"
+                    />
+                  </div>
+
+                  <div className="pt-2 flex justify-end">
+                    <button
+                      type="submit"
+                      disabled={savingProfile}
+                      className="px-6 py-3 rounded-xl bg-[#2F6FED] hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center space-x-2 rtl:space-x-reverse disabled:opacity-60 cursor-pointer"
+                    >
+                      <span>{savingProfile ? (isFa ? 'در حال ذخیره...' : 'Saving...') : (isFa ? 'ذخیره مشخصات و آدرس‌ها' : 'Save Profile Details')}</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            {/* Right Column: Password Setting & Security (5 cols) */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="bg-white border border-[#dfe6ef] rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+                <div className="border-b border-[#dfe6ef] pb-4">
+                  <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                    <KeyRound size={20} className="text-[#2F6FED]" />
+                    <h2 className="text-base sm:text-lg font-extrabold text-[#142033]">
+                      {isFa ? 'تنظیم / تغییر رمز عبور' : 'Set or Change Password'}
+                    </h2>
+                  </div>
+                  <p className="text-xs text-[#526174] mt-1 leading-relaxed">
+                    {isFa
+                      ? 'با تعیین رمز عبور، در ورودهای بعدی علاوه بر لینک مستقیم ایمیل، می‌توانید مستقیماً با رمز عبور وارد پورتال پرونده شوید.'
+                      : 'Set a password to enable instant sign-in alongside your regular magic email links.'}
+                  </p>
+                </div>
+
+                {passwordSuccess && (
+                  <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs sm:text-sm flex items-center space-x-2.5 rtl:space-x-reverse animate-fadeIn">
+                    <CheckCircle size={18} className="text-emerald-600 shrink-0" />
+                    <span>{passwordSuccess}</span>
+                  </div>
+                )}
+
+                {passwordError && (
+                  <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900 text-xs sm:text-sm flex items-center space-x-2.5 rtl:space-x-reverse animate-fadeIn">
+                    <AlertCircle size={18} className="text-rose-600 shrink-0" />
+                    <span>{passwordError}</span>
+                  </div>
+                )}
+
+                <form onSubmit={handlePasswordSave} className="space-y-4">
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-bold text-[#142033]">
+                      {isFa ? 'رمز عبور جدید (حداقل ۸ کاراکتر):' : 'New Password (min 8 chars):'}
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="password"
+                        required
+                        dir="ltr"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        placeholder="••••••••"
+                        className="w-full px-4 py-3 pl-11 rounded-xl border border-[#dfe6ef] text-sm text-[#142033] focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
+                      />
+                      <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-bold text-[#142033]">
+                      {isFa ? 'تکرار رمز عبور جدید:' : 'Confirm New Password:'}
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="password"
+                        required
+                        dir="ltr"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        placeholder="••••••••"
+                        className="w-full px-4 py-3 pl-11 rounded-xl border border-[#dfe6ef] text-sm text-[#142033] focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
+                      />
+                      <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    </div>
+                  </div>
+
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      disabled={savingPassword}
+                      className="w-full py-3 rounded-xl bg-[#071B3D] hover:bg-[#0b2b55] text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse disabled:opacity-60 cursor-pointer"
+                    >
+                      <KeyRound size={16} />
+                      <span>{savingPassword ? (isFa ? 'در حال ثبت...' : 'Saving...') : (isFa ? 'ثبت رمز عبور جدید' : 'Update Password')}</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         )}
 

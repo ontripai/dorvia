@@ -52,6 +52,9 @@ interface LeadProfile {
   address_line: string | null;
   address_city: string | null;
   address_postal_code: string | null;
+  iran_address?: string | null;
+  other_residency_address?: string | null;
+  romania_address?: string | null;
   employment_status: string | null;
   education_level: string | null;
   created_at: string;
@@ -83,6 +86,9 @@ export default function PortalProfilePage({ params }: PortalProfileProps) {
   const [addressLine, setAddressLine] = useState('');
   const [addressCity, setAddressCity] = useState('');
   const [addressPostalCode, setAddressPostalCode] = useState('');
+  const [iranAddress, setIranAddress] = useState('');
+  const [otherResidencyAddress, setOtherResidencyAddress] = useState('');
+  const [romaniaAddress, setRomaniaAddress] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [anniversaryDate, setAnniversaryDate] = useState('');
   const [nationalId, setNationalId] = useState('');
@@ -125,6 +131,9 @@ export default function PortalProfilePage({ params }: PortalProfileProps) {
         setAddressLine(l.address_line || '');
         setAddressCity(l.address_city || '');
         setAddressPostalCode(l.address_postal_code || '');
+        setIranAddress(l.iran_address || '');
+        setOtherResidencyAddress(l.other_residency_address || '');
+        setRomaniaAddress(l.romania_address || '');
         setDateOfBirth(l.date_of_birth || '');
         setAnniversaryDate(l.anniversary_date || '');
         setNationalId(l.national_id_or_passport || '');
@@ -151,16 +160,18 @@ export default function PortalProfilePage({ params }: PortalProfileProps) {
 
     try {
       const res = await fetch('/api/portal/profile', {
-        method: 'POST',
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           phone: phone.trim() || null,
           address_line: addressLine.trim() || null,
           address_city: addressCity.trim() || null,
           address_postal_code: addressPostalCode.trim() || null,
+          iran_address: iranAddress.trim() || null,
+          other_residency_address: otherResidencyAddress.trim() || null,
+          romania_address: romaniaAddress.trim() || null,
           date_of_birth: dateOfBirth.trim() || null,
           anniversary_date: anniversaryDate.trim() || null,
-          national_id_or_passport: nationalId.trim() || null,
           employment_status: employmentStatus.trim() || null,
           education_level: educationLevel.trim() || null,
         }),
@@ -633,8 +644,47 @@ export default function PortalProfilePage({ params }: PortalProfileProps) {
 
                 </div>
 
-                {/* Residential Address Fields */}
+                {/* Dedicated Addresses Section (dre-p80) */}
                 <div className="space-y-4 pt-2 border-t border-slate-100">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#142033] block">
+                      {isFa ? 'آدرس محل سکونت در ایران (مبدأ):' : 'Home Address in Iran:'}
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={iranAddress}
+                      onChange={(e) => setIranAddress(e.target.value)}
+                      placeholder={isFa ? 'استان، شهر، خیابان، پلاک، واحد...' : 'Province, City, Street, Unit...'}
+                      className="w-full p-3 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2F6FED] resize-none"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#142033] block">
+                      {isFa ? 'آدرس در کشور دیگر (اختیاری، در صورت داشتن اقامت قبلی):' : 'Address in Another Country (Optional):'}
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={otherResidencyAddress}
+                      onChange={(e) => setOtherResidencyAddress(e.target.value)}
+                      placeholder={isFa ? 'کشور، شهر، آدرس اقامت دوم (در صورت وجود)...' : 'Country, City, Second residency address...'}
+                      className="w-full p-3 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2F6FED] resize-none"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#142033] block">
+                      {isFa ? 'آدرس در رومانی (محل سکونت پس از ورود به رومانی):' : 'Address in Romania (After Arrival):'}
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={romaniaAddress}
+                      onChange={(e) => setRomaniaAddress(e.target.value)}
+                      placeholder={isFa ? 'شهر، خیابان، شماره آپارتمان در رومانی...' : 'City, Street, Apartment number in Romania...'}
+                      className="w-full p-3 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2F6FED] resize-none"
+                    />
+                  </div>
+
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-[#142033] block">
                       {isFa ? 'نشانی دقیق محل سکونت فعلی' : 'Current Residential Address'}

@@ -74,13 +74,11 @@ export async function GET(request: Request) {
 }
 
 /**
- * POST /api/portal/profile
- * Updates allowed personal profile fields for the authenticated lead.
- * STRICT WHITELIST: Only personal contact and profile info may be edited.
- * Administrative fields (status, admin_comment, verified_at, invited_at, etc.)
+ * Core profile updater with strict customer-side field whitelisting.
+ * Administrative fields (email, status, admin_comment, raw_meta, verified_*, invited_*, etc.)
  * are strictly ignored and never modified.
  */
-export async function POST(request: Request) {
+async function updateProfileHandler(request: Request) {
   try {
     const supabase = createServerComponentClient(request);
     const {
@@ -104,7 +102,7 @@ export async function POST(request: Request) {
 
     const { data: currentLead, error: leadErr } = await supabaseAdmin
       .from('leads')
-      .select('id, email')
+      .select('id, email, user_id')
       .eq('user_id', user.id)
       .maybeSingle();
 
@@ -123,11 +121,23 @@ export async function POST(request: Request) {
       );
     }
 
-    // STRICT WHITELIST of customer-editable fields
+    // STRICT WHITELIST of customer-editable fields (dre-p80)
     const allowedUpdates: Record<string, any> = {};
 
+    if (typeof body.full_name === 'string' && body.full_name.trim()) {
+      allowedUpdates.full_name = body.full_name.trim();
+    }
     if (typeof body.phone === 'string') {
       allowedUpdates.phone = body.phone.trim() || null;
+    }
+    if (typeof body.iran_address === 'string') {
+      allowedUpdates.iran_address = body.iran_address.trim() || null;
+    }
+    if (typeof body.other_residency_address === 'string') {
+      allowedUpdates.other_residency_address = body.other_residency_address.trim() || null;
+    }
+    if (typeof body.romania_address === 'string') {
+      allowedUpdates.romania_address = body.romania_address.trim() || null;
     }
     if (typeof body.address_line === 'string') {
       allowedUpdates.address_line = body.address_line.trim() || null;
@@ -144,9 +154,6 @@ export async function POST(request: Request) {
     if (typeof body.anniversary_date === 'string') {
       allowedUpdates.anniversary_date = body.anniversary_date.trim() || null;
     }
-    if (typeof body.national_id_or_passport === 'string') {
-      allowedUpdates.national_id_or_passport = body.national_id_or_passport.trim() || null;
-    }
     if (typeof body.employment_status === 'string') {
       allowedUpdates.employment_status = body.employment_status.trim() || null;
     }
@@ -159,7 +166,7 @@ export async function POST(request: Request) {
     const { data: updatedLead, error: updateErr } = await supabaseAdmin
       .from('leads')
       .update(allowedUpdates)
-      .eq('id', currentLead.id)
+      .eq('user_id', user.id)
       .select('*')
       .single();
 
@@ -176,10 +183,26 @@ export async function POST(request: Request) {
       lead: updatedLead,
     });
   } catch (error) {
-    console.error('Unexpected error in POST /api/portal/profile:', error);
+    console.error('Unexpected error in PATCH /api/portal/profile:', error);
     return NextResponse.json(
       { error: 'Internal server error.' },
       { status: 500 }
     );
   }
+}
+
+/**
+ * PATCH /api/portal/profile
+ * Server-authoritative route for updating customer profile.
+ */
+export async function PATCH(request: Request) {
+  return updateProfileHandler(request);
+}
+
+/**
+ * POST /api/portal/profile
+ * Backwards-compatibility wrapper for profile updates.
+ */
+export async function POST(request: Request) {
+  return updateProfileHandler(request);
 }
