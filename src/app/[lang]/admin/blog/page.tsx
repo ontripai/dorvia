@@ -522,7 +522,7 @@ export default function AdminBlogPage({ params }: { params: { lang: Language } }
                           <div className="flex items-center justify-center gap-2">
                             {post.status === 'published' && (
                               <a
-                                href={`/${currentLang}/romania/blog/${post.slug_fa}`}
+                                href={`/${currentLang}/romania/blog/${currentLang === 'en' && post.slug_en ? post.slug_en : post.slug_fa}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"

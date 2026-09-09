@@ -84,8 +84,22 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
+    const mappedPosts = (posts || []).map((p: any) => {
+      const isEn = lang === 'en';
+      const title = isEn ? (p.title_en || p.title_fa) : (p.title_fa || p.title_en);
+      const slug = isEn ? (p.slug_en || p.slug_fa) : (p.slug_fa || p.slug_en);
+      const excerpt = isEn ? (p.excerpt_en || p.excerpt_fa) : (p.excerpt_fa || p.excerpt_en);
+
+      return {
+        ...p,
+        title,
+        slug,
+        excerpt,
+      };
+    });
+
     return NextResponse.json({
-      posts: posts || [],
+      posts: mappedPosts,
       total: count || 0,
       page,
       limit,
