@@ -29,5 +29,3 @@ export async function isJobBoardPubliclyEnabled(): Promise<boolean> {
   }
 }
 
-// Re-export client-safe utilities from slugHelper
-export { slugifyJob } from './slugHelper';
