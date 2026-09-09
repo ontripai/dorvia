@@ -41,8 +41,7 @@ export async function GET(request: Request, { params }: RouteParams) {
         ),
         author:admin_users!blog_posts_author_admin_id_fkey (
           id,
-          full_name,
-          email
+          full_name
         )
       `)
       .eq('id', params.id)
