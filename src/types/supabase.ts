@@ -40,6 +40,9 @@ export type Database = {
           address_line: string | null;
           address_city: string | null;
           address_postal_code: string | null;
+          iran_address: string | null;
+          other_residency_address: string | null;
+          romania_address: string | null;
           employment_status: string | null;
           education_level: string | null;
           created_at: string;
@@ -76,6 +79,9 @@ export type Database = {
           address_line?: string | null;
           address_city?: string | null;
           address_postal_code?: string | null;
+          iran_address?: string | null;
+          other_residency_address?: string | null;
+          romania_address?: string | null;
           employment_status?: string | null;
           education_level?: string | null;
           created_at?: string;
@@ -112,6 +118,9 @@ export type Database = {
           address_line?: string | null;
           address_city?: string | null;
           address_postal_code?: string | null;
+          iran_address?: string | null;
+          other_residency_address?: string | null;
+          romania_address?: string | null;
           employment_status?: string | null;
           education_level?: string | null;
           created_at?: string;
