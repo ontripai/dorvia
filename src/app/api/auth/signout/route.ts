@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+import { getSupabaseAnonKey, getSupabaseUrl } from '@/lib/supabaseConfig';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,12 +26,8 @@ export async function POST(request: Request) {
       cookieStore = cookies();
     } catch {}
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-    if (!supabaseAnonKey) {
-      throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY is not set — refusing to fall back to a higher-privilege key.');
-    }
+    const supabaseUrl = getSupabaseUrl();
+    const supabaseAnonKey = getSupabaseAnonKey();
 
     const serverClient = createServerClient(supabaseUrl, supabaseAnonKey, {
       cookies: {

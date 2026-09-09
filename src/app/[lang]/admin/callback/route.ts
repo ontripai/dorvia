@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
+import { getSupabaseAnonKey, getSupabaseUrl } from '@/lib/supabaseConfig';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,12 +17,8 @@ export async function GET(request: Request, { params }: { params: { lang: string
   // 1. Server-side PKCE or TokenHash exchange (if query parameters are present)
   if (code || (tokenHash && type)) {
     const cookieStore = cookies();
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-    if (!supabaseAnonKey) {
-      throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY is not set — refusing to fall back to a higher-privilege key.');
-    }
+    const supabaseUrl = getSupabaseUrl();
+    const supabaseAnonKey = getSupabaseAnonKey();
 
     const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
       cookies: {

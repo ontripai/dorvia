@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
+import { getSupabaseAnonKey, getSupabaseUrl } from '@/lib/supabaseConfig';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,12 +17,15 @@ export async function POST(request: Request) {
     return res;
   };
 
+  let flow = 'admin';
+  let lang = 'fa';
+
   try {
     const body = await request.json().catch(() => null);
     const accessToken = body?.access_token;
     const refreshToken = body?.refresh_token;
-    const flow = body?.flow === 'admin' ? 'admin' : 'portal';
-    const lang = body?.lang === 'en' ? 'en' : 'fa';
+    flow = body?.flow === 'portal' ? 'portal' : 'admin';
+    lang = body?.lang === 'en' ? 'en' : 'fa';
 
     if (!accessToken || typeof accessToken !== 'string') {
       return createResponse(
@@ -37,12 +41,8 @@ export async function POST(request: Request) {
       // In standalone tests or non-standard execution contexts outside requestAsyncStorage
     }
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-    if (!supabaseAnonKey) {
-      throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY is not set — refusing to fall back to a higher-privilege key.');
-    }
+    const supabaseUrl = getSupabaseUrl();
+    const supabaseAnonKey = getSupabaseAnonKey();
 
     const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
       cookies: {
@@ -189,9 +189,9 @@ export async function POST(request: Request) {
 
     return createResponse({ success: true, redirectTo: `/${lang}` });
   } catch (err) {
-    console.error('[Auth Session] Unexpected error:', err);
+    console.error('[Auth Session] Unexpected error:', err instanceof Error ? err.stack : err);
     return createResponse(
-      { error: 'technical_error', redirectTo: `/fa/admin/login?error=technical_error` },
+      { error: 'technical_error', redirectTo: `/${lang}/${flow}/login?error=technical_error` },
       { status: 500 }
     );
   }
