@@ -1,13 +1,12 @@
 import { NextResponse } from 'next/server';
 import { recordPathfinderLead } from '../../../lib/supabaseAdmin';
 import { sendPathfinderEmails } from '../../../lib/email/pathfinderEmails';
+import { checkRateLimit } from '@/lib/rateLimit';
 
 // DORVIA Assessment / PathFinder — lead capture endpoint.
 // Validates payload, saves lead to Supabase, dispatches Resend transactional
 // emails (internal notification to DORVIA + localized result email to applicant),
 // and best-effort Telegram notification if configured.
-
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
 const ROUTES = ['study', 'work', 'business', 'family', 'relocation'] as const;
 type RouteId = (typeof ROUTES)[number];
@@ -20,16 +19,16 @@ export async function POST(req: Request) {
   try {
     const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
 
-    // Rate limiting: max 3 requests per 5 minutes per IP (same policy as /api/evaluation)
-    const now = Date.now();
-    const rlData = rateLimitMap.get(ip);
-    if (rlData && now < rlData.resetTime) {
-      if (rlData.count >= 3) {
-        return NextResponse.json({ error: 'Too Many Requests' }, { status: 429 });
-      }
-      rlData.count += 1;
-    } else {
-      rateLimitMap.set(ip, { count: 1, resetTime: now + 5 * 60 * 1000 });
+    // Rate limiting: max 3 requests per 5 minutes per IP (persistent database store)
+    const rateLimit = await checkRateLimit({
+      endpoint: 'assessment',
+      ip,
+      maxRequests: 3,
+      windowSeconds: 5 * 60,
+    });
+
+    if (!rateLimit.allowed) {
+      return NextResponse.json({ error: 'Too Many Requests' }, { status: 429 });
     }
 
     let data: any;

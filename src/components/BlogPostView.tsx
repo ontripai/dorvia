@@ -131,6 +131,7 @@ export function BlogPostView({ post, lang }: BlogPostViewProps) {
           { label: title },
         ]}
         currentLang={lang}
+        disableJsonLd={true}
       />
 
       {/* Main Article Container */}

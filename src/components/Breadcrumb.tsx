@@ -21,6 +21,7 @@ interface BreadcrumbProps {
   items?: BreadcrumbItem[];
   currentLang: Language;
   onNavigate?: (route: string) => void;
+  disableJsonLd?: boolean;
 }
 
 export const Breadcrumb: React.FC<BreadcrumbProps> = ({
@@ -30,7 +31,8 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
   customParentTitle,
   items,
   currentLang,
-  onNavigate
+  onNavigate,
+  disableJsonLd = false,
 }) => {
   const meta = slugRoute ? PAGE_META[slugRoute] : null;
 
@@ -104,10 +106,12 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      {!disableJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+      )}
 
       {/* MOBILE STICKY PARENT BACK BAR (موبایل و تبلت - چسبان زیر هدر) */}
       {parentPath && parentTitle && (

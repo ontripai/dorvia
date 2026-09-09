@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
+import { maskEmail } from '@/lib/privacy';
 
 export const dynamic = 'force-dynamic';
 
@@ -58,7 +59,7 @@ export async function POST(request: Request) {
     });
 
     if (authErr || !authData?.session || !authData.user) {
-      console.warn('[Auth Password] Credentials rejected for email:', email, authErr?.message);
+      console.warn('[Auth Password] Credentials rejected for email:', maskEmail(email), authErr?.message);
       return createResponse(
         {
           success: false,
