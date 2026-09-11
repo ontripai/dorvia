@@ -11,6 +11,18 @@ export interface TelegramSendResult {
 }
 
 /**
+ * Escapes HTML characters (&, <, >, ") for safe insertion into Telegram messages using 'HTML' parse_mode.
+ */
+export function escapeTelegramHtml(str: string): string {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/**
  * Sends a message to a specific Telegram chat_id using the official Telegram Bot API.
  * If TELEGRAM_BOT_TOKEN is not configured, logs a warning and returns gracefully (never crashes).
  *

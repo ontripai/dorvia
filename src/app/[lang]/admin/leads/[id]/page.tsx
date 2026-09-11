@@ -405,6 +405,21 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
       } else {
         setMessages((prev) => [...prev, data.message]);
         setNewMsgText('');
+        if (data.telegramDelivered === true) {
+          setActionSuccess(
+            isFa
+              ? 'پیام با موفقیت در پرتال ثبت و به تلگرام متقاضی تحویل داده شد.'
+              : 'Message saved and delivered to applicant Telegram.'
+          );
+          setTimeout(() => setActionSuccess(null), 5000);
+        } else if (data.telegramDelivered === false) {
+          setActionError(
+            isFa
+              ? 'پیام در پرتال ذخیره شد اما تحویل به تلگرام انجام نشد.'
+              : 'Message saved to portal, but Telegram delivery failed.'
+          );
+          setTimeout(() => setActionError(null), 6000);
+        }
       }
     } catch (err) {
       setActionError('Error sending message.');
@@ -1870,8 +1885,20 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
                       <Send size={18} />
                     </button>
                   </form>
-                  <div className="flex items-center justify-between text-[11px] text-slate-400 pt-2 px-1">
-                    <span>{isFa ? 'ارسال با کلید Enter' : 'Press Enter to send'}</span>
+                  <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-400 pt-2 px-1 gap-2">
+                    <div className="flex items-center gap-2">
+                      <span>{isFa ? 'ارسال با کلید Enter' : 'Press Enter to send'}</span>
+                      {lead?.source === 'telegram_bot' && lead?.channel_ref && (
+                        <span className="inline-flex items-center gap-1 text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-full font-medium">
+                          <span>📱</span>
+                          <span>
+                            {isFa
+                              ? `تحویل مستقیم به تلگرام (${lead.channel_ref})`
+                              : `Direct Telegram dispatch (${lead.channel_ref})`}
+                          </span>
+                        </span>
+                      )}
+                    </div>
                     <span>🔒 {isFa ? 'ارسال به عنوان مشاور رسمی DORVIA' : 'Signed as DORVIA Staff'}</span>
                   </div>
                 </div>
