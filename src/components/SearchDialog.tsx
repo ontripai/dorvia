@@ -285,6 +285,15 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
       icon: <Landmark size={18} className="text-[#2F6FED]" />
     },
     {
+      id: 'legal-consultation',
+      categoryKey: 'needs',
+      title: { fa: 'وکیل و مشاوره حقوقی — استعلام پروانه وکلا در رومانی (UNBR)', en: 'Legal Consultation & Finding a Lawyer in Romania (UNBR)' },
+      categoryLabel: { fa: 'نیازهای زندگی', en: 'Essentials' },
+      description: { fa: 'بررسی پروانه وکلای رسمی، قرارداد مکتوب وکالت و پیشگیری از واسطه‌های غیرمجاز', en: 'Official UNBR bar license verification, legal contracts, avoiding unlicensed agents' },
+      route: 'needs/legal-consultation',
+      icon: <Landmark size={18} className="text-[#2F6FED]" />
+    },
+    {
       id: 'romanian-language',
       categoryKey: 'needs',
       title: { fa: 'آموزش زبان رومانیایی — دوره‌های رایگان IOM و موسسات', en: 'Romanian Language Courses & Free Integration Programs' },

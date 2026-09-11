@@ -242,6 +242,18 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     inSitemap: true,
     pageType: 'content'
   },
+  'needs/legal-consultation': {
+    canonical: '/needs/legal-consultation',
+    aliases: [],
+    parentHub: '/needs',
+    titleFa: 'وکیل و مشاوره حقوقی',
+    titleEn: 'Legal Consultation & Finding a Lawyer',
+    parentTitleFa: 'نیازمندی‌ها و استقرار',
+    parentTitleEn: 'Essentials & Settlement',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'content'
+  },
   'needs/notary-public': {
     canonical: '/needs/notary-public',
     aliases: [],

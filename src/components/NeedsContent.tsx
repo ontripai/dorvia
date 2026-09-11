@@ -151,6 +151,17 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
             </Link>
 
+            <Link href="/needs/legal-consultation" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">⚖️</span>
+                  <span>{currentLang === 'fa' ? 'وکیل و مشاوره حقوقی' : 'Legal Consultation & Lawyers'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'استعلام پروانه وکلای رسمی (UNBR)، نکات قرارداد وکالت و جلوگیری از واسطه‌های غیرمجاز.' : 'UNBR bar license verification, legal engagement contracts, and avoiding unlicensed agents.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </Link>
+
             <Link href="/needs/romanian-language-courses" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
               <div>
                 <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
@@ -529,6 +540,234 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
           ]} />
 
           <ParentHubFooterCard slugRoute="needs/certified-translation" currentLang={currentLang} onNavigate={onNavigate} />
+        </div>
+      );
+
+    // 3b. LEGAL CONSULTATION & LAWYER VERIFICATION
+    case 'legal-consultation':
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="needs/legal-consultation" currentLang={currentLang} onNavigate={onNavigate} />
+
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <span className="text-[#2F6FED] font-bold text-xs uppercase tracking-wider">
+              {currentLang === 'fa' ? 'امور حقوقی و وکالت در رومانی' : 'Legal Affairs & Representation in Romania'}
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'وکیل و مشاوره حقوقی' : 'Legal Consultation & Finding a Lawyer'}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa'
+                ? 'راهنمای استعلام اعتبار پروانه وکالت از کانون وکلای رومانی (UNBR)، نکات تنظیم قرارداد مکتوب و پیشگیری از کلاهبرداری واسطه‌های غیرمجاز.'
+                : 'Guide to verifying lawyer licensing via the Romanian Bar (UNBR), structuring legal assistance agreements, and preventing fraud.'}
+            </p>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منابع: اتحادیه ملی کانون‌های وکلای رومانی (UNBR) و سامانه فهرست وکلا (Tabloul avocaților) — آخرین بررسی: شهریور ۱۴۰۵ / سپتامبر ۲۰۲۶'
+                : 'Sources: National Union of Romanian Bar Associations (UNBR) & Lawyers\' Roll (Tabloul avocaților) — Last reviewed: September 2026'}
+            </div>
+          </div>
+
+          {/* Section 1: Why verifying lawyer status matters + How to check */}
+          <div className="editorial-card p-6 sm:p-8 bg-white space-y-5 border border-[#dfe6ef]">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033]">
+              {currentLang === 'fa'
+                ? 'چرا تأیید مجوز وکیل مهم است و چگونه استعلام بگیریم؟'
+                : 'Why Lawyer License Verification Matters & How to Check'}
+            </h2>
+
+            <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed space-y-3">
+              <p>
+                {currentLang === 'fa'
+                  ? 'در رومانی، فقط افرادی که رسماً در اتحادیه وکلای رومانی (UNBR – Uniunea Națională a Barourilor din România) ثبت شده باشند، مجاز به ارائه مشاوره و نمایندگی حقوقی هستند. خودِ UNBR به‌طور رسمی هشدار داده که برخی افراد یا سایت‌ها بدون مجوز، خود را «مشاور حقوقی» یا «وکیل» معرفی می‌کنند و این کار طبق قانون رومانی جرم محسوب می‌شود.'
+                  : 'In Romania, only individuals officially registered with the National Union of Romanian Bar Associations (UNBR – Uniunea Națională a Barourilor din România) are legally permitted to provide legal advice and representation. UNBR itself has issued an official public warning that some unlicensed individuals or websites falsely present themselves as "legal consultants" or "lawyers," which is a criminal offense under Romanian law.'}
+              </p>
+              <p>
+                {currentLang === 'fa'
+                  ? 'پیش از پرداخت هرگونه هزینه یا امضای هر توافقی با یک وکیل، می‌توانید به‌صورت رایگان و آنلاین از طریق سامانه رسمی «فهرست وکلا» (Tabloul avocaților) بررسی کنید که آیا آن فرد واقعاً وکیل ثبت‌شده و دارای مجوز فعال است یا نه.'
+                  : 'Before paying any fee or signing any agreement with a lawyer, you can check — free of charge, online — through the official Lawyers\' Roll (Tabloul avocaților) whether that person is genuinely a registered, currently licensed attorney.'}
+              </p>
+            </div>
+
+            <div className="p-4 sm:p-5 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-2">
+              <div className="font-bold text-[#142033] text-sm flex items-center space-x-2 rtl:space-x-reverse">
+                <span>🔍</span>
+                <span>{currentLang === 'fa' ? 'سامانه رسمی جستجوی وکلای دارای پروانه رومانی' : 'Official Romanian Licensed Lawyers Directory'}</span>
+              </div>
+              <p className="text-xs text-[#526174] leading-relaxed">
+                {currentLang === 'fa'
+                  ? 'این سامانه توسط کانون وکلای رومانی (UNBR) اداره می‌شود و امکان جستجوی نام، نام خانوادگی و کانون استانی (Barou) را برای بررسی وضعیت فعالیت (Activ) وکیل فراهم می‌کند.'
+                  : 'Maintained and officially endorsed by UNBR, this database allows anyone to search by full name and Bar association (Barou) to verify an attorney\'s active (Activ) status.'}
+              </p>
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                <a
+                  href="https://ifep.ro/Justice/Lawyers/LawyersPanel.aspx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="outline" size="sm" rightIcon={<ExternalLink size={14} />}>
+                    {currentLang === 'fa' ? 'ورود به سامaneh جستجوی وکلای رومانی (ifep.ro)' : 'Search Romanian Lawyers Panel (ifep.ro)'}
+                  </Button>
+                </a>
+                <a
+                  href="https://www.unbr.ro/unbr-toleranta-zero-fata-de-practicarea-fara-drept-a-profesiei-de-avocat-in-mediul-online/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="ghost" size="sm" rightIcon={<ExternalLink size={14} />}>
+                    {currentLang === 'fa' ? 'متن هشدار رسمی UNBR درباره وکالت غیرمجاز' : 'UNBR Warning on Illegal Legal Practice'}
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Section 2: Practical advice before hiring a lawyer */}
+          <div className="editorial-card p-6 sm:p-8 bg-white space-y-4 border border-[#dfe6ef]">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033]">
+              {currentLang === 'fa' ? 'نکات عملی پیش از استخدام وکیل' : 'Practical Advice Before Hiring a Lawyer'}
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1.5">
+                <div className="font-bold text-[#2F6FED] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span>1️⃣</span>
+                  <span>{currentLang === 'fa' ? 'بررسی هویت و مجوز در سامانه' : 'Verify License via the Official Roll'}</span>
+                </div>
+                <p className="text-xs text-[#526174] leading-relaxed">
+                  {currentLang === 'fa'
+                    ? 'هویت و مجوز وکیل را از طریق سامانه رسمی کانون وکلا (Tabloul avocaților) بررسی کنید تا از وضعیت فعال بودن پروانه اطمینان حاصل شود.'
+                    : 'Verify the lawyer\'s identity and active bar license status through the official UNBR registry before taking any further steps.'}
+                </p>
+              </div>
+
+              <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1.5">
+                <div className="font-bold text-[#2F6FED] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span>2️⃣</span>
+                  <span>{currentLang === 'fa' ? 'درخواست قرارداد مکتوب و شفاف' : 'Demand Written Engagement Agreement'}</span>
+                </div>
+                <p className="text-xs text-[#526174] leading-relaxed">
+                  {currentLang === 'fa'
+                    ? 'شرایط همکاری و حق‌الزحمه را همیشه به‌صورت مکتوب (قرارداد وکالت — Contract de asistență juridică) درخواست کنید؛ این یک رویه حرفه‌ای استاندارد است.'
+                    : 'Always request the terms of engagement and fees in writing (a formal legal assistance contract) — this is standard professional practice.'}
+                </p>
+              </div>
+
+              <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1.5">
+                <div className="font-bold text-[#2F6FED] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span>3️⃣</span>
+                  <span>{currentLang === 'fa' ? 'عدم اعتماد به افراد بدون شماره ثبت' : 'Do Not Trust Unlicensed Intermediaries'}</span>
+                </div>
+                <p className="text-xs text-[#526174] leading-relaxed">
+                  {currentLang === 'fa'
+                    ? 'به هیچ فردی که خود را «وکیل» معرفی می‌کند ولی نمی‌تواند شماره ثبت خود در کانون وکلا را ارائه دهد، اعتماد نکنید.'
+                    : 'Do not trust anyone who presents themselves as a "lawyer" or "legal advisor" but cannot provide verifiable bar registration credentials.'}
+                </p>
+              </div>
+
+              <div className="p-4 bg-[#f7f9fc] rounded-xl border border-[#dfe6ef] space-y-1.5">
+                <div className="font-bold text-[#2F6FED] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span>4️⃣</span>
+                  <span>{currentLang === 'fa' ? 'عدم امضای اسناد بدون بررسی' : 'Never Sign Without Prior Review'}</span>
+                </div>
+                <p className="text-xs text-[#526174] leading-relaxed">
+                  {currentLang === 'fa'
+                    ? 'هیچ مدرک یا سندی را بدون مطالعه دقیق و مشورت با وکیل رسمی و معتبر امضا نکنید.'
+                    : 'Never sign any contract, power of attorney, or declaration without first consulting a qualified, registered lawyer.'}
+                </p>
+              </div>
+            </div>
+
+            <div className="p-4 bg-amber-50/60 rounded-xl border border-amber-200 text-xs sm:text-sm text-[#526174] leading-relaxed mt-4">
+              <span className="font-bold text-amber-800 block mb-1">
+                {currentLang === 'fa' ? '⚠️ توجه درباره هزینه‌ها و حق‌الزحمه وکالت در رومانی:' : '⚠️ Note on Legal Fees in Romania:'}
+              </span>
+              {currentLang === 'fa'
+                ? 'در رومانی هیچ تعرفه ثابت یا سقف دولتی رسمی برای حق‌الزحمه پرونده‌های مهاجرتی و مشاوره‌های حقوقی وجود ندارد. هزینه وکالت توافقی بوده و بر اساس پیچیدگی پرونده، میزان ساعت کار و تجربه وکیل تعیین می‌شود. بنابراین، پیش از شروع هرگونه اقدام یا پرداخت، حتماً برآورد مکتوب و پیش‌نویس قرارداد وکالت را دریافت و توافق کنید.'
+                : 'Romania does not have an official fixed tariff or statutory cap for private immigration law matters. Legal fees are freely negotiated between attorney and client based on case complexity, expected hours, and seniority. Therefore, always secure a written fee schedule and draft engagement agreement before commencing work or making any payment.'}
+            </div>
+          </div>
+
+          {/* Section 3: FAQ */}
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول درباره وکیل و مشاوره حقوقی' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">
+                  {currentLang === 'fa'
+                    ? 'چطور مطمئن شوم فردی که به من به‌عنوان «وکیل مهاجرت» معرفی شده، واقعاً مجوز دارد؟'
+                    : 'How can I confirm that someone presented to me as an "immigration lawyer" is actually licensed?'}
+                </h4>
+                <p className="text-sm text-[#475569] leading-relaxed">
+                  {currentLang === 'fa'
+                    ? 'نام او را در سامانه رسمی «فهرست وکلا» (Tabloul avocaților) به آدرس ifep.ro جستجو کنید. این سامانه توسط اتحادیه وکلای رومانی (UNBR) معرفی و پشتیبانی می‌شود و رایگان و در دسترس عموم است.'
+                    : 'Search their name in the official Lawyers\' Roll (Tabloul avocaților) at ifep.ro. This registry is maintained and endorsed by the National Union of Romanian Bar Associations (UNBR), and is free and publicly accessible.'}
+                </p>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">
+                  {currentLang === 'fa'
+                    ? 'آیا مشاوره حقوقی غیررسمی (بدون وکیل دارای مجوز) در رومانی قانونی است؟'
+                    : 'Is it legal to receive informal legal advice from someone without a valid law license in Romania?'}
+                </h4>
+                <p className="text-sm text-[#475569] leading-relaxed">
+                  {currentLang === 'fa'
+                    ? 'خیر. طبق هشدار رسمی UNBR، ارائه مشاوره و نمایندگی حقوقی حرفه‌ای در رومانی فقط در انحصار وکلای دارای مجوز است و انجام آن توسط افراد فاقد مجوز، جرم محسوب می‌شود.'
+                    : 'No. According to UNBR\'s official warning, providing professional legal advice and representation in Romania is reserved exclusively for licensed attorneys, and doing so without a license is a criminal offense.'}
+                </p>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">
+                  {currentLang === 'fa'
+                    ? 'قبل از امضای قرارداد وکالت باید به چه نکاتی توجه کنم؟'
+                    : 'What should I pay attention to before signing a legal engagement agreement?'}
+                </h4>
+                <p className="text-sm text-[#475569] leading-relaxed">
+                  {currentLang === 'fa'
+                    ? 'حتماً درخواست کنید شرایط همکاری، دامنه‌ی خدمات و حق‌الزحمه به‌صورت مکتوب مشخص شود. این یک رویه استاندارد حرفه‌ای است و به شما کمک می‌کند از سوءتفاهم‌های بعدی جلوگیری کنید.'
+                    : 'Always ask for the terms of engagement, scope of services, and fees to be specified in writing. This is standard professional practice and helps prevent misunderstandings later.'}
+                </p>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">
+                  {currentLang === 'fa'
+                    ? 'آیا برای تمام مراحل اداری مهاجرت یا ثبت شرکت در رومانی الزاماً به وکیل نیاز است؟'
+                    : 'Is a lawyer mandatory for every step of Romanian immigration or business registration?'}
+                </h4>
+                <p className="text-sm text-[#475569] leading-relaxed">
+                  {currentLang === 'fa'
+                    ? 'خیر، بسیاری از مراحل اداری، آماده‌سازی پرونده و ارزیابی مدارک اولیه را متقاضیان می‌توانند شخصاً یا با راهنمایی پلتفرم‌های تخصصی انجام دهند؛ اما در صورت بروز دعاوی، تجدیدنظرخواهی رد ویزا در مراجع قضایی، یا پرونده‌های پیچیده حقوقی، طبق قانون فقط وکلای رسمی عضو UNBR صلاحیت ورود و دفاع را دارند.'
+                    : 'No, administrative document compilation and procedural guidance can often be handled directly by applicants or specialized platforms; however, judicial appeals against visa or permit refusals and formal court representation strictly require a licensed UNBR attorney.'}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <FaqSchema items={[
+            {
+              q: currentLang === 'fa' ? 'چطور مطمئن شوم فردی که به من به‌عنوان «وکیل مهاجرت» معرفی شده، واقعاً مجوز دارد؟' : 'How can I confirm that someone presented to me as an "immigration lawyer" is actually licensed?',
+              a: currentLang === 'fa' ? 'نام او را در سامانه رسمی «فهرست وکلا» (Tabloul avocaților) به آدرس ifep.ro جستجو کنید. این سامانه توسط اتحادیه وکلای رومانی (UNBR) معرفی و پشتیبانی می‌شود و رایگان و در دسترس عموم است.' : 'Search their name in the official Lawyers\' Roll (Tabloul avocaților) at ifep.ro. This registry is maintained and endorsed by the National Union of Romanian Bar Associations (UNBR), and is free and publicly accessible.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا مشاوره حقوقی غیررسمی (بدون وکیل دارای مجوز) در رومانی قانونی است؟' : 'Is it legal to receive informal legal advice from someone without a valid law license in Romania?',
+              a: currentLang === 'fa' ? 'خیر. طبق هشدار رسمی UNBR، ارائه مشاوره و نمایندگی حقوقی حرفه‌ای در رومانی فقط در انحصار وکلای دارای مجوز است و انجام آن توسط افراد فاقد مجوز، جرم محسوب می‌شود.' : 'No. According to UNBR\'s official warning, providing professional legal advice and representation in Romania is reserved exclusively for licensed attorneys, and doing so without a license is a criminal offense.'
+            },
+            {
+              q: currentLang === 'fa' ? 'قبل از امضای قرارداد وکالت باید به چه نکاتی توجه کنم؟' : 'What should I pay attention to before signing a legal engagement agreement?',
+              a: currentLang === 'fa' ? 'حتماً درخواست کنید شرایط همکاری، دامنه‌ی خدمات و حق‌الزحمه به‌صورت مکتوب مشخص شود. این یک رویه استاندارد حرفه‌ای است و به شما کمک می‌کند از سوءتفاهم‌های بعدی جلوگیری کنید.' : 'Always ask for the terms of engagement, scope of services, and fees to be specified in writing. This is standard professional practice and helps prevent misunderstandings later.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا برای تمام مراحل اداری مهاجرت یا ثبت شرکت در رومانی الزاماً به وکیل نیاز است؟' : 'Is a lawyer mandatory for every step of Romanian immigration or business registration?',
+              a: currentLang === 'fa' ? 'خیر، بسیاری از مراحل اداری، آماده‌سازی پرونده و ارزیابی مدارک اولیه را متقاضیان می‌توانند شخصاً یا با راهنمایی پلتفرم‌های تخصصی انجام دهند؛ اما در صورت بروز دعاوی، تجدیدنظرخواهی رد ویزا در مراجع قضایی، یا پرونده‌های پیچیده حقوقی، طبق قانون فقط وکلای رسمی عضو UNBR صلاحیت ورود و دفاع را دارند.' : 'No, administrative document compilation and procedural guidance can often be handled directly by applicants or specialized platforms; however, judicial appeals against visa or permit refusals and formal court representation strictly require a licensed UNBR attorney.'
+            }
+          ]} />
+
+          <ParentHubFooterCard slugRoute="needs/legal-consultation" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
 

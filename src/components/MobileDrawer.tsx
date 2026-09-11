@@ -174,6 +174,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             { id: 'needs/currency-exchange', label: isFa ? 'صرافی و تبدیل پول' : 'Currency Exchange' },
             { id: 'needs/driving-license', label: isFa ? 'گواهینامه رانندگی' : 'Driving License' },
             { id: 'needs/certified-translation', label: isFa ? 'دارالترجمه رسمی' : 'Certified Translation' },
+            { id: 'needs/legal-consultation', label: isFa ? 'وکیل و مشاوره حقوقی' : 'Legal Consultation' },
             { id: 'needs/romanian-language-courses', label: isFa ? 'آموزش زبان رومانیایی' : 'Romanian Language Courses' },
             { id: 'needs/notary-public', label: isFa ? 'دفتر اسناد رسمی' : 'Notary Public' },
             { id: 'needs/iranian-embassy-and-mikhak', label: isFa ? 'سفارت ایران و سامانه میخک' : 'Iranian Embassy & Mikhak' },
