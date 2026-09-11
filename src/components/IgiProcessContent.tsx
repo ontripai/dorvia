@@ -668,6 +668,11 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
             <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چرا انتظار در دفتر بخارست با دفاتر شهرستان فرق دارد؟' : 'Why is the wait at the Bucharest office different from regional offices?'}</h4>
             <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'دفتر بخارست از سال ۲۰۲۳ با ۳۰ باجه و نوبت‌دهی خودکار به مجتمع Grand Arena Mall منتقل شد، اما دفاتر کوچک‌تر (مثل کلوژ) ظرفیت محدودتری داشته‌اند. اگر خارج از بخارست هستید، نوبت آنلاین را زودتر رزرو کنید.' : 'Since 2023 the Bucharest office moved to the Grand Arena Mall complex with 30 counters and automated queuing, while smaller offices (like Cluj) have historically had far more limited capacity. If you\'re outside Bucharest, book your online appointment well in advance.'}</p>
           </div>
+          {/* Source: Official IGI page on postal delivery of issued documents (igi.mai.gov.ro) */}
+          <div>
+            <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'وقتی کارت اقامتم آماده شد، خودِ اداره مهاجرت به من خبر می‌دهد یا باید خودم پیگیری کنم؟' : 'When my residence card is ready, will IGI notify me, or do I need to follow up myself?'}</h4>
+            <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق رویه‌ی فعلی منتشرشده‌ی IGI، سیستم اطلاع‌رسانی خودکار (پیامک/ایمیل) برای آماده شدن کارت وجود ندارد. تنها گزینه‌ی رسمی: در زمان ثبت درخواست می‌توانید با پرداخت هزینه‌ی پستی، درخواست دهید کارت به آدرس محل سکونتتان در رومانی پست شود. در غیر این صورت، بهتر است خودتان از طریق پورتال آنلاین اداره مهاجرت یا تماس مستقیم با همان دفتری که پرونده را ثبت کرده‌اید، وضعیت را پیگیری کنید.' : 'Per IGI\'s currently published procedures, there is no automatic SMS/email notification system for card readiness. The only official option: at the time you file your application, you can pay a postal-delivery fee to have the card mailed to your address in Romania. Otherwise, it\'s best to follow up yourself via the immigration office\'s online portal or by contacting the specific office where your file was submitted.'}</p>
+          </div>
         </div>
       </div>
 
@@ -695,6 +700,10 @@ export const IgiProcessContent: React.FC<IgiProcessContentProps> = ({ currentLan
         {
           q: currentLang === 'fa' ? 'چرا انتظار در دفتر بخارست با دفاتر شهرستان فرق دارد؟' : 'Why is the wait at the Bucharest office different from regional offices?',
           a: currentLang === 'fa' ? 'دفتر بخارست از سال ۲۰۲۳ با ۳۰ باجه و نوبت‌دهی خودکار به مجتمع Grand Arena Mall منتقل شد، اما دفاتر کوچک‌تر (مثل کلوژ) ظرفیت محدودتری داشته‌اند. اگر خارج از بخارست هستید، نوبت آنلاین را زودتر رزرو کنید.' : 'Since 2023 the Bucharest office moved to the Grand Arena Mall complex with 30 counters and automated queuing, while smaller offices (like Cluj) have historically had far more limited capacity. If you\'re outside Bucharest, book your online appointment well in advance.'
+        },
+        {
+          q: currentLang === 'fa' ? 'وقتی کارت اقامتم آماده شد، خودِ اداره مهاجرت به من خبر می‌دهد یا باید خودم پیگیری کنم؟' : 'When my residence card is ready, will IGI notify me, or do I need to follow up myself?',
+          a: currentLang === 'fa' ? 'طبق رویه‌ی فعلی منتشرشده‌ی IGI، سیستم اطلاع‌رسانی خودکار (پیامک/ایمیل) برای آماده شدن کارت وجود ندارد. تنها گزینه‌ی رسمی: در زمان ثبت درخواست می‌توانید با پرداخت هزینه‌ی پستی، درخواست دهید کارت به آدرس محل سکونتتان در رومانی پست شود. در غیر این صورت، بهتر است خودتان از طریق پورتال آنلاین اداره مهاجرت یا تماس مستقیم با همان دفتری که پرونده را ثبت کرده‌اید، وضعیت را پیگیری کنید.' : 'Per IGI\'s currently published procedures, there is no automatic SMS/email notification system for card readiness. The only official option: at the time you file your application, you can pay a postal-delivery fee to have the card mailed to your address in Romania. Otherwise, it\'s best to follow up yourself via the immigration office\'s online portal or by contacting the specific office where your file was submitted.'
         }
       ]} />
 

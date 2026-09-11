@@ -315,6 +315,59 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
         </p>
       </div>
 
+      {/* SECTION 5: SPOUSE WORK RIGHTS — NARRATIVE */}
+      {/* Source: OG 25/2014, Art. 3(2)(e) and (f) — official text PDF at igi.mai.gov.ro */}
+      <div id="spouse-work-rights" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-5">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <span>💼</span>
+          <span>
+            {currentLang === 'fa'
+              ? 'آیا همسری که با ویزای الحاق خانواده آمده، اجازه کار دارد؟'
+              : 'Can a Spouse Who Came on a Family-Reunification Visa Work?'}
+          </span>
+        </h2>
+        <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'پاسخ به این سوال به این بستگی دارد که الحاق به چه کسی انجام شده است:'
+            : 'This depends on who the sponsoring family member is:'}
+        </p>
+        <div className="space-y-3">
+          <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
+            <strong className="block text-sm font-bold text-emerald-950">
+              {currentLang === 'fa' ? '— اگر الحاق به همسر تبعه رومانیایی باشد:' : '— If reunifying with a Romanian citizen spouse:'}
+            </strong>
+            <p className="text-xs sm:text-sm text-emerald-900 leading-relaxed">
+              {currentLang === 'fa'
+                ? 'طبق قانون (OG 25/2014، ماده ۳ بند ۲)، از نیاز به مجوز کار جداگانه معاف هستید و می‌توانید مستقیم کار کنید.'
+                : 'Under the law (OG 25/2014, Art. 3(2)), you are exempt from needing a separate work authorization and can work directly.'}
+            </p>
+          </div>
+          <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl space-y-1">
+            <strong className="block text-sm font-bold text-amber-950">
+              {currentLang === 'fa' ? '— اگر الحاق به همسری با تابعیت کشور ثالث که خودش دارنده اقامت رومانی است باشد (رایج‌ترین حالت برای خانواده‌های ایرانی):' : '— If reunifying with a spouse who is a third-country national holding Romanian residence (the more common case for Iranian families):'}
+            </strong>
+            <p className="text-xs sm:text-sm text-amber-900 leading-relaxed">
+              {currentLang === 'fa'
+                ? 'این حالت در فهرست معافیت‌های قانونی نیست، یعنی برای کار باید جداگانه مجوز کار (Aviz de Angajare) بگیرید.'
+                : 'This scenario is not on the legal exemption list, meaning you need to separately obtain a work authorization (Aviz de Angajare) to work.'}
+            </p>
+          </div>
+        </div>
+        <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl text-xs sm:text-sm text-[#142033] leading-relaxed">
+          <strong className="block font-bold mb-1">
+            {currentLang === 'fa' ? 'نکته مهم:' : 'Important note:'}
+          </strong>
+          {currentLang === 'fa'
+            ? 'اگر خودِ فردی که الحاق شده در ادامه به اقامت بلندمدت (۵ ساله) رومانی برسد، از آن مرحله به بعد از نیاز به مجوز کار کاملاً معاف می‌شود.'
+            : 'If the reunified person later obtains Romania\'s own long-term (5-year) residence, they become fully exempt from needing a work authorization from that point on.'}
+        </div>
+        <p className="text-xs text-[#788697] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'منبع: OG 25/2014، ماده ۳ بند ۲ حروف (e) و (f) — متن رسمی PDF در igi.mai.gov.ro.'
+            : 'Source: OG 25/2014, Art. 3(2)(e) and (f) — official PDF text at igi.mai.gov.ro.'}
+        </p>
+      </div>
+
       {/* SECTION 6: OFFICIAL TIMELINES */}
       <div id="timelines" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
         <div className="flex items-center space-x-3 rtl:space-x-reverse text-[#2F6FED]">
@@ -505,6 +558,11 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
               <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم از پلتفرم WorkinRomania.gov.ro برای پرونده پیوست خانواده استفاده کنم؟' : 'Can I use the WorkinRomania.gov.ro platform for my family reunification case?'}</h4>
               <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. این پلتفرم یکپارچه دولتی که در اوت ۲۰۲۶ کامل راه‌اندازی شد، پرونده‌های پیوست خانواده را پوشش نمی‌دهد؛ این فرآیند همچنان کاملاً حضوری و کاغذی نزد دفتر استانی IGI انجام می‌شود.' : 'No. This unified government platform, fully launched in August 2026, does not cover family reunification cases; this process remains entirely in-person and paper-based at your regional IGI office.'}</p>
             </div>
+            {/* Source: OG 25/2014, Art. 3(2)(e) and (f) — official PDF at igi.mai.gov.ro */}
+            <div>
+              <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا همسرم با ویزای الحاق می‌تواند در رومانی کار کند؟' : 'Can my spouse work in Romania on a family reunification visa?'}</h4>
+              <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بستگی دارد به تابعیت اسپانسر (همسری که الحاق به او انجام شده) — جزئیات کامل را در بخش اختصاصی اجازه کار همسر در همین صفحه ببینید: اگر همسر تبعه رومانی باشد معاف از مجوز کار است و مستقیم می‌تواند کار کند، اما اگر دارنده اقامت از کشور ثالث باشد معاف نیست و برای کار باید جداگانه مجوز کار (Aviz de Angajare) بگیرد. با رسیدن به اقامت ۵ ساله بلندمدت، از مجوز کار معاف خواهد شد.' : 'It depends on who the sponsoring spouse is — see the dedicated spouse work rights section on this page: reunifying with a Romanian citizen exempts them from work authorization and allows working directly, while reunifying with a third-country resident is not exempt and requires obtaining a separate work authorization (Aviz de Angajare). Once 5-year long-term residence is reached, they become fully exempt.'}</p>
+            </div>
           </div>
         </div>
 
@@ -528,6 +586,10 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
           {
             q: currentLang === 'fa' ? 'آیا می‌توانم از پلتفرم WorkinRomania.gov.ro برای پرونده پیوست خانواده استفاده کنم؟' : 'Can I use the WorkinRomania.gov.ro platform for my family reunification case?',
             a: currentLang === 'fa' ? 'خیر. این پلتفرم یکپارچه دولتی که در اوت ۲۰۲۶ کامل راه‌اندازی شد، پرونده‌های پیوست خانواده را پوشش نمی‌دهد؛ این فرآیند همچنان کاملاً حضوری و کاغذی نزد دفتر استانی IGI انجام می‌شود.' : 'No. This unified government platform, fully launched in August 2026, does not cover family reunification cases; this process remains entirely in-person and paper-based at your regional IGI office.'
+          },
+          {
+            q: currentLang === 'fa' ? 'آیا همسرم با ویزای الحاق می‌تواند در رومانی کار کند؟' : 'Can my spouse work in Romania on a family reunification visa?',
+            a: currentLang === 'fa' ? 'بستگی دارد به تابعیت اسپانسر (همسری که الحاق به او انجام شده) — جزئیات کامل را در بخش اختصاصی اجازه کار همسر در همین صفحه ببینید: اگر همسر تبعه رومانی باشد معاف از مجوز کار است و مستقیم می‌تواند کار کند، اما اگر دارنده اقامت از کشور ثالث باشد معاف نیست و برای کار باید جداگانه مجوز کار (Aviz de Angajare) بگیرد. با رسیدن به اقامت ۵ ساله بلندمدت، از مجوز کار معاف خواهد شد.' : 'It depends on who the sponsoring spouse is — see the dedicated spouse work rights section on this page: reunifying with a Romanian citizen exempts them from work authorization and allows working directly, while reunifying with a third-country resident is not exempt and requires obtaining a separate work authorization (Aviz de Angajare). Once 5-year long-term residence is reached, they become fully exempt.'
           }
         ]} />
 

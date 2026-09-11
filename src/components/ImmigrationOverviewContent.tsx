@@ -385,6 +385,11 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چرا گاهی نوبت تمدید حتی تا ماه‌ها بعد از انقضای کارت داده می‌شود؟' : 'Why can renewal appointments sometimes fall months after the card expires?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق تحلیل رسمی IGI برای سال ۲۰۲۶، جمعیت خارجیان تحت پوشش این اداره در ۵ سال حدود ۴ برابر شده در حالی که تعداد کارکنان ثابت مانده؛ این فشار سیستمی می‌تواند در برخی مواقع و برخی استان‌ها به تاخیر منجر شود. رسید ثبت درخواست خود را همیشه همراه داشته باشید.' : 'Per IGI\'s own official 2026 analysis, the foreign population it manages grew roughly 4x in five years while staffing stayed flat — this systemic pressure can cause delays in some periods and counties. Always keep your application receipt on hand as proof you filed on time.'}</p>
               </div>
+              {/* Source: Official IGI page on postal delivery of issued documents (igi.mai.gov.ro) */}
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'وقتی کارت اقامتم آماده شد، خودِ اداره مهاجرت به من خبر می‌دهد یا باید خودم پیگیری کنم؟' : 'When my residence card is ready, will IGI notify me, or do I need to follow up myself?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق رویه‌ی فعلی منتشرشده‌ی IGI، سیستم اطلاع‌رسانی خودکار (پیامک/ایمیل) برای آماده شدن کارت وجود ندارد. تنها گزینه‌ی رسمی: در زمان ثبت درخواست می‌توانید با پرداخت هزینه‌ی پستی، درخواست دهید کارت به آدرس محل سکونتتان در رومانی پست شود. در غیر این صورت، بهتر است خودتان از طریق پورتال آنلاین اداره مهاجرت یا تماس مستقیم با همان دفتری که پرونده را ثبت کرده‌اید، وضعیت را پیگیری کنید.' : 'Per IGI\'s currently published procedures, there is no automatic SMS/email notification system for card readiness. The only official option: at the time you file your application, you can pay a postal-delivery fee to have the card mailed to your address in Romania. Otherwise, it\'s best to follow up yourself via the immigration office\'s online portal or by contacting the specific office where your file was submitted.'}</p>
+              </div>
             </div>
           </div>
 
@@ -404,6 +409,10 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             {
               q: currentLang === 'fa' ? 'چرا گاهی نوبت تمدید حتی تا ماه‌ها بعد از انقضای کارت داده می‌شود؟' : 'Why can renewal appointments sometimes fall months after the card expires?',
               a: currentLang === 'fa' ? 'طبق تحلیل رسمی IGI برای سال ۲۰۲۶، جمعیت خارجیان تحت پوشش این اداره در ۵ سال حدود ۴ برابر شده در حالی که تعداد کارکنان ثابت مانده؛ این فشار سیستمی می‌تواند در برخی مواقع و برخی استان‌ها به تاخیر منجر شود. رسید ثبت درخواست خود را همیشه همراه داشته باشید.' : 'Per IGI\'s own official 2026 analysis, the foreign population it manages grew roughly 4x in five years while staffing stayed flat — this systemic pressure can cause delays in some periods and counties. Always keep your application receipt on hand as proof you filed on time.'
+            },
+            {
+              q: currentLang === 'fa' ? 'وقتی کارت اقامتم آماده شد، خودِ اداره مهاجرت به من خبر می‌دهد یا باید خودم پیگیری کنم؟' : 'When my residence card is ready, will IGI notify me, or do I need to follow up myself?',
+              a: currentLang === 'fa' ? 'طبق رویه‌ی فعلی منتشرشده‌ی IGI، سیستم اطلاع‌رسانی خودکار (پیامک/ایمیل) برای آماده شدن کارت وجود ندارد. تنها گزینه‌ی رسمی: در زمان ثبت درخواست می‌توانید با پرداخت هزینه‌ی پستی، درخواست دهید کارت به آدرس محل سکونتتان در رومانی پست شود. در غیر این صورت، بهتر است خودتان از طریق پورتال آنلاین اداره مهاجرت یا تماس مستقیم با همان دفتری که پرونده را ثبت کرده‌اید، وضعیت را پیگیری کنید.' : 'Per IGI\'s currently published procedures, there is no automatic SMS/email notification system for card readiness. The only official option: at the time you file your application, you can pay a postal-delivery fee to have the card mailed to your address in Romania. Otherwise, it\'s best to follow up yourself via the immigration office\'s online portal or by contacting the specific office where your file was submitted.'
             }
           ]} />
 
@@ -497,6 +506,28 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 ? 'یک تصور غلط رایج دیگر: پیوستن رومانی به منطقه شنگن (مرزهای هوایی/دریایی از مارس ۲۰۲۴، مرزهای زمینی از ژانویه ۲۰۲۵) هیچ تغییری در قوانین یا حقوق جابجایی اقامت بلندمدت ایجاد نکرده است. حقوق محدود جابجایی برای دارندگان اقامت بلندمدت اتحادیه اروپا (طبق دستورالعمل ۲۰۰۳/۱۰۹/EC) از زمان پیوستن رومانی به اتحادیه اروپا در سال ۲۰۰۷ برقرار بوده، کاملاً مستقل از شنگن. عضویت شنگن فقط کنترل‌های مرزی فیزیکی بین کشورها را حذف کرده، نه چارچوب قانونی وضعیت اقامت بلندمدت را.'
                 : 'Another common misconception: Romania joining the Schengen Area (air/sea borders since March 2024, land borders since January 2025) did not change any rules or mobility rights tied to long-term residence status. The limited EU mobility right for holders of EU long-term resident status (under Directive 2003/109/EC) has existed since Romania joined the EU in 2007 — entirely separate from Schengen. Schengen membership only removed physical border checks between countries; it did not amend the long-term residence legal framework.'}
             </p>
+            {/* Source: Directive 2003/109/EC, Art. 14(3), eur-lex.europa.eu; reform proposal COM(2022)650 */}
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              <strong className="text-[#142033] font-bold block mb-1">
+                {currentLang === 'fa'
+                  ? 'باور غلط: «اقامت بلندمدت رومانی یعنی می‌توانم در هر کشور اروپایی دیگر هم آزادانه کار کنم»'
+                  : 'Misconception: "Romanian long-term residence means I can freely work in any other EU country"'}
+              </strong>
+              {currentLang === 'fa'
+                ? 'خیر. طبق ماده ۱۴ بند ۳ دایرکتیو اتحادیه اروپا ۲۰۰۳/۱۰۹/EC، کشور دوم (که می‌خواهید در آن کار کنید) می‌تواند رویه‌های ملی بازار کار خودش را همچنان روی شما اعمال کند. یعنی کارت اقامت بلندمدت رومانی به‌تنهایی حق کار خودکار در کشور اروپایی دیگر نمی‌دهد؛ برای کار در کشور دیگر معمولاً باید مسیر اقامت/کار همان کشور را طی کنید. (نکته: پیش‌نویس اصلاحیه‌ای در سطح اتحادیه اروپا برای تسهیل این مسیر در حال بررسی است، اما تا این تاریخ هنوز قانون لازم‌الاجرا نشده است.)'
+                : 'No. Under Article 14(3) of EU Directive 2003/109/EC, the second Member State where you want to work may still apply its own national labour-market procedures to you. A Romanian long-term residence card alone does not automatically grant the right to work in another EU country — you typically still need to go through that country\'s own residence/work process. (Note: an EU-level reform proposal to ease this is under discussion, but is not yet in force.)'}
+            </p>
+            {/* Source: IMI Daily, "Every Golden Visa Still Open in Europe in 2026" */}
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              <strong className="text-[#142033] font-bold block mb-1">
+                {currentLang === 'fa'
+                  ? 'باور غلط: «خرید ملک در رومانی به من اقامت دائم یا تابعیت می‌دهد»'
+                  : 'Misconception: "Buying property in Romania grants permanent residence or citizenship"'}
+              </strong>
+              {currentLang === 'fa'
+                ? 'خیر. رومانی در حال حاضر هیچ برنامه‌ی «ویزای طلایی» یا اقامت از طریق سرمایه‌گذاری ملکی فعالی ندارد. در نوامبر ۲۰۲۵ طرحی برای ویزای طلایی با سرمایه‌گذاری ۴۰۰ هزار یورویی مطرح شد، اما این طرح به دلیل نگرانی‌های امنیتی و ریسک برای عضویت شینگن/برنامه‌ی معافیت ویزای آمریکا لغو شد. خرید ملک به‌تنهایی هیچ مسیر اقامتی یا مسیر تابعیت ایجاد نمی‌کند.'
+                : 'No. Romania currently has no active \'golden visa\' or real-estate investment residency program. A proposed €400,000 golden-visa scheme was floated in November 2025 but was cancelled over security concerns and risk to Romania\'s Schengen membership / US Visa Waiver status. Buying property by itself creates no residency or citizenship pathway.'}
+            </p>
             <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs sm:text-sm text-amber-950 leading-relaxed">
               <strong className="block font-bold mb-1">{currentLang === 'fa' ? 'تله‌ی رایج در محاسبه ۵ سال:' : 'The common 5-year calculation trap:'}</strong>
               {currentLang === 'fa'
@@ -539,6 +570,11 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا برای این اقامت باید در آزمون زبان رسمی A1 یا A2 قبول شوم؟' : 'Do I need to pass a formal A1 or A2 language exam for this?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. قانون فقط «سطح رضایت‌بخش» زبان رومانیایی را می‌خواهد و این معمولاً طی همان جلسه تحویل مدارک و به تشخیص کارمند IGI ارزیابی می‌شود، نه یک آزمون کتبی جداگانه با سطح CEFR مشخص.' : 'No. The law only requires a "satisfactory level" of Romanian, typically assessed informally by the IGI officer during the document-submission appointment itself, not a separate written exam with a defined CEFR level.'}</p>
               </div>
+              {/* Source: Official IGI explanatory page on conditions for granting and terminating long-term residence (igi.mai.gov.ro) */}
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر بعد از گرفتن اقامت بلندمدت، مدت طولانی از رومانی دور باشم، اقامتم باطل می‌شود؟' : 'If I\'m away from Romania for a long time after getting long-term residence, can I lose it?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، در شرایط خاص. طبق توضیح رسمی اداره مهاجرت (IGI): اگر بیش از ۱۲ ماه متوالی از خاک رومانی غایب باشید، حق اقامت بلندمدت از بین می‌رود (مگر در آن مدت اقامت موقت در کشور دیگر اتحادیه اروپا داشته باشید یا فرزند زیرسن والد تبعه رومانیایی باشید). حتی با این استثنا، غیبت بیش از ۶ سال متوالی همچنان باعث ابطال می‌شود. برای کسانی که قبلاً دارنده‌ی کارت آبی اروپا بوده‌اند، غیبت بیش از ۲ سال متوالی از قلمرو اتحادیه اروپا/EEA/سوئیس هم می‌تواند باعث ابطال شود (با استثنای فعالیت اقتصادی/تحصیل در کشور مبدا).' : 'Yes, under specific conditions. Per IGI\'s official guidance: being absent from Romania for more than 12 consecutive months causes the long-term residence right to lapse (unless you held temporary residence in another EU country during that time, or are a minor child of a Romanian citizen parent). Even with that exception, absence of more than 6 consecutive years still causes it to lapse. For those who previously held an EU Blue Card, absence of more than 2 consecutive years from the EU/EEA/Switzerland can also cause it to lapse (with an exception for economic activity or study in the country of origin).'}</p>
+              </div>
             </div>
           </div>
 
@@ -554,6 +590,10 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
             {
               q: currentLang === 'fa' ? 'آیا برای این اقامت باید در آزمون زبان رسمی A1 یا A2 قبول شوم؟' : 'Do I need to pass a formal A1 or A2 language exam for this?',
               a: currentLang === 'fa' ? 'خیر. قانون فقط «سطح رضایت‌بخش» زبان رومانیایی را می‌خواهد و این معمولاً طی همان جلسه تحویل مدارک و به تشخیص کارمند IGI ارزیابی می‌شود، نه یک آزمون کتبی جداگانه با سطح CEFR مشخص.' : 'No. The law only requires a "satisfactory level" of Romanian, typically assessed informally by the IGI officer during the document-submission appointment itself, not a separate written exam with a defined CEFR level.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر بعد از گرفتن اقامت بلندمدت، مدت طولانی از رومانی دور باشم، اقامتم باطل می‌شود؟' : 'If I\'m away from Romania for a long time after getting long-term residence, can I lose it?',
+              a: currentLang === 'fa' ? 'بله، در شرایط خاص. طبق توضیح رسمی اداره مهاجرت (IGI): اگر بیش از ۱۲ ماه متوالی از خاک رومانی غایب باشید، حق اقامت بلندمدت از بین می‌رود (مگر در آن مدت اقامت موقت در کشور دیگر اتحادیه اروپا داشته باشید یا فرزند زیرسن والد تبعه رومانیایی باشید). حتی با این استثنا، غیبت بیش از ۶ سال متوالی همچنان باعث ابطال می‌شود. برای کسانی که قبلاً دارنده‌ی کارت آبی اروپا بوده‌اند، غیبت بیش از ۲ سال متوالی از قلمرو اتحادیه اروپا/EEA/سوئیس هم می‌تواند باعث ابطال شود (با استثنای فعالیت اقتصادی/تحصیل در کشور مبدا).' : 'Yes, under specific conditions. Per IGI\'s official guidance: being absent from Romania for more than 12 consecutive months causes the long-term residence right to lapse (unless you held temporary residence in another EU country during that time, or are a minor child of a Romanian citizen parent). Even with that exception, absence of more than 6 consecutive years still causes it to lapse. For those who previously held an EU Blue Card, absence of more than 2 consecutive years from the EU/EEA/Switzerland can also cause it to lapse (with an exception for economic activity or study in the country of origin).'
             }
           ]} />
 
