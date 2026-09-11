@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getAdminContext, hasPermission } from '@/lib/adminAuth';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
+import { sendTelegramMessage, escapeTelegramHtml } from '@/lib/telegram';
 
 export const dynamic = 'force-dynamic';
 
@@ -97,7 +98,48 @@ export async function POST(
       return NextResponse.json({ error: 'Failed to record message.' }, { status: 500 });
     }
 
-    return NextResponse.json({ success: true, message: inserted });
+    // Best-effort Telegram delivery: only for leads originating from telegram_bot with non-empty channel_ref
+    let telegramDelivered: boolean | null = null;
+    let telegramError: string | undefined;
+
+    try {
+      const { data: lead, error: leadError } = await supabaseAdmin
+        .from('leads')
+        .select('id, source, channel_ref')
+        .eq('id', leadId)
+        .single();
+
+      if (leadError) {
+        console.warn(`[LeadMessage] Failed to query lead ${leadId} for telegram delivery:`, leadError);
+      } else if (lead && lead.source === 'telegram_bot' && lead.channel_ref && lead.channel_ref.trim()) {
+        const brandedMessage = `💬 <b>پیام جدید از تیم DORVIA</b>\n\n${escapeTelegramHtml(text)}`;
+        const tgRes = await sendTelegramMessage(lead.channel_ref.trim(), brandedMessage, 'HTML');
+
+        telegramDelivered = tgRes.success;
+        if (!tgRes.success) {
+          telegramError = tgRes.error;
+          console.warn(
+            `[LeadMessage] Telegram delivery failed for lead ${leadId} (${lead.channel_ref}):`,
+            tgRes.error
+          );
+        } else {
+          console.log(
+            `[LeadMessage] Telegram delivery succeeded for lead ${leadId} (messageId: ${tgRes.messageId})`
+          );
+        }
+      }
+    } catch (err: any) {
+      console.error(`[LeadMessage] Unexpected error delivering telegram message to lead ${leadId}:`, err);
+      telegramDelivered = false;
+      telegramError = err?.message || 'Telegram delivery exception';
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: inserted,
+      telegramDelivered,
+      ...(telegramError ? { telegramError } : {}),
+    });
   } catch (error) {
     console.error('Unexpected error sending admin message:', error);
     return NextResponse.json({ error: 'Internal server error.' }, { status: 500 });
