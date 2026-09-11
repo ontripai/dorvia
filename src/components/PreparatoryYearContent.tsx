@@ -6,6 +6,7 @@ import { Breadcrumb } from './Breadcrumb';
 import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { SectionPhoto } from './SectionPhoto';
 import { RelatedGuidesCard } from './RelatedGuidesCard';
+import { FaqSchema } from './FaqSchema';
 
 interface PreparatoryYearContentProps {
   currentLang: Language;
@@ -103,6 +104,60 @@ export const PreparatoryYearContent: React.FC<PreparatoryYearContentProps> = ({ 
           ? 'به‌روزرسانی: طبق چند دانشگاه رومانیایی (پلی‌تکنیک بخارست، اوویدیوس کنستانتا، UMF یاش)، مدرک پایان دوره معمولاً «certificat/atestat de absolvire a anului pregătitor» نامیده می‌شود (دانشگاه‌های مختلف از «certificat» یا «atestat» استفاده می‌کنند) و پس از گذراندن ۶۰ واحد و قبولی در آزمون نهایی زبان صادر می‌شود؛ اما نام انگلیسی این مدرک استاندارد نیست — دانشگاه‌ها آن را متفاوت ترجمه می‌کنند (مثلاً «Certificate of Proficiency in Romanian Language» یا «certificate of linguistic competence»). این نام‌گذاری بر اساس منبع اولیهٔ متن آیین‌نامهٔ وزارتی (شماره ۵۵۱۶/۲۰۲۴) تایید مستقیم نشده، بلکه از چند صفحه دانشگاهی مستقل استخراج شده. نکته دوم (آیا کارت اقامت جداگانه‌ای لازم است) هنوز به‌روشنی مشخص نشد؛ هر دو مورد را مستقیماً از دانشگاه و IGI استعلام بگیرید.'
           : 'Update: per several Romanian universities (Politehnica București, Ovidius Constanța, UMF Iași), the completion certificate is typically called "certificat/atestat de absolvire a anului pregătitor" (institutions use either "certificat" or "atestat"), issued after completing 60 credits and passing the final language exam — but there is no standardized English name; universities translate it differently (e.g., "Certificate of Proficiency in Romanian Language" or "certificate of linguistic competence"). This naming is not confirmed against the primary text of the governing ministerial order (No. 5516/2024) itself, but drawn from several independent university pages. The second question (whether a separate residence permit is required) remains unclear; confirm both directly with your university and IGI.'}
       </div>
+
+      {/* FREQUENTLY ASKED QUESTIONS */}
+      <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+        <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+          {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+        </h3>
+        <div className="space-y-6">
+          {/* Source: Ministerial Order 5516/2024 (Ministry of Education summary), UTCB regulations */}
+          <div>
+            <h4 className="font-bold text-[#334155] mb-2">
+              {currentLang === 'fa'
+                ? 'من قبلاً یک سال آمادگی زبان مشابه در کشور دیگری (مثلاً ترکیه) گذرانده‌ام. آیا از سال زبان رومانی معاف می‌شوم؟'
+                : "I've already completed a similar language-preparation year in another country (e.g. Turkey). Am I exempt from Romania's preparatory year?"}
+            </h4>
+            <p className="text-sm text-[#475569]">
+              {currentLang === 'fa'
+                ? 'طبق آیین‌نامه‌ی فعلی وزارت آموزش رومانی، هیچ مکانیزم رسمی برای معاف شدن بر اساس گذراندن دوره‌ی مشابه در کشور دیگر پیدا نشد. تنها راه‌های رسمی معاف شدن از سال آمادگی زبان رومانیایی: داشتن مدرک تحصیلی رومانیایی یا حداقل ۴ سال متوالی تحصیل در نظام آموزشی خودِ رومانی، یا قبولی در آزمون تعیین سطح زبان رومانیایی که دانشگاه مقصد یا یک موسسه‌ی معتبر دیگر در رومانی برگزار می‌کند. یعنی گذراندن یک دوره‌ی مشابه در کشور دیگر به‌تنهایی معافیت ایجاد نمی‌کند.'
+                : "Under Romania's current Ministry of Education framework, no official exemption mechanism was found based on completing a similar program abroad. The only official ways to be exempt from Romania's language preparatory year are: holding Romanian academic credentials or at least 4 consecutive years of study within Romania's own school system, or passing a Romanian-language proficiency test administered by your target university or another accredited institution in Romania. Completing a similar program in another country by itself does not create an exemption."}
+            </p>
+          </div>
+          {/* Source: Ministerial Order 5516/2024 (Ministry of Education summary), UTCB regulations */}
+          <div>
+            <h4 className="font-bold text-[#334155] mb-2">
+              {currentLang === 'fa'
+                ? 'سال آمادگی زبان توسط چه کسی برگزار می‌شود؟'
+                : 'Who organizes the Romanian preparatory year?'}
+            </h4>
+            <p className="text-sm text-[#475569]">
+              {currentLang === 'fa'
+                ? 'سال آمادگی زبان توسط خودِ دانشگاه‌های رومانی برگزار می‌شود؛ هزینه و جزئیات دقیق برنامه بین دانشگاه‌ها متفاوت است (برای مثال، دانشگاه بابش-بویای کلوژ حدود ۳,۰۱۵ یورو + ۵۰ یورو هزینه‌ی ثبت‌نام اعلام کرده — این فقط یک نمونه است، برای دانشکده‌های پزشکی معمولاً هزینه بیشتر است). حتماً با دفتر بین‌الملل دانشگاه مقصد خودتان هماهنگ کنید.'
+                : 'The preparatory year is run by the Romanian universities themselves; exact cost and program details vary by university (for example, Babeș-Bolyai University Cluj lists about €3,015 + €50 registration fee — this is just one example; medical faculties are typically more expensive). Always confirm with your target university\'s international office.'}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <FaqSchema items={[
+        {
+          q: currentLang === 'fa'
+            ? 'من قبلاً یک سال آمادگی زبان مشابه در کشور دیگری (مثلاً ترکیه) گذرانده‌ام. آیا از سال زبان رومانی معاف می‌شوم؟'
+            : "I've already completed a similar language-preparation year in another country (e.g. Turkey). Am I exempt from Romania's preparatory year?",
+          a: currentLang === 'fa'
+            ? 'طبق آیین‌نامه‌ی فعلی وزارت آموزش رومانی، هیچ مکانیزم رسمی برای معاف شدن بر اساس گذراندن دوره‌ی مشابه در کشور دیگر پیدا نشد. تنها راه‌های رسمی معاف شدن از سال آمادگی زبان رومانیایی: داشتن مدرک تحصیلی رومانیایی یا حداقل ۴ سال متوالی تحصیل در نظام آموزشی خودِ رومانی، یا قبولی در آزمون تعیین سطح زبان رومانیایی که دانشگاه مقصد یا یک موسسه‌ی معتبر دیگر در رومانی برگزار می‌کند. یعنی گذراندن یک دوره‌ی مشابه در کشور دیگر به‌تنهایی معافیت ایجاد نمی‌کند.'
+            : "Under Romania's current Ministry of Education framework, no official exemption mechanism was found based on completing a similar program abroad. The only official ways to be exempt from Romania's language preparatory year are: holding Romanian academic credentials or at least 4 consecutive years of study within Romania's own school system, or passing a Romanian-language proficiency test administered by your target university or another accredited institution in Romania. Completing a similar program in another country by itself does not create an exemption."
+        },
+        {
+          q: currentLang === 'fa'
+            ? 'سال آمادگی زبان توسط چه کسی برگزار می‌شود؟'
+            : 'Who organizes the Romanian preparatory year?',
+          a: currentLang === 'fa'
+            ? 'سال آمادگی زبان توسط خودِ دانشگاه‌های رومانی برگزار می‌شود؛ هزینه و جزئیات دقیق برنامه بین دانشگاه‌ها متفاوت است (برای مثال، دانشگاه بابش-بویای کلوژ حدود ۳,۰۱۵ یورو + ۵۰ یورو هزینه‌ی ثبت‌نام اعلام کرده — این فقط یک نمونه است، برای دانشکده‌های پزشکی معمولاً هزینه بیشتر است). حتماً با دفتر بین‌الملل دانشگاه مقصد خودتان هماهنگ کنید.'
+            : 'The preparatory year is run by the Romanian universities themselves; exact cost and program details vary by university (for example, Babeș-Bolyai University Cluj lists about €3,015 + €50 registration fee — this is just one example; medical faculties are typically more expensive). Always confirm with your target university\'s international office.'
+        }
+      ]} />
 
       {/* RELATED GUIDES CARD */}
       <RelatedGuidesCard
