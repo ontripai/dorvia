@@ -552,13 +552,15 @@ export type Database = {
           }
         ];
       };
-      case_invoices: {
+      case_charges: {
         Row: {
           id: string;
           lead_id: string;
+          doc_number: string | null;
+          description: string;
           currency: string;
           total_amount: number;
-          status: 'draft' | 'sent' | 'partially_paid' | 'paid' | 'cancelled';
+          status: 'open' | 'partially_paid' | 'paid' | 'cancelled';
           created_by: string | null;
           notes: string | null;
           created_at: string;
@@ -567,9 +569,11 @@ export type Database = {
         Insert: {
           id?: string;
           lead_id: string;
+          doc_number?: string | null;
+          description?: string;
           currency?: string;
           total_amount: number;
-          status?: 'draft' | 'sent' | 'partially_paid' | 'paid' | 'cancelled';
+          status?: 'open' | 'partially_paid' | 'paid' | 'cancelled';
           created_by?: string | null;
           notes?: string | null;
           created_at?: string;
@@ -578,9 +582,11 @@ export type Database = {
         Update: {
           id?: string;
           lead_id?: string;
+          doc_number?: string | null;
+          description?: string;
           currency?: string;
           total_amount?: number;
-          status?: 'draft' | 'sent' | 'partially_paid' | 'paid' | 'cancelled';
+          status?: 'open' | 'partially_paid' | 'paid' | 'cancelled';
           created_by?: string | null;
           notes?: string | null;
           created_at?: string;
@@ -588,14 +594,14 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: 'case_invoices_lead_id_fkey';
+            foreignKeyName: 'case_charges_lead_id_fkey';
             columns: ['lead_id'];
             isOneToOne: false;
             referencedRelation: 'leads';
             referencedColumns: ['id'];
           },
           {
-            foreignKeyName: 'case_invoices_created_by_fkey';
+            foreignKeyName: 'case_charges_created_by_fkey';
             columns: ['created_by'];
             isOneToOne: false;
             referencedRelation: 'admin_users';
@@ -603,55 +609,101 @@ export type Database = {
           }
         ];
       };
-      invoice_installments: {
+      case_receipts: {
         Row: {
           id: string;
-          invoice_id: string;
-          installment_no: number;
+          lead_id: string;
+          doc_number: string | null;
           amount: number;
-          due_date: string;
-          paid_amount: number;
-          paid_at: string | null;
-          status: 'pending' | 'paid' | 'partial' | 'overdue';
-          payment_method: string | null;
+          currency: string;
+          received_at: string;
+          payment_method: 'bank_transfer' | 'cash' | 'card' | null;
+          status: 'active' | 'cancelled';
           notes: string | null;
+          created_by: string | null;
           created_at: string;
           updated_at: string;
         };
         Insert: {
           id?: string;
-          invoice_id: string;
-          installment_no: number;
+          lead_id: string;
+          doc_number?: string | null;
           amount: number;
-          due_date: string;
-          paid_amount?: number;
-          paid_at?: string | null;
-          status?: 'pending' | 'paid' | 'partial' | 'overdue';
-          payment_method?: string | null;
+          currency?: string;
+          received_at?: string;
+          payment_method?: 'bank_transfer' | 'cash' | 'card' | null;
+          status?: 'active' | 'cancelled';
           notes?: string | null;
+          created_by?: string | null;
           created_at?: string;
           updated_at?: string;
         };
         Update: {
           id?: string;
-          invoice_id?: string;
-          installment_no?: number;
+          lead_id?: string;
+          doc_number?: string | null;
           amount?: number;
-          due_date?: string;
-          paid_amount?: number;
-          paid_at?: string | null;
-          status?: 'pending' | 'paid' | 'partial' | 'overdue';
-          payment_method?: string | null;
+          currency?: string;
+          received_at?: string;
+          payment_method?: 'bank_transfer' | 'cash' | 'card' | null;
+          status?: 'active' | 'cancelled';
           notes?: string | null;
+          created_by?: string | null;
           created_at?: string;
           updated_at?: string;
         };
         Relationships: [
           {
-            foreignKeyName: 'invoice_installments_invoice_id_fkey';
-            columns: ['invoice_id'];
+            foreignKeyName: 'case_receipts_lead_id_fkey';
+            columns: ['lead_id'];
             isOneToOne: false;
-            referencedRelation: 'case_invoices';
+            referencedRelation: 'leads';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'case_receipts_created_by_fkey';
+            columns: ['created_by'];
+            isOneToOne: false;
+            referencedRelation: 'admin_users';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      receipt_allocations: {
+        Row: {
+          id: string;
+          receipt_id: string;
+          charge_id: string;
+          amount: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          receipt_id: string;
+          charge_id: string;
+          amount: number;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          receipt_id?: string;
+          charge_id?: string;
+          amount?: number;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'receipt_allocations_receipt_id_fkey';
+            columns: ['receipt_id'];
+            isOneToOne: false;
+            referencedRelation: 'case_receipts';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'receipt_allocations_charge_id_fkey';
+            columns: ['charge_id'];
+            isOneToOne: false;
+            referencedRelation: 'case_charges';
             referencedColumns: ['id'];
           }
         ];

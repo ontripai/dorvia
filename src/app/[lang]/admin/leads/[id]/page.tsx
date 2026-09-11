@@ -136,44 +136,43 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
   const [editStageError, setEditStageError] = useState<string | null>(null);
   const [deletingStageId, setDeletingStageId] = useState<string | null>(null);
 
-  // Finance & Accounting State (dre-p67)
+  // Finance & Detailed Accounting State (dre-p85)
   const [canViewFinance, setCanViewFinance] = useState(false);
   const [canEditFinance, setCanEditFinance] = useState(false);
   const [loadingFinance, setLoadingFinance] = useState(false);
-  const [invoice, setInvoice] = useState<any | null>(null);
-  const [financeSummary, setFinanceSummary] = useState<{
-    total_amount: number;
-    total_paid: number;
-    remaining_balance: number;
-    total_expenses: number;
-    net_profit: number;
-    currency: string;
+  const [charges, setCharges] = useState<any[]>([]);
+  const [receipts, setReceipts] = useState<any[]>([]);
+  const [ledgerEntries, setLedgerEntries] = useState<any[]>([]);
+  const [ledgerSummary, setLedgerSummary] = useState<{
+    totalCharges: number;
+    totalReceipts: number;
+    balance: number;
+    openChargesCount: number;
+    chargesCount: number;
+    receiptsCount: number;
   } | null>(null);
   const [expenses, setExpenses] = useState<any[]>([]);
   const [financeError, setFinanceError] = useState<string | null>(null);
   const [financeSuccess, setFinanceSuccess] = useState<string | null>(null);
 
-  // Invoice modal
-  const [showCreateInvoiceModal, setShowCreateInvoiceModal] = useState(false);
-  const [newInvoiceAmount, setNewInvoiceAmount] = useState('');
-  const [newInvoiceCurrency, setNewInvoiceCurrency] = useState('RON');
-  const [newInvoiceNotes, setNewInvoiceNotes] = useState('');
-  const [creatingInvoice, setCreatingInvoice] = useState(false);
+  // Add Charge modal
+  const [showAddChargeModal, setShowAddChargeModal] = useState(false);
+  const [newChargeDesc, setNewChargeDesc] = useState('');
+  const [newChargeAmount, setNewChargeAmount] = useState('');
+  const [newChargeNotes, setNewChargeNotes] = useState('');
+  const [creatingCharge, setCreatingCharge] = useState(false);
 
-  // Installment modal
-  const [showAddInstallmentModal, setShowAddInstallmentModal] = useState(false);
-  const [newInstallmentAmount, setNewInstallmentAmount] = useState('');
-  const [newInstallmentDueDate, setNewInstallmentDueDate] = useState('');
-  const [newInstallmentNotes, setNewInstallmentNotes] = useState('');
-  const [addingInstallment, setAddingInstallment] = useState(false);
+  // Record Receipt modal
+  const [showRecordReceiptModal, setShowRecordReceiptModal] = useState(false);
+  const [newReceiptAmount, setNewReceiptAmount] = useState('');
+  const [newReceiptMethod, setNewReceiptMethod] = useState<'bank_transfer' | 'cash' | 'card'>('bank_transfer');
+  const [newReceiptDate, setNewReceiptDate] = useState('');
+  const [newReceiptNotes, setNewReceiptNotes] = useState('');
+  const [receiptAllocations, setReceiptAllocations] = useState<Record<string, string>>({});
+  const [recordingReceipt, setRecordingReceipt] = useState(false);
 
-  // Payment modal
-  const [payingInstallment, setPayingInstallment] = useState<any | null>(null);
-  const [paymentAmount, setPaymentAmount] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('bank_transfer');
-  const [paymentDate, setPaymentDate] = useState('');
-  const [paymentNotes, setPaymentNotes] = useState('');
-  const [recordingPayment, setRecordingPayment] = useState(false);
+  // Cancellation state
+  const [cancellingAction, setCancellingAction] = useState(false);
 
   // Expense modal
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
@@ -860,27 +859,38 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
     }
   };
 
-  // Finance Load & Action Handlers (dre-p67)
+  // Finance & Accounting Handlers (dre-p85: Detailed Professional Ledger)
   const loadFinanceData = async () => {
     try {
       setLoadingFinance(true);
-      const res = await fetch(`/api/admin/leads/${leadId}/invoice`);
-      if (res.status === 403) {
+      const ledgerRes = await fetch(`/api/admin/leads/${leadId}/ledger`);
+      if (ledgerRes.status === 403) {
         setCanViewFinance(false);
         return;
       }
-      const json = await res.json().catch(() => null);
-      if (res.ok && json?.success) {
-        setCanViewFinance(true);
-        setInvoice(json.invoice);
-        setFinanceSummary(json.summary);
-        setCanEditFinance(Boolean(json.canEdit));
 
-        const expRes = await fetch(`/api/admin/leads/${leadId}/expenses`);
-        const expJson = await expRes.json().catch(() => null);
-        if (expRes.ok && expJson?.success) {
-          setExpenses(expJson.expenses || []);
-        }
+      const ledgerJson = await ledgerRes.json().catch(() => null);
+      if (ledgerRes.ok && ledgerJson?.success) {
+        setCanViewFinance(true);
+        setLedgerEntries(ledgerJson.entries || []);
+        setLedgerSummary(ledgerJson.summary || null);
+        setCanEditFinance(Boolean(ledgerJson.canEdit));
+
+        const [chgRes, recRes, expRes] = await Promise.all([
+          fetch(`/api/admin/leads/${leadId}/charges`),
+          fetch(`/api/admin/leads/${leadId}/receipts`),
+          fetch(`/api/admin/leads/${leadId}/expenses`),
+        ]);
+
+        const [chgJson, recJson, expJson] = await Promise.all([
+          chgRes.json().catch(() => null),
+          recRes.json().catch(() => null),
+          expRes.json().catch(() => null),
+        ]);
+
+        if (chgJson?.success) setCharges(chgJson.charges || []);
+        if (recJson?.success) setReceipts(recJson.receipts || []);
+        if (expJson?.success) setExpenses(expJson.expenses || []);
       }
     } catch (err) {
       console.error('Failed to load finance data:', err);
@@ -889,127 +899,166 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
     }
   };
 
-  const handleCreateInvoice = async (e: React.FormEvent) => {
+  const handleCreateCharge = async (e: React.FormEvent) => {
     e.preventDefault();
-    const amountNum = parseFloat(newInvoiceAmount);
+    if (!newChargeDesc.trim()) {
+      setFinanceError(isFa ? 'شرح خدمت الزامی است.' : 'Service description is required.');
+      return;
+    }
+    const amountNum = parseFloat(newChargeAmount);
     if (isNaN(amountNum) || amountNum <= 0) {
-      setFinanceError(isFa ? 'مبلغ کل فاکتور باید عددی مثبت و بزرگتر از صفر باشد.' : 'Total amount must be greater than 0.');
+      setFinanceError(isFa ? 'مبلغ بدهکاری باید عددی مثبت و بزرگتر از صفر باشد.' : 'Amount must be greater than 0.');
       return;
     }
 
-    setCreatingInvoice(true);
+    setCreatingCharge(true);
     setFinanceError(null);
     setFinanceSuccess(null);
 
     try {
-      const res = await fetch(`/api/admin/leads/${leadId}/invoice`, {
+      const res = await fetch(`/api/admin/leads/${leadId}/charges`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          total_amount: amountNum,
-          currency: newInvoiceCurrency,
-          notes: newInvoiceNotes.trim() || null,
+          description: newChargeDesc.trim(),
+          amount: amountNum,
+          notes: newChargeNotes.trim() || null,
         }),
       });
       const json = await res.json();
       if (res.ok && json.success) {
-        setFinanceSuccess(isFa ? 'فاکتور پرونده با موفقیت صادر شد.' : 'Invoice created successfully.');
-        setShowCreateInvoiceModal(false);
-        setNewInvoiceAmount('');
-        setNewInvoiceNotes('');
+        setFinanceSuccess(isFa ? 'بدهکاری جدید با موفقیت ثبت شد.' : 'Charge recorded successfully.');
+        setShowAddChargeModal(false);
+        setNewChargeDesc('');
+        setNewChargeAmount('');
+        setNewChargeNotes('');
         await loadFinanceData();
       } else {
-        setFinanceError(json.error || (isFa ? 'صدور فاکتور ناموفق بود.' : 'Failed to create invoice.'));
+        setFinanceError(json.error || (isFa ? 'ثبت بدهکاری ناموفق بود.' : 'Failed to record charge.'));
       }
     } catch (err) {
       setFinanceError(isFa ? 'خطا در برقراری ارتباط با سرور.' : 'Network connection error.');
     } finally {
-      setCreatingInvoice(false);
+      setCreatingCharge(false);
     }
   };
 
-  const handleAddInstallment = async (e: React.FormEvent) => {
+  const handleRecordReceipt = async (e: React.FormEvent) => {
     e.preventDefault();
-    const amountNum = parseFloat(newInstallmentAmount);
+    const amountNum = parseFloat(newReceiptAmount);
     if (isNaN(amountNum) || amountNum <= 0) {
-      setFinanceError(isFa ? 'مبلغ قسط باید عددی مثبت و بزرگتر از صفر باشد.' : 'Installment amount must be greater than 0.');
-      return;
-    }
-    if (!newInstallmentDueDate) {
-      setFinanceError(isFa ? 'تاریخ سررسید قسط الزامی است.' : 'Due date is required.');
+      setFinanceError(isFa ? 'مبلغ دریافتی باید عددی مثبت و بزرگتر از صفر باشد.' : 'Receipt amount must be greater than 0.');
       return;
     }
 
-    setAddingInstallment(true);
+    const allocationsList: { charge_id: string; amount: number }[] = [];
+    let sumAlloc = 0;
+    for (const [chgId, val] of Object.entries(receiptAllocations)) {
+      const parsed = parseFloat(val);
+      if (!isNaN(parsed) && parsed > 0) {
+        allocationsList.push({ charge_id: chgId, amount: parsed });
+        sumAlloc += parsed;
+      }
+    }
+
+    if (sumAlloc > amountNum) {
+      setFinanceError(
+        isFa
+          ? `مجموع تخصیص‌ها (${sumAlloc} یورو) نمی‌تواند از مبلغ کل دریافتی (${amountNum} یورو) بیشتر باشد.`
+          : 'Total allocations exceed receipt amount.'
+      );
+      return;
+    }
+
+    setRecordingReceipt(true);
     setFinanceError(null);
     setFinanceSuccess(null);
 
     try {
-      const res = await fetch(`/api/admin/leads/${leadId}/invoice/installments`, {
+      const res = await fetch(`/api/admin/leads/${leadId}/receipts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           amount: amountNum,
-          due_date: newInstallmentDueDate,
-          notes: newInstallmentNotes.trim() || null,
+          received_at: newReceiptDate || new Date().toISOString().split('T')[0],
+          payment_method: newReceiptMethod,
+          notes: newReceiptNotes.trim() || null,
+          allocations: allocationsList,
         }),
       });
       const json = await res.json();
       if (res.ok && json.success) {
-        setFinanceSuccess(isFa ? 'قسط جدید با موفقیت اضافه شد.' : 'Installment added successfully.');
-        setShowAddInstallmentModal(false);
-        setNewInstallmentAmount('');
-        setNewInstallmentDueDate('');
-        setNewInstallmentNotes('');
+        setFinanceSuccess(isFa ? 'سند دریافتی با موفقیت ثبت و تخصیص یافت.' : 'Receipt recorded and allocated.');
+        setShowRecordReceiptModal(false);
+        setNewReceiptAmount('');
+        setNewReceiptNotes('');
+        setReceiptAllocations({});
         await loadFinanceData();
       } else {
-        setFinanceError(json.error || (isFa ? 'افزودن قسط ناموفق بود.' : 'Failed to add installment.'));
+        setFinanceError(json.error || (isFa ? 'ثبت دریافتی ناموفق بود.' : 'Failed to record receipt.'));
       }
     } catch (err) {
-      setFinanceError(isFa ? 'خطا در ارتباط با سرور.' : 'Network connection error.');
+      setFinanceError(isFa ? 'خطا در برقراری ارتباط با سرور.' : 'Network connection error.');
     } finally {
-      setAddingInstallment(false);
+      setRecordingReceipt(false);
     }
   };
 
-  const handleRecordPayment = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!payingInstallment) return;
-    const paidNum = parseFloat(paymentAmount);
-    if (isNaN(paidNum) || paidNum < 0) {
-      setFinanceError(isFa ? 'مبلغ پرداختی باید عددی نامنفی (بزرگتر یا مساوی صفر) باشد.' : 'Paid amount must be non-negative.');
+  const handleCancelCharge = async (chargeId: string, docNumber?: string) => {
+    if (!confirm(isFa ? `آیا از لغو سند بدهکاری ${docNumber || ''} اطمینان دارید؟` : 'Cancel this charge?')) {
       return;
     }
 
-    setRecordingPayment(true);
+    setCancellingAction(true);
     setFinanceError(null);
     setFinanceSuccess(null);
 
     try {
-      const res = await fetch(`/api/admin/leads/${leadId}/invoice/installments/${payingInstallment.id}`, {
+      const res = await fetch(`/api/admin/leads/${leadId}/charges/${chargeId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          paid_amount: paidNum,
-          payment_method: paymentMethod,
-          paid_at: paymentDate || undefined,
-          notes: paymentNotes.trim() || null,
-        }),
+        body: JSON.stringify({ status: 'cancelled' }),
       });
       const json = await res.json();
       if (res.ok && json.success) {
-        setFinanceSuccess(isFa ? 'پرداخت قسط با موفقیت ثبت و به‌روزرسانی شد.' : 'Payment recorded successfully.');
-        setPayingInstallment(null);
-        setPaymentAmount('');
-        setPaymentNotes('');
+        setFinanceSuccess(isFa ? 'سند بدهکاری با موفقیت لغو شد.' : 'Charge cancelled.');
         await loadFinanceData();
       } else {
-        setFinanceError(json.error || (isFa ? 'ثبت پرداخت ناموفق بود.' : 'Failed to record payment.'));
+        setFinanceError(json.error || (isFa ? 'لغو سند ناموفق بود.' : 'Failed to cancel charge.'));
       }
     } catch (err) {
       setFinanceError(isFa ? 'خطا در ارتباط با سرور.' : 'Network connection error.');
     } finally {
-      setRecordingPayment(false);
+      setCancellingAction(false);
+    }
+  };
+
+  const handleCancelReceipt = async (receiptId: string, docNumber?: string) => {
+    if (!confirm(isFa ? `آیا از لغو سند دریافتی ${docNumber || ''} اطمینان دارید؟ تمامی تخصیص‌های آن بازگردانده خواهد شد.` : 'Cancel this receipt and revert allocations?')) {
+      return;
+    }
+
+    setCancellingAction(true);
+    setFinanceError(null);
+    setFinanceSuccess(null);
+
+    try {
+      const res = await fetch(`/api/admin/leads/${leadId}/receipts/${receiptId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'cancelled' }),
+      });
+      const json = await res.json();
+      if (res.ok && json.success) {
+        setFinanceSuccess(isFa ? 'سند دریافتی لغو شد و بدهکاری‌های مرتبط به وضعیت باز برگشتند.' : 'Receipt cancelled.');
+        await loadFinanceData();
+      } else {
+        setFinanceError(json.error || (isFa ? 'لغو سند دریافتی ناموفق بود.' : 'Failed to cancel receipt.'));
+      }
+    } catch (err) {
+      setFinanceError(isFa ? 'خطا در ارتباط با سرور.' : 'Network connection error.');
+    } finally {
+      setCancellingAction(false);
     }
   };
 
@@ -1102,6 +1151,30 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
       case 'other':
       default:
         return isFa ? 'سایر هزینه‌های اداری' : 'Other Expense';
+    }
+  };
+
+  const getChargeStatusBadge = (status: string) => {
+    switch (status) {
+      case 'paid':
+        return { label: isFa ? 'تسویه کامل' : 'Paid in Full', bg: 'bg-emerald-100 text-emerald-800 border-emerald-200' };
+      case 'partially_paid':
+        return { label: isFa ? 'تسویه ناقص' : 'Partially Paid', bg: 'bg-amber-100 text-amber-800 border-amber-200' };
+      case 'cancelled':
+        return { label: isFa ? 'باطل‌شده' : 'Cancelled', bg: 'bg-rose-100 text-rose-800 border-rose-200' };
+      case 'open':
+      default:
+        return { label: isFa ? 'در انتظار پرداخت' : 'Open', bg: 'bg-blue-100 text-blue-800 border-blue-200' };
+    }
+  };
+
+  const getReceiptStatusBadge = (status: string) => {
+    switch (status) {
+      case 'cancelled':
+        return { label: isFa ? 'باطل‌شده' : 'Cancelled', bg: 'bg-rose-100 text-rose-800 border-rose-200' };
+      case 'active':
+      default:
+        return { label: isFa ? 'معتبر' : 'Active', bg: 'bg-emerald-100 text-emerald-800 border-emerald-200' };
     }
   };
 
@@ -1476,18 +1549,23 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
             >
               <Receipt size={16} />
               <span>{isFa ? 'مالی و حسابداری' : 'Finance & Invoices'}</span>
-              {financeSummary !== null && (
+              {ledgerSummary !== null && (
                 <span
                   className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                     activeTab === 'finance'
                       ? 'bg-white/20 text-white'
-                      : financeSummary.net_profit >= 0
+                      : ledgerSummary.balance <= 0
                         ? 'bg-emerald-100 text-emerald-800'
                         : 'bg-rose-100 text-rose-800'
                   }`}
                 >
-                  {isFa ? 'سود: ' : 'Profit: '}
-                  {financeSummary.net_profit.toLocaleString()} {financeSummary.currency}
+                  {ledgerSummary.balance > 0 ? (
+                    <span>{isFa ? 'مانده: ' : 'Due: '}{ledgerSummary.balance.toLocaleString()} €</span>
+                  ) : ledgerSummary.balance < 0 ? (
+                    <span>{isFa ? 'بستانکار: ' : 'Credit: '}{Math.abs(ledgerSummary.balance).toLocaleString()} €</span>
+                  ) : (
+                    <span>{isFa ? 'تسویه' : 'Settled'}</span>
+                  )}
                 </span>
               )}
             </button>
@@ -2826,309 +2904,297 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
               </div>
             )}
 
-            {/* FINANCIAL SUMMARY METRIC CARDS */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {/* Net Profit Card (Hero) */}
-              <div className={`rounded-3xl p-5 sm:p-6 border transition-all relative overflow-hidden shadow-sm ${
-                (financeSummary?.net_profit || 0) >= 0
-                  ? 'bg-gradient-to-br from-[#071B3D] to-[#16356b] text-white border-[#071B3D]'
-                  : 'bg-gradient-to-br from-rose-900 to-rose-950 text-white border-rose-800'
-              }`}>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-slate-200">
-                    {isFa ? 'سود خالص پرونده' : 'Net Case Profit'}
-                  </span>
-                  <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-white">
-                    <Receipt size={16} />
-                  </div>
-                </div>
-                <div className="mt-3">
-                  <div className="text-2xl sm:text-3xl font-black tracking-tight">
-                    {financeSummary ? financeSummary.net_profit.toLocaleString() : '۰'}{' '}
-                    <span className="text-xs sm:text-sm font-bold opacity-80">
-                      {financeSummary?.currency || 'RON'}
-                    </span>
-                  </div>
-                  <div className="mt-1 text-[11px] text-slate-300">
-                    {isFa
-                      ? `محاسبه سروری: ${financeSummary ? financeSummary.total_paid.toLocaleString() : '۰'} دریافتی − ${financeSummary ? financeSummary.total_expenses.toLocaleString() : '۰'} هزینه`
-                      : `Server: ${financeSummary?.total_paid.toLocaleString() || '0'} collections - ${financeSummary?.total_expenses.toLocaleString() || '0'} expenses`}
-                  </div>
-                </div>
-              </div>
+            {/* FINANCIAL SUMMARY METRIC CARDS & DETAILED ACCOUNTING (dre-p85) */}
+            {(() => {
+              const totalCaseExpenses = expenses.reduce((sum, exp) => sum + (Number(exp.amount) || 0), 0);
+              const totalCharges = ledgerSummary?.totalCharges ?? charges.filter(c => c.status !== 'cancelled').reduce((sum, c) => sum + (Number(c.amount) || 0), 0);
+              const totalReceipts = ledgerSummary?.totalReceipts ?? receipts.filter(r => r.status !== 'cancelled').reduce((sum, r) => sum + (Number(r.amount) || 0), 0);
+              const clientBalance = ledgerSummary?.balance ?? (totalCharges - totalReceipts);
+              const netProfit = totalReceipts - totalCaseExpenses;
 
-              {/* Total Invoiced Card */}
-              <div className="bg-white border border-[#dfe6ef] rounded-3xl p-5 sm:p-6 shadow-sm">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-slate-500">
-                    {isFa ? 'مبلغ کل فاکتور' : 'Total Invoiced'}
-                  </span>
-                  <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#2F6FED] flex items-center justify-center">
-                    <FileText size={16} />
-                  </div>
-                </div>
-                <div className="mt-3">
-                  <div className="text-xl sm:text-2xl font-extrabold text-[#142033]">
-                    {financeSummary ? financeSummary.total_amount.toLocaleString() : '۰'}{' '}
-                    <span className="text-xs font-bold text-slate-400">
-                      {financeSummary?.currency || 'RON'}
-                    </span>
-                  </div>
-                  <div className="mt-1 text-[11px] text-slate-500">
-                    {invoice ? (
-                      <span>
-                        {isFa ? 'وضعیت: ' : 'Status: '}
-                        <strong className="font-bold text-slate-700">
-                          {getInvoiceStatusBadge(invoice.status).label}
-                        </strong>
-                      </span>
-                    ) : (
-                      <span>{isFa ? 'هنوز فاکتوری صادر نشده' : 'No invoice issued'}</span>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              {/* Total Paid Installments Card */}
-              <div className="bg-white border border-[#dfe6ef] rounded-3xl p-5 sm:p-6 shadow-sm">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-slate-500">
-                    {isFa ? 'مجموع دریافتی (اقساط)' : 'Total Collected'}
-                  </span>
-                  <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                    <CheckCircle size={16} />
-                  </div>
-                </div>
-                <div className="mt-3">
-                  <div className="text-xl sm:text-2xl font-extrabold text-emerald-700">
-                    {financeSummary ? financeSummary.total_paid.toLocaleString() : '۰'}{' '}
-                    <span className="text-xs font-bold text-emerald-600">
-                      {financeSummary?.currency || 'RON'}
-                    </span>
-                  </div>
-                  <div className="mt-1 text-[11px] text-slate-500">
-                    {isFa ? 'مانده طلب از متقاضی: ' : 'Remaining: '}
-                    <strong className="font-bold text-slate-700">
-                      {financeSummary ? financeSummary.remaining_balance.toLocaleString() : '۰'} {financeSummary?.currency || 'RON'}
-                    </strong>
-                  </div>
-                </div>
-              </div>
-
-              {/* Total Expenses Card */}
-              <div className="bg-white border border-[#dfe6ef] rounded-3xl p-5 sm:p-6 shadow-sm">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-slate-500">
-                    {isFa ? 'مجموع هزینه‌های پرونده' : 'Total Expenses'}
-                  </span>
-                  <div className="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
-                    <CreditCard size={16} />
-                  </div>
-                </div>
-                <div className="mt-3">
-                  <div className="text-xl sm:text-2xl font-extrabold text-rose-700">
-                    {financeSummary ? financeSummary.total_expenses.toLocaleString() : '۰'}{' '}
-                    <span className="text-xs font-bold text-rose-600">
-                      {financeSummary?.currency || 'RON'}
-                    </span>
-                  </div>
-                  <div className="mt-1 text-[11px] text-slate-500">
-                    {isFa ? `${expenses.length} مورد هزینه ثبت‌شده` : `${expenses.length} expense records`}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* SECTION 1: CASE INVOICE & INSTALLMENTS */}
-            <div className="bg-white border border-[#dfe6ef] rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-100 pb-5">
-                <div className="space-y-1">
-                  <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                    <h2 className="text-base sm:text-lg font-extrabold text-[#142033]">
-                      {isFa ? 'فاکتور پرونده و برنامه اقساط' : 'Case Invoice & Installments Schedule'}
-                    </h2>
-                    {invoice && (
-                      <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-extrabold border ${getInvoiceStatusBadge(invoice.status).bg}`}>
-                        {getInvoiceStatusBadge(invoice.status).label}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-xs text-slate-500">
-                    {isFa
-                      ? 'مدیریت مبلغ قرارداد پرونده، سررسید اقساط و ثبت پرداختی‌های متقاضی'
-                      : 'Manage agreed case invoice, installment due dates, and client payments'}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  {!invoice && canEditFinance && (
-                    <button
-                      type="button"
-                      onClick={() => setShowCreateInvoiceModal(true)}
-                      className="px-4 py-2.5 rounded-2xl bg-[#071B3D] hover:bg-blue-900 text-white font-extrabold text-xs shadow-sm transition-all flex items-center space-x-1.5 rtl:space-x-reverse cursor-pointer"
-                    >
-                      <Receipt size={14} />
-                      <span>{isFa ? 'ایجاد فاکتور پرونده' : 'Create Case Invoice'}</span>
-                    </button>
-                  )}
-
-                  {invoice && canEditFinance && (
-                    <button
-                      type="button"
-                      onClick={() => setShowAddInstallmentModal(true)}
-                      className="px-4 py-2.5 rounded-2xl bg-[#071B3D] hover:bg-blue-900 text-white font-extrabold text-xs shadow-sm transition-all flex items-center space-x-1.5 rtl:space-x-reverse cursor-pointer"
-                    >
-                      <Plus size={14} />
-                      <span>{isFa ? 'افزودن قسط جدید' : 'Add Installment'}</span>
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              {!invoice ? (
-                /* Empty Invoice State */
-                <div className="text-center py-12 px-4 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/50 space-y-4">
-                  <div className="w-14 h-14 rounded-2xl bg-blue-50 text-[#071B3D] flex items-center justify-center mx-auto shadow-xs">
-                    <Receipt size={28} />
-                  </div>
-                  <div className="space-y-1">
-                    <h3 className="text-sm font-bold text-[#142033]">
-                      {isFa ? 'هنوز فاکتوری برای این پرونده صادر نشده است' : 'No invoice created for this case yet'}
-                    </h3>
-                    <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                      {isFa
-                        ? 'برای ثبت اقساط و دریافت مبالغ متقاضی، ابتدا فاکتور کل پرونده را صادر کنید.'
-                        : 'To track installments and payments, please issue a case invoice first.'}
-                    </p>
-                  </div>
-                  {canEditFinance && (
-                    <button
-                      type="button"
-                      onClick={() => setShowCreateInvoiceModal(true)}
-                      className="px-5 py-2.5 rounded-xl bg-[#071B3D] hover:bg-blue-900 text-white font-extrabold text-xs transition-all shadow-sm cursor-pointer"
-                    >
-                      {isFa ? 'صدور اولین فاکتور پرونده' : 'Issue First Invoice'}
-                    </button>
-                  )}
-                </div>
-              ) : (
-                /* Invoice Details & Installments Table */
-                <div className="space-y-6">
-                  {/* Invoice Header Details Bar */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
-                    <div>
-                      <span className="text-[11px] text-slate-400 block font-medium">
-                        {isFa ? 'مبلغ قرارداد / فاکتور:' : 'Invoice Amount:'}
-                      </span>
-                      <span className="text-sm font-extrabold text-[#142033]">
-                        {Number(invoice.total_amount).toLocaleString()} {invoice.currency}
-                      </span>
-                    </div>
-
-                    <div>
-                      <span className="text-[11px] text-slate-400 block font-medium">
-                        {isFa ? 'میزان تسویه شده:' : 'Settled Amount:'}
-                      </span>
-                      <span className="text-sm font-extrabold text-emerald-700">
-                        {financeSummary?.total_paid.toLocaleString() || '۰'} {invoice.currency}{' '}
-                        <span className="text-[11px] text-slate-400 font-normal">
-                          ({Number(invoice.total_amount) > 0 ? Math.round(((financeSummary?.total_paid || 0) / Number(invoice.total_amount)) * 100) : 0}٪)
+              return (
+                <>
+                  {/* METRIC CARDS */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {/* Client Outstanding Balance Card (Hero) */}
+                    <div className={`rounded-3xl p-5 sm:p-6 border transition-all relative overflow-hidden shadow-sm ${
+                      clientBalance > 0
+                        ? 'bg-gradient-to-br from-[#071B3D] to-[#16356b] text-white border-[#071B3D]'
+                        : clientBalance === 0
+                        ? 'bg-gradient-to-br from-emerald-800 to-emerald-950 text-white border-emerald-700'
+                        : 'bg-gradient-to-br from-indigo-900 to-indigo-950 text-white border-indigo-800'
+                    }`}>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-medium text-slate-200">
+                          {isFa ? 'مانده بدهی متقاضی (طلب شرکت)' : 'Client Outstanding Balance'}
                         </span>
-                      </span>
+                        <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-white">
+                          <Receipt size={16} />
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <div className="text-2xl sm:text-3xl font-black tracking-tight">
+                          {clientBalance.toLocaleString()}{' '}
+                          <span className="text-xs sm:text-sm font-bold opacity-80">EUR (€)</span>
+                        </div>
+                        <div className="mt-1 text-[11px] text-slate-300">
+                          {clientBalance > 0
+                            ? (isFa ? `${clientBalance.toLocaleString()} یورو جهت تسویه کامل پرونده` : `${clientBalance.toLocaleString()} EUR pending settlement`)
+                            : clientBalance === 0
+                            ? (isFa ? 'پرونده کاملاً تسویه شده است' : 'Account is fully settled')
+                            : (isFa ? `${Math.abs(clientBalance).toLocaleString()} یورو بستانکاری مازاد متقاضی` : `${Math.abs(clientBalance).toLocaleString()} EUR client credit`)}
+                        </div>
+                      </div>
                     </div>
 
-                    <div>
-                      <span className="text-[11px] text-slate-400 block font-medium">
-                        {isFa ? 'یادداشت فاکتور:' : 'Invoice Notes:'}
-                      </span>
-                      <span className="text-xs text-slate-700 font-medium truncate block">
-                        {invoice.notes || (isFa ? '— بدون توضیحات —' : '— None —')}
-                      </span>
+                    {/* Net Profit Card */}
+                    <div className="bg-white border border-[#dfe6ef] rounded-3xl p-5 sm:p-6 shadow-sm">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-medium text-slate-500">
+                          {isFa ? 'سود خالص پرونده' : 'Net Case Profit'}
+                        </span>
+                        <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${
+                          netProfit >= 0 ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'
+                        }`}>
+                          <Receipt size={16} />
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <div className={`text-xl sm:text-2xl font-extrabold ${netProfit >= 0 ? 'text-emerald-700' : 'text-rose-700'}`}>
+                          {netProfit.toLocaleString()}{' '}
+                          <span className="text-xs font-bold opacity-80">EUR</span>
+                        </div>
+                        <div className="mt-1 text-[11px] text-slate-500">
+                          {isFa
+                            ? `${totalReceipts.toLocaleString()} € دریافتی − ${totalCaseExpenses.toLocaleString()} € هزینه`
+                            : `${totalReceipts.toLocaleString()} € collections - ${totalCaseExpenses.toLocaleString()} € expenses`}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Total Charges Card */}
+                    <div className="bg-white border border-[#dfe6ef] rounded-3xl p-5 sm:p-6 shadow-sm">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-medium text-slate-500">
+                          {isFa ? 'مجموع خدمات (بدهکاری‌ها)' : 'Total Invoiced Services'}
+                        </span>
+                        <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#2F6FED] flex items-center justify-center">
+                          <FileText size={16} />
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <div className="text-xl sm:text-2xl font-extrabold text-[#142033]">
+                          {totalCharges.toLocaleString()}{' '}
+                          <span className="text-xs font-bold text-slate-400">EUR</span>
+                        </div>
+                        <div className="mt-1 text-[11px] text-slate-500">
+                          {isFa
+                            ? `${charges.filter(c => c.status !== 'cancelled').length} خدمت فعال ثبت‌شده`
+                            : `${charges.filter(c => c.status !== 'cancelled').length} active charges`}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Total Collected Card */}
+                    <div className="bg-white border border-[#dfe6ef] rounded-3xl p-5 sm:p-6 shadow-sm">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-medium text-slate-500">
+                          {isFa ? 'مجموع دریافتی‌های وصول‌شده' : 'Total Collected Receipts'}
+                        </span>
+                        <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                          <CheckCircle size={16} />
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <div className="text-xl sm:text-2xl font-extrabold text-emerald-700">
+                          {totalReceipts.toLocaleString()}{' '}
+                          <span className="text-xs font-bold text-emerald-600">EUR</span>
+                        </div>
+                        <div className="mt-1 text-[11px] text-slate-500">
+                          {isFa
+                            ? `${receipts.filter(r => r.status !== 'cancelled').length} سند دریافتی وصول‌شده`
+                            : `${receipts.filter(r => r.status !== 'cancelled').length} receipts recorded`}
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Installments Table */}
-                  <div className="space-y-3">
-                    <h3 className="text-xs font-extrabold text-slate-700 flex items-center justify-between">
-                      <span>{isFa ? 'فهرست اقساط سررسید فاکتور' : 'Installments Schedule'}</span>
-                      <span className="text-[11px] text-slate-400 font-normal">
-                        {invoice.installments?.length || 0} {isFa ? 'قسط ثبت‌شده' : 'installments'}
-                      </span>
-                    </h3>
+                  {/* SECTION 1: DETAILED CLIENT LEDGER */}
+                  <div className="bg-white border border-[#dfe6ef] rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-100 pb-5">
+                      <div className="space-y-1">
+                        <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                          <h2 className="text-base sm:text-lg font-extrabold text-[#142033]">
+                            {isFa ? 'دفتر تفصیلی مالی پرونده (حسابداری متقاضی)' : 'Detailed Client Accounting Ledger'}
+                          </h2>
+                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-50 text-[#071B3D] border border-blue-200">
+                            {ledgerEntries.length} {isFa ? 'سند ثبت‌شده' : 'entries'}
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-500">
+                          {isFa
+                            ? 'ردیف‌های گردش مالی به ترتیب زمانی با مانده متوالی بدهی و تسویه‌ها'
+                            : 'Chronological transaction statement with running balance'}
+                        </p>
+                      </div>
 
-                    {(!invoice.installments || invoice.installments.length === 0) ? (
-                      <div className="text-center py-8 rounded-xl border border-slate-200 bg-slate-50/50 text-xs text-slate-500">
-                        {isFa ? 'هیچ قسطی برای این فاکتور تعریف نشده است.' : 'No installments defined for this invoice.'}
+                      {canEditFinance && (
+                        <div className="flex items-center gap-3">
+                          <button
+                            type="button"
+                            onClick={() => setShowAddChargeModal(true)}
+                            className="px-4 py-2.5 rounded-2xl bg-[#071B3D] hover:bg-blue-900 text-white font-extrabold text-xs shadow-sm transition-all flex items-center space-x-1.5 rtl:space-x-reverse cursor-pointer"
+                          >
+                            <Plus size={14} />
+                            <span>{isFa ? 'افزودن بدهکاری جدید' : 'Add New Charge'}</span>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setShowRecordReceiptModal(true);
+                              setNewReceiptDate(new Date().toISOString().split('T')[0]);
+                              setNewReceiptAmount('');
+                              setNewReceiptNotes('');
+                              setReceiptAllocations({});
+                            }}
+                            className="px-4 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-sm transition-all flex items-center space-x-1.5 rtl:space-x-reverse cursor-pointer"
+                          >
+                            <Receipt size={14} />
+                            <span>{isFa ? 'ثبت دریافتی و تخصیص' : 'Record Receipt'}</span>
+                          </button>
+                        </div>
+                      )}
+                    </div>
+
+                    {ledgerEntries.length === 0 ? (
+                      /* Empty Ledger State */
+                      <div className="text-center py-12 px-4 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/50 space-y-4">
+                        <div className="w-14 h-14 rounded-2xl bg-blue-50 text-[#071B3D] flex items-center justify-center mx-auto shadow-xs">
+                          <Receipt size={28} />
+                        </div>
+                        <div className="space-y-1">
+                          <h3 className="text-sm font-bold text-[#142033]">
+                            {isFa ? 'هنوز هیچ رویداد مالی برای این پرونده ثبت نشده است' : 'No financial transactions logged yet'}
+                          </h3>
+                          <p className="text-xs text-slate-500 max-w-md mx-auto">
+                            {isFa
+                              ? 'برای آغاز گردش حسابداری، ابتدا یک سند خدمت (بدهکاری) یا یک فیش دریافتی ثبت فرمایید.'
+                              : 'Log a service charge or client receipt to begin the accounting ledger.'}
+                          </p>
+                        </div>
+                        {canEditFinance && (
+                          <div className="flex items-center justify-center gap-3 pt-2">
+                            <button
+                              type="button"
+                              onClick={() => setShowAddChargeModal(true)}
+                              className="px-5 py-2.5 rounded-xl bg-[#071B3D] hover:bg-blue-900 text-white font-extrabold text-xs transition-all shadow-sm cursor-pointer"
+                            >
+                              {isFa ? 'ثبت اولین خدمت / بدهکاری' : 'Add First Charge'}
+                            </button>
+                          </div>
+                        )}
                       </div>
                     ) : (
+                      /* Ledger Table */
                       <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-xs">
                         <table className="w-full text-right text-xs">
                           <thead className="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
                             <tr>
                               <th className="p-3.5 text-center w-12">#</th>
-                              <th className="p-3.5">{isFa ? 'مبلغ قسط' : 'Amount'}</th>
-                              <th className="p-3.5">{isFa ? 'سررسید' : 'Due Date'}</th>
+                              <th className="p-3.5">{isFa ? 'تاریخ' : 'Date'}</th>
+                              <th className="p-3.5">{isFa ? 'نوع سند' : 'Doc Type'}</th>
+                              <th className="p-3.5">{isFa ? 'شماره سند' : 'Doc Number'}</th>
+                              <th className="p-3.5">{isFa ? 'شرح و جزییات' : 'Description'}</th>
+                              <th className="p-3.5">{isFa ? 'بدهکار (خدمت)' : 'Debit (€)'}</th>
+                              <th className="p-3.5">{isFa ? 'بستانکار (دریافتی)' : 'Credit (€)'}</th>
+                              <th className="p-3.5">{isFa ? 'مانده متوالی' : 'Running Balance'}</th>
                               <th className="p-3.5">{isFa ? 'وضعیت' : 'Status'}</th>
-                              <th className="p-3.5">{isFa ? 'پرداخت‌شده' : 'Paid Amount'}</th>
-                              <th className="p-3.5">{isFa ? 'روش پرداخت' : 'Method'}</th>
-                              <th className="p-3.5">{isFa ? 'تاریخ پرداخت' : 'Paid Date'}</th>
-                              <th className="p-3.5">{isFa ? 'یادداشت' : 'Notes'}</th>
-                              {canEditFinance && <th className="p-3.5 text-center">{isFa ? 'عملیات' : 'Actions'}</th>}
+                              {canEditFinance && <th className="p-3.5 text-center w-24">{isFa ? 'عملیات' : 'Action'}</th>}
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-slate-100 bg-white">
-                            {invoice.installments.map((inst: any) => {
-                              const badge = getInstallmentStatusBadge(inst.status);
-                              const isPaidFull = inst.status === 'paid';
+                            {ledgerEntries.map((entry: any, idx: number) => {
+                              const isDebit = entry.type === 'charge';
+                              const badge = isDebit ? getChargeStatusBadge(entry.status) : getReceiptStatusBadge(entry.status);
+
                               return (
-                                <tr key={inst.id} className="hover:bg-slate-50/80 transition-colors">
-                                  <td className="p-3.5 text-center font-bold text-slate-500">
-                                    {inst.installment_no}
+                                <tr key={`${entry.type}-${entry.id}`} className="hover:bg-slate-50/80 transition-colors">
+                                  <td className="p-3.5 text-center font-bold text-slate-400">
+                                    {idx + 1}
                                   </td>
-                                  <td className="p-3.5 font-extrabold text-[#142033]">
-                                    {Number(inst.amount).toLocaleString()} {invoice.currency}
-                                  </td>
-                                  <td className="p-3.5 text-slate-600 font-mono text-[11px]">
-                                    {inst.due_date}
+                                  <td className="p-3.5 text-slate-600 font-mono text-[11px] whitespace-nowrap">
+                                    {entry.date ? entry.date.split('T')[0] : '—'}
                                   </td>
                                   <td className="p-3.5">
+                                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold ${
+                                      isDebit ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                                    }`}>
+                                      {isDebit ? (isFa ? 'بدهکاری' : 'Charge') : (isFa ? 'دریافتی' : 'Receipt')}
+                                    </span>
+                                  </td>
+                                  <td className="p-3.5 font-mono font-bold text-[#142033] whitespace-nowrap">
+                                    {entry.doc_number || '—'}
+                                  </td>
+                                  <td className="p-3.5 text-slate-700 max-w-xs">
+                                    <div className="font-semibold text-slate-800">{entry.description}</div>
+                                    {entry.notes && (
+                                      <div className="text-[11px] text-slate-400 truncate mt-0.5">{entry.notes}</div>
+                                    )}
+                                    {entry.allocations && entry.allocations.length > 0 && (
+                                      <div className="text-[10px] text-emerald-700 font-medium mt-1">
+                                        {isFa ? 'تخصیص‌یافته به: ' : 'Allocated to: '}
+                                        {entry.allocations.map((al: any) => `${al.charge_doc_no} (${al.amount}€)`).join(', ')}
+                                      </div>
+                                    )}
+                                  </td>
+                                  <td className="p-3.5 font-extrabold text-slate-900 whitespace-nowrap">
+                                    {entry.debit > 0 ? `${Number(entry.debit).toLocaleString()} €` : '—'}
+                                  </td>
+                                  <td className="p-3.5 font-extrabold text-emerald-700 whitespace-nowrap">
+                                    {entry.credit > 0 ? `${Number(entry.credit).toLocaleString()} €` : '—'}
+                                  </td>
+                                  <td className="p-3.5 font-mono font-extrabold text-[#142033] whitespace-nowrap">
+                                    {entry.running_balance !== null && entry.running_balance !== undefined
+                                      ? `${Number(entry.running_balance).toLocaleString()} €`
+                                      : '—'}
+                                  </td>
+                                  <td className="p-3.5 whitespace-nowrap">
                                     <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${badge.bg}`}>
                                       {badge.label}
                                     </span>
                                   </td>
-                                  <td className="p-3.5 font-bold text-emerald-700">
-                                    {Number(inst.paid_amount) > 0
-                                      ? `${Number(inst.paid_amount).toLocaleString()} ${invoice.currency}`
-                                      : '۰'}
-                                  </td>
-                                  <td className="p-3.5 text-slate-600">
-                                    {getPaymentMethodLabel(inst.payment_method)}
-                                  </td>
-                                  <td className="p-3.5 text-slate-500 font-mono text-[11px]">
-                                    {inst.paid_at ? inst.paid_at.split('T')[0] : '—'}
-                                  </td>
-                                  <td className="p-3.5 text-slate-500 max-w-[180px] truncate" title={inst.notes || ''}>
-                                    {inst.notes || '—'}
-                                  </td>
                                   {canEditFinance && (
-                                    <td className="p-3.5 text-center">
-                                      <button
-                                        type="button"
-                                        onClick={() => {
-                                          setPayingInstallment(inst);
-                                          setPaymentAmount(String(inst.paid_amount || inst.amount));
-                                          setPaymentMethod(inst.payment_method || 'bank_transfer');
-                                          setPaymentDate(inst.paid_at ? inst.paid_at.split('T')[0] : new Date().toISOString().split('T')[0]);
-                                          setPaymentNotes(inst.notes || '');
-                                        }}
-                                        className={`px-2.5 py-1 rounded-xl text-[11px] font-bold transition-all cursor-pointer ${
-                                          isPaidFull
-                                            ? 'bg-slate-100 hover:bg-slate-200 text-slate-700'
-                                            : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs'
-                                        }`}
-                                      >
-                                        {isPaidFull ? (isFa ? 'ویرایش فیش' : 'Edit Receipt') : (isFa ? 'ثبت پرداخت' : 'Record Payment')}
-                                      </button>
+                                    <td className="p-3.5 text-center whitespace-nowrap">
+                                      {isDebit ? (
+                                        entry.status !== 'cancelled' ? (
+                                          <button
+                                            type="button"
+                                            disabled={cancellingAction}
+                                            onClick={() => handleCancelCharge(entry.id, entry.doc_number)}
+                                            className="px-2.5 py-1 rounded-xl text-[10px] font-bold text-rose-600 hover:bg-rose-50 border border-rose-200 transition-all cursor-pointer disabled:opacity-50"
+                                            title={isFa ? 'لغو سند بدهکاری' : 'Cancel Charge'}
+                                          >
+                                            {isFa ? 'لغو سند' : 'Cancel'}
+                                          </button>
+                                        ) : (
+                                          <span className="text-[10px] text-slate-400">—</span>
+                                        )
+                                      ) : (
+                                        entry.status === 'active' ? (
+                                          <button
+                                            type="button"
+                                            disabled={cancellingAction}
+                                            onClick={() => handleCancelReceipt(entry.id, entry.doc_number)}
+                                            className="px-2.5 py-1 rounded-xl text-[10px] font-bold text-rose-600 hover:bg-rose-50 border border-rose-200 transition-all cursor-pointer disabled:opacity-50"
+                                            title={isFa ? 'لغو سند دریافتی و بازگشت تخصیص‌ها' : 'Cancel Receipt'}
+                                          >
+                                            {isFa ? 'لغو دریافت' : 'Cancel'}
+                                          </button>
+                                        ) : (
+                                          <span className="text-[10px] text-slate-400">—</span>
+                                        )
+                                      )}
                                     </td>
                                   )}
                                 </tr>
@@ -3139,9 +3205,102 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
                       </div>
                     )}
                   </div>
-                </div>
-              )}
-            </div>
+
+                  {/* SECTION 2: CHARGES BREAKDOWN & SETTLEMENT STATUS */}
+                  <div className="bg-white border border-[#dfe6ef] rounded-3xl p-6 sm:p-8 shadow-sm space-y-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-100 pb-4">
+                      <div className="space-y-1">
+                        <h3 className="text-sm sm:text-base font-extrabold text-[#142033]">
+                          {isFa ? 'فهرست تفکیکی خدمات و هزینه‌های متقاضی (بدهکاری‌ها)' : 'Services & Charges Breakdown'}
+                        </h3>
+                        <p className="text-xs text-slate-500">
+                          {isFa
+                            ? 'وضعیت تسویه هر خدمت و میزان مانده پرداخت‌نشده برای هر ردیف'
+                            : 'Settlement progress and remaining balance per line item'}
+                        </p>
+                      </div>
+                    </div>
+
+                    {charges.length === 0 ? (
+                      <div className="text-center py-6 text-xs text-slate-400">
+                        {isFa ? 'هیچ خدمت یا بدهکاری ثبت نشده است.' : 'No charges recorded.'}
+                      </div>
+                    ) : (
+                      <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-xs">
+                        <table className="w-full text-right text-xs">
+                          <thead className="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
+                            <tr>
+                              <th className="p-3.5">{isFa ? 'شماره سند' : 'Doc No'}</th>
+                              <th className="p-3.5">{isFa ? 'شرح خدمت' : 'Service Description'}</th>
+                              <th className="p-3.5">{isFa ? 'مبلغ کل (€)' : 'Total (€)'}</th>
+                              <th className="p-3.5">{isFa ? 'وصول‌شده (€)' : 'Paid (€)'}</th>
+                              <th className="p-3.5">{isFa ? 'مانده پرداخت‌نشده (€)' : 'Remaining (€)'}</th>
+                              <th className="p-3.5">{isFa ? 'وضعیت' : 'Status'}</th>
+                              <th className="p-3.5">{isFa ? 'تاریخ ثبت' : 'Date'}</th>
+                              {canEditFinance && <th className="p-3.5 text-center w-20">{isFa ? 'عملیات' : 'Action'}</th>}
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100 bg-white">
+                            {charges.map((chg: any) => {
+                              const badge = getChargeStatusBadge(chg.status);
+                              const totalAmt = Number(chg.amount) || 0;
+                              const paidAmt = Number(chg.paid_amount) || 0;
+                              const remainingAmt = Math.max(0, totalAmt - paidAmt);
+                              const isCancelled = chg.status === 'cancelled';
+
+                              return (
+                                <tr key={chg.id} className="hover:bg-slate-50/80 transition-colors">
+                                  <td className="p-3.5 font-mono font-bold text-[#142033] whitespace-nowrap">
+                                    {chg.doc_number || '—'}
+                                  </td>
+                                  <td className="p-3.5 font-medium text-slate-800">
+                                    {chg.description}
+                                    {chg.notes && <span className="text-[11px] text-slate-400 block font-normal">{chg.notes}</span>}
+                                  </td>
+                                  <td className="p-3.5 font-extrabold text-[#142033] whitespace-nowrap">
+                                    {totalAmt.toLocaleString()} €
+                                  </td>
+                                  <td className="p-3.5 font-bold text-emerald-700 whitespace-nowrap">
+                                    {paidAmt.toLocaleString()} €
+                                  </td>
+                                  <td className="p-3.5 font-extrabold text-amber-700 whitespace-nowrap">
+                                    {isCancelled ? '۰ €' : `${remainingAmt.toLocaleString()} €`}
+                                  </td>
+                                  <td className="p-3.5 whitespace-nowrap">
+                                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${badge.bg}`}>
+                                      {badge.label}
+                                    </span>
+                                  </td>
+                                  <td className="p-3.5 text-slate-500 font-mono text-[11px] whitespace-nowrap">
+                                    {chg.created_at ? chg.created_at.split('T')[0] : '—'}
+                                  </td>
+                                  {canEditFinance && (
+                                    <td className="p-3.5 text-center whitespace-nowrap">
+                                      {!isCancelled && paidAmt === 0 ? (
+                                        <button
+                                          type="button"
+                                          disabled={cancellingAction}
+                                          onClick={() => handleCancelCharge(chg.id, chg.doc_number)}
+                                          className="text-[10px] text-rose-600 hover:text-rose-800 font-bold hover:underline cursor-pointer disabled:opacity-50"
+                                        >
+                                          {isFa ? 'لغو' : 'Cancel'}
+                                        </button>
+                                      ) : (
+                                        <span className="text-[10px] text-slate-400">—</span>
+                                      )}
+                                    </td>
+                                  )}
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+                  </div>
+                </>
+              );
+            })()}
 
             {/* SECTION 2: CASE EXPENSES */}
             <div className="bg-white border border-[#dfe6ef] rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
@@ -3259,8 +3418,8 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
           </div>
         )}
 
-        {/* CREATE INVOICE MODAL */}
-        {showCreateInvoiceModal && (
+        {/* ADD CHARGE MODAL (dre-p85) */}
+        {showAddChargeModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-fadeIn">
             <div
               className="bg-white border border-[#dfe6ef] rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-6"
@@ -3268,42 +3427,80 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
             >
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                 <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                  <div className="w-10 h-10 rounded-2xl bg-blue-50 text-[#071B3D] flex items-center justify-center">
-                    <Receipt size={20} />
+                  <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-700 flex items-center justify-center">
+                    <Plus size={20} />
                   </div>
                   <div>
                     <h3 className="text-base sm:text-lg font-extrabold text-[#142033]">
-                      {isFa ? 'صدور فاکتور کل پرونده' : 'Create Case Invoice'}
+                      {isFa ? 'افزودن بدهکاری / خدمت جدید' : 'Add New Charge / Service'}
                     </h3>
                     <p className="text-xs text-slate-500">
-                      {isFa ? 'تعیین مبلغ کل قرارداد خدمات مهاجرتی این پرونده' : 'Total contract amount agreed for this lead'}
+                      {isFa ? 'ثبت ردیف خدمت جدید با شماره سند خودکار و ارز یورو (€)' : 'Record client charge in EUR (€) with auto doc number'}
                     </p>
                   </div>
                 </div>
 
                 <button
                   type="button"
-                  onClick={() => setShowCreateInvoiceModal(false)}
+                  onClick={() => setShowAddChargeModal(false)}
                   className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold cursor-pointer"
                 >
                   ✕
                 </button>
               </div>
 
-              <form onSubmit={handleCreateInvoice} className="space-y-4">
+              {/* Service Quick Presets */}
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-bold text-slate-500 block">
+                  {isFa ? 'عناوین متداول خدمت (انتخاب سریع):' : 'Common Presets:'}
+                </label>
+                <div className="flex flex-wrap gap-1.5">
+                  {[
+                    isFa ? 'حق‌الوکاله اخذ اقامت' : 'Residency Legal Fee',
+                    isFa ? 'خدمات ترجمه رسمی و آپوستیل' : 'Official Translation & Apostille',
+                    isFa ? 'عوارض دولتی و ثبت شرکت' : 'Government Fees & Incorporation',
+                    isFa ? 'مشاوره و ارزیابی پرونده' : 'Case Assessment & Consultation',
+                  ].map((preset) => (
+                    <button
+                      key={preset}
+                      type="button"
+                      onClick={() => setNewChargeDesc(preset)}
+                      className="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-medium transition-colors cursor-pointer"
+                    >
+                      {preset}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <form onSubmit={handleCreateCharge} className="space-y-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700 block">
+                    {isFa ? 'شرح خدمت الزامی است:' : 'Service Description (Required):'}
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder={isFa ? 'مثال: حق‌الوکاله مرحله اول اخذ اقامت تجاری' : 'e.g. Stage 1 residency legal fee'}
+                    value={newChargeDesc}
+                    onChange={(e) => setNewChargeDesc(e.target.value)}
+                    className="w-full p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                  />
+                </div>
+
                 <div className="grid grid-cols-3 gap-3">
                   <div className="col-span-2 space-y-1.5">
                     <label className="text-xs font-bold text-slate-700 block">
-                      {isFa ? 'مبلغ کل فاکتور:' : 'Total Amount:'}
+                      {isFa ? 'مبلغ بدهکاری (یورو):' : 'Amount (EUR):'}
                     </label>
                     <input
                       type="number"
                       required
                       min="1"
                       step="any"
-                      placeholder="5000"
-                      value={newInvoiceAmount}
-                      onChange={(e) => setNewInvoiceAmount(e.target.value)}
+                      placeholder="1500"
+                      value={newChargeAmount}
+                      onChange={(e) => setNewChargeAmount(e.target.value)}
                       className="w-full p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
                     />
                   </div>
@@ -3312,27 +3509,24 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
                     <label className="text-xs font-bold text-slate-700 block">
                       {isFa ? 'واحد ارز:' : 'Currency:'}
                     </label>
-                    <select
-                      value={newInvoiceCurrency}
-                      onChange={(e) => setNewInvoiceCurrency(e.target.value)}
-                      className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
-                    >
-                      <option value="RON">RON (لئو)</option>
-                      <option value="EUR">EUR (یورو)</option>
-                      <option value="USD">USD (دلار)</option>
-                    </select>
+                    <input
+                      type="text"
+                      disabled
+                      value="EUR (€)"
+                      className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-500 bg-slate-50 font-bold text-center"
+                    />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-slate-700 block">
-                    {isFa ? 'یادداشت یا توضیحات قرارداد:' : 'Notes / Remarks:'}
+                    {isFa ? 'یادداشت یا توضیحات قرارداد (اختیاری):' : 'Notes (Optional):'}
                   </label>
                   <textarea
-                    rows={3}
-                    placeholder={isFa ? 'مثال: قرارداد ثبت شرکت تجاری با خدمات اخذ کارت اقامت' : 'e.g. Full package for company registration and residency'}
-                    value={newInvoiceNotes}
-                    onChange={(e) => setNewInvoiceNotes(e.target.value)}
+                    rows={2}
+                    placeholder={isFa ? 'توضیحات تکمیلی پیرامون این ردیف هزینه...' : 'Additional notes...'}
+                    value={newChargeNotes}
+                    onChange={(e) => setNewChargeNotes(e.target.value)}
                     className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
                   />
                 </div>
@@ -3340,24 +3534,24 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
                 <div className="pt-3 flex items-center justify-end gap-3 border-t border-slate-100">
                   <button
                     type="button"
-                    disabled={creatingInvoice}
-                    onClick={() => setShowCreateInvoiceModal(false)}
+                    disabled={creatingCharge}
+                    onClick={() => setShowAddChargeModal(false)}
                     className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold transition-all cursor-pointer"
                   >
                     {isFa ? 'انصراف' : 'Cancel'}
                   </button>
                   <button
                     type="submit"
-                    disabled={creatingInvoice}
+                    disabled={creatingCharge}
                     className="px-5 py-2.5 rounded-xl bg-[#071B3D] hover:bg-blue-900 text-white text-xs font-bold transition-all disabled:opacity-50 flex items-center gap-2 cursor-pointer shadow-sm"
                   >
-                    {creatingInvoice ? (
+                    {creatingCharge ? (
                       <>
                         <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        <span>{isFa ? 'در حال صدور...' : 'Creating...'}</span>
+                        <span>{isFa ? 'در حال ثبت...' : 'Recording...'}</span>
                       </>
                     ) : (
-                      <span>{isFa ? 'تأیید و صدور فاکتور' : 'Issue Invoice'}</span>
+                      <span>{isFa ? 'تأیید و ثبت بدهکاری' : 'Record Charge'}</span>
                     )}
                   </button>
                 </div>
@@ -3366,155 +3560,51 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
           </div>
         )}
 
-        {/* ADD INSTALLMENT MODAL */}
-        {showAddInstallmentModal && (
+        {/* RECORD RECEIPT & ALLOCATION MODAL (dre-p85) */}
+        {showRecordReceiptModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-fadeIn">
             <div
-              className="bg-white border border-[#dfe6ef] rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-6"
+              className="bg-white border border-[#dfe6ef] rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto"
               dir={isFa ? 'rtl' : 'ltr'}
             >
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                 <div className="flex items-center space-x-2 rtl:space-x-reverse">
                   <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                    <Plus size={20} />
+                    <Receipt size={20} />
                   </div>
                   <div>
                     <h3 className="text-base sm:text-lg font-extrabold text-[#142033]">
-                      {isFa ? 'افزودن قسط جدید به فاکتور' : 'Add Installment'}
+                      {isFa ? 'ثبت سند دریافتی و تخصیص به بدهکاری‌ها' : 'Record Receipt & Allocate to Charges'}
                     </h3>
                     <p className="text-xs text-slate-500">
-                      {isFa ? 'تعیین مبلغ و موعد سررسید قسط' : 'Set amount and due date for installment'}
+                      {isFa ? 'ثبت وجه دریافتی با ارز یورو (€) و تخصیص مستقیم به خدمات باز' : 'Log received funds and allocate across open charges'}
                     </p>
                   </div>
                 </div>
 
                 <button
                   type="button"
-                  onClick={() => setShowAddInstallmentModal(false)}
+                  onClick={() => setShowRecordReceiptModal(false)}
                   className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold cursor-pointer"
                 >
                   ✕
                 </button>
               </div>
 
-              <form onSubmit={handleAddInstallment} className="space-y-4">
+              <form onSubmit={handleRecordReceipt} className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-slate-700 block">
-                      {isFa ? 'مبلغ قسط:' : 'Amount:'} ({invoice?.currency || 'RON'})
+                      {isFa ? 'مبلغ دریافتی (یورو €):' : 'Amount (EUR €):'}
                     </label>
                     <input
                       type="number"
                       required
                       min="1"
                       step="any"
-                      placeholder="2500"
-                      value={newInstallmentAmount}
-                      onChange={(e) => setNewInstallmentAmount(e.target.value)}
-                      className="w-full p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-700 block">
-                      {isFa ? 'تاریخ سررسید قسط:' : 'Due Date:'}
-                    </label>
-                    <input
-                      type="date"
-                      required
-                      value={newInstallmentDueDate}
-                      onChange={(e) => setNewInstallmentDueDate(e.target.value)}
-                      className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700 block">
-                    {isFa ? 'توضیحات قسط:' : 'Notes:'}
-                  </label>
-                  <textarea
-                    rows={2}
-                    placeholder={isFa ? 'مثال: پیش‌پرداخت اولیه پس از عقد قرارداد' : 'e.g. Initial payment upon contract signing'}
-                    value={newInstallmentNotes}
-                    onChange={(e) => setNewInstallmentNotes(e.target.value)}
-                    className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
-                  />
-                </div>
-
-                <div className="pt-3 flex items-center justify-end gap-3 border-t border-slate-100">
-                  <button
-                    type="button"
-                    disabled={addingInstallment}
-                    onClick={() => setShowAddInstallmentModal(false)}
-                    className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold transition-all cursor-pointer"
-                  >
-                    {isFa ? 'انصراف' : 'Cancel'}
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={addingInstallment}
-                    className="px-5 py-2.5 rounded-xl bg-[#071B3D] hover:bg-blue-900 text-white text-xs font-bold transition-all disabled:opacity-50 flex items-center gap-2 cursor-pointer shadow-sm"
-                  >
-                    {addingInstallment ? (
-                      <>
-                        <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        <span>{isFa ? 'در حال ثبت...' : 'Adding...'}</span>
-                      </>
-                    ) : (
-                      <span>{isFa ? 'ثبت قسط' : 'Add Installment'}</span>
-                    )}
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
-
-        {/* RECORD PAYMENT MODAL */}
-        {payingInstallment && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-fadeIn">
-            <div
-              className="bg-white border border-[#dfe6ef] rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-6"
-              dir={isFa ? 'rtl' : 'ltr'}
-            >
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-                <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                  <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                    <CheckCircle size={20} />
-                  </div>
-                  <div>
-                    <h3 className="text-base sm:text-lg font-extrabold text-[#142033]">
-                      {isFa ? `ثبت پرداخت قسط شماره ${payingInstallment.installment_no}` : `Record Payment for Installment #${payingInstallment.installment_no}`}
-                    </h3>
-                    <p className="text-xs text-slate-500">
-                      {isFa ? `مبلغ تعیین‌شده قسط: ${Number(payingInstallment.amount).toLocaleString()} ${invoice?.currency || 'RON'}` : `Scheduled Amount: ${Number(payingInstallment.amount).toLocaleString()}`}
-                    </p>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => setPayingInstallment(null)}
-                  className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold cursor-pointer"
-                >
-                  ✕
-                </button>
-              </div>
-
-              <form onSubmit={handleRecordPayment} className="space-y-4">
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-700 block">
-                      {isFa ? 'مبلغ دریافتی:' : 'Amount Received:'}
-                    </label>
-                    <input
-                      type="number"
-                      required
-                      min="0"
-                      step="any"
-                      value={paymentAmount}
-                      onChange={(e) => setPaymentAmount(e.target.value)}
+                      placeholder="1000"
+                      value={newReceiptAmount}
+                      onChange={(e) => setNewReceiptAmount(e.target.value)}
                       className="w-full p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
                     />
                   </div>
@@ -3524,65 +3614,182 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
                       {isFa ? 'روش پرداخت:' : 'Payment Method:'}
                     </label>
                     <select
-                      value={paymentMethod}
-                      onChange={(e) => setPaymentMethod(e.target.value)}
+                      value={newReceiptMethod}
+                      onChange={(e) => setNewReceiptMethod(e.target.value as any)}
                       className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
                     >
-                      <option value="bank_transfer">{isFa ? 'حواله / انتقال بانکی' : 'Bank Transfer'}</option>
+                      <option value="bank_transfer">{isFa ? 'حواله / واریز بانکی' : 'Bank Transfer'}</option>
                       <option value="cash">{isFa ? 'نقدی' : 'Cash'}</option>
                       <option value="card">{isFa ? 'کارتخوان / درگاه' : 'Card / POS'}</option>
-                      <option value="other">{isFa ? 'سایر روش‌ها' : 'Other'}</option>
                     </select>
                   </div>
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700 block">
-                    {isFa ? 'تاریخ پرداخت:' : 'Paid Date:'}
-                  </label>
-                  <input
-                    type="date"
-                    required
-                    value={paymentDate}
-                    onChange={(e) => setPaymentDate(e.target.value)}
-                    className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
-                  />
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-700 block">
+                      {isFa ? 'تاریخ دریافت وجه:' : 'Received Date:'}
+                    </label>
+                    <input
+                      type="date"
+                      required
+                      value={newReceiptDate}
+                      onChange={(e) => setNewReceiptDate(e.target.value)}
+                      className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-700 block">
+                      {isFa ? 'کد پیگیری یا شماره تراکنش:' : 'Reference Number:'}
+                    </label>
+                    <input
+                      type="text"
+                      placeholder={isFa ? 'مثال: TR-982347' : 'e.g. TR-982347'}
+                      value={newReceiptNotes}
+                      onChange={(e) => setNewReceiptNotes(e.target.value)}
+                      className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
+                    />
+                  </div>
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700 block">
-                    {isFa ? 'یادداشت / کد پیگیری تراکنش:' : 'Notes / Reference:'}
-                  </label>
-                  <textarea
-                    rows={2}
-                    placeholder={isFa ? 'مثال: شماره پیگیری واریز بانک ملت ۴۳۵۷۸۹' : 'e.g. Bank reference #435789'}
-                    value={paymentNotes}
-                    onChange={(e) => setPaymentNotes(e.target.value)}
-                    className="w-full p-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071B3D]"
-                  />
+                {/* ALLOCATION SECTION */}
+                <div className="space-y-3 pt-2 border-t border-slate-100">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-xs font-bold text-slate-800 block">
+                        {isFa ? 'تخصیص به بدهکاری‌ها / خدمات پرونده:' : 'Allocate to Open Charges:'}
+                      </span>
+                      <span className="text-[11px] text-slate-500">
+                        {isFa ? 'مبلغ واریزی را به بدهکاری‌های باز تخصیص دهید (اختیاری)' : 'Assign received funds to open charges'}
+                      </span>
+                    </div>
+
+                    {/* Auto Allocate Button */}
+                    {parseFloat(newReceiptAmount) > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          let available = parseFloat(newReceiptAmount) || 0;
+                          const nextAlloc: Record<string, string> = {};
+                          const openChgs = charges.filter(c => c.status === 'open' || c.status === 'partially_paid');
+                          for (const chg of openChgs) {
+                            if (available <= 0) break;
+                            const rem = Math.max(0, (Number(chg.amount) || 0) - (Number(chg.paid_amount) || 0));
+                            if (rem > 0) {
+                              const alloc = Math.min(available, rem);
+                              nextAlloc[chg.id] = String(alloc);
+                              available -= alloc;
+                            }
+                          }
+                          setReceiptAllocations(nextAlloc);
+                        }}
+                        className="px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-[#071B3D] text-[11px] font-bold transition-all cursor-pointer"
+                      >
+                        {isFa ? '⚡ تخصیص خودکار' : '⚡ Auto Allocate'}
+                      </button>
+                    )}
+                  </div>
+
+                  {(() => {
+                    const openCharges = charges.filter(c => c.status === 'open' || c.status === 'partially_paid');
+                    const totalAllocated = Object.values(receiptAllocations).reduce((sum, val) => sum + (parseFloat(val) || 0), 0);
+                    const receiptAmt = parseFloat(newReceiptAmount) || 0;
+                    const unallocated = Math.max(0, receiptAmt - totalAllocated);
+
+                    return (
+                      <div className="space-y-2">
+                        {openCharges.length === 0 ? (
+                          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-500 text-center">
+                            {isFa ? 'هیچ بدهکاری بازی برای تخصیص یافت نشد (وجه به عنوان بستانکاری ذخیره می‌شود).' : 'No open charges to allocate against.'}
+                          </div>
+                        ) : (
+                          <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
+                            {openCharges.map((chg) => {
+                              const totalAmt = Number(chg.amount) || 0;
+                              const paidAmt = Number(chg.paid_amount) || 0;
+                              const remaining = Math.max(0, totalAmt - paidAmt);
+
+                              return (
+                                <div key={chg.id} className="p-2.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between gap-3 text-xs">
+                                  <div className="min-w-0">
+                                    <div className="font-bold text-slate-800 flex items-center gap-1.5">
+                                      <span className="font-mono text-[11px] text-[#071B3D]">{chg.doc_number}</span>
+                                      <span className="truncate">{chg.description}</span>
+                                    </div>
+                                    <div className="text-[11px] text-slate-500 mt-0.5">
+                                      {isFa ? 'مانده بدهی: ' : 'Remaining: '}
+                                      <strong className="text-amber-700 font-bold">{remaining.toLocaleString()} €</strong>
+                                      {' '}({isFa ? 'از کل ' : 'of '}{totalAmt.toLocaleString()} €)
+                                    </div>
+                                  </div>
+
+                                  <div className="flex items-center gap-1.5 shrink-0">
+                                    <input
+                                      type="number"
+                                      min="0"
+                                      max={remaining}
+                                      step="any"
+                                      placeholder="0"
+                                      value={receiptAllocations[chg.id] || ''}
+                                      onChange={(e) => {
+                                        const v = e.target.value;
+                                        setReceiptAllocations(prev => ({
+                                          ...prev,
+                                          [chg.id]: v,
+                                        }));
+                                      }}
+                                      className="w-24 p-1.5 rounded-lg border border-slate-200 text-center text-xs font-bold bg-white text-slate-800 focus:ring-1 focus:ring-[#071B3D]"
+                                    />
+                                    <span className="text-[11px] font-bold text-slate-500">€</span>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+
+                        {receiptAmt > 0 && (
+                          <div className="p-2.5 rounded-xl bg-slate-100 flex items-center justify-between text-[11px]">
+                            <span className="text-slate-600">
+                              {isFa ? 'مجموع تخصیص یافته:' : 'Total Allocated:'}{' '}
+                              <strong className={totalAllocated > receiptAmt ? 'text-rose-600 font-bold' : 'text-emerald-700 font-bold'}>
+                                {totalAllocated.toLocaleString()} €
+                              </strong>
+                              {' '}{isFa ? 'از' : 'of'}{' '}{receiptAmt.toLocaleString()} €
+                            </span>
+                            <span className="text-slate-500">
+                              {isFa ? 'مانده غیرتخصیص:' : 'Unallocated:'}{' '}
+                              <strong className="text-slate-700 font-bold">{unallocated.toLocaleString()} €</strong>
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
                 </div>
 
                 <div className="pt-3 flex items-center justify-end gap-3 border-t border-slate-100">
                   <button
                     type="button"
-                    disabled={recordingPayment}
-                    onClick={() => setPayingInstallment(null)}
+                    disabled={recordingReceipt}
+                    onClick={() => setShowRecordReceiptModal(false)}
                     className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold transition-all cursor-pointer"
                   >
                     {isFa ? 'انصراف' : 'Cancel'}
                   </button>
                   <button
                     type="submit"
-                    disabled={recordingPayment}
+                    disabled={recordingReceipt}
                     className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all disabled:opacity-50 flex items-center gap-2 cursor-pointer shadow-sm"
                   >
-                    {recordingPayment ? (
+                    {recordingReceipt ? (
                       <>
                         <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                         <span>{isFa ? 'در حال ثبت...' : 'Recording...'}</span>
                       </>
                     ) : (
-                      <span>{isFa ? 'ثبت و تسویه' : 'Save Payment'}</span>
+                      <span>{isFa ? 'ثبت و تخصیص سند دریافتی' : 'Record Receipt'}</span>
                     )}
                   </button>
                 </div>

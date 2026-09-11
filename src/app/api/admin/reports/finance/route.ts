@@ -24,8 +24,11 @@ function getWeekLabel(dateStr: string): string {
 
 /**
  * GET /api/admin/reports/finance
- * Financial analytics report.
- * Requires 'finance.view' permission (finance, owner, manager).
+ * Upgraded professional financial analytics report (dre-p85).
+ * All metrics strictly in EUR.
+ * Reads from case_charges, case_receipts, and case_expenses.
+ * Includes per-client receivables and balance breakdown.
+ * Requires 'finance.view' permission.
  */
 export async function GET(request: Request) {
   try {
@@ -48,25 +51,43 @@ export async function GET(request: Request) {
     const dateRange = parseReportDates(searchParams);
     const isCsv = searchParams.get('format')?.toLowerCase() === 'csv';
 
-    // 1. Fetch installments paid within date range
-    const { data: installments, error: instErr } = await supabaseAdmin
-      .from('invoice_installments')
-      .select('id, invoice_id, amount, paid_amount, paid_at, status')
-      .not('paid_at', 'is', null)
-      .gte('paid_at', dateRange.fromIso)
-      .lte('paid_at', dateRange.toIso);
+    // 1. Fetch active receipts received within date range
+    const { data: receiptsInRange, error: recErr } = await supabaseAdmin
+      .from('case_receipts')
+      .select('id, lead_id, amount, received_at, status')
+      .eq('status', 'active')
+      .gte('received_at', dateRange.fromStr)
+      .lte('received_at', dateRange.toStr);
 
-    if (instErr) {
-      console.error('Error fetching installments for finance report:', instErr);
-      return NextResponse.json({ error: instErr.message }, { status: 500 });
+    if (recErr) {
+      console.error('Error fetching receipts for finance report:', recErr);
+      return NextResponse.json({ error: recErr.message }, { status: 500 });
     }
 
-    const totalRevenue = (installments || []).reduce(
-      (sum, item) => sum + Number(item.paid_amount || 0),
+    const totalRevenue = (receiptsInRange || []).reduce(
+      (sum, item) => sum + Number(item.amount || 0),
       0
     );
 
-    // 2. Fetch expenses incurred within date range
+    // 2. Fetch non-cancelled charges created within date range
+    const { data: chargesInRange, error: chgErr } = await supabaseAdmin
+      .from('case_charges')
+      .select('id, lead_id, total_amount, created_at, status')
+      .neq('status', 'cancelled')
+      .gte('created_at', dateRange.fromIso)
+      .lte('created_at', dateRange.toIso);
+
+    if (chgErr) {
+      console.error('Error fetching charges for finance report:', chgErr);
+      return NextResponse.json({ error: chgErr.message }, { status: 500 });
+    }
+
+    const totalCharges = (chargesInRange || []).reduce(
+      (sum, item) => sum + Number(item.total_amount || 0),
+      0
+    );
+
+    // 3. Fetch expenses incurred within date range
     const { data: expenses, error: expErr } = await supabaseAdmin
       .from('case_expenses')
       .select('id, lead_id, expense_type, amount, currency, incurred_at, paid_to')
@@ -85,7 +106,7 @@ export async function GET(request: Request) {
 
     const netProfit = totalRevenue - totalExpenses;
 
-    // 3. Time Series generation (daily if diffDays <= 31, weekly otherwise)
+    // 4. Time Series generation (daily if diffDays <= 31, weekly otherwise)
     const isDaily = dateRange.diffDays <= 31;
     let timeSeries: { period: string; label: string; revenue: number; expenses: number; profit: number }[] = [];
 
@@ -99,75 +120,59 @@ export async function GET(request: Request) {
         expMap[d] = 0;
       });
 
-      (installments || []).forEach((inst) => {
-        if (inst.paid_at) {
-          const d = inst.paid_at.split('T')[0];
-          if (revMap[d] !== undefined) {
-            revMap[d] += Number(inst.paid_amount || 0);
-          }
+      (receiptsInRange || []).forEach((r) => {
+        if (r.received_at && revMap[r.received_at] !== undefined) {
+          revMap[r.received_at] += Number(r.amount || 0);
         }
       });
 
-      (expenses || []).forEach((exp) => {
-        if (exp.incurred_at) {
-          const d = exp.incurred_at.split('T')[0];
-          if (expMap[d] !== undefined) {
-            expMap[d] += Number(exp.amount || 0);
-          }
+      (expenses || []).forEach((e) => {
+        const d = e.incurred_at?.split('T')[0];
+        if (d && expMap[d] !== undefined) {
+          expMap[d] += Number(e.amount || 0);
         }
       });
 
-      timeSeries = dates.map((date) => {
-        const rev = revMap[date] || 0;
-        const exp = expMap[date] || 0;
+      timeSeries = dates.map((d) => {
+        const rev = revMap[d] || 0;
+        const exp = expMap[d] || 0;
         return {
-          period: date,
-          label: date,
+          period: d,
+          label: d.slice(5), // "MM-DD"
           revenue: Math.round(rev * 100) / 100,
           expenses: Math.round(exp * 100) / 100,
           profit: Math.round((rev - exp) * 100) / 100,
         };
       });
     } else {
-      // Group by weeks
-      const weekRevMap: Record<string, number> = {};
-      const weekExpMap: Record<string, number> = {};
-      const weekOrder: string[] = [];
+      const revMap: Record<string, number> = {};
+      const expMap: Record<string, number> = {};
+      const weekLabels: Record<string, string> = {};
 
-      const dates = generateDateList(dateRange.fromStr, dateRange.toStr);
-      dates.forEach((d) => {
-        const w = getWeekLabel(d);
-        if (!weekOrder.includes(w)) {
-          weekOrder.push(w);
-          weekRevMap[w] = 0;
-          weekExpMap[w] = 0;
+      (receiptsInRange || []).forEach((r) => {
+        if (r.received_at) {
+          const w = getWeekLabel(r.received_at);
+          revMap[w] = (revMap[w] || 0) + Number(r.amount || 0);
+          weekLabels[w] = w;
         }
       });
 
-      (installments || []).forEach((inst) => {
-        if (inst.paid_at) {
-          const w = getWeekLabel(inst.paid_at.split('T')[0]);
-          if (weekRevMap[w] !== undefined) {
-            weekRevMap[w] += Number(inst.paid_amount || 0);
-          }
+      (expenses || []).forEach((e) => {
+        const d = e.incurred_at?.split('T')[0];
+        if (d) {
+          const w = getWeekLabel(d);
+          expMap[w] = (expMap[w] || 0) + Number(e.amount || 0);
+          weekLabels[w] = w;
         }
       });
 
-      (expenses || []).forEach((exp) => {
-        if (exp.incurred_at) {
-          const w = getWeekLabel(exp.incurred_at.split('T')[0]);
-          if (weekExpMap[w] !== undefined) {
-            weekExpMap[w] += Number(exp.amount || 0);
-          }
-        }
-      });
-
-      timeSeries = weekOrder.map((w) => {
-        const rev = weekRevMap[w] || 0;
-        const exp = weekExpMap[w] || 0;
+      const sortedWeeks = Object.keys(weekLabels).sort();
+      timeSeries = sortedWeeks.map((w) => {
+        const rev = revMap[w] || 0;
+        const exp = expMap[w] || 0;
         return {
           period: w,
-          label: `هفته ${w}`,
+          label: `هفته ${w.slice(5)}`,
           revenue: Math.round(rev * 100) / 100,
           expenses: Math.round(exp * 100) / 100,
           profit: Math.round((rev - exp) * 100) / 100,
@@ -175,103 +180,154 @@ export async function GET(request: Request) {
       });
     }
 
-    // 4. Outstanding invoices (draft, sent, partially_paid)
-    const { data: outstandingInvoicesRaw, error: outErr } = await supabaseAdmin
-      .from('case_invoices')
+    // 5. Per-Client Breakdown Table (every client with charges or receipts)
+    // Query all non-cancelled charges with joined lead info
+    const { data: allCharges, error: allChgErr } = await supabaseAdmin
+      .from('case_charges')
       .select(`
         id,
         lead_id,
-        currency,
         total_amount,
         status,
-        created_at,
-        lead:leads!case_invoices_lead_id_fkey (
+        lead:leads!case_charges_lead_id_fkey (
           id,
           full_name,
           email,
           phone
-        ),
-        installments:invoice_installments (
-          id,
-          amount,
-          paid_amount,
-          status,
-          due_date
         )
       `)
-      .in('status', ['draft', 'sent', 'partially_paid'])
-      .order('created_at', { ascending: false });
+      .neq('status', 'cancelled');
 
-    if (outErr) {
-      console.error('Error fetching outstanding invoices:', outErr);
-      return NextResponse.json({ error: outErr.message }, { status: 500 });
+    if (allChgErr) {
+      console.error('Error fetching all charges for client breakdown:', allChgErr);
+      return NextResponse.json({ error: allChgErr.message }, { status: 500 });
     }
 
-    const outstandingInvoices = (outstandingInvoicesRaw || []).map((inv: any) => {
-      const totalAmount = Number(inv.total_amount || 0);
-      const paidSum = (inv.installments || []).reduce(
-        (acc: number, inst: any) => acc + Number(inst.paid_amount || 0),
-        0
-      );
-      const remainingAmount = Math.max(0, totalAmount - paidSum);
+    // Query all active receipts
+    const { data: allReceipts, error: allRecErr } = await supabaseAdmin
+      .from('case_receipts')
+      .select('id, lead_id, amount, status')
+      .eq('status', 'active');
 
+    if (allRecErr) {
+      console.error('Error fetching all receipts for client breakdown:', allRecErr);
+      return NextResponse.json({ error: allRecErr.message }, { status: 500 });
+    }
+
+    // Aggregate by lead_id
+    const clientMap: Record<
+      string,
+      {
+        leadId: string;
+        leadFullName: string;
+        leadEmail: string | null;
+        leadPhone: string | null;
+        totalCharges: number;
+        totalReceipts: number;
+        remainingBalance: number;
+        openChargesCount: number;
+      }
+    > = {};
+
+    (allCharges || []).forEach((c: any) => {
+      const lid = c.lead_id;
+      if (!clientMap[lid]) {
+        clientMap[lid] = {
+          leadId: lid,
+          leadFullName: c.lead?.full_name || 'متقاضی نامشخص',
+          leadEmail: c.lead?.email || null,
+          leadPhone: c.lead?.phone || null,
+          totalCharges: 0,
+          totalReceipts: 0,
+          remainingBalance: 0,
+          openChargesCount: 0,
+        };
+      }
+      clientMap[lid].totalCharges += Number(c.total_amount || 0);
+      if (c.status === 'open' || c.status === 'partially_paid') {
+        clientMap[lid].openChargesCount += 1;
+      }
+    });
+
+    (allReceipts || []).forEach((r: any) => {
+      const lid = r.lead_id;
+      if (!clientMap[lid]) {
+        clientMap[lid] = {
+          leadId: lid,
+          leadFullName: 'متقاضی نامشخص',
+          leadEmail: null,
+          leadPhone: null,
+          totalCharges: 0,
+          totalReceipts: 0,
+          remainingBalance: 0,
+          openChargesCount: 0,
+        };
+      }
+      clientMap[lid].totalReceipts += Number(r.amount || 0);
+    });
+
+    const clientBreakdown = Object.values(clientMap).map((client) => {
+      const charges = Math.round(client.totalCharges * 100) / 100;
+      const receipts = Math.round(client.totalReceipts * 100) / 100;
+      const balance = Math.round((charges - receipts) * 100) / 100;
       return {
-        invoiceId: inv.id,
-        leadId: inv.lead_id,
-        leadFullName: inv.lead?.full_name || 'نامشخص',
-        leadEmail: inv.lead?.email || null,
-        leadPhone: inv.lead?.phone || null,
-        currency: inv.currency || 'RON',
-        totalAmount,
-        paidAmount: paidSum,
-        remainingAmount: Math.round(remainingAmount * 100) / 100,
-        status: inv.status,
-        createdAt: inv.created_at,
+        ...client,
+        totalCharges: charges,
+        totalReceipts: receipts,
+        remainingBalance: balance,
       };
     });
 
+    // Sort: highest remaining balance first, then name
+    clientBreakdown.sort((a, b) => b.remainingBalance - a.remainingBalance);
+
+    const totalOutstandingBalance = clientBreakdown.reduce(
+      (sum, c) => sum + (c.remainingBalance > 0 ? c.remainingBalance : 0),
+      0
+    );
+
     const summary = {
+      currency: 'EUR',
       totalRevenue: Math.round(totalRevenue * 100) / 100,
+      totalCharges: Math.round(totalCharges * 100) / 100,
       totalExpenses: Math.round(totalExpenses * 100) / 100,
       netProfit: Math.round(netProfit * 100) / 100,
-      outstandingInvoicesCount: outstandingInvoices.length,
-      totalOutstandingAmount: Math.round(
-        outstandingInvoices.reduce((s, inv) => s + inv.remainingAmount, 0) * 100
-      ) / 100,
+      totalClientsWithBalance: clientBreakdown.filter((c) => c.remainingBalance > 0).length,
+      totalOutstandingBalance: Math.round(totalOutstandingBalance * 100) / 100,
       timeSeriesMode: isDaily ? 'daily' : 'weekly',
       from: dateRange.fromStr,
       to: dateRange.toStr,
     };
 
     if (isCsv) {
-      let csv = `گزارش مالی پورتال (${dateRange.fromStr} تا ${dateRange.toStr})\n\n`;
+      let csv = `گزارش مالی پورتال DORVIA (${dateRange.fromStr} تا ${dateRange.toStr}) - مبالغ به یورو (EUR)\n\n`;
 
       csv += 'شاخص‌های کلیدی مالی\n';
       csv += toCsvString(
-        ['درآمد بازه (RON)', 'هزینه‌های بازه (RON)', 'سود خالص (RON)', 'تعداد فاکتورهای دارای مانده', 'مجموع مانده مطالبات (RON)'],
-        [[summary.totalRevenue, summary.totalExpenses, summary.netProfit, summary.outstandingInvoicesCount, summary.totalOutstandingAmount]]
+        ['درآمد بازه (EUR)', 'بدهکاری‌های ثبت‌شده (EUR)', 'هزینه‌های بازه (EUR)', 'سود خالص (EUR)', 'مجموع مانده مطالبات (EUR)'],
+        [[summary.totalRevenue, summary.totalCharges, summary.totalExpenses, summary.netProfit, summary.totalOutstandingBalance]]
       );
       csv += '\n\n';
 
       csv += `روند زمانی مالی (${isDaily ? 'روزانه' : 'هفتگی'})\n`;
       csv += toCsvString(
-        ['بازه', 'درآمد', 'هزینه', 'سود خالص'],
+        ['بازه', 'درآمد (EUR)', 'هزینه (EUR)', 'سود خالص (EUR)'],
         timeSeries.map((t) => [t.label, t.revenue, t.expenses, t.profit])
       );
       csv += '\n\n';
 
-      csv += 'فهرست فاکتورهای دارای مانده و پیگیری مطالبات\n';
+      csv += 'جدول تفکیکی مطالبات و گردش حساب مشتریان\n';
       csv += toCsvString(
-        ['شناسه فاکتور', 'نام متقاضی', 'وضعیت', 'مبلغ کل', 'پرداخت‌شده', 'مانده مطالبات', 'ارز', 'تاریخ ثبت'],
-        outstandingInvoices.map((inv) => [
-          inv.invoiceId,
-          inv.leadFullName,
-          inv.status,
-          inv.totalAmount,
-          inv.paidAmount,
-          inv.remainingAmount,
-          inv.currency,
-          inv.createdAt?.split('T')[0],
+        ['شناسه مشتری', 'نام متقاضی', 'شماره تماس', 'ایمیل', 'کل بدهکاری‌ها (EUR)', 'کل دریافتی‌ها (EUR)', 'مانده حساب (EUR)', 'تعداد خدمات باز'],
+        clientBreakdown.map((c) => [
+          c.leadId,
+          c.leadFullName,
+          c.leadPhone || '-',
+          c.leadEmail || '-',
+          c.totalCharges,
+          c.totalReceipts,
+          c.remainingBalance,
+          c.openChargesCount,
         ])
       );
 
@@ -279,6 +335,7 @@ export async function GET(request: Request) {
     }
 
     return NextResponse.json({
+      currency: 'EUR',
       dateRange: {
         from: dateRange.fromStr,
         to: dateRange.toStr,
@@ -286,7 +343,23 @@ export async function GET(request: Request) {
       },
       summary,
       timeSeries,
-      outstandingInvoices,
+      clientBreakdown,
+      // Backward compatibility alias for UI components reading outstandingInvoices
+      outstandingInvoices: clientBreakdown
+        .filter((c) => c.remainingBalance > 0)
+        .map((c) => ({
+          invoiceId: c.leadId,
+          leadId: c.leadId,
+          leadFullName: c.leadFullName,
+          leadEmail: c.leadEmail,
+          leadPhone: c.leadPhone,
+          currency: 'EUR',
+          totalAmount: c.totalCharges,
+          paidAmount: c.totalReceipts,
+          remainingAmount: c.remainingBalance,
+          status: c.openChargesCount > 0 ? 'partially_paid' : 'open',
+          createdAt: dateRange.fromIso,
+        })),
     });
   } catch (error: any) {
     console.error('Unexpected error in GET /api/admin/reports/finance:', error);
