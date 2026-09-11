@@ -1,7 +1,16 @@
+/**
+ * ============================================================================
+ * [LOGIC_SIMULATION_TEST] شبیه‌سازی منطقی و اعتبارسنجی فرمول‌ها
+ * ============================================================================
+ * وضعیت: شبیه‌سازی منطق حسابداری درون‌حافظه‌ای (Memory-Level Parity Simulation)
+ * نکته شفافیت: این اسکریپت مدل منطقی محاسبات مالی، گذار وضعیت‌ها (open, partially_paid, paid)،
+ * لاجیک لجر، و گاردهای لغو را شبیه‌سازی می‌کند، نه تست یکپارچه زنده دیتابیس.
+ * تست یکپارچه دیتابیس نیازمند اجرای مقدماتی مایگریشن
+ * docs/migrations/08_case_charges_receipts_accounting.sql در دیتابیس Supabase است.
+ * ============================================================================
+ */
 import { loadEnvConfig } from '@next/env';
 loadEnvConfig(process.cwd());
-
-import { supabaseAdmin } from '../src/lib/supabaseAdmin';
 
 interface ChargeRecord {
   id: string;
@@ -32,7 +41,9 @@ interface ReceiptRecord {
 
 async function runTest() {
   console.log('================================================================');
-  console.log('🚀 DRE-P85: Comprehensive Accounting Engine & Ledger Test Suite');
+  console.log('⚠️ [LOGIC SIMULATION ONLY] DRE-P85: Accounting Engine Logic Simulation');
+  console.log('NOTE: In-memory simulation of brief business logic & state transitions.');
+  console.log('Live DB execution requires migration 08 executed in Supabase SQL editor.');
   console.log('================================================================\n');
 
   console.log('📋 Test Scenarios from Task Brief:');

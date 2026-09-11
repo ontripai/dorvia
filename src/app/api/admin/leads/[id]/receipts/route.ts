@@ -200,17 +200,19 @@ export async function POST(
         return NextResponse.json({ error: 'خطا در بررسی بدهکاری‌های متقاضی.' }, { status: 500 });
       }
 
-      // Fetch existing allocations for these charges
+      // Fetch existing active allocations for these charges
       const { data: existingAllocations, error: exAllocErr } = await supabaseAdmin
         .from('receipt_allocations')
         .select(`
           charge_id,
           amount,
+          status,
           receipt:case_receipts!receipt_allocations_receipt_id_fkey (
             status
           )
         `)
-        .in('charge_id', chargeIds);
+        .in('charge_id', chargeIds)
+        .eq('status', 'active');
 
       if (exAllocErr) {
         console.error('Error fetching existing allocations:', exAllocErr);
@@ -220,7 +222,7 @@ export async function POST(
       const existingMap: Record<string, number> = {};
       (existingAllocations || []).forEach((ea) => {
         const rec = ea.receipt as any;
-        if (rec?.status === 'active') {
+        if (ea.status === 'active' && (!rec || rec.status === 'active')) {
           existingMap[ea.charge_id] = (existingMap[ea.charge_id] || 0) + Number(ea.amount || 0);
         }
       });

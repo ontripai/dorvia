@@ -65,23 +65,22 @@ export async function PATCH(
       .select(`
         id,
         amount,
+        status,
         receipt:case_receipts!receipt_allocations_receipt_id_fkey (
           id,
           doc_number,
           status
         )
       `)
-      .eq('charge_id', chargeId);
+      .eq('charge_id', chargeId)
+      .eq('status', 'active');
 
     if (allocErr) {
       console.error('Error checking allocations before charge cancellation:', allocErr);
       return NextResponse.json({ error: allocErr.message }, { status: 500 });
     }
 
-    const activeAllocations = (allocations || []).filter((a) => {
-      const rec = a.receipt as any;
-      return rec?.status === 'active';
-    });
+    const activeAllocations = (allocations || []).filter((a) => a.status === 'active');
 
     if (activeAllocations.length > 0) {
       const totalAllocated = activeAllocations.reduce((sum, a) => sum + Number(a.amount || 0), 0);
