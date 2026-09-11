@@ -1041,10 +1041,10 @@ export default function AdminReportsPage({ params }: ReportsPageProps) {
                   <DollarIcon size={18} className="text-emerald-600" />
                 </div>
                 <div className="text-xl sm:text-2xl font-extrabold text-emerald-600">
-                  {financeData.summary?.totalRevenue?.toLocaleString() ?? 0} RON
+                  {financeData.summary?.totalRevenue?.toLocaleString() ?? 0} €
                 </div>
                 <div className="text-[11px] text-slate-500">
-                  {isFa ? 'اقساط وصول‌شده' : 'Collected installments'}
+                  {isFa ? 'مجموع دریافتی‌های وصول‌شده' : 'Collected receipts'}
                 </div>
               </div>
 
@@ -1054,7 +1054,7 @@ export default function AdminReportsPage({ params }: ReportsPageProps) {
                   <DollarIcon size={18} className="text-rose-600" />
                 </div>
                 <div className="text-xl sm:text-2xl font-extrabold text-rose-600">
-                  {financeData.summary?.totalExpenses?.toLocaleString() ?? 0} RON
+                  {financeData.summary?.totalExpenses?.toLocaleString() ?? 0} €
                 </div>
                 <div className="text-[11px] text-slate-500">
                   {isFa ? 'ترجمه، نوتر، وکالت و غیره' : 'Translation, legal, etc.'}
@@ -1073,23 +1073,23 @@ export default function AdminReportsPage({ params }: ReportsPageProps) {
                       : 'text-rose-600'
                   }`}
                 >
-                  {financeData.summary?.netProfit?.toLocaleString() ?? 0} RON
+                  {financeData.summary?.netProfit?.toLocaleString() ?? 0} €
                 </div>
                 <div className="text-[11px] text-slate-500">
-                  {isFa ? 'تفاضل درآمد و هزینه' : 'Revenue minus expenses'}
+                  {isFa ? 'تفاضل دریافتی‌ها و هزینه‌ها' : 'Receipts minus expenses'}
                 </div>
               </div>
 
               <div className="bg-white border border-[#dfe6ef] rounded-2xl p-5 shadow-xs space-y-2">
                 <div className="flex items-center justify-between text-slate-500 text-xs font-bold">
-                  <span>{isFa ? 'فاکتورهای دارای مانده' : 'Unpaid Invoices'}</span>
+                  <span>{isFa ? 'خدمات دارای مانده' : 'Open Charges'}</span>
                   <AlertCircle size={18} className="text-amber-500" />
                 </div>
                 <div className="text-xl sm:text-2xl font-extrabold text-amber-600">
                   {financeData.summary?.outstandingInvoicesCount ?? 0}
                 </div>
                 <div className="text-[11px] text-slate-500">
-                  {isFa ? 'نیازمند پیگیری وصول' : 'Pending payment collection'}
+                  {isFa ? 'بدهکاری‌های تسویه‌نشده' : 'Unpaid charges count'}
                 </div>
               </div>
 
@@ -1099,10 +1099,10 @@ export default function AdminReportsPage({ params }: ReportsPageProps) {
                   <DollarIcon size={18} className="text-purple-600" />
                 </div>
                 <div className="text-xl sm:text-2xl font-extrabold text-purple-700">
-                  {financeData.summary?.totalOutstandingAmount?.toLocaleString() ?? 0} RON
+                  {financeData.summary?.totalOutstandingAmount?.toLocaleString() ?? 0} €
                 </div>
                 <div className="text-[11px] text-slate-500">
-                  {isFa ? 'کل مبالغ وصول‌نشده' : 'Total uncollected balance'}
+                  {isFa ? 'کل مبالغ وصول‌نشده شرکت' : 'Total uncollected receivables'}
                 </div>
               </div>
             </div>
@@ -1113,11 +1113,11 @@ export default function AdminReportsPage({ params }: ReportsPageProps) {
                 <div>
                   <h2 className="text-base font-bold text-[#071B3D]">
                     {isFa
-                      ? `روند درآمد، هزینه و سود خالص (${financeData.summary?.timeSeriesMode === 'daily' ? 'روزانه' : 'هفتگی'})`
-                      : `Revenue vs Expenses vs Profit (${financeData.summary?.timeSeriesMode})`}
+                      ? `روند دریافتی، هزینه و سود خالص (${financeData.summary?.timeSeriesMode === 'daily' ? 'روزانه' : 'هفتگی'})`
+                      : `Receipts vs Expenses vs Profit (${financeData.summary?.timeSeriesMode})`}
                   </h2>
                   <p className="text-xs text-slate-500">
-                    {isFa ? 'نمایش مقایسه‌ای وضعیت مالی پورتال بر حسب رون' : 'Comparative financial trends in RON'}
+                    {isFa ? 'نمایش مقایسه‌ای جریان مالی بر حسب یورو (€)' : 'Comparative financial trends in EUR (€)'}
                   </p>
                 </div>
                 <span className="px-3 py-1 bg-slate-100 rounded-full text-xs font-bold text-slate-700">
@@ -1141,12 +1141,12 @@ export default function AdminReportsPage({ params }: ReportsPageProps) {
                         }}
                       />
                       <Legend />
-                      <Bar dataKey="revenue" name={isFa ? 'درآمد (RON)' : 'Revenue'} fill="#10b981" radius={[4, 4, 0, 0]} />
-                      <Bar dataKey="expenses" name={isFa ? 'هزینه (RON)' : 'Expenses'} fill="#f43f5e" radius={[4, 4, 0, 0]} />
+                      <Bar dataKey="revenue" name={isFa ? 'دریافتی (€)' : 'Receipts (€)'} fill="#10b981" radius={[4, 4, 0, 0]} />
+                      <Bar dataKey="expenses" name={isFa ? 'هزینه (€)' : 'Expenses (€)'} fill="#f43f5e" radius={[4, 4, 0, 0]} />
                       <Line
                         type="monotone"
                         dataKey="profit"
-                        name={isFa ? 'سود خالص (RON)' : 'Net Profit'}
+                        name={isFa ? 'سود خالص (€)' : 'Net Profit (€)'}
                         stroke="#2F6FED"
                         strokeWidth={3}
                         dot={{ r: 3 }}
@@ -1157,35 +1157,120 @@ export default function AdminReportsPage({ params }: ReportsPageProps) {
               </div>
             </div>
 
-            {/* Outstanding Invoices Table */}
+            {/* Per-Client Financial Breakdown Table */}
             <div className="bg-white border border-[#dfe6ef] rounded-2xl shadow-xs overflow-hidden">
               <div className="p-6 border-b border-slate-100 flex items-center justify-between">
                 <div>
                   <h3 className="text-base font-bold text-[#071B3D]">
-                    {isFa ? 'فهرست فاکتورهای دارای مانده و پیگیری مطالبات' : 'Outstanding Invoices & Collections'}
+                    {isFa ? 'صورت وضعیت مالی و مانده مطالبات به تفکیک هر پرونده/مشتری' : 'Per-Client Receivables & Financial Breakdown'}
                   </h3>
                   <p className="text-xs text-slate-500">
-                    {isFa ? 'فاکتورهای پرداخت‌نشده یا دارای اقساط معوق' : 'Invoices with unpaid balances'}
+                    {isFa ? 'سرجمع بدهکاری‌ها، دریافتی‌ها و خالص مانده طلب شرکت از هر متقاضی' : 'Total charges, receipts, and outstanding balances per lead'}
+                  </p>
+                </div>
+                <span className="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-bold">
+                  {financeData.clientBreakdown?.length ?? 0} {isFa ? 'مشتری' : 'clients'}
+                </span>
+              </div>
+              <div className="overflow-x-auto">
+                {!financeData.clientBreakdown || financeData.clientBreakdown.length === 0 ? (
+                  <div className="p-8 text-center text-slate-400 text-xs">
+                    {isFa ? 'هیچ تراکنش مالی برای مشتریان در این بازه ثبت نشده است.' : 'No client accounting records found for this period.'}
+                  </div>
+                ) : (
+                  <table className="w-full text-right text-xs">
+                    <thead className="bg-slate-50 text-slate-500 border-b border-slate-100 font-bold">
+                      <tr>
+                        <th className="py-3.5 px-6">{isFa ? 'متقاضی' : 'Applicant'}</th>
+                        <th className="py-3.5 px-6">{isFa ? 'اطلاعات تماس' : 'Contact'}</th>
+                        <th className="py-3.5 px-6 text-center">{isFa ? 'تعداد خدمات / واریزی' : 'Charges / Receipts'}</th>
+                        <th className="py-3.5 px-6">{isFa ? 'مجموع خدمات (بدهکاری)' : 'Total Charges'}</th>
+                        <th className="py-3.5 px-6">{isFa ? 'مجموع دریافتی (بستانکاری)' : 'Total Received'}</th>
+                        <th className="py-3.5 px-6 font-bold">{isFa ? 'مانده طلب شرکت' : 'Balance Due'}</th>
+                        <th className="py-3.5 px-6 text-center">{isFa ? 'اقدام' : 'Action'}</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
+                      {financeData.clientBreakdown.map((client: any) => {
+                        const bal = Number(client.outstandingBalance) || 0;
+                        return (
+                          <tr key={client.leadId} className="hover:bg-slate-50/50 transition-colors">
+                            <td className="py-3.5 px-6 font-bold text-slate-900">{client.fullName}</td>
+                            <td className="py-3.5 px-6 text-slate-500">
+                              <span className="font-mono text-[11px] block">{client.phone || '-'}</span>
+                              {client.email && <span className="text-[11px] text-slate-400 truncate block">{client.email}</span>}
+                            </td>
+                            <td className="py-3.5 px-6 text-center text-slate-500">
+                              <span className="px-2 py-0.5 rounded bg-slate-100 font-mono text-[11px]">
+                                {client.chargesCount} {isFa ? 'خدمت' : 'chg'} / {client.receiptsCount} {isFa ? 'واریزی' : 'rcpt'}
+                              </span>
+                            </td>
+                            <td className="py-3.5 px-6 font-bold text-slate-800">
+                              {Number(client.totalCharges || 0).toLocaleString()} €
+                            </td>
+                            <td className="py-3.5 px-6 text-emerald-600 font-bold">
+                              {Number(client.totalReceipts || 0).toLocaleString()} €
+                            </td>
+                            <td className="py-3.5 px-6 font-extrabold">
+                              {bal > 0 ? (
+                                <span className="text-rose-600 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded">
+                                  {bal.toLocaleString()} € {isFa ? 'بدهکار' : 'due'}
+                                </span>
+                              ) : bal < 0 ? (
+                                <span className="text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+                                  {Math.abs(bal).toLocaleString()} € {isFa ? 'بستانکار' : 'credit'}
+                                </span>
+                              ) : (
+                                <span className="text-slate-400">0 € ({isFa ? 'تسویه کامل' : 'settled'})</span>
+                              )}
+                            </td>
+                            <td className="py-3.5 px-6 text-center">
+                              <Link
+                                href={`/admin/leads/${client.leadId}?tab=5`}
+                                className="inline-flex items-center space-x-1 rtl:space-x-reverse px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition-all"
+                              >
+                                <span>{isFa ? 'دفتر حساب' : 'Ledger'}</span>
+                                {isFa ? <ArrowLeft size={12} /> : <ArrowRight size={12} />}
+                              </Link>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+            </div>
+
+            {/* Outstanding Charges Table */}
+            <div className="bg-white border border-[#dfe6ef] rounded-2xl shadow-xs overflow-hidden">
+              <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+                <div>
+                  <h3 className="text-base font-bold text-[#071B3D]">
+                    {isFa ? 'فهرست بدهکاری‌های باز و پیگیری مطالبات' : 'Open Charges & Collections'}
+                  </h3>
+                  <p className="text-xs text-slate-500">
+                    {isFa ? 'خدمات و بدهکاری‌های پرداخت‌نشده یا دارای مانده معوق' : 'Charges with unpaid balances'}
                   </p>
                 </div>
                 <span className="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-200 rounded-full text-xs font-bold">
-                  {financeData.outstandingInvoices?.length ?? 0} {isFa ? 'فاکتور' : 'invoices'}
+                  {financeData.outstandingInvoices?.length ?? 0} {isFa ? 'مورد' : 'charges'}
                 </span>
               </div>
               <div className="overflow-x-auto">
                 {financeData.outstandingInvoices?.length === 0 ? (
                   <div className="p-8 text-center text-slate-400 text-xs">
-                    {isFa ? 'هیچ فاکتور دارای مانده‌ای یافت نشد. همه مطالبات تسویه شده‌اند.' : 'All invoices are fully paid.'}
+                    {isFa ? 'هیچ بدهکاری دارای مانده‌ای یافت نشد. همه مطالبات تسویه شده‌اند.' : 'All charges are fully settled.'}
                   </div>
                 ) : (
                   <table className="w-full text-right text-xs">
                     <thead className="bg-slate-50 text-slate-500 border-b border-slate-100 font-bold">
                       <tr>
                         <th className="py-3.5 px-6">{isFa ? 'نام متقاضی' : 'Applicant'}</th>
-                        <th className="py-3.5 px-6">{isFa ? 'وضعیت فاکتور' : 'Status'}</th>
-                        <th className="py-3.5 px-6">{isFa ? 'مبلغ کل' : 'Total Amount'}</th>
+                        <th className="py-3.5 px-6">{isFa ? 'وضعیت' : 'Status'}</th>
+                        <th className="py-3.5 px-6">{isFa ? 'مبلغ خدمت' : 'Total Amount'}</th>
                         <th className="py-3.5 px-6">{isFa ? 'پرداخت‌شده' : 'Paid Amount'}</th>
-                        <th className="py-3.5 px-6 font-bold text-rose-600">{isFa ? 'مانده مطالبات' : 'Remaining'}</th>
+                        <th className="py-3.5 px-6 font-bold text-rose-600">{isFa ? 'مانده بدهی' : 'Remaining'}</th>
                         <th className="py-3.5 px-6 text-center">{isFa ? 'اقدام' : 'Action'}</th>
                       </tr>
                     </thead>
@@ -1198,19 +1283,19 @@ export default function AdminReportsPage({ params }: ReportsPageProps) {
                               {inv.status}
                             </span>
                           </td>
-                          <td className="py-3.5 px-6">{inv.totalAmount?.toLocaleString()} {inv.currency}</td>
+                          <td className="py-3.5 px-6">{inv.totalAmount?.toLocaleString()} €</td>
                           <td className="py-3.5 px-6 text-emerald-600 font-bold">
-                            {inv.paidAmount?.toLocaleString()} {inv.currency}
+                            {inv.paidAmount?.toLocaleString()} €
                           </td>
                           <td className="py-3.5 px-6 text-rose-600 font-extrabold">
-                            {inv.remainingAmount?.toLocaleString()} {inv.currency}
+                            {inv.remainingAmount?.toLocaleString()} €
                           </td>
                           <td className="py-3.5 px-6 text-center">
                             <Link
-                              href={`/admin/leads/${inv.leadId}`}
+                              href={`/admin/leads/${inv.leadId}?tab=5`}
                               className="inline-flex items-center space-x-1 rtl:space-x-reverse px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition-all"
                             >
-                              <span>{isFa ? 'مشاهده و دریافت قسط' : 'View'}</span>
+                              <span>{isFa ? 'مشاهده در پرونده' : 'View'}</span>
                               {isFa ? <ArrowLeft size={12} /> : <ArrowRight size={12} />}
                             </Link>
                           </td>
