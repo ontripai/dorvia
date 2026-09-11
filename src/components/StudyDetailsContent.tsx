@@ -178,6 +178,16 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا سفارت رومانی در تهران فعال است؟' : 'Is the Romanian Embassy in Tehran operating?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، بر اساس اطلاعات رسمی وزارت امور خارجه رومانی، سفارت رومانی در تهران فعال است؛ با این حال پیش از مراجعه حضوری، ساعات کاری و ظرفیت پذیرش را مستقیماً از سفارت استعلام بگیرید.' : 'Yes, per official Romanian Ministry of Foreign Affairs information, the Romanian Embassy in Tehran is active; however, confirm current opening hours and appointment capacity directly with the embassy before visiting in person.'}</p>
               </div>
+              {/* Source: Independent advisory sources referencing grad.saorg.ir & mohed.behdasht.gov.ir (no direct unverified links in site text) */}
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا دانشگاهی که در رومانی قبول می‌شوم، مدرکش در ایران هم تایید می‌شود؟' : 'Will my Romanian university\'s degree be recognized in Iran?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'این به رشته‌ی شما بستگی دارد و از دو مرجع رسمی جداگانه در ایران باید استعلام بگیرید، نه یک فهرست عمومی: — برای رشته‌های غیرپزشکی: مرجع وزارت علوم، تحقیقات و فناوری است (از طریق سازمان امور دانشجویان). — برای رشته‌های پزشکی، دندانپزشکی و داروسازی: مرجع جداگانه، وزارت بهداشت، درمان و آموزش پزشکی است (از طریق «سامانه موحد»). پیش از ثبت‌نام در هر دانشگاه رومانیایی، حتماً از طریق همین دو مرجع رسمی استعلام بگیرید که دانشگاه/رشته‌ی مدنظرتان تاییدشده است یا نه — این فهرست‌ها می‌توانند تغییر کنند، پس هیچ فهرست ثابتی (حتی همینجا) را به‌جای استعلام مستقیم و به‌روز نپذیرید. نکته‌ی مهم دیگر: طبق رویه‌ی رایج، برای حفظ اعتبار مدرک باید بخش عمده‌ی دوره‌ی تحصیلی را در همان دانشگاه تاییدشده گذراند، نه اینکه فقط بخشی از دوره آنجا و بقیه جای دیگر باشد.' : 'This depends on your field, and you need to check with two separate official Iranian authorities, not a single generic list: — For non-medical fields: the Ministry of Science, Research and Technology (via the student affairs organization). — For Medicine, Dentistry, and Pharmacy: a separate authority, the Ministry of Health and Medical Education (via its \'Movahed\' system/سامانه موحد). Before enrolling at any Romanian university, always verify directly with these official bodies whether your specific university/program is currently approved — these lists can change, so don\'t rely on any static list (including this one) instead of a direct, current check. Also important: to preserve degree recognition, the common rule is that you must complete the majority of your program at the approved university itself, not split mostly elsewhere.'}</p>
+              </div>
+              {/* Source: Romanian Ministry of Education nationwide university transfer regulation (2014, ongoing updates); Politehnica Bucharest international office procedures; UTCB regulations */}
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا بعد از پذیرش می‌توانم دانشگاه یا رشته‌ام را عوض کنم؟' : 'Can I change my university or program after being accepted?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله ممکن است، ولی یک فرایند رسمی و بوروکراتیک است، نه یک جابجایی ساده‌ی اداری. برای دانشجویان غیراتحادیه‌اروپا، این جابجایی معمولاً باید از طریق مدیریت کل روابط بین‌الملل وزارت آموزش رومانی انجام شود، نیازمند حداقل یک ترم گذرانده‌شده در دانشگاه اول، و باید حدود ۹۰ روز پیش از شروع سال تحصیلی جدید درخواست شود. در برخی دانشگاه‌ها (مثل UTCB)، هرگونه تغییر پذیرش اولیه نیازمند صدور نامه‌ی پذیرش رسمی تازه از وزارت است. پس اگر مطمئن نیستید، بهتر است پیش از ثبت‌نام اولیه کاملاً روی انتخاب دانشگاه/رشته مطمئن شوید.' : 'Yes, it\'s possible, but it\'s a formal bureaucratic process, not a simple administrative switch. For non-EU students, this transfer typically must go through Romania\'s Ministry of Education international-relations directorate, requires at least one completed semester at the original university, and must be requested about 90 days before the new academic year starts. At some universities (e.g. UTCB), any change to the original acceptance requires the Ministry to issue a brand-new official acceptance letter. So if you\'re unsure, it\'s best to be fully confident about your university/program choice before your initial enrollment.'}</p>
+              </div>
             </div>
           </div>
 
@@ -193,6 +203,14 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             {
               q: currentLang === 'fa' ? 'آیا سفارت رومانی در تهران فعال است؟' : 'Is the Romanian Embassy in Tehran operating?',
               a: currentLang === 'fa' ? 'بله، بر اساس اطلاعات رسمی وزارت امور خارجه رومانی، سفارت رومانی در تهران فعال است؛ با این حال پیش از مراجعه حضوری، ساعات کاری و ظرفیت پذیرش را مستقیماً از سفارت استعلام بگیرید.' : 'Yes, per official Romanian Ministry of Foreign Affairs information, the Romanian Embassy in Tehran is active; however, confirm current opening hours and appointment capacity directly with the embassy before visiting in person.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا دانشگاهی که در رومانی قبول می‌شوم، مدرکش در ایران هم تایید می‌شود؟' : 'Will my Romanian university\'s degree be recognized in Iran?',
+              a: currentLang === 'fa' ? 'این به رشته‌ی شما بستگی دارد و از دو مرجع رسمی جداگانه در ایران باید استعلام بگیرید، نه یک فهرست عمومی: — برای رشته‌های غیرپزشکی: مرجع وزارت علوم، تحقیقات و فناوری است (از طریق سازمان امور دانشجویان). — برای رشته‌های پزشکی، دندانپزشکی و داروسازی: مرجع جداگانه، وزارت بهداشت، درمان و آموزش پزشکی است (از طریق «سامانه موحد»). پیش از ثبت‌نام در هر دانشگاه رومانیایی، حتماً از طریق همین دو مرجع رسمی استعلام بگیرید که دانشگاه/رشته‌ی مدنظرتان تاییدشده است یا نه — این فهرست‌ها می‌توانند تغییر کنند، پس هیچ فهرست ثابتی (حتی همینجا) را به‌جای استعلام مستقیم و به‌روز نپذیرید. نکته‌ی مهم دیگر: طبق رویه‌ی رایج، برای حفظ اعتبار مدرک باید بخش عمده‌ی دوره‌ی تحصیلی را در همان دانشگاه تاییدشده گذراند، نه اینکه فقط بخشی از دوره آنجا و بقیه جای دیگر باشد.' : 'This depends on your field, and you need to check with two separate official Iranian authorities, not a single generic list: — For non-medical fields: the Ministry of Science, Research and Technology (via the student affairs organization). — For Medicine, Dentistry, and Pharmacy: a separate authority, the Ministry of Health and Medical Education (via its \'Movahed\' system/سامانه موحد). Before enrolling at any Romanian university, always verify directly with these official bodies whether your specific university/program is currently approved — these lists can change, so don\'t rely on any static list (including this one) instead of a direct, current check. Also important: to preserve degree recognition, the common rule is that you must complete the majority of your program at the approved university itself, not split mostly elsewhere.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا بعد از پذیرش می‌توانم دانشگاه یا رشته‌ام را عوض کنم؟' : 'Can I change my university or program after being accepted?',
+              a: currentLang === 'fa' ? 'بله ممکن است، ولی یک فرایند رسمی و بوروکراتیک است، نه یک جابجایی ساده‌ی اداری. برای دانشجویان غیراتحادیه‌اروپا، این جابجایی معمولاً باید از طریق مدیریت کل روابط بین‌الملل وزارت آموزش رومانی انجام شود، نیازمند حداقل یک ترم گذرانده‌شده در دانشگاه اول، و باید حدود ۹۰ روز پیش از شروع سال تحصیلی جدید درخواست شود. در برخی دانشگاه‌ها (مثل UTCB)، هرگونه تغییر پذیرش اولیه نیازمند صدور نامه‌ی پذیرش رسمی تازه از وزارت است. پس اگر مطمئن نیستید، بهتر است پیش از ثبت‌نام اولیه کاملاً روی انتخاب دانشگاه/رشته مطمئن شوید.' : 'Yes, it\'s possible, but it\'s a formal bureaucratic process, not a simple administrative switch. For non-EU students, this transfer typically must go through Romania\'s Ministry of Education international-relations directorate, requires at least one completed semester at the original university, and must be requested about 90 days before the new academic year starts. At some universities (e.g. UTCB), any change to the original acceptance requires the Ministry to issue a brand-new official acceptance letter. So if you\'re unsure, it\'s best to be fully confident about your university/program choice before your initial enrollment.'
             }
           ]} />
 
@@ -342,6 +360,25 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             </span>
           </div>
 
+          {/* TUITION REFUND POLICY ON VISA REFUSAL */}
+          {/* Source: University of Bucharest official admission page (unibuc.ro); UTCB International Student Regulations (Jan 2025, Art. 30). */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-3">
+            <h3 className="text-lg sm:text-xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🔄</span>
+              <span>{currentLang === 'fa' ? 'سیاست استرداد شهریه در صورت ریجکت ویزا' : 'Tuition Refund Policy in Case of Visa Refusal'}</span>
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'اگر شهریه را پرداخت کنم و بعد ویزا رد شود، شهریه برمی‌گردد؟ در دانشگاه‌های دولتی رومانی، استرداد شهریه در صورت رد شدن ویزا یک رویه‌ی رایج و مستند است — برای مثال، دانشگاه بخارست رسماً اعلام می‌کند در صورت رد ویزا بعد از پرداخت شهریه‌ی سال اول، مبلغ طبق آیین‌نامه‌ی استرداد بازگردانده می‌شود. یک نمونه‌ی دقیق‌تر از دانشگاه فنی عمران بخارست (UTCB): درخواست استرداد باید ظرف ۱۵ روز از اعلام رسمی رد ویزا ثبت شود، و مبلغ بازگشتی ممکن است کارمزد بانکی و حدود ۵٪ کسر داشته باشد. این رویه در همه‌ی دانشگاه‌ها دقیقاً یکسان نیست — پیش از پرداخت شهریه، حتماً سیاست استرداد را به‌صورت کتبی (ایمیل یا سند رسمی) از همان دانشگاه مقصد بگیرید.'
+                : 'If I pay tuition and then get rejected for the visa, will the tuition be refunded? At Romanian public universities, refunding tuition after a visa rejection is a common, documented practice — for example, the University of Bucharest officially states that if the visa is refused after first-year tuition is paid, the amount is refunded per its reimbursement policy. A more precise example from the Technical University of Civil Engineering Bucharest (UTCB): the refund request must be filed within 15 days of the official visa-refusal notice, and the refunded amount may have bank fees and roughly 5% deducted. This exact policy isn\'t identical at every university — always get your target university\'s refund policy in writing (email or official document) before paying tuition.'}
+            </p>
+            <p className="text-[11px] text-slate-400">
+              {currentLang === 'fa'
+                ? 'منبع: صفحهٔ رسمی پذیرش دانشگاه بخارست (unibuc.ro)؛ آیین‌نامهٔ رسمی دانشجویان بین‌المللی UTCB (ژانویه ۲۰۲۵، ماده ۳۰).'
+                : 'Source: University of Bucharest official admission page (unibuc.ro); UTCB International Student Regulations (Jan 2025, Art. 30).'}
+            </p>
+          </div>
+
           {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
           <div className="bg-gradient-to-r from-slate-50 to-blue-50 border border-[#dfe6ef] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
             <div className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -382,6 +419,11 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'برای اثبات تمکن مالی چه مبلغی نیاز دارم؟' : 'How much money do I need for financial proof?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'برای خودِ ویزای D در سفارت: معادل حداقل حقوق خالص کشوری (حدود ۲,۶۹۹ لئو در ماه، ۲۰۲۶). برای تمدید اقامت داخل رومانی: معادل حداقل حقوق ناخالص کشوری (۴,۳۲۵ لئو در ماه از ژوئیه ۲۰۲۶)، حداقل ۶ ماه نگه‌داری‌شده — این دو رقم متفاوت‌اند، با هم اشتباه نگیرید.' : 'For the D visa itself at the embassy: the net national minimum wage (around 2,699 RON/month, 2026). For extending residence inside Romania: the gross national minimum wage (4,325 RON/month as of July 2026), held for at least 6 months — these are two different figures, don\'t confuse them.'}</p>
               </div>
+              {/* Source: University of Bucharest official admission page (unibuc.ro); UTCB International Student Regulations (Jan 2025, Art. 30) */}
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر شهریه را پرداخت کنم و بعد ویزا رد شود، آیا شهریه برمی‌گردد؟' : 'If I pay tuition and then get rejected for the visa, will the tuition be refunded?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'در دانشگاه‌های دولتی رومانی، استرداد شهریه در صورت رد شدن ویزا یک رویه‌ی رایج و مستند است — برای مثال، دانشگاه بخارست رسماً اعلام می‌کند در صورت رد ویزا بعد از پرداخت شهریه‌ی سال اول، مبلغ طبق آیین‌نامه‌ی استرداد بازگردانده می‌شود. یک نمونه‌ی دقیق‌تر از دانشگاه فنی عمران بخارست (UTCB): درخواست استرداد باید ظرف ۱۵ روز از اعلام رسمی رد ویزا ثبت شود، و مبلغ بازگشتی ممکن است کارمزد بانکی و حدود ۵٪ کسر داشته باشد. این رویه در همه‌ی دانشگاه‌ها دقیقاً یکسان نیست — پیش از پرداخت شهریه، حتماً سیاست استرداد را به‌صورت کتبی (ایمیل یا سند رسمی) از همان دانشگاه مقصد بگیرید.' : 'At Romanian public universities, refunding tuition after a visa rejection is a common, documented practice — for example, the University of Bucharest officially states that if the visa is refused after first-year tuition is paid, the amount is refunded per its reimbursement policy. A more precise example from the Technical University of Civil Engineering Bucharest (UTCB): the refund request must be filed within 15 days of the official visa-refusal notice, and the refunded amount may have bank fees and roughly 5% deducted. This exact policy isn\'t identical at every university — always get your target university\'s refund policy in writing (email or official document) before paying tuition.'}</p>
+              </div>
             </div>
           </div>
 
@@ -397,6 +439,10 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             {
               q: currentLang === 'fa' ? 'برای اثبات تمکن مالی چه مبلغی نیاز دارم؟' : 'How much money do I need for financial proof?',
               a: currentLang === 'fa' ? 'برای خودِ ویزای D در سفارت: معادل حداقل حقوق خالص کشوری (حدود ۲,۶۹۹ لئو در ماه، ۲۰۲۶). برای تمدید اقامت داخل رومانی: معادل حداقل حقوق ناخالص کشوری (۴,۳۲۵ لئو در ماه از ژوئیه ۲۰۲۶)، حداقل ۶ ماه نگه‌داری‌شده — این دو رقم متفاوت‌اند، با هم اشتباه نگیرید.' : 'For the D visa itself at the embassy: the net national minimum wage (around 2,699 RON/month, 2026). For extending residence inside Romania: the gross national minimum wage (4,325 RON/month as of July 2026), held for at least 6 months — these are two different figures, don\'t confuse them.'
+            },
+            {
+              q: currentLang === 'fa' ? 'اگر شهریه را پرداخت کنم و بعد ویزا رد شود، آیا شهریه برمی‌گردد؟' : 'If I pay tuition and then get rejected for the visa, will the tuition be refunded?',
+              a: currentLang === 'fa' ? 'در دانشگاه‌های دولتی رومانی، استرداد شهریه در صورت رد شدن ویزا یک رویه‌ی رایج و مستند است — برای مثال، دانشگاه بخارست رسماً اعلام می‌کند در صورت رد ویزا بعد از پرداخت شهریه‌ی سال اول، مبلغ طبق آیین‌نامه‌ی استرداد بازگردانده می‌شود. یک نمونه‌ی دقیق‌تر از دانشگاه فنی عمران بخارست (UTCB): درخواست استرداد باید ظرف ۱۵ روز از اعلام رسمی رد ویزا ثبت شود، و مبلغ بازگشتی ممکن است کارمزد بانکی و حدود ۵٪ کسر داشته باشد. این رویه در همه‌ی دانشگاه‌ها دقیقاً یکسان نیست — پیش از پرداخت شهریه، حتماً سیاست استرداد را به‌صورت کتبی (ایمیل یا سند رسمی) از همان دانشگاه مقصد بگیرید.' : 'At Romanian public universities, refunding tuition after a visa rejection is a common, documented practice — for example, the University of Bucharest officially states that if the visa is refused after first-year tuition is paid, the amount is refunded per its reimbursement policy. A more precise example from the Technical University of Civil Engineering Bucharest (UTCB): the refund request must be filed within 15 days of the official visa-refusal notice, and the refunded amount may have bank fees and roughly 5% deducted. This exact policy isn\'t identical at every university — always get your target university\'s refund policy in writing (email or official document) before paying tuition.'
             }
           ]} />
 
@@ -489,6 +535,115 @@ export const StudyDetailsContent: React.FC<StudyDetailsContentProps> = ({ subRou
             >
               <span>{currentLang === 'fa' ? '🔎 ارزیابی رایگان شرایط من' : '🔎 Free Case Evaluation'}</span>
             </button>
+          </div>
+
+          {/* REAL APPLICATION + TUITION FEE EXAMPLE (UMFCD) */}
+          {/* Source: Official UMFCD fee schedule 2025-2026 (umfcd.ro) */}
+          <div className="bg-[#f0f4f9] p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] space-y-3">
+            <h3 className="text-lg sm:text-xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>💶</span>
+              <span>{currentLang === 'fa' ? 'نمونه واقعی هزینه اپلیکیشن و شهریه (دانشگاه کارول داویلا بخارست)' : 'Real Application & Tuition Fee Example (Carol Davila Bucharest)'}</span>
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa' ? (
+                <>
+                  برای اینکه درک بهتری از ساختار هزینه‌ها داشته باشید، به‌عنوان یک نمونه‌ی واقعی (نه میانگین کل کشور): دانشگاه علوم پزشکی Carol Davila بخارست برای متقاضیان بین‌المللی، جدا از شهریه‌ی سالانه، یک هزینه‌ی آزمون زبان/پذیرش حدود ۵۰۰ یورو دریافت می‌کند؛ شهریه‌ی سالانه‌ی پزشکی/دندانپزشکی در این دانشگاه حدود ۱۰,۰۰۰ یورو در سال است.{' '}
+                  <strong>این عدد فقط برای همین یک دانشگاه و همین رشته‌هاست</strong> — هزینه‌ی دقیق هر دانشگاه/رشته را حتماً از همان دانشگاه استعلام بگیرید، چون تفاوت زیادی بین دانشگاه‌ها و رشته‌ها وجود دارد.
+                </>
+              ) : (
+                <>
+                  As one real example (not a nationwide average) to illustrate the fee structure: Carol Davila University of Medicine and Pharmacy in Bucharest charges international applicants a language-test/admission fee of about €500, separate from annual tuition; its Medicine/Dentistry annual tuition is around €10,000/year.{' '}
+                  <strong>This figure applies only to this specific university and these specific programs</strong> — always confirm exact fees directly with your target university, since costs vary significantly.
+                </>
+              )}
+            </p>
+            <p className="text-[11px] text-slate-400">
+              {currentLang === 'fa' ? 'منبع: سند رسمی هزینه‌های UMFCD سال تحصیلی ۲۰۲۵-۲۰۲۶ (umfcd.ro).' : 'Source: Official UMFCD fee schedule 2025-2026 (umfcd.ro).'}
+            </p>
+          </div>
+
+          {/* ANNUAL VS FULL PROGRAM TUITION EXPLANATION */}
+          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 sm:p-6 text-xs sm:text-sm text-amber-950 leading-relaxed space-y-2">
+            <h4 className="font-extrabold text-sm sm:text-base text-amber-900 flex items-center space-x-2 rtl:space-x-reverse">
+              <span>💡</span>
+              <span>{currentLang === 'fa' ? 'توضیح صریح: شهریه سالانه در برابر کل دوره' : 'Annual Tuition vs. Total Program Cost'}</span>
+            </h4>
+            <p>
+              {currentLang === 'fa' ? (
+                <>
+                  نکته‌ی مهم: هر عددی که به‌عنوان شهریه می‌بینید (چه در این صفحه، چه در سایت دانشگاه)، معمولاً <strong>هزینه‌ی سالانه</strong> است، نه هزینه‌ی کل دوره. برای محاسبه‌ی هزینه‌ی کل تحصیل، این رقم را در تعداد سال‌های دوره (معمولاً ۴ تا ۶ سال بسته به رشته) ضرب کنید و حتماً از دانشگاه بپرسید آیا شهریه در سال‌های بعد ثابت می‌ماند یا افزایش می‌یابد.
+                </>
+              ) : (
+                <>
+                  Important: any tuition figure you see (here or on a university&apos;s own site) is typically an <strong>annual</strong> fee, not the total program cost. To estimate the full cost, multiply by the number of years in the program (usually 4-6 years depending on the field), and always ask the university whether tuition stays fixed or increases in later years.
+                </>
+              )}
+            </p>
+          </div>
+
+          {/* DORMITORY COSTS BY CITY TABLE */}
+          {/* Source: Official dormitory rates from Babeș-Bolyai (ubbcluj.ro) and West University of Timișoara (uvt.ro), 2025-2026. */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+            <h3 className="text-lg sm:text-xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🏢</span>
+              <span>{currentLang === 'fa' ? 'هزینه خوابگاه دانشجویی دولتی به تفکیک شهر' : 'State Dormitory Costs by City'}</span>
+            </h3>
+            <p className="text-sm text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'هزینه‌ی خوابگاه دانشجویی دولتی بسته به شهر و دانشگاه بسیار متفاوت است و برای دانشجویان بین‌المللی/غیراتحادیه‌اروپا معمولاً بیشتر از نرخ دانشجویان رومانیایی/اتحادیه‌اروپا است. چند نمونه (سال تحصیلی ۲۰۲۵-۲۰۲۶، ماهانه):'
+                : 'State dormitory costs vary considerably depending on the city and university, and international/non-EU students generally pay higher rates than Romanian/EU students. Sourced examples (2025-2026 academic year, monthly):'}
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs sm:text-sm text-[#526174] border border-[#dfe6ef] rounded-xl overflow-hidden">
+                <thead className="bg-[#071B3D] text-white font-bold">
+                  <tr>
+                    <th className="p-3 text-start border-b border-[#dfe6ef]">
+                      {currentLang === 'fa' ? 'شهر و دانشگاه' : 'City & University'}
+                    </th>
+                    <th className="p-3 text-start border-b border-[#dfe6ef]">
+                      {currentLang === 'fa' ? 'نرخ دانشجوی رومانیایی / اتحادیه اروپا' : 'Romanian / EU Student Rate'}
+                    </th>
+                    <th className="p-3 text-start border-b border-[#dfe6ef]">
+                      {currentLang === 'fa' ? 'نرخ دانشجوی بین‌المللی' : 'International Student Rate'}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#dfe6ef] bg-white">
+                  <tr>
+                    <td className="p-3 font-bold text-[#142033] bg-[#f8fafc]">
+                      {currentLang === 'fa' ? 'کلوژ (دانشگاه Babeș-Bolyai)' : 'Cluj (Babeș-Bolyai University)'}
+                    </td>
+                    <td className="p-3">
+                      {currentLang === 'fa' ? '۱۵۸–۲۶۸ لی' : '158–268 Lei'}
+                    </td>
+                    <td className="p-3 font-semibold text-[#2F6FED]">
+                      {currentLang === 'fa' ? '۳۹۸–۵۷۲ لی' : '398–572 Lei'}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-bold text-[#142033] bg-[#f8fafc]">
+                      {currentLang === 'fa' ? 'تیمیشوارا (دانشگاه غرب - UVT)' : 'Timișoara (West University - UVT)'}
+                    </td>
+                    <td className="p-3">
+                      {currentLang === 'fa' ? '۲۹۵–۷۰۰ لی' : '295–700 Lei'}
+                    </td>
+                    <td className="p-3 font-semibold text-[#2F6FED]">
+                      {currentLang === 'fa' ? '۵۴۵–۸۵۰ لی' : '545–850 Lei'}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs sm:text-sm text-[#526174] leading-relaxed pt-1">
+              {currentLang === 'fa'
+                ? 'توجه: جای خوابگاه دولتی محدود است (در برخی دانشگاه‌ها فقط بخشی از دانشجویان جا می‌گیرند) و بسیاری از دانشجویان بین‌المللی ناچار به اجاره در بازار خصوصی (با هزینه‌ی بیشتر) می‌شوند. حتماً پیش از سفر با دفتر امور دانشجویان بین‌الملل همان دانشگاه هماهنگ کنید.'
+                : 'Note: state dormitory spots are limited (at some universities only a portion of students get one), and many international students end up renting privately (at higher cost). Always coordinate with your target university\'s international office before traveling.'}
+            </p>
+            <p className="text-[11px] text-slate-400">
+              {currentLang === 'fa'
+                ? 'منبع: سند رسمی نرخ خوابگاه Babeș-Bolyai (ubbcluj.ro) و دانشگاه غرب تیمیشوارا (uvt.ro)، سال ۲۰۲۵-۲۰۲۶.'
+                : 'Source: Official dormitory rates from Babeș-Bolyai (ubbcluj.ro) and West University of Timișoara (uvt.ro), 2025-2026.'}
+            </p>
           </div>
 
           {/* INLINE CTA 2: PRE-FAQ */}
