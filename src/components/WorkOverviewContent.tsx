@@ -271,6 +271,11 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر پرونده من قبل از راه‌اندازی پلتفرم جدید ثبت شده بود چه می‌شود؟' : 'What happens if my file was submitted before the new platform launched?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق گزارش‌های رسانه‌ای، صدها پرونده ثبت‌شده پیش از راه‌اندازی کامل پلتفرم (اوت ۲۰۲۶) مجبور به شروع مجدد شدند. با کارفرمای خود پیگیری کنید که پرونده شما تحت روال جدید هم معتبر شناخته شده یا نیاز به ثبت مجدد دارد.' : 'Per media reports, hundreds of files submitted before the platform\'s full launch (August 2026) were forced to restart. Check with your employer whether your file is recognized under the new procedure or needs to be resubmitted.'}</p>
               </div>
+              {/* Source: OG 25/2014, Art. 18 — igi.mai.gov.ro/wp-content/uploads/2024/03/OG-nr.-25.pdf */}
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بعد از فارغ‌التحصیلی از دانشگاه در رومانی، آیا اقامت تحصیلی من خودکار به اقامت کاری تبدیل می‌شود یا مهلت خاصی برای پیدا کردن کار دارم؟' : 'After I graduate from a university in Romania, does my student residence automatically convert to a work residence, or do I have a set period to find a job?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر، رومانی مهلت قانونی مشخصی برای «جستجوی کار بعد از فارغ‌التحصیلی» (شبیه برخی کشورهای اروپایی) ندارد و تبدیل خودکار وجود ندارد. طبق ماده ۱۸ قانون OG 25/2014، تنها تسهیلاتی که برای فارغ‌التحصیلان دانشگاه‌های رومانی وجود دارد این است که وقتی کارفرمای شما برای شما اجازه‌کار (Aviz de Angajare) درخواست می‌دهد، برخی شرایط عمومی/خاص درخواست (طبق مواد ۴، ۷ و ۹ همان قانون) برایتان حذف می‌شود. اما همچنان باید یک کارفرما پیدا کنید و او باید مانند هر متقاضی جدید دیگر، درخواست Aviz de Angajare را از ابتدا ثبت کند.' : 'No — Romania does not have a formal "post-graduation job-search period" (unlike some other European countries), and there is no automatic conversion. Under Article 18 of OG 25/2014, the only simplification available to graduates of Romanian universities is that when your employer applies for a work permit (Aviz de Angajare) on your behalf, certain general and special conditions (under Articles 4, 7, and 9 of the same law) are waived. You still need to find an employer, and they must file a standard Aviz de Angajare application from scratch, just like for any new applicant.'}</p>
+              </div>
             </div>
           </div>
 
@@ -290,6 +295,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             {
               q: currentLang === 'fa' ? 'اگر پرونده من قبل از راه‌اندازی پلتفرم جدید ثبت شده بود چه می‌شود؟' : 'What happens if my file was submitted before the new platform launched?',
               a: currentLang === 'fa' ? 'طبق گزارش‌های رسانه‌ای، صدها پرونده ثبت‌شده پیش از راه‌اندازی کامل پلتفرم (اوت ۲۰۲۶) مجبور به شروع مجدد شدند. با کارفرمای خود پیگیری کنید که پرونده شما تحت روال جدید هم معتبر شناخته شده یا نیاز به ثبت مجدد دارد.' : 'Per media reports, hundreds of files submitted before the platform\'s full launch (August 2026) were forced to restart. Check with your employer whether your file is recognized under the new procedure or needs to be resubmitted.'
+            },
+            {
+              q: currentLang === 'fa' ? 'بعد از فارغ‌التحصیلی از دانشگاه در رومانی، آیا اقامت تحصیلی من خودکار به اقامت کاری تبدیل می‌شود یا مهلت خاصی برای پیدا کردن کار دارم؟' : 'After I graduate from a university in Romania, does my student residence automatically convert to a work residence, or do I have a set period to find a job?',
+              a: currentLang === 'fa' ? 'خیر، رومانی مهلت قانونی مشخصی برای «جستجوی کار بعد از فارغ‌التحصیلی» (شبیه برخی کشورهای اروپایی) ندارد و تبدیل خودکار وجود ندارد. طبق ماده ۱۸ قانون OG 25/2014، تنها تسهیلاتی که برای فارغ‌التحصیلان دانشگاه‌های رومانی وجود دارد این است که وقتی کارفرمای شما برای شما اجازه‌کار (Aviz de Angajare) درخواست می‌دهد، برخی شرایط عمومی/خاص درخواست (طبق مواد ۴، ۷ و ۹ همان قانون) برایتان حذف می‌شود. اما همچنان باید یک کارفرما پیدا کنید و او باید مانند هر متقاضی جدید دیگر، درخواست Aviz de Angajare را از ابتدا ثبت کند.' : 'No — Romania does not have a formal "post-graduation job-search period" (unlike some other European countries), and there is no automatic conversion. Under Article 18 of OG 25/2014, the only simplification available to graduates of Romanian universities is that when your employer applies for a work permit (Aviz de Angajare) on your behalf, certain general and special conditions (under Articles 4, 7, and 9 of the same law) are waived. You still need to find an employer, and they must file a standard Aviz de Angajare application from scratch, just like for any new applicant.'
             }
           ]} />
 
@@ -433,6 +442,11 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم برای ویزای D/AM از مرکز VFS در تهران اقدام کنم؟' : 'Can I apply for the D/AM visa through a VFS center in Tehran?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر. رومانی هیچ مرکز VFS Global در ایران ندارد؛ باید از طریق سامانه eViza پرونده بسازید و سپس شخصاً به سفارت رومانی در تهران مراجعه کنید.' : 'No. Romania has no VFS Global center in Iran; you must build your file through the eViza system and then attend the Romanian Embassy in Tehran in person.'}</p>
               </div>
+              {/* Source: Embassy of Romania in Chisinau, chisinau.mae.ro/node/749 — single embassy source, guidance advisory */}
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'بعد از مصاحبه سفارت، چقدر طول می‌کشد تا نتیجه ویزای کاری (نوع D/AM) اعلام شود؟' : 'After the embassy interview, how long until I get a decision on my work visa (type D/AM)?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'زمان دقیق بسته به سفارت متفاوت است. طبق اطلاعات منتشرشده توسط یکی از سفارتخانه‌های رومانی، برای درخواست‌هایی که از قبل Aviz de Angajare دارند، تصمیم معمولاً ظرف ۱۰ روز از تاریخ ثبت درخواست اعلام می‌شود؛ برای دسته‌هایی که نیاز به تایید اضافی اداره مهاجرت دارند، این بازه به ۳۰ تا ۴۵ روز می‌رسد. توصیه می‌شود بازه‌ی دقیق را از همان سفارتی که درخواست خود را آنجا ثبت می‌کنید مستقیماً بپرسید، چون ممکن است بین سفارتخانه‌های مختلف کمی متفاوت باشد.' : 'The exact timing varies by embassy. According to information published by one Romanian embassy, applications that already have an Aviz de Angajare are typically decided within 10 days of filing; categories requiring additional IGI approval can take 30–45 days. We recommend confirming the exact timeframe directly with the specific embassy where you file your application, as it may vary slightly between locations.'}</p>
+              </div>
             </div>
           </div>
 
@@ -448,6 +462,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             {
               q: currentLang === 'fa' ? 'آیا می‌توانم برای ویزای D/AM از مرکز VFS در تهران اقدام کنم؟' : 'Can I apply for the D/AM visa through a VFS center in Tehran?',
               a: currentLang === 'fa' ? 'خیر. رومانی هیچ مرکز VFS Global در ایران ندارد؛ باید از طریق سامانه eViza پرونده بسازید و سپس شخصاً به سفارت رومانی در تهران مراجعه کنید.' : 'No. Romania has no VFS Global center in Iran; you must build your file through the eViza system and then attend the Romanian Embassy in Tehran in person.'
+            },
+            {
+              q: currentLang === 'fa' ? 'بعد از مصاحبه سفارت، چقدر طول می‌کشد تا نتیجه ویزای کاری (نوع D/AM) اعلام شود؟' : 'After the embassy interview, how long until I get a decision on my work visa (type D/AM)?',
+              a: currentLang === 'fa' ? 'زمان دقیق بسته به سفارت متفاوت است. طبق اطلاعات منتشرشده توسط یکی از سفارتخانه‌های رومانی، برای درخواست‌هایی که از قبل Aviz de Angajare دارند، تصمیم معمولاً ظرف ۱۰ روز از تاریخ ثبت درخواست اعلام می‌شود؛ برای دسته‌هایی که نیاز به تایید اضافی اداره مهاجرت دارند، این بازه به ۳۰ تا ۴۵ روز می‌رسد. توصیه می‌شود بازه‌ی دقیق را از همان سفارتی که درخواست خود را آنجا ثبت می‌کنید مستقیماً بپرسید، چون ممکن است بین سفارتخانه‌های مختلف کمی متفاوت باشد.' : 'The exact timing varies by embassy. According to information published by one Romanian embassy, applications that already have an Aviz de Angajare are typically decided within 10 days of filing; categories requiring additional IGI approval can take 30–45 days. We recommend confirming the exact timeframe directly with the specific embassy where you file your application, as it may vary slightly between locations.'
             }
           ]} />
 
@@ -618,6 +636,46 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                 ? 'منابع: AIDA/ECRE (asylumineurope.org). این سایت نتوانست آمار یا گزارش مشخصی درباره حضور یا برتری حرفه‌ای ایرانیان در بخش خاصی از بازار کار رومانی (مثل IT یا نفت‌وگاز) پیدا کند — پس چنین ادعایی را بدون منبع معتبر منتشر نمی‌کنیم.'
                 : 'Sources: AIDA/ECRE (asylumineurope.org). This site could not find specific data or reports on Iranian professional presence or advantage in any particular sector of the Romanian labor market (e.g. IT or oil & gas) — so no such claim is published without a credible source.'}
             </p>
+          </div>
+
+          {/* PRACTICAL ADVICE: HOW TO RECOGNIZE A LEGITIMATE EMPLOYER */}
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>🛡️</span>
+              <span>{currentLang === 'fa' ? 'چطور کارفرمای معتبر را تشخیص دهیم' : 'How to Recognize a Legitimate Employer'}</span>
+            </h2>
+            <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'قبل از پذیرفتن هر پیشنهاد کاری از رومانی، این نکات را بررسی کنید:'
+                : 'Before accepting any job offer from Romania, check the following:'}
+            </p>
+            <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
+              <li>
+                {currentLang === 'fa'
+                  ? 'ثبت رسمی شرکت کارفرما را می‌توانید از طریق سامانه رسمی ثبت شرکت‌های رومانی (ONRC) بررسی کنید.'
+                  : 'You can verify the employer\'s official company registration through Romania\'s official trade registry (ONRC).'}
+              </li>
+              <li>
+                {currentLang === 'fa'
+                  ? 'کارفرمای معتبر هرگز برای «تضمین» استخدام یا صدور دعوتنامه از شما پیش‌پرداخت نقدی بزرگ درخواست نمی‌کند.'
+                  : 'A legitimate employer will never ask for a large upfront cash payment to "guarantee" a job or issue an invitation letter.'}
+              </li>
+              <li>
+                {currentLang === 'fa'
+                  ? 'شرایط قرارداد (حقوق، ساعت کاری، محل اقامت در صورت وجود) باید پیش از سفر و به‌صورت مکتوب روشن شده باشد.'
+                  : 'Contract terms (salary, working hours, accommodation if provided) should be clear and in writing before you travel.'}
+              </li>
+              <li>
+                {currentLang === 'fa'
+                  ? 'درخواست دیدن وضعیت واقعی پرونده‌ی Aviz de Angajare نزد اداره مهاجرت، حق شماست.'
+                  : 'You have the right to ask about the real status of your Aviz de Angajare application with the immigration authority.'}
+              </li>
+              <li>
+                {currentLang === 'fa'
+                  ? 'متاسفانه موارد فسخ قرارداد بعد از صدور دعوتنامه گزارش شده — هیچ کارفرمایی نمی‌تواند تضمین ۱۰۰٪ بدهد، اما رعایت نکات بالا ریسک را کاهش می‌دهد.'
+                  : 'Unfortunately, cases of contract cancellation after an invitation letter has been issued have been reported — no employer can offer a 100% guarantee, but following the points above reduces the risk.'}
+              </li>
+            </ul>
           </div>
 
           {/* INLINE CTA 2: POST-DOCUMENTS & PRE-FAQ */}
@@ -873,6 +931,11 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا حق دارم نسخه رومانیایی رسمی از قراردادم داشته باشم؟' : 'Am I entitled to an official Romanian-language version of my contract?'}</h3>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله. طبق OUG 32/2026، قراردادهایی که به زبان رومانیایی تنظیم نشوند برای کارفرما جریمه‌ای تا ۶٬۰۰۰ لئو به‌ازای هر تخلف دارند؛ همیشه یک نسخه رومانیایی رسمی درخواست کنید، حتی اگر ترجمه انگلیسی یا فارسی هم داشته باشید.' : 'Yes. Under OUG 32/2026, contracts not drafted in Romanian carry a fine of up to 6,000 RON per violation for the employer; always request an official Romanian-language version, even if you also have an English or Persian translation.'}</p>
               </div>
+              {/* Source: OG 25/2014, Art. 3(4) and Art. 17 — igi.mai.gov.ro/wp-content/uploads/2024/03/OG-nr.-25.pdf */}
+              <div>
+                <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم همزمان با شغل اصلی‌ام (که با اجازه‌کار/Aviz de Angajare گرفته‌ام) یک شغل پاره‌وقت دوم هم داشته باشم؟' : 'Can I take a second, part-time job while already working under a work permit (Aviz de Angajare) for my main employer?'}</h3>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله. طبق ماده ۳ بند ۴ قانون OG 25/2014، می‌توانید بدون نیاز به Aviz de Angajare جدید، با کارفرمای دیگری قرارداد کار پاره‌وقت ببندید — به شرطی که این شغل دوم حداکثر ۴ ساعت در روز باشد. توجه: این معافیت فقط برای شغل دوم و پاره‌وقت است؛ اگر بخواهید شغل اصلی یا کارفرمای اصلی‌تان را تغییر دهید، طبق ماده ۱۷ همان قانون، به Aviz de Angajare جدید نیاز دارید.' : 'Yes. Under Article 3(4) of Government Ordinance OG 25/2014, you may sign a part-time employment contract with a different employer without needing a new Aviz de Angajare — as long as the second job is no more than 4 hours per day. Note: this exception applies only to a second, part-time job. If you want to change your primary full-time job or employer, Article 17 of the same law requires a new Aviz de Angajare.'}</p>
+              </div>
             </div>
           </div>
 
@@ -896,6 +959,10 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             {
               q: currentLang === 'fa' ? 'آیا حق دارم نسخه رومانیایی رسمی از قراردادم داشته باشم؟' : 'Am I entitled to an official Romanian-language version of my contract?',
               a: currentLang === 'fa' ? 'بله. طبق OUG 32/2026، قراردادهایی که به زبان رومانیایی تنظیم نشوند برای کارفرما جریمه‌ای تا ۶٬۰۰۰ لئو به‌ازای هر تخلف دارند؛ همیشه یک نسخه رومانیایی رسمی درخواست کنید، حتی اگر ترجمه انگلیسی یا فارسی هم داشته باشید.' : 'Yes. Under OUG 32/2026, contracts not drafted in Romanian carry a fine of up to 6,000 RON per violation for the employer; always request an official Romanian-language version, even if you also have an English or Persian translation.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم همزمان با شغل اصلی‌ام (که با اجازه‌کار/Aviz de Angajare گرفته‌ام) یک شغل پاره‌وقت دوم هم داشته باشم؟' : 'Can I take a second, part-time job while already working under a work permit (Aviz de Angajare) for my main employer?',
+              a: currentLang === 'fa' ? 'بله. طبق ماده ۳ بند ۴ قانون OG 25/2014، می‌توانید بدون نیاز به Aviz de Angajare جدید، با کارفرمای دیگری قرارداد کار پاره‌وقت ببندید — به شرطی که این شغل دوم حداکثر ۴ ساعت در روز باشد. توجه: این معافیت فقط برای شغل دوم و پاره‌وقت است؛ اگر بخواهید شغل اصلی یا کارفرمای اصلی‌تان را تغییر دهید، طبق ماده ۱۷ همان قانون، به Aviz de Angajare جدید نیاز دارید.' : 'Yes. Under Article 3(4) of Government Ordinance OG 25/2014, you may sign a part-time employment contract with a different employer without needing a new Aviz de Angajare — as long as the second job is no more than 4 hours per day. Note: this exception applies only to a second, part-time job. If you want to change your primary full-time job or employer, Article 17 of the same law requires a new Aviz de Angajare.'
             }
           ]} />
 
