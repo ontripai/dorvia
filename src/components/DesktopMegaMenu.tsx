@@ -344,7 +344,8 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                 {currentLang === 'fa' ? 'استقرار و حقوقی' : 'Housing & Consular'}
               </h4>
               <ul className="space-y-2 text-[#526174] font-medium">
-                <li><Link href="/needs/notary-public" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>⚖️ {currentLang === 'fa' ? 'دفتر اسناد رسمی (Notar Public)' : 'Notary Public Services'}</Link></li>
+                <li><Link href="/needs/legal-consultation" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>⚖️ {currentLang === 'fa' ? 'وکیل و مشاوره حقوقی (UNBR)' : 'Legal Consultation & Lawyers'}</Link></li>
+                <li><Link href="/needs/notary-public" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🏛️ {currentLang === 'fa' ? 'دفتر اسناد رسمی (Notar Public)' : 'Notary Public Services'}</Link></li>
                 <li><Link href="/needs/iranian-embassy-and-mikhak" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🇮🇷 {currentLang === 'fa' ? 'سفارت ایران در بخارست و سامانه میخک' : 'Iranian Embassy & Mikhak System'}</Link></li>
                 <li><Link href="/needs/housing" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>🏠 {currentLang === 'fa' ? 'راهنمای اجاره و خرید مسکن' : 'Renting & Buying Property'}</Link></li>
                 <li><Link href="/needs/cost-of-living" className="hover:text-[#2F6FED] py-1 cursor-pointer" onClick={onClose}>💰 {currentLang === 'fa' ? 'محاسبه‌گر هزینه زندگی' : 'Cost of Living Calculator'}</Link></li>
