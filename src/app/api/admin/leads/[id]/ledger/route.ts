@@ -165,11 +165,13 @@ export async function GET(
         const amount = Number(ev.data.amount || 0);
         currentBalance = Math.round((currentBalance - amount) * 100) / 100;
 
-        const allocList = (ev.data.allocations || []).map((a: any) => ({
-          chargeDocNumber: a.charge?.doc_number || '',
-          chargeDescription: a.charge?.description || '',
-          amount: Number(a.amount || 0),
-        }));
+        const allocList = (ev.data.allocations || [])
+          .filter((a: any) => a.status === undefined || a.status === 'active')
+          .map((a: any) => ({
+            chargeDocNumber: a.charge?.doc_number || '',
+            chargeDescription: a.charge?.description || '',
+            amount: Number(a.amount || 0),
+          }));
 
         entries.push({
           id: ev.data.id,

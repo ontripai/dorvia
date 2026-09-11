@@ -675,6 +675,9 @@ export type Database = {
           receipt_id: string;
           charge_id: string;
           amount: number;
+          status: 'active' | 'cancelled';
+          cancelled_at: string | null;
+          cancelled_by: string | null;
           created_at: string;
         };
         Insert: {
@@ -682,6 +685,9 @@ export type Database = {
           receipt_id: string;
           charge_id: string;
           amount: number;
+          status?: 'active' | 'cancelled';
+          cancelled_at?: string | null;
+          cancelled_by?: string | null;
           created_at?: string;
         };
         Update: {
@@ -689,6 +695,9 @@ export type Database = {
           receipt_id?: string;
           charge_id?: string;
           amount?: number;
+          status?: 'active' | 'cancelled';
+          cancelled_at?: string | null;
+          cancelled_by?: string | null;
           created_at?: string;
         };
         Relationships: [
@@ -704,6 +713,13 @@ export type Database = {
             columns: ['charge_id'];
             isOneToOne: false;
             referencedRelation: 'case_charges';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'receipt_allocations_cancelled_by_fkey';
+            columns: ['cancelled_by'];
+            isOneToOne: false;
+            referencedRelation: 'admin_users';
             referencedColumns: ['id'];
           }
         ];

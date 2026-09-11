@@ -88,11 +88,15 @@ export async function PATCH(
       return NextResponse.json({ error: updateErr.message }, { status: 500 });
     }
 
-    // 4. Remove allocations for this cancelled receipt
+    // 4. Soft-cancel allocations for this cancelled receipt (preserves financial audit trail)
     if (allocations && allocations.length > 0) {
       await supabaseAdmin
         .from('receipt_allocations')
-        .delete()
+        .update({
+          status: 'cancelled',
+          cancelled_at: new Date().toISOString(),
+          cancelled_by: admin.adminUserId,
+        })
         .eq('receipt_id', receiptId);
     }
 
@@ -111,11 +115,13 @@ export async function PATCH(
         .select(`
           charge_id,
           amount,
+          status,
           receipt:case_receipts!receipt_allocations_receipt_id_fkey (
             status
           )
         `)
-        .in('charge_id', affectedChargeIds);
+        .in('charge_id', affectedChargeIds)
+        .eq('status', 'active');
 
       const remainingMap: Record<string, number> = {};
       (remainingAllocations || []).forEach((ra) => {

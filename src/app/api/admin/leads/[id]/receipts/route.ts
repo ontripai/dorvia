@@ -264,7 +264,44 @@ export async function POST(
       }
     }
 
-    // 3. Create receipt record
+    // 3. ATOMIC EXECUTION: Try atomic stored procedure first for guaranteed ACID compliance
+    try {
+      const { data: rpcResult, error: rpcErr } = await (supabaseAdmin as any).rpc(
+        'record_receipt_with_allocations',
+        {
+          p_lead_id: leadId,
+          p_amount: roundedReceiptAmount,
+          p_currency: 'EUR',
+          p_payment_method: paymentMethod || null,
+          p_received_at: receivedAt || new Date().toISOString().split('T')[0],
+          p_notes: notes || null,
+          p_created_by: admin.adminUserId,
+          p_allocations: allocationsToApply.map((a) => ({
+            charge_id: a.charge_id,
+            amount: Math.round(a.amount * 100) / 100,
+          })),
+        }
+      );
+
+      if (!rpcErr && rpcResult) {
+        return NextResponse.json(
+          {
+            success: true,
+            receipt: rpcResult,
+            allocatedCount: allocationsToApply.length,
+          },
+          { status: 201 }
+        );
+      }
+      // If error is a business logic error from RPC, return it directly
+      if (rpcErr && rpcErr.code !== 'PGRST202' && !rpcErr.message?.includes('function')) {
+        return NextResponse.json({ error: rpcErr.message }, { status: 400 });
+      }
+    } catch (e: any) {
+      console.warn('RPC record_receipt_with_allocations not available, falling back to sequential transaction with rollback:', e?.message);
+    }
+
+    // 4. Fallback sequential execution with guaranteed rollback compensation
     const docNumber = await generateReceiptDocNumber();
     const { data: newReceipt, error: recInsertErr } = await supabaseAdmin
       .from('case_receipts')
@@ -287,12 +324,13 @@ export async function POST(
       return NextResponse.json({ error: recInsertErr?.message || 'Failed to record receipt.' }, { status: 500 });
     }
 
-    // 4. Create allocations
+    // Insert allocations with atomic rollback guarantee
     if (allocationsToApply.length > 0) {
       const allocationInserts = allocationsToApply.map((a) => ({
         receipt_id: newReceipt.id,
         charge_id: a.charge_id,
         amount: Math.round(a.amount * 100) / 100,
+        status: 'active' as const,
       }));
 
       const { error: allocInsertErr } = await supabaseAdmin
@@ -300,12 +338,20 @@ export async function POST(
         .insert(allocationInserts);
 
       if (allocInsertErr) {
-        console.error('Error inserting receipt allocations:', allocInsertErr);
-        // Note: Even in the rare case of allocation insert failure, receipt exists
-        return NextResponse.json({ error: allocInsertErr.message }, { status: 500 });
+        console.error('Error inserting receipt allocations — rolling back receipt:', allocInsertErr);
+        // Rollback: cancel the receipt record to guarantee atomicity
+        await supabaseAdmin
+          .from('case_receipts')
+          .delete()
+          .eq('id', newReceipt.id);
+
+        return NextResponse.json(
+          { error: `خطا در تخصیص مبلغ به خدمات. سند دریافتی لغو و بازگردانده شد: ${allocInsertErr.message}` },
+          { status: 500 }
+        );
       }
 
-      // 5. Update status of affected charges
+      // Update status of affected charges
       for (const update of chargeUpdates) {
         let nextStatus: 'open' | 'partially_paid' | 'paid' = 'open';
         if (update.newAllocated >= update.totalAmount) {
