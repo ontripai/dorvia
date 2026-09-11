@@ -338,8 +338,8 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
             </strong>
             <p className="text-xs sm:text-sm text-emerald-900 leading-relaxed">
               {currentLang === 'fa'
-                ? 'طبق قانون (OG 25/2014، ماده ۳ بند ۲)، از نیاز به مجوز کار جداگانه معاف هستید و می‌توانید مستقیم کار کنید.'
-                : 'Under the law (OG 25/2014, Art. 3(2)), you are exempt from needing a separate work authorization and can work directly.'}
+                ? 'طبق قانون (OG 25/2014، ماده ۳ بند ۲ حرف f)، از نیاز به مجوز کار جداگانه معاف هستید و می‌توانید مستقیم کار کنید.'
+                : 'Under the law (OG 25/2014, Art. 3(2)(f)), you are exempt from needing a separate work authorization and can work directly.'}
             </p>
           </div>
           <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl space-y-1">
@@ -358,8 +358,8 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
             {currentLang === 'fa' ? 'نکته مهم:' : 'Important note:'}
           </strong>
           {currentLang === 'fa'
-            ? 'اگر خودِ فردی که الحاق شده در ادامه به اقامت بلندمدت (۵ ساله) رومانی برسد، از آن مرحله به بعد از نیاز به مجوز کار کاملاً معاف می‌شود.'
-            : 'If the reunified person later obtains Romania\'s own long-term (5-year) residence, they become fully exempt from needing a work authorization from that point on.'}
+            ? 'اگر خودِ فردی که الحاق شده در ادامه به اقامت بلندمدت (۵ ساله) رومانی برسد، از آن مرحله به بعد از نیاز به مجوز کار کاملاً معاف می‌شود (OG 25/2014، ماده ۳ بند ۲ حرف e).'
+            : 'If the reunified person later obtains Romania\'s own long-term (5-year) residence, they become fully exempt from needing a work authorization from that point on (OG 25/2014, Art. 3(2)(e)).'}
         </div>
         <p className="text-xs text-[#788697] leading-relaxed">
           {currentLang === 'fa'
