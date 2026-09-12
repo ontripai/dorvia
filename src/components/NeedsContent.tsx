@@ -593,6 +593,40 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چرا مترجم فارسی پیدا کردن این‌قدر سخت است؟' : 'Why is finding a Persian translator so hard?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'فارسی در مقایسه با زبان‌های اروپایی رایج، تقاضای بسیار کمتری در رومانی دارد؛ در نتیجه تعداد مترجمین مجاز دادگستری برای این زبان بسیار محدود است. جستجوی زودهنگام و تماس مستقیم با دفاتر اسناد رسمی توصیه می‌شود.' : 'Persian has far lower demand in Romania than common European languages, so the pool of Ministry-of-Justice-authorized translators for it is very small. Search early and consider contacting notary offices directly, as they often work with an authorized translator network.'}</p>
               </div>
+              {/* Item 1: Bringing original documents alongside certified translations */}
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">
+                  {currentLang === 'fa'
+                    ? 'اگر ترجمه‌ی رسمی و تاییدشده‌ی مدارکم را دارم، باز هم باید اصل مدارک را همراه داشته باشم؟'
+                    : 'If I already have an official, certified translation of my documents, do I still need to bring the originals?'}
+                </h4>
+                <p className="text-sm text-[#475569]">
+                  {currentLang === 'fa'
+                    ? 'بله. طبق صفحه‌ی رسمی خدمات کنسولی رومانی (econsulat.ro)، برای بسیاری از خدمات، تمام مدارک باید به‌صورت اصل ارائه شوند، حتی اگر ترجمه‌ی رسمی/تاییدشده هم همراه داشته باشید. همچنین صفحه‌ی رسمی اداره مهاجرت (IGI) درباره‌ی برخی مدارک هویتی/خانوادگی صراحتاً «ترجمه و لگالیزه‌شده — همراه با اصل و کپی» را ذکر کرده. توصیه می‌شود همیشه اصل مدارک را همراه ترجمه‌های تاییدشده به سفارت/اداره مهاجرت ببرید.'
+                    : 'Yes. According to Romania\'s official consular services page (econsulat.ro), for many services all documents must be presented in original, even when accompanied by certified translations. IGI\'s official page also explicitly lists certain identity/family documents as needing to be "translated and legalized — copy and original." We recommend always bringing the original documents along with your certified translations to the embassy or immigration office.'}
+                </p>
+              </div>
+              {/* Item 2: Certified true copy (Copie Legalizată) */}
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">
+                  {currentLang === 'fa'
+                    ? '«کپی برابر اصل» (Copie Legalizată) چیست و چطور می‌توان گرفت؟'
+                    : 'What is a "certified true copy" (Copie Legalizată) and how do I get one?'}
+                </h4>
+                <p className="text-sm text-[#475569]">
+                  {currentLang === 'fa' ? (
+                    <>
+                      کپی برابر اصل، رونوشتی از یک مدرک است که توسط یک سردفتر اسناد رسمی (Notar Public) رومانیایی، تایید می‌شود که دقیقاً مطابق نسخه‌ی اصلی است. طبق قانون سردفتران رومانی (Legea 36/1995، ماده ۱۲)، این یکی از خدمات رسمی سردفتری است.{' '}
+                      <strong>نکته‌ی مهم:</strong> منبع رسمی روشنی درباره‌ی اینکه آیا می‌توان از روی یک «کپی برابر اصلِ» قبلی، دوباره کپی برابر اصل جدید گرفت یا هر بار باید اصل مدرک را نشان داد، پیدا نشد — رویه‌ی رایج (بر اساس تجربه‌ی عملی، نه یک منبع رسمی مکتوب) این است که سردفتر معمولاً اصل مدرک را می‌خواهد. برای اطمینان کامل، بهتر است مستقیماً از یک سردفتر اسناد رسمی رومانیایی بپرسید.
+                    </>
+                  ) : (
+                    <>
+                      A certified true copy is a copy of a document that a Romanian notary public (Notar Public) certifies as an exact match of the original. Under Romania\'s notary law (Legea 36/1995, Art. 12), this is one of the official notarial services.{' '}
+                      <strong>Important note:</strong> we could not find a clear official source on whether a new certified copy can be made from an already-certified copy, or whether the original must be shown every time — common practice (based on practical experience, not a written official source) is that the notary typically requires the original document. For full certainty, it\'s best to ask a Romanian notary public directly.
+                    </>
+                  )}
+                </p>
+              </div>
             </div>
           </div>
 
@@ -608,6 +642,22 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             {
               q: currentLang === 'fa' ? 'چرا مترجم فارسی پیدا کردن این‌قدر سخت است؟' : 'Why is finding a Persian translator so hard?',
               a: currentLang === 'fa' ? 'فارسی در مقایسه با زبان‌های اروپایی رایج، تقاضای بسیار کمتری در رومانی دارد؛ در نتیجه تعداد مترجمین مجاز دادگستری برای این زبان بسیار محدود است. جستجوی زودهنگام و تماس مستقیم با دفاتر اسناد رسمی توصیه می‌شود.' : 'Persian has far lower demand in Romania than common European languages, so the pool of Ministry-of-Justice-authorized translators for it is very small. Search early and consider contacting notary offices directly, as they often work with an authorized translator network.'
+            },
+            {
+              q: currentLang === 'fa'
+                ? 'اگر ترجمه‌ی رسمی و تاییدشده‌ی مدارکم را دارم، باز هم باید اصل مدارک را همراه داشته باشم؟'
+                : 'If I already have an official, certified translation of my documents, do I still need to bring the originals?',
+              a: currentLang === 'fa'
+                ? 'بله. طبق صفحه‌ی رسمی خدمات کنسولی رومانی (econsulat.ro)، برای بسیاری از خدمات، تمام مدارک باید به‌صورت اصل ارائه شوند، حتی اگر ترجمه‌ی رسمی/تاییدشده هم همراه داشته باشید. همچنین صفحه‌ی رسمی اداره مهاجرت (IGI) درباره‌ی برخی مدارک هویتی/خانوادگی صراحتاً «ترجمه و لگالیزه‌شده — همراه با اصل و کپی» را ذکر کرده. توصیه می‌شود همیشه اصل مدارک را همراه ترجمه‌های تاییدشده به سفارت/اداره مهاجرت ببرید.'
+                : 'Yes. According to Romania\'s official consular services page (econsulat.ro), for many services all documents must be presented in original, even when accompanied by certified translations. IGI\'s official page also explicitly lists certain identity/family documents as needing to be "translated and legalized — copy and original." We recommend always bringing the original documents along with your certified translations to the embassy or immigration office.'
+            },
+            {
+              q: currentLang === 'fa'
+                ? '«کپی برابر اصل» (Copie Legalizată) چیست و چطور می‌توان گرفت؟'
+                : 'What is a "certified true copy" (Copie Legalizată) and how do I get one?',
+              a: currentLang === 'fa'
+                ? 'کپی برابر اصل، رونوشتی از یک مدرک است که توسط یک سردفتر اسناد رسمی (Notar Public) رومانیایی، تایید می‌شود که دقیقاً مطابق نسخه‌ی اصلی است. طبق قانون سردفتران رومانی (Legea 36/1995، ماده ۱۲)، این یکی از خدمات رسمی سردفتری است. نکته‌ی مهم: منبع رسمی روشنی درباره‌ی اینکه آیا می‌توان از روی یک «کپی برابر اصلِ» قبلی، دوباره کپی برابر اصل جدید گرفت یا هر بار باید اصل مدرک را نشان داد، پیدا نشد — رویه‌ی رایج (بر اساس تجربه‌ی عملی، نه یک منبع رسمی مکتوب) این است که سردفتر معمولاً اصل مدرک را می‌خواهد. برای اطمینان کامل، بهتر است مستقیماً از یک سردفتر اسناد رسمی رومانیایی بپرسید.'
+                : 'A certified true copy is a copy of a document that a Romanian notary public (Notar Public) certifies as an exact match of the original. Under Romania\'s notary law (Legea 36/1995, Art. 12), this is one of the official notarial services. Important note: we could not find a clear official source on whether a new certified copy can be made from an already-certified copy, or whether the original must be shown every time — common practice (based on practical experience, not a written official source) is that the notary typically requires the original document. For full certainty, it\'s best to ask a Romanian notary public directly.'
             }
           ]} />
 
