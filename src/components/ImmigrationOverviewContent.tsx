@@ -745,6 +745,30 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
                     : 'No — despite what a few other sites currently claim. On January 10, 2025, the US Department of Homeland Security (DHS) announced Romania\'s designation into the Visa Waiver Program, planned to take effect March 31, 2025; but before that date, DHS paused the decision for a security review and formally rescinded it on May 2, 2025 (per DHS.gov\'s own announcement). As of now, Romanian citizens still need a standard US B-1/B-2 visa. For passport strength, per the Henley Passport Index\'s January 2026 edition, Romania ranks 11th globally with visa-free/visa-on-arrival access to 178 destinations.'}
                 </p>
               </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">
+                  {currentLang === 'fa'
+                    ? 'آیا سال‌هایی که با اقامت تحصیلی در رومانی بوده‌ام، برای ۸ سال لازم برای تابعیت حساب می‌شود؟'
+                    : 'Do years spent in Romania on a student residence permit count toward the 8 years required for citizenship?'}
+                </h4>
+                <p className="text-sm text-[#475569]">
+                  {currentLang === 'fa'
+                    ? 'صادقانه بگوییم: ما نتوانستیم پاسخ قطعی این را از هیچ منبع رسمی پیدا کنیم، در هیچ جهتی. متن قانون تابعیت (قانون ۲۱/۱۹۹۱، ماده ۸) شرط را «domiciliu داشتن در قلمرو رومانی به‌مدت دست‌کم ۸ سال» تعریف می‌کند، اما خودِ قانون تابعیت تعریف نمی‌کند که چه نوع اقامتی «domiciliu» محسوب می‌شود، و ما نتوانستیم متن تلفیقی به‌روز این ماده را پس از یک اصلاحیه در سال ۲۰۲۵ از منبع رسمی به‌دست آوریم. اما یک چیز را روشن کردیم، و احتمالاً منشأ سوءتفاهم همین است: قاعده‌ی معروف «سال‌های دانشجویی نصف حساب می‌شود» واقعی است، ولی مربوط به تابعیت نیست. متن رسمی اداره‌ی مهاجرت (IGI) می‌گوید: «Perioada de şedere în scop de studii se calculează la jumătate pentru rezidenţa pe termen lung» — یعنی «دوره‌ی اقامت به قصد تحصیل، برای اقامت بلندمدت، نصف محاسبه می‌شود». اقامت بلندمدت (مجوز ۵ ساله) یک مسیر حقوقی جداگانه از تابعیت است. هیچ منبعی که ما دیدیم این قاعده را به شمارش ۸ ساله‌ی تابعیت تعمیم نداده است. پس اگر کسی با قطعیت به شما گفت «سال‌های دانشجویی نصف حساب می‌شود» یا «اصلاً حساب نمی‌شود»، احتمالاً دارد قاعده‌ای را از مسیری به مسیر دیگر منتقل می‌کند. برای پاسخ قابل اتکا، مستقیماً از اداره‌ی ملی تابعیت (ANC) به نشانی cetatenie.just.ro استعلام بگیرید یا با یک وکیل مشورت کنید — و پیش از اینکه سال‌های تحصیلتان را در برنامه‌ریزی تابعیت حساب کنید، این را کتبی تایید بگیرید.'
+                    : 'Honestly: we could not find a definitive answer from any official source, in either direction. The citizenship law (Law 21/1991, Article 8) frames the requirement as having "domiciliu" on Romanian territory for at least 8 years, but the citizenship law itself does not define which type of residence counts as "domiciliu", and we were unable to obtain the current consolidated text of that article following a 2025 amendment from an official source. One thing we did clarify, and it is probably the source of the confusion: the well-known rule that "student years count at half" is real, but it does not concern citizenship. The Immigration Inspectorate\'s own text states: "Perioada de şedere în scop de studii se calculează la jumătate pentru rezidenţa pe termen lung" — "the period of residence for study purposes is calculated at half for long-term residence". Long-term residence (the 5-year permit) is a separate legal track from citizenship. No source we found extends that rule to the 8-year citizenship count. So if someone tells you confidently that student years "count at half" or "don\'t count at all", they are most likely carrying a rule across from a different track. For a reliable answer, ask the National Citizenship Authority (ANC) directly at cetatenie.just.ro, or consult a lawyer — and get it confirmed in writing before you count your study years in any citizenship plan.'}
+                </p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">
+                  {currentLang === 'fa'
+                    ? 'برای مصاحبه‌ی تابعیت دوره‌ی آمادگی رایگان وجود دارد؟'
+                    : 'Is there a free preparation course for the citizenship interview?'}
+                </h4>
+                <p className="text-sm text-[#475569]">
+                  {currentLang === 'fa'
+                    ? 'بله، دست‌کم یک مورد پیدا کردیم: شورای ملی رومانیایی برای پناهندگان (CNRR) روی سایت خودش یک دوره‌ی آنلاین رایگان آمادگی مصاحبه‌ی تابعیت معرفی می‌کند که هر چهار بخش مصاحبه را پوشش می‌دهد: تاریخ، قانون اساسی، جغرافیا، و فرهنگ و تمدن رومانی. توجه: اما پیش از اینکه روی آن حساب کنید، صفحه‌ی این دوره شرایط واجد بودن را ذکر نکرده، و ماموریت اعلام‌شده‌ی خود CNRR پناهندگان و مشمولان حمایت بین‌المللی است. ما نتوانستیم تایید کنیم که دانشجو یا کارگر دارای اقامت عادی هم می‌تواند ثبت‌نام کند. اگر مشمول حمایت بین‌المللی نیستید، پیش از برنامه‌ریزی مستقیماً از خود CNRR بپرسید که آیا شما را می‌پذیرند یا نه. ضمناً یادآوری: مرجع رسمی خودِ مصاحبه، اداره‌ی ملی تابعیت است و نمونه‌سوالات روی cetatenie.just.ro منتشر می‌شود.'
+                    : 'Yes, we found at least one: the Romanian National Council for Refugees (CNRR) advertises a free online citizenship-interview preparation course on its own site, covering all four parts of the interview: history, the constitution, geography, and Romanian culture and civilisation. Note: But before you count on it, the course page does not state eligibility criteria, and CNRR\'s own stated mission is refugees and beneficiaries of international protection. We could not confirm that a student or worker on an ordinary residence permit can enrol. If you are not a beneficiary of international protection, ask CNRR directly whether they will accept you before planning around it. Also worth remembering: the official authority for the interview itself is the National Authority for Citizenship, and sample questions are published at cetatenie.just.ro.'}
+                </p>
+              </div>
             </div>
           </div>
 
@@ -770,10 +794,42 @@ export const ImmigrationOverviewContent: React.FC<ImmigrationOverviewContentProp
               a: currentLang === 'fa'
                 ? 'خیر — با وجود اینکه در برخی سایت‌های دیگر خلاف این عنوان شده. در ۱۰ ژانویه ۲۰۲۵ وزارت امنیت داخلی آمریکا (DHS) عضویت رومانی در برنامه معافیت ویزا (Visa Waiver Program) را با اجرای برنامه‌ریزی‌شده از ۳۱ مارس ۲۰۲۵ اعلام کرد؛ اما پیش از آن تاریخ، DHS این تصمیم را برای بازبینی امنیتی متوقف کرد و در نهایت در ۲ می ۲۰۲۵ رسماً آن را لغو کرد (اعلامیه رسمی dhs.gov). یعنی تا این لحظه شهروندان رومانیایی همچنان باید مانند گذشته ویزای B-1/B-2 آمریکا دریافت کنند. برای رتبه قدرت پاسپورت، طبق شاخص هنلی (Henley Passport Index)، ویرایش ژانویه ۲۰۲۶، رومانی رتبه ۱۱ جهان را با دسترسی بدون ویزا/ویزای فرودگاهی به ۱۷۸ مقصد دارد.'
                 : 'No — despite what a few other sites currently claim. On January 10, 2025, the US Department of Homeland Security (DHS) announced Romania\'s designation into the Visa Waiver Program, planned to take effect March 31, 2025; but before that date, DHS paused the decision for a security review and formally rescinded it on May 2, 2025 (per DHS.gov\'s own announcement). As of now, Romanian citizens still need a standard US B-1/B-2 visa. For passport strength, per the Henley Passport Index\'s January 2026 edition, Romania ranks 11th globally with visa-free/visa-on-arrival access to 178 destinations.'
+            },
+            {
+              q: currentLang === 'fa'
+                ? 'آیا سال‌هایی که با اقامت تحصیلی در رومانی بوده‌ام، برای ۸ سال لازم برای تابعیت حساب می‌شود؟'
+                : 'Do years spent in Romania on a student residence permit count toward the 8 years required for citizenship?',
+              a: currentLang === 'fa'
+                ? 'صادقانه بگوییم: ما نتوانستیم پاسخ قطعی این را از هیچ منبع رسمی پیدا کنیم، در هیچ جهتی. متن قانون تابعیت (قانون ۲۱/۱۹۹۱، ماده ۸) شرط را «domiciliu داشتن در قلمرو رومانی به‌مدت دست‌کم ۸ سال» تعریف می‌کند، اما خودِ قانون تابعیت تعریف نمی‌کند که چه نوع اقامتی «domiciliu» محسوب می‌شود، و ما نتوانستیم متن تلفیقی به‌روز این ماده را پس از یک اصلاحیه در سال ۲۰۲۵ از منبع رسمی به‌دست آوریم. اما یک چیز را روشن کردیم، و احتمالاً منشأ سوءتفاهم همین است: قاعده‌ی معروف «سال‌های دانشجویی نصف حساب می‌شود» واقعی است، ولی مربوط به تابعیت نیست. متن رسمی اداره‌ی مهاجرت (IGI) می‌گوید: «Perioada de şedere în scop de studii se calculează la jumătate pentru rezidenţa pe termen lung» — یعنی «دوره‌ی اقامت به قصد تحصیل، برای اقامت بلندمدت، نصف محاسبه می‌شود». اقامت بلندمدت (مجوز ۵ ساله) یک مسیر حقوقی جداگانه از تابعیت است. هیچ منبعی که ما دیدیم این قاعده را به شمارش ۸ ساله‌ی تابعیت تعمیم نداده است. پس اگر کسی با قطعیت به شما گفت «سال‌های دانشجویی نصف حساب می‌شود» یا «اصلاً حساب نمی‌شود»، احتمالاً دارد قاعده‌ای را از مسیری به مسیر دیگر منتقل می‌کند. برای پاسخ قابل اتکا، مستقیماً از اداره‌ی ملی تابعیت (ANC) به نشانی cetatenie.just.ro استعلام بگیرید یا با یک وکیل مشورت کنید — و پیش از اینکه سال‌های تحصیلتان را در برنامه‌ریزی تابعیت حساب کنید، این را کتبی تایید بگیرید.'
+                : 'Honestly: we could not find a definitive answer from any official source, in either direction. The citizenship law (Law 21/1991, Article 8) frames the requirement as having "domiciliu" on Romanian territory for at least 8 years, but the citizenship law itself does not define which type of residence counts as "domiciliu", and we were unable to obtain the current consolidated text of that article following a 2025 amendment from an official source. One thing we did clarify, and it is probably the source of the confusion: the well-known rule that "student years count at half" is real, but it does not concern citizenship. The Immigration Inspectorate\'s own text states: "Perioada de şedere în scop de studii se calculează la jumătate pentru rezidenţa pe termen lung" — "the period of residence for study purposes is calculated at half for long-term residence". Long-term residence (the 5-year permit) is a separate legal track from citizenship. No source we found extends that rule to the 8-year citizenship count. So if someone tells you confidently that student years "count at half" or "don\'t count at all", they are most likely carrying a rule across from a different track. For a reliable answer, ask the National Citizenship Authority (ANC) directly at cetatenie.just.ro, or consult a lawyer — and get it confirmed in writing before you count your study years in any citizenship plan.'
+            },
+            {
+              q: currentLang === 'fa'
+                ? 'برای مصاحبه‌ی تابعیت دوره‌ی آمادگی رایگان وجود دارد؟'
+                : 'Is there a free preparation course for the citizenship interview?',
+              a: currentLang === 'fa'
+                ? 'بله، دست‌کم یک مورد پیدا کردیم: شورای ملی رومانیایی برای پناهندگان (CNRR) روی سایت خودش یک دوره‌ی آنلاین رایگان آمادگی مصاحبه‌ی تابعیت معرفی می‌کند که هر چهار بخش مصاحبه را پوشش می‌دهد: تاریخ، قانون اساسی، جغرافیا، و فرهنگ و تمدن رومانی. توجه: اما پیش از اینکه روی آن حساب کنید، صفحه‌ی این دوره شرایط واجد بودن را ذکر نکرده، و ماموریت اعلام‌شده‌ی خود CNRR پناهندگان و مشمولان حمایت بین‌المللی است. ما نتوانستیم تایید کنیم که دانشجو یا کارگر دارای اقامت عادی هم می‌تواند ثبت‌نام کند. اگر مشمول حمایت بین‌المللی نیستید، پیش از برنامه‌ریزی مستقیماً از خود CNRR بپرسید که آیا شما را می‌پذیرند یا نه. ضمناً یادآوری: مرجع رسمی خودِ مصاحبه، اداره‌ی ملی تابعیت است و نمونه‌سوالات روی cetatenie.just.ro منتشر می‌شود.'
+                : 'Yes, we found at least one: the Romanian National Council for Refugees (CNRR) advertises a free online citizenship-interview preparation course on its own site, covering all four parts of the interview: history, the constitution, geography, and Romanian culture and civilisation. Note: But before you count on it, the course page does not state eligibility criteria, and CNRR\'s own stated mission is refugees and beneficiaries of international protection. We could not confirm that a student or worker on an ordinary residence permit can enrol. If you are not a beneficiary of international protection, ask CNRR directly whether they will accept you before planning around it. Also worth remembering: the official authority for the interview itself is the National Authority for Citizenship, and sample questions are published at cetatenie.just.ro.'
             }
           ]} />
 
-          <RelatedGuidesCard items={['start-here/citizenship-goal']} currentLang={currentLang} onNavigate={onNavigate} />
+          <RelatedGuidesCard
+            items={[
+              'start-here/citizenship-goal',
+              {
+                route: 'needs/romanian-language-courses',
+                icon: '🇷🇴',
+                titleFa: 'دوره‌های زبان رومانیایی',
+                titleEn: 'Romanian Language Courses',
+                descriptionFa: 'مصاحبه تابعیت به زبان رومانیایی برگزار می‌شود؛ دوره‌های دولتی و رایگان زبان می‌توانند بخشی از آمادگی شما باشند.',
+                descriptionEn: 'The citizenship interview is conducted in Romanian; available public and free language courses can be part of your preparation.',
+                badgeFa: 'آمادگی مصاحبه',
+                badgeEn: 'Interview Prep'
+              }
+            ]}
+            currentLang={currentLang}
+            onNavigate={onNavigate}
+          />
           <ParentHubFooterCard slugRoute="immigration/citizenship" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
