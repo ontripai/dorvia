@@ -23,6 +23,36 @@ export const SchoolGuideContent: React.FC<SchoolGuideContentProps> = ({ currentL
 
   const schoolFaqs = [
     {
+      q: currentLang === 'fa' ? 'بچه‌ام در چه سنی وارد مدرسه می‌شود؟' : 'At what age does my child start school?',
+      a: currentLang === 'fa'
+        ? 'مقطع ابتدایی در رومانی با «کلاس آمادگی» (clasa pregătitoare) شروع می‌شود که پیش از کلاس اول است. طبق ماده ۳۱(۲) قانون آموزش پیش‌دانشگاهی (قانون ۱۹۸/۲۰۲۳)، کودکانی در کلاس آمادگی ثبت‌نام می‌شوند که پیش‌دبستانی را گذرانده باشند و تا ۳۱ آگوست همان سال ۶ ساله شوند. نکته‌ای که مخصوص خانواده‌های تازه‌رسیده از ایران است: اگر کودک شما بین ۱ سپتامبر تا ۳۱ دسامبر ۶ ساله می‌شود، ثبت‌نامش خودکار نیست. طبق راهنمای وزارت آموزش، در این حالت یا باید توصیه‌ی مهدکودکی که کودک در آن بوده ارائه شود، یا — و این حالت شماست اگر کودک مهدکودک رومانیایی نرفته یا تازه از خارج آمده — کودک باید ارزیابی مرکز کمک روانشناختی-آموزشی شهرستان (CJRAE/CMBRAE) را بگذراند. این ارزیابی پنجره‌ی زمانی مشخصی دارد که هر سال اعلام می‌شود (برای سال تحصیلی ۲۰۲۶–۲۰۲۷ در بازه‌ی مارس ۲۰۲۶ بود)، پس اگر ورودتان نزدیک این بازه است زودتر پیگیری کنید.'
+        : 'Primary education in Romania begins with a "preparatory class" (clasa pregătitoare) that comes before first grade. Under Article 31(2) of the pre-university education law (Law 198/2023), children enrol in the preparatory class if they have attended preschool and turn 6 by 31 August of that year. A point that specifically affects families newly arrived from Iran: if your child turns 6 between 1 September and 31 December, enrolment is not automatic. Per the Ministry of Education\'s guidance, you need either a recommendation from the kindergarten the child attended, or — and this is your situation if the child has not attended Romanian kindergarten or has just arrived from abroad — an assessment by the county psycho-pedagogical assistance centre (CJRAE/CMBRAE). This assessment has a defined application window announced each year (for the 2026–2027 school year it fell in March 2026), so if your arrival is near that window, start early.'
+    },
+    {
+      q: currentLang === 'fa' ? 'ساختار مقاطع تحصیلی در رومانی چگونه است؟' : 'How is the Romanian school system structured?',
+      a: currentLang === 'fa'
+        ? 'آموزش زودهنگام (creșă از ۳ ماهگی تا ۳ سال، و grădiniță از ۳ تا ۶ سال) → ابتدایی که پنج سال است (کلاس آمادگی به‌علاوه‌ی کلاس‌های ۱ تا ۴) → gimnaziu (کلاس‌های ۵ تا ۸) → liceu (کلاس‌های ۹ تا ۱۲). نکته‌ای که خیلی‌ها نمی‌دانند: مهدکودک در رومانی اجباری است، البته مرحله‌ای. گروه بزرگ (grupa mare) از سال تحصیلی ۲۰۲۰–۲۰۲۱ و گروه میانی (grupa mijlocie) از سپتامبر ۲۰۲۳ اجباری شده‌اند. عملاً یعنی کودک ۴ یا ۵ ساله‌ی شما قانوناً باید به مهدکودک برود، در حالی که برای کودک ۳ ساله هنوز الزامی نیست. (توجه: اجباری‌شدن گروه کوچک / grupa mică برای سال‌های آینده برنامه‌ریزی شده اما تاریخ دقیق آن در متن رسمی مشخص نشده است).'
+        : 'Early education (creșă from 3 months to 3 years, grădiniță from 3 to 6) → primary, which is five years (the preparatory class plus grades I–IV) → gimnaziu (grades V–VIII) → liceu (grades IX–XII). Something many families don\'t realise: kindergarten in Romania is compulsory, in phases. The senior group (grupa mare) became compulsory from the 2020–2021 school year and the middle group (grupa mijlocie) from September 2023. In practice this means your 4- or 5-year-old is legally required to attend kindergarten, while it is not yet compulsory for a 3-year-old. (Note: Making the junior group / grupa mică compulsory is planned for a future year, but the exact date has not been officially confirmed).'
+    },
+    {
+      q: currentLang === 'fa' ? 'اگر وسط سال تحصیلی برسیم چه می‌شود؟' : 'What happens if we arrive mid-school-year?',
+      a: currentLang === 'fa'
+        ? 'کودک بلافاصله می‌تواند به مدرسه برود. تا وقتی پرونده‌ی معادلسازی مدارک در حال رسیدگی است، دانش‌آموز به‌عنوان «audient» (شنونده) ثبت می‌شود و فعالیتش در دفاتر موقت کلاس ثبت می‌گردد — یعنی عملاً سر کلاس حاضر است و درس می‌خواند، فقط نمراتش هنوز رسمی نشده. بازرسی آموزش شهرستان (ISJ) طبق رویه ۳۰ روز کاری از تاریخ تحویل پرونده‌ی کامل برای صدور گواهی معادلسازی زمان دارد، و پس از دریافت گواهی، دانش‌آموز حداکثر ظرف ۱۵ روز در دفتر رسمی کلاس ثبت می‌شود. پرونده معمولاً از طریق همان مدرسه‌ای که کودک در آن حاضر می‌شود تحویل داده می‌شود.'
+        : 'The child can start school immediately. While the credential-recognition (echivalare) file is being processed, the pupil is enrolled as an "audient" and their work is recorded in provisional class registers — meaning they attend and study normally; only the formal grades are pending. The county school inspectorate (ISJ) has, per procedure, 30 working days from submission of a complete file to issue the equivalence certificate, and once it is issued the pupil is entered in the official class register within 15 days at most. The file is normally submitted through the school the child is attending as an audient.'
+    },
+    {
+      q: currentLang === 'fa' ? 'اگر فرزندم رومانیایی بلد نیست، دوره‌ی زبان رایگان هست؟' : 'If my child doesn\'t speak Romanian, is there a free language course?',
+      a: currentLang === 'fa'
+        ? 'بر اساس توصیف رسمی سیستم آموزشی رومانی در پایگاه Eurydice کمیسیون اروپا، برای فرزندان کارگران مهاجری که رومانیایی نمی‌دانند یک دوره‌ی مقدماتی رایگان زبان رومانیایی به‌مدت یک سال تحصیلی پیش‌بینی شده که در مدارس دولتی برگزار و توسط شوراهای محلی تامین مالی می‌شود، با گروه‌بندی سنی. کودکی که رومانیایی می‌داند به‌جای آن آزمون تعیین سطح می‌دهد. اما روی این حساب باز نکنید تا خودتان تایید بگیرید: ما نتوانستیم این حق را به شماره‌ی ماده‌ی مشخصی از قانون فعلی گره بزنیم، عبارت منبع «فرزندان کارگران مهاجر» است و تعمیمش به همه‌ی کودکان تبعه‌ی خارجی تایید نشد، و از همه مهم‌تر نتوانستیم تایید کنیم که این دوره در عمل در هر شهر و هر مدرسه‌ای واقعاً برگزار می‌شود. پیش از انتخاب مدرسه، مستقیماً از خود مدرسه و از ISJ شهرستان بپرسید چه پشتیبانی زبانی مشخصی ارائه می‌دهند. (یک مسیر جداگانه و روشن‌تر برای دارندگان حمایت بین‌المللی/پناهندگی وجود دارد که شامل خانواده‌ی دارای اقامت کاری یا خانوادگی نمی‌شود).'
+        : 'According to the European Commission\'s Eurydice description of the Romanian education system, children of migrant workers who do not speak Romanian are provided a free Romanian-language initiation course lasting one school year, organised in state schools and funded by local councils, with pupils grouped by age. A child who already speaks Romanian sits a placement test instead. But do not count on this until you confirm it yourself: we could not tie this entitlement to a specific article of the current law, the source wording refers to "children of migrant workers" and we could not confirm it extends to all foreign-national children, and — most importantly — we could not confirm that the course actually runs in every city and every school in practice. Before choosing a school, ask the school itself and the county ISJ what specific language support they provide. (A separate, clearer track exists for holders of international protection, which does not cover a family on a work or family residence permit).'
+    },
+    {
+      q: currentLang === 'fa' ? '«افترسکول» که می‌شنویم چیست؟' : 'What is "afterschool"?',
+      a: currentLang === 'fa'
+        ? 'دو چیز متفاوت با یک اسم است: یکی برنامه‌ی دولتی «Școala după școală» که داخل خود مدارس دولتی و با مجوز سالانه برگزار می‌شود، و دیگری مراکز خصوصی تجاری که معمولاً شامل بردن کودک از مدرسه، ناهار، انجام تکالیف زیر نظر مربی و فعالیت‌های جانبی هستند — بیشتر برای مقطع ابتدایی. هر دو در رومانی رایج‌اند. توجه: هزینه‌ها از منبع رسمی و معتبری قابل تایید نیست و بین ارائه‌دهندگان بسیار متفاوت است، بنابراین باید مستقیماً از خود مرکز یا مدرسه استعلام شود.'
+        : 'Two different things share the name: the state-regulated "Școala după școală" programme run inside public schools with annual approval, and private commercial centres that typically include collecting the child from school, lunch, supervised homework and extra activities — mostly for primary-age children. Both are common in Romania. Note: Costs could not be verified from an official credible source and vary widely between providers; inquire directly with the specific centre or school.'
+    },
+    {
       q: currentLang === 'fa' ? 'آیا فرزندان اتباع خارجی حق تحصیل در مدارس دولتی رایگان رومانی را دارند؟' : 'Can expat children attend free public schools in Romania?',
       a: currentLang === 'fa'
         ? 'بله، طبق قانون اساسی و مقررات آموزشی رومانی، تمامی کودکان دارای اقامت قانونی از حق تحصیل رایگان در سیستم مدارس دولتی برخوردارند.'
@@ -72,7 +102,7 @@ export const SchoolGuideContent: React.FC<SchoolGuideContentProps> = ({ currentL
           <span>📌</span>
           <span>{currentLang === 'fa' ? 'فهرست محتوای این راهنما (پرش سریع)' : 'Table of Contents'}</span>
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-bold">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs font-bold">
           <a href="#quick-answer" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۱. پاسخ سریع' : '1. Quick Answer'}
           </a>
@@ -94,8 +124,11 @@ export const SchoolGuideContent: React.FC<SchoolGuideContentProps> = ({ currentL
           <a href="#official-sources" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۷. منابع رسمی (edu.ro)' : '7. Official Sources (edu.ro)'}
           </a>
+          <a href="#faq" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۸. سوالات متداول' : '8. Frequently Asked Questions'}
+          </a>
           <a href="#related-content" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
-            {currentLang === 'fa' ? '۸. مطالب مرتبط و نظرات' : '8. Related & Comments'}
+            {currentLang === 'fa' ? '۹. مطالب مرتبط و نظرات' : '9. Related & Comments'}
           </a>
         </div>
       </div>
@@ -366,6 +399,21 @@ export const SchoolGuideContent: React.FC<SchoolGuideContentProps> = ({ currentL
             <span>edu.ro (وزارت آموزش رومانی)</span>
             <ExternalLink size={14} />
           </a>
+        </div>
+      </div>
+
+      {/* SECTION 8.5: FREQUENTLY ASKED QUESTIONS */}
+      <div id="faq" className="bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+        <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+          {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+        </h3>
+        <div className="space-y-6">
+          {schoolFaqs.map((faq, index) => (
+            <div key={index}>
+              <h4 className="font-bold text-[#334155] mb-2">{faq.q}</h4>
+              <p className="text-sm text-[#475569] leading-relaxed">{faq.a}</p>
+            </div>
+          ))}
         </div>
       </div>
 
