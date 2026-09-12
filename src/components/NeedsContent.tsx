@@ -343,6 +343,10 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا صرافی ایرانی (سبک حواله) در رومانی وجود دارد؟' : 'Is there an Iranian-style hawala exchange bureau in Romania?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'در تحقیق ما نمونه مستند و شناخته‌شده‌ای در رومانی پیدا نشد؛ نزدیک‌ترین مراکز شناخته‌شده این نوع خدمات در آلمان، بریتانیا و کشورهای اسکاندیناوی فعال‌اند.' : 'Our research did not find a documented, known example in Romania; the nearest known hubs for this kind of service are in Germany, the UK, and the Nordic countries.'}</p>
               </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چرا برخی مغازه‌ها اسکناس ۵۰۰ یورویی را قبول نمی‌کنند؟' : 'Why do some businesses refuse €500 notes?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'این یک قانون رسمی نیست، بلکه یک احتیاط رایج در بسیاری از کشورهای منطقه‌ی یورو است — به‌خاطر نگرانی از جعل و کمتر در گردش بودن این اسکناس، بسیاری از کسب‌وکارهای کوچک ترجیح می‌دهند آن را نپذیرند. توصیه می‌شود در سفر، عمدتاً اسکناس‌های کوچک‌تر (۵۰/۱۰۰ یورو) همراه داشته باشید.' : 'This isn\'t an official law — it\'s a common precaution across many eurozone countries, since many small businesses prefer not to accept this note due to counterfeiting concerns and its rarity in circulation. We recommend traveling mainly with smaller denominations (€50/€100).'}</p>
+              </div>
             </div>
           </div>
 
@@ -358,6 +362,10 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             {
               q: currentLang === 'fa' ? 'آیا صرافی ایرانی (سبک حواله) در رومانی وجود دارد؟' : 'Is there an Iranian-style hawala exchange bureau in Romania?',
               a: currentLang === 'fa' ? 'در تحقیق ما نمونه مستند و شناخته‌شده‌ای در رومانی پیدا نشد؛ نزدیک‌ترین مراکز شناخته‌شده این نوع خدمات در آلمان، بریتانیا و کشورهای اسکاندیناوی فعال‌اند.' : 'Our research did not find a documented, known example in Romania; the nearest known hubs for this kind of service are in Germany, the UK, and the Nordic countries.'
+            },
+            {
+              q: currentLang === 'fa' ? 'چرا برخی مغازه‌ها اسکناس ۵۰۰ یورویی را قبول نمی‌کنند؟' : 'Why do some businesses refuse €500 notes?',
+              a: currentLang === 'fa' ? 'این یک قانون رسمی نیست، بلکه یک احتیاط رایج در بسیاری از کشورهای منطقه‌ی یورو است — به‌خاطر نگرانی از جعل و کمتر در گردش بودن این اسکناس، بسیاری از کسب‌وکارهای کوچک ترجیح می‌دهند آن را نپذیرند. توصیه می‌شود در سفر، عمدتاً اسکناس‌های کوچک‌تر (۵۰/۱۰۰ یورو) همراه داشته باشید.' : 'This isn\'t an official law — it\'s a common precaution across many eurozone countries, since many small businesses prefer not to accept this note due to counterfeiting concerns and its rarity in circulation. We recommend traveling mainly with smaller denominations (€50/€100).'
             }
           ]} />
         </div>
