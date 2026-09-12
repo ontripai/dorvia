@@ -1953,7 +1953,42 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
     }
 
     // 9. TRANSPORTATION
-    case 'transportation':
+    case 'transportation': {
+      const transportationFaqs = [
+        {
+          q: currentLang === 'fa' ? 'آیا رومانی کارت حمل‌ونقل یکپارچه سراسری دارد؟' : 'Does Romania have one nationwide transit card?',
+          a: currentLang === 'fa' ? 'خیر؛ هر شهر اپراتور و کارت/اپلیکیشن بلیت جداگانه خودش را دارد. برای قطار بین‌شهری، بلیت CFR جداست و ارتباطی به کارت شهری ندارد.' : 'No; each city has its own operator and ticket card/app. Intercity rail tickets (CFR) are separate and unrelated to any city transit card.'
+        },
+        {
+          q: currentLang === 'fa' ? 'کدام گزینه برای سفر بین شهرهای نزدیک ارزان‌تر است، قطار یا اتوبوس؟' : 'Which is cheaper for travel between nearby cities, train or bus?',
+          a: currentLang === 'fa' ? 'برای مسیرهای کوتاه‌تر، اتوبوس‌های خصوصی معمولاً ارزان‌تر و گاهی سریع‌تر از قطار اینترریجیو هستند؛ برای مسیرهای طولانی‌تر بین شهرهای بزرگ، قطار اینترسیتی معمولاً راحت‌تر و قابل‌اعتمادتر است.' : 'For shorter routes, private coaches are often cheaper and sometimes faster than InterRegio trains; for longer routes between major cities, InterCity trains are usually more comfortable and reliable.'
+        },
+        {
+          q: currentLang === 'fa' ? 'به‌عنوان خارجی می‌توانم در رومانی خودرو بخرم و به نام خودم ثبت کنم؟' : 'As a foreigner, can I buy a car in Romania and register it in my own name?',
+          a: currentLang === 'fa'
+            ? 'بله. معیار قانونی اقامت است، نه تابعیت. طبق فرمان فوری دولت شماره ۱۹۵/۲۰۰۲ (قانون راهنمایی و رانندگی، ماده ۹)، اشخاصی که در رومانی اقامت دائم (domiciliu) یا اقامت موقت (reședință) دارند خودرو را نزد اداره‌ی صدور گواهینامه و ثبت خودرو (DRPCIV) ثبت می‌کنند. مهلت قانونی ۹۰ روز است: طبق ماده ۱۱(۴) همان فرمان، مالک جدید باید ظرف ۹۰ روز از تاریخ تملک، درخواست انتقال سند را ثبت کند. مراحل بعد از خرید: تنظیم قرارداد استاندارد خرید و فروش وسیله‌ی نقلیه (فرم رسمی وزارت کشور)؛ دریافت گواهی تسویه‌ی مالیاتی فروشنده از شهرداری و ثبت مالیات محلی خودرو به نام خودتان در شهرداری محل سکونت؛ بیمه‌ی شخص ثالث (RCA) معتبر؛ برگه‌ی بازرسی فنی (ITP) معتبر؛ و نهایتاً تشکیل پرونده و تحویل مدارک در DRPCIV. یک نکته‌ی کاربردی: دامنه‌ی قدیمی drpciv.ro اکنون به dgpci.mai.gov.ro هدایت می‌شود؛ راهنماهای قدیمی‌تر هنوز نشانی قبلی را می‌دهند. توجه: فهرست‌های رسمی مدارک صرفاً «مدرک هویتی متقاضی» را ذکر می‌کنند و ما هیچ متن رسمی‌ای پیدا نکردیم که صراحتاً داشتن کد ملی (CNP) را شرط ثبت خودرو اعلام کرده باشد. در عمل کارت اقامت دارای CNP است و ثبت مالیات محلی نیز به آن نیاز پیدا می‌کند، اما چون منبع رسمی صریحی نیافتیم، این موضوع را به عنوان قطعیت حقوقی مطرح نمی‌کنیم.'
+            : 'Yes. The legal test is residence, not citizenship. Under Emergency Ordinance 195/2002 (the road traffic law, Article 9), persons with domiciliu or reședință in Romania register vehicles with the driving licence and vehicle registration authority (DRPCIV). Legal deadline: 90 days. Under Article 11(4) of the same ordinance, the new owner must file for transfer of ownership within 90 days of acquiring the vehicle. Steps after purchase: the standard vehicle sale-purchase contract (official Ministry of Interior form); the seller\'s fiscal clearance certificate from the local council, plus registering the vehicle for local tax in your own name at your local council; valid RCA insurance; valid ITP technical inspection; then filing with DRPCIV. A practical note: the old drpciv.ro domain now redirects to dgpci.mai.gov.ro; older guides still cite the previous address. Caveat: official document lists mention only "the applicant\'s identity document", and we found no official text explicitly stating that a CNP (personal numeric code) is required to register a vehicle. In practice a residence card carries a CNP and local tax registration requires one, but since we found no explicit official source, we have not stated it as a certainty.'
+        },
+        {
+          q: currentLang === 'fa' ? 'بیمه‌ی خودرو در رومانی اجباری است و چقدر هزینه دارد؟' : 'Is car insurance mandatory in Romania, and how much does it cost?',
+          a: currentLang === 'fa'
+            ? 'بله. بیمه‌ی مسئولیت مدنی خودرو (RCA) طبق قانون ۱۳۲/۲۰۱۷ اجباری است و تحت نظارت مرجع نظارت مالی (ASF) قرار دارد. این بیمه فقط خسارت وارد به اشخاص ثالث را پوشش می‌دهد؛ خسارت خودروی خودتان بیمه‌ی جداگانه‌ای به نام CASCO می‌خواهد که اختیاری است. قیمت به چه عواملی بستگی دارد: توان موتور (کیلووات)، سن راننده، شهرستان محل ثبت (بخارست-ایلفوو معمولاً گران‌تر از سایر مناطق کشور است)، و سابقه‌ی رانندگی (سیستم bonus-malus). درباره‌ی ارقام — این را حتماً بخوانید: مرجع نظارت مالی (ASF) جدولی از «تعرفه‌های مرجع» منتشر می‌کند (آخرین نسخه‌ی بررسی‌شده مه ۲۰۲۶ بود) که مثلاً برای راننده‌ی زیر ۳۰ سال با خودروی کم‌قدرت ارقامی مانند حدود ۳٬۹۷۴ لی در بخارست-ایلفوو در برابر ۲٬۳۶۱ لی در سایر مناطق را نشان می‌دهد، اما خود ASF صراحتاً تصریح کرده که این ارقام تعرفه‌ی مرجع هستند نه قیمت نهایی پرداختی شما — قیمت واقعی بازار هم بالاتر و هم پایین‌تر از آن می‌رود، پس این ارقام را صرفاً به عنوان مقیاس ذهنی ببینید نه قیمت قطعی. چرا قیمت‌ها بالا رفته است: بازار RCA رومانی در چند سال اخیر دو بار بی‌ثبات شده است — مجوز City Insurance که بزرگ‌ترین بیمه‌گر RCA بود در سپتامبر ۲۰۲۱ لغو شد، و Euroins România که رهبر بعدی بازار بود در مارس ۲۰۲۳ مجوزش توسط ASF لغو و در ژوئن ۲۰۲۳ حکم ورشکستگی گرفت؛ بیمه‌نامه‌هایش تنها تا دسامبر ۲۰۲۳ معتبر ماند و حدود ۸۰۰ هزار مشتری مجبور به تغییر شرکت شدند. این دو اتفاق به افزایش قیمت‌ها دامن زد. درس عملی: پیش از خرید، وضعیت مجوز شرکت بیمه را روی سایت ASF بررسی کنید.'
+            : 'Yes. Motor third-party liability insurance (RCA) is mandatory under Law 132/2017 and supervised by the Financial Supervisory Authority (ASF). It covers damage to third parties only; damage to your own vehicle requires separate, optional CASCO cover. What the price depends on: engine power (kW), driver age, county of registration (Bucharest–Ilfov is typically more expensive than the rest of the country), and driving history (the bonus-malus system). About the numbers — please read this: ASF publishes a table of "reference tariffs" (the most recent we saw was May 2026), showing for example roughly 3,974 RON for a driver under 30 with a low-power car in Bucharest–Ilfov versus 2,361 RON elsewhere — but ASF itself explicitly states that these are reference tariffs and not the final price you pay, as actual market quotes come in both above and below them, so treat these figures strictly as a sense of scale and not a price. Why prices have risen: Romania\'s RCA market has been destabilised twice in recent years — City Insurance, then the largest RCA insurer, lost its licence in September 2021, and Euroins România, the subsequent market leader, had its authorisation withdrawn by ASF in March 2023 and was declared bankrupt in June 2023; its policies remained valid only until December 2023, forcing around 800,000 customers to re-insure. Both events pushed prices up. Practical lesson: check an insurer\'s licence status on the ASF site before buying.'
+        },
+        {
+          q: currentLang === 'fa' ? 'بازرسی فنی خودرو هر چند وقت لازم است؟' : 'How often is the technical inspection required?',
+          a: currentLang === 'fa'
+            ? 'برای خودروی سواری شخصی (حداکثر ۸ صندلی به جز راننده): اگر خودرو در زمان اولین ثبت در رومانی نو بوده باشد، اولین معاینه فنی (ITP) پس از ۳ سال انجام می‌شود؛ پس از آن هر ۲ سال یک‌بار؛ و برای خودروهایی که دست‌کم ۱۲ سال از عمرشان گذشته باشد به‌صورت سالانه الزامی است. رانندگی با ITP منقضی اکیداً ممنوع بوده و علاوه بر جریمه، می‌تواند به تعلیق خودکار شماره‌گذاری و ضبط کارت خودرو (certificat de înmatriculare) تا زمان انجام بازرسی منجر شود. توجه: از ذکر مبلغ دقیق جریمه خودداری شده است زیرا امکان تایید رقم جاری از منبع رسمی به‌روز فراهم نبود.'
+            : 'For a passenger car (up to 8 seats besides the driver): if the car was new at its first registration in Romania, the first ITP falls at 3 years; after that every 2 years; and annually for vehicles at least 12 years old. Driving with an expired ITP is prohibited and, besides a fine, can lead to suspension of the registration and withdrawal of the vehicle registration certificate until the inspection is done. Note: We have not given a fine amount because we could not confirm a current figure from an official source.'
+        },
+        {
+          q: currentLang === 'fa' ? 'برای رانندگی در جاده‌های رومانی چه عوارضی لازم است؟' : 'What road toll do I need to drive in Romania?',
+          a: currentLang === 'fa'
+            ? 'برای تردد در شبکه‌ی جاده‌های ملی و بزرگراه‌های رومانی، خودروی سواری به عوارض جاده‌ای الکترونیکی موسوم به «رویینیتا» (rovinietă) نیاز دارد. این عوارض جدا از هزینه‌ی عبور از پل‌های خاص نظیر فتشتی–چرناوودا (Fetești–Cernavodă) یا پل جیورجیو–روسه (Giurgiu–Ruse) است که جداگانه دریافت می‌شوند. هشدار مهم: کانال رسمی و معتبر خرید، سامانه‌ی متعلق به شرکت ملی راه‌های رومانی به نشانی erovinieta.ro است. بخش قابل‌توجهی از نتایج اولیه‌ی جستجوی اینترنتی عباراتی مانند rovinieta متعلق به وب‌سایت‌های واسطه‌ی تجاری است که همان عوارض را با کارمزد اضافی و قیمت بالاتر از نرخ مصوب دولتی می‌فروشند؛ پیش از پرداخت اطمینان حاصل کنید که روی دامنه‌ی رسمی قرار دارید. تعرفه‌ی رسمی متناسب با مدت زمان تردد تعیین می‌شود و نرخ‌های مصوب روز را می‌توانید مستقیماً از ماشین‌حساب سامانه‌ی رسمی استعلام بگیرید.'
+            : 'To use Romania\'s national road and motorway network, a passenger car needs a "rovinietă". This is separate from bridge tolls such as Fetești–Cernavodă and the Giurgiu–Ruse bridge, which are charged additionally. Important warning: the official purchase channel is the national roads company\'s own system at erovinieta.ro. Many of the top search results for "rovinieta" belong to commercial resellers who sell the same product above the official price. Before paying, make sure you are on the official address. We have deliberately not quoted prices — get the official tariff from the calculator on the official site itself.'
+        }
+      ];
+
       return (
         <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
           <Breadcrumb slugRoute="needs/transportation" currentLang={currentLang} onNavigate={onNavigate} />
@@ -2038,31 +2073,28 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
               {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
             </h3>
             <div className="space-y-6">
-              <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا رومانی کارت حمل‌ونقل یکپارچه سراسری دارد؟' : 'Does Romania have one nationwide transit card?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'خیر؛ هر شهر اپراتور و کارت/اپلیکیشن بلیت جداگانه خودش را دارد. برای قطار بین‌شهری، بلیت CFR جداست و ارتباطی به کارت شهری ندارد.' : 'No; each city has its own operator and ticket card/app. Intercity rail tickets (CFR) are separate and unrelated to any city transit card.'}</p>
-              </div>
-              <div>
-                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'کدام گزینه برای سفر بین شهرهای نزدیک ارزان‌تر است، قطار یا اتوبوس؟' : 'Which is cheaper for travel between nearby cities, train or bus?'}</h4>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'برای مسیرهای کوتاه‌تر، اتوبوس‌های خصوصی معمولاً ارزان‌تر و گاهی سریع‌تر از قطار اینترریجیو هستند؛ برای مسیرهای طولانی‌تر بین شهرهای بزرگ، قطار اینترسیتی معمولاً راحت‌تر و قابل‌اعتمادتر است.' : 'For shorter routes, private coaches are often cheaper and sometimes faster than InterRegio trains; for longer routes between major cities, InterCity trains are usually more comfortable and reliable.'}</p>
-              </div>
+              {transportationFaqs.map((faq, index) => (
+                <div key={index}>
+                  <h4 className="font-bold text-[#334155] mb-2">{faq.q}</h4>
+                  <p className="text-sm text-[#475569] leading-relaxed">{faq.a}</p>
+                </div>
+              ))}
             </div>
           </div>
 
-          <FaqSchema items={[
-            {
-              q: currentLang === 'fa' ? 'آیا رومانی کارت حمل‌ونقل یکپارچه سراسری دارد؟' : 'Does Romania have one nationwide transit card?',
-              a: currentLang === 'fa' ? 'خیر؛ هر شهر اپراتور و کارت/اپلیکیشن بلیت جداگانه خودش را دارد. برای قطار بین‌شهری، بلیت CFR جداست و ارتباطی به کارت شهری ندارد.' : 'No; each city has its own operator and ticket card/app. Intercity rail tickets (CFR) are separate and unrelated to any city transit card.'
-            },
-            {
-              q: currentLang === 'fa' ? 'کدام گزینه برای سفر بین شهرهای نزدیک ارزان‌تر است، قطار یا اتوبوس؟' : 'Which is cheaper for travel between nearby cities, train or bus?',
-              a: currentLang === 'fa' ? 'برای مسیرهای کوتاه‌تر، اتوبوس‌های خصوصی معمولاً ارزان‌تر و گاهی سریع‌تر از قطار اینترریجیو هستند؛ برای مسیرهای طولانی‌تر بین شهرهای بزرگ، قطار اینترسیتی معمولاً راحت‌تر و قابل‌اعتمادتر است.' : 'For shorter routes, private coaches are often cheaper and sometimes faster than InterRegio trains; for longer routes between major cities, InterCity trains are usually more comfortable and reliable.'
-            }
-          ]} />
+          <FaqSchema items={transportationFaqs} />
+
+          {/* RELATED GUIDES: DRIVING LICENSE EXCHANGE */}
+          <RelatedGuidesCard
+            items={['needs/driving-license']}
+            currentLang={currentLang}
+            onNavigate={onNavigate}
+          />
 
           <ParentHubFooterCard slugRoute="needs/transportation" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
+    }
 
     case 'cost-of-living':
       return (
