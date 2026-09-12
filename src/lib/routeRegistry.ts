@@ -254,6 +254,18 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     inSitemap: true,
     pageType: 'content'
   },
+  'needs/flights-travel': {
+    canonical: '/needs/flights-travel',
+    aliases: [],
+    parentHub: '/needs',
+    titleFa: 'سفر و بلیط هوایی به رومانی',
+    titleEn: 'Flights & Travel to Romania',
+    parentTitleFa: 'نیازمندی‌ها و استقرار',
+    parentTitleEn: 'Essentials & Settlement',
+    indexable: true,
+    inSitemap: true,
+    pageType: 'content'
+  },
   'needs/notary-public': {
     canonical: '/needs/notary-public',
     aliases: [],

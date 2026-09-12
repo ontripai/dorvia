@@ -80,6 +80,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
               <li><Link href="/needs/notary-public" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'دفتر اسناد رسمی' : 'Notary Public'}</Link></li>
               <li><Link href="/needs/iranian-embassy-and-mikhak" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سفارت ایران و میخک' : 'Iranian Embassy & Mikhak'}</Link></li>
               <li><Link href="/needs/housing" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'اجاره و خرید مسکن' : 'Housing Guide'}</Link></li>
+              <li><Link href="/needs/flights-travel" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'سفر و بلیط هوایی' : 'Flights & Travel'}</Link></li>
               <li><Link href="/needs/cost-of-living" className="hover:text-[#F4F7FC] transition-colors cursor-pointer">{currentLang === 'fa' ? 'محاسبه‌گر هزینه زندگی' : 'Cost of Living Calculator'}</Link></li>
             </ul>
           </div>

@@ -10,6 +10,7 @@ import { ParentHubFooterCard } from './ParentHubFooterCard';
 import { EvaluationCTA } from './EvaluationCTA';
 import { SectionPhoto } from './SectionPhoto';
 import { FaqSchema } from './FaqSchema';
+import { RelatedGuidesCard } from './RelatedGuidesCard';
 
 interface StartHereContentProps {
   subRoute: string;
@@ -260,6 +261,12 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               a: currentLang === 'fa' ? 'خیر. پرواز مستقیمی بین تهران و بخارست وجود ندارد؛ باید از طریق استانبول (یا گاهی دبی/دوحه) ترانزیت کنید.' : 'No. There is no direct flight between Tehran and Bucharest; you must transit through Istanbul (or occasionally Dubai/Doha).'
             }
           ]} />
+
+          <RelatedGuidesCard
+            items={['needs/flights-travel', 'needs/first-days-checklist', 'needs/housing']}
+            currentLang={currentLang}
+            onNavigate={onNavigate}
+          />
 
           <ParentHubFooterCard slugRoute="start-here/planning-to-come" currentLang={currentLang} onNavigate={onNavigate} />
         </div>

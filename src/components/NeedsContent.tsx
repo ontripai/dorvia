@@ -22,6 +22,7 @@ import { drivingLicenseFA } from '../content/guides/driving-license/fa';
 import { firstDaysChecklistEN } from '../content/guides/first-days-checklist/en';
 import { firstDaysChecklistFA } from '../content/guides/first-days-checklist/fa';
 import { CostOfLivingCalculator } from './CostOfLivingCalculator';
+import { RelatedGuidesCard } from './RelatedGuidesCard';
 
 interface NeedsContentProps {
   subRoute: string;
@@ -235,6 +236,17 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                   <span>{currentLang === 'fa' ? 'حمل‌ونقل عمومی و بین‌شهری' : 'Public Transportation'}</span>
                 </h4>
                 <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'فرودگاه تا شهر، مترو و اتوبوس شهری، قطار و اتوبوس بین‌شهری.' : 'Airport to city, city metro/bus, and intercity train & coach.'}</p>
+              </div>
+              <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
+            </Link>
+
+            <Link href="/needs/flights-travel" className="editorial-card p-6 bg-white space-y-3 hover:border-[#2F6FED] transition-all cursor-pointer flex flex-col justify-between">
+              <div>
+                <h4 className="font-extrabold text-base text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#2F6FED] flex items-center justify-center">✈️</span>
+                  <span>{currentLang === 'fa' ? 'سفر و بلیط هوایی' : 'Flights & Travel'}</span>
+                </h4>
+                <p className="text-xs text-[#526174] leading-relaxed mt-2">{currentLang === 'fa' ? 'مسیرهای پروازی ترانزیت استانبول، مقررات اظهار ارز نقدی، سقف بار و نکات سفر.' : 'Flight routes via Istanbul, cash declaration rules, baggage allowances and travel tips.'}</p>
               </div>
               <span className="text-xs font-bold text-[#2F6FED] inline-flex items-center space-x-1 rtl:space-x-reverse pt-4">{currentLang === 'fa' ? 'مطالعه بیشتر' : 'Read More'} <ArrowIcon size={12} className="rtl:mr-1 ltr:ml-1" /></span>
             </Link>
@@ -1652,6 +1664,262 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
         </div>
       );
     }
+
+    // 8b. FLIGHTS & TRAVEL
+    case 'flights-travel': {
+      const flightsFaqs = [
+        {
+          q: currentLang === 'fa' ? 'آیا پرواز مستقیم تهران–بخارست وجود دارد؟' : 'Is there a direct Tehran-Bucharest flight?',
+          a: currentLang === 'fa'
+            ? 'خیر، هیچ پرواز مستقیمی بین تهران و بخارست وجود ندارد. مسیر معمول از طریق ترانزیت استانبول (با ترکیش ایرلاینز یا پگاسوس) است.'
+            : 'No — there are currently no direct flights between Tehran and Bucharest. The standard route transits through Istanbul (typically via Turkish Airlines or Pegasus).'
+        },
+        {
+          q: currentLang === 'fa' ? 'هنگام سفر با پول نقد، چه مقرراتی باید رعایت کنم؟' : 'What are the cash-carrying rules when traveling?',
+          a: currentLang === 'fa'
+            ? 'طبق مقررات اتحادیه اروپا (Regulation 2018/1672)، هر مسافری که ۱۰٬۰۰۰ یورو یا معادل آن (به هر ارزی) هنگام عبور از مرز خارجی اتحادیه اروپا همراه داشته باشد، باید آن را به گمرک اظهار کند. چون رومانی عضو اتحادیه اروپا است و ورود از ایران عبور از مرز خارجی اتحادیه محسوب می‌شود، این قانون الزامی است.'
+            : 'Under EU Regulation 2018/1672, any traveler carrying €10,000 or more (in any currency) when crossing an external EU border must declare it to customs. Since Romania is an EU member and arriving from Iran counts as crossing an external EU border, this rule applies to you.'
+        },
+        {
+          q: currentLang === 'fa' ? 'چیزی به نام «نامه‌ی پلیس» برای راحت‌تر عبور کردن از مرزهای شینگن وجود دارد؟' : 'Is there such a thing as a "police letter" that eases crossing Schengen borders?',
+          a: currentLang === 'fa'
+            ? 'خیر؛ هیچ سند رسمی اتحادیه اروپا، شینگن یا رومانی به این نام که ورود یا عبور را تسهیل کند پیدا نکردیم. آنچه رسمی و شناخته‌شده است، «گواهی عدم سوءپیشینه» (Police Clearance Certificate) است که برای درخواست ویزا یا اقامت لازم می‌شود، نه برای تسهیل عبور مرزی روزمره. اگر جایی درباره‌ی «نامه‌ی پلیس» شنیده‌اید، احتمالاً یک تجربه غیررسمی یا غیرمستند است، نه یک رویه‌ی قانونی تضمین‌شده.'
+            : 'We found no official EU, Schengen, or Romanian document by this name that facilitates entry or transit. What does officially exist is a "Police Clearance Certificate," required for visa and residence applications, not for easing routine border crossings. If you have heard of a "police letter," it is most likely an informal, undocumented practice, not a guaranteed legal procedure.'
+        },
+        {
+          q: currentLang === 'fa' ? 'آیا اتوبوس بین‌المللی بین استانبول و تهران وجود دارد؟' : 'Is there an international bus between Istanbul and Tehran?',
+          a: currentLang === 'fa'
+            ? 'بله، خطوط اتوبوس بین این دو شهر وجود دارند، اما معمولاً روی سایت‌های بین‌المللی رزرو بلیط (مثل FlixBus) لیست نمی‌شوند — رزرو آن‌ها عمدتاً حضوری در پایانه اتوبوس استانبول یا از طریق سایت‌های رزرو محلی و فارسی انجام می‌شود.'
+            : 'Yes, bus routes between these two cities genuinely exist, but they are usually not listed on international booking aggregators (like FlixBus) — booking is mainly done in person at the Istanbul bus terminal or through local/Persian-language booking sites.'
+        },
+        {
+          q: currentLang === 'fa' ? 'چقدر بار مجاز می‌توانم ببرم؟' : 'How much luggage am I allowed?',
+          a: currentLang === 'fa'
+            ? 'این موضوع کاملاً به ایرلاین و کلاس بلیط شما بستگی دارد و ممکن است تغییر کند — حتماً پیش از پرواز، قوانین دقیق بار مجاز (کابین و چمدان تحویلی) را مستقیماً از سایت رسمی همان ایرلاین (مانند ترکیش ایرلاینز، پگاسوس یا سایر خطوط) بررسی کنید.'
+            : 'This depends entirely on your specific airline and ticket fare class and changes often — always check the exact carry-on and checked baggage allowances directly on your airline\'s official website (such as Turkish Airlines, Pegasus, or others) before flying.'
+        }
+      ];
+
+      return (
+        <div className="space-y-10 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
+          <Breadcrumb slugRoute="needs/flights-travel" currentLang={currentLang} onNavigate={onNavigate} />
+
+          {/* HERO PANEL */}
+          <div className="dark-hero-panel rounded-3xl p-8 sm:p-14 space-y-4 shadow-xl">
+            <span className="text-[#2F6FED] font-bold text-xs uppercase tracking-wider">
+              {currentLang === 'fa' ? 'سفر و تردد بین‌المللی به رومانی' : 'International Travel to Romania'}
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+              {currentLang === 'fa' ? 'سفر و بلیط هوایی به رومانی' : 'Flights & Travel to Romania'}
+            </h1>
+            <p className="text-slate-200 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              {currentLang === 'fa'
+                ? 'راهنمای جامع مسیرهای پروازی، ترانزیت فرودگاهی استانبول، مقررات اظهار ارز نقدی اتحادیه اروپا، سقف بار مجاز ایرلاین‌ها و تردد قانونی مرزی.'
+                : 'Comprehensive guide to air routes, Istanbul transit connections, EU cash declaration rules, airline baggage policies, and legal border crossings.'}
+            </p>
+            <div className="text-[11px] text-slate-400 mt-2">
+              {currentLang === 'fa'
+                ? 'منابع: مقررات اتحادیه اروپا (Regulation 2018/1672)، سازمان هواپیمایی کشوری رومانی (AACR) و فرودگاه بین‌المللی هنری کواندا بخارست (OTP) — آخرین بررسی: شهریور ۱۴۰۵ / سپتامبر ۲۰۲۶'
+                : 'Sources: EU Regulation 2018/1672, Romanian Civil Aeronautical Authority (AACR), Bucharest Henri Coandă Airport (OTP) — Last reviewed: September 2026'}
+            </div>
+          </div>
+
+          {/* QUICK ESSENTIALS OVERVIEW */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="editorial-card p-6 bg-white space-y-3 border border-[#dfe6ef]">
+              <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#2F6FED] font-bold text-sm">
+                <span>✈️</span>
+                <h3 className="font-bold text-[#142033]">{currentLang === 'fa' ? 'مسیرهای پروازی و ترانزیت' : 'Air Routes & Transit'}</h3>
+              </div>
+              <p className="text-xs text-[#526174] leading-relaxed">
+                {currentLang === 'fa'
+                  ? 'نبود پرواز مستقیم تهران–بخارست؛ پروازها عمدتاً از طریق فرودگاه‌های جدید استانبول (IST) یا صبیحه گوکچن (SAW) انجام می‌شوند.'
+                  : 'No direct Tehran-Bucharest flights. Routes connect via Istanbul Airport (IST) or Sabiha Gökçen (SAW).'}
+              </p>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 border border-[#dfe6ef]">
+              <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#2F6FED] font-bold text-sm">
+                <span>💶</span>
+                <h3 className="font-bold text-[#142033]">{currentLang === 'fa' ? 'سقف ارز نقدی مسافرتی' : 'Customs Cash Controls'}</h3>
+              </div>
+              <p className="text-xs text-[#526174] leading-relaxed">
+                {currentLang === 'fa'
+                  ? 'الزام قانونی اظهار مبالغ معادل ۱۰٬۰۰۰ یورو یا بیشتر در مبادی ورودی و خروجی مرز خارجی اتحادیه اروپا طبق قانون ۲۰۱۸/۱۶۷۲.'
+                  : 'Mandatory declaration for cash amounts equal to or exceeding €10,000 at external EU border checkpoints under EU 2018/1672.'}
+              </p>
+            </div>
+
+            <div className="editorial-card p-6 bg-white space-y-3 border border-[#dfe6ef]">
+              <div className="flex items-center space-x-2 rtl:space-x-reverse text-[#2F6FED] font-bold text-sm">
+                <span>🧳</span>
+                <h3 className="font-bold text-[#142033]">{currentLang === 'fa' ? 'بار مجاز و قوانین ایرلاین' : 'Baggage Allowances'}</h3>
+              </div>
+              <p className="text-xs text-[#526174] leading-relaxed">
+                {currentLang === 'fa'
+                  ? 'قوانین ابعاد و وزن بار داخل کابین و چمدان تحویلی متغیر بوده و الزاماً باید از وب‌سایت رسمی ایرلاین استعلام شود.'
+                  : 'Cabin carry-on and checked baggage limits vary by airline and fare; always confirm directly on the operating carrier website.'}
+              </p>
+            </div>
+          </div>
+
+          {/* SECTION 1: AIR ROUTES & ISTANBUL TRANSIT */}
+          <div className="editorial-card p-6 sm:p-8 bg-white space-y-4 border border-[#dfe6ef]">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033]">
+              {currentLang === 'fa' ? '۱. مسیرهای هوایی و نکات ترانزیت فرودگاهی' : '1. Air Routes & Istanbul Transit Points'}
+            </h2>
+            <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed space-y-3">
+              <p>
+                {currentLang === 'fa'
+                  ? 'در حال حاضر هیچ پرواز مستقیمی بین ایران (فرودگاه امام خمینی تهران) و رومانی (فرودگاه بین‌المللی هنری کواندا بخارست - OTP) دایر نیست. مسافران ایرانی برای سفر به رومانی معمولاً از پروازهای اتصالی با توقف در استانبول ترکیه استفاده می‌کنند. دو ایرلاین اصلی فعال در این مسیر ترکیش ایرلاینز (از فرودگاه استانبول - IST) و پگاسوس (از فرودگاه صبیحه گوکچن - SAW) هستند.'
+                  : 'There are currently no direct commercial flights operating between Iran (Tehran Imam Khomeini Airport - IKA) and Romania (Bucharest Henri Coandă Airport - OTP). Travelers from Iran generally travel via connecting flights with a layover in Istanbul, Turkey. The two primary airlines serving this connection are Turkish Airlines (via Istanbul Airport - IST) and Pegasus Airlines (via Sabiha Gökçen Airport - SAW).'}
+              </p>
+              <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl text-xs text-[#142033] space-y-2">
+                <strong className="block font-bold">
+                  {currentLang === 'fa' ? '📌 نکات حیاتی هنگام خرید بلیط و توقف ترانزیت:' : '📌 Critical Transit & Connection Guidelines:'}
+                </strong>
+                <ul className="list-disc list-inside space-y-1 text-[#526174]">
+                  <li>
+                    {currentLang === 'fa'
+                      ? 'مدت زمان ترانزیت: توصیه می‌شود فاصله زمانی بین دو پرواز حداقل ۳ ساعت باشد تا در صورت تاخیر پرواز اول یا شلوغی بازرسی امنیتی ترانزیت، به پرواز بعدی برسید.'
+                      : 'Connection Buffer: Allow a minimum layover of 3 hours between connecting flights to safeguard against first-leg delays or transit security queues.'}
+                  </li>
+                  <li>
+                    {currentLang === 'fa'
+                      ? 'نوع بلیط (کانکشن یکپارچه در برابر دو بلیط مجزا): اگر بلیط شما یکسره (Through-Ticket) صادر شده باشد، بار شما در تهران تحویل گرفته شده و مستقیماً در بخارست تحویل داده می‌شود و نیازی به ورود به خاک ترکیه ندارید. اما در صورت خرید دو بلیط جداگانه، باید از گیت گذرنامه ترکیه عبور کنید، بار را تحویل گرفته و مجدداً برای پرواز بخارست پذیرش (Check-in) نمایید.'
+                      : 'Single vs Separate Tickets: With a through-ticket, your baggage is checked through to Bucharest. If purchasing two separate flight tickets, you must clear Turkish border control, collect baggage, and re-check it at the departure counter.'}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* SECTION 2: EU CASH DECLARATION REGULATIONS */}
+          <div className="editorial-card p-6 sm:p-8 bg-white space-y-4 border border-amber-200 bg-amber-50/40">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+              <span>💶</span>
+              <span>{currentLang === 'fa' ? '۲. مقررات قانونی اظهار پول نقد در مرز اتحادیه اروپا (Regulation 2018/1672)' : '2. EU Cash Declaration Regulations (Regulation 2018/1672)'}</span>
+            </h2>
+            <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed space-y-3">
+              <p>
+                {currentLang === 'fa'
+                  ? 'یکی از مهم‌ترین الزامات قانونی در بدو ورود به رومانی، مقررات کنترل نقدینگی اتحادیه اروپا است. طبق آیین‌نامه رسمی اتحادیه اروپا (EU Regulation 2018/1672)، هر مسافری که هنگام ورود به مرزهای خارجی اتحادیه اروپا یا خروج از آن، مبلغ ۱۰٬۰۰۰ یورو یا بیشتر (یا معادل آن به هر ارز دیگری) همراه داشته باشد، موظف است آن را نزد گمرک فرودگاه اظهار نماید.'
+                  : 'One of the most critical statutory requirements upon arrival in Romania is the European Union cash control regime. Under EU Regulation 2018/1672, any individual entering or leaving the EU carrying cash of a value of €10,000 or more (or its equivalent in any other currency) must declare it to customs authorities at the border point of entry.'}
+              </p>
+              <p>
+                {currentLang === 'fa'
+                  ? 'این تعریف علاوه بر اسکناس و مسکوکات، شامل ابزارهای قابل انتقال مانند چک‌های مسافرتی و سفته‌های بدون نام نیز می‌شود. عدم اظهار نقدینگی یا ارائه اطلاعات نادرست در گمرک فرودگاه هنری کواندا می‌تواند به جریمه‌های اداری سنگین و توقیف وجه تا روشن شدن منشا مالی آن منجر شود.'
+                  : 'This definition encompasses banknotes and coins, as well as negotiable bearer instruments such as traveler\'s cheques and promissory notes. Failure to file a truthful declaration can trigger substantial administrative fines and detention of the funds pending source-of-funds verification.'}
+              </p>
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                <a
+                  href="https://taxation-customs.ec.europa.eu/customs/prohibitions-restrictions/eu-cash-controls_en"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="outline" size="sm" rightIcon={<ExternalLink size={14} />}>
+                    {currentLang === 'fa' ? 'مشاهده درگاه رسمی کمیسیون اروپا درباره کنترل ارز نقدی' : 'EU Commission Official Cash Controls Portal'}
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* SECTION 3: BORDER CLEARANCE & "POLICE LETTER" MYTH */}
+          <div className="editorial-card p-6 sm:p-8 bg-white space-y-4 border border-[#dfe6ef]">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033]">
+              {currentLang === 'fa' ? '۳. واقعیت‌های تردد مرزی و باور نادرست «نامه پلیس»' : '3. Border Crossing Realities & Clarifying the "Police Letter" Myth'}
+            </h2>
+            <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed space-y-3">
+              <p>
+                {currentLang === 'fa'
+                  ? 'در میان مسافران و شبکه‌های اجتماعی گاهی اصطلاحی غیررسمی تحت عنوان «نامه پلیس برای عبور آسان از مرز شینگن یا رومانی» شنیده می‌شود. بررسی مستندات قانونی اتحادیه اروپا، شینگن و پلیس مرزی رومانی (Poliția de Frontieră) نشان می‌دهد که هیچ سند رسمی به این نام یا با این کارکرد در ساختار اداری رومانی وجود خارجی ندارد.'
+                  : 'A common misconception circulated across informal traveler forums references a purported "police letter" designed to ease or expedite passage through Romanian or Schengen border control. Official examination of EU, Schengen, and Romanian Border Police (Poliția de Frontieră) statutes confirms that no such document exists in the legal framework.'}
+              </p>
+              <p>
+                {currentLang === 'fa'
+                  ? 'تنها مدرک رسمی صادره از سوی مراجع انتظامی که برای متقاضیان اقامت و ویزا کاربرد دارد، «گواهی عدم سوءپیشینه» (Police Clearance Certificate / Cazier Judiciar) است که در مراحل اداری درخواست ویزا در سفارت یا پرونده اقامت در اداره مهاجرت (IGI) تحویل داده می‌شود و ربطی به تشریفات روزمره عبور از مرز فرودگاهی ندارد. عبور قانونی از گیت پلیس مرزی رومانی صرفاً با گذرنامه معتبر و ویزای معتبر (یا کارت اقامت معتبر) انجام می‌پذیرد.'
+                  : 'The only recognized police-issued document is the "Police Clearance Certificate" (Cazier Judiciar), which is strictly an administrative prerequisite submitted with your visa application at the consulate or your residency dossier at the Immigration Inspectorate (IGI), and plays no role at airport passport control. Legitimate border entry rests solely upon presenting a valid passport alongside an authorized visa or residence permit.'}
+              </p>
+            </div>
+          </div>
+
+          {/* SECTION 4: OVERLAND TRAVEL & TEHRAN-ISTANBUL BUSES */}
+          <div className="editorial-card p-6 sm:p-8 bg-white space-y-4 border border-[#dfe6ef]">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033]">
+              {currentLang === 'fa' ? '۴. سفرهای زمینی منطقه‌ای (اتوبوس تهران–استانبول)' : '4. Regional Overland Travel (Tehran-Istanbul Bus Routes)'}
+            </h2>
+            <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed space-y-3">
+              <p>
+                {currentLang === 'fa'
+                  ? 'برخی از مسافران به دلایل اقتصادی یا حمل حجم بیشتر بار، بخش اول سفر (تهران تا استانبول) را به صورت زمینی با اتوبوس بین‌المللی طی می‌کنند و سپس از استانبول پرواز خود را به بخارست ادامه می‌دهند. خطوط اتوبوس بین تهران و استانبول فعال بوده و مسافت را معمولاً در مدت ۳۰ تا ۳۶ ساعت (با احتساب توقف‌های مرزی رازی یا بازرگان) طی می‌کنند.'
+                  : 'Some travelers choose to complete the initial leg between Tehran and Istanbul by international bus before boarding a flight to Bucharest. Overland bus lines between Tehran and Istanbul operate regularly, covering the route in approximately 30 to 36 hours depending on border processing times at Razi or Bazargan.'}
+              </p>
+              <p>
+                {currentLang === 'fa'
+                  ? 'توجه داشته باشید که بلیط این اتوبوس‌ها معمولاً روی وب‌سایت‌های بین‌المللی تجمیع‌کننده رزرو (نظیر FlixBus) عرضه نمی‌شوند. خرید بلیط عموماً به صورت حضوری در پایانه‌های مسافربری (مانند پایانه غرب تهران یا ترمینال اسنلر استانبول) یا از طریق سامانه‌های رزرواسیون اینترنتی محلی انجام می‌شود.'
+                  : 'Note that tickets for these routes are generally not indexed on mainstream Western aggregator portals (such as FlixBus). Booking is typically conducted in person at coach terminals (such as Tehran West Terminal or Istanbul Esenler Otogar) or via domestic booking channels.'}
+              </p>
+            </div>
+          </div>
+
+          {/* SECTION 5: LUGGAGE & BAGGAGE POLICIES */}
+          <div className="editorial-card p-6 sm:p-8 bg-white space-y-4 border border-[#dfe6ef]">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033]">
+              {currentLang === 'fa' ? '۵. ضوابط بار مسافر و چمدان‌ها' : '5. Luggage Allowance & Baggage Regulations'}
+            </h2>
+            <div className="prose prose-slate max-w-none text-[#526174] text-sm sm:text-base leading-relaxed space-y-3">
+              <p>
+                {currentLang === 'fa'
+                  ? 'قوانین و محدودیت‌های وزن و ابعاد بار مسافری بسته به شرکت هواپیمایی، کلاس رزرو، و قوانین تعرفه‌ای متغیر است و عدد ثابتی برای همه پروازها وجود ندارد. توصیه می‌شود پیش از حرکت، سقف وزن چمدان تحویلی (Hold Baggage) و بار داخل کابین (Cabin Baggage) را در سایت رسمی ایرلاین انتخابی خود مطالعه فرمایید.'
+                  : 'Permissible weight and dimensions for luggage depend entirely on the airline, fare category, and ticket terms, with no universal uniform allowance. Travelers must review the exact checked baggage and cabin baggage rules published on their carrier’s official portal prior to flying.'}
+              </p>
+              <div className="p-4 bg-[#f8fafc] border border-[#dfe6ef] rounded-xl text-xs text-[#142033] space-y-1.5">
+                <strong className="block font-bold">{currentLang === 'fa' ? 'نکات کلیدی برای بسته‌بندی وسایل مهم:' : 'Key Packing Advice for Crucial Items:'}</strong>
+                <p className="text-[#526174] leading-relaxed">
+                  {currentLang === 'fa'
+                    ? 'اصل مدارک مهاجرتی، گذرنامه، برگه پذیرش دانشگاه یا قرارداد کاری، پول نقد و اقلام الکترونیکی حساس را حتماً در چمدان دستی کابین همراه خود نگه دارید و از قرار دادن آن‌ها در چمدان تحویلی به قسمت بار خودداری فرمایید.'
+                    : 'Always keep essential immigration papers, passports, acceptance letters, employment contracts, cash, and sensitive electronics inside your cabin hand luggage, never in checked hold baggage.'}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* SECTION 6: FREQUENTLY ASKED QUESTIONS */}
+          <div className="mt-12 bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+            <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+              {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+            </h3>
+            <div className="space-y-6">
+              {flightsFaqs.map((faq, index) => (
+                <div key={index}>
+                  <h4 className="font-bold text-[#334155] mb-2">{faq.q}</h4>
+                  <p className="text-sm text-[#475569] leading-relaxed">{faq.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* FAQ SCHEMA */}
+          <FaqSchema items={flightsFaqs} />
+
+          {/* RELATED GUIDES: AIRPORT GROUND TRANSFER & NEXT STEPS */}
+          <RelatedGuidesCard
+            items={['needs/transportation', 'needs/first-days-checklist', 'needs/currency-exchange']}
+            currentLang={currentLang}
+            onNavigate={onNavigate}
+          />
+
+          <ParentHubFooterCard slugRoute="needs/flights-travel" currentLang={currentLang} onNavigate={onNavigate} />
+
+          {/* COMMENTS SECTION */}
+          <div className="pt-6">
+            <CommentsSection currentLang={currentLang} pagePath="needs/flights-travel" />
+          </div>
+        </div>
+      );
+    }
+
     // 9. TRANSPORTATION
     case 'transportation':
       return (
