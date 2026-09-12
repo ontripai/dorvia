@@ -46,7 +46,7 @@ const tests = [
   },
   {
     name: 'Invalid CTA Href',
-    replace: /ctaHref: '\/study',/g,
+    replace: /ctaHref: '\/universities\/umf-carol-davila',/g,
     with: `ctaHref: '#',`
   },
   {
