@@ -179,6 +179,18 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
             </tbody>
           </table>
         </div>
+
+        <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-[#526174] flex items-start space-x-3 rtl:space-x-reverse">
+          <span className="text-base mt-0.5">ℹ️</span>
+          <div>
+            <strong className="block font-bold text-[#142033] mb-0.5">
+              {currentLang === 'fa' ? 'نکته مهم درباره خواهر و برادر:' : 'Important Note Regarding Siblings:'}
+            </strong>
+            {currentLang === 'fa'
+              ? 'طبق مقررات رسمی IGI، دایره افراد مشمول پیوست خانواده منحصراً شامل همسر و فرزندان مجرد زیرسن است؛ خواهر و برادر در هیچ شرایطی مشمول الحاق خانواده نمی‌شوند (پاسخ تفصیلی در بخش سوالات متداول انتهای صفحه).'
+              : 'Under official IGI regulations, eligible family members are strictly limited to a spouse and unmarried minor children; siblings are not eligible for family reunification under any circumstances (see detailed FAQ at the bottom of this page).'}
+          </div>
+        </div>
       </div>
 
       {/* SECTION 4: STEP-BY-STEP PROCESS */}
@@ -563,6 +575,59 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
               <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا همسرم با ویزای الحاق می‌تواند در رومانی کار کند؟' : 'Can my spouse work in Romania on a family reunification visa?'}</h4>
               <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بستگی دارد به تابعیت اسپانسر (همسری که الحاق به او انجام شده) — جزئیات کامل را در بخش اختصاصی اجازه کار همسر در همین صفحه ببینید: اگر همسر تبعه رومانی باشد معاف از مجوز کار است و مستقیم می‌تواند کار کند، اما اگر دارنده اقامت از کشور ثالث باشد معاف نیست و برای کار باید جداگانه مجوز کار (Aviz de Angajare) بگیرد. با رسیدن به اقامت ۵ ساله بلندمدت، از مجوز کار معاف خواهد شد.' : 'It depends on who the sponsoring spouse is — see the dedicated spouse work rights section on this page: reunifying with a Romanian citizen exempts them from work authorization and allows working directly, while reunifying with a third-country resident is not exempt and requires obtaining a separate work authorization (Aviz de Angajare). Once 5-year long-term residence is reached, they become fully exempt.'}</p>
             </div>
+            {/* Item 1: Sibling Reunification After Asylum / Residence */}
+            <div>
+              <h4 className="font-bold text-[#334155] mb-2">
+                {currentLang === 'fa'
+                  ? 'آیا بعد از گرفتن پناهندگی/اقامت در رومانی، می‌توانم خواهر یا برادر مجردم را هم از طریق الحاق خانواده به رومانی بیاورم؟'
+                  : 'After obtaining asylum/residence in Romania, can I also bring my unmarried sibling through family reunification?'}
+              </h4>
+              <p className="text-sm text-[#475569]">
+                {currentLang === 'fa'
+                  ? 'خیر. طبق تعریف رسمی اداره مهاجرت رومانی (IGI)، دایره‌ی افراد قابل الحاق خانواده فقط شامل همسر و فرزندان مجرد زیرسن (بیولوژیک/ناتنی/فرزندخوانده) است — و فقط در صورتی که خودِ فرد پناهنده زیرسن باشد، والد/سرپرست او هم اضافه می‌شود. خواهر و برادر در هیچ‌کدام از این دسته‌ها قرار نمی‌گیرند.'
+                  : 'No. Under Romania\'s official immigration authority (IGI) definition, eligible family members for reunification are limited to a spouse and unmarried minor children (biological/step/adopted) — and only if the sponsored person is themselves a minor, a parent/guardian may also be included. Siblings fall outside all of these categories.'}
+              </p>
+            </div>
+            {/* Item 2: Need for Lawyer */}
+            <div>
+              <h4 className="font-bold text-[#334155] mb-2">
+                {currentLang === 'fa'
+                  ? 'آیا برای فرآیند الحاق خانواده حتماً باید وکیل بگیرم؟'
+                  : 'Do I need to hire a lawyer for the family reunification process?'}
+              </h4>
+              <p className="text-sm text-[#475569]">
+                {currentLang === 'fa' ? (
+                  <>
+                    از نظر قانونی هیچ الزامی برای داشتن وکیل در این فرآیند وجود ندارد و می‌توانید خودتان مستقیماً اقدام کنید. با این حال، چون این فرآیند شامل ارزیابی دقیق مدارک توسط اداره مهاجرت است، بسیاری از متقاضیان ترجیح می‌دهند با یک وکیل مشورت کنند — به‌خصوص اگر پرونده‌شان پیچیدگی خاصی داشته باشد (برای اطلاعات بیشتر،{' '}
+                    <Link href="/needs/legal-consultation" onClick={() => handleNav('needs/legal-consultation')} className="text-[#2F6FED] font-bold hover:underline">
+                      راهنمای وکیل و مشاوره حقوقی
+                    </Link>
+                    {' '}را ببینید).
+                  </>
+                ) : (
+                  <>
+                    There is no legal requirement to have a lawyer for this process — you can file it yourself directly. However, because the process involves a detailed document evaluation by the immigration authority, many applicants choose to consult a lawyer, especially if their case has any particular complexity (see our{' '}
+                    <Link href="/needs/legal-consultation" onClick={() => handleNav('needs/legal-consultation')} className="text-[#2F6FED] font-bold hover:underline">
+                      Legal Consultation Guide
+                    </Link>
+                    {' '}for details).
+                  </>
+                )}
+              </p>
+            </div>
+            {/* Item 3: Student Residence Permit Family Reunification */}
+            <div>
+              <h4 className="font-bold text-[#334155] mb-2">
+                {currentLang === 'fa'
+                  ? 'آیا دانشجویی که اقامت تحصیلی رومانی دارد، می‌تواند همسرش را از طریق الحاق خانواده به رومانی بیاورد؟'
+                  : 'Can a student holding a Romanian study-based residence permit sponsor a spouse through family reunification?'}
+              </h4>
+              <p className="text-sm text-[#475569]">
+                {currentLang === 'fa'
+                  ? 'بر اساس دسته‌بندی رسمی اسپانسرهای مجاز که اداره مهاجرت (IGI) اعلام کرده — اقامت موقت با اعتبار حداقل یک‌سال، کارت آبی اروپا، اقامت ICT، اقامت بلندمدت، و وضعیت پناهندگی/حمایت تبعی — دانشجویان با اقامت تحصیلی به‌طور صریح در این فهرست نیامده‌اند. این به این معنا نیست که قطعاً امکان‌پذیر نیست، اما چون در قانون و منابع رسمی صراحتاً ذکر نشده، توصیه می‌کنیم پیش از هر اقدامی، مستقیماً از اداره مهاجرت (IGI) یا یک وکیل مهاجرت استعلام بگیرید.'
+                  : 'Based on the official list of eligible sponsor categories published by Romania\'s immigration authority (IGI) — temporary residence valid for at least one year, EU Blue Card, ICT permit, long-term residence, and refugee/subsidiary protection status — students on a study-based residence permit are not explicitly included in this list. This doesn\'t necessarily mean it\'s impossible, but since it isn\'t explicitly addressed in the law or official sources, we recommend confirming directly with IGI or an immigration lawyer before proceeding.'}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -590,10 +655,34 @@ export const FamilyReunificationContent: React.FC<FamilyReunificationContentProp
           {
             q: currentLang === 'fa' ? 'آیا همسرم با ویزای الحاق می‌تواند در رومانی کار کند؟' : 'Can my spouse work in Romania on a family reunification visa?',
             a: currentLang === 'fa' ? 'بستگی دارد به تابعیت اسپانسر (همسری که الحاق به او انجام شده) — جزئیات کامل را در بخش اختصاصی اجازه کار همسر در همین صفحه ببینید: اگر همسر تبعه رومانی باشد معاف از مجوز کار است و مستقیم می‌تواند کار کند، اما اگر دارنده اقامت از کشور ثالث باشد معاف نیست و برای کار باید جداگانه مجوز کار (Aviz de Angajare) بگیرد. با رسیدن به اقامت ۵ ساله بلندمدت، از مجوز کار معاف خواهد شد.' : 'It depends on who the sponsoring spouse is — see the dedicated spouse work rights section on this page: reunifying with a Romanian citizen exempts them from work authorization and allows working directly, while reunifying with a third-country resident is not exempt and requires obtaining a separate work authorization (Aviz de Angajare). Once 5-year long-term residence is reached, they become fully exempt.'
+          },
+          {
+            q: currentLang === 'fa'
+              ? 'آیا بعد از گرفتن پناهندگی/اقامت در رومانی، می‌توانم خواهر یا برادر مجردم را هم از طریق الحاق خانواده به رومانی بیاورم؟'
+              : 'After obtaining asylum/residence in Romania, can I also bring my unmarried sibling through family reunification?',
+            a: currentLang === 'fa'
+              ? 'خیر. طبق تعریف رسمی اداره مهاجرت رومانی (IGI)، دایره‌ی افراد قابل الحاق خانواده فقط شامل همسر و فرزندان مجرد زیرسن (بیولوژیک/ناتنی/فرزندخوانده) است — و فقط در صورتی که خودِ فرد پناهنده زیرسن باشد، والد/سرپرست او هم اضافه می‌شود. خواهر و برادر در هیچ‌کدام از این دسته‌ها قرار نمی‌گیرند.'
+              : 'No. Under Romania\'s official immigration authority (IGI) definition, eligible family members for reunification are limited to a spouse and unmarried minor children (biological/step/adopted) — and only if the sponsored person is themselves a minor, a parent/guardian may also be included. Siblings fall outside all of these categories.'
+          },
+          {
+            q: currentLang === 'fa'
+              ? 'آیا برای فرآیند الحاق خانواده حتماً باید وکیل بگیرم؟'
+              : 'Do I need to hire a lawyer for the family reunification process?',
+            a: currentLang === 'fa'
+              ? 'از نظر قانونی هیچ الزامی برای داشتن وکیل در این فرآیند وجود ندارد و می‌توانید خودتان مستقیماً اقدام کنید. با این حال، چون این فرآیند شامل ارزیابی دقیق مدارک توسط اداره مهاجرت است، بسیاری از متقاضیان ترجیح می‌دهند با یک وکیل مشورت کنند — به‌خصوص اگر پرونده‌شان پیچیدگی خاصی داشته باشد.'
+              : 'There is no legal requirement to have a lawyer for this process — you can file it yourself directly. However, because the process involves a detailed document evaluation by the immigration authority, many applicants choose to consult a lawyer, especially if their case has any particular complexity.'
+          },
+          {
+            q: currentLang === 'fa'
+              ? 'آیا دانشجویی که اقامت تحصیلی رومانی دارد، می‌تواند همسرش را از طریق الحاق خانواده به رومانی بیاورد؟'
+              : 'Can a student holding a Romanian study-based residence permit sponsor a spouse through family reunification?',
+            a: currentLang === 'fa'
+              ? 'بر اساس دسته‌بندی رسمی اسپانسرهای مجاز که اداره مهاجرت (IGI) اعلام کرده — اقامت موقت با اعتبار حداقل یک‌سال، کارت آبی اروپا، اقامت ICT، اقامت بلندمدت، و وضعیت پناهندگی/حمایت تبعی — دانشجویان با اقامت تحصیلی به‌طور صریح در این فهرست نیامده‌اند. این به این معنا نیست که قطعاً امکان‌پذیر نیست، اما چون در قانون و منابع رسمی صراحتاً ذکر نشده، توصیه می‌کنیم پیش از هر اقدامی، مستقیماً از اداره مهاجرت (IGI) یا یک وکیل مهاجرت استعلام بگیرید.'
+              : 'Based on the official list of eligible sponsor categories published by Romania\'s immigration authority (IGI) — temporary residence valid for at least one year, EU Blue Card, ICT permit, long-term residence, and refugee/subsidiary protection status — students on a study-based residence permit are not explicitly included in this list. This doesn\'t necessarily mean it\'s impossible, but since it isn\'t explicitly addressed in the law or official sources, we recommend confirming directly with IGI or an immigration lawyer before proceeding.'
           }
         ]} />
 
-        <RelatedGuidesCard items={['needs/school', 'needs/health']} currentLang={currentLang} onNavigate={onNavigate} />
+        <RelatedGuidesCard items={['needs/school', 'needs/health', 'needs/legal-consultation']} currentLang={currentLang} onNavigate={onNavigate} />
         <ParentHubFooterCard slugRoute="immigration/family-reunification" currentLang={currentLang} onNavigate={onNavigate} />
 
         {/* COMMENTS SECTION */}
