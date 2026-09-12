@@ -446,6 +446,21 @@ export const UniversityDetailContent: React.FC<UniversityDetailContentProps> = (
         </Link>
       </div>
 
+      {/* FREQUENTLY ASKED QUESTIONS */}
+      <div id="faq" className="bg-[#F8FAFC] rounded-3xl p-6 sm:p-8 border border-[#e2e8f0] shadow-sm space-y-6">
+        <h3 className="text-xl font-bold text-[#1e293b] border-b border-[#cbd5e1] pb-3">
+          {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+        </h3>
+        <div className="space-y-6">
+          {uniFaqs.map((faq, index) => (
+            <div key={index} className="space-y-2">
+              <h4 className="font-bold text-sm sm:text-base text-[#334155]">{faq.q}</h4>
+              <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">{faq.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* OFFICIAL ACTIONS BAR */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-[#071B3D] rounded-3xl text-white shadow-lg">
         <div>
