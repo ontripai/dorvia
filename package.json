@@ -10,6 +10,7 @@
     "validate:first-days-negative": "npx tsx scripts/validateFirstDaysNegativeTests.ts",
     "validate:universities": "npx tsx scripts/validateUniversities.ts",
     "validate:universities-negative": "npx tsx scripts/validateUniversitiesNegativeTests.ts",
+    "test:integrity": "npm run validate:first-days-negative && npm run validate:universities-negative",
     "build": "npm run validate:translations && npm run validate:content && npm run validate:content-safety && npm run validate:universities && next build",
     "sweep": "npx tsx scripts/comprehensive-page-sweep.ts",
     "start": "next start",

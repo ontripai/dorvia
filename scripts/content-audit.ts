@@ -46,10 +46,6 @@ const RULES: PhraseRule[] = [
   { phrase: 'instant visa' },
   { phrase: 'fast-track visa' },
   { phrase: 'instant residency' },
-  // Section B: Additional high-risk claim categories
-  // Temporarily commented out due to corporate law false positives (100% share ownership in SRL):
-  // { phrase: '۱۰۰٪', negationAware: true },
-  { phrase: '۱۰۰ درصد', negationAware: true },
   { phrase: 'بدون ریسک', negationAware: true },
   { phrase: 'risk-free', negationAware: true },
 ];
