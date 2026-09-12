@@ -34,6 +34,38 @@ export const HealthGuideContent: React.FC<HealthGuideContentProps> = ({ currentL
       a: currentLang === 'fa'
         ? 'با همراه داشتن کارت اقامت (Permis de Ședere)، شماره CNP و تاییدیه بیمه، می‌توانید به مطب هر پزشک خانواده دارای ظرفیت در منطقه سکونت خود مراجعه و ثبت‌نام کنید.'
         : 'Present your residence permit card with CNP and insurance proof to any licensed family doctor in your residential district with available registration capacity.'
+    },
+    {
+      q: currentLang === 'fa'
+        ? 'گواهی سلامت لازم چه چیزی باید داشته باشد؟'
+        : 'What must the required medical certificate contain?',
+      a: currentLang === 'fa'
+        ? 'برای تمدید اقامت موقت (نه گرفتن ویزای اولیه — که در آن بیمه مسافرتی جایگزین آن است، به سوال بعدی مراجعه کنید)، طبق اطلاعیه‌ی رسمی اداره مهاجرت، گواهی باید از یک موسسه‌ی درمانی دولتی یا خصوصی صادر شود و نشان دهد فرد بیماری‌ای که سلامت عمومی را به خطر بیندازد ندارد — آزمایش یا پنل مشخصی ذکر نشده است.'
+        : 'For renewing your temporary residence permit (not the initial visa — see next FAQ for that), per IGI\'s official notice, the certificate must be issued by a public or private health institution and show you don\'t have a disease that could endanger public health — no specific test panel is specified.'
+    },
+    {
+      q: currentLang === 'fa'
+        ? 'آیا همه‌ی متقاضیان بالای ۲۶ سال باید بیمه درمانی خصوصی داشته باشند؟'
+        : 'Do all applicants over 26 need private health insurance?',
+      a: currentLang === 'fa'
+        ? 'این قانون فقط مخصوص دانشجویان است، نه یک قانون عمومی برای همه‌ی متقاضیان اقامت. طبق قانون ۹۵/۲۰۰۶ (ماده ۲۲۴)، دانشجویان خارجی تا سن ۲۶ سالگی به‌صورت خودکار و بدون پرداخت حق‌بیمه تحت پوشش نظام درمانی رومانی (CNAS) قرار می‌گیرند؛ بعد از ۲۶ سالگی، این پوشش رایگان خودکار قطع می‌شود و دانشجو باید مثل بقیه بیمه درمانی تهیه کند. برای مسیرهای دیگر اقامت (کار، الحاق خانواده) چنین قانون سرتاسری با آستانه‌ی سنی ۲۶ سال پیدا نکردیم.'
+        : 'This rule specifically applies to students, not a blanket rule for all immigration applicants. Under Law 95/2006 (Art. 224), foreign students are automatically covered by Romania\'s health system (CNAS) without paying a contribution until age 26; after 26, this automatic free coverage ends and the student must arrange health insurance like anyone else. We did not find an equivalent blanket age-26 rule for other residence pathways (work, family reunification).'
+    },
+    {
+      q: currentLang === 'fa'
+        ? 'عضو خانواده‌ای که کار نمی‌کند، برای بیمه درمانی چقدر باید بپردازد؟'
+        : 'How much does a non-working family member pay for health insurance?',
+      a: currentLang === 'fa'
+        ? 'طبق فرمول قانون مالیات (ماده ۱۸۰)، فرد بدون درآمد باید سالانه ۱۰٪ از (۶ برابر حداقل حقوق ناخالص کشور در ابتدای همان سال) بابت CASS بپردازد. برای سال ۲۰۲۶ این رقم به‌صورت تقریبی بر اساس فرمول رسمی حدود ۲٬۴۳۰ لی است (بر اساس گزارش رسانه‌ای از اعلام ANAF). چون حداقل حقوق هر سال تغییر می‌کند، این رقم هم سالانه عوض می‌شود — پیشنهاد می‌کنیم رقم دقیق سال جاری را از CNAS/ANAF استعلام بگیرید.'
+        : 'Under the Fiscal Code\'s formula (Art. 180), a person without income owes 10% of (6× the national gross minimum wage in effect at the start of that year) annually for CASS. For 2026 this is approximately 2,430 RON (estimated based on the official formula, per a media report of ANAF\'s statement). Since the minimum wage changes yearly, this figure changes too — we recommend confirming the current year\'s exact figure with CNAS/ANAF.'
+    },
+    {
+      q: currentLang === 'fa'
+        ? 'آیا بیمه مسافرتی که در ایران خریده‌ام برای ویزا/رومانی معتبر است؟'
+        : 'Is travel insurance I bought in Iran valid for my visa/for Romania?',
+      a: currentLang === 'fa'
+        ? 'طبق معیارهای رسمی اداره مهاجرت برای ویزای بلندمدت، بیمه باید کل دوره‌ی اقامت را پوشش دهد، هزینه‌ی بازگشت/درمان اورژانسی/بستری/فوت را شامل شود، حداقل سقف پوشش آن ۳۰٬۰۰۰ یورو باشد، و در تمام کشورهای شینگن معتبر باشد. هیچ محدودیتی درباره‌ی کشور محل خرید بیمه در منابع رسمی پیدا نکردیم — یعنی از نظر تئوری، بیمه‌ی خریداری‌شده در ایران اگر این معیارها را داشته باشد باید قابل قبول باشد؛ اما پذیرش عملی آن توسط سفارت رومانی در تهران را نتوانستیم تایید کنیم، پس توصیه می‌کنیم مستقیماً با همان سفارت تماس بگیرید.'
+        : 'Per IGI\'s official long-stay visa criteria, insurance must cover the entire stay, include repatriation/emergency treatment/hospitalization/death, have minimum coverage of €30,000, and be valid across all Schengen countries. We found no restriction on country-of-purchase in official sources — meaning, in principle, insurance bought in Iran meeting these criteria should qualify. However, we could not confirm actual acceptance practice at the Romanian Embassy in Tehran, so we recommend contacting that embassy directly.'
     }
   ];
 
@@ -96,6 +128,9 @@ export const HealthGuideContent: React.FC<HealthGuideContentProps> = ({ currentL
           <a href="#required-docs" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۴. مدارک لازم' : '4. Required Documents'}
           </a>
+          <a href="#iran-specific" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۴.۵. نکات ویژه ایرانیان' : '4.5. Iran-Specific Notes'}
+          </a>
           <a href="#european-card" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۵. کارت اروپایی بیمه (CEASS)' : '5. European Card (CEASS)'}
           </a>
@@ -105,8 +140,11 @@ export const HealthGuideContent: React.FC<HealthGuideContentProps> = ({ currentL
           <a href="#official-sources" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۷. منابع رسمی و SIUI' : '7. Official Sources & SIUI'}
           </a>
+          <a href="#faq" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۸. سوالات متداول' : '8. FAQ'}
+          </a>
           <a href="#related-content" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
-            {currentLang === 'fa' ? '۸. مطالب مرتبط و نظرات' : '8. Related & Comments'}
+            {currentLang === 'fa' ? '۹. مطالب مرتبط و نظرات' : '9. Related & Comments'}
           </a>
         </div>
       </div>
@@ -294,6 +332,68 @@ export const HealthGuideContent: React.FC<HealthGuideContentProps> = ({ currentL
         </ul>
       </div>
 
+      {/* SECTION 5.5: IRAN-SPECIFIC HEALTH & INSURANCE NOTES */}
+      <div id="iran-specific" className="editorial-card p-6 sm:p-8 bg-white space-y-4 border border-amber-200 bg-amber-50/40 rounded-2xl shadow-sm">
+        <h3 className="font-extrabold text-base sm:text-lg text-[#142033] flex items-center space-x-2 rtl:space-x-reverse">
+          <span>🇮🇷</span>
+          <span>{currentLang === 'fa' ? 'ویژه ایرانیان: نکات کلیدی بیمه، گواهی سلامت و سفارت' : 'Iran-Specific: Key Health Insurance & Embassy Nuances'}</span>
+        </h3>
+        <p className="text-sm text-[#526174] leading-relaxed">
+          {currentLang === 'fa'
+            ? 'برای متقاضیان ایرانی مقیم یا در حال مهاجرت به رومانی، چند نکته حقوقی و اجرایی پرتقاضا وجود دارد که شفاف‌سازی آن‌ها اهمیت دارد:'
+            : 'For Iranian applicants residing in or moving to Romania, several practical and legal nuances are frequently misunderstood:'}
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div className="p-4 bg-white/80 rounded-xl border border-amber-200/80 space-y-1.5">
+            <h4 className="font-bold text-[#142033] flex items-center gap-1.5">
+              <span>✈️</span>
+              <span>{currentLang === 'fa' ? 'بیمه مسافرتی خرید ایران برای ویزا:' : 'Travel Insurance Bought in Iran:'}</span>
+            </h4>
+            <p className="text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'بیمه باید پوشش حداقل ۳۰٬۰۰۰ یورو، بازگشت، درمان اضطراری و اعتبار شینگن داشته باشد. قانون رومانی محدودیتی روی کشور خرید بیمه ندارد، اما پیش از اقدام توصیه می‌شود تاییدیه عملی را از سفارت رومانی در تهران استعلام بگیرید.'
+                : 'Must cover at least €30,000, medical repatriation, emergency care, and Schengen validity. Romanian law specifies no country-of-purchase restriction, but confirm direct acceptance with the Romanian Embassy in Tehran.'}
+            </p>
+          </div>
+
+          <div className="p-4 bg-white/80 rounded-xl border border-amber-200/80 space-y-1.5">
+            <h4 className="font-bold text-[#142033] flex items-center gap-1.5">
+              <span>🩺</span>
+              <span>{currentLang === 'fa' ? 'گواهی سلامت برای تمدید اقامت (نه ویزای اول):' : 'Medical Certificate for Residence Renewal:'}</span>
+            </h4>
+            <p className="text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'گواهی سلامت دولتی/خصوصی مبنی بر عدم ابتلا به بیماری‌های مخل سلامت عمومی برای تمدید اقامت IGI در رومانی لازم است، نه درخواست ویزای اولیه که در آن بیمه مسافرتی کفایت می‌کند.'
+                : 'Required for IGI permit renewals inside Romania from a registered public/private clinic stating absence of public health threats, not for initial visa filing where travel insurance applies.'}
+            </p>
+          </div>
+
+          <div className="p-4 bg-white/80 rounded-xl border border-amber-200/80 space-y-1.5">
+            <h4 className="font-bold text-[#142033] flex items-center gap-1.5">
+              <span>🎓</span>
+              <span>{currentLang === 'fa' ? 'قانون سن ۲۶ سال فقط مخصوص دانشجویان است:' : 'Age 26 Rule Applies Only to Students:'}</span>
+            </h4>
+            <p className="text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'معافیت خودکار از پرداخت CASS تا ۲۶ سالگی طبق قانون ۹۵/۲۰۰۶ فقط ویژه دانشجویان دانشگاه است و ربطی به سایر مسیرهای اقامت (کاری یا الحاق خانواده) ندارد.'
+                : 'Free CNAS coverage exemption up to age 26 under Law 95/2006 applies specifically to university students, not as a general age threshold for other visas.'}
+            </p>
+          </div>
+
+          <div className="p-4 bg-white/80 rounded-xl border border-amber-200/80 space-y-1.5">
+            <h4 className="font-bold text-[#142033] flex items-center gap-1.5">
+              <span>👨‍👩‍👧</span>
+              <span>{currentLang === 'fa' ? 'هزینه تقریبی بیمه CASS عضو غیرشاغل:' : 'Approximate CASS for Non-Working Members:'}</span>
+            </h4>
+            <p className="text-[#526174] leading-relaxed">
+              {currentLang === 'fa'
+                ? 'بر اساس ماده ۱۸۰ قانون مالیات (۱۰٪ از ۶ برابر حداقل حقوق ناخالص)، هزینه CASS برای فرد بدون درآمد در سال ۲۰۲۶ حدود ۲٬۴۳۰ لی برآورد می‌شود (با توجه به تغییر سالانه حداقل حقوق، استعلام از CNAS پیشنهاد می‌شود).'
+                : 'Under Fiscal Code Art. 180 (10% of 6× gross minimum wage), optional CASS for a non-working member is estimated at around 2,430 RON for 2026 based on official formula projections.'}
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* SECTION 6: EUROPEAN HEALTH INSURANCE CARD (CEASS) */}
       <div id="european-card" className="bg-white p-6 sm:p-8 rounded-2xl border border-[#dfe6ef] shadow-sm space-y-4">
         <div className="flex items-center space-x-3 rtl:space-x-reverse text-[#2F6FED]">
@@ -399,6 +499,21 @@ export const HealthGuideContent: React.FC<HealthGuideContentProps> = ({ currentL
             ? 'آخرین بررسی و به‌روزرسانی محتوا: سال ۲۰۲۶ (بر اساس ضوابط سازمان ملی بیمه سلامت رومانی CNAS)'
             : 'Last reviewed & updated: 2026 (Based on official Romanian National Health Insurance House CNAS guidelines)'}
         </span>
+      </div>
+
+      {/* SECTION 9.5: FREQUENTLY ASKED QUESTIONS */}
+      <div id="faq" className="bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+        <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+          {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+        </h3>
+        <div className="space-y-6">
+          {healthFaqs.map((faq, index) => (
+            <div key={index}>
+              <h4 className="font-bold text-[#334155] mb-2">{faq.q}</h4>
+              <p className="text-sm text-[#475569] leading-relaxed">{faq.a}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* SECTION 10: RELATED CONTENT & COMMENTS */}
