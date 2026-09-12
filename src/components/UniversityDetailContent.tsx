@@ -103,16 +103,20 @@ export const UniversityDetailContent: React.FC<UniversityDetailContentProps> = (
             : `Tuition varies depending on program and degree level.`)
     },
     {
-      q: currentLang === 'fa' ? `آیا دانشگاه ${name} مورد تایید وزارت بهداشت یا علوم ایران است؟` : `Is ${name} accredited internationally?`,
+      q: currentLang === 'fa' ? `آیا مدرک دانشگاه ${name} در ایران به رسمیت شناخته می‌شود؟` : `Is ${name}'s degree recognised in Iran?`,
       a: currentLang === 'fa'
-        ? (uni.recognitionStatus === 'IRAN_MOH_APPROVED' ? `بله، این دانشگاه در لیست رسمی دانشگاه‌های معتبر و مورد تایید وزارت بهداشت و درمان ایران قرار دارد.` : `این دانشگاه به عنوان یکی از مراکز آموزشی معتبر و رسمی کشور رومانی و اتحادیه اروپا فعالیت دارد.`)
-        : `Yes, this institution is fully accredited under Romanian Ministry of Education standards and European Higher Education Area frameworks.`
+        ? (uni.recognitionStatus === 'IRAN_MOH_APPROVED'
+            ? 'بر اساس داده‌ی ما، این دانشگاه در فهرست مورد تایید وزارت بهداشت، درمان و آموزش پزشکی ایران قرار دارد — مرجعی که رشته‌های پزشکی، دندانپزشکی، داروسازی و حوزه‌های سلامت را ارزیابی می‌کند.\n\nاما یک نکته که ممکن است سرنوشت مدرک شما را عوض کند: تایید وزارت بهداشت به رشته‌های پزشکی مربوط است، نه لزوماً به همه‌ی رشته‌هایی که این دانشگاه ارائه می‌دهد. اگر رشته‌ی شما بالینی نیست (مثلاً مهندسی پزشکی، فیزیک پزشکی، یا مدیریت خدمات بهداشتی)، ممکن است مرجع ارزیابی مدرک شما وزارت علوم باشد نه وزارت بهداشت. ما نتوانستیم تایید کنیم ایران دقیقاً کجا این مرز را می‌کشد — پس پیش از ثبت‌نام، وضعیت رشته‌ی مشخص خودتان را جداگانه استعلام بگیرید، نه فقط نام دانشگاه را.'
+            : 'برای رشته‌های غیرپزشکی، مرجع ارزیابی مدرک خارجی در ایران وزارت علوم، تحقیقات و فناوری است — اما بر اساس بررسی ما، خودِ ارزیابی و فهرست دانشگاه‌های مورد تایید را «سازمان امور دانشجویان» انجام می‌دهد و منتشر می‌کند، نه مستقیماً خود وزارتخانه. این نکته‌ی کاربردی است، چون بسیاری سراغ سایت وزارت علوم می‌روند در حالی که فرآیند نزد سازمان امور دانشجویان است.\n\nما نتوانستیم وضعیت این دانشگاه مشخص را در آن فهرست تایید کنیم. این به معنای «تایید نشده» نیست — به این معناست که ما نتوانستیم فهرست رسمی را مستقیماً ببینیم و ترجیح می‌دهیم به جای حدس زدن، همین را صادقانه بگوییم. تنها چیزی که واقعاً می‌توانید به آن تکیه کنید این است: پیش از ثبت‌نام، برای دانشگاه و رشته‌ی مشخص خودتان از سازمان امور دانشجویان استعلام کتبی بگیرید. هر فهرستی — از جمله هر چیزی که ما یا هر سایت دیگری منتشر می‌کند — با گذر زمان کهنه می‌شود؛ پاسخ کتبی به نام خودتان کهنه نمی‌شود.')
+        : (uni.recognitionStatus === 'IRAN_MOH_APPROVED'
+            ? 'Based on our data, this university appears on the list approved by Iran\'s Ministry of Health and Medical Education — the authority that evaluates medicine, dentistry, pharmacy and health-related fields.\n\nBut one point that could change the outcome for your own degree: Ministry of Health approval concerns medical fields, not necessarily every programme the university offers. If your programme is not clinical (biomedical engineering, medical physics, or health services management, for example), the authority evaluating your degree may be the Ministry of Science rather than the Ministry of Health. We could not confirm exactly where Iran draws that line — so before enrolling, check the position for your specific programme, not just the university\'s name.'
+            : 'For non-medical fields, the authority that evaluates foreign degrees in Iran is the Ministry of Science, Research and Technology — but based on our review, the evaluation itself, and the list of approved universities, is handled and published by the Organization for Students Affairs (SAORG), not by the ministry directly. This matters practically, because many people go to the ministry\'s website when the process actually sits with SAORG.\n\nWe could not confirm this specific university\'s status on that list. That does not mean it is unapproved — it means we could not access the official list directly, and we would rather tell you that than guess. The only thing you can really rely on is this: before enrolling, obtain a written determination from SAORG for your specific university and programme. Any list — including anything we or any other site publishes — goes out of date; a written answer in your own name does not.')
     },
     {
       q: currentLang === 'fa' ? `آیا امکان تحصیل به زبان انگلیسی در ${name} وجود دارد؟` : `Are English-taught programs available at ${name}?`,
       a: currentLang === 'fa'
-        ? `بله، در رشته‌های مختلف برنامه‌های آموزشی به زبان‌های انگلیسی، فرانسوی یا رومانیایی (به همراه دوره سال مقدماتی زبان) ارائه می‌شود.`
-        : `Yes, multiple degree programs are available in English, French, or Romanian with preparatory language year options.`
+        ? `بله، در این دانشگاه برنامه‌های آموزشی به زبان انگلیسی یا رومانیایی (به همراه دوره سال مقدماتی زبان) ارائه می‌شود. با این حال زبان تدریس دقیق بسته به رشته و مقطع تحصیلی متفاوت است و باید مستقیماً از بخش پذیرش دانشگاه استعلام شود.`
+        : `Yes, English-taught and Romanian-taught degree programs are available with preparatory language year options. However, exact teaching languages vary by degree and department and should be confirmed directly with university admissions.`
     }
   ];
 
@@ -455,7 +459,7 @@ export const UniversityDetailContent: React.FC<UniversityDetailContentProps> = (
           {uniFaqs.map((faq, index) => (
             <div key={index} className="space-y-2">
               <h4 className="font-bold text-sm sm:text-base text-[#334155]">{faq.q}</h4>
-              <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">{faq.a}</p>
+              <p className="text-xs sm:text-sm text-[#475569] leading-relaxed whitespace-pre-line">{faq.a}</p>
             </div>
           ))}
         </div>
