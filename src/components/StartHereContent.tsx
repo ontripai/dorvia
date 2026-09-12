@@ -388,17 +388,13 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
                     <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? 'ما نتوانستیم بسته‌های حجمی فعلی این اپراتور را از سایت رسمی تایید کنیم — رقم دقیق را مستقیماً از vodafone.ro استعلام بگیرید.' : "We could not confirm this operator's current bundled data plans from its official site — check vodafone.ro directly for exact current pricing."}</td>
                   </tr>
                   <tr>
-                    <td className="p-3 border border-[#e2e8f0] font-semibold">Telekom Romania</td>
-                    <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? '۵ یورو (بسته «Mobil Nelimitat 5»، اینترنت نامحدود)' : '€5 ("Mobil Nelimitat 5" package, unlimited data)'}</td>
-                  </tr>
-                  <tr>
                     <td className="p-3 border border-[#e2e8f0] font-semibold">Digi Mobil</td>
                     <td className="p-3 border border-[#e2e8f0] text-[#526174]">{currentLang === 'fa' ? '۲.۵ یورو در ماه (۱۰۰ گیگابایت) یا ۵ یورو در ماه (اینترنت نامحدود)' : '€2.5/month (100GB) or €5/month (unlimited data)'}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <p className="text-[11px] italic text-slate-400">{currentLang === 'fa' ? 'منبع: صفحات رسمی و بروشور تعرفه Orange (ژانویه ۲۰۲۶)، Telekom.ro، و پوشش خبری Gadget.ro از راه‌اندازی مجدد Digi Mobil — آخرین بررسی: سپتامبر ۲۰۲۶. این ارقام به‌سرعت تغییر می‌کنند؛ پیش از خرید حتماً از سایت رسمی همان اپراتور تایید بگیرید.' : 'Source: official Orange pages and tariff brochure (January 2026), Telekom.ro, and Gadget.ro coverage of Digi Mobil\'s prepaid relaunch — last checked: September 2026. These figures change quickly; always confirm on the operator\'s own site before buying.'}</p>
+            <p className="text-[11px] italic text-slate-400">{currentLang === 'fa' ? 'منبع: صفحات رسمی و بروشور تعرفه Orange (ژانویه ۲۰۲۶) و پوشش خبری Gadget.ro از راه‌اندازی مجدد Digi Mobil — آخرین بررسی: سپتامبر ۲۰۲۶. این ارقام به‌سرعت تغییر می‌کنند؛ پیش از خرید حتماً از سایت رسمی همان اپراتور تایید بگیرید.' : 'Source: official Orange pages and tariff brochure (January 2026) and Gadget.ro coverage of Digi Mobil\'s prepaid relaunch — last checked: September 2026. These figures change quickly; always confirm on the operator\'s own site before buying.'}</p>
             <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-amber-900 text-sm leading-relaxed">
               {currentLang === 'fa'
                 ? '⚠️ برخلاف آنچه ممکن است شنیده باشید، ثبت اجباری هویت خریدار سیم‌کارت پیش‌پرداخت هرگز قانوناً در رومانی اجرا نشد (دو تلاش قانون‌گذاری در ۲۰۱۴ و ۲۰۱۹ هر دو توسط دادگاه قانون اساسی رومانی لغو شدند). با این حال، بیشتر فروشندگان همچنان از روی سیاست داخلی خودشان پاسپورت می‌خواهند — پس همراه داشتن آن توصیه می‌شود. جزئیات کامل در بخش '
@@ -888,7 +884,7 @@ export const StartHereContent: React.FC<StartHereContentProps> = ({
               </h3>
               <ul className="space-y-2 text-sm text-[#526174] list-disc list-inside">
                 <li>{currentLang === 'fa' ? 'مسیر عادی: ۸ سال اقامت قانونی مستمر در رومانی (قانون ۲۱/۱۹۹۱، ماده ۸).' : 'Ordinary route: 8 years of continuous legal residence in Romania (Law 21/1991, Art. 8).'}</li>
-                <li>{currentLang === 'fa' ? 'مسیر کوتاه‌تر: ۵ سال در صورت ازدواج با شهروند رومانیایی (به شرط ۵ سال زناشویی)؛ ۳ سال برای دارندگان وضعیت پناهندگی شناخته‌شده.' : 'Shorter routes: 5 years if married to a Romanian citizen (for 5+ years of marriage); 3 years for recognized refugees.'}</li>
+                <li>{currentLang === 'fa' ? 'مسیر کوتاه‌تر: برای متقاضی متأهل با شهروند رومانیایی که با او زندگی می‌کند، دوره اقامت لازم به ۵ سال از تاریخ ازدواج کاهش می‌یابد؛ ۳ سال برای دارندگان وضعیت پناهندگی شناخته‌شده.' : 'Shorter routes: for an applicant married to and living with a Romanian citizen, the required residence period is reduced to 5 years from the date of marriage; 3 years for recognized refugees.'}</li>
               </ul>
             </div>
 

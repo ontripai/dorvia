@@ -76,14 +76,29 @@ export interface CityCostData {
  */
 export const EUR_TO_RON_RATE = 5.25;
 
-export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
+/**
+ * Unified benchmark dataset review date (derived directly from dataset header documentation).
+ */
+export const COST_DATA_REVIEW_DATE = {
+  en: 'September 2026',
+  fa: 'شهریور ۱۴۰۵ / سپتامبر ۲۰۲۶',
+};
+
+/**
+ * Official BNR reference exchange rate effective date.
+ */
+export const EUR_RATE_DATE = {
+  en: 'September 3, 2026',
+  fa: '۳ سپتامبر ۲۰۲۶',
+};
+
+const RAW_ROMANIAN_CITIES_COST: Record<CityId, Omit<CityCostData, 'costIndexRank'>> = {
   'bucharest': {
     id: 'bucharest',
     name: { fa: 'بخارست', en: 'Bucharest' },
     romanianName: 'București',
     region: { fa: 'مونتنیا (پایتخت)', en: 'Muntenia (Capital)' },
     isCapital: true,
-    costIndexRank: 2,
     costIndexVsBucharest: 100,
     rent: {
       // Source: evz.ro / UPB CPV international student dorms (~550 RON/mo; university range 350-1230 RON)
@@ -135,7 +150,6 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
     name: { fa: 'کلوژ-نپوکا', en: 'Cluj-Napoca' },
     romanianName: 'Cluj-Napoca',
     region: { fa: 'ترانسیلوانیا', en: 'Transylvania' },
-    costIndexRank: 1,
     costIndexVsBucharest: 105,
     rent: {
       // Estimated: Scaled from 3-city average (556.67 RON) with Cluj rent ratio (2999.10 / 2986.46) = 560 RON
@@ -187,7 +201,6 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
     name: { fa: 'براشوف', en: 'Brașov' },
     romanianName: 'Brașov',
     region: { fa: 'ترانسیلوانیا (منطقه کوهستانی)', en: 'Transylvania (Carpathians)' },
-    costIndexRank: 3,
     costIndexVsBucharest: 92,
     rent: {
       // Source: unitbv.ro & evz.ro (Transilvania Univ Colina/Memorandumului dorms: 725-735 RON)
@@ -239,7 +252,6 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
     name: { fa: 'تیمیشوارا', en: 'Timișoara' },
     romanianName: 'Timișoara',
     region: { fa: 'بانات (غرب رومانی)', en: 'Banat (Western Romania)' },
-    costIndexRank: 4,
     costIndexVsBucharest: 89,
     rent: {
       // Estimated: Scaled with rent ratio (2548.76 / 2986.46) * 556.67 = 475 RON
@@ -291,7 +303,6 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
     name: { fa: 'یاش', en: 'Iași' },
     romanianName: 'Iași',
     region: { fa: 'مولداوی (شمال شرق)', en: 'Moldavia (Northeast)' },
-    costIndexRank: 5,
     costIndexVsBucharest: 84,
     rent: {
       // Source: campus.tuiasi.ro & evz.ro (Tudor Vladimirescu campus: 385-400 RON)
@@ -343,7 +354,6 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
     name: { fa: 'کونستانتسا', en: 'Constanța' },
     romanianName: 'Constanța',
     region: { fa: 'دوبروجا (ساحل دریای سیاه)', en: 'Dobrogea (Black Sea Coast)' },
-    costIndexRank: 6,
     costIndexVsBucharest: 86,
     rent: {
       // Estimated: Scaled with rent ratio (2844.77 / 2986.46) * 556.67 = 530 RON
@@ -395,7 +405,6 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
     name: { fa: 'سیبیو', en: 'Sibiu' },
     romanianName: 'Sibiu',
     region: { fa: 'ترانسیلوانیا', en: 'Transylvania' },
-    costIndexRank: 7,
     costIndexVsBucharest: 87,
     rent: {
       // Source: evz.ro / ULBS student housing (range 300-800 RON, midpoint 550 RON)
@@ -447,7 +456,6 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
     name: { fa: 'کرایووا', en: 'Craiova' },
     romanianName: 'Craiova',
     region: { fa: 'اولتنیا (جنوب غرب)', en: 'Oltenia (Southwest)' },
-    costIndexRank: 8,
     costIndexVsBucharest: 80,
     rent: {
       // Estimated: Scaled with rent ratio (2406.46 / 2986.46) * 556.67 = 450 RON
@@ -493,6 +501,34 @@ export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = {
       leisureMonthlyEstimate: 400.00,
     },
   },
+};
+
+/**
+ * Dynamically computes cost index ranking derived purely from costIndexVsBucharest descending.
+ * 1 = highest living cost index in Romania. Single source of truth.
+ */
+const computeCityRankings = (
+  rawCities: Record<CityId, Omit<CityCostData, 'costIndexRank'>>
+): Record<CityId, CityCostData> => {
+  const sorted = Object.values(rawCities).sort(
+    (a, b) => b.costIndexVsBucharest - a.costIndexVsBucharest
+  );
+  const result = {} as Record<CityId, CityCostData>;
+  sorted.forEach((city, index) => {
+    result[city.id] = {
+      ...city,
+      costIndexRank: index + 1,
+    };
+  });
+  return result;
+};
+
+export const ROMANIAN_CITIES_COST: Record<CityId, CityCostData> = computeCityRankings(RAW_ROMANIAN_CITIES_COST);
+
+export const getSortedCitiesByCostIndex = (): CityCostData[] => {
+  return Object.values(ROMANIAN_CITIES_COST).sort(
+    (a, b) => b.costIndexVsBucharest - a.costIndexVsBucharest
+  );
 };
 
 export interface ExpenseCalculationInput {

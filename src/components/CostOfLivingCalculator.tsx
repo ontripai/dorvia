@@ -11,7 +11,9 @@ import {
   Currency,
   ROMANIAN_CITIES_COST,
   calculateMonthlyCost,
-  EUR_TO_RON_RATE
+  EUR_TO_RON_RATE,
+  COST_DATA_REVIEW_DATE,
+  EUR_RATE_DATE
 } from '../lib/costOfLivingData';
 import { useAppContext } from './AppLayout';
 import { FaqSchema } from './FaqSchema';
@@ -153,8 +155,8 @@ export const CostOfLivingCalculator: React.FC<CostOfLivingCalculatorProps> = ({
     {
       qFa: 'گران‌ترین و ارزان‌ترین شهرهای رومانی برای زندگی کدامند؟',
       qEn: 'Which Romanian cities are the most expensive and most affordable?',
-      aFa: 'بر اساس داده‌های Numbeo در سال ۲۰۲۶، کلوژ-نپوکا و بخارست گران‌ترین شهرهای رومانی هستند (به‌ویژه در بخش اجاره مسکن). در مقابل، شهرهایی مانند یاش، کرایووا و سیبیو بین ۱۵ تا ۲۵ درصد هزینه مسکن و زندگی اقتصادی‌تری دارند.',
-      aEn: 'According to 2026 data, Cluj-Napoca and Bucharest are the most expensive cities (particularly for apartment rents). Conversely, cities like Iași, Craiova, and Sibiu are roughly 15% to 25% more affordable.',
+      aFa: `بر اساس داده‌های بازبینی‌شده در ${COST_DATA_REVIEW_DATE.fa}، کلوژ-نپوکا با شاخص ۱۰۵ گران‌ترین شهر رومانی است و پس از آن بخارست با شاخص ۱۰۰ در رتبه دوم قرار دارد (به‌ویژه در بخش اجاره مسکن). در مقابل، شهرهایی مانند سیبیو (شاخص ۸۷)، کونستانتسا (شاخص ۸۶)، یاش (شاخص ۸۴) و کرایووا (شاخص ۸۰) بین ۱۳ تا ۲۰ درصد هزینه زندگی اقتصادی‌تری نسبت به بخارست دارند.`,
+      aEn: `According to data reviewed in ${COST_DATA_REVIEW_DATE.en}, Cluj-Napoca (index 105) is the most expensive city in Romania, followed by Bucharest (index 100) in second place (particularly for apartment rents). In contrast, cities like Sibiu (index 87), Constanța (index 86), Iași (index 84), and Craiova (index 80) are roughly 13% to 20% more affordable than Bucharest.`,
     },
     {
       qFa: 'هزینه قبوض آب، برق، گاز و اینترنت در رومانی چقدر است؟',
@@ -453,6 +455,15 @@ export const CostOfLivingCalculator: React.FC<CostOfLivingCalculatorProps> = ({
                 <span>•</span>
                 <span>{t.costOfLiving.results.annualTotal}: {formatMoney(breakdown.totalAnnual)}</span>
               </div>
+
+              <div className="text-[11px] text-slate-300/90 pt-2 border-t border-white/10 flex items-center space-x-1.5 rtl:space-x-reverse">
+                <span>💱</span>
+                <span>
+                  {isFa
+                    ? `ارقام یورویی با نرخ مرجع ۱ یورو = ${EUR_TO_RON_RATE.toLocaleString('fa-IR')} لی (نرخ ${EUR_RATE_DATE.fa}) محاسبه شده‌اند.`
+                    : `EUR figures calculated at reference rate 1 EUR = ${EUR_TO_RON_RATE} RON (rate as of ${EUR_RATE_DATE.en}).`}
+                </span>
+              </div>
             </div>
 
             {/* City Rank Gauge */}
@@ -651,10 +662,10 @@ export const CostOfLivingCalculator: React.FC<CostOfLivingCalculatorProps> = ({
         <Info size={18} className="text-slate-400 shrink-0 mt-0.5" />
         <div className="space-y-1.5 text-slate-600">
           <p className="font-semibold text-slate-700 leading-relaxed">
-            {t.costOfLiving.results.sourceNote}
+            {t.costOfLiving.results.sourceNote.replace('{reviewDate}', COST_DATA_REVIEW_DATE[currentLang])}
           </p>
           <p className="text-[11px] text-slate-400 leading-relaxed">
-            {t.costOfLiving.results.disclaimer}
+            {t.costOfLiving.results.disclaimer.replace('{reviewDate}', COST_DATA_REVIEW_DATE[currentLang])}
           </p>
         </div>
       </div>

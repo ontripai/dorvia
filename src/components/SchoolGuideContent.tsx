@@ -311,8 +311,8 @@ export const SchoolGuideContent: React.FC<SchoolGuideContentProps> = ({ currentL
         </p>
         <div className="p-4 bg-white border border-amber-200 rounded-xl text-xs text-[#142033]">
           {currentLang === 'fa'
-            ? 'در تحقیق ما هیچ مدرسه یا کلاس تکمیلی زبان فارسی رسمی و فعال در رومانی (برای حفظ سواد فارسی فرزندان) پیدا نشد. اگر این موضوع برای شما اهمیت دارد، می‌توانید با بخش فرهنگی سفارت ایران در بخارست تماس بگیرید یا از برنامه‌های آنلاین آموزش زبان فارسی که برای ایرانیان خارج از کشور طراحی شده‌اند استفاده کنید.'
-            : 'Our research did not find an active, organized Persian-language supplementary school in Romania (for maintaining children\'s Persian literacy). If this matters to you, consider contacting the Iranian Embassy\'s cultural section in Bucharest, or using online Persian-language programs designed for Iranian diaspora children.'}
+            ? 'ما نتوانستیم هیچ مدرسهٔ ایرانی یا فارسی‌زبانِ ثبت‌شدهٔ رسمی برای کودکان در رومانی شناسایی کنیم. خانواده‌هایی که به دنبال ادامهٔ تحصیل فارسی فرزندشان هستند معمولاً از گزینهٔ آموزش از راه دور مدارس ایرانی استفاده می‌کنند؛ برای اطلاع از آخرین وضعیت و راهکارهای آموزشی، بهتر است مستقیماً از سفارت ایران در بخارست پرس‌وجو فرمایید.'
+            : 'We were unable to identify any officially registered Iranian or Persian-language schools for children in Romania. Families wishing to continue their children\'s Persian education typically utilize distance-learning options offered by Iranian remote schooling programs; for the most up-to-date status and guidance, it is best to inquire directly with the Iranian Embassy in Bucharest.'}
         </div>
       </div>
 
