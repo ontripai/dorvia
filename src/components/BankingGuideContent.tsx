@@ -41,6 +41,24 @@ export const BankingGuideContent: React.FC<BankingGuideContentProps> = ({ curren
       a: currentLang === 'fa'
         ? 'بله، Revolut دارای مجوز رسمی بانکی در رومانی با شماره شبا (IBAN) محلی لئو است و برای پرداخت‌های روزمره بسیار محبوب است.'
         : 'Yes, Revolut operates with a local Romanian IBAN (via partner banks) and is exceptionally popular for daily transactions.'
+    },
+    {
+      q: currentLang === 'fa' ? 'آیا برای ساخت حساب Revolut حتماً به CNP نیاز دارم؟' : 'Do I need a Romanian CNP to open a Revolut account?',
+      a: currentLang === 'fa'
+        ? 'خیر، برای حساب معمولی Revolut (که با پاسپورت، آدرس و اطلاعات پایه ساخته می‌شود) نیازی به CNP نیست. CNP فقط برای بخش سرمایه‌گذاری/معاملات سهام Revolut (به دلایل الزامات گزارش‌دهی مالی) لازم است، نه برای حساب بانکی عادی.'
+        : 'No, a standard Revolut account (opened with a passport, address, and basic details) does not require a CNP. A CNP is only needed for Revolut\'s investment/stock-trading feature (due to securities-reporting requirements), not for a regular account.'
+    },
+    {
+      q: currentLang === 'fa' ? 'بانک از چه مبلغی برای حواله‌های دریافتی، مدرک اثبات منشا وجه می‌خواهد؟' : 'Above what amount does a bank require proof-of-funds documentation for incoming transfers?',
+      a: currentLang === 'fa'
+        ? 'طبق قانون مبارزه با پولشویی رومانی (Legea 129/2019، ماده ۱۳)، بررسی هویت/منشا وجه استاندارد برای تراکنش‌های غیرمعمول ۱۵٬۰۰۰ یورو یا بیشتر الزامی است؛ یک آستانه‌ی پایین‌تر (۱٬۰۰۰ یورو) هم برای اطلاعات حواله‌های بانکی طبق مقررات اتحادیه اروپا وجود دارد. فراتر از این آستانه‌ها، بانک‌ها می‌توانند بنا به صلاحدید خودشان (بر اساس ریسک) برای هر مبلغ غیرمعمول دیگری هم مدرک بخواهند.'
+        : 'Under Romania\'s AML law (Legea 129/2019, Art. 13), standard identity/source-of-funds due diligence is required for unusual transactions of €15,000 or more; a lower €1,000 threshold also applies to wire-transfer information under EU regulation. Beyond these thresholds, banks may also request documentation at their own risk-based discretion for any other unusual amount.'
+    },
+    {
+      q: currentLang === 'fa' ? 'آیا دارندگان ویزای الحاق خانواده محدودیت خاصی برای باز کردن حساب بانکی دارند؟' : 'Do family-reunification visa holders face any special restriction opening a bank account?',
+      a: currentLang === 'fa'
+        ? 'خیر، هیچ محدودیت یا الزام ویژه‌ای برای این دسته پیدا نشد — پس از دریافت کارت اقامت و CNP، دقیقاً مثل هر دارنده اقامت دیگری می‌توانید حساب باز کنید.'
+        : 'No special restriction or requirement was found for this category — once you have your residence card and CNP, you can open an account just like any other residence-permit holder.'
     }
   ];
 
@@ -110,8 +128,11 @@ export const BankingGuideContent: React.FC<BankingGuideContentProps> = ({ curren
           <a href="#disclaimer" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۷. هشدار و منابع رسمی' : '7. Official Disclaimer'}
           </a>
+          <a href="#faq" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۸. سوالات متداول' : '8. FAQ'}
+          </a>
           <a href="#related-content" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
-            {currentLang === 'fa' ? '۸. مطالب مرتبط و نظرات' : '8. Related & Comments'}
+            {currentLang === 'fa' ? '۹. مطالب مرتبط و نظرات' : '9. Related & Comments'}
           </a>
         </div>
       </div>
@@ -406,6 +427,21 @@ export const BankingGuideContent: React.FC<BankingGuideContentProps> = ({ curren
             ? 'آخرین بررسی و به‌روزرسانی محتوا: سال ۲۰۲۶ (بر اساس آیین‌نامه‌های بانکی رومانی)'
             : 'Last reviewed & updated: 2026 (Based on official Romanian banking compliance standards)'}
         </span>
+      </div>
+
+      {/* SECTION: FREQUENTLY ASKED QUESTIONS */}
+      <div id="faq" className="bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+        <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+          {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+        </h3>
+        <div className="space-y-6">
+          {bankingFaqs.map((faq, index) => (
+            <div key={index}>
+              <h4 className="font-bold text-[#334155] mb-2">{faq.q}</h4>
+              <p className="text-sm text-[#475569] leading-relaxed">{faq.a}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* SECTION 10: RELATED CONTENT & COMMENTS */}
