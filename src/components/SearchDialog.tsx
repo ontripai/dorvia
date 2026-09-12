@@ -321,6 +321,15 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
       icon: <House size={18} className="text-[#2F6FED]" />
     },
     {
+      id: 'flights-travel',
+      categoryKey: 'needs',
+      title: { fa: 'سفر و بلیط هوایی به رومانی — مسیرها، ترانزیت، بار و قوانین گمرک', en: 'Flights & Travel to Romania — Routes, Baggage & Customs' },
+      categoryLabel: { fa: 'نیازهای زندگی', en: 'Essentials' },
+      description: { fa: 'مسیرهای پروازی ترانزیت استانبول، مقررات اظهار ارز نقدی، سقف بار و حمل‌ونقل', en: 'Istanbul transit routes, cash declaration rules, airline baggage limits' },
+      route: 'needs/flights-travel',
+      icon: <Landmark size={18} className="text-[#2F6FED]" />
+    },
+    {
       id: 'cost-of-living',
       categoryKey: 'needs',
       title: { fa: 'محاسبه‌گر هزینه زندگی در شهرهای رومانی', en: 'Cost of Living Calculator in Romanian Cities' },
