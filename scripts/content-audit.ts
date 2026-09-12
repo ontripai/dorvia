@@ -31,28 +31,27 @@ const RULES: PhraseRule[] = [
   { phrase: 'guaranteed visa', negationAware: true },
   { phrase: 'guaranteed residence', negationAware: true },
   { phrase: 'WHO approved' },
-  {
-    phrase: 'فوری',
-    allowedWithin: [
-      'فوریه',
-      'فوریت',
-      'فرمان فوری',
-      'اولویت فوری',
-      'کارهای فوری',
-      'کار های فوری',
-      'نیاز فوری',
-      'اقدام فوری',
-      'نتیجه اولیه فوری',
-      'نتیجه‌ی اولیه فوری',
-      'شماره‌های فوری',
-      'شماره های فوری',
-      'تماس فوری'
-    ]
-  },
   { phrase: 'اقامت تضمینی' },
   { phrase: 'اقامت قطعی' },
   { phrase: 'ویزای تضمینی' },
   { phrase: 'ویزای قطعی' },
+  // Section A.2: Compound deceptive urgent phrases
+  { phrase: 'ویزای فوری' },
+  { phrase: 'اقامت فوری' },
+  { phrase: 'پاسپورت فوری' },
+  { phrase: 'اخذ فوری' },
+  { phrase: 'دریافت فوری' },
+  { phrase: 'ویزای اکسپرس' },
+  { phrase: 'express visa' },
+  { phrase: 'instant visa' },
+  { phrase: 'fast-track visa' },
+  { phrase: 'instant residency' },
+  // Section B: Additional high-risk claim categories
+  // Temporarily commented out due to corporate law false positives (100% share ownership in SRL):
+  // { phrase: '۱۰۰٪', negationAware: true },
+  { phrase: '۱۰۰ درصد', negationAware: true },
+  { phrase: 'بدون ریسک', negationAware: true },
+  { phrase: 'risk-free', negationAware: true },
 ];
 
 interface Finding {
