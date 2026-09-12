@@ -1127,7 +1127,7 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
               </div>
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'مالیات فعالیت فریلنسری (PFA) در رومانی چقدر است؟' : 'How is freelance (PFA) activity taxed?'}</h3>
-                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'مالیات بر درآمد PFA (نظام واقعی) نرخ ثابت ۱۰٪ روی درآمد خالص است. حق بیمه‌ی بازنشستگی (CAS، ۲۵٪) فقط اگر درآمد خالص سالانه به ۱۲ برابر حداقل حقوق ناخالص برسد الزامی است؛ حق بیمه‌ی درمان (CASS، ۱۰٪) فقط اگر به ۶ برابر حداقل حقوق برسد. هر دو از طریق «Declarația Unică» خوداظهاری می‌شوند.' : 'PFA income tax (real system) is a flat 10% on net income. Pension contribution (CAS, 25%) is only mandatory if annual net income reaches 12× the gross minimum wage; health contribution (CASS, 10%) only if it reaches 6×. Both are self-declared via the "Declarația Unică."'}</p>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'مالیات بر درآمد PFA (نظام واقعی) نرخ ثابت ۱۰٪ روی درآمد خالص است. حق بیمه‌ی بازنشستگی (CAS، ۲۵٪) فقط اگر درآمد خالص سالانه به ۱۲ برابر حداقل حقوق ناخالص برسد الزامی است؛ حق بیمه‌ی درمان (CASS، ۱۰٪) فقط اگر به ۶ برابر حداقل حقوق برسد. هر دو از طریق «Declarația Unică» خوداظهاری می‌شوند. توجه: بر اساس بررسی ما، تاسیس PFA به شهروندان رومانی و اتحادیه اروپا/EEA محدود است و ممکن است برای اتباع ایرانی در دسترس نباشد — پیش از برنامه‌ریزی بر این اساس، بخش «SRL در برابر PFA» در راهنمای ثبت شرکت را ببینید.' : 'PFA income tax (real system) is a flat 10% on net income. Pension contribution (CAS, 25%) is only mandatory if annual net income reaches 12× the gross minimum wage; health contribution (CASS, 10%) only if it reaches 6×. Both are self-declared via the "Declarația Unică." Note: Based on our review, setting up a PFA is restricted to Romanian and EU/EEA citizens and may not be accessible to Iranian nationals — before planning on this basis, see the "SRL vs PFA" section in the Company Registration guide.'}</p>
               </div>
               <div>
                 <h3 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'اگر صاحبخانه‌ام اجاره را به ANAF گزارش ندهد، برای من (مستاجر) مشکلی پیش می‌آید؟' : 'If my landlord doesn\'t report the rental to ANAF, does that cause a problem for me (the tenant)?'}</h3>
@@ -1167,7 +1167,7 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             },
             {
               q: currentLang === 'fa' ? 'مالیات فعالیت فریلنسری (PFA) در رومانی چقدر است؟' : 'How is freelance (PFA) activity taxed?',
-              a: currentLang === 'fa' ? 'مالیات بر درآمد PFA (نظام واقعی) نرخ ثابت ۱۰٪ روی درآمد خالص است. حق بیمه‌ی بازنشستگی (CAS، ۲۵٪) فقط اگر درآمد خالص سالانه به ۱۲ برابر حداقل حقوق ناخالص برسد الزامی است؛ حق بیمه‌ی درمان (CASS، ۱۰٪) فقط اگر به ۶ برابر حداقل حقوق برسد. هر دو از طریق «Declarația Unică» خوداظهاری می‌شوند.' : 'PFA income tax (real system) is a flat 10% on net income. Pension contribution (CAS, 25%) is only mandatory if annual net income reaches 12× the gross minimum wage; health contribution (CASS, 10%) only if it reaches 6×. Both are self-declared via the "Declarația Unică."'
+              a: currentLang === 'fa' ? 'مالیات بر درآمد PFA (نظام واقعی) نرخ ثابت ۱۰٪ روی درآمد خالص است. حق بیمه‌ی بازنشستگی (CAS، ۲۵٪) فقط اگر درآمد خالص سالانه به ۱۲ برابر حداقل حقوق ناخالص برسد الزامی است؛ حق بیمه‌ی درمان (CASS، ۱۰٪) فقط اگر به ۶ برابر حداقل حقوق برسد. هر دو از طریق «Declarația Unică» خوداظهاری می‌شوند. توجه: بر اساس بررسی ما، تاسیس PFA به شهروندان رومانی و اتحادیه اروپا/EEA محدود است و ممکن است برای اتباع ایرانی در دسترس نباشد — پیش از برنامه‌ریزی بر این اساس، بخش «SRL در برابر PFA» در راهنمای ثبت شرکت را ببینید.' : 'PFA income tax (real system) is a flat 10% on net income. Pension contribution (CAS, 25%) is only mandatory if annual net income reaches 12× the gross minimum wage; health contribution (CASS, 10%) only if it reaches 6×. Both are self-declared via the "Declarația Unică." Note: Based on our review, setting up a PFA is restricted to Romanian and EU/EEA citizens and may not be accessible to Iranian nationals — before planning on this basis, see the "SRL vs PFA" section in the Company Registration guide.'
             },
             {
               q: currentLang === 'fa' ? 'اگر صاحبخانه‌ام اجاره را به ANAF گزارش ندهد، برای من (مستاجر) مشکلی پیش می‌آید؟' : 'If my landlord doesn\'t report the rental to ANAF, does that cause a problem for me (the tenant)?',
@@ -1183,7 +1183,7 @@ export const WorkOverviewContent: React.FC<WorkOverviewContentProps> = ({
             }
           ]} />
 
-          <RelatedGuidesCard items={['needs/cost-of-living', 'company/tax-types']} currentLang={currentLang} onNavigate={onNavigate} />
+          <RelatedGuidesCard items={['needs/cost-of-living', 'company/tax-types', 'company/registration']} currentLang={currentLang} onNavigate={onNavigate} />
           <ParentHubFooterCard slugRoute="work/taxes-salaries" currentLang={currentLang} onNavigate={onNavigate} />
         </div>
       );
