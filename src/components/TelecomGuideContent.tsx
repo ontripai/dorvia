@@ -89,8 +89,8 @@ export const TelecomGuideContent: React.FC<TelecomGuideContentProps> = ({ curren
         <span className="text-2xl">⚠️</span>
         <p className="text-sm font-semibold leading-relaxed">
           {currentLang === 'fa'
-            ? 'اصلاحیه مهم: برخلاف آنچه پیش‌تر روی این صفحه نوشته شده بود، ثبت اجباری هویت خریداران سیم‌کارت اعتباری (Prepaid) هرگز به‌طور قانونی در رومانی اجرا نشد — دو تلاش قانون‌گذاری برای این کار (۲۰۱۴ و ۲۰۱۹) هر دو توسط دادگاه قانون اساسی رومانی (CCR) به‌طور کامل لغو شدند (آخرین بار فوریه ۲۰۲۰). با این حال، در عمل بیشتر فروشندگان همچنان از روی سیاست داخلی خودشان (نه الزام قانونی) برای هر نوع سیم‌کارت پاسپورت یا کارت اقامت می‌خواهند — پس همراه داشتن آن هنوز عملاً توصیه می‌شود، فقط این‌که «قانون» نیست.'
-            : "Correction: contrary to what this page previously stated, mandatory ID registration for prepaid SIM buyers was never actually enforced in Romania — two legislative attempts to require it (2014 and 2019) were both struck down in full by Romania's Constitutional Court (CCR), most recently in February 2020. In practice, though, most retailers still ask for a passport or residence card for any SIM purchase as their own internal policy, not a legal requirement — so it's still practically worth bringing one, just not because it's \"the law\"."}
+            ? 'اصلاحیه مهم: برخلاف آنچه پیش‌تر روی این صفحه نوشته شده بود، ثبت اجباری هویت خریداران سیم‌کارت اعتباری (Prepaid) هرگز به‌طور قانونی در رومانی اجرا نشد — دو تلاش قانون‌گذاری برای این کار (۲۰۱۴ و ۲۰۱۹) هر دو توسط دادگاه قانون اساسی رومانی (CCR) به‌طور کامل لغو شدند (آخرین بار فوریه ۲۰۲۰). با این حال، در عمل بسیاری از فروشندگان همچنان از روی سیاست داخلی خودشان (نه الزام قانونی) برای هر نوع سیم‌کارت پاسپورت یا کارت اقامت می‌خواهند — پس همراه داشتن آن هنوز عملاً توصیه می‌شود، فقط این‌که «قانون» نیست.'
+            : "Correction: contrary to what this page previously stated, mandatory ID registration for prepaid SIM buyers was never actually enforced in Romania — two legislative attempts to require it (2014 and 2019) were both struck down in full by Romania's Constitutional Court (CCR), most recently in February 2020. In practice, though, many retailers still ask for a passport or residence card for any SIM purchase as their own internal policy, not a legal requirement — so it's still practically worth bringing one, just not because it's \"the law\"."}
         </p>
       </div>
 
@@ -211,7 +211,7 @@ export const TelecomGuideContent: React.FC<TelecomGuideContentProps> = ({ curren
             <ul className="text-xs text-[#526174] space-y-2">
               <li className="flex items-start space-x-2 rtl:space-x-reverse">
                 <span>▪</span>
-                <span><strong>{currentLang === 'fa' ? 'مدارک:' : 'Documents:'}</strong> {currentLang === 'fa' ? 'از نظر قانونی الزامی نیست، اما در عمل بیشتر فروشندگان پاسپورت یا کارت شناسایی معتبر درخواست می‌کنند (همراه داشتن پاسپورت توصیه می‌شود).' : 'Not legally required, but in practice most retailers ask for a valid passport or ID card (carrying your passport is recommended).'}</span>
+                <span><strong>{currentLang === 'fa' ? 'مدارک:' : 'Documents:'}</strong> {currentLang === 'fa' ? 'از نظر قانونی الزامی نیست، اما در عمل بسیاری از فروشندگان پاسپورت یا کارت شناسایی معتبر درخواست می‌کنند (همراه داشتن پاسپورت توصیه می‌شود).' : 'Not legally required, but in practice many retailers ask for a valid passport or ID card (carrying your passport is recommended).'}</span>
               </li>
               <li className="flex items-start space-x-2 rtl:space-x-reverse">
                 <span>▪</span>
