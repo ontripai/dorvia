@@ -66,7 +66,7 @@ export const TelecomGuideContent: React.FC<TelecomGuideContentProps> = ({ curren
         </div>
       </div>
 
-      {/* ID AT PURCHASE NOTICE (CORRECTED — see below) */}
+      {/* ID AT PURCHASE NOTICE */}
       <div className="p-5 bg-amber-50 border border-amber-200 rounded-2xl flex items-center gap-3 text-amber-900">
         <span className="text-2xl">⚠️</span>
         <p className="text-sm font-semibold leading-relaxed">
@@ -82,7 +82,7 @@ export const TelecomGuideContent: React.FC<TelecomGuideContentProps> = ({ curren
           <span>📌</span>
           <span>{currentLang === 'fa' ? 'فهرست محتوای این راهنما (پرش سریع)' : 'Table of Contents'}</span>
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-bold">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-xs font-bold">
           <a href="#quick-answer" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۱. پاسخ سریع' : '1. Quick Answer'}
           </a>
@@ -104,8 +104,11 @@ export const TelecomGuideContent: React.FC<TelecomGuideContentProps> = ({ curren
           <a href="#last-reviewed" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
             {currentLang === 'fa' ? '۷. تاریخ آخرین بررسی' : '7. Last Update'}
           </a>
+          <a href="#faq" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
+            {currentLang === 'fa' ? '۸. سوالات متداول' : '8. FAQ'}
+          </a>
           <a href="#related-content" className="p-3 bg-[#f7f9fc] hover:bg-[#eef3f8] text-[#142033] hover:text-[#2F6FED] rounded-xl border border-[#dfe6ef] transition-colors text-center">
-            {currentLang === 'fa' ? '۸. مطالب مرتبط و نظرات' : '8. Related & Comments'}
+            {currentLang === 'fa' ? '۹. مطالب مرتبط و نظرات' : '9. Related & Comments'}
           </a>
         </div>
       </div>
@@ -120,8 +123,8 @@ export const TelecomGuideContent: React.FC<TelecomGuideContentProps> = ({ curren
         </div>
         <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
           {currentLang === 'fa'
-            ? 'رومانی یکی از پیشرفته‌ترین و اقتصادی‌ترین شبکه‌های اینترنت فیبر نوری خانگی و ارتباطات موبایل را در اتحادیه اروپا دارد. سه اپراتور اصلی کشور Orange، Vodafone و Digi (RCS-RDS) هستند (Telekom Romania نیز به‌تدریج در اپراتورهای اصلی ادغام می‌شود). برای روزهای نخست ورود، خرید سیم‌کارت اعتباری (Prepay) تنها با ارائه پاسپورت یا کارت شناسایی فوراً امکان‌پذیر است. پس از استقرار، خرید بسته‌های ترکیبی خانگی (شامل اینترنت فیبر نوری + تلویزیون دیجیتال + خط موبایل) از اپراتورهایی نظیر Digi یا Orange بسیار مقرون‌به‌صرفه‌تر از خرید جداگانه هر خدمت است.'
-            : 'Romania offers some of the fastest and most affordable fiber optic home broadband and mobile networks in Europe. The market is led by three main operators: Orange, Vodafone, and Digi (RCS-RDS), with Telekom Romania progressively merging into these main networks. For quick setup upon arrival, prepaid SIM cards (Prepay) require only a valid passport or ID card. Once settled in an apartment, bundled packages (combining fiber internet + digital TV + mobile plans) provide significant cost savings compared to subscribing to services separately.'}
+            ? 'رومانی یکی از پیشرفته‌ترین و اقتصادی‌ترین شبکه‌های اینترنت فیبر نوری خانگی و ارتباطات موبایل را در اتحادیه اروپا دارد. امروز بازار عملاً سه اپراتور اصلی دارد: Orange، Vodafone و Digi (RCS-RDS)؛ اپراتور Telekom Romania Mobile در سپتامبر ۲۰۲۵ توسط Vodafone و Digi خریداری شد و برند آن بازنشسته شده است (مشترکین اعتباری به Digi منتقل شدند و شماره‌های منتقل‌نشده در مه ۲۰۲۶ قطع شدند؛ اگر در راهنماهای قدیمی‌تر نام Telekom را دیدید، آن راهنما به‌روز نیست). برای روزهای نخست ورود، از نظر قانونی ارائه مدرک هویتی برای خرید سیم‌کارت اعتباری (Prepay) الزامی نیست (دادگاه قانون اساسی رومانی الزام ثبت هویت را لغو کرده است)، اما در عمل بسیاری از فروشندگان طبق سیاست داخلی خود پاسپورت یا کارت شناسایی درخواست می‌کنند — بنابراین همراه داشتن پاسپورت توصیه می‌شود. پس از استقرار، خرید بسته‌های ترکیبی خانگی (شامل اینترنت فیبر نوری + تلویزیون دیجیتال + خط موبایل) از اپراتورهایی نظیر Digi یا Orange بسیار مقرون‌به‌صرفه‌تر از خرید جداگانه هر خدمت است.'
+            : 'Romania offers some of the fastest and most affordable fiber optic home broadband and mobile networks in Europe. Today, the market effectively consists of three main operators: Orange, Vodafone, and Digi (RCS-RDS). Telekom Romania Mobile was acquired by Vodafone and Digi in September 2025 and its brand has been retired; prepaid subscribers were migrated to Digi and non-migrated numbers were disconnected in May 2026 (if you see Telekom listed in older guides, that information is outdated). For initial arrival, presenting ID is legally not required for purchasing a prepaid SIM card (Prepay) as mandatory registration was struck down by the Constitutional Court, but in practice many retailers still ask for a passport or ID card under store policy — so carrying your passport is recommended. Once settled in an apartment, bundled packages (combining fiber internet + digital TV + mobile plans) provide significant cost savings compared to subscribing to services separately.'}
         </p>
         <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl text-xs text-[#142033] flex items-start space-x-3 rtl:space-x-reverse">
           <span className="text-base mt-0.5">💡</span>
@@ -190,7 +193,7 @@ export const TelecomGuideContent: React.FC<TelecomGuideContentProps> = ({ curren
             <ul className="text-xs text-[#526174] space-y-2">
               <li className="flex items-start space-x-2 rtl:space-x-reverse">
                 <span>▪</span>
-                <span><strong>{currentLang === 'fa' ? 'مدارک:' : 'Documents:'}</strong> {currentLang === 'fa' ? 'اصل پاسپورت معتبر یا کارت شناسایی هویتی.' : 'Valid original passport or ID card.'}</span>
+                <span><strong>{currentLang === 'fa' ? 'مدارک:' : 'Documents:'}</strong> {currentLang === 'fa' ? 'از نظر قانونی الزامی نیست، اما در عمل بیشتر فروشندگان پاسپورت یا کارت شناسایی معتبر درخواست می‌کنند (همراه داشتن پاسپورت توصیه می‌شود).' : 'Not legally required, but in practice most retailers ask for a valid passport or ID card (carrying your passport is recommended).'}</span>
               </li>
               <li className="flex items-start space-x-2 rtl:space-x-reverse">
                 <span>▪</span>
@@ -309,16 +312,33 @@ export const TelecomGuideContent: React.FC<TelecomGuideContentProps> = ({ curren
         </div>
       </div>
 
-      {/* SECTION 8: LAST REVIEWED DATE & COMMENTS */}
-      <div id="last-reviewed" className="space-y-6 pt-4">
-        <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-[#526174] flex items-center space-x-2 rtl:space-x-reverse">
-          <Clock size={16} className="text-slate-400" />
-          <span>
-            {currentLang === 'fa'
-              ? 'آخرین بررسی و به‌روزرسانی محتوا: سال ۲۰۲۶ (بر اساس اطلاعات رسمی اپراتورهای مخابراتی رومانی)'
-              : 'Last reviewed & updated: 2026 (Based on official Romanian telecom service provider data)'}
-          </span>
+      {/* SECTION 8: LAST REVIEWED DATE */}
+      <div id="last-reviewed" className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-[#526174] flex items-center space-x-2 rtl:space-x-reverse">
+        <Clock size={16} className="text-slate-400" />
+        <span>
+          {currentLang === 'fa'
+            ? 'آخرین بررسی و به‌روزرسانی محتوا: سال ۲۰۲۶ (بر اساس اطلاعات رسمی اپراتورهای مخابراتی رومانی)'
+            : 'Last reviewed & updated: 2026 (Based on official Romanian telecom service provider data)'}
+        </span>
+      </div>
+
+      {/* SECTION 8.5: FREQUENTLY ASKED QUESTIONS */}
+      <div id="faq" className="bg-[#F8FAFC] rounded-2xl p-6 sm:p-8 border border-[#e2e8f0]">
+        <h3 className="text-xl font-bold text-[#1e293b] mb-6 border-b border-[#cbd5e1] pb-2">
+          {currentLang === 'fa' ? 'سوالات متداول' : 'Frequently Asked Questions'}
+        </h3>
+        <div className="space-y-6">
+          {telecomFaqs.map((faq, index) => (
+            <div key={index}>
+              <h4 className="font-bold text-[#334155] mb-2">{faq.q}</h4>
+              <p className="text-sm text-[#475569] leading-relaxed">{faq.a}</p>
+            </div>
+          ))}
         </div>
+      </div>
+
+      {/* SECTION 9: RELATED CONTENT & COMMENTS */}
+      <div className="space-y-6 pt-4">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div
