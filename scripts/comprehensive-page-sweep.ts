@@ -1,5 +1,5 @@
 import http from 'http';
-import { spawn, ChildProcess } from 'child_process';
+import { spawn, execSync, ChildProcess } from 'child_process';
 import { ROUTE_REGISTRY } from '../src/lib/routeRegistry';
 
 const PORT = 3005;
@@ -15,13 +15,14 @@ interface AuditResult {
   placeholderMatches: string[];
   undefinedLinks: string[];
   ok: boolean;
+  reason?: string;
 }
 
 async function waitForServer(url: string, timeoutMs: number = 30000): Promise<void> {
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
       if (res.status < 500) return;
     } catch {}
     await new Promise((r) => setTimeout(r, 500));
@@ -37,6 +38,7 @@ async function runSweep() {
     {
       stdio: 'pipe',
       shell: true,
+      detached: true,
       env: { ...process.env, PORT: String(PORT), NODE_ENV: 'production' },
     }
   );
@@ -82,6 +84,9 @@ async function runSweep() {
       .map((r) => r.canonical);
     const results: AuditResult[] = [];
 
+    const totalPages = canonicalRoutes.length * 2;
+    let completedPages = 0;
+
     for (const route of canonicalRoutes) {
       for (const lang of ['fa', 'en'] as const) {
         const cleanPath = route === '/' ? '' : route;
@@ -89,7 +94,7 @@ async function runSweep() {
         const url = `${BASE_URL}${fullPath}`;
 
         try {
-          const res = await fetch(url);
+          const res = await fetch(url, { signal: AbortSignal.timeout(30000) });
           const html = await res.text();
 
           // Title
@@ -146,17 +151,24 @@ async function runSweep() {
             ok,
           });
         } catch (err: any) {
+          const isTimeout = err?.name === 'TimeoutError' || err?.name === 'AbortError';
           results.push({
             route: fullPath,
             lang,
-            status: 0,
+            status: isTimeout ? 408 : 0,
             hasTitle: false,
             hasH1: false,
             brokenImgAlts: 0,
             placeholderMatches: [],
             undefinedLinks: [],
             ok: false,
+            reason: isTimeout ? 'timeout (30s exceeded)' : `fetch error: ${err?.message || 'unknown'}`,
           });
+        }
+
+        completedPages++;
+        if (completedPages % 10 === 0 || completedPages === totalPages) {
+          console.log(`[sweep] ${completedPages}/${totalPages} ...`);
         }
       }
     }
@@ -175,7 +187,7 @@ async function runSweep() {
     if (failed.length > 0) {
       console.log('Issues found:');
       for (const f of failed) {
-        console.log(`- ${f.route}: status=${f.status}, brokenImgAlts=${f.brokenImgAlts}, undefinedLinks=${f.undefinedLinks.join(',')}, placeholders=${f.placeholderMatches.join(',')}`);
+        console.log(`- ${f.route}: status=${f.status}${f.reason ? `, reason=${f.reason}` : ''}, brokenImgAlts=${f.brokenImgAlts}, undefinedLinks=${f.undefinedLinks.join(',')}, placeholders=${f.placeholderMatches.join(',')}`);
       }
     } else {
       console.log('🎉 100% of tested pages passed all checks without any issues!');
@@ -183,8 +195,14 @@ async function runSweep() {
   } finally {
     if (serverProc.pid) {
       try {
-        require('child_process').execSync(`taskkill /F /T /PID ${serverProc.pid}`, { stdio: 'ignore' });
-      } catch {}
+        if (process.platform === 'win32') {
+          execSync(`taskkill /F /T /PID ${serverProc.pid}`, { stdio: 'ignore' });
+        } else {
+          process.kill(-serverProc.pid, 'SIGKILL');
+        }
+      } catch {
+        /* already gone */
+      }
     }
   }
 }
