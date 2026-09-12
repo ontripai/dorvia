@@ -1552,6 +1552,22 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
                 <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم آپارتمان بخرم بدون اینکه نگران محدودیت زمین باشم؟' : 'Can I buy an apartment without worrying about the land restriction?'}</h4>
                 <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'در عمل بله؛ مالکیت خودِ واحد آپارتمانی برای اتباع غیر اتحادیه اروپا آزاد است و سهم زمین معمولاً از طریق «حق سطحی» مدیریت می‌شود، نه مالکیت مستقیم. با این حال، سازوکار دقیق را نوتار طرف معامله باید در سند خرید مشخص کند.' : 'In practice, yes — non-EU citizens can freely own the apartment unit itself, and the land share is typically handled via a "right of superficies" rather than direct ownership. Even so, the exact mechanism must be specified by your notary in the purchase deed.'}</p>
               </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چه سایت‌هایی برای جستجوی اجاره در رومانی معتبر هستند؟' : 'Which websites are reliable for apartment hunting in Romania?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'سه پلتفرم شناخته‌شده و فعال: Storia.ro (بخش املاک گروه OLX)، OLX.ro (بزرگ‌ترین سایت آگهی رومانی)، و Imobiliare.ro (یکی از قدیمی‌ترین پلتفرم‌های ملکی رومانی).' : 'Three well-known, active platforms: Storia.ro (OLX Group\'s real-estate arm), OLX.ro (Romania\'s largest classifieds site), and Imobiliare.ro (one of Romania\'s longest-running property portals).'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'چرا بعضی موجران از اجاره دادن به خارجی‌ها امتناع می‌کنند و چه کنیم؟' : 'Why do some landlords refuse to rent to non-Romanians, and what can I do?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'متاسفانه این یک تجربه‌ی واقعی است که برخی مهاجران گزارش می‌دهند. برای افزایش شانس خودتان: مدارک شغلی و درآمد را از قبل آماده داشته باشید، از یک آژانس املاک با تجربه‌ی کار با مستاجران خارجی کمک بگیرید، و پرداخت چند ماه اجاره به‌صورت پیش (اگر از نظر مالی برایتان مقدور است) می‌تواند اعتماد موجر را جلب کند.' : 'Unfortunately, this is a real experience some immigrants report. To improve your chances: have employment/income documentation ready in advance, work with a rental agency experienced with foreign tenants, and — if financially feasible — offering to pay a few months\' rent upfront can help build a landlord\'s confidence.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'آیا می‌توانم آپارتمان نوساز را با اقساط مستقیم از سازنده بخرم، بدون وام بانکی؟' : 'Can I buy a new-build apartment on direct installments from the developer, without a bank mortgage?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'بله، این روش («developer installment plan») در میان برخی سازندگان به‌خصوص در بخارست رایج است — معمولاً حدود ۳۰٪ پیش‌پرداخت و بازپرداخت ۳ تا ۵ ساله، فقط با مدارک هویتی. توجه: این یک قاعده‌ی دولتی یا استاندارد نیست، شرایط از سازنده‌ای به سازنده‌ی دیگر کاملاً متفاوت است — پیش از امضای هر قراردادی، حتماً آن را با یک وکیل بررسی کنید.' : 'Yes, this ("developer installment plan") is offered by some developers, particularly in Bucharest — typically around a 30% down payment with a 3-5 year repayment term, requiring only identity documents. Note: this is not a government-regulated or standardized scheme — terms vary significantly by developer. Always have any such contract reviewed by a lawyer before signing.'}</p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#334155] mb-2">{currentLang === 'fa' ? 'تاخیر در پرداخت شارژ ساختمان چه جریمه‌ای دارد؟' : 'What\'s the penalty for late building-maintenance-fee payments?'}</h4>
+                <p className="text-sm text-[#475569]">{currentLang === 'fa' ? 'طبق قانون انجمن‌های مالکان (Legea 196/2018)، انجمن ساختمان می‌تواند از ۳۰ روز بعد از سررسید، تا سقف ۰.۲٪ در روز جریمه‌ی تاخیر محاسبه کند — با این محدودیت که مجموع جریمه هرگز نمی‌تواند از اصل بدهی بیشتر شود.' : 'Under the owners\' associations law (Legea 196/2018), the building association can charge a late fee of up to 0.2% per day starting 30 days after the due date — capped so total penalties never exceed the original debt amount.'}</p>
+              </div>
             </div>
           </div>
 
@@ -1571,6 +1587,22 @@ export const NeedsContent: React.FC<NeedsContentProps> = ({
             {
               q: currentLang === 'fa' ? 'آیا می‌توانم آپارتمان بخرم بدون اینکه نگران محدودیت زمین باشم؟' : 'Can I buy an apartment without worrying about the land restriction?',
               a: currentLang === 'fa' ? 'در عمل بله؛ مالکیت خودِ واحد آپارتمانی برای اتباع غیر اتحادیه اروپا آزاد است و سهم زمین معمولاً از طریق «حق سطحی» مدیریت می‌شود، نه مالکیت مستقیم. با این حال، سازوکار دقیق را نوتار طرف معامله باید در سند خرید مشخص کند.' : 'In practice, yes — non-EU citizens can freely own the apartment unit itself, and the land share is typically handled via a "right of superficies" rather than direct ownership. Even so, the exact mechanism must be specified by your notary in the purchase deed.'
+            },
+            {
+              q: currentLang === 'fa' ? 'چه سایت‌هایی برای جستجوی اجاره در رومانی معتبر هستند؟' : 'Which websites are reliable for apartment hunting in Romania?',
+              a: currentLang === 'fa' ? 'سه پلتفرم شناخته‌شده و فعال: Storia.ro (بخش املاک گروه OLX)، OLX.ro (بزرگ‌ترین سایت آگهی رومانی)، و Imobiliare.ro (یکی از قدیمی‌ترین پلتفرم‌های ملکی رومانی).' : 'Three well-known, active platforms: Storia.ro (OLX Group\'s real-estate arm), OLX.ro (Romania\'s largest classifieds site), and Imobiliare.ro (one of Romania\'s longest-running property portals).'
+            },
+            {
+              q: currentLang === 'fa' ? 'چرا بعضی موجران از اجاره دادن به خارجی‌ها امتناع می‌کنند و چه کنیم؟' : 'Why do some landlords refuse to rent to non-Romanians, and what can I do?',
+              a: currentLang === 'fa' ? 'متاسفانه این یک تجربه‌ی واقعی است که برخی مهاجران گزارش می‌دهند. برای افزایش شانس خودتان: مدارک شغلی و درآمد را از قبل آماده داشته باشید، از یک آژانس املاک با تجربه‌ی کار با مستاجران خارجی کمک بگیرید، و پرداخت چند ماه اجاره به‌صورت پیش (اگر از نظر مالی برایتان مقدور است) می‌تواند اعتماد موجر را جلب کند.' : 'Unfortunately, this is a real experience some immigrants report. To improve your chances: have employment/income documentation ready in advance, work with a rental agency experienced with foreign tenants, and — if financially feasible — offering to pay a few months\' rent upfront can help build a landlord\'s confidence.'
+            },
+            {
+              q: currentLang === 'fa' ? 'آیا می‌توانم آپارتمان نوساز را با اقساط مستقیم از سازنده بخرم، بدون وام بانکی؟' : 'Can I buy a new-build apartment on direct installments from the developer, without a bank mortgage?',
+              a: currentLang === 'fa' ? 'بله، این روش («developer installment plan») در میان برخی سازندگان به‌خصوص در بخارست رایج است — معمولاً حدود ۳۰٪ پیش‌پرداخت و بازپرداخت ۳ تا ۵ ساله، فقط با مدارک هویتی. توجه: این یک قاعده‌ی دولتی یا استاندارد نیست، شرایط از سازنده‌ای به سازنده‌ی دیگر کاملاً متفاوت است — پیش از امضای هر قراردادی، حتماً آن را با یک وکیل بررسی کنید.' : 'Yes, this ("developer installment plan") is offered by some developers, particularly in Bucharest — typically around a 30% down payment with a 3-5 year repayment term, requiring only identity documents. Note: this is not a government-regulated or standardized scheme — terms vary significantly by developer. Always have any such contract reviewed by a lawyer before signing.'
+            },
+            {
+              q: currentLang === 'fa' ? 'تاخیر در پرداخت شارژ ساختمان چه جریمه‌ای دارد؟' : 'What\'s the penalty for late building-maintenance-fee payments?',
+              a: currentLang === 'fa' ? 'طبق قانون انجمن‌های مالکان (Legea 196/2018)، انجمن ساختمان می‌تواند از ۳۰ روز بعد از سررسید، تا سقف ۰.۲٪ در روز جریمه‌ی تاخیر محاسبه کند — با این محدودیت که مجموع جریمه هرگز نمی‌تواند از اصل بدهی بیشتر شود.' : 'Under the owners\' associations law (Legea 196/2018), the building association can charge a late fee of up to 0.2% per day starting 30 days after the due date — capped so total penalties never exceed the original debt amount.'
             }
           ]} />
 
