@@ -19,6 +19,18 @@ export interface LeadFormData {
 }
 
 export type RecognitionStatus = 'IRAN_MOH_APPROVED' | 'GENERAL_POPULAR' | 'IRAN_MOH_NOT_APPROVED' | 'REQUIRES_CURRENT_RECHECK';
+
+export type MosListStatus = 'LISTED_2026' | 'NOT_IN_2026_LIST' | 'OUT_OF_MOS_SCOPE';
+
+export interface MosRecognition {
+  status: MosListStatus;
+  listYear: string;                                              // '2026'
+  group?: 'A' | 'B' | 'C';                                       // فقط وقتی LISTED_2026
+  previousGroup?: { listYear: string; group: 'A' | 'B' | 'C' };   // اگر سطحش عوض شده
+  appearedInPriorLists?: boolean;                                // در فهرست سالهای قبل بوده یا نه
+  checkedAt: string;                                             // '2026-09-13'
+  sourceUrl: string;
+}
 export type TuitionVerificationStatus = 'OFFICIAL_FIXED' | 'OFFICIAL_RANGE' | 'OFFICIAL_REGISTRATION_FEE' | 'HISTORICAL_OFFICIAL' | 'UNOFFICIAL_ESTIMATE' | 'CONTACT_UNIVERSITY' | 'NOT_PROVIDED';
 export type WarningLevel = 'none' | 'warning' | 'danger';
 export type CTAType = 'internal' | 'external';
@@ -90,6 +102,7 @@ export interface University {
   tuitionVerificationStatus: TuitionVerificationStatus;
   recognitionStatus: RecognitionStatus;
   recognitionSources?: RecognitionSource[];
+  mosRecognition?: MosRecognition;
   badgeTextFa: string;
   badgeTextEn: string;
   warningLevel: WarningLevel;

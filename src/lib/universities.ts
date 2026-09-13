@@ -82,6 +82,12 @@ export const universitiesData: University[] = [
         officialFlag: true
       }
     ],
+    mosRecognition: {
+      status: 'OUT_OF_MOS_SCOPE',
+      listYear: '2026',
+      checkedAt: '2026-09-13',
+      sourceUrl: 'https://grad.saorg.ir/portal/home/?272052/دانشگاه-های-مورد-تایید'
+    },
     badgeTextFa: '✓ تأییدیه وزارت بهداشت ایران',
     badgeTextEn: '✓ Listed by Iran’s Ministry of Health',
     warningLevel: 'none',
@@ -168,6 +174,12 @@ export const universitiesData: University[] = [
         officialFlag: true
       }
     ],
+    mosRecognition: {
+      status: 'OUT_OF_MOS_SCOPE',
+      listYear: '2026',
+      checkedAt: '2026-09-13',
+      sourceUrl: 'https://grad.saorg.ir/portal/home/?272052/دانشگاه-های-مورد-تایید'
+    },
     badgeTextFa: '✓ تأییدیه وزارت بهداشت ایران',
     badgeTextEn: '✓ Listed by Iran’s Ministry of Health',
     warningLevel: 'none',
@@ -254,6 +266,12 @@ export const universitiesData: University[] = [
         officialFlag: true
       }
     ],
+    mosRecognition: {
+      status: 'OUT_OF_MOS_SCOPE',
+      listYear: '2026',
+      checkedAt: '2026-09-13',
+      sourceUrl: 'https://grad.saorg.ir/portal/home/?272052/دانشگاه-های-مورد-تایید'
+    },
     badgeTextFa: '✓ تأییدیه وزارت بهداشت ایران',
     badgeTextEn: '✓ Listed by Iran’s Ministry of Health',
     warningLevel: 'none',
@@ -349,6 +367,12 @@ export const universitiesData: University[] = [
         officialFlag: true
       }
     ],
+    mosRecognition: {
+      status: 'OUT_OF_MOS_SCOPE',
+      listYear: '2026',
+      checkedAt: '2026-09-13',
+      sourceUrl: 'https://grad.saorg.ir/portal/home/?272052/دانشگاه-های-مورد-تایید'
+    },
     badgeTextFa: '✓ تأییدیه وزارت بهداشت ایران',
     badgeTextEn: '✓ Listed by Iran’s Ministry of Health',
     warningLevel: 'none',
@@ -439,6 +463,15 @@ export const universitiesData: University[] = [
         officialFlag: true
       }
     ],
+    mosRecognition: {
+      status: 'LISTED_2026',
+      listYear: '2026',
+      group: 'C',
+      previousGroup: { listYear: '2024', group: 'B' },
+      appearedInPriorLists: true,
+      checkedAt: '2026-09-13',
+      sourceUrl: 'https://grad.saorg.ir/portal/home/?272052/دانشگاه-های-مورد-تایید'
+    },
     badgeTextFa: 'دانشگاه جامع دولتی',
     badgeTextEn: 'Public Comprehensive',
     warningLevel: 'none',
@@ -520,6 +553,13 @@ export const universitiesData: University[] = [
         officialFlag: true
       }
     ],
+    mosRecognition: {
+      status: 'NOT_IN_2026_LIST',
+      listYear: '2026',
+      appearedInPriorLists: true,
+      checkedAt: '2026-09-13',
+      sourceUrl: 'https://grad.saorg.ir/portal/home/?272052/دانشگاه-های-مورد-تایید'
+    },
     badgeTextFa: 'برترین دانشگاه فنی',
     badgeTextEn: 'Top Technological University',
     warningLevel: 'none',
@@ -610,6 +650,13 @@ export const universitiesData: University[] = [
         officialFlag: true
       }
     ],
+    mosRecognition: {
+      status: 'NOT_IN_2026_LIST',
+      listYear: '2026',
+      appearedInPriorLists: true,
+      checkedAt: '2026-09-13',
+      sourceUrl: 'https://grad.saorg.ir/portal/home/?272052/دانشگاه-های-مورد-تایید'
+    },
     badgeTextFa: 'دانشگاه برتر اقتصاد',
     badgeTextEn: 'Top Economics University',
     warningLevel: 'none',
@@ -690,6 +737,13 @@ export const universitiesData: University[] = [
         officialFlag: true
       }
     ],
+    mosRecognition: {
+      status: 'NOT_IN_2026_LIST',
+      listYear: '2026',
+      appearedInPriorLists: false,
+      checkedAt: '2026-09-13',
+      sourceUrl: 'https://grad.saorg.ir/portal/home/?272052/دانشگاه-های-مورد-تایید'
+    },
     badgeTextFa: 'دانشگاه خصوصی',
     badgeTextEn: 'Private University',
     warningLevel: 'none',
@@ -764,6 +818,13 @@ export const universitiesData: University[] = [
         officialFlag: true
       }
     ],
+    mosRecognition: {
+      status: 'NOT_IN_2026_LIST',
+      listYear: '2026',
+      appearedInPriorLists: false,
+      checkedAt: '2026-09-13',
+      sourceUrl: 'https://grad.saorg.ir/portal/home/?272052/دانشگاه-های-مورد-تایید'
+    },
     badgeTextFa: '⚠ در فهرست فعلی مورد تأیید نیست',
     badgeTextEn: '⚠ Not currently listed as approved',
     warningLevel: 'warning',
