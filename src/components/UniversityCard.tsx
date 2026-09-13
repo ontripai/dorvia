@@ -68,6 +68,45 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
   // Get unique languages for the displayed programs
   const uniqueLanguages = Array.from(new Set(displayedPrograms.flatMap(p => p.languages)));
 
+  const getMosStatusLine = () => {
+    const rec = university.mosRecognition;
+    if (!rec) return null;
+
+    if (rec.status === 'OUT_OF_MOS_SCOPE') {
+      return currentLang === 'fa'
+        ? 'ارزشیابی: وزارت بهداشت'
+        : 'Evaluation: Ministry of Health';
+    }
+
+    if (rec.status === 'LISTED_2026') {
+      if (rec.group === 'A') {
+        return currentLang === 'fa'
+          ? 'وزارت علوم ۲۰۲۶: گروه الف'
+          : 'Ministry of Science 2026: Group A';
+      }
+      if (rec.group === 'B') {
+        return currentLang === 'fa'
+          ? 'وزارت علوم ۲۰۲۶: گروه ب'
+          : 'Ministry of Science 2026: Group B';
+      }
+      if (rec.group === 'C') {
+        return currentLang === 'fa'
+          ? 'وزارت علوم ۲۰۲۶: گروه ج — تا کارشناسی ارشد'
+          : "Ministry of Science 2026: Group C — up to master's";
+      }
+    }
+
+    if (rec.status === 'NOT_IN_2026_LIST') {
+      return currentLang === 'fa'
+        ? 'وزارت علوم ۲۰۲۶: در فهرست نیست'
+        : 'Ministry of Science 2026: not listed';
+    }
+
+    return null;
+  };
+
+  const mosStatusLine = getMosStatusLine();
+
   return (
     <div className={`bg-white rounded-2xl border ${isWarning ? 'border-amber-300' : 'border-slate-200'} shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col justify-between group`}>
 
@@ -96,9 +135,14 @@ export const UniversityCard: React.FC<UniversityCardProps> = ({ university, curr
 
       {/* Visual Header Banner */}
       <div className={`${headerColors} p-5 text-white relative`}>
-        <div className={`inline-block px-2.5 py-1 rounded-md text-[11px] font-bold border mb-3 ${badgeColors}`}>
+        <div className={`inline-block px-2.5 py-1 rounded-md text-[11px] font-bold border ${mosStatusLine ? 'mb-1.5' : 'mb-3'} ${badgeColors}`}>
           {currentLang === 'fa' ? university.badgeTextFa : university.badgeTextEn}
         </div>
+        {mosStatusLine && (
+          <div className="text-[10px] text-white/85 mb-3 font-medium">
+            {mosStatusLine}
+          </div>
+        )}
         <h3 className="text-lg font-bold leading-snug">
           {currentLang === 'fa' ? university.nameFa : university.nameEn}
         </h3>
