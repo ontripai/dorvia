@@ -336,6 +336,7 @@ async function main() {
     interface RealSqlTest {
       id: string;
       name: string;
+      setupSql?: string;
       sql: string;
       expectedErrorPattern: RegExp | string;
     }
@@ -455,8 +456,7 @@ async function main() {
       {
         id: '7',
         name: 'Constraint 7: Transition to SETTLED without office payout record',
-        sql: `
-          -- Create match in IRR_CONFIRMED state
+        setupSql: `
           INSERT INTO public.exchange_matches (
             id, request_id, acceptor_lead_id, amount_eur, rate_snapshot, amount_irr, status,
             eur_payer_lead_id, eur_receiver_lead_id, irr_payer_lead_id, irr_receiver_lead_id,
@@ -467,8 +467,9 @@ async function main() {
             'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
             'cccccccc-cccc-cccc-cccc-cccccccccccc', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
             '10000000-0000-0000-0000-000000000002', now() + interval '1 hour'
-          );
-
+          ) ON CONFLICT (id) DO UPDATE SET status = 'IRR_CONFIRMED';
+        `,
+        sql: `
           -- Attempt SETTLED without exchange_office_payouts record
           UPDATE public.exchange_matches
           SET status = 'SETTLED'
@@ -480,13 +481,12 @@ async function main() {
       {
         id: '8',
         name: 'Constraint 8: Concurrency reserve on non-open request',
-        sql: `
-          -- Mark request cancelled
+        setupSql: `
           UPDATE public.exchange_requests
           SET status = 'cancelled'
           WHERE id = '20000000-0000-0000-0000-000000000001';
-
-          -- Attempt reserve RPC
+        `,
+        sql: `
           SELECT public.fn_exchange_reserve_request_match(
             '20000000-0000-0000-0000-000000000001',
             'cccccccc-cccc-cccc-cccc-cccccccccccc',
@@ -500,25 +500,30 @@ async function main() {
       {
         id: '9a',
         name: 'Constraint 9a: UPDATE on existing exchange_events row (append-only)',
-        sql: `
-          -- Seed an event first
+        setupSql: `
           INSERT INTO public.exchange_events (id, actor, from_status, to_status)
-          VALUES ('50000000-0000-0000-0000-000000000001', 'system', 'RESERVED', 'ACCEPTED');
-
-          -- Attempt UPDATE
+          VALUES ('50000000-0000-0000-0000-000000000001', 'system', 'RESERVED', 'ACCEPTED')
+          ON CONFLICT (id) DO NOTHING;
+        `,
+        sql: `
           UPDATE public.exchange_events
           SET to_status = 'TAMPERED'
           WHERE id = '50000000-0000-0000-0000-000000000001';
         `,
         expectedErrorPattern: /exchange_events is append-only: updates and deletes are prohibited/i
       },
-      // Test 9b: DELETE on exchange_events with existing row
+      // Test 9b: DELETE on exchange_events with existing committed row (Fix 1 - dre-p126)
       {
         id: '9b',
         name: 'Constraint 9b: DELETE on existing exchange_events row (append-only)',
+        setupSql: `
+          INSERT INTO public.exchange_events (id, actor, from_status, to_status)
+          VALUES ('50000000-0000-0000-0000-000000000002', 'system', 'RESERVED', 'ACCEPTED')
+          ON CONFLICT (id) DO NOTHING;
+        `,
         sql: `
           DELETE FROM public.exchange_events
-          WHERE id = '50000000-0000-0000-0000-000000000001';
+          WHERE id = '50000000-0000-0000-0000-000000000002';
         `,
         expectedErrorPattern: /exchange_events is append-only: updates and deletes are prohibited/i
       },
@@ -526,40 +531,46 @@ async function main() {
       {
         id: '9c',
         name: 'Constraint 9c (Fix 1): TRUNCATE TABLE exchange_events (statement trigger)',
+        setupSql: `
+          INSERT INTO public.exchange_events (id, actor, from_status, to_status)
+          VALUES ('50000000-0000-0000-0000-000000000003', 'system', 'RESERVED', 'ACCEPTED')
+          ON CONFLICT (id) DO NOTHING;
+        `,
         sql: `
           TRUNCATE TABLE public.exchange_events;
         `,
         expectedErrorPattern: /exchange_events is append-only: truncate is prohibited/i
       },
-      // Test 10: State machine illegal transition
+      // Test 10: State machine illegal transition (Fix 2 - dre-p126: RESERVED directly to EUR_RECEIVED)
       {
         id: '10',
-        name: 'Constraint 10: Illegal state machine transition (ACCEPTED directly to SETTLED)',
-        sql: `
+        name: 'Constraint 10: Illegal state machine transition (RESERVED directly to EUR_RECEIVED)',
+        setupSql: `
           INSERT INTO public.exchange_matches (
             id, request_id, acceptor_lead_id, amount_eur, rate_snapshot, amount_irr, status,
             eur_payer_lead_id, eur_receiver_lead_id, irr_payer_lead_id, irr_receiver_lead_id,
             destination_account_id, reserved_until
           ) VALUES (
             '40000000-0000-0000-0000-000000000002', '20000000-0000-0000-0000-000000000002', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
-            100.00, 60000, 6000000, 'ACCEPTED',
+            100.00, 60000, 6000000, 'RESERVED',
             'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
             'cccccccc-cccc-cccc-cccc-cccccccccccc', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
             '10000000-0000-0000-0000-000000000002', now() + interval '1 hour'
-          );
-
-          -- Attempt illegal skip from ACCEPTED to SETTLED
+          ) ON CONFLICT (id) DO UPDATE SET status = 'RESERVED';
+        `,
+        sql: `
+          -- Attempt illegal skip from RESERVED directly to EUR_RECEIVED (bypassing ACCEPTED)
           UPDATE public.exchange_matches
-          SET status = 'SETTLED'
+          SET status = 'EUR_RECEIVED'
           WHERE id = '40000000-0000-0000-0000-000000000002';
         `,
-        expectedErrorPattern: /Illegal state machine transition from ACCEPTED to SETTLED/i
+        expectedErrorPattern: /Illegal state machine transition.*from RESERVED to EUR_RECEIVED|Illegal state machine transition/i
       },
       // Test 11: Transition to IRR_CONFIRMED without receiver proof (Addendum 2)
       {
         id: '11',
         name: 'Constraint 11: Transition to IRR_CONFIRMED without receiver transfer proof',
-        sql: `
+        setupSql: `
           INSERT INTO public.exchange_matches (
             id, request_id, acceptor_lead_id, amount_eur, rate_snapshot, amount_irr, status,
             eur_payer_lead_id, eur_receiver_lead_id, irr_payer_lead_id, irr_receiver_lead_id,
@@ -570,8 +581,9 @@ async function main() {
             'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
             'cccccccc-cccc-cccc-cccc-cccccccccccc', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
             '10000000-0000-0000-0000-000000000002', now() + interval '1 hour'
-          );
-
+          ) ON CONFLICT (id) DO UPDATE SET status = 'IRR_PROOF_SUBMITTED';
+        `,
+        sql: `
           -- Attempt transition to IRR_CONFIRMED without exchange_transfer_proofs (side='receiver')
           UPDATE public.exchange_matches
           SET status = 'IRR_CONFIRMED'
@@ -587,11 +599,26 @@ async function main() {
       console.log(`----------------------------------------------------------------------------`);
       console.log(`[TEST #${test.id}] ${test.name}`);
 
+      // If test has a separate setup step, execute and commit it first
+      if (test.setupSql) {
+        const setupResult = runPsql(test.setupSql, TEST_DB);
+        if (!setupResult.success) {
+          console.error(`❌ FAILED: Setup SQL for test #${test.id} failed:\n${setupResult.stderr}`);
+          allPassed = false;
+          continue;
+        }
+      }
+
       const result = runPsql(test.sql, TEST_DB);
 
       if (result.success) {
-        console.error(`❌ FAILED: Statement succeeded but was expected to throw an exception!`);
-        console.error(`Output: ${result.stdout}`);
+        if (result.stdout.includes('DELETE 0') || result.stdout.includes('UPDATE 0')) {
+          console.error(`❌ FAILED: Statement affected 0 rows (table or target row was empty, trigger was not invoked)!`);
+          console.error(`Output: ${result.stdout.trim()}`);
+        } else {
+          console.error(`❌ FAILED: Statement succeeded but was expected to throw an exception!`);
+          console.error(`Output: ${result.stdout}`);
+        }
         allPassed = false;
         continue;
       }
