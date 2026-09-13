@@ -20,12 +20,20 @@ export async function POST(request: Request) {
   const startTime = Date.now();
 
   try {
-    // 1. Authenticate Cron Request if CRON_SECRET is configured
+    // 1. Authenticate Vercel Cron Request
     const authHeader = request.headers.get('authorization');
     const cronSecret = process.env.CRON_SECRET?.trim();
 
-    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
-      console.warn('[ExchangeCron] Invalid or missing Authorization Bearer token.');
+    if (!cronSecret) {
+      console.warn('[Cron] CRON_SECRET is not configured in server environment.');
+      return NextResponse.json(
+        { error: 'Unauthorized: CRON_SECRET not configured' },
+        { status: 401 }
+      );
+    }
+
+    if (authHeader !== `Bearer ${cronSecret}`) {
+      console.warn('[Cron] Invalid or missing Authorization Bearer token.');
       return NextResponse.json(
         { error: 'Unauthorized: Invalid cron authorization token' },
         { status: 401 }
