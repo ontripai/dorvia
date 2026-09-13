@@ -2,15 +2,15 @@ import fs from 'fs';
 import path from 'path';
 import ts from 'typescript';
 
-interface FaqInstance {
-  filePath: string;
-  relativeFile: string;
-  line: number;
-  arrayName: string;
-  pattern: 'map' | 'double' | 'violation';
+export interface FileFaqStats {
+  file: string;
+  schemaCount: number;
+  headingCount: number;
+  mapCallsCount: number;
+  hasDeficit: boolean;
 }
 
-interface Violation {
+export interface Violation {
   file: string;
   line: number;
   arrayName: string;
@@ -43,11 +43,13 @@ export function validateFaqParity(): {
   mapCount: number;
   doubleCount: number;
   violations: Violation[];
+  fileStats: FileFaqStats[];
 } {
   const componentsDir = path.join(process.cwd(), 'src/components');
   const files = getAllTsxFiles(componentsDir);
 
   const violations: Violation[] = [];
+  const fileStats: FileFaqStats[] = [];
   let totalFaqSchemas = 0;
   let mapCount = 0;
   let doubleCount = 0;
@@ -68,14 +70,22 @@ export function validateFaqParity(): {
       ts.ScriptKind.TSX
     );
 
-    const hasFaqHeading =
-      code.includes('سوالات متداول') || /Frequently Asked/i.test(code);
+    interface LocalSchema {
+      node: ts.Node;
+      startPos: number;
+      endPos: number;
+      lineNumber: number;
+      arrayName: string;
+      baseIdentifier: string | null;
+      isMapPattern: boolean;
+    }
+
+    const localSchemas: LocalSchema[] = [];
 
     function visit(node: ts.Node) {
       if (ts.isJsxSelfClosingElement(node) || ts.isJsxOpeningElement(node)) {
         const tagName = node.tagName.getText(sourceFile);
         if (tagName === 'FaqSchema') {
-          totalFaqSchemas++;
           const startPos = node.getStart(sourceFile);
           const endPos = node.getEnd();
           const { line } = sourceFile.getLineAndCharacterOfPosition(startPos);
@@ -119,44 +129,17 @@ export function validateFaqParity(): {
             } else {
               arrayName = expr.getText(sourceFile).slice(0, 30);
             }
-          } else {
-            violations.push({
-              file: relativeFile,
-              line: lineNumber,
-              arrayName: '(missing items attribute)',
-              reason: 'FaqSchema has no valid items attribute',
-            });
-            return;
           }
 
-          // Check for Shared Array Pattern: X.map( exists in the same file outside of FaqSchema
-          let isMapPattern = false;
-          if (baseIdentifier) {
-            const mapRegex = new RegExp(
-              `\\b${escapeRegExp(baseIdentifier)}\\s*\\.\\s*map\\s*\\(`,
-              'g'
-            );
-            let match: RegExpExecArray | null;
-            while ((match = mapRegex.exec(code)) !== null) {
-              if (match.index < startPos || match.index >= endPos) {
-                isMapPattern = true;
-                break;
-              }
-            }
-          }
-
-          if (isMapPattern) {
-            mapCount++;
-          } else if (hasFaqHeading) {
-            doubleCount++;
-          } else {
-            violations.push({
-              file: relativeFile,
-              line: lineNumber,
-              arrayName,
-              reason: `Array "${arrayName}" neither has ${baseIdentifier ? baseIdentifier + '.map(' : '.map('} visual rendering nor is accompanied by a visual FAQ heading ("سوالات متداول" or "Frequently Asked")`,
-            });
-          }
+          localSchemas.push({
+            node,
+            startPos,
+            endPos,
+            lineNumber,
+            arrayName,
+            baseIdentifier,
+            isMapPattern: false,
+          });
         }
       }
 
@@ -164,6 +147,77 @@ export function validateFaqParity(): {
     }
 
     visit(sourceFile);
+
+    if (localSchemas.length === 0) {
+      continue;
+    }
+
+    totalFaqSchemas += localSchemas.length;
+
+    // Check for Shared Array Pattern: baseIdentifier.map( exists outside of FaqSchema
+    let fileMapCallsCount = 0;
+    for (const schema of localSchemas) {
+      if (schema.baseIdentifier) {
+        const mapRegex = new RegExp(
+          `\\b${escapeRegExp(schema.baseIdentifier)}\\s*\\.\\s*map\\s*\\(`,
+          'g'
+        );
+        let match: RegExpExecArray | null;
+        while ((match = mapRegex.exec(code)) !== null) {
+          const isInsideCurrentSchema =
+            match.index >= schema.startPos && match.index < schema.endPos;
+          if (!isInsideCurrentSchema) {
+            schema.isMapPattern = true;
+            fileMapCallsCount++;
+            break;
+          }
+        }
+      }
+    }
+
+    // Count visual FAQ headings in the file
+    const lines = code.split(/\r?\n/);
+    let headingCount = 0;
+    for (const l of lines) {
+      if (l.includes('سوالات متداول') || /Frequently Asked/i.test(l)) {
+        headingCount++;
+      }
+    }
+
+    const mappedSchemas = localSchemas.filter((s) => s.isMapPattern);
+    const unmappedSchemas = localSchemas.filter((s) => !s.isMapPattern);
+
+    // Each mapped schema with an associated heading consumes 1 heading.
+    // The remaining headings are available for unmapped (double pattern) schemas.
+    const headingsForMapped = Math.min(headingCount, mappedSchemas.length);
+    let availableHeadingsForUnmapped = headingCount - headingsForMapped;
+
+    const hasDeficit = unmappedSchemas.length > availableHeadingsForUnmapped;
+
+    fileStats.push({
+      file: relativeFile,
+      schemaCount: localSchemas.length,
+      headingCount,
+      mapCallsCount: fileMapCallsCount,
+      hasDeficit,
+    });
+
+    // Assign patterns and register violations
+    for (const schema of localSchemas) {
+      if (schema.isMapPattern) {
+        mapCount++;
+      } else if (availableHeadingsForUnmapped > 0) {
+        doubleCount++;
+        availableHeadingsForUnmapped--;
+      } else {
+        violations.push({
+          file: relativeFile,
+          line: schema.lineNumber,
+          arrayName: schema.arrayName,
+          reason: `Unrendered FAQ schema in file: ${relativeFile} (FaqSchema instances: ${localSchemas.length}, FAQ headings: ${headingCount}, .map calls: ${fileMapCallsCount}). Array "${schema.arrayName}" has neither a .map visual rendering nor an available visual FAQ heading.`,
+        });
+      }
+    }
   }
 
   return {
@@ -172,11 +226,17 @@ export function validateFaqParity(): {
     mapCount,
     doubleCount,
     violations,
+    fileStats,
   };
 }
 
 // Run CLI
-if (require.main === module || (typeof process !== 'undefined' && process.argv[1] && process.argv[1].endsWith('validateFaqParity.ts'))) {
+if (
+  require.main === module ||
+  (typeof process !== 'undefined' &&
+    process.argv[1] &&
+    process.argv[1].endsWith('validateFaqParity.ts'))
+) {
   console.log('🔍 Validating FAQ Parity across all components in src/components/...\n');
 
   const result = validateFaqParity();
