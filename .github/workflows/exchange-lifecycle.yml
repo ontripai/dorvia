@@ -1,0 +1,19 @@
+name: Exchange Lifecycle Cron
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger exchange lifecycle
+        run: |
+          code=$(curl -s -o /tmp/out.json -w "%{http_code}" -X POST \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "${{ secrets.SITE_URL }}/api/cron/exchange-lifecycle")
+          echo "HTTP $code"
+          cat /tmp/out.json
+          test "$code" = "200"

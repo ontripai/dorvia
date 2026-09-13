@@ -142,6 +142,7 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState<string | null>(null);
+  const [exchangeStatus, setExchangeStatus] = useState<string | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -184,6 +185,16 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
           }
           setLoading(false);
         }
+
+        // Check currency exchange access status
+        fetch('/api/portal/exchange/status')
+          .then((r) => r.json())
+          .then((d) => {
+            if (isMounted && d?.profile?.exchange_status) {
+              setExchangeStatus(d.profile.exchange_status);
+            }
+          })
+          .catch(() => {});
 
         // Optional: Trigger client-side SDK hydration in background without blocking
         if (supabase) {
@@ -700,6 +711,24 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
             <Building2 size={16} />
             <span>{isFa ? 'شبکه خانواده' : 'Family Network'}</span>
           </Link>
+
+          {exchangeStatus === 'approved' ? (
+            <Link
+              href={`/${currentLang}/portal/exchange`}
+              className="px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center space-x-2 rtl:space-x-reverse bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm hover:opacity-95"
+            >
+              <ShieldCheck size={16} />
+              <span>{isFa ? 'تبادل ارز' : 'Currency Exchange'}</span>
+            </Link>
+          ) : (
+            <Link
+              href={`/${currentLang}/portal/exchange/request-access`}
+              className="px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center space-x-2 rtl:space-x-reverse bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
+            >
+              <ShieldCheck size={16} />
+              <span>{isFa ? 'درخواست دسترسی' : 'Request Access'}</span>
+            </Link>
+          )}
         </div>
 
         {/* TAB 1: OVERVIEW & CHAT */}
