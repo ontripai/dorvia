@@ -195,11 +195,6 @@
       "description": "Complete guide to obtaining a work permit in Romania (Aviz de Muncă), requirements, required documents, and work visa steps.",
       "h1": "Work Permit in Romania (Aviz de Muncă)"
     },
-    "romania/cities": {
-      "title": "Cities of Romania for Living, Work and Study | DORVIA EUROP",
-      "description": "Comprehensive guide to Romanian cities for living, studying, and working. Compare Bucharest, Cluj, Timisoara, and other major cities.",
-      "h1": "Cities of Romania"
-    },
     "needs/driving-license": {
       "title": "Driving Licence in Romania: Exchange, Issuance and Rules | DORVIA EUROP",
       "description": "Complete operational guide to Romanian driving licences: rules, exchanges, new issuance, and International Driving Permits (IDP).",
@@ -231,6 +226,302 @@
       "title": "Romania Cost of Living Calculator; Bucharest, Cluj, Timisoara & More | DORVIA EUROP",
       "description": "Interactive Cost of Living Calculator in Romania. Estimate monthly living expenses including rent, groceries, utilities, transit, and leisure tailored to your lifestyle.",
       "h1": "Interactive Cost of Living Calculator in Romania"
+    },
+    "home": {
+      "title": "DORVIA EUROP | Immigration, Residence, Work and Study in Romania",
+      "description": "Guidance on moving to Romania: IGI residence permits, work and study visas, company formation, family reunification and daily life — plus a free pathway assessment."
+    },
+    "about": {
+      "title": "About DORVIA EUROP: Team, Method and Limits | DORVIA EUROP",
+      "description": "Who DORVIA EUROP is, how we work, and what we do not do. Our team, our reliance on official sources, and our approach to transparency in Romanian immigration services."
+    },
+    "contact": {
+      "title": "Contact DORVIA EUROP: Consultation and Case Review | DORVIA EUROP",
+      "description": "Get in touch about residence, work, study or company formation in Romania. Contact form, available channels, and an initial review of your case."
+    },
+    "universities": {
+      "title": "Romanian Universities: Tuition, Programmes and Degree Recognition | DORVIA EUROP",
+      "description": "Romanian universities for international students: tuition, teaching language, programmes, and each university's standing on Iran's official degree-recognition list."
+    },
+    "services": {
+      "title": "DORVIA EUROP Services in Romania: Residence, Work, Study, Business | DORVIA EUROP",
+      "description": "What DORVIA EUROP does for clients in Romania: residence case review, study and work pathways, company formation, and support through administrative and document steps."
+    },
+    "articles": {
+      "title": "Romania Articles and News: Law, Residence and Daily Life | DORVIA EUROP",
+      "description": "Current articles and news about Romania: changes to residence and work rules, cost of living, the labour market, and practical experience from recent arrivals."
+    },
+    "needs": {
+      "title": "Daily Essentials in Romania: Housing, Banking, Health, Schools | DORVIA EUROP",
+      "description": "The practical side of arriving in Romania: renting and buying a home, opening a bank account, health insurance, schools, certified translation, SIM cards and transport."
+    },
+    "immigration": {
+      "title": "Romanian Immigration: IGI, Renewal, Long-Term Residence, Citizenship | DORVIA EUROP",
+      "description": "Residence pathways in Romania: IGI procedures and appointments, permit renewal, family reunification, long-term and permanent residence, citizenship, and applying from abroad."
+    },
+    "work": {
+      "title": "Working in Romania: Work Permit, Visa, Contracts and Tax | DORVIA EUROP",
+      "description": "Working in Romania: finding a job and writing a CV, the Aviz de Muncă work permit, work visas, employment contracts, salary and tax, insurance, and the digital nomad visa."
+    },
+    "company": {
+      "title": "Company Formation and Investment in Romania: SRL, Tax, Residence | DORVIA EUROP",
+      "description": "Registering an SRL in Romania, corporate tax regimes, business bank accounts, residence through a company, and investing in real estate and startups."
+    },
+    "study": {
+      "title": "Study in Romania: Admission, Student Visa, Tuition, Scholarships | DORVIA EUROP",
+      "description": "Studying in Romania: admission documents and requirements, the type D student visa, tuition levels, the preparatory language year, state scholarships and student work."
+    },
+    "romania": {
+      "title": "About Romania: Economy, Society, Law, Cities and Culture | DORVIA EUROP",
+      "description": "Understanding Romania before you move: economy and labour market, society and daily life, law, culture and the arts, history, geography, tourism and the main cities."
+    },
+    "start-here": {
+      "title": "Start Here: A Step-by-Step Roadmap to Moving to Romania | DORVIA EUROP",
+      "description": "New to the idea of Romania? Start here: planning before departure, the first 72 hours, the first month of settling in, long-term residence, and the path to citizenship."
+    },
+    "needs/first-days-checklist": {
+      "title": "First Days in Romania: A Checklist for the Week You Arrive | DORVIA EUROP",
+      "description": "What to do in your first days in Romania: registering your address, opening your residence file, a bank account, a SIM card, a family doctor, and the documents you need."
+    },
+    "needs/housing": {
+      "title": "Renting and Buying Property in Romania: Contracts, Fees, Land Rules | DORVIA EUROP",
+      "description": "Housing in Romania: reputable rental sites, agency commission, using a lease for your residence file, buying an apartment, and land-ownership limits for non-EU nationals."
+    },
+    "needs/banking": {
+      "title": "Opening a Bank Account in Romania: Documents, KYC and IBAN | DORVIA EUROP",
+      "description": "Opening a Romanian bank account: choosing a bank and branch, documents and KYC forms, getting your IBAN, an overview of the main banks, and where Revolut and Wise fit."
+    },
+    "needs/certified-translation": {
+      "title": "Certified Translation in Romania: Sworn Translators and Legalisation | DORVIA EUROP",
+      "description": "Getting documents translated for Romania: sworn translators, notarial certification, and the full consular legalisation chain required because Iran is not an Apostille member."
+    },
+    "needs/notary-public": {
+      "title": "Notary Public in Romania: Powers of Attorney, Fees and Uses | DORVIA EUROP",
+      "description": "What a Romanian notary does: drafting powers of attorney, certifying signatures and copies, property and company deeds, and which acts legally require a notary."
+    },
+    "needs/romanian-language-courses": {
+      "title": "Learning Romanian: Courses, Levels and Language Certificates | DORVIA EUROP",
+      "description": "Learning Romanian as a migrant: course options, language levels, university and private-school programmes, and where language becomes a formal requirement."
+    },
+    "needs/iranian-embassy-and-mikhak": {
+      "title": "Iranian Embassy in Bucharest and the Mikhak System | DORVIA EUROP",
+      "description": "Consular services for Iranians in Romania: the embassy in Bucharest, the Mikhak platform, passport renewal, powers of attorney, civil records, and appointment tips."
+    },
+    "needs/health": {
+      "title": "Health Insurance and Healthcare in Romania: CNAS and Family Doctors | DORVIA EUROP",
+      "description": "Romanian healthcare for newcomers: CNAS health insurance, choosing and registering with a family doctor, the national health card, the EHIC/CEASS card, and private cover."
+    },
+    "needs/school": {
+      "title": "Enrolling Children in School in Romania and Recognising Diplomas | DORVIA EUROP",
+      "description": "Enrolling children in Romanian schools: recognition of foreign school records, required documents, state versus international schools, teaching language and term dates."
+    },
+    "needs/telecom": {
+      "title": "SIM Cards, Internet and TV in Romania | DORVIA EUROP",
+      "description": "Staying connected in Romania: prepaid and contract SIM cards, the documents required, the main operators, home internet and TV, and eSIM versus a physical SIM."
+    },
+    "needs/currency-exchange": {
+      "title": "Currency Exchange and Transfers in Romania: Rates and Rules | DORVIA EUROP",
+      "description": "Exchanging and moving money in Romania: exchange offices and the BNR reference rate, cash declaration rules, fees, and the practical limits Iranians run into."
+    },
+    "needs/transportation": {
+      "title": "Getting Around Romania: Metro, Buses, Trains and Intercity Travel | DORVIA EUROP",
+      "description": "Transport in Romania: the Bucharest metro and buses, ticket cards, CFR trains, intercity coaches, taxis and ride apps, and notes on driving your own car."
+    },
+    "immigration/igi-process": {
+      "title": "The IGI Process in Romania: Appointments, Documents, Residence Cards | DORVIA EUROP",
+      "description": "How a file moves through Romania's immigration authority (IGI): document assessment, the long-stay type D visa, filing and appointments, legal deadlines, and card issuance."
+    },
+    "immigration/residence-renewal": {
+      "title": "Renewing a Romanian Residence Permit: Timing and Documents | DORVIA EUROP",
+      "description": "Renewing your Romanian residence permit: when to apply, the documents required for each permit type, the steps at IGI, and what happens if you apply too late."
+    },
+    "immigration/family-reunification": {
+      "title": "Family Reunification in Romania: Sponsor Conditions and Deadlines | DORVIA EUROP",
+      "description": "Family reunification in Romania: filing as a sponsor at IGI, the legal review period, the approval letter and embassy window, income and housing conditions, and common obstacles."
+    },
+    "immigration/long-term-residence": {
+      "title": "Long-Term and Permanent Residence in Romania: The Five-Year Path | DORVIA EUROP",
+      "description": "Long-term residence in Romania: the residence history required, permitted absences, income and insurance conditions, how it differs from temporary permits, and what comes next."
+    },
+    "immigration/citizenship": {
+      "title": "Romanian Citizenship and Passport: Conditions, Exam, Timelines | DORVIA EUROP",
+      "description": "Romanian citizenship: the residence history required, the language and constitution exam, how long files take, the position on Iranian nationality, and what the passport gives you."
+    },
+    "immigration/apply-from-iran": {
+      "title": "Applying for Romania from Iran: The Tehran Embassy and Visa Steps | DORVIA EUROP",
+      "description": "Applying from inside Iran for Romanian residence: the role of the Romanian embassy in Tehran, the order of steps, documents and translations, and how to avoid delays."
+    },
+    "immigration/apply-from-uae-gulf": {
+      "title": "Applying for Romania from the UAE and the Gulf | DORVIA EUROP",
+      "description": "If you live in the UAE or the Gulf: how to apply for a Romanian visa and residence, how it differs from applying in Iran, proof of local residence, and travel considerations."
+    },
+    "immigration/apply-from-turkey-europe": {
+      "title": "Applying for Romania from Turkey or Another European Country | DORVIA EUROP",
+      "description": "Applying from Turkey or elsewhere in Europe: whether you can file outside your home country, evidence of your current residence, and how Schengen and non-Schengen routes differ."
+    },
+    "work/finding-job": {
+      "title": "Finding a Job in Romania: CVs, Job Boards and the Labour Market | DORVIA EUROP",
+      "description": "Job hunting in Romania: reliable job boards, a Romanian-style CV, interviews, in-demand fields, and what an employer must do to hire a non-EU national."
+    },
+    "work/work-visa": {
+      "title": "Romanian Work Visa (Type D/AM): Steps, Documents, Timing | DORVIA EUROP",
+      "description": "The Romanian work visa: how the work permit relates to the type D/AM visa, embassy documents, the deadline to apply after the permit is issued, and the route to a residence card."
+    },
+    "work/employment-contract": {
+      "title": "Employment Contracts in Romania: Rights, Leave and Termination | DORVIA EUROP",
+      "description": "Romanian employment contracts: key clauses, the probation period, working hours and leave, termination and resignation rules, and registration in the REVISAL system."
+    },
+    "work/taxes-salaries": {
+      "title": "Salaries and Employee Tax in Romania: Gross, Net and Deductions | DORVIA EUROP",
+      "description": "How pay works in Romania: gross versus net salary, income tax, social contributions, reading your payslip, and what to know before negotiating an offer."
+    },
+    "work/insurance": {
+      "title": "Social and Health Insurance for Employees in Romania | DORVIA EUROP",
+      "description": "Insurance in Romania: pension and health contributions, the employee and employer shares, how contributions connect to CNAS access, and how different contracts are treated."
+    },
+    "work/digital-nomad": {
+      "title": "Romania Digital Nomad Visa: Eligibility, Income, Documents | DORVIA EUROP",
+      "description": "Romania's digital nomad visa: who qualifies, proving income and a non-Romanian employer or clients, the documents required, its validity, and how it differs from a work visa."
+    },
+    "work/job-requests": {
+      "title": "Job Opportunities and Work Requests in Romania | DORVIA EUROP",
+      "description": "Job opportunities listed by DORVIA EUROP and how to submit a work request for available positions in Romania."
+    },
+    "company/registration": {
+      "title": "Registering an SRL in Romania: Documents, Capital, Timeline | DORVIA EUROP",
+      "description": "Registering an SRL in Romania: documents and steps, minimum share capital, why no Romanian partner is required, powers of attorney from abroad, and the bank account deadline."
+    },
+    "company/tax-types": {
+      "title": "Corporate Tax in Romania: Micro Regime, Profit Tax and VAT | DORVIA EUROP",
+      "description": "How Romanian companies are taxed: the micro-company regime and its conditions, profit tax, dividend tax, VAT registration, and how to choose between regimes."
+    },
+    "company/bank-account": {
+      "title": "Opening a Business Bank Account in Romania | DORVIA EUROP",
+      "description": "Opening a corporate account in Romania: company and director documents, the bank's KYC process, deadlines tied to registration, and how banks treat non-EU directors."
+    },
+    "company/residency": {
+      "title": "Romanian Residence Through a Company: Real Conditions | DORVIA EUROP",
+      "description": "Residence through company formation in Romania: the conditions for issuing and renewing a director's permit, what IGI expects in terms of genuine activity, and common myths."
+    },
+    "company/real-estate-investment": {
+      "title": "Real Estate Investment in Romania: Buying, Yields and Limits | DORVIA EUROP",
+      "description": "Property investment in Romania: buying apartments and commercial premises, land-ownership limits for non-EU nationals, buying through a company, transfer costs and tax."
+    },
+    "company/startup-tech-investment": {
+      "title": "Startup and Technology Investment in Romania | DORVIA EUROP",
+      "description": "Romania's technology ecosystem: where startup investment is active, legal structures, incentives in the IT sector, and practical notes for non-EU founders."
+    },
+    "company/annual-tax-reporting": {
+      "title": "Annual Company Tax Reporting in Romania: Deadlines and Duties | DORVIA EUROP",
+      "description": "Annual obligations for Romanian companies: ANAF declarations and deadlines, financial statements, the accountant's role, and the consequences of filing late or not at all."
+    },
+    "company/investment": {
+      "title": "Investment Opportunities in Romania: Sectors and Routes | DORVIA EUROP",
+      "description": "An overview of investing in Romania: active sectors of the economy, routes for bringing capital in, legal and tax considerations, and how investment relates to residence."
+    },
+    "study/requirements": {
+      "title": "Admission Requirements for Romanian Universities | DORVIA EUROP",
+      "description": "Admission requirements in Romania: academic records and certified translation, the consular legalisation chain for Iranian documents, language proof, and the ministry letter."
+    },
+    "study/visa-type-d": {
+      "title": "Romanian Student Visa (Type D/SD): Documents, Funds, Timing | DORVIA EUROP",
+      "description": "The Romanian student visa: embassy documents, proof of financial means, processing time, whether a tourist visa can be converted, and the route to a residence card."
+    },
+    "study/tuition-overview": {
+      "title": "Tuition Fees at Romanian Universities by Level and Field | DORVIA EUROP",
+      "description": "Tuition in Romania: fee ranges from bachelor's to doctoral level, how medical programmes differ from other fields, additional costs, and how payment usually works."
+    },
+    "study/preparatory-year": {
+      "title": "The Romanian Preparatory Year (Anul Pregătitor): Who Needs It | DORVIA EUROP",
+      "description": "The preparatory language year in Romania: who is required to take it, what the course covers and how long it lasts, its cost, and how it affects admission to your degree."
+    },
+    "study/scholarships": {
+      "title": "Romanian Government Scholarships: Eligibility and Applying | DORVIA EUROP",
+      "description": "Scholarships for studying in Romania: the government scheme for non-EU applicants, eligibility, documents and deadlines, and what the scholarship does and does not cover."
+    },
+    "study/part-time-work": {
+      "title": "Student Work in Romania: Permitted Hours and Legal Conditions | DORVIA EUROP",
+      "description": "Working while studying in Romania: the hours non-EU students may work, whether a work permit is needed, contract types, and the effect on your student residence permit."
+    },
+    "start-here/planning-to-come": {
+      "title": "Planning Your Move to Romania: Before You Travel | DORVIA EUROP",
+      "description": "What to settle before leaving for Romania: choosing a residence pathway, the documents to prepare and translate at home, and a realistic budget and timeline."
+    },
+    "start-here/newly-arrived": {
+      "title": "Newly Arrived in Romania: Your First 72 Hours | DORVIA EUROP",
+      "description": "Your first three days in Romania: what to do immediately on arrival, temporary accommodation, a SIM card and internet, first administrative contacts, and common early mistakes."
+    },
+    "start-here/settling-in": {
+      "title": "Settling Into Romania: Your First Month and the Paperwork | DORVIA EUROP",
+      "description": "Your first month in Romania: renting a home and signing a lease, a bank account, a family doctor, enrolling children in school, transport, and setting a monthly budget."
+    },
+    "start-here/long-term-stay": {
+      "title": "Staying Long-Term in Romania: From Temporary Card to Stable Residence | DORVIA EUROP",
+      "description": "Planning a long stay in Romania: renewing without gaps, preserving your residence history, insurance and tax, and the decisions that keep permanent residence open to you."
+    },
+    "start-here/citizenship-goal": {
+      "title": "Aiming for Romanian Citizenship: A Multi-Year Roadmap | DORVIA EUROP",
+      "description": "If a Romanian passport is your end goal: the residence history required, how continuity and absences count, language and the exam, and which choices today shorten the path."
+    },
+    "romania/economy": {
+      "title": "Romania's Economy: Labour Market, Currency, Inflation, Sectors | DORVIA EUROP",
+      "description": "A look at Romania's economy: the structure of the labour market, the leu and its relationship to the euro, growth sectors such as IT, and what matters for a relocation decision."
+    },
+    "romania/society": {
+      "title": "Society and Daily Life in Romania | DORVIA EUROP",
+      "description": "Social life in Romania: urban lifestyles, attitudes toward foreigners, the Persian-speaking community, everyday language, and the cultural differences newcomers notice first."
+    },
+    "romania/culture-and-arts": {
+      "title": "Romanian Culture and Arts: Music, Literature and Festivals | DORVIA EUROP",
+      "description": "Culture in Romania: literature and music, cinema and theatre, festivals and museums, local traditions, and the cultural entry points open to newcomers."
+    },
+    "romania/laws-and-regulations": {
+      "title": "Romanian Laws and Regulations for Foreign Nationals | DORVIA EUROP",
+      "description": "The legal framework of life in Romania: rules on residence and work for non-EU nationals, administrative duties, the competent institutions, and where to read the official text."
+    },
+    "romania/tourism": {
+      "title": "Tourism in Romania: Attractions, Routes and When to Go | DORVIA EUROP",
+      "description": "Travelling in Romania: Transylvania and its castles, the Carpathian mountains, the Danube Delta and the Black Sea coast, historic towns, and practical notes on domestic travel."
+    },
+    "romania/geography": {
+      "title": "The Geography of Romania: Climate, Regions and Major Cities | DORVIA EUROP",
+      "description": "Romania's geography: its position in Eastern Europe, the Carpathians and the plains, climate and seasons, the historic regions, and where the large cities sit."
+    },
+    "romania/history": {
+      "title": "The History of Romania: From Dacia to EU Membership | DORVIA EUROP",
+      "description": "An overview of Romanian history: Dacian and Roman roots, the formation of the modern state, the communist period and the 1989 revolution, and the path into NATO and the EU."
+    },
+    "romania-cities": {
+      "title": "Cities of Romania: Comparing Cost, Work and Quality of Life | DORVIA EUROP",
+      "description": "Romania's main cities for living and working: Bucharest, Cluj, Timisoara, Iasi, Brasov and Constanta — with cost of living, the job market, and the feel of each city."
+    },
+    "romania/cities/bucharest": {
+      "title": "Living in Bucharest: Cost, Neighbourhoods, Work and Transport | DORVIA EUROP",
+      "description": "Bucharest, Romania's capital: cost of living and rent, the main neighbourhoods, the job market and major employers, the metro and transport, and daily life for newcomers."
+    },
+    "romania/cities/cluj-napoca": {
+      "title": "Living in Cluj-Napoca: University City and Technology Hub | DORVIA EUROP",
+      "description": "Cluj-Napoca: Romania's leading university and technology centre, cost of living and rent, the IT job market, the student community, and urban quality of life."
+    },
+    "romania/cities/timisoara": {
+      "title": "Living in Timisoara: Western Romania, Work and Costs | DORVIA EUROP",
+      "description": "Timisoara in western Romania: proximity to the Hungarian and Serbian borders, industry and job opportunities, cost of living, universities, and the city's cultural scene."
+    },
+    "romania/cities/iasi": {
+      "title": "Living in Iasi: Eastern Romania, Universities and Costs | DORVIA EUROP",
+      "description": "Iasi in eastern Romania: one of the country's oldest university centres, a lower cost of living than the capital, the local job market, and what daily life is like."
+    },
+    "romania/cities/brasov": {
+      "title": "Living in Brasov: The Carpathians, Tourism and a Calmer Pace | DORVIA EUROP",
+      "description": "Brasov in the Carpathian mountains: quality of life and nature, a tourism-driven economy, housing costs, and who finds it a good alternative to the big cities."
+    },
+    "romania/cities/constanta": {
+      "title": "Living in Constanta: The Black Sea Coast and the Port | DORVIA EUROP",
+      "description": "Constanta on the Black Sea: Romania's largest port, a maritime and summer-tourism economy, cost of living, and how the city's rhythm changes with the seasons."
+    },
+    "romania/blog": {
+      "title": "Romania Blog: Analysis, Experience and Immigration News | DORVIA EUROP",
+      "description": "The DORVIA EUROP blog on Romania: analysis of changing rules, practical experience from migrants, cost of living, and step-by-step guides."
     }
   },
   "costOfLiving": {
