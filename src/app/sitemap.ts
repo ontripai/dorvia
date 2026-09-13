@@ -9,7 +9,9 @@ const BASE_URL = getCanonicalOrigin();
 // URL as "modified right now" on every crawl gives Google no real freshness signal
 // and can even look suspicious. Bump this manually when a broad content pass ships
 // (e.g. a dre-pNN patch that touches many pages at once).
-const SITE_LAST_MODIFIED = new Date('2026-09-03');
+// Last bumped 2026-09-13 for dre-p115/p117/p118/p119/p122 (canonical + hreflang fix,
+// university recognition content, and unique SEO titles/descriptions for all 83 routes).
+const SITE_LAST_MODIFIED = new Date('2026-09-13');
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = BASE_URL;
