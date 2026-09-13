@@ -34,6 +34,8 @@ export async function POST(
         irr_payer_lead_id,
         irr_receiver_lead_id,
         destination_account_id,
+        reserved_until,
+        destination_account_revealed_at,
         destination_account:exchange_accounts(id, kind, value, holder_name)
       `)
       .eq('id', matchId)
@@ -54,6 +56,32 @@ export async function POST(
       return NextResponse.json({ error: 'دسترسی به این معامله مجاز نیست.' }, { status: 403 });
     }
 
+    // Lazy promotion: if match is RESERVED and reserved_until has passed, promote to ACCEPTED
+    let effectiveStatus = match.status;
+    if (match.status === 'RESERVED' && match.reserved_until && new Date() > new Date(match.reserved_until)) {
+      effectiveStatus = 'ACCEPTED';
+      await supabaseAdmin
+        .from('exchange_matches')
+        .update({
+          status: 'ACCEPTED',
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', match.id);
+
+      await supabaseAdmin.from('exchange_events').insert({
+        match_id: match.id,
+        request_id: match.request_id,
+        actor: 'system',
+        from_status: 'RESERVED',
+        to_status: 'ACCEPTED',
+        payload: {
+          action: 'lazy_transition_to_accepted',
+          reason: 'reserved_until_expired_in_reveal_account',
+          reserved_until: match.reserved_until,
+        },
+      });
+    }
+
     // Only revealed after RESERVED
     const allowedStatuses = [
       'RESERVED',
@@ -64,7 +92,7 @@ export async function POST(
       'SETTLED',
     ];
 
-    if (!allowedStatuses.includes(match.status)) {
+    if (!allowedStatuses.includes(effectiveStatus)) {
       return NextResponse.json(
         { error: 'شماره حساب تنها پس از رزرو معامله قابل مشاهده است.' },
         { status: 400 }
@@ -77,8 +105,8 @@ export async function POST(
       request_id: match.request_id,
       actor: 'customer',
       actor_user_id: user.id,
-      from_status: match.status,
-      to_status: match.status,
+      from_status: effectiveStatus,
+      to_status: effectiveStatus,
       payload: {
         action: 'view_destination_account',
         viewed_by_lead_id: lead.id,
@@ -86,9 +114,18 @@ export async function POST(
       },
     });
 
+    // Update destination_account_revealed_at if first time
+    if (!match.destination_account_revealed_at) {
+      await supabaseAdmin
+        .from('exchange_matches')
+        .update({ destination_account_revealed_at: new Date().toISOString() })
+        .eq('id', match.id);
+    }
+
     return NextResponse.json({
       success: true,
       destination_account: match.destination_account,
+      effectiveStatus,
     });
   } catch (error) {
     console.error('Unexpected error in POST /api/portal/exchange/matches/[id]/reveal-account:', error);

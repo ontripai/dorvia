@@ -92,8 +92,8 @@ interface MatchItem {
   destination_account?: {
     id: string;
     kind: string;
-    value: string;
-    holder_name: string;
+    value?: string;
+    holder_name?: string;
   } | null;
   nextStep: {
     actorRole: string;
@@ -132,6 +132,7 @@ export default function ExchangePortalPage({ params }: ExchangePageProps) {
   const [orderBook, setOrderBook] = useState<OrderBookItem[]>([]);
   const [myRequests, setMyRequests] = useState<MyRequestItem[]>([]);
   const [matches, setMatches] = useState<MatchItem[]>([]);
+  const [revealedAccounts, setRevealedAccounts] = useState<Record<string, { kind: string; value: string; holder_name: string }>>({});
 
   // Modals
   const [showNewRequestModal, setShowNewRequestModal] = useState(false);
@@ -550,16 +551,20 @@ export default function ExchangePortalPage({ params }: ExchangePageProps) {
       });
       const data = await res.json().catch(() => null);
       if (res.ok && data.destination_account) {
+        setRevealedAccounts((prev) => ({
+          ...prev,
+          [matchId]: data.destination_account,
+        }));
         alert(
           isFa
             ? `اطلاعات حساب مقصد:\nنوع: ${data.destination_account.kind}\nشماره: ${data.destination_account.value}\nصاحب حساب: ${data.destination_account.holder_name}`
             : `Account Details:\n${data.destination_account.kind}: ${data.destination_account.value}\nHolder: ${data.destination_account.holder_name}`
         );
       } else {
-        alert(data?.error || 'Account details unavailable.');
+        alert(data?.error || (isFa ? 'اطلاعات حساب در دسترس نیست.' : 'Account details unavailable.'));
       }
     } catch (err) {
-      alert('Error');
+      alert(isFa ? 'خطا در ارتباط با سرور.' : 'Network error.');
     }
   };
 
@@ -896,9 +901,16 @@ export default function ExchangePortalPage({ params }: ExchangePageProps) {
                           <div className="text-xs font-bold text-slate-300">
                             {isFa ? 'اطلاعات حساب مقصد معامله:' : 'Destination Account:'}
                           </div>
-                          {m.destination_account ? (
-                            <div className="text-xs text-slate-400 font-mono">
-                              {m.destination_account.kind}: {m.destination_account.value} ({m.destination_account.holder_name})
+                          {revealedAccounts[m.id] ? (
+                            <div className="text-xs text-white font-mono bg-slate-850 px-3 py-1.5 rounded-xl border border-blue-500/40 inline-block">
+                              <span className="text-blue-400 font-bold">{revealedAccounts[m.id].kind}:</span> {revealedAccounts[m.id].value} ({revealedAccounts[m.id].holder_name})
+                            </div>
+                          ) : m.destination_account ? (
+                            <div className="text-xs text-slate-400">
+                              <span className="font-bold text-slate-300">{m.destination_account.kind}</span>
+                              <span className="text-slate-500 mr-2 rtl:mr-0 rtl:ml-2">
+                                {isFa ? '(شماره حساب جهت حفظ امنیت و ردگیری حسابرسی مخفی است؛ برای مشاهده کلیک کنید)' : '(Masked for audit trail; click to reveal)'}
+                              </span>
                             </div>
                           ) : (
                             <div className="text-xs text-slate-500 italic">
@@ -910,9 +922,10 @@ export default function ExchangePortalPage({ params }: ExchangePageProps) {
                         <button
                           type="button"
                           onClick={() => handleRevealAccount(m.id)}
-                          className="px-4 py-2 rounded-xl bg-slate-850 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-white transition-all cursor-pointer self-start sm:self-auto"
+                          className="px-4 py-2 rounded-xl bg-slate-850 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-white transition-all cursor-pointer self-start sm:self-auto flex items-center gap-1.5"
                         >
-                          {isFa ? 'نمایش شماره حساب' : 'View Account'}
+                          <ShieldCheck size={14} />
+                          <span>{revealedAccounts[m.id] ? (isFa ? 'نمایش مجدد' : 'View Again') : (isFa ? 'نمایش شماره حساب' : 'Reveal Account')}</span>
                         </button>
                       </div>
 

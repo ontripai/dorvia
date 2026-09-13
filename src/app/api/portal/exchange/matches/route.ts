@@ -10,12 +10,13 @@ export async function GET(request: Request) {
     if (auth.response) return auth.response;
     const { lead, user } = auth.context!;
 
-    if (!supabaseAdmin) {
+    const db = supabaseAdmin;
+    if (!db) {
       return NextResponse.json({ error: 'Database service unconfigured.' }, { status: 500 });
     }
 
     // 1. Query all matches where this lead is one of the 4 roles
-    const { data: matches, error: matchError } = await supabaseAdmin
+    const { data: matches, error: matchError } = await db
       .from('exchange_matches')
       .select(`
         id,
@@ -38,7 +39,7 @@ export async function GET(request: Request) {
         destination_account_revealed_at,
         created_at,
         updated_at,
-        destination_account:exchange_accounts(id, kind, value, holder_name),
+        destination_account:exchange_accounts(id, kind),
         request:exchange_requests(direction, eur_currency),
         proofs:exchange_transfer_proofs(
           id,
@@ -60,8 +61,35 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Failed to fetch your matches.' }, { status: 500 });
     }
 
-    // 2. Format matches with role determination and actor assignment
-    const formattedMatches = (matches || []).map((m) => {
+    // 2. Format matches with role determination, lazy promotion, and actor assignment
+    const formattedMatches = await Promise.all((matches || []).map(async (m) => {
+      let currentStatus = m.status;
+
+      // Lazy promotion: if match is RESERVED and reserved_until has passed, promote to ACCEPTED
+      if (m.status === 'RESERVED' && m.reserved_until && new Date() > new Date(m.reserved_until)) {
+        currentStatus = 'ACCEPTED';
+        await db
+          .from('exchange_matches')
+          .update({
+            status: 'ACCEPTED',
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', m.id);
+
+        await db.from('exchange_events').insert({
+          match_id: m.id,
+          request_id: m.request_id,
+          actor: 'system',
+          from_status: 'RESERVED',
+          to_status: 'ACCEPTED',
+          payload: {
+            action: 'lazy_transition_to_accepted',
+            reason: 'reserved_until_expired_in_matches_list',
+            reserved_until: m.reserved_until,
+          },
+        });
+      }
+
       // Determine user's active role(s)
       const userRoles: string[] = [];
       if (m.eur_payer_lead_id === lead.id) userRoles.push('eur_payer');
@@ -78,7 +106,7 @@ export async function GET(request: Request) {
         deadline: null as string | null,
       };
 
-      switch (m.status) {
+      switch (currentStatus) {
         case 'RESERVED':
           nextStep = {
             actorRole: 'eur_payer',
@@ -144,18 +172,21 @@ export async function GET(request: Request) {
       }
 
       // Revealed destination account:
-      // Destination account is visible to the party paying that currency:
-      // - IRR payer needs the IRR receiver's destination account
-      // - EUR payer needs office instructions (custody at partner counter)
-      const hasAccountRevealed = ['RESERVED', 'ACCEPTED', 'EUR_RECEIVED', 'IRR_PROOF_SUBMITTED', 'IRR_CONFIRMED', 'SETTLED'].includes(m.status);
+      // Note: value and holder_name are omitted here. The actual account details must be
+      // requested via POST /api/portal/exchange/matches/[id]/reveal-account to maintain an immutable audit trail.
+      const hasAccountRevealed = ['RESERVED', 'ACCEPTED', 'EUR_RECEIVED', 'IRR_PROOF_SUBMITTED', 'IRR_CONFIRMED', 'SETTLED'].includes(currentStatus);
 
       return {
         ...m,
+        status: currentStatus,
         userRoles,
         nextStep,
-        destination_account: hasAccountRevealed ? m.destination_account : null,
+        destination_account: hasAccountRevealed && m.destination_account ? {
+          id: (m.destination_account as any).id,
+          kind: (m.destination_account as any).kind,
+        } : null,
       };
-    });
+    }));
 
     return NextResponse.json({
       success: true,

@@ -33,9 +33,40 @@ export async function POST(
       return NextResponse.json({ error: 'Match not found.' }, { status: 404 });
     }
 
-    if (match.status !== 'RESERVED') {
+    const isOverdue = new Date() > new Date(match.reserved_until);
+
+    if (match.status !== 'RESERVED' || isOverdue) {
+      // Lazy promotion: if reserved_until has passed, promote to ACCEPTED and log audit event
+      if (match.status === 'RESERVED' && isOverdue) {
+        await supabaseAdmin
+          .from('exchange_matches')
+          .update({
+            status: 'ACCEPTED',
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', matchId);
+
+        await supabaseAdmin.from('exchange_events').insert({
+          match_id: matchId,
+          request_id: match.request_id,
+          actor: 'system',
+          from_status: 'RESERVED',
+          to_status: 'ACCEPTED',
+          payload: {
+            action: 'lazy_transition_to_accepted',
+            reason: 'reserved_until_expired_in_cancel_free',
+            reserved_until: match.reserved_until,
+          },
+        });
+      }
+
       return NextResponse.json(
-        { error: 'امکان انصراف بدون جریمه فقط در وضعیت RESERVED (طی بازه ۳۰ دقیقه‌ای اولیه) مجاز است.' },
+        {
+          error: isOverdue
+            ? 'مهلت ۳۰ دقیقه‌ای انصراف بدون جریمه به پایان رسیده است و معامله قطعی (ACCEPTED) گردیده است. امکان انصراف بدون جریمه وجود ندارد.'
+            : `امکان انصراف بدون جریمه در وضعیت جاری (${match.status}) وجود ندارد.`,
+          code: 'reserved_window_expired',
+        },
         { status: 400 }
       );
     }
