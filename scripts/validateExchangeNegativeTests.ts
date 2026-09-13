@@ -1,501 +1,637 @@
 /**
- * Negative Test Suite for P2P Currency Exchange Schema (dre-p124)
+ * Real SQL Negative Test Suite for P2P Currency Exchange Schema (dre-p125)
  * Repository: github.com/ontripai/dorvia
  *
- * Enforces the 11 non-negotiable database integrity constraints.
- * Demonstrates for each constraint:
- *   1. Concrete invalid payload/state attempted
- *   2. Rejection under database constraint (with exact SQL exception)
- *   3. Counterfactual: without constraint, invalid state would pass silently
+ * Requirements (dre-p125):
+ * 1. Must execute REAL SQL against a live PostgreSQL instance.
+ * 2. Stubs external tables: leads, lead_documents, admin_users, auth.users + roles + auth.uid().
+ * 3. Applies migration docs/migrations/10_p2p_exchange_schema.sql.
+ * 4. Creates valid baseline fixtures before executing invalid operations.
+ * 5. Asserts that PostgreSQL actually rejects all 11 constraints (plus TRUNCATE guard on exchange_events).
+ * 6. If no database is reachable, prints a clear "NOT EXECUTED / SKIPPED" message and exits non-zero.
+ *    STRICTLY NO synthetic checkmarks or fabricated exception strings.
  */
 
 import fs from 'fs';
 import path from 'path';
+import { execSync, spawnSync } from 'child_process';
 
 const MIGRATION_PATH = path.resolve('docs/migrations/10_p2p_exchange_schema.sql');
 
-interface NegativeTestCase {
-  id: number;
-  title: string;
-  sqlConstraintName: string;
-  sqlPattern: RegExp | string;
-  description: string;
-  invalidPayload: Record<string, unknown>;
-  expectedErrorMessage: string;
-  evaluateWithoutConstraint: (payload: any) => { passed: boolean; reason: string };
-  evaluateWithConstraint: (payload: any) => { rejected: boolean; error: string };
+// Configuration from environment variables
+const PGHOST = process.env.PGHOST || '127.0.0.1';
+const PGPORT = process.env.PGPORT || '5432';
+const PGUSER = process.env.PGUSER || 'postgres';
+const PGDATABASE = process.env.PGDATABASE || 'postgres';
+const PGPASSWORD = process.env.PGPASSWORD || '';
+const TEST_DATABASE_URL = process.env.TEST_DATABASE_URL || process.env.DATABASE_URL || '';
+
+// Resolve psql binary path
+function resolvePsqlPath(): string | null {
+  if (process.env.PSQL_PATH && fs.existsSync(process.env.PSQL_PATH)) {
+    return process.env.PSQL_PATH;
+  }
+
+  // Windows standard installation paths
+  const candidateWindowsPaths = [
+    'C:\\Program Files\\PostgreSQL\\18\\bin\\psql.exe',
+    'C:\\Program Files\\PostgreSQL\\17\\bin\\psql.exe',
+    'C:\\Program Files\\PostgreSQL\\16\\bin\\psql.exe',
+    'C:\\Program Files\\PostgreSQL\\15\\bin\\psql.exe'
+  ];
+
+  for (const p of candidateWindowsPaths) {
+    if (fs.existsSync(p)) return p;
+  }
+
+  // Fallback to psql in system PATH
+  try {
+    const checkCmd = process.platform === 'win32' ? 'where psql' : 'which psql';
+    const found = execSync(checkCmd, { stdio: 'pipe' }).toString().trim().split('\n')[0].trim();
+    if (found && fs.existsSync(found)) return found;
+  } catch {
+    // Not found in PATH
+  }
+
+  return null;
 }
 
-const negativeTests: NegativeTestCase[] = [
-  // --------------------------------------------------------------------------
-  // Constraint 1: Amounts always positive numeric, never float or <= 0
-  // --------------------------------------------------------------------------
-  {
-    id: 1,
-    title: 'Monetary amounts strictly positive numeric (amount > 0, rate > 0)',
-    sqlConstraintName: 'CHECK (eur_amount > 0), CHECK (rate > 0), CHECK (amount_eur > 0)',
-    sqlPattern: /CHECK\s*\(\s*eur_amount\s*>\s*0\s*\)/,
-    description: 'Reject requests or matches with zero, negative, or float amounts',
-    invalidPayload: {
-      eur_amount: -500.0,
-      rate: 0.0,
-      irr_amount: -250000000,
-      field_type: 'numeric(14, 2)'
-    },
-    expectedErrorMessage: 'new row for relation "exchange_requests" violates check constraint "chk_exchange_requests_eur_amount_check"',
-    evaluateWithoutConstraint: (p) => ({
-      passed: true,
-      reason: 'Without CHECK (eur_amount > 0), negative credit (-500 EUR) was accepted into exchange_requests'
-    }),
-    evaluateWithConstraint: (p) => {
-      if (p.eur_amount <= 0 || p.rate <= 0 || p.irr_amount <= 0) {
-        return {
-          rejected: true,
-          error: 'CHECK constraint violation: (eur_amount > 0 AND rate > 0 AND irr_amount > 0). Negative or zero amount rejected.'
-        };
-      }
-      return { rejected: false, error: '' };
-    }
-  },
+const psqlBin = resolvePsqlPath();
 
-  // --------------------------------------------------------------------------
-  // Constraint 2: Sum of active matches does not exceed request amount
-  // --------------------------------------------------------------------------
-  {
-    id: 2,
-    title: 'Total matches amount_eur <= request.eur_amount',
-    sqlConstraintName: 'trg_exchange_matches_validate_request_capacity',
-    sqlPattern: /Total active matches amount_eur \(%\) exceeds request eur_amount/,
-    description: 'Reject match creation when total allocated EUR exceeds available request capacity',
-    invalidPayload: {
-      request_eur_amount: 1000.0,
-      existing_active_matches_eur: 600.0,
-      attempted_new_match_eur: 500.0 // Total = 1100.0 > 1000.0
-    },
-    expectedErrorMessage: 'Total active matches amount_eur (1100) exceeds request eur_amount (1000)',
-    evaluateWithoutConstraint: (p) => ({
-      passed: true,
-      reason: 'Without capacity trigger, 1,100 EUR allocated against a 1,000 EUR request (110% over-allocation)'
-    }),
-    evaluateWithConstraint: (p) => {
-      const total = p.existing_active_matches_eur + p.attempted_new_match_eur;
-      if (total > p.request_eur_amount) {
-        return {
-          rejected: true,
-          error: `Total active matches amount_eur (${total}) exceeds request eur_amount (${p.request_eur_amount})`
-        };
-      }
-      return { rejected: false, error: '' };
-    }
-  },
-
-  // --------------------------------------------------------------------------
-  // Constraint 3: If allow_partial = false, only single match allowed for full amount
-  // --------------------------------------------------------------------------
-  {
-    id: 3,
-    title: 'allow_partial = false requires single match exactly equal to request amount',
-    sqlConstraintName: 'trg_exchange_matches_validate_request_capacity (allow_partial)',
-    sqlPattern: /does not allow partial matches: match amount \(%\) must exactly equal request amount/,
-    description: 'Reject partial match or secondary match on an all-or-nothing exchange request',
-    invalidPayload: {
-      allow_partial: false,
-      request_eur_amount: 1000.0,
-      attempted_match_eur: 400.0 // 400 != 1000
-    },
-    expectedErrorMessage: 'Request does not allow partial matches: match amount (400) must exactly equal request amount (1000)',
-    evaluateWithoutConstraint: (p) => ({
-      passed: true,
-      reason: 'Without allow_partial check, 400 EUR chunk was matched against a non-partial 1,000 EUR order'
-    }),
-    evaluateWithConstraint: (p) => {
-      if (!p.allow_partial && p.attempted_match_eur !== p.request_eur_amount) {
-        return {
-          rejected: true,
-          error: `Request does not allow partial matches: match amount (${p.attempted_match_eur}) must exactly equal request amount (${p.request_eur_amount})`
-        };
-      }
-      return { rejected: false, error: '' };
-    }
-  },
-
-  // --------------------------------------------------------------------------
-  // Constraint 4: Romanian account to self/authorized recipient; Iranian to self/related party
-  // --------------------------------------------------------------------------
-  {
-    id: 4,
-    title: 'Strict destination account ownership segregation (RO_IBAN vs IR_SHEBA/CARD)',
-    sqlConstraintName: 'chk_acc_ro_iban_no_related + trg_exchange_accounts_validate_destination',
-    sqlPattern: /Romanian accounts \(RO_IBAN\) cannot link to exchange_related_parties/,
-    description: 'Reject linking Romanian IBAN to Iranian related party or unapproved recipient',
-    invalidPayload: {
-      account_kind: 'RO_IBAN',
-      related_party_id: 'c1b51e04-d4b9-4a49-9c59-86000e3f22a1', // Illegal for RO_IBAN
-      authorized_recipient_id: null
-    },
-    expectedErrorMessage: 'Romanian accounts (RO_IBAN) cannot link to exchange_related_parties',
-    evaluateWithoutConstraint: (p) => ({
-      passed: true,
-      reason: 'Without segregation constraint, Romanian IBAN was linked to an Iranian related party entity'
-    }),
-    evaluateWithConstraint: (p) => {
-      if (p.account_kind === 'RO_IBAN' && p.related_party_id !== null) {
-        return {
-          rejected: true,
-          error: 'Romanian accounts (RO_IBAN) cannot link to exchange_related_parties'
-        };
-      }
-      return { rejected: false, error: '' };
-    }
-  },
-
-  // --------------------------------------------------------------------------
-  // Constraint 5: Related party company must be own_company with document
-  // --------------------------------------------------------------------------
-  {
-    id: 5,
-    title: 'exchange_related_parties company must have relationship=own_company and id_document_id',
-    sqlConstraintName: 'chk_related_party_company_own + chk_related_party_company_doc',
-    sqlPattern: /chk_related_party_company_own CHECK \(party_type != 'company' OR relationship = 'own_company'\)/,
-    description: 'Reject company related party with relationship != own_company or approved without document',
-    invalidPayload: {
-      party_type: 'company',
-      relationship: 'sibling', // Invalid for company
-      status: 'approved',
-      id_document_id: null // Missing document
-    },
-    expectedErrorMessage: 'violates check constraint "chk_related_party_company_own"',
-    evaluateWithoutConstraint: (p) => ({
-      passed: true,
-      reason: 'Without company ownership constraint, corporate entity registered as "sibling" without registration document'
-    }),
-    evaluateWithConstraint: (p) => {
-      if (p.party_type === 'company' && p.relationship !== 'own_company') {
-        return {
-          rejected: true,
-          error: 'CHECK constraint violation: party_type company requires relationship = own_company'
-        };
-      }
-      if (p.party_type === 'company' && p.status === 'approved' && !p.id_document_id) {
-        return {
-          rejected: true,
-          error: 'CHECK constraint violation: company cannot be approved without id_document_id'
-        };
-      }
-      return { rejected: false, error: '' };
-    }
-  },
-
-  // --------------------------------------------------------------------------
-  // Constraint 6: exchange_authorized_recipients recipient_lead_id must have approved profile
-  // --------------------------------------------------------------------------
-  {
-    id: 6,
-    title: 'Authorized recipient lead must have approved exchange_profile',
-    sqlConstraintName: 'trg_exchange_authorized_recipients_validate_approval',
-    sqlPattern: /must have an approved exchange_profile before recipient authorization can be approved/,
-    description: 'Reject approving authorized recipient when target lead is not approved on exchange',
-    invalidPayload: {
-      recipient_lead_id: '99999999-9999-9999-9999-999999999999',
-      recipient_exchange_status: 'pending', // NOT approved
-      recipient_authorization_status: 'approved'
-    },
-    expectedErrorMessage: 'recipient_lead_id (99999999-9999-9999-9999-999999999999) must have an approved exchange_profile before recipient authorization can be approved',
-    evaluateWithoutConstraint: (p) => ({
-      passed: true,
-      reason: 'Without KYC profile trigger, unverified third party was approved as Romanian cash recipient'
-    }),
-    evaluateWithConstraint: (p) => {
-      if (p.recipient_authorization_status === 'approved' && p.recipient_exchange_status !== 'approved') {
-        return {
-          rejected: true,
-          error: `recipient_lead_id (${p.recipient_lead_id}) must have an approved exchange_profile before recipient authorization can be approved`
-        };
-      }
-      return { rejected: false, error: '' };
-    }
-  },
-
-  // --------------------------------------------------------------------------
-  // Constraint 7: Settlement prerequisites (IRR_CONFIRMED, office payout, supervisor)
-  // --------------------------------------------------------------------------
-  {
-    id: 7,
-    title: 'Settlement prerequisites (previous IRR_CONFIRMED, payout record, supervisor check)',
-    sqlConstraintName: 'trg_exchange_matches_validate_settled',
-    sqlPattern: /Cannot settle match % without an exchange_office_payouts record/,
-    description: 'Reject transition to SETTLED when EUR office payout record does not exist',
-    invalidPayload: {
-      current_match_status: 'IRR_CONFIRMED',
-      target_match_status: 'SETTLED',
-      office_payout_records_count: 0 // No payout recorded!
-    },
-    expectedErrorMessage: 'Cannot settle match without an exchange_office_payouts record',
-    evaluateWithoutConstraint: (p) => ({
-      passed: true,
-      reason: 'Without settlement trigger, trade was settled before EUR payout occurred at Bucharest partner counter'
-    }),
-    evaluateWithConstraint: (p) => {
-      if (p.target_match_status === 'SETTLED' && p.office_payout_records_count === 0) {
-        return {
-          rejected: true,
-          error: 'Cannot settle match without an exchange_office_payouts record'
-        };
-      }
-      return { rejected: false, error: '' };
-    }
-  },
-
-  // --------------------------------------------------------------------------
-  // Constraint 8: Concurrency serialization via row locking RPC
-  // --------------------------------------------------------------------------
-  {
-    id: 8,
-    title: 'Concurrency protection: SELECT FOR UPDATE on exchange_requests row',
-    sqlConstraintName: 'fn_exchange_reserve_request_match (FOR UPDATE row lock)',
-    sqlPattern: /SELECT \* INTO v_request[\s\S]*?FROM public\.exchange_requests[\s\S]*?FOR UPDATE;/,
-    description: 'Prevent two concurrent transactions from simultaneously claiming the same request',
-    invalidPayload: {
-      request_status: 'fully_matched',
-      attempted_race_match_eur: 1000.0,
-      concurrent_call: 2
-    },
-    expectedErrorMessage: 'Exchange request is not open for matching (status: fully_matched)',
-    evaluateWithoutConstraint: (p) => ({
-      passed: true,
-      reason: 'Without FOR UPDATE row locking, both concurrent callers read "open" and double-spend the 1,000 EUR request'
-    }),
-    evaluateWithConstraint: (p) => {
-      if (p.request_status !== 'open' && p.request_status !== 'partially_matched') {
-        return {
-          rejected: true,
-          error: `Exchange request is not open for matching (status: ${p.request_status})`
-        };
-      }
-      return { rejected: false, error: '' };
-    }
-  },
-
-  // --------------------------------------------------------------------------
-  // Constraint 9: exchange_events strictly append-only
-  // --------------------------------------------------------------------------
-  {
-    id: 9,
-    title: 'exchange_events is strictly append-only (reject UPDATE and DELETE)',
-    sqlConstraintName: 'trg_exchange_events_prevent_mutation',
-    sqlPattern: /exchange_events is append-only: updates and deletes are prohibited/,
-    description: 'Reject any attempt to modify or delete audit log entries in exchange_events',
-    invalidPayload: {
-      attempted_operation: 'UPDATE',
-      target_table: 'exchange_events',
-      mutation: { to_status: 'TAMPERED' }
-    },
-    expectedErrorMessage: 'exchange_events is append-only: updates and deletes are prohibited',
-    evaluateWithoutConstraint: (p) => ({
-      passed: true,
-      reason: 'Without append-only trigger, historical audit event record was altered/tampered'
-    }),
-    evaluateWithConstraint: (p) => {
-      if (p.attempted_operation === 'UPDATE' || p.attempted_operation === 'DELETE') {
-        return {
-          rejected: true,
-          error: 'exchange_events is append-only: updates and deletes are prohibited'
-        };
-      }
-      return { rejected: false, error: '' };
-    }
-  },
-
-  // --------------------------------------------------------------------------
-  // Constraint 10: Legal state machine transitions enforcement
-  // --------------------------------------------------------------------------
-  {
-    id: 10,
-    title: 'State machine transition validation (prohibit skipping states)',
-    sqlConstraintName: 'trg_exchange_matches_validate_transition',
-    sqlPattern: /Illegal state machine transition from % to % for match %/,
-    description: 'Reject illegal skip jump directly from ACCEPTED to SETTLED',
-    invalidPayload: {
-      from_status: 'ACCEPTED',
-      to_status: 'SETTLED' // Illegal leap bypassing EUR/IRR confirmations
-    },
-    expectedErrorMessage: 'Illegal state machine transition from ACCEPTED to SETTLED',
-    evaluateWithoutConstraint: (p) => ({
-      passed: true,
-      reason: 'Without state machine trigger, trade jumped from ACCEPTED directly to SETTLED bypassing payment proofs'
-    }),
-    evaluateWithConstraint: (p) => {
-      const allowedTransitions: Record<string, string[]> = {
-        RESERVED: ['ACCEPTED', 'CANCELLED_FREE', 'EXPIRED'],
-        ACCEPTED: ['EUR_RECEIVED', 'EXPIRED', 'DISPUTED'],
-        EUR_RECEIVED: ['IRR_PROOF_SUBMITTED', 'EXPIRED', 'DISPUTED', 'REFUNDED'],
-        IRR_PROOF_SUBMITTED: ['IRR_CONFIRMED', 'EXPIRED', 'DISPUTED'],
-        IRR_CONFIRMED: ['SETTLED', 'DISPUTED'],
-        DISPUTED: ['SETTLED', 'REFUNDED']
-      };
-
-      const allowed = allowedTransitions[p.from_status] || [];
-      if (!allowed.includes(p.to_status)) {
-        return {
-          rejected: true,
-          error: `Illegal state machine transition from ${p.from_status} to ${p.to_status}`
-        };
-      }
-      return { rejected: false, error: '' };
-    }
-  },
-
-  // --------------------------------------------------------------------------
-  // Constraint 11 (Addendum 2): IRR_CONFIRMED requires receiver proof of transfer
-  // --------------------------------------------------------------------------
-  {
-    id: 11,
-    title: 'Transition to IRR_CONFIRMED requires receiver proof (side = receiver) in exchange_transfer_proofs',
-    sqlConstraintName: 'trg_exchange_matches_validate_irr_confirmed',
-    sqlPattern: /Cannot transition match % to IRR_CONFIRMED without receiver proof of transfer in exchange_transfer_proofs/,
-    description: 'Reject IRR_CONFIRMED when only payer uploaded proof and receiver proof is missing',
-    invalidPayload: {
-      target_status: 'IRR_CONFIRMED',
-      payer_proof_uploaded: true,
-      receiver_proof_uploaded: false // Addendum 2: Must have receiver proof
-    },
-    expectedErrorMessage: 'Cannot transition match to IRR_CONFIRMED without receiver proof of transfer in exchange_transfer_proofs',
-    evaluateWithoutConstraint: (p) => ({
-      passed: true,
-      reason: 'Without receiver proof trigger, Iranian payment confirmed solely on payer claim without bank statement from receiver'
-    }),
-    evaluateWithConstraint: (p) => {
-      if (p.target_status === 'IRR_CONFIRMED' && !p.receiver_proof_uploaded) {
-        return {
-          rejected: true,
-          error: 'Cannot transition match to IRR_CONFIRMED without receiver proof of transfer in exchange_transfer_proofs'
-        };
-      }
-      return { rejected: false, error: '' };
-    }
+// Execute a SQL statement or file via psql
+function runPsql(sqlCommand: string, dbName: string = PGDATABASE): { success: boolean; stdout: string; stderr: string; code: number } {
+  if (!psqlBin) {
+    return { success: false, stdout: '', stderr: 'psql binary not found on system', code: 127 };
   }
-];
 
-// ============================================================================
-// Main Execution Runner
-// ============================================================================
+  const args = [
+    '-h', PGHOST,
+    '-p', PGPORT,
+    '-U', PGUSER,
+    '-d', dbName,
+    '-w', // never prompt for password
+    '-v', 'ON_ERROR_STOP=1',
+    '-c', sqlCommand
+  ];
+
+  const env = {
+    ...process.env,
+    PGPASSWORD
+  };
+
+  const proc = spawnSync(psqlBin, args, {
+    env,
+    encoding: 'utf-8',
+    timeout: 10000
+  });
+
+  return {
+    success: proc.status === 0,
+    stdout: proc.stdout || '',
+    stderr: proc.stderr || '',
+    code: proc.status ?? 1
+  };
+}
+
+// Execute a SQL file via psql
+function runPsqlFile(filePath: string, dbName: string = PGDATABASE): { success: boolean; stdout: string; stderr: string; code: number } {
+  if (!psqlBin) {
+    return { success: false, stdout: '', stderr: 'psql binary not found on system', code: 127 };
+  }
+
+  const args = [
+    '-h', PGHOST,
+    '-p', PGPORT,
+    '-U', PGUSER,
+    '-d', dbName,
+    '-w',
+    '-v', 'ON_ERROR_STOP=1',
+    '-f', filePath
+  ];
+
+  const env = {
+    ...process.env,
+    PGPASSWORD
+  };
+
+  const proc = spawnSync(psqlBin, args, {
+    env,
+    encoding: 'utf-8',
+    timeout: 30000
+  });
+
+  return {
+    success: proc.status === 0,
+    stdout: proc.stdout || '',
+    stderr: proc.stderr || '',
+    code: proc.status ?? 1
+  };
+}
 
 async function main() {
   console.log('============================================================================');
-  console.log('DORVIA P2P Currency Exchange Database Integrity Validation Suite (dre-p124)');
+  console.log('DORVIA P2P Currency Exchange Real SQL Negative Test Suite (dre-p125)');
   console.log('============================================================================\n');
 
   if (!fs.existsSync(MIGRATION_PATH)) {
-    console.error(`❌ Migration file not found at: ${MIGRATION_PATH}`);
+    console.error(`❌ Migration file not found: ${MIGRATION_PATH}`);
     process.exit(1);
   }
 
-  const migrationSql = fs.readFileSync(MIGRATION_PATH, 'utf-8');
-  console.log(`Loaded migration: ${path.basename(MIGRATION_PATH)} (${migrationSql.length} bytes, ${migrationSql.split('\n').length} lines)\n`);
-
-  console.log('Database Environment:');
-  console.log('- Supabase remote execution: STRICTLY PROHIBITED per brief rules.');
-  console.log('- Local PostgreSQL (port 5432): Detected, but requires credentials (fe_sendauth).');
-  console.log('- Validation Strategy: Comprehensive SQL AST & constraint contract mutation tests.');
-  console.log('  Each test proves: (1) Invalid state rejected with constraint, (2) Would pass without constraint.\n');
-
-  let allPassed = true;
-
-  for (const test of negativeTests) {
-    console.log(`----------------------------------------------------------------------------`);
-    console.log(`[TEST #${test.id}] ${test.title}`);
-    console.log(`Database Enforcement: ${test.sqlConstraintName}`);
-    console.log(`Description: ${test.description}`);
-    console.log(`Invalid Payload Attempted:`, JSON.stringify(test.invalidPayload, null, 2));
-
-    // Step A: Verify constraint exists in SQL migration file
-    const patternMatches = typeof test.sqlPattern === 'string'
-      ? migrationSql.includes(test.sqlPattern)
-      : test.sqlPattern.test(migrationSql);
-
-    if (!patternMatches) {
-      console.error(`❌ FAILED: SQL migration is missing expected constraint pattern: ${test.sqlPattern}`);
-      allPassed = false;
-      continue;
-    }
-    console.log(`✓ Migration SQL Verification: Constraint/Trigger pattern located in 10_p2p_exchange_schema.sql`);
-
-    // Step B: Counterfactual test (Without constraint)
-    const counterfactual = test.evaluateWithoutConstraint(test.invalidPayload);
-    if (counterfactual.passed) {
-      console.log(`⚠️  COUNTERFACTUAL (Without Constraint): PASSED SILENTLY`);
-      console.log(`   Vulnerability: ${counterfactual.reason}`);
-    } else {
-      console.error(`❌ Error in counterfactual evaluation`);
-      allPassed = false;
-    }
-
-    // Step C: Negative test (With constraint)
-    const withConstraint = test.evaluateWithConstraint(test.invalidPayload);
-    if (withConstraint.rejected) {
-      console.log(`🛑 CONSTRAINT ENFORCEMENT (With Constraint): REJECTED AS EXPECTED`);
-      console.log(`   SQL Exception: "${withConstraint.error}"`);
-      console.log(`✅ RESULT: TEST #${test.id} PASSED (Invalid state caught and prevented)`);
-    } else {
-      console.error(`❌ FAILED: Constraint did not reject invalid payload!`);
-      allPassed = false;
-    }
-    console.log();
+  if (!psqlBin) {
+    console.error('❌ Diagnostic: psql binary was not found in standard paths or PATH.');
+    console.error('   Execution Result: SKIPPED (PostgreSQL client tooling missing).');
+    process.exit(1);
   }
 
-  // Section: Structural Anti-Float & RLS Integrity Verification
-  console.log('============================================================================');
-  console.log('STRUCTURAL SAFETY CHECKS (Anti-Float, Strict Numeric, RLS & Append-Only)');
-  console.log('============================================================================');
+  console.log(`Using psql binary: ${psqlBin}`);
+  console.log(`Target database: ${PGUSER}@${PGHOST}:${PGPORT}/${PGDATABASE}\n`);
 
-  // Check 1: Anti-Float
-  const hasFloat = /\b(float|real|double precision)\b/i.test(migrationSql);
-  if (hasFloat) {
-    console.error('❌ FAILED: Schema contains float/real/double precision types! Only numeric is permitted.');
-    allPassed = false;
-  } else {
-    console.log('✓ Anti-Float Rule: ZERO float/real types found. All monetary values use numeric.');
-  }
+  // Step 1: Probe live database connectivity
+  console.log('Probing PostgreSQL connection...');
+  const probe = runPsql('SELECT version();');
 
-  // Check 2: All 16 tables have RLS enabled
-  const rlsTableMatches = migrationSql.match(/ALTER TABLE public\.\w+ ENABLE ROW LEVEL SECURITY;/g) || [];
-  console.log(`✓ Row Level Security: ${rlsTableMatches.length} tables have ENABLE ROW LEVEL SECURITY defined.`);
-  if (rlsTableMatches.length < 16) {
-    console.error(`❌ FAILED: Expected 16 tables with RLS enabled, found ${rlsTableMatches.length}`);
-    allPassed = false;
-  }
-
-  // Check 3: Addendum 1 (exchange_partners country RO|IR)
-  const hasPartnerCountry = /country text NOT NULL CHECK \(country IN \('RO', 'IR'\)\)/.test(migrationSql);
-  if (hasPartnerCountry) {
-    console.log('✓ Addendum 1 Verified: exchange_partners.country includes RO and IR check constraint.');
-  } else {
-    console.error('❌ FAILED: exchange_partners missing country RO|IR check constraint.');
-    allPassed = false;
-  }
-
-  // Check 4: Addendum 2 (exchange_transfer_proofs side payer|receiver)
-  const hasProofSide = /side text NOT NULL CHECK \(side IN \('payer', 'receiver'\)\)/.test(migrationSql);
-  if (hasProofSide) {
-    console.log('✓ Addendum 2 Verified: exchange_transfer_proofs.side includes payer and receiver check constraint.');
-  } else {
-    console.error('❌ FAILED: exchange_transfer_proofs missing side payer|receiver constraint.');
-    allPassed = false;
-  }
-
-  console.log('============================================================================');
-  if (allPassed) {
-    console.log('🎉 ALL 11 NEGATIVE TESTS & STRUCTURAL INTEGRITY AUDITS PASSED SUCCESSFULLY!');
-    console.log('============================================================================');
-    process.exit(0);
-  } else {
-    console.error('❌ SOME TESTS FAILED. See error output above.');
+  if (!probe.success) {
+    console.log('----------------------------------------------------------------------------');
+    console.log('DATABASE CONNECTION STATUS: UNAVAILABLE / CONNECTION FAILED');
+    console.log(`Connection error details:\n${probe.stderr.trim() || probe.stdout.trim() || 'Unknown connection error'}`);
+    console.log('----------------------------------------------------------------------------');
+    console.log('Execution Result: SKIPPED (No local or test PostgreSQL database could be reached).');
+    console.log('Strict Brief Rule (dre-p125):');
+    console.log('  "اگر دیتابیسی در دسترس نبود، اسکریپت باید با پیام روشن skip شود و کد خروجی غیرصفر بدهد');
+    console.log('   یا صریح بگوید «اجرا نشد» — نه اینکه خروجی موفقیت‌آمیز چاپ کند.');
+    console.log('   هیچ ✅ ای چاپ نشود مگر برای چیزی که واقعاً اجرا شده."\n');
+    console.log('To run this test against a live PostgreSQL instance, set credentials in environment:');
+    console.log('  Windows PowerShell:');
+    console.log('    $env:PGPASSWORD = "your_postgres_password"');
+    console.log('    $env:PGPORT = "5432"');
+    console.log('    npm run validate:exchange-negative');
     console.log('============================================================================');
     process.exit(1);
+  }
+
+  console.log(`Connected to live PostgreSQL:\n  ${probe.stdout.trim().split('\n')[0]}\n`);
+
+  // Step 2: Setup isolated test schema / database
+  const TEST_DB = 'dorvia_p2p_exchange_test_runner';
+  console.log(`Creating isolated database/environment: ${TEST_DB}...`);
+  runPsql(`DROP DATABASE IF EXISTS ${TEST_DB};`);
+  const createDb = runPsql(`CREATE DATABASE ${TEST_DB};`);
+  if (!createDb.success) {
+    console.error(`Failed to create test database ${TEST_DB}:\n${createDb.stderr}`);
+    process.exit(1);
+  }
+
+  try {
+    // Step 3: Stubs for external dependencies (auth.users, leads, lead_documents, admin_users, auth roles)
+    console.log('Applying external schema stubs (leads, lead_documents, admin_users, auth.users, roles)...');
+    const stubsSql = `
+      CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+      CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+      -- Auth schema & mock auth.uid()
+      CREATE SCHEMA IF NOT EXISTS auth;
+      CREATE TABLE IF NOT EXISTS auth.users (
+        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+        email text,
+        created_at timestamptz DEFAULT now()
+      );
+
+      CREATE OR REPLACE FUNCTION auth.uid()
+      RETURNS uuid
+      LANGUAGE sql STABLE
+      AS $$
+        SELECT '00000000-0000-0000-0000-000000000001'::uuid;
+      $$;
+
+      -- Roles expected by Supabase RLS
+      DO $$
+      BEGIN
+        IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'authenticated') THEN
+          CREATE ROLE authenticated;
+        END IF;
+        IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'anon') THEN
+          CREATE ROLE anon;
+        END IF;
+        IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'service_role') THEN
+          CREATE ROLE service_role;
+        END IF;
+      END $$;
+
+      -- Existing tables referenced by exchange schema
+      CREATE TABLE IF NOT EXISTS public.leads (
+        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+        user_id uuid REFERENCES auth.users(id),
+        email text,
+        full_name text,
+        phone text,
+        national_id_or_passport text,
+        verified_at timestamptz,
+        created_at timestamptz DEFAULT now()
+      );
+
+      CREATE TABLE IF NOT EXISTS public.lead_documents (
+        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+        lead_id uuid NOT NULL REFERENCES public.leads(id) ON DELETE CASCADE,
+        document_type text NOT NULL,
+        file_path text NOT NULL,
+        created_at timestamptz DEFAULT now()
+      );
+
+      CREATE TABLE IF NOT EXISTS public.admin_users (
+        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+        user_id uuid REFERENCES auth.users(id),
+        email text NOT NULL,
+        role text NOT NULL DEFAULT 'admin',
+        is_active boolean NOT NULL DEFAULT true,
+        created_at timestamptz DEFAULT now()
+      );
+    `;
+
+    const stubResult = runPsql(stubsSql, TEST_DB);
+    if (!stubResult.success) {
+      console.error(`Failed to apply external stubs:\n${stubResult.stderr}`);
+      process.exit(1);
+    }
+    console.log('Stubs applied successfully.');
+
+    // Step 4: Apply 10_p2p_exchange_schema.sql
+    console.log(`Applying migration: ${path.basename(MIGRATION_PATH)}...`);
+    const migResult = runPsqlFile(MIGRATION_PATH, TEST_DB);
+    if (!migResult.success) {
+      console.error(`Failed to execute migration:\n${migResult.stderr}`);
+      process.exit(1);
+    }
+    console.log('Migration executed with zero errors.\n');
+
+    // Step 5: Seed valid baseline data
+    console.log('Seeding baseline fixtures (users, leads, exchange profiles, accounts, open request)...');
+    const seedSql = `
+      -- Mock users & leads
+      INSERT INTO auth.users (id, email) VALUES
+        ('00000000-0000-0000-0000-000000000001', 'actor@dorvia.ro'),
+        ('11111111-1111-1111-1111-111111111111', 'user1@dorvia.ro'),
+        ('22222222-2222-2222-2222-222222222222', 'user2@dorvia.ro'),
+        ('33333333-3333-3333-3333-333333333333', 'user3@dorvia.ro');
+
+      INSERT INTO public.admin_users (id, user_id, email) VALUES
+        ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', '00000000-0000-0000-0000-000000000001', 'admin@dorvia.ro');
+
+      INSERT INTO public.leads (id, user_id, email, full_name, verified_at) VALUES
+        ('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', '11111111-1111-1111-1111-111111111111', 'requester@dorvia.ro', 'Ali Rezai', now()),
+        ('cccccccc-cccc-cccc-cccc-cccccccccccc', '22222222-2222-2222-2222-222222222222', 'acceptor@dorvia.ro', 'Elena Popescu', now()),
+        ('dddddddd-dddd-dddd-dddd-dddddddddddd', '33333333-3333-3333-3333-333333333333', 'thirdparty@dorvia.ro', 'Mihai Radu', now());
+
+      INSERT INTO public.exchange_profiles (id, lead_id, exchange_status, approved_at) VALUES
+        ('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'approved', now()),
+        ('ffffffff-ffff-ffff-ffff-ffffffffffff', 'cccccccc-cccc-cccc-cccc-cccccccccccc', 'approved', now());
+      -- Note: dddddddd is intentionally left NOT approved for recipient tests
+
+      -- Valid destination accounts
+      INSERT INTO public.exchange_accounts (id, lead_id, kind, value, holder_name) VALUES
+        ('10000000-0000-0000-0000-000000000001', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'IR_SHEBA', 'IR120000000000000000000001', 'Ali Rezai'),
+        ('10000000-0000-0000-0000-000000000002', 'cccccccc-cccc-cccc-cccc-cccccccccccc', 'RO_IBAN', 'RO49BTRL0000000000000002', 'Elena Popescu');
+
+      -- Base exchange request: 1000 EUR @ 60000 = 60,000,000 IRR, allow_partial = false
+      INSERT INTO public.exchange_requests (
+        id, requester_lead_id, direction, eur_currency, eur_amount, rate, irr_amount, allow_partial, destination_account_id, expires_at
+      ) VALUES (
+        '20000000-0000-0000-0000-000000000001',
+        'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+        'RO_TO_IR',
+        'EUR',
+        1000.00,
+        60000.0000,
+        60000000,
+        false,
+        '10000000-0000-0000-0000-000000000001',
+        now() + interval '2 days'
+      );
+
+      -- Base exchange request allowing partial matching: 1000 EUR
+      INSERT INTO public.exchange_requests (
+        id, requester_lead_id, direction, eur_currency, eur_amount, rate, irr_amount, allow_partial, destination_account_id, expires_at
+      ) VALUES (
+        '20000000-0000-0000-0000-000000000002',
+        'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+        'RO_TO_IR',
+        'EUR',
+        1000.00,
+        60000.0000,
+        60000000,
+        true,
+        '10000000-0000-0000-0000-000000000001',
+        now() + interval '2 days'
+      );
+    `;
+
+    const seedResult = runPsql(seedSql, TEST_DB);
+    if (!seedResult.success) {
+      console.error(`Failed to seed baseline data:\n${seedResult.stderr}`);
+      process.exit(1);
+    }
+    console.log('Baseline data seeded successfully.\n');
+
+    // Step 6: Execute Real Negative SQL Tests
+    interface RealSqlTest {
+      id: string;
+      name: string;
+      sql: string;
+      expectedErrorPattern: RegExp | string;
+    }
+
+    const realTests: RealSqlTest[] = [
+      // Test 1: Negative amount check
+      {
+        id: '1',
+        name: 'Constraint 1: Monetary amounts strictly positive numeric (amount > 0)',
+        sql: `
+          INSERT INTO public.exchange_requests (
+            requester_lead_id, direction, eur_currency, eur_amount, rate, irr_amount, destination_account_id, expires_at
+          ) VALUES (
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'RO_TO_IR', 'EUR', -500.00, 60000, -30000000, '10000000-0000-0000-0000-000000000001', now() + interval '1 day'
+          );
+        `,
+        expectedErrorPattern: /violates check constraint.*eur_amount/i
+      },
+      // Test 2: Sum of active matches exceeds request
+      {
+        id: '2',
+        name: 'Constraint 2: Sum of matches exceeds request amount (600 + 500 > 1000)',
+        sql: `
+          -- First match 600 EUR on partial request 20000000-0000-0000-0000-000000000002
+          INSERT INTO public.exchange_matches (
+            request_id, acceptor_lead_id, amount_eur, rate_snapshot, amount_irr, status,
+            eur_payer_lead_id, eur_receiver_lead_id, irr_payer_lead_id, irr_receiver_lead_id,
+            destination_account_id, reserved_until
+          ) VALUES (
+            '20000000-0000-0000-0000-000000000002', 'cccccccc-cccc-cccc-cccc-cccccccccccc', 600.00, 60000, 36000000, 'RESERVED',
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+            '10000000-0000-0000-0000-000000000002', now() + interval '30 minutes'
+          );
+
+          -- Second match attempts 500 EUR (Total = 1100 > 1000)
+          INSERT INTO public.exchange_matches (
+            request_id, acceptor_lead_id, amount_eur, rate_snapshot, amount_irr, status,
+            eur_payer_lead_id, eur_receiver_lead_id, irr_payer_lead_id, irr_receiver_lead_id,
+            destination_account_id, reserved_until
+          ) VALUES (
+            '20000000-0000-0000-0000-000000000002', 'cccccccc-cccc-cccc-cccc-cccccccccccc', 500.00, 60000, 30000000, 'RESERVED',
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+            '10000000-0000-0000-0000-000000000002', now() + interval '30 minutes'
+          );
+        `,
+        expectedErrorPattern: /exceeds request eur_amount/i
+      },
+      // Test 3: Partial match when allow_partial = false
+      {
+        id: '3',
+        name: 'Constraint 3: Partial match on allow_partial = false request',
+        sql: `
+          INSERT INTO public.exchange_matches (
+            request_id, acceptor_lead_id, amount_eur, rate_snapshot, amount_irr, status,
+            eur_payer_lead_id, eur_receiver_lead_id, irr_payer_lead_id, irr_receiver_lead_id,
+            destination_account_id, reserved_until
+          ) VALUES (
+            '20000000-0000-0000-0000-000000000001', 'cccccccc-cccc-cccc-cccc-cccccccccccc', 400.00, 60000, 24000000, 'RESERVED',
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+            '10000000-0000-0000-0000-000000000002', now() + interval '30 minutes'
+          );
+        `,
+        expectedErrorPattern: /does not allow partial matches/i
+      },
+      // Test 4: RO_IBAN linked to related party
+      {
+        id: '4',
+        name: 'Constraint 4: RO_IBAN destination linked to Iranian related party',
+        sql: `
+          -- Seed related party first
+          INSERT INTO public.exchange_related_parties (
+            id, lead_id, party_type, full_name, relationship, national_id, country, status
+          ) VALUES (
+            '30000000-0000-0000-0000-000000000001', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'person', 'Hassan Rezai', 'father', '0011223344', 'IR', 'approved'
+          );
+
+          -- Attempt linking RO_IBAN to related party
+          INSERT INTO public.exchange_accounts (
+            lead_id, kind, value, holder_name, related_party_id
+          ) VALUES (
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'RO_IBAN', 'RO49BTRL0000000000000099', 'Hassan Rezai', '30000000-0000-0000-0000-000000000001'
+          );
+        `,
+        expectedErrorPattern: /chk_acc_ro_iban_no_related|Romanian accounts \(RO_IBAN\) cannot link to exchange_related_parties/i
+      },
+      // Test 5: Company party with relationship != own_company
+      {
+        id: '5',
+        name: 'Constraint 5: Related party company with relationship != own_company',
+        sql: `
+          INSERT INTO public.exchange_related_parties (
+            lead_id, party_type, full_name, relationship, national_id, country, status
+          ) VALUES (
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'company', 'Tehran Trading SRL', 'sibling', '10101010101', 'IR', 'pending'
+          );
+        `,
+        expectedErrorPattern: /chk_related_party_company_own/i
+      },
+      // Test 6: Approving authorized recipient whose lead exchange profile is unapproved
+      {
+        id: '6',
+        name: 'Constraint 6: Approving authorized recipient whose profile is not approved',
+        sql: `
+          -- Recipient lead dddddddd is NOT approved in exchange_profiles
+          INSERT INTO public.exchange_authorized_recipients (
+            lead_id, recipient_lead_id, relationship, status
+          ) VALUES (
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'dddddddd-dddd-dddd-dddd-dddddddddddd', 'Friend', 'approved'
+          );
+        `,
+        expectedErrorPattern: /must have an approved exchange_profile/i
+      },
+      // Test 7: Match transition to SETTLED without office payout record
+      {
+        id: '7',
+        name: 'Constraint 7: Transition to SETTLED without office payout record',
+        sql: `
+          -- Create match in IRR_CONFIRMED state
+          INSERT INTO public.exchange_matches (
+            id, request_id, acceptor_lead_id, amount_eur, rate_snapshot, amount_irr, status,
+            eur_payer_lead_id, eur_receiver_lead_id, irr_payer_lead_id, irr_receiver_lead_id,
+            destination_account_id, reserved_until
+          ) VALUES (
+            '40000000-0000-0000-0000-000000000001', '20000000-0000-0000-0000-000000000001', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            1000.00, 60000, 60000000, 'IRR_CONFIRMED',
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+            '10000000-0000-0000-0000-000000000002', now() + interval '1 hour'
+          );
+
+          -- Attempt SETTLED without exchange_office_payouts record
+          UPDATE public.exchange_matches
+          SET status = 'SETTLED'
+          WHERE id = '40000000-0000-0000-0000-000000000001';
+        `,
+        expectedErrorPattern: /without an exchange_office_payouts record/i
+      },
+      // Test 8: Concurrency serialization on reserve function
+      {
+        id: '8',
+        name: 'Constraint 8: Concurrency reserve on non-open request',
+        sql: `
+          -- Mark request cancelled
+          UPDATE public.exchange_requests
+          SET status = 'cancelled'
+          WHERE id = '20000000-0000-0000-0000-000000000001';
+
+          -- Attempt reserve RPC
+          SELECT public.fn_exchange_reserve_request_match(
+            '20000000-0000-0000-0000-000000000001',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            1000.00,
+            '10000000-0000-0000-0000-000000000002'
+          );
+        `,
+        expectedErrorPattern: /is not open for matching/i
+      },
+      // Test 9a: UPDATE on exchange_events with existing row
+      {
+        id: '9a',
+        name: 'Constraint 9a: UPDATE on existing exchange_events row (append-only)',
+        sql: `
+          -- Seed an event first
+          INSERT INTO public.exchange_events (id, actor, from_status, to_status)
+          VALUES ('50000000-0000-0000-0000-000000000001', 'system', 'RESERVED', 'ACCEPTED');
+
+          -- Attempt UPDATE
+          UPDATE public.exchange_events
+          SET to_status = 'TAMPERED'
+          WHERE id = '50000000-0000-0000-0000-000000000001';
+        `,
+        expectedErrorPattern: /exchange_events is append-only: updates and deletes are prohibited/i
+      },
+      // Test 9b: DELETE on exchange_events with existing row
+      {
+        id: '9b',
+        name: 'Constraint 9b: DELETE on existing exchange_events row (append-only)',
+        sql: `
+          DELETE FROM public.exchange_events
+          WHERE id = '50000000-0000-0000-0000-000000000001';
+        `,
+        expectedErrorPattern: /exchange_events is append-only: updates and deletes are prohibited/i
+      },
+      // Test 9c: TRUNCATE on exchange_events (Fix 1 - dre-p125)
+      {
+        id: '9c',
+        name: 'Constraint 9c (Fix 1): TRUNCATE TABLE exchange_events (statement trigger)',
+        sql: `
+          TRUNCATE TABLE public.exchange_events;
+        `,
+        expectedErrorPattern: /exchange_events is append-only: truncate is prohibited/i
+      },
+      // Test 10: State machine illegal transition
+      {
+        id: '10',
+        name: 'Constraint 10: Illegal state machine transition (ACCEPTED directly to SETTLED)',
+        sql: `
+          INSERT INTO public.exchange_matches (
+            id, request_id, acceptor_lead_id, amount_eur, rate_snapshot, amount_irr, status,
+            eur_payer_lead_id, eur_receiver_lead_id, irr_payer_lead_id, irr_receiver_lead_id,
+            destination_account_id, reserved_until
+          ) VALUES (
+            '40000000-0000-0000-0000-000000000002', '20000000-0000-0000-0000-000000000002', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            100.00, 60000, 6000000, 'ACCEPTED',
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+            '10000000-0000-0000-0000-000000000002', now() + interval '1 hour'
+          );
+
+          -- Attempt illegal skip from ACCEPTED to SETTLED
+          UPDATE public.exchange_matches
+          SET status = 'SETTLED'
+          WHERE id = '40000000-0000-0000-0000-000000000002';
+        `,
+        expectedErrorPattern: /Illegal state machine transition from ACCEPTED to SETTLED/i
+      },
+      // Test 11: Transition to IRR_CONFIRMED without receiver proof (Addendum 2)
+      {
+        id: '11',
+        name: 'Constraint 11: Transition to IRR_CONFIRMED without receiver transfer proof',
+        sql: `
+          INSERT INTO public.exchange_matches (
+            id, request_id, acceptor_lead_id, amount_eur, rate_snapshot, amount_irr, status,
+            eur_payer_lead_id, eur_receiver_lead_id, irr_payer_lead_id, irr_receiver_lead_id,
+            destination_account_id, reserved_until
+          ) VALUES (
+            '40000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000002', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            100.00, 60000, 6000000, 'IRR_PROOF_SUBMITTED',
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+            '10000000-0000-0000-0000-000000000002', now() + interval '1 hour'
+          );
+
+          -- Attempt transition to IRR_CONFIRMED without exchange_transfer_proofs (side='receiver')
+          UPDATE public.exchange_matches
+          SET status = 'IRR_CONFIRMED'
+          WHERE id = '40000000-0000-0000-0000-000000000003';
+        `,
+        expectedErrorPattern: /without receiver proof of transfer in exchange_transfer_proofs/i
+      }
+    ];
+
+    let allPassed = true;
+
+    for (const test of realTests) {
+      console.log(`----------------------------------------------------------------------------`);
+      console.log(`[TEST #${test.id}] ${test.name}`);
+
+      const result = runPsql(test.sql, TEST_DB);
+
+      if (result.success) {
+        console.error(`❌ FAILED: Statement succeeded but was expected to throw an exception!`);
+        console.error(`Output: ${result.stdout}`);
+        allPassed = false;
+        continue;
+      }
+
+      const rawError = result.stderr.trim();
+      const matches = typeof test.expectedErrorPattern === 'string'
+        ? rawError.includes(test.expectedErrorPattern)
+        : test.expectedErrorPattern.test(rawError);
+
+      if (!matches) {
+        console.error(`❌ FAILED: Unexpected error returned by PostgreSQL.`);
+        console.error(`Expected pattern: ${test.expectedErrorPattern}`);
+        console.error(`Actual PostgreSQL stderr:\n${rawError}`);
+        allPassed = false;
+        continue;
+      }
+
+      // Format the exact PostgreSQL error message (extract first ERROR line)
+      const errorLine = rawError.split('\n').find(l => l.includes('ERROR:')) || rawError.split('\n')[0];
+      console.log(`Real PostgreSQL Exception:`);
+      console.log(`   ${errorLine.trim()}`);
+      console.log(`✅ RESULT: Constraint verified on live PostgreSQL.`);
+    }
+
+    console.log('\n============================================================================');
+    if (allPassed) {
+      console.log('🎉 ALL NEGATIVE TESTS PASSED ON LIVE POSTGRESQL INSTANCE!');
+    } else {
+      console.error('❌ SOME REAL SQL TESTS FAILED.');
+    }
+    console.log('============================================================================');
+
+    process.exit(allPassed ? 0 : 1);
+  } finally {
+    // Cleanup test database
+    runPsql(`DROP DATABASE IF EXISTS ${TEST_DB};`);
   }
 }
 
 main().catch((err) => {
-  console.error('Unexpected error during test execution:', err);
+  console.error('Fatal unexpected runner error:', err);
   process.exit(1);
 });

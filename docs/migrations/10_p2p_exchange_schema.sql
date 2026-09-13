@@ -416,8 +416,26 @@ CREATE INDEX IF NOT EXISTS idx_exchange_disputes_status ON public.exchange_dispu
 CREATE INDEX IF NOT EXISTS idx_exchange_events_match ON public.exchange_events (match_id);
 CREATE INDEX IF NOT EXISTS idx_exchange_events_request ON public.exchange_events (request_id);
 CREATE INDEX IF NOT EXISTS idx_exchange_events_created ON public.exchange_events (created_at);
-
 CREATE INDEX IF NOT EXISTS idx_exchange_nonbanking_days_lookup ON public.exchange_nonbanking_days (country, date);
+
+-- Fix 2 (dre-p125): Complete foreign key indexing coverage across all exchange tables
+CREATE INDEX IF NOT EXISTS idx_exchange_matches_acceptor ON public.exchange_matches (acceptor_lead_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_matches_dest_acc ON public.exchange_matches (destination_account_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_matches_partner_confirmed_by ON public.exchange_matches (partner_confirmed_by_user_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_transfer_proofs_uploader ON public.exchange_transfer_proofs (uploaded_by_lead_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_transfer_proofs_account ON public.exchange_transfer_proofs (account_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_transfer_proofs_verified_by ON public.exchange_transfer_proofs (verified_by_admin_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_disputes_opener ON public.exchange_disputes (opened_by_lead_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_disputes_resolver ON public.exchange_disputes (resolved_by_admin_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_events_actor ON public.exchange_events (actor_user_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_office_receipts_staff ON public.exchange_office_receipts (staff_admin_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_office_payouts_staff ON public.exchange_office_payouts (staff_admin_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_related_parties_verified_by ON public.exchange_related_parties (verified_by_admin_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_auth_recipients_verified_by ON public.exchange_authorized_recipients (verified_by_admin_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_accounts_verified_by ON public.exchange_accounts (verified_by_admin_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_request_prices_changed_by ON public.exchange_request_prices (changed_by);
+CREATE INDEX IF NOT EXISTS idx_exchange_banking_calendar_updated_by ON public.exchange_banking_calendar (updated_by_admin_id);
+CREATE INDEX IF NOT EXISTS idx_exchange_nonbanking_days_created_by ON public.exchange_nonbanking_days (created_by_admin_id);
 
 
 -- ============================================================================
@@ -440,6 +458,21 @@ DROP TRIGGER IF EXISTS trg_exchange_events_prevent_mutation ON public.exchange_e
 CREATE TRIGGER trg_exchange_events_prevent_mutation
 BEFORE UPDATE OR DELETE ON public.exchange_events
 FOR EACH ROW EXECUTE FUNCTION public.fn_exchange_events_prevent_mutation();
+
+-- Fix 1 (dre-p125): Statement-level trigger preventing TRUNCATE on audit log
+CREATE OR REPLACE FUNCTION public.fn_exchange_events_prevent_truncate()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  RAISE EXCEPTION 'exchange_events is append-only: truncate is prohibited';
+END;
+$$;
+
+DROP TRIGGER IF EXISTS trg_exchange_events_prevent_truncate ON public.exchange_events;
+CREATE TRIGGER trg_exchange_events_prevent_truncate
+BEFORE TRUNCATE ON public.exchange_events
+FOR EACH STATEMENT EXECUTE FUNCTION public.fn_exchange_events_prevent_truncate();
 
 
 -- ----------------------------------------------------------------------------
