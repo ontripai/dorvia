@@ -124,6 +124,10 @@ export async function GET(request: Request) {
         total,
         totalPages: Math.ceil(total / limit) || 1,
       },
+      admin: {
+        ...admin,
+        permissions: Array.from(admin.permissions),
+      },
     });
   } catch (err: any) {
     console.error('[AdminExchange] Unexpected error in GET /api/admin/exchange/matches:', err);

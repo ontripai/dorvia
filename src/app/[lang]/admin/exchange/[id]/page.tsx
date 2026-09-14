@@ -177,12 +177,7 @@ export default function AdminMatchDossierPage({ params }: MatchDossierPageProps)
 
   // Current admin session profile & permissions
   const [adminUser, setAdminUser] = useState<any>(null);
-  const canManageExchange = useMemo(() => {
-    if (!adminUser) return false;
-    if (adminUser.roleKey === 'owner' || adminUser.roleKey === 'manager') return true;
-    const perms: string[] = adminUser.permissions || [];
-    return perms.includes('exchange.manage');
-  }, [adminUser]);
+  const canManageExchange = (adminUser?.permissions || []).includes('exchange.manage');
 
   // Dossier data
   const [match, setMatch] = useState<MatchRecord | null>(null);
@@ -230,33 +225,7 @@ export default function AdminMatchDossierPage({ params }: MatchDossierPageProps)
   const [proofError, setProofError] = useState<string | null>(null);
   const [proofSuccess, setProofSuccess] = useState<string | null>(null);
 
-  // 1. Fetch current admin context (for permissions and nav bar)
-  useEffect(() => {
-    let isMounted = true;
-    async function loadAdminUser() {
-      try {
-        const res = await fetch('/api/admin/leads');
-        if (res.status === 401) {
-          router.replace(`/${currentLang}/admin/login?error=unauthorized`);
-          return;
-        }
-        if (res.ok) {
-          const json = await res.json();
-          if (isMounted && json.admin) {
-            setAdminUser(json.admin);
-          }
-        }
-      } catch (err) {
-        console.error('Error loading admin user:', err);
-      }
-    }
-    loadAdminUser();
-    return () => {
-      isMounted = false;
-    };
-  }, [currentLang, router]);
-
-  // 2. Fetch match case dossier from /api/admin/exchange/matches/[id]
+  // Fetch match case dossier from /api/admin/exchange/matches/[id]
   const loadDossier = useCallback(async () => {
     if (!matchId) return;
     setLoading(true);
@@ -307,6 +276,9 @@ export default function AdminMatchDossierPage({ params }: MatchDossierPageProps)
       setTransferProofs(json.transferProofs || []);
       setEvents(json.events || []);
       setAuthorizedRecipients(json.authorizedRecipients || []);
+      if (json.admin) {
+        setAdminUser(json.admin);
+      }
 
       // Pre-select primary EUR receiver for payout form if not selected
       if (json.match?.eur_receiver_lead_id) {

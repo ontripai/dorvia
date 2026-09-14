@@ -118,32 +118,6 @@ export default function AdminExchangeListPage({ params }: AdminExchangeListPageP
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  // 1. Fetch current admin context from /api/admin/leads (for permissions and nav bar)
-  useEffect(() => {
-    let isMounted = true;
-    async function loadAdminUser() {
-      try {
-        const res = await fetch('/api/admin/leads');
-        if (res.status === 401) {
-          router.replace(`/${currentLang}/admin/login?error=unauthorized`);
-          return;
-        }
-        if (res.ok) {
-          const json = await res.json();
-          if (isMounted && json.admin) {
-            setAdminUser(json.admin);
-          }
-        }
-      } catch (err) {
-        console.error('Error fetching admin context:', err);
-      }
-    }
-    loadAdminUser();
-    return () => {
-      isMounted = false;
-    };
-  }, [currentLang, router]);
-
   // 2. Fetch actionable counters (total ACCEPTED and IRR_CONFIRMED counts across all pages)
   const loadCounters = useCallback(async () => {
     try {
@@ -208,6 +182,9 @@ export default function AdminExchangeListPage({ params }: AdminExchangeListPageP
       setMatches(json.matches || []);
       if (json.pagination) {
         setPagination(json.pagination);
+      }
+      if (json.admin) {
+        setAdminUser(json.admin);
       }
     } catch (err: any) {
       console.error('Network error loading exchange matches:', err);

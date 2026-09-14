@@ -318,6 +318,10 @@ export async function GET(
       transferProofs,
       events: eventsRes.data || [],
       authorizedRecipients: authRecipientsRes.data || [],
+      admin: {
+        ...admin,
+        permissions: Array.from(admin.permissions),
+      },
     });
   } catch (err: any) {
     console.error('[AdminExchange] Unexpected error in GET /api/admin/exchange/matches/[id]:', err);
