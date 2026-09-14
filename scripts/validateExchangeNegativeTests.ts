@@ -17,6 +17,7 @@ import path from 'path';
 import { execSync, spawnSync } from 'child_process';
 
 const MIGRATION_PATH = path.resolve('docs/migrations/10_p2p_exchange_schema.sql');
+const MIGRATION_11_PATH = path.resolve('docs/migrations/11_exchange_staff_operations.sql');
 
 // Configuration from environment variables
 const PGHOST = process.env.PGHOST || '127.0.0.1';
@@ -218,6 +219,37 @@ async function main() {
         END IF;
       END $$;
 
+      -- RBAC tables (from migration 03, needed by migration 11)
+      CREATE TABLE IF NOT EXISTS public.roles (
+        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+        key text UNIQUE NOT NULL,
+        label_fa text NOT NULL,
+        label_en text NOT NULL,
+        description text,
+        created_at timestamptz NOT NULL DEFAULT now()
+      );
+
+      CREATE TABLE IF NOT EXISTS public.permissions (
+        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+        key text UNIQUE NOT NULL,
+        label_fa text NOT NULL,
+        label_en text NOT NULL,
+        description text
+      );
+
+      CREATE TABLE IF NOT EXISTS public.role_permissions (
+        role_id uuid NOT NULL REFERENCES public.roles(id) ON DELETE CASCADE,
+        permission_id uuid NOT NULL REFERENCES public.permissions(id) ON DELETE CASCADE,
+        PRIMARY KEY (role_id, permission_id)
+      );
+
+      INSERT INTO public.roles (key, label_fa, label_en) VALUES
+        ('owner', 'مالک', 'Owner'),
+        ('manager', 'مدیر', 'Manager'),
+        ('agent', 'کارشناس', 'Agent'),
+        ('viewer', 'ناظر', 'Viewer')
+      ON CONFLICT (key) DO NOTHING;
+
       -- Existing tables referenced by exchange schema
       CREATE TABLE IF NOT EXISTS public.leads (
         id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -264,18 +296,28 @@ async function main() {
     }
     console.log('Migration executed with zero errors.\n');
 
+    // Step 4b: Apply 11_exchange_staff_operations.sql
+    console.log(`Applying migration 11: ${path.basename(MIGRATION_11_PATH)}...`);
+    const mig11Result = runPsqlFile(MIGRATION_11_PATH, TEST_DB);
+    if (!mig11Result.success) {
+      console.error(`Failed to execute migration 11:\n${mig11Result.stderr}`);
+      process.exit(1);
+    }
+    console.log('Migration 11 executed with zero errors.\n');
+
     // Step 5: Seed valid baseline data
     console.log('Seeding baseline fixtures (users, leads, exchange profiles, accounts, open request)...');
     const seedSql = `
       -- Mock users & leads
       INSERT INTO auth.users (id, email) VALUES
         ('00000000-0000-0000-0000-000000000001', 'actor@dorvia.ro'),
+        ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'staff@dorvia.ro'),
         ('11111111-1111-1111-1111-111111111111', 'user1@dorvia.ro'),
         ('22222222-2222-2222-2222-222222222222', 'user2@dorvia.ro'),
         ('33333333-3333-3333-3333-333333333333', 'user3@dorvia.ro');
 
       INSERT INTO public.admin_users (id, user_id, email) VALUES
-        ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', '00000000-0000-0000-0000-000000000001', 'admin@dorvia.ro');
+        ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'admin@dorvia.ro');
 
       INSERT INTO public.leads (id, user_id, email, full_name, verified_at) VALUES
         ('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', '11111111-1111-1111-1111-111111111111', 'requester@dorvia.ro', 'Ali Rezai', now()),
@@ -323,6 +365,47 @@ async function main() {
         '10000000-0000-0000-0000-000000000001',
         now() + interval '2 days'
       );
+
+      -- Dedicated requests for Staff Operations testing (dre-p132)
+      INSERT INTO public.exchange_requests (
+        id, requester_lead_id, direction, eur_currency, eur_amount, rate, irr_amount, allow_partial, destination_account_id, expires_at
+      ) VALUES
+      (
+        '20000000-0000-0000-0000-000000000003',
+        'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+        'RO_TO_IR',
+        'EUR',
+        1000.00,
+        60000.0000,
+        60000000,
+        false,
+        '10000000-0000-0000-0000-000000000001',
+        now() + interval '2 days'
+      ),
+      (
+        '20000000-0000-0000-0000-000000000004',
+        'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+        'RO_TO_IR',
+        'EUR',
+        1000.00,
+        60000.0000,
+        60000000,
+        false,
+        '10000000-0000-0000-0000-000000000001',
+        now() + interval '2 days'
+      ),
+      (
+        '20000000-0000-0000-0000-000000000005',
+        'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+        'RO_TO_IR',
+        'EUR',
+        1000.00,
+        60000.0000,
+        60000000,
+        false,
+        '10000000-0000-0000-0000-000000000001',
+        now() + interval '2 days'
+      );
     `;
 
     const seedResult = runPsql(seedSql, TEST_DB);
@@ -338,7 +421,10 @@ async function main() {
       name: string;
       setupSql?: string;
       sql: string;
-      expectedErrorPattern: RegExp | string;
+      expectedErrorPattern?: RegExp | string;
+      expectSuccess?: boolean;
+      verifySql?: string;
+      verifyFn?: (stdout: string) => boolean;
     }
 
     const realTests: RealSqlTest[] = [
@@ -590,6 +676,225 @@ async function main() {
           WHERE id = '40000000-0000-0000-0000-000000000003';
         `,
         expectedErrorPattern: /without receiver proof of transfer in exchange_transfer_proofs/i
+      },
+      // Test 12 (Staff Op 1): Receipt on match in RESERVED status rejected
+      {
+        id: '12',
+        name: 'Staff Op 1: Office receipt rejected on match in RESERVED status',
+        setupSql: `
+          INSERT INTO public.exchange_matches (
+            id, request_id, acceptor_lead_id, amount_eur, rate_snapshot, amount_irr, fee_eur, status,
+            eur_payer_lead_id, eur_receiver_lead_id, irr_payer_lead_id, irr_receiver_lead_id,
+            destination_account_id, reserved_until
+          ) VALUES (
+            '50000000-0000-0000-0000-000000000001', '20000000-0000-0000-0000-000000000003', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            1000.00, 60000, 60000000, 20.00, 'RESERVED',
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+            '10000000-0000-0000-0000-000000000002', now() + interval '1 hour'
+          ) ON CONFLICT (id) DO UPDATE SET status = 'RESERVED';
+        `,
+        sql: `
+          SELECT public.fn_exchange_record_office_receipt(
+            '50000000-0000-0000-0000-000000000001',
+            1020.00,
+            'EUR',
+            'partner_exchange',
+            NULL,
+            'REF-12',
+            'REC-12',
+            'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+            now(),
+            'Receipt attempt on RESERVED'
+          );
+        `,
+        expectedErrorPattern: /expected ACCEPTED|Cannot record office receipt.*status RESERVED/i
+      },
+      // Test 13 (Staff Op 2): Receipt with incorrect EUR amount rejected
+      {
+        id: '13',
+        name: 'Staff Op 2: Office receipt rejected when amount does not match (amount_eur + fee_eur)',
+        setupSql: `
+          INSERT INTO public.exchange_matches (
+            id, request_id, acceptor_lead_id, amount_eur, rate_snapshot, amount_irr, fee_eur, status,
+            eur_payer_lead_id, eur_receiver_lead_id, irr_payer_lead_id, irr_receiver_lead_id,
+            destination_account_id, reserved_until
+          ) VALUES (
+            '50000000-0000-0000-0000-000000000002', '20000000-0000-0000-0000-000000000004', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            1000.00, 60000, 60000000, 20.00, 'ACCEPTED',
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+            '10000000-0000-0000-0000-000000000002', now() + interval '1 hour'
+          ) ON CONFLICT (id) DO UPDATE SET status = 'ACCEPTED';
+        `,
+        sql: `
+          -- Expected exactly 1020.00 EUR (1000 + 20 fee), passed 1000.00 EUR
+          SELECT public.fn_exchange_record_office_receipt(
+            '50000000-0000-0000-0000-000000000002',
+            1000.00,
+            'EUR',
+            'partner_exchange',
+            NULL,
+            'REF-13',
+            'REC-13',
+            'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+            now(),
+            'Underpaid receipt'
+          );
+        `,
+        expectedErrorPattern: /Invalid EUR receipt amount 1000\.00.*expected exactly 1020\.00/i
+      },
+      // Test 14 (Staff Op 3): Valid office receipt succeeds -> status becomes EUR_RECEIVED
+      {
+        id: '14',
+        name: 'Staff Op 3: Valid office receipt succeeds and advances match to EUR_RECEIVED',
+        expectSuccess: true,
+        sql: `
+          SELECT public.fn_exchange_record_office_receipt(
+            '50000000-0000-0000-0000-000000000002',
+            1020.00,
+            'EUR',
+            'partner_exchange',
+            NULL,
+            'REF-14',
+            'REC-14',
+            'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+            now(),
+            'Valid full receipt'
+          );
+        `,
+        verifySql: `
+          SELECT status FROM public.exchange_matches WHERE id = '50000000-0000-0000-0000-000000000002';
+        `,
+        verifyFn: (stdout: string) => stdout.includes('EUR_RECEIVED')
+      },
+      // Test 15 (Staff Op 4): Second receipt on same match rejected (idempotency guard)
+      {
+        id: '15',
+        name: 'Staff Op 4: Second receipt on same match rejected (state gate & unique index uq_exchange_office_receipts_match)',
+        sql: `
+          SELECT public.fn_exchange_record_office_receipt(
+            '50000000-0000-0000-0000-000000000002',
+            1020.00,
+            'EUR',
+            'partner_exchange',
+            NULL,
+            'REF-15',
+            'REC-15',
+            'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+            now(),
+            'Second receipt attempt'
+          );
+        `,
+        expectedErrorPattern: /expected ACCEPTED|Cannot record office receipt.*status EUR_RECEIVED|uq_exchange_office_receipts_match|duplicate key/i
+      },
+      // Test 16 (Staff Op 5): Payout rejected on match not IRR_CONFIRMED
+      {
+        id: '16',
+        name: 'Staff Op 5: Office payout rejected on match that is not in IRR_CONFIRMED status',
+        sql: `
+          -- Match 50000000-0000-0000-0000-000000000002 is in EUR_RECEIVED, not IRR_CONFIRMED
+          SELECT public.fn_exchange_record_office_payout(
+            '50000000-0000-0000-0000-000000000002',
+            1000.00,
+            'EUR',
+            'partner_exchange',
+            NULL,
+            'REF-16',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            'PAY-16',
+            'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+            now(),
+            'Premature payout attempt'
+          );
+        `,
+        expectedErrorPattern: /expected IRR_CONFIRMED|Cannot record office payout.*status EUR_RECEIVED/i
+      },
+      // Test 17 (Staff Op 6): Payout to unauthorized recipient rejected
+      {
+        id: '17',
+        name: 'Staff Op 6: Office payout to unauthorized lead rejected (neither receiver nor authorized recipient)',
+        setupSql: `
+          INSERT INTO public.exchange_matches (
+            id, request_id, acceptor_lead_id, amount_eur, rate_snapshot, amount_irr, fee_eur, status,
+            eur_payer_lead_id, eur_receiver_lead_id, irr_payer_lead_id, irr_receiver_lead_id,
+            destination_account_id, reserved_until
+          ) VALUES (
+            '50000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000005', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            1000.00, 60000, 60000000, 20.00, 'IRR_CONFIRMED',
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+            '10000000-0000-0000-0000-000000000002', now() + interval '1 hour'
+          ) ON CONFLICT (id) DO UPDATE SET status = 'IRR_CONFIRMED';
+        `,
+        sql: `
+          -- Lead dddddddd is neither eur_receiver (cccccccc) nor an approved authorized recipient
+          SELECT public.fn_exchange_record_office_payout(
+            '50000000-0000-0000-0000-000000000003',
+            1000.00,
+            'EUR',
+            'partner_exchange',
+            NULL,
+            'REF-17',
+            'dddddddd-dddd-dddd-dddd-dddddddddddd',
+            'PAY-17',
+            'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+            now(),
+            'Payout to unauthorized lead'
+          );
+        `,
+        expectedErrorPattern: /is neither EUR receiver.*nor an approved authorized recipient/i
+      },
+      // Test 18 (Staff Op 7): Payout to approved authorized recipient succeeds -> status becomes SETTLED
+      {
+        id: '18',
+        name: 'Staff Op 7: Office payout to approved authorized recipient succeeds and advances match to SETTLED',
+        expectSuccess: true,
+        setupSql: `
+          -- 1. Ensure recipient dddddddd has approved exchange profile
+          INSERT INTO public.exchange_profiles (lead_id, exchange_status, approved_at)
+          VALUES ('dddddddd-dddd-dddd-dddd-dddddddddddd', 'approved', now())
+          ON CONFLICT (lead_id) DO UPDATE SET exchange_status = 'approved';
+
+          -- 2. Add approved authorized recipient relation
+          INSERT INTO public.exchange_authorized_recipients (
+            lead_id, recipient_lead_id, relationship, status, verified_at
+          ) VALUES (
+            'cccccccc-cccc-cccc-cccc-cccccccccccc', 'dddddddd-dddd-dddd-dddd-dddddddddddd', 'business_partner', 'approved', now()
+          ) ON CONFLICT DO NOTHING;
+        `,
+        sql: `
+          SELECT public.fn_exchange_record_office_payout(
+            '50000000-0000-0000-0000-000000000003',
+            1000.00,
+            'EUR',
+            'partner_exchange',
+            NULL,
+            'REF-18',
+            'dddddddd-dddd-dddd-dddd-dddddddddddd',
+            'PAY-18',
+            'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+            now(),
+            'Payout released to authorized recipient'
+          );
+        `,
+        verifySql: `
+          SELECT status FROM public.exchange_matches WHERE id = '50000000-0000-0000-0000-000000000003';
+        `,
+        verifyFn: (stdout: string) => stdout.includes('SETTLED')
+      },
+      // Test 19 (Staff Op 8): Verify staff audit events in exchange_events
+      {
+        id: '19',
+        name: 'Staff Op 8: Verify immutable audit events logged with actor = staff for both operations',
+        expectSuccess: true,
+        sql: `
+          SELECT id, actor, to_status, payload->>'receipt_no' as receipt_no
+          FROM public.exchange_events
+          WHERE actor = 'staff' AND actor_user_id = 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'
+          ORDER BY created_at ASC;
+        `,
+        verifyFn: (stdout: string) => stdout.includes('EUR_RECEIVED') && stdout.includes('SETTLED') && stdout.includes('REC-14') && stdout.includes('PAY-18')
       }
     ];
 
@@ -611,36 +916,65 @@ async function main() {
 
       const result = runPsql(test.sql, TEST_DB);
 
-      if (result.success) {
-        if (result.stdout.includes('DELETE 0') || result.stdout.includes('UPDATE 0')) {
-          console.error(`❌ FAILED: Statement affected 0 rows (table or target row was empty, trigger was not invoked)!`);
-          console.error(`Output: ${result.stdout.trim()}`);
-        } else {
-          console.error(`❌ FAILED: Statement succeeded but was expected to throw an exception!`);
-          console.error(`Output: ${result.stdout}`);
+      if (test.expectSuccess) {
+        if (!result.success) {
+          console.error(`❌ FAILED: Expected success, but PostgreSQL threw an error:`);
+          console.error(result.stderr);
+          allPassed = false;
+          continue;
         }
-        allPassed = false;
-        continue;
+
+        if (test.verifySql) {
+          const verifyResult = runPsql(test.verifySql, TEST_DB);
+          if (!verifyResult.success || (test.verifyFn && !test.verifyFn(verifyResult.stdout))) {
+            console.error(`❌ FAILED: Post-operation verification check failed.`);
+            console.error(`Verify stdout: ${verifyResult.stdout}`);
+            allPassed = false;
+            continue;
+          }
+        } else if (test.verifyFn && !test.verifyFn(result.stdout)) {
+          console.error(`❌ FAILED: Query output verification check failed.`);
+          console.error(`Query stdout: ${result.stdout}`);
+          allPassed = false;
+          continue;
+        }
+
+        console.log(`Real PostgreSQL Output:`);
+        const cleanOut = result.stdout.trim().split('\n').slice(0, 5).join('\n');
+        console.log(`   ${cleanOut}`);
+        console.log(`✅ RESULT: Operation verified on live PostgreSQL.`);
+      } else {
+        if (result.success) {
+          if (result.stdout.includes('DELETE 0') || result.stdout.includes('UPDATE 0')) {
+            console.error(`❌ FAILED: Statement affected 0 rows (table or target row was empty, trigger was not invoked)!`);
+            console.error(`Output: ${result.stdout.trim()}`);
+          } else {
+            console.error(`❌ FAILED: Statement succeeded but was expected to throw an exception!`);
+            console.error(`Output: ${result.stdout}`);
+          }
+          allPassed = false;
+          continue;
+        }
+
+        const rawError = result.stderr.trim();
+        const matches = typeof test.expectedErrorPattern === 'string'
+          ? rawError.includes(test.expectedErrorPattern)
+          : test.expectedErrorPattern?.test(rawError);
+
+        if (!matches) {
+          console.error(`❌ FAILED: Unexpected error returned by PostgreSQL.`);
+          console.error(`Expected pattern: ${test.expectedErrorPattern}`);
+          console.error(`Actual PostgreSQL stderr:\n${rawError}`);
+          allPassed = false;
+          continue;
+        }
+
+        // Format the exact PostgreSQL error message (extract first ERROR line)
+        const errorLine = rawError.split('\n').find(l => l.includes('ERROR:')) || rawError.split('\n')[0];
+        console.log(`Real PostgreSQL Exception:`);
+        console.log(`   ${errorLine.trim()}`);
+        console.log(`✅ RESULT: Constraint verified on live PostgreSQL.`);
       }
-
-      const rawError = result.stderr.trim();
-      const matches = typeof test.expectedErrorPattern === 'string'
-        ? rawError.includes(test.expectedErrorPattern)
-        : test.expectedErrorPattern.test(rawError);
-
-      if (!matches) {
-        console.error(`❌ FAILED: Unexpected error returned by PostgreSQL.`);
-        console.error(`Expected pattern: ${test.expectedErrorPattern}`);
-        console.error(`Actual PostgreSQL stderr:\n${rawError}`);
-        allPassed = false;
-        continue;
-      }
-
-      // Format the exact PostgreSQL error message (extract first ERROR line)
-      const errorLine = rawError.split('\n').find(l => l.includes('ERROR:')) || rawError.split('\n')[0];
-      console.log(`Real PostgreSQL Exception:`);
-      console.log(`   ${errorLine.trim()}`);
-      console.log(`✅ RESULT: Constraint verified on live PostgreSQL.`);
     }
 
     console.log('\n============================================================================');
