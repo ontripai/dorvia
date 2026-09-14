@@ -65,7 +65,7 @@ export async function POST(request: Request) {
     // 3. Verify destination_account_id belongs to the acceptor
     const { data: accData, error: accError } = await supabaseAdmin
       .from('exchange_accounts')
-      .select('id, lead_id, kind, is_active')
+      .select('id, lead_id, kind, is_active, verified_at')
       .eq('id', destination_account_id)
       .eq('lead_id', lead.id)
       .eq('is_active', true)
@@ -74,6 +74,13 @@ export async function POST(request: Request) {
     if (accError || !accData) {
       return NextResponse.json(
         { error: 'حساب مقصد انتخابی معتبر نیست یا به شما تعلق ندارد.' },
+        { status: 400 }
+      );
+    }
+
+    if (!accData.verified_at) {
+      return NextResponse.json(
+        { error: 'حساب مقصد انتخابی هنوز توسط کارشناسان دورویا تایید نشده است. تا زمان تایید، امکان پذیرش و رزرو معامله وجود ندارد.' },
         { status: 400 }
       );
     }
@@ -111,6 +118,12 @@ export async function POST(request: Request) {
 
     if (rpcError) {
       console.error('Error in fn_exchange_reserve_request_match:', rpcError);
+      if (rpcError.message && rpcError.message.includes('is not verified by staff')) {
+        return NextResponse.json(
+          { error: 'حساب مقصد انتخابی هنوز توسط کارشناسان دورویا تایید نشده است. تا زمان تایید، امکان پذیرش و رزرو معامله وجود ندارد.' },
+          { status: 400 }
+        );
+      }
       return NextResponse.json(
         { error: rpcError.message || 'خطا در رزرو معامله. ظرفیت ممکن است هم‌اکنون رزرو شده باشد.' },
         { status: 400 }

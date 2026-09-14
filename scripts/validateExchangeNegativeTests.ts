@@ -20,6 +20,7 @@ const MIGRATION_PATH = path.resolve('docs/migrations/10_p2p_exchange_schema.sql'
 const MIGRATION_11_PATH = path.resolve('docs/migrations/11_exchange_staff_operations.sql');
 const MIGRATION_12_PATH = path.resolve('docs/migrations/12_exchange_rpc_lockdown.sql');
 const MIGRATION_13_PATH = path.resolve('docs/migrations/13_exchange_onboarding_permission.sql');
+const MIGRATION_14_PATH = path.resolve('docs/migrations/14_exchange_require_verified_account.sql');
 
 // Configuration from environment variables
 const PGHOST = process.env.PGHOST || '127.0.0.1';
@@ -146,6 +147,14 @@ async function main() {
   }
   if (!fs.existsSync(MIGRATION_12_PATH)) {
     console.error(`❌ Migration file not found: ${MIGRATION_12_PATH}`);
+    process.exit(1);
+  }
+  if (!fs.existsSync(MIGRATION_13_PATH)) {
+    console.error(`❌ Migration file not found: ${MIGRATION_13_PATH}`);
+    process.exit(1);
+  }
+  if (!fs.existsSync(MIGRATION_14_PATH)) {
+    console.error(`❌ Migration file not found: ${MIGRATION_14_PATH}`);
     process.exit(1);
   }
 
@@ -333,6 +342,15 @@ async function main() {
     }
     console.log('Migration 13 executed with zero errors.\n');
 
+    // Step 4e: Apply 14_exchange_require_verified_account.sql (dre-p142)
+    console.log(`Applying migration 14: ${path.basename(MIGRATION_14_PATH)}...`);
+    const mig14Result = runPsqlFile(MIGRATION_14_PATH, TEST_DB);
+    if (!mig14Result.success) {
+      console.error(`Failed to execute migration 14:\n${mig14Result.stderr}`);
+      process.exit(1);
+    }
+    console.log('Migration 14 executed with zero errors.\n');
+
     // Step 5: Seed valid baseline data
     console.log('Seeding baseline fixtures (users, leads, exchange profiles, accounts, open request)...');
     const seedSql = `
@@ -366,10 +384,10 @@ async function main() {
       INSERT INTO public.exchange_related_parties (id, lead_id, party_type, full_name, relationship, national_id, id_document_id, country, status) VALUES
         ('77777777-7777-7777-7777-777777777777', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'company', 'Pars Caspian LLC', 'own_company', '1010101010', NULL, 'IR', 'pending');
 
-      -- Valid destination accounts
-      INSERT INTO public.exchange_accounts (id, lead_id, kind, value, holder_name) VALUES
-        ('10000000-0000-0000-0000-000000000001', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'IR_SHEBA', 'IR120000000000000000000001', 'Ali Rezai'),
-        ('10000000-0000-0000-0000-000000000002', 'cccccccc-cccc-cccc-cccc-cccccccccccc', 'RO_IBAN', 'RO49BTRL0000000000000002', 'Elena Popescu');
+      -- Valid destination accounts (verified_at set to satisfy migration 14 trigger for baseline operations)
+      INSERT INTO public.exchange_accounts (id, lead_id, kind, value, holder_name, verified_at) VALUES
+        ('10000000-0000-0000-0000-000000000001', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'IR_SHEBA', 'IR120000000000000000000001', 'Ali Rezai', now()),
+        ('10000000-0000-0000-0000-000000000002', 'cccccccc-cccc-cccc-cccc-cccccccccccc', 'RO_IBAN', 'RO49BTRL0000000000000002', 'Elena Popescu', now());
 
       -- Base exchange request: 1000 EUR @ 60000 = 60,000,000 IRR, allow_partial = false
       INSERT INTO public.exchange_requests (
@@ -1082,6 +1100,101 @@ async function main() {
           WHERE id = '88888888-8888-8888-8888-888888888888';
         `,
         verifyFn: (stdout: string) => stdout.includes('approved')
+      },
+      // Test 26 (Verified Destination Account - dre-p142): Reject INSERT into exchange_requests with unverified destination account
+      {
+        id: '26',
+        name: 'Verified Destination: Reject INSERT into exchange_requests with unverified account',
+        expectSuccess: false,
+        setupSql: `
+          -- Seed fresh unverified destination account (verified_at IS NULL)
+          INSERT INTO public.exchange_accounts (id, lead_id, kind, value, holder_name, verified_at) VALUES
+            ('10000000-0000-0000-0000-000000000099', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'IR_SHEBA', 'IR990000000000000000000099', 'Ali Rezai', NULL);
+        `,
+        sql: `
+          INSERT INTO public.exchange_requests (
+            id, requester_lead_id, direction, eur_currency, eur_amount, rate, irr_amount, destination_account_id, expires_at
+          ) VALUES (
+            '20000000-0000-0000-0000-000000000099', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'RO_TO_IR', 'EUR', 100.00, 60000, 6000000, '10000000-0000-0000-0000-000000000099', now() + interval '1 day'
+          );
+        `,
+        expectedErrorPattern: 'Destination account 10000000-0000-0000-0000-000000000099 is not verified by staff'
+      },
+      // Test 27 (Verified Destination Account - dre-p142): Reject INSERT into exchange_matches with unverified destination account
+      {
+        id: '27',
+        name: 'Verified Destination: Reject INSERT into exchange_matches with unverified account',
+        expectSuccess: false,
+        sql: `
+          INSERT INTO public.exchange_matches (
+            id, request_id, acceptor_lead_id, amount_eur, rate_snapshot, amount_irr, status,
+            eur_payer_lead_id, eur_receiver_lead_id, irr_payer_lead_id, irr_receiver_lead_id,
+            destination_account_id, reserved_until
+          ) VALUES (
+            '40000000-0000-0000-0000-000000000099',
+            '20000000-0000-0000-0000-000000000002',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            100.00, 60000, 6000000, 'RESERVED',
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+            '10000000-0000-0000-0000-000000000099', now() + interval '30 minutes'
+          );
+        `,
+        expectedErrorPattern: 'Destination account 10000000-0000-0000-0000-000000000099 is not verified by staff'
+      },
+      // Test 28 (Verified Destination Account - dre-p142): After setting verified_at, both exchange_requests and exchange_matches INSERT succeed
+      {
+        id: '28',
+        name: 'Verified Destination: After verifying account, both request and match INSERT succeed',
+        expectSuccess: true,
+        sql: `
+          UPDATE public.exchange_accounts
+          SET verified_at = now()
+          WHERE id = '10000000-0000-0000-0000-000000000099';
+
+          INSERT INTO public.exchange_requests (
+            id, requester_lead_id, direction, eur_currency, eur_amount, rate, irr_amount, allow_partial, destination_account_id, expires_at
+          ) VALUES (
+            '20000000-0000-0000-0000-000000000099',
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+            'RO_TO_IR',
+            'EUR',
+            100.00,
+            60000.0000,
+            6000000,
+            false,
+            '10000000-0000-0000-0000-000000000099',
+            now() + interval '2 days'
+          );
+
+          INSERT INTO public.exchange_matches (
+            id, request_id, acceptor_lead_id, amount_eur, rate_snapshot, amount_irr, status,
+            eur_payer_lead_id, eur_receiver_lead_id, irr_payer_lead_id, irr_receiver_lead_id,
+            destination_account_id, reserved_until
+          ) VALUES (
+            '40000000-0000-0000-0000-000000000099',
+            '20000000-0000-0000-0000-000000000099',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            100.00,
+            60000.0000,
+            6000000,
+            'RESERVED',
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            'cccccccc-cccc-cccc-cccc-cccccccccccc',
+            'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+            '10000000-0000-0000-0000-000000000099',
+            now() + interval '30 minutes'
+          );
+        `,
+        verifySql: `
+          SELECT r.id AS req_id, m.id AS match_id
+          FROM public.exchange_requests r
+          JOIN public.exchange_matches m ON m.request_id = r.id
+          WHERE r.id = '20000000-0000-0000-0000-000000000099'
+            AND m.id = '40000000-0000-0000-0000-000000000099';
+        `,
+        verifyFn: (stdout: string) => stdout.includes('20000000-0000-0000-0000-000000000099') && stdout.includes('40000000-0000-0000-0000-000000000099')
       }
     ];
 
