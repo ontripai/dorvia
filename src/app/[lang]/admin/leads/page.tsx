@@ -25,6 +25,7 @@ import {
   BookOpen,
   BriefcaseBusiness,
   Handshake,
+  Landmark,
   Plus,
 } from '@/components/Icons';
 
@@ -310,6 +311,16 @@ export default function AdminLeadsPage({ params }: AdminLeadsPageProps) {
               >
                 <Handshake size={15} />
                 <span>{isFa ? 'همکاران معرف' : 'Referrals'}</span>
+              </Link>
+            )}
+
+            {adminUser?.permissions?.includes('exchange.view') && (
+              <Link
+                href="/admin/exchange"
+                className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all"
+              >
+                <Landmark size={15} />
+                <span>{isFa ? 'تبادل ارز' : 'Exchange'}</span>
               </Link>
             )}
 
