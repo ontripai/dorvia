@@ -570,14 +570,19 @@ async function main() {
             if (table) {
               varTableMap.set(node.name.text, table);
               if (!schemaMap.has(table)) {
-                const { line } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
-                violations.push({
-                  type: 'TABLE',
-                  file,
-                  line: line + 1,
-                  table,
-                  column: `[TABLE NOT FOUND: ${table}]`
-                });
+                const alreadyReported = violations.some(
+                  (v) => v.type === 'TABLE' && v.file === file && v.table === table
+                );
+                if (!alreadyReported) {
+                  const { line } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                  violations.push({
+                    type: 'TABLE',
+                    file,
+                    line: line + 1,
+                    table,
+                    column: `[TABLE NOT FOUND: ${table}]`
+                  });
+                }
               }
             }
           }
@@ -588,14 +593,19 @@ async function main() {
             if (table) {
               varTableMap.set(node.left.text, table);
               if (!schemaMap.has(table)) {
-                const { line } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
-                violations.push({
-                  type: 'TABLE',
-                  file,
-                  line: line + 1,
-                  table,
-                  column: `[TABLE NOT FOUND: ${table}]`
-                });
+                const alreadyReported = violations.some(
+                  (v) => v.type === 'TABLE' && v.file === file && v.table === table
+                );
+                if (!alreadyReported) {
+                  const { line } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                  violations.push({
+                    type: 'TABLE',
+                    file,
+                    line: line + 1,
+                    table,
+                    column: `[TABLE NOT FOUND: ${table}]`
+                  });
+                }
               }
             }
           }
@@ -614,20 +624,19 @@ async function main() {
             const { line } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
 
             if (!schemaMap.has(table)) {
-              if (methodName === 'select' || WRITE_METHODS.has(methodName) || FILTER_METHODS.has(methodName)) {
-                const alreadyReported = violations.some(
-                  (v) => v.type === 'TABLE' && v.file === file && v.table === table && Math.abs(v.line - (line + 1)) <= 10
-                );
-                if (!alreadyReported) {
-                  violations.push({
-                    type: 'TABLE',
-                    file,
-                    line: line + 1,
-                    table,
-                    column: `[TABLE NOT FOUND: ${table}]`
-                  });
-                }
+              const alreadyReported = violations.some(
+                (v) => v.type === 'TABLE' && v.file === file && v.table === table
+              );
+              if (!alreadyReported) {
+                violations.push({
+                  type: 'TABLE',
+                  file,
+                  line: line + 1,
+                  table,
+                  column: `[TABLE NOT FOUND: ${table}]`
+                });
               }
+              ts.forEachChild(node, visit);
               return;
             }
 
