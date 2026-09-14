@@ -63,7 +63,7 @@ export async function GET(request: Request) {
         id_document:lead_documents!exchange_related_parties_id_document_id_fkey (
           id,
           document_type,
-          file_path
+          storage_path
         ),
         verified_by:admin_users!exchange_related_parties_verified_by_admin_id_fkey (
           id,

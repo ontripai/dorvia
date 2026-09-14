@@ -18,11 +18,7 @@ import path from 'path';
 import { execSync, spawnSync } from 'child_process';
 import ts from 'typescript';
 
-const MIGRATION_10_PATH = path.resolve('docs/migrations/10_p2p_exchange_schema.sql');
-const MIGRATION_11_PATH = path.resolve('docs/migrations/11_exchange_staff_operations.sql');
-const MIGRATION_12_PATH = path.resolve('docs/migrations/12_exchange_rpc_lockdown.sql');
-const MIGRATION_13_PATH = path.resolve('docs/migrations/13_exchange_onboarding_permission.sql');
-const MIGRATION_14_PATH = path.resolve('docs/migrations/14_exchange_require_verified_account.sql');
+const MIGRATIONS_DIR = path.resolve('docs/migrations');
 
 // Configuration from environment variables
 const PGHOST = process.env.PGHOST || '127.0.0.1';
@@ -192,7 +188,7 @@ function stripComments(str: string): string {
     .replace(/\/\/.*$/gm, ' ');
 }
 
-type ViolationType = 'SELECT' | 'WRITE' | 'FILTER';
+type ViolationType = 'SELECT' | 'WRITE' | 'FILTER' | 'TABLE';
 
 interface QueryViolation {
   type: ViolationType;
@@ -226,6 +222,12 @@ function getTargetTable(callExpr: ts.CallExpression, varTableMap: Map<string, st
       curr = curr.expression;
     } else if (ts.isCallExpression(curr)) {
       if (ts.isPropertyAccessExpression(curr.expression) && curr.expression.name.text === 'from') {
+        if (
+          ts.isPropertyAccessExpression(curr.expression.expression) &&
+          curr.expression.expression.name.text === 'storage'
+        ) {
+          return null;
+        }
         if (curr.arguments.length > 0 && ts.isStringLiteral(curr.arguments[0])) {
           return curr.arguments[0].text.trim();
         }
@@ -244,7 +246,7 @@ function getTargetTable(callExpr: ts.CallExpression, varTableMap: Map<string, st
 
 async function main() {
   console.log('============================================================================');
-  console.log('DORVIA Exchange Queries Schema Parity & Query Validator (dre-p136)');
+  console.log('DORVIA Full Database Queries Schema Parity & Query Validator (dre-p144)');
   console.log('============================================================================\n');
 
   if (!psqlBin) {
@@ -274,7 +276,7 @@ async function main() {
   const dbVersion = probeResult.stdout.trim().split('\n')[2]?.trim() || 'PostgreSQL';
   console.log(`Connected to live database instance: ${dbVersion}\n`);
 
-  const TEST_DB = `dorvia_exchange_query_check_${Date.now()}`;
+  const TEST_DB = `dorvia_full_query_check_${Date.now()}`;
   console.log(`Creating isolated ephemeral test database: ${TEST_DB}...`);
   const createDbResult = runPsql(`CREATE DATABASE ${TEST_DB};`);
   if (!createDbResult.success) {
@@ -284,8 +286,8 @@ async function main() {
   console.log(`Database ${TEST_DB} created successfully.\n`);
 
   try {
-    // 1. Apply external stubs
-    console.log('Applying external table stubs (leads, lead_documents, admin_users, auth schema)...');
+    // 1. Apply external stubs (auth schema, auth.uid(), roles, extensions)
+    console.log('Applying external stubs (auth schema, auth.uid(), roles, extensions)...');
     const stubsSql = `
       CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
       CREATE EXTENSION IF NOT EXISTS "pgcrypto";
@@ -317,58 +319,6 @@ async function main() {
           CREATE ROLE service_role;
         END IF;
       END $$;
-
-      CREATE TABLE IF NOT EXISTS public.roles (
-        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-        key text UNIQUE NOT NULL,
-        label_fa text NOT NULL,
-        label_en text NOT NULL,
-        description text,
-        created_at timestamptz NOT NULL DEFAULT now()
-      );
-
-      CREATE TABLE IF NOT EXISTS public.permissions (
-        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-        key text UNIQUE NOT NULL,
-        label_fa text NOT NULL,
-        label_en text NOT NULL,
-        description text
-      );
-
-      CREATE TABLE IF NOT EXISTS public.role_permissions (
-        role_id uuid NOT NULL REFERENCES public.roles(id) ON DELETE CASCADE,
-        permission_id uuid NOT NULL REFERENCES public.permissions(id) ON DELETE CASCADE,
-        PRIMARY KEY (role_id, permission_id)
-      );
-
-      CREATE TABLE IF NOT EXISTS public.leads (
-        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-        user_id uuid REFERENCES auth.users(id),
-        email text,
-        full_name text,
-        phone text,
-        national_id_or_passport text,
-        verified_at timestamptz,
-        created_at timestamptz DEFAULT now()
-      );
-
-      CREATE TABLE IF NOT EXISTS public.lead_documents (
-        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-        lead_id uuid NOT NULL REFERENCES public.leads(id) ON DELETE CASCADE,
-        document_type text NOT NULL,
-        file_path text NOT NULL,
-        created_at timestamptz DEFAULT now()
-      );
-
-      CREATE TABLE IF NOT EXISTS public.admin_users (
-        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-        user_id uuid REFERENCES auth.users(id),
-        email text NOT NULL,
-        full_name text,
-        role text NOT NULL DEFAULT 'admin',
-        is_active boolean NOT NULL DEFAULT true,
-        created_at timestamptz DEFAULT now()
-      );
     `;
 
     const stubResult = runPsql(stubsSql, TEST_DB);
@@ -376,56 +326,39 @@ async function main() {
       console.error(`Failed to apply external stubs:\n${stubResult.stderr}`);
       process.exit(1);
     }
-    console.log('External stubs applied successfully.');
+    console.log('External stubs applied successfully.\n');
 
-    // 2. Apply migrations 10, 11, and 12
-    console.log(`Applying migration 10: ${path.basename(MIGRATION_10_PATH)}...`);
-    const mig10Res = runPsqlFile(MIGRATION_10_PATH, TEST_DB);
-    if (!mig10Res.success) {
-      console.error(`Migration 10 failed:\n${mig10Res.stderr}`);
-      process.exit(1);
+    // 2. Discover and execute all migrations in docs/migrations in alphabetical order
+    const migrationFiles = fs.readdirSync(MIGRATIONS_DIR)
+      .filter((file) => file.endsWith('.sql'))
+      .sort((a, b) => a.localeCompare(b));
+
+    console.log(`Discovered ${migrationFiles.length} migrations to execute in sequence:`);
+    migrationFiles.forEach((file, index) => {
+      console.log(`  ${String(index + 1).padStart(2, '0')}. ${file}`);
+    });
+    console.log('');
+
+    for (const file of migrationFiles) {
+      const fullPath = path.join(MIGRATIONS_DIR, file);
+      process.stdout.write(`Executing migration ${file}... `);
+      const res = runPsqlFile(fullPath, TEST_DB);
+      if (!res.success) {
+        console.log('FAILED ❌');
+        console.error(`\nCRITICAL: Migration ${file} failed:`);
+        console.error(res.stderr.trim());
+        process.exit(1);
+      }
+      console.log('OK ✅');
     }
-    console.log('Migration 10 applied with zero errors.');
+    console.log('\nAll migrations executed successfully with zero SQL errors.\n');
 
-    console.log(`Applying migration 11: ${path.basename(MIGRATION_11_PATH)}...`);
-    const mig11Res = runPsqlFile(MIGRATION_11_PATH, TEST_DB);
-    if (!mig11Res.success) {
-      console.error(`Migration 11 failed:\n${mig11Res.stderr}`);
-      process.exit(1);
-    }
-    console.log('Migration 11 applied with zero errors.');
-
-    console.log(`Applying migration 12: ${path.basename(MIGRATION_12_PATH)}...`);
-    const mig12Res = runPsqlFile(MIGRATION_12_PATH, TEST_DB);
-    if (!mig12Res.success) {
-      console.error(`Migration 12 failed:\n${mig12Res.stderr}`);
-      process.exit(1);
-    }
-    console.log('Migration 12 applied with zero errors.');
-
-    console.log(`Applying migration 13: ${path.basename(MIGRATION_13_PATH)}...`);
-    const mig13Res = runPsqlFile(MIGRATION_13_PATH, TEST_DB);
-    if (!mig13Res.success) {
-      console.error(`Migration 13 failed:\n${mig13Res.stderr}`);
-      process.exit(1);
-    }
-    console.log('Migration 13 applied with zero errors.');
-
-    console.log(`Applying migration 14: ${path.basename(MIGRATION_14_PATH)}...`);
-    const mig14Res = runPsqlFile(MIGRATION_14_PATH, TEST_DB);
-    if (!mig14Res.success) {
-      console.error(`Migration 14 failed:\n${mig14Res.stderr}`);
-      process.exit(1);
-    }
-    console.log('Migration 14 applied with zero errors.\n');
-
-    // 3. Extract live schema columns for all exchange_* tables
+    // 3. Extract live schema columns for all public tables
     console.log('Extracting live columns from information_schema.columns...');
     const schemaSql = `
       SELECT table_name, column_name
       FROM information_schema.columns
       WHERE table_schema = 'public'
-        AND table_name LIKE 'exchange_%'
       ORDER BY table_name, column_name;
     `;
     const schemaRes = runPsql(schemaSql, TEST_DB);
@@ -448,7 +381,7 @@ async function main() {
       }
     }
 
-    console.log(`Loaded live schema for ${schemaMap.size} exchange_* tables:\n` +
+    console.log(`Loaded live schema for ${schemaMap.size} public tables:\n` +
       Array.from(schemaMap.keys()).map(k => `  - ${k} (${schemaMap.get(k)!.size} columns)`).join('\n') + '\n'
     );
 
@@ -503,29 +436,17 @@ async function main() {
 
           const currentPath = embedPath ? `${embedPath} -> ${header}` : header;
 
-          if (targetTable.startsWith('exchange_')) {
-            if (!schemaMap.has(targetTable)) {
-              violations.push({
-                type: 'SELECT',
-                file,
-                line,
-                table: targetTable,
-                embedPath: currentPath,
-                column: `[TABLE NOT FOUND: ${targetTable}]`
-              });
-            } else {
-              validateSelectTokens(targetTable, inner, currentPath, file, line);
-            }
-          } else {
-            // Non-exchange table (leads, admin_users, lead_documents, etc.)
-            skippedTables.add(targetTable);
-            skippedItems.push({
-              type: 'TABLE',
+          if (!schemaMap.has(targetTable)) {
+            violations.push({
+              type: 'SELECT',
               file,
               line,
               table: targetTable,
-              reason: `Embedded non-exchange external table: "${targetTable}"`
+              embedPath: currentPath,
+              column: `[TABLE NOT FOUND: ${targetTable}]`
             });
+          } else {
+            validateSelectTokens(targetTable, inner, currentPath, file, line);
           }
         } else {
           // Plain column reference
@@ -636,26 +557,56 @@ async function main() {
 
     for (const file of allFiles) {
       const content = fs.readFileSync(file, 'utf8');
-      if (!content.includes('exchange_')) continue;
+      if (!content.includes('.from(')) continue;
 
       const sourceFile = ts.createSourceFile(file, content, ts.ScriptTarget.Latest, true);
       const varTableMap = new Map<string, string>();
 
-      // Pass 1: find variable declarations/assignments initialized with exchange queries
+      // Pass 1: find variable declarations/assignments initialized with Supabase queries
       function findVars(node: ts.Node) {
         if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.initializer) {
           if (ts.isCallExpression(node.initializer)) {
             const table = getTargetTable(node.initializer, varTableMap);
-            if (table && table.startsWith('exchange_')) {
+            if (table) {
               varTableMap.set(node.name.text, table);
+              if (!schemaMap.has(table)) {
+                const alreadyReported = violations.some(
+                  (v) => v.type === 'TABLE' && v.file === file && v.table === table
+                );
+                if (!alreadyReported) {
+                  const { line } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                  violations.push({
+                    type: 'TABLE',
+                    file,
+                    line: line + 1,
+                    table,
+                    column: `[TABLE NOT FOUND: ${table}]`
+                  });
+                }
+              }
             }
           }
         }
         if (ts.isBinaryExpression(node) && node.operatorToken.kind === ts.SyntaxKind.EqualsToken) {
           if (ts.isIdentifier(node.left) && ts.isCallExpression(node.right)) {
             const table = getTargetTable(node.right, varTableMap);
-            if (table && table.startsWith('exchange_')) {
+            if (table) {
               varTableMap.set(node.left.text, table);
+              if (!schemaMap.has(table)) {
+                const alreadyReported = violations.some(
+                  (v) => v.type === 'TABLE' && v.file === file && v.table === table
+                );
+                if (!alreadyReported) {
+                  const { line } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                  violations.push({
+                    type: 'TABLE',
+                    file,
+                    line: line + 1,
+                    table,
+                    column: `[TABLE NOT FOUND: ${table}]`
+                  });
+                }
+              }
             }
           }
         }
@@ -669,8 +620,25 @@ async function main() {
           const methodName = node.expression.name.text;
           const table = getTargetTable(node, varTableMap);
 
-          if (table && table.startsWith('exchange_')) {
+          if (table) {
             const { line } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+
+            if (!schemaMap.has(table)) {
+              const alreadyReported = violations.some(
+                (v) => v.type === 'TABLE' && v.file === file && v.table === table
+              );
+              if (!alreadyReported) {
+                violations.push({
+                  type: 'TABLE',
+                  file,
+                  line: line + 1,
+                  table,
+                  column: `[TABLE NOT FOUND: ${table}]`
+                });
+              }
+              ts.forEachChild(node, visit);
+              return;
+            }
 
             // 1. SELECT
             if (methodName === 'select') {
@@ -932,7 +900,7 @@ async function main() {
     }
 
     console.log('============================================================================');
-    console.log('EXCHANGE QUERIES SCHEMA PARITY & INTEGRITY REPORT');
+    console.log('DATABASE QUERIES SCHEMA PARITY & INTEGRITY REPORT');
     console.log('============================================================================\n');
 
     if (violations.length > 0) {
@@ -946,10 +914,14 @@ async function main() {
         if (v.embedPath) {
           console.error(`    Embed Path:    ${v.embedPath}`);
         }
-        console.error(`    Invalid Col:   "${v.column}" does NOT exist in table "${v.table}"\n`);
+        if (v.type === 'TABLE' || v.column.startsWith('[TABLE NOT FOUND')) {
+          console.error(`    Table Error:   ${v.column}\n`);
+        } else {
+          console.error(`    Invalid Col:   "${v.column}" does NOT exist in table "${v.table}"\n`);
+        }
       }
     } else {
-      console.log('✅ ZERO VIOLATIONS FOUND. All exchange queries strictly match the database schema.\n');
+      console.log('✅ ZERO VIOLATIONS FOUND. All database queries strictly match the database schema.\n');
     }
 
     console.log('----------------------------------------------------------------------------');
@@ -980,10 +952,10 @@ async function main() {
     console.log('----------------------------------------------------------------------------\n');
 
     if (violations.length > 0) {
-      console.error(`FAILED: ${violations.length} invalid column/key reference(s) detected in exchange queries.`);
+      console.error(`FAILED: ${violations.length} invalid column/key reference(s) detected in database queries.`);
       process.exit(1);
     } else {
-      console.log('SUCCESS: All exchange queries (SELECT, WRITE, FILTER) adhere strictly to schema.');
+      console.log('SUCCESS: All database queries (SELECT, WRITE, FILTER) adhere strictly to schema.');
       process.exit(0);
     }
   } finally {
