@@ -64,7 +64,7 @@ interface PsqlResult {
   exitCode: number;
 }
 
-function runPsql(sql: string, targetDb: string = PGDATABASE): PsqlResult {
+function runPsql(sql: string, targetDb: string = PGDATABASE, extraArgs: string[] = []): PsqlResult {
   if (!psqlBin) {
     return {
       success: false,
@@ -89,7 +89,7 @@ function runPsql(sql: string, targetDb: string = PGDATABASE): PsqlResult {
     );
   }
 
-  args.push('-X', '-v', 'ON_ERROR_STOP=1', '-c', sql);
+  args.push(...extraArgs, '-X', '-v', 'ON_ERROR_STOP=1', '-c', sql);
 
   const res = spawnSync(psqlBin, args, {
     env,
@@ -300,27 +300,113 @@ async function main() {
     }
     console.log('\nAll migrations executed successfully with zero SQL errors.\n');
 
+    let hasErrors = false;
+
     // Step 4b: Verify case_charges foreign keys and RLS policy (Self-Test 3 - dre-p143)
     console.log('============================================================================');
     console.log('SELF-TEST 3: case_charges FOREIGN KEYS & POLICIES VERIFICATION');
     console.log('============================================================================');
+
+    const EXPECTED_CASE_CHARGES_FKS = [
+      'case_invoices_created_by_fkey|FOREIGN KEY (created_by) REFERENCES admin_users(id)',
+      'case_invoices_lead_id_fkey|FOREIGN KEY (lead_id) REFERENCES leads(id) ON DELETE CASCADE'
+    ];
+
+    const EXPECTED_CASE_CHARGES_POLICIES = [
+      'case_invoices_service_role_only|{service_role}'
+    ];
+
+    const normalizeLines = (raw: string): string[] => {
+      return raw
+        .split('\n')
+        .map((line) => line.split('|').map((part) => part.trim()).join('|').trim())
+        .filter(Boolean)
+        .sort((a, b) => a.localeCompare(b));
+    };
+
+    const sortedExpectedFks = [...EXPECTED_CASE_CHARGES_FKS].map((l) => l.trim()).sort();
+    const sortedExpectedPolicies = [...EXPECTED_CASE_CHARGES_POLICIES].map((l) => l.trim()).sort();
+
+    // Query and assert Foreign Keys
     const fkQuery = `
       SELECT conname, pg_get_constraintdef(oid)
       FROM pg_constraint
       WHERE conrelid = 'public.case_charges'::regclass AND contype = 'f'
       ORDER BY conname;
     `;
-    const fkRes = runPsql(fkQuery, TEST_DB);
-    console.log('Query: SELECT conname, pg_get_constraintdef(oid) FROM pg_constraint WHERE conrelid = \'public.case_charges\'::regclass AND contype = \'f\' ORDER BY conname;');
-    console.log(fkRes.stdout.trim());
+    const fkRes = runPsql(fkQuery, TEST_DB, ['-t', '-A', '-F', '|']);
+    const actualFks = normalizeLines(fkRes.stdout);
 
+    const fksMatch =
+      actualFks.length === sortedExpectedFks.length &&
+      actualFks.every((val, idx) => val === sortedExpectedFks[idx]);
+
+    if (!fkRes.success || !fksMatch) {
+      hasErrors = true;
+      console.error('❌ SELF-TEST 3 FAILED: case_charges foreign keys do not match expected definition.');
+      console.error('Expected Foreign Keys:');
+      sortedExpectedFks.forEach((k) => console.error(`   [EXPECTED] ${k}`));
+      console.error('Actual Foreign Keys:');
+      if (actualFks.length === 0) {
+        console.error('   (none found)');
+      } else {
+        actualFks.forEach((k) => console.error(`   [ACTUAL]   ${k}`));
+      }
+      const missingFks = sortedExpectedFks.filter((k) => !actualFks.includes(k));
+      if (missingFks.length > 0) {
+        missingFks.forEach((k) => console.error(`   Missing foreign key: ${k.split('|')[0]}`));
+      }
+      const unexpectedFks = actualFks.filter((k) => !sortedExpectedFks.includes(k));
+      if (unexpectedFks.length > 0) {
+        unexpectedFks.forEach((k) => console.error(`   Unexpected foreign key: ${k.split('|')[0]}`));
+      }
+      if (fkRes.stderr.trim()) {
+        console.error(`Error: ${fkRes.stderr.trim()}`);
+      }
+      console.error('');
+    } else {
+      console.log(`✅ SELF-TEST 3: case_charges has exactly the ${sortedExpectedFks.length} expected foreign keys.`);
+    }
+
+    // Query and assert RLS Policies
     const policyQuery = `
       SELECT policyname, roles::text FROM pg_policies
-      WHERE schemaname='public' AND tablename='case_charges';
+      WHERE schemaname='public' AND tablename='case_charges'
+      ORDER BY policyname;
     `;
-    const policyRes = runPsql(policyQuery, TEST_DB);
-    console.log('\nQuery: SELECT policyname, roles::text FROM pg_policies WHERE schemaname=\'public\' AND tablename=\'case_charges\';');
-    console.log(policyRes.stdout.trim());
+    const policyRes = runPsql(policyQuery, TEST_DB, ['-t', '-A', '-F', '|']);
+    const actualPolicies = normalizeLines(policyRes.stdout);
+
+    const policiesMatch =
+      actualPolicies.length === sortedExpectedPolicies.length &&
+      actualPolicies.every((val, idx) => val === sortedExpectedPolicies[idx]);
+
+    if (!policyRes.success || !policiesMatch) {
+      hasErrors = true;
+      console.error('❌ SELF-TEST 3 FAILED: case_charges RLS policies do not match expected definition.');
+      console.error('Expected Policies:');
+      sortedExpectedPolicies.forEach((p) => console.error(`   [EXPECTED] ${p}`));
+      console.error('Actual Policies:');
+      if (actualPolicies.length === 0) {
+        console.error('   (none found)');
+      } else {
+        actualPolicies.forEach((p) => console.error(`   [ACTUAL]   ${p}`));
+      }
+      const missingPolicies = sortedExpectedPolicies.filter((p) => !actualPolicies.includes(p));
+      if (missingPolicies.length > 0) {
+        missingPolicies.forEach((p) => console.error(`   Missing policy: ${p.split('|')[0]}`));
+      }
+      const unexpectedPolicies = actualPolicies.filter((p) => !sortedExpectedPolicies.includes(p));
+      if (unexpectedPolicies.length > 0) {
+        unexpectedPolicies.forEach((p) => console.error(`   Unexpected policy: ${p.split('|')[0]}`));
+      }
+      if (policyRes.stderr.trim()) {
+        console.error(`Error: ${policyRes.stderr.trim()}`);
+      }
+      console.error('');
+    } else {
+      console.log(`✅ SELF-TEST 3: case_charges has exactly the ${sortedExpectedPolicies.length} expected RLS policy.`);
+    }
     console.log('============================================================================\n');
 
     // Step 5: Read target schema from production snapshot fixture
@@ -382,8 +468,6 @@ async function main() {
     console.log('============================================================================');
     console.log('SCHEMA REBUILD PARITY COMPARISON REPORT');
     console.log('============================================================================\n');
-
-    let hasErrors = false;
 
     // Check 1: Missing Tables
     const snapshotOnlyExceptions = new Set(
