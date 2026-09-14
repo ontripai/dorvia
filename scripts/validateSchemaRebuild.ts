@@ -150,39 +150,14 @@ interface DocumentedException {
 
 export const DOCUMENTED_EXCEPTIONS: DocumentedException[] = [
   {
-    table: 'case_invoices',
-    type: 'snapshot_only',
-    reason: 'Renamed to case_charges by migration 09b (accounting overhaul).'
-  },
-  {
-    table: 'invoice_installments',
-    type: 'snapshot_only',
-    reason: 'Dropped by migration 09b (superseded by receipt_allocations and case_charges).'
-  },
-  {
-    table: 'case_charges',
-    type: 'rebuild_only',
-    reason: 'Created / renamed from case_invoices by migration 09b.'
-  },
-  {
-    table: 'case_receipts',
-    type: 'rebuild_only',
-    reason: 'Created by migration 09b for case client payment receipts.'
-  },
-  {
-    table: 'receipt_allocations',
-    type: 'rebuild_only',
-    reason: 'Created by migration 09b for allocating receipts to charges.'
-  },
-  {
     table: 'comments',
     type: 'rebuild_only',
-    reason: 'Created by migration 01 for blog and site comments.'
+    reason: 'Created by migration 01 for blog and site comments; never provisioned in production.'
   },
   {
     table: 'page_comments',
     type: 'rebuild_only',
-    reason: 'Created by migration 01 for page-level comment threads.'
+    reason: 'Created by migration 01 for page-level comment threads; never provisioned in production.'
   }
 ];
 

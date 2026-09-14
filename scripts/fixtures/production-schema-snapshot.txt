@@ -1,13 +1,14 @@
-# DORVIA production schema snapshot — public schema, table|columns (in ordinal order)
-# Source: Supabase project eufjxgjlahqupxsxmfem, read on 2026-09-14 by Claude via information_schema.columns
-# Purpose: reference target for scripts/validateSchemaRebuild.ts (dre-p143)
-# NOTE: taken BEFORE migrations 08/09b, 12, 13 and 14 were applied to production.
+# DORVIA production schema snapshot
+# Taken from the live Supabase database on 2026-09-14, AFTER migrations 12, 13, 14 and 09b were applied.
+# Format: table|col1,col2,... (columns in ordinal_position order)
+# 37 base tables in schema public.
 admin_users|id,role_id,full_name,permission_overrides,is_active,created_at,updated_at,telegram_chat_id,notify_email,notify_telegram,date_of_birth,last_birthday_greeted_year
 app_settings|key,value,description,updated_at,updated_by
 blog_categories|id,key,label_fa,label_en,sort_order,created_at
 blog_posts|id,category_id,status,title_fa,title_en,slug_fa,slug_en,excerpt_fa,excerpt_en,content_fa,content_en,cover_image_url,meta_title_fa,meta_title_en,meta_description_fa,meta_description_en,tags,author_admin_id,published_at,created_at,updated_at
+case_charges|id,lead_id,currency,total_amount,status,created_by,notes,created_at,updated_at,description,doc_number
 case_expenses|id,lead_id,case_stage_id,expense_type,amount,currency,paid_to,incurred_at,notes,created_by,created_at,updated_at
-case_invoices|id,lead_id,currency,total_amount,status,created_by,notes,created_at,updated_at
+case_receipts|id,lead_id,doc_number,amount,currency,received_at,payment_method,status,notes,created_by,created_at,updated_at
 case_stages|id,lead_id,stage_key,label_fa,status,due_date,responsible_role,responsible_staff_id,completed_at,notes,created_at,updated_at
 document_types|key,label_fa,allowed_roles
 exchange_accounts|id,lead_id,kind,value,holder_name,related_party_id,authorized_recipient_id,verified_at,verified_by_admin_id,is_active,created_at,updated_at
@@ -26,7 +27,6 @@ exchange_related_parties|id,lead_id,party_type,full_name,relationship,national_i
 exchange_request_prices|id,request_id,version,rate,irr_amount,changed_at,changed_by
 exchange_requests|id,requester_lead_id,direction,eur_currency,eur_amount,rate,irr_amount,allow_partial,min_chunk,acting_party_id,destination_account_id,status,expires_at,renewed_count,price_version,created_at,updated_at
 exchange_transfer_proofs|id,match_id,side,uploaded_by_lead_id,proof_type,instrument,document_id,account_id,bank_reference,statement_period_from,statement_period_to,submitted_at,verified_by_admin_id,verified_at,verification_channel,verification_result,verification_note,created_at
-invoice_installments|id,invoice_id,installment_no,amount,due_date,paid_amount,paid_at,status,payment_method,notes,created_at,updated_at
 job_categories|id,key,label_fa,label_en,sort_order,created_at
 job_listings|id,category_id,status,title_fa,title_en,slug_fa,slug_en,city,salary_min,salary_max,salary_currency,contract_type,positions_available,accommodation_provided,description_fa,description_en,requirements_fa,requirements_en,is_sample,author_admin_id,published_at,created_at,updated_at
 lead_assignments|id,lead_id,staff_id,assigned_role,assigned_at
@@ -35,6 +35,7 @@ lead_messages|id,lead_id,sender_role,sender_ref,text,created_at
 leads|id,source,channel_ref,full_name,phone,email,site_goal,bot_major,bot_sub,unified_category,message,status,admin_comment,consent_terms,marketing_consent,raw_meta,created_at,updated_at,user_id,verified_at,verified_by,invited_at,invited_by,family_group_id,relation_to_primary,is_family_primary,date_of_birth,anniversary_date,national_id_or_passport,address_line,address_city,address_postal_code,employment_status,education_level,applied_job_listing_id,referred_by_partner_id,last_birthday_greeted_year,last_anniversary_greeted_year,iran_address,other_residency_address,romania_address
 permissions|id,key,label_fa,label_en,description
 rate_limit_events|id,bucket_key,created_at
+receipt_allocations|id,receipt_id,charge_id,amount,status,cancelled_at,cancelled_by,created_at
 referral_partners|id,full_name,phone,email,notes,is_active,created_at,updated_at
 role_permissions|role_id,permission_id
 roles|id,key,label_fa,label_en,description,created_at
