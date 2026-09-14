@@ -18,6 +18,7 @@ import { execSync, spawnSync } from 'child_process';
 
 const MIGRATION_PATH = path.resolve('docs/migrations/10_p2p_exchange_schema.sql');
 const MIGRATION_11_PATH = path.resolve('docs/migrations/11_exchange_staff_operations.sql');
+const MIGRATION_12_PATH = path.resolve('docs/migrations/12_exchange_rpc_lockdown.sql');
 
 // Configuration from environment variables
 const PGHOST = process.env.PGHOST || '127.0.0.1';
@@ -136,6 +137,14 @@ async function main() {
 
   if (!fs.existsSync(MIGRATION_PATH)) {
     console.error(`❌ Migration file not found: ${MIGRATION_PATH}`);
+    process.exit(1);
+  }
+  if (!fs.existsSync(MIGRATION_11_PATH)) {
+    console.error(`❌ Migration file not found: ${MIGRATION_11_PATH}`);
+    process.exit(1);
+  }
+  if (!fs.existsSync(MIGRATION_12_PATH)) {
+    console.error(`❌ Migration file not found: ${MIGRATION_12_PATH}`);
     process.exit(1);
   }
 
@@ -304,6 +313,15 @@ async function main() {
       process.exit(1);
     }
     console.log('Migration 11 executed with zero errors.\n');
+
+    // Step 4c: Apply 12_exchange_rpc_lockdown.sql (dre-p135)
+    console.log(`Applying migration 12: ${path.basename(MIGRATION_12_PATH)}...`);
+    const mig12Result = runPsqlFile(MIGRATION_12_PATH, TEST_DB);
+    if (!mig12Result.success) {
+      console.error(`Failed to execute migration 12:\n${mig12Result.stderr}`);
+      process.exit(1);
+    }
+    console.log('Migration 12 executed with zero errors.\n');
 
     // Step 5: Seed valid baseline data
     console.log('Seeding baseline fixtures (users, leads, exchange profiles, accounts, open request)...');
@@ -934,6 +952,61 @@ async function main() {
           ORDER BY created_at ASC;
         `,
         verifyFn: (stdout: string) => stdout.includes('EUR_RECEIVED') && stdout.includes('SETTLED') && stdout.includes('REC-14') && stdout.includes('PAY-18')
+      },
+      // Test 20 (RPC Security Lockdown - dre-p135): Verify fn_exchange_reserve_request_match privileges
+      {
+        id: '20',
+        name: 'RPC Security Lockdown: Verify fn_exchange_reserve_request_match is revoked from anon & authenticated',
+        expectSuccess: true,
+        sql: `
+          SELECT
+            has_function_privilege('anon', 'public.fn_exchange_reserve_request_match(uuid, uuid, numeric, uuid, integer)', 'EXECUTE') AS anon_can_execute,
+            has_function_privilege('authenticated', 'public.fn_exchange_reserve_request_match(uuid, uuid, numeric, uuid, integer)', 'EXECUTE') AS auth_can_execute,
+            has_function_privilege('service_role', 'public.fn_exchange_reserve_request_match(uuid, uuid, numeric, uuid, integer)', 'EXECUTE') AS service_role_can_execute;
+        `,
+        verifyFn: (stdout: string) => {
+          // Both anon and authenticated must be 'f' (false), and service_role must be 't' (true)
+          const dataLine = stdout.split('\n').find(line => /^\s*[ft]\s*\|\s*[ft]\s*\|\s*[ft]/.test(line));
+          if (!dataLine) {
+            console.error('❌ FAILED: Could not parse privilege check output:');
+            console.error(stdout);
+            return false;
+          }
+          const [anon, auth, service] = dataLine.split('|').map(s => s.trim());
+          if (anon !== 'f') {
+            console.error(`❌ FAILED: anon has EXECUTE privilege on fn_exchange_reserve_request_match (expected 'f', got '${anon}')`);
+            return false;
+          }
+          if (auth !== 'f') {
+            console.error(`❌ FAILED: authenticated has EXECUTE privilege on fn_exchange_reserve_request_match (expected 'f', got '${auth}')`);
+            return false;
+          }
+          if (service !== 't') {
+            console.error(`❌ FAILED: service_role missing EXECUTE privilege on fn_exchange_reserve_request_match (expected 't', got '${service}')`);
+            return false;
+          }
+          return true;
+        }
+      },
+      // Test 21 (Search Path Hardening - dre-p135): Verify zero fn_exchange% functions have missing search_path
+      {
+        id: '21',
+        name: 'Search Path Hardening: Verify all fn_exchange% functions have search_path configured in proconfig',
+        expectSuccess: true,
+        sql: `
+          SELECT p.proname FROM pg_proc p
+          JOIN pg_namespace n ON n.oid = p.pronamespace
+          WHERE n.nspname = 'public' AND p.proname LIKE 'fn_exchange%'
+            AND (p.proconfig IS NULL OR NOT (p.proconfig::text LIKE '%search_path%'));
+        `,
+        verifyFn: (stdout: string) => {
+          if (!stdout.includes('(0 rows)')) {
+            console.error('❌ FAILED: Found fn_exchange% functions missing search_path in proconfig:');
+            console.error(stdout);
+            return false;
+          }
+          return true;
+        }
       }
     ];
 
