@@ -721,6 +721,126 @@ async function main() {
                     });
                   }
                 }
+              } else if (ts.isIdentifier(arg)) {
+                // Check if the argument is a simple identifier defined with `const` in the enclosing function
+                // with an object literal initializer
+                let resolved = false;
+                const varName = arg.text;
+                const targetTable: string = table;
+
+                // Find enclosing function or method
+                let enclosingFn: ts.Node | undefined = node.parent;
+                while (enclosingFn) {
+                  if (
+                    ts.isFunctionDeclaration(enclosingFn) ||
+                    ts.isFunctionExpression(enclosingFn) ||
+                    ts.isArrowFunction(enclosingFn) ||
+                    ts.isMethodDeclaration(enclosingFn)
+                  ) {
+                    break;
+                  }
+                  enclosingFn = enclosingFn.parent;
+                }
+
+                if (enclosingFn) {
+                  function findVarDecl(scope: ts.Node, name: string): { decl: ts.VariableDeclaration | null; isConst: boolean } {
+                    let foundDecl: ts.VariableDeclaration | null = null;
+                    let foundConst = false;
+                    function walk(n: ts.Node) {
+                      if (foundDecl) return;
+                      if (ts.isVariableDeclaration(n) && ts.isIdentifier(n.name) && n.name.text === name) {
+                        foundDecl = n;
+                        if (ts.isVariableDeclarationList(n.parent)) {
+                          foundConst = Boolean(n.parent.flags & ts.NodeFlags.Const);
+                        }
+                        return;
+                      }
+                      ts.forEachChild(n, walk);
+                    }
+                    walk(scope);
+                    return { decl: foundDecl, isConst: foundConst };
+                  }
+
+                  const { decl, isConst } = findVarDecl(enclosingFn, varName);
+                  if (decl && isConst && decl.initializer && ts.isObjectLiteralExpression(decl.initializer)) {
+                    resolved = true;
+                    // 1. Validate the initial object literal
+                    validateWriteObject(decl.initializer, targetTable, methodName, file, sourceFile);
+
+                    // 2. Validate subsequent property assignments within the enclosing function
+                    const scanAssignments = (n: ts.Node) => {
+                      if (ts.isBinaryExpression(n) && n.operatorToken.kind === ts.SyntaxKind.EqualsToken) {
+                        if (
+                          ts.isPropertyAccessExpression(n.left) &&
+                          ts.isIdentifier(n.left.expression) &&
+                          n.left.expression.text === varName
+                        ) {
+                          const keyName = n.left.name.text;
+                          const { line: assignLine } = sourceFile.getLineAndCharacterOfPosition(n.left.getStart());
+                          countWriteKeysChecked++;
+                          const validCols = schemaMap.get(targetTable);
+                          if (validCols && !validCols.has(keyName.toLowerCase())) {
+                            violations.push({
+                              type: 'WRITE',
+                              file,
+                              line: assignLine + 1,
+                              table: targetTable,
+                              column: keyName,
+                              method: methodName
+                            });
+                          }
+                        } else if (
+                          ts.isElementAccessExpression(n.left) &&
+                          ts.isIdentifier(n.left.expression) &&
+                          n.left.expression.text === varName
+                        ) {
+                          const { line: assignLine } = sourceFile.getLineAndCharacterOfPosition(n.left.getStart());
+                          if (
+                            n.left.argumentExpression &&
+                            (ts.isStringLiteral(n.left.argumentExpression) ||
+                              ts.isNoSubstitutionTemplateLiteral(n.left.argumentExpression))
+                          ) {
+                            const keyName = n.left.argumentExpression.text.trim();
+                            countWriteKeysChecked++;
+                            const validCols = schemaMap.get(targetTable);
+                            if (validCols && !validCols.has(keyName.toLowerCase())) {
+                              violations.push({
+                                type: 'WRITE',
+                                file,
+                                line: assignLine + 1,
+                                table: targetTable,
+                                column: keyName,
+                                method: methodName
+                              });
+                            }
+                          } else {
+                            skippedItems.push({
+                              type: 'WRITE',
+                              file,
+                              line: assignLine + 1,
+                              table: targetTable,
+                              method: methodName,
+                              reason: `Computed property access assignment [${n.left.argumentExpression ? n.left.argumentExpression.getText(sourceFile) : '?'}] on write payload`
+                            });
+                          }
+                        }
+                      }
+                      ts.forEachChild(n, scanAssignments);
+                    };
+                    scanAssignments(enclosingFn);
+                  }
+                }
+
+                if (!resolved) {
+                  skippedItems.push({
+                    type: 'WRITE',
+                    file,
+                    line: line + 1,
+                    table,
+                    method: methodName,
+                    reason: `Non-literal write argument (variable/expression: ${arg.getText(sourceFile).slice(0, 40)})`
+                  });
+                }
               } else {
                 skippedItems.push({
                   type: 'WRITE',
