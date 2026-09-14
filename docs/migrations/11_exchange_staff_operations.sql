@@ -15,7 +15,7 @@
 --   4. Idempotency & double-click protection: enforced via unique database indexes
 --      uq_exchange_office_receipts_match and uq_exchange_office_payouts_match.
 --   5. Backfill permission catalog: backfills unseeded permissions used by the admin
---      codebase and links all to 'owner', while giving exchange operations to manager/agent/viewer.
+--      codebase and links all to 'owner', while giving exchange operations to manager.
 -- ============================================================================
 
 BEGIN;
@@ -51,18 +51,6 @@ ON CONFLICT DO NOTHING;
 INSERT INTO public.role_permissions (role_id, permission_id)
 SELECT r.id, p.id FROM public.roles r CROSS JOIN public.permissions p
 WHERE r.key = 'manager' AND p.key IN ('exchange.view', 'exchange.manage')
-ON CONFLICT DO NOTHING;
-
--- Wire agent: read-only visibility into exchange matches
-INSERT INTO public.role_permissions (role_id, permission_id)
-SELECT r.id, p.id FROM public.roles r CROSS JOIN public.permissions p
-WHERE r.key = 'agent' AND p.key = 'exchange.view'
-ON CONFLICT DO NOTHING;
-
--- Wire viewer: read-only visibility into exchange matches
-INSERT INTO public.role_permissions (role_id, permission_id)
-SELECT r.id, p.id FROM public.roles r CROSS JOIN public.permissions p
-WHERE r.key = 'viewer' AND p.key = 'exchange.view'
 ON CONFLICT DO NOTHING;
 
 -- ============================================================================

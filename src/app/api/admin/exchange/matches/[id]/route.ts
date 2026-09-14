@@ -18,6 +18,40 @@ export const dynamic = 'force-dynamic';
  *
  * Requires 'exchange.view' permission.
  */
+/**
+ * Masks sensitive bank account numbers (IBAN, Sheba, Card) unless the caller
+ * has full 'exchange.manage' authority.
+ * Shows only the last 4 characters preceded by bullet dots (e.g. ••••1234).
+ */
+function maskAccountValue(value: string | null | undefined, canManage: boolean): string | null {
+  if (!value) return null;
+  if (canManage) return value;
+  const str = String(value).trim();
+  if (str.length <= 4) return '••••';
+  return `••••${str.slice(-4)}`;
+}
+
+function sanitizeAccount<T extends { value?: string | null }>(
+  account: T | T[] | null | undefined,
+  canManage: boolean
+): any {
+  if (!account) return account;
+  if (Array.isArray(account)) {
+    return account.map((acc) =>
+      acc
+        ? {
+            ...acc,
+            value: maskAccountValue(acc.value, canManage),
+          }
+        : acc
+    );
+  }
+  return {
+    ...account,
+    value: maskAccountValue(account.value, canManage),
+  };
+}
+
 export async function GET(
   request: Request,
   { params }: { params: { id: string } | Promise<{ id: string }> }
@@ -262,11 +296,26 @@ export async function GET(
         .eq('status', 'approved'),
     ]);
 
+    const canManage = hasPermission(admin, 'exchange.manage');
+
+    const sanitizedMatch = match
+      ? {
+          ...match,
+          destination_account: sanitizeAccount(match.destination_account, canManage),
+        }
+      : match;
+
+    const rawProofs = proofsRes.data || [];
+    const transferProofs = rawProofs.map((proof: any) => ({
+      ...proof,
+      account: sanitizeAccount(proof.account, canManage),
+    }));
+
     return NextResponse.json({
-      match,
+      match: sanitizedMatch,
       receipts: receiptsRes.data || [],
       payouts: payoutsRes.data || [],
-      transferProofs: proofsRes.data || [],
+      transferProofs,
       events: eventsRes.data || [],
       authorizedRecipients: authRecipientsRes.data || [],
     });

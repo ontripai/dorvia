@@ -768,10 +768,10 @@ async function main() {
         `,
         verifyFn: (stdout: string) => stdout.includes('EUR_RECEIVED')
       },
-      // Test 15 (Staff Op 4): Second receipt on same match rejected (idempotency guard)
+      // Test 15 (Staff Op 4a): Second receipt attempt rejected by state gate
       {
         id: '15',
-        name: 'Staff Op 4: Second receipt on same match rejected (state gate & unique index uq_exchange_office_receipts_match)',
+        name: 'Staff Op 4a: Second receipt attempt on match rejected by state gate (status EUR_RECEIVED, expected ACCEPTED)',
         sql: `
           SELECT public.fn_exchange_record_office_receipt(
             '50000000-0000-0000-0000-000000000002',
@@ -786,7 +786,26 @@ async function main() {
             'Second receipt attempt'
           );
         `,
-        expectedErrorPattern: /expected ACCEPTED|Cannot record office receipt.*status EUR_RECEIVED|uq_exchange_office_receipts_match|duplicate key/i
+        expectedErrorPattern: /expected ACCEPTED|Cannot record office receipt.*status EUR_RECEIVED/i
+      },
+      // Test 15b (Staff Op 4b): Direct duplicate insert rejected by unique index uq_exchange_office_receipts_match
+      {
+        id: '15b',
+        name: 'Staff Op 4b: Direct duplicate insert rejected by unique index uq_exchange_office_receipts_match',
+        sql: `
+          INSERT INTO public.exchange_office_receipts (
+            match_id, amount, currency, handled_by, partner_reference, receipt_no, staff_admin_id
+          ) VALUES (
+            '50000000-0000-0000-0000-000000000002',
+            1020.00,
+            'EUR',
+            'partner_exchange',
+            'REF-DUP-REC',
+            'REC-DUP',
+            'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'
+          );
+        `,
+        expectedErrorPattern: /duplicate key value violates unique constraint "uq_exchange_office_receipts_match"/i
       },
       // Test 16 (Staff Op 5): Payout rejected on match not IRR_CONFIRMED
       {
@@ -845,10 +864,10 @@ async function main() {
         `,
         expectedErrorPattern: /is neither EUR receiver.*nor an approved authorized recipient/i
       },
-      // Test 18 (Staff Op 7): Payout to approved authorized recipient succeeds -> status becomes SETTLED
+      // Test 18 (Staff Op 7a): Payout to approved authorized recipient succeeds -> status becomes SETTLED
       {
         id: '18',
-        name: 'Staff Op 7: Office payout to approved authorized recipient succeeds and advances match to SETTLED',
+        name: 'Staff Op 7a: Office payout to approved authorized recipient succeeds and advances match to SETTLED',
         expectSuccess: true,
         setupSql: `
           -- 1. Ensure recipient dddddddd has approved exchange profile
@@ -882,6 +901,26 @@ async function main() {
           SELECT status FROM public.exchange_matches WHERE id = '50000000-0000-0000-0000-000000000003';
         `,
         verifyFn: (stdout: string) => stdout.includes('SETTLED')
+      },
+      // Test 18b (Staff Op 7b): Direct duplicate insert rejected by unique index uq_exchange_office_payouts_match
+      {
+        id: '18b',
+        name: 'Staff Op 7b: Direct duplicate insert rejected by unique index uq_exchange_office_payouts_match',
+        sql: `
+          INSERT INTO public.exchange_office_payouts (
+            match_id, amount, currency, handled_by, partner_reference, paid_to_lead_id, receipt_no, staff_admin_id
+          ) VALUES (
+            '50000000-0000-0000-0000-000000000003',
+            1000.00,
+            'EUR',
+            'partner_exchange',
+            'REF-DUP-PAY',
+            'dddddddd-dddd-dddd-dddd-dddddddddddd',
+            'PAY-DUP',
+            'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'
+          );
+        `,
+        expectedErrorPattern: /duplicate key value violates unique constraint "uq_exchange_office_payouts_match"/i
       },
       // Test 19 (Staff Op 8): Verify staff audit events in exchange_events
       {
