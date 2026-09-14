@@ -108,8 +108,8 @@ export async function GET(
           eur_amount,
           rate,
           irr_amount,
-          min_match_eur,
-          lead_id
+          min_chunk,
+          requester_lead_id
         ),
         eur_payer:leads!exchange_matches_eur_payer_lead_id_fkey (
           id,
