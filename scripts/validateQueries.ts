@@ -188,7 +188,7 @@ function stripComments(str: string): string {
     .replace(/\/\/.*$/gm, ' ');
 }
 
-type ViolationType = 'SELECT' | 'WRITE' | 'FILTER';
+type ViolationType = 'SELECT' | 'WRITE' | 'FILTER' | 'TABLE';
 
 interface QueryViolation {
   type: ViolationType;
@@ -222,6 +222,12 @@ function getTargetTable(callExpr: ts.CallExpression, varTableMap: Map<string, st
       curr = curr.expression;
     } else if (ts.isCallExpression(curr)) {
       if (ts.isPropertyAccessExpression(curr.expression) && curr.expression.name.text === 'from') {
+        if (
+          ts.isPropertyAccessExpression(curr.expression.expression) &&
+          curr.expression.expression.name.text === 'storage'
+        ) {
+          return null;
+        }
         if (curr.arguments.length > 0 && ts.isStringLiteral(curr.arguments[0])) {
           return curr.arguments[0].text.trim();
         }
@@ -561,16 +567,36 @@ async function main() {
         if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.initializer) {
           if (ts.isCallExpression(node.initializer)) {
             const table = getTargetTable(node.initializer, varTableMap);
-            if (table && schemaMap.has(table)) {
+            if (table) {
               varTableMap.set(node.name.text, table);
+              if (!schemaMap.has(table)) {
+                const { line } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                violations.push({
+                  type: 'TABLE',
+                  file,
+                  line: line + 1,
+                  table,
+                  column: `[TABLE NOT FOUND: ${table}]`
+                });
+              }
             }
           }
         }
         if (ts.isBinaryExpression(node) && node.operatorToken.kind === ts.SyntaxKind.EqualsToken) {
           if (ts.isIdentifier(node.left) && ts.isCallExpression(node.right)) {
             const table = getTargetTable(node.right, varTableMap);
-            if (table && schemaMap.has(table)) {
+            if (table) {
               varTableMap.set(node.left.text, table);
+              if (!schemaMap.has(table)) {
+                const { line } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                violations.push({
+                  type: 'TABLE',
+                  file,
+                  line: line + 1,
+                  table,
+                  column: `[TABLE NOT FOUND: ${table}]`
+                });
+              }
             }
           }
         }
@@ -584,8 +610,26 @@ async function main() {
           const methodName = node.expression.name.text;
           const table = getTargetTable(node, varTableMap);
 
-          if (table && schemaMap.has(table)) {
+          if (table) {
             const { line } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+
+            if (!schemaMap.has(table)) {
+              if (methodName === 'select' || WRITE_METHODS.has(methodName) || FILTER_METHODS.has(methodName)) {
+                const alreadyReported = violations.some(
+                  (v) => v.type === 'TABLE' && v.file === file && v.table === table && Math.abs(v.line - (line + 1)) <= 10
+                );
+                if (!alreadyReported) {
+                  violations.push({
+                    type: 'TABLE',
+                    file,
+                    line: line + 1,
+                    table,
+                    column: `[TABLE NOT FOUND: ${table}]`
+                  });
+                }
+              }
+              return;
+            }
 
             // 1. SELECT
             if (methodName === 'select') {
@@ -861,7 +905,11 @@ async function main() {
         if (v.embedPath) {
           console.error(`    Embed Path:    ${v.embedPath}`);
         }
-        console.error(`    Invalid Col:   "${v.column}" does NOT exist in table "${v.table}"\n`);
+        if (v.type === 'TABLE' || v.column.startsWith('[TABLE NOT FOUND')) {
+          console.error(`    Table Error:   ${v.column}\n`);
+        } else {
+          console.error(`    Invalid Col:   "${v.column}" does NOT exist in table "${v.table}"\n`);
+        }
       }
     } else {
       console.log('✅ ZERO VIOLATIONS FOUND. All database queries strictly match the database schema.\n');

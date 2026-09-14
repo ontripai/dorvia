@@ -121,7 +121,7 @@ interface ExchangeRelatedPartyRecord {
   id_document?: {
     id: string;
     document_type: string;
-    file_path: string;
+    storage_path: string;
   } | null;
   verified_by?: {
     id: string;
