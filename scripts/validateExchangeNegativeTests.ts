@@ -19,6 +19,7 @@ import { execSync, spawnSync } from 'child_process';
 const MIGRATION_PATH = path.resolve('docs/migrations/10_p2p_exchange_schema.sql');
 const MIGRATION_11_PATH = path.resolve('docs/migrations/11_exchange_staff_operations.sql');
 const MIGRATION_12_PATH = path.resolve('docs/migrations/12_exchange_rpc_lockdown.sql');
+const MIGRATION_13_PATH = path.resolve('docs/migrations/13_exchange_onboarding_permission.sql');
 
 // Configuration from environment variables
 const PGHOST = process.env.PGHOST || '127.0.0.1';
@@ -323,6 +324,15 @@ async function main() {
     }
     console.log('Migration 12 executed with zero errors.\n');
 
+    // Step 4d: Apply 13_exchange_onboarding_permission.sql (dre-p139)
+    console.log(`Applying migration 13: ${path.basename(MIGRATION_13_PATH)}...`);
+    const mig13Result = runPsqlFile(MIGRATION_13_PATH, TEST_DB);
+    if (!mig13Result.success) {
+      console.error(`Failed to execute migration 13:\n${mig13Result.stderr}`);
+      process.exit(1);
+    }
+    console.log('Migration 13 executed with zero errors.\n');
+
     // Step 5: Seed valid baseline data
     console.log('Seeding baseline fixtures (users, leads, exchange profiles, accounts, open request)...');
     const seedSql = `
@@ -332,7 +342,8 @@ async function main() {
         ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'staff@dorvia.ro'),
         ('11111111-1111-1111-1111-111111111111', 'user1@dorvia.ro'),
         ('22222222-2222-2222-2222-222222222222', 'user2@dorvia.ro'),
-        ('33333333-3333-3333-3333-333333333333', 'user3@dorvia.ro');
+        ('33333333-3333-3333-3333-333333333333', 'user3@dorvia.ro'),
+        ('44444444-4444-4444-4444-444444444444', 'onboarding@dorvia.ro');
 
       INSERT INTO public.admin_users (id, user_id, email) VALUES
         ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'admin@dorvia.ro');
@@ -340,12 +351,20 @@ async function main() {
       INSERT INTO public.leads (id, user_id, email, full_name, verified_at) VALUES
         ('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', '11111111-1111-1111-1111-111111111111', 'requester@dorvia.ro', 'Ali Rezai', now()),
         ('cccccccc-cccc-cccc-cccc-cccccccccccc', '22222222-2222-2222-2222-222222222222', 'acceptor@dorvia.ro', 'Elena Popescu', now()),
-        ('dddddddd-dddd-dddd-dddd-dddddddddddd', '33333333-3333-3333-3333-333333333333', 'thirdparty@dorvia.ro', 'Mihai Radu', now());
+        ('dddddddd-dddd-dddd-dddd-dddddddddddd', '33333333-3333-3333-3333-333333333333', 'thirdparty@dorvia.ro', 'Mihai Radu', now()),
+        ('44444444-4444-4444-4444-444444444444', '44444444-4444-4444-4444-444444444444', 'onboarding@dorvia.ro', 'Kaveh Rad', now());
 
       INSERT INTO public.exchange_profiles (id, lead_id, exchange_status, approved_at) VALUES
         ('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'approved', now()),
-        ('ffffffff-ffff-ffff-ffff-ffffffffffff', 'cccccccc-cccc-cccc-cccc-cccccccccccc', 'approved', now());
-      -- Note: dddddddd is intentionally left NOT approved for recipient tests
+        ('ffffffff-ffff-ffff-ffff-ffffffffffff', 'cccccccc-cccc-cccc-cccc-cccccccccccc', 'approved', now()),
+        ('99999999-9999-9999-9999-999999999999', '44444444-4444-4444-4444-444444444444', 'pending', null);
+
+      -- Onboarding fixtures: pending authorized recipient nominating lead 44444444 and unapproved company without id_document_id
+      INSERT INTO public.exchange_authorized_recipients (id, lead_id, recipient_lead_id, relationship, status) VALUES
+        ('88888888-8888-8888-8888-888888888888', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', '44444444-4444-4444-4444-444444444444', 'business_partner', 'pending');
+
+      INSERT INTO public.exchange_related_parties (id, lead_id, party_type, full_name, relationship, national_id, id_document_id, country, status) VALUES
+        ('77777777-7777-7777-7777-777777777777', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'company', 'Pars Caspian LLC', 'own_company', '1010101010', NULL, 'IR', 'pending');
 
       -- Valid destination accounts
       INSERT INTO public.exchange_accounts (id, lead_id, kind, value, holder_name) VALUES
@@ -1007,6 +1026,62 @@ async function main() {
           }
           return true;
         }
+      },
+      // Test 22 (Exchange Customer Onboarding - dre-p139): Validate authorized recipient approval rejection when recipient exchange_profile is unapproved
+      {
+        id: '22',
+        name: 'Onboarding: Reject approving authorized_recipient when recipient lead exchange_profile is not approved',
+        expectSuccess: false,
+        sql: `
+          UPDATE public.exchange_authorized_recipients
+          SET status = 'approved'
+          WHERE id = '88888888-8888-8888-8888-888888888888';
+        `,
+        expectedErrorPattern: 'must have an approved exchange_profile before recipient authorization can be approved'
+      },
+      // Test 23 (Exchange Customer Onboarding - dre-p139): Validate related_party company cannot be approved without id_document_id
+      {
+        id: '23',
+        name: 'Onboarding: Reject approving related_party company without id_document_id (chk_related_party_company_doc)',
+        expectSuccess: false,
+        sql: `
+          UPDATE public.exchange_related_parties
+          SET status = 'approved'
+          WHERE id = '77777777-7777-7777-7777-777777777777';
+        `,
+        expectedErrorPattern: 'chk_related_party_company_doc'
+      },
+      // Test 24 (Exchange Customer Onboarding - dre-p139): Approve customer exchange_profile from pending to approved
+      {
+        id: '24',
+        name: 'Onboarding: Approve customer exchange_profile from pending to approved',
+        expectSuccess: true,
+        sql: `
+          UPDATE public.exchange_profiles
+          SET exchange_status = 'approved', approved_at = now()
+          WHERE lead_id = '44444444-4444-4444-4444-444444444444';
+        `,
+        verifySql: `
+          SELECT exchange_status FROM public.exchange_profiles
+          WHERE lead_id = '44444444-4444-4444-4444-444444444444';
+        `,
+        verifyFn: (stdout: string) => stdout.includes('approved')
+      },
+      // Test 25 (Exchange Customer Onboarding - dre-p139): After recipient profile approval, approve authorized_recipient succeeds
+      {
+        id: '25',
+        name: 'Onboarding: Successfully approve authorized_recipient after recipient profile approved',
+        expectSuccess: true,
+        sql: `
+          UPDATE public.exchange_authorized_recipients
+          SET status = 'approved', verified_at = now()
+          WHERE id = '88888888-8888-8888-8888-888888888888';
+        `,
+        verifySql: `
+          SELECT status FROM public.exchange_authorized_recipients
+          WHERE id = '88888888-8888-8888-8888-888888888888';
+        `,
+        verifyFn: (stdout: string) => stdout.includes('approved')
       }
     ];
 
