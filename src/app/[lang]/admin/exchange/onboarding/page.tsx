@@ -147,6 +147,15 @@ interface ExchangeAuthorizedRecipientRecord {
   } | null;
 }
 
+interface LeadDocumentCompact {
+  id: string;
+  file_name: string;
+  document_type: string;
+  label: string | null;
+  mime_type: string | null;
+  created_at: string;
+}
+
 type TabKey = 'profiles' | 'accounts' | 'related_parties' | 'authorized_recipients';
 
 // -----------------------------------------------------------------------------
@@ -172,23 +181,31 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
 
   // Section 1: Profiles
   const [profiles, setProfiles] = useState<ExchangeProfileRecord[]>([]);
+  const [profilesTotal, setProfilesTotal] = useState<number>(0);
   const [profilesStatusFilter, setProfilesStatusFilter] = useState<string>('pending');
   const [pendingProfilesCount, setPendingProfilesCount] = useState<number>(0);
 
   // Section 2: Accounts
   const [accounts, setAccounts] = useState<ExchangeAccountRecord[]>([]);
+  const [accountsTotal, setAccountsTotal] = useState<number>(0);
   const [accountsStatusFilter, setAccountsStatusFilter] = useState<string>('unverified');
   const [unverifiedAccountsCount, setUnverifiedAccountsCount] = useState<number>(0);
 
   // Section 3: Related Parties
   const [relatedParties, setRelatedParties] = useState<ExchangeRelatedPartyRecord[]>([]);
+  const [partiesTotal, setPartiesTotal] = useState<number>(0);
   const [relatedPartiesStatusFilter, setRelatedPartiesStatusFilter] = useState<string>('pending');
   const [pendingRelatedPartiesCount, setPendingRelatedPartiesCount] = useState<number>(0);
 
   // Section 4: Authorized Recipients
   const [authorizedRecipients, setAuthorizedRecipients] = useState<ExchangeAuthorizedRecipientRecord[]>([]);
+  const [recipientsTotal, setRecipientsTotal] = useState<number>(0);
   const [authorizedRecipientsStatusFilter, setAuthorizedRecipientsStatusFilter] = useState<string>('pending');
   const [pendingRecipientsCount, setPendingRecipientsCount] = useState<number>(0);
+
+  // Customer Documents (for Add Related Party document selector)
+  const [customerDocuments, setCustomerDocuments] = useState<LeadDocumentCompact[]>([]);
+  const [loadingCustomerDocuments, setLoadingCustomerDocuments] = useState<boolean>(false);
 
   // Search filter
   const [searchQuery, setSearchQuery] = useState('');
@@ -337,6 +354,7 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
       if (profilesRes.ok) {
         const pData = await profilesRes.json();
         setProfiles(pData.profiles || []);
+        setProfilesTotal(pData.pagination?.total ?? (pData.profiles?.length || 0));
       }
 
       // Also get pending profiles count
@@ -356,6 +374,7 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
       if (accountsRes.ok) {
         const aData = await accountsRes.json();
         setAccounts(aData.accounts || []);
+        setAccountsTotal(aData.pagination?.total ?? (aData.accounts?.length || 0));
       }
 
       // Accounts unverified count
@@ -375,6 +394,7 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
       if (partiesRes.ok) {
         const ptData = await partiesRes.json();
         setRelatedParties(ptData.relatedParties || []);
+        setPartiesTotal(ptData.pagination?.total ?? (ptData.relatedParties?.length || 0));
       }
 
       // Related parties pending count
@@ -394,6 +414,7 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
       if (recRes.ok) {
         const rData = await recRes.json();
         setAuthorizedRecipients(rData.authorizedRecipients || []);
+        setRecipientsTotal(rData.pagination?.total ?? (rData.authorizedRecipients?.length || 0));
       }
 
       // Recipients pending count
@@ -655,6 +676,30 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
     }
   };
 
+  // Fetch documents for the selected customer in Add Related Party form
+  const handleLeadSelectForParty = async (selectedLeadId: string) => {
+    setAddPartyModal((prev) => ({ ...prev, leadId: selectedLeadId, idDocumentId: '', error: null }));
+    if (!selectedLeadId) {
+      setCustomerDocuments([]);
+      return;
+    }
+    setLoadingCustomerDocuments(true);
+    try {
+      const res = await fetch(`/api/admin/exchange/onboarding/leads/${selectedLeadId}/documents`);
+      if (res.ok) {
+        const data = await res.json();
+        setCustomerDocuments(data.documents || []);
+      } else {
+        setCustomerDocuments([]);
+      }
+    } catch (err) {
+      console.error('Error fetching customer documents:', err);
+      setCustomerDocuments([]);
+    } finally {
+      setLoadingCustomerDocuments(false);
+    }
+  };
+
   // 5. Submit New Related Party
   const handleCreateRelatedParty = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -668,6 +713,15 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
     }
     if (!addPartyModal.nationalId.trim()) {
       setAddPartyModal((prev) => ({ ...prev, error: isFa ? 'کد ملی / شناسه ملی الزامی است.' : 'National ID is required.' }));
+      return;
+    }
+    if (addPartyModal.partyType === 'company' && !addPartyModal.idDocumentId) {
+      setAddPartyModal((prev) => ({
+        ...prev,
+        error: isFa
+          ? 'برای ثبت شرکت متعلق به مشتری، انتخاب مدرک ثبتی یا هویتی الزامی است.'
+          : 'Document selection is mandatory for customer-owned company.',
+      }));
       return;
     }
 
@@ -703,6 +757,7 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
         isSubmitting: false,
         error: null,
       });
+      setCustomerDocuments([]);
 
       setSuccessToast(isFa ? 'بستگان / شرکت مشتری با وضعیت در انتظار تایید ثبت شد.' : 'Related party registered in pending status.');
       await fetchAllData();
@@ -1145,7 +1200,18 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
                   {activeTab === 'related_parties' && (
                     <button
                       type="button"
-                      onClick={() => setAddPartyModal((prev) => ({ ...prev, isOpen: true, error: null }))}
+                      onClick={() => {
+                        setCustomerDocuments([]);
+                        setAddPartyModal((prev) => ({
+                          ...prev,
+                          isOpen: true,
+                          leadId: '',
+                          fullName: '',
+                          nationalId: '',
+                          idDocumentId: '',
+                          error: null,
+                        }));
+                      }}
                       className="inline-flex items-center space-x-1.5 rtl:space-x-reverse px-4 py-2 rounded-xl bg-purple-600 text-white text-xs font-bold hover:bg-purple-700 transition-all shadow-sm cursor-pointer"
                     >
                       <Plus size={15} />
@@ -1194,10 +1260,23 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
                         </button>
                       ))}
                     </div>
-                    <span className="text-slate-400">
-                      {isFa ? `${filteredProfiles.length} پرونده یافت شد` : `${filteredProfiles.length} profiles found`}
+                    <span className="text-slate-500 font-medium">
+                      {isFa
+                        ? `نمایش ${filteredProfiles.length} از ${profilesTotal}`
+                        : `Showing ${filteredProfiles.length} of ${profilesTotal}`}
                     </span>
                   </div>
+
+                  {profilesTotal > profiles.length && (
+                    <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-2xl flex items-center space-x-2.5 rtl:space-x-reverse text-xs text-amber-800">
+                      <AlertCircle size={16} className="shrink-0 text-amber-600" />
+                      <span>
+                        {isFa
+                          ? `توجه: ${profilesTotal - profiles.length} پرونده دیگر در سرور وجود دارد که به دلیل سقف نمایش ۱۰۰ موردی نمایش داده نشده‌اند. لطفاً از فیلترهای وضعیت یا جستجو برای محدود کردن نتایج استفاده نمایید.`
+                          : `Notice: ${profilesTotal - profiles.length} additional profiles exist on the server but are not displayed due to the 100-item view limit. Please use filters or search.`}
+                      </span>
+                    </div>
+                  )}
 
                   {/* Profiles Table */}
                   <div className="overflow-x-auto rounded-2xl border border-slate-200">
@@ -1354,10 +1433,23 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
                         </button>
                       ))}
                     </div>
-                    <span className="text-slate-400">
-                      {isFa ? `${filteredAccounts.length} حساب بانکی` : `${filteredAccounts.length} accounts found`}
+                    <span className="text-slate-500 font-medium">
+                      {isFa
+                        ? `نمایش ${filteredAccounts.length} از ${accountsTotal}`
+                        : `Showing ${filteredAccounts.length} of ${accountsTotal}`}
                     </span>
                   </div>
+
+                  {accountsTotal > accounts.length && (
+                    <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-2xl flex items-center space-x-2.5 rtl:space-x-reverse text-xs text-amber-800">
+                      <AlertCircle size={16} className="shrink-0 text-amber-600" />
+                      <span>
+                        {isFa
+                          ? `توجه: ${accountsTotal - accounts.length} حساب بانکی دیگر در سرور وجود دارد که به دلیل سقف نمایش ۱۰۰ موردی نمایش داده نشده‌اند. لطفاً از فیلترهای وضعیت یا جستجو برای محدود کردن نتایج استفاده نمایید.`
+                          : `Notice: ${accountsTotal - accounts.length} additional accounts exist on the server but are not displayed due to the 100-item view limit. Please use filters or search.`}
+                      </span>
+                    </div>
+                  )}
 
                   {/* Accounts Table */}
                   <div className="overflow-x-auto rounded-2xl border border-slate-200">
@@ -1492,10 +1584,23 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
                         </button>
                       ))}
                     </div>
-                    <span className="text-slate-400">
-                      {isFa ? `${filteredParties.length} بستگان/شرکت یافت شد` : `${filteredParties.length} parties found`}
+                    <span className="text-slate-500 font-medium">
+                      {isFa
+                        ? `نمایش ${filteredParties.length} از ${partiesTotal}`
+                        : `Showing ${filteredParties.length} of ${partiesTotal}`}
                     </span>
                   </div>
+
+                  {partiesTotal > relatedParties.length && (
+                    <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-2xl flex items-center space-x-2.5 rtl:space-x-reverse text-xs text-amber-800">
+                      <AlertCircle size={16} className="shrink-0 text-amber-600" />
+                      <span>
+                        {isFa
+                          ? `توجه: ${partiesTotal - relatedParties.length} ردیف بستگان دیگر در سرور وجود دارد که به دلیل سقف نمایش ۱۰۰ موردی نمایش داده نشده‌اند. لطفاً از فیلترهای وضعیت یا جستجو برای محدود کردن نتایج استفاده نمایید.`
+                          : `Notice: ${partiesTotal - relatedParties.length} additional related parties exist on the server but are not displayed due to the 100-item view limit. Please use filters or search.`}
+                      </span>
+                    </div>
+                  )}
 
                   {/* Related Parties Table */}
                   <div className="overflow-x-auto rounded-2xl border border-slate-200">
@@ -1658,10 +1763,23 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
                         </button>
                       ))}
                     </div>
-                    <span className="text-slate-400">
-                      {isFa ? `${filteredRecipients.length} گیرنده مجاز` : `${filteredRecipients.length} recipients found`}
+                    <span className="text-slate-500 font-medium">
+                      {isFa
+                        ? `نمایش ${filteredRecipients.length} از ${recipientsTotal}`
+                        : `Showing ${filteredRecipients.length} of ${recipientsTotal}`}
                     </span>
                   </div>
+
+                  {recipientsTotal > authorizedRecipients.length && (
+                    <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-2xl flex items-center space-x-2.5 rtl:space-x-reverse text-xs text-amber-800">
+                      <AlertCircle size={16} className="shrink-0 text-amber-600" />
+                      <span>
+                        {isFa
+                          ? `توجه: ${recipientsTotal - authorizedRecipients.length} گیرنده مجاز دیگر در سرور وجود دارد که به دلیل سقف نمایش ۱۰۰ موردی نمایش داده نشده‌اند. لطفاً از فیلترهای وضعیت یا جستجو برای محدود کردن نتایج استفاده نمایید.`
+                          : `Notice: ${recipientsTotal - authorizedRecipients.length} additional authorized recipients exist on the server but are not displayed due to the 100-item view limit. Please use filters or search.`}
+                      </span>
+                    </div>
+                  )}
 
                   {/* Authorized Recipients Table */}
                   <div className="overflow-x-auto rounded-2xl border border-slate-200">
@@ -2172,7 +2290,7 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
                 <select
                   required
                   value={addPartyModal.leadId}
-                  onChange={(e) => setAddPartyModal((prev) => ({ ...prev, leadId: e.target.value, error: null }))}
+                  onChange={(e) => handleLeadSelectForParty(e.target.value)}
                   className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/20"
                 >
                   <option value="">{isFa ? '-- انتخاب از بین مشتریان تبادل --' : '-- Select Customer --'}</option>
@@ -2274,19 +2392,51 @@ export default function AdminExchangeOnboardingPage({ params }: AdminOnboardingP
                 />
               </div>
 
-              {/* 6. Document ID (Optional reference) */}
+              {/* 6. Document Selection */}
               <div className="space-y-1">
                 <label className="text-xs font-bold text-slate-800 flex items-center justify-between">
-                  <span>{isFa ? 'شناسه سند هویتی/ثبتی (id_document_id):' : 'ID Document ID:'}</span>
-                  <span className="text-[10px] text-slate-400 font-normal">{isFa ? 'اختیاری هنگام ثبت اولیه' : 'Optional at creation'}</span>
+                  <span>
+                    {isFa ? 'مدرک هویتی / ثبتی:' : 'ID / Registration Document:'}
+                    {addPartyModal.partyType === 'company' && <span className="text-rose-500 mr-1">*</span>}
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-normal">
+                    {addPartyModal.partyType === 'company'
+                      ? (isFa ? 'الزامی برای شرکت' : 'Required for company')
+                      : (isFa ? 'اختیاری برای اشخاص حقیقی' : 'Optional for individuals')}
+                  </span>
                 </label>
-                <input
-                  type="text"
-                  value={addPartyModal.idDocumentId}
-                  onChange={(e) => setAddPartyModal((prev) => ({ ...prev, idDocumentId: e.target.value }))}
-                  placeholder="UUID (اختیاری)"
-                  className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/20"
-                />
+
+                {!addPartyModal.leadId ? (
+                  <div className="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-400 italic">
+                    {isFa ? 'ابتدا مشتری را در بالا انتخاب کنید.' : 'Select a customer above first.'}
+                  </div>
+                ) : loadingCustomerDocuments ? (
+                  <div className="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-500">
+                    {isFa ? 'در حال بارگذاری مدارک مشتری...' : 'Loading customer documents...'}
+                  </div>
+                ) : customerDocuments.length === 0 ? (
+                  <div className="p-2.5 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800 flex items-center space-x-2 rtl:space-x-reverse">
+                    <Info size={15} className="shrink-0 text-amber-600" />
+                    <span>{isFa ? 'برای این مشتری مدرکی ثبت نشده است.' : 'No documents found for this customer.'}</span>
+                  </div>
+                ) : (
+                  <select
+                    value={addPartyModal.idDocumentId}
+                    onChange={(e) => setAddPartyModal((prev) => ({ ...prev, idDocumentId: e.target.value, error: null }))}
+                    className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                  >
+                    <option value="">
+                      {addPartyModal.partyType === 'company'
+                        ? (isFa ? '-- انتخاب مدرک ثبتی شرکت (الزامی) --' : '-- Select Company Document (Required) --')
+                        : (isFa ? '-- بدون انتخاب مدرک (اختیاری) --' : '-- None (Optional) --')}
+                    </option>
+                    {customerDocuments.map((doc) => (
+                      <option key={doc.id} value={doc.id}>
+                        {doc.file_name} ({doc.label || doc.document_type || 'مدرک'})
+                      </option>
+                    ))}
+                  </select>
+                )}
               </div>
 
               {addPartyModal.error && (
