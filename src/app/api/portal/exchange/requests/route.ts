@@ -164,7 +164,7 @@ export async function POST(request: Request) {
 
     const { data: account, error: accError } = await supabaseAdmin
       .from('exchange_accounts')
-      .select('id, lead_id, kind, is_active')
+      .select('id, lead_id, kind, is_active, verified_at')
       .eq('id', destination_account_id)
       .eq('lead_id', lead.id)
       .eq('is_active', true)
@@ -173,6 +173,13 @@ export async function POST(request: Request) {
     if (accError || !account) {
       return NextResponse.json(
         { error: 'Selected destination account is invalid, inactive, or not owned by you.' },
+        { status: 400 }
+      );
+    }
+
+    if (!account.verified_at) {
+      return NextResponse.json(
+        { error: 'حساب مقصد انتخابی هنوز توسط کارشناسان دورویا تایید نشده است. تا زمان تایید، امکان ثبت درخواست وجود ندارد.' },
         { status: 400 }
       );
     }

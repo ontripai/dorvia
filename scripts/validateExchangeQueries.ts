@@ -22,6 +22,7 @@ const MIGRATION_10_PATH = path.resolve('docs/migrations/10_p2p_exchange_schema.s
 const MIGRATION_11_PATH = path.resolve('docs/migrations/11_exchange_staff_operations.sql');
 const MIGRATION_12_PATH = path.resolve('docs/migrations/12_exchange_rpc_lockdown.sql');
 const MIGRATION_13_PATH = path.resolve('docs/migrations/13_exchange_onboarding_permission.sql');
+const MIGRATION_14_PATH = path.resolve('docs/migrations/14_exchange_require_verified_account.sql');
 
 // Configuration from environment variables
 const PGHOST = process.env.PGHOST || '127.0.0.1';
@@ -408,7 +409,15 @@ async function main() {
       console.error(`Migration 13 failed:\n${mig13Res.stderr}`);
       process.exit(1);
     }
-    console.log('Migration 13 applied with zero errors.\n');
+    console.log('Migration 13 applied with zero errors.');
+
+    console.log(`Applying migration 14: ${path.basename(MIGRATION_14_PATH)}...`);
+    const mig14Res = runPsqlFile(MIGRATION_14_PATH, TEST_DB);
+    if (!mig14Res.success) {
+      console.error(`Migration 14 failed:\n${mig14Res.stderr}`);
+      process.exit(1);
+    }
+    console.log('Migration 14 applied with zero errors.\n');
 
     // 3. Extract live schema columns for all exchange_* tables
     console.log('Extracting live columns from information_schema.columns...');

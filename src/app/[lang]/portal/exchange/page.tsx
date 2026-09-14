@@ -586,6 +586,8 @@ export default function ExchangePortalPage({ params }: ExchangePageProps) {
     if (newDirection === 'RO_TO_IR') return ['IR_SHEBA', 'IR_CARD'].includes(acc.kind);
     return acc.kind === 'RO_IBAN';
   });
+  const hasAnyVerifiedAccount = accounts.some((acc) => !!acc.verified_at);
+  const hasVerifiedEligibleAccount = eligibleAccountsForNew.some((acc) => !!acc.verified_at);
 
   return (
     <div className="min-h-screen bg-[#0F172A] text-white p-4 sm:p-8 flex flex-col justify-between">
@@ -1131,7 +1133,17 @@ export default function ExchangePortalPage({ params }: ExchangePageProps) {
                         </div>
                         <div className="text-xs font-mono text-slate-300">{acc.value}</div>
                       </div>
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                      {acc.verified_at ? (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                          {isFa ? 'تاییدشده' : 'Verified'}
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                          {isFa ? 'در انتظار تایید' : 'Pending Verification'}
+                        </span>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -1237,6 +1249,24 @@ export default function ExchangePortalPage({ params }: ExchangePageProps) {
                   ✕
                 </button>
               </div>
+
+              {!hasAnyVerifiedAccount && (
+                <div className="text-xs text-amber-300 bg-amber-500/10 border border-amber-500/30 p-4 rounded-2xl flex items-start gap-3">
+                  <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                  <div className="space-y-1">
+                    <p className="font-bold">
+                      {isFa
+                        ? 'شما در حال حاضر هیچ حساب بانکی تاییدشده‌ای ندارید.'
+                        : 'You currently have no verified bank accounts.'}
+                    </p>
+                    <p className="text-[11px] text-amber-200/80 leading-relaxed">
+                      {isFa
+                        ? 'جهت حفظ امنیت مبادلات، حساب‌های بانکی پیش از انجام تراکنش باید توسط کارشناسان دورویا بررسی و تایید شوند. تا زمان تایید حساب‌ها، امکان ثبت درخواست تبادل ارز وجود ندارد. لطفاً شکیبا باشید.'
+                        : 'For transaction safety, bank accounts must be verified by Dorvia staff before use. Creating exchange orders is disabled until an account is verified. Please wait for staff review.'}
+                    </p>
+                  </div>
+                </div>
+              )}
 
               <form onSubmit={handleCreateRequest} className="space-y-4">
                 {/* Direction */}
@@ -1365,11 +1395,15 @@ export default function ExchangePortalPage({ params }: ExchangePageProps) {
                       className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white"
                     >
                       <option value="">{isFa ? '-- انتخاب حساب بانکی --' : '-- Select Account --'}</option>
-                      {eligibleAccountsForNew.map((acc) => (
-                        <option key={acc.id} value={acc.id}>
-                          {acc.kind} - {acc.value} ({acc.holder_name})
-                        </option>
-                      ))}
+                      {eligibleAccountsForNew.map((acc) => {
+                        const isVerified = !!acc.verified_at;
+                        return (
+                          <option key={acc.id} value={acc.id} disabled={!isVerified}>
+                            {acc.kind} - {acc.value} ({acc.holder_name})
+                            {!isVerified ? (isFa ? ' (در انتظار تایید)' : ' (Pending Verification)') : ''}
+                          </option>
+                        );
+                      })}
                     </select>
                   )}
                 </div>
@@ -1400,7 +1434,13 @@ export default function ExchangePortalPage({ params }: ExchangePageProps) {
                   </button>
                   <button
                     type="submit"
-                    disabled={creatingRequest || eligibleAccountsForNew.length === 0}
+                    disabled={
+                      creatingRequest ||
+                      eligibleAccountsForNew.length === 0 ||
+                      !hasVerifiedEligibleAccount ||
+                      !newAccountId ||
+                      !accounts.find((a) => a.id === newAccountId)?.verified_at
+                    }
                     className="px-5 py-2.5 rounded-xl bg-[#2F6FED] hover:bg-blue-600 disabled:opacity-50 text-white font-extrabold text-xs shadow-md cursor-pointer"
                   >
                     {creatingRequest ? '...' : isFa ? 'ثبت در دفتر سفارش‌ها' : 'Publish Order'}
@@ -1489,11 +1529,15 @@ export default function ExchangePortalPage({ params }: ExchangePageProps) {
                             ? acc.kind === 'RO_IBAN'
                             : ['IR_SHEBA', 'IR_CARD'].includes(acc.kind)
                         )
-                        .map((acc) => (
-                          <option key={acc.id} value={acc.id}>
-                            {acc.kind} - {acc.value} ({acc.holder_name})
-                          </option>
-                        ))}
+                        .map((acc) => {
+                          const isVerified = !!acc.verified_at;
+                          return (
+                            <option key={acc.id} value={acc.id} disabled={!isVerified}>
+                              {acc.kind} - {acc.value} ({acc.holder_name})
+                              {!isVerified ? (isFa ? ' (در انتظار تایید)' : ' (Pending Verification)') : ''}
+                            </option>
+                          );
+                        })}
                     </select>
                   </div>
 
@@ -1514,7 +1558,7 @@ export default function ExchangePortalPage({ params }: ExchangePageProps) {
                     <button
                       type="button"
                       onClick={handleReserveMatch}
-                      disabled={reserving || !reserveAccountId}
+                      disabled={reserving || !reserveAccountId || !accounts.find((a) => a.id === reserveAccountId)?.verified_at}
                       className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-extrabold text-xs shadow-md cursor-pointer"
                     >
                       {reserving ? '...' : isFa ? 'رزرو ۳۰ دقیقه‌ای' : 'Reserve Match'}
