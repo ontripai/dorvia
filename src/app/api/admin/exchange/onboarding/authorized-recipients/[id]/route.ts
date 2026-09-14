@@ -102,7 +102,7 @@ export async function PATCH(
       }
 
       return NextResponse.json(
-        { error: updateError.message || 'Failed to update authorized recipient status.' },
+        { error: 'تغییر وضعیت گیرنده مجاز با خطا مواجه شد.' },
         { status: 400 }
       );
     }

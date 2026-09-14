@@ -205,7 +205,7 @@ export async function POST(request: Request) {
     if (insertError) {
       console.error('[AdminExchangeOnboarding] Error inserting related party:', insertError);
       return NextResponse.json(
-        { error: insertError.message || 'Failed to register related party.' },
+        { error: 'ثبت اطلاعات بستگان یا شرکت با خطا مواجه شد. لطفاً ورودی‌ها را بررسی نمایید.' },
         { status: 400 }
       );
     }

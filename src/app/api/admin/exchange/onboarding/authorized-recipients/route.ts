@@ -193,7 +193,7 @@ export async function POST(request: Request) {
     if (insertError) {
       console.error('[AdminExchangeOnboarding] Error inserting authorized recipient:', insertError);
       return NextResponse.json(
-        { error: insertError.message || 'Failed to create authorized recipient.' },
+        { error: 'ثبت گیرنده مجاز با خطا مواجه شد. لطفاً اطلاعات ورودی را بررسی نمایید.' },
         { status: 400 }
       );
     }

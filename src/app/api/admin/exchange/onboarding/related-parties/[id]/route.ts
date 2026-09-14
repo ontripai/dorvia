@@ -100,7 +100,7 @@ export async function PATCH(
     if (updateError) {
       console.error(`[AdminExchangeOnboarding] Error updating related party ${partyId}:`, updateError);
       return NextResponse.json(
-        { error: updateError.message || 'Failed to update related party status.' },
+        { error: 'تغییر وضعیت بستگان یا شرکت با خطا مواجه شد.' },
         { status: 400 }
       );
     }
