@@ -545,25 +545,19 @@ async function main() {
       file: string,
       sourceFile: ts.SourceFile
     ) {
-      // Check for spread assignments
-      const hasSpread = objLiteral.properties.some(p => ts.isSpreadAssignment(p));
-      if (hasSpread) {
-        const { line } = sourceFile.getLineAndCharacterOfPosition(objLiteral.getStart());
-        skippedItems.push({
-          type: 'WRITE',
-          file,
-          line: line + 1,
-          table,
-          method: methodName,
-          reason: 'Spread assignment (...obj) present inside write payload'
-        });
-        return;
-      }
-
       const validCols = schemaMap.get(table);
       for (const prop of objLiteral.properties) {
         const { line } = sourceFile.getLineAndCharacterOfPosition(prop.getStart());
-        if (ts.isPropertyAssignment(prop)) {
+        if (ts.isSpreadAssignment(prop)) {
+          skippedItems.push({
+            type: 'WRITE',
+            file,
+            line: line + 1,
+            table,
+            method: methodName,
+            reason: `Spread assignment (${prop.getText(sourceFile)}) present inside write payload`
+          });
+        } else if (ts.isPropertyAssignment(prop)) {
           if (ts.isComputedPropertyName(prop.name)) {
             skippedItems.push({
               type: 'WRITE',
