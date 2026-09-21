@@ -997,4 +997,174 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     inSitemap: true,
     pageType: 'hub'
   },
+
+  // Romanian Language Learning Hub & Category Routes (Phase L0: dre-p146)
+  // Non-indexable and excluded from sitemap pending linguistic review.
+  'learn-romanian': {
+    canonical: '/learn-romanian',
+    aliases: [],
+    parentHub: null,
+    titleFa: 'آموزش زبان رومانیایی',
+    titleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'hub'
+  },
+  'learn-romanian/everyday': {
+    canonical: '/learn-romanian/everyday',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'مکالمات روزمره رومانیایی',
+    titleEn: 'Everyday Romanian Phrases',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
+  'learn-romanian/transport': {
+    canonical: '/learn-romanian/transport',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'حمل‌ونقل و سفر در رومانی',
+    titleEn: 'Transport & Travel Phrases',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
+  'learn-romanian/shopping': {
+    canonical: '/learn-romanian/shopping',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'خرید و فروشگاه در رومانی',
+    titleEn: 'Shopping & Store Phrases',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
+  'learn-romanian/housing': {
+    canonical: '/learn-romanian/housing',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'مسکن و اقامتگاه در رومانی',
+    titleEn: 'Housing & Accommodation Phrases',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
+  'learn-romanian/banking': {
+    canonical: '/learn-romanian/banking',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'بانک و امور مالی در رومانی',
+    titleEn: 'Banking & Financial Phrases',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
+  'learn-romanian/healthcare': {
+    canonical: '/learn-romanian/healthcare',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'بهداشت و درمان در رومانی',
+    titleEn: 'Healthcare & Medical Phrases',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
+  'learn-romanian/school': {
+    canonical: '/learn-romanian/school',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'مدارس و آموزش کودکان در رومانی',
+    titleEn: 'School & Education Phrases',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
+  'learn-romanian/university': {
+    canonical: '/learn-romanian/university',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'دانشگاه و آموزش عالی در رومانی',
+    titleEn: 'University & Academic Phrases',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
+  'learn-romanian/work': {
+    canonical: '/learn-romanian/work',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'محیط کار و اشتغال در رومانی',
+    titleEn: 'Workplace & Job Phrases',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
+  'learn-romanian/business': {
+    canonical: '/learn-romanian/business',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'کسب‌وکار و جلسات اداری در رومانی',
+    titleEn: 'Business & Commercial Phrases',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
+  'learn-romanian/administration': {
+    canonical: '/learn-romanian/administration',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'امور اداری و مدارک رسمی در رومانی',
+    titleEn: 'Administrative & Legal Phrases',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
+  'learn-romanian/emergency': {
+    canonical: '/learn-romanian/emergency',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'شرایط اضطراری و درخواست کمک',
+    titleEn: 'Emergency & Urgent Phrases',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
+  'learn-romanian/social': {
+    canonical: '/learn-romanian/social',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'روابط اجتماعی و گفتگو در رومانی',
+    titleEn: 'Social & Conversation Phrases',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
 };
+

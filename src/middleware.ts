@@ -14,6 +14,7 @@ const KNOWN_SECTIONS = [
   'company',
   'contact',
   'immigration',
+  'learn-romanian',
   'legal',
   'needs',
   'portal',
