@@ -1,16 +1,22 @@
 import { PILOT_PHRASES } from '@/content/romanian/pilot';
+import { STAGE0_PHRASES } from '@/content/romanian/stage0';
 import { assertValidPhrases } from './validator';
 import { RomanianCategory, RomanianPhrase } from './types';
 import { ROMANIAN_CATEGORIES } from './categories';
 
+export const ALL_ROMANIAN_PHRASES: RomanianPhrase[] = [
+  ...PILOT_PHRASES,
+  ...STAGE0_PHRASES,
+];
+
 // Strictly validate all phrases at module evaluation / build time.
 // Any violation of V1-V7 throws an exception and halts build immediately.
-assertValidPhrases(PILOT_PHRASES);
+assertValidPhrases(ALL_ROMANIAN_PHRASES);
 
 // Status filter applied strictly once at module scope.
 // This module does not know or expose drafts or unreviewed content.
 const PUBLISHED_PHRASES: readonly RomanianPhrase[] = Object.freeze(
-  PILOT_PHRASES.filter(p => p.status === 'published')
+  ALL_ROMANIAN_PHRASES.filter(p => p.status === 'published')
 );
 
 // Pre-index by category

@@ -181,6 +181,24 @@ export const PhraseCard: React.FC<PhraseCardProps> = ({
         </div>
       )}
 
+      {/* Usage Note (Contextual & cultural nuance — subordinate & subtle) */}
+      {phrase.usageNote && (
+        <div className="mt-3 p-3 bg-slate-50 border border-slate-200/70 rounded-xl space-y-1 text-xs">
+          <div className="flex items-center gap-1.5 text-slate-600 font-semibold">
+            <span className="text-slate-400">💡</span>
+            <span>
+              {currentLang === 'fa' ? 'نکته کاربردی:' : 'Usage note:'}
+            </span>
+          </div>
+          <p
+            dir={currentLang === 'fa' ? 'rtl' : 'ltr'}
+            className="text-slate-700 leading-relaxed text-[11px] sm:text-xs pt-0.5"
+          >
+            {currentLang === 'fa' ? phrase.usageNote.fa : phrase.usageNote.en}
+          </p>
+        </div>
+      )}
+
       {/* Vocabulary Breakdown (Rendered only if present) */}
       {phrase.vocabulary && phrase.vocabulary.length > 0 && (
         <div className="mt-3 pt-3 border-t border-slate-100 text-xs space-y-2">
