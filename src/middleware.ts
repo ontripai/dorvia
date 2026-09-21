@@ -42,8 +42,9 @@ export async function middleware(request: NextRequest) {
   const nextHost = request.nextUrl.host || '';
   const host = (xForwardedHost || reqHost || nextHost).toLowerCase();
   const isVercelHost = host.includes('vercel.app');
+  const isPreview = process.env.VERCEL_ENV === 'preview';
 
-  if (isVercelHost && !pathname.startsWith('/_next')) {
+  if (isVercelHost && !isPreview && !pathname.startsWith('/_next')) {
     const destination = new URL(pathname + search, 'https://dorvia.ro');
     return NextResponse.redirect(destination, 301);
   }
