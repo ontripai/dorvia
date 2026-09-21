@@ -1,8 +1,7 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 import { RomanianPhrase } from '@/lib/romanian/types';
 import { Language } from '@/types';
+import { PersianTranslationToggle } from './PersianTranslationToggle';
 
 interface PhraseCardProps {
   phrase: RomanianPhrase;
@@ -64,8 +63,17 @@ export const PhraseCard: React.FC<PhraseCardProps> = ({
   currentLang,
   learnerName,
 }) => {
-  const [showFaTranslation, setShowFaTranslation] = useState(false);
   const isEnMode = currentLang === 'en';
+
+  const persianContentNode = (
+    <p
+      dir="rtl"
+      lang="fa"
+      className="text-sm sm:text-base font-medium text-slate-800 leading-relaxed"
+    >
+      {renderTextWithToken(phrase.text.fa, learnerName, true)}
+    </p>
+  );
 
   return (
     <div className="editorial-card p-5 sm:p-6 bg-white border border-slate-200/90 rounded-2xl shadow-sm hover:shadow-md transition-all space-y-4">
@@ -96,7 +104,7 @@ export const PhraseCard: React.FC<PhraseCardProps> = ({
       {/* Main Content Layout */}
       {/* Desktop in /fa: 3 columns (Romanian | English | Persian) */}
       {/* Mobile in /fa: stacked vertically (Romanian -> English -> Persian) */}
-      {/* In /en: Romanian and English always visible, Persian behind a toggle */}
+      {/* In /en: Romanian and English always visible, Persian behind a client island toggle */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start pt-1">
         {/* Romanian Section (Dominant visual weight) */}
         <div className="space-y-1.5 md:col-span-1 border-b md:border-b-0 md:border-r md:rtl:border-r-0 md:rtl:border-l border-slate-100 pb-3 md:pb-0 md:pr-4 md:rtl:pr-0 md:rtl:pl-4">
@@ -128,29 +136,19 @@ export const PhraseCard: React.FC<PhraseCardProps> = ({
 
         {/* Persian Section */}
         <div className="space-y-1.5 md:col-span-1">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
-              فارسی
-            </span>
-            {isEnMode && (
-              <button
-                type="button"
-                onClick={() => setShowFaTranslation(prev => !prev)}
-                className="text-[11px] font-semibold text-[#1554bd] hover:underline focus:outline-none"
-              >
-                {showFaTranslation ? 'Hide Persian' : 'Show Persian'}
-              </button>
-            )}
-          </div>
-
-          {(!isEnMode || showFaTranslation) && (
-            <p
-              dir="rtl"
-              lang="fa"
-              className="text-sm sm:text-base font-medium text-slate-800 leading-relaxed"
-            >
-              {renderTextWithToken(phrase.text.fa, learnerName, true)}
-            </p>
+          {isEnMode ? (
+            /* In English view: render interactive client toggle island */
+            <PersianTranslationToggle>
+              {persianContentNode}
+            </PersianTranslationToggle>
+          ) : (
+            /* In Persian view: pure server component, static HTML without JS */
+            <>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+                فارسی
+              </span>
+              {persianContentNode}
+            </>
           )}
         </div>
       </div>
