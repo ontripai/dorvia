@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ORDERED_CATEGORIES } from '@/lib/romanian/categories';
