@@ -31,6 +31,8 @@ export type RomanianPhrase = {
   text: { ro: string; en: string; fa: string };
   /** فقط برای درک شنیداری — هرگز بهعنوان جملهی پیشنهادی نمایش داده نشود. */
   informalVariant?: { ro: string; note?: string };
+  /** نکته‌ی کاربرد — کِی و چطور این عبارت گفته می‌شود. اختیاری. */
+  usageNote?: { fa: string; en: string };
   pronunciationFa?: string;      // در این فاز برای همه undefined — بخش ۵
   vocabulary?: Array<{ ro: string; en: string; fa: string }>;
   audio?: { key: string; voice: string; generatedAt: string };  // در این فاز undefined

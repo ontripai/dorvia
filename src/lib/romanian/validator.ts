@@ -1,12 +1,29 @@
 import { RomanianPhrase } from './types';
 
 export interface ValidationError {
-  rule: 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7';
+  rule: 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8';
   phraseId: string;
   message: string;
 }
 
 const SLUG_REGEX = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+
+export const ZWNJ_EXCEPTIONS: readonly string[] = Object.freeze([
+  'میز',
+  'میوه',
+  'میان',
+  'میدان',
+  'میلیون',
+  'میلیارد',
+  'میهن',
+  'میل',
+  'میراث',
+  'میزان',
+  'میکرو',
+]);
+
+const ZWNJ_EXCEPTIONS_SET = new Set(ZWNJ_EXCEPTIONS);
+const PERSIAN_LETTERS_RAW = '\\u0621-\\u064A\\u067E\\u0686\\u0698\\u06A9\\u06AF\\u06CC';
 
 export function validateRomanianPhrases(phrases: RomanianPhrase[]): ValidationError[] {
   const errors: ValidationError[] = [];
@@ -126,6 +143,32 @@ export function validateRomanianPhrases(phrases: RomanianPhrase[]): ValidationEr
           phraseId: id,
           message: `Token {{name}} presence parity violation across languages: ro=${roHas}, en=${enHas}, fa=${faHas}. Must be present in all 3 languages or in none.`,
         });
+      }
+    }
+
+    // V8: Verb prefix ZWNJ enforcement (می / نمی‌)
+    const faFields = [
+      { name: 'text.fa', text: phrase.text?.fa },
+      { name: 'usageNote.fa', text: phrase.usageNote?.fa },
+      { name: 'informalVariant.note', text: phrase.informalVariant?.note },
+    ];
+
+    for (const { name, text } of faFields) {
+      if (!text) continue;
+      const re = new RegExp(
+        `(?:^|[^${PERSIAN_LETTERS_RAW}\\u200C])((?:ن?می)(?:[${PERSIAN_LETTERS_RAW}]+))`,
+        'g'
+      );
+      let m;
+      while ((m = re.exec(text)) !== null) {
+        const word = m[1];
+        if (!ZWNJ_EXCEPTIONS_SET.has(word)) {
+          errors.push({
+            rule: 'V8',
+            phraseId: id,
+            message: `Missing ZWNJ (نیم‌فاصله) after verb prefix in ${name}: offending word "${word}"`,
+          });
+        }
       }
     }
   }
