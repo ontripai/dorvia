@@ -10,7 +10,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     text: {
       ro: 'Nu vorbesc românește.',
       en: "I don't speak Romanian.",
-      fa: 'رومانیایی صحبت نمیکنم.',
+      fa: 'رومانیایی صحبت نمی‌کنم.',
     },
     source: {
       kind: 'common-usage',
@@ -30,7 +30,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     text: {
       ro: 'Vorbiți engleză?',
       en: 'Do you speak English?',
-      fa: 'انگلیسی صحبت میکنید؟',
+      fa: 'انگلیسی صحبت می‌کنید؟',
     },
     informalVariant: {
       ro: 'Vorbești engleză?',
@@ -118,7 +118,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     text: {
       ro: 'Cu plăcere.',
       en: "You're welcome.",
-      fa: 'خواهش میکنم.',
+      fa: 'خواهش می‌کنم.',
     },
     source: {
       kind: 'common-usage',
@@ -145,7 +145,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
       note: 'صورت غیررسمی — برای درک، نه برای گفتن.',
     },
     usageNote: {
-      fa: 'در رومانی برای صدا زدن یک غریبه در خیابان، اغلب بهجای «ببخشید» با «Bună ziua» شروع میکنند.',
+      fa: 'در رومانی برای صدا زدن یک غریبه در خیابان، اغلب به‌جای «ببخشید» با «Bună ziua» شروع می‌کنند.',
       en: 'In Romania, people often open with “Bună ziua” rather than “excuse me” when approaching a stranger.',
     },
     source: {
@@ -186,14 +186,14 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     text: {
       ro: 'Puteți vorbi mai rar, vă rog?',
       en: 'Could you speak more slowly, please?',
-      fa: 'میتوانید آهستهتر صحبت کنید؟',
+      fa: 'می‌توانید آهسته‌تر صحبت کنید؟',
     },
     informalVariant: {
       ro: 'Poți vorbi mai rar?',
       note: 'صورت غیررسمی — برای درک، نه برای گفتن.',
     },
     usageNote: {
-      fa: '«mai încet» نگویید — آن یعنی «آرامتر/بیصداتر»، نه «آهستهتر».',
+      fa: '«mai încet» نگویید — آن یعنی «آرام‌تر/بی‌صداتر»، نه «آهسته‌تر».',
       en: 'Do not say “mai încet” — that means “more quietly”, not “more slowly”.',
     },
     source: {
@@ -217,7 +217,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
       fa: 'این یعنی چه؟',
     },
     usageNote: {
-      fa: 'حتماً با «vă rog» گفته شود؛ صورت خالی با لحن تخت میتواند پرخاشگرانه شنیده شود.',
+      fa: 'حتماً با «vă rog» گفته شود؛ صورت خالی با لحن تخت می‌تواند پرخاشگرانه شنیده شود.',
       en: 'Always say it with “vă rog”; the bare form with flat intonation can sound confrontational.',
     },
     source: {
@@ -238,7 +238,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     text: {
       ro: 'Cum se spune în română?',
       en: 'How do you say it in Romanian?',
-      fa: 'به رومانیایی چه میشود؟',
+      fa: 'به رومانیایی چه می‌شود؟',
     },
     source: {
       kind: 'common-usage',
@@ -258,7 +258,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     text: {
       ro: 'Puteți scrie, vă rog?',
       en: 'Could you write it down, please?',
-      fa: 'میتوانید بنویسید، لطفاً؟',
+      fa: 'می‌توانید بنویسید، لطفاً؟',
     },
     source: {
       kind: 'common-usage',
@@ -382,7 +382,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     text: {
       ro: 'Doar mă uit, mulțumesc.',
       en: "I'm just looking, thank you.",
-      fa: 'فقط نگاه میکنم، ممنون.',
+      fa: 'فقط نگاه می‌کنم، ممنون.',
     },
     source: {
       kind: 'common-usage',
@@ -462,7 +462,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     text: {
       ro: 'M-am rătăcit.',
       en: "I'm lost.",
-      fa: 'گم شدهام.',
+      fa: 'گم شده‌ام.',
     },
     source: {
       kind: 'common-usage',

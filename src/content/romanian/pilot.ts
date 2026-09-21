@@ -50,7 +50,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     text: {
       ro: 'Nu am înțeles. Puteți repeta, vă rog?',
       en: "I didn't understand. Could you repeat, please?",
-      fa: 'متوجه نشدم. لطفاً میتوانید تکرار کنید؟',
+      fa: 'متوجه نشدم. لطفاً می‌توانید تکرار کنید؟',
     },
     informalVariant: {
       ro: 'Nu am înțeles. Poți repeta, te rog?',
@@ -134,7 +134,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     text: {
       ro: 'Pot plăti cu cardul?',
       en: 'Can I pay by card?',
-      fa: 'میتوانم با کارت پرداخت کنم؟',
+      fa: 'می‌توانم با کارت پرداخت کنم؟',
     },
     source: {
       kind: 'common-usage',
@@ -154,7 +154,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     text: {
       ro: 'Aș dori să deschid un cont bancar.',
       en: 'I would like to open a bank account.',
-      fa: 'میخواهم یک حساب بانکی باز کنم.',
+      fa: 'می‌خواهم یک حساب بانکی باز کنم.',
     },
     vocabulary: [
       { ro: 'cont bancar', en: 'bank account', fa: 'حساب بانکی' },
@@ -220,7 +220,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     text: {
       ro: 'Fiul meu este elev aici.',
       en: 'My son is a student here.',
-      fa: 'پسرم اینجا دانشآموز است.',
+      fa: 'پسرم اینجا دانش‌آموز است.',
     },
     journeys: ['family'],
     source: {
