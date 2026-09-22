@@ -10,7 +10,8 @@ import {
 
 export type ValidationRuleId =
   | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8'
-  | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16';
+  | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16'
+  | 'V17' | 'V18' | 'V19';
 
 export interface ValidationError {
   rule: ValidationRuleId;
@@ -526,6 +527,85 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
           entityId: domain.id,
           message: `Domain "${domain.id}" exceeds item budget maxItems (${domain.maxItems}): currently has ${totalPublished} published items (${pubPhrases} phrases, ${pubWords} words, ${pubVerbs} verbs, ${pubDialogues} dialogues).`,
         });
+      }
+    }
+  }
+
+  // --- Validate Global ID Uniqueness Across Combined Dataset (V17) ---
+  const globalIdMap = new Map<string, string>();
+  const allEntities: Array<{ id: string; type: string }> = [
+    ...phrases.map(p => ({ id: p.id, type: 'phrase' })),
+    ...words.map(w => ({ id: w.id, type: 'word' })),
+    ...verbs.map(v => ({ id: v.id, type: 'verb' })),
+    ...graphemes.map(g => ({ id: g.id, type: 'grapheme' })),
+    ...dialogues.map(d => ({ id: d.id, type: 'dialogue' })),
+  ];
+  for (const ent of allEntities) {
+    if (!ent.id) continue;
+    if (globalIdMap.has(ent.id)) {
+      errors.push({
+        rule: 'V17',
+        phraseId: ent.id,
+        entityId: ent.id,
+        message: `Duplicate entity ID "${ent.id}" found across dataset (first seen as ${globalIdMap.get(ent.id)}, duplicate in ${ent.type}).`,
+      });
+    } else {
+      globalIdMap.set(ent.id, ent.type);
+    }
+  }
+
+  // --- Validate Grapheme-to-Word Referential Integrity (V18) ---
+  for (const grapheme of graphemes) {
+    const gId = grapheme.id || '(missing-grapheme-id)';
+    if (!grapheme.exampleWordId) {
+      errors.push({
+        rule: 'V18',
+        phraseId: gId,
+        entityId: gId,
+        message: `Grapheme "${gId}" missing required exampleWordId.`,
+      });
+    } else if (!wordIdSet.has(grapheme.exampleWordId)) {
+      errors.push({
+        rule: 'V18',
+        phraseId: gId,
+        entityId: gId,
+        message: `Grapheme "${gId}" references non-existent exampleWordId: "${grapheme.exampleWordId}".`,
+      });
+    }
+  }
+
+  // --- Validate Display Form Contains Lesson Grapheme (V19) ---
+  for (const grapheme of graphemes) {
+    const gId = grapheme.id || '(missing-grapheme-id)';
+    if (grapheme.matchPattern) {
+      const refWord = grapheme.exampleWordId ? wordMap.get(grapheme.exampleWordId) : null;
+      const formToTest = grapheme.exampleForm || refWord?.lemma;
+      if (!formToTest) {
+        errors.push({
+          rule: 'V19',
+          phraseId: gId,
+          entityId: gId,
+          message: `Grapheme "${gId}" has matchPattern "${grapheme.matchPattern}" but no exampleForm or referenced word lemma to test.`,
+        });
+      } else {
+        try {
+          const rx = new RegExp(grapheme.matchPattern);
+          if (!rx.test(formToTest)) {
+            errors.push({
+              rule: 'V19',
+              phraseId: gId,
+              entityId: gId,
+              message: `Grapheme "${gId}" display form "${formToTest}" does not match lesson pattern /${grapheme.matchPattern}/.`,
+            });
+          }
+        } catch (e) {
+          errors.push({
+            rule: 'V19',
+            phraseId: gId,
+            entityId: gId,
+            message: `Grapheme "${gId}" has invalid regex matchPattern "${grapheme.matchPattern}": ${(e as Error).message}`,
+          });
+        }
       }
     }
   }

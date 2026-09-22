@@ -49,6 +49,7 @@ export type RomanianWord = {
   source: PhraseSource;
   reviewer?: string | null;
   status: 'draft' | 'review' | 'published' | 'archived';
+  usageNote?: { fa: string; en: string };
 };
 
 export type RomanianVerb = {
@@ -74,7 +75,9 @@ export type RomanianGrapheme = {
   id: string;
   grapheme: string;        // 'ș' یا 'ce'
   soundHintFa: string;     // توضیح صدا — نه آوانگاری جمله
-  exampleWordId: string;   // به واژه وصل می‌شود
+  exampleWordId: string;   // به واژه وصل می‌شود (V18)
+  exampleForm?: string;    // شکل نمایشی (پیش‌فرض lemma است، برای فرم‌های جمع مثل bani از پارسر می‌آید)
+  matchPattern?: string;   // الگوی regex برای اعتبارسنجی حضور گرافم در شکل نمایشی (V19)
   order: number;
   status: 'draft' | 'review' | 'published' | 'archived';
 };
