@@ -7,6 +7,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Nu vorbesc românește.',
       en: "I don't speak Romanian.",
@@ -27,6 +28,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'formal',
+    intendedUse: 'produce',
     text: {
       ro: 'Vorbiți engleză?',
       en: 'Do you speak English?',
@@ -51,6 +53,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'La revedere!',
       en: 'Goodbye!',
@@ -71,6 +74,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'formal',
+    intendedUse: 'produce',
     text: {
       ro: 'Vă rog.',
       en: 'Please.',
@@ -95,6 +99,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Mulțumesc.',
       en: 'Thank you.',
@@ -115,6 +120,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Cu plăcere.',
       en: "You're welcome.",
@@ -135,6 +141,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'formal',
+    intendedUse: 'produce',
     text: {
       ro: 'Scuzați-mă.',
       en: 'Excuse me.',
@@ -163,6 +170,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Îmi pare rău.',
       en: "I'm sorry.",
@@ -183,6 +191,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'formal',
+    intendedUse: 'produce',
     text: {
       ro: 'Puteți vorbi mai rar, vă rog?',
       en: 'Could you speak more slowly, please?',
@@ -211,6 +220,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'formal',
+    intendedUse: 'produce',
     text: {
       ro: 'Ce înseamnă asta, vă rog?',
       en: 'What does this mean, please?',
@@ -235,6 +245,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Cum se spune în română?',
       en: 'How do you say it in Romanian?',
@@ -255,6 +266,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'formal',
+    intendedUse: 'produce',
     text: {
       ro: 'Puteți scrie, vă rog?',
       en: 'Could you write it down, please?',
@@ -275,6 +287,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'transport',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Unde este?',
       en: 'Where is it?',
@@ -295,6 +308,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'transport',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Unde este toaleta?',
       en: 'Where is the toilet?',
@@ -315,6 +329,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'healthcare',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Unde este o farmacie?',
       en: 'Where is a pharmacy?',
@@ -335,6 +350,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'transport',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Este departe?',
       en: 'Is it far?',
@@ -355,6 +371,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'shopping',
     level: 'beginner',
     register: 'formal',
+    intendedUse: 'produce',
     text: {
       ro: 'Aveți?',
       en: 'Do you have it?',
@@ -379,6 +396,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'shopping',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Doar mă uit, mulțumesc.',
       en: "I'm just looking, thank you.",
@@ -399,6 +417,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'shopping',
     level: 'beginner',
     register: 'formal',
+    intendedUse: 'produce',
     text: {
       ro: 'O sticlă de apă, vă rog.',
       en: 'A bottle of water, please.',
@@ -419,6 +438,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'emergency',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Ajutor!',
       en: 'Help!',
@@ -439,6 +459,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'emergency',
     level: 'beginner',
     register: 'formal',
+    intendedUse: 'produce',
     text: {
       ro: 'Sunați la 112, vă rog.',
       en: 'Call 112, please.',
@@ -459,6 +480,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'emergency',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'M-am rătăcit.',
       en: "I'm lost.",
@@ -479,6 +501,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     category: 'healthcare',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Nu mă simt bine.',
       en: "I don't feel well.",
