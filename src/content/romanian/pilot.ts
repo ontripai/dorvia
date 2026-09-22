@@ -7,6 +7,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'formal',
+    intendedUse: 'produce',
     text: {
       ro: 'Bună ziua!',
       en: 'Good afternoon / Hello!',
@@ -27,6 +28,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Mă numesc {{name}}.',
       en: 'My name is {{name}}.',
@@ -47,6 +49,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     level: 'beginner',
     register: 'formal',
+    intendedUse: 'produce',
     text: {
       ro: 'Nu am înțeles. Puteți repeta, vă rog?',
       en: "I didn't understand. Could you repeat, please?",
@@ -71,6 +74,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     category: 'transport',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Unde este stația de metrou?',
       en: 'Where is the metro station?',
@@ -91,6 +95,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     category: 'transport',
     level: 'beginner',
     register: 'formal',
+    intendedUse: 'produce',
     text: {
       ro: 'Un bilet, vă rog.',
       en: 'One ticket, please.',
@@ -111,6 +116,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     category: 'shopping',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Cât costă?',
       en: 'How much does it cost?',
@@ -131,6 +137,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     category: 'shopping',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Pot plăti cu cardul?',
       en: 'Can I pay by card?',
@@ -151,6 +158,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     category: 'banking',
     level: 'elementary',
     register: 'formal',
+    intendedUse: 'produce',
     text: {
       ro: 'Aș dori să deschid un cont bancar.',
       en: 'I would like to open a bank account.',
@@ -176,6 +184,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     category: 'healthcare',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Am o programare.',
       en: 'I have an appointment.',
@@ -196,6 +205,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     category: 'administration',
     level: 'elementary',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Unde trebuie să depun documentele?',
       en: 'Where do I need to submit the documents?',
@@ -217,6 +227,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     category: 'school',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Fiul meu este elev aici.',
       en: 'My son is a student here.',
@@ -238,6 +249,7 @@ export const PILOT_PHRASES: RomanianPhrase[] = [
     category: 'emergency',
     level: 'beginner',
     register: 'neutral',
+    intendedUse: 'produce',
     text: {
       ro: 'Am nevoie de ajutor.',
       en: 'I need help.',
