@@ -61,6 +61,8 @@ function main() {
     const budgetStr = typeof d.budget === 'number' ? `   (budget ${d.budget})` : '';
     console.log(`  ${d.id.padEnd(15, ' ')}: ${parts.join(', ')}${budgetStr}`);
   }
+  console.log(`  words in 'core' that also belong to another domain: ${stats.coreMultiDomainWords}`);
+  console.log(`  verbs in 'core' that also belong to another domain: ${stats.coreMultiDomainVerbs}`);
 
   console.log(`\nCATEGORY MAPPING: ${stats.mappedCategoriesCount} of ${stats.totalCategoriesCount} categories mapped to at least one domain\n`);
 

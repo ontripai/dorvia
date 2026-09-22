@@ -576,6 +576,8 @@ export interface ContentStats {
   mappedCategoriesCount: number;
   totalCategoriesCount: number;
   mappedCategories: RomanianCategory[];
+  coreMultiDomainWords: number;
+  coreMultiDomainVerbs: number;
 }
 
 export function computeContentStats(context: RomanianValidationContext): ContentStats {
@@ -611,10 +613,20 @@ export function computeContentStats(context: RomanianValidationContext): Content
     }
   }
 
+  const coreMultiDomainWords = words.filter(
+    w => (w.domains || []).includes('core') && (w.domains || []).length > 1
+  ).length;
+
+  const coreMultiDomainVerbs = verbs.filter(
+    v => (v.domains || []).includes('core') && (v.domains || []).length > 1
+  ).length;
+
   return {
     domainSizes,
     mappedCategoriesCount: mappedCategoriesSet.size,
     totalCategoriesCount: 13,
     mappedCategories: Array.from(mappedCategoriesSet),
+    coreMultiDomainWords,
+    coreMultiDomainVerbs,
   };
 }
