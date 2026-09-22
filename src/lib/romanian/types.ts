@@ -100,6 +100,8 @@ export type DomainMeta = {
   stationOrder: 'sequential' | 'grouped';          // V13
   stations: Array<{ id: string; titleFa: string; titleRo: string; order: number }>;
   sourcingPolicy: 'common-usage-ok' | 'must-be-sourced';
+  categories: RomanianCategory[];                  // این حوزه از کدام دسته‌ها تغذیه می‌کند
+  maxItems?: number;                               // بودجه — بخش ۳
 };
 
 export type RomanianPhrase = {

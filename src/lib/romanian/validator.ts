@@ -1,4 +1,5 @@
 import {
+  RomanianCategory,
   RomanianPhrase,
   RomanianWord,
   RomanianVerb,
@@ -9,7 +10,7 @@ import {
 
 export type ValidationRuleId =
   | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8'
-  | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14';
+  | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16';
 
 export interface ValidationError {
   rule: ValidationRuleId;
@@ -67,7 +68,7 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
   const wordMap = new Map<string, RomanianWord>(words.map(w => [w.id, w]));
   const domainMap = new Map<string, DomainMeta>(domains.map(d => [d.id, d]));
 
-  // --- Validate Phrases (V1 to V8, V9, V12, V14) ---
+  // --- Validate Phrases (V1 to V8, V9, V12, V14, V15) ---
   for (const phrase of phrases) {
     const id = phrase.id || '(missing-id)';
 
@@ -137,7 +138,6 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
     }
 
     // V6: Published phrase cannot have register === 'informal' ONLY IF intendedUse === 'produce'
-    // Modified in dre-p152: phrases with intendedUse === 'comprehend' may have informal register.
     if (
       phrase.status === 'published' &&
       phrase.intendedUse === 'produce' &&
@@ -318,6 +318,20 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
         }
       }
     }
+
+    // V15: Category and Domain Compatibility
+    // Failure when: Published item has domain and category, and category is not in domain's categories list
+    if (phrase.status === 'published' && phrase.domain && phrase.category) {
+      const pDomain = domainMap.get(phrase.domain);
+      if (pDomain && pDomain.categories && !pDomain.categories.includes(phrase.category)) {
+        errors.push({
+          rule: 'V15',
+          phraseId: id,
+          entityId: id,
+          message: `Published phrase "${id}" has category "${phrase.category}" which is not in domain "${phrase.domain}" allowed categories: [${pDomain.categories.join(', ')}].`,
+        });
+      }
+    }
   }
 
   // --- Validate Graphemes (V9) ---
@@ -351,7 +365,6 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
   // --- Validate Verbs (V10, V14) ---
   for (const verb of verbs) {
     if (verb.status === 'published') {
-      // V10: Published verb must have source.url and conjugation.prezent
       const url = verb.source?.url?.trim() || '';
       if (!url) {
         errors.push({
@@ -384,7 +397,6 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
         }
       }
 
-      // V14: Verb in must-be-sourced domain
       for (const dId of verb.domains || []) {
         const d = domainMap.get(dId);
         if (d && d.sourcingPolicy === 'must-be-sourced') {
@@ -404,7 +416,6 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
   // --- Validate Words (V11, V14) ---
   for (const word of words) {
     if (word.status === 'published') {
-      // V11: Published noun must have gender and definiteForm
       if (word.pos === 'noun') {
         if (!word.gender || !['m', 'f', 'n'].includes(word.gender)) {
           errors.push({
@@ -424,7 +435,6 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
         }
       }
 
-      // V14: Word in must-be-sourced domain
       for (const dId of word.domains || []) {
         const d = domainMap.get(dId);
         if (d && d.sourcingPolicy === 'must-be-sourced') {
@@ -444,7 +454,6 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
   }
 
   // --- Validate Domains (V13) ---
-  // Collect all domains that contain published content
   const domainsWithPublishedContent = new Set<string>();
   for (const d of domains) {
     domainsWithPublishedContent.add(d.id);
@@ -501,6 +510,26 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
     }
   }
 
+  // --- Validate Domain Budgets (V16) ---
+  for (const domain of domains) {
+    if (typeof domain.maxItems === 'number') {
+      const pubPhrases = phrases.filter(p => p.status === 'published' && p.domain === domain.id).length;
+      const pubWords = words.filter(w => w.status === 'published' && (w.domains || []).includes(domain.id)).length;
+      const pubVerbs = verbs.filter(v => v.status === 'published' && (v.domains || []).includes(domain.id)).length;
+      const pubDialogues = dialogues.filter(d => d.status === 'published' && d.domain === domain.id).length;
+      const totalPublished = pubPhrases + pubWords + pubVerbs + pubDialogues;
+
+      if (totalPublished > domain.maxItems) {
+        errors.push({
+          rule: 'V16',
+          phraseId: domain.id,
+          entityId: domain.id,
+          message: `Domain "${domain.id}" exceeds item budget maxItems (${domain.maxItems}): currently has ${totalPublished} published items (${pubPhrases} phrases, ${pubWords} words, ${pubVerbs} verbs, ${pubDialogues} dialogues).`,
+        });
+      }
+    }
+  }
+
   return errors;
 }
 
@@ -530,4 +559,74 @@ export function assertValidContent(context: RomanianValidationContext): void {
       `Romanian Content Validation Failed with ${errors.length} error(s):\n${formatted}`
     );
   }
+}
+
+export interface DomainSizeStats {
+  id: string;
+  phrases: number;
+  words: number;
+  verbs: number;
+  dialogues: number;
+  total: number;
+  budget?: number;
+}
+
+export interface ContentStats {
+  domainSizes: DomainSizeStats[];
+  mappedCategoriesCount: number;
+  totalCategoriesCount: number;
+  mappedCategories: RomanianCategory[];
+  coreMultiDomainWords: number;
+  coreMultiDomainVerbs: number;
+}
+
+export function computeContentStats(context: RomanianValidationContext): ContentStats {
+  const {
+    phrases = [],
+    words = [],
+    verbs = [],
+    dialogues = [],
+    domains = [],
+  } = context;
+
+  const domainSizes: DomainSizeStats[] = domains.map(d => {
+    const pubPhrases = phrases.filter(p => p.status === 'published' && p.domain === d.id).length;
+    const pubWords = words.filter(w => w.status === 'published' && (w.domains || []).includes(d.id)).length;
+    const pubVerbs = verbs.filter(v => v.status === 'published' && (v.domains || []).includes(d.id)).length;
+    const pubDialogues = dialogues.filter(dlg => dlg.status === 'published' && dlg.domain === d.id).length;
+    const total = pubPhrases + pubWords + pubVerbs + pubDialogues;
+    return {
+      id: d.id,
+      phrases: pubPhrases,
+      words: pubWords,
+      verbs: pubVerbs,
+      dialogues: pubDialogues,
+      total,
+      budget: d.maxItems,
+    };
+  });
+
+  const mappedCategoriesSet = new Set<RomanianCategory>();
+  for (const d of domains) {
+    for (const cat of d.categories || []) {
+      mappedCategoriesSet.add(cat);
+    }
+  }
+
+  const coreMultiDomainWords = words.filter(
+    w => (w.domains || []).includes('core') && (w.domains || []).length > 1
+  ).length;
+
+  const coreMultiDomainVerbs = verbs.filter(
+    v => (v.domains || []).includes('core') && (v.domains || []).length > 1
+  ).length;
+
+  return {
+    domainSizes,
+    mappedCategoriesCount: mappedCategoriesSet.size,
+    totalCategoriesCount: 13,
+    mappedCategories: Array.from(mappedCategoriesSet),
+    coreMultiDomainWords,
+    coreMultiDomainVerbs,
+  };
 }

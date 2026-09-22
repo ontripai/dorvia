@@ -97,9 +97,9 @@ export default function RomanianCategoryPage({
         </div>
       ) : (
         /* Explicit Empty State for zero-phrase categories */
-        <div className="editorial-card p-10 sm:p-14 bg-white border border-slate-200 rounded-3xl text-center space-y-5 shadow-sm">
-          <div className="w-14 h-14 mx-auto rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl font-bold">
-            ⏳
+        <div className="editorial-card p-10 sm:p-14 bg-white border border-slate-200 rounded-3xl text-center space-y-6 shadow-sm">
+          <div className="w-14 h-14 mx-auto rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center text-2xl font-bold">
+            📂
           </div>
           <div className="space-y-2 max-w-md mx-auto">
             <h2 className="text-lg sm:text-xl font-bold text-[#142033]">
@@ -107,11 +107,6 @@ export default function RomanianCategoryPage({
                 ? 'برای این دسته هنوز عبارتی منتشر نشده است'
                 : 'No phrases published for this category yet.'}
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-              {isFa
-                ? 'محتوای آموزشی و عبارت‌های کاربردی این بخش در حال بازبینی و آماده‌سازی نهایی است.'
-                : 'Learning content and phrases for this category are currently under review and preparation.'}
-            </p>
           </div>
           <div className="pt-2">
             <Link

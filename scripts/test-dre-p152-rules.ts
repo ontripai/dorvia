@@ -114,6 +114,7 @@ runTest('RED TEST V12: Phrase in order 0 domain uses word introduced in order 1 
     stationOrder: 'grouped',
     stations: [],
     sourcingPolicy: 'common-usage-ok',
+    categories: ['transport'],
   });
   // Word introduced in domain 'airport' (order 1)
   ctx.words!.push({
@@ -157,6 +158,7 @@ runTest('RED TEST V14: Temporary must-be-sourced domain with common-usage word',
     stationOrder: 'grouped',
     stations: [],
     sourcingPolicy: 'must-be-sourced',
+    categories: ['administration'],
   });
   ctx.words!.push({
     id: 'w-vama',
