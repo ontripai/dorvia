@@ -8,6 +8,10 @@ import {
   SEED_DIALOGUES,
 } from '../src/content/romanian/seed';
 import {
+  FOUNDATION_WORDS,
+  FOUNDATION_GRAPHEMES,
+} from '../src/content/romanian/foundation';
+import {
   validateRomanianContent,
   computeContentStats,
   RomanianValidationContext,
@@ -16,21 +20,23 @@ import {
 function main() {
   const allPhrases = [...PILOT_PHRASES, ...STAGE0_PHRASES];
   const publishedPhrases = allPhrases.filter(p => p.status === 'published');
+  const allWords = [...SEED_WORDS, ...FOUNDATION_WORDS];
+  const allGraphemes = [...SEED_GRAPHEMES, ...FOUNDATION_GRAPHEMES];
 
   const context: RomanianValidationContext = {
     phrases: allPhrases,
-    words: SEED_WORDS,
+    words: allWords,
     verbs: SEED_VERBS,
-    graphemes: SEED_GRAPHEMES,
+    graphemes: allGraphemes,
     dialogues: SEED_DIALOGUES,
     domains: SEED_DOMAINS,
   };
 
   console.log('================================================================');
-  console.log('DORVIA Romanian Language Content Validator (dre-p153, Taxonomy)');
+  console.log('DORVIA Romanian Language Content Validator (dre-p154, Foundation)');
   console.log('================================================================');
   console.log(
-    `Auditing ${allPhrases.length} phrases (${publishedPhrases.length} published), ${SEED_WORDS.length} words, ${SEED_VERBS.length} verbs, ${SEED_GRAPHEMES.length} graphemes, ${SEED_DOMAINS.length} domains across rules V1 to V16...\n`
+    `Auditing ${allPhrases.length} phrases (${publishedPhrases.length} published), ${allWords.length} words, ${SEED_VERBS.length} verbs, ${allGraphemes.length} graphemes, ${SEED_DOMAINS.length} domains across rules V1 to V19...\n`
   );
 
   const errors = validateRomanianContent(context);
@@ -66,13 +72,13 @@ function main() {
 
   console.log(`\nCATEGORY MAPPING: ${stats.mappedCategoriesCount} of ${stats.totalCategoriesCount} categories mapped to at least one domain\n`);
 
-  console.log('✅ SUCCESS: All Romanian content strictly adheres to rules V1 to V16.');
-  console.log(`  - Total phrases: ${allPhrases.length} (${publishedPhrases.length} published, 2 in review)`);
-  console.log(`  - Total words: ${SEED_WORDS.length}`);
+  console.log('✅ SUCCESS: All Romanian content strictly adheres to rules V1 to V19.');
+  console.log(`  - Total phrases: ${allPhrases.length} (${publishedPhrases.length} published, ${allPhrases.length - publishedPhrases.length} in review)`);
+  console.log(`  - Total words: ${allWords.length} (${allWords.filter(w => w.status === 'published').length} published, ${allWords.filter(w => w.status === 'draft').length} draft)`);
   console.log(`  - Total verbs: ${SEED_VERBS.length}`);
-  console.log(`  - Total graphemes: ${SEED_GRAPHEMES.length}`);
+  console.log(`  - Total graphemes: ${allGraphemes.length} (${allGraphemes.filter(g => g.status === 'published').length} published, ${allGraphemes.filter(g => g.status === 'draft').length} draft)`);
   console.log(`  - Total domains: ${SEED_DOMAINS.length}`);
-  console.log('  - All IDs & slugs unique and properly formatted (V1-V3).');
+  console.log('  - All IDs & slugs unique and properly formatted (V1-V3, V17).');
   console.log('  - All texts and sources validated (V4-V5).');
   console.log('  - Register policy scoped to intendedUse: produce (V6).');
   console.log('  - Name tokens strictly consistent across ro/en/fa (V7).');
@@ -85,6 +91,9 @@ function main() {
   console.log('  - High-risk domain sourcing policy strictly enforced (V14).');
   console.log('  - Category-domain compatibility verified (V15).');
   console.log('  - Domain item budgets verified (V16).');
+  console.log('  - Global entity ID uniqueness across combined dataset verified (V17).');
+  console.log('  - Grapheme-to-word referential integrity verified (V18).');
+  console.log('  - Display form contains lesson grapheme verified (V19).');
   process.exit(0);
 }
 
