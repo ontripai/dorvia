@@ -609,7 +609,6 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
       }
     }
   }
-
   return errors;
 }
 
