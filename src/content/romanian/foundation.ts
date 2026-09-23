@@ -439,220 +439,508 @@ export const FOUNDATION_WORDS: RomanianWord[] = [
 
 export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   {
-    id: 'g-01-a',
-    grapheme: 'a',
-    soundHintFa: 'مثل «آ» کوتاه در «باد».',
-    exampleWordId: 'w-apa',
-    matchPattern: 'a',
-    order: 1,
-    status: 'draft',
+    "id": "g-01-a",
+    "grapheme": "a",
+    "soundHintFa": "مثل «آ» کوتاه در «باد».",
+    "exampleWordId": "w-apa",
+    "matchPattern": "a",
+    "order": 1,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-01-a-aoede.mp3",
+        "durationMs": 1340
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-01-a-puck.mp3",
+        "durationMs": 2300
+      }
+    ]
   },
   {
-    id: 'g-02-e',
-    grapheme: 'e',
-    soundHintFa: 'مثل «اِ» در «بِبَر».',
-    exampleWordId: 'w-elev',
-    matchPattern: 'e',
-    order: 2,
-    status: 'draft',
+    "id": "g-02-e",
+    "grapheme": "e",
+    "soundHintFa": "مثل «اِ» در «بِبَر».",
+    "exampleWordId": "w-elev",
+    "matchPattern": "e",
+    "order": 2,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-02-e-aoede.mp3",
+        "durationMs": 2020
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-02-e-puck.mp3",
+        "durationMs": 3220
+      }
+    ]
   },
   {
-    id: 'g-03-i',
-    grapheme: 'i',
-    soundHintFa: 'مثل «ای» در «بید» — ولی بند ۲۳ را هم بخوانید.',
-    exampleWordId: 'w-bilet',
-    matchPattern: 'i',
-    order: 3,
-    status: 'draft',
+    "id": "g-03-i",
+    "grapheme": "i",
+    "soundHintFa": "مثل «ای» در «بید» — ولی بند ۲۳ را هم بخوانید.",
+    "exampleWordId": "w-bilet",
+    "matchPattern": "i",
+    "order": 3,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-03-i-aoede.mp3",
+        "durationMs": 2450
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-03-i-puck.mp3",
+        "durationMs": 2420
+      }
+    ]
   },
   {
-    id: 'g-04-o',
-    grapheme: 'o',
-    soundHintFa: 'مثل «اُ» در «پُل».',
-    exampleWordId: 'w-oras',
-    matchPattern: 'o',
-    order: 4,
-    status: 'draft',
+    "id": "g-04-o",
+    "grapheme": "o",
+    "soundHintFa": "مثل «اُ» در «پُل».",
+    "exampleWordId": "w-oras",
+    "matchPattern": "o",
+    "order": 4,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-04-o-aoede.mp3",
+        "durationMs": 2450
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-04-o-puck.mp3",
+        "durationMs": 3340
+      }
+    ]
   },
   {
-    id: 'g-05-u',
-    grapheme: 'u',
-    soundHintFa: 'مثل «او» در «بود».',
-    exampleWordId: 'w-unde',
-    matchPattern: 'u',
-    order: 5,
-    status: 'draft',
+    "id": "g-05-u",
+    "grapheme": "u",
+    "soundHintFa": "مثل «او» در «بود».",
+    "exampleWordId": "w-unde",
+    "matchPattern": "u",
+    "order": 5,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-05-u-aoede.mp3",
+        "durationMs": 2500
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-05-u-puck.mp3",
+        "durationMs": 1540
+      }
+    ]
   },
   {
-    id: 'g-06-a-breve',
-    grapheme: 'ă',
-    soundHintFa: 'صدای کوتاه و بی‌تأکید، چیزی میان «اَ» و «اِ». در فارسی وجود ندارد — صوت را بشنوید.',
-    exampleWordId: 'w-masa',
-    matchPattern: 'ă',
-    order: 6,
-    status: 'draft',
+    "id": "g-06-a-breve",
+    "grapheme": "ă",
+    "soundHintFa": "صدای کوتاه و بی‌تأکید، چیزی میان «اَ» و «اِ». در فارسی وجود ندارد — صوت را بشنوید.",
+    "exampleWordId": "w-masa",
+    "matchPattern": "ă",
+    "order": 6,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-06-a-breve-aoede.mp3",
+        "durationMs": 2140
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-06-a-breve-puck.mp3",
+        "durationMs": 1610
+      }
+    ]
   },
   {
-    id: 'g-07-a-circ-i-circ',
-    grapheme: 'â / î',
-    soundHintFa: 'یک صدا با دو املا. در فارسی نیست: زبان بالا و عقب، لب‌ها کشیده نیست. اگر «ای» بگویید و زبان را کمی عقب ببرید نزدیک می‌شوید.',
-    exampleWordId: 'w-romana',
-    matchPattern: '[âî]',
-    order: 7,
-    status: 'draft',
+    "id": "g-07-a-circ-i-circ",
+    "grapheme": "â / î",
+    "soundHintFa": "یک صدا با دو املا. در فارسی نیست: زبان بالا و عقب، لب‌ها کشیده نیست. اگر «ای» بگویید و زبان را کمی عقب ببرید نزدیک می‌شوید.",
+    "exampleWordId": "w-romana",
+    "matchPattern": "[âî]",
+    "order": 7,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-07-a-circ-i-circ-aoede.mp3",
+        "durationMs": 2980
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-07-a-circ-i-circ-puck.mp3",
+        "durationMs": 1540
+      }
+    ]
   },
   {
-    id: 'g-08-circ-rule',
-    grapheme: 'قاعده‌ی î و â',
-    soundHintFa: 'î در ابتدا و انتهای واژه، â در میانه. همین و بس.',
-    exampleWordId: 'w-inainte',
-    matchPattern: '^î|î$|â',
-    order: 8,
-    status: 'draft',
+    "id": "g-08-circ-rule",
+    "grapheme": "قاعده‌ی î و â",
+    "soundHintFa": "î در ابتدا و انتهای واژه، â در میانه. همین و بس.",
+    "exampleWordId": "w-inainte",
+    "matchPattern": "^î|î$|â",
+    "order": 8,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-08-circ-rule-aoede.mp3",
+        "durationMs": 2300
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-08-circ-rule-puck.mp3",
+        "durationMs": 1820
+      }
+    ]
   },
   {
-    id: 'g-09-s-comma',
-    grapheme: 'ș',
-    soundHintFa: 'دقیقاً «ش» فارسی.',
-    exampleWordId: 'w-usa',
-    matchPattern: 'ș',
-    order: 9,
-    status: 'draft',
+    "id": "g-09-s-comma",
+    "grapheme": "ș",
+    "soundHintFa": "دقیقاً «ش» فارسی.",
+    "exampleWordId": "w-usa",
+    "matchPattern": "ș",
+    "order": 9,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-09-s-comma-aoede.mp3",
+        "durationMs": 1370
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-09-s-comma-puck.mp3",
+        "durationMs": 1060
+      }
+    ]
   },
   {
-    id: 'g-10-t-comma',
-    grapheme: 'ț',
-    soundHintFa: '«ت» و «س» چسبیده به هم، یک صدا نه دو تا.',
-    exampleWordId: 'w-multumesc',
-    matchPattern: 'ț',
-    order: 10,
-    status: 'draft',
+    "id": "g-10-t-comma",
+    "grapheme": "ț",
+    "soundHintFa": "«ت» و «س» چسبیده به هم، یک صدا نه دو تا.",
+    "exampleWordId": "w-multumesc",
+    "matchPattern": "ț",
+    "order": 10,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-10-t-comma-aoede.mp3",
+        "durationMs": 3460
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-10-t-comma-puck.mp3",
+        "durationMs": 2540
+      }
+    ]
   },
   {
-    id: 'g-11-c-hard',
-    grapheme: 'c + a o u',
-    soundHintFa: '«ک».',
-    exampleWordId: 'w-card',
-    matchPattern: 'c[aou]',
-    order: 11,
-    status: 'draft',
+    "id": "g-11-c-hard",
+    "grapheme": "c + a o u",
+    "soundHintFa": "«ک».",
+    "exampleWordId": "w-card",
+    "matchPattern": "c[aou]",
+    "order": 11,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-11-c-hard-aoede.mp3",
+        "durationMs": 1540
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-11-c-hard-puck.mp3",
+        "durationMs": 2980
+      }
+    ]
   },
   {
-    id: 'g-12-ce-ci',
-    grapheme: 'ce / ci',
-    soundHintFa: '«چ». c پیش از e و i همیشه «چ» می‌شود.',
-    exampleWordId: 'w-ceai',
-    matchPattern: 'c[ei]',
-    order: 12,
-    status: 'draft',
+    "id": "g-12-ce-ci",
+    "grapheme": "ce / ci",
+    "soundHintFa": "«چ». c پیش از e و i همیشه «چ» می‌شود.",
+    "exampleWordId": "w-ceai",
+    "matchPattern": "c[ei]",
+    "order": 12,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-12-ce-ci-aoede.mp3",
+        "durationMs": 1340
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-12-ce-ci-puck.mp3",
+        "durationMs": 1180
+      }
+    ]
   },
   {
-    id: 'g-13-che-chi',
-    grapheme: 'che / chi',
-    soundHintFa: '«ک». h تلفظ نمی‌شود؛ کارش این است که c را «ک» نگه دارد.',
-    exampleWordId: 'w-cheie',
-    matchPattern: 'ch[ei]',
-    order: 13,
-    status: 'draft',
+    "id": "g-13-che-chi",
+    "grapheme": "che / chi",
+    "soundHintFa": "«ک». h تلفظ نمی‌شود؛ کارش این است که c را «ک» نگه دارد.",
+    "exampleWordId": "w-cheie",
+    "matchPattern": "ch[ei]",
+    "order": 13,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-13-che-chi-aoede.mp3",
+        "durationMs": 1490
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-13-che-chi-puck.mp3",
+        "durationMs": 1730
+      }
+    ]
   },
   {
-    id: 'g-14-g-hard',
-    grapheme: 'g + a o u',
-    soundHintFa: '«گ».',
-    exampleWordId: 'w-gara',
-    matchPattern: 'g[aou]',
-    order: 14,
-    status: 'draft',
+    "id": "g-14-g-hard",
+    "grapheme": "g + a o u",
+    "soundHintFa": "«گ».",
+    "exampleWordId": "w-gara",
+    "matchPattern": "g[aou]",
+    "order": 14,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-14-g-hard-aoede.mp3",
+        "durationMs": 1540
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-14-g-hard-puck.mp3",
+        "durationMs": 1700
+      }
+    ]
   },
   {
-    id: 'g-15-ge-gi',
-    grapheme: 'ge / gi',
-    soundHintFa: '«ج».',
-    exampleWordId: 'w-geam',
-    matchPattern: 'g[ei]',
-    order: 15,
-    status: 'draft',
+    "id": "g-15-ge-gi",
+    "grapheme": "ge / gi",
+    "soundHintFa": "«ج».",
+    "exampleWordId": "w-geam",
+    "matchPattern": "g[ei]",
+    "order": 15,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-15-ge-gi-aoede.mp3",
+        "durationMs": 1820
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-15-ge-gi-puck.mp3",
+        "durationMs": 3020
+      }
+    ]
   },
   {
-    id: 'g-16-ghe-ghi',
-    grapheme: 'ghe / ghi',
-    soundHintFa: '«گ». h باز هم تلفظ نمی‌شود و نقش نگهبان دارد.',
-    exampleWordId: 'w-ghiseu',
-    matchPattern: 'gh[ei]',
-    order: 16,
-    status: 'draft',
+    "id": "g-16-ghe-ghi",
+    "grapheme": "ghe / ghi",
+    "soundHintFa": "«گ». h باز هم تلفظ نمی‌شود و نقش نگهبان دارد.",
+    "exampleWordId": "w-ghiseu",
+    "matchPattern": "gh[ei]",
+    "order": 16,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-16-ghe-ghi-aoede.mp3",
+        "durationMs": 2980
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-16-ghe-ghi-puck.mp3",
+        "durationMs": 5020
+      }
+    ]
   },
   {
-    id: 'g-17-j',
-    grapheme: 'j',
-    soundHintFa: '«ژ» — نه «ج». این پرتکرارترین اشتباه انگلیسی‌زبان‌هاست.',
-    exampleWordId: 'w-ajutor',
-    matchPattern: 'j',
-    order: 17,
-    status: 'draft',
+    "id": "g-17-j",
+    "grapheme": "j",
+    "soundHintFa": "«ژ» — نه «ج». این پرتکرارترین اشتباه انگلیسی‌زبان‌هاست.",
+    "exampleWordId": "w-ajutor",
+    "matchPattern": "j",
+    "order": 17,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-17-j-aoede.mp3",
+        "durationMs": 3530
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-17-j-puck.mp3",
+        "durationMs": 3410
+      }
+    ]
   },
   {
-    id: 'g-18-r',
-    grapheme: 'r',
-    soundHintFa: 'غلتان و کوتاه، مثل «ر» فارسی ولی محکم‌تر.',
-    exampleWordId: 'w-rece',
-    matchPattern: 'r',
-    order: 18,
-    status: 'draft',
+    "id": "g-18-r",
+    "grapheme": "r",
+    "soundHintFa": "غلتان و کوتاه، مثل «ر» فارسی ولی محکم‌تر.",
+    "exampleWordId": "w-rece",
+    "matchPattern": "r",
+    "order": 18,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-18-r-aoede.mp3",
+        "durationMs": 1370
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-18-r-puck.mp3",
+        "durationMs": 1490
+      }
+    ]
   },
   {
-    id: 'g-19-v',
-    grapheme: 'v',
-    soundHintFa: 'مثل «و» در «وان» — نه مثل «و» در «او».',
-    exampleWordId: 'w-vama',
-    matchPattern: 'v',
-    order: 19,
-    status: 'draft',
+    "id": "g-19-v",
+    "grapheme": "v",
+    "soundHintFa": "مثل «و» در «وان» — نه مثل «و» در «او».",
+    "exampleWordId": "w-vama",
+    "matchPattern": "v",
+    "order": 19,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-19-v-aoede.mp3",
+        "durationMs": 2420
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-19-v-puck.mp3",
+        "durationMs": 2020
+      }
+    ]
   },
   {
-    id: 'g-20-h',
-    grapheme: 'h',
-    soundHintFa: 'همیشه تلفظ می‌شود، مثل «ه» فارسی. برخلاف فرانسوی و ایتالیایی.',
-    exampleWordId: 'w-harta',
-    matchPattern: 'h',
-    order: 20,
-    status: 'draft',
+    "id": "g-20-h",
+    "grapheme": "h",
+    "soundHintFa": "همیشه تلفظ می‌شود، مثل «ه» فارسی. برخلاف فرانسوی و ایتالیایی.",
+    "exampleWordId": "w-harta",
+    "matchPattern": "h",
+    "order": 20,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-20-h-aoede.mp3",
+        "durationMs": 1580
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-20-h-puck.mp3",
+        "durationMs": 1900
+      }
+    ]
   },
   {
-    id: 'g-21-s',
-    grapheme: 's',
-    soundHintFa: 'همیشه «س»، هرگز «ز» — حتی وقتی میان دو مصوت باشد.',
-    exampleWordId: 'w-casa',
-    matchPattern: 's',
-    order: 21,
-    status: 'draft',
+    "id": "g-21-s",
+    "grapheme": "s",
+    "soundHintFa": "همیشه «س»، هرگز «ز» — حتی وقتی میان دو مصوت باشد.",
+    "exampleWordId": "w-casa",
+    "matchPattern": "s",
+    "order": 21,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-21-s-aoede.mp3",
+        "durationMs": 1300
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-21-s-puck.mp3",
+        "durationMs": 1250
+      }
+    ]
   },
   {
-    id: 'g-22-x',
-    grapheme: 'x',
-    soundHintFa: '«کس».',
-    exampleWordId: 'w-taxi',
-    matchPattern: 'x',
-    order: 22,
-    status: 'draft',
+    "id": "g-22-x",
+    "grapheme": "x",
+    "soundHintFa": "«کس».",
+    "exampleWordId": "w-taxi",
+    "matchPattern": "x",
+    "order": 22,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-22-x-aoede.mp3",
+        "durationMs": 1900
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-22-x-puck.mp3",
+        "durationMs": 1490
+      }
+    ]
   },
   {
-    id: 'g-23-i-final',
-    grapheme: 'i پایانی',
-    soundHintFa: 'در پایان واژه معمولاً مصوت کامل نیست؛ فقط حرف قبلی را نازک می‌کند. bani «بانی» نیست، «بان» با یک ردّ «ی» است.',
-    exampleWordId: 'w-ban',
-    exampleForm: 'bani',
-    matchPattern: 'i$',
-    order: 23,
-    status: 'draft',
+    "id": "g-23-i-final",
+    "grapheme": "i پایانی",
+    "soundHintFa": "در پایان واژه معمولاً مصوت کامل نیست؛ فقط حرف قبلی را نازک می‌کند. bani «بانی» نیست، «بان» با یک ردّ «ی» است.",
+    "exampleWordId": "w-ban",
+    "exampleForm": "bani",
+    "matchPattern": "i$",
+    "order": 23,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-23-i-final-aoede.mp3",
+        "durationMs": 2780
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-23-i-final-puck.mp3",
+        "durationMs": 1370
+      }
+    ]
   },
   {
-    id: 'g-24-consonants-basic',
-    grapheme: 'b d f l m n p t z',
-    soundHintFa: 'همان‌طور که انتظار دارید. یک درس مشترک.',
-    exampleWordId: 'w-telefon',
-    matchPattern: '[bdflmnptz]',
-    order: 24,
-    status: 'draft',
-  },
+    "id": "g-24-consonants-basic",
+    "grapheme": "b d f l m n p t z",
+    "soundHintFa": "همان‌طور که انتظار دارید. یک درس مشترک.",
+    "exampleWordId": "w-telefon",
+    "matchPattern": "[bdflmnptz]",
+    "order": 24,
+    "status": "draft",
+    "audio": [
+      {
+        "voice": "Aoede",
+        "src": "/audio/romanian/foundation/g-24-consonants-basic-aoede.mp3",
+        "durationMs": 1700
+      },
+      {
+        "voice": "Puck",
+        "src": "/audio/romanian/foundation/g-24-consonants-basic-puck.mp3",
+        "durationMs": 4130
+      }
+    ]
+  }
 ];

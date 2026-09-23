@@ -11,7 +11,7 @@ import {
 export type ValidationRuleId =
   | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8'
   | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16'
-  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21';
+  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23';
 
 export interface ValidationError {
   rule: ValidationRuleId;
@@ -755,6 +755,105 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
       }
     }
   }
+
+  // --- Helper for V23 File Existence ---
+  const checkFileExistsOnDisk = (src: string): boolean => {
+    if (typeof window !== 'undefined') return true;
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      const relativeToPublic = src.startsWith('/') ? src.slice(1) : src;
+      const filePath = path.join(process.cwd(), 'public', relativeToPublic);
+      return fs.existsSync(filePath);
+    } catch {
+      return false;
+    }
+  };
+
+  // --- Validate Published Grapheme Audio Clips (V22) ---
+  for (const grapheme of graphemes) {
+    if (grapheme.status === 'published') {
+      const gId = grapheme.id || '(missing-grapheme-id)';
+      if (!grapheme.audio || !Array.isArray(grapheme.audio) || grapheme.audio.length < 2) {
+        errors.push({
+          rule: 'V22',
+          phraseId: gId,
+          entityId: gId,
+          message: `Published grapheme "${gId}" requires at least 2 AudioClips with distinct voices.`,
+        });
+      } else {
+        const voicesSeen = new Set<string>();
+        for (let i = 0; i < grapheme.audio.length; i++) {
+          const clip = grapheme.audio[i];
+          const voice = clip.voice?.trim() || '';
+          const src = clip.src?.trim() || '';
+          const durationMs = clip.durationMs;
+
+          if (!src) {
+            errors.push({
+              rule: 'V22',
+              phraseId: gId,
+              entityId: gId,
+              message: `Published grapheme "${gId}" audio clip #${i + 1} has empty src.`,
+            });
+          }
+
+          if (typeof durationMs !== 'number' || durationMs <= 0 || isNaN(durationMs)) {
+            errors.push({
+              rule: 'V22',
+              phraseId: gId,
+              entityId: gId,
+              message: `Published grapheme "${gId}" audio clip #${i + 1} (${voice || 'unnamed'}) has invalid durationMs: ${durationMs}. Must be > 0.`,
+            });
+          }
+
+          if (voice) {
+            voicesSeen.add(voice);
+          }
+        }
+
+        if (voicesSeen.size < 2) {
+          errors.push({
+            rule: 'V22',
+            phraseId: gId,
+            entityId: gId,
+            message: `Published grapheme "${gId}" must have clips with at least 2 distinct voices, found: ${Array.from(voicesSeen).join(', ') || 'none'}.`,
+          });
+        }
+      }
+    }
+  }
+
+  // --- Validate Audio Clip File Referential Integrity (V23) ---
+  for (const grapheme of graphemes) {
+    const gId = grapheme.id || '(missing-grapheme-id)';
+    if (grapheme.audio && Array.isArray(grapheme.audio)) {
+      for (let i = 0; i < grapheme.audio.length; i++) {
+        const clip = grapheme.audio[i];
+        const src = clip.src?.trim() || '';
+        if (!src) {
+          errors.push({
+            rule: 'V23',
+            phraseId: gId,
+            entityId: gId,
+            message: `Grapheme "${gId}" audio clip #${i + 1} has empty src.`,
+          });
+          continue;
+        }
+
+        const fileExists = checkFileExistsOnDisk(src);
+        if (!fileExists) {
+          errors.push({
+            rule: 'V23',
+            phraseId: gId,
+            entityId: gId,
+            message: `Grapheme "${gId}" audio clip #${i + 1} references non-existent file on disk: "${src}".`,
+          });
+        }
+      }
+    }
+  }
+
   return errors;
 }
 

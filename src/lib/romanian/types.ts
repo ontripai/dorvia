@@ -75,6 +75,12 @@ export type RomanianVerb = {
   defective?: { reason: string; source: string };
 };
 
+export type AudioClip = {
+  voice: string;      // 'Aoede' | 'Puck'
+  src: string;        // مسیر از ریشه‌ی سایت، مثل '/audio/romanian/foundation/g-06-...mp3'
+  durationMs: number; // از خود فایل خوانده شود، نه تایپ
+};
+
 export type RomanianGrapheme = {
   id: string;
   grapheme: string;        // 'ș' یا 'ce'
@@ -84,6 +90,7 @@ export type RomanianGrapheme = {
   matchPattern: string;    // الگوی regex برای اعتبارسنجی حضور گرافم در شکل نمایشی (V19)
   order: number;
   status: 'draft' | 'review' | 'published' | 'archived';
+  audio?: AudioClip[];
 };
 
 export type RomanianDialogue = {

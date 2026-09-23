@@ -96,6 +96,10 @@ function main() {
   console.log('  - Global entity ID uniqueness across combined dataset verified (V17).');
   console.log('  - Grapheme-to-word referential integrity verified (V18).');
   console.log('  - Display form contains lesson grapheme verified (V19).');
+  console.log('  - Verb participiu and conjunctiv completeness verified (V20).');
+  console.log('  - Verb stored forms purity verified (V21).');
+  console.log('  - Grapheme published audio completeness verified (V22).');
+  console.log('  - Audio clip file referential integrity on disk verified (V23).');
   process.exit(0);
 }
 

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "validate:content": "npx tsx scripts/validateContent.ts",
     "validate:romanian": "npx tsx scripts/validateRomanianContent.ts",
-    "test:romanian-rules": "npx tsx scripts/test-dre-p152-rules.ts && npx tsx scripts/test-dre-p153-rules.ts && npx tsx scripts/test-dre-p154-rules.ts && npx tsx scripts/test-dre-p157-rules.ts",
+    "test:romanian-rules": "npx tsx scripts/test-dre-p152-rules.ts && npx tsx scripts/test-dre-p153-rules.ts && npx tsx scripts/test-dre-p154-rules.ts && npx tsx scripts/test-dre-p157-rules.ts && npx tsx scripts/test-dre-p158-rules.ts",
     "validate:content-safety": "tsx scripts/content-audit.ts",
     "validate:translations": "npx tsx scripts/validateTranslationsParity.ts",
     "validate:faq-parity": "tsx scripts/validateFaqParity.ts",
@@ -35,6 +35,7 @@
     "sharp": "^0.35.4"
   },
   "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@types/node": "^20.11.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
