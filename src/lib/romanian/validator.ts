@@ -11,7 +11,7 @@ import {
 export type ValidationRuleId =
   | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8'
   | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16'
-  | 'V17' | 'V18' | 'V19';
+  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21';
 
 export interface ValidationError {
   rule: ValidationRuleId;
@@ -376,6 +376,14 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
         });
       }
 
+      const isDefectiveValid = Boolean(
+        verb.defective &&
+        verb.defective.reason &&
+        verb.defective.reason.trim().length > 0 &&
+        verb.defective.source &&
+        verb.defective.source.trim().length > 0
+      );
+
       if (!verb.conjugation?.prezent) {
         errors.push({
           rule: 'V10',
@@ -383,7 +391,7 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
           entityId: verb.id,
           message: `Published verb "${verb.id}" missing required conjugation.prezent.`,
         });
-      } else {
+      } else if (!isDefectiveValid) {
         const p = verb.conjugation.prezent;
         const missingPersons = ['eu', 'tu', 'el', 'noi', 'voi', 'ei'].filter(
           k => !p[k as keyof typeof p] || !p[k as keyof typeof p].trim()
@@ -410,6 +418,137 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
             });
           }
         }
+      }
+    }
+  }
+
+  // --- Validate Verb Conjunctiv and Participiu (V20) ---
+  for (const verb of verbs) {
+    if (verb.status === 'published') {
+      const vId = verb.id || '(missing-verb-id)';
+
+      // Participiu: non-empty string required
+      const participiu = verb.participiu?.trim() || '';
+      if (!participiu) {
+        errors.push({
+          rule: 'V20',
+          phraseId: vId,
+          entityId: vId,
+          message: `Published verb "${vId}" missing required non-empty participiu.`,
+        });
+      }
+
+      // Defective declaration check: if declared, reason and source must be non-empty
+      const hasDefectiveDeclaration = Boolean(verb.defective);
+      const isDefectiveValid = Boolean(
+        verb.defective &&
+        verb.defective.reason &&
+        verb.defective.reason.trim().length > 0 &&
+        verb.defective.source &&
+        verb.defective.source.trim().length > 0
+      );
+
+      if (hasDefectiveDeclaration && !isDefectiveValid) {
+        errors.push({
+          rule: 'V20',
+          phraseId: vId,
+          entityId: vId,
+          message: `Published verb "${vId}" declared defective but missing non-empty reason or source.`,
+        });
+      }
+
+      // Conjunctiv: all 6 persons complete and non-empty, unless explicitly declared defective
+      if (!isDefectiveValid) {
+        const conj = verb.conjugation?.conjunctiv || verb.conjunctiv;
+        if (!conj) {
+          errors.push({
+            rule: 'V20',
+            phraseId: vId,
+            entityId: vId,
+            message: `Published verb "${vId}" missing required conjunctiv paradigm.`,
+          });
+        } else {
+          const persons = ['eu', 'tu', 'el', 'noi', 'voi', 'ei'] as const;
+          const missingPersons = persons.filter(k => !conj[k] || !conj[k].trim());
+          if (missingPersons.length > 0) {
+            errors.push({
+              rule: 'V20',
+              phraseId: vId,
+              entityId: vId,
+              message: `Published verb "${vId}" conjunctiv paradigm missing person(s): ${missingPersons.join(', ')}.`,
+            });
+          }
+        }
+      }
+    }
+  }
+
+  // --- Validate Verb Stored Forms Purity (V21) ---
+  for (const verb of verbs) {
+    const vId = verb.id || '(missing-verb-id)';
+
+    const checkForm = (form: unknown, path: string) => {
+      if (typeof form !== 'string') return;
+      const trimmed = form.trim();
+      if (!trimmed) return;
+
+      const isSaWord = /(?:^|[^\p{L}])să(?=[^\p{L}]|$)/iu.test(form);
+      const isSaPrefix =
+        !verb.infinitive?.startsWith('a să') &&
+        !verb.infinitive?.startsWith('a sa') &&
+        /^să\p{L}+/iu.test(form);
+
+      if (isSaWord || isSaPrefix) {
+        errors.push({
+          rule: 'V21',
+          phraseId: vId,
+          entityId: vId,
+          message: `Verb "${vId}" ${path} contains "să": "${form}". Stored conjunctiv forms must not include "să".`,
+        });
+      }
+      if (/[-‑–—]/.test(form)) {
+        errors.push({
+          rule: 'V21',
+          phraseId: vId,
+          entityId: vId,
+          message: `Verb "${vId}" ${path} contains hyphen: "${form}".`,
+        });
+      }
+      if (/[&]|#x/i.test(form)) {
+        errors.push({
+          rule: 'V21',
+          phraseId: vId,
+          entityId: vId,
+          message: `Verb "${vId}" ${path} contains HTML entity: "${form}".`,
+        });
+      }
+      if (/\s/.test(form)) {
+        errors.push({
+          rule: 'V21',
+          phraseId: vId,
+          entityId: vId,
+          message: `Verb "${vId}" ${path} contains whitespace: "${form}".`,
+        });
+      }
+    };
+
+    if (verb.participiu) {
+      checkForm(verb.participiu, 'participiu');
+    }
+
+    if (verb.conjugation) {
+      for (const [tense, personSet] of Object.entries(verb.conjugation)) {
+        if (personSet && typeof personSet === 'object') {
+          for (const [pKey, pVal] of Object.entries(personSet)) {
+            checkForm(pVal, `conjugation.${tense}.${pKey}`);
+          }
+        }
+      }
+    }
+
+    if (verb.conjunctiv) {
+      for (const [pKey, pVal] of Object.entries(verb.conjunctiv)) {
+        checkForm(pVal, `conjunctiv.${pKey}`);
       }
     }
   }

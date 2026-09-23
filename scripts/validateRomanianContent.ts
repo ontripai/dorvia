@@ -11,6 +11,7 @@ import {
   FOUNDATION_WORDS,
   FOUNDATION_GRAPHEMES,
 } from '../src/content/romanian/foundation';
+import { CORE_VERBS } from '../src/content/romanian/core-verbs';
 import {
   validateRomanianContent,
   computeContentStats,
@@ -21,22 +22,23 @@ function main() {
   const allPhrases = [...PILOT_PHRASES, ...STAGE0_PHRASES];
   const publishedPhrases = allPhrases.filter(p => p.status === 'published');
   const allWords = [...SEED_WORDS, ...FOUNDATION_WORDS];
+  const allVerbs = [...SEED_VERBS, ...CORE_VERBS];
   const allGraphemes = [...SEED_GRAPHEMES, ...FOUNDATION_GRAPHEMES];
 
   const context: RomanianValidationContext = {
     phrases: allPhrases,
     words: allWords,
-    verbs: SEED_VERBS,
+    verbs: allVerbs,
     graphemes: allGraphemes,
     dialogues: SEED_DIALOGUES,
     domains: SEED_DOMAINS,
   };
 
   console.log('================================================================');
-  console.log('DORVIA Romanian Language Content Validator (dre-p154, Foundation)');
+  console.log('DORVIA Romanian Language Content Validator (dre-p157, Core Verbs)');
   console.log('================================================================');
   console.log(
-    `Auditing ${allPhrases.length} phrases (${publishedPhrases.length} published), ${allWords.length} words, ${SEED_VERBS.length} verbs, ${allGraphemes.length} graphemes, ${SEED_DOMAINS.length} domains across rules V1 to V19...\n`
+    `Auditing ${allPhrases.length} phrases (${publishedPhrases.length} published), ${allWords.length} words, ${allVerbs.length} verbs, ${allGraphemes.length} graphemes, ${SEED_DOMAINS.length} domains across rules V1 to V21...\n`
   );
 
   const errors = validateRomanianContent(context);

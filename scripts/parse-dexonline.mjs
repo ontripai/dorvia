@@ -170,6 +170,10 @@ export function extractPluralFormFromHtml(html, lemma, targetGender = null) {
   throw new Error(`[PARSER_ERROR] Could not extract plural form for lemma "${lemma}".`);
 }
 
+function stripInlineTags(html) {
+  return html.replace(/<\/?(span|i|b|em|abbr|a)[^>]*>/gi, '');
+}
+
 function parseRowCells(rowHtml) {
   const tdRegex = /<td([^>]*)>([\s\S]*?)<\/td>/gi;
   const cells = [];
@@ -177,7 +181,8 @@ function parseRowCells(rowHtml) {
   while ((m = tdRegex.exec(rowHtml)) !== null) {
     const rawAttrs = m[1];
     const rawInner = m[2];
-    const text = decodeHtmlEntities(rawInner.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ')).trim();
+    const cleanInner = stripInlineTags(rawInner);
+    const text = decodeHtmlEntities(cleanInner.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ')).trim();
     cells.push({ raw: rawInner, attrs: rawAttrs, text });
   }
   return cells;
@@ -195,6 +200,15 @@ function extractCellVariants(cellHtml, lemma) {
   if (allVariants.length === 0) {
     const cleaned = cleanToken(cellHtml);
     if (cleaned) allVariants.push(cleaned);
+  }
+
+  const isDash = (tok) => tok === '—' || tok === '–' || tok === '-' || tok === '';
+  if (allVariants.length === 0 || allVariants.every(isDash)) {
+    return {
+      definiteForm: '',
+      multiValues: null,
+      isMissing: true,
+    };
   }
 
   let multiValues = null;
@@ -216,13 +230,15 @@ function extractCellVariants(cellHtml, lemma) {
   return {
     definiteForm: selected,
     multiValues,
+    isMissing: false,
   };
 }
 
 function cleanToken(htmlText) {
-  let text = decodeHtmlEntities(htmlText);
+  let text = stripInlineTags(htmlText);
+  text = decodeHtmlEntities(text);
   text = text
-    .replace(/<[^>]+>/g, '') // remove HTML tags
+    .replace(/<[^>]+>/g, ' ') // remove HTML tags with spaces
     .trim();
 
   // Pick first whitespace or comma separated segment
@@ -243,4 +259,173 @@ function assertCleanForm(form, lemma, fieldName) {
   if (/\s/.test(form)) {
     throw new Error(`[ASSERTION_FAILED] Lemma "${lemma}" ${fieldName} contains whitespace: "${form}".`);
   }
+  if (/\bsă\b/i.test(form)) {
+    throw new Error(`[ASSERTION_FAILED] Lemma "${lemma}" ${fieldName} contains "să": "${form}".`);
+  }
+}
+
+/**
+ * Extracts prezent conjugation (6 persons), conjunctiv prezent (6 persons, without 'să'),
+ * and participiu from dexonline paradigm HTML for a verb.
+ */
+export function extractVerbFromHtml(html, lemma) {
+  const tableRegex = /<table[^>]*class=["'][^"']*lexeme[^"']*["'][^>]*>([\s\S]*?)<\/table>/gi;
+  const tables = [];
+  let tMatch;
+  while ((tMatch = tableRegex.exec(html)) !== null) {
+    tables.push(tMatch[1]);
+  }
+
+  if (tables.length === 0) {
+    throw new Error(`[PARSER_ERROR] No lexeme tables found for lemma "${lemma}".`);
+  }
+
+  const multiValuesReport = [];
+
+  for (let tIdx = 0; tIdx < tables.length; tIdx++) {
+    const tableContent = tables[tIdx];
+    const rows = [];
+    const rowRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+    let rMatch;
+    while ((rMatch = rowRegex.exec(tableContent)) !== null) {
+      rows.push(rMatch[1]);
+    }
+
+    if (rows.length < 5) continue;
+
+    // Header check in row 0
+    const row0Cells = parseRowCells(rows[0]);
+    const headerText = row0Cells.map(c => c.text).join(' ');
+
+    // Must be a verb table
+    if (!/verb/i.test(headerText)) continue;
+
+    // Must not be an auxiliary-only table (e.g. V514-aux, VT517-aux)
+    if (/-aux/i.test(headerText)) continue;
+
+    // Row 1 infinitiv verification
+    const row1Cells = parseRowCells(rows[1]);
+    const infinitivCell = row1Cells.find(c => /form/i.test(c.attrs) || /\(a\)/i.test(c.text));
+    if (infinitivCell) {
+      const infVariants = infinitivCell.text
+        .replace(/\(a\)\s*/gi, ' ')
+        .split(/[\s,]+/)
+        .map(v => v.replace(/[-‑–—]/g, '').trim().toLowerCase())
+        .filter(Boolean);
+      if (!infVariants.includes(lemma.toLowerCase())) {
+        continue;
+      }
+    }
+
+    // Locate participiu in non-finite section (Row 0 & Row 1)
+    const nonFiniteFormCells = row1Cells.filter(c => /form/i.test(c.attrs));
+    const nonFiniteHeaderCells = row0Cells.filter(c => /inflection/i.test(c.attrs));
+    const participiuHeaderIdx = nonFiniteHeaderCells.findIndex(c => /participiu/i.test(c.text));
+
+    let participiu = null;
+    if (participiuHeaderIdx !== -1 && participiuHeaderIdx < nonFiniteFormCells.length) {
+      const partCell = nonFiniteFormCells[participiuHeaderIdx];
+      const partRes = extractCellVariants(partCell.raw, lemma);
+      participiu = partRes.definiteForm;
+      if (partRes.multiValues) {
+        multiValuesReport.push({ context: 'participiu', variants: partRes.multiValues, selected: participiu });
+      }
+    }
+
+    if (!participiu || participiu === '—' || participiu === '-') {
+      continue;
+    }
+
+    assertCleanForm(participiu, lemma, 'participiu');
+
+    // Locate finite tense conjugation header row (e.g. numărul | persoana | prezent | conjunctiv prezent | ...)
+    let tenseHeaderRowIdx = -1;
+    for (let r = 2; r < rows.length; r++) {
+      if (/prezent/i.test(rows[r]) && /persoana/i.test(rows[r])) {
+        tenseHeaderRowIdx = r;
+        break;
+      }
+    }
+
+    if (tenseHeaderRowIdx === -1) continue;
+
+    const tenseHeaderCells = parseRowCells(rows[tenseHeaderRowIdx]);
+    const tenseColumns = tenseHeaderCells.filter(c => !/numărul|persoana/i.test(c.text));
+    const prezentColIdx = tenseColumns.findIndex(c => c.text.toLowerCase() === 'prezent');
+    const conjunctivColIdx = tenseColumns.findIndex(c => /conjunctiv\s+prezent/i.test(c.text));
+
+    if (prezentColIdx === -1 || conjunctivColIdx === -1) continue;
+
+    const prezent = {};
+    const conjunctiv = {};
+
+    const personMap = [
+      { key: 'eu', rx: /I\s*\(eu\)/i },
+      { key: 'tu', rx: /II-a\s*\(tu\)/i },
+      { key: 'el', rx: /III-a\s*\(el/i },
+      { key: 'noi', rx: /I\s*\(noi\)/i },
+      { key: 'voi', rx: /II-a\s*\(voi\)/i },
+      { key: 'ei', rx: /III-a\s*\(ei/i },
+    ];
+
+    for (let r = tenseHeaderRowIdx + 1; r < rows.length; r++) {
+      const rHtml = rows[r];
+      const rCells = parseRowCells(rHtml);
+      const personCell = rCells.find(c => /person/i.test(c.attrs) || /\((eu|tu|el|ea|noi|voi|ei|ele)\)/i.test(c.text));
+      if (!personCell) continue;
+
+      const matchedPerson = personMap.find(p => p.rx.test(personCell.text));
+      if (!matchedPerson) continue;
+
+      const formCells = rCells.filter(c => /form/i.test(c.attrs));
+      if (prezentColIdx < formCells.length) {
+        const pRes = extractCellVariants(formCells[prezentColIdx].raw, lemma);
+        prezent[matchedPerson.key] = pRes.definiteForm;
+        if (!pRes.isMissing && pRes.definiteForm) {
+          assertCleanForm(pRes.definiteForm, lemma, `prezent.${matchedPerson.key}`);
+        }
+        if (pRes.multiValues) {
+          multiValuesReport.push({ context: `prezent.${matchedPerson.key}`, variants: pRes.multiValues, selected: pRes.definiteForm });
+        }
+      }
+
+      if (conjunctivColIdx < formCells.length) {
+        const cRes = extractCellVariants(formCells[conjunctivColIdx].raw, lemma);
+        conjunctiv[matchedPerson.key] = cRes.definiteForm;
+        if (!cRes.isMissing && cRes.definiteForm) {
+          assertCleanForm(cRes.definiteForm, lemma, `conjunctiv.${matchedPerson.key}`);
+        }
+        if (cRes.multiValues) {
+          multiValuesReport.push({ context: `conjunctiv.${matchedPerson.key}`, variants: cRes.multiValues, selected: cRes.definiteForm });
+        }
+      }
+    }
+
+    if (lemma === 'trebui') {
+      // Defective / impersonal verb in contemporary standard Romanian (DOOM 3)
+      if (!prezent.el || !conjunctiv.el) {
+        continue;
+      }
+    } else {
+      const persons = ['eu', 'tu', 'el', 'noi', 'voi', 'ei'];
+      const missingPrezent = persons.filter(k => !prezent[k]);
+      const missingConj = persons.filter(k => !conjunctiv[k]);
+
+      if (missingPrezent.length > 0 || missingConj.length > 0) {
+        continue;
+      }
+    }
+
+    return {
+      lemma,
+      prezent,
+      conjunctiv,
+      participiu,
+      multiValues: multiValuesReport,
+      tableIndex: tIdx,
+      tableHeader: headerText,
+    };
+  }
+
+  throw new Error(`[PARSER_ERROR] Could not extract valid verb paradigm for lemma "${lemma}".`);
 }
