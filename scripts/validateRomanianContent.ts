@@ -1,17 +1,11 @@
-import { PILOT_PHRASES } from '../src/content/romanian/pilot';
-import { STAGE0_PHRASES } from '../src/content/romanian/stage0';
 import {
-  SEED_DOMAINS,
-  SEED_WORDS,
-  SEED_VERBS,
-  SEED_GRAPHEMES,
-  SEED_DIALOGUES,
-} from '../src/content/romanian/seed';
-import {
-  FOUNDATION_WORDS,
-  FOUNDATION_GRAPHEMES,
-} from '../src/content/romanian/foundation';
-import { CORE_VERBS } from '../src/content/romanian/core-verbs';
+  ALL_WORDS,
+  ALL_VERBS,
+  ALL_GRAPHEMES,
+  ALL_PHRASES,
+  ALL_DIALOGUES,
+  ALL_DOMAINS,
+} from '../src/content/romanian/registry';
 import {
   validateRomanianContent,
   computeContentStats,
@@ -19,26 +13,26 @@ import {
 } from '../src/lib/romanian/validator';
 
 function main() {
-  const allPhrases = [...PILOT_PHRASES, ...STAGE0_PHRASES];
+  const allPhrases = ALL_PHRASES;
   const publishedPhrases = allPhrases.filter(p => p.status === 'published');
-  const allWords = [...SEED_WORDS, ...FOUNDATION_WORDS];
-  const allVerbs = [...SEED_VERBS, ...CORE_VERBS];
-  const allGraphemes = [...SEED_GRAPHEMES, ...FOUNDATION_GRAPHEMES];
+  const allWords = ALL_WORDS;
+  const allVerbs = ALL_VERBS;
+  const allGraphemes = ALL_GRAPHEMES;
 
   const context: RomanianValidationContext = {
     phrases: allPhrases,
     words: allWords,
     verbs: allVerbs,
     graphemes: allGraphemes,
-    dialogues: SEED_DIALOGUES,
-    domains: SEED_DOMAINS,
+    dialogues: ALL_DIALOGUES,
+    domains: ALL_DOMAINS,
   };
 
   console.log('================================================================');
-  console.log('DORVIA Romanian Language Content Validator (dre-p157, Core Verbs)');
+  console.log('DORVIA Romanian Language Content Validator (dre-p159, Registry)');
   console.log('================================================================');
   console.log(
-    `Auditing ${allPhrases.length} phrases (${publishedPhrases.length} published), ${allWords.length} words, ${allVerbs.length} verbs, ${allGraphemes.length} graphemes, ${SEED_DOMAINS.length} domains across rules V1 to V21...\n`
+    `Auditing ${allPhrases.length} phrases (${publishedPhrases.length} published), ${allWords.length} words, ${allVerbs.length} verbs, ${allGraphemes.length} graphemes, ${ALL_DOMAINS.length} domains across rules V1 to V23...\n`
   );
 
   const errors = validateRomanianContent(context);
@@ -79,7 +73,7 @@ function main() {
   console.log(`  - Total words: ${allWords.length} (${allWords.filter(w => w.status === 'published').length} published, ${allWords.filter(w => w.status === 'draft').length} draft)`);
   console.log(`  - Total verbs: ${allVerbs.length} (${allVerbs.filter(v => v.status === 'published').length} published, ${allVerbs.filter(v => v.status === 'draft').length} draft)`);
   console.log(`  - Total graphemes: ${allGraphemes.length} (${allGraphemes.filter(g => g.status === 'published').length} published, ${allGraphemes.filter(g => g.status === 'draft').length} draft)`);
-  console.log(`  - Total domains: ${SEED_DOMAINS.length}`);
+  console.log(`  - Total domains: ${ALL_DOMAINS.length}`);
   console.log('  - All IDs & slugs unique and properly formatted (V1-V3, V17).');
   console.log('  - All texts and sources validated (V4-V5).');
   console.log('  - Register policy scoped to intendedUse: produce (V6).');

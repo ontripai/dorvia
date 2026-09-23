@@ -11,13 +11,22 @@ import {
 export type ValidationRuleId =
   | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8'
   | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16'
-  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23';
+  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24';
 
 export interface ValidationError {
   rule: ValidationRuleId;
   phraseId: string;
   entityId?: string;
   message: string;
+}
+
+export interface RegistrySourceContext {
+  phrases?: RomanianPhrase[];
+  words?: RomanianWord[];
+  verbs?: RomanianVerb[];
+  graphemes?: RomanianGrapheme[];
+  dialogues?: RomanianDialogue[];
+  domains?: DomainMeta[];
 }
 
 export interface RomanianValidationContext {
@@ -27,6 +36,7 @@ export interface RomanianValidationContext {
   graphemes?: RomanianGrapheme[];
   dialogues?: RomanianDialogue[];
   domains?: DomainMeta[];
+  sources?: RegistrySourceContext;
 }
 
 const SLUG_REGEX = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -853,6 +863,53 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
       }
     }
   }
+
+  // --- Validate Registry Completeness (V24) ---
+  if (context.sources) {
+    const v24Errors = validateRegistryCompleteness(context, context.sources);
+    errors.push(...v24Errors);
+  }
+
+  return errors;
+}
+
+export function validateRegistryCompleteness(
+  registry: RomanianValidationContext,
+  sources: RegistrySourceContext
+): ValidationError[] {
+  const errors: ValidationError[] = [];
+
+  const checkCategory = (
+    categoryName: string,
+    regItems?: Array<{ id: string }>,
+    srcItems?: Array<{ id: string }>
+  ) => {
+    if (!srcItems || srcItems.length === 0) return;
+    const regIds = new Set((regItems || []).map(item => item.id));
+    const missingIds: string[] = [];
+    for (const src of srcItems) {
+      if (!regIds.has(src.id)) {
+        missingIds.push(src.id);
+      }
+    }
+    if (missingIds.length > 0) {
+      for (const id of missingIds) {
+        errors.push({
+          rule: 'V24',
+          phraseId: id,
+          entityId: id,
+          message: `Registry ${categoryName} is incomplete: missing ID "${id}" defined in source array.`,
+        });
+      }
+    }
+  };
+
+  checkCategory('phrases', registry.phrases, sources.phrases);
+  checkCategory('words', registry.words, sources.words);
+  checkCategory('verbs', registry.verbs, sources.verbs);
+  checkCategory('graphemes', registry.graphemes, sources.graphemes);
+  checkCategory('dialogues', registry.dialogues, sources.dialogues);
+  checkCategory('domains', registry.domains, sources.domains);
 
   return errors;
 }
