@@ -71,6 +71,8 @@ export type RomanianVerb = {
   reviewer?: string | null;
   status: 'draft' | 'review' | 'published' | 'archived';
   usageNote?: { fa: string; en: string };
+  /** برای افعال ناقص (مثل a trebui) که تمام اشخاص صرفی را ندارند */
+  defective?: { reason: string; source: string };
 };
 
 export type RomanianGrapheme = {

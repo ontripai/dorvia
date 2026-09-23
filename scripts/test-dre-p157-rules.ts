@@ -101,21 +101,47 @@ runTest('Red Test V20-B: Published verb missing conjunctiv person (e.g. tu)', ()
   return { expectedRule: 'V20', errors, shouldPass: false };
 });
 
-// 3. Green Test V20-C: Draft verb with missing conjunctiv persons does not trigger V20
-runTest('Green Test V20-C: Draft defective verb (a trebui) does not trigger V20', () => {
+// 3. Red Test V20-C: Published defective verb (a trebui) without defective declaration fails V20
+runTest('Red Test V20-C: Published defective verb without defective declaration fails V20', () => {
   const ctx = getCleanBaseContext();
-  // v-core-a-trebui has status: 'draft' and empty persons in conjunctiv
   const trebuiVerb = ctx.verbs!.find(v => v.id === 'v-core-a-trebui')!;
-  trebuiVerb.status = 'draft';
+  trebuiVerb.status = 'published';
+  delete trebuiVerb.defective;
+  const errors = validateRomanianContent(ctx);
+  return { expectedRule: 'V20', errors, shouldPass: false };
+});
+
+// 4. Green Test V20-D: Published defective verb WITH defective declaration passes V20
+runTest('Green Test V20-D: Published defective verb with defective declaration passes V20', () => {
+  const ctx = getCleanBaseContext();
+  const trebuiVerb = ctx.verbs!.find(v => v.id === 'v-core-a-trebui')!;
+  trebuiVerb.status = 'published';
+  trebuiVerb.defective = {
+    reason: 'Verb unipersonal / defectiv de persoana I și a II-a; se folosește doar la persoana a III-a.',
+    source: 'DOOM 3 (V343) / dexonline',
+  };
   const errors = validateRomanianContent(ctx);
   return { errors, shouldPass: true };
 });
 
-// 4. Red Test V21-A: Stored form contains 'să'
-runTest("Red Test V21-A: Stored conjunctiv form contains 'să'", () => {
+// 5. Red Test V20-E: Published defective verb with empty defective reason/source fails V20
+runTest('Red Test V20-E: Published defective verb with empty defective reason/source fails V20', () => {
+  const ctx = getCleanBaseContext();
+  const trebuiVerb = ctx.verbs!.find(v => v.id === 'v-core-a-trebui')!;
+  trebuiVerb.status = 'published';
+  trebuiVerb.defective = {
+    reason: '',
+    source: 'DOOM 3',
+  };
+  const errors = validateRomanianContent(ctx);
+  return { expectedRule: 'V20', errors, shouldPass: false };
+});
+
+// 6. Red Test V21-A: Stored form contains 'să' without whitespace (e.g. 'săpoată')
+runTest("Red Test V21-A: Stored conjunctiv form contains 'să' without whitespace (e.g. 'săpoată')", () => {
   const ctx = getCleanBaseContext();
   const verb = ctx.verbs!.find(v => v.id === 'v-core-a-putea')!;
-  verb.conjugation.conjunctiv!.el = 'să poată';
+  verb.conjugation.conjunctiv!.el = 'săpoată';
   const errors = validateRomanianContent(ctx);
   return { expectedRule: 'V21', errors, shouldPass: false };
 });

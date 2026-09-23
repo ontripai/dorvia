@@ -376,6 +376,14 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
         });
       }
 
+      const isDefectiveValid = Boolean(
+        verb.defective &&
+        verb.defective.reason &&
+        verb.defective.reason.trim().length > 0 &&
+        verb.defective.source &&
+        verb.defective.source.trim().length > 0
+      );
+
       if (!verb.conjugation?.prezent) {
         errors.push({
           rule: 'V10',
@@ -383,7 +391,7 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
           entityId: verb.id,
           message: `Published verb "${verb.id}" missing required conjugation.prezent.`,
         });
-      } else {
+      } else if (!isDefectiveValid) {
         const p = verb.conjugation.prezent;
         const missingPersons = ['eu', 'tu', 'el', 'noi', 'voi', 'ei'].filter(
           k => !p[k as keyof typeof p] || !p[k as keyof typeof p].trim()
@@ -430,25 +438,46 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
         });
       }
 
-      // Conjunctiv: all 6 persons complete and non-empty
-      const conj = verb.conjugation?.conjunctiv || verb.conjunctiv;
-      if (!conj) {
+      // Defective declaration check: if declared, reason and source must be non-empty
+      const hasDefectiveDeclaration = Boolean(verb.defective);
+      const isDefectiveValid = Boolean(
+        verb.defective &&
+        verb.defective.reason &&
+        verb.defective.reason.trim().length > 0 &&
+        verb.defective.source &&
+        verb.defective.source.trim().length > 0
+      );
+
+      if (hasDefectiveDeclaration && !isDefectiveValid) {
         errors.push({
           rule: 'V20',
           phraseId: vId,
           entityId: vId,
-          message: `Published verb "${vId}" missing required conjunctiv paradigm.`,
+          message: `Published verb "${vId}" declared defective but missing non-empty reason or source.`,
         });
-      } else {
-        const persons = ['eu', 'tu', 'el', 'noi', 'voi', 'ei'] as const;
-        const missingPersons = persons.filter(k => !conj[k] || !conj[k].trim());
-        if (missingPersons.length > 0) {
+      }
+
+      // Conjunctiv: all 6 persons complete and non-empty, unless explicitly declared defective
+      if (!isDefectiveValid) {
+        const conj = verb.conjugation?.conjunctiv || verb.conjunctiv;
+        if (!conj) {
           errors.push({
             rule: 'V20',
             phraseId: vId,
             entityId: vId,
-            message: `Published verb "${vId}" conjunctiv paradigm missing person(s): ${missingPersons.join(', ')}.`,
+            message: `Published verb "${vId}" missing required conjunctiv paradigm.`,
           });
+        } else {
+          const persons = ['eu', 'tu', 'el', 'noi', 'voi', 'ei'] as const;
+          const missingPersons = persons.filter(k => !conj[k] || !conj[k].trim());
+          if (missingPersons.length > 0) {
+            errors.push({
+              rule: 'V20',
+              phraseId: vId,
+              entityId: vId,
+              message: `Published verb "${vId}" conjunctiv paradigm missing person(s): ${missingPersons.join(', ')}.`,
+            });
+          }
         }
       }
     }
@@ -463,7 +492,13 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
       const trimmed = form.trim();
       if (!trimmed) return;
 
-      if (/\bsă\b/i.test(form)) {
+      const isSaWord = /(?:^|[^\p{L}])să(?=[^\p{L}]|$)/iu.test(form);
+      const isSaPrefix =
+        !verb.infinitive?.startsWith('a să') &&
+        !verb.infinitive?.startsWith('a sa') &&
+        /^să\p{L}+/iu.test(form);
+
+      if (isSaWord || isSaPrefix) {
         errors.push({
           rule: 'V21',
           phraseId: vId,
