@@ -59,16 +59,18 @@ export type RomanianVerb = {
   domains: string[];
   conjugation: {
     prezent: PersonSet;              // اجباری — V10
-    conjunctiv?: PersonSet;
+    conjunctiv?: PersonSet;          // صیغه‌ها بدون să ذخیره می‌شوند (V20, V21)
     perfect?: PersonSet;
     viitor?: PersonSet;
   };
-  participiu?: string;
+  conjunctiv?: PersonSet;            // دسترسی مستقیم اختیاری به صیغه‌های conjunctiv بدون să
+  participiu?: string;               // اجباری در حالت published — V20
   /** کدام صورت‌ها مستقیم از منبع آمده‌اند و کدام با قاعده مشتق شده‌اند */
   derivedTenses?: Array<'perfect' | 'viitor'>;
   source: VerbSource;
   reviewer?: string | null;
   status: 'draft' | 'review' | 'published' | 'archived';
+  usageNote?: { fa: string; en: string };
 };
 
 export type RomanianGrapheme = {
