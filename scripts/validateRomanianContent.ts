@@ -77,7 +77,7 @@ function main() {
   console.log('✅ SUCCESS: All Romanian content strictly adheres to rules V1 to V19.');
   console.log(`  - Total phrases: ${allPhrases.length} (${publishedPhrases.length} published, ${allPhrases.length - publishedPhrases.length} in review)`);
   console.log(`  - Total words: ${allWords.length} (${allWords.filter(w => w.status === 'published').length} published, ${allWords.filter(w => w.status === 'draft').length} draft)`);
-  console.log(`  - Total verbs: ${SEED_VERBS.length}`);
+  console.log(`  - Total verbs: ${allVerbs.length} (${allVerbs.filter(v => v.status === 'published').length} published, ${allVerbs.filter(v => v.status === 'draft').length} draft)`);
   console.log(`  - Total graphemes: ${allGraphemes.length} (${allGraphemes.filter(g => g.status === 'published').length} published, ${allGraphemes.filter(g => g.status === 'draft').length} draft)`);
   console.log(`  - Total domains: ${SEED_DOMAINS.length}`);
   console.log('  - All IDs & slugs unique and properly formatted (V1-V3, V17).');
