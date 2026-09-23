@@ -155,6 +155,13 @@ export function getWordById(id: string): RomanianWord | undefined {
 }
 
 /**
+ * Lookup published grapheme by slug.
+ */
+export function getGraphemeBySlug(slug: string): RomanianGrapheme | undefined {
+  return PUBLISHED_GRAPHEMES.find(g => g.slug === slug);
+}
+
+/**
  * Lookup published verb by id.
  */
 export function getVerbById(id: string): RomanianVerb | undefined {

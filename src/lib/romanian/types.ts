@@ -83,6 +83,7 @@ export type AudioClip = {
 
 export type RomanianGrapheme = {
   id: string;
+  slug: string;            // اسلاگ پایدار و خوانا برای مسیرهای URL (مانند 'a-breve')
   grapheme: string;        // 'ș' یا 'ce'
   soundHintFa: string;     // توضیح صدا — نه آوانگاری جمله
   exampleWordId: string;   // به واژه وصل می‌شود (V18)

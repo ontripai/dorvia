@@ -11,7 +11,7 @@ import {
 export type ValidationRuleId =
   | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8'
   | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16'
-  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24';
+  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24' | 'V25';
 
 export interface ValidationError {
   rule: ValidationRuleId;
@@ -703,6 +703,48 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
     }
   }
 
+  const seenGraphemeIds = new Set<string>();
+  const seenGraphemeSlugs = new Set<string>();
+
+  // --- Validate Graphemes Identity & Slug (V1, V2, V3) ---
+  for (const grapheme of graphemes) {
+    const gId = grapheme.id || '(missing-grapheme-id)';
+
+    // V1: Unique grapheme id
+    if (seenGraphemeIds.has(grapheme.id)) {
+      errors.push({
+        rule: 'V1',
+        phraseId: gId,
+        entityId: gId,
+        message: `Duplicate grapheme id: "${grapheme.id}"`,
+      });
+    } else if (grapheme.id) {
+      seenGraphemeIds.add(grapheme.id);
+    }
+
+    // V2: Unique grapheme slug
+    if (seenGraphemeSlugs.has(grapheme.slug)) {
+      errors.push({
+        rule: 'V2',
+        phraseId: gId,
+        entityId: gId,
+        message: `Duplicate grapheme slug: "${grapheme.slug}"`,
+      });
+    } else if (grapheme.slug) {
+      seenGraphemeSlugs.add(grapheme.slug);
+    }
+
+    // V3: Slug format regex: ^[a-z0-9]+(-[a-z0-9]+)*$
+    if (!grapheme.slug || !SLUG_REGEX.test(grapheme.slug)) {
+      errors.push({
+        rule: 'V3',
+        phraseId: gId,
+        entityId: gId,
+        message: `Invalid grapheme slug format: "${grapheme.slug}". Must match ^[a-z0-9]+(-[a-z0-9]+)*$`,
+      });
+    }
+  }
+
   // --- Validate Grapheme-to-Word Referential Integrity (V18) ---
   for (const grapheme of graphemes) {
     const gId = grapheme.id || '(missing-grapheme-id)';
@@ -868,6 +910,22 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
   if (context.sources) {
     const v24Errors = validateRegistryCompleteness(context, context.sources);
     errors.push(...v24Errors);
+  }
+
+  // --- Validate Published Grapheme Example Word Published (V25) ---
+  for (const grapheme of graphemes) {
+    if (grapheme.status === 'published') {
+      const gId = grapheme.id || '(missing-grapheme-id)';
+      const refWord = grapheme.exampleWordId ? wordMap.get(grapheme.exampleWordId) : null;
+      if (refWord && refWord.status !== 'published') {
+        errors.push({
+          rule: 'V25',
+          phraseId: gId,
+          entityId: gId,
+          message: `Published grapheme "${gId}" references example word "${grapheme.exampleWordId}" with status "${refWord.status}". Example word must be published.`,
+        });
+      }
+    }
   }
 
   return errors;
