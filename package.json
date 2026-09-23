@@ -18,7 +18,7 @@
     "validate:exchange-queries": "npx tsx scripts/validateQueries.ts",
     "validate:schema-rebuild": "npx tsx scripts/validateSchemaRebuild.ts",
     "test:integrity": "npm run validate:first-days-negative && npm run validate:universities-negative",
-    "build": "npm run validate:translations && npm run validate:content && npm run validate:content-safety && npm run validate:universities && npm run validate:faq-parity && next build",
+    "build": "npm run validate:translations && npm run validate:content && npm run validate:content-safety && npm run validate:universities && npm run validate:faq-parity && npm run validate:romanian && npm run test:romanian-rules && next build",
     "sweep": "npx tsx scripts/comprehensive-page-sweep.ts",
     "start": "next start",
     "lint": "next lint"

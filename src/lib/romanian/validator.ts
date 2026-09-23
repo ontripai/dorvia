@@ -577,7 +577,14 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
   // --- Validate Display Form Contains Lesson Grapheme (V19) ---
   for (const grapheme of graphemes) {
     const gId = grapheme.id || '(missing-grapheme-id)';
-    if (grapheme.matchPattern) {
+    if (!grapheme.matchPattern) {
+      errors.push({
+        rule: 'V19',
+        phraseId: gId,
+        entityId: gId,
+        message: `Grapheme "${gId}" missing required matchPattern.`,
+      });
+    } else {
       const refWord = grapheme.exampleWordId ? wordMap.get(grapheme.exampleWordId) : null;
       const formToTest = grapheme.exampleForm || refWord?.lemma;
       if (!formToTest) {
