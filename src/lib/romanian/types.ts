@@ -77,7 +77,7 @@ export type RomanianGrapheme = {
   soundHintFa: string;     // توضیح صدا — نه آوانگاری جمله
   exampleWordId: string;   // به واژه وصل می‌شود (V18)
   exampleForm?: string;    // شکل نمایشی (پیش‌فرض lemma است، برای فرم‌های جمع مثل bani از پارسر می‌آید)
-  matchPattern?: string;   // الگوی regex برای اعتبارسنجی حضور گرافم در شکل نمایشی (V19)
+  matchPattern: string;    // الگوی regex برای اعتبارسنجی حضور گرافم در شکل نمایشی (V19)
   order: number;
   status: 'draft' | 'review' | 'published' | 'archived';
 };

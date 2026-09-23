@@ -111,16 +111,26 @@ runTest('RED TEST V19: Lesson 23 exampleForm set to "ban" instead of "bani" fail
   return { expectedRule: 'V19', errors, shouldPass: false };
 });
 
+// 4. Red Test V19 (Mandatory matchPattern): Grapheme without matchPattern fails V19
+runTest('RED TEST V19 (dre-p155): Grapheme missing required matchPattern fails V19', () => {
+  const ctx = getCleanBaseContext();
+  const targetGrapheme = ctx.graphemes!.find(g => g.id === 'g-01-a')!;
+  // Deliberately delete matchPattern
+  delete (targetGrapheme as any).matchPattern;
+  const errors = validateRomanianContent(ctx);
+  return { expectedRule: 'V19', errors, shouldPass: false };
+});
+
 // --- GREEN TESTS ---
 
-// 4. Green Test 1: Clean combined dataset (SEED + FOUNDATION) passes strictly with 0 errors
+// 5. Green Test 1: Clean combined dataset (SEED + FOUNDATION) passes strictly with 0 errors
 runTest('GREEN TEST 1: Full combined dataset with 24 foundation words and graphemes stays green', () => {
   const ctx = getCleanBaseContext();
   const errors = validateRomanianContent(ctx);
   return { errors, shouldPass: true };
 });
 
-// 5. Green Test 2: Lesson 23 with exampleForm "bani" correctly satisfies pattern /i$/
+// 6. Green Test 2: Lesson 23 with exampleForm "bani" correctly satisfies pattern /i$/
 runTest('GREEN TEST 2: Lesson 23 with exampleForm "bani" satisfies pattern /i$/ with 0 errors', () => {
   const ctx = getCleanBaseContext();
   const g23 = ctx.graphemes!.find(g => g.id === 'g-23-i-final')!;
@@ -134,11 +144,11 @@ runTest('GREEN TEST 2: Lesson 23 with exampleForm "bani" satisfies pattern /i$/ 
 
 console.log('\n============================================================');
 if (passedAll) {
-  console.log('🎉 ALL 3 RED TESTS AND 2 GREEN TESTS PASSED STRICTLY!');
+  console.log('🎉 ALL 4 RED TESTS AND 2 GREEN TESTS PASSED STRICTLY!');
   console.log('============================================================\n');
   process.exit(0);
 } else {
-  console.error('❌ SOME TESTS FAILED IN DRE-P154 TEST SUITE.');
+  console.error('❌ SOME TESTS FAILED IN DRE-P154/P155 TEST SUITE.');
   console.log('============================================================\n');
   process.exit(1);
 }
