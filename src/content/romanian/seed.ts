@@ -171,7 +171,7 @@ export const SEED_GRAPHEMES: RomanianGrapheme[] = [
     exampleWordId: 'w-pasaport',
     matchPattern: 'ș',
     order: 1,
-    status: 'published',
+    status: 'draft',
   },
   {
     id: 'g-t-comma',
@@ -180,7 +180,7 @@ export const SEED_GRAPHEMES: RomanianGrapheme[] = [
     exampleWordId: 'w-cont',
     matchPattern: 't',
     order: 2,
-    status: 'published',
+    status: 'draft',
   },
 ];
 
