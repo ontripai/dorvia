@@ -163,25 +163,6 @@ export const SEED_VERBS: RomanianVerb[] = [
   },
 ];
 
-export const SEED_GRAPHEMES: RomanianGrapheme[] = [
-  {
-    id: 'g-s-comma',
-    grapheme: 'ș',
-    soundHintFa: 'مثل «ش» فارسی',
-    exampleWordId: 'w-pasaport',
-    matchPattern: 'ș',
-    order: 1,
-    status: 'draft',
-  },
-  {
-    id: 'g-t-comma',
-    grapheme: 'ț',
-    soundHintFa: 'مثل «تس» پشت سر هم',
-    exampleWordId: 'w-cont',
-    matchPattern: 't',
-    order: 2,
-    status: 'draft',
-  },
-];
+export const SEED_GRAPHEMES: RomanianGrapheme[] = [];
 
 export const SEED_DIALOGUES: RomanianDialogue[] = [];

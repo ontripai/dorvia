@@ -1,12 +1,11 @@
-import { PILOT_PHRASES } from '@/content/romanian/pilot';
-import { STAGE0_PHRASES } from '@/content/romanian/stage0';
 import {
-  SEED_DOMAINS,
-  SEED_WORDS,
-  SEED_VERBS,
-  SEED_GRAPHEMES,
-  SEED_DIALOGUES,
-} from '@/content/romanian/seed';
+  ALL_WORDS,
+  ALL_VERBS,
+  ALL_GRAPHEMES,
+  ALL_PHRASES,
+  ALL_DIALOGUES,
+  ALL_DOMAINS,
+} from '@/content/romanian/registry';
 import { assertValidContent } from './validator';
 import {
   RomanianCategory,
@@ -19,19 +18,15 @@ import {
 } from './types';
 import { ROMANIAN_CATEGORIES } from './categories';
 
-export const ALL_ROMANIAN_PHRASES: RomanianPhrase[] = [
-  ...PILOT_PHRASES,
-  ...STAGE0_PHRASES,
-];
-
-export const ALL_ROMANIAN_WORDS: RomanianWord[] = [...SEED_WORDS];
-export const ALL_ROMANIAN_VERBS: RomanianVerb[] = [...SEED_VERBS];
-export const ALL_ROMANIAN_GRAPHEMES: RomanianGrapheme[] = [...SEED_GRAPHEMES];
-export const ALL_ROMANIAN_DIALOGUES: RomanianDialogue[] = [...SEED_DIALOGUES];
-export const ALL_ROMANIAN_DOMAINS: DomainMeta[] = [...SEED_DOMAINS];
+export const ALL_ROMANIAN_PHRASES: RomanianPhrase[] = [...ALL_PHRASES];
+export const ALL_ROMANIAN_WORDS: RomanianWord[] = [...ALL_WORDS];
+export const ALL_ROMANIAN_VERBS: RomanianVerb[] = [...ALL_VERBS];
+export const ALL_ROMANIAN_GRAPHEMES: RomanianGrapheme[] = [...ALL_GRAPHEMES];
+export const ALL_ROMANIAN_DIALOGUES: RomanianDialogue[] = [...ALL_DIALOGUES];
+export const ALL_ROMANIAN_DOMAINS: DomainMeta[] = [...ALL_DOMAINS];
 
 // Strictly validate all Romanian content at module evaluation / build time.
-// Any violation of V1-V14 throws an exception and halts build immediately.
+// Any violation of V1-V23 throws an exception and halts build immediately.
 assertValidContent({
   phrases: ALL_ROMANIAN_PHRASES,
   words: ALL_ROMANIAN_WORDS,
