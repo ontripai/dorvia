@@ -1166,5 +1166,29 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     inSitemap: false,
     pageType: 'content'
   },
+  'learn-romanian/alfabet': {
+    canonical: '/learn-romanian/alfabet',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'الفبا و تلفظ زبان رومانیایی',
+    titleEn: 'Romanian Alphabet & Pronunciation',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
+  'learn-romanian/alfabet/[slug]': {
+    canonical: '/learn-romanian/alfabet/[slug]',
+    aliases: [],
+    parentHub: '/learn-romanian/alfabet',
+    titleFa: 'درس تلفظ الفبای رومانیایی',
+    titleEn: 'Romanian Alphabet Lesson',
+    parentTitleFa: 'الفبا و تلفظ زبان رومانیایی',
+    parentTitleEn: 'Romanian Alphabet & Pronunciation',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
 };
 

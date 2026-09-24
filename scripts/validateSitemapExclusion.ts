@@ -10,8 +10,8 @@ async function validateSitemapExclusion(): Promise<void> {
   const romanianKeys = Object.keys(ROUTE_REGISTRY).filter(k => k === 'learn-romanian' || k.startsWith('learn-romanian/'));
   console.log(`Auditing ${romanianKeys.length} registered Romanian learning routes in ROUTE_REGISTRY:`);
 
-  if (romanianKeys.length !== 14) {
-    console.error(`❌ FAILED: Expected exactly 14 routes in ROUTE_REGISTRY, found ${romanianKeys.length}`);
+  if (romanianKeys.length !== 16) {
+    console.error(`❌ FAILED: Expected exactly 16 routes in ROUTE_REGISTRY, found ${romanianKeys.length}`);
     process.exit(1);
   }
 
@@ -39,7 +39,7 @@ async function validateSitemapExclusion(): Promise<void> {
 
   console.log('\n✅ ASSERTION PASSED:');
   console.log('  - Zero (0) Romanian learning URLs exist in sitemap() return data.');
-  console.log('  - All 14 routes strictly flagged as indexable: false and inSitemap: false.');
+  console.log('  - All 16 routes strictly flagged as indexable: false and inSitemap: false.');
   console.log('  - Exclusion strictly enforced by code logic before Google crawler ingestion.');
   process.exit(0);
 }

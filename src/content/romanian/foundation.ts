@@ -1,451 +1,572 @@
 import { RomanianWord, RomanianGrapheme } from '@/lib/romanian/types';
 
 /**
- * لایه‌ی فونداسیون حروف و صداهای رومانیایی (dre-p154)
+ * لایه‌ی فونداسیون حروف و صداهای رومانیایی (dre-p154, dre-p158, dre-p160)
  * طراحی و تألیف: Claude (۲۲ سپتامبر ۲۰۲۶)
  * مبنا: dorvia-romanian-foundation-letters-v1-2026-09-22.md
  *
  * تصمیم معماری (بند ۴): لایه‌ی فونداسیون grouped است، نه sequential.
  * واژه‌ی نمونه برای شنیدن صداست، نه رمزگشایی خطی حرف‌به‌حرف.
- * تمامی ورودی‌ها تا زمان اتصال صوت واقعی در وضعیت پیش‌نویس (status: 'draft') هستند.
+ * تمامی ورودی‌ها در dre-p160 به همراه صوت‌های تأییدشده منتشر شدند (status: 'published').
  */
 
 export const FOUNDATION_WORDS: RomanianWord[] = [
   {
-    id: 'w-apa',
-    lemma: 'apă',
-    pos: 'noun',
-    gender: 'f',
-    definiteForm: 'apa',
-    plural: 'ape',
-    translations: { en: 'water', fa: 'آب' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOR)',
-      url: 'https://dexonline.ro/definitie/ap%C4%83/paradigma',
+    "id": "w-apa",
+    "lemma": "apă",
+    "pos": "noun",
+    "gender": "f",
+    "definiteForm": "apa",
+    "plural": "ape",
+    "translations": {
+      "en": "water",
+      "fa": "آب"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOR)",
+      "url": "https://dexonline.ro/definitie/ap%C4%83/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-elev',
-    lemma: 'elev',
-    pos: 'noun',
-    gender: 'm',
-    definiteForm: 'elevul',
-    plural: 'elevi',
-    translations: { en: 'student / pupil', fa: 'دانش‌آموز' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOOM 3)',
-      url: 'https://dexonline.ro/definitie/elev/paradigma',
+    "id": "w-elev",
+    "lemma": "elev",
+    "pos": "noun",
+    "gender": "m",
+    "definiteForm": "elevul",
+    "plural": "elevi",
+    "translations": {
+      "en": "student / pupil",
+      "fa": "دانش‌آموز"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOOM 3)",
+      "url": "https://dexonline.ro/definitie/elev/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-bilet',
-    lemma: 'bilet',
-    pos: 'noun',
-    gender: 'n',
-    definiteForm: 'biletul',
-    plural: 'bilete',
-    translations: { en: 'ticket', fa: 'بلیت' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOOM 3)',
-      url: 'https://dexonline.ro/definitie/bilet/paradigma',
+    "id": "w-bilet",
+    "lemma": "bilet",
+    "pos": "noun",
+    "gender": "n",
+    "definiteForm": "biletul",
+    "plural": "bilete",
+    "translations": {
+      "en": "ticket",
+      "fa": "بلیت"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOOM 3)",
+      "url": "https://dexonline.ro/definitie/bilet/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-oras',
-    lemma: 'oraș',
-    pos: 'noun',
-    gender: 'n',
-    definiteForm: 'orașul',
-    plural: 'orașe',
-    translations: { en: 'city', fa: 'شهر' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOOM 3)',
-      url: 'https://dexonline.ro/definitie/ora%C8%99/paradigma',
+    "id": "w-oras",
+    "lemma": "oraș",
+    "pos": "noun",
+    "gender": "n",
+    "definiteForm": "orașul",
+    "plural": "orașe",
+    "translations": {
+      "en": "city",
+      "fa": "شهر"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOOM 3)",
+      "url": "https://dexonline.ro/definitie/ora%C8%99/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-unde',
-    lemma: 'unde',
-    pos: 'adv',
-    translations: { en: 'where', fa: 'کجا' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: "dexonline (DEX '09)",
-      url: 'https://dexonline.ro/definitie/unde',
+    "id": "w-unde",
+    "lemma": "unde",
+    "pos": "adv",
+    "translations": {
+      "en": "where",
+      "fa": "کجا"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DEX '09)",
+      "url": "https://dexonline.ro/definitie/unde"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-masa',
-    lemma: 'masă',
-    pos: 'noun',
-    gender: 'f',
-    definiteForm: 'masa',
-    plural: 'mese',
-    translations: { en: 'table', fa: 'میز' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOOM 3)',
-      url: 'https://dexonline.ro/definitie/mas%C4%83/paradigma',
+    "id": "w-masa",
+    "lemma": "masă",
+    "pos": "noun",
+    "gender": "f",
+    "definiteForm": "masa",
+    "plural": "mese",
+    "translations": {
+      "en": "table",
+      "fa": "میز"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOOM 3)",
+      "url": "https://dexonline.ro/definitie/mas%C4%83/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-romana',
-    lemma: 'română',
-    pos: 'noun',
-    gender: 'f',
-    definiteForm: 'româna',
-    plural: 'române',
-    translations: { en: 'Romanian language', fa: 'زبان رومانیایی' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOR)',
-      url: 'https://dexonline.ro/definitie/rom%C3%A2n%C4%83/paradigma',
+    "id": "w-romana",
+    "lemma": "română",
+    "pos": "noun",
+    "gender": "f",
+    "definiteForm": "româna",
+    "plural": "române",
+    "translations": {
+      "en": "Romanian language",
+      "fa": "زبان رومانیایی"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOR)",
+      "url": "https://dexonline.ro/definitie/rom%C3%A2n%C4%83/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-inainte',
-    lemma: 'înainte',
-    pos: 'adv',
-    translations: { en: 'forward / before', fa: 'جلو / پیش / قبل' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: "dexonline (DEX '09)",
-      url: 'https://dexonline.ro/definitie/%C3%AEnainte',
+    "id": "w-inainte",
+    "lemma": "înainte",
+    "pos": "adv",
+    "translations": {
+      "en": "forward / before",
+      "fa": "جلو / پیش / قبل"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DEX '09)",
+      "url": "https://dexonline.ro/definitie/%C3%AEnainte"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-usa',
-    lemma: 'ușă',
-    pos: 'noun',
-    gender: 'f',
-    definiteForm: 'ușa',
-    plural: 'uși',
-    translations: { en: 'door', fa: 'در / درب' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOR)',
-      url: 'https://dexonline.ro/definitie/u%C8%99%C4%83/paradigma',
+    "id": "w-usa",
+    "lemma": "ușă",
+    "pos": "noun",
+    "gender": "f",
+    "definiteForm": "ușa",
+    "plural": "uși",
+    "translations": {
+      "en": "door",
+      "fa": "در / درب"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOR)",
+      "url": "https://dexonline.ro/definitie/u%C8%99%C4%83/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-multumesc',
-    lemma: 'mulțumesc',
-    pos: 'expression',
-    translations: { en: 'thank you', fa: 'متشکرم / ممنون' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: "dexonline (DEX '09)",
-      url: 'https://dexonline.ro/definitie/mul%C8%9Bumesc',
+    "id": "w-multumesc",
+    "lemma": "mulțumesc",
+    "pos": "expression",
+    "translations": {
+      "en": "thank you",
+      "fa": "متشکرم / ممنون"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DEX '09)",
+      "url": "https://dexonline.ro/definitie/mul%C8%9Bumesc"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-card',
-    lemma: 'card',
-    pos: 'noun',
-    gender: 'n',
-    definiteForm: 'cardul',
-    plural: 'carduri',
-    translations: { en: 'card (bank/ID)', fa: 'کارت' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOOM 3)',
-      url: 'https://dexonline.ro/definitie/card/paradigma',
+    "id": "w-card",
+    "lemma": "card",
+    "pos": "noun",
+    "gender": "n",
+    "definiteForm": "cardul",
+    "plural": "carduri",
+    "translations": {
+      "en": "card (bank/ID)",
+      "fa": "کارت"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOOM 3)",
+      "url": "https://dexonline.ro/definitie/card/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-ceai',
-    lemma: 'ceai',
-    pos: 'noun',
-    gender: 'n',
-    definiteForm: 'ceaiul',
-    plural: 'ceaiuri',
-    translations: { en: 'tea', fa: 'چای' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOOM 3)',
-      url: 'https://dexonline.ro/definitie/ceai/paradigma',
+    "id": "w-ceai",
+    "lemma": "ceai",
+    "pos": "noun",
+    "gender": "n",
+    "definiteForm": "ceaiul",
+    "plural": "ceaiuri",
+    "translations": {
+      "en": "tea",
+      "fa": "چای"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOOM 3)",
+      "url": "https://dexonline.ro/definitie/ceai/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-cheie',
-    lemma: 'cheie',
-    pos: 'noun',
-    gender: 'f',
-    definiteForm: 'cheia',
-    plural: 'chei',
-    translations: { en: 'key', fa: 'کلید' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOR)',
-      url: 'https://dexonline.ro/definitie/cheie/paradigma',
+    "id": "w-cheie",
+    "lemma": "cheie",
+    "pos": "noun",
+    "gender": "f",
+    "definiteForm": "cheia",
+    "plural": "chei",
+    "translations": {
+      "en": "key",
+      "fa": "کلید"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOR)",
+      "url": "https://dexonline.ro/definitie/cheie/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-gara',
-    lemma: 'gară',
-    pos: 'noun',
-    gender: 'f',
-    definiteForm: 'gara',
-    plural: 'gări',
-    translations: { en: 'train station', fa: 'ایستگاه قطار' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOR)',
-      url: 'https://dexonline.ro/definitie/gar%C4%83/paradigma',
+    "id": "w-gara",
+    "lemma": "gară",
+    "pos": "noun",
+    "gender": "f",
+    "definiteForm": "gara",
+    "plural": "gări",
+    "translations": {
+      "en": "train station",
+      "fa": "ایستگاه قطار"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOR)",
+      "url": "https://dexonline.ro/definitie/gar%C4%83/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-geam',
-    lemma: 'geam',
-    pos: 'noun',
-    gender: 'n',
-    definiteForm: 'geamul',
-    plural: 'geamuri',
-    translations: { en: 'window pane / glass', fa: 'شیشه / پنجره' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOOM 3)',
-      url: 'https://dexonline.ro/definitie/geam/paradigma',
+    "id": "w-geam",
+    "lemma": "geam",
+    "pos": "noun",
+    "gender": "n",
+    "definiteForm": "geamul",
+    "plural": "geamuri",
+    "translations": {
+      "en": "window pane / glass",
+      "fa": "شیشه / پنجره"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOOM 3)",
+      "url": "https://dexonline.ro/definitie/geam/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-ghiseu',
-    lemma: 'ghișeu',
-    pos: 'noun',
-    gender: 'n',
-    definiteForm: 'ghișeul',
-    plural: 'ghișee',
-    translations: { en: 'counter / ticket window', fa: 'باجه' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOOM 3)',
-      url: 'https://dexonline.ro/definitie/ghi%C8%99eu/paradigma',
+    "id": "w-ghiseu",
+    "lemma": "ghișeu",
+    "pos": "noun",
+    "gender": "n",
+    "definiteForm": "ghișeul",
+    "plural": "ghișee",
+    "translations": {
+      "en": "counter / ticket window",
+      "fa": "باجه"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOOM 3)",
+      "url": "https://dexonline.ro/definitie/ghi%C8%99eu/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-ajutor',
-    lemma: 'ajutor',
-    pos: 'noun',
-    gender: 'n',
-    definiteForm: 'ajutorul',
-    plural: 'ajutoare',
-    translations: { en: 'help / assistance', fa: 'کمک' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOOM 3)',
-      url: 'https://dexonline.ro/definitie/ajutor/paradigma',
+    "id": "w-ajutor",
+    "lemma": "ajutor",
+    "pos": "noun",
+    "gender": "n",
+    "definiteForm": "ajutorul",
+    "plural": "ajutoare",
+    "translations": {
+      "en": "help / assistance",
+      "fa": "کمک"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
-    usageNote: {
-      fa: 'در معنای «کمک» خنثی است با جمع «ajutoare». در معنای «دستیار/کمک‌کار» اسم مذکر است با جمع «ajutori» (استخراج‌شده از dexonline DOOM 3).',
-      en: 'Neuter noun meaning "help" with plural "ajutoare". As masculine noun meaning "assistant/helper", its plural is "ajutori" (sourced from dexonline DOOM 3).',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOOM 3)",
+      "url": "https://dexonline.ro/definitie/ajutor/paradigma"
     },
+    "reviewer": "ai-only",
+    "status": "published",
+    "usageNote": {
+      "fa": "در معنای «کمک» خنثی است با جمع «ajutoare». در معنای «دستیار/کمک‌کار» اسم مذکر است با جمع «ajutori» (استخراج‌شده از dexonline DOOM 3).",
+      "en": "Neuter noun meaning \"help\" with plural \"ajutoare\". As masculine noun meaning \"assistant/helper\", its plural is \"ajutori\" (sourced from dexonline DOOM 3)."
+    }
   },
   {
-    id: 'w-rece',
-    lemma: 'rece',
-    pos: 'adj',
-    translations: { en: 'cold', fa: 'سرد' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: "dexonline (DEX '09)",
-      url: 'https://dexonline.ro/definitie/rece',
+    "id": "w-rece",
+    "lemma": "rece",
+    "pos": "adj",
+    "translations": {
+      "en": "cold",
+      "fa": "سرد"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DEX '09)",
+      "url": "https://dexonline.ro/definitie/rece"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-vama',
-    lemma: 'vamă',
-    pos: 'noun',
-    gender: 'f',
-    definiteForm: 'vama',
-    plural: 'vămi',
-    translations: { en: 'customs', fa: 'گمرک' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOR)',
-      url: 'https://dexonline.ro/definitie/vam%C4%83/paradigma',
+    "id": "w-vama",
+    "lemma": "vamă",
+    "pos": "noun",
+    "gender": "f",
+    "definiteForm": "vama",
+    "plural": "vămi",
+    "translations": {
+      "en": "customs",
+      "fa": "گمرک"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOR)",
+      "url": "https://dexonline.ro/definitie/vam%C4%83/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-harta',
-    lemma: 'hartă',
-    pos: 'noun',
-    gender: 'f',
-    definiteForm: 'harta',
-    plural: 'hărți',
-    translations: { en: 'map', fa: 'نقشه' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOR)',
-      url: 'https://dexonline.ro/definitie/hart%C4%83/paradigma',
+    "id": "w-harta",
+    "lemma": "hartă",
+    "pos": "noun",
+    "gender": "f",
+    "definiteForm": "harta",
+    "plural": "hărți",
+    "translations": {
+      "en": "map",
+      "fa": "نقشه"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOR)",
+      "url": "https://dexonline.ro/definitie/hart%C4%83/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-casa',
-    lemma: 'casă',
-    pos: 'noun',
-    gender: 'f',
-    definiteForm: 'casa',
-    plural: 'case',
-    translations: { en: 'house / home', fa: 'خانه' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOR)',
-      url: 'https://dexonline.ro/definitie/cas%C4%83/paradigma',
+    "id": "w-casa",
+    "lemma": "casă",
+    "pos": "noun",
+    "gender": "f",
+    "definiteForm": "casa",
+    "plural": "case",
+    "translations": {
+      "en": "house / home",
+      "fa": "خانه"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOR)",
+      "url": "https://dexonline.ro/definitie/cas%C4%83/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-taxi',
-    lemma: 'taxi',
-    pos: 'noun',
-    gender: 'n',
-    definiteForm: 'taxiul',
-    plural: 'taxiuri',
-    translations: { en: 'taxi', fa: 'تاکسی' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOOM 3)',
-      url: 'https://dexonline.ro/definitie/taxi/paradigma',
+    "id": "w-taxi",
+    "lemma": "taxi",
+    "pos": "noun",
+    "gender": "n",
+    "definiteForm": "taxiul",
+    "plural": "taxiuri",
+    "translations": {
+      "en": "taxi",
+      "fa": "تاکسی"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOOM 3)",
+      "url": "https://dexonline.ro/definitie/taxi/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-ban',
-    lemma: 'ban',
-    pos: 'noun',
-    gender: 'm',
-    definiteForm: 'banul',
-    plural: 'bani',
-    translations: { en: 'money / coin', fa: 'پول / سکه' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOOM 3)',
-      url: 'https://dexonline.ro/definitie/ban/paradigma',
+    "id": "w-ban",
+    "lemma": "ban",
+    "pos": "noun",
+    "gender": "m",
+    "definiteForm": "banul",
+    "plural": "bani",
+    "translations": {
+      "en": "money / coin",
+      "fa": "پول / سکه"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOOM 3)",
+      "url": "https://dexonline.ro/definitie/ban/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
   },
   {
-    id: 'w-telefon',
-    lemma: 'telefon',
-    pos: 'noun',
-    gender: 'n',
-    definiteForm: 'telefonul',
-    plural: 'telefoane',
-    translations: { en: 'telephone / phone', fa: 'تلفن' },
-    domains: ['core'],
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline (DOOM 3)',
-      url: 'https://dexonline.ro/definitie/telefon/paradigma',
+    "id": "w-telefon",
+    "lemma": "telefon",
+    "pos": "noun",
+    "gender": "n",
+    "definiteForm": "telefonul",
+    "plural": "telefoane",
+    "translations": {
+      "en": "telephone / phone",
+      "fa": "تلفن"
     },
-    reviewer: 'ai-only',
-    status: 'draft',
-  },
+    "domains": [
+      "core"
+    ],
+    "intendedUse": "produce",
+    "source": {
+      "kind": "common-usage",
+      "label": "dexonline (DOOM 3)",
+      "url": "https://dexonline.ro/definitie/telefon/paradigma"
+    },
+    "reviewer": "ai-only",
+    "status": "published"
+  }
 ];
 
 export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   {
     "id": "g-01-a",
+    "slug": "a",
     "grapheme": "a",
     "soundHintFa": "مثل «آ» کوتاه در «باد».",
     "exampleWordId": "w-apa",
     "matchPattern": "a",
     "order": 1,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -461,12 +582,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-02-e",
+    "slug": "e",
     "grapheme": "e",
     "soundHintFa": "مثل «اِ» در «بِبَر».",
     "exampleWordId": "w-elev",
     "matchPattern": "e",
     "order": 2,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -482,12 +604,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-03-i",
+    "slug": "i",
     "grapheme": "i",
     "soundHintFa": "مثل «ای» در «بید» — ولی بند ۲۳ را هم بخوانید.",
     "exampleWordId": "w-bilet",
     "matchPattern": "i",
     "order": 3,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -503,12 +626,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-04-o",
+    "slug": "o",
     "grapheme": "o",
     "soundHintFa": "مثل «اُ» در «پُل».",
     "exampleWordId": "w-oras",
     "matchPattern": "o",
     "order": 4,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -524,12 +648,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-05-u",
+    "slug": "u",
     "grapheme": "u",
     "soundHintFa": "مثل «او» در «بود».",
     "exampleWordId": "w-unde",
     "matchPattern": "u",
     "order": 5,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -545,12 +670,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-06-a-breve",
+    "slug": "a-breve",
     "grapheme": "ă",
     "soundHintFa": "صدای کوتاه و بی‌تأکید، چیزی میان «اَ» و «اِ». در فارسی وجود ندارد — صوت را بشنوید.",
     "exampleWordId": "w-masa",
     "matchPattern": "ă",
     "order": 6,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -566,12 +692,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-07-a-circ-i-circ",
+    "slug": "a-circ",
     "grapheme": "â / î",
     "soundHintFa": "یک صدا با دو املا. در فارسی نیست: زبان بالا و عقب، لب‌ها کشیده نیست. اگر «ای» بگویید و زبان را کمی عقب ببرید نزدیک می‌شوید.",
     "exampleWordId": "w-romana",
     "matchPattern": "[âî]",
     "order": 7,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -587,12 +714,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-08-circ-rule",
+    "slug": "circ-rule",
     "grapheme": "قاعده‌ی î و â",
     "soundHintFa": "î در ابتدا و انتهای واژه، â در میانه. همین و بس.",
     "exampleWordId": "w-inainte",
     "matchPattern": "^î|î$|â",
     "order": 8,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -608,12 +736,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-09-s-comma",
+    "slug": "s-comma",
     "grapheme": "ș",
     "soundHintFa": "دقیقاً «ش» فارسی.",
     "exampleWordId": "w-usa",
     "matchPattern": "ș",
     "order": 9,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -629,12 +758,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-10-t-comma",
+    "slug": "t-comma",
     "grapheme": "ț",
     "soundHintFa": "«ت» و «س» چسبیده به هم، یک صدا نه دو تا.",
     "exampleWordId": "w-multumesc",
     "matchPattern": "ț",
     "order": 10,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -650,12 +780,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-11-c-hard",
+    "slug": "c-hard",
     "grapheme": "c + a o u",
     "soundHintFa": "«ک».",
     "exampleWordId": "w-card",
     "matchPattern": "c[aou]",
     "order": 11,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -671,12 +802,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-12-ce-ci",
+    "slug": "ce-ci",
     "grapheme": "ce / ci",
     "soundHintFa": "«چ». c پیش از e و i همیشه «چ» می‌شود.",
     "exampleWordId": "w-ceai",
     "matchPattern": "c[ei]",
     "order": 12,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -692,12 +824,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-13-che-chi",
+    "slug": "che-chi",
     "grapheme": "che / chi",
     "soundHintFa": "«ک». h تلفظ نمی‌شود؛ کارش این است که c را «ک» نگه دارد.",
     "exampleWordId": "w-cheie",
     "matchPattern": "ch[ei]",
     "order": 13,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -713,12 +846,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-14-g-hard",
+    "slug": "g-hard",
     "grapheme": "g + a o u",
     "soundHintFa": "«گ».",
     "exampleWordId": "w-gara",
     "matchPattern": "g[aou]",
     "order": 14,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -734,12 +868,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-15-ge-gi",
+    "slug": "ge-gi",
     "grapheme": "ge / gi",
     "soundHintFa": "«ج».",
     "exampleWordId": "w-geam",
     "matchPattern": "g[ei]",
     "order": 15,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -755,12 +890,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-16-ghe-ghi",
+    "slug": "ghe-ghi",
     "grapheme": "ghe / ghi",
     "soundHintFa": "«گ». h باز هم تلفظ نمی‌شود و نقش نگهبان دارد.",
     "exampleWordId": "w-ghiseu",
     "matchPattern": "gh[ei]",
     "order": 16,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -776,12 +912,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-17-j",
+    "slug": "j",
     "grapheme": "j",
     "soundHintFa": "«ژ» — نه «ج». این پرتکرارترین اشتباه انگلیسی‌زبان‌هاست.",
     "exampleWordId": "w-ajutor",
     "matchPattern": "j",
     "order": 17,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -797,12 +934,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-18-r",
+    "slug": "r",
     "grapheme": "r",
     "soundHintFa": "غلتان و کوتاه، مثل «ر» فارسی ولی محکم‌تر.",
     "exampleWordId": "w-rece",
     "matchPattern": "r",
     "order": 18,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -818,12 +956,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-19-v",
+    "slug": "v",
     "grapheme": "v",
     "soundHintFa": "مثل «و» در «وان» — نه مثل «و» در «او».",
     "exampleWordId": "w-vama",
     "matchPattern": "v",
     "order": 19,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -839,12 +978,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-20-h",
+    "slug": "h",
     "grapheme": "h",
     "soundHintFa": "همیشه تلفظ می‌شود، مثل «ه» فارسی. برخلاف فرانسوی و ایتالیایی.",
     "exampleWordId": "w-harta",
     "matchPattern": "h",
     "order": 20,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -860,12 +1000,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-21-s",
+    "slug": "s",
     "grapheme": "s",
     "soundHintFa": "همیشه «س»، هرگز «ز» — حتی وقتی میان دو مصوت باشد.",
     "exampleWordId": "w-casa",
     "matchPattern": "s",
     "order": 21,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -881,12 +1022,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-22-x",
+    "slug": "x",
     "grapheme": "x",
     "soundHintFa": "«کس».",
     "exampleWordId": "w-taxi",
     "matchPattern": "x",
     "order": 22,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -902,13 +1044,14 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-23-i-final",
+    "slug": "i-final",
     "grapheme": "i پایانی",
     "soundHintFa": "در پایان واژه معمولاً مصوت کامل نیست؛ فقط حرف قبلی را نازک می‌کند. bani «بانی» نیست، «بان» با یک ردّ «ی» است.",
     "exampleWordId": "w-ban",
     "exampleForm": "bani",
     "matchPattern": "i$",
     "order": 23,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
@@ -924,12 +1067,13 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
   },
   {
     "id": "g-24-consonants-basic",
+    "slug": "consoane",
     "grapheme": "b d f l m n p t z",
     "soundHintFa": "همان‌طور که انتظار دارید. یک درس مشترک.",
     "exampleWordId": "w-telefon",
     "matchPattern": "[bdflmnptz]",
     "order": 24,
-    "status": "draft",
+    "status": "published",
     "audio": [
       {
         "voice": "Aoede",
