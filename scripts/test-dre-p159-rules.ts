@@ -25,6 +25,7 @@ import {
   FOUNDATION_GRAPHEMES,
 } from '../src/content/romanian/foundation';
 import { CORE_VERBS } from '../src/content/romanian/core-verbs';
+import { CORE_PRONOUNS } from '../src/content/romanian/core-pronouns';
 import { PILOT_PHRASES } from '../src/content/romanian/pilot';
 import { STAGE0_PHRASES } from '../src/content/romanian/stage0';
 import {
@@ -38,7 +39,7 @@ import {
 
 const sourceContext: RegistrySourceContext = {
   phrases: [...PILOT_PHRASES, ...STAGE0_PHRASES],
-  words: [...SEED_WORDS, ...FOUNDATION_WORDS],
+  words: [...SEED_WORDS, ...FOUNDATION_WORDS, ...CORE_PRONOUNS],
   verbs: [...SEED_VERBS, ...CORE_VERBS],
   graphemes: [...SEED_GRAPHEMES, ...FOUNDATION_GRAPHEMES],
   dialogues: [...SEED_DIALOGUES],
