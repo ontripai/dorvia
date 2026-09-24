@@ -38,7 +38,7 @@ export type PhraseSource = {
 export type RomanianWord = {
   id: string;
   lemma: string;
-  pos: 'noun' | 'verb' | 'adj' | 'adv' | 'expression' | 'pronoun' | 'numeral';
+  pos: 'noun' | 'verb' | 'adj' | 'adv' | 'expression' | 'pronoun' | 'numeral' | 'prep';
   gender?: 'm' | 'f' | 'n';   // برای اسم اجباری — V11
   definiteForm?: string;      // برای اسم اجباری — V11
   plural?: string;
