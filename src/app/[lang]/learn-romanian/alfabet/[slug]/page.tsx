@@ -79,6 +79,9 @@ export default function RomanianGraphemeDetailPage({
   const exampleWord = getWordById(grapheme.exampleWordId);
   const displayWord = grapheme.exampleForm || exampleWord?.lemma || '';
 
+  const toFaDigits = (n: number | string) =>
+    String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
+
   const PrevNextArrow = isFa ? ArrowRight : ArrowLeft;
   const ForwardArrow = isFa ? ArrowLeft : ArrowRight;
 
@@ -108,7 +111,7 @@ export default function RomanianGraphemeDetailPage({
             <span>{isFa ? 'تمام حروف الفبا' : 'All Alphabet Lessons'}</span>
           </Link>
           <span className="font-mono bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-full font-semibold">
-            {isFa ? `درس ${grapheme.order} از ۲۴` : `Lesson ${grapheme.order} of 24`}
+            {isFa ? `درس ${toFaDigits(grapheme.order)} از ۲۴` : `Lesson ${grapheme.order} of 24`}
           </span>
         </div>
 
@@ -146,9 +149,6 @@ export default function RomanianGraphemeDetailPage({
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
                 {isFa ? 'واژه نمونه در رومانیایی' : 'Romanian Example Word'}
-              </span>
-              <span className="text-xs text-slate-400 font-mono">
-                ID: {exampleWord.id}
               </span>
             </div>
 

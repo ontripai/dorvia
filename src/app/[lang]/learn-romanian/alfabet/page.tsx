@@ -47,6 +47,9 @@ export default function RomanianAlphabetIndexPage({
   const graphemes = getPublishedGraphemes();
   const ArrowIcon = isFa ? ArrowRight : ArrowLeft;
 
+  const toFaDigits = (n: number | string) =>
+    String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
+
   return (
     <div className="space-y-8 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
       {/* Breadcrumb Navigation */}
@@ -116,7 +119,7 @@ export default function RomanianAlphabetIndexPage({
                     </span>
                   </Link>
                   <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
-                    #{g.order}
+                    {isFa ? `#${toFaDigits(g.order)}` : `#${g.order}`}
                   </span>
                 </div>
 

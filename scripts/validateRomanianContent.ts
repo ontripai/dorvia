@@ -10,6 +10,7 @@ import {
   validateRomanianContent,
   computeContentStats,
   RomanianValidationContext,
+  VALIDATION_RULES,
 } from '../src/lib/romanian/validator';
 
 function main() {
@@ -28,11 +29,13 @@ function main() {
     domains: ALL_DOMAINS,
   };
 
+  const ruleRange = `${VALIDATION_RULES[0].id} to ${VALIDATION_RULES[VALIDATION_RULES.length - 1].id}`;
+
   console.log('================================================================');
-  console.log('DORVIA Romanian Language Content Validator (dre-p159, Registry)');
+  console.log('DORVIA Romanian Language Content Validator');
   console.log('================================================================');
   console.log(
-    `Auditing ${allPhrases.length} phrases (${publishedPhrases.length} published), ${allWords.length} words, ${allVerbs.length} verbs, ${allGraphemes.length} graphemes, ${ALL_DOMAINS.length} domains across rules V1 to V23...\n`
+    `Auditing ${allPhrases.length} phrases (${publishedPhrases.length} published), ${allWords.length} words, ${allVerbs.length} verbs, ${allGraphemes.length} graphemes, ${ALL_DOMAINS.length} domains across rules ${ruleRange}...\n`
   );
 
   const errors = validateRomanianContent(context);
@@ -68,32 +71,16 @@ function main() {
 
   console.log(`\nCATEGORY MAPPING: ${stats.mappedCategoriesCount} of ${stats.totalCategoriesCount} categories mapped to at least one domain\n`);
 
-  console.log('✅ SUCCESS: All Romanian content strictly adheres to rules V1 to V19.');
+  console.log(`✅ SUCCESS: All Romanian content strictly adheres to rules ${ruleRange}.`);
   console.log(`  - Total phrases: ${allPhrases.length} (${publishedPhrases.length} published, ${allPhrases.length - publishedPhrases.length} in review)`);
   console.log(`  - Total words: ${allWords.length} (${allWords.filter(w => w.status === 'published').length} published, ${allWords.filter(w => w.status === 'draft').length} draft)`);
   console.log(`  - Total verbs: ${allVerbs.length} (${allVerbs.filter(v => v.status === 'published').length} published, ${allVerbs.filter(v => v.status === 'draft').length} draft)`);
   console.log(`  - Total graphemes: ${allGraphemes.length} (${allGraphemes.filter(g => g.status === 'published').length} published, ${allGraphemes.filter(g => g.status === 'draft').length} draft)`);
   console.log(`  - Total domains: ${ALL_DOMAINS.length}`);
-  console.log('  - All IDs & slugs unique and properly formatted (V1-V3, V17).');
-  console.log('  - All texts and sources validated (V4-V5).');
-  console.log('  - Register policy scoped to intendedUse: produce (V6).');
-  console.log('  - Name tokens strictly consistent across ro/en/fa (V7).');
-  console.log('  - Verb prefix ZWNJ (نیم‌فاصله) strictly enforced (V8).');
-  console.log('  - Reference existence strictly verified (V9).');
-  console.log('  - Verb source URL & present tense conjugation verified (V10).');
-  console.log('  - Noun gender and definite forms verified (V11).');
-  console.log('  - Domain introduction order strictly enforced (V12).');
-  console.log('  - Domain estimatedWeeks and stationOrder verified (V13).');
-  console.log('  - High-risk domain sourcing policy strictly enforced (V14).');
-  console.log('  - Category-domain compatibility verified (V15).');
-  console.log('  - Domain item budgets verified (V16).');
-  console.log('  - Global entity ID uniqueness across combined dataset verified (V17).');
-  console.log('  - Grapheme-to-word referential integrity verified (V18).');
-  console.log('  - Display form contains lesson grapheme verified (V19).');
-  console.log('  - Verb participiu and conjunctiv completeness verified (V20).');
-  console.log('  - Verb stored forms purity verified (V21).');
-  console.log('  - Grapheme published audio completeness verified (V22).');
-  console.log('  - Audio clip file referential integrity on disk verified (V23).');
+  console.log(`\nVERIFIED RULES (${ruleRange}):`);
+  for (const rule of VALIDATION_RULES) {
+    console.log(`  - [${rule.id}] ${rule.description}.`);
+  }
   process.exit(0);
 }
 

@@ -13,6 +13,40 @@ export type ValidationRuleId =
   | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16'
   | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24' | 'V25';
 
+export interface ValidationRuleMeta {
+  id: ValidationRuleId;
+  name: string;
+  description: string;
+}
+
+export const VALIDATION_RULES: readonly ValidationRuleMeta[] = Object.freeze([
+  { id: 'V1', name: 'Unique ID', description: 'All entity IDs must be unique within their respective collections' },
+  { id: 'V2', name: 'Unique Slug', description: 'All slugs must be unique across collections' },
+  { id: 'V3', name: 'Slug Format', description: 'Slugs must strictly match regex ^[a-z0-9]+(-[a-z0-9]+)*$' },
+  { id: 'V4', name: 'Trilingual Text', description: 'Phrase texts in ro, en, fa must be non-empty after trim' },
+  { id: 'V5', name: 'Source Citation', description: 'Published phrases must have non-empty source label' },
+  { id: 'V6', name: 'Register Scoping', description: 'Register policy strictly scoped to intendedUse: produce' },
+  { id: 'V7', name: 'Name Consistency', description: 'Name tokens {{name}} strictly consistent across ro/en/fa' },
+  { id: 'V8', name: 'Verb Prefix ZWNJ', description: 'Persian continuous prefix mi-/nemi- must use ZWNJ' },
+  { id: 'V9', name: 'Reference Integrity', description: 'Phrase word/verb references must exist in dictionary' },
+  { id: 'V10', name: 'Verb Source & Paradigm', description: 'Verbs require valid DEX URL and complete present tense paradigm' },
+  { id: 'V11', name: 'Noun Gender & Definite', description: 'Nouns require valid gender and definite form' },
+  { id: 'V12', name: 'Domain Order', description: 'Curriculum domain introduction order strictly enforced' },
+  { id: 'V13', name: 'Domain Metadata', description: 'Domain estimatedWeeks and stationOrder verified' },
+  { id: 'V14', name: 'High-Risk Sourcing', description: 'High-risk domains must adhere to sourcing policy' },
+  { id: 'V15', name: 'Category Compatibility', description: 'Phrase categories must be mapped to valid domains' },
+  { id: 'V16', name: 'Domain Budgets', description: 'Domain max item budgets strictly enforced' },
+  { id: 'V17', name: 'Global ID Uniqueness', description: 'Global entity ID uniqueness across combined dataset' },
+  { id: 'V18', name: 'Grapheme Word Reference', description: 'Grapheme-to-word referential integrity verified' },
+  { id: 'V19', name: 'Grapheme Pattern Match', description: 'Display form must contain lesson grapheme matching pattern' },
+  { id: 'V20', name: 'Verb Participiu & Conjunctiv', description: 'Verb participiu and conjunctiv paradigm completeness verified' },
+  { id: 'V21', name: 'Verb Stored Purity', description: 'Verb stored forms purity verified (no să, enclitic hyphens, HTML entities)' },
+  { id: 'V22', name: 'Published Audio Completeness', description: 'Published graphemes require at least 2 distinct voice clips with valid durations' },
+  { id: 'V23', name: 'Audio File Integrity', description: 'Audio clip files must physically exist on disk under public/' },
+  { id: 'V24', name: 'Registry Completeness', description: 'All entities in source content files must be present in unified registry' },
+  { id: 'V25', name: 'Published Example Word', description: 'Published graphemes must reference published example words' },
+]);
+
 export interface ValidationError {
   rule: ValidationRuleId;
   phraseId: string;
