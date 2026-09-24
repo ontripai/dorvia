@@ -16,6 +16,7 @@ export const SEED_DOMAINS: DomainMeta[] = [
     stationOrder: 'sequential',
     stations: [
       { id: 'core-pronouns', titleFa: 'ضمایر', titleRo: 'Pronume', order: 1 },
+      { id: 'core-question-words', titleFa: 'کلمات پرسشی', titleRo: 'Cuvinte interogative', order: 2 },
     ],
     sourcingPolicy: 'common-usage-ok',
     categories: ['everyday', 'transport', 'shopping', 'healthcare', 'emergency'],
