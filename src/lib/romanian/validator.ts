@@ -37,7 +37,7 @@ export const VALIDATION_RULES: readonly ValidationRuleMeta[] = Object.freeze([
   { id: 'V15', name: 'Category Compatibility', description: 'Phrase categories must be mapped to valid domains' },
   { id: 'V16', name: 'Domain Budgets', description: 'Domain max item budgets strictly enforced' },
   { id: 'V17', name: 'Global ID Uniqueness', description: 'Global entity ID uniqueness across combined dataset' },
-  { id: 'V18', name: 'Grapheme Word Reference', description: 'Grapheme-to-word referential integrity verified' },
+  { id: 'V18', name: 'Referential Integrity', description: 'Referential integrity verified (grapheme exampleWordId and word formOf)' },
   { id: 'V19', name: 'Grapheme Pattern Match', description: 'Display form must contain lesson grapheme matching pattern' },
   { id: 'V20', name: 'Verb Participiu & Conjunctiv', description: 'Verb participiu and conjunctiv paradigm completeness verified' },
   { id: 'V21', name: 'Verb Stored Purity', description: 'Verb stored forms purity verified (no să, enclitic hyphens, HTML entities)' },
@@ -843,6 +843,31 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
         entityId: gId,
         message: `Grapheme "${gId}" references non-existent exampleWordId: "${grapheme.exampleWordId}".`,
       });
+    }
+  }
+
+  // --- Validate Word formOf Referential Integrity (V18) ---
+  for (const word of words) {
+    const wId = word.id || '(missing-word-id)';
+    if (word.formOf !== undefined) {
+      if (!word.formOf || !wordMap.has(word.formOf)) {
+        errors.push({
+          rule: 'V18',
+          phraseId: wId,
+          entityId: wId,
+          message: `Word "${wId}" has formOf referencing non-existent word "${word.formOf}".`,
+        });
+      } else {
+        const baseWord = wordMap.get(word.formOf);
+        if (baseWord && baseWord.formOf) {
+          errors.push({
+            rule: 'V18',
+            phraseId: wId,
+            entityId: wId,
+            message: `Word "${wId}" has formOf referencing "${word.formOf}" which itself has formOf "${baseWord.formOf}" (two-level formOf chain prohibited).`,
+          });
+        }
+      }
     }
   }
 

@@ -38,10 +38,11 @@ export type PhraseSource = {
 export type RomanianWord = {
   id: string;
   lemma: string;
-  pos: 'noun' | 'verb' | 'adj' | 'adv' | 'expression' | 'pronoun';
+  pos: 'noun' | 'verb' | 'adj' | 'adv' | 'expression' | 'pronoun' | 'numeral';
   gender?: 'm' | 'f' | 'n';   // برای اسم اجباری — V11
   definiteForm?: string;      // برای اسم اجباری — V11
   plural?: string;
+  formOf?: string;            // شناسه‌ی مدخل پایه — V18 referential integrity
   translations: { en: string; fa: string };
   domains: string[];
   stationId?: string;
