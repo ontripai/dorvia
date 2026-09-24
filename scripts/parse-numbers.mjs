@@ -31,6 +31,34 @@ async function fetchPage(url) {
   return { status: res.status, ok: res.ok, text, url: res.url };
 }
 
+// Extract headwords from a dexonline definition page
+export function extractHeadwords(html) {
+  const headwords = new Set();
+
+  // 1. Check <span class="entryName">
+  const entryMatches = html.matchAll(/class=["'][^"']*entryName[^"']*["'][^>]*>([\s\S]*?)<\/span>/gi);
+  for (const m of entryMatches) {
+    const text = cleanText(m[1]).toLowerCase().replace(/[^\p{L}]/gu, '');
+    if (text) headwords.add(text);
+  }
+
+  // 2. Check <b> tags inside <span class="def">
+  const defMatches = html.matchAll(/class=["'][^"']*def\b[^"']*["'][^>]*>([\s\S]*?)<\/p>/gi);
+  for (const dm of defMatches) {
+    const boldMatches = dm[1].matchAll(/<b>([\s\S]*?)<\/b>/gi);
+    for (const bm of boldMatches) {
+      const raw = decodeHtmlEntities(bm[1]).replace(/<[^>]+>/g, '');
+      const parts = raw.split(/[,;\/]/);
+      for (const p of parts) {
+        const clean = p.replace(/[0-9\.\-\(\)\*~]/g, '').replace(/\s+/g, '').toLowerCase().trim();
+        if (clean) headwords.add(clean);
+      }
+    }
+  }
+
+  return [...headwords];
+}
+
 export async function parseNumbers() {
   console.log('================================================================');
   console.log('DRE-P163: NUMBERS EXTRACTION & VALIDATION SUITE (dexonline)');
@@ -41,6 +69,7 @@ export async function parseNumbers() {
     group2: [],
     group3: [],
     group4: [],
+    allEntriesTable: [],
     haltConditionsTriggered: [],
   };
 
@@ -54,7 +83,6 @@ export async function parseNumbers() {
     'douăzeci', 'treizeci', 'patruzeci', 'cincizeci', 'șaizeci', 'șaptezeci', 'optzeci', 'nouăzeci'
   ];
 
-  // Specific spellings required by prompt
   const spellingChecks = {
     14: 'paisprezece',
     16: 'șaisprezece',
@@ -67,15 +95,12 @@ export async function parseNumbers() {
     const dUrl = `https://dexonline.ro/definitie/${encoded}`;
 
     const pRes = await fetchPage(pUrl);
-    const dRes = await fetchPage(dUrl);
 
     // Look for any 2-column m/f numeral table
     const tables = [...pRes.text.matchAll(/<table[^>]*class=["'][^"']*lexeme[^"']*["'][^>]*>([\s\S]*?)<\/table>/gi)];
     let twoColNumeralTable = null;
     for (const table of tables) {
       const text = cleanText(table[1]);
-      // Check if this table is for the numeral itself having m/f distinction
-      // Note: "nouă" has a table for personal pronoun eu/noi (P57), but NOT for the numeral 9
       if (text.includes('masculin') && text.includes('feminin') && text.includes('numeral') && !text.includes('Persoana I')) {
         twoColNumeralTable = text;
         break;
@@ -94,12 +119,7 @@ export async function parseNumbers() {
     if (lemma === 'șaisprezece' && lemma !== spellingChecks[16]) throw new Error('Spelling mismatch for 16');
     if (lemma === 'șaizeci' && lemma !== spellingChecks[60]) throw new Error('Spelling mismatch for 60');
 
-    report.group1.push({
-      lemma,
-      url: dUrl,
-      twoColTable: false,
-      status: 'verified',
-    });
+    report.group1.push({ lemma, url: dUrl, twoColTable: false, status: 'verified' });
     console.log(`  ✓ "${lemma}": verified invariable cardinal, 0 m/f gender variation.`);
   }
 
@@ -118,7 +138,6 @@ export async function parseNumbers() {
     const pUrl = `https://dexonline.ro/definitie/${encoded}/paradigma`;
     const pRes = await fetchPage(pUrl);
 
-    // Find the numeral table matching the model
     const tables = [...pRes.text.matchAll(/<table[^>]*class=["'][^"']*lexeme[^"']*["'][^>]*>([\s\S]*?)<\/table>/gi)];
     let targetTable = null;
     for (const t of tables) {
@@ -136,7 +155,6 @@ export async function parseNumbers() {
       process.exit(1);
     }
 
-    // Assert exactly 2 distinct forms: m and f
     const hasM = targetTable.includes(exp.m);
     const hasF = targetTable.includes(exp.f);
     if (!hasM || !hasF) {
@@ -147,93 +165,125 @@ export async function parseNumbers() {
     }
 
     console.log(`  ✓ "${exp.base}": Model ${exp.model} confirmed 2-column. Forms: Masculin="${exp.m}", Feminin="${exp.f}".`);
-    report.group2.push({
-      base: exp.base,
-      model: exp.model,
-      masculin: exp.m,
-      feminin: exp.f,
-      url: pUrl,
-    });
+    report.group2.push({ base: exp.base, model: exp.model, masculin: exp.m, feminin: exp.f, url: pUrl });
   }
 
   // ==========================================================================
-  // GROUP 3: Multi-word / Noun Cardinals (o sută, o mie)
+  // FULL CONTENT-BASED EXISTENCE TEST ACROSS ALL 55 ENTRIES
   // ==========================================================================
-  console.log('\n--- Group 3: Multi-word / Noun Expressions ---');
-  const group3Items = [
-    { phrase: 'o sută', base: 'sută' },
-    { phrase: 'o mie', base: 'mie' },
+  console.log('\n--- Running New Content-Based Existence Test (All 55 entries) ---');
+
+  const all55Definitions = [
+    // Group 1
+    { lemma: 'zero', root: 'zero', url: 'https://dexonline.ro/definitie/zero' },
+    { lemma: 'trei', root: 'trei', url: 'https://dexonline.ro/definitie/trei' },
+    { lemma: 'patru', root: 'patru', url: 'https://dexonline.ro/definitie/patru' },
+    { lemma: 'cinci', root: 'cinci', url: 'https://dexonline.ro/definitie/cinci' },
+    { lemma: 'șase', root: 'șase', url: 'https://dexonline.ro/definitie/%C8%99ase' },
+    { lemma: 'șapte', root: 'șapte', url: 'https://dexonline.ro/definitie/%C8%99apte' },
+    { lemma: 'opt', root: 'opt', url: 'https://dexonline.ro/definitie/opt' },
+    { lemma: 'nouă', root: 'nouă', url: 'https://dexonline.ro/definitie/nou%C4%83' },
+    { lemma: 'zece', root: 'zece', url: 'https://dexonline.ro/definitie/zece' },
+    { lemma: 'unsprezece', root: 'unsprezece', url: 'https://dexonline.ro/definitie/unsprezece' },
+    { lemma: 'treisprezece', root: 'treisprezece', url: 'https://dexonline.ro/definitie/treisprezece' },
+    { lemma: 'paisprezece', root: 'paisprezece', url: 'https://dexonline.ro/definitie/paisprezece' },
+    { lemma: 'cincisprezece', root: 'cincisprezece', url: 'https://dexonline.ro/definitie/cincisprezece' },
+    { lemma: 'șaisprezece', root: 'șaisprezece', url: 'https://dexonline.ro/definitie/%C8%99aisprezece' },
+    { lemma: 'șaptesprezece', root: 'șaptesprezece', url: 'https://dexonline.ro/definitie/%C8%99aptesprezece' },
+    { lemma: 'optsprezece', root: 'optsprezece', url: 'https://dexonline.ro/definitie/optsprezece' },
+    { lemma: 'nouăsprezece', root: 'nouăsprezece', url: 'https://dexonline.ro/definitie/nou%C4%83sprezece' },
+    { lemma: 'douăzeci', root: 'douăzeci', url: 'https://dexonline.ro/definitie/dou%C4%83zeci' },
+    { lemma: 'treizeci', root: 'treizeci', url: 'https://dexonline.ro/definitie/treizeci' },
+    { lemma: 'patruzeci', root: 'patruzeci', url: 'https://dexonline.ro/definitie/patruzeci' },
+    { lemma: 'cincizeci', root: 'cincizeci', url: 'https://dexonline.ro/definitie/cincizeci' },
+    { lemma: 'șaizeci', root: 'șaizeci', url: 'https://dexonline.ro/definitie/%C8%99aizeci' },
+    { lemma: 'șaptezeci', root: 'șaptezeci', url: 'https://dexonline.ro/definitie/%C8%99aptezeci' },
+    { lemma: 'optzeci', root: 'optzeci', url: 'https://dexonline.ro/definitie/optzeci' },
+    { lemma: 'nouăzeci', root: 'nouăzeci', url: 'https://dexonline.ro/definitie/nou%C4%83zeci' },
+
+    // Group 2
+    { lemma: 'unu', root: 'unu', url: 'https://dexonline.ro/definitie/unu/paradigma' },
+    { lemma: 'una', root: 'unu', url: 'https://dexonline.ro/definitie/unu/paradigma' },
+    { lemma: 'doi', root: 'doi', url: 'https://dexonline.ro/definitie/doi/paradigma' },
+    { lemma: 'două', root: 'doi', url: 'https://dexonline.ro/definitie/doi/paradigma' },
+    { lemma: 'doisprezece', root: 'doisprezece', url: 'https://dexonline.ro/definitie/doisprezece/paradigma' },
+    { lemma: 'douăsprezece', root: 'doisprezece', url: 'https://dexonline.ro/definitie/doisprezece/paradigma' },
+
+    // Group 3
+    { lemma: 'o sută', root: 'sută', url: 'https://dexonline.ro/definitie/sut%C4%83' },
+    { lemma: 'o mie', root: 'mie', url: 'https://dexonline.ro/definitie/mie' },
+
+    // Group 4
+    { lemma: 'primul', root: 'prim', url: 'https://dexonline.ro/definitie/prim' },
+    { lemma: 'prima', root: 'prim', url: 'https://dexonline.ro/definitie/prim' },
+    { lemma: 'al doilea', root: 'doilea', url: 'https://dexonline.ro/definitie/doilea' },
+    { lemma: 'a doua', root: 'doilea', url: 'https://dexonline.ro/definitie/doilea' },
+    { lemma: 'al treilea', root: 'treilea', url: 'https://dexonline.ro/definitie/treilea' },
+    { lemma: 'a treia', root: 'treilea', url: 'https://dexonline.ro/definitie/treilea' },
+    { lemma: 'al patrulea', root: 'patrulea', url: 'https://dexonline.ro/definitie/patrulea' },
+    { lemma: 'a patra', root: 'patrulea', url: 'https://dexonline.ro/definitie/patrulea' },
+    { lemma: 'al cincilea', root: 'cincilea', url: 'https://dexonline.ro/definitie/cincilea' },
+    { lemma: 'a cincea', root: 'cincilea', url: 'https://dexonline.ro/definitie/cincilea' },
+    { lemma: 'al șaselea', root: 'șaselea', url: 'https://dexonline.ro/definitie/%C8%99aselea' },
+    { lemma: 'a șasea', root: 'șaselea', url: 'https://dexonline.ro/definitie/%C8%99aselea' },
+    { lemma: 'al șaptelea', root: 'șaptelea', url: 'https://dexonline.ro/definitie/%C8%99aptelea' },
+    { lemma: 'a șaptea', root: 'șaptelea', url: 'https://dexonline.ro/definitie/%C8%99aptelea' },
+    { lemma: 'al optulea', root: 'optulea', url: 'https://dexonline.ro/definitie/optulea' },
+    { lemma: 'a opta', root: 'optulea', url: 'https://dexonline.ro/definitie/optulea' },
+    { lemma: 'al nouălea', root: 'nouălea', url: 'https://dexonline.ro/definitie/nou%C4%83lea' },
+    { lemma: 'a noua', root: 'nouălea', url: 'https://dexonline.ro/definitie/nou%C4%83lea' },
+    { lemma: 'al zecelea', root: 'zecelea', url: 'https://dexonline.ro/definitie/zecelea' },
+    { lemma: 'a zecea', root: 'zecelea', url: 'https://dexonline.ro/definitie/zecelea' },
+    { lemma: 'întâi', root: 'întâi', url: 'https://dexonline.ro/definitie/%C3%AEnt%C3%A2i' },
+    { lemma: 'întâia', root: 'întâi', url: 'https://dexonline.ro/definitie/%C3%AEnt%C3%A2i' },
   ];
 
-  for (const item of group3Items) {
-    const encodedPhrase = encodeURIComponent(item.phrase);
-    const encodedBase = encodeURIComponent(item.base);
+  for (const item of all55Definitions) {
+    // Guard: URL must not contain space or %20
+    if (item.url.includes(' ') || item.url.includes('%20')) {
+      const msg = `URL GUARD FAILED: Item "${item.lemma}" has spaces or %20 in URL "${item.url}"!`;
+      console.error(`❌ ${msg}`);
+      report.haltConditionsTriggered.push(msg);
+      process.exit(1);
+    }
 
-    const phraseRes = await fetchPage(`https://dexonline.ro/definitie/${encodedPhrase}`);
-    const baseRes = await fetchPage(`https://dexonline.ro/definitie/${encodedBase}`);
+    const res = await fetchPage(item.url);
 
-    console.log(`  "${item.phrase}":`);
-    console.log(`    definitie/${item.phrase} status: ${phraseRes.status} (url: ${phraseRes.url})`);
-    console.log(`    definitie/${item.base} status: ${baseRes.status}`);
+    // Assertion 1: No "nu este în dicționar"
+    const notFound = res.text.includes('nu este în dicționar') || res.text.includes('nu este în dicţionar');
+    if (!res.ok || notFound) {
+      const msg = `ASSERTION 1 FAILED: Page for "${item.lemma}" at "${item.url}" was not found in dictionary!`;
+      console.error(`❌ ${msg}`);
+      report.haltConditionsTriggered.push(msg);
+      process.exit(1);
+    }
 
-    const foundSubentry = baseRes.text.includes(item.phrase);
-    console.log(`    Subentry in base word "${item.base}": ${foundSubentry}`);
+    // Assertion 2: Entry headword matches expected root lemma
+    const headwords = extractHeadwords(res.text);
+    const expected = item.root.toLowerCase().replace(/\s+/g, '');
+    const matched = headwords.some(hw => hw === expected || hw.startsWith(expected) || expected.startsWith(hw));
+    const matchingHw = headwords.find(hw => hw === expected || hw.startsWith(expected) || expected.startsWith(hw)) || headwords[0] || 'NONE';
 
-    report.group3.push({
-      phrase: item.phrase,
-      base: item.base,
-      directUrl: phraseRes.status === 200 ? phraseRes.url : null,
-      baseUrl: baseRes.url,
-      subentry: foundSubentry,
+    if (!matched) {
+      const msg = `ASSERTION 2 FAILED: Headwords [${headwords.slice(0, 5).join(', ')}] do not match expected root "${item.root}" for item "${item.lemma}"!`;
+      console.error(`❌ ${msg}`);
+      report.haltConditionsTriggered.push(msg);
+      process.exit(1);
+    }
+
+    report.allEntriesTable.push({
+      lemma: item.lemma,
+      finalUrl: item.url,
+      returnedHeadword: matchingHw,
+      matched: true,
     });
-  }
 
-  // ==========================================================================
-  // GROUP 4: Ordinals (1 to 10 + întâi/întâia)
-  // ==========================================================================
-  console.log('\n--- Group 4: Ordinals (1-10 + întâi) ---');
-  const group4Pairs = [
-    { m: 'primul', f: 'prima', base: 'prim' },
-    { m: 'al doilea', f: 'a doua', base: 'doilea' },
-    { m: 'al treilea', f: 'a treia', base: 'treilea' },
-    { m: 'al patrulea', f: 'a patra', base: 'patrulea' },
-    { m: 'al cincilea', f: 'a cincea', base: 'cincilea' },
-    { m: 'al șaselea', f: 'a șasea', base: 'șaselea' },
-    { m: 'al șaptelea', f: 'a șaptea', base: 'șaptelea' },
-    { m: 'al optulea', f: 'a opta', base: 'optulea' },
-    { m: 'al nouălea', f: 'a noua', base: 'nouălea' },
-    { m: 'al zecelea', f: 'a zecea', base: 'zecelea' },
-    { m: 'întâi', f: 'întâia', base: 'întâi' },
-  ];
-
-  for (const pair of group4Pairs) {
-    const mRes = await fetchPage(`https://dexonline.ro/definitie/${encodeURIComponent(pair.m)}`);
-    const fRes = await fetchPage(`https://dexonline.ro/definitie/${encodeURIComponent(pair.f)}`);
-    const bRes = await fetchPage(`https://dexonline.ro/definitie/${encodeURIComponent(pair.base)}`);
-
-    const mFound = mRes.status === 200 && !mRes.text.includes('Nu am găsit');
-    const fFound = fRes.status === 200 && !fRes.text.includes('Nu am găsit');
-    const bFound = bRes.status === 200 && !bRes.text.includes('Nu am găsit');
-
-    const effectiveMUrl = mFound ? mRes.url : (bFound ? bRes.url : null);
-    const effectiveFUrl = fFound ? fRes.url : (bFound ? bRes.url : null);
-
-    console.log(`  Ordinal pair: "${pair.m}" / "${pair.f}"`);
-    console.log(`    Masc direct status: ${mRes.status}, Fem direct status: ${fRes.status}, Base "${pair.base}" status: ${bRes.status}`);
-    console.log(`    Effective Masc URL: ${effectiveMUrl}`);
-    console.log(`    Effective Fem URL:  ${effectiveFUrl}`);
-
-    report.group4.push({
-      m: pair.m,
-      f: pair.f,
-      base: pair.base,
-      effectiveMUrl,
-      effectiveFUrl,
-    });
+    console.log(`  ✓ [PASS] "${item.lemma.padEnd(14)}" -> ${item.url} (headword: "${matchingHw}")`);
   }
 
   console.log('\n================================================================');
-  console.log('✅ ALL DRE-P163 ASSERTIONS & STOP CONDITIONS PASSED!');
+  console.log('✅ ALL DRE-P163 CONTENT-BASED ASSERTIONS & STOP CONDITIONS PASSED!');
+  console.log(`Total verified entries: ${report.allEntriesTable.length}/55`);
   console.log('================================================================\n');
 
   return report;
