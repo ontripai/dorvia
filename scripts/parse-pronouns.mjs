@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 export function decodeHtmlEntities(str) {
   if (!str) return '';
@@ -17,18 +18,46 @@ export function decodeHtmlEntities(str) {
 
 export function cleanText(html) {
   if (!html) return '';
-  const decoded = decodeHtmlEntities(html);
-  return decoded.replace(/<[^>]+>/g, '').trim();
+  return decodeHtmlEntities(html).replace(/<[^>]+>/g, '').trim();
 }
 
 /**
- * Parses the dexonline HTML for a pronoun, extracting:
- * 1. The lexeme paradigm table (P57 / P101)
- * 2. The DOOM 3 grammatical definition entry
- * Cross-references both to ensure deterministic, labeled extraction.
+ * Extracts items from <li> inside a table cell, separating elisions.
  */
-export function parsePronounHtml(html, lemma, personLabel = 'Persoana I') {
-  // 1. Find the pronoun lexeme table
+function extractItems(cellHtml) {
+  if (!cellHtml) return [];
+  const liRegex = /<li([^>]*)>([\s\S]*?)<\/li>/gi;
+  const items = [];
+  let liMatch;
+  while ((liMatch = liRegex.exec(cellHtml)) !== null) {
+    const attrs = liMatch[1];
+    const inner = liMatch[2];
+    const isElision = /class=["'][^"']*elision/i.test(attrs) || /title=["'][^"']*eliziune/i.test(attrs);
+    const text = cleanText(inner);
+    const hasHyphen = /[-‑–—\u2011]/.test(text);
+
+    items.push({
+      rawText: text,
+      cleanText: text.replace(/[-‑–—\u2011]/g, '').trim(),
+      isElision: isElision || hasHyphen,
+      attrs: attrs.trim(),
+    });
+  }
+  return items;
+}
+
+/**
+ * Parses pronoun paradigms from dexonline HTML using role-based rules (dre-p161 Addendum 2).
+ */
+export function parsePronounRoleBased({
+  html,
+  lemma,
+  group, // 'A' | 'B' | 'C'
+  personLabel,
+  number = 'singular', // 'singular' | 'plural'
+  genderCol = 0, // 0 for masculin / invariant, 1 for feminin
+}) {
+  // 1. Find the target lexeme table
   const tableRegex = /<table[^>]*class=["'][^"']*lexeme[^"']*["'][^>]*>([\s\S]*?)<\/table>/gi;
   let targetTable = null;
   let targetTableIndex = -1;
@@ -37,10 +66,9 @@ export function parsePronounHtml(html, lemma, personLabel = 'Persoana I') {
 
   while ((tMatch = tableRegex.exec(html)) !== null) {
     const tableHtml = tMatch[1];
-    if (
-      /pronume/i.test(tableHtml) &&
-      new RegExp(personLabel, 'i').test(tableHtml)
-    ) {
+    const matchesPos = /pronume/i.test(tableHtml) || /articol \/ numeral \/ adjectiv pronominal/i.test(tableHtml);
+    const matchesPerson = !personLabel || new RegExp(personLabel, 'i').test(tableHtml);
+    if (matchesPos && matchesPerson) {
       targetTable = tableHtml;
       targetTableIndex = idx;
       break;
@@ -49,177 +77,244 @@ export function parsePronounHtml(html, lemma, personLabel = 'Persoana I') {
   }
 
   if (!targetTable) {
-    throw new Error(`[PARSER_ERROR] No matching pronoun table found for "${lemma}" (${personLabel}).`);
+    throw new Error(`[PARSER_ERROR] No matching pronoun table found for "${lemma}" (${personLabel || 'no person'}).`);
   }
 
-  // Parse rows of the table
-  const rowRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
-  const rows = [];
-  let rMatch;
-  while ((rMatch = rowRegex.exec(targetTable)) !== null) {
-    rows.push(rMatch[1]);
-  }
+  const rows = [...targetTable.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)].map(r => r[1]);
 
-  let nomAccSingularCell = null;
-  let genDatSingularCell = null;
+  let nomAccCell = null;
+  let genDatCell = null;
+  let currentCase = null;
+  let currentCaseRowsRemaining = 0;
 
   for (let r = 0; r < rows.length; r++) {
     const rHtml = rows[r];
-    if (/nominativ-acuzativ/i.test(rHtml) && /singular/i.test(rHtml)) {
+    const caseMatch = rHtml.match(/<td[^>]*class=["'][^"']*inflection[^"']*["'][^>]*>(nominativ-acuzativ|genitiv-dativ|vocativ)<\/td>/i);
+    if (caseMatch) {
+      currentCase = caseMatch[1].toLowerCase();
+      const rowSpanMatch =
+        rHtml.match(/<td[^>]*rowspan=["'](\d+)["'][^>]*class=["'][^"']*inflection[^"']*["'][^>]*>/i) ||
+        rHtml.match(/<td[^>]*class=["'][^"']*inflection[^"']*["'][^>]*rowspan=["'](\d+)["'][^>]*>/i);
+      currentCaseRowsRemaining = rowSpanMatch ? parseInt(rowSpanMatch[1], 10) : 1;
+    }
+
+    if (currentCase === 'nominativ-acuzativ' && new RegExp(number, 'i').test(rHtml)) {
       const formCells = [...rHtml.matchAll(/<td[^>]*class=["'][^"']*form[^"']*["'][^>]*>([\s\S]*?)<\/td>/gi)];
-      if (formCells.length > 0) {
-        nomAccSingularCell = formCells[0][1];
+      if (formCells.length > genderCol) {
+        nomAccCell = formCells[genderCol][1];
       }
     }
-    if (/genitiv-dativ/i.test(rHtml) && /singular/i.test(rHtml)) {
+    if (currentCase === 'genitiv-dativ' && new RegExp(number, 'i').test(rHtml)) {
       const formCells = [...rHtml.matchAll(/<td[^>]*class=["'][^"']*form[^"']*["'][^>]*>([\s\S]*?)<\/td>/gi)];
-      if (formCells.length > 0) {
-        genDatSingularCell = formCells[0][1];
+      if (formCells.length > genderCol) {
+        genDatCell = formCells[genderCol][1];
+      }
+    }
+
+    if (currentCaseRowsRemaining > 0) {
+      currentCaseRowsRemaining--;
+      if (currentCaseRowsRemaining === 0) {
+        currentCase = null;
       }
     }
   }
 
-  if (!nomAccSingularCell || !genDatSingularCell) {
-    throw new Error(`[PARSER_ERROR] Missing nom-acc or gen-dat singular cells in table ${targetTableIndex}.`);
+  if (!nomAccCell) {
+    throw new Error(`[PARSER_ERROR] Missing nom-acc cell for "${lemma}" (${number}, col ${genderCol}) in table ${targetTableIndex}.`);
   }
 
-  // Extract items from <li> inside each cell, filtering out elision items
-  const extractItems = (cellHtml) => {
-    const liRegex = /<li([^>]*)>([\s\S]*?)<\/li>/gi;
-    const items = [];
-    let liMatch;
-    while ((liMatch = liRegex.exec(cellHtml)) !== null) {
-      const attrs = liMatch[1];
-      const inner = liMatch[2];
-      const isElision = /class=["'][^"']*elision/i.test(attrs) || /title=["'][^"']*eliziune/i.test(attrs);
-      const text = cleanText(inner);
-      const hasHyphen = /[-‑–—\u2011]/.test(text);
-
-      items.push({
-        rawText: text,
-        cleanText: text.replace(/[-‑–—\u2011]/g, '').trim(),
-        isElision: isElision || hasHyphen,
-        attrs,
-      });
-    }
-    return items;
-  };
-
-  const nomAccItems = extractItems(nomAccSingularCell);
-  const genDatItems = extractItems(genDatSingularCell);
-
+  const nomAccItems = extractItems(nomAccCell);
   const cleanNomAcc = nomAccItems.filter(i => !i.isElision).map(i => i.cleanText);
-  const cleanGenDat = genDatItems.filter(i => !i.isElision).map(i => i.cleanText);
 
-  // 2. Parse DOOM 3 definition entry for explicit grammatical labels
-  let doom3DefText = '';
-  const defWrappers = [...html.matchAll(/<div[^>]*class=["'][^"']*defWrapper[^"']*["'][^>]*>([\s\S]*?)<\/div>\s*<\/div>/gi)];
-  for (const dw of defWrappers) {
-    const content = dw[1];
-    if (/\/sursa\/doom3/i.test(content) && new RegExp(`/definitie/${lemma}/\\d+`, 'i').test(content)) {
-      if (content.includes('>pr.<') || content.includes('data-bs-content="pronume')) {
-        const pMatch = content.match(/<p[^>]*class=["'][^"']*read-more[^"']*["'][^>]*>([\s\S]*?)<\/p>/i);
-        if (pMatch) {
-          doom3DefText = pMatch[1];
-          break;
-        }
-      }
+  // GROUP A: Full clitic extraction (eu, tu, noi, voi)
+  if (group === 'A') {
+    if (!genDatCell) {
+      throw new Error(`[PARSER_ERROR] Missing gen-dat cell for Group A pronoun "${lemma}".`);
     }
+    const genDatItems = extractItems(genDatCell);
+    const cleanGenDat = genDatItems.filter(i => !i.isElision).map(i => i.cleanText);
+
+    // Rule 1: Nominative = FIRST item
+    const nominativ = cleanNomAcc[0];
+
+    // Rule 2: Accusative clitic = LAST non-elision item
+    const acuzativNeacc = cleanNomAcc[cleanNomAcc.length - 1];
+
+    // Assertion 1: acuzativNeacc !== nominativ
+    if (acuzativNeacc === nominativ) {
+      throw new Error(`[ASSERTION_FAILED] Group A "${lemma}": acuzativNeacc ("${acuzativNeacc}") must not equal nominativ ("${nominativ}").`);
+    }
+
+    // Rule 3: Dative clitic selection:
+    // If one candidate equals acuzativNeacc -> pick it (equality branch)
+    // Else -> candidate starting with 'î' (î branch)
+    const eqCandidates = cleanGenDat.filter(c => c === acuzativNeacc);
+    let matchingCandidates = [];
+    let branch = '';
+
+    if (eqCandidates.length > 0) {
+      matchingCandidates = eqCandidates;
+      branch = 'equality branch';
+    } else {
+      matchingCandidates = cleanGenDat.filter(c => c.startsWith('î'));
+      branch = 'î branch';
+    }
+
+    // Assertion 2: EXACTLY ONE candidate must match
+    if (matchingCandidates.length !== 1) {
+      throw new Error(
+        `[ASSERTION_FAILED] Group A "${lemma}": Expected exactly 1 matching dativ candidate, found ${matchingCandidates.length} (${JSON.stringify(matchingCandidates)}) in candidates ${JSON.stringify(cleanGenDat)}.`
+      );
+    }
+
+    const dativNeacc = matchingCandidates[0];
+
+    // Short forms logged (items that are neither the tonic first item nor the selected clitic)
+    const dativShortForms = cleanGenDat.filter((c, idx) => idx > 0 && c !== dativNeacc);
+
+    return {
+      lemma,
+      group: 'A',
+      tableIndex: targetTableIndex,
+      extracted: {
+        nominativ,
+        acuzativNeacc,
+        dativNeacc,
+      },
+      branch,
+      tableRaw: {
+        nomAccClean: cleanNomAcc,
+        genDatClean: cleanGenDat,
+      },
+      loggedOnly: {
+        dativShortForms,
+        elisionForms: [
+          ...nomAccItems.filter(i => i.isElision).map(i => i.rawText),
+          ...genDatItems.filter(i => i.isElision).map(i => i.rawText),
+        ],
+      },
+    };
   }
 
-  let doom3DativAcc = null;
-  let doom3DativNeaccVariants = [];
-  let doom3AcuzativAcc = null;
-  let doom3AcuzativNeaccVariants = [];
+  // GROUP B: Nominative only (el, ea, ei, ele, dumneavoastră, dumneata)
+  if (group === 'B') {
+    const nominativ = cleanNomAcc[0];
+    const secondItemInfo = nomAccItems.length > 1 ? {
+      text: nomAccItems[1].cleanText,
+      attrs: nomAccItems[1].attrs,
+      hasNotRecommendedClass: /notRecommended/i.test(nomAccItems[1].attrs),
+    } : null;
 
-  if (doom3DefText) {
-    // Dativ section
-    const dMatch = doom3DefText.match(/data-bs-content=["']dativ["'][\s\S]*?data-bs-content=["']accentuat["'][^>]*>[^<]*<\/abbr>\s*<i>([\s\S]*?)<\/i>[\s\S]*?data-bs-content=["']neaccentuat["'][^>]*>[^<]*<\/abbr>\s*([\s\S]*?)(?:;|<abbr[^>]*data-bs-content=["']acuzativ["'])/i);
-    if (dMatch) {
-      doom3DativAcc = cleanText(dMatch[1]).split(/[\s,]+/)[0];
-      const rawNeacc = cleanText(dMatch[2]);
-      doom3DativNeaccVariants = rawNeacc
-        .split(/[\s,;]+/)
-        .map(v => v.replace(/[()]/g, '').trim())
-        .filter(v => v && !/[-‑–—\u2011]/.test(v) && !/^[A-Z]/.test(v) && !/^(Mi-a|Dă-mi|dându|Ție|se|dă)/i.test(v));
-    }
-
-    // Acuzativ section
-    const acMatch = doom3DefText.match(/data-bs-content=["']acuzativ["'][\s\S]*?data-bs-content=["']accentuat["'][^>]*>[^<]*<\/abbr>\s*<i>([\s\S]*?)<\/i>[\s\S]*?data-bs-content=["']neaccentuat["'][^>]*>[^<]*<\/abbr>\s*([\s\S]*?)(?:;|<\/span>|<\/p>)/i);
-    if (acMatch) {
-      doom3AcuzativAcc = cleanText(acMatch[1]).split(/[\s,]+/)[0];
-      const rawNeacc = cleanText(acMatch[2]);
-      doom3AcuzativNeaccVariants = rawNeacc
-        .split(/[\s,;]+/)
-        .map(v => v.replace(/[()]/g, '').trim())
-        .filter(v => v && !/[-‑–—\u2011]/.test(v) && !/^[A-Z]/.test(v) && !/^(Mă-ntreabă|Dă-mă|Te|Vedea)/i.test(v));
-    }
+    return {
+      lemma,
+      group: 'B',
+      tableIndex: targetTableIndex,
+      extracted: {
+        nominativ,
+      },
+      tableRaw: {
+        nomAccClean: cleanNomAcc,
+      },
+      secondItemInfo,
+      loggedOnly: {
+        otherItems: cleanNomAcc.slice(1),
+        elisionForms: nomAccItems.filter(i => i.isElision).map(i => i.rawText),
+      },
+    };
   }
 
-  // Paradigm table breakdown:
-  // In row 'nominativ-acuzativ singular':
-  // Item 0: nominative (matches lemma)
-  const nominativ = cleanNomAcc[0];
-  // Item 1: accusative accentuat
-  const acuzativAcc = cleanNomAcc[1];
-  // Item 2: accusative neaccentuat
-  const acuzativNeacc = cleanNomAcc[2];
+  // GROUP C: Possessive (meu, mea)
+  if (group === 'C') {
+    // Assertion: exactly 1 item
+    if (cleanNomAcc.length !== 1) {
+      throw new Error(`[ASSERTION_FAILED] Group C "${lemma}": expected exactly 1 item, found ${cleanNomAcc.length} (${JSON.stringify(cleanNomAcc)}).`);
+    }
+    const nominativ = cleanNomAcc[0];
 
-  // In row 'genitiv-dativ singular':
-  // Item 0: dativ accentuat
-  const dativAcc = cleanGenDat[0];
-  // Item 1: dativ neaccentuat short clitic (e.g. 'mi' / 'ți')
-  const dativNeaccShort = cleanGenDat[1];
-  // Item 2: dativ neaccentuat standard clitic with î- prefix (e.g. 'îmi' / 'îți')
-  const dativNeaccFull = cleanGenDat[2];
+    return {
+      lemma,
+      group: 'C',
+      tableIndex: targetTableIndex,
+      extracted: {
+        nominativ,
+      },
+      tableRaw: {
+        nomAccClean: cleanNomAcc,
+      },
+      loggedOnly: {},
+    };
+  }
 
-  // Selection rule for Dativ clitic:
-  // The user requirement specifies standard standalone clitic starting with î- ('îmi', 'îți')
-  // Short variant ('mi', 'ți') is preserved and reported as an alternate variant.
-  const dativNeaccSelected = dativNeaccFull && dativNeaccFull.startsWith('î') ? dativNeaccFull : dativNeaccShort;
-
-  return {
-    lemma,
-    personLabel,
-    tableIndex: targetTableIndex,
-    sources: 'DOOM 3 (Flexion model & DOOM 3 dictionary entry)',
-    tableRaw: {
-      nomAccAll: nomAccItems.map(i => i.rawText),
-      nomAccClean: cleanNomAcc,
-      genDatAll: genDatItems.map(i => i.rawText),
-      genDatClean: cleanGenDat,
-    },
-    doom3Entry: {
-      found: Boolean(doom3DefText),
-      dativAccentuat: doom3DativAcc,
-      dativNeaccentuatVariants: doom3DativNeaccVariants,
-      acuzativAccentuat: doom3AcuzativAcc,
-      acuzativNeaccentuatVariants: doom3AcuzativNeaccVariants,
-    },
-    extracted: {
-      nominativ,
-      acuzativAccentuat: acuzativAcc,
-      acuzativNeaccentuat: acuzativNeacc,
-      dativAccentuat: dativAcc,
-      dativNeaccentuat: dativNeaccSelected,
-    },
-    multiValues: {
-      dativNeaccentuatVariants: [dativNeaccShort, dativNeaccFull].filter(Boolean),
-      elisionForms: genDatItems.filter(i => i.isElision).map(i => i.rawText),
-    },
-  };
+  throw new Error(`Unknown group: ${group}`);
 }
 
-// Execute on fixtures and save log
-const euResult = parsePronounHtml(fs.readFileSync('eu-paradigm.html', 'utf8'), 'eu', 'Persoana I');
-const tuResult = parsePronounHtml(fs.readFileSync('tu-paradigm.html', 'utf8'), 'tu', 'Persoana a 2-a');
+export function runFullPronounPipeline() {
+  const root = process.cwd();
+  const dir = path.join(root, 'scratch', 'pronouns');
 
-const fullReport = {
-  timestamp: new Date().toISOString(),
-  fixtures: [euResult, tuResult],
-};
+  const targets = [
+    // GROUP A
+    { group: 'A', lemma: 'eu', file: 'eu-paradigm.html', person: 'Persoana I', number: 'singular' },
+    { group: 'A', lemma: 'tu', file: 'tu-paradigm.html', person: 'Persoana a 2-a', number: 'singular' },
+    { group: 'A', lemma: 'noi', file: path.join(dir, 'noi.html'), person: 'Persoana I', number: 'plural' },
+    { group: 'A', lemma: 'voi', file: path.join(dir, 'voi.html'), person: 'Persoana a 2-a', number: 'plural' },
 
-fs.writeFileSync('pronoun-fixtures.log', JSON.stringify(fullReport, null, 2), 'utf8');
-console.log('Saved pronoun-fixtures.log successfully.');
-console.log('EU:', JSON.stringify(euResult.extracted));
-console.log('TU:', JSON.stringify(tuResult.extracted));
+    // GROUP B
+    { group: 'B', lemma: 'el', file: path.join(dir, 'el.html'), person: null, number: 'singular', genderCol: 0 },
+    { group: 'B', lemma: 'ea', file: path.join(dir, 'ea.html'), person: null, number: 'singular', genderCol: 1 },
+    { group: 'B', lemma: 'ei', file: path.join(dir, 'ei.html'), person: null, number: 'plural', genderCol: 0 },
+    { group: 'B', lemma: 'ele', file: path.join(dir, 'ele.html'), person: null, number: 'plural', genderCol: 1 },
+    { group: 'B', lemma: 'dumneavoastră', file: path.join(dir, 'dumneavoastr%C4%83.html'), person: null, number: 'plural', genderCol: 0 },
+    { group: 'B', lemma: 'dumneata', file: path.join(dir, 'dumneata.html'), person: null, number: 'singular', genderCol: 0 },
+
+    // GROUP C
+    { group: 'C', lemma: 'meu', file: path.join(dir, 'meu.html'), person: null, number: 'singular', genderCol: 0 },
+    { group: 'C', lemma: 'mea', file: path.join(dir, 'mea.html'), person: null, number: 'singular', genderCol: 1 },
+  ];
+
+  const results = [];
+  const errors = [];
+
+  for (const t of targets) {
+    try {
+      const html = fs.readFileSync(t.file, 'utf8');
+      const res = parsePronounRoleBased({
+        html,
+        lemma: t.lemma,
+        group: t.group,
+        personLabel: t.person,
+        number: t.number,
+        genderCol: t.genderCol || 0,
+      });
+      results.push(res);
+      console.log(`[PASS] Group ${t.group} "${t.lemma}":`, res.extracted);
+    } catch (err) {
+      console.error(`[HALT] Error on "${t.lemma}":`, err.message);
+      errors.push({ lemma: t.lemma, error: err.message });
+      break;
+    }
+  }
+
+  const logPayload = {
+    timestamp: new Date().toISOString(),
+    ruleSet: 'dre-p161 Addendum 2 (Role-based Extraction)',
+    successCount: results.length,
+    errorCount: errors.length,
+    results,
+    errors,
+  };
+
+  fs.writeFileSync('pronoun-parser.log', JSON.stringify(logPayload, null, 2), 'utf8');
+  console.log('\nWrote pronoun-parser.log');
+
+  if (errors.length > 0) {
+    console.error('\n❌ PIPELINE HALTED WITH ERRORS.');
+    process.exit(1);
+  } else {
+    console.log('\n✅ ALL 12 PRONOUNS PARSED STRICTLY AND VERIFIED WITH 0 ERRORS!');
+    process.exit(0);
+  }
+}
+
+// Execute when invoked
+runFullPronounPipeline();
