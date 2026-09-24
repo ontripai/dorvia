@@ -13,8 +13,10 @@ export const SEED_DOMAINS: DomainMeta[] = [
     titleEn: 'Core',
     order: 0,
     estimatedWeeks: 2,
-    stationOrder: 'grouped',
-    stations: [],
+    stationOrder: 'sequential',
+    stations: [
+      { id: 'core-pronouns', titleFa: 'ضمایر', titleRo: 'Pronume', order: 1 },
+    ],
     sourcingPolicy: 'common-usage-ok',
     categories: ['everyday', 'transport', 'shopping', 'healthcare', 'emergency'],
     maxItems: 250,

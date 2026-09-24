@@ -694,6 +694,53 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
     }
   }
 
+  // V13: Item stationId validation against domain stations list
+  for (const phrase of phrases) {
+    if (phrase.stationId) {
+      const pDomainId = phrase.domain || phrase.category;
+      const pDomain = domainMap.get(pDomainId);
+      if (!pDomain || !pDomain.stations.some(s => s.id === phrase.stationId)) {
+        errors.push({
+          rule: 'V13',
+          phraseId: phrase.id,
+          entityId: phrase.id,
+          message: `Phrase "${phrase.id}" references stationId "${phrase.stationId}" which is not defined in domain "${pDomainId}" stations list.`,
+        });
+      }
+    }
+  }
+
+  for (const word of words) {
+    if (word.stationId) {
+      const wDomains = word.domains || [];
+      const hasMatchingStation = wDomains.some(dId =>
+        domainMap.get(dId)?.stations.some(s => s.id === word.stationId)
+      );
+      if (!hasMatchingStation) {
+        errors.push({
+          rule: 'V13',
+          phraseId: word.id,
+          entityId: word.id,
+          message: `Word "${word.id}" references stationId "${word.stationId}" which is not defined in any of its domains ([${wDomains.join(', ')}]) stations list.`,
+        });
+      }
+    }
+  }
+
+  for (const dialogue of dialogues) {
+    if (dialogue.stationId) {
+      const dDomain = domainMap.get(dialogue.domain);
+      if (!dDomain || !dDomain.stations.some(s => s.id === dialogue.stationId)) {
+        errors.push({
+          rule: 'V13',
+          phraseId: dialogue.id,
+          entityId: dialogue.id,
+          message: `Dialogue "${dialogue.id}" references stationId "${dialogue.stationId}" which is not defined in domain "${dialogue.domain}" stations list.`,
+        });
+      }
+    }
+  }
+
   // --- Validate Domain Budgets (V16) ---
   for (const domain of domains) {
     if (typeof domain.maxItems === 'number') {
