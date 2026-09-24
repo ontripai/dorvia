@@ -159,8 +159,8 @@ export const CORE_NUMBERS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'draft',
     usageNote: {
-      fa: 'واژه‌ی nouă دارای ۳ کاربرد کاملاً متمایز است: ۱) عدد ۹ («nouă bani»)، ۲) صفت مفرد مؤنث به معنای «نو/جدید» («casă nouă»)، ۳) ضمیر برایی تأکیدی به معنای «به ما» («ne dă nouă»).',
-      en: 'The word "nouă" has 3 distinct roles: 1) cardinal number 9, 2) feminine singular adjective meaning "new", 3) tonic dative pronoun meaning "to us".',
+      fa: 'واژه‌ی nouă دارای ۳ کاربرد کاملاً متمایز است: ۱) عدد ۹ («nouă bani»)، ۲) صفت مفرد مؤنث به معنای «نو/جدید» («casă nouă»)، ۳) ضمیر برایی تأکیدی به معنای «به ما» — همان صورتی که در جدول صرفی noi دیده می‌شود.',
+      en: 'The word "nouă" has 3 distinct roles: 1) cardinal number 9, 2) feminine singular adjective meaning "new", 3) tonic dative pronoun meaning "to us", the form listed in the paradigm of "noi".',
     },
   },
   {
