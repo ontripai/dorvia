@@ -1,6 +1,6 @@
 import fs from 'fs';
-
 import { decodeHtmlEntities, cleanText, isElision } from './lib/dex-text.mjs';
+import { parseNounParadigmTable } from './lib/parse-noun-table.mjs';
 
 async function fetchPage(url) {
   try {
@@ -69,7 +69,10 @@ async function parseTime() {
   const resultsTable = [];
   const haltConditions = [];
 
-  // 1. Test each word for dexonline existence & headword match
+  // ==========================================================================
+  // PART 1: 44 Words Existence Test in dexonline
+  // ==========================================================================
+  log('\n--- PART 1: 44 WORDS EXISTENCE IN DEXONLINE ---');
   for (const [groupName, lemmas] of Object.entries(groups)) {
     log(`\n--- ${groupName.toUpperCase()} ---`);
     for (const lemma of lemmas) {
@@ -80,10 +83,8 @@ async function parseTime() {
       const hasNotFound = res.text.includes('nu este în dicționar');
       const headwords = extractHeadwords(res.text);
 
-      // Normalize comparison: case-insensitive, keep diacritics
       const targetClean = lemma.toLowerCase().replace(/[-‑\s]/g, '');
       const matched = !hasNotFound && headwords.some(h => h.replace(/[-‑\s]/g, '') === targetClean);
-
       const returnedHeadword = matched ? lemma : (headwords[0] || 'N/A');
 
       resultsTable.push({
@@ -99,54 +100,119 @@ async function parseTime() {
     }
   }
 
-  // 2. Check Stop Condition 1 (Addendum 1): Days of the week plural claim
-  // First 5 days: plural === lemma. Last 2 days: plural !== lemma (sâmbete, duminici).
-  log('\n--- EVALUATING STOP CONDITION 1 (ADDENDUM 1): Days of the week plural claims ---');
-  const dayPluralValues = {
-    luni: 'luni',
-    marți: 'marți',
-    miercuri: 'miercuri',
-    joi: 'joi',
-    vineri: 'vineri',
-    sâmbătă: 'sâmbete',
-    duminică: 'duminici',
+  // ==========================================================================
+  // PART 2: 32 Inflected Words Paradigm Extraction (DRE-P164 Addendum 2)
+  // Fetches real https://dexonline.ro/definitie/<lemma>/paradigma pages and
+  // parses noun flexion tables by role/label (never hardcoded indices).
+  // ==========================================================================
+  log('\n--- PART 2: REAL PARADIGM EXTRACTION FROM DEXONLINE (/paradigma) ---');
+
+  // Reference values from user prompt and Addendum 1 & 2
+  const referenceValues = {
+    // 7 days
+    luni: { plural: 'luni', definiteForm: 'lunea' },
+    marți: { plural: 'marți', definiteForm: 'marțea' },
+    miercuri: { plural: 'miercuri', definiteForm: 'miercurea' },
+    joi: { plural: 'joi', definiteForm: 'joia' },
+    vineri: { plural: 'vineri', definiteForm: 'vinerea' },
+    sâmbătă: { plural: 'sâmbete', definiteForm: 'sâmbăta' },
+    duminică: { plural: 'duminici', definiteForm: 'duminica' },
+
+    // 5 clock nouns
+    oră: { plural: 'ore', definiteForm: 'ora' },
+    minut: { plural: 'minute', definiteForm: 'minutul' },
+    ceas: { plural: 'ceasuri', definiteForm: 'ceasul' },
+    jumătate: { plural: 'jumătăți', definiteForm: 'jumătatea' },
+    sfert: { plural: 'sferturi', definiteForm: 'sfertul' },
+
+    // 4 period nouns
+    zi: { plural: 'zile', definiteForm: 'ziua' },
+    săptămână: { plural: 'săptămâni', definiteForm: 'săptămâna' },
+    lună: { plural: 'luni', definiteForm: 'luna' },
+    an: { plural: 'ani', definiteForm: 'anul' },
+
+    // 4 parts of day
+    dimineață: { plural: 'dimineți', definiteForm: 'dimineața' },
+    'după-amiază': { plural: 'după-amiezi', definiteForm: 'după-amiaza' },
+    seară: { plural: 'seri', definiteForm: 'seara' },
+    noapte: { plural: 'nopți', definiteForm: 'noaptea' },
+
+    // 12 months (invariable in DOOM 3 / M999: no plural, no definiteForm)
+    ianuarie: { plural: null, definiteForm: null },
+    februarie: { plural: null, definiteForm: null },
+    martie: { plural: null, definiteForm: null },
+    aprilie: { plural: null, definiteForm: null },
+    mai: { plural: null, definiteForm: null },
+    iunie: { plural: null, definiteForm: null },
+    iulie: { plural: null, definiteForm: null },
+    august: { plural: null, definiteForm: null }, // DOOM 3 M9 has augustul for masc noun, but month is invariable in usage
+    septembrie: { plural: null, definiteForm: null },
+    octombrie: { plural: null, definiteForm: null },
+    noiembrie: { plural: null, definiteForm: null },
+    decembrie: { plural: null, definiteForm: null },
   };
 
-  const daysFirst5 = ['luni', 'marți', 'miercuri', 'joi', 'vineri'];
-  for (const day of daysFirst5) {
-    const val = dayPluralValues[day];
-    const isIdentical = (val === day);
-    log(`Day: "${day}" -> plural: "${val}" (plural === lemma: ${isIdentical})`);
-    if (!isIdentical) {
+  const extractedParadigmResults = {};
+
+  for (const [lemma, expected] of Object.entries(referenceValues)) {
+    const enc = encodeURIComponent(lemma);
+    const pUrl = `https://dexonline.ro/definitie/${enc}/paradigma`;
+    const pRes = await fetchPage(pUrl);
+
+    const tables = [...pRes.text.matchAll(/<table[^>]*class=["'][^"']*lexeme[^"']*["'][^>]*>([\s\S]*?)<\/table>/gi)];
+    let selectedParsed = null;
+
+    // Filter candidate tables where singularNearticulat === lemma
+    const candidates = [];
+    for (let t = 0; t < tables.length; t++) {
+      const parsed = parseNounParadigmTable(tables[t][1], lemma);
+      if (parsed && parsed.singularNearticulat === lemma) {
+        candidates.push({ tableIndex: t, parsed });
+      }
+    }
+
+    if (candidates.length === 1) {
+      selectedParsed = candidates[0].parsed;
+    } else if (candidates.length > 1) {
+      // If multiple (e.g. minut has minuturi vs minute, mai has tool vs month):
+      // Choose candidate matching expected plural if known, or first standard feminine/masculine
+      const matchPlural = candidates.find(c => c.parsed.plural === expected.plural);
+      selectedParsed = matchPlural ? matchPlural.parsed : candidates[0].parsed;
+    }
+
+    extractedParadigmResults[lemma] = selectedParsed;
+
+    const extPlural = selectedParsed?.plural || null;
+    const extDef = selectedParsed?.definiteForm || null;
+
+    log(`Word: "${lemma}" | Extracted: { plural: "${extPlural}", definiteForm: "${extDef}" } | Expected: { plural: "${expected.plural}", definiteForm: "${expected.definiteForm}" }`);
+
+    // Compare with reference (excluding months where reference is null to explore)
+    if (expected.plural !== null && extPlural !== expected.plural) {
       haltConditions.push({
-        id: 'HALT-1-ADDENDUM1',
-        rule: 'Addendum 1 Claim (first 5 days plural must equal lemma)',
-        detail: `Day '${day}' plural is '${val}', expected equal to lemma`
+        id: 'HALT-PLURAL-MISMATCH',
+        rule: `Extracted plural mismatch for '${lemma}'`,
+        detail: `Extracted '${extPlural}', expected '${expected.plural}'`
+      });
+    }
+
+    if (expected.definiteForm !== null && extDef !== expected.definiteForm) {
+      haltConditions.push({
+        id: 'HALT-DEFINITE-MISMATCH',
+        rule: `Extracted definiteForm mismatch for '${lemma}'`,
+        detail: `Extracted '${extDef}', expected '${expected.definiteForm}'`
       });
     }
   }
 
-  for (const day of ['sâmbătă', 'duminică']) {
-    const val = dayPluralValues[day];
-    const isDistinct = (val !== day);
-    log(`Day: "${day}" -> plural: "${val}" (plural !== lemma: ${isDistinct})`);
-    if (!isDistinct) {
-      haltConditions.push({
-        id: 'HALT-1-ADDENDUM1',
-        rule: 'Addendum 1 Claim (sâmbătă/duminică plural must differ from lemma)',
-        detail: `Day '${day}' plural is '${val}', expected distinct from lemma`
-      });
-    }
-  }
-
-  // 3. Check Stop Condition 2: Months POS consistency
-  log('\n--- EVALUATING STOP CONDITION 2: Months POS consistency ---');
-  // All months: ianuarie to decembrie
+  // ==========================================================================
+  // PART 3: Months POS Consistency (Condition 2)
+  // ==========================================================================
+  log('\n--- PART 3: MONTHS POS CONSISTENCY ---');
   const monthPosMap = {};
   for (const m of groups.group2) {
     const enc = encodeURIComponent(m);
     const defRes = await fetchPage(`https://dexonline.ro/definitie/${enc}`);
-    // Check definition text for POS
     const defMatches = [...defRes.text.matchAll(/class=["'][^"']*def\b[^"']*["'][^>]*>([\s\S]*?)<\/p>/gi)];
     let foundPos = 'unknown';
     for (const dm of defMatches) {
@@ -168,17 +234,41 @@ async function parseTime() {
     });
   }
 
-  // 4. Check Stop Condition 4: Hyphen filter on după-amiază
-  log('\n--- EVALUATING STOP CONDITION 4: Hyphen filter on după-amiază ---');
-  const oldHyphenFilter = (str) => /[-‑–—\u2011]/.test(str);
-  const daRejectedByOldFilter = oldHyphenFilter('după-amiază');
-  log(`după-amiază tested against old hyphen filter (/[-‑–—\\u2011]/): rejected = ${daRejectedByOldFilter}`);
-  if (daRejectedByOldFilter) {
-    log('CONFIRMED: The previous hyphen filter rejects "după-amiază" because it contains an internal hyphen!');
-    log('As instructed: Restrict filter to leading hyphen ^[-‑–—\\u2011] (elisions/enclitics), write red test.');
+  // ==========================================================================
+  // PART 4: Hyphen & Elision Real Function Assertion (Condition 4 - Addendum 2)
+  // Tests imported cleanText and isElision from ./lib/dex-text.mjs
+  // ==========================================================================
+  log('\n--- PART 4: REAL DEX-TEXT.MJS FILTER ASSERTIONS ---');
+  const daClean = cleanText('după-amiază');
+  const daIsEl = isElision('după-amiază');
+  log(`cleanText('după-amiază') = "${daClean}" (preserves internal hyphen: ${daClean === 'după-amiază'})`);
+  log(`isElision('după-amiază') = ${daIsEl} (correctly not an elision: ${daIsEl === false})`);
+
+  if (daClean !== 'după-amiază' || daIsEl !== false) {
+    haltConditions.push({
+      id: 'HALT-HYPHEN-FILTER',
+      rule: 'Section 6 Condition 4 (după-amiază must not be corrupted or flagged as elision)',
+      detail: `cleanText gave '${daClean}', isElision gave ${daIsEl}`
+    });
   }
 
-  // 5. Summary & Halt Report
+  const miIsEl = isElision('‑mi');
+  const tiIsEl = isElision('‑ți');
+  const miClean = cleanText('‑mi');
+  log(`isElision('‑mi') = ${miIsEl}, isElision('‑ți') = ${tiIsEl}`);
+  log(`cleanText('‑mi') = "${miClean}"`);
+
+  if (!miIsEl || !tiIsEl || miClean !== 'mi') {
+    haltConditions.push({
+      id: 'HALT-ELISION-REJECTION',
+      rule: 'Enclitic/elision boundary hyphens must be recognized',
+      detail: `miIsEl=${miIsEl}, tiIsEl=${tiIsEl}, miClean='${miClean}'`
+    });
+  }
+
+  // ==========================================================================
+  // PART 5: Summary & Halt Report
+  // ==========================================================================
   log('\n================================================================');
   log(`TOTAL HALT CONDITIONS TRIGGERED: ${haltConditions.length}`);
   for (const h of haltConditions) {
@@ -188,6 +278,10 @@ async function parseTime() {
 
   fs.writeFileSync('time-parser.log', logLines.join('\n'), 'utf8');
   console.log('\nWrote log to time-parser.log');
+
+  if (haltConditions.length > 0) {
+    process.exit(1);
+  }
 }
 
 parseTime();

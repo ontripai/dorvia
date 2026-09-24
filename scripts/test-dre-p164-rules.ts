@@ -71,8 +71,8 @@ console.log('============================================================');
 console.log('DRE-P164 RULES SUITE (TIME MODULE, HYPHEN FILTER, DAYS & MONTHS)');
 console.log('============================================================');
 
-// 1. Red Test: Old hyphen filter corrupts după-amiază
-runTest("Red Test: Old hyphen filter corrupted compound word 'după-amiază'", () => {
+// 1. Documentation Test: History of what the old hyphen filter did
+runTest("Documentation: what the old filter did (corrupted compound words with internal hyphens)", () => {
   const oldCleanText = (text: string) => text.replace(/[-‑–—\u2011]/g, '').trim();
   const oldIsElision = (text: string) => /[-‑–—\u2011]/.test(text);
 
@@ -209,11 +209,11 @@ runTest("Green Test: Group 2 Months are all invariable masculine nouns", () => {
       errors.push({ rule: 'V1', phraseId: lemma, message: `Missing month '${lemma}'` });
       continue;
     }
-    if (entry.pos !== 'noun' || entry.gender !== 'm' || entry.plural !== undefined) {
+    if (entry.pos !== 'noun' || entry.gender !== 'm' || entry.plural !== undefined || entry.definiteForm !== undefined) {
       errors.push({
         rule: 'V11',
         phraseId: entry.id,
-        message: `Month '${lemma}' must be pos: 'noun', gender: 'm', and invariable (no plural). Found: pos=${entry.pos}, gender=${entry.gender}, plural=${entry.plural}`,
+        message: `Month '${lemma}' must be pos: 'noun', gender: 'm', and invariable (no plural, no definiteForm). Found: pos=${entry.pos}, gender=${entry.gender}, plural=${entry.plural}, definiteForm=${entry.definiteForm}`,
       });
     }
   }

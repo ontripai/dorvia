@@ -216,7 +216,6 @@ export const CORE_TIME: RomanianWord[] = [
     lemma: 'ianuarie',
     pos: 'noun',
     gender: 'm',
-    definiteForm: 'ianuarie',
     translations: {
       en: 'January',
       fa: 'ژانویه',
@@ -242,7 +241,6 @@ export const CORE_TIME: RomanianWord[] = [
     lemma: 'februarie',
     pos: 'noun',
     gender: 'm',
-    definiteForm: 'februarie',
     translations: {
       en: 'February',
       fa: 'فوریه',
@@ -268,7 +266,6 @@ export const CORE_TIME: RomanianWord[] = [
     lemma: 'martie',
     pos: 'noun',
     gender: 'm',
-    definiteForm: 'martie',
     translations: {
       en: 'March',
       fa: 'مارس',
@@ -294,7 +291,6 @@ export const CORE_TIME: RomanianWord[] = [
     lemma: 'aprilie',
     pos: 'noun',
     gender: 'm',
-    definiteForm: 'aprilie',
     translations: {
       en: 'April',
       fa: 'آوریل',
@@ -320,7 +316,6 @@ export const CORE_TIME: RomanianWord[] = [
     lemma: 'mai',
     pos: 'noun',
     gender: 'm',
-    definiteForm: 'mai',
     translations: {
       en: 'May',
       fa: 'مه',
@@ -346,7 +341,6 @@ export const CORE_TIME: RomanianWord[] = [
     lemma: 'iunie',
     pos: 'noun',
     gender: 'm',
-    definiteForm: 'iunie',
     translations: {
       en: 'June',
       fa: 'ژوئن',
@@ -372,7 +366,6 @@ export const CORE_TIME: RomanianWord[] = [
     lemma: 'iulie',
     pos: 'noun',
     gender: 'm',
-    definiteForm: 'iulie',
     translations: {
       en: 'July',
       fa: 'ژوئیه',
@@ -398,7 +391,6 @@ export const CORE_TIME: RomanianWord[] = [
     lemma: 'august',
     pos: 'noun',
     gender: 'm',
-    definiteForm: 'august',
     translations: {
       en: 'August',
       fa: 'اوت',
@@ -424,7 +416,6 @@ export const CORE_TIME: RomanianWord[] = [
     lemma: 'septembrie',
     pos: 'noun',
     gender: 'm',
-    definiteForm: 'septembrie',
     translations: {
       en: 'September',
       fa: 'سپتامبر',
@@ -450,7 +441,6 @@ export const CORE_TIME: RomanianWord[] = [
     lemma: 'octombrie',
     pos: 'noun',
     gender: 'm',
-    definiteForm: 'octombrie',
     translations: {
       en: 'October',
       fa: 'اکتبر',
@@ -476,7 +466,6 @@ export const CORE_TIME: RomanianWord[] = [
     lemma: 'noiembrie',
     pos: 'noun',
     gender: 'm',
-    definiteForm: 'noiembrie',
     translations: {
       en: 'November',
       fa: 'نوامبر',
@@ -502,7 +491,6 @@ export const CORE_TIME: RomanianWord[] = [
     lemma: 'decembrie',
     pos: 'noun',
     gender: 'm',
-    definiteForm: 'decembrie',
     translations: {
       en: 'December',
       fa: 'دسامبر',
