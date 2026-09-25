@@ -174,3 +174,64 @@ export function getVerbById(id: string): RomanianVerb | undefined {
 export function getGraphemeById(id: string): RomanianGrapheme | undefined {
   return PUBLISHED_GRAPHEMES.find(g => g.id === id);
 }
+
+export interface PublishedStationInfo {
+  id: string;
+  slug: string;
+  titleFa: string;
+  titleRo: string;
+  order: number;
+  wordCount: number;
+  phraseCount: number;
+  totalCount: number;
+}
+
+/**
+ * Returns all stations across domains that contain published content.
+ * Strictly dynamically calculated from published words and phrases.
+ */
+export function getPublishedStations(): PublishedStationInfo[] {
+  const stations: PublishedStationInfo[] = [];
+  for (const domain of ALL_ROMANIAN_DOMAINS) {
+    for (const st of domain.stations || []) {
+      if (!st.slug) continue;
+      const stWords = PUBLISHED_WORDS.filter(w => w.stationId === st.id);
+      const stPhrases = PUBLISHED_PHRASES.filter(p => p.stationId === st.id);
+      const total = stWords.length + stPhrases.length;
+      if (total > 0) {
+        stations.push({
+          id: st.id,
+          slug: st.slug,
+          titleFa: st.titleFa,
+          titleRo: st.titleRo,
+          order: st.order,
+          wordCount: stWords.length,
+          phraseCount: stPhrases.length,
+          totalCount: total,
+        });
+      }
+    }
+  }
+  return stations.sort((a, b) => a.order - b.order);
+}
+
+/**
+ * Lookup published station by slug.
+ */
+export function getStationBySlug(slug: string): PublishedStationInfo | undefined {
+  const stations = getPublishedStations();
+  return stations.find(s => s.slug === slug);
+}
+
+/**
+ * Returns published words and phrases for a given stationId.
+ */
+export function getStationItems(stationId: string): {
+  words: RomanianWord[];
+  phrases: RomanianPhrase[];
+} {
+  return {
+    words: PUBLISHED_WORDS.filter(w => w.stationId === stationId),
+    phrases: PUBLISHED_PHRASES.filter(p => p.stationId === stationId),
+  };
+}

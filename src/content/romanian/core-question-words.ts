@@ -16,7 +16,7 @@ import { RomanianWord } from '@/lib/romanian/types';
  * استثنا — ترکیب دوواژه‌ای:
  *   de ce (expression — زیرمدخل ce در dexonline)
  *
- * تمامی اقلام با status: 'draft' و stationId: 'core-question-words' ثبت شده‌اند.
+ * تمامی اقلام با status: 'published' و stationId: 'core-question-words' ثبت شده‌اند.
  */
 
 export const CORE_QUESTION_WORDS: RomanianWord[] = [
@@ -39,7 +39,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   // 'unde' لمای مشترک با foundation است و در w-unde زندگی می‌کند
   // (ایستگاه core-question-words روی همان مدخل ثبت شده). dre-p166
@@ -61,7 +61,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-cum',
@@ -81,7 +81,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
 
   // --- گروه ۲: خانواده‌ی cât (چهار صورت متمایز از جدول دو ستونی P37) ---
@@ -103,7 +103,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'قالب کلیدی روزمره: «Cât costă …?» به‌معنای «… چقدر است؟ / قیمتش چنده؟». واژه‌ی «cât» با اسم پس از خود مطابقت جنسی و شماری پیدا می‌کند: «Cât costă?» (قیمت، بدون اسم)، «Câtă apă?» (مؤنث مفرد)، «Câți bani?» (مذکر جمع).',
       en: 'Key everyday pattern: "Cât costă …?" meaning "How much does … cost?". "cât" agrees in gender and number with the following noun: "Cât costă?" (price, without noun), "Câtă apă?" (feminine singular), "Câți bani?" (masculine plural).',
@@ -128,7 +128,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-cati',
@@ -149,7 +149,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-cate',
@@ -170,7 +170,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
 
   // --- گروه ۳: فقط نومیناتیو ---
@@ -192,7 +192,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-care',
@@ -212,7 +212,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
 
   // --- ترکیب استثنایی: de ce ---
@@ -234,6 +234,6 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
 ];
