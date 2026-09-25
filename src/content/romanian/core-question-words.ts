@@ -41,30 +41,8 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'draft',
   },
-  {
-    id: 'w-core-unde',
-    lemma: 'unde',
-    pos: 'adv',
-    translations: {
-      en: 'where',
-      fa: 'کجا',
-    },
-    domains: ['core'],
-    stationId: 'core-question-words',
-    intendedUse: 'produce',
-    source: {
-      kind: 'common-usage',
-      label: 'dexonline — definitie (DOOM 3)',
-      url: 'https://dexonline.ro/definitie/unde',
-      retrievedAt: '2026-09-24',
-    },
-    reviewer: 'ai-only',
-    status: 'draft',
-    usageNote: {
-      fa: 'قالب کلیدی روزمره: «Unde este …?» به‌معنای «… کجاست؟» (مانند «Unde este gara?»).',
-      en: 'Key everyday pattern: "Unde este …?" meaning "Where is …?" (e.g. "Unde este gara?").',
-    },
-  },
+  // 'unde' لمای مشترک با foundation است و در w-unde زندگی می‌کند
+  // (ایستگاه core-question-words روی همان مدخل ثبت شده). dre-p166
   {
     id: 'w-core-cand',
     lemma: 'când',

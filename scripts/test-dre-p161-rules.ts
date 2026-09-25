@@ -106,7 +106,7 @@ runTest('Green Test V11: Published pronoun does not require noun gender or defin
   // Add a test pronoun with pos: 'pronoun' and status: 'published'
   ctx.words!.push({
     id: 'w-test-pronoun',
-    lemma: 'eu',
+    lemma: 'test-pronoun',
     pos: 'pronoun',
     translations: { en: 'I', fa: 'من' },
     domains: ['core'],

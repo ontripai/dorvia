@@ -465,5 +465,153 @@ export const CORE_VERBS: RomanianVerb[] = [
     },
     "reviewer": "ai-only",
     "status": "draft"
+  },
+  {
+    "id": "v-core-a-multumi",
+    "infinitive": "a mulțumi",
+    "translations": {
+      "en": "to thank",
+      "fa": "تشکر کردن / سپاسگزاری کردن"
+    },
+    "domains": [
+      "core"
+    ],
+    "conjugation": {
+      "prezent": {
+        "eu": "mulțumesc",
+        "tu": "mulțumești",
+        "el": "mulțumește",
+        "noi": "mulțumim",
+        "voi": "mulțumiți",
+        "ei": "mulțumesc"
+      },
+      "conjunctiv": {
+        "eu": "mulțumesc",
+        "tu": "mulțumești",
+        "el": "mulțumească",
+        "noi": "mulțumim",
+        "voi": "mulțumiți",
+        "ei": "mulțumească"
+      }
+    },
+    "participiu": "mulțumit",
+    "source": {
+      "label": "dexonline — paradigma",
+      "url": "https://dexonline.ro/definitie/mulțumi/paradigma",
+      "retrievedAt": "2026-09-25"
+    },
+    "reviewer": "ai-only",
+    "status": "draft"
+  },
+  {
+    "id": "v-core-a-ruga",
+    "infinitive": "a ruga",
+    "translations": {
+      "en": "to ask / to beg",
+      "fa": "خواهش کردن / تقاضا کردن"
+    },
+    "domains": [
+      "core"
+    ],
+    "conjugation": {
+      "prezent": {
+        "eu": "rog",
+        "tu": "rogi",
+        "el": "roagă",
+        "noi": "rugăm",
+        "voi": "rugați",
+        "ei": "roagă"
+      },
+      "conjunctiv": {
+        "eu": "rog",
+        "tu": "rogi",
+        "el": "roage",
+        "noi": "rugăm",
+        "voi": "rugați",
+        "ei": "roage"
+      }
+    },
+    "participiu": "rugat",
+    "source": {
+      "label": "dexonline — paradigma",
+      "url": "https://dexonline.ro/definitie/ruga/paradigma",
+      "retrievedAt": "2026-09-25"
+    },
+    "reviewer": "ai-only",
+    "status": "draft"
+  },
+  {
+    "id": "v-core-a-numi",
+    "infinitive": "a numi",
+    "translations": {
+      "en": "to name / to call",
+      "fa": "نامیدن / صدا کردن"
+    },
+    "domains": [
+      "core"
+    ],
+    "conjugation": {
+      "prezent": {
+        "eu": "numesc",
+        "tu": "numești",
+        "el": "numește",
+        "noi": "numim",
+        "voi": "numiți",
+        "ei": "numesc"
+      },
+      "conjunctiv": {
+        "eu": "numesc",
+        "tu": "numești",
+        "el": "numească",
+        "noi": "numim",
+        "voi": "numiți",
+        "ei": "numească"
+      }
+    },
+    "participiu": "numit",
+    "source": {
+      "label": "dexonline — paradigma",
+      "url": "https://dexonline.ro/definitie/numi/paradigma",
+      "retrievedAt": "2026-09-25"
+    },
+    "reviewer": "ai-only",
+    "status": "draft"
+  },
+  {
+    "id": "v-core-a-parea",
+    "infinitive": "a părea",
+    "translations": {
+      "en": "to seem / to appear",
+      "fa": "به نظر رسیدن"
+    },
+    "domains": [
+      "core"
+    ],
+    "conjugation": {
+      "prezent": {
+        "eu": "par",
+        "tu": "pari",
+        "el": "pare",
+        "noi": "părem",
+        "voi": "păreți",
+        "ei": "par"
+      },
+      "conjunctiv": {
+        "eu": "par",
+        "tu": "pari",
+        "el": "pară",
+        "noi": "părem",
+        "voi": "păreți",
+        "ei": "pară"
+      }
+    },
+    "participiu": "părut",
+    "source": {
+      "label": "dexonline — paradigma",
+      "url": "https://dexonline.ro/definitie/părea/paradigma",
+      "retrievedAt": "2026-09-25"
+    },
+    "reviewer": "ai-only",
+    "status": "draft"
   }
 ];

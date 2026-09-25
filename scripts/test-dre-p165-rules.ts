@@ -293,7 +293,7 @@ const negativeListIds = [
   'w-core-cine',
   'w-core-care',
   'w-core-ce',
-  'w-core-unde',
+  'w-unde',
   'w-core-cand',
   'w-core-cum',
   // Independent time words
