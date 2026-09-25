@@ -7,7 +7,7 @@ import { RomanianWord, RomanianPhrase } from '@/lib/romanian/types';
  * شامل:
  * - ۱۲ واژه (bon/bună, bine, rău, mai [adv], salut [noun], pa [interj], da, nu, plăcere, revedere, scuză)
  * - ۲۰ عبارت کاربردی با منبع‌دهی دقیق
- * - ثبت سیاست رجیستر روی پنج جفت تعاملی (dumneavoastră فعل جمع voi می‌گیرد)
+ * - ثبت سیاست رجیستر روی چهار جفت تعاملی (dumneavoastră فعل جمع voi می‌گیرد)
  * - قاعده وارونگی در noapte bună
  *
  * تمامی اقلام با status: 'draft' و stationId: 'core-greetings' ثبت شده‌اند.
@@ -811,8 +811,8 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'draft',
     isFree: true,
     usageNote: {
-      fa: 'پرسش رسمی درباره‌ی نام با ضمیر انعکاسی/برایی vă و صیغه‌ی دوم شخص جمع numiți از فعل a numi. ضمیر احترامی dumneavoastră با صیغه‌ی جمع می‌آید (در برابر فرمول غیررسمی «Cum te cheamă?»).',
-      en: 'Formal inquiry about name using reflexive vă and 2nd person plural numiți of a numi. Polite dumneavoastră governs plural agreement (contrasting with informal "Cum te cheamă?").',
+      fa: 'پرسش رسمی درباره‌ی نام با ضمیر vă و صیغه‌ی دوم‌شخص جمع numiți از فعل a numi. ضمیر احترامی dumneavoastră صیغه‌ی جمع می‌گیرد، حتی وقتی با یک نفر حرف می‌زنید.',
+      en: "Formal inquiry about one's name, using vă and the 2nd person plural numiți of a numi. Polite dumneavoastră governs plural agreement even when addressing one person.",
     },
   },
   {
