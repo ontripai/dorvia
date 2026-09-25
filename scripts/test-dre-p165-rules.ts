@@ -213,10 +213,11 @@ runTest('Parser Green Test: Healthy table for "zi" extracts correctly', () => {
 });
 
 // ============================================================================
-// PART 2: 10 formOf Backfill Links Validation (Section 2)
+// PART 2: 13 formOf Backfill Links Validation (Section 2 & Addendum 1)
 // ============================================================================
 
 const expectedLinks: Record<string, string> = {
+  // 7 pronouns (Section 2)
   'w-core-ma': 'w-core-eu',
   'w-core-imi': 'w-core-eu',
   'w-core-te': 'w-core-tu',
@@ -224,12 +225,17 @@ const expectedLinks: Record<string, string> = {
   'w-core-ne': 'w-core-noi',
   'w-core-va': 'w-core-voi',
   'w-core-mea': 'w-core-meu',
+  // 3 question words (Section 2)
   'w-core-cata': 'w-core-cat',
   'w-core-cati': 'w-core-cat',
   'w-core-cate': 'w-core-cat',
+  // 3 third-person pronouns (Addendum 1)
+  'w-core-ea': 'w-core-el',
+  'w-core-ei': 'w-core-el',
+  'w-core-ele': 'w-core-el',
 };
 
-runTest('Green Test: All 10 backfilled entries have correct formOf target ID', () => {
+runTest('Green Test: All 13 backfilled entries have correct formOf target ID', () => {
   const errors: ValidationError[] = [];
   for (const [entryId, targetId] of Object.entries(expectedLinks)) {
     const entry = ALL_WORDS.find(w => w.id === entryId);
@@ -268,22 +274,29 @@ runTest('Green Test: All 10 backfilled entries have correct formOf target ID', (
 });
 
 // ============================================================================
-// PART 3: Items that MUST NOT have formOf (Section 3 negative list)
+// PART 3: Items that MUST NOT have formOf (Section 3 negative list & Section 4)
 // ============================================================================
 
 const negativeListIds = [
+  // Citation lemmas (Section 4)
+  'w-core-eu',
+  'w-core-tu',
+  'w-core-noi',
+  'w-core-voi',
   'w-core-el',
-  'w-core-ea',
-  'w-core-ei',
-  'w-core-ele',
+  'w-core-meu',
+  'w-core-cat',
+  // Independent polite pronouns
   'w-core-dumneata',
   'w-core-dumneavoastra',
+  // Independent question words
   'w-core-cine',
   'w-core-care',
   'w-core-ce',
   'w-core-unde',
   'w-core-cand',
   'w-core-cum',
+  // Independent time words
   'w-time-azi',
   'w-time-astazi',
 ];
