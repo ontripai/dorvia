@@ -131,8 +131,8 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'draft',
     usageNote: {
-      fa: 'قید احوال‌پرسی و تفضیلی در عبارت‌هایی چون Ce mai faci?. هم‌آوا با ماه مه (w-time-mai در ایستگاه core-time با pos: noun) ولی مستقل و بدون رابطه‌ی صرفی.',
-      en: 'Greeting and comparative adverb used in phrases like Ce mai faci?. Homophone of May (w-time-mai in core-time, pos: noun) without inflectional relation.',
+      fa: 'قید احوال‌پرسی و تفضیلی در عبارت‌هایی چون Ce mai faci?. همنگاشت با نام ماه مه، ولی واژه‌ی مستقلی است و رابطه‌ی صرفی با آن ندارد.',
+      en: 'Greeting and comparative adverb used in phrases like Ce mai faci?. Homograph of the month May, but an independent word with no inflectional relation.',
     },
   },
   {
@@ -182,8 +182,8 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'draft',
     usageNote: {
-      fa: 'صوت (interj) برای خداحافظی غیررسمی و صمیمانه میان دوستان و آشنایان نزدیک.',
-      en: 'Interjection used as an informal farewell among friends.',
+      fa: 'صوت خداحافظی غیررسمی و صمیمانه میان دوستان و آشنایان نزدیک.',
+      en: 'Informal farewell greeting among friends and close acquaintances.',
     },
   },
   {

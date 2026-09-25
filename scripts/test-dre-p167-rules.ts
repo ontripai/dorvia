@@ -257,7 +257,58 @@ runTest('GREEN TEST 3: Case-insensitive match with capital "La" in "La ce oră?"
 });
 
 // ============================================================================
-// TEST 7: Green Test 1 - Full current active registry evaluated against V27
+// TEST 7: Red Test 5 - counterExamples scoped strictly to its own entity (no cross-entity leak)
+// ============================================================================
+runTest('RED TEST 5: Token in another entity\'s counterExamples fails V27 on entity lacking it', () => {
+  const ctx = getCleanBaseContext();
+  const testWord = ctx.words!.find(w => w.id === 'w-apa');
+  if (testWord) {
+    testWord.usageNote = {
+      fa: 'اینجا کلمه‌ی patrusprezece آمده است بدون اینکه در counterExamples خودش باشد.',
+      en: 'Here patrusprezece is used without being in its own counterExamples.',
+    };
+  }
+
+  const errors = validateRomanianContent(ctx).filter(
+    e => e.rule === 'V27' && e.phraseId === 'w-apa' && e.message.includes('"patrusprezece"')
+  );
+
+  return {
+    expectedRule: 'V27',
+    errors,
+    shouldPass: false,
+  };
+});
+
+// ============================================================================
+// TEST 8: Green Test 4 - Three number entries pass V27 using their own counterExamples
+// ============================================================================
+runTest('GREEN TEST 4: w-num-paisprezece, w-num-saisprezece, and w-num-saizeci pass V27 with counterExamples', () => {
+  const ctx = getCleanBaseContext();
+  const numberWordIds = ['w-num-paisprezece', 'w-num-saisprezece', 'w-num-saizeci'];
+  const testWords = ctx.words!.filter(w => numberWordIds.includes(w.id));
+
+  const testCtx: RomanianValidationContext = {
+    words: testWords,
+    verbs: [],
+    graphemes: [],
+    phrases: [],
+    dialogues: [],
+    domains: ctx.domains,
+  };
+
+  const errors = validateRomanianContent(testCtx).filter(
+    e => e.rule === 'V27' && numberWordIds.includes(e.phraseId)
+  );
+
+  return {
+    errors,
+    shouldPass: true,
+  };
+});
+
+// ============================================================================
+// TEST 9: Green Test 1 - Full current active registry evaluated against V27
 // ============================================================================
 runTest('GREEN TEST 1: Full current active registry evaluated against V27', () => {
   const ctx = getCleanBaseContext();

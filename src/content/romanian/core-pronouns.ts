@@ -345,8 +345,8 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'draft',
     usageNote: {
-      fa: 'واژه‌ی «dumneavoastră» هم برای مفرد و هم برای جمع به کار می‌رود و همواره با صیغه‌ی دوم‌شخص جمع صرف می‌شود («Dumneavoastră sunteți»، نه «este»). همچنین در نقش ملکی بدون تغییر می‌ماند («numele dumneavoastră»).',
-      en: '"dumneavoastră" is used for both singular and plural formal address and always takes the second-person plural verb form ("Dumneavoastră sunteți", not "este"). It is also invariable as a possessive ("numele dumneavoastră").',
+      fa: 'واژه‌ی «dumneavoastră» هم برای مفرد و هم برای جمع به کار می‌رود و همواره با صیغه‌ی دوم‌شخص جمع صرف می‌شود («Dumneavoastră sunteți»، نه «este»). همچنین در نقش ملکی بدون تغییر می‌ماند («casa dumneavoastră»).',
+      en: '"dumneavoastră" is used for both singular and plural formal address and always takes the second-person plural verb form ("Dumneavoastră sunteți", not "este"). It is also invariable as a possessive ("casa dumneavoastră").',
     },
   },
   {

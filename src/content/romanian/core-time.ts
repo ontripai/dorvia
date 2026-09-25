@@ -332,8 +332,8 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'draft',
     usageNote: {
-      fa: 'واژه‌ی «mai» دارای سه کاربرد کاملاً متمایز است: ۱) اسم ماه پنجم سال (ماه مه؛ همین مدخل)، ۲) قید احوال‌پرسی/تفضیلی (رجوع به مدخل هم‌آوا w-core-mai-adv در ایستگاه core-greetings)، ۳) جزء صرفی.',
-      en: 'The word "mai" has three distinct roles: 1) the fifth month of the year (May; this entry), 2) greeting/comparative adverb (see homophone entry w-core-mai-adv in station core-greetings), 3) grammatical aspect/tense marker.',
+      fa: 'واژه‌ی «mai» دارای سه کاربرد کاملاً متمایز است: ۱) اسم ماه پنجم سال (ماه مه؛ همین مدخل)، ۲) قید احوال‌پرسی و تفضیلی، که مدخل جداگانه‌ای دارد، ۳) جزء صرفی.',
+      en: 'The word "mai" has three distinct roles: 1) the fifth month of the year (May; this entry), 2) greeting and comparative adverb, which has a separate entry, 3) grammatical aspect/tense marker.',
     },
   },
   {

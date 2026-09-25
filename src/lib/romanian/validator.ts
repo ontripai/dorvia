@@ -1105,12 +1105,11 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
     }
   };
 
-  // ۱. واژه‌ها: لما، جمع، معرفه، فرم نمایشی نمونه
+  // ۱. واژه‌ها: لما، جمع، معرفه
   for (const w of words) {
     addVocabTokens(w.lemma);
     addVocabTokens(w.plural);
     addVocabTokens(w.definiteForm);
-    addVocabTokens(w.exampleForm);
   }
 
   // ۲. افعال: شش صیغه‌ی حال و التزامی، وجه وصفی، اجزای مصدر (a و ریشه)
@@ -1155,16 +1154,32 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
     entityId: string,
     entityLabel: string,
     field: string,
-    text?: string
+    text?: string,
+    counterExamples?: string[]
   ) => {
     if (!text) return;
     const textToScan = text.replace(/\{\{[^}]*\}\}/g, ' ');
     const matches = textToScan.match(LATIN_TOKEN_REGEX);
     if (!matches) return;
 
+    // استخراج توکن‌های مجاز محلی (مخصوص همین مدخل) از فیلد counterExamples
+    const localAllowed = new Set<string>();
+    if (counterExamples && Array.isArray(counterExamples)) {
+      for (const ce of counterExamples) {
+        if (typeof ce === 'string') {
+          const ceMatches = ce.match(LATIN_TOKEN_REGEX);
+          if (ceMatches) {
+            for (const cet of ceMatches) {
+              localAllowed.add(cet.toLowerCase());
+            }
+          }
+        }
+      }
+    }
+
     for (const rawToken of matches) {
       const tokenLower = rawToken.toLowerCase();
-      if (!allowedVocab.has(tokenLower)) {
+      if (!allowedVocab.has(tokenLower) && !localAllowed.has(tokenLower)) {
         errors.push({
           rule: 'V27',
           phraseId: entityId,
@@ -1177,21 +1192,21 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
 
   // دامنه ۱: usageNote.fa هر واژه، فعل، گرافم و عبارت
   for (const w of words) {
-    validateLatinTokens('word', w.id || '(missing-id)', w.lemma || 'word', 'usageNote.fa', w.usageNote?.fa);
+    validateLatinTokens('word', w.id || '(missing-id)', w.lemma || 'word', 'usageNote.fa', w.usageNote?.fa, w.counterExamples);
   }
   for (const v of verbs) {
-    validateLatinTokens('verb', v.id || '(missing-id)', v.infinitive || 'verb', 'usageNote.fa', v.usageNote?.fa);
+    validateLatinTokens('verb', v.id || '(missing-id)', v.infinitive || 'verb', 'usageNote.fa', v.usageNote?.fa, (v as any).counterExamples);
   }
   for (const g of graphemes) {
-    validateLatinTokens('grapheme', g.id || '(missing-id)', g.grapheme || 'grapheme', 'usageNote.fa', (g as any).usageNote?.fa);
+    validateLatinTokens('grapheme', g.id || '(missing-id)', g.grapheme || 'grapheme', 'usageNote.fa', (g as any).usageNote?.fa, (g as any).counterExamples);
   }
   for (const p of phrases) {
-    validateLatinTokens('phrase', p.id || '(missing-id)', p.slug || 'phrase', 'usageNote.fa', p.usageNote?.fa);
+    validateLatinTokens('phrase', p.id || '(missing-id)', p.slug || 'phrase', 'usageNote.fa', p.usageNote?.fa, (p as any).counterExamples);
   }
 
   // دامنه ۲: متن رومانیایی عبارت‌ها (فیلد ro)
   for (const p of phrases) {
-    validateLatinTokens('phrase', p.id || '(missing-id)', p.slug || 'phrase', 'text.ro', p.text?.ro);
+    validateLatinTokens('phrase', p.id || '(missing-id)', p.slug || 'phrase', 'text.ro', p.text?.ro, (p as any).counterExamples);
   }
 
   return errors;
