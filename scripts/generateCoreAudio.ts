@@ -423,7 +423,7 @@ async function main() {
       }
     }
 
-    if (clipsForItem.length > 0) {
+    if (clipsForItem.length === 2) {
       manifestData[item.id] = clipsForItem;
     }
   }
@@ -489,6 +489,38 @@ async function main() {
   } else {
     for (const r of otherMismatchRecords) {
       console.log(`  ${r.filename}: target="${r.targetText}", transcribed="${r.transcribedText}"`);
+    }
+  }
+
+  console.log('\n--- PAIR DURATION RATIO CHECK (Aoede vs Puck) ---');
+  const pairRatios: Array<{ id: string; target: string; aoedeMs: number; puckMs: number; ratio: number }> = [];
+
+  for (const [id, clips] of Object.entries(manifestData)) {
+    if (clips.length === 2) {
+      const aoede = clips.find(c => c.voice === 'Aoede');
+      const puck = clips.find(c => c.voice === 'Puck');
+      if (aoede && puck && aoede.durationMs > 0 && puck.durationMs > 0) {
+        const ratio = Math.max(aoede.durationMs, puck.durationMs) / Math.min(aoede.durationMs, puck.durationMs);
+        pairRatios.push({
+          id,
+          target: clipRecords.find(r => r.id === id)?.targetText || id,
+          aoedeMs: aoede.durationMs,
+          puckMs: puck.durationMs,
+          ratio,
+        });
+      }
+    }
+  }
+
+  pairRatios.sort((a, b) => b.ratio - a.ratio);
+
+  const highRatioItems = pairRatios.filter(p => p.ratio >= 2.0);
+  if (highRatioItems.length === 0) {
+    console.log('  All pair ratios are under 2.0x! Excellent consistency.');
+  } else {
+    console.log(`  Found ${highRatioItems.length} item(s) with duration ratio >= 2.0x:`);
+    for (const h of highRatioItems) {
+      console.log(`  - [${h.ratio.toFixed(2)}x] "${h.id}" ("${h.target}"): Aoede=${h.aoedeMs}ms, Puck=${h.puckMs}ms`);
     }
   }
   console.log(`Manifest written to: ${manifestFile}`);

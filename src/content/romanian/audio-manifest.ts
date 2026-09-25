@@ -589,19 +589,5 @@ export const CORE_AUDIO: Record<string, AudioClip[]> = {
       "src": "/audio/romanian/core/w-core-meu-puck.mp3",
       "durationMs": 1340
     }
-  ],
-  "w-core-mea": [
-    {
-      "voice": "Aoede",
-      "src": "/audio/romanian/core/w-core-mea-aoede.mp3",
-      "durationMs": 1340
-    }
-  ],
-  "w-unde": [
-    {
-      "voice": "Puck",
-      "src": "/audio/romanian/core/w-unde-puck.mp3",
-      "durationMs": 1420
-    }
   ]
 };
