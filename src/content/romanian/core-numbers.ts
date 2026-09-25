@@ -234,6 +234,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       fa: 'املای استاندارد این عدد paisprezece است (نه patrusprezece).',
       en: 'The standard spelling is "paisprezece" (not "patrusprezece").',
     },
+    counterExamples: ['patrusprezece'],
   },
   {
     id: 'w-num-cincisprezece',
@@ -272,6 +273,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       fa: 'املای استاندارد این عدد șaisprezece است (نه șasesprezece).',
       en: 'The standard spelling is "șaisprezece" (not "șasesprezece").',
     },
+    counterExamples: ['șasesprezece'],
   },
   {
     id: 'w-num-saptesprezece',
@@ -424,6 +426,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       fa: 'املای استاندارد عدد ۶۰ در رومانیایی șaizeci است (نه șasezeci).',
       en: 'The standard spelling is "șaizeci" (not "șasezeci").',
     },
+    counterExamples: ['șasezeci'],
   },
   {
     id: 'w-num-saptezeci',

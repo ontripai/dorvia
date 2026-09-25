@@ -11,7 +11,7 @@ import {
 export type ValidationRuleId =
   | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8'
   | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16'
-  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24' | 'V25' | 'V26';
+  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24' | 'V25' | 'V26' | 'V27';
 
 export interface ValidationRuleMeta {
   id: ValidationRuleId;
@@ -46,6 +46,7 @@ export const VALIDATION_RULES: readonly ValidationRuleMeta[] = Object.freeze([
   { id: 'V24', name: 'Registry Completeness', description: 'All entities in source content files must be present in unified registry' },
   { id: 'V25', name: 'Published Example Word', description: 'Published graphemes must reference published example words' },
   { id: 'V26', name: 'Unique Lemma and POS', description: 'The (lemma, pos) pair of every word must be unique across the registry' },
+  { id: 'V27', name: 'Usage Note Vocabulary Conformance', description: 'All Latin tokens in usage notes (fa) and phrase ro texts must be valid Romanian vocabulary from registry or allowlist' },
 ]);
 
 export interface ValidationError {
@@ -75,6 +76,26 @@ export interface RomanianValidationContext {
 }
 
 const SLUG_REGEX = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+
+/**
+ * الگوی استخراج نشانه‌های لاتین به همراه حروف دارای نشانه‌های رومانیایی (ă â î ș ț) و خط‌تیره‌های درون‌واژه‌ای
+ */
+export const LATIN_TOKEN_REGEX = /[a-zA-ZăâîșțĂÂÎȘȚ]+(?:-[a-zA-ZăâîșțĂÂÎȘȚ]+)*/gu;
+
+/**
+ * واژه‌های نقشی که مدخل مستقل ندارند ولی در یادداشت‌ها لازم‌اند.
+ * هر مدخل تازه اینجا باید دلیل داشته باشد — این فهرست راه فرار از V27 نیست.
+ * سقف تعیین‌شده: حداکثر ۱۵ مدخل (بند ۲ dre-p167).
+ */
+export const FUNCTION_WORD_ALLOWLIST: readonly string[] = Object.freeze([
+  'de',  // قاعده‌ی «de بعد از ۲۰» در ماژول اعداد — موضوع خودِ قاعده است
+  'la',  // در la revedere و La ce oră؟ — در لوکوسیون منبع آمده
+  'cu',  // در cu plăcere — در لوکوسیون منبع آمده
+  'un',  // حرف تعریف نامعین مذکر — موضوع قاعده‌ی مطابقت جنسیت
+  'o',   // حرف تعریف نامعین مؤنث — همان
+  'și',  // موضوع قاعده‌ی اعداد مرکب
+  'pe',  // حرف اضافه‌ی مفعول مستقیم رومانیایی
+]);
 
 export const ZWNJ_EXCEPTIONS: readonly string[] = Object.freeze([
   'میز',
@@ -1051,6 +1072,141 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
     } else {
       lemmaPosMap.set(key, word.id);
     }
+  }
+
+  // --- Validate Usage Note & Phrase Text Conformance (V27) ---
+  /**
+   * محدودیت واقعی دامنه‌ی بررسی V27:
+   * فیلد usageNote.en بررسی نمی‌شود، زیرا در نثر انگلیسی واژگان انگلیسی با واژگان رومانیایی
+   * بدون یک قرارداد نشانه‌گذاری صریح تفکیک‌پذیر نیستند.
+   * پوشش فیلد انگلیسی به صورت غیرمستقیم از طریق تناظر محتوایی آن با usageNote.fa تأمین می‌شود.
+   * ادعا نمی‌شود که قاعده کامل است.
+   */
+
+  // سقف ۱۵ مدخل برای فهرست واژه‌های نقشی مجاز
+  if (FUNCTION_WORD_ALLOWLIST.length > 15) {
+    errors.push({
+      rule: 'V27',
+      phraseId: 'FUNCTION_WORD_ALLOWLIST',
+      entityId: 'FUNCTION_WORD_ALLOWLIST',
+      message: `FUNCTION_WORD_ALLOWLIST exceeds maximum allowed size of 15 entries (currently ${FUNCTION_WORD_ALLOWLIST.length}). The allowlist must not be used to bypass V27.`,
+    });
+  }
+
+  // استخراج واژگان مجاز از خود رجیستری (بدون فهرست دستی)
+  const allowedVocab = new Set<string>();
+  const addVocabTokens = (raw?: string) => {
+    if (!raw) return;
+    const tokens = raw.match(LATIN_TOKEN_REGEX);
+    if (tokens) {
+      for (const t of tokens) {
+        allowedVocab.add(t.toLowerCase());
+      }
+    }
+  };
+
+  // ۱. واژه‌ها: لما، جمع، معرفه
+  for (const w of words) {
+    addVocabTokens(w.lemma);
+    addVocabTokens(w.plural);
+    addVocabTokens(w.definiteForm);
+  }
+
+  // ۲. افعال: شش صیغه‌ی حال و التزامی، وجه وصفی، اجزای مصدر (a و ریشه)
+  for (const v of verbs) {
+    addVocabTokens(v.participiu);
+    addVocabTokens(v.infinitive);
+    if (v.conjugation) {
+      if (v.conjugation.prezent) {
+        for (const f of Object.values(v.conjugation.prezent)) addVocabTokens(f);
+      }
+      if (v.conjugation.conjunctiv) {
+        for (const f of Object.values(v.conjugation.conjunctiv)) addVocabTokens(f);
+      }
+    }
+  }
+
+  // ۳. گرافم‌ها: نماد گرافم و فرم نمایشی نمونه
+  for (const g of graphemes) {
+    addVocabTokens(g.grapheme);
+    addVocabTokens(g.exampleForm);
+  }
+
+  // ۴. متن ro هر عبارت (با حذف نشانه‌های قالبی {{name}})
+  for (const p of phrases) {
+    if (p.text?.ro) {
+      const cleanRo = p.text.ro.replace(/\{\{[^}]*\}\}/g, ' ');
+      addVocabTokens(cleanRo);
+    }
+    if (p.informalVariant?.ro) {
+      const cleanInf = p.informalVariant.ro.replace(/\{\{[^}]*\}\}/g, ' ');
+      addVocabTokens(cleanInf);
+    }
+  }
+
+  // ۵. فهرست واژه‌های نقشی مجاز
+  for (const fw of FUNCTION_WORD_ALLOWLIST) {
+    allowedVocab.add(fw.toLowerCase());
+  }
+
+  const validateLatinTokens = (
+    entityType: string,
+    entityId: string,
+    entityLabel: string,
+    field: string,
+    text?: string,
+    counterExamples?: string[]
+  ) => {
+    if (!text) return;
+    const textToScan = text.replace(/\{\{[^}]*\}\}/g, ' ');
+    const matches = textToScan.match(LATIN_TOKEN_REGEX);
+    if (!matches) return;
+
+    // استخراج توکن‌های مجاز محلی (مخصوص همین مدخل) از فیلد counterExamples
+    const localAllowed = new Set<string>();
+    if (counterExamples && Array.isArray(counterExamples)) {
+      for (const ce of counterExamples) {
+        if (typeof ce === 'string') {
+          const ceMatches = ce.match(LATIN_TOKEN_REGEX);
+          if (ceMatches) {
+            for (const cet of ceMatches) {
+              localAllowed.add(cet.toLowerCase());
+            }
+          }
+        }
+      }
+    }
+
+    for (const rawToken of matches) {
+      const tokenLower = rawToken.toLowerCase();
+      if (!allowedVocab.has(tokenLower) && !localAllowed.has(tokenLower)) {
+        errors.push({
+          rule: 'V27',
+          phraseId: entityId,
+          entityId: entityId,
+          message: `Unverified Latin token "${rawToken}" in ${entityType} "${entityId}" (${entityLabel}) field "${field}". Token is not present in registry vocabulary or FUNCTION_WORD_ALLOWLIST.`,
+        });
+      }
+    }
+  };
+
+  // دامنه ۱: usageNote.fa هر واژه، فعل، گرافم و عبارت
+  for (const w of words) {
+    validateLatinTokens('word', w.id || '(missing-id)', w.lemma || 'word', 'usageNote.fa', w.usageNote?.fa, w.counterExamples);
+  }
+  for (const v of verbs) {
+    validateLatinTokens('verb', v.id || '(missing-id)', v.infinitive || 'verb', 'usageNote.fa', v.usageNote?.fa, (v as any).counterExamples);
+  }
+  for (const g of graphemes) {
+    validateLatinTokens('grapheme', g.id || '(missing-id)', g.grapheme || 'grapheme', 'usageNote.fa', (g as any).usageNote?.fa, (g as any).counterExamples);
+  }
+  for (const p of phrases) {
+    validateLatinTokens('phrase', p.id || '(missing-id)', p.slug || 'phrase', 'usageNote.fa', p.usageNote?.fa, (p as any).counterExamples);
+  }
+
+  // دامنه ۲: متن رومانیایی عبارت‌ها (فیلد ro)
+  for (const p of phrases) {
+    validateLatinTokens('phrase', p.id || '(missing-id)', p.slug || 'phrase', 'text.ro', p.text?.ro, (p as any).counterExamples);
   }
 
   return errors;

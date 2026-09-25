@@ -100,6 +100,26 @@ export const SEED_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
   },
+  {
+    id: 'w-incet',
+    lemma: 'încet',
+    pos: 'adv',
+    translations: { en: 'slowly / quietly', fa: 'آهسته / آرام' },
+    domains: ['core'],
+    intendedUse: 'produce',
+    source: {
+      kind: 'common-usage',
+      label: "dexonline (DEX '09 / DOOM 3)",
+      url: 'https://dexonline.ro/definitie/%C3%AEncet',
+      retrievedAt: '2026-09-25',
+    },
+    reviewer: 'ai-only',
+    status: 'draft',
+    usageNote: {
+      fa: 'قید به معنای «آرام، آهسته، بی‌صدا». در عبارت‌هایی چون «mai încet» به کار می‌رود.',
+      en: 'Adverb meaning "slowly / quietly / softly". Used in expressions like "mai încet".',
+    },
+  },
 ];
 
 export const SEED_VERBS: RomanianVerb[] = [

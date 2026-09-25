@@ -51,6 +51,7 @@ export type RomanianWord = {
   reviewer?: string | null;
   status: 'draft' | 'review' | 'published' | 'archived';
   usageNote?: { fa: string; en: string };
+  counterExamples?: string[];   // صورت‌هایی که عمداً به‌عنوان غلط رایج نقل می‌شوند
 };
 
 export type RomanianVerb = {

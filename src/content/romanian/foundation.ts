@@ -399,8 +399,8 @@ export const FOUNDATION_WORDS: RomanianWord[] = [
     "reviewer": "ai-only",
     "status": "published",
     "usageNote": {
-      "fa": "در معنای «کمک» خنثی است با جمع «ajutoare». در معنای «دستیار/کمک‌کار» اسم مذکر است با جمع «ajutori» (استخراج‌شده از dexonline DOOM 3).",
-      "en": "Neuter noun meaning \"help\" with plural \"ajutoare\". As masculine noun meaning \"assistant/helper\", its plural is \"ajutori\" (sourced from dexonline DOOM 3)."
+      "fa": "در معنای «کمک» خنثی است و جمعش «ajutoare» است. واژه‌ی همنگاشتی هم هست به معنای «دستیار» که اسم مذکر است و جمع دیگری دارد؛ در این درس‌ها فقط معنای «کمک» به کار می‌آید.",
+      "en": "Neuter noun meaning \"help\" with plural \"ajutoare\". There is also a homograph meaning \"assistant\" which is masculine and has a different plural; only the meaning \"help\" is taught in these lessons."
     }
   },
   {
