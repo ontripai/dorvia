@@ -6,588 +6,588 @@ export const CORE_AUDIO: Record<string, AudioClip[]> = {
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-buna-dimineata-aoede.mp3",
-      "durationMs": 4900
+      "durationMs": 3672
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-buna-dimineata-puck.mp3",
-      "durationMs": 4130
+      "durationMs": 3648
     }
   ],
   "p-core-buna-ziua": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-buna-ziua-aoede.mp3",
-      "durationMs": 3530
+      "durationMs": 2784
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-buna-ziua-puck.mp3",
-      "durationMs": 3170
+      "durationMs": 2760
     }
   ],
   "p-core-buna-seara": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-buna-seara-aoede.mp3",
-      "durationMs": 3890
+      "durationMs": 2736
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-buna-seara-puck.mp3",
-      "durationMs": 4370
+      "durationMs": 3792
     }
   ],
   "p-core-noapte-buna": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-noapte-buna-aoede.mp3",
-      "durationMs": 3170
+      "durationMs": 2568
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-noapte-buna-puck.mp3",
-      "durationMs": 3380
+      "durationMs": 2904
     }
   ],
   "p-core-la-revedere": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-la-revedere-aoede.mp3",
-      "durationMs": 5020
+      "durationMs": 4152
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-la-revedere-puck.mp3",
-      "durationMs": 3740
+      "durationMs": 2928
     }
   ],
   "p-core-pa": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-pa-aoede.mp3",
-      "durationMs": 1010
+      "durationMs": 504
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-pa-puck.mp3",
-      "durationMs": 1010
+      "durationMs": 456
     }
   ],
   "p-core-o-zi-buna": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-o-zi-buna-aoede.mp3",
-      "durationMs": 4780
+      "durationMs": 4344
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-o-zi-buna-puck.mp3",
-      "durationMs": 3980
+      "durationMs": 3480
     }
   ],
   "p-core-va-rog": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-va-rog-aoede.mp3",
-      "durationMs": 2660
+      "durationMs": 2160
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-va-rog-puck.mp3",
-      "durationMs": 3290
+      "durationMs": 2472
     }
   ],
   "p-core-te-rog": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-te-rog-aoede.mp3",
-      "durationMs": 2620
+      "durationMs": 2160
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-te-rog-puck.mp3",
-      "durationMs": 2380
+      "durationMs": 1944
     }
   ],
   "p-core-va-multumesc": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-va-multumesc-aoede.mp3",
-      "durationMs": 3530
+      "durationMs": 3072
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-va-multumesc-puck.mp3",
-      "durationMs": 3580
+      "durationMs": 2688
     }
   ],
   "p-core-multumim": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-multumim-aoede.mp3",
-      "durationMs": 2260
+      "durationMs": 1800
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-multumim-puck.mp3",
-      "durationMs": 1970
+      "durationMs": 1512
     }
   ],
   "p-core-cu-placere": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-cu-placere-aoede.mp3",
-      "durationMs": 2500
+      "durationMs": 2016
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-cu-placere-puck.mp3",
-      "durationMs": 3020
+      "durationMs": 2472
     }
   ],
   "p-core-scuze": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-scuze-aoede.mp3",
-      "durationMs": 1660
+      "durationMs": 1248
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-scuze-puck.mp3",
-      "durationMs": 1610
+      "durationMs": 1056
     }
   ],
   "p-core-ce-mai-faceti": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-ce-mai-faceti-aoede.mp3",
-      "durationMs": 4780
+      "durationMs": 4272
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-ce-mai-faceti-puck.mp3",
-      "durationMs": 4730
+      "durationMs": 4296
     }
   ],
   "p-core-ce-mai-faci": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-ce-mai-faci-aoede.mp3",
-      "durationMs": 4250
+      "durationMs": 3768
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-ce-mai-faci-puck.mp3",
-      "durationMs": 5060
+      "durationMs": 4608
     }
   ],
   "p-core-bine-multumesc": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-bine-multumesc-aoede.mp3",
-      "durationMs": 3020
+      "durationMs": 2568
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-bine-multumesc-puck.mp3",
-      "durationMs": 3100
+      "durationMs": 2472
     }
   ],
   "p-core-cum-va-numiti": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-cum-va-numiti-aoede.mp3",
-      "durationMs": 3860
+      "durationMs": 3384
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-cum-va-numiti-puck.mp3",
-      "durationMs": 5210
+      "durationMs": 4464
     }
   ],
   "p-core-ma-numesc": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-ma-numesc-aoede.mp3",
-      "durationMs": 2780
+      "durationMs": 2352
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-ma-numesc-puck.mp3",
-      "durationMs": 3460
+      "durationMs": 2808
     }
   ],
   "p-core-imi-pare-bine": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-imi-pare-bine-aoede.mp3",
-      "durationMs": 3580
+      "durationMs": 3000
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-imi-pare-bine-puck.mp3",
-      "durationMs": 2620
+      "durationMs": 2088
     }
   ],
   "p-core-imi-pare-rau": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/p-core-imi-pare-rau-aoede.mp3",
-      "durationMs": 3620
+      "durationMs": 3168
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/p-core-imi-pare-rau-puck.mp3",
-      "durationMs": 3580
+      "durationMs": 2928
     }
   ],
   "w-core-bun": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-bun-aoede.mp3",
-      "durationMs": 1540
+      "durationMs": 1080
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-bun-puck.mp3",
-      "durationMs": 1610
+      "durationMs": 1200
     }
   ],
   "w-core-buna": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-buna-aoede.mp3",
-      "durationMs": 1420
+      "durationMs": 912
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-buna-puck.mp3",
-      "durationMs": 7490
+      "durationMs": 2208
     }
   ],
   "w-core-bine": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-bine-aoede.mp3",
-      "durationMs": 1370
+      "durationMs": 960
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-bine-puck.mp3",
-      "durationMs": 2020
+      "durationMs": 864
     }
   ],
   "w-core-rau": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-rau-aoede.mp3",
-      "durationMs": 3410
+      "durationMs": 984
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-rau-puck.mp3",
-      "durationMs": 1940
+      "durationMs": 888
     }
   ],
   "w-core-mai-adv": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-mai-adv-aoede.mp3",
-      "durationMs": 1460
+      "durationMs": 936
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-mai-adv-puck.mp3",
-      "durationMs": 1490
+      "durationMs": 1056
     }
   ],
   "w-core-salut": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-salut-aoede.mp3",
-      "durationMs": 8570
+      "durationMs": 8184
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-salut-puck.mp3",
-      "durationMs": 2810
+      "durationMs": 2328
     }
   ],
   "w-core-pa": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-pa-aoede.mp3",
-      "durationMs": 1660
+      "durationMs": 840
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-pa-puck.mp3",
-      "durationMs": 1060
+      "durationMs": 600
     }
   ],
   "w-core-da": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-da-aoede.mp3",
-      "durationMs": 1580
+      "durationMs": 888
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-da-puck.mp3",
-      "durationMs": 2300
+      "durationMs": 624
     }
   ],
   "w-core-nu": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-nu-aoede.mp3",
-      "durationMs": 1300
+      "durationMs": 624
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-nu-puck.mp3",
-      "durationMs": 1300
+      "durationMs": 840
     }
   ],
   "w-core-placere": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-placere-aoede.mp3",
-      "durationMs": 1820
+      "durationMs": 1368
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-placere-puck.mp3",
-      "durationMs": 3700
+      "durationMs": 3288
     }
   ],
   "w-core-revedere": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-revedere-aoede.mp3",
-      "durationMs": 4340
+      "durationMs": 3792
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-revedere-puck.mp3",
-      "durationMs": 6220
+      "durationMs": 5736
     }
   ],
   "w-core-scuza": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-scuza-aoede.mp3",
-      "durationMs": 1660
+      "durationMs": 1224
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-scuza-puck.mp3",
-      "durationMs": 2090
+      "durationMs": 1608
     }
   ],
   "w-core-eu": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-eu-aoede.mp3",
-      "durationMs": 1540
+      "durationMs": 912
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-eu-puck.mp3",
-      "durationMs": 1300
+      "durationMs": 840
     }
   ],
   "w-core-tu": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-tu-aoede.mp3",
-      "durationMs": 1300
+      "durationMs": 504
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-tu-puck.mp3",
-      "durationMs": 890
+      "durationMs": 432
     }
   ],
   "w-core-noi": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-noi-aoede.mp3",
-      "durationMs": 1420
+      "durationMs": 960
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-noi-puck.mp3",
-      "durationMs": 1580
+      "durationMs": 1152
     }
   ],
   "w-core-voi": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-voi-aoede.mp3",
-      "durationMs": 1610
+      "durationMs": 1104
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-voi-puck.mp3",
-      "durationMs": 1900
+      "durationMs": 1056
     }
   ],
   "w-core-ma": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-ma-aoede.mp3",
-      "durationMs": 1780
+      "durationMs": 720
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-ma-puck.mp3",
-      "durationMs": 1250
+      "durationMs": 744
     }
   ],
   "w-core-imi": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-imi-aoede.mp3",
-      "durationMs": 1340
+      "durationMs": 864
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-imi-puck.mp3",
-      "durationMs": 1130
+      "durationMs": 720
     }
   ],
   "w-core-te": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-te-aoede.mp3",
-      "durationMs": 1130
+      "durationMs": 432
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-te-puck.mp3",
-      "durationMs": 1610
+      "durationMs": 456
     }
   ],
   "w-core-iti": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-iti-aoede.mp3",
-      "durationMs": 1250
+      "durationMs": 744
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-iti-puck.mp3",
-      "durationMs": 1250
+      "durationMs": 816
     }
   ],
   "w-core-ne": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-ne-aoede.mp3",
-      "durationMs": 1060
+      "durationMs": 672
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-ne-puck.mp3",
-      "durationMs": 1220
+      "durationMs": 720
     }
   ],
   "w-core-va": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-va-aoede.mp3",
-      "durationMs": 1220
+      "durationMs": 792
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-va-puck.mp3",
-      "durationMs": 1780
+      "durationMs": 672
     }
   ],
   "w-core-el": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-el-aoede.mp3",
-      "durationMs": 1300
+      "durationMs": 792
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-el-puck.mp3",
-      "durationMs": 1130
+      "durationMs": 720
     }
   ],
   "w-core-ea": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-ea-aoede.mp3",
-      "durationMs": 1580
+      "durationMs": 600
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-ea-puck.mp3",
-      "durationMs": 1940
+      "durationMs": 744
     }
   ],
   "w-core-ei": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-ei-aoede.mp3",
-      "durationMs": 1180
+      "durationMs": 672
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-ei-puck.mp3",
-      "durationMs": 1100
+      "durationMs": 600
     }
   ],
   "w-core-ele": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-ele-aoede.mp3",
-      "durationMs": 1340
+      "durationMs": 744
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-ele-puck.mp3",
-      "durationMs": 2210
+      "durationMs": 1848
     }
   ],
   "w-core-dumneavoastra": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-dumneavoastra-aoede.mp3",
-      "durationMs": 9290
+      "durationMs": 8808
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-dumneavoastra-puck.mp3",
-      "durationMs": 2930
+      "durationMs": 2472
     }
   ],
   "w-core-dumneata": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-dumneata-aoede.mp3",
-      "durationMs": 3220
+      "durationMs": 2568
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-dumneata-puck.mp3",
-      "durationMs": 1970
+      "durationMs": 1560
     }
   ],
   "w-core-meu": [
     {
       "voice": "Aoede",
       "src": "/audio/romanian/core/w-core-meu-aoede.mp3",
-      "durationMs": 1850
+      "durationMs": 1080
     },
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-meu-puck.mp3",
-      "durationMs": 1340
+      "durationMs": 912
     }
   ]
 };
