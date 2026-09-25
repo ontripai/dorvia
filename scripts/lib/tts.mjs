@@ -56,12 +56,17 @@ export function pcmToWav(pcmBuffer, sampleRate = 24000, channels = 1, bitsPerSam
 }
 
 export function wavToMp3WithDuration(wavPath, mp3Path, ffmpegPath = ffmpeg.path) {
+  const silenceFilter =
+    'silenceremove=start_periods=1:start_silence=0.10:start_threshold=-45dB:detection=rms,areverse,silenceremove=start_periods=1:start_silence=0.10:start_threshold=-45dB:detection=rms,areverse';
+
   execFileSync(ffmpegPath, [
     '-y',
     '-i', wavPath,
+    '-af', silenceFilter,
     '-codec:a', 'libmp3lame',
     '-b:a', '64k',
     '-ac', '1',
+    '-ar', '24000',
     mp3Path,
   ], { stdio: ['ignore', 'ignore', 'ignore'] });
 
@@ -96,7 +101,7 @@ export async function callTtsWithRetry(
   isPhrase = false,
   maxRetries = 4
 ) {
-  const promptText = `Pronounce this Romanian ${isPhrase ? 'phrase' : 'word'} slowly and clearly, the way a pronunciation teacher would for a complete beginner. Standard Romanian pronunciation.
+  const promptText = `Say this Romanian ${isPhrase ? 'phrase' : 'word'} once, clearly and at a slightly slow pace, in standard Romanian pronunciation. Say it exactly one time. Do not spell it out, do not break it into syllables, do not repeat it, and do not add any other words.
 
 ${text}`;
 
