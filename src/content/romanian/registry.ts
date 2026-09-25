@@ -42,3 +42,4 @@ export const ALL_PHRASES: RomanianPhrase[] = [
 ];
 export const ALL_DIALOGUES: RomanianDialogue[] = [...SEED_DIALOGUES];
 export const ALL_DOMAINS: DomainMeta[] = [...SEED_DOMAINS];
+export { CORE_AUDIO } from './audio-manifest';

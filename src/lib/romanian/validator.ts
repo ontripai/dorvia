@@ -6,12 +6,13 @@ import {
   RomanianGrapheme,
   RomanianDialogue,
   DomainMeta,
+  AudioClip,
 } from './types';
 
 export type ValidationRuleId =
   | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8'
   | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16'
-  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24' | 'V25' | 'V26' | 'V27' | 'V28';
+  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24' | 'V25' | 'V26' | 'V27' | 'V28' | 'V29';
 
 export interface ValidationRuleMeta {
   id: ValidationRuleId;
@@ -48,6 +49,7 @@ export const VALIDATION_RULES: readonly ValidationRuleMeta[] = Object.freeze([
   { id: 'V26', name: 'Unique Lemma and POS', description: 'The (lemma, pos) pair of every word must be unique across the registry' },
   { id: 'V27', name: 'Usage Note Vocabulary Conformance', description: 'All Latin tokens in usage notes (fa) and phrase ro texts must be valid Romanian vocabulary from registry or allowlist' },
   { id: 'V28', name: 'Published formOf Target Integrity', description: 'Published words with formOf must reference published base words' },
+  { id: 'V29', name: 'Core Audio Manifest Integrity', description: 'Audio clip files referenced in core audio manifest must physically exist on disk under public/' },
 ]);
 
 export interface ValidationError {
@@ -74,6 +76,7 @@ export interface RomanianValidationContext {
   dialogues?: RomanianDialogue[];
   domains?: DomainMeta[];
   sources?: RegistrySourceContext;
+  coreAudio?: Record<string, AudioClip[]>;
 }
 
 const SLUG_REGEX = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -1096,6 +1099,36 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
           entityId: wId,
           message: `Published word "${wId}" has formOf referencing "${word.formOf}" with status "${baseWord.status}". Base word must be published.`,
         });
+      }
+    }
+  }
+
+  // --- Validate Core Audio Manifest File Integrity (V29) ---
+  if (context.coreAudio) {
+    for (const [entityId, clips] of Object.entries(context.coreAudio)) {
+      if (Array.isArray(clips)) {
+        for (let i = 0; i < clips.length; i++) {
+          const clip = clips[i];
+          const src = clip?.src?.trim() || '';
+          if (!src) {
+            errors.push({
+              rule: 'V29',
+              phraseId: entityId,
+              entityId: entityId,
+              message: `Core audio clip #${i + 1} for "${entityId}" has empty src.`,
+            });
+            continue;
+          }
+          const fileExists = checkFileExistsOnDisk(src);
+          if (!fileExists) {
+            errors.push({
+              rule: 'V29',
+              phraseId: entityId,
+              entityId: entityId,
+              message: `Core audio clip #${i + 1} for "${entityId}" references non-existent file on disk: "${src}".`,
+            });
+          }
+        }
       }
     }
   }
