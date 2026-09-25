@@ -12,6 +12,8 @@ import { RomanianWord, RomanianPhrase } from '@/lib/romanian/types';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ArrowLeft, ArrowRight } from '@/components/Icons';
+import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
+import { CORE_AUDIO } from '@/content/romanian/audio-manifest';
 
 export function generateStaticParams() {
   const stations = getPublishedStations();
@@ -298,6 +300,13 @@ export default function RomanianStationModulePage({
                       </div>
                     </div>
 
+                    <PronunciationAudio
+                      clips={CORE_AUDIO[word.id]}
+                      currentLang={currentLang}
+                      label={word.lemma}
+                      variant="compact"
+                    />
+
                     {/* Noun Inflection Details */}
                     {word.pos === 'noun' && word.definiteForm && (
                       <div className="text-xs text-slate-600 bg-slate-50 rounded-lg p-2.5 border border-slate-100 space-y-1">
@@ -357,6 +366,12 @@ export default function RomanianStationModulePage({
                               <div className="text-[11px] text-slate-500">
                                 {dep.translations.en}
                               </div>
+                              <PronunciationAudio
+                                clips={CORE_AUDIO[dep.id]}
+                                currentLang={currentLang}
+                                label={dep.lemma}
+                                variant="compact"
+                              />
                               {dep.usageNote?.fa && (
                                 <p className="text-[11px] text-slate-600 leading-relaxed pt-1 border-t border-slate-200/50">
                                   {isFa ? dep.usageNote.fa : dep.usageNote.en || dep.usageNote.fa}
@@ -418,6 +433,13 @@ export default function RomanianStationModulePage({
                         {phrase.text.en}
                       </div>
                     </div>
+
+                    <PronunciationAudio
+                      clips={CORE_AUDIO[phrase.id]}
+                      currentLang={currentLang}
+                      label={phrase.text.ro}
+                      variant="compact"
+                    />
 
                     {phrase.informalVariant?.ro && (
                       <div className="text-xs text-slate-600 bg-slate-50 rounded-lg p-2.5 border border-slate-100">

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { LOCALES } from '@/lib/locale-router';
 import { Language } from '@/types';
 import { getPublishedGraphemes, getWordById } from '@/lib/romanian/content';
-import { GraphemeAudio } from '@/components/romanian/GraphemeAudio';
+import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ArrowLeft, ArrowRight } from '@/components/Icons';
@@ -153,10 +153,11 @@ export default function RomanianAlphabetIndexPage({
 
               {/* Bottom: Audio Island & Lesson Link */}
               <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
-                <GraphemeAudio
+                <PronunciationAudio
                   clips={g.audio}
                   currentLang={currentLang}
-                  graphemeName={g.grapheme}
+                  label={g.grapheme}
+                  variant="labelled"
                 />
                 <Link
                   href={`/learn-romanian/alfabet/${g.slug}`}

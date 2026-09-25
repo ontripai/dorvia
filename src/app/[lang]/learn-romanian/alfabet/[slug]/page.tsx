@@ -8,7 +8,7 @@ import {
   getGraphemeBySlug,
   getWordById,
 } from '@/lib/romanian/content';
-import { GraphemeAudio } from '@/components/romanian/GraphemeAudio';
+import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ArrowLeft, ArrowRight, ChevronRight, ChevronLeft } from '@/components/Icons';
@@ -134,10 +134,11 @@ export default function RomanianGraphemeDetailPage({
 
           {/* Client Audio Player Island */}
           <div className="pt-2 flex justify-center">
-            <GraphemeAudio
+            <PronunciationAudio
               clips={grapheme.audio}
               currentLang={currentLang}
-              graphemeName={grapheme.grapheme}
+              label={grapheme.grapheme}
+              variant="labelled"
               className="gap-3"
             />
           </div>
