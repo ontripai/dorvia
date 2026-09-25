@@ -5,6 +5,7 @@ import {
   ALL_PHRASES,
   ALL_DIALOGUES,
   ALL_DOMAINS,
+  CORE_AUDIO,
 } from '@/content/romanian/registry';
 import { assertValidContent } from './validator';
 import {
@@ -26,7 +27,7 @@ export const ALL_ROMANIAN_DIALOGUES: RomanianDialogue[] = [...ALL_DIALOGUES];
 export const ALL_ROMANIAN_DOMAINS: DomainMeta[] = [...ALL_DOMAINS];
 
 // Strictly validate all Romanian content at module evaluation / build time.
-// Any violation of V1-V23 throws an exception and halts build immediately.
+// Any violation of V1-V29 throws an exception and halts build immediately.
 assertValidContent({
   phrases: ALL_ROMANIAN_PHRASES,
   words: ALL_ROMANIAN_WORDS,
@@ -34,6 +35,7 @@ assertValidContent({
   graphemes: ALL_ROMANIAN_GRAPHEMES,
   dialogues: ALL_ROMANIAN_DIALOGUES,
   domains: ALL_ROMANIAN_DOMAINS,
+  coreAudio: CORE_AUDIO,
 });
 
 // Status filter applied strictly once at module scope.

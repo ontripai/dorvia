@@ -5,6 +5,7 @@ import {
   ALL_PHRASES,
   ALL_DIALOGUES,
   ALL_DOMAINS,
+  CORE_AUDIO,
 } from '../src/content/romanian/registry';
 import {
   validateRomanianContent,
@@ -27,6 +28,7 @@ function main() {
     graphemes: allGraphemes,
     dialogues: ALL_DIALOGUES,
     domains: ALL_DOMAINS,
+    coreAudio: CORE_AUDIO,
   };
 
   const ruleRange = `${VALIDATION_RULES[0].id} to ${VALIDATION_RULES[VALIDATION_RULES.length - 1].id}`;
