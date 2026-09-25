@@ -523,6 +523,39 @@ async function main() {
       console.log(`  - [${h.ratio.toFixed(2)}x] "${h.id}" ("${h.target}"): Aoede=${h.aoedeMs}ms, Puck=${h.puckMs}ms`);
     }
   }
+
+  console.log('\n--- ABSOLUTE DURATION DETECTOR (Words > 3.0s, Phrases > 5.0s) ---');
+  const longClips: Array<{ id: string; target: string; voice: string; filename: string; durationMs: number; isPhrase: boolean }> = [];
+
+  for (const r of clipRecords) {
+    if (r.durationMs > 0 && r.status !== 'failed') {
+      const itemMeta = orderedItems.find(it => it.id === r.id);
+      const isPhrase = itemMeta ? itemMeta.isPhrase : false;
+      const thresholdMs = isPhrase ? 5000 : 3000;
+      if (r.durationMs > thresholdMs) {
+        longClips.push({
+          id: r.id,
+          target: r.targetText,
+          voice: r.voice,
+          filename: r.filename,
+          durationMs: r.durationMs,
+          isPhrase,
+        });
+      }
+    }
+  }
+
+  longClips.sort((a, b) => b.durationMs - a.durationMs);
+
+  if (longClips.length === 0) {
+    console.log('  All clips are within absolute duration limits (words <= 3.0s, phrases <= 5.0s)!');
+  } else {
+    console.log(`  Flagged ${longClips.length} clip(s) exceeding absolute duration threshold:`);
+    for (const lc of longClips) {
+      console.log(`  - [${(lc.durationMs / 1000).toFixed(2)}s] ${lc.filename} ("${lc.target}"): ${lc.isPhrase ? 'phrase (> 5.0s)' : 'word (> 3.0s)'}`);
+    }
+  }
+
   console.log(`Manifest written to: ${manifestFile}`);
   console.log(`Log written to: ${logFile}`);
 }
