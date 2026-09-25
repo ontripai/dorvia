@@ -19,6 +19,7 @@ import { CORE_VERBS } from './core-verbs';
 import { CORE_PRONOUNS } from './core-pronouns';
 import { CORE_QUESTION_WORDS } from './core-question-words';
 import { CORE_NUMBERS } from './core-numbers';
+import { CORE_TIME } from './core-time';
 import { PILOT_PHRASES } from './pilot';
 import { STAGE0_PHRASES } from './stage0';
 
@@ -28,6 +29,7 @@ export const ALL_WORDS: RomanianWord[] = [
   ...CORE_PRONOUNS,
   ...CORE_QUESTION_WORDS,
   ...CORE_NUMBERS,
+  ...CORE_TIME,
 ];
 export const ALL_VERBS: RomanianVerb[] = [...SEED_VERBS, ...CORE_VERBS];
 export const ALL_GRAPHEMES: RomanianGrapheme[] = [...SEED_GRAPHEMES, ...FOUNDATION_GRAPHEMES];

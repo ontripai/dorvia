@@ -1,50 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
-export function decodeHtmlEntities(str) {
-  if (!str) return '';
-  return str
-    .replace(/&#x([0-9a-fA-F]+);?/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
-    .replace(/&#([0-9]+);?/g, (_, dec) => String.fromCharCode(parseInt(dec, 10)))
-    .replace(/&mdash;/g, '\u2014')
-    .replace(/&ndash;/g, '\u2013')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&quot;/g, '"')
-    .replace(/&apos;/g, "'")
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>');
-}
-
-export function cleanText(html) {
-  if (!html) return '';
-  return decodeHtmlEntities(html).replace(/<[^>]+>/g, '').trim();
-}
-
-/**
- * Extracts items from <li> inside a table cell, separating elisions.
- */
-function extractItems(cellHtml) {
-  if (!cellHtml) return [];
-  const liRegex = /<li([^>]*)>([\s\S]*?)<\/li>/gi;
-  const items = [];
-  let liMatch;
-  while ((liMatch = liRegex.exec(cellHtml)) !== null) {
-    const attrs = liMatch[1];
-    const inner = liMatch[2];
-    const isElision = /class=["'][^"']*elision/i.test(attrs) || /title=["'][^"']*eliziune/i.test(attrs);
-    const text = cleanText(inner);
-    const hasHyphen = /[-‑–—\u2011]/.test(text);
-
-    items.push({
-      rawText: text,
-      cleanText: text.replace(/[-‑–—\u2011]/g, '').trim(),
-      isElision: isElision || hasHyphen,
-      attrs: attrs.trim(),
-    });
-  }
-  return items;
-}
+export { decodeHtmlEntities, cleanText, isElision, extractItems } from './lib/dex-text.mjs';
+import { decodeHtmlEntities, cleanText, isElision, extractItems } from './lib/dex-text.mjs';
 
 /**
  * Parses pronoun paradigms from dexonline HTML using role-based rules (dre-p161 Addendum 2).
