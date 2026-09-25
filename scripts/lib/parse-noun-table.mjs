@@ -76,10 +76,12 @@ export function parseNounParadigmTable(tableHtml, targetLemma) {
     const isPlural = rowTexts.some(t => t.includes('plural') || t === 'pl' || t === 'pl.');
 
     if (isNomAcc && isSingular) nomAccSingularRow = r;
-    else if (isSingular && nomAccSingularRow === -1 && r <= 3) nomAccSingularRow = r;
-
     if (isNomAcc && isPlural) nomAccPluralRow = r;
-    else if (isPlural && nomAccPluralRow === -1 && r <= 4) nomAccPluralRow = r;
+  }
+
+  // Reject table if nominativ-acuzativ row was not explicitly labeled
+  if (nomAccSingularRow === -1) {
+    return null;
   }
 
   let singularNearticulat = null;
