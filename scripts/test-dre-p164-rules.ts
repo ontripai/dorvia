@@ -216,6 +216,19 @@ runTest("Green Test: Group 2 Months are all invariable masculine nouns", () => {
         message: `Month '${lemma}' must be pos: 'noun', gender: 'm', and invariable (no plural, no definiteForm). Found: pos=${entry.pos}, gender=${entry.gender}, plural=${entry.plural}, definiteForm=${entry.definiteForm}`,
       });
     }
+    if (
+      !entry.invariable ||
+      typeof entry.invariable.reason !== 'string' ||
+      entry.invariable.reason.trim().length === 0 ||
+      typeof entry.invariable.source !== 'string' ||
+      entry.invariable.source.trim().length === 0
+    ) {
+      errors.push({
+        rule: 'V11',
+        phraseId: entry.id,
+        message: `Month '${lemma}' must have declared invariable with non-empty reason and source`,
+      });
+    }
   }
 
   return { errors, shouldPass: true };

@@ -10,7 +10,7 @@ import { RomanianWord, RomanianPhrase } from '@/lib/romanian/types';
  * - ثبت سیاست رجیستر روی چهار جفت تعاملی (dumneavoastră فعل جمع voi می‌گیرد)
  * - قاعده وارونگی در noapte bună
  *
- * تمامی اقلام با status: 'draft' و stationId: 'core-greetings' ثبت شده‌اند.
+ * تمامی اقلام با status: 'published' و stationId: 'core-greetings' ثبت شده‌اند.
  */
 
 export const CORE_GREETING_WORDS: RomanianWord[] = [
@@ -32,7 +32,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'صفت پایه با معنای «خوب». صورت مؤنث مفرد آن «bună» در بیشتر احوال‌پرسی‌های روزانه به کار می‌رود.',
       en: 'Base adjective meaning "good". Its feminine singular form "bună" is used in most everyday greetings.',
@@ -57,7 +57,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'صورت مؤنث مفرد صفت bun. در احوال‌پرسی‌ها پیش یا پس از اسم مؤنث می‌آید: bună dimineața، bună ziua، bună seara، noapte bună.',
       en: 'Feminine singular of bun. Used in greetings before or after feminine nouns.',
@@ -81,7 +81,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'قید حالت با کاربرد فراوان در پاسخ‌های احوال‌پرسی («Bine, mulțumesc») و تعارفات («Îmi pare bine»).',
       en: 'Adverb widely used in greeting responses ("Bine, mulțumesc") and politeness formulas ("Îmi pare bine").',
@@ -105,7 +105,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'قید منفی که در ترکیب با فعل părea عبارت عذرخواهی و تأسف «Îmi pare rău» (متأسفم) را می‌سازد.',
       en: 'Adverb used with verb părea in the expression of apology and sympathy "Îmi pare rău" (I am sorry).',
@@ -129,7 +129,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'قید احوال‌پرسی و تفضیلی در عبارت‌هایی چون Ce mai faci?. همنگاشت با نام ماه مه، ولی واژه‌ی مستقلی است و رابطه‌ی صرفی با آن ندارد.',
       en: 'Greeting and comparative adverb used in phrases like Ce mai faci?. Homograph of the month May, but an independent word with no inflectional relation.',
@@ -156,7 +156,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'اسم خنثی (salutul / saluturi) که طبق تعریف فرهنگ لغت به صورت ندایی به عنوان سلام و درود غیررسمی (Salut!) نیز به کار می‌رود.',
       en: 'Neuter noun (salutul / saluturi) used as an informal greeting (Salut!) per dictionary definition.',
@@ -180,7 +180,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'صوت خداحافظی غیررسمی و صمیمانه میان دوستان و آشنایان نزدیک.',
       en: 'Informal farewell greeting among friends and close acquaintances.',
@@ -204,7 +204,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-nu',
@@ -224,7 +224,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-placere',
@@ -247,7 +247,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'اسم مؤنث که در لوکوسیون «cu plăcere» (خواهش می‌کنم / با کمال میل) به کار می‌رود.',
       en: 'Feminine noun used in the locution "cu plăcere" (you are welcome / with pleasure).',
@@ -274,7 +274,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'اسم مؤنث با ریشه‌ی فعلی که در لوکوسیون خداحافظی رسمی «la revedere» (تا دیدار بعد) به کار می‌رود.',
       en: 'Feminine verbal noun used in the standard formal farewell locution "la revedere".',
@@ -301,7 +301,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'اسم مؤنث که صورت جمع آن «scuze» مستقلاً به عنوان عذرخواهی و معذرت‌خواهی سریع به کار می‌رود.',
       en: 'Feminine noun whose plural form "scuze" is used standalone as a quick apology.',
@@ -333,7 +333,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'احوال‌پرسی رسمی و خنثی هنگام صبح (تا پیش از ظهر). ساختار: صفت مؤنث bună + اسم معرفه مؤنث dimineața.',
@@ -362,7 +362,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'سلام و احوال‌پرسی استاندارد و رسمی در طول روز (در برابر salut/bună که خودمانی هستند). ساختار: صفت مؤنث bună + اسم معرفه مؤنث ziua.',
@@ -391,7 +391,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'احوال‌پرسی استاندارد در هنگام عصر و غروب. ساختار: صفت مؤنث bună + اسم معرفه مؤنث seara.',
@@ -420,7 +420,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'خداحافظی هنگام خواب یا اواخر شب. برخلاف bună dimineața/ziua/seara که در آن‌ها صفت پیش از اسم معرفه می‌آید، در noapte bună اسم نکره در ابتدا و صفت پس از آن می‌آید (وارونگی موصوف و صفت). هر چهار اسم مؤنث هستند، لذا در همه از bună استفاده می‌شود.',
@@ -449,7 +449,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'خداحافظی استاندارد و رسمی (در برابر pa که غیررسمی و خودمانی است). معنای تحت‌اللفظی: تا دیدار دوباره.',
@@ -478,7 +478,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'خداحافظی کاملاً خودمانی و دوستانه میان دوستان و آشنایان نزدیک (در برابر la revedere که رسمی است).',
@@ -507,7 +507,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'آرزوی حسن ختام هنگام خداحافظی در طول روز. اسم zi نکره است و صفت bună پس از آن آمده است.',
@@ -539,7 +539,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'فرمول ادب رسمی با ضمیر احترامی vă (در برابر te rog خودمانی). ضمیر رسمی dumneavoastră با صیغه‌ی جمع voi مطابقت می‌کند (vă rog = از شما خواهش می‌کنم).',
@@ -569,7 +569,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'فرمول ادب خودمانی برای درخواست از دوستان و افراد صمیمی (در برابر vă rog رسمی).',
@@ -599,7 +599,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'تشکر رسمی با ضمیر برایی vă و اول شخص مفرد mulțumesc. برای احترام به شخص مخاطب (dumneavoastră) از vă استفاده می‌شود.',
@@ -628,7 +628,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'صیغه‌ی اول شخص جمع (ما) از فعل a mulțumi برای تشکر از طرف یک جمع یا خانواده.',
@@ -657,7 +657,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'پاسخ استاندارد و مؤدبانه به تشکر (Mulțumesc). ترکیب حرف اضافه‌ی cu و اسم plăcere.',
@@ -686,7 +686,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'عذرخواهی کوتاه و روزمره با استفاده از صورت جمع اسم scuză.',
@@ -718,7 +718,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'احوال‌پرسی رسمی یا خطاب به چند نفر با صیغه‌ی دوم‌شخص جمع faceți از فعل a face. ضمیر احترامی dumneavoastră نیز همواره فعل جمع می‌گیرد. در برابر Ce mai faci? خودمانی.',
@@ -748,7 +748,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'احوال‌پرسی غیررسمی و صمیمانه با صیغه‌ی دوم‌شخص مفرد faci (در برابر Ce mai faceți? رسمی). قید mai در اینجا نقش احوال‌پرسی دارد.',
@@ -778,7 +778,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'پاسخ متداول و مؤدبانه به احوال‌پرسی‌های Ce mai faci? و Ce mai faceți?. ترکیب قید bine و صیغه‌ی اول شخص mulțumesc.',
@@ -808,7 +808,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'پرسش رسمی درباره‌ی نام با ضمیر vă و صیغه‌ی دوم‌شخص جمع numiți از فعل a numi. ضمیر احترامی dumneavoastră صیغه‌ی جمع می‌گیرد، حتی وقتی با یک نفر حرف می‌زنید.',
@@ -838,7 +838,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'فرمول استاندارد و مؤدبانه برای معرفی نام خود با ضمیر انعکاسی mă و صیغه‌ی اول‌شخص مفرد numesc از فعل a numi.',
@@ -868,7 +868,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'عبارت رایج هنگام آشنایی و معرفی به معنای «خوش‌وقتم». ساختار: ضمیر برایی îmi + فعل سوم‌شخص pare + قید bine (ذیل مدخل părea در فرهنگ لغت).',
@@ -898,7 +898,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     isFree: true,
     usageNote: {
       fa: 'فرمول استاندارد برای ابراز تأسف و همدردی. ساختار: ضمیر برایی îmi + فعل سوم‌شخص pare + قید rău (عیناً ذیل مدخل părea در فرهنگ لغت نقل شده است).',

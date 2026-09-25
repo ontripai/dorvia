@@ -11,7 +11,7 @@ import {
 export type ValidationRuleId =
   | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8'
   | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16'
-  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24' | 'V25' | 'V26' | 'V27';
+  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24' | 'V25' | 'V26' | 'V27' | 'V28';
 
 export interface ValidationRuleMeta {
   id: ValidationRuleId;
@@ -30,7 +30,7 @@ export const VALIDATION_RULES: readonly ValidationRuleMeta[] = Object.freeze([
   { id: 'V8', name: 'Verb Prefix ZWNJ', description: 'Persian continuous prefix mi-/nemi- must use ZWNJ' },
   { id: 'V9', name: 'Reference Integrity', description: 'Phrase word/verb references must exist in dictionary' },
   { id: 'V10', name: 'Verb Source & Paradigm', description: 'Verbs require valid DEX URL and complete present tense paradigm' },
-  { id: 'V11', name: 'Noun Gender & Definite', description: 'Nouns require valid gender and definite form' },
+  { id: 'V11', name: 'Noun Gender & Definite', description: 'Nouns require valid gender and definite form (or declared invariable)' },
   { id: 'V12', name: 'Domain Order', description: 'Curriculum domain introduction order strictly enforced' },
   { id: 'V13', name: 'Domain Metadata', description: 'Domain estimatedWeeks and stationOrder verified' },
   { id: 'V14', name: 'High-Risk Sourcing', description: 'High-risk domains must adhere to sourcing policy' },
@@ -47,6 +47,7 @@ export const VALIDATION_RULES: readonly ValidationRuleMeta[] = Object.freeze([
   { id: 'V25', name: 'Published Example Word', description: 'Published graphemes must reference published example words' },
   { id: 'V26', name: 'Unique Lemma and POS', description: 'The (lemma, pos) pair of every word must be unique across the registry' },
   { id: 'V27', name: 'Usage Note Vocabulary Conformance', description: 'All Latin tokens in usage notes (fa) and phrase ro texts must be valid Romanian vocabulary from registry or allowlist' },
+  { id: 'V28', name: 'Published formOf Target Integrity', description: 'Published words with formOf must reference published base words' },
 ]);
 
 export interface ValidationError {
@@ -631,13 +632,40 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
             message: `Published noun "${word.id}" missing required gender ('m' | 'f' | 'n').`,
           });
         }
-        if (!word.definiteForm || !word.definiteForm.trim()) {
-          errors.push({
-            rule: 'V11',
-            phraseId: word.id,
-            entityId: word.id,
-            message: `Published noun "${word.id}" missing required definiteForm.`,
-          });
+        if (word.invariable) {
+          if (!word.invariable.reason || !word.invariable.reason.trim() || !word.invariable.source || !word.invariable.source.trim()) {
+            errors.push({
+              rule: 'V11',
+              phraseId: word.id,
+              entityId: word.id,
+              message: `Published noun "${word.id}" declared invariable must have non-empty reason and source.`,
+            });
+          }
+          if (word.definiteForm && word.definiteForm.trim().length > 0) {
+            errors.push({
+              rule: 'V11',
+              phraseId: word.id,
+              entityId: word.id,
+              message: `Published noun "${word.id}" declared invariable must not have definiteForm.`,
+            });
+          }
+          if (word.plural && word.plural.trim().length > 0) {
+            errors.push({
+              rule: 'V11',
+              phraseId: word.id,
+              entityId: word.id,
+              message: `Published noun "${word.id}" declared invariable must not have plural.`,
+            });
+          }
+        } else {
+          if (!word.definiteForm || !word.definiteForm.trim()) {
+            errors.push({
+              rule: 'V11',
+              phraseId: word.id,
+              entityId: word.id,
+              message: `Published noun "${word.id}" missing required definiteForm.`,
+            });
+          }
         }
       }
 
@@ -1051,6 +1079,22 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
           phraseId: gId,
           entityId: gId,
           message: `Published grapheme "${gId}" references example word "${grapheme.exampleWordId}" with status "${refWord.status}". Example word must be published.`,
+        });
+      }
+    }
+  }
+
+  // --- Validate Published formOf Target Integrity (V28) ---
+  for (const word of words) {
+    if (word.status === 'published' && word.formOf) {
+      const wId = word.id || '(missing-word-id)';
+      const baseWord = wordMap.get(word.formOf);
+      if (baseWord && baseWord.status !== 'published') {
+        errors.push({
+          rule: 'V28',
+          phraseId: wId,
+          entityId: wId,
+          message: `Published word "${wId}" has formOf referencing "${word.formOf}" with status "${baseWord.status}". Base word must be published.`,
         });
       }
     }

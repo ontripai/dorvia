@@ -52,6 +52,10 @@ export type RomanianWord = {
   status: 'draft' | 'review' | 'published' | 'archived';
   usageNote?: { fa: string; en: string };
   counterExamples?: string[];   // صورت‌هایی که عمداً به‌عنوان غلط رایج نقل می‌شوند
+  invariable?: {
+    reason: string;             // چرا این واژه صرف نمی‌شود
+    source: string;             // آدرس صفحه‌ای که این را نشان می‌دهد
+  };
 };
 
 export type RomanianVerb = {
@@ -115,7 +119,7 @@ export type DomainMeta = {
   order: number;
   estimatedWeeks: number;                          // V13
   stationOrder: 'sequential' | 'grouped';          // V13
-  stations: Array<{ id: string; titleFa: string; titleRo: string; order: number }>;
+  stations: Array<{ id: string; slug?: string; titleFa: string; titleRo: string; order: number }>;
   sourcingPolicy: 'common-usage-ok' | 'must-be-sourced';
   categories: RomanianCategory[];                  // این حوزه از کدام دسته‌ها تغذیه می‌کند
   maxItems?: number;                               // بودجه — بخش ۳

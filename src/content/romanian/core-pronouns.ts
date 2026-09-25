@@ -14,7 +14,7 @@ import { RomanianWord } from '@/lib/romanian/types';
  * گروه ج — ملکی اول‌شخص:
  *   meu · mea
  *
- * تمامی اقلام با status: 'draft'، pos: 'pronoun'، stationId: 'core-pronouns'
+ * تمامی اقلام با status: 'published'، pos: 'pronoun'، stationId: 'core-pronouns'
  * و source.url صفحه‌ی پارادایم ثبت شده‌اند.
  */
 
@@ -38,7 +38,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'در زبان رومانیایی ضمایر فاعلی معمولاً حذف می‌شوند (مانند «Vreau»، نه «Eu vreau»). ضمیر فقط برای تأکید یا تقابل به کار می‌رود.',
       en: 'In Romanian, subject pronouns are usually omitted (e.g. "Vreau", not "Eu vreau"). The pronoun is only used for emphasis or contrast.',
@@ -62,7 +62,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-noi',
@@ -82,7 +82,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-voi',
@@ -102,7 +102,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
 
   // --- گروه الف (پی‌بستی‌ها): رایی و برایی اول و دوم شخص ---
@@ -125,7 +125,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-imi',
@@ -146,7 +146,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-te',
@@ -167,7 +167,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-iti',
@@ -188,7 +188,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-ne',
@@ -209,7 +209,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'صورت پی‌بستی «ne» در هر دو حالت رایی (مفعول مستقیم) و برایی (مفعول غیرمستقیم) یکسان است و این یکسانی بار یادگیری را کم می‌کند.',
       en: 'The clitic form "ne" is identical for both accusative (direct object) and dative (indirect object).',
@@ -234,7 +234,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'صورت پی‌بستی «vă» در هر دو حالت رایی (مفعول مستقیم) و برایی (مفعول غیرمستقیم) یکسان است و این یکسانی بار یادگیری را کم می‌کند.',
       en: 'The clitic form "vă" is identical for both accusative (direct object) and dative (indirect object).',
@@ -260,7 +260,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-ea',
@@ -281,7 +281,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-ei',
@@ -302,7 +302,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-ele',
@@ -323,7 +323,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-dumneavoastra',
@@ -343,7 +343,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'واژه‌ی «dumneavoastră» هم برای مفرد و هم برای جمع به کار می‌رود و همواره با صیغه‌ی دوم‌شخص جمع صرف می‌شود («Dumneavoastră sunteți»، نه «este»). همچنین در نقش ملکی بدون تغییر می‌ماند («casa dumneavoastră»).',
       en: '"dumneavoastră" is used for both singular and plural formal address and always takes the second-person plural verb form ("Dumneavoastră sunteți", not "este"). It is also invariable as a possessive ("casa dumneavoastră").',
@@ -367,7 +367,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
 
   // --- گروه ج: ملکی اول‌شخص ---
@@ -389,7 +389,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-core-mea',
@@ -410,6 +410,6 @@ export const CORE_PRONOUNS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
 ];

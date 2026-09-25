@@ -11,7 +11,7 @@ import { RomanianWord } from '@/lib/romanian/types';
  * ۴. گروه ۴: اعداد ترتیبی اول تا دهم (primul/prima تا al zecelea/a zecea) + întâi/întâia، همراه با formOf برای صورت‌های مؤنث
  *
  * تمامی اقلام:
- * - status: 'draft'
+ * - status: 'published'
  * - domains: ['core']
  * - stationId: 'core-numbers'
  * - pos: 'numeral'
@@ -38,7 +38,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-trei',
@@ -55,7 +55,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-patru',
@@ -72,7 +72,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-cinci',
@@ -89,7 +89,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-sase',
@@ -106,7 +106,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-sapte',
@@ -123,7 +123,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-opt',
@@ -140,7 +140,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-noua',
@@ -157,7 +157,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'واژه‌ی nouă دارای ۳ کاربرد کاملاً متمایز است: ۱) عدد ۹ («nouă bani»)، ۲) صفت مفرد مؤنث به معنای «نو/جدید» («casă nouă»)، ۳) ضمیر برایی تأکیدی به معنای «به ما» — همان صورتی که در جدول صرفی noi دیده می‌شود.',
       en: 'The word "nouă" has 3 distinct roles: 1) cardinal number 9, 2) feminine singular adjective meaning "new", 3) tonic dative pronoun meaning "to us", the form listed in the paradigm of "noi".',
@@ -178,7 +178,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-unsprezece',
@@ -195,7 +195,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-treisprezece',
@@ -212,7 +212,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-paisprezece',
@@ -229,7 +229,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'املای استاندارد این عدد paisprezece است (نه patrusprezece).',
       en: 'The standard spelling is "paisprezece" (not "patrusprezece").',
@@ -251,7 +251,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-saisprezece',
@@ -268,7 +268,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'املای استاندارد این عدد șaisprezece است (نه șasesprezece).',
       en: 'The standard spelling is "șaisprezece" (not "șasesprezece").',
@@ -290,7 +290,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-optsprezece',
@@ -307,7 +307,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-nouasprezece',
@@ -324,7 +324,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'تا عدد نوزده، اسم مستقیماً پس از عدد می‌آید و نیازی به حرف اضافه نیست: «nouăsprezece bani». از عدد ۲۰ به بعد حرف اضافه‌ی de لازم است.',
       en: 'Up to 19, the noun follows the numeral directly without "de": "nouăsprezece bani".',
@@ -345,7 +345,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'قاعده‌ی de بعد از ۲۰: از عدد ۲۰ به بالا، هنگام شمارش اسم، حرف اضافه‌ی de بین عدد و اسم قرار می‌گیرد: «douăzeci de bani» (در مقایسه با «nouăsprezece bani»). در اعداد مرکب نیز اگر به عدد ۱ یا ۲ ختم شود حرف de نمی‌آید، اما در سایر مضارب ۲۰ de اجباری است.',
       en: 'Preposition "de" rule: from 20 onwards, "de" is placed between the numeral and the noun: "douăzeci de bani".',
@@ -366,7 +366,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'در اعداد مرکب، بین دهگان و یکان حرف ربط și اجباری است: «treizeci și cinci» (۳۵) یا «douăzeci și unu» (۲۱). عدم استفاده از și غلط است.',
       en: 'Compound numbers require the conjunction "și" between tens and units: "treizeci și cinci" (35).',
@@ -387,7 +387,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-cincizeci',
@@ -404,7 +404,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-saizeci',
@@ -421,7 +421,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'املای استاندارد عدد ۶۰ در رومانیایی șaizeci است (نه șasezeci).',
       en: 'The standard spelling is "șaizeci" (not "șasezeci").',
@@ -443,7 +443,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-optzeci',
@@ -460,7 +460,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-nouazeci',
@@ -477,7 +477,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
 
   // =========================================================================
@@ -498,7 +498,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'عدد یک با جنسیت اسم بعدش مطابقت می‌گیرد: برای اسم مذکر و خنثی «un ban» و برای اسم مؤنث «o casă». هنگام شمارش مجرد یا بدون اسم از صورت unu (مذکر) یا una (مؤنث) استفاده می‌شود.',
       en: 'The number 1 agrees with the noun gender: "un ban" (m) / "o casă" (f). Standalone forms are "unu" and "una".',
@@ -520,7 +520,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-doi',
@@ -537,7 +537,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'عدد دو با جنسیت اسم بعدش مطابقت می‌گیرد: برای اسم مذکر «doi bani» و برای اسم مؤنث یا خنثی جمع «două case». در تاریخ‌ها، از روز دوم به بعد از عدد اصلی استفاده می‌شود (مانند «doi»)، نه عدد ترتیبی («al doilea»).',
       en: 'The number 2 agrees in gender: "doi bani" (m) vs "două case" (f). For dates after the 1st, cardinal numbers are used (e.g. "doi", not "al doilea").',
@@ -559,7 +559,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-doisprezece',
@@ -576,7 +576,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'عدد ۱۲ نیز مانند ۲ با جنسیت اسم بعدش مطابقت دارد: «doisprezece bani» (مذکر) در برابر «douăsprezece case» (مؤنث/خنثی).',
       en: 'The number 12 agrees in gender: "doisprezece bani" (m) vs "douăsprezece case" (f).',
@@ -598,7 +598,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
 
   // =========================================================================
@@ -619,7 +619,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'واژه‌ی sută از نظر دستوری اسمی مؤنث است و با حرف تعریف نامعین o ترکیب شده و «o sută» را می‌سازد.',
       en: 'The word "sută" is grammatically a feminine noun used with indefinite article "o" to form "o sută" (100).',
@@ -640,7 +640,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'واژه‌ی mie اسمی مؤنث است و به همراه حرف تعریف نامعین o صورت «o mie» را تشکیل می‌دهد.',
       en: 'The word "mie" is grammatically a feminine noun used with indefinite article "o" to form "o mie" (1000).',
@@ -665,7 +665,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-prima',
@@ -683,7 +683,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-al-doilea',
@@ -700,7 +700,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-a-doua',
@@ -718,7 +718,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-al-treilea',
@@ -735,7 +735,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-a-treia',
@@ -753,7 +753,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-al-patrulea',
@@ -770,7 +770,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-a-patra',
@@ -788,7 +788,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-al-cincilea',
@@ -805,7 +805,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-a-cincea',
@@ -823,7 +823,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-al-saselea',
@@ -840,7 +840,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-a-sasea',
@@ -858,7 +858,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-al-saptelea',
@@ -875,7 +875,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-a-saptea',
@@ -893,7 +893,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-al-optulea',
@@ -910,7 +910,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-a-opta',
@@ -928,7 +928,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-al-noualea',
@@ -945,7 +945,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-a-noua',
@@ -963,7 +963,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-al-zecelea',
@@ -980,7 +980,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-a-zecea',
@@ -998,7 +998,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
   {
     id: 'w-num-intai',
@@ -1015,7 +1015,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
     usageNote: {
       fa: 'در بیان تاریخ‌ها، برای روز اول همیشه از صورت ترتیبی întâi استفاده می‌شود. از روز دوم به بعد، برخلاف زبان‌های دیگر، از عدد اصلی مانند doi (نه al doilea) استفاده می‌شود.',
       en: 'In calendar dates, "întâi" is used exclusively for the 1st of the month. From the 2nd onwards, cardinal numbers are used (e.g. "doi", not "al doilea").',
@@ -1037,6 +1037,6 @@ export const CORE_NUMBERS: RomanianWord[] = [
       retrievedAt: '2026-09-24',
     },
     reviewer: 'ai-only',
-    status: 'draft',
+    status: 'published',
   },
 ];
