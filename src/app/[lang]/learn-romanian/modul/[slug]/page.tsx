@@ -338,7 +338,7 @@ export default function RomanianStationModulePage({
                     {dependents.length > 0 && (
                       <div className="mt-3 pt-3 border-t border-slate-200/80 space-y-2">
                         <div className="text-xs font-bold text-slate-700">
-                          {isFa ? 'صورت‌های پی‌بستی و متصل:' : 'Clitic and dependent forms:'}
+                          {isFa ? 'صورت‌های دیگر این واژه:' : 'Other forms of this word:'}
                         </div>
                         <div className="space-y-2">
                           {dependents.map(dep => (
