@@ -114,14 +114,20 @@ export const FOUNDATION_WORDS: RomanianWord[] = [
     "domains": [
       "core"
     ],
+    "stationId": "core-question-words",
     "intendedUse": "produce",
     "source": {
       "kind": "common-usage",
-      "label": "dexonline (DEX '09)",
-      "url": "https://dexonline.ro/definitie/unde"
+      "label": "dexonline — definitie (DOOM 3)",
+      "url": "https://dexonline.ro/definitie/unde",
+      "retrievedAt": "2026-09-24"
     },
     "reviewer": "ai-only",
-    "status": "published"
+    "status": "published",
+    "usageNote": {
+      "fa": "قالب کلیدی روزمره: «Unde este …?» به‌معنای «… کجاست؟» (مانند «Unde este gara?»).",
+      "en": "Key everyday pattern: \"Unde este …?\" meaning \"Where is …?\" (e.g. \"Unde este gara?\")."
+    }
   },
   {
     "id": "w-masa",

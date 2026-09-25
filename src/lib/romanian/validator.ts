@@ -11,7 +11,7 @@ import {
 export type ValidationRuleId =
   | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8'
   | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16'
-  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24' | 'V25';
+  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24' | 'V25' | 'V26';
 
 export interface ValidationRuleMeta {
   id: ValidationRuleId;
@@ -45,6 +45,7 @@ export const VALIDATION_RULES: readonly ValidationRuleMeta[] = Object.freeze([
   { id: 'V23', name: 'Audio File Integrity', description: 'Audio clip files must physically exist on disk under public/' },
   { id: 'V24', name: 'Registry Completeness', description: 'All entities in source content files must be present in unified registry' },
   { id: 'V25', name: 'Published Example Word', description: 'Published graphemes must reference published example words' },
+  { id: 'V26', name: 'Unique Lemma and POS', description: 'The (lemma, pos) pair of every word must be unique across the registry' },
 ]);
 
 export interface ValidationError {
@@ -1031,6 +1032,24 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
           message: `Published grapheme "${gId}" references example word "${grapheme.exampleWordId}" with status "${refWord.status}". Example word must be published.`,
         });
       }
+    }
+  }
+
+  // --- Validate Unique (lemma, pos) across Words (V26) ---
+  const lemmaPosMap = new Map<string, string>();
+  for (const word of words) {
+    if (!word.lemma || !word.pos) continue;
+    const key = `${word.lemma.trim().toLowerCase()}#${word.pos}`;
+    const existingWordId = lemmaPosMap.get(key);
+    if (existingWordId) {
+      errors.push({
+        rule: 'V26',
+        phraseId: word.id,
+        entityId: word.id,
+        message: `Duplicate (lemma, pos) pair ("${word.lemma.trim()}", "${word.pos}"): word "${word.id}" duplicates word "${existingWordId}".`,
+      });
+    } else {
+      lemmaPosMap.set(key, word.id);
     }
   }
 

@@ -19,6 +19,7 @@ export const SEED_DOMAINS: DomainMeta[] = [
       { id: 'core-question-words', titleFa: 'کلمات پرسشی', titleRo: 'Cuvinte interogative', order: 2 },
       { id: 'core-numbers', titleFa: 'اعداد', titleRo: 'Numere', order: 3 },
       { id: 'core-time', titleFa: 'زمان', titleRo: 'Timp', order: 4 },
+      { id: 'core-greetings', titleFa: 'احوال‌پرسی و ادب', titleRo: 'Salutări și politețe', order: 5 },
     ],
     sourcingPolicy: 'common-usage-ok',
     categories: ['everyday', 'transport', 'shopping', 'healthcare', 'emergency'],

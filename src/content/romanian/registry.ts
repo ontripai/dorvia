@@ -20,6 +20,7 @@ import { CORE_PRONOUNS } from './core-pronouns';
 import { CORE_QUESTION_WORDS } from './core-question-words';
 import { CORE_NUMBERS } from './core-numbers';
 import { CORE_TIME } from './core-time';
+import { CORE_GREETING_WORDS, CORE_GREETING_PHRASES } from './core-greetings';
 import { PILOT_PHRASES } from './pilot';
 import { STAGE0_PHRASES } from './stage0';
 
@@ -30,9 +31,14 @@ export const ALL_WORDS: RomanianWord[] = [
   ...CORE_QUESTION_WORDS,
   ...CORE_NUMBERS,
   ...CORE_TIME,
+  ...CORE_GREETING_WORDS,
 ];
 export const ALL_VERBS: RomanianVerb[] = [...SEED_VERBS, ...CORE_VERBS];
 export const ALL_GRAPHEMES: RomanianGrapheme[] = [...SEED_GRAPHEMES, ...FOUNDATION_GRAPHEMES];
-export const ALL_PHRASES: RomanianPhrase[] = [...PILOT_PHRASES, ...STAGE0_PHRASES];
+export const ALL_PHRASES: RomanianPhrase[] = [
+  ...PILOT_PHRASES,
+  ...STAGE0_PHRASES,
+  ...CORE_GREETING_PHRASES,
+];
 export const ALL_DIALOGUES: RomanianDialogue[] = [...SEED_DIALOGUES];
 export const ALL_DOMAINS: DomainMeta[] = [...SEED_DOMAINS];
