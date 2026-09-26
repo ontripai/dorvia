@@ -31,6 +31,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-1-days',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -76,6 +77,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-1-days',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -111,6 +113,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-1-days',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -144,6 +147,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-1-days',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -177,6 +181,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-1-days',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -210,6 +215,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-1-days',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -247,6 +253,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-1-days',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -288,6 +295,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-2-months-first',
     intendedUse: 'comprehend',
     source: {
       kind: 'common-usage',
@@ -321,6 +329,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-2-months-first',
     intendedUse: 'comprehend',
     source: {
       kind: 'common-usage',
@@ -354,6 +363,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-2-months-first',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -399,6 +409,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-2-months-first',
     intendedUse: 'comprehend',
     source: {
       kind: 'common-usage',
@@ -432,6 +443,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-2-months-first',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -467,6 +479,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-2-months-first',
     intendedUse: 'comprehend',
     source: {
       kind: 'common-usage',
@@ -500,6 +513,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-3-months-second',
     intendedUse: 'comprehend',
     source: {
       kind: 'common-usage',
@@ -533,6 +547,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-3-months-second',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -568,6 +583,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-3-months-second',
     intendedUse: 'comprehend',
     source: {
       kind: 'common-usage',
@@ -601,6 +617,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-3-months-second',
     intendedUse: 'comprehend',
     source: {
       kind: 'common-usage',
@@ -634,6 +651,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-3-months-second',
     intendedUse: 'comprehend',
     source: {
       kind: 'common-usage',
@@ -667,6 +685,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-3-months-second',
     intendedUse: 'comprehend',
     source: {
       kind: 'common-usage',
@@ -702,6 +721,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-4-clock',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -797,6 +817,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-4-clock',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -830,6 +851,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-4-clock',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -863,6 +885,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-4-clock',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -902,6 +925,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-4-clock',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -946,6 +970,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-4-clock',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -988,6 +1013,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-4-clock',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1027,6 +1053,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-5-today',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1057,6 +1084,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-5-today',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1087,6 +1115,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-5-today',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1115,6 +1144,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-5-today',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1143,6 +1173,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-5-today',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1171,6 +1202,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-5-today',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1199,6 +1231,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-6-periods',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1227,6 +1260,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-6-periods',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1260,6 +1294,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-6-periods',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1295,6 +1330,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-6-periods',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1330,6 +1366,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-6-periods',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1365,6 +1402,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-6-periods',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1402,6 +1440,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-7-day-parts',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1435,6 +1474,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-7-day-parts',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1468,6 +1508,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-7-day-parts',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1501,6 +1542,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-7-day-parts',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1533,6 +1575,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-7-day-parts',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1561,6 +1604,7 @@ export const CORE_TIME: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-time',
+    stepId: 'time-7-day-parts',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',

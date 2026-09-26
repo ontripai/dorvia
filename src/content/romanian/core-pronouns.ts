@@ -30,6 +30,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-1-subject',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -64,6 +65,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-1-subject',
     intendedUse: 'comprehend',
     source: {
       kind: 'common-usage',
@@ -84,6 +86,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-1-subject',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -104,6 +107,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-1-subject',
     intendedUse: 'comprehend',
     source: {
       kind: 'common-usage',
@@ -127,6 +131,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     formOf: 'w-core-eu',
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-2-clitics',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -148,6 +153,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     formOf: 'w-core-eu',
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-2-clitics',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -169,6 +175,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     formOf: 'w-core-tu',
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-2-clitics',
     intendedUse: 'comprehend',
     source: {
       kind: 'common-usage',
@@ -190,6 +197,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     formOf: 'w-core-tu',
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-2-clitics',
     intendedUse: 'comprehend',
     source: {
       kind: 'common-usage',
@@ -211,6 +219,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     formOf: 'w-core-noi',
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-2-clitics',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -242,6 +251,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     formOf: 'w-core-voi',
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-2-clitics',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -274,6 +284,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-3-third',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -295,6 +306,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     formOf: 'w-core-el',
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-3-third',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -316,6 +328,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     formOf: 'w-core-el',
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-3-third',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -337,6 +350,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     formOf: 'w-core-el',
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-3-third',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -357,6 +371,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-3-third',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -394,6 +409,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-3-third',
     intendedUse: 'comprehend',
     source: {
       kind: 'common-usage',
@@ -416,6 +432,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-4-possessive',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -437,6 +454,7 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     formOf: 'w-core-meu',
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-4-possessive',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',

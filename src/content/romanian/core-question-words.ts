@@ -31,6 +31,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-question-words',
+    stepId: 'qw-1-plain',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -53,6 +54,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-question-words',
+    stepId: 'qw-1-plain',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -73,6 +75,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-question-words',
+    stepId: 'qw-1-plain',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -95,6 +98,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-question-words',
+    stepId: 'qw-2-cat',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -138,6 +142,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
     formOf: 'w-core-cat',
     domains: ['core'],
     stationId: 'core-question-words',
+    stepId: 'qw-2-cat',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -159,6 +164,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
     formOf: 'w-core-cat',
     domains: ['core'],
     stationId: 'core-question-words',
+    stepId: 'qw-2-cat',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -180,6 +186,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
     formOf: 'w-core-cat',
     domains: ['core'],
     stationId: 'core-question-words',
+    stepId: 'qw-2-cat',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -202,6 +209,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-question-words',
+    stepId: 'qw-3-who-which',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -222,6 +230,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-question-words',
+    stepId: 'qw-3-who-which',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -244,6 +253,7 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-question-words',
+    stepId: 'qw-3-who-which',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
