@@ -19,8 +19,8 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     lemma: 'bun',
     pos: 'adj',
     translations: {
-      en: 'good',
-      fa: 'خوب',
+      en: 'good (masculine)',
+      fa: 'خوب (مذکر)',
     },
     domains: ['core'],
     stationId: 'core-greetings',
@@ -34,8 +34,14 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'صفت پایه با معنای «خوب». صورت مؤنث مفرد آن «bună» در بیشتر احوال‌پرسی‌های روزانه به کار می‌رود.',
-      en: 'Base adjective meaning "good". Its feminine singular form "bună" is used in most everyday greetings.',
+      fa: [
+        { t: 'صفت پایه با معنای «خوب». صورت مؤنث مفرد آن «' },
+        { ref: 'w-core-buna', display: 'bună' },
+        { t: '» در بیشتر احوال‌پرسی‌های روزانه به کار می‌رود.' },
+      ],
+      en: [
+        { t: 'Base adjective meaning ' },
+      ],
     },
   },
   {
@@ -59,8 +65,24 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'صورت مؤنث مفرد صفت bun. در احوال‌پرسی‌ها پیش یا پس از اسم مؤنث می‌آید: bună dimineața، bună ziua، bună seara، noapte bună.',
-      en: 'Feminine singular of bun. Used in greetings before or after feminine nouns.',
+      fa: [
+        { t: 'صورت مؤنث مفرد صفت ' },
+        { ref: 'w-core-bun', display: 'bun' },
+        { t: '. در احوال‌پرسی‌ها پیش یا پس از اسم مؤنث می‌آید: ' },
+        { ref: 'p-core-buna-dimineata', display: 'bună dimineața' },
+        { t: '، ' },
+        { ref: 'p-core-buna-ziua', display: 'bună ziua' },
+        { t: '، ' },
+        { ref: 'p-core-buna-seara', display: 'bună seara' },
+        { t: '، ' },
+        { ref: 'p-core-noapte-buna', display: 'noapte bună' },
+        { t: '.' },
+      ],
+      en: [
+        { t: 'Feminine singular of ' },
+        { ref: 'w-core-bun', display: 'bun' },
+        { t: '. Used in greetings before or after feminine nouns.' },
+      ],
     },
   },
   {
@@ -83,8 +105,16 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قید حالت با کاربرد فراوان در پاسخ‌های احوال‌پرسی («Bine, mulțumesc») و تعارفات («Îmi pare bine»).',
-      en: 'Adverb widely used in greeting responses ("Bine, mulțumesc") and politeness formulas ("Îmi pare bine").',
+      fa: [
+        { t: 'قید حالت با کاربرد فراوان در پاسخ‌های احوال‌پرسی («' },
+        { ref: 'p-core-bine-multumesc', display: 'Bine, mulțumesc' },
+        { t: '») و تعارفات («' },
+        { ref: 'p-core-imi-pare-bine', display: 'Îmi pare bine' },
+        { t: '»).' },
+      ],
+      en: [
+        { t: 'Adverb widely used in greeting responses (' },
+      ],
     },
   },
   {
@@ -107,8 +137,18 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قید منفی که در ترکیب با فعل părea عبارت عذرخواهی و تأسف «Îmi pare rău» (متأسفم) را می‌سازد.',
-      en: 'Adverb used with verb părea in the expression of apology and sympathy "Îmi pare rău" (I am sorry).',
+      fa: [
+        { t: 'قید منفی که در ترکیب با فعل ' },
+        { ref: 'v-core-a-parea', display: 'părea' },
+        { t: ' عبارت عذرخواهی و تأسف «' },
+        { ref: 'p-core-imi-pare-rau', display: 'Îmi pare rău' },
+        { t: '» (متأسفم) را می‌سازد.' },
+      ],
+      en: [
+        { t: 'Adverb used with verb ' },
+        { ref: 'v-core-a-parea', display: 'părea' },
+        { t: ' in the expression of apology and sympathy ' },
+      ],
     },
   },
   {
@@ -131,8 +171,16 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قید احوال‌پرسی و تفضیلی در عبارت‌هایی چون Ce mai faci?. همنگاشت با نام ماه مه، ولی واژه‌ی مستقلی است و رابطه‌ی صرفی با آن ندارد.',
-      en: 'Greeting and comparative adverb used in phrases like Ce mai faci?. Homograph of the month May, but an independent word with no inflectional relation.',
+      fa: [
+        { t: 'قید احوال‌پرسی و تفضیلی در عبارت‌هایی چون ' },
+        { ref: 'p-core-ce-mai-faci', display: 'Ce mai faci' },
+        { t: '?. همنگاشت با نام ماه مه، ولی واژه‌ی مستقلی است و رابطه‌ی صرفی با آن ندارد.' },
+      ],
+      en: [
+        { t: 'Greeting and comparative adverb used in phrases like ' },
+        { ref: 'p-core-ce-mai-faci', display: 'Ce mai faci' },
+        { t: '?. Homograph of the month May, but an independent word with no inflectional relation.' },
+      ],
     },
   },
   {
@@ -158,8 +206,24 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'اسم خنثی (salutul / saluturi) که طبق تعریف فرهنگ لغت به صورت ندایی به عنوان سلام و درود غیررسمی (Salut!) نیز به کار می‌رود.',
-      en: 'Neuter noun (salutul / saluturi) used as an informal greeting (Salut!) per dictionary definition.',
+      fa: [
+        { t: 'اسم خنثی (' },
+        { ref: 'w-core-salut', display: 'salutul' },
+        { t: ' / ' },
+        { ref: 'w-core-salut', display: 'saluturi' },
+        { t: ') که طبق تعریف فرهنگ لغت به صورت ندایی به عنوان سلام و درود غیررسمی (' },
+        { ref: 'w-core-salut', display: 'Salut' },
+        { t: '!) نیز به کار می‌رود.' },
+      ],
+      en: [
+        { t: 'Neuter noun (' },
+        { ref: 'w-core-salut', display: 'salutul' },
+        { t: ' / ' },
+        { ref: 'w-core-salut', display: 'saluturi' },
+        { t: ') used as an informal greeting (' },
+        { ref: 'w-core-salut', display: 'Salut' },
+        { t: '!) per dictionary definition.' },
+      ],
     },
   },
   {
@@ -182,8 +246,12 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'صوت خداحافظی غیررسمی و صمیمانه میان دوستان و آشنایان نزدیک.',
-      en: 'Informal farewell greeting among friends and close acquaintances.',
+      fa: [
+        { t: 'صوت خداحافظی غیررسمی و صمیمانه میان دوستان و آشنایان نزدیک.' },
+      ],
+      en: [
+        { t: 'Informal farewell greeting among friends and close acquaintances.' },
+      ],
     },
   },
   {
@@ -249,8 +317,14 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'اسم مؤنث که در لوکوسیون «cu plăcere» (خواهش می‌کنم / با کمال میل) به کار می‌رود.',
-      en: 'Feminine noun used in the locution "cu plăcere" (you are welcome / with pleasure).',
+      fa: [
+        { t: 'اسم مؤنث که در لوکوسیون «' },
+        { ref: 'p-core-cu-placere', display: 'cu plăcere' },
+        { t: '» (خواهش می‌کنم / با کمال میل) به کار می‌رود.' },
+      ],
+      en: [
+        { t: 'Feminine noun used in the locution ' },
+      ],
     },
   },
   {
@@ -276,8 +350,14 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'اسم مؤنث با ریشه‌ی فعلی که در لوکوسیون خداحافظی رسمی «la revedere» (تا دیدار بعد) به کار می‌رود.',
-      en: 'Feminine verbal noun used in the standard formal farewell locution "la revedere".',
+      fa: [
+        { t: 'اسم مؤنث با ریشه‌ی فعلی که در لوکوسیون خداحافظی رسمی «' },
+        { ref: 'p-core-la-revedere', display: 'la revedere' },
+        { t: '» (تا دیدار بعد) به کار می‌رود.' },
+      ],
+      en: [
+        { t: 'Feminine verbal noun used in the standard formal farewell locution ' },
+      ],
     },
   },
   {
@@ -303,8 +383,14 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'اسم مؤنث که صورت جمع آن «scuze» مستقلاً به عنوان عذرخواهی و معذرت‌خواهی سریع به کار می‌رود.',
-      en: 'Feminine noun whose plural form "scuze" is used standalone as a quick apology.',
+      fa: [
+        { t: 'اسم مؤنث که صورت جمع آن «' },
+        { ref: 'w-core-scuza', display: 'scuze' },
+        { t: '» مستقلاً به عنوان عذرخواهی و معذرت‌خواهی سریع به کار می‌رود.' },
+      ],
+      en: [
+        { t: 'Feminine noun whose plural form ' },
+      ],
     },
   },
 ];
@@ -336,8 +422,20 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'احوال‌پرسی رسمی و خنثی هنگام صبح (تا پیش از ظهر). ساختار: صفت مؤنث bună + اسم معرفه مؤنث dimineața.',
-      en: 'Standard morning greeting until noon. Structure: feminine adjective bună + definite feminine noun dimineața.',
+      fa: [
+        { t: 'احوال‌پرسی رسمی و خنثی هنگام صبح (تا پیش از ظهر). ساختار: صفت مؤنث ' },
+        { ref: 'w-core-buna', display: 'bună' },
+        { t: ' + اسم معرفه مؤنث ' },
+        { ref: 'w-time-dimineata', display: 'dimineața' },
+        { t: '.' },
+      ],
+      en: [
+        { t: 'Standard morning greeting until noon. Structure: feminine adjective ' },
+        { ref: 'w-core-buna', display: 'bună' },
+        { t: ' + definite feminine noun ' },
+        { ref: 'w-time-dimineata', display: 'dimineața' },
+        { t: '.' },
+      ],
     },
   },
   {
@@ -365,8 +463,28 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'سلام و احوال‌پرسی استاندارد و رسمی در طول روز (در برابر salut/bună که خودمانی هستند). ساختار: صفت مؤنث bună + اسم معرفه مؤنث ziua.',
-      en: 'Standard formal greeting during the day (contrasts with informal salut/bună). Structure: feminine adjective bună + definite feminine noun ziua.',
+      fa: [
+        { t: 'سلام و احوال‌پرسی استاندارد و رسمی در طول روز (در برابر ' },
+        { ref: 'w-core-salut', display: 'salut' },
+        { t: '/' },
+        { ref: 'w-core-buna', display: 'bună' },
+        { t: ' که خودمانی هستند). ساختار: صفت مؤنث ' },
+        { ref: 'w-core-buna', display: 'bună' },
+        { t: ' + اسم معرفه مؤنث ' },
+        { ref: 'w-time-zi', display: 'ziua' },
+        { t: '.' },
+      ],
+      en: [
+        { t: 'Standard formal greeting during the day (contrasts with informal ' },
+        { ref: 'w-core-salut', display: 'salut' },
+        { t: '/' },
+        { ref: 'w-core-buna', display: 'bună' },
+        { t: '). Structure: feminine adjective ' },
+        { ref: 'w-core-buna', display: 'bună' },
+        { t: ' + definite feminine noun ' },
+        { ref: 'w-time-zi', display: 'ziua' },
+        { t: '.' },
+      ],
     },
   },
   {
@@ -394,8 +512,20 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'احوال‌پرسی استاندارد در هنگام عصر و غروب. ساختار: صفت مؤنث bună + اسم معرفه مؤنث seara.',
-      en: 'Standard evening greeting. Structure: feminine adjective bună + definite feminine noun seara.',
+      fa: [
+        { t: 'احوال‌پرسی استاندارد در هنگام عصر و غروب. ساختار: صفت مؤنث ' },
+        { ref: 'w-core-buna', display: 'bună' },
+        { t: ' + اسم معرفه مؤنث ' },
+        { ref: 'w-time-seara', display: 'seara' },
+        { t: '.' },
+      ],
+      en: [
+        { t: 'Standard evening greeting. Structure: feminine adjective ' },
+        { ref: 'w-core-buna', display: 'bună' },
+        { t: ' + definite feminine noun ' },
+        { ref: 'w-time-seara', display: 'seara' },
+        { t: '.' },
+      ],
     },
   },
   {
@@ -423,8 +553,30 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'خداحافظی هنگام خواب یا اواخر شب. برخلاف bună dimineața/ziua/seara که در آن‌ها صفت پیش از اسم معرفه می‌آید، در noapte bună اسم نکره در ابتدا و صفت پس از آن می‌آید (وارونگی موصوف و صفت). هر چهار اسم مؤنث هستند، لذا در همه از bună استفاده می‌شود.',
-      en: 'Bedtime farewell. Unlike bună dimineața/ziua/seara where adjective precedes definite noun, here the indefinite noun precedes the adjective (word order inversion). All four nouns are feminine, hence bună is used in all.',
+      fa: [
+        { t: 'خداحافظی هنگام خواب یا اواخر شب. برخلاف ' },
+        { ref: 'p-core-buna-dimineata', display: 'bună dimineața' },
+        { t: '/' },
+        { ref: 'w-time-zi', display: 'ziua' },
+        { t: '/' },
+        { ref: 'w-time-seara', display: 'seara' },
+        { t: ' که در آن‌ها صفت پیش از اسم معرفه می‌آید، در ' },
+        { ref: 'p-core-noapte-buna', display: 'noapte bună' },
+        { t: ' اسم نکره در ابتدا و صفت پس از آن می‌آید (وارونگی موصوف و صفت). هر چهار اسم مؤنث هستند، لذا در همه از ' },
+        { ref: 'w-core-buna', display: 'bună' },
+        { t: ' استفاده می‌شود.' },
+      ],
+      en: [
+        { t: 'Bedtime farewell. Unlike ' },
+        { ref: 'p-core-buna-dimineata', display: 'bună dimineața' },
+        { t: '/' },
+        { ref: 'w-time-zi', display: 'ziua' },
+        { t: '/' },
+        { ref: 'w-time-seara', display: 'seara' },
+        { t: ' where adjective precedes definite noun, here the indefinite noun precedes the adjective (word order inversion). All four nouns are feminine, hence ' },
+        { ref: 'w-core-buna', display: 'bună' },
+        { t: ' is used in all.' },
+      ],
     },
   },
   {
@@ -452,8 +604,16 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'خداحافظی استاندارد و رسمی (در برابر pa که غیررسمی و خودمانی است). معنای تحت‌اللفظی: تا دیدار دوباره.',
-      en: 'Standard formal farewell (contrasts with informal pa). Literal meaning: until seeing each other again.',
+      fa: [
+        { t: 'خداحافظی استاندارد و رسمی (در برابر ' },
+        { ref: 'w-core-pa', display: 'pa' },
+        { t: ' که غیررسمی و خودمانی است). معنای تحت‌اللفظی: تا دیدار دوباره.' },
+      ],
+      en: [
+        { t: 'Standard formal farewell (contrasts with informal ' },
+        { ref: 'w-core-pa', display: 'pa' },
+        { t: '). Literal meaning: until seeing each other again.' },
+      ],
     },
   },
   {
@@ -481,8 +641,16 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'خداحافظی کاملاً خودمانی و دوستانه میان دوستان و آشنایان نزدیک (در برابر la revedere که رسمی است).',
-      en: 'Informal farewell used among close friends (contrasts with formal la revedere).',
+      fa: [
+        { t: 'خداحافظی کاملاً خودمانی و دوستانه میان دوستان و آشنایان نزدیک (در برابر ' },
+        { ref: 'p-core-la-revedere', display: 'la revedere' },
+        { t: ' که رسمی است).' },
+      ],
+      en: [
+        { t: 'Informal farewell used among close friends (contrasts with formal ' },
+        { ref: 'p-core-la-revedere', display: 'la revedere' },
+        { t: ').' },
+      ],
     },
   },
   {
@@ -510,8 +678,20 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'آرزوی حسن ختام هنگام خداحافظی در طول روز. اسم zi نکره است و صفت bună پس از آن آمده است.',
-      en: 'Parting wish during daytime. Indefinite noun zi followed by adjective bună.',
+      fa: [
+        { t: 'آرزوی حسن ختام هنگام خداحافظی در طول روز. اسم ' },
+        { ref: 'w-time-zi', display: 'zi' },
+        { t: ' نکره است و صفت ' },
+        { ref: 'w-core-buna', display: 'bună' },
+        { t: ' پس از آن آمده است.' },
+      ],
+      en: [
+        { t: 'Parting wish during daytime. Indefinite noun ' },
+        { ref: 'w-time-zi', display: 'zi' },
+        { t: ' followed by adjective ' },
+        { ref: 'w-core-buna', display: 'bună' },
+        { t: '.' },
+      ],
     },
   },
 
@@ -527,7 +707,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     intendedUse: 'produce',
     text: {
       ro: 'Vă rog.',
-      en: 'Please.',
+      en: 'Please (formal).',
       fa: 'خواهش می‌کنم / لطفاً (رسمی).',
     },
     wordIds: ['w-core-va'],
@@ -542,8 +722,30 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'فرمول ادب رسمی با ضمیر احترامی vă (در برابر te rog خودمانی). ضمیر رسمی dumneavoastră با صیغه‌ی جمع voi مطابقت می‌کند (vă rog = از شما خواهش می‌کنم).',
-      en: 'Formal politeness formula with clitic vă (contrasting with informal te rog). Formal dumneavoastră aligns with voi plural verb/clitics.',
+      fa: [
+        { t: 'فرمول ادب رسمی با ضمیر احترامی ' },
+        { ref: 'w-core-va', display: 'vă' },
+        { t: ' (در برابر ' },
+        { ref: 'p-core-te-rog', display: 'te rog' },
+        { t: ' خودمانی). ضمیر رسمی ' },
+        { ref: 'w-core-dumneavoastra', display: 'dumneavoastră' },
+        { t: ' با صیغه‌ی جمع ' },
+        { ref: 'w-core-voi', display: 'voi' },
+        { t: ' مطابقت می‌کند (' },
+        { ref: 'p-core-va-rog', display: 'vă rog' },
+        { t: ' = از شما خواهش می‌کنم).' },
+      ],
+      en: [
+        { t: 'Formal politeness formula with clitic ' },
+        { ref: 'w-core-va', display: 'vă' },
+        { t: ' (contrasting with informal ' },
+        { ref: 'p-core-te-rog', display: 'te rog' },
+        { t: '). Formal ' },
+        { ref: 'w-core-dumneavoastra', display: 'dumneavoastră' },
+        { t: ' aligns with ' },
+        { ref: 'w-core-voi', display: 'voi' },
+        { t: ' plural verb/clitics.' },
+      ],
     },
   },
   {
@@ -557,7 +759,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     intendedUse: 'comprehend',
     text: {
       ro: 'Te rog.',
-      en: 'Please.',
+      en: 'Please (informal).',
       fa: 'خواهش می‌کنم / لطفاً (خودمانی).',
     },
     wordIds: ['w-core-te'],
@@ -572,8 +774,16 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'فرمول ادب خودمانی برای درخواست از دوستان و افراد صمیمی (در برابر vă rog رسمی).',
-      en: 'Informal request formula among close friends (contrasting with formal vă rog).',
+      fa: [
+        { t: 'فرمول ادب خودمانی برای درخواست از دوستان و افراد صمیمی (در برابر ' },
+        { ref: 'p-core-va-rog', display: 'vă rog' },
+        { t: ' رسمی).' },
+      ],
+      en: [
+        { t: 'Informal request formula among close friends (contrasting with formal ' },
+        { ref: 'p-core-va-rog', display: 'vă rog' },
+        { t: ').' },
+      ],
     },
   },
   {
@@ -602,8 +812,24 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'تشکر رسمی با ضمیر برایی vă و اول شخص مفرد mulțumesc. برای احترام به شخص مخاطب (dumneavoastră) از vă استفاده می‌شود.',
-      en: 'Formal thank you combining clitic vă and first person singular mulțumesc.',
+      fa: [
+        { t: 'تشکر رسمی با ضمیر برایی ' },
+        { ref: 'w-core-va', display: 'vă' },
+        { t: ' و اول شخص مفرد ' },
+        { ref: 'w-multumesc', display: 'mulțumesc' },
+        { t: '. برای احترام به شخص مخاطب (' },
+        { ref: 'w-core-dumneavoastra', display: 'dumneavoastră' },
+        { t: ') از ' },
+        { ref: 'w-core-va', display: 'vă' },
+        { t: ' استفاده می‌شود.' },
+      ],
+      en: [
+        { t: 'Formal thank you combining clitic ' },
+        { ref: 'w-core-va', display: 'vă' },
+        { t: ' and first person singular ' },
+        { ref: 'w-multumesc', display: 'mulțumesc' },
+        { t: '.' },
+      ],
     },
   },
   {
@@ -631,8 +857,16 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'صیغه‌ی اول شخص جمع (ما) از فعل a mulțumi برای تشکر از طرف یک جمع یا خانواده.',
-      en: 'First person plural form of a mulțumi used when thanking on behalf of a group.',
+      fa: [
+        { t: 'صیغه‌ی اول شخص جمع (ما) از فعل ' },
+        { ref: 'v-core-a-multumi', display: 'a mulțumi' },
+        { t: ' برای تشکر از طرف یک جمع یا خانواده.' },
+      ],
+      en: [
+        { t: 'First person plural form of ' },
+        { ref: 'v-core-a-multumi', display: 'a mulțumi' },
+        { t: ' used when thanking on behalf of a group.' },
+      ],
     },
   },
   {
@@ -660,8 +894,18 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'پاسخ استاندارد و مؤدبانه به تشکر (Mulțumesc). ترکیب حرف اضافه‌ی cu و اسم plăcere.',
-      en: 'Standard polite response to "Mulțumesc". Combines preposition cu and noun plăcere.',
+      fa: [
+        { t: 'پاسخ استاندارد و مؤدبانه به تشکر (' },
+        { ref: 'w-multumesc', display: 'Mulțumesc' },
+        { t: '). ترکیب حرف اضافه‌ی ' },
+        { fn: 'cu' },
+        { t: ' و اسم ' },
+        { ref: 'w-core-placere', display: 'plăcere' },
+        { t: '.' },
+      ],
+      en: [
+        { t: 'Standard polite response to ' },
+      ],
     },
   },
   {
@@ -689,8 +933,16 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'عذرخواهی کوتاه و روزمره با استفاده از صورت جمع اسم scuză.',
-      en: 'Short everyday apology using the plural form of the noun scuză.',
+      fa: [
+        { t: 'عذرخواهی کوتاه و روزمره با استفاده از صورت جمع اسم ' },
+        { ref: 'w-core-scuza', display: 'scuză' },
+        { t: '.' },
+      ],
+      en: [
+        { t: 'Short everyday apology using the plural form of the noun ' },
+        { ref: 'w-core-scuza', display: 'scuză' },
+        { t: '.' },
+      ],
     },
   },
 
@@ -721,8 +973,28 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'احوال‌پرسی رسمی یا خطاب به چند نفر با صیغه‌ی دوم‌شخص جمع faceți از فعل a face. ضمیر احترامی dumneavoastră نیز همواره فعل جمع می‌گیرد. در برابر Ce mai faci? خودمانی.',
-      en: 'Formal greeting or addressed to multiple people using second-person plural faceți of a face. Formal dumneavoastră always takes plural verb. Contrasts with informal Ce mai faci?.',
+      fa: [
+        { t: 'احوال‌پرسی رسمی یا خطاب به چند نفر با صیغه‌ی دوم‌شخص جمع ' },
+        { ref: 'v-core-a-face', display: 'faceți' },
+        { t: ' از فعل ' },
+        { ref: 'v-core-a-face', display: 'a face' },
+        { t: '. ضمیر احترامی ' },
+        { ref: 'w-core-dumneavoastra', display: 'dumneavoastră' },
+        { t: ' نیز همواره فعل جمع می‌گیرد. در برابر ' },
+        { ref: 'p-core-ce-mai-faci', display: 'Ce mai faci' },
+        { t: '? خودمانی.' },
+      ],
+      en: [
+        { t: 'Formal greeting or addressed to multiple people using second-person plural ' },
+        { ref: 'v-core-a-face', display: 'faceți' },
+        { t: ' of ' },
+        { ref: 'v-core-a-face', display: 'a face' },
+        { t: '. Formal ' },
+        { ref: 'w-core-dumneavoastra', display: 'dumneavoastră' },
+        { t: ' always takes plural verb. Contrasts with informal ' },
+        { ref: 'p-core-ce-mai-faci', display: 'Ce mai faci' },
+        { t: '?.' },
+      ],
     },
   },
   {
@@ -751,8 +1023,24 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'احوال‌پرسی غیررسمی و صمیمانه با صیغه‌ی دوم‌شخص مفرد faci (در برابر Ce mai faceți? رسمی). قید mai در اینجا نقش احوال‌پرسی دارد.',
-      en: 'Informal friendly greeting using second-person singular faci (contrasts with formal Ce mai faceți?). Adverb mai functions as greeting marker.',
+      fa: [
+        { t: 'احوال‌پرسی غیررسمی و صمیمانه با صیغه‌ی دوم‌شخص مفرد ' },
+        { ref: 'v-core-a-face', display: 'faci' },
+        { t: ' (در برابر ' },
+        { ref: 'p-core-ce-mai-faceti', display: 'Ce mai faceți' },
+        { t: '? رسمی). قید ' },
+        { ref: 'w-core-mai-adv', display: 'mai' },
+        { t: ' در اینجا نقش احوال‌پرسی دارد.' },
+      ],
+      en: [
+        { t: 'Informal friendly greeting using second-person singular ' },
+        { ref: 'v-core-a-face', display: 'faci' },
+        { t: ' (contrasts with formal ' },
+        { ref: 'p-core-ce-mai-faceti', display: 'Ce mai faceți' },
+        { t: '?). Adverb ' },
+        { ref: 'w-core-mai-adv', display: 'mai' },
+        { t: ' functions as greeting marker.' },
+      ],
     },
   },
   {
@@ -781,8 +1069,26 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'پاسخ متداول و مؤدبانه به احوال‌پرسی‌های Ce mai faci? و Ce mai faceți?. ترکیب قید bine و صیغه‌ی اول شخص mulțumesc.',
-      en: 'Standard polite response to greeting inquiries Ce mai faci? and Ce mai faceți?. Combines adverb bine and verb mulțumesc.',
+      fa: [
+        { t: 'پاسخ متداول و مؤدبانه به احوال‌پرسی‌های ' },
+        { ref: 'p-core-ce-mai-faci', display: 'Ce mai faci' },
+        { t: '? و ' },
+        { ref: 'p-core-ce-mai-faceti', display: 'Ce mai faceți' },
+        { t: '?. ترکیب قید ' },
+        { ref: 'w-core-bine', display: 'bine' },
+        { t: ' و صیغه‌ی اول شخص ' },
+        { ref: 'w-multumesc', display: 'mulțumesc' },
+        { t: '.' },
+      ],
+      en: [
+        { t: 'Standard polite response to greeting inquiries ' },
+        { ref: 'p-core-ce-mai-faci', display: 'Ce mai faci' },
+        { t: '? and ' },
+        { ref: 'p-core-ce-mai-faceti', display: 'Ce mai faceți' },
+        { t: '?. Combines adverb bine and verb ' },
+        { ref: 'w-multumesc', display: 'mulțumesc' },
+        { t: '.' },
+      ],
     },
   },
   {
@@ -811,8 +1117,20 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'پرسش رسمی درباره‌ی نام با ضمیر vă و صیغه‌ی دوم‌شخص جمع numiți از فعل a numi. ضمیر احترامی dumneavoastră صیغه‌ی جمع می‌گیرد، حتی وقتی با یک نفر حرف می‌زنید.',
-      en: "Formal inquiry about one's name, using vă and the 2nd person plural numiți of a numi. Polite dumneavoastră governs plural agreement even when addressing one person.",
+      fa: [
+        { t: 'پرسش رسمی درباره‌ی نام با ضمیر ' },
+        { ref: 'w-core-va', display: 'vă' },
+        { t: ' و صیغه‌ی دوم‌شخص جمع ' },
+        { ref: 'v-core-a-numi', display: 'numiți' },
+        { t: ' از فعل ' },
+        { ref: 'v-core-a-numi', display: 'a numi' },
+        { t: '. ضمیر احترامی ' },
+        { ref: 'w-core-dumneavoastra', display: 'dumneavoastră' },
+        { t: ' صیغه‌ی جمع می‌گیرد، حتی وقتی با یک نفر حرف می‌زنید.' },
+      ],
+      en: [
+        { t: 'Formal inquiry about one' },
+      ],
     },
   },
   {
@@ -841,8 +1159,24 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'فرمول استاندارد و مؤدبانه برای معرفی نام خود با ضمیر انعکاسی mă و صیغه‌ی اول‌شخص مفرد numesc از فعل a numi.',
-      en: 'Standard polite formula for self-introduction with reflexive mă and first-person numesc of a numi.',
+      fa: [
+        { t: 'فرمول استاندارد و مؤدبانه برای معرفی نام خود با ضمیر انعکاسی ' },
+        { ref: 'w-core-ma', display: 'mă' },
+        { t: ' و صیغه‌ی اول‌شخص مفرد ' },
+        { ref: 'v-core-a-numi', display: 'numesc' },
+        { t: ' از فعل ' },
+        { ref: 'v-core-a-numi', display: 'a numi' },
+        { t: '.' },
+      ],
+      en: [
+        { t: 'Standard polite formula for self-introduction with reflexive ' },
+        { ref: 'w-core-ma', display: 'mă' },
+        { t: ' and first-person ' },
+        { ref: 'v-core-a-numi', display: 'numesc' },
+        { t: ' of ' },
+        { ref: 'v-core-a-numi', display: 'a numi' },
+        { t: '.' },
+      ],
     },
   },
   {
@@ -871,8 +1205,20 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'عبارت رایج هنگام آشنایی و معرفی به معنای «خوش‌وقتم». ساختار: ضمیر برایی îmi + فعل سوم‌شخص pare + قید bine (ذیل مدخل părea در فرهنگ لغت).',
-      en: 'Common expression upon meeting someone meaning "pleased to meet you". Structure: dative clitic îmi + 3rd person pare + adverb bine (cited directly under părea in DEX).',
+      fa: [
+        { t: 'عبارت رایج هنگام آشنایی و معرفی به معنای «خوش‌وقتم». ساختار: ضمیر برایی ' },
+        { ref: 'w-core-imi', display: 'îmi' },
+        { t: ' + فعل سوم‌شخص ' },
+        { ref: 'v-core-a-parea', display: 'pare' },
+        { t: ' + قید ' },
+        { ref: 'w-core-bine', display: 'bine' },
+        { t: ' (ذیل مدخل ' },
+        { ref: 'v-core-a-parea', display: 'părea' },
+        { t: ' در فرهنگ لغت).' },
+      ],
+      en: [
+        { t: 'Common expression upon meeting someone meaning ' },
+      ],
     },
   },
   {
@@ -901,8 +1247,28 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     status: 'published',
     isFree: true,
     usageNote: {
-      fa: 'فرمول استاندارد برای ابراز تأسف و همدردی. ساختار: ضمیر برایی îmi + فعل سوم‌شخص pare + قید rău (عیناً ذیل مدخل părea در فرهنگ لغت نقل شده است).',
-      en: 'Standard formula for expressing regret or sympathy. Structure: dative clitic îmi + 3rd person pare + adverb rău (cited directly under părea in DEX).',
+      fa: [
+        { t: 'فرمول استاندارد برای ابراز تأسف و همدردی. ساختار: ضمیر برایی ' },
+        { ref: 'w-core-imi', display: 'îmi' },
+        { t: ' + فعل سوم‌شخص ' },
+        { ref: 'v-core-a-parea', display: 'pare' },
+        { t: ' + قید ' },
+        { ref: 'w-core-rau', display: 'rău' },
+        { t: ' (عیناً ذیل مدخل ' },
+        { ref: 'v-core-a-parea', display: 'părea' },
+        { t: ' در فرهنگ لغت نقل شده است).' },
+      ],
+      en: [
+        { t: 'Standard formula for expressing regret or sympathy. Structure: dative clitic ' },
+        { ref: 'w-core-imi', display: 'îmi' },
+        { t: ' + 3rd person ' },
+        { ref: 'v-core-a-parea', display: 'pare' },
+        { t: ' + adverb ' },
+        { ref: 'w-core-rau', display: 'rău' },
+        { t: ' (cited directly under ' },
+        { ref: 'v-core-a-parea', display: 'părea' },
+        { t: ' in DEX).' },
+      ],
     },
   },
 ];

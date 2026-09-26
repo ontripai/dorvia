@@ -105,8 +105,26 @@ export const CORE_QUESTION_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قالب کلیدی روزمره: «Cât costă …?» به‌معنای «… چقدر است؟ / قیمتش چنده؟». واژه‌ی «cât» با اسم پس از خود مطابقت جنسی و شماری پیدا می‌کند: «Cât costă?» (قیمت، بدون اسم)، «Câtă apă?» (مؤنث مفرد)، «Câți bani?» (مذکر جمع).',
-      en: 'Key everyday pattern: "Cât costă …?" meaning "How much does … cost?". "cât" agrees in gender and number with the following noun: "Cât costă?" (price, without noun), "Câtă apă?" (feminine singular), "Câți bani?" (masculine plural).',
+      fa: [
+        { t: 'قالب کلیدی روزمره: «' },
+        { ref: 'shopping-001', display: 'Cât costă' },
+        { t: ' …?» به‌معنای «… چقدر است؟ / قیمتش چنده؟». واژه‌ی «' },
+        { ref: 'w-core-cat', display: 'cât' },
+        { t: '» با اسم پس از خود مطابقت جنسی و شماری پیدا می‌کند: «' },
+        { ref: 'shopping-001', display: 'Cât costă' },
+        { t: '?» (قیمت، بدون اسم)، «' },
+        { ref: 'w-core-cata', display: 'Câtă' },
+        { t: ' ' },
+        { ref: 'w-apa', display: 'apă' },
+        { t: '?» (مؤنث مفرد)، «' },
+        { ref: 'w-core-cati', display: 'Câți' },
+        { t: ' ' },
+        { ref: 'w-ban', display: 'bani' },
+        { t: '?» (مذکر جمع).' },
+      ],
+      en: [
+        { t: 'Key everyday pattern: ' },
+      ],
     },
   },
   {

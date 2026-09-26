@@ -31,6 +31,7 @@ import { CORE_NUMBERS } from '../src/content/romanian/core-numbers';
 import { CORE_TIME } from '../src/content/romanian/core-time';
 import { PILOT_PHRASES } from '../src/content/romanian/pilot';
 import { STAGE0_PHRASES } from '../src/content/romanian/stage0';
+import { CORE_GREETING_WORDS, CORE_GREETING_PHRASES } from '../src/content/romanian/core-greetings';
 import {
   ALL_ROMANIAN_WORDS,
   ALL_ROMANIAN_VERBS,
@@ -41,8 +42,8 @@ import {
 } from '../src/lib/romanian/content';
 
 const sourceContext: RegistrySourceContext = {
-  phrases: [...PILOT_PHRASES, ...STAGE0_PHRASES],
-  words: [...SEED_WORDS, ...FOUNDATION_WORDS, ...CORE_PRONOUNS, ...CORE_QUESTION_WORDS, ...CORE_NUMBERS, ...CORE_TIME],
+  phrases: [...PILOT_PHRASES, ...STAGE0_PHRASES, ...CORE_GREETING_PHRASES],
+  words: [...SEED_WORDS, ...FOUNDATION_WORDS, ...CORE_PRONOUNS, ...CORE_QUESTION_WORDS, ...CORE_NUMBERS, ...CORE_TIME, ...CORE_GREETING_WORDS],
   verbs: [...SEED_VERBS, ...CORE_VERBS],
   graphemes: [...SEED_GRAPHEMES, ...FOUNDATION_GRAPHEMES],
   dialogues: [...SEED_DIALOGUES],

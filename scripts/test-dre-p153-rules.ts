@@ -4,24 +4,23 @@ import {
   RomanianValidationContext,
 } from '../src/lib/romanian/validator';
 import {
-  SEED_DOMAINS,
-  SEED_WORDS,
-  SEED_VERBS,
-  SEED_GRAPHEMES,
-  SEED_DIALOGUES,
-} from '../src/content/romanian/seed';
-import { PILOT_PHRASES } from '../src/content/romanian/pilot';
-import { STAGE0_PHRASES } from '../src/content/romanian/stage0';
+  ALL_WORDS,
+  ALL_VERBS,
+  ALL_GRAPHEMES,
+  ALL_PHRASES,
+  ALL_DIALOGUES,
+  ALL_DOMAINS,
+} from '../src/content/romanian/registry';
 import { RomanianPhrase } from '../src/lib/romanian/types';
 
 function getCleanBaseContext(): RomanianValidationContext {
   return {
-    phrases: JSON.parse(JSON.stringify([...PILOT_PHRASES, ...STAGE0_PHRASES])),
-    words: JSON.parse(JSON.stringify(SEED_WORDS)),
-    verbs: JSON.parse(JSON.stringify(SEED_VERBS)),
-    graphemes: JSON.parse(JSON.stringify(SEED_GRAPHEMES)),
-    dialogues: JSON.parse(JSON.stringify(SEED_DIALOGUES)),
-    domains: JSON.parse(JSON.stringify(SEED_DOMAINS)),
+    phrases: JSON.parse(JSON.stringify(ALL_PHRASES)),
+    words: JSON.parse(JSON.stringify(ALL_WORDS)),
+    verbs: JSON.parse(JSON.stringify(ALL_VERBS)),
+    graphemes: JSON.parse(JSON.stringify(ALL_GRAPHEMES)),
+    dialogues: JSON.parse(JSON.stringify(ALL_DIALOGUES)),
+    domains: JSON.parse(JSON.stringify(ALL_DOMAINS)),
   };
 }
 
@@ -78,8 +77,7 @@ console.log('============================================================');
 // 1. Red Test V15: Category of a core phrase changed to 'banking'
 runTest("RED TEST V15: Change category of a 'core' phrase to 'banking' (not in core.categories)", () => {
   const ctx = getCleanBaseContext();
-  const phrase = ctx.phrases!.find(p => p.id === 'everyday-001')!;
-  phrase.domain = 'core';
+  const phrase = ctx.phrases!.find(p => p.status === 'published' && p.domain === 'core')!;
   phrase.category = 'banking'; // banking is NOT in core.categories
   const errors = validateRomanianContent(ctx);
   return { expectedRule: 'V15', errors, shouldPass: false };

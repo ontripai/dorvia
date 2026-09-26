@@ -124,10 +124,26 @@ export const FOUNDATION_WORDS: RomanianWord[] = [
     },
     "reviewer": "ai-only",
     "status": "published",
-    "usageNote": {
-      "fa": "قالب کلیدی روزمره: «Unde este …?» به‌معنای «… کجاست؟» (مانند «Unde este gara?»).",
-      "en": "Key everyday pattern: \"Unde este …?\" meaning \"Where is …?\" (e.g. \"Unde este gara?\")."
-    }
+    usageNote: {
+      fa: [
+        { t: "قالب کلیدی روزمره: «" },
+        { ref: "transport-003", display: "Unde este" },
+        { t: " …?» به‌معنای «… کجاست؟» (مانند «" },
+        { ref: "transport-003", display: "Unde este" },
+        { t: " " },
+        { ref: "w-gara", display: "gara" },
+        { t: "?»)." },
+      ],
+      en: [
+        { t: "Key everyday pattern: \"" },
+        { ref: "transport-003", display: "Unde este" },
+        { t: " …?\" meaning \"Where is …?\" (e.g. \"" },
+        { ref: "transport-003", display: "Unde este" },
+        { t: " " },
+        { ref: "w-gara", display: "gara" },
+        { t: "?\")." },
+      ],
+    },
   },
   {
     "id": "w-masa",
@@ -398,10 +414,20 @@ export const FOUNDATION_WORDS: RomanianWord[] = [
     },
     "reviewer": "ai-only",
     "status": "published",
-    "usageNote": {
-      "fa": "در معنای «کمک» خنثی است و جمعش «ajutoare» است. واژه‌ی همنگاشتی هم هست به معنای «دستیار» که اسم مذکر است و جمع دیگری دارد؛ در این درس‌ها فقط معنای «کمک» به کار می‌آید.",
-      "en": "Neuter noun meaning \"help\" with plural \"ajutoare\". There is also a homograph meaning \"assistant\" which is masculine and has a different plural; only the meaning \"help\" is taught in these lessons."
-    }
+    usageNote: {
+      fa: [
+        { t: "در معنای «کمک» خنثی است و جمعش «" },
+        { ref: "w-ajutor", display: "ajutoare" },
+        { t: "» است. واژه‌ی همنگاشتی هم هست به معنای «دستیار» که اسم مذکر است و جمع دیگری دارد؛ در این درس‌ها فقط معنای «کمک» به کار می‌آید." },
+      ],
+      en: [
+        { t: "Neuter noun meaning \"help\" with plural " },
+        { t: "\"" },
+        { ref: "w-ajutor", display: "ajutoare" },
+        { t: "\"" },
+        { t: ". There is also a homograph meaning \"assistant\" which is masculine and has a different plural; only the meaning \"help\" is taught in these lessons." },
+      ],
+    },
   },
   {
     "id": "w-rece",
@@ -577,12 +603,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-01-a-aoede.mp3",
-        "durationMs": 1340
+        "durationMs": 790
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-01-a-puck.mp3",
-        "durationMs": 2300
+        "durationMs": 1680
       }
     ]
   },
@@ -599,12 +625,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-02-e-aoede.mp3",
-        "durationMs": 2020
+        "durationMs": 1490
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-02-e-puck.mp3",
-        "durationMs": 3220
+        "durationMs": 1900
       }
     ]
   },
@@ -621,12 +647,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-03-i-aoede.mp3",
-        "durationMs": 2450
+        "durationMs": 1940
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-03-i-puck.mp3",
-        "durationMs": 2420
+        "durationMs": 1940
       }
     ]
   },
@@ -643,12 +669,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-04-o-aoede.mp3",
-        "durationMs": 2450
+        "durationMs": 1850
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-04-o-puck.mp3",
-        "durationMs": 3340
+        "durationMs": 2230
       }
     ]
   },
@@ -665,12 +691,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-05-u-aoede.mp3",
-        "durationMs": 2500
+        "durationMs": 940
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-05-u-puck.mp3",
-        "durationMs": 1540
+        "durationMs": 1010
       }
     ]
   },
@@ -687,12 +713,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-06-a-breve-aoede.mp3",
-        "durationMs": 2140
+        "durationMs": 1460
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-06-a-breve-puck.mp3",
-        "durationMs": 1610
+        "durationMs": 1180
       }
     ]
   },
@@ -709,12 +735,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-07-a-circ-i-circ-aoede.mp3",
-        "durationMs": 2980
+        "durationMs": 2500
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-07-a-circ-i-circ-puck.mp3",
-        "durationMs": 1540
+        "durationMs": 1080
       }
     ]
   },
@@ -731,12 +757,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-08-circ-rule-aoede.mp3",
-        "durationMs": 2300
+        "durationMs": 1420
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-08-circ-rule-puck.mp3",
-        "durationMs": 1820
+        "durationMs": 1300
       }
     ]
   },
@@ -753,12 +779,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-09-s-comma-aoede.mp3",
-        "durationMs": 1370
+        "durationMs": 910
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-09-s-comma-puck.mp3",
-        "durationMs": 1060
+        "durationMs": 720
       }
     ]
   },
@@ -775,12 +801,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-10-t-comma-aoede.mp3",
-        "durationMs": 3460
+        "durationMs": 2760
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-10-t-comma-puck.mp3",
-        "durationMs": 2540
+        "durationMs": 2040
       }
     ]
   },
@@ -797,12 +823,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-11-c-hard-aoede.mp3",
-        "durationMs": 1540
+        "durationMs": 1080
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-11-c-hard-puck.mp3",
-        "durationMs": 2980
+        "durationMs": 1010
       }
     ]
   },
@@ -819,12 +845,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-12-ce-ci-aoede.mp3",
-        "durationMs": 1340
+        "durationMs": 770
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-12-ce-ci-puck.mp3",
-        "durationMs": 1180
+        "durationMs": 820
       }
     ]
   },
@@ -841,12 +867,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-13-che-chi-aoede.mp3",
-        "durationMs": 1490
+        "durationMs": 840
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-13-che-chi-puck.mp3",
-        "durationMs": 1730
+        "durationMs": 910
       }
     ]
   },
@@ -863,12 +889,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-14-g-hard-aoede.mp3",
-        "durationMs": 1540
+        "durationMs": 1100
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-14-g-hard-puck.mp3",
-        "durationMs": 1700
+        "durationMs": 1010
       }
     ]
   },
@@ -885,12 +911,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-15-ge-gi-aoede.mp3",
-        "durationMs": 1820
+        "durationMs": 980
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-15-ge-gi-puck.mp3",
-        "durationMs": 3020
+        "durationMs": 1060
       }
     ]
   },
@@ -907,12 +933,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-16-ghe-ghi-aoede.mp3",
-        "durationMs": 2980
+        "durationMs": 2500
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-16-ghe-ghi-puck.mp3",
-        "durationMs": 5020
+        "durationMs": 2810
       }
     ]
   },
@@ -929,12 +955,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-17-j-aoede.mp3",
-        "durationMs": 3530
+        "durationMs": 3140
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-17-j-puck.mp3",
-        "durationMs": 3410
+        "durationMs": 3070
       }
     ]
   },
@@ -951,12 +977,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-18-r-aoede.mp3",
-        "durationMs": 1370
+        "durationMs": 860
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-18-r-puck.mp3",
-        "durationMs": 1490
+        "durationMs": 1100
       }
     ]
   },
@@ -973,12 +999,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-19-v-aoede.mp3",
-        "durationMs": 2420
+        "durationMs": 1920
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-19-v-puck.mp3",
-        "durationMs": 2020
+        "durationMs": 960
       }
     ]
   },
@@ -995,12 +1021,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-20-h-aoede.mp3",
-        "durationMs": 1580
+        "durationMs": 1060
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-20-h-puck.mp3",
-        "durationMs": 1900
+        "durationMs": 1270
       }
     ]
   },
@@ -1017,12 +1043,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-21-s-aoede.mp3",
-        "durationMs": 1300
+        "durationMs": 860
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-21-s-puck.mp3",
-        "durationMs": 1250
+        "durationMs": 860
       }
     ]
   },
@@ -1039,12 +1065,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-22-x-aoede.mp3",
-        "durationMs": 1900
+        "durationMs": 1270
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-22-x-puck.mp3",
-        "durationMs": 1490
+        "durationMs": 860
       }
     ]
   },
@@ -1062,12 +1088,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-23-i-final-aoede.mp3",
-        "durationMs": 2780
+        "durationMs": 910
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-23-i-final-puck.mp3",
-        "durationMs": 1370
+        "durationMs": 890
       }
     ]
   },
@@ -1084,12 +1110,12 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-24-consonants-basic-aoede.mp3",
-        "durationMs": 1700
+        "durationMs": 1270
       },
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-24-consonants-basic-puck.mp3",
-        "durationMs": 4130
+        "durationMs": 3480
       }
     ]
   }

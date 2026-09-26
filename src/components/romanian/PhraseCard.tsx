@@ -1,6 +1,7 @@
 import React from 'react';
 import { RomanianPhrase } from '@/lib/romanian/types';
 import { Language } from '@/types';
+import { UsageNoteText } from './UsageNoteText';
 import { PersianTranslationToggle } from './PersianTranslationToggle';
 
 interface PhraseCardProps {
@@ -194,7 +195,7 @@ export const PhraseCard: React.FC<PhraseCardProps> = ({
             dir={currentLang === 'fa' ? 'rtl' : 'ltr'}
             className="text-slate-700 leading-relaxed text-[11px] sm:text-xs pt-0.5"
           >
-            {currentLang === 'fa' ? phrase.usageNote.fa : phrase.usageNote.en}
+            <UsageNoteText note={phrase.usageNote} lang={currentLang} />
           </p>
         </div>
       )}

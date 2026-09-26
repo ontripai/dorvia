@@ -67,7 +67,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
       label: 'DORVIA Stage 0 — AI-authored, not natively reviewed',
     },
     reviewer: 'ai-only',
-    status: 'published',
+    status: 'archived',
     lastReviewed: null,
     isFree: true,
   },
@@ -93,7 +93,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
       label: 'DORVIA Stage 0 — AI-authored, not natively reviewed',
     },
     reviewer: 'ai-only',
-    status: 'published',
+    status: 'archived',
     lastReviewed: null,
     isFree: true,
   },
@@ -107,7 +107,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
     intendedUse: 'produce',
     text: {
       ro: 'Mulțumesc.',
-      en: 'Thank you.',
+      en: 'Thank you (neutral).',
       fa: 'ممنون.',
     },
     source: {
@@ -137,7 +137,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
       label: 'DORVIA Stage 0 — AI-authored, not natively reviewed',
     },
     reviewer: 'ai-only',
-    status: 'published',
+    status: 'archived',
     lastReviewed: null,
     isFree: true,
   },
@@ -159,8 +159,16 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
       note: 'صورت غیررسمی — برای درک، نه برای گفتن.',
     },
     usageNote: {
-      fa: 'در رومانی برای صدا زدن یک غریبه در خیابان، اغلب به‌جای «ببخشید» با «Bună ziua» شروع می‌کنند.',
-      en: 'In Romania, people often open with “Bună ziua” rather than “excuse me” when approaching a stranger.',
+      fa: [
+        { t: 'در رومانی برای صدا زدن یک غریبه در خیابان، اغلب به‌جای «ببخشید» با «' },
+        { ref: 'p-core-buna-ziua', display: 'Bună ziua' },
+        { t: '» شروع می‌کنند.' },
+      ],
+      en: [
+        { t: 'In Romania, people often open with “' },
+        { ref: 'p-core-buna-ziua', display: 'Bună ziua' },
+        { t: '” rather than “excuse me” when approaching a stranger.' },
+      ],
     },
     source: {
       kind: 'common-usage',
@@ -189,7 +197,7 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
       label: 'DORVIA Stage 0 — AI-authored, not natively reviewed',
     },
     reviewer: 'ai-only',
-    status: 'published',
+    status: 'archived',
     lastReviewed: null,
     isFree: true,
   },
@@ -211,8 +219,20 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
       note: 'صورت غیررسمی — برای درک، نه برای گفتن.',
     },
     usageNote: {
-      fa: '«mai încet» نگویید — آن یعنی «آرام‌تر/بی‌صداتر»، نه «آهسته‌تر».',
-      en: 'Do not say “mai încet” — that means “more quietly”, not “more slowly”.',
+      fa: [
+        { t: '«' },
+        { ref: 'w-core-mai-adv', display: 'mai' },
+        { t: ' ' },
+        { ref: 'w-incet', display: 'încet' },
+        { t: '» نگویید — آن یعنی «آرام‌تر/بی‌صداتر»، نه «آهسته‌تر».' },
+      ],
+      en: [
+        { t: 'Do not say “' },
+        { ref: 'w-core-mai-adv', display: 'mai' },
+        { t: ' ' },
+        { ref: 'w-incet', display: 'încet' },
+        { t: '” — that means “more quietly”, not “more slowly”.' },
+      ],
     },
     source: {
       kind: 'common-usage',
@@ -237,8 +257,16 @@ export const STAGE0_PHRASES: RomanianPhrase[] = [
       fa: 'این یعنی چه؟',
     },
     usageNote: {
-      fa: 'حتماً با «vă rog» گفته شود؛ صورت خالی با لحن تخت می‌تواند پرخاشگرانه شنیده شود.',
-      en: 'Always say it with “vă rog”; the bare form with flat intonation can sound confrontational.',
+      fa: [
+        { t: 'حتماً با «' },
+        { ref: 'p-core-va-rog', display: 'vă rog' },
+        { t: '» گفته شود؛ صورت خالی با لحن تخت می‌تواند پرخاشگرانه شنیده شود.' },
+      ],
+      en: [
+        { t: 'Always say it with “' },
+        { ref: 'p-core-va-rog', display: 'vă rog' },
+        { t: '”; the bare form with flat intonation can sound confrontational.' },
+      ],
     },
     source: {
       kind: 'common-usage',

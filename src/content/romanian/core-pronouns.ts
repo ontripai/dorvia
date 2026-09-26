@@ -40,8 +40,18 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'در زبان رومانیایی ضمایر فاعلی معمولاً حذف می‌شوند (مانند «Vreau»، نه «Eu vreau»). ضمیر فقط برای تأکید یا تقابل به کار می‌رود.',
-      en: 'In Romanian, subject pronouns are usually omitted (e.g. "Vreau", not "Eu vreau"). The pronoun is only used for emphasis or contrast.',
+      fa: [
+        { t: 'در زبان رومانیایی ضمایر فاعلی معمولاً حذف می‌شوند (مانند «' },
+        { ref: 'v-core-a-vrea', display: 'Vreau' },
+        { t: '»، نه «' },
+        { ref: 'w-core-eu', display: 'Eu' },
+        { t: ' ' },
+        { ref: 'v-core-a-vrea', display: 'vreau' },
+        { t: '»). ضمیر فقط برای تأکید یا تقابل به کار می‌رود.' },
+      ],
+      en: [
+        { t: 'In Romanian, subject pronouns are usually omitted (e.g. ' },
+      ],
     },
   },
   {
@@ -211,8 +221,14 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'صورت پی‌بستی «ne» در هر دو حالت رایی (مفعول مستقیم) و برایی (مفعول غیرمستقیم) یکسان است و این یکسانی بار یادگیری را کم می‌کند.',
-      en: 'The clitic form "ne" is identical for both accusative (direct object) and dative (indirect object).',
+      fa: [
+        { t: 'صورت پی‌بستی «' },
+        { ref: 'w-core-ne', display: 'ne' },
+        { t: '» در هر دو حالت رایی (مفعول مستقیم) و برایی (مفعول غیرمستقیم) یکسان است و این یکسانی بار یادگیری را کم می‌کند.' },
+      ],
+      en: [
+        { t: 'The clitic form ' },
+      ],
     },
   },
   {
@@ -236,8 +252,14 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'صورت پی‌بستی «vă» در هر دو حالت رایی (مفعول مستقیم) و برایی (مفعول غیرمستقیم) یکسان است و این یکسانی بار یادگیری را کم می‌کند.',
-      en: 'The clitic form "vă" is identical for both accusative (direct object) and dative (indirect object).',
+      fa: [
+        { t: 'صورت پی‌بستی «' },
+        { ref: 'w-core-va', display: 'vă' },
+        { t: '» در هر دو حالت رایی (مفعول مستقیم) و برایی (مفعول غیرمستقیم) یکسان است و این یکسانی بار یادگیری را کم می‌کند.' },
+      ],
+      en: [
+        { t: 'The clitic form ' },
+      ],
     },
   },
 
@@ -345,8 +367,21 @@ export const CORE_PRONOUNS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'واژه‌ی «dumneavoastră» هم برای مفرد و هم برای جمع به کار می‌رود و همواره با صیغه‌ی دوم‌شخص جمع صرف می‌شود («Dumneavoastră sunteți»، نه «este»). همچنین در نقش ملکی بدون تغییر می‌ماند («casa dumneavoastră»).',
-      en: '"dumneavoastră" is used for both singular and plural formal address and always takes the second-person plural verb form ("Dumneavoastră sunteți", not "este"). It is also invariable as a possessive ("casa dumneavoastră").',
+      fa: [
+        { t: 'واژه‌ی «' },
+        { ref: 'w-core-dumneavoastra', display: 'dumneavoastră' },
+        { t: '» هم برای مفرد و هم برای جمع به کار می‌رود و همواره با صیغه‌ی دوم‌شخص جمع صرف می‌شود («' },
+        { ref: 'w-core-dumneavoastra', display: 'Dumneavoastră' },
+        { t: ' ' },
+        { ref: 'v-a-fi', display: 'sunteți' },
+        { t: '»، نه «' },
+        { ref: 'v-a-fi', display: 'este' },
+        { t: '»). همچنین در نقش ملکی بدون تغییر می‌ماند («' },
+        { ref: 'w-casa', display: 'casa' },
+        { t: ' ' },
+        { ref: 'w-core-dumneavoastra', display: 'dumneavoastră' },
+        { t: '»).' },
+      ],
     },
   },
   {

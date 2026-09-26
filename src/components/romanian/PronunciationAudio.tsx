@@ -223,31 +223,5 @@ export function PronunciationAudio({
   );
 }
 
-/**
- * Backwards-compatible alias for alphabet pages that may still import GraphemeAudio
- * with `graphemeName`. Kept so dre-p170 remains 100% backwards-compatible.
- */
-export function GraphemeAudio({
-  clips,
-  currentLang,
-  graphemeName = '',
-  className = '',
-}: {
-  clips?: AudioClip[];
-  currentLang: Language;
-  graphemeName?: string;
-  className?: string;
-}) {
-  return (
-    <PronunciationAudio
-      clips={clips}
-      currentLang={currentLang}
-      label={graphemeName}
-      variant="labelled"
-      className={className}
-    />
-  );
-}
-
 export default PronunciationAudio;
 
