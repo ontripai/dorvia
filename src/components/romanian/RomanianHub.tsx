@@ -72,16 +72,38 @@ export const RomanianHub: React.FC<RomanianHubProps> = ({
                 className="editorial-card group p-5 sm:p-6 bg-white border border-slate-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-[#1554bd] transition-all flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-2">
                     <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 text-[#1554bd]">
                       {isFa
                         ? `${toFaDigits(st.totalCount)} مورد آموزشی`
                         : `${st.totalCount} learning item${st.totalCount > 1 ? 's' : ''}`}
                     </span>
-                    <span className="text-[11px] text-slate-400 font-mono">
+                    <span className="text-[11px] text-slate-400 font-mono shrink-0">
                       {isFa ? `ایستگاه ${toFaDigits(st.order)}` : `Station ${st.order}`}
                     </span>
                   </div>
+
+                  {/*
+                    مرز پرداخت باید دیده شود. `isFree` از dre-p177 در داده بود و
+                    V37 تضمین می‌کرد پیشوند ترتیب آموزشی باشد، ولی هیچ‌جا رندر
+                    نمی‌شد — یعنی یادگیرنده نمی‌دانست از کجا رایگان است.
+                  */}
+                  {(st.isFree || st.stepCount > 0) && (
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      {st.isFree && (
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/70">
+                          {isFa ? 'رایگان' : 'Free'}
+                        </span>
+                      )}
+                      {st.stepCount > 0 && (
+                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200/70">
+                          {isFa
+                            ? `${toFaDigits(st.stepCount)} گام`
+                            : `${st.stepCount} step${st.stepCount > 1 ? 's' : ''}`}
+                        </span>
+                      )}
+                    </div>
+                  )}
                   <div>
                     <h3 className="text-base sm:text-lg font-bold text-[#142033] group-hover:text-[#1554bd] transition-colors">
                       {isFa ? st.titleFa : st.titleRo}

@@ -16,6 +16,7 @@ import {
   RomanianGrapheme,
   RomanianDialogue,
   DomainMeta,
+  RomanianStep,
 } from './types';
 import { ROMANIAN_CATEGORIES } from './categories';
 
@@ -186,6 +187,10 @@ export interface PublishedStationInfo {
   wordCount: number;
   phraseCount: number;
   totalCount: number;
+  /** رایگان و بدون دیوار پرداخت — V37 تضمین می‌کند پیشوند ترتیب آموزشی باشد. */
+  isFree: boolean;
+  /** صفر یعنی این ایستگاه گام تعریف نکرده و فهرست تخت رندر می‌شود. */
+  stepCount: number;
 }
 
 /**
@@ -210,6 +215,8 @@ export function getPublishedStations(): PublishedStationInfo[] {
           wordCount: stWords.length,
           phraseCount: stPhrases.length,
           totalCount: total,
+          isFree: st.isFree === true,
+          stepCount: (st.steps || []).length,
         });
       }
     }
@@ -236,4 +243,75 @@ export function getStationItems(stationId: string): {
     words: PUBLISHED_WORDS.filter(w => w.stationId === stationId),
     phrases: PUBLISHED_PHRASES.filter(p => p.stationId === stationId),
   };
+}
+
+/** یک کارت واژه در یک گام. */
+export interface StepWordCard {
+  word: RomanianWord;
+  /** صورت‌هایی که سرواژه‌شان همین واژه است **و** در همین گام آموزش داده می‌شوند. */
+  nested: RomanianWord[];
+  /**
+   * وقتی پر است، این کارت خودش یک صورتِ `formOf` است که **جدا از سرواژه‌اش**
+   * نشان داده می‌شود، چون گامی که آن را آموزش می‌دهد همان گامِ سرواژه نیست.
+   *
+   * چرا لازم شد: شش پی‌بست `mă · îmi · te · îți · ne · vă` صورت‌های ضمایر
+   * فاعلی‌اند، ولی در گام دوم ضمایر آموزش داده می‌شوند نه گام اول. لانه‌کردنشان
+   * زیر سرواژه، آنها را در گام اول به یادگیرنده نشان می‌داد — یعنی پیش از
+   * گامی که قرار است یادشان بدهد.
+   */
+  shownApartFrom?: { id: string; lemma: string };
+}
+
+/** یک گام با محتوای واقعی‌اش، به‌ترتیب آموزشی. */
+export interface StationStepGroup {
+  step: RomanianStep;
+  words: StepWordCard[];
+  phrases: RomanianPhrase[];
+  /** هر قلم منتشرشده‌ی این گام، یک بار شمرده — لانه‌شده‌ها هم حساب می‌شوند. */
+  itemCount: number;
+}
+
+const RAW_STATIONS = ALL_ROMANIAN_DOMAINS.flatMap(d => d.stations || []);
+
+/**
+ * محتوای یک ایستگاه، گروه‌بندی‌شده به گام‌ها و مرتب به ترتیب آموزشی.
+ *
+ * برای ایستگاهی که گام تعریف نکرده، آرایه‌ی خالی برمی‌گرداند — فراخوان باید
+ * در آن حالت همان فهرست تخت قبلی را رندر کند.
+ */
+export function getStationStepGroups(stationId: string): StationStepGroup[] {
+  const station = RAW_STATIONS.find(st => st.id === stationId);
+  const steps = station?.steps || [];
+  if (steps.length === 0) return [];
+
+  const words = PUBLISHED_WORDS.filter(w => w.stationId === stationId);
+  const phrases = PUBLISHED_PHRASES.filter(p => p.stationId === stationId);
+  const wordById = new Map(words.map(w => [w.id, w]));
+
+  return [...steps]
+    .sort((a, b) => a.order - b.order)
+    .map(step => {
+      const stepWords = words.filter(w => w.stepId === step.id);
+      const cards: StepWordCard[] = [];
+
+      for (const word of stepWords) {
+        const head = word.formOf ? wordById.get(word.formOf) : undefined;
+        // سرواژه در همین گام است ⇒ این صورت زیر آن لانه می‌شود، نه کارت جدا.
+        if (head && head.stepId === step.id) continue;
+
+        cards.push({
+          word,
+          nested: stepWords.filter(d => d.formOf === word.id && d.stepId === step.id),
+          shownApartFrom: head ? { id: head.id, lemma: head.lemma } : undefined,
+        });
+      }
+
+      const stepPhrases = phrases.filter(p => p.stepId === step.id);
+      return {
+        step,
+        words: cards,
+        phrases: stepPhrases,
+        itemCount: stepWords.length + stepPhrases.length,
+      };
+    });
 }
