@@ -824,6 +824,195 @@ export type Database = {
         };
         Relationships: [];
       };
+      romanian_learners: {
+        Row: {
+          user_id: string;
+          timezone: string;
+          daily_goal_items: number;
+          streak_days: number;
+          streak_last_active_date: string | null;
+          streak_freezes_left: number;
+          streak_freezes_renewed_on: string | null;
+          current_station_id: string | null;
+          current_step_id: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          user_id: string;
+          timezone?: string;
+          daily_goal_items?: number;
+          streak_days?: number;
+          streak_last_active_date?: string | null;
+          streak_freezes_left?: number;
+          streak_freezes_renewed_on?: string | null;
+          current_station_id?: string | null;
+          current_step_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          user_id?: string;
+          timezone?: string;
+          daily_goal_items?: number;
+          streak_days?: number;
+          streak_last_active_date?: string | null;
+          streak_freezes_left?: number;
+          streak_freezes_renewed_on?: string | null;
+          current_station_id?: string | null;
+          current_step_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      romanian_step_progress: {
+        Row: {
+          user_id: string;
+          step_id: string;
+          station_id: string;
+          status: 'in_progress' | 'completed';
+          items_introduced: number;
+          last_item_index: number;
+          started_at: string;
+          completed_at: string | null;
+          updated_at: string;
+        };
+        Insert: {
+          user_id: string;
+          step_id: string;
+          station_id: string;
+          status?: 'in_progress' | 'completed';
+          items_introduced?: number;
+          last_item_index?: number;
+          started_at?: string;
+          completed_at?: string | null;
+          updated_at?: string;
+        };
+        Update: {
+          user_id?: string;
+          step_id?: string;
+          station_id?: string;
+          status?: 'in_progress' | 'completed';
+          items_introduced?: number;
+          last_item_index?: number;
+          started_at?: string;
+          completed_at?: string | null;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      romanian_item_state: {
+        Row: {
+          user_id: string;
+          item_id: string;
+          box: number;
+          mode: 'recognition' | 'listening' | 'production';
+          due_on: string;
+          consecutive_correct: number;
+          total_seen: number;
+          total_correct: number;
+          last_seen_at: string | null;
+          updated_at: string;
+        };
+        Insert: {
+          user_id: string;
+          item_id: string;
+          box?: number;
+          mode?: 'recognition' | 'listening' | 'production';
+          due_on?: string;
+          consecutive_correct?: number;
+          total_seen?: number;
+          total_correct?: number;
+          last_seen_at?: string | null;
+          updated_at?: string;
+        };
+        Update: {
+          user_id?: string;
+          item_id?: string;
+          box?: number;
+          mode?: 'recognition' | 'listening' | 'production';
+          due_on?: string;
+          consecutive_correct?: number;
+          total_seen?: number;
+          total_correct?: number;
+          last_seen_at?: string | null;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      romanian_sessions: {
+        Row: {
+          id: string;
+          user_id: string;
+          station_id: string | null;
+          step_id: string | null;
+          started_at: string;
+          ended_at: string | null;
+          items_total: number;
+          items_correct: number;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          station_id?: string | null;
+          step_id?: string | null;
+          started_at?: string;
+          ended_at?: string | null;
+          items_total?: number;
+          items_correct?: number;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          station_id?: string | null;
+          step_id?: string | null;
+          started_at?: string;
+          ended_at?: string | null;
+          items_total?: number;
+          items_correct?: number;
+        };
+        Relationships: [];
+      };
+      romanian_review_events: {
+        Row: {
+          id: number;
+          user_id: string;
+          session_id: string | null;
+          item_id: string;
+          mode: 'recognition' | 'listening' | 'production';
+          is_correct: boolean;
+          latency_ms: number | null;
+          box_before: number | null;
+          box_after: number | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: number;
+          user_id: string;
+          session_id?: string | null;
+          item_id: string;
+          mode: 'recognition' | 'listening' | 'production';
+          is_correct: boolean;
+          latency_ms?: number | null;
+          box_before?: number | null;
+          box_after?: number | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: number;
+          user_id?: string;
+          session_id?: string | null;
+          item_id?: string;
+          mode?: 'recognition' | 'listening' | 'production';
+          is_correct?: boolean;
+          latency_ms?: number | null;
+          box_before?: number | null;
+          box_after?: number | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;
