@@ -6,6 +6,15 @@ import ffmpeg from '@ffmpeg-installer/ffmpeg';
 import { FOUNDATION_GRAPHEMES, FOUNDATION_WORDS } from '../src/content/romanian/foundation';
 import { SEED_WORDS } from '../src/content/romanian/seed';
 import { AudioClip } from '../src/lib/romanian/types';
+import { judgeClip } from './lib/asrGate.mjs';
+
+/**
+ * dre-p176 — کلیپ‌هایی که دروازه‌ی رونویسی رد کرد.
+ * تا پیش از این، عدم تطابق فقط «⚠️ TRIAGE FLAG» چاپ می‌شد و کلیپ به‌هرحال
+ * وارد مانیفست می‌شد. این‌طور بود که g-01-a-puck حرف را هجی می‌کرد و
+ * g-19-v-aoede واژه‌ی دیگری می‌گفت، و هر دو منتشر شدند.
+ */
+const rejectedByGate: string[] = [];
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
@@ -314,6 +323,32 @@ async function main() {
 
       process.stdout.write(`-> "${transcribed}" [${isMatch ? '✅ MATCH' : '⚠️ TRIAGE FLAG'}]\n`);
 
+      // --- دروازه‌ی رونویسی (dre-p176) ---
+      // فایل همین الان ساخته شده، پس حذفش چیزی از قبل را خراب نمی‌کند.
+      // گرافم بدون جفت کامل می‌ماند و آشکارسازهای بهداشت صدا می‌گیرندش.
+      {
+        const verdict = judgeClip(targetWord, transcribed);
+        if (verdict.reject) {
+          if (fs.existsSync(mp3Path)) fs.unlinkSync(mp3Path);
+          rejectedByGate.push(`${mp3Filename} — ${verdict.reason}`);
+          results.push({
+            order: g.order,
+            graphemeId: g.id,
+            grapheme: g.grapheme,
+            targetWord,
+            voice: voiceName,
+            mp3Filename,
+            src: webSrc,
+            durationMs,
+            fileSizeBytes,
+            transcribed,
+            isMatch: false,
+          });
+          process.stdout.write(`  REJECTED by ASR gate: ${verdict.reason}. File deleted, not added to the manifest.\n`);
+          continue;
+        }
+      }
+
       results.push({
         order: g.order,
         graphemeId: g.id,
@@ -422,6 +457,13 @@ async function main() {
   console.log(`ALL 48 MP3 CLIPS ENCODED, LOGGED, AND EMBEDDED SUCCESSFULLY!`);
   console.log(`Total Directory Size: ${(totalBytes / 1024).toFixed(1)} KB`);
   console.log('================================================================');
+
+  if (rejectedByGate.length > 0) {
+    console.error(`\nASR gate rejected ${rejectedByGate.length} clip(s):`);
+    for (const line of rejectedByGate) console.error(`  - ${line}`);
+    console.error('These clips are not in the manifest. Regenerate them; do not edit the prompt for one item.');
+    process.exitCode = 1;
+  }
 }
 
 main().catch(err => {

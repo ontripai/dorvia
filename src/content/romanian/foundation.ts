@@ -608,7 +608,7 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-01-a-puck.mp3",
-        "durationMs": 1680
+        "durationMs": 820
       }
     ]
   },
@@ -735,7 +735,7 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-07-a-circ-i-circ-aoede.mp3",
-        "durationMs": 2500
+        "durationMs": 1200
       },
       {
         "voice": "Puck",
@@ -999,7 +999,7 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Aoede",
         "src": "/audio/romanian/foundation/g-19-v-aoede.mp3",
-        "durationMs": 1920
+        "durationMs": 940
       },
       {
         "voice": "Puck",
@@ -1115,7 +1115,7 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
       {
         "voice": "Puck",
         "src": "/audio/romanian/foundation/g-24-consonants-basic-puck.mp3",
-        "durationMs": 3480
+        "durationMs": 1250
       }
     ]
   }

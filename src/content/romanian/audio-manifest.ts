@@ -599,7 +599,7 @@ export const CORE_AUDIO: Record<string, AudioClip[]> = {
     {
       "voice": "Puck",
       "src": "/audio/romanian/core/w-core-mea-puck.mp3",
-      "durationMs": 620
+      "durationMs": 840
     }
   ]
 };
