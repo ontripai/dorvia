@@ -34,7 +34,7 @@ export type ValidationRuleId =
   | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8'
   | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16'
   | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24' | 'V25' | 'V26' | 'V27' | 'V28' | 'V29'
-  | 'V30' | 'V31' | 'V32' | 'V33' | 'V34' | 'V35' | 'V36' | 'V37' | 'V38';
+  | 'V30' | 'V31' | 'V32' | 'V33' | 'V34' | 'V35' | 'V36' | 'V37' | 'V38' | 'V39';
 
 export interface ValidationRuleMeta {
   id: ValidationRuleId;
@@ -81,6 +81,7 @@ export const VALIDATION_RULES: readonly ValidationRuleMeta[] = Object.freeze([
   { id: 'V36', name: 'Step Membership', description: 'Every entry in a station with steps must name a stepId defined by that station' },
   { id: 'V37', name: 'Free Stations Are A Prefix', description: 'Free stations must occupy the first positions of the teaching order — no paid station may precede a free one' },
   { id: 'V38', name: 'Step Size', description: 'A step must hold between 2 and 10 items — a session the learner can finish' },
+  { id: 'V39', name: 'Placeholder Parity', description: 'A {{placeholder}} must be from the known set and appear in every language of the same entry' },
 ]);
 
 export interface ValidationError {
@@ -1767,6 +1768,66 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
   for (const v of verbs) validateNote('Verb', v.id || '(missing-id)', v.status, (v as any).counterExamples, v.usageNote);
   for (const g of graphemes) validateNote('Grapheme', g.id || '(missing-id)', g.status, (g as any).counterExamples, (g as any).usageNote);
   for (const p of phrases) validateNote('Phrase', p.id || '(missing-id)', p.status, (p as any).counterExamples, p.usageNote);
+
+  // --- Validate Placeholder Parity (V39) ---
+  /**
+   * عبارتی مثل `Mă numesc {{name}}.` جای خالی دارد که یادگیرنده پرش می‌کند.
+   * جای خالی در داده **می‌ماند** — حذفش درس را از بین می‌برد، چون همان الگوست
+   * که باید یاد گرفته شود. ولی دو چیز باید تضمین شود:
+   *
+   * ۱. نامِ جای خالی از مجموعه‌ی شناخته‌شده باشد. یک غلط تایپی مثل `{{naem}}`
+   *    در هیچ بیلدی خطا نمی‌دهد و مستقیم به چشم یادگیرنده می‌رسد.
+   * ۲. **همه‌ی زبان‌های یک مدخل همان جای خالی‌ها را داشته باشند.** اگر رومانیایی
+   *    `{{name}}` داشته باشد و فارسی نه، ترجمه دیگر همان جمله نیست.
+   *
+   * این قاعده از یک نقص واقعی درآمد: `p-core-ma-numesc` روی سایت زنده عیناً
+   * `Mă numesc {{name}}.` را نشان می‌داد، در حالی که صدایش جای خالی را حذف
+   * می‌کرد — نوشته و صدا با هم نمی‌خواندند.
+   */
+  const KNOWN_PLACEHOLDERS = new Set(['name']);
+  const PLACEHOLDER = /\{\{([^}]*)\}\}/g;
+
+  const placeholdersIn = (raw?: string): string[] => {
+    if (!raw) return [];
+    const found: string[] = [];
+    for (const m of raw.matchAll(PLACEHOLDER)) found.push(m[1].trim());
+    return found;
+  };
+
+  for (const p of phrases) {
+    if (p.status !== 'published') continue;
+    const byLang = new Map<string, string[]>();
+    for (const lang of ['ro', 'en', 'fa'] as const) {
+      byLang.set(lang, placeholdersIn((p.text as Record<string, string | undefined>)?.[lang]));
+    }
+
+    const all = new Set<string>();
+    for (const list of byLang.values()) for (const n of list) all.add(n);
+    if (all.size === 0) continue;
+
+    for (const n of all) {
+      if (!KNOWN_PLACEHOLDERS.has(n)) {
+        errors.push({
+          rule: 'V39',
+          phraseId: p.id,
+          entityId: p.id,
+          message: `Phrase "${p.id}" uses placeholder "{{${n}}}", which is not in the known set [${[...KNOWN_PLACEHOLDERS].join(', ')}]. A typo here reaches the learner without failing any build.`,
+        });
+      }
+    }
+
+    for (const [lang, list] of byLang.entries()) {
+      const missing = [...all].filter(n => !list.includes(n));
+      if (missing.length) {
+        errors.push({
+          rule: 'V39',
+          phraseId: p.id,
+          entityId: p.id,
+          message: `Phrase "${p.id}" has placeholder(s) ${missing.map(n => `"{{${n}}}"`).join(', ')} in another language but not in "${lang}". The translation is then not the same sentence.`,
+        });
+      }
+    }
+  }
 
   // --- Validate Steps (V36, V37, V38) ---
   /**
