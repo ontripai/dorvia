@@ -7,12 +7,34 @@ import {
   RomanianDialogue,
   DomainMeta,
   AudioClip,
+  NoteSegment,
+  UsageNote,
 } from './types';
+
+/** متن رویه‌ای یک یادداشت — همان چیزی که کاربر می‌خواند. */
+export function usageNoteText(segments?: NoteSegment[], headOf?: (id: string) => string | undefined): string {
+  if (!Array.isArray(segments)) return '';
+  return segments
+    .map(seg => {
+      if ('t' in seg) return seg.t;
+      if ('bad' in seg) return seg.bad;
+      if ('fn' in seg) return seg.fn;
+      return seg.display ?? headOf?.(seg.ref) ?? '';
+    })
+    .join('');
+}
+
+/** ارجاع‌های یک یادداشت، به‌ترتیب. قطعه‌های `bad` ارجاع محتوایی نیستند. */
+export function usageNoteRefs(segments?: NoteSegment[]): string[] {
+  if (!Array.isArray(segments)) return [];
+  return segments.filter(s => 'ref' in s && !('bad' in s)).map(s => (s as { ref: string }).ref);
+}
 
 export type ValidationRuleId =
   | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8'
   | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16'
-  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24' | 'V25' | 'V26' | 'V27' | 'V28' | 'V29';
+  | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24' | 'V25' | 'V26' | 'V27' | 'V28' | 'V29'
+  | 'V30' | 'V31' | 'V32' | 'V33' | 'V34' | 'V35';
 
 export interface ValidationRuleMeta {
   id: ValidationRuleId;
@@ -50,6 +72,12 @@ export const VALIDATION_RULES: readonly ValidationRuleMeta[] = Object.freeze([
   { id: 'V27', name: 'Usage Note Vocabulary Conformance', description: 'All Latin tokens in usage notes (fa) and phrase ro texts must be valid Romanian vocabulary from registry or allowlist' },
   { id: 'V28', name: 'Published formOf Target Integrity', description: 'Published words with formOf must reference published base words' },
   { id: 'V29', name: 'Core Audio Manifest Integrity', description: 'Audio clip files referenced in core audio manifest must physically exist on disk under public/' },
+  { id: 'V30', name: 'Unique Published Phrase Text', description: 'No two published phrases may share the same Romanian text (text.ro)' },
+  { id: 'V31', name: 'English Gloss Disambiguation', description: 'Published entries sharing an English gloss must each carry a parenthetical disambiguator' },
+  { id: 'V32', name: 'Stored Duration Matches File', description: 'Every AudioClip durationMs must match the real duration of the mp3 on disk (100ms tolerance)' },
+  { id: 'V33', name: 'Unique Published Verb Infinitive', description: 'No two published verbs may share the same infinitive' },
+  { id: 'V34', name: 'Usage Note Language Completeness', description: 'For every usage note, at least one language must carry every ref used by any of its languages' },
+  { id: 'V35', name: 'No Bare Romanian In Note Text', description: 'A translatable {t} segment may not contain Romanian diacritics — Romanian forms must be refs' },
 ]);
 
 export interface ValidationError {
@@ -268,7 +296,7 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
     // V8: Verb prefix ZWNJ enforcement (می / نمی‌)
     const faFields = [
       { name: 'text.fa', text: phrase.text?.fa },
-      { name: 'usageNote.fa', text: phrase.usageNote?.fa },
+      { name: 'usageNote.fa', text: usageNoteText(phrase.usageNote?.fa) || undefined },
       { name: 'informalVariant.note', text: phrase.informalVariant?.note },
     ];
 
@@ -981,6 +1009,71 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
     }
   };
 
+  /**
+   * مدت واقعی یک mp3، با شمردن فریم‌ها — نه ffprobe.
+   *
+   * چرا ffprobe نه: این اعتبارسنج در زمان بیلد روی Vercel هم اجرا می‌شود و
+   * آنجا ffmpeg نصب نیست. قاعده‌ای که در محیط بیلد اجرا نشود، چیزی را
+   * دروازه‌بانی نمی‌کند (درس dre-p155).
+   *
+   * چرا اندازه‌ی فایل نه: در آزمایش روی هر ۱۴۸ کلیپ، تخمین از روی اندازه
+   * افست ثابت ۷۵۵ میلی‌ثانیه داشت (سرآیند ID3). ثابت بود فقط چون همه‌ی
+   * فایل‌ها یک‌جور کدگذاری شده‌اند — یعنی درست بود به‌تصادف، نه به‌دلیل.
+   *
+   * شمردن فریم روی همان ۱۴۸ فایل حداکثر ۳۰ میلی‌ثانیه با ffprobe اختلاف داشت.
+   */
+  const BITRATE_V2_L3 = [0, 8, 16, 24, 32, 40, 48, 56, 64, 80, 96, 112, 128, 144, 160, 0];
+  const BITRATE_V1_L3 = [0, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, 0];
+  const SAMPLE_RATES: Record<number, number[]> = {
+    3: [44100, 48000, 32000],   // MPEG 1
+    2: [22050, 24000, 16000],   // MPEG 2
+    0: [11025, 12000, 8000],    // MPEG 2.5
+  };
+
+  const readMp3DurationMs = (src: string): number | null => {
+    if (typeof window !== 'undefined') return null;
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      const rel = src.startsWith('/') ? src.slice(1) : src;
+      const filePath = path.join(process.cwd(), 'public', rel);
+      const b: Buffer = fs.readFileSync(filePath);
+
+      let i = 0;
+      if (b.length > 10 && b[0] === 0x49 && b[1] === 0x44 && b[2] === 0x33) {
+        i = 10 + (((b[6] & 0x7f) << 21) | ((b[7] & 0x7f) << 14) | ((b[8] & 0x7f) << 7) | (b[9] & 0x7f));
+      }
+
+      let samples = 0;
+      let rate = 0;
+      let frames = 0;
+      while (i + 4 <= b.length) {
+        if (b[i] !== 0xff || (b[i + 1] & 0xe0) !== 0xe0) { i++; continue; }
+        const verBits = (b[i + 1] >> 3) & 0x03;
+        const layer = (b[i + 1] >> 1) & 0x03;
+        if (layer !== 1 || verBits === 1) { i++; continue; }
+        const brIdx = (b[i + 2] >> 4) & 0x0f;
+        const srIdx = (b[i + 2] >> 2) & 0x03;
+        if (brIdx === 0 || brIdx === 15 || srIdx === 3) { i++; continue; }
+        const isV1 = verBits === 3;
+        const bitrate = (isV1 ? BITRATE_V1_L3 : BITRATE_V2_L3)[brIdx] * 1000;
+        const sr = SAMPLE_RATES[verBits][srIdx];
+        const spf = isV1 ? 1152 : 576;
+        const pad = (b[i + 2] >> 1) & 0x01;
+        const len = Math.floor((spf / 8) * bitrate / sr) + pad;
+        if (len < 4) { i++; continue; }
+        rate = sr;
+        samples += spf;
+        frames++;
+        i += len;
+      }
+      if (!frames || !rate) return null;
+      return Math.round((samples / rate) * 1000 / 10) * 10;
+    } catch {
+      return null;
+    }
+  };
+
   // --- Validate Published Grapheme Audio Clips (V22) ---
   for (const grapheme of graphemes) {
     if (grapheme.status === 'published') {
@@ -1153,11 +1246,9 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
 
   // --- Validate Usage Note & Phrase Text Conformance (V27) ---
   /**
-   * محدودیت واقعی دامنه‌ی بررسی V27:
-   * فیلد usageNote.en بررسی نمی‌شود، زیرا در نثر انگلیسی واژگان انگلیسی با واژگان رومانیایی
-   * بدون یک قرارداد نشانه‌گذاری صریح تفکیک‌پذیر نیستند.
-   * پوشش فیلد انگلیسی به صورت غیرمستقیم از طریق تناظر محتوایی آن با usageNote.fa تأمین می‌شود.
-   * ادعا نمی‌شود که قاعده کامل است.
+   * دامنه‌ی این بخش حالا فقط متن رومانیایی عبارت‌هاست (text.ro).
+   * یادداشت‌های کاربرد دیگر رشته نیستند و با قواعد قطعه‌ای بررسی می‌شوند —
+   * همان «قرارداد نشانه‌گذاری صریح» که کامنت قبلی نبودش را گزارش می‌کرد.
    */
 
   // سقف ۱۵ مدخل برای فهرست واژه‌های نقشی مجاز
@@ -1267,24 +1358,387 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
     }
   };
 
-  // دامنه ۱: usageNote.fa هر واژه، فعل، گرافم و عبارت
-  for (const w of words) {
-    validateLatinTokens('word', w.id || '(missing-id)', w.lemma || 'word', 'usageNote.fa', w.usageNote?.fa, w.counterExamples);
-  }
-  for (const v of verbs) {
-    validateLatinTokens('verb', v.id || '(missing-id)', v.infinitive || 'verb', 'usageNote.fa', v.usageNote?.fa, (v as any).counterExamples);
-  }
-  for (const g of graphemes) {
-    validateLatinTokens('grapheme', g.id || '(missing-id)', g.grapheme || 'grapheme', 'usageNote.fa', (g as any).usageNote?.fa, (g as any).counterExamples);
-  }
-  for (const p of phrases) {
-    validateLatinTokens('phrase', p.id || '(missing-id)', p.slug || 'phrase', 'usageNote.fa', p.usageNote?.fa, (p as any).counterExamples);
-  }
+  // دامنه ۱ سابق (اسکن رشته‌ای usageNote.fa) حذف شد و جایش را V27 قطعه‌ای گرفت.
+  // بند «یادداشت‌های کاربرد» پایین‌تر.
 
   // دامنه ۲: متن رومانیایی عبارت‌ها (فیلد ro)
   for (const p of phrases) {
     validateLatinTokens('phrase', p.id || '(missing-id)', p.slug || 'phrase', 'text.ro', p.text?.ro, (p as any).counterExamples);
   }
+
+  // --- Validate Unique Published Phrase Text (V30) ---
+  /**
+   * V26 همین را برای واژه‌ها اجرا می‌کند: یکتایی (lemma, pos). برای عبارت‌ها
+   * معادلی نبود، و شش عبارت با هر دو نسخه‌ی published زنده ماندند (dre-p173).
+   *
+   * یک عبارت تکراری فقط باگ نمایشی نیست: حلقه‌ی یادگیری روی شناسه‌ی قلم کلید
+   * می‌خورد، پس هر تکرار یک خانه‌ی حافظه‌ی اضافی می‌سازد، دو بار زمان‌بندی
+   * می‌شود، و شمارنده‌ی پیشرفت را بیش از واقع می‌کند.
+   *
+   * مقایسه به حروف بزرگ/کوچک حساس نیست، ولی «ă â î ș ț» هرگز نرمال‌سازی
+   * نمی‌شوند — suta و sută دو چیزند (درس dre-p163).
+   */
+  const publishedPhraseText = new Map<string, string>();
+  for (const p of phrases) {
+    if (p.status !== 'published') continue;
+    const ro = p.text?.ro?.trim();
+    if (!ro) continue;
+    const key = ro.toLowerCase();
+    const prior = publishedPhraseText.get(key);
+    if (prior) {
+      errors.push({
+        rule: 'V30',
+        phraseId: p.id,
+        entityId: p.id,
+        message: `Duplicate published phrase text "${ro}": phrase "${p.id}" duplicates phrase "${prior}". Archive one of them.`,
+      });
+    } else {
+      publishedPhraseText.set(key, p.id);
+    }
+  }
+
+  // --- Validate English Gloss Disambiguation (V31) ---
+  /**
+   * انگلیسی خط ثابت هر مخاطب است. یادگیرنده‌ای که فارسی نمی‌خواند فقط انگلیسی
+   * را دارد، و دو مدخل متفاوت با یک معادل انگلیسی برای او دو چیز یکسان‌اند.
+   *
+   * رفع‌ابهام = پرانتز در خود رشته‌ی انگلیسی: «please (polite)».
+   * قاعده فقط وجود پرانتز را می‌خواهد، نه درستی محتوایش — آن کار انسان است.
+   *
+   * دامنه: فقط مدخل‌های هم‌نوع با هم مقایسه می‌شوند (واژه با واژه، عبارت با
+   * عبارت). نسخه‌ی اول این قاعده روی داده‌ی واقعی آزموده شد و واژه با عبارت را
+   * هم مقایسه می‌کرد؛ نتیجه‌اش مثبت کاذب بود: واژه‌ی `pa` و عبارت `Pa!` یک چیزند
+   * که عمداً در دو سطح ثبت شده، نه دو معنای مبهم. آنچه می‌ماند واقعی است:
+   * `azi`/`astăzi` هر دو «today» و `bun`/`bună` هر دو «good» — و دومی دقیقاً
+   * همان شکاف جنسیت است که یادگیرنده‌ی انگلیسی‌خوان هیچ نشانی از آن نمی‌بیند.
+   */
+  const DISAMBIGUATOR = /\([^)]+\)/;
+  const normaliseGloss = (raw: string): string =>
+    raw.trim().toLowerCase().replace(/[.!?]+$/, '').trim();
+
+  type GlossEntry = { id: string; gloss: string; kind: string };
+  const glossBuckets = new Map<string, GlossEntry[]>();
+  const addGloss = (kind: string, id: string | undefined, gloss: string | undefined) => {
+    if (!id || !gloss) return;
+    const key = `${kind}#${normaliseGloss(gloss.replace(DISAMBIGUATOR, ' '))}`;
+    if (key.endsWith('#')) return;
+    const list = glossBuckets.get(key) || [];
+    list.push({ id, gloss, kind });
+    glossBuckets.set(key, list);
+  };
+
+  for (const w of words) {
+    if (w.status === 'published') addGloss('word', w.id, w.translations?.en);
+  }
+  for (const v of verbs) {
+    if (v.status === 'published') addGloss('verb', v.id, v.translations?.en);
+  }
+  for (const p of phrases) {
+    if (p.status === 'published') addGloss('phrase', p.id, p.text?.en);
+  }
+
+  for (const list of glossBuckets.values()) {
+    if (list.length < 2) continue;
+    const bare = list.filter(e => !DISAMBIGUATOR.test(e.gloss));
+    if (bare.length === 0) continue;
+    const all = list.map(e => `"${e.id}"`).join(', ');
+    for (const e of bare) {
+      errors.push({
+        rule: 'V31',
+        phraseId: e.id,
+        entityId: e.id,
+        message: `English gloss "${e.gloss}" on ${e.kind} "${e.id}" is shared with ${all} but carries no parenthetical disambiguator. A learner reading only English cannot tell them apart.`,
+      });
+    }
+  }
+
+  // --- Validate Unique Published Verb Infinitive (V33) ---
+  /**
+   * V26 یکتایی (lemma, pos) را برای واژه‌ها اجرا می‌کند و V30 همان را برای
+   * عبارت‌ها. افعال تا امروز هیچ قاعده‌ای نداشتند — و رجیستری دو جفت تکراری
+   * دارد: «a fi» (v-a-fi / v-core-a-fi) و «a avea» (v-a-avea / v-core-a-avea).
+   *
+   * دامنه عمداً فقط published است، برخلاف V26 که بی‌توجه به وضعیت کار می‌کند.
+   * دلیلش این است که در هر جفت، یکی published و دیگری draft است؛ قاعده‌ی
+   * بی‌توجه‌به‌وضعیت همین حالا قرمز می‌شود و ما را مجبور می‌کند تصمیم بگیریم
+   * کدام نسخه متعارف است — تصمیمی محتوایی که هنوز گرفته نشده.
+   *
+   * این نسخه دقیقاً همان خطری را می‌بندد که مهم است: انتشار همزمان هر دو.
+   * وقتی تصمیم گرفته شد، برداشتن شرط status یک خط است.
+   */
+  const publishedInfinitives = new Map<string, string>();
+  for (const v of verbs) {
+    if (v.status !== 'published') continue;
+    const inf = v.infinitive?.trim();
+    if (!inf) continue;
+    const key = inf.toLowerCase();
+    const prior = publishedInfinitives.get(key);
+    if (prior) {
+      errors.push({
+        rule: 'V33',
+        phraseId: v.id,
+        entityId: v.id,
+        message: `Duplicate published verb infinitive "${inf}": verb "${v.id}" duplicates verb "${prior}". Archive one of them.`,
+      });
+    } else {
+      publishedInfinitives.set(key, v.id);
+    }
+  }
+
+  // --- Validate Stored Duration Matches File (V32) ---
+  /**
+   * V23 و V29 بررسی می‌کنند فایل روی دیسک هست. هیچ‌کدام بررسی نمی‌کنند که
+   * durationMs با آن فایل بخواند — و وقتی ۱۲۷ کلیپ برش سکوت خوردند،
+   * ۱۴۵ مقدار ذخیره‌شده غلط شد و از هر ۳۱ قاعده رد شد (dre-p172).
+   *
+   * تلورانس ۱۰۰ms: هم خطای شمارش فریم را می‌پوشاند و هم گردکردن به ۱۰ms را،
+   * ولی از یک برش واقعی (کوچک‌ترینشان ۲۹۰ms بود) بسیار کوچک‌تر است.
+   */
+  const DURATION_TOLERANCE_MS = 100;
+  const checkClipDuration = (ownerKind: string, ownerId: string, clip: AudioClip) => {
+    const src = clip?.src?.trim();
+    if (!src) return;
+    const actual = readMp3DurationMs(src);
+    if (actual === null) return;   // فایل نیست یا خوانده نشد — کار V23/V29 است
+    const stored = clip.durationMs;
+    if (typeof stored !== 'number' || !Number.isFinite(stored)) {
+      errors.push({
+        rule: 'V32',
+        phraseId: ownerId,
+        entityId: ownerId,
+        message: `${ownerKind} "${ownerId}" clip "${src}" has no numeric durationMs (file is ${actual}ms).`,
+      });
+      return;
+    }
+    const drift = Math.abs(stored - actual);
+    if (drift > DURATION_TOLERANCE_MS) {
+      errors.push({
+        rule: 'V32',
+        phraseId: ownerId,
+        entityId: ownerId,
+        message: `${ownerKind} "${ownerId}" clip "${src}" stores durationMs ${stored} but the file is ${actual}ms (off by ${drift}ms). Run \`npm run audio:durations\`.`,
+      });
+    }
+  };
+
+  for (const g of graphemes) {
+    if (!Array.isArray(g.audio)) continue;
+    for (const clip of g.audio) checkClipDuration('Grapheme', g.id || '(missing-id)', clip);
+  }
+  if (context.coreAudio) {
+    for (const [entryId, clips] of Object.entries(context.coreAudio)) {
+      if (!Array.isArray(clips)) continue;
+      for (const clip of clips) checkClipDuration('Manifest entry', entryId, clip);
+    }
+  }
+
+  // --- Validate Usage Note Segments (V27, V34, V35) ---
+  /**
+   * V27 تا dre-p175 هر رشته‌ی لاتین در usageNote.fa را می‌گرفت و می‌پرسید آیا
+   * *یک جایی* در رجیستری هست. این کار می‌کرد فقط چون فارسی خط لاتین ندارد —
+   * یعنی قاعده به خاصیت تصادفی یکی از ورودی‌هایش تکیه داشت.
+   *
+   * حالا صورت رومانیایی ارجاع است، نه متن. قاعده زبان‌ناوابسته شد و
+   * سخت‌گیرانه‌تر: `bani` دیگر مجاز نیست چون «یک جایی هست»، بلکه فقط وقتی
+   * مجاز است که صورتِ همان مدخل ارجاع‌شده باشد.
+   */
+  const ROMANIAN_DIACRITIC = /[ăâîșțĂÂÎȘȚ]/;
+
+  /** همه‌ی صورت‌هایی که یک مدخل «دارد» — و اجزای سرواژه‌ی چندواژه‌ای‌اش. */
+  const formsOfEntry = new Map<string, Set<string>>();
+  const headOfEntry = new Map<string, string>();
+
+  const registerEntry = (id: string | undefined, head: string | undefined, forms: (string | undefined)[], allowComponents: boolean) => {
+    if (!id) return;
+    const set = new Set<string>();
+    for (const f of forms) {
+      const v = f?.trim();
+      if (!v) continue;
+      set.add(v.toLowerCase());
+      // جزء یک سرواژه‌ی چندواژه‌ای فقط برای واژه و فعل معنا دارد:
+      // «sută» جزئی از «o sută» است، ولی «costă» صورتی از جمله‌ی «Cât costă?» نیست.
+      if (allowComponents && v.includes(' ')) {
+        for (const part of v.split(/\s+/)) if (part.length > 2) set.add(part.toLowerCase());
+      }
+    }
+    formsOfEntry.set(id, set);
+    if (head) headOfEntry.set(id, head);
+  };
+
+  for (const w of words) {
+    registerEntry(w.id, w.lemma, [w.lemma, w.plural, w.definiteForm], true);
+  }
+  for (const v of verbs) {
+    const cells: (string | undefined)[] = [v.infinitive, v.participiu];
+    if (v.conjugation?.prezent) cells.push(...Object.values(v.conjugation.prezent));
+    if (v.conjugation?.conjunctiv) cells.push(...Object.values(v.conjugation.conjunctiv));
+    registerEntry(v.id, v.infinitive, cells, true);
+  }
+  for (const g of graphemes) {
+    registerEntry(g.id, g.grapheme, [g.grapheme, g.exampleForm], false);
+  }
+  for (const p of phrases) {
+    // یک عبارت در یادداشت‌ها به چند شکل نقل می‌شود: با جای‌نگهدار، بدون آن،
+    // با یا بدون نقطه‌گذاری پایانی. همه‌ی این‌ها همان عبارت‌اند.
+    const ro = p.text?.ro;
+    const noPlaceholder = ro?.replace(/\{\{[^}]*\}\}/g, ' ');
+    const variants = [ro, noPlaceholder];
+    for (const v of [ro, noPlaceholder]) {
+      if (!v) continue;
+      const tidy = v.replace(/[\u2026]/g, ' ').replace(/\s+/g, ' ').trim();
+      variants.push(tidy, tidy.replace(/[.?!:;,]+$/, '').trim());
+    }
+    registerEntry(p.id, ro, variants, false);
+  }
+
+  const statusOfEntry = new Map<string, string | undefined>();
+  for (const w of words) if (w.id) statusOfEntry.set(w.id, w.status);
+  for (const v of verbs) if (v.id) statusOfEntry.set(v.id, v.status);
+  for (const g of graphemes) if (g.id) statusOfEntry.set(g.id, g.status);
+  for (const p of phrases) if (p.id) statusOfEntry.set(p.id, p.status);
+
+  const allowedFunctionWords = new Set(FUNCTION_WORD_ALLOWLIST.map(f => f.toLowerCase()));
+
+  const validateNote = (
+    kind: string,
+    ownerId: string,
+    ownerStatus: string | undefined,
+    counterExamples: string[] | undefined,
+    note: UsageNote | undefined
+  ) => {
+    if (!note) return;
+    const counters = new Set((counterExamples || []).map(c => c.trim().toLowerCase()));
+    const refsByLang = new Map<string, string[]>();
+
+    for (const [lang, segments] of Object.entries(note)) {
+      if (!Array.isArray(segments)) continue;
+      refsByLang.set(lang, usageNoteRefs(segments));
+
+      for (const seg of segments) {
+        if ('t' in seg) {
+          // V35 — هیچ نشانه‌ی رومانیایی داخل متن ترجمه‌شدنی
+          if (ROMANIAN_DIACRITIC.test(seg.t)) {
+            errors.push({
+              rule: 'V35',
+              phraseId: ownerId,
+              entityId: ownerId,
+              message: `${kind} "${ownerId}" usageNote.${lang} has a translatable text segment containing Romanian diacritics: "${seg.t.trim().slice(0, 60)}". Romanian forms must be {ref} segments, not text.`,
+            });
+          }
+          continue;
+        }
+
+        if ('fn' in seg) {
+          // V27.4
+          if (!allowedFunctionWords.has(seg.fn.trim().toLowerCase())) {
+            errors.push({
+              rule: 'V27',
+              phraseId: ownerId,
+              entityId: ownerId,
+              message: `${kind} "${ownerId}" usageNote.${lang} uses function word "${seg.fn}", which is not in FUNCTION_WORD_ALLOWLIST.`,
+            });
+          }
+          continue;
+        }
+
+        if ('bad' in seg) {
+          // V27.3 — یک غلط نقل‌شده باید در counterExamples همان مدخل باشد
+          if (seg.ref !== ownerId) {
+            errors.push({
+              rule: 'V27',
+              phraseId: ownerId,
+              entityId: ownerId,
+              message: `${kind} "${ownerId}" usageNote.${lang} has a {bad} segment whose ref is "${seg.ref}", but a counter-example may only cite its own entry.`,
+            });
+          } else if (!counters.has(seg.bad.trim().toLowerCase())) {
+            errors.push({
+              rule: 'V27',
+              phraseId: ownerId,
+              entityId: ownerId,
+              message: `${kind} "${ownerId}" usageNote.${lang} quotes "${seg.bad}" as a mistake, but it is not listed in that entry's counterExamples.`,
+            });
+          }
+          continue;
+        }
+
+        // V27.1 — ارجاع باید مدخل موجود باشد
+        const forms = formsOfEntry.get(seg.ref);
+        if (!forms) {
+          errors.push({
+            rule: 'V27',
+            phraseId: ownerId,
+            entityId: ownerId,
+            message: `${kind} "${ownerId}" usageNote.${lang} references unknown entry "${seg.ref}".`,
+          });
+          continue;
+        }
+
+        // V27.2 — display باید صورتی از همان مدخل باشد
+        const shown = (seg.display ?? headOfEntry.get(seg.ref) ?? '').trim().toLowerCase();
+        if (!shown || !forms.has(shown)) {
+          errors.push({
+            rule: 'V27',
+            phraseId: ownerId,
+            entityId: ownerId,
+            message: `${kind} "${ownerId}" usageNote.${lang} shows "${seg.display ?? headOfEntry.get(seg.ref)}" for entry "${seg.ref}", but that is not a stored form of it.`,
+          });
+        }
+
+        // V27.5 — یادداشت هرگز به مدخل بایگانی‌شده ارجاع نمی‌دهد
+        /**
+         * چرا «بایگانی‌شده» و نه «منتشرنشده»: نسخه‌ی اول این شرط، انتشار را
+         * می‌خواست و ۱۶ خطا داد — یادداشت‌های منتشرشده‌ای که به افعال هنوز
+         * پیش‌نویس (`v-core-a-face` و …) اشاره می‌کنند.
+         *
+         * آن‌ها خطا نیستند: نمایشگر فقط `display` را چاپ می‌کند و پیوندی
+         * نمی‌سازد، پس ارجاع به مدخل پیش‌نویس هیچ چیزی را برای یادگیرنده
+         * نمی‌شکند. «بایگانی‌شده» فرق دارد — یعنی عمداً برداشته شده.
+         *
+         * اگر روزی ارجاع‌ها پیوند شوند، این شرط باید به `published` سخت شود.
+         */
+        if (statusOfEntry.get(seg.ref) === 'archived') {
+          errors.push({
+            rule: 'V27',
+            phraseId: ownerId,
+            entityId: ownerId,
+            message: `${kind} "${ownerId}" usageNote.${lang} references "${seg.ref}", which is archived.`,
+          });
+        }
+      }
+    }
+
+    // V34 — دست‌کم یک زبان باید همه‌ی ارجاع‌های هر زبان دیگری را داشته باشد
+    /**
+     * چرا زیرمجموعه و نه برابری: اندازه گرفته شد — فقط ۲۰ از ۹۸ یادداشت
+     * دنباله‌ی ارجاع یکسان دارند. یادداشت انگلیسی خلاصه است، نه ترجمه‌ی
+     * تحت‌اللفظی. قاعده‌ی برابری ۷۸ یادداشت را مجبور به بازنویسی می‌کرد.
+     * زیرمجموعه‌بودن در هر ۹۸ برقرار بود، صفر استثنا.
+     */
+    if (refsByLang.size > 1) {
+      const union = new Set<string>();
+      for (const list of refsByLang.values()) for (const r of list) union.add(r);
+      const complete = [...refsByLang.entries()].find(([, list]) => {
+        const have = new Set(list);
+        return [...union].every(r => have.has(r));
+      });
+      if (!complete) {
+        const detail = [...refsByLang.entries()]
+          .map(([lang, list]) => `${lang}=[${[...new Set(list)].join(', ')}]`)
+          .join(' ');
+        errors.push({
+          rule: 'V34',
+          phraseId: ownerId,
+          entityId: ownerId,
+          message: `${kind} "${ownerId}" usageNote has no complete language: no single language carries every ref used. ${detail}`,
+        });
+      }
+    }
+  };
+
+  for (const w of words) validateNote('Word', w.id || '(missing-id)', w.status, w.counterExamples, w.usageNote);
+  for (const v of verbs) validateNote('Verb', v.id || '(missing-id)', v.status, (v as any).counterExamples, v.usageNote);
+  for (const g of graphemes) validateNote('Grapheme', g.id || '(missing-id)', g.status, (g as any).counterExamples, (g as any).usageNote);
+  for (const p of phrases) validateNote('Phrase', p.id || '(missing-id)', p.status, (p as any).counterExamples, p.usageNote);
 
   return errors;
 }

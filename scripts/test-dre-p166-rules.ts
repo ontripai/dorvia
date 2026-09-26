@@ -341,7 +341,10 @@ runTest('GREEN TEST: 20 phrases in core-greetings have valid references, registe
 
   // Check noapte bună inversion explanation in usageNote
   const noapteBuna = CORE_GREETING_PHRASES.find(p => p.id === 'p-core-noapte-buna');
-  if (!noapteBuna?.usageNote?.fa.includes('وارونگی')) {
+  const hasInversion = noapteBuna?.usageNote?.fa?.some(
+    seg => 't' in seg && seg.t.includes('وارونگی')
+  );
+  if (!hasInversion) {
     errors.push({
       rule: 'V4',
       phraseId: 'p-core-noapte-buna',

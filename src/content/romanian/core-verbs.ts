@@ -202,10 +202,26 @@ export const CORE_VERBS: RomanianVerb[] = [
       "reason": "Verb unipersonal / defectiv de persoana I și a II-a; se folosește doar la persoana a III-a.",
       "source": "DOOM 3 (V343) / dexonline"
     },
-    "usageNote": {
-      "fa": "در زبان رومانیایی امروز، فعل a trebui به‌صورت بی‌شخص به کار می‌رود و فقط صورت trebuie برای همه‌ی اشخاص استفاده می‌شود؛ سایر صیغه‌ها در تولید گفتار معیار کاربرد ندارند.",
-      "en": "In contemporary Romanian, \"a trebui\" is used impersonally; only the form \"trebuie\" is used across all persons, and personal forms are not used in standard production."
-    }
+    usageNote: {
+      fa: [
+        { t: "در زبان رومانیایی امروز، فعل " },
+        { ref: "v-core-a-trebui", display: "a trebui" },
+        { t: " به‌صورت بی‌شخص به کار می‌رود و فقط صورت " },
+        { ref: "v-core-a-trebui", display: "trebuie" },
+        { t: " برای همه‌ی اشخاص استفاده می‌شود؛ سایر صیغه‌ها در تولید گفتار معیار کاربرد ندارند." },
+      ],
+      en: [
+        { t: "In contemporary Romanian, " },
+        { t: "\"" },
+        { ref: "v-core-a-trebui", display: "a trebui" },
+        { t: "\"" },
+        { t: " is used impersonally; only the form " },
+        { t: "\"" },
+        { ref: "v-core-a-trebui", display: "trebuie" },
+        { t: "\"" },
+        { t: " is used across all persons, and personal forms are not used in standard production." },
+      ],
+    },
   },
   {
     "id": "v-core-a-sti",

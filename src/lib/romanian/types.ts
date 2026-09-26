@@ -35,6 +35,29 @@ export type PhraseSource = {
   retrievedAt?: string;   // YYYY-MM-DD
 };
 
+/**
+ * یک یادداشت کاربرد، به‌صورت دنباله‌ای از قطعه‌ها به‌جای یک رشته (dre-p175).
+ *
+ * چرا: V27 هر رشته‌ی لاتین در usageNote.fa را به‌عنوان صورت رومانیایی بررسی
+ * می‌کرد. این کار می‌کرد فقط چون فارسی خط لاتین ندارد. با اضافه‌شدن زبان‌های
+ * لاتین‌نویس (انگلیسی، فرانسوی، ترکی) آن فرض فرو می‌ریزد.
+ *
+ * حالا صورت رومانیایی متن نیست، ارجاع است. مترجم فقط `t` را ترجمه می‌کند و
+ * اصلاً به صورت رومانیایی دسترسی ندارد.
+ */
+export type NoteSegment =
+  /** متن ترجمه‌شدنی. فاصله‌ها و نقطه‌گذاری دقیقاً همین‌جا نگه داشته می‌شوند. */
+  | { t: string }
+  /** یک صورت رومانیایی، مجاز شده توسط مدخل `ref`. `display` برای صورت صرف‌شده. */
+  | { ref: string; display?: string }
+  /** صورتی که عمداً به‌عنوان غلط رایج نقل می‌شود؛ باید در counterExamples همان مدخل باشد. */
+  | { bad: string; ref: string }
+  /** واژه‌ی نقشی از FUNCTION_WORD_ALLOWLIST که مدخل مستقل ندارد. */
+  | { fn: string };
+
+/** یادداشت کاربرد به تفکیک زبان. کلیدها کد زبان‌اند: fa, en, ur, ne, … */
+export type UsageNote = Partial<Record<string, NoteSegment[]>>;
+
 export type RomanianWord = {
   id: string;
   lemma: string;
@@ -50,7 +73,7 @@ export type RomanianWord = {
   source: PhraseSource;
   reviewer?: string | null;
   status: 'draft' | 'review' | 'published' | 'archived';
-  usageNote?: { fa: string; en: string };
+  usageNote?: UsageNote;
   counterExamples?: string[];   // صورت‌هایی که عمداً به‌عنوان غلط رایج نقل می‌شوند
   invariable?: {
     reason: string;             // چرا این واژه صرف نمی‌شود
@@ -76,7 +99,7 @@ export type RomanianVerb = {
   source: VerbSource;
   reviewer?: string | null;
   status: 'draft' | 'review' | 'published' | 'archived';
-  usageNote?: { fa: string; en: string };
+  usageNote?: UsageNote;
   /** برای افعال ناقص (مثل a trebui) که تمام اشخاص صرفی را ندارند */
   defective?: { reason: string; source: string };
 };
@@ -140,7 +163,7 @@ export type RomanianPhrase = {
   /** فقط برای درک شنیداری — هرگز به‌عنوان جمله‌ی پیشنهادی نمایش داده نشود. */
   informalVariant?: { ro: string; note?: string };
   /** نکته‌ی کاربرد — کِی و چطور این عبارت گفته می‌شود. اختیاری. */
-  usageNote?: { fa: string; en: string };
+  usageNote?: UsageNote;
   pronunciationFa?: string;      // در این فاز برای همه undefined — بخش ۵
   vocabulary?: Array<{ ro: string; en: string; fa: string }>;
   audio?: { key: string; voice: string; generatedAt: string };  // در این فاز undefined

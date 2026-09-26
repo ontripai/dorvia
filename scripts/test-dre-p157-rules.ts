@@ -4,29 +4,23 @@ import {
   RomanianValidationContext,
 } from '../src/lib/romanian/validator';
 import {
-  SEED_DOMAINS,
-  SEED_WORDS,
-  SEED_VERBS,
-  SEED_GRAPHEMES,
-  SEED_DIALOGUES,
-} from '../src/content/romanian/seed';
-import {
-  FOUNDATION_WORDS,
-  FOUNDATION_GRAPHEMES,
-} from '../src/content/romanian/foundation';
-import { CORE_VERBS } from '../src/content/romanian/core-verbs';
-import { PILOT_PHRASES } from '../src/content/romanian/pilot';
-import { STAGE0_PHRASES } from '../src/content/romanian/stage0';
+  ALL_WORDS,
+  ALL_VERBS,
+  ALL_GRAPHEMES,
+  ALL_PHRASES,
+  ALL_DIALOGUES,
+  ALL_DOMAINS,
+} from '../src/content/romanian/registry';
 import { RomanianVerb } from '../src/lib/romanian/types';
 
 function getCleanBaseContext(): RomanianValidationContext {
   return {
-    phrases: JSON.parse(JSON.stringify([...PILOT_PHRASES, ...STAGE0_PHRASES])),
-    words: JSON.parse(JSON.stringify([...SEED_WORDS, ...FOUNDATION_WORDS])),
-    verbs: JSON.parse(JSON.stringify([...SEED_VERBS, ...CORE_VERBS])),
-    graphemes: JSON.parse(JSON.stringify([...SEED_GRAPHEMES, ...FOUNDATION_GRAPHEMES])),
-    dialogues: JSON.parse(JSON.stringify(SEED_DIALOGUES)),
-    domains: JSON.parse(JSON.stringify(SEED_DOMAINS)),
+    phrases: JSON.parse(JSON.stringify(ALL_PHRASES)),
+    words: JSON.parse(JSON.stringify(ALL_WORDS)),
+    verbs: JSON.parse(JSON.stringify(ALL_VERBS)),
+    graphemes: JSON.parse(JSON.stringify(ALL_GRAPHEMES)),
+    dialogues: JSON.parse(JSON.stringify(ALL_DIALOGUES)),
+    domains: JSON.parse(JSON.stringify(ALL_DOMAINS)),
   };
 }
 

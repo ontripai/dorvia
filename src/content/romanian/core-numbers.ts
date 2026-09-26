@@ -159,8 +159,24 @@ export const CORE_NUMBERS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'واژه‌ی nouă دارای ۳ کاربرد کاملاً متمایز است: ۱) عدد ۹ («nouă bani»)، ۲) صفت مفرد مؤنث به معنای «نو/جدید» («casă nouă»)، ۳) ضمیر برایی تأکیدی به معنای «به ما» — همان صورتی که در جدول صرفی noi دیده می‌شود.',
-      en: 'The word "nouă" has 3 distinct roles: 1) cardinal number 9, 2) feminine singular adjective meaning "new", 3) tonic dative pronoun meaning "to us", the form listed in the paradigm of "noi".',
+      fa: [
+        { t: 'واژه‌ی ' },
+        { ref: 'w-num-noua', display: 'nouă' },
+        { t: ' دارای ۳ کاربرد کاملاً متمایز است: ۱) عدد ۹ («' },
+        { ref: 'w-num-noua', display: 'nouă' },
+        { t: ' ' },
+        { ref: 'w-ban', display: 'bani' },
+        { t: '»)، ۲) صفت مفرد مؤنث به معنای «نو/جدید» («' },
+        { ref: 'w-casa', display: 'casă' },
+        { t: ' ' },
+        { ref: 'w-num-noua', display: 'nouă' },
+        { t: '»)، ۳) ضمیر برایی تأکیدی به معنای «به ما» — همان صورتی که در جدول صرفی ' },
+        { ref: 'w-core-noi', display: 'noi' },
+        { t: ' دیده می‌شود.' },
+      ],
+      en: [
+        { t: 'The word ' },
+      ],
     },
   },
   {
@@ -231,8 +247,16 @@ export const CORE_NUMBERS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'املای استاندارد این عدد paisprezece است (نه patrusprezece).',
-      en: 'The standard spelling is "paisprezece" (not "patrusprezece").',
+      fa: [
+        { t: 'املای استاندارد این عدد ' },
+        { ref: 'w-num-paisprezece', display: 'paisprezece' },
+        { t: ' است (نه ' },
+        { bad: 'patrusprezece', ref: 'w-num-paisprezece' },
+        { t: ').' },
+      ],
+      en: [
+        { t: 'The standard spelling is ' },
+      ],
     },
     counterExamples: ['patrusprezece'],
   },
@@ -270,8 +294,16 @@ export const CORE_NUMBERS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'املای استاندارد این عدد șaisprezece است (نه șasesprezece).',
-      en: 'The standard spelling is "șaisprezece" (not "șasesprezece").',
+      fa: [
+        { t: 'املای استاندارد این عدد ' },
+        { ref: 'w-num-saisprezece', display: 'șaisprezece' },
+        { t: ' است (نه ' },
+        { bad: 'șasesprezece', ref: 'w-num-saisprezece' },
+        { t: ').' },
+      ],
+      en: [
+        { t: 'The standard spelling is ' },
+      ],
     },
     counterExamples: ['șasesprezece'],
   },
@@ -326,8 +358,18 @@ export const CORE_NUMBERS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'تا عدد نوزده، اسم مستقیماً پس از عدد می‌آید و نیازی به حرف اضافه نیست: «nouăsprezece bani». از عدد ۲۰ به بعد حرف اضافه‌ی de لازم است.',
-      en: 'Up to 19, the noun follows the numeral directly without "de": "nouăsprezece bani".',
+      fa: [
+        { t: 'تا عدد نوزده، اسم مستقیماً پس از عدد می‌آید و نیازی به حرف اضافه نیست: «' },
+        { ref: 'w-num-nouasprezece', display: 'nouăsprezece' },
+        { t: ' ' },
+        { ref: 'w-ban', display: 'bani' },
+        { t: '». از عدد ۲۰ به بعد حرف اضافه‌ی ' },
+        { fn: 'de' },
+        { t: ' لازم است.' },
+      ],
+      en: [
+        { t: 'Up to 19, the noun follows the numeral directly without ' },
+      ],
     },
   },
   {
@@ -347,8 +389,30 @@ export const CORE_NUMBERS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قاعده‌ی de بعد از ۲۰: از عدد ۲۰ به بالا، هنگام شمارش اسم، حرف اضافه‌ی de بین عدد و اسم قرار می‌گیرد: «douăzeci de bani» (در مقایسه با «nouăsprezece bani»). در اعداد مرکب نیز اگر به عدد ۱ یا ۲ ختم شود حرف de نمی‌آید، اما در سایر مضارب ۲۰ de اجباری است.',
-      en: 'Preposition "de" rule: from 20 onwards, "de" is placed between the numeral and the noun: "douăzeci de bani".',
+      fa: [
+        { t: 'قاعده‌ی ' },
+        { fn: 'de' },
+        { t: ' بعد از ۲۰: از عدد ۲۰ به بالا، هنگام شمارش اسم، حرف اضافه‌ی ' },
+        { fn: 'de' },
+        { t: ' بین عدد و اسم قرار می‌گیرد: «' },
+        { ref: 'w-num-douazeci', display: 'douăzeci' },
+        { t: ' ' },
+        { fn: 'de' },
+        { t: ' ' },
+        { ref: 'w-ban', display: 'bani' },
+        { t: '» (در مقایسه با «' },
+        { ref: 'w-num-nouasprezece', display: 'nouăsprezece' },
+        { t: ' ' },
+        { ref: 'w-ban', display: 'bani' },
+        { t: '»). در اعداد مرکب نیز اگر به عدد ۱ یا ۲ ختم شود حرف ' },
+        { fn: 'de' },
+        { t: ' نمی‌آید، اما در سایر مضارب ۲۰ ' },
+        { fn: 'de' },
+        { t: ' اجباری است.' },
+      ],
+      en: [
+        { t: 'Preposition ' },
+      ],
     },
   },
   {
@@ -368,8 +432,28 @@ export const CORE_NUMBERS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'در اعداد مرکب، بین دهگان و یکان حرف ربط și اجباری است: «treizeci și cinci» (۳۵) یا «douăzeci și unu» (۲۱). عدم استفاده از și غلط است.',
-      en: 'Compound numbers require the conjunction "și" between tens and units: "treizeci și cinci" (35).',
+      fa: [
+        { t: 'در اعداد مرکب، بین دهگان و یکان حرف ربط ' },
+        { fn: 'și' },
+        { t: ' اجباری است: «' },
+        { ref: 'w-num-treizeci', display: 'treizeci' },
+        { t: ' ' },
+        { fn: 'și' },
+        { t: ' ' },
+        { ref: 'w-num-cinci', display: 'cinci' },
+        { t: '» (۳۵) یا «' },
+        { ref: 'w-num-douazeci', display: 'douăzeci' },
+        { t: ' ' },
+        { fn: 'și' },
+        { t: ' ' },
+        { ref: 'w-num-unu', display: 'unu' },
+        { t: '» (۲۱). عدم استفاده از ' },
+        { fn: 'și' },
+        { t: ' غلط است.' },
+      ],
+      en: [
+        { t: 'Compound numbers require the conjunction ' },
+      ],
     },
   },
   {
@@ -423,8 +507,16 @@ export const CORE_NUMBERS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'املای استاندارد عدد ۶۰ در رومانیایی șaizeci است (نه șasezeci).',
-      en: 'The standard spelling is "șaizeci" (not "șasezeci").',
+      fa: [
+        { t: 'املای استاندارد عدد ۶۰ در رومانیایی ' },
+        { ref: 'w-num-saizeci', display: 'șaizeci' },
+        { t: ' است (نه ' },
+        { bad: 'șasezeci', ref: 'w-num-saizeci' },
+        { t: ').' },
+      ],
+      en: [
+        { t: 'The standard spelling is ' },
+      ],
     },
     counterExamples: ['șasezeci'],
   },
@@ -500,8 +592,24 @@ export const CORE_NUMBERS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'عدد یک با جنسیت اسم بعدش مطابقت می‌گیرد: برای اسم مذکر و خنثی «un ban» و برای اسم مؤنث «o casă». هنگام شمارش مجرد یا بدون اسم از صورت unu (مذکر) یا una (مؤنث) استفاده می‌شود.',
-      en: 'The number 1 agrees with the noun gender: "un ban" (m) / "o casă" (f). Standalone forms are "unu" and "una".',
+      fa: [
+        { t: 'عدد یک با جنسیت اسم بعدش مطابقت می‌گیرد: برای اسم مذکر و خنثی «' },
+        { fn: 'un' },
+        { t: ' ' },
+        { ref: 'w-ban', display: 'ban' },
+        { t: '» و برای اسم مؤنث «' },
+        { ref: 'g-04-o', display: 'o' },
+        { t: ' ' },
+        { ref: 'w-casa', display: 'casă' },
+        { t: '». هنگام شمارش مجرد یا بدون اسم از صورت ' },
+        { ref: 'w-num-unu', display: 'unu' },
+        { t: ' (مذکر) یا ' },
+        { ref: 'w-num-una', display: 'una' },
+        { t: ' (مؤنث) استفاده می‌شود.' },
+      ],
+      en: [
+        { t: 'The number 1 agrees with the noun gender: ' },
+      ],
     },
   },
   {
@@ -539,8 +647,24 @@ export const CORE_NUMBERS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'عدد دو با جنسیت اسم بعدش مطابقت می‌گیرد: برای اسم مذکر «doi bani» و برای اسم مؤنث یا خنثی جمع «două case». در تاریخ‌ها، از روز دوم به بعد از عدد اصلی استفاده می‌شود (مانند «doi»)، نه عدد ترتیبی («al doilea»).',
-      en: 'The number 2 agrees in gender: "doi bani" (m) vs "două case" (f). For dates after the 1st, cardinal numbers are used (e.g. "doi", not "al doilea").',
+      fa: [
+        { t: 'عدد دو با جنسیت اسم بعدش مطابقت می‌گیرد: برای اسم مذکر «' },
+        { ref: 'w-num-doi', display: 'doi' },
+        { t: ' ' },
+        { ref: 'w-ban', display: 'bani' },
+        { t: '» و برای اسم مؤنث یا خنثی جمع «' },
+        { ref: 'w-num-doua', display: 'două' },
+        { t: ' ' },
+        { ref: 'w-casa', display: 'case' },
+        { t: '». در تاریخ‌ها، از روز دوم به بعد از عدد اصلی استفاده می‌شود (مانند «' },
+        { ref: 'w-num-doi', display: 'doi' },
+        { t: '»)، نه عدد ترتیبی («' },
+        { ref: 'w-num-al-doilea', display: 'al doilea' },
+        { t: '»).' },
+      ],
+      en: [
+        { t: 'The number 2 agrees in gender: ' },
+      ],
     },
   },
   {
@@ -578,8 +702,20 @@ export const CORE_NUMBERS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'عدد ۱۲ نیز مانند ۲ با جنسیت اسم بعدش مطابقت دارد: «doisprezece bani» (مذکر) در برابر «douăsprezece case» (مؤنث/خنثی).',
-      en: 'The number 12 agrees in gender: "doisprezece bani" (m) vs "douăsprezece case" (f).',
+      fa: [
+        { t: 'عدد ۱۲ نیز مانند ۲ با جنسیت اسم بعدش مطابقت دارد: «' },
+        { ref: 'w-num-doisprezece', display: 'doisprezece' },
+        { t: ' ' },
+        { ref: 'w-ban', display: 'bani' },
+        { t: '» (مذکر) در برابر «' },
+        { ref: 'w-num-douasprezece', display: 'douăsprezece' },
+        { t: ' ' },
+        { ref: 'w-casa', display: 'case' },
+        { t: '» (مؤنث/خنثی).' },
+      ],
+      en: [
+        { t: 'The number 12 agrees in gender: ' },
+      ],
     },
   },
   {
@@ -621,8 +757,18 @@ export const CORE_NUMBERS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'واژه‌ی sută از نظر دستوری اسمی مؤنث است و با حرف تعریف نامعین o ترکیب شده و «o sută» را می‌سازد.',
-      en: 'The word "sută" is grammatically a feminine noun used with indefinite article "o" to form "o sută" (100).',
+      fa: [
+        { t: 'واژه‌ی ' },
+        { ref: 'w-num-o-suta', display: 'sută' },
+        { t: ' از نظر دستوری اسمی مؤنث است و با حرف تعریف نامعین ' },
+        { ref: 'g-04-o', display: 'o' },
+        { t: ' ترکیب شده و «' },
+        { ref: 'w-num-o-suta', display: 'o sută' },
+        { t: '» را می‌سازد.' },
+      ],
+      en: [
+        { t: 'The word ' },
+      ],
     },
   },
   {
@@ -642,8 +788,18 @@ export const CORE_NUMBERS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'واژه‌ی mie اسمی مؤنث است و به همراه حرف تعریف نامعین o صورت «o mie» را تشکیل می‌دهد.',
-      en: 'The word "mie" is grammatically a feminine noun used with indefinite article "o" to form "o mie" (1000).',
+      fa: [
+        { t: 'واژه‌ی ' },
+        { ref: 'w-num-o-mie', display: 'mie' },
+        { t: ' اسمی مؤنث است و به همراه حرف تعریف نامعین ' },
+        { ref: 'g-04-o', display: 'o' },
+        { t: ' صورت «' },
+        { ref: 'w-num-o-mie', display: 'o mie' },
+        { t: '» را تشکیل می‌دهد.' },
+      ],
+      en: [
+        { t: 'The word ' },
+      ],
     },
   },
 
@@ -1017,8 +1173,18 @@ export const CORE_NUMBERS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'در بیان تاریخ‌ها، برای روز اول همیشه از صورت ترتیبی întâi استفاده می‌شود. از روز دوم به بعد، برخلاف زبان‌های دیگر، از عدد اصلی مانند doi (نه al doilea) استفاده می‌شود.',
-      en: 'In calendar dates, "întâi" is used exclusively for the 1st of the month. From the 2nd onwards, cardinal numbers are used (e.g. "doi", not "al doilea").',
+      fa: [
+        { t: 'در بیان تاریخ‌ها، برای روز اول همیشه از صورت ترتیبی ' },
+        { ref: 'w-num-intai', display: 'întâi' },
+        { t: ' استفاده می‌شود. از روز دوم به بعد، برخلاف زبان‌های دیگر، از عدد اصلی مانند ' },
+        { ref: 'w-num-doi', display: 'doi' },
+        { t: ' (نه ' },
+        { ref: 'w-num-al-doilea', display: 'al doilea' },
+        { t: ') استفاده می‌شود.' },
+      ],
+      en: [
+        { t: 'In calendar dates, ' },
+      ],
     },
   },
   {

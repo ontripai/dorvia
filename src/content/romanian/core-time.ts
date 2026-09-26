@@ -41,8 +41,26 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'نام روزهای هفته در زبان رومانیایی با حروف کوچک نوشته می‌شود (luni، نه Luni). واژه‌ی «luni» هم به معنای «دوشنبه» است و هم صورت جمع «lună» (ماه‌ها). صورت معرفه‌ی آن «lunea» است و برای بیان عادت یا برنامه‌ی کاری هفتگی به کار می‌رود («دوشنبه‌ها»).',
-      en: 'Days of the week in Romanian are written in lowercase (luni, not Luni). The word "luni" denotes "Monday" and also serves as the plural of "lună" (months). Its definite form "lunea" is used for regular weekly habits or recurring schedules ("on Mondays").',
+      fa: [
+        { t: 'نام روزهای هفته در زبان رومانیایی با حروف کوچک نوشته می‌شود (' },
+        { ref: 'w-time-luni', display: 'luni' },
+        { t: '، نه ' },
+        { ref: 'w-time-luni', display: 'Luni' },
+        { t: '). واژه‌ی «' },
+        { ref: 'w-time-luni', display: 'luni' },
+        { t: '» هم به معنای «دوشنبه» است و هم صورت جمع «' },
+        { ref: 'w-time-luna', display: 'lună' },
+        { t: '» (ماه‌ها). صورت معرفه‌ی آن «' },
+        { ref: 'w-time-luni', display: 'lunea' },
+        { t: '» است و برای بیان عادت یا برنامه‌ی کاری هفتگی به کار می‌رود («دوشنبه‌ها»).' },
+      ],
+      en: [
+        { t: 'Days of the week in Romanian are written in lowercase (' },
+        { ref: 'w-time-luni', display: 'luni' },
+        { t: ', not ' },
+        { ref: 'w-time-luni', display: 'Luni' },
+        { t: '). The word ' },
+      ],
     },
   },
   {
@@ -68,8 +86,16 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'با حرف کوچک نوشته می‌شود. صورت معرفه‌ی آن «marțea» به معنای «سه‌شنبه‌ها» (به طور مرتب) است. توجه کنید که این واژه با «martie» (ماه مارس) که یک حرف بیشتر دارد اشتباه نشود.',
-      en: 'Written in lowercase. The definite form "marțea" means "on Tuesdays" (habitually). Be careful not to confuse it with "martie" (the month of March).',
+      fa: [
+        { t: 'با حرف کوچک نوشته می‌شود. صورت معرفه‌ی آن «' },
+        { ref: 'w-time-marti', display: 'marțea' },
+        { t: '» به معنای «سه‌شنبه‌ها» (به طور مرتب) است. توجه کنید که این واژه با «' },
+        { ref: 'w-time-martie', display: 'martie' },
+        { t: '» (ماه مارس) که یک حرف بیشتر دارد اشتباه نشود.' },
+      ],
+      en: [
+        { t: 'Written in lowercase. The definite form ' },
+      ],
     },
   },
   {
@@ -95,8 +121,14 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'با حرف کوچک نوشته می‌شود. صورت معرفه‌ی آن «miercurea» بیانگر استمرار هفتگی («چهارشنبه‌ها») است.',
-      en: 'Written in lowercase. The definite form "miercurea" denotes recurring weekly occurrences ("on Wednesdays").',
+      fa: [
+        { t: 'با حرف کوچک نوشته می‌شود. صورت معرفه‌ی آن «' },
+        { ref: 'w-time-miercuri', display: 'miercurea' },
+        { t: '» بیانگر استمرار هفتگی («چهارشنبه‌ها») است.' },
+      ],
+      en: [
+        { t: 'Written in lowercase. The definite form ' },
+      ],
     },
   },
   {
@@ -122,8 +154,14 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'با حرف کوچک نوشته می‌شود. صورت معرفه‌ی آن «joia» به معنای «پنج‌شنبه‌ها» است.',
-      en: 'Written in lowercase. The definite form "joia" means "on Thursdays".',
+      fa: [
+        { t: 'با حرف کوچک نوشته می‌شود. صورت معرفه‌ی آن «' },
+        { ref: 'w-time-joi', display: 'joia' },
+        { t: '» به معنای «پنج‌شنبه‌ها» است.' },
+      ],
+      en: [
+        { t: 'Written in lowercase. The definite form ' },
+      ],
     },
   },
   {
@@ -149,8 +187,14 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'با حرف کوچک نوشته می‌شود. صورت معرفه‌ی آن «vinerea» به معنای «جمعه‌ها» به کار می‌رود.',
-      en: 'Written in lowercase. The definite form "vinerea" means "on Fridays".',
+      fa: [
+        { t: 'با حرف کوچک نوشته می‌شود. صورت معرفه‌ی آن «' },
+        { ref: 'w-time-vineri', display: 'vinerea' },
+        { t: '» به معنای «جمعه‌ها» به کار می‌رود.' },
+      ],
+      en: [
+        { t: 'Written in lowercase. The definite form ' },
+      ],
     },
   },
   {
@@ -176,8 +220,18 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'بر خلاف پنج روز نخست هفته که صورت جمع هم‌شکل با مفرد دارند، واژه‌ی «sâmbătă» دارای صورت جمع متمایز «sâmbete» است. صورت معرفه‌ی مفرد آن «sâmbăta» به معنای «شنبه‌ها» است.',
-      en: 'Unlike the first five days of the week which have identical plural forms, "sâmbătă" has the distinct plural "sâmbete". Its singular definite form "sâmbăta" means "on Saturdays".',
+      fa: [
+        { t: 'بر خلاف پنج روز نخست هفته که صورت جمع هم‌شکل با مفرد دارند، واژه‌ی «' },
+        { ref: 'w-time-sambata', display: 'sâmbătă' },
+        { t: '» دارای صورت جمع متمایز «' },
+        { ref: 'w-time-sambata', display: 'sâmbete' },
+        { t: '» است. صورت معرفه‌ی مفرد آن «' },
+        { ref: 'w-time-sambata', display: 'sâmbăta' },
+        { t: '» به معنای «شنبه‌ها» است.' },
+      ],
+      en: [
+        { t: 'Unlike the first five days of the week which have identical plural forms, ' },
+      ],
     },
   },
   {
@@ -203,8 +257,16 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'دارای صورت جمع متمایز «duminici» است. صورت معرفه‌ی آن «duminica» به معنای «یکشنبه‌ها» استفاده می‌شود.',
-      en: 'Features the distinct plural form "duminici". Its definite form "duminica" means "on Sundays".',
+      fa: [
+        { t: 'دارای صورت جمع متمایز «' },
+        { ref: 'w-time-duminica', display: 'duminici' },
+        { t: '» است. صورت معرفه‌ی آن «' },
+        { ref: 'w-time-duminica', display: 'duminica' },
+        { t: '» به معنای «یکشنبه‌ها» استفاده می‌شود.' },
+      ],
+      en: [
+        { t: 'Features the distinct plural form ' },
+      ],
     },
   },
 
@@ -236,8 +298,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'نام ماه‌ها در رومانیایی با حرف کوچک نوشته می‌شود. اسم مذکر بدون صرف است.',
-      en: 'Month names in Romanian are written in lowercase. It is an invariable masculine noun.',
+      fa: [
+        { t: 'نام ماه‌ها در رومانیایی با حرف کوچک نوشته می‌شود. اسم مذکر بدون صرف است.' },
+      ],
+      en: [
+        { t: 'Month names in Romanian are written in lowercase. It is an invariable masculine noun.' },
+      ],
     },
   },
   {
@@ -265,8 +331,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'با حرف کوچک نوشته می‌شود.',
-      en: 'Written in lowercase.',
+      fa: [
+        { t: 'با حرف کوچک نوشته می‌شود.' },
+      ],
+      en: [
+        { t: 'Written in lowercase.' },
+      ],
     },
   },
   {
@@ -294,8 +364,24 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قاعده‌ی تاریخ: برای روز اول ماه از عدد ترتیبی استفاده می‌شود («întâi martie»)، اما برای روزهای دیگر از عدد اصلی استفاده می‌شود («doi martie»، نه «al doilea»). توجه: با «marți» (سه‌شنبه) اشتباه نشود.',
-      en: 'Date rule: The first day of the month uses an ordinal numeral ("întâi martie"), while subsequent days use cardinal numerals ("doi martie", not "al doilea"). Warning: Do not confuse with "marți" (Tuesday).',
+      fa: [
+        { t: 'قاعده‌ی تاریخ: برای روز اول ماه از عدد ترتیبی استفاده می‌شود («' },
+        { ref: 'w-num-intai', display: 'întâi' },
+        { t: ' ' },
+        { ref: 'w-time-martie', display: 'martie' },
+        { t: '»)، اما برای روزهای دیگر از عدد اصلی استفاده می‌شود («' },
+        { ref: 'w-num-doi', display: 'doi' },
+        { t: ' ' },
+        { ref: 'w-time-martie', display: 'martie' },
+        { t: '»، نه «' },
+        { ref: 'w-num-al-doilea', display: 'al doilea' },
+        { t: '»). توجه: با «' },
+        { ref: 'w-time-marti', display: 'marți' },
+        { t: '» (سه‌شنبه) اشتباه نشود.' },
+      ],
+      en: [
+        { t: 'Date rule: The first day of the month uses an ordinal numeral (' },
+      ],
     },
   },
   {
@@ -323,8 +409,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'با حرف کوچک نوشته می‌شود.',
-      en: 'Written in lowercase.',
+      fa: [
+        { t: 'با حرف کوچک نوشته می‌شود.' },
+      ],
+      en: [
+        { t: 'Written in lowercase.' },
+      ],
     },
   },
   {
@@ -352,8 +442,14 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'واژه‌ی «mai» دارای سه کاربرد کاملاً متمایز است: ۱) اسم ماه پنجم سال (ماه مه؛ همین مدخل)، ۲) قید احوال‌پرسی و تفضیلی، که مدخل جداگانه‌ای دارد، ۳) جزء صرفی.',
-      en: 'The word "mai" has three distinct roles: 1) the fifth month of the year (May; this entry), 2) greeting and comparative adverb, which has a separate entry, 3) grammatical aspect/tense marker.',
+      fa: [
+        { t: 'واژه‌ی «' },
+        { ref: 'w-time-mai', display: 'mai' },
+        { t: '» دارای سه کاربرد کاملاً متمایز است: ۱) اسم ماه پنجم سال (ماه مه؛ همین مدخل)، ۲) قید احوال‌پرسی و تفضیلی، که مدخل جداگانه‌ای دارد، ۳) جزء صرفی.' },
+      ],
+      en: [
+        { t: 'The word ' },
+      ],
     },
   },
   {
@@ -381,8 +477,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'با حرف کوچک نوشته می‌شود.',
-      en: 'Written in lowercase.',
+      fa: [
+        { t: 'با حرف کوچک نوشته می‌شود.' },
+      ],
+      en: [
+        { t: 'Written in lowercase.' },
+      ],
     },
   },
   {
@@ -410,8 +510,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'با حرف کوچک نوشته می‌شود.',
-      en: 'Written in lowercase.',
+      fa: [
+        { t: 'با حرف کوچک نوشته می‌شود.' },
+      ],
+      en: [
+        { t: 'Written in lowercase.' },
+      ],
     },
   },
   {
@@ -439,8 +543,14 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'این مدخل نشان‌دهنده‌ی ماه هشتم سال (اوت) است. همنگاشت آن صفت «august» به معنای «باشکوه/والامقام» و لقب امپراتوران روم است.',
-      en: 'This entry represents the eighth month of the year (August). Its homograph is the adjective "august" meaning "majestic/venerable" or imperial title.',
+      fa: [
+        { t: 'این مدخل نشان‌دهنده‌ی ماه هشتم سال (اوت) است. همنگاشت آن صفت «' },
+        { ref: 'w-time-august', display: 'august' },
+        { t: '» به معنای «باشکوه/والامقام» و لقب امپراتوران روم است.' },
+      ],
+      en: [
+        { t: 'This entry represents the eighth month of the year (August). Its homograph is the adjective ' },
+      ],
     },
   },
   {
@@ -468,8 +578,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'با حرف کوچک نوشته می‌شود.',
-      en: 'Written in lowercase.',
+      fa: [
+        { t: 'با حرف کوچک نوشته می‌شود.' },
+      ],
+      en: [
+        { t: 'Written in lowercase.' },
+      ],
     },
   },
   {
@@ -497,8 +611,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'با حرف کوچک نوشته می‌شود.',
-      en: 'Written in lowercase.',
+      fa: [
+        { t: 'با حرف کوچک نوشته می‌شود.' },
+      ],
+      en: [
+        { t: 'Written in lowercase.' },
+      ],
     },
   },
   {
@@ -526,8 +644,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'با حرف کوچک نوشته می‌شود.',
-      en: 'Written in lowercase.',
+      fa: [
+        { t: 'با حرف کوچک نوشته می‌شود.' },
+      ],
+      en: [
+        { t: 'Written in lowercase.' },
+      ],
     },
   },
   {
@@ -555,8 +677,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'با حرف کوچک نوشته می‌شود.',
-      en: 'Written in lowercase.',
+      fa: [
+        { t: 'با حرف کوچک نوشته می‌شود.' },
+      ],
+      en: [
+        { t: 'Written in lowercase.' },
+      ],
     },
   },
 
@@ -586,8 +712,76 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قاعده‌ی بیان زمان و ساعت: ۱) برای ساعت ۱، صورت پایه استفاده می‌شود: «ora unu» (نه «una»؛ زیرا به عنوان شماره و برچسب به کار می‌رود). ۲) برای ساعت‌های ۲ و ۱۲ از صورت مؤنث عدد استفاده می‌شود: «ora două» و «ora douăsprezece». ۳) برای گذشت زمان از «și» («două și zece»، «două și jumătate»، «două și un sfert») و برای مانده تا ساعت بعدی از «fără» («două fără zece»، «două fără un sfert») استفاده می‌شود. ۴) جمله‌ی رایج پرسیدن ساعت: «La ce oră?» (در چه ساعتی؟) و پاسخ: «La ora două.» (در ساعت ۲).',
-      en: 'Telling time rules: 1) Hour 1 uses the base cardinal: "ora unu" (not "una", as it acts as an identifying numeral label). 2) Hours 2 and 12 use the feminine form: "ora două" and "ora douăsprezece". 3) Use "și" for minutes past ("două și zece", "două și jumătate", "două și un sfert") and "fără" for minutes to ("două fără zece", "două fără un sfert"). 4) Essential question: "La ce oră?" (At what time?) and answer: "La ora două." (At two o\'clock).',
+      fa: [
+        { t: 'قاعده‌ی بیان زمان و ساعت: ۱) برای ساعت ۱، صورت پایه استفاده می‌شود: «' },
+        { ref: 'w-time-ora', display: 'ora' },
+        { t: ' ' },
+        { ref: 'w-num-unu', display: 'unu' },
+        { t: '» (نه «' },
+        { ref: 'w-num-una', display: 'una' },
+        { t: '»؛ زیرا به عنوان شماره و برچسب به کار می‌رود). ۲) برای ساعت‌های ۲ و ۱۲ از صورت مؤنث عدد استفاده می‌شود: «' },
+        { ref: 'w-time-ora', display: 'ora' },
+        { t: ' ' },
+        { ref: 'w-num-doua', display: 'două' },
+        { t: '» و «' },
+        { ref: 'w-time-ora', display: 'ora' },
+        { t: ' ' },
+        { ref: 'w-num-douasprezece', display: 'douăsprezece' },
+        { t: '». ۳) برای گذشت زمان از «' },
+        { fn: 'și' },
+        { t: '» («' },
+        { ref: 'w-num-doua', display: 'două' },
+        { t: ' ' },
+        { fn: 'și' },
+        { t: ' ' },
+        { ref: 'w-num-zece', display: 'zece' },
+        { t: '»، «' },
+        { ref: 'w-num-doua', display: 'două' },
+        { t: ' ' },
+        { fn: 'și' },
+        { t: ' ' },
+        { ref: 'w-time-jumatate', display: 'jumătate' },
+        { t: '»، «' },
+        { ref: 'w-num-doua', display: 'două' },
+        { t: ' ' },
+        { fn: 'și' },
+        { t: ' ' },
+        { fn: 'un' },
+        { t: ' ' },
+        { ref: 'w-time-sfert', display: 'sfert' },
+        { t: '») و برای مانده تا ساعت بعدی از «' },
+        { ref: 'w-time-fara', display: 'fără' },
+        { t: '» («' },
+        { ref: 'w-num-doua', display: 'două' },
+        { t: ' ' },
+        { ref: 'w-time-fara', display: 'fără' },
+        { t: ' ' },
+        { ref: 'w-num-zece', display: 'zece' },
+        { t: '»، «' },
+        { ref: 'w-num-doua', display: 'două' },
+        { t: ' ' },
+        { ref: 'w-time-fara', display: 'fără' },
+        { t: ' ' },
+        { fn: 'un' },
+        { t: ' ' },
+        { ref: 'w-time-sfert', display: 'sfert' },
+        { t: '») استفاده می‌شود. ۴) جمله‌ی رایج پرسیدن ساعت: «' },
+        { fn: 'La' },
+        { t: ' ' },
+        { ref: 'w-core-ce', display: 'ce' },
+        { t: ' ' },
+        { ref: 'w-time-ora', display: 'oră' },
+        { t: '?» (در چه ساعتی؟) و پاسخ: «' },
+        { fn: 'La' },
+        { t: ' ' },
+        { ref: 'w-time-ora', display: 'ora' },
+        { t: ' ' },
+        { ref: 'w-num-doua', display: 'două' },
+        { t: '.» (در ساعت ۲).' },
+      ],
+      en: [
+        { t: 'Telling time rules: 1) Hour 1 uses the base cardinal: ' },
+      ],
     },
   },
   {
@@ -613,8 +807,14 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'اسم خنثی؛ جمع آن «minute» است.',
-      en: 'Neuter noun; its plural is "minute".',
+      fa: [
+        { t: 'اسم خنثی؛ جمع آن «' },
+        { ref: 'w-time-minut', display: 'minute' },
+        { t: '» است.' },
+      ],
+      en: [
+        { t: 'Neuter noun; its plural is ' },
+      ],
     },
   },
   {
@@ -640,8 +840,14 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'برای دستگاه ساعت فیزیکی (مچی یا دیواری) به کار می‌رود؛ بر خلاف «oră» که واحد سنجش زمان است.',
-      en: 'Refers to the physical clock or watch device, in contrast to "oră" which denotes the hour of time.',
+      fa: [
+        { t: 'برای دستگاه ساعت فیزیکی (مچی یا دیواری) به کار می‌رود؛ بر خلاف «' },
+        { ref: 'w-time-ora', display: 'oră' },
+        { t: '» که واحد سنجش زمان است.' },
+      ],
+      en: [
+        { t: 'Refers to the physical clock or watch device, in contrast to ' },
+      ],
     },
   },
   {
@@ -667,8 +873,20 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'در بیان ساعت همراه با «și» می‌آید: «două și jumătate» (ساعت دو و نیم).',
-      en: 'Used with "și" when telling time: "două și jumătate" (half past two).',
+      fa: [
+        { t: 'در بیان ساعت همراه با «' },
+        { fn: 'și' },
+        { t: '» می‌آید: «' },
+        { ref: 'w-num-doua', display: 'două' },
+        { t: ' ' },
+        { fn: 'și' },
+        { t: ' ' },
+        { ref: 'w-time-jumatate', display: 'jumătate' },
+        { t: '» (ساعت دو و نیم).' },
+      ],
+      en: [
+        { t: 'Used with ' },
+      ],
     },
   },
   {
@@ -694,8 +912,28 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'در بیان ساعت با حرف تعریف نامعین می‌آید: «două și un sfert» (دو و ربع) و «două fără un sfert» (یک ربع مانده به دو).',
-      en: 'Used with the indefinite article in clock times: "două și un sfert" (quarter past two) and "două fără un sfert" (quarter to two).',
+      fa: [
+        { t: 'در بیان ساعت با حرف تعریف نامعین می‌آید: «' },
+        { ref: 'w-num-doua', display: 'două' },
+        { t: ' ' },
+        { fn: 'și' },
+        { t: ' ' },
+        { fn: 'un' },
+        { t: ' ' },
+        { ref: 'w-time-sfert', display: 'sfert' },
+        { t: '» (دو و ربع) و «' },
+        { ref: 'w-num-doua', display: 'două' },
+        { t: ' ' },
+        { ref: 'w-time-fara', display: 'fără' },
+        { t: ' ' },
+        { fn: 'un' },
+        { t: ' ' },
+        { ref: 'w-time-sfert', display: 'sfert' },
+        { t: '» (یک ربع مانده به دو).' },
+      ],
+      en: [
+        { t: 'Used with the indefinite article in clock times: ' },
+      ],
     },
   },
   {
@@ -718,8 +956,26 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'حرف اضافه برای بیان مانده به ساعت بعدی: «două fără zece» (ده دقیقه به دو) و «două fără un sfert» (یک ربع به دو).',
-      en: 'Preposition indicating minutes to the next hour: "două fără zece" (ten to two) and "două fără un sfert" (quarter to two).',
+      fa: [
+        { t: 'حرف اضافه برای بیان مانده به ساعت بعدی: «' },
+        { ref: 'w-num-doua', display: 'două' },
+        { t: ' ' },
+        { ref: 'w-time-fara', display: 'fără' },
+        { t: ' ' },
+        { ref: 'w-num-zece', display: 'zece' },
+        { t: '» (ده دقیقه به دو) و «' },
+        { ref: 'w-num-doua', display: 'două' },
+        { t: ' ' },
+        { ref: 'w-time-fara', display: 'fără' },
+        { t: ' ' },
+        { fn: 'un' },
+        { t: ' ' },
+        { ref: 'w-time-sfert', display: 'sfert' },
+        { t: '» (یک ربع به دو).' },
+      ],
+      en: [
+        { t: 'Preposition indicating minutes to the next hour: ' },
+      ],
     },
   },
   {
@@ -742,8 +998,18 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'به عنوان قید برای نشان دادن ساعت دقیق به کار می‌رود: «ora două fix» (ساعت دو دقیقاً).',
-      en: 'Used adverbially to designate exact time: "ora două fix" (two o\'clock sharp).',
+      fa: [
+        { t: 'به عنوان قید برای نشان دادن ساعت دقیق به کار می‌رود: «' },
+        { ref: 'w-time-ora', display: 'ora' },
+        { t: ' ' },
+        { ref: 'w-num-doua', display: 'două' },
+        { t: ' ' },
+        { ref: 'w-time-fix', display: 'fix' },
+        { t: '» (ساعت دو دقیقاً).' },
+      ],
+      en: [
+        { t: 'Used adverbially to designate exact time: ' },
+      ],
     },
   },
 
@@ -756,7 +1022,7 @@ export const CORE_TIME: RomanianWord[] = [
     lemma: 'azi',
     pos: 'adv',
     translations: {
-      en: 'today',
+      en: 'today (= astăzi)',
       fa: 'امروز',
     },
     domains: ['core'],
@@ -771,8 +1037,14 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قید زمان به معنای امروز؛ هم‌معنی کوتاه‌تر «astăzi».',
-      en: 'Adverb of time meaning today; shorter equivalent of "astăzi".',
+      fa: [
+        { t: 'قید زمان به معنای امروز؛ هم‌معنی کوتاه‌تر «' },
+        { ref: 'w-time-astazi', display: 'astăzi' },
+        { t: '».' },
+      ],
+      en: [
+        { t: 'Adverb of time meaning today; shorter equivalent of ' },
+      ],
     },
   },
   {
@@ -780,7 +1052,7 @@ export const CORE_TIME: RomanianWord[] = [
     lemma: 'astăzi',
     pos: 'adv',
     translations: {
-      en: 'today',
+      en: 'today (= azi)',
       fa: 'امروز',
     },
     domains: ['core'],
@@ -795,8 +1067,14 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قید زمان به معنای امروز؛ مترادف «azi».',
-      en: 'Adverb of time meaning today; synonym of "azi".',
+      fa: [
+        { t: 'قید زمان به معنای امروز؛ مترادف «' },
+        { ref: 'w-time-azi', display: 'azi' },
+        { t: '».' },
+      ],
+      en: [
+        { t: 'Adverb of time meaning today; synonym of ' },
+      ],
     },
   },
   {
@@ -819,8 +1097,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قید زمان به معنای روز بعد.',
-      en: 'Adverb of time meaning tomorrow.',
+      fa: [
+        { t: 'قید زمان به معنای روز بعد.' },
+      ],
+      en: [
+        { t: 'Adverb of time meaning tomorrow.' },
+      ],
     },
   },
   {
@@ -843,8 +1125,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قید زمان به معنای روز بعد از فردا.',
-      en: 'Adverb of time meaning the day after tomorrow.',
+      fa: [
+        { t: 'قید زمان به معنای روز بعد از فردا.' },
+      ],
+      en: [
+        { t: 'Adverb of time meaning the day after tomorrow.' },
+      ],
     },
   },
   {
@@ -867,8 +1153,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قید زمان به معنای روز گذشته.',
-      en: 'Adverb of time meaning yesterday.',
+      fa: [
+        { t: 'قید زمان به معنای روز گذشته.' },
+      ],
+      en: [
+        { t: 'Adverb of time meaning yesterday.' },
+      ],
     },
   },
   {
@@ -891,8 +1181,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قید زمان برای زمان حال و زمان حاضر.',
-      en: 'Adverb of time indicating the present moment.',
+      fa: [
+        { t: 'قید زمان برای زمان حال و زمان حاضر.' },
+      ],
+      en: [
+        { t: 'Adverb of time indicating the present moment.' },
+      ],
     },
   },
   {
@@ -915,8 +1209,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قید به معنای در وقت اولیه یا پیش از موعد مقرر.',
-      en: 'Adverb meaning early or ahead of schedule.',
+      fa: [
+        { t: 'قید به معنای در وقت اولیه یا پیش از موعد مقرر.' },
+      ],
+      en: [
+        { t: 'Adverb meaning early or ahead of schedule.' },
+      ],
     },
   },
   {
@@ -939,8 +1237,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'قید به معنای پس از موعد یا دیر وقت.',
-      en: 'Adverb meaning late or after the expected time.',
+      fa: [
+        { t: 'قید به معنای پس از موعد یا دیر وقت.' },
+      ],
+      en: [
+        { t: 'Adverb meaning late or after the expected time.' },
+      ],
     },
   },
 
@@ -968,8 +1270,16 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'اسم مؤنث؛ صورت معرفه‌ی آن «ziua» و جمع آن «zile» است.',
-      en: 'Feminine noun; definite form is "ziua" and plural is "zile".',
+      fa: [
+        { t: 'اسم مؤنث؛ صورت معرفه‌ی آن «' },
+        { ref: 'w-time-zi', display: 'ziua' },
+        { t: '» و جمع آن «' },
+        { ref: 'w-time-zi', display: 'zile' },
+        { t: '» است.' },
+      ],
+      en: [
+        { t: 'Feminine noun; definite form is ' },
+      ],
     },
   },
   {
@@ -995,8 +1305,16 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'اسم مؤنث؛ صورت معرفه «săptămâna» و جمع آن «săptămâni» است.',
-      en: 'Feminine noun; definite form is "săptămâna" and plural is "săptămâni".',
+      fa: [
+        { t: 'اسم مؤنث؛ صورت معرفه «' },
+        { ref: 'w-time-saptamana', display: 'săptămâna' },
+        { t: '» و جمع آن «' },
+        { ref: 'w-time-saptamana', display: 'săptămâni' },
+        { t: '» است.' },
+      ],
+      en: [
+        { t: 'Feminine noun; definite form is ' },
+      ],
     },
   },
   {
@@ -1022,8 +1340,16 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'واژه‌ی «lună» همنگاشت است و دارای دو معنای بنیادین است: ۱) ماه تقویمی (دوازدهمین بخش از سال)، ۲) کره‌ی ماه در آسمان. صورت جمع آن «luni» با نام روز دوشنبه هم‌شکل است.',
-      en: 'The word "lună" is polysemous with two core meanings: 1) calendar month, 2) the celestial moon. Its plural form "luni" is homographic with the day name "luni" (Monday).',
+      fa: [
+        { t: 'واژه‌ی «' },
+        { ref: 'w-time-luna', display: 'lună' },
+        { t: '» همنگاشت است و دارای دو معنای بنیادین است: ۱) ماه تقویمی (دوازدهمین بخش از سال)، ۲) کره‌ی ماه در آسمان. صورت جمع آن «' },
+        { ref: 'w-time-luna', display: 'luni' },
+        { t: '» با نام روز دوشنبه هم‌شکل است.' },
+      ],
+      en: [
+        { t: 'The word ' },
+      ],
     },
   },
   {
@@ -1049,8 +1375,16 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'اسم مذکر؛ صورت معرفه «anul» و جمع آن «ani» است.',
-      en: 'Masculine noun; definite form is "anul" and plural is "ani".',
+      fa: [
+        { t: 'اسم مذکر؛ صورت معرفه «' },
+        { ref: 'w-time-an', display: 'anul' },
+        { t: '» و جمع آن «' },
+        { ref: 'w-time-an', display: 'ani' },
+        { t: '» است.' },
+      ],
+      en: [
+        { t: 'Masculine noun; definite form is ' },
+      ],
     },
   },
 
@@ -1078,8 +1412,14 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'صورت معرفه‌ی آن «dimineața» علاوه بر «صبح»، به صورت قیدی به معنای «صبح‌ها / هر روز صبح» به کار می‌رود.',
-      en: 'The definite form "dimineața" can function adverbially meaning "in the morning" or "mornings (regularly)".',
+      fa: [
+        { t: 'صورت معرفه‌ی آن «' },
+        { ref: 'w-time-dimineata', display: 'dimineața' },
+        { t: '» علاوه بر «صبح»، به صورت قیدی به معنای «صبح‌ها / هر روز صبح» به کار می‌رود.' },
+      ],
+      en: [
+        { t: 'The definite form ' },
+      ],
     },
   },
   {
@@ -1105,8 +1445,14 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'واژه‌ی مرکب استاندارد با خط‌تیره‌ی میانی. صورت معرفه‌ی آن «după-amiaza» است.',
-      en: 'Standard compound noun with an internal hyphen. Its definite form is "după-amiaza".',
+      fa: [
+        { t: 'واژه‌ی مرکب استاندارد با خط‌تیره‌ی میانی. صورت معرفه‌ی آن «' },
+        { ref: 'w-time-dupa-amiaza', display: 'după-amiaza' },
+        { t: '» است.' },
+      ],
+      en: [
+        { t: 'Standard compound noun with an internal hyphen. Its definite form is ' },
+      ],
     },
   },
   {
@@ -1132,8 +1478,14 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'صورت معرفه‌ی آن «seara» به صورت قیدی به معنای «شب‌ها / عصرها (به‌طور مرتب)» نیز به کار می‌رود.',
-      en: 'The definite form "seara" is also used adverbially to mean "in the evening" or "evenings (habitually)".',
+      fa: [
+        { t: 'صورت معرفه‌ی آن «' },
+        { ref: 'w-time-seara', display: 'seara' },
+        { t: '» به صورت قیدی به معنای «شب‌ها / عصرها (به‌طور مرتب)» نیز به کار می‌رود.' },
+      ],
+      en: [
+        { t: 'The definite form ' },
+      ],
     },
   },
   {
@@ -1159,8 +1511,14 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'صورت معرفه‌ی آن «noaptea» به صورت قیدی به معنای «شب‌ها / در طول شب» کاربرد دارد.',
-      en: 'The definite form "noaptea" is also used adverbially meaning "at night" or "nights".',
+      fa: [
+        { t: 'صورت معرفه‌ی آن «' },
+        { ref: 'w-time-noapte', display: 'noaptea' },
+        { t: '» به صورت قیدی به معنای «شب‌ها / در طول شب» کاربرد دارد.' },
+      ],
+      en: [
+        { t: 'The definite form ' },
+      ],
     },
   },
 
@@ -1185,8 +1543,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'صفت برای اشاره به دوره‌ی بعدی؛ مانند هفته‌ی بعد یا سال بعد.',
-      en: 'Adjective used to refer to subsequent time periods, e.g. next week or next year.',
+      fa: [
+        { t: 'صفت برای اشاره به دوره‌ی بعدی؛ مانند هفته‌ی بعد یا سال بعد.' },
+      ],
+      en: [
+        { t: 'Adjective used to refer to subsequent time periods, e.g. next week or next year.' },
+      ],
     },
   },
   {
@@ -1209,8 +1571,12 @@ export const CORE_TIME: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'published',
     usageNote: {
-      fa: 'صفت برای اشاره به دوره‌ی زمانی سپری‌شده؛ مانند هفته‌ی گذشته.',
-      en: 'Adjective used to refer to past time periods, e.g. last week.',
+      fa: [
+        { t: 'صفت برای اشاره به دوره‌ی زمانی سپری‌شده؛ مانند هفته‌ی گذشته.' },
+      ],
+      en: [
+        { t: 'Adjective used to refer to past time periods, e.g. last week.' },
+      ],
     },
   },
 ];

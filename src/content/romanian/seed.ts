@@ -116,8 +116,16 @@ export const SEED_WORDS: RomanianWord[] = [
     reviewer: 'ai-only',
     status: 'draft',
     usageNote: {
-      fa: 'قید به معنای «آرام، آهسته، بی‌صدا». در عبارت‌هایی چون «mai încet» به کار می‌رود.',
-      en: 'Adverb meaning "slowly / quietly / softly". Used in expressions like "mai încet".',
+      fa: [
+        { t: 'قید به معنای «آرام، آهسته، بی‌صدا». در عبارت‌هایی چون «' },
+        { ref: 'w-core-mai-adv', display: 'mai' },
+        { t: ' ' },
+        { ref: 'w-incet', display: 'încet' },
+        { t: '» به کار می‌رود.' },
+      ],
+      en: [
+        { t: 'Adverb meaning ' },
+      ],
     },
   },
 ];

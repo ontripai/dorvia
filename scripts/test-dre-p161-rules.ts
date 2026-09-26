@@ -108,7 +108,7 @@ runTest('Green Test V11: Published pronoun does not require noun gender or defin
     id: 'w-test-pronoun',
     lemma: 'test-pronoun',
     pos: 'pronoun',
-    translations: { en: 'I', fa: 'من' },
+    translations: { en: 'unique-test-pronoun', fa: 'من-تست' },
     domains: ['core'],
     stationId: 'core-pronouns',
     intendedUse: 'produce',

@@ -12,6 +12,14 @@ import {
   normalizeForComparison,
   sleep,
 } from './lib/tts.mjs';
+import { judgeClip } from './lib/asrGate.mjs';
+
+/**
+ * dre-p176 — شمارنده‌ی کلیپ‌هایی که دروازه‌ی رونویسی رد کرد.
+ * اگر صفر نباشد، اسکریپت با کد خروج غیرصفر تمام می‌شود.
+ */
+let totalRejectedByGate = 0;
+const rejectedByGate: string[] = [];
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
@@ -33,7 +41,7 @@ interface ClipLogRecord {
   isMatch: boolean;
   durationMs: number;
   sizeBytes: number;
-  status: 'generated' | 'cached' | 'failed';
+  status: 'generated' | 'cached' | 'failed' | 'rejected-by-asr-gate' | 'rejected-by-asr-gate-cached';
 }
 
 function cleanPhraseText(raw: string): string {
@@ -289,6 +297,31 @@ async function main() {
           }
         }
 
+        // --- دروازه‌ی رونویسی، شاخه‌ی کش‌شده (dre-p176) ---
+        // اینجا فایل از اجرای قبلی هست. حذفش نمی‌کنیم — یک اجرای معمولی نباید
+        // چیزی را که از قبل منتشر شده پاک کند. ولی وارد مانیفست هم نمی‌شود، و
+        // اسکریپت با کد خروج غیرصفر تمام می‌شود.
+        {
+          const verdict = judgeClip(item.targetText, transcribedText);
+          if (verdict.reject) {
+            totalRejectedByGate++;
+            rejectedByGate.push(`${filename} (cached) — ${verdict.reason}`);
+            clipRecords.push({
+              id: item.id,
+              targetText: item.targetText,
+              voice: v.name,
+              filename,
+              transcribedText,
+              isMatch: false,
+              durationMs,
+              sizeBytes,
+              status: 'rejected-by-asr-gate-cached',
+            });
+            console.error(`  [${clipIndex}/${totalClips}] ${v.name} (cached): REJECTED by ASR gate: ${verdict.reason}. Kept on disk, excluded from the manifest.`);
+            continue;
+          }
+        }
+
         totalEvaluatedTranscriptions++;
         if (!isMatch) totalMismatches++;
 
@@ -352,6 +385,38 @@ async function main() {
 
           transcriptionCache[cacheKey] = { text: transcribedText, isMatch };
           saveCache();
+
+          // --- دروازه‌ی رونویسی (dre-p176) ---
+          // پیش از این، isMatch محاسبه و چاپ می‌شد و بعد نادیده گرفته می‌شد:
+          // کلیپ هرچه رونویسی می‌گفت وارد مانیفست می‌شد. این‌طور بود که `ele`
+          // به‌صورت حرف انگلیسی «L» منتشر شد (p169) و `mea` به‌صورت `mă` (p174).
+          //
+          // فایل همین چند ثانیه پیش ساخته شده، پس حذفش چیزی از قبل را خراب
+          // نمی‌کند — و جفت ناقص می‌ماند که آشکارسازهای بهداشت صدا می‌گیرندش.
+          {
+            const verdict = judgeClip(item.targetText, transcribedText);
+            if (verdict.reject) {
+              if (fs.existsSync(mp3Path)) fs.unlinkSync(mp3Path);
+              if (fs.existsSync(tempWav)) fs.unlinkSync(tempWav);
+              delete transcriptionCache[cacheKey];
+              saveCache();
+              totalRejectedByGate++;
+              rejectedByGate.push(`${filename} — ${verdict.reason}`);
+              clipRecords.push({
+                id: item.id,
+                targetText: item.targetText,
+                voice: v.name,
+                filename,
+                transcribedText,
+                isMatch: false,
+                durationMs,
+                sizeBytes,
+                status: 'rejected-by-asr-gate',
+              });
+              console.error(`    -> REJECTED by ASR gate: ${verdict.reason}. File deleted, not added to the manifest.`);
+              continue;
+            }
+          }
 
           totalEvaluatedTranscriptions++;
           if (!isMatch) totalMismatches++;
@@ -582,6 +647,13 @@ export const CORE_AUDIO: Record<string, AudioClip[]> = ${JSON.stringify(manifest
   ).join('\n');
   fs.writeFileSync(logFile, header + rows, 'utf8');
   console.log(`Successfully updated log: ${logFile}`);
+
+  if (totalRejectedByGate > 0) {
+    console.error(`\nASR gate rejected ${totalRejectedByGate} clip(s):`);
+    for (const line of rejectedByGate) console.error(`  - ${line}`);
+    console.error('These clips are not in the manifest. Regenerate them; do not edit the prompt for one item.');
+    process.exitCode = 1;
+  }
 }
 
 main().catch(err => {

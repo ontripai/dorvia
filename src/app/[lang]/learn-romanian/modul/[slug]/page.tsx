@@ -12,6 +12,9 @@ import { RomanianWord, RomanianPhrase } from '@/lib/romanian/types';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ArrowLeft, ArrowRight } from '@/components/Icons';
+import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
+import { UsageNoteText } from '@/components/romanian/UsageNoteText';
+import { CORE_AUDIO } from '@/content/romanian/audio-manifest';
 
 export function generateStaticParams() {
   const stations = getPublishedStations();
@@ -298,6 +301,13 @@ export default function RomanianStationModulePage({
                       </div>
                     </div>
 
+                    <PronunciationAudio
+                      clips={CORE_AUDIO[word.id]}
+                      currentLang={currentLang}
+                      label={word.lemma}
+                      variant="compact"
+                    />
+
                     {/* Noun Inflection Details */}
                     {word.pos === 'noun' && word.definiteForm && (
                       <div className="text-xs text-slate-600 bg-slate-50 rounded-lg p-2.5 border border-slate-100 space-y-1">
@@ -325,12 +335,12 @@ export default function RomanianStationModulePage({
                     )}
 
                     {/* Usage Note */}
-                    {word.usageNote?.fa && (
+                    {word.usageNote && (
                       <div className="text-xs text-slate-700 bg-blue-50/60 rounded-xl p-3 border border-blue-100/80 leading-relaxed">
                         <div className="font-bold text-blue-900 mb-1">
                           {isFa ? 'نکته کاربردی:' : 'Usage note:'}
                         </div>
-                        <p>{isFa ? word.usageNote.fa : word.usageNote.en || word.usageNote.fa}</p>
+                        <p><UsageNoteText note={word.usageNote} lang={isFa ? 'fa' : 'en'} /></p>
                       </div>
                     )}
 
@@ -357,9 +367,15 @@ export default function RomanianStationModulePage({
                               <div className="text-[11px] text-slate-500">
                                 {dep.translations.en}
                               </div>
-                              {dep.usageNote?.fa && (
+                              <PronunciationAudio
+                                clips={CORE_AUDIO[dep.id]}
+                                currentLang={currentLang}
+                                label={dep.lemma}
+                                variant="compact"
+                              />
+                              {dep.usageNote && (
                                 <p className="text-[11px] text-slate-600 leading-relaxed pt-1 border-t border-slate-200/50">
-                                  {isFa ? dep.usageNote.fa : dep.usageNote.en || dep.usageNote.fa}
+                                  <UsageNoteText note={dep.usageNote} lang={isFa ? 'fa' : 'en'} />
                                 </p>
                               )}
                             </div>
@@ -419,6 +435,13 @@ export default function RomanianStationModulePage({
                       </div>
                     </div>
 
+                    <PronunciationAudio
+                      clips={CORE_AUDIO[phrase.id]}
+                      currentLang={currentLang}
+                      label={phrase.text.ro}
+                      variant="compact"
+                    />
+
                     {phrase.informalVariant?.ro && (
                       <div className="text-xs text-slate-600 bg-slate-50 rounded-lg p-2.5 border border-slate-100">
                         <span className="font-semibold text-slate-700">
@@ -430,12 +453,12 @@ export default function RomanianStationModulePage({
                       </div>
                     )}
 
-                    {phrase.usageNote?.fa && (
+                    {phrase.usageNote && (
                       <div className="text-xs text-slate-700 bg-blue-50/60 rounded-xl p-3 border border-blue-100/80 leading-relaxed">
                         <div className="font-bold text-blue-900 mb-1">
                           {isFa ? 'نکته کاربردی:' : 'Usage note:'}
                         </div>
-                        <p>{isFa ? phrase.usageNote.fa : phrase.usageNote.en || phrase.usageNote.fa}</p>
+                        <p><UsageNoteText note={phrase.usageNote} lang={isFa ? 'fa' : 'en'} /></p>
                       </div>
                     )}
                   </div>
