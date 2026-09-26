@@ -17,6 +17,8 @@ import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ArrowLeft, ArrowRight } from '@/components/Icons';
 import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
 import { UsageNoteText } from '@/components/romanian/UsageNoteText';
+import { PhraseText } from '@/components/romanian/PhraseText';
+import { spokenForm } from '@/lib/romanian/placeholders';
 import { CORE_AUDIO } from '@/content/romanian/audio-manifest';
 
 export function generateStaticParams() {
@@ -264,7 +266,7 @@ function PhraseCardBlock({
       <div className="space-y-3">
         <div className="flex items-start justify-between gap-3">
           <span className="text-xl sm:text-2xl font-extrabold text-[#142033] font-heading leading-snug">
-            {phrase.text.ro}
+            <PhraseText text={phrase.text.ro} variant="ro" lang={isFa ? 'fa' : 'en'} />
           </span>
           <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200/70 shrink-0">
             {regLabel}
@@ -272,14 +274,18 @@ function PhraseCardBlock({
         </div>
 
         <div className="space-y-1 pt-1">
-          <div className="text-base font-bold text-slate-900 leading-snug">{phrase.text.fa}</div>
-          <div className="text-xs text-slate-500 font-medium">{phrase.text.en}</div>
+          <div className="text-base font-bold text-slate-900 leading-snug">
+            <PhraseText text={phrase.text.fa} variant="gloss" lang="fa" />
+          </div>
+          <div className="text-xs text-slate-500 font-medium">
+            <PhraseText text={phrase.text.en} variant="gloss" lang="en" />
+          </div>
         </div>
 
         <PronunciationAudio
           clips={CORE_AUDIO[phrase.id]}
           currentLang={currentLang}
-          label={phrase.text.ro}
+          label={spokenForm(phrase.text.ro)}
           variant="compact"
         />
 
