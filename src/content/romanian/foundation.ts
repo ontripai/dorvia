@@ -115,6 +115,7 @@ export const FOUNDATION_WORDS: RomanianWord[] = [
       "core"
     ],
     "stationId": "core-question-words",
+    "stepId": "qw-1-plain",
     "intendedUse": "produce",
     "source": {
       "kind": "common-usage",

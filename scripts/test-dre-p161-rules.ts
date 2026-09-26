@@ -96,6 +96,8 @@ runTest('Red Test V13: Phrase referencing non-existent stationId fails V13', () 
 runTest('Green Test V13: Word with valid stationId ("core-pronouns") passes V13', () => {
   const ctx = getCleanBaseContext();
   ctx.words![0].stationId = 'core-pronouns';
+  // core-pronouns defines steps, so V36 requires a step of that station.
+  ctx.words![0].stepId = 'pron-1-subject';
   const errors = validateRomanianContent(ctx);
   return { errors, shouldPass: true };
 });
@@ -111,6 +113,7 @@ runTest('Green Test V11: Published pronoun does not require noun gender or defin
     translations: { en: 'unique-test-pronoun', fa: 'من-تست' },
     domains: ['core'],
     stationId: 'core-pronouns',
+    stepId: 'pron-1-subject',
     intendedUse: 'produce',
     source: { kind: 'common-usage', label: 'DOOM 3' },
     status: 'published',

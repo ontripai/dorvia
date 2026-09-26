@@ -69,6 +69,8 @@ export type RomanianWord = {
   translations: { en: string; fa: string };
   domains: string[];
   stationId?: string;
+  /** گام درون ایستگاه — V36. */
+  stepId?: string;
   intendedUse: IntendedUse;
   source: PhraseSource;
   reviewer?: string | null;
@@ -127,6 +129,8 @@ export type RomanianDialogue = {
   id: string;
   domain: string;
   stationId?: string;
+  /** گام درون ایستگاه — V36. */
+  stepId?: string;
   title: { ro: string; fa: string };
   turns: Array<{
     speaker: 'counterpart' | 'user';
@@ -136,13 +140,42 @@ export type RomanianDialogue = {
   status: 'draft' | 'review' | 'published' | 'archived';
 };
 
+/**
+ * یک گام: کوچک‌ترین واحدی که یادگیرنده در یک نشست تمام می‌کند (dre-p177).
+ *
+ * چرا لازم شد: «تا کجای این درس را خوانده‌ای» با فهرست ۵۵تایی اعداد پاسخی
+ * نداشت. گام هم موقعیت قابل‌ذخیره می‌دهد، هم بار شناختی را به ۷±۲ می‌رساند،
+ * هم واحدی است که فاصله‌گذاری رویش کار می‌کند.
+ *
+ * `can` عمداً جمله‌ی توانایی است، نه عنوان موضوع: هر گام با کاری که یادگیرنده
+ * از آن پس می‌تواند بکند تمام می‌شود.
+ */
+export type RomanianStep = {
+  id: string;
+  order: number;
+  titleFa: string;
+  titleRo: string;
+  canFa: string;
+  canEn: string;
+};
+
 export type DomainMeta = {
   id: string;
   titleFa: string; titleEn: string;
   order: number;
   estimatedWeeks: number;                          // V13
   stationOrder: 'sequential' | 'grouped';          // V13
-  stations: Array<{ id: string; slug?: string; titleFa: string; titleRo: string; order: number }>;
+  stations: Array<{
+    id: string;
+    slug?: string;
+    titleFa: string;
+    titleRo: string;
+    /** ترتیب **آموزشی**، نه ترتیب وابستگی داده (dre-p177). */
+    order: number;
+    /** رایگان و بدون دیوار پرداخت. باید پیشوند ترتیب آموزشی باشد — V37. */
+    isFree?: boolean;
+    steps?: RomanianStep[];
+  }>;
   sourcingPolicy: 'common-usage-ok' | 'must-be-sourced';
   categories: RomanianCategory[];                  // این حوزه از کدام دسته‌ها تغذیه می‌کند
   maxItems?: number;                               // بودجه — بخش ۳
@@ -158,10 +191,25 @@ export type RomanianPhrase = {
   wordIds?: string[];
   verbIds?: string[];
   stationId?: string;
+  /** گام درون ایستگاه — V36. */
+  stepId?: string;
   domain?: string;
   text: { ro: string; en: string; fa: string };
   /** فقط برای درک شنیداری — هرگز به‌عنوان جمله‌ی پیشنهادی نمایش داده نشود. */
   informalVariant?: { ro: string; note?: string };
+  /**
+   * این عبارت به‌صورت **فرمول ثابت** آموزش داده می‌شود (dre-p177).
+   *
+   * یادگیرنده کلش را حفظ می‌کند و اجزایش بعداً در ایستگاه خودشان تحلیل
+   * می‌شوند — همان‌طور که هیچ‌کس روز اول نمی‌داند «vă» ضمیر مفعولی جمع
+   * مؤدبانه است، ولی «Vă rog» را می‌گوید.
+   *
+   * `analysedAt` باید **دقیقاً** ایستگاه‌هایی را نام ببرد که آن واژه‌ها را
+   * معرفی می‌کنند — نه کمتر، نه بیشتر. V12 این را بررسی می‌کند، پس این
+   * اعلان راه فرار نیست: ادعایی است که خودش آزموده می‌شود.
+   */
+  taughtAsFormula?: { reason: string; analysedAt: string[] };
+
   /** نکته‌ی کاربرد — کِی و چطور این عبارت گفته می‌شود. اختیاری. */
   usageNote?: UsageNote;
   pronunciationFa?: string;      // در این فاز برای همه undefined — بخش ۵

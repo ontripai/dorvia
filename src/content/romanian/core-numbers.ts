@@ -30,6 +30,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'zero', fa: 'صفر' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-2-zero-ten',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -47,6 +48,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'three', fa: 'سه' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-2-zero-ten',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -64,6 +66,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'four', fa: 'چهار' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-2-zero-ten',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -81,6 +84,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'five', fa: 'پنج' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-2-zero-ten',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -98,6 +102,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'six', fa: 'شش' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-2-zero-ten',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -115,6 +120,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'seven', fa: 'هفت' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-2-zero-ten',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -132,6 +138,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'eight', fa: 'هشت' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-2-zero-ten',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -149,6 +156,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'nine', fa: 'نه' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-2-zero-ten',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -186,6 +194,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'ten', fa: 'ده' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-2-zero-ten',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -203,6 +212,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'eleven', fa: 'یازده' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-3-teens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -220,6 +230,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'thirteen', fa: 'سیزده' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-3-teens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -237,6 +248,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'fourteen', fa: 'چهارده' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-3-teens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -267,6 +279,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'fifteen', fa: 'پانزده' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-3-teens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -284,6 +297,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'sixteen', fa: 'شانزده' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-3-teens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -314,6 +328,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'seventeen', fa: 'هفده' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-3-teens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -331,6 +346,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'eighteen', fa: 'هجده' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-3-teens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -348,6 +364,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'nineteen', fa: 'نوزده' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-3-teens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -379,6 +396,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'twenty', fa: 'بیست' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-4-tens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -422,6 +440,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'thirty', fa: 'سی' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-4-tens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -463,6 +482,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'forty', fa: 'چهل' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-4-tens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -480,6 +500,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'fifty', fa: 'پنجاه' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-4-tens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -497,6 +518,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'sixty', fa: 'شصت' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-4-tens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -527,6 +549,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'seventy', fa: 'هفتاد' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-4-tens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -544,6 +567,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'eighty', fa: 'هشتاد' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-4-tens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -561,6 +585,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'ninety', fa: 'نود' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-4-tens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -582,6 +607,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'one (masculine/neuter)', fa: 'یک (مذکر/خنثی)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-1-one-two',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -620,6 +646,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'one (feminine)', fa: 'یک (مؤنث)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-1-one-two',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -637,6 +664,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'two (masculine)', fa: 'دو (مذکر)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-1-one-two',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -675,6 +703,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'two (feminine/neuter)', fa: 'دو (مؤنث/خنثی)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-1-one-two',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -692,6 +721,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'twelve (masculine)', fa: 'دوازده (مذکر)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-3-teens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -726,6 +756,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'twelve (feminine/neuter)', fa: 'دوازده (مؤنث/خنثی)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-3-teens',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -747,6 +778,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'one hundred', fa: 'صد، یکصد' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-5-hundred-thousand',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -778,6 +810,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'one thousand', fa: 'هزار، یک هزار' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-5-hundred-thousand',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -813,6 +846,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the first (masculine)', fa: 'اول، نخست (مذکر)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-6-ordinals-first',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -831,6 +865,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the first (feminine)', fa: 'اول، نخست (مؤنث)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-6-ordinals-first',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -848,6 +883,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the second (masculine)', fa: 'دوم (مذکر)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-6-ordinals-first',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -866,6 +902,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the second (feminine)', fa: 'دوم (مؤنث)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-6-ordinals-first',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -883,6 +920,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the third (masculine)', fa: 'سوم (مذکر)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-6-ordinals-first',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -901,6 +939,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the third (feminine)', fa: 'سوم (مؤنث)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-6-ordinals-first',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -918,6 +957,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the fourth (masculine)', fa: 'چهارم (مذکر)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-7-ordinals-mid',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -936,6 +976,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the fourth (feminine)', fa: 'چهارم (مؤنث)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-7-ordinals-mid',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -953,6 +994,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the fifth (masculine)', fa: 'پنجم (مذکر)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-7-ordinals-mid',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -971,6 +1013,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the fifth (feminine)', fa: 'پنجم (مؤنث)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-7-ordinals-mid',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -988,6 +1031,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the sixth (masculine)', fa: 'ششم (مذکر)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-7-ordinals-mid',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1006,6 +1050,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the sixth (feminine)', fa: 'ششم (مؤنث)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-7-ordinals-mid',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1023,6 +1068,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the seventh (masculine)', fa: 'هفتم (مذکر)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-7-ordinals-mid',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1041,6 +1087,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the seventh (feminine)', fa: 'هفتم (مؤنث)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-7-ordinals-mid',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1058,6 +1105,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the eighth (masculine)', fa: 'هشتم (مذکر)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-8-ordinals-last',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1076,6 +1124,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the eighth (feminine)', fa: 'هشتم (مؤنث)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-8-ordinals-last',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1093,6 +1142,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the ninth (masculine)', fa: 'نهم (مذکر)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-8-ordinals-last',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1111,6 +1161,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the ninth (feminine)', fa: 'نهم (مؤنث)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-8-ordinals-last',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1128,6 +1179,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the tenth (masculine)', fa: 'دهم (مذکر)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-8-ordinals-last',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1146,6 +1198,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'the tenth (feminine)', fa: 'دهم (مؤنث)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-8-ordinals-last',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1163,6 +1216,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'first (ordinal / dates)', fa: 'اول، یکم (روز اول ماه / ترتیبی)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-6-ordinals-first',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -1195,6 +1249,7 @@ export const CORE_NUMBERS: RomanianWord[] = [
     translations: { en: 'first (feminine ordinal)', fa: 'اول، یکم (مؤنث)' },
     domains: ['core'],
     stationId: 'core-numbers',
+    stepId: 'num-6-ordinals-first',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',

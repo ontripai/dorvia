@@ -24,6 +24,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-greetings',
+    stepId: 'greet-7-the-words',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -55,6 +56,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-greetings',
+    stepId: 'greet-7-the-words',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -95,6 +97,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-greetings',
+    stepId: 'greet-5-how-are-you',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -127,6 +130,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-greetings',
+    stepId: 'greet-7-the-words',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -161,6 +165,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-greetings',
+    stepId: 'greet-7-the-words',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -196,6 +201,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-greetings',
+    stepId: 'greet-7-the-words',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -236,6 +242,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-greetings',
+    stepId: 'greet-7-the-words',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -264,6 +271,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-greetings',
+    stepId: 'greet-2-yes-no-bye',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -284,6 +292,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-greetings',
+    stepId: 'greet-2-yes-no-bye',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -307,6 +316,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-greetings',
+    stepId: 'greet-6-introduce',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -340,6 +350,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-greetings',
+    stepId: 'greet-7-the-words',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -373,6 +384,7 @@ export const CORE_GREETING_WORDS: RomanianWord[] = [
     },
     domains: ['core'],
     stationId: 'core-greetings',
+    stepId: 'greet-4-apology',
     intendedUse: 'produce',
     source: {
       kind: 'common-usage',
@@ -403,6 +415,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-1-hello',
     level: 'beginner',
     register: 'neutral',
     intendedUse: 'produce',
@@ -419,6 +432,10 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
+    taughtAsFormula: {
+      reason: 'ترکیب ثابت احوال‌پرسی؛ اسم dimineață در ایستگاه زمان تحلیل می‌شود',
+      analysedAt: ['core-time'],
+    },
     status: 'published',
     isFree: true,
     usageNote: {
@@ -444,6 +461,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-1-hello',
     level: 'beginner',
     register: 'formal',
     intendedUse: 'produce',
@@ -460,6 +478,10 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
+    taughtAsFormula: {
+      reason: 'ترکیب ثابت احوال‌پرسی؛ اسم zi و صورت معرفه‌اش در ایستگاه زمان تحلیل می‌شود',
+      analysedAt: ['core-time'],
+    },
     status: 'published',
     isFree: true,
     usageNote: {
@@ -493,6 +515,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-1-hello',
     level: 'beginner',
     register: 'neutral',
     intendedUse: 'produce',
@@ -509,6 +532,10 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
+    taughtAsFormula: {
+      reason: 'ترکیب ثابت احوال‌پرسی؛ اسم seară در ایستگاه زمان تحلیل می‌شود',
+      analysedAt: ['core-time'],
+    },
     status: 'published',
     isFree: true,
     usageNote: {
@@ -534,6 +561,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-1-hello',
     level: 'beginner',
     register: 'neutral',
     intendedUse: 'produce',
@@ -550,6 +578,10 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
+    taughtAsFormula: {
+      reason: 'ترکیب ثابت شب‌بخیر؛ اسم noapte در ایستگاه زمان تحلیل می‌شود',
+      analysedAt: ['core-time'],
+    },
     status: 'published',
     isFree: true,
     usageNote: {
@@ -585,6 +617,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-2-yes-no-bye',
     level: 'beginner',
     register: 'formal',
     intendedUse: 'produce',
@@ -622,6 +655,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-2-yes-no-bye',
     level: 'beginner',
     register: 'informal',
     intendedUse: 'comprehend',
@@ -659,6 +693,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-1-hello',
     level: 'beginner',
     register: 'neutral',
     intendedUse: 'produce',
@@ -675,6 +710,10 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
+    taughtAsFormula: {
+      reason: 'آرزوی ثابت؛ اسم zi در ایستگاه زمان تحلیل می‌شود',
+      analysedAt: ['core-time'],
+    },
     status: 'published',
     isFree: true,
     usageNote: {
@@ -702,6 +741,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-3-politeness',
     level: 'beginner',
     register: 'formal',
     intendedUse: 'produce',
@@ -719,6 +759,10 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
+    taughtAsFormula: {
+      reason: 'فرمول ادب؛ پی‌بست vă در ایستگاه ضمایر تحلیل می‌شود',
+      analysedAt: ['core-pronouns'],
+    },
     status: 'published',
     isFree: true,
     usageNote: {
@@ -754,6 +798,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-3-politeness',
     level: 'beginner',
     register: 'informal',
     intendedUse: 'comprehend',
@@ -771,6 +816,10 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
+    taughtAsFormula: {
+      reason: 'فرمول ادب خودمانی؛ پی‌بست te در ایستگاه ضمایر تحلیل می‌شود',
+      analysedAt: ['core-pronouns'],
+    },
     status: 'published',
     isFree: true,
     usageNote: {
@@ -792,6 +841,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-3-politeness',
     level: 'beginner',
     register: 'formal',
     intendedUse: 'produce',
@@ -809,6 +859,10 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
+    taughtAsFormula: {
+      reason: 'فرمول تشکر رسمی؛ پی‌بست vă در ایستگاه ضمایر تحلیل می‌شود',
+      analysedAt: ['core-pronouns'],
+    },
     status: 'published',
     isFree: true,
     usageNote: {
@@ -838,6 +892,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-3-politeness',
     level: 'beginner',
     register: 'neutral',
     intendedUse: 'produce',
@@ -875,6 +930,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-3-politeness',
     level: 'beginner',
     register: 'neutral',
     intendedUse: 'produce',
@@ -914,6 +970,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-4-apology',
     level: 'beginner',
     register: 'neutral',
     intendedUse: 'produce',
@@ -953,6 +1010,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-5-how-are-you',
     level: 'beginner',
     register: 'formal',
     intendedUse: 'produce',
@@ -970,6 +1028,10 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
+    taughtAsFormula: {
+      reason: 'فرمول احوال‌پرسی؛ واژه‌ی پرسشی ce در ایستگاه کلمات پرسشی تحلیل می‌شود',
+      analysedAt: ['core-question-words'],
+    },
     status: 'published',
     isFree: true,
     usageNote: {
@@ -1003,6 +1065,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-5-how-are-you',
     level: 'beginner',
     register: 'informal',
     intendedUse: 'comprehend',
@@ -1020,6 +1083,10 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
+    taughtAsFormula: {
+      reason: 'همان، صورت خودمانی',
+      analysedAt: ['core-question-words'],
+    },
     status: 'published',
     isFree: true,
     usageNote: {
@@ -1049,6 +1116,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-5-how-are-you',
     level: 'beginner',
     register: 'neutral',
     intendedUse: 'produce',
@@ -1097,6 +1165,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-6-introduce',
     level: 'beginner',
     register: 'formal',
     intendedUse: 'produce',
@@ -1114,6 +1183,10 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
+    taughtAsFormula: {
+      reason: 'فرمول پرسیدن نام؛ cum در کلمات پرسشی و vă در ضمایر تحلیل می‌شوند',
+      analysedAt: ['core-question-words', 'core-pronouns'],
+    },
     status: 'published',
     isFree: true,
     usageNote: {
@@ -1139,6 +1212,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-6-introduce',
     level: 'beginner',
     register: 'neutral',
     intendedUse: 'produce',
@@ -1156,6 +1230,10 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
+    taughtAsFormula: {
+      reason: 'فرمول معرفی؛ پی‌بست mă در ایستگاه ضمایر تحلیل می‌شود',
+      analysedAt: ['core-pronouns'],
+    },
     status: 'published',
     isFree: true,
     usageNote: {
@@ -1185,6 +1263,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-6-introduce',
     level: 'beginner',
     register: 'neutral',
     intendedUse: 'produce',
@@ -1202,6 +1281,10 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
+    taughtAsFormula: {
+      reason: 'فرمول آشنایی؛ پی‌بست îmi در ایستگاه ضمایر تحلیل می‌شود',
+      analysedAt: ['core-pronouns'],
+    },
     status: 'published',
     isFree: true,
     usageNote: {
@@ -1227,6 +1310,7 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
     category: 'everyday',
     domain: 'core',
     stationId: 'core-greetings',
+    stepId: 'greet-4-apology',
     level: 'beginner',
     register: 'neutral',
     intendedUse: 'produce',
@@ -1244,6 +1328,10 @@ export const CORE_GREETING_PHRASES: RomanianPhrase[] = [
       retrievedAt: '2026-09-25',
     },
     reviewer: 'ai-only',
+    taughtAsFormula: {
+      reason: 'فرمول تأسف؛ پی‌بست îmi در ایستگاه ضمایر تحلیل می‌شود',
+      analysedAt: ['core-pronouns'],
+    },
     status: 'published',
     isFree: true,
     usageNote: {

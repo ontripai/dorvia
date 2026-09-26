@@ -34,7 +34,7 @@ export type ValidationRuleId =
   | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8'
   | 'V9' | 'V10' | 'V11' | 'V12' | 'V13' | 'V14' | 'V15' | 'V16'
   | 'V17' | 'V18' | 'V19' | 'V20' | 'V21' | 'V22' | 'V23' | 'V24' | 'V25' | 'V26' | 'V27' | 'V28' | 'V29'
-  | 'V30' | 'V31' | 'V32' | 'V33' | 'V34' | 'V35';
+  | 'V30' | 'V31' | 'V32' | 'V33' | 'V34' | 'V35' | 'V36' | 'V37' | 'V38';
 
 export interface ValidationRuleMeta {
   id: ValidationRuleId;
@@ -78,6 +78,9 @@ export const VALIDATION_RULES: readonly ValidationRuleMeta[] = Object.freeze([
   { id: 'V33', name: 'Unique Published Verb Infinitive', description: 'No two published verbs may share the same infinitive' },
   { id: 'V34', name: 'Usage Note Language Completeness', description: 'For every usage note, at least one language must carry every ref used by any of its languages' },
   { id: 'V35', name: 'No Bare Romanian In Note Text', description: 'A translatable {t} segment may not contain Romanian diacritics — Romanian forms must be refs' },
+  { id: 'V36', name: 'Step Membership', description: 'Every entry in a station with steps must name a stepId defined by that station' },
+  { id: 'V37', name: 'Free Stations Are A Prefix', description: 'Free stations must occupy the first positions of the teaching order — no paid station may precede a free one' },
+  { id: 'V38', name: 'Step Size', description: 'A step must hold between 2 and 10 items — a session the learner can finish' },
 ]);
 
 export interface ValidationError {
@@ -389,12 +392,37 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
           const phraseStation = phraseDomain.stations.find(s => s.id === phrase.stationId);
           const wordStation = phraseDomain.stations.find(s => s.id === word.stationId);
           if (phraseStation && wordStation && phraseStation.order < wordStation.order) {
-            errors.push({
-              rule: 'V12',
-              phraseId: id,
-              entityId: id,
-              message: `Phrase "${id}" at station "${phrase.stationId}" (order ${phraseStation.order}) uses word "${wId}" introduced at later station "${word.stationId}" (order ${wordStation.order}) in sequential domain "${phraseDomain.id}".`,
-            });
+            /**
+             * استثنای «فرمول ثابت» (dre-p177).
+             *
+             * V12 فرض می‌کرد ترتیب وابستگی داده و ترتیب آموزش یکی‌اند. تا
+             * وقتی احوال‌پرسی آخرین ایستگاه بود، بودند. حالا که اول است،
+             * «Vă rog» پیش از ضمیر `vă` آموزش داده می‌شود — و باید هم بشود،
+             * چون هیچ انسانی روز اول صرف پی‌بست یاد نمی‌گیرد.
+             *
+             * اعلان کافی نیست: `analysedAt` باید دقیقاً ایستگاه همان واژه را
+             * نام ببرد. اگر جای دیگری را نام ببرد یا نام نبرد، قاعده قرمز
+             * می‌شود. اعلانی که خودش آزموده نشود، راه فرار است.
+             */
+            const formula = phrase.taughtAsFormula;
+            const declared = formula?.analysedAt ?? [];
+            if (formula && declared.includes(word.stationId)) {
+              // اعلان درست است — این واژه واقعاً در ایستگاهی که نام برده تحلیل می‌شود
+            } else if (formula) {
+              errors.push({
+                rule: 'V12',
+                phraseId: id,
+                entityId: id,
+                message: `Phrase "${id}" declares taughtAsFormula but its analysedAt [${declared.join(', ')}] does not name "${word.stationId}", where word "${wId}" is introduced.`,
+              });
+            } else {
+              errors.push({
+                rule: 'V12',
+                phraseId: id,
+                entityId: id,
+                message: `Phrase "${id}" at station "${phrase.stationId}" (order ${phraseStation.order}) uses word "${wId}" introduced at later station "${word.stationId}" (order ${wordStation.order}) in sequential domain "${phraseDomain.id}". Declare taughtAsFormula if it is meant to be memorised whole.`,
+              });
+            }
           }
         }
       }
@@ -1739,6 +1767,100 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
   for (const v of verbs) validateNote('Verb', v.id || '(missing-id)', v.status, (v as any).counterExamples, v.usageNote);
   for (const g of graphemes) validateNote('Grapheme', g.id || '(missing-id)', g.status, (g as any).counterExamples, (g as any).usageNote);
   for (const p of phrases) validateNote('Phrase', p.id || '(missing-id)', p.status, (p as any).counterExamples, p.usageNote);
+
+  // --- Validate Steps (V36, V37, V38) ---
+  /**
+   * چرا گام لازم شد: «تا کجای این درس را خوانده‌ای» با فهرست ۵۵تایی اعداد
+   * پاسخی نداشت. گام هم موقعیت قابل‌ذخیره می‌دهد، هم بار شناختی را مهار
+   * می‌کند، هم واحدی است که فاصله‌گذاری رویش کار می‌کند (dre-p177).
+   */
+  const MIN_STEP_ITEMS = 2;
+  const MAX_STEP_ITEMS = 10;
+
+  for (const domain of domains) {
+    const withSteps = (domain.stations || []).filter(st => Array.isArray(st.steps) && st.steps.length > 0);
+
+    // V37 — رایگان‌ها باید پیشوند ترتیب آموزشی باشند
+    /**
+     * یادگیرنده‌ای که ایستگاه ۱ و ۳ رایگان‌اند و ۲ پولی، به دیوار می‌خورد و
+     * برمی‌گردد. مرز پرداخت باید یک برش باشد، نه یک الگوی راه‌راه.
+     */
+    const ordered = [...(domain.stations || [])].sort((a, b) => a.order - b.order);
+    let seenPaid: string | null = null;
+    for (const st of ordered) {
+      if (st.isFree) {
+        if (seenPaid) {
+          errors.push({
+            rule: 'V37',
+            phraseId: st.id,
+            entityId: st.id,
+            message: `Free station "${st.id}" (order ${st.order}) comes after paid station "${seenPaid}". Free stations must be an unbroken prefix of the teaching order.`,
+          });
+        }
+      } else {
+        seenPaid = seenPaid ?? st.id;
+      }
+    }
+
+    for (const st of withSteps) {
+      const stepIds = new Set((st.steps || []).map(sp => sp.id));
+
+      // V38 — اندازه‌ی گام، شمرده از روی داده‌ی واقعی
+      const counts = new Map<string, number>();
+      for (const sp of st.steps || []) counts.set(sp.id, 0);
+      const members = [
+        ...words.filter(w => w.stationId === st.id),
+        ...phrases.filter(p => p.stationId === st.id),
+      ];
+      for (const item of members) {
+        const sid = (item as { stepId?: string }).stepId;
+        // V36 — هر مدخل باید گامی از همین ایستگاه را نام ببرد
+        if (!sid) {
+          errors.push({
+            rule: 'V36',
+            phraseId: item.id,
+            entityId: item.id,
+            message: `Entry "${item.id}" is in station "${st.id}", which defines steps, but names no stepId.`,
+          });
+          continue;
+        }
+        if (!stepIds.has(sid)) {
+          errors.push({
+            rule: 'V36',
+            phraseId: item.id,
+            entityId: item.id,
+            message: `Entry "${item.id}" names stepId "${sid}", which station "${st.id}" does not define.`,
+          });
+          continue;
+        }
+        counts.set(sid, (counts.get(sid) || 0) + 1);
+      }
+
+      for (const sp of st.steps || []) {
+        const n = counts.get(sp.id) || 0;
+        if (n < MIN_STEP_ITEMS || n > MAX_STEP_ITEMS) {
+          errors.push({
+            rule: 'V38',
+            phraseId: sp.id,
+            entityId: sp.id,
+            message: `Step "${sp.id}" in station "${st.id}" holds ${n} item(s); a step must hold between ${MIN_STEP_ITEMS} and ${MAX_STEP_ITEMS}.`,
+          });
+        }
+      }
+
+      // ترتیب گام‌ها باید یکتا و پیوسته باشد
+      const orders = (st.steps || []).map(sp => sp.order).sort((a, b) => a - b);
+      const expected = orders.map((_, i) => i + 1);
+      if (orders.join(',') !== expected.join(',')) {
+        errors.push({
+          rule: 'V36',
+          phraseId: st.id,
+          entityId: st.id,
+          message: `Station "${st.id}" step orders are [${orders.join(', ')}]; they must be 1..${orders.length} with no gaps or repeats.`,
+        });
+      }
+    }
+  }
 
   return errors;
 }
