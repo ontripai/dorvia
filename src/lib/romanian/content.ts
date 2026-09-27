@@ -315,3 +315,30 @@ export function getStationStepGroups(stationId: string): StationStepGroup[] {
       };
     });
 }
+
+/**
+ * شناسه‌ی همه‌ی قلم‌های منتشرشده، به **ترتیب آموزشی**: ایستگاه به ایستگاه،
+ * گام به گام، و درون هر گام واژه‌ها بعد عبارت‌ها.
+ *
+ * ساخت نشست از اینجا قلم تازه برمی‌دارد. ترتیب اینجا تعیین می‌شود، نه در
+ * `session.ts` — آن ماژول عمداً محتوا نمی‌شناسد.
+ */
+export function getTeachingOrderItemIds(): string[] {
+  const ids: string[] = [];
+  for (const station of getPublishedStations()) {
+    const groups = getStationStepGroups(station.id);
+    if (groups.length === 0) {
+      const { words, phrases } = getStationItems(station.id);
+      ids.push(...words.map(w => w.id), ...phrases.map(p => p.id));
+      continue;
+    }
+    for (const g of groups) {
+      for (const card of g.words) {
+        ids.push(card.word.id);
+        ids.push(...card.nested.map(d => d.id));
+      }
+      ids.push(...g.phrases.map(p => p.id));
+    }
+  }
+  return ids;
+}

@@ -14,6 +14,7 @@ import {
   getPublishedStations,
   getStationItems,
   getStationStepGroups,
+  getTeachingOrderItemIds,
 } from '../src/lib/romanian/content';
 
 let failed = 0;
@@ -148,6 +149,28 @@ if (cliticStep) {
     leakedIntoStep1.join(', ')
   );
 }
+
+// 6b. ترتیب آموزشی: هر قلم منتشرشده دقیقاً یک بار، و به ترتیب گام‌ها.
+//     تکرار در این فهرست یعنی یک قلم دو بار معرفی می‌شود و ساخت نشست خراب است.
+const order = getTeachingOrderItemIds();
+const orderSet = new Set(order);
+check('teaching order has no duplicates', orderSet.size === order.length,
+  `${order.length} ids, ${orderSet.size} unique`);
+
+const everyPublished: string[] = [];
+for (const st of stations) {
+  const { words, phrases } = getStationItems(st.id);
+  everyPublished.push(...words.map(w => w.id), ...phrases.map(p => p.id));
+}
+const missingFromOrder = everyPublished.filter(id => !orderSet.has(id));
+check('teaching order contains every item of every step-bearing station',
+  missingFromOrder.length === 0, missingFromOrder.join(', '));
+
+check('teaching order starts with the free station',
+  order.length > 0 && getStationItems(stations[0].id).words.concat(
+    getStationItems(stations[0].id).phrases as any
+  ).some(i => i.id === order[0]),
+  `first id: ${order[0]}`);
 
 // 7. مرز پرداخت: تنها ایستگاه رایگان باید اولین ایستگاه ترتیب آموزشی باشد.
 const free = stations.filter(s => s.isFree);
