@@ -313,6 +313,19 @@ export async function bumpStreak(learner: Learner, today: string): Promise<Strea
   return outcome;
 }
 
+/**
+ * موقعیت جاری یادگیرنده را می‌نویسد.
+ *
+ * **این تابع امروز هیچ فراخوانی ندارد، و این عمدی است (dre-p189).** انتخاب قلم
+ * از ترتیب آموزشی و صف سررسید می‌آید، نه از این ستون‌ها؛ پس `current_station_id`
+ * و `current_step_id` روی یادگیرنده و `station_id`/`step_id` روی نشست همیشه
+ * `null` می‌مانند.
+ *
+ * نگهش داشتیم به‌جای حذف، چون روزی که «ادامه از جایی که ماندی» ساخته شود همین
+ * لازم است. ولی تا آن روز **پرش نمی‌کنیم**: ستونی که با حدس پر شود و چیزی
+ * نخواندش، بدتر از ستونِ خالیِ برچسب‌خورده است — بعداً کسی به آن تکیه می‌کند و
+ * عددش معنا ندارد.
+ */
 export async function saveCurrentPosition(
   userId: string,
   stationId: string | null,
