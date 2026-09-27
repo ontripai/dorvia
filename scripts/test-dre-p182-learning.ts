@@ -65,10 +65,20 @@ check('daysBetween is zero for the same day', daysBetween('2026-09-26', '2026-09
 
 const T0 = '2026-09-26';
 let st = initialState('w-x', T0);
-check('a new item starts in box 0, due today', st.box === 0 && st.dueOn === T0);
+// dre-p189: جعبه‌ی اولیه از ۰ به ۱ رفت تا پاسخ درستِ بارِ اول بی‌اثر نباشد.
+check('a new item starts in box 1, due today', st.box === 1 && st.dueOn === T0);
 
 st = gradeItem(st, true, T0);
-check('first correct answer moves to box 1, due tomorrow', st.box === 1 && st.dueOn === addDays(T0, 1));
+check('first correct answer moves to box 2, due in three days', st.box === 2 && st.dueOn === addDays(T0, 3));
+
+// و قرینه‌اش: همان قلم تازه اگر غلط جواب داده شود در جعبه‌ی ۱ می‌ماند و فرداست.
+{
+  const wrongFirst = gradeItem(initialState('w-y', T0), false, T0);
+  check('a new item answered wrong stays in box 1, due tomorrow',
+    wrongFirst.box === 1 && wrongFirst.dueOn === addDays(T0, 1));
+  check('first sight now discriminates: correct and wrong differ',
+    wrongFirst.dueOn !== st.dueOn, `wrong=${wrongFirst.dueOn} right=${st.dueOn}`);
+}
 
 // چهار پاسخ درست پشت سر هم، هر بار در روز سررسید
 let day = st.dueOn;
