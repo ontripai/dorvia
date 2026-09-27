@@ -52,6 +52,9 @@ function cleanPhraseText(raw: string): string {
   return cleaned.replace(/\s+/g, ' ').trim();
 }
 
+/** فاصله‌ی کمینه بین دو فراخوان TTS — ۱۰ در دقیقه یعنی هر ۶ ثانیه یکی. */
+const TTS_MIN_GAP_MS = 6500;
+
 function isLongItem(targetText: string): boolean {
   const words = targetText.trim().split(/\s+/).filter(Boolean);
   if (words.length >= 2) return true;
@@ -260,7 +263,10 @@ async function main() {
       const cacheKey = `${item.id}-${v.suffix}`;
 
       const exists = fs.existsSync(mp3Path) && fs.statSync(mp3Path).size > 0;
-      const forceThisItem = force || item.id === 'p-core-ma-numesc';
+      // یادگار دیباگ برداشته شد (dre-p185b): `|| item.id === 'p-core-ma-numesc'`
+      // آن قلم را هر اجرا از نو می‌ساخت — ۴ درخواست سهمیه در هر اجرا، و همان
+      // دلیلی که آن دو mp3 در هر `git status` به‌صورت modified می‌آمدند.
+      const forceThisItem = force;
 
       if (forceThisItem && transcriptionCache[cacheKey]) {
         delete transcriptionCache[cacheKey];
@@ -455,7 +461,12 @@ async function main() {
           // Cleanup temp wav
           if (fs.existsSync(tempWav)) fs.unlinkSync(tempWav);
 
-          await sleep(400);
+          // سقف Tier 1 برای این مدل ۱۰ درخواست در دقیقه است. با ۴۰۰ میلی‌ثانیه،
+          // استوانه تا ۱۵۰ در دقیقه می‌رفت و داشبورد `12/10` قرمز نشان می‌داد.
+          //
+          // مهم نیست چقدر سریع باشد — سقف واقعی ۱۰۰ درخواست در روز است.
+          // مهم این است که هیچ‌یک از آن ۱۰۰ تا صرف یک ۴۲۹ نشود.
+          await sleep(TTS_MIN_GAP_MS);
         } catch (err: any) {
           totalFailed++;
           console.error(`  ❌ Failed to generate clip ${v.name} for ${item.id}:`, err.message);
@@ -488,7 +499,21 @@ async function main() {
       }
     }
 
-    if (clipsForItem.length === 2) {
+    /*
+      یک کلیپِ تأییدشده کافی است (dre-p185b).
+
+      شرط قبلی `=== 2` بود، و نتیجه‌اش این شد که ۱۶ قلم بی‌صدا ماندند در حالی
+      که کلیپ سالمشان روی دیسک بود: دروازه یکی از دو صدا را رد کرده بود و
+      قلم کلاً از مانیفست بیرون می‌افتاد.
+
+      **این شل‌کردن دروازه نیست.** هر عضو `clipsForItem` از `judgeClip` گذشته
+      است؛ هیچ کلیپ تأییدنشده‌ای اینجا نمی‌رسد. دو صدا از ابتدا برای *مقایسه*
+      بود (dre-p156)، نه شرط ایمنی. یک تلفظ درست، درس را می‌دهد.
+
+      `PronunciationAudio` روی `clips` نقشه می‌زند: با یک کلیپ یک دکمه، با صفر
+      کلیپ هیچ‌چیز (dre-p168). پس سمت UI چیزی لازم نیست.
+    */
+    if (clipsForItem.length > 0) {
       manifestData[item.id] = clipsForItem;
     }
   }
