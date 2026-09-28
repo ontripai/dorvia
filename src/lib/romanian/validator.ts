@@ -73,9 +73,9 @@ export const VALIDATION_RULES: readonly ValidationRuleMeta[] = Object.freeze([
   { id: 'V28', name: 'Published formOf Target Integrity', description: 'Published words with formOf must reference published base words' },
   { id: 'V29', name: 'Core Audio Manifest Integrity', description: 'Audio clip files referenced in core audio manifest must physically exist on disk under public/' },
   { id: 'V30', name: 'Unique Published Phrase Text', description: 'No two published phrases may share the same Romanian text (text.ro)' },
-  { id: 'V31', name: 'English Gloss Disambiguation', description: 'Published entries sharing an English gloss must each carry a parenthetical disambiguator' },
+  { id: 'V31', name: 'Gloss Disambiguation', description: 'Published entries sharing a gloss in the same language (en or fa) must each carry a parenthetical disambiguator' },
   { id: 'V32', name: 'Stored Duration Matches File', description: 'Every AudioClip durationMs must match the real duration of the mp3 on disk (100ms tolerance)' },
-  { id: 'V33', name: 'Unique Published Verb Infinitive', description: 'No two published verbs may share the same infinitive' },
+  { id: 'V33', name: 'Unique Verb Infinitive', description: 'No two verbs may share the same infinitive, in any status' },
   { id: 'V34', name: 'Usage Note Language Completeness', description: 'For every usage note, at least one language must carry every ref used by any of its languages' },
   { id: 'V35', name: 'No Bare Romanian In Note Text', description: 'A translatable {t} segment may not contain Romanian diacritics — Romanian forms must be refs' },
   { id: 'V36', name: 'Step Membership', description: 'Every entry in a station with steps must name a stepId defined by that station' },
@@ -1440,30 +1440,52 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
    * که عمداً در دو سطح ثبت شده، نه دو معنای مبهم. آنچه می‌ماند واقعی است:
    * `azi`/`astăzi` هر دو «today» و `bun`/`bună` هر دو «good» — و دومی دقیقاً
    * همان شکاف جنسیت است که یادگیرنده‌ی انگلیسی‌خوان هیچ نشانی از آن نمی‌بیند.
+   *
+   * ### چرا فارسی هم اضافه شد (dre-p187)
+   * نسخه‌ی اول فقط انگلیسی را می‌دید، در حالی که **مخاطب اصلی فارسی می‌خواند** و
+   * تمرینِ بازشناسی گزینه‌هایش را از همان گلاس فارسی می‌سازد. دو مدخل با یک گلاس
+   * فارسی در آن تمرین یعنی یک دیستراکتور که خودش هم جواب درست است — نقصی که با
+   * خواندن انگلیسی هرگز دیده نمی‌شود. `azi`/`astăzi` هر دو «امروز» بودند و
+   * انگلیسی‌شان از قبل رفع‌ابهام داشت، پس قاعده‌ی انگلیسی‌محور سبز می‌ماند.
+   *
+   * سنجیده شد: در کل مدخل‌های منتشرشده همین یک تصادم فارسی وجود داشت.
    */
   const DISAMBIGUATOR = /\([^)]+\)/;
   const normaliseGloss = (raw: string): string =>
     raw.trim().toLowerCase().replace(/[.!?]+$/, '').trim();
 
-  type GlossEntry = { id: string; gloss: string; kind: string };
+  type GlossLang = 'en' | 'fa';
+  type GlossEntry = { id: string; gloss: string; kind: string; lang: GlossLang };
   const glossBuckets = new Map<string, GlossEntry[]>();
-  const addGloss = (kind: string, id: string | undefined, gloss: string | undefined) => {
+  const addGloss = (
+    kind: string,
+    id: string | undefined,
+    lang: GlossLang,
+    gloss: string | undefined
+  ) => {
     if (!id || !gloss) return;
-    const key = `${kind}#${normaliseGloss(gloss.replace(DISAMBIGUATOR, ' '))}`;
+    // سبد هر زبان جداست: «today» و «امروز» هرگز با هم مقایسه نمی‌شوند.
+    const key = `${lang}#${kind}#${normaliseGloss(gloss.replace(DISAMBIGUATOR, ' '))}`;
     if (key.endsWith('#')) return;
     const list = glossBuckets.get(key) || [];
-    list.push({ id, gloss, kind });
+    list.push({ id, gloss, kind, lang });
     glossBuckets.set(key, list);
   };
 
   for (const w of words) {
-    if (w.status === 'published') addGloss('word', w.id, w.translations?.en);
+    if (w.status !== 'published') continue;
+    addGloss('word', w.id, 'en', w.translations?.en);
+    addGloss('word', w.id, 'fa', w.translations?.fa);
   }
   for (const v of verbs) {
-    if (v.status === 'published') addGloss('verb', v.id, v.translations?.en);
+    if (v.status !== 'published') continue;
+    addGloss('verb', v.id, 'en', v.translations?.en);
+    addGloss('verb', v.id, 'fa', v.translations?.fa);
   }
   for (const p of phrases) {
-    if (p.status === 'published') addGloss('phrase', p.id, p.text?.en);
+    if (p.status !== 'published') continue;
+    addGloss('phrase', p.id, 'en', p.text?.en);
+    addGloss('phrase', p.id, 'fa', p.text?.fa);
   }
 
   for (const list of glossBuckets.values()) {
@@ -1476,28 +1498,29 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
         rule: 'V31',
         phraseId: e.id,
         entityId: e.id,
-        message: `English gloss "${e.gloss}" on ${e.kind} "${e.id}" is shared with ${all} but carries no parenthetical disambiguator. A learner reading only English cannot tell them apart.`,
+        message: `${e.lang === 'fa' ? 'Persian' : 'English'} gloss "${e.gloss}" on ${e.kind} "${e.id}" is shared with ${all} but carries no parenthetical disambiguator. A learner reading only ${e.lang === 'fa' ? 'Persian' : 'English'} cannot tell them apart${e.lang === 'fa' ? ', and the recognition exercise would offer two correct options' : ''}.`,
       });
     }
   }
 
-  // --- Validate Unique Published Verb Infinitive (V33) ---
+  // --- Validate Unique Verb Infinitive (V33) ---
   /**
    * V26 یکتایی (lemma, pos) را برای واژه‌ها اجرا می‌کند و V30 همان را برای
-   * عبارت‌ها. افعال تا امروز هیچ قاعده‌ای نداشتند — و رجیستری دو جفت تکراری
-   * دارد: «a fi» (v-a-fi / v-core-a-fi) و «a avea» (v-a-avea / v-core-a-avea).
+   * عبارت‌ها. افعال تا dre-p173 هیچ قاعده‌ای نداشتند.
    *
-   * دامنه عمداً فقط published است، برخلاف V26 که بی‌توجه به وضعیت کار می‌کند.
-   * دلیلش این است که در هر جفت، یکی published و دیگری draft است؛ قاعده‌ی
-   * بی‌توجه‌به‌وضعیت همین حالا قرمز می‌شود و ما را مجبور می‌کند تصمیم بگیریم
-   * کدام نسخه متعارف است — تصمیمی محتوایی که هنوز گرفته نشده.
+   * نسخه‌ی اول عمداً فقط published را می‌دید، چون رجیستری دو جفت تکراری داشت —
+   * «a fi» (v-a-fi / v-core-a-fi) و «a avea» (v-a-avea / v-core-a-avea) — که در
+   * هر جفت یکی published و دیگری draft بود، و انتخاب نسخه‌ی متعارف تصمیمی بود
+   * که آن موقع گرفته نشده بود.
    *
-   * این نسخه دقیقاً همان خطری را می‌بندد که مهم است: انتشار همزمان هر دو.
-   * وقتی تصمیم گرفته شد، برداشتن شرط status یک خط است.
+   * در dre-p187 گرفته شد: دو نسخه **بیت‌به‌بیت یکسان** بودند (صیغه‌ها، مصدر،
+   * participiu، حوزه‌ها؛ تنها برچسب منبع فرق داشت)، پس تصمیمی محتوایی در میان
+   * نبود. دو draft حذف شدند و شرط status هم برداشته شد: از این پس دو فعل با یک
+   * مصدر در **هیچ** وضعیتی نمی‌توانند وجود داشته باشند، پس جفت تکراری دیگر
+   * نمی‌تواند در پیش‌نویس کاشته شود و بعدها با انتشار دسته‌جمعی لو برود.
    */
   const publishedInfinitives = new Map<string, string>();
   for (const v of verbs) {
-    if (v.status !== 'published') continue;
     const inf = v.infinitive?.trim();
     if (!inf) continue;
     const key = inf.toLowerCase();
@@ -1507,7 +1530,7 @@ export function validateRomanianContent(context: RomanianValidationContext): Val
         rule: 'V33',
         phraseId: v.id,
         entityId: v.id,
-        message: `Duplicate published verb infinitive "${inf}": verb "${v.id}" duplicates verb "${prior}". Archive one of them.`,
+        message: `Duplicate verb infinitive "${inf}": verb "${v.id}" duplicates verb "${prior}". Two verbs may never share an infinitive, in any status — remove one.`,
       });
     } else {
       publishedInfinitives.set(key, v.id);

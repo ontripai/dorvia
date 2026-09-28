@@ -7,6 +7,12 @@ import { RomanianVerb } from '@/lib/romanian/types';
  * لایه‌ی الف — پایه‌ای:
  *   a fi · a avea · a putea · a vrea · a trebui · a ști
  *
+ * `a fi` و `a avea` **در این فایل نیستند** (dre-p187). هر دو از قبل در
+ * `seed.ts` با شناسه‌های `v-a-fi` و `v-a-avea` منتشر شده بودند و صیغه‌هایشان
+ * با نسخه‌ی واکشی‌شده‌ی این‌جا **بیت‌به‌بیت یکسان** بود؛ تنها تفاوت برچسب منبع
+ * بود که در نسخه‌ی seed تمیزتر است (DOOM 3 / DEX '09). پس دو مدخل تکراری
+ * حذف شدند و V33 از این پس بی‌توجه به وضعیت کار می‌کند تا دوباره ساخته نشوند.
+ *
  * لایه‌ی ب — تعامل روزمره:
  *   a înțelege · a vorbi · a merge · a veni · a face · a ajuta
  *
@@ -14,80 +20,6 @@ import { RomanianVerb } from '@/lib/romanian/types';
  */
 
 export const CORE_VERBS: RomanianVerb[] = [
-  {
-    "id": "v-core-a-fi",
-    "infinitive": "a fi",
-    "translations": {
-      "en": "to be",
-      "fa": "بودن"
-    },
-    "domains": [
-      "core"
-    ],
-    "conjugation": {
-      "prezent": {
-        "eu": "sunt",
-        "tu": "ești",
-        "el": "este",
-        "noi": "suntem",
-        "voi": "sunteți",
-        "ei": "sunt"
-      },
-      "conjunctiv": {
-        "eu": "fiu",
-        "tu": "fii",
-        "el": "fie",
-        "noi": "fim",
-        "voi": "fiți",
-        "ei": "fie"
-      }
-    },
-    "participiu": "fost",
-    "source": {
-      "label": "dexonline — paradigma (verb (V339) infinitiv infiniti)",
-      "url": "https://dexonline.ro/definitie/fi/paradigma",
-      "retrievedAt": "2026-09-23"
-    },
-    "reviewer": "ai-only",
-    "status": "draft"
-  },
-  {
-    "id": "v-core-a-avea",
-    "infinitive": "a avea",
-    "translations": {
-      "en": "to have",
-      "fa": "داشتن"
-    },
-    "domains": [
-      "core"
-    ],
-    "conjugation": {
-      "prezent": {
-        "eu": "am",
-        "tu": "ai",
-        "el": "are",
-        "noi": "avem",
-        "voi": "aveți",
-        "ei": "au"
-      },
-      "conjunctiv": {
-        "eu": "am",
-        "tu": "ai",
-        "el": "aibă",
-        "noi": "avem",
-        "voi": "aveți",
-        "ei": "aibă"
-      }
-    },
-    "participiu": "avut",
-    "source": {
-      "label": "dexonline — paradigma (verb (VT514) infinitiv infinit)",
-      "url": "https://dexonline.ro/definitie/avea/paradigma",
-      "retrievedAt": "2026-09-23"
-    },
-    "reviewer": "ai-only",
-    "status": "draft"
-  },
   {
     "id": "v-core-a-putea",
     "infinitive": "a putea",

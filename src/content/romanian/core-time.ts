@@ -1049,7 +1049,7 @@ export const CORE_TIME: RomanianWord[] = [
     pos: 'adv',
     translations: {
       en: 'today (= astăzi)',
-      fa: 'امروز',
+      fa: 'امروز (صورت کوتاه)',
     },
     domains: ['core'],
     stationId: 'core-time',
@@ -1080,7 +1080,7 @@ export const CORE_TIME: RomanianWord[] = [
     pos: 'adv',
     translations: {
       en: 'today (= azi)',
-      fa: 'امروز',
+      fa: 'امروز (صورت بلند)',
     },
     domains: ['core'],
     stationId: 'core-time',
