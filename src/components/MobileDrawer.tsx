@@ -176,6 +176,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             { id: 'needs/certified-translation', label: isFa ? 'دارالترجمه رسمی' : 'Certified Translation' },
             { id: 'needs/legal-consultation', label: isFa ? 'وکیل و مشاوره حقوقی' : 'Legal Consultation' },
             { id: 'needs/romanian-language-courses', label: isFa ? 'آموزش زبان رومانیایی' : 'Romanian Language Courses' },
+            { id: 'learn-romanian', label: isFa ? 'دورهی رایگان زبان رومانیایی' : 'Free Romanian Course' },
             { id: 'needs/notary-public', label: isFa ? 'دفتر اسناد رسمی' : 'Notary Public' },
             { id: 'needs/iranian-embassy-and-mikhak', label: isFa ? 'سفارت ایران و سامانه میخک' : 'Iranian Embassy & Mikhak' },
             { id: 'needs/housing', label: isFa ? 'اجاره و خرید مسکن' : 'Housing' },
