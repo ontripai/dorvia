@@ -369,8 +369,11 @@ export function buildApplicantResultEmail(params: SendPathfinderEmailsParams): {
                 <a href="${escapeHtml(directWaUrl)}" style="display: block; background-color: #16a34a; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 14px; margin-bottom: 10px; box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);">
                   💬 ${isFa ? 'ادامه بررسی رایگان در واتس‌اپ' : 'Continue Free Discussion on WhatsApp'}
                 </a>
-                <a href="${escapeHtml(siteUrl)}" style="display: block; background-color: #2F6FED; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 14px;">
+                <a href="${escapeHtml(siteUrl)}" style="display: block; background-color: #2F6FED; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 14px; margin-bottom: 10px;">
                   📖 ${isFa ? 'مشاهده راهنمای کامل این مسیر در سایت DORVIA' : 'Explore Complete Pathway Guide on DORVIA'}
+                </a>
+                <a href="${escapeHtml(`${baseUrl}/${isFa ? 'fa' : 'en'}/learn-romanian`)}" style="display: block; background-color: #0f766e; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 14px;">
+                  🎓 ${isFa ? 'شروع رایگان آموزش زبان رومانیایی' : 'Start Learning Romanian — Free'}
                 </a>
               </div>
 

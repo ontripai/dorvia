@@ -735,6 +735,14 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
             <span>{isFa ? 'شبکه خانواده' : 'Family Network'}</span>
           </Link>
 
+          <Link
+            href={`/${currentLang}/learn-romanian`}
+            className="px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center space-x-2 rtl:space-x-reverse bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
+          >
+            <Languages size={16} />
+            <span>{isFa ? 'آموزش زبان' : 'Learn Romanian'}</span>
+          </Link>
+
           {exchangeStatus === 'approved' ? (
             <Link
               href={`/${currentLang}/portal/exchange`}
