@@ -89,6 +89,18 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
   const [activeTab, setActiveTab] = useState<'details' | 'documents' | 'assignments' | 'stages' | 'finance'>('details');
   const [loading, setLoading] = useState(true);
   const [lead, setLead] = useState<any>(null);
+  /*
+    ویرایش اطلاعات تماسِ پرونده (dre-p190).
+
+    اندپوینت `PATCH /api/admin/leads/[id]` از قبل `full_name` و `email` و `phone`
+    را می‌پذیرفت و می‌نوشت؛ چیزی که نبود راهی برای **وارد کردنشان** بود. پرونده‌های
+    واردشده از تلگرام ایمیل ندارند و بدون ایمیل دعوت‌نامه‌ی پورتال فرستاده
+    نمی‌شود — اندپوینت `invite` صریحاً ردش می‌کند.
+  */
+  const [editingContact, setEditingContact] = useState(false);
+  const [savingContact, setSavingContact] = useState(false);
+  const [contactError, setContactError] = useState<string | null>(null);
+  const [contactForm, setContactForm] = useState({ full_name: '', email: '', phone: '' });
   const [messages, setMessages] = useState<any[]>([]);
   const [newMsgText, setNewMsgText] = useState('');
   const [sendingMsg, setSendingMsg] = useState(false);
@@ -1004,6 +1016,51 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
     }
   };
 
+  const startEditContact = () => {
+    setContactForm({
+      full_name: lead?.full_name || '',
+      email: lead?.email || '',
+      phone: lead?.phone || '',
+    });
+    setContactError(null);
+    setEditingContact(true);
+  };
+
+  const handleSaveContact = async () => {
+    const email = contactForm.email.trim();
+    // اعتبارسنجی سبک سمت کلاینت؛ تصمیم واقعی با سرور است.
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setContactError(isFa ? 'ایمیل معتبر نیست.' : 'That email address is not valid.');
+      return;
+    }
+
+    setSavingContact(true);
+    setContactError(null);
+    try {
+      const res = await fetch(`/api/admin/leads/${leadId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          full_name: contactForm.full_name.trim(),
+          // رشته‌ی خالی یعنی «پاک کن» — سرور همین را به null تبدیل می‌کند.
+          email: email || null,
+          phone: contactForm.phone.trim() || null,
+        }),
+      });
+      const json = await res.json();
+      if (res.ok) {
+        setEditingContact(false);
+        await loadLeadData();
+      } else {
+        setContactError(json.error || (isFa ? 'ذخیره ناموفق بود.' : 'Save failed.'));
+      }
+    } catch {
+      setContactError(isFa ? 'خطا در ارتباط با سرور.' : 'Network connection error.');
+    } finally {
+      setSavingContact(false);
+    }
+  };
+
   const handleCancelCharge = async (chargeId: string, docNumber?: string) => {
     if (!confirm(isFa ? `آیا از لغو سند بدهکاری ${docNumber || ''} اطمینان دارید؟` : 'Cancel this charge?')) {
       return;
@@ -1681,20 +1738,102 @@ export default function LeadDetailPage({ params }: LeadDetailPageProps) {
 
                 {/* Applicant Fields */}
                 <div className="space-y-3 text-xs text-[#526174]">
-                  <div className="flex items-center justify-between py-1.5 border-b border-slate-100">
-                    <span className="font-semibold text-slate-600">{isFa ? 'نام و نام خانوادگی' : 'Name'}</span>
-                    <span className="font-bold text-[#142033]">{lead.full_name}</span>
+                  <div className="flex items-center justify-between pb-1">
+                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                      {isFa ? 'اطلاعات تماس' : 'Contact details'}
+                    </span>
+                    {!editingContact && (
+                      <button
+                        type="button"
+                        onClick={startEditContact}
+                        className="text-xs font-bold text-[#2F6FED] hover:underline cursor-pointer"
+                      >
+                        {isFa ? 'ویرایش' : 'Edit'}
+                      </button>
+                    )}
                   </div>
 
-                  <div className="flex items-center justify-between py-1.5 border-b border-slate-100">
-                    <span className="font-semibold text-slate-600">{isFa ? 'ایمیل' : 'Email'}</span>
-                    <span className="font-mono text-slate-800" dir="ltr">{lead.email || '—'}</span>
-                  </div>
+                  {editingContact ? (
+                    <div className="space-y-2.5 pb-1">
+                      <div className="space-y-1">
+                        <label className="font-semibold text-slate-600">{isFa ? 'نام و نام خانوادگی' : 'Name'}</label>
+                        <input
+                          type="text"
+                          value={contactForm.full_name}
+                          onChange={e => setContactForm(f => ({ ...f, full_name: e.target.value }))}
+                          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#2F6FED]/30"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="font-semibold text-slate-600">{isFa ? 'ایمیل' : 'Email'}</label>
+                        <input
+                          type="email"
+                          dir="ltr"
+                          value={contactForm.email}
+                          onChange={e => setContactForm(f => ({ ...f, email: e.target.value }))}
+                          placeholder="name@example.com"
+                          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-[#2F6FED]/30"
+                        />
+                        <p className="text-[11px] text-slate-400 leading-relaxed">
+                          {isFa
+                            ? 'بدون ایمیل، دعوت‌نامه‌ی پورتال فرستاده نمی‌شود. ثبت ایمیل خودش دعوت‌نامه نمی‌فرستد؛ آن دکمه جداست.'
+                            : 'Without an email no portal invitation can be sent. Saving an email does not send one — that is a separate button.'}
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <label className="font-semibold text-slate-600">{isFa ? 'شماره تماس' : 'Phone'}</label>
+                        <input
+                          type="text"
+                          dir="ltr"
+                          value={contactForm.phone}
+                          onChange={e => setContactForm(f => ({ ...f, phone: e.target.value }))}
+                          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-[#2F6FED]/30"
+                        />
+                      </div>
 
-                  <div className="flex items-center justify-between py-1.5 border-b border-slate-100">
-                    <span className="font-semibold text-slate-600">{isFa ? 'شماره تماس' : 'Phone'}</span>
-                    <span className="font-mono text-slate-800" dir="ltr">{lead.phone || '—'}</span>
-                  </div>
+                      {contactError && (
+                        <div className="rounded-lg bg-rose-50 border border-rose-200 px-3 py-2 text-[11px] text-rose-800">
+                          {contactError}
+                        </div>
+                      )}
+
+                      <div className="flex items-center gap-2 pt-1">
+                        <button
+                          type="button"
+                          onClick={handleSaveContact}
+                          disabled={savingContact}
+                          className="px-4 py-2 rounded-lg bg-[#2F6FED] text-white text-xs font-bold hover:bg-[#2559c4] transition-colors disabled:opacity-60"
+                        >
+                          {savingContact ? (isFa ? 'در حال ذخیره…' : 'Saving…') : (isFa ? 'ذخیره' : 'Save')}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setEditingContact(false)}
+                          disabled={savingContact}
+                          className="px-4 py-2 rounded-lg border border-slate-300 text-slate-600 text-xs font-bold hover:bg-slate-50 transition-colors disabled:opacity-60"
+                        >
+                          {isFa ? 'انصراف' : 'Cancel'}
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="flex items-center justify-between py-1.5 border-b border-slate-100">
+                        <span className="font-semibold text-slate-600">{isFa ? 'نام و نام خانوادگی' : 'Name'}</span>
+                        <span className="font-bold text-[#142033]">{lead.full_name}</span>
+                      </div>
+
+                      <div className="flex items-center justify-between py-1.5 border-b border-slate-100">
+                        <span className="font-semibold text-slate-600">{isFa ? 'ایمیل' : 'Email'}</span>
+                        <span className="font-mono text-slate-800" dir="ltr">{lead.email || '—'}</span>
+                      </div>
+
+                      <div className="flex items-center justify-between py-1.5 border-b border-slate-100">
+                        <span className="font-semibold text-slate-600">{isFa ? 'شماره تماس' : 'Phone'}</span>
+                        <span className="font-mono text-slate-800" dir="ltr">{lead.phone || '—'}</span>
+                      </div>
+                    </>
+                  )}
 
                   {lead.national_id_or_passport && (
                     <div className="flex items-center justify-between py-1.5 border-b border-slate-100">

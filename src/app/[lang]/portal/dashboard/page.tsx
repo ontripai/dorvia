@@ -524,6 +524,15 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
         return isFa ? 'پیوست خانواده' : 'Family Reunification';
       case 'living':
         return isFa ? 'اقامت و استقرار' : 'Settlement & Living';
+      /*
+        PathFinder مسیرها را `business` و `relocation` نام می‌گذارد، ولی این
+        نگاشت فقط `company` و `living` را می‌شناخت. نتیجه‌اش این بود که روی
+        صفحه‌ی فارسیِ مشتری، عیناً واژه‌ی لاتینِ «business» چاپ می‌شد.
+      */
+      case 'business':
+        return isFa ? 'ثبت شرکت و راه‌اندازی کسب‌وکار' : 'Company Formation & Business';
+      case 'relocation':
+        return isFa ? 'اقامت و استقرار' : 'Settlement & Living';
       default:
         return goal || (isFa ? 'عمومی' : 'General');
     }
@@ -607,7 +616,21 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
 
   const statusBadge = getStatusBadge(lead.status);
   const rawMeta = lead.raw_meta as any;
-  const pathfinderScore = rawMeta?.profileScore ?? rawMeta?.score ?? null;
+  /*
+    `leadScore` همان کلیدی است که PathFinder واقعاً می‌نویسد. دو نام قبلی
+    (`profileScore` و `score`) در هیچ سطری از دیتابیس وجود نداشتند — سنجیده شد —
+    پس این پنل از روزی که نوشته شد تا امروز هرگز چیزی نشان نداده بود. دو نام
+    قدیمی نگه داشته شدند تا اگر سطر تاریخی‌ای با آن‌ها بود نشکند.
+  */
+  const pathfinderScore =
+    rawMeta?.profileScore ?? rawMeta?.score ?? rawMeta?.leadScore ?? null;
+  /** امتیاز هر مسیر، از زیاد به کم. منبعِ «خلاصه‌ی ارزیابی» که به کاربر وعده داده‌ایم. */
+  const routeScores: Array<[string, number]> = rawMeta?.scores
+    ? Object.entries(rawMeta.scores as Record<string, unknown>)
+        .filter(([, v]) => typeof v === 'number')
+        .map(([k, v]) => [k, v as number] as [string, number])
+        .sort((a, b) => b[1] - a[1])
+    : [];
   const pathfinderTemp = rawMeta?.leadTemperature ?? null;
 
   return (
@@ -814,6 +837,53 @@ export default function PortalDashboardPage({ params }: PortalDashboardProps) {
                         {pathfinderTemp || (isFa ? 'عادی' : 'Standard')}
                       </div>
                     </div>
+                  </div>
+                )}
+
+                {/*
+                  خلاصه‌ی ارزیابی — همان چیزی که متن بالای صفحه وعده‌اش را می‌دهد.
+                  داده‌اش از ابتدا در `raw_meta.scores` بود و هیچ‌جا نشان داده
+                  نمی‌شد. عددِ کل (۵۵) به‌تنهایی به کاربر چیزی نمی‌گوید؛ چیزی که
+                  می‌گوید این است که کدام مسیر برای او بازتر است.
+                */}
+                {routeScores.length > 0 && (
+                  <div className="space-y-3 pt-1">
+                    <span className="text-[11px] font-bold text-[#526174] uppercase tracking-wider">
+                      {isFa ? 'تناسب شما با هر مسیر' : 'How each route fits you'}
+                    </span>
+                    <div className="space-y-2.5">
+                      {routeScores.map(([route, value]) => {
+                        const isPrimary = route === (rawMeta?.primaryRoute ?? null);
+                        return (
+                          <div key={route} className="space-y-1">
+                            <div className="flex items-center justify-between gap-3 text-xs">
+                              <span className={isPrimary ? 'font-extrabold text-[#142033]' : 'text-[#526174]'}>
+                                {getPathwayTitle(route)}
+                                {isPrimary && (
+                                  <span className="ms-2 px-1.5 py-0.5 rounded-md bg-blue-50 text-[#2F6FED] text-[10px] font-bold align-middle">
+                                    {isFa ? 'پیشنهاد اول' : 'best fit'}
+                                  </span>
+                                )}
+                              </span>
+                              <span className={`font-bold tabular-nums ${isPrimary ? 'text-[#2F6FED]' : 'text-slate-500'}`}>
+                                {value}
+                              </span>
+                            </div>
+                            <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
+                              <div
+                                className={`h-full rounded-full ${isPrimary ? 'bg-[#2F6FED]' : 'bg-slate-300'}`}
+                                style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <p className="text-[11px] text-slate-400 leading-relaxed">
+                      {isFa
+                        ? 'این اعداد از پاسخ‌های خودتان در فرم ارزیابی به دست آمده‌اند و نتیجه‌ی بررسی کارشناسی نیستند. بررسی پرونده توسط تیم DORVIA جداگانه انجام می‌شود.'
+                        : 'These numbers come from your own answers in the assessment form and are not a professional review. The DORVIA team reviews your case separately.'}
+                    </p>
                   </div>
                 )}
 

@@ -24,6 +24,20 @@ function getCleanBaseContext(): RomanianValidationContext {
   };
 }
 
+/**
+ * جست‌وجوی فعل با خطای گویا.
+ *
+ * نسخه‌ی قبلی `find(...)!` بود. وقتی در dre-p187 دو فعل تکراری حذف شدند، این
+ * سوئیت با `TypeError: Cannot set properties of undefined` افتاد — خطایی که
+ * نمی‌گوید کدام فیکسچر گم شده است. یک قلم داده که ناپدید می‌شود باید بگوید
+ * ناپدید شده.
+ */
+function verbById(ctx: RomanianValidationContext, id: string) {
+  const verb = ctx.verbs!.find(v => v.id === id);
+  if (!verb) throw new Error(`Fixture missing: verb "${id}" is not in the registry.`);
+  return verb;
+}
+
 let passedAll = true;
 
 function runTest(
@@ -80,7 +94,7 @@ runTest('Green Test: Clean Base Dataset (Seed + Foundation + Core Verbs)', () =>
 // 1. Red Test V20-A: Published verb missing participiu
 runTest('Red Test V20-A: Published verb missing participiu', () => {
   const ctx = getCleanBaseContext();
-  const verb = ctx.verbs!.find(v => v.id === 'v-a-fi')!;
+  const verb = verbById(ctx, 'v-a-fi');
   delete (verb as any).participiu;
   const errors = validateRomanianContent(ctx);
   return { expectedRule: 'V20', errors, shouldPass: false };
@@ -89,7 +103,7 @@ runTest('Red Test V20-A: Published verb missing participiu', () => {
 // 2. Red Test V20-B: Published verb missing conjunctiv person
 runTest('Red Test V20-B: Published verb missing conjunctiv person (e.g. tu)', () => {
   const ctx = getCleanBaseContext();
-  const verb = ctx.verbs!.find(v => v.id === 'v-a-fi')!;
+  const verb = verbById(ctx, 'v-a-fi');
   verb.conjugation.conjunctiv!.tu = '';
   const errors = validateRomanianContent(ctx);
   return { expectedRule: 'V20', errors, shouldPass: false };
@@ -98,7 +112,7 @@ runTest('Red Test V20-B: Published verb missing conjunctiv person (e.g. tu)', ()
 // 3. Red Test V20-C: Published defective verb (a trebui) without defective declaration fails V20
 runTest('Red Test V20-C: Published defective verb without defective declaration fails V20', () => {
   const ctx = getCleanBaseContext();
-  const trebuiVerb = ctx.verbs!.find(v => v.id === 'v-core-a-trebui')!;
+  const trebuiVerb = verbById(ctx, 'v-core-a-trebui');
   trebuiVerb.status = 'published';
   delete trebuiVerb.defective;
   const errors = validateRomanianContent(ctx);
@@ -108,7 +122,7 @@ runTest('Red Test V20-C: Published defective verb without defective declaration 
 // 4. Green Test V20-D: Published defective verb WITH defective declaration passes V20
 runTest('Green Test V20-D: Published defective verb with defective declaration passes V20', () => {
   const ctx = getCleanBaseContext();
-  const trebuiVerb = ctx.verbs!.find(v => v.id === 'v-core-a-trebui')!;
+  const trebuiVerb = verbById(ctx, 'v-core-a-trebui');
   trebuiVerb.status = 'published';
   trebuiVerb.defective = {
     reason: 'Verb unipersonal / defectiv de persoana I și a II-a; se folosește doar la persoana a III-a.',
@@ -121,7 +135,7 @@ runTest('Green Test V20-D: Published defective verb with defective declaration p
 // 5. Red Test V20-E: Published defective verb with empty defective reason/source fails V20
 runTest('Red Test V20-E: Published defective verb with empty defective reason/source fails V20', () => {
   const ctx = getCleanBaseContext();
-  const trebuiVerb = ctx.verbs!.find(v => v.id === 'v-core-a-trebui')!;
+  const trebuiVerb = verbById(ctx, 'v-core-a-trebui');
   trebuiVerb.status = 'published';
   trebuiVerb.defective = {
     reason: '',
@@ -134,7 +148,7 @@ runTest('Red Test V20-E: Published defective verb with empty defective reason/so
 // 6. Red Test V21-A: Stored form contains 'să' without whitespace (e.g. 'săpoată')
 runTest("Red Test V21-A: Stored conjunctiv form contains 'să' without whitespace (e.g. 'săpoată')", () => {
   const ctx = getCleanBaseContext();
-  const verb = ctx.verbs!.find(v => v.id === 'v-core-a-putea')!;
+  const verb = verbById(ctx, 'v-core-a-putea');
   verb.conjugation.conjunctiv!.el = 'săpoată';
   const errors = validateRomanianContent(ctx);
   return { expectedRule: 'V21', errors, shouldPass: false };
@@ -143,7 +157,7 @@ runTest("Red Test V21-A: Stored conjunctiv form contains 'să' without whitespac
 // 5. Red Test V21-B: Stored form contains hyphen
 runTest("Red Test V21-B: Stored form contains hyphen (e.g. enclitic ‑s or fostu‑)", () => {
   const ctx = getCleanBaseContext();
-  const verb = ctx.verbs!.find(v => v.id === 'v-core-a-fi')!;
+  const verb = verbById(ctx, 'v-a-fi');
   verb.participiu = 'fostu‑';
   const errors = validateRomanianContent(ctx);
   return { expectedRule: 'V21', errors, shouldPass: false };
@@ -152,7 +166,7 @@ runTest("Red Test V21-B: Stored form contains hyphen (e.g. enclitic ‑s or fost
 // 6. Red Test V21-C: Stored form contains HTML entity
 runTest("Red Test V21-C: Stored form contains HTML entity (e.g. &#x2011;)", () => {
   const ctx = getCleanBaseContext();
-  const verb = ctx.verbs!.find(v => v.id === 'v-core-a-merge')!;
+  const verb = verbById(ctx, 'v-core-a-merge');
   verb.conjugation.prezent.eu = 'merg&#x2011;';
   const errors = validateRomanianContent(ctx);
   return { expectedRule: 'V21', errors, shouldPass: false };
@@ -161,14 +175,14 @@ runTest("Red Test V21-C: Stored form contains HTML entity (e.g. &#x2011;)", () =
 // 7. Red Test V21-D: Stored form contains whitespace
 runTest("Red Test V21-D: Stored form contains whitespace (e.g. 'vor besc')", () => {
   const ctx = getCleanBaseContext();
-  const verb = ctx.verbs!.find(v => v.id === 'v-core-a-vorbi')!;
+  const verb = verbById(ctx, 'v-core-a-vorbi');
   verb.conjugation.prezent.eu = 'vor besc';
   const errors = validateRomanianContent(ctx);
   return { expectedRule: 'V21', errors, shouldPass: false };
 });
 
 // 8. Green Test V21-E: Core verbs all have pure forms
-runTest("Green Test V21-E: All 12 core verbs pass V21 purity check", () => {
+runTest("Green Test V21-E: every core verb passes the V21 purity check", () => {
   const ctx = getCleanBaseContext();
   const errors = validateRomanianContent(ctx);
   const v21Errors = errors.filter(e => e.rule === 'V21');

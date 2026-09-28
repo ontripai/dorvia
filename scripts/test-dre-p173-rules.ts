@@ -233,16 +233,33 @@ runTest('GREEN V33: no two published verbs share an infinitive', () => {
   return { errors: validateRomanianContent(ctx).filter(e => e.rule === 'V33'), shouldPass: true };
 });
 
-runTest('RED V33: publishing v-core-a-fi alongside v-a-fi is caught', () => {
+/*
+  نسخه‌ی اول این آزمون به دو مدخل تکراریِ واقعیِ رجیستری تکیه داشت
+  (`v-core-a-fi` در کنار `v-a-fi`). در dre-p187 آن دو حذف شدند و آزمون افتاد —
+  درست افتاد، ولی به دلیل غلط: چون فیکسچرش ناپدید شده بود، نه چون قاعده شکسته
+  بود. آزمونِ یک قاعده باید نقضش را **خودش بسازد**، نه اینکه منتظر بماند نقص در
+  داده‌ی واقعی باقی مانده باشد.
+*/
+runTest('RED V33: a second verb with the same infinitive is caught', () => {
   const ctx = getCleanBaseContext();
-  const draft = ctx.verbs.find(v => v.id === 'v-core-a-fi');
   const live = ctx.verbs.find(v => v.id === 'v-a-fi');
-  if (!draft || !live) throw new Error('Fixture missing: v-core-a-fi / v-a-fi.');
+  if (!live) throw new Error('Fixture missing: verb "v-a-fi" is not in the registry.');
   if (live.status !== 'published') throw new Error('Fixture broken: v-a-fi must be published.');
-  if (draft.infinitive !== live.infinitive) {
-    throw new Error(`Fixture broken: infinitives differ ("${draft.infinitive}" vs "${live.infinitive}").`);
-  }
-  draft.status = 'published';
+  const clone = JSON.parse(JSON.stringify(live));
+  clone.id = 'test-verb-infinitive-clone';
+  ctx.verbs.push(clone);
+  return { expectedRule: 'V33', errors: validateRomanianContent(ctx), shouldPass: false };
+});
+
+runTest('RED V33 (dre-p187): the rule no longer ignores drafts', () => {
+  const ctx = getCleanBaseContext();
+  const live = ctx.verbs.find(v => v.id === 'v-a-avea');
+  if (!live) throw new Error('Fixture missing: verb "v-a-avea" is not in the registry.');
+  const clone = JSON.parse(JSON.stringify(live));
+  clone.id = 'test-verb-draft-clone';
+  // پیش از p187 این مدخل بی‌خطر بود و می‌توانست ماه‌ها در پیش‌نویس بماند.
+  clone.status = 'draft';
+  ctx.verbs.push(clone);
   return { expectedRule: 'V33', errors: validateRomanianContent(ctx), shouldPass: false };
 });
 

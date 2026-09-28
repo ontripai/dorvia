@@ -45,6 +45,42 @@ export const RomanianHub: React.FC<RomanianHubProps> = ({
         </p>
       </div>
 
+      {/*
+        ورودِ تمرین روزانه (dre-p188).
+
+        پیش از این هیچ صفحه‌ای به `/learn-romanian/exercitiu` لینک نمی‌داد —
+        فقط با تایپ دستی آدرس باز می‌شد. یک حلقه‌ی یادگیری که راهی به آن نیست،
+        ساخته نشده حساب می‌شود.
+
+        جای آن عمداً پیش از فهرست ایستگاه‌هاست: کسی که برگشته، کارِ امروزش را
+        می‌خواهد، نه فهرست درس‌ها را.
+      */}
+      {stations.length > 0 && (
+        <Link
+          href="/learn-romanian/exercitiu"
+          className="block rounded-3xl border border-[#1554bd]/25 bg-gradient-to-l from-[#1554bd]/[0.07] to-transparent p-6 sm:p-7 hover:border-[#1554bd]/50 transition-colors group"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="space-y-1">
+              <div className="text-xs font-bold text-[#1554bd] uppercase tracking-wider">
+                {isFa ? 'تمرین روزانه' : 'Daily practice'}
+              </div>
+              <div className="text-lg sm:text-xl font-extrabold text-[#142033]">
+                {isFa ? 'هر روز چند دقیقه، با فاصله‌گذاری' : 'A few minutes a day, spaced out'}
+              </div>
+              <p className="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-2xl">
+                {isFa
+                  ? 'هر واژه را درست وقتی که در آستانه‌ی فراموشی است دوباره می‌بینید. بدون ایمیل و بدون رمز.'
+                  : 'Each word comes back just as you are about to forget it. No email, no password.'}
+              </p>
+            </div>
+            <span className="inline-flex items-center px-5 py-2.5 rounded-xl bg-[#1554bd] text-white text-sm font-bold group-hover:bg-[#0f3f8f] transition-colors shrink-0">
+              {isFa ? 'شروع تمرین' : 'Start practising'}
+            </span>
+          </div>
+        </Link>
+      )}
+
       {/* Core Stations Section (Dynamically rendered from published stations) */}
       {stations.length > 0 && (
         <div className="space-y-6">
