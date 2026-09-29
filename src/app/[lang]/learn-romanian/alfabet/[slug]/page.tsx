@@ -9,6 +9,7 @@ import {
   getWordById,
 } from '@/lib/romanian/content';
 import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
+import { ABreveFoundationLesson } from '@/components/romanian/ABreveFoundationLesson';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ArrowLeft, ArrowRight, ChevronRight, ChevronLeft } from '@/components/Icons';
@@ -84,6 +85,22 @@ export default function RomanianGraphemeDetailPage({
 
   const PrevNextArrow = isFa ? ArrowRight : ArrowLeft;
   const ForwardArrow = isFa ? ArrowLeft : ArrowRight;
+
+  if (grapheme.slug === 'a-breve') {
+    return <main className="max-w-4xl mx-auto px-4 py-8 space-y-6">
+      <Breadcrumb
+        items={[
+          { label: isFa ? 'خانه' : 'Home', href: '/' },
+          { label: isFa ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' },
+          { label: isFa ? 'الفبا و تلفظ' : 'Alphabet & pronunciation', href: '/learn-romanian/alfabet' },
+          { label: 'ă' },
+        ]}
+        currentLang={currentLang}
+        disableJsonLd
+      />
+      <ABreveFoundationLesson lang={currentLang} clips={grapheme.audio || []} />
+    </main>;
+  }
 
   return (
     <div className="space-y-8 animate-fadeIn max-w-[960px] mx-auto px-4 py-8">

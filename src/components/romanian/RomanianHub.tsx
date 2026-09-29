@@ -45,6 +45,13 @@ export const RomanianHub: React.FC<RomanianHubProps> = ({
         </p>
       </div>
 
+      <Link href="/learn-romanian/alfabet/a-breve" className="block rounded-2xl border border-amber-200 bg-amber-50 p-5 sm:p-6 hover:border-amber-500 transition-colors">
+        <span className="text-xs font-bold text-amber-900">{isFa ? 'جلسهٔ نمونه از آموزش پایه' : 'Foundation sample lesson'}</span>
+        <h2 className="mt-1 text-lg sm:text-xl font-extrabold text-[#142033]">{isFa ? 'صدای ă را در آغاز، میانه و پایان واژه بشناسید' : 'Discover ă at the beginning, middle and end of words'}</h2>
+        <p className="mt-1 text-sm text-slate-700">{isFa ? 'شنیدن دو صدای ضبط‌شده، واژه‌ها با شناسنامهٔ قواعد، یادآوری و پاسخ صوتی یا نوشتاری.' : 'Two recorded voices, word rule cards, recall, and spoken or typed answers.'}</p>
+        <span className="mt-3 inline-block text-sm font-bold text-[#1554bd]">{isFa ? 'ورود به درس پایه' : 'Open foundation lesson'}</span>
+      </Link>
+
       <Link
         href="/learn-romanian/lectie/bilet"
         className="block rounded-3xl border border-[#1554bd]/30 bg-blue-50 p-6 sm:p-8 hover:border-[#1554bd] transition-colors"

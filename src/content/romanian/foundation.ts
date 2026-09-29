@@ -705,7 +705,7 @@ export const FOUNDATION_GRAPHEMES: RomanianGrapheme[] = [
     "id": "g-06-a-breve",
     "slug": "a-breve",
     "grapheme": "ă",
-    "soundHintFa": "صدای کوتاه و بی‌تأکید، چیزی میان «اَ» و «اِ». در فارسی وجود ندارد — صوت را بشنوید.",
+    "soundHintFa": "واکهٔ میانی /ə/ که با a فرق دارد و می‌تواند تکیه هم بگیرد. با شنیدن نمونه، صدای آن را یاد بگیرید.",
     "exampleWordId": "w-masa",
     "matchPattern": "ă",
     "order": 6,
