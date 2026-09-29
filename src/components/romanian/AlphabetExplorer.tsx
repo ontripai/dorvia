@@ -49,7 +49,7 @@ export function AlphabetExplorer({ letters, lang }: { letters: Letter[]; lang: '
         {categoryNames[lang][key]} <span className="opacity-75">({letters.filter(letter => key === 'all' || letter.category === key).length})</span>
       </button>)}
     </div>
-    <p aria-live="polite" className="text-xs text-slate-500">{isFa ? `${filtered.length} حرف نمایش داده می‌شود` : `Showing ${filtered.length} letters`}</p>
+    <p aria-live="polite" className="text-xs text-slate-500">{isFa ? `${String(filtered.length).replace(/\d/g, digit => '۰۱۲۳۴۵۶۷۸۹'[Number(digit)])} حرف نمایش داده می‌شود` : `Showing ${filtered.length} ${filtered.length === 1 ? 'letter' : 'letters'}`}</p>
     {filtered.length ? <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
       {filtered.map(letter => <Link key={letter.glyph} href={`/learn-romanian/alfabet/${letter.slug}`}
         className="group flex min-h-36 flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1554bd]">
