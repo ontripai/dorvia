@@ -20,6 +20,22 @@ const patterns = [
   { label: 'ghe / ghi', slug: 'ghe-ghi', fa: 'صدای گ · ghișeu', en: 'hard g · ghișeu' },
 ] as const;
 
+const additionalExamples: Record<string, { word: string; fa: string; en: string }> = {
+  'B b': { word: 'bilet', fa: 'بلیت', en: 'ticket' },
+  'D d': { word: 'card', fa: 'کارت', en: 'card' },
+  'F f': { word: 'telefon', fa: 'تلفن', en: 'phone' },
+  'L l': { word: 'elev', fa: 'دانش‌آموز', en: 'pupil' },
+  'M m': { word: 'masă', fa: 'میز', en: 'table' },
+  'N n': { word: 'ban', fa: 'واحد پول', en: 'monetary unit' },
+  'P p': { word: 'apă', fa: 'آب', en: 'water' },
+  'T t': { word: 'taxi', fa: 'تاکسی', en: 'taxi' },
+  'Z z': { word: 'zi', fa: 'روز', en: 'day' },
+  'K k': { word: 'kilometru', fa: 'کیلومتر', en: 'kilometre' },
+  'Q q': { word: 'quasar', fa: 'اختروش', en: 'quasar' },
+  'W w': { word: 'weekend', fa: 'آخر هفته', en: 'weekend' },
+  'Y y': { word: 'yoga', fa: 'یوگا', en: 'yoga' },
+};
+
 export function generateStaticParams() {
   return LOCALES.map(lang => ({ lang }));
 }
@@ -41,13 +57,12 @@ export default function RomanianAlphabetIndexPage({ params }: { params: { lang: 
   const letters = groups.flatMap(group => group.letters.map(([glyph, slug]) => {
     const sound = graphemes.find(entry => entry.slug === slug);
     const word = glyph === 'Î î' ? getWordById('w-inainte') : sound && getWordById(sound.exampleWordId);
-    // A shared lesson is a sound overview; individual examples are taught inside it.
-    const shared = slug === 'consoane';
+    const extra = additionalExamples[glyph];
     return {
       glyph, slug, category: group.category,
-      example: shared ? undefined : glyph === 'Î î' ? word?.lemma : sound?.exampleForm || word?.lemma,
-      translation: shared ? undefined : word?.translations[lang],
-      hint: shared ? (isFa ? 'درس مشترک همخوان‌ها' : 'Shared consonant lesson') : undefined,
+      example: extra?.word || (glyph === 'Î î' ? word?.lemma : sound?.exampleForm || word?.lemma),
+      translation: extra?.[lang] || word?.translations[lang],
+      hint: slug === 'consoane' ? (isFa ? 'درس مشترک همخوان‌ها' : 'Shared consonant lesson') : undefined,
     };
   }));
 
