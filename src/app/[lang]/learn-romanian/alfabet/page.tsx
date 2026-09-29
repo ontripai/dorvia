@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation';
 import { LOCALES } from '@/lib/locale-router';
 import { Language } from '@/types';
 import { getPublishedGraphemes, getWordById } from '@/lib/romanian/content';
-import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ArrowLeft, ArrowRight } from '@/components/Icons';
@@ -57,8 +56,8 @@ export async function generateMetadata({
       ? 'الفبا و تلفظ زبان رومانیایی | DORVIA'
       : 'Romanian Alphabet & Pronunciation | DORVIA',
     description: isFa
-      ? 'راهنمای جامع حروف، صداها و تلفظ صحیح زبان رومانیایی به همراه فایل‌های صوتی بومی.'
-      : 'Comprehensive guide to Romanian letters, sounds, and pronunciation with native audio.',
+      ? 'فهرست ۳۱ حرف رومانیایی، گروه‌حرف‌ها، واژه‌های نمونه و تمرین‌های نوشتاری.'
+      : 'The 31 Romanian letters, spelling patterns, example words, and writing practice.',
     robots: {
       index: false,
       follow: false,
@@ -114,24 +113,24 @@ export default function RomanianAlphabetIndexPage({
           </h1>
           <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed">
             {isFa
-              ? 'الفبای رومانیایی ۳۱ حرف دارد. فهرست کامل حروف را در پایین می‌بینید؛ ۲۴ درس صوتی کنونی چند حرف و الگوی نوشتاری را با هم آموزش می‌دهند. درس هر حرف با خود حرف یکی نیست و برخی بخش‌ها هنوز به نمونه‌های بیشتری نیاز دارند.'
-              : 'The Romanian alphabet has 31 letters. Below is the complete letter inventory and 24 current sound lessons; some lessons combine letters or spelling patterns and still need more examples.'}
+              ? 'الفبای رومانیایی ۳۱ حرف دارد. ۲۴ درسِ صدا و املا چند حرف یا الگوی نوشتاری را با هم آموزش می‌دهند. فایل‌های ضبط‌شدهٔ این بخش به دلیل گزارش ناهماهنگی با حروف موقتاً از پخش خارج شده‌اند.'
+              : 'The Romanian alphabet has 31 letters. The 24 sound and spelling lessons sometimes combine letters or patterns. Recorded clips have been paused after a report that they do not match the lessons.'}
           </p>
         </div>
 
         <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-300">
           <span className="inline-flex items-center px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 font-medium">
-            {isFa ? '۳۱ حرف · ۲۴ درس آوایی' : '31 letters · 24 sound lessons'}
+            {isFa ? '۳۱ حرف · ۲۴ درس صدا و املا' : '31 letters · 24 sound and spelling lessons'}
           </span>
-          <span className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-medium">
-            {isFa ? 'صوت آزاد و عمومی' : 'Free Public Audio'}
+          <span className="inline-flex items-center px-3 py-1 rounded-full bg-amber-500/20 text-amber-200 border border-amber-500/30 font-medium">
+            {isFa ? 'ضبط صوت در حال بررسی' : 'Recorded audio under review'}
           </span>
         </div>
       </div>
 
       <section className="space-y-4" aria-labelledby="letter-inventory">
         <h2 id="letter-inventory" className="text-2xl font-bold">{isFa ? 'فهرست کامل حروف' : 'Complete letter inventory'}</h2>
-        <p className="text-sm text-slate-700">{isFa ? 'ترتیب حروف مطابق DOOM3 است. روی هر حرف بزنید تا درس مرتبط را ببینید. چهار درس K/Q/W/Y فعلاً صوت ضبط‌شده ندارند و این موضوع در خود درس مشخص است.' : 'Letters follow DOOM3 alphabetical order. Open a lesson for each letter. The four K/Q/W/Y lessons currently have no verified recorded audio, as marked on each page.'}</p>
+        <p className="text-sm text-slate-700">{isFa ? 'ترتیب حروف مطابق DOOM3 است. برای هر حرف درس مرتبط را باز کنید؛ نمونه‌های ضبط‌شدهٔ این بخش تا پایان بررسی در دسترس نیستند.' : 'Letters follow DOOM3 alphabetical order. Open a lesson for each letter; recorded examples are unavailable pending review.'}</p>
         {alphabetGroups.map(group => <div key={group.en} className="rounded-2xl border border-slate-200 bg-white p-5 space-y-3">
           <h3 className="font-bold text-lg">{isFa ? group.fa : group.en} <span className="text-sm font-normal text-slate-500">({isFa ? toFaDigits(group.letters.length) : group.letters.length})</span></h3>
           <div className="flex flex-wrap gap-2" dir="ltr">{group.letters.map(([letter, slug]) => slug ? <Link key={letter} href={`/learn-romanian/alfabet/${slug}`} lang="ro" className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 font-semibold text-[#1554bd] hover:bg-blue-100">{letter}</Link> : <a key={letter} href="#borrowed-letters" lang="ro" className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 font-semibold text-slate-700 hover:bg-slate-100">{letter}</a>)}</div>
@@ -214,14 +213,9 @@ export default function RomanianAlphabetIndexPage({
                 )}
               </div>
 
-              {/* Bottom: Audio Island & Lesson Link */}
+              {/* Recorded clips are intentionally withheld pending content review. */}
               <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
-                <PronunciationAudio
-                  clips={g.audio}
-                  currentLang={currentLang}
-                  label={g.grapheme}
-                  variant="labelled"
-                />
+                <span className="text-xs text-amber-800">{isFa ? 'صوت در حال بررسی' : 'Audio under review'}</span>
                 <Link
                   href={`/learn-romanian/alfabet/${g.slug}`}
                   className="text-xs font-medium text-[#1554bd] dark:text-blue-400 hover:underline inline-flex items-center gap-1 shrink-0"

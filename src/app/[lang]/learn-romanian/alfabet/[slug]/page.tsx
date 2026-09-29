@@ -8,7 +8,6 @@ import {
   getGraphemeBySlug,
   getWordById,
 } from '@/lib/romanian/content';
-import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
 import { ABreveFoundationLesson } from '@/components/romanian/ABreveFoundationLesson';
 import { LetterPositionPractice } from '@/components/romanian/LetterPositionPractice';
 import { CGPatternPractice } from '@/components/romanian/CGPatternPractice';
@@ -58,8 +57,8 @@ export async function generateMetadata({
       ? `تلفظ حرف «${grapheme.grapheme}» در زبان رومانیایی | DORVIA`
       : `Pronunciation of "${grapheme.grapheme}" in Romanian | DORVIA`,
     description: isFa
-      ? `راهنمای شنیداری و تلفظ «${grapheme.grapheme}» در رومانیایی با واژه نمونه و دو فایل صوتی.`
-      : `Listening and pronunciation guide for Romanian spelling pattern "${grapheme.grapheme}" with an example word and two audio clips.`,
+      ? `راهنمای حرف «${grapheme.grapheme}» در رومانیایی با واژه نمونه و تمرین؛ صوت ضبط‌شده در انتظار بررسی است.`
+      : `Romanian spelling pattern "${grapheme.grapheme}" with example words and practice; recorded audio is pending review.`,
     robots: {
       index: false,
       follow: false,
@@ -115,7 +114,7 @@ export default function RomanianGraphemeDetailPage({
         currentLang={currentLang}
         disableJsonLd
       />
-      <ABreveFoundationLesson lang={currentLang} clips={grapheme.audio || []} />
+      <ABreveFoundationLesson lang={currentLang} />
     </main>;
   }
 
@@ -166,16 +165,9 @@ export default function RomanianGraphemeDetailPage({
             </p>
           </div>
 
-          {/* Client Audio Player Island */}
-          <div className="pt-2 flex justify-center">
-            <PronunciationAudio
-              clips={grapheme.audio}
-              currentLang={currentLang}
-              label={grapheme.grapheme}
-              variant="labelled"
-              className="gap-3"
-            />
-          </div>
+          <p className="text-sm text-amber-900 bg-amber-50 rounded-xl p-3">
+            {isFa ? 'فایل‌های صوتی این بخش به دلیل گزارش ناهماهنگی با حروف از پخش خارج شده‌اند. واژهٔ نمونه و تمرین‌های نوشتاری را دنبال کنید تا ضبط صحیح بررسی و جایگزین شود.' : 'The recordings are paused after a report that they do not match the letters. Use the example word and writing practice until corrected recordings are reviewed.'}
+          </p>
         </div>
 
         {/* Example Word Section */}

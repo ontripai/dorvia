@@ -1,9 +1,7 @@
 'use client';
 
 import React from 'react';
-import { PronunciationAudio } from './PronunciationAudio';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
-import type { AudioClip } from '@/lib/romanian/types';
 
 type Locale = 'fa' | 'en';
 type Phase = 0 | 1 | 2 | 3 | 4;
@@ -47,7 +45,7 @@ function normalize(value: string) {
   return value.normalize('NFC').toLocaleLowerCase('ro-RO').trim().replace(/[.!?،,]+$/g, '').replace(/\s+/g, ' ');
 }
 
-export function ABreveFoundationLesson({ lang, clips }: { lang: Locale; clips: AudioClip[] }) {
+export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
   const isFa = lang === 'fa';
   const [phase, setPhase] = React.useState<Phase>(0);
   const [round, setRound] = React.useState(0);
@@ -135,11 +133,10 @@ export function ABreveFoundationLesson({ lang, clips }: { lang: Locale; clips: A
       </button>)}
     </nav>
     {phase === 0 && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-5">
-      <h2 className="text-xl font-bold">{isFa ? 'دو گوینده، یک آوا' : 'Two voices, one sound'}</h2>
-      <p>{isFa ? 'به دو نمونهٔ صوتی ă گوش کنید. سپس جای آن را در واژهٔ «masă» ببینید و تکرار کنید. صدای ă را با a یکی نخوانید.' : 'Listen to two recordings of ă. Then find it in “masă” and repeat it. Do not confuse ă with a.'}</p>
+      <h2 className="text-xl font-bold">{isFa ? 'حرف و واژهٔ نمونه' : 'Letter and example word'}</h2>
+      <p>{isFa ? 'جای ă را در واژهٔ «masă» ببینید و تکرار کنید. آن را با a یکی نخوانید. صدای ضبط‌شدهٔ این درس تا بررسی مطابقت با حرف پخش نمی‌شود.' : 'Find ă in “masă” and practise it. Do not confuse it with a. The recording is unavailable until it is checked against the letter.'}</p>
       <div lang="ro" dir="ltr" className="text-4xl font-bold text-[#1554bd]">mas<span className="underline decoration-amber-500 decoration-4">ă</span></div>
-      <PronunciationAudio clips={clips} currentLang={lang} label="ă in masă" variant="labelled" />
-      <p className="text-sm text-slate-600">{isFa ? 'این دو فایل صوتی برای آوای پایه منتشر شده‌اند؛ پخش واژه‌ها به صدای رومانیایی مرورگر وابسته است.' : 'These two recordings demonstrate the foundation sound; word playback uses a Romanian browser voice.'}</p>
+      <p className="text-sm text-slate-600">{isFa ? 'پخش واژه‌ها در مرحلهٔ بعد به صدای رومانیایی مرورگر وابسته است و صدای تأییدشدهٔ گوینده نیست.' : 'Word playback in the next stage relies on a Romanian browser voice and is not a verified speaker recording.'}</p>
       <button type="button" onClick={() => move(1)} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-bold">{isFa ? 'کشف واژه‌ها' : 'Explore the words'}</button>
     </section>}
     {phase === 1 && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-5">
