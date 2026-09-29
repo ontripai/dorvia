@@ -51,6 +51,20 @@ function errorKind(value: string, expected: 'one' | 'two'): 'number' | 'plural' 
 }
 
 const target = { one: 'Un bilet, vă rog.', two: 'Două bilete, vă rog.' } as const;
+const wordNotes = [
+  { ro: 'Bună ziua', en: 'Good day / hello', fa: 'سلام رسمی در روز', ruleEn: 'A daytime greeting. Bună agrees with feminine zi; ziua is the definite form of zi (day). Learn the whole expression as a greeting.', ruleFa: 'سلام رایج و مؤدبانه در روز؛ bună صفت مؤنثِ هماهنگ با zi («روز») است و ziua صورت مشخصِ zi است. کل عبارت را یک سلام یاد بگیرید.', source: 'https://dexonline.ro/definitie/zi' },
+  { ro: 'un · două', en: 'one · two', fa: 'یک · دو', ruleEn: 'Bilet is neuter: un with the singular, două with the plural. Două is also used with feminine plural nouns; doi is used with masculine plural nouns.', ruleFa: 'bilet خنثی است: در مفرد un و در جمع două می‌آید. două با جمع مؤنث نیز می‌آید؛ doi برای جمع مذکر است.', source: 'https://dexonline.ro/definitie/doi' },
+  { ro: 'bilet · bilete', en: 'ticket · tickets', fa: 'بلیت · بلیت‌ها', ruleEn: 'Neuter noun; indefinite singular un bilet, plural două bilete. Definite: biletul, biletele. The lesson practises indefinite forms.', ruleFa: 'اسم خنثی؛ مفرد نامشخص un bilet و جمع نامشخص două bilete. صورت مشخص: biletul و biletele. در این جلسه صورت نامشخص را تمرین می‌کنید.', source: 'https://dexonline.ro/definitie/bilet/paradigma' },
+  { ro: 'sau', en: 'or', fa: 'یا', ruleEn: 'A conjunction joining alternatives: un bilet sau două? It does not change for gender or number.', ruleFa: 'حرف ربط میان دو گزینه: un bilet sau două؟ جنس و شمار نمی‌گیرد.', source: 'https://dexonline.ro/definitie/sau' },
+  { ro: 'vă', en: 'you (polite/plural)', fa: 'شما را / به شما (ضمیر مؤدبانه یا جمع)', ruleEn: 'An unstressed second-person plural object pronoun. In vă rog it addresses one person politely or several people; it precedes rog.', ruleFa: 'ضمیر مفعولیِ بی‌تکیهٔ دوم‌شخص جمع است. در vă rog برای خطاب مؤدبانه به یک نفر یا خطاب به چند نفر می‌آید و پیش از rog قرار می‌گیرد.', source: 'https://dexonline.ro/definitie/v%C4%83' },
+  { ro: 'rog', en: 'I ask / I request', fa: 'خواهش می‌کنم (صورت فعل)', ruleEn: 'First-person singular present of a ruga. Vă rog is a polite request (“please”); compare te rog for informal singular address.', ruleFa: 'اول‌شخص مفردِ زمان حال از فعل a ruga است. vă rog درخواست مؤدبانه («لطفاً») می‌سازد؛ برای خطاب خودمانی به یک نفر te rog می‌گوییم.', source: 'https://dexonline.ro/definitie/ruga/paradigma' },
+  { ro: 'Poftiți', en: 'Here you are / please', fa: 'بفرمایید', ruleEn: 'A polite imperative of a pofti for one respectfully addressed person or several people. Here the clerk offers the tickets; context gives the meaning.', ruleFa: 'وجه امریِ مؤدبانه از a pofti برای یک مخاطب محترمانه یا چند نفر است. اینجا فروشنده هنگام دادن بلیت می‌گوید «بفرمایید».', source: 'https://dexonline.ro/definitie/pofti%C8%9Bi' },
+  { ro: 'Mulțumesc', en: 'Thank you', fa: 'سپاسگزارم', ruleEn: 'First-person singular present of a mulțumi, used on its own as “thank you”. This verb does not change with the listener’s formality.', ruleFa: 'اول‌شخص مفردِ زمان حال از a mulțumi است و به‌تنهایی معنی «متشکرم» می‌دهد. صورت این فعل با رسمی یا خودمانی بودن مخاطب عوض نمی‌شود.', source: 'https://dexonline.ro/definitie/mul%C8%9Bumi/paradigma' },
+] as const;
+const microTasks = [
+  { fa: 'یک بلیت می‌خواهید. کدام عبارت درست است؟', en: 'You need one ticket. Which phrase is correct?', choices: ['Un bilet', 'O bilet', 'Un bilete'], answer: 'Un bilet', explanationFa: 'اسم خنثی در مفرد با un می‌آید و اسم به صورت bilet می‌ماند.', explanationEn: 'A neuter singular uses un and the singular bilet.' },
+  { fa: 'دو بلیت می‌خواهید. کدام عبارت درست است؟', en: 'You need two tickets. Which phrase is correct?', choices: ['Doi bilete', 'Două bilet', 'Două bilete'], answer: 'Două bilete', explanationFa: 'اسم خنثی در جمع با două می‌آید و bilet به bilete تبدیل می‌شود.', explanationEn: 'A neuter plural uses două and the plural bilete.' },
+] as const;
 const progressKey = 'dorvia:romanian:ticket-lesson:v1';
 
 export function TicketLesson({ lang }: { lang: Locale }) {
@@ -69,6 +83,8 @@ export function TicketLesson({ lang }: { lang: Locale }) {
   const [voiceAvailable, setVoiceAvailable] = React.useState(false);
   const [listening, setListening] = React.useState(false);
   const [voiceMessage, setVoiceMessage] = React.useState('');
+  const [microRound, setMicroRound] = React.useState(0);
+  const [microChoice, setMicroChoice] = React.useState<string | null>(null);
   const recognitionRef = React.useRef<RomanianRecognition | null>(null);
 
   React.useEffect(() => {
@@ -113,6 +129,8 @@ export function TicketLesson({ lang }: { lang: Locale }) {
     setFeedback(null);
     setHint(false);
     setTask(0);
+    setMicroRound(0);
+    setMicroChoice(null);
   }
 
   const expected: 'one' | 'two' = phase === 2 ? 'two' : task === 2 ? 'one' : 'two';
@@ -123,7 +141,7 @@ export function TicketLesson({ lang }: { lang: Locale }) {
       ? ['două bilete', 'două bilete, vă rog'].includes(submitted)
       : ['un bilet', 'un bilet, vă rog'].includes(submitted);
     if (valid) { setFeedback('correct'); return; }
-    const kind = errorKind(answer, expected);
+    const kind = errorKind(raw, expected);
     setFeedback(kind);
     setMistakes(old => old.includes(kind) ? old : [...old, kind]);
   }
@@ -256,7 +274,22 @@ export function TicketLesson({ lang }: { lang: Locale }) {
           <p className="mt-2" dir="ltr" lang="ro">bilet (neuter) · bilet / bilete · biletul / biletele</p>
           <p className="mt-1">{isFa ? 'صورت‌های مشخص در درس دیگری تمرین می‌شوند.' : 'The definite forms are practised in a later lesson.'}</p>
         </details>
-        <button type="button" onClick={() => move(2)} className="rounded-xl bg-[#1554bd] px-6 py-3 text-white font-bold">{isFa ? 'حالا از حافظه بگو' : 'Recall it now'}</button>
+        <div className="space-y-3">
+          <h3 className="font-bold text-lg">{isFa ? 'شناسنامهٔ واژه‌های همین گفت‌وگو' : 'Every word in this dialogue'}</h3>
+          <p className="text-sm text-slate-600">{isFa ? 'هر مورد را باز کنید و نقش آن را در جمله ببینید. صورت‌های فراتر از تمرین امروز برای شناخت آمده‌اند.' : 'Open each note to see its role in the sentence. Extra forms are for reference, not today’s quiz.'}</p>
+          <div className="grid gap-3 sm:grid-cols-2">{wordNotes.map(note => <details key={note.ro} className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm">
+            <summary className="cursor-pointer font-semibold"><span lang="ro" dir="ltr" className="inline-block">{note.ro}</span> · {isFa ? note.fa : note.en}</summary>
+            <p className="mt-3 leading-relaxed">{isFa ? note.ruleFa : note.ruleEn}</p>
+            <a href={note.source} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-[#1554bd] underline">{isFa ? 'منبع واژه' : 'Word source'}</a>
+          </details>)}</div>
+        </div>
+        <div className="rounded-xl border border-blue-200 bg-blue-50 p-4 space-y-3">
+          <h3 className="font-bold">{isFa ? `تمرین کوتاه ${microRound + 1} از ۲` : `Short practice ${microRound + 1} of 2`}</h3>
+          <p>{isFa ? microTasks[microRound].fa : microTasks[microRound].en}</p>
+          <div className="flex flex-wrap gap-2" lang="ro" dir="ltr">{microTasks[microRound].choices.map(choice => <button key={choice} type="button" aria-pressed={microChoice === choice} onClick={() => setMicroChoice(choice)} className={`rounded-lg border px-4 py-2 font-semibold ${microChoice === choice ? 'border-[#1554bd] bg-[#1554bd] text-white' : 'border-blue-200 bg-white text-slate-900'}`}>{choice}</button>)}</div>
+          {microChoice && <p role="status" className="text-sm">{microChoice === microTasks[microRound].answer ? isFa ? 'درست است. ' : 'Correct. ' : isFa ? 'یک بار دیگر دقت کنید: ' : 'Try again: '}{isFa ? microTasks[microRound].explanationFa : microTasks[microRound].explanationEn}</p>}
+          {microChoice === microTasks[microRound].answer && (microRound === 0 ? <button type="button" onClick={() => { setMicroRound(1); setMicroChoice(null); }} className="rounded-xl bg-[#1554bd] px-5 py-2 text-white font-bold">{isFa ? 'تمرین بعدی' : 'Next practice'}</button> : <button type="button" onClick={() => move(2)} className="rounded-xl bg-[#1554bd] px-5 py-2 text-white font-bold">{isFa ? 'حالا از حافظه بگو' : 'Recall it now'}</button>)}
+        </div>
       </section>}
 
       {(phase === 2 || phase === 3) && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-5">
