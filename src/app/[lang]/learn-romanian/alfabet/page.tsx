@@ -35,6 +35,13 @@ const soundGroups = [
   { fa: 'تغییر صدا در جایگاه واژه', en: 'Sound changes by word position', orders: [23] },
 ] as const;
 
+const pairedPatterns = [
+  { label: 'ce / ci', slug: 'ce-ci', fa: 'صدای «چ»؛ مانند ceai', en: 'ch sound; as in ceai' },
+  { label: 'che / chi', slug: 'che-chi', fa: 'صدای «ک»؛ h صدای جدا ندارد؛ مانند cheie', en: 'k sound; h has no separate sound; as in cheie' },
+  { label: 'ge / gi', slug: 'ge-gi', fa: 'صدای «ج»؛ مانند geam', en: 'j sound; as in geam' },
+  { label: 'ghe / ghi', slug: 'ghe-ghi', fa: 'صدای «گ»؛ h صدای جدا ندارد؛ مانند ghișeu', en: 'hard g; h has no separate sound; as in ghișeu' },
+] as const;
+
 export function generateStaticParams() {
   return LOCALES.map(lang => ({ lang }));
 }
@@ -131,6 +138,15 @@ export default function RomanianAlphabetIndexPage({
         </div>)}
         <p className="text-sm text-slate-600">{isFa ? 'ă، â، î، ș و ț حرف‌های مستقل‌اند؛ ce/ci و che/chi گروه‌حرف‌اند، نه حرف تازه. â و î یک آوا را با دو املا نشان می‌دهند. K/Q/W/Y بیشتر در وام‌واژه‌ها و نام‌ها دیده می‌شوند.' : 'Ă, Â, Î, Ș and Ț are separate letters. Ce/ci and che/chi are letter patterns, not extra letters. Â and Î usually represent the same sound. K/Q/W/Y occur mainly in loans and names.'}</p>
         <a href="https://doom.lingv.ro/studiu_introductiv_complet" target="_blank" rel="noopener noreferrer" className="text-sm text-[#1554bd] underline">{isFa ? 'منبع معیار: فرهنگ DOOM3 فرهنگستان رومانی' : 'Reference: Romanian Academy DOOM3'}</a>
+      </section>
+
+      <section className="space-y-3" aria-labelledby="paired-patterns">
+        <h2 id="paired-patterns" className="text-2xl font-bold">{isFa ? 'چهار گروه‌حرف ضروری C و G' : 'Four essential C/G letter patterns'}</h2>
+        <p className="text-sm text-slate-700">{isFa ? 'این‌ها حروف جدید الفبا نیستند. تفاوت ce با che و ge با ghe را بشنوید و در هر درس، واژه و قاعده را تمرین کنید.' : 'These are spelling patterns, not extra alphabet letters. Compare ce with che and ge with ghe, then practise the word and rule in each lesson.'}</p>
+        <div className="grid gap-3 sm:grid-cols-2">{pairedPatterns.map(pattern => <Link key={pattern.slug} href={`/learn-romanian/alfabet/${pattern.slug}`} className="rounded-xl border border-blue-200 bg-blue-50 p-4 hover:bg-blue-100">
+          <strong lang="ro" dir="ltr" className="block text-2xl text-[#1554bd]">{pattern.label}</strong>
+          <span className="text-sm text-slate-700">{isFa ? pattern.fa : pattern.en}</span>
+        </Link>)}</div>
       </section>
 
       <section id="borrowed-letters" className="rounded-2xl border border-slate-200 bg-white p-5 space-y-3">
