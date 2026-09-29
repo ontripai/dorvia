@@ -9,6 +9,32 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ArrowLeft, ArrowRight } from '@/components/Icons';
 
+// Official alphabetical order (DOOM3). A sound lesson can teach several letters,
+// and a letter can require more than one lesson; neither count is an alphabet count.
+const alphabetGroups = [
+  { fa: 'واکه‌ها', en: 'Vowels', letters: [
+    ['A a', 'a'], ['Ă ă', 'a-breve'], ['Â â', 'a-circ'], ['E e', 'e'],
+    ['I i', 'i'], ['Î î', 'a-circ'], ['O o', 'o'], ['U u', 'u'],
+  ] },
+  { fa: 'همخوان‌ها', en: 'Consonants', letters: [
+    ['B b', 'consoane'], ['C c', 'c-hard'], ['D d', 'consoane'], ['F f', 'consoane'],
+    ['G g', 'g-hard'], ['H h', 'h'], ['J j', 'j'], ['L l', 'consoane'],
+    ['M m', 'consoane'], ['N n', 'consoane'], ['P p', 'consoane'], ['R r', 'r'],
+    ['S s', 's'], ['Ș ș', 's-comma'], ['T t', 'consoane'], ['Ț ț', 't-comma'],
+    ['V v', 'v'], ['X x', 'x'], ['Z z', 'consoane'],
+  ] },
+  { fa: 'حروف بیشتر در وام‌واژه‌ها و نام‌ها', en: 'Letters common in loans and names', letters: [
+    ['K k', null], ['Q q', null], ['W w', null], ['Y y', null],
+  ] },
+] as const;
+
+const soundGroups = [
+  { fa: 'واکه‌ها و نشانه‌های ویژه', en: 'Vowels and distinctive letters', orders: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
+  { fa: 'صدای C و G با دو و سه حرف', en: 'C and G in two and three-letter patterns', orders: [11, 12, 13, 14, 15, 16] },
+  { fa: 'همخوان‌های دیگر', en: 'Other consonants', orders: [17, 18, 19, 20, 21, 22, 24] },
+  { fa: 'تغییر صدا در جایگاه واژه', en: 'Sound changes by word position', orders: [23] },
+] as const;
+
 export function generateStaticParams() {
   return LOCALES.map(lang => ({ lang }));
 }
@@ -81,14 +107,14 @@ export default function RomanianAlphabetIndexPage({
           </h1>
           <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed">
             {isFa
-              ? 'زبان رومانیایی خطی تا حد زیادی فونتیک (واج‌نگار) دارد؛ یعنی هر حرف غالباً همان‌گونه که نوشته می‌شود خوانده می‌شود. این ۲۴ درس پایه، تمامی صداهای خاص و حروف ترکیبی را با واژه نمونه و صوت دوگانه گویندگان بومی آموزش می‌دهند.'
-              : 'Romanian is largely phonetic: words are generally pronounced as they are written. These 24 foundation lessons cover all special characters and combinations with native dual audio recordings.'}
+              ? 'الفبای رومانیایی ۳۱ حرف دارد. فهرست کامل حروف را در پایین می‌بینید؛ ۲۴ درس صوتی کنونی چند حرف و الگوی نوشتاری را با هم آموزش می‌دهند. درس هر حرف با خود حرف یکی نیست و برخی بخش‌ها هنوز به نمونه‌های بیشتری نیاز دارند.'
+              : 'The Romanian alphabet has 31 letters. Below is the complete letter inventory and 24 current sound lessons; some lessons combine letters or spelling patterns and still need more examples.'}
           </p>
         </div>
 
         <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-300">
           <span className="inline-flex items-center px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 font-medium">
-            {isFa ? '۲۴ درس آوایی' : '24 Sound Lessons'}
+            {isFa ? '۳۱ حرف · ۲۴ درس آوایی' : '31 letters · 24 sound lessons'}
           </span>
           <span className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-medium">
             {isFa ? 'صوت آزاد و عمومی' : 'Free Public Audio'}
@@ -96,9 +122,23 @@ export default function RomanianAlphabetIndexPage({
         </div>
       </div>
 
-      {/* Graphemes Grid */}
+      <section className="space-y-4" aria-labelledby="letter-inventory">
+        <h2 id="letter-inventory" className="text-2xl font-bold">{isFa ? 'فهرست کامل حروف' : 'Complete letter inventory'}</h2>
+        <p className="text-sm text-slate-700">{isFa ? 'ترتیب حروف مطابق DOOM3 است. روی هر حرف بزنید تا درس صوتی مرتبط را ببینید؛ برای K، Q، W و Y هنوز درس صوتی جداگانه منتشر نشده است.' : 'Letters follow DOOM3 alphabetical order. Open a linked sound lesson; K, Q, W and Y do not yet have dedicated audio lessons.'}</p>
+        {alphabetGroups.map(group => <div key={group.en} className="rounded-2xl border border-slate-200 bg-white p-5 space-y-3">
+          <h3 className="font-bold text-lg">{isFa ? group.fa : group.en} <span className="text-sm font-normal text-slate-500">({isFa ? toFaDigits(group.letters.length) : group.letters.length})</span></h3>
+          <div className="flex flex-wrap gap-2" dir="ltr">{group.letters.map(([letter, slug]) => slug ? <Link key={letter} href={`/learn-romanian/alfabet/${slug}`} lang="ro" className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 font-semibold text-[#1554bd] hover:bg-blue-100">{letter}</Link> : <span key={letter} lang="ro" className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 font-semibold text-slate-700" title={isFa ? 'درس صوتی در دست تهیه' : 'Audio lesson pending'}>{letter}</span>)}</div>
+        </div>)}
+        <p className="text-sm text-slate-600">{isFa ? 'ă، â، î، ș و ț حرف‌های مستقل‌اند؛ ce/ci و che/chi گروه‌حرف‌اند، نه حرف تازه. â و î یک آوا را با دو املا نشان می‌دهند. K/Q/W/Y بیشتر در وام‌واژه‌ها و نام‌ها دیده می‌شوند.' : 'Ă, Â, Î, Ș and Ț are separate letters. Ce/ci and che/chi are letter patterns, not extra letters. Â and Î usually represent the same sound. K/Q/W/Y occur mainly in loans and names.'}</p>
+        <a href="https://doom.lingv.ro/studiu_introductiv_complet" target="_blank" rel="noopener noreferrer" className="text-sm text-[#1554bd] underline">{isFa ? 'منبع معیار: فرهنگ DOOM3 فرهنگستان رومانی' : 'Reference: Romanian Academy DOOM3'}</a>
+      </section>
+
+      <section className="space-y-6" aria-labelledby="sound-lessons">
+      <h2 id="sound-lessons" className="text-2xl font-bold">{isFa ? 'درس‌ها بر پایهٔ نوع صدا و ترکیب' : 'Lessons by sound and spelling pattern'}</h2>
+      {soundGroups.map(group => <div key={group.en} className="space-y-3">
+      <h3 className="text-lg font-bold">{isFa ? group.fa : group.en}</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {graphemes.map(g => {
+        {graphemes.filter(g => (group.orders as readonly number[]).includes(g.order)).map(g => {
           const exampleWord = getWordById(g.exampleWordId);
           const displayWord = g.exampleForm || exampleWord?.lemma || '';
 
@@ -169,7 +209,8 @@ export default function RomanianAlphabetIndexPage({
             </div>
           );
         })}
-      </div>
+      </div></div>)}
+      </section>
     </div>
   );
 }
