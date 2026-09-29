@@ -12,6 +12,8 @@ import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
 import { ABreveFoundationLesson } from '@/components/romanian/ABreveFoundationLesson';
 import { LetterPositionPractice } from '@/components/romanian/LetterPositionPractice';
 import { CGPatternPractice } from '@/components/romanian/CGPatternPractice';
+import { BasicConsonantPractice } from '@/components/romanian/BasicConsonantPractice';
+import { ConsonantWordPractice } from '@/components/romanian/ConsonantWordPractice';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ArrowLeft, ArrowRight, ChevronRight, ChevronLeft } from '@/components/Icons';
@@ -250,6 +252,8 @@ export default function RomanianGraphemeDetailPage({
       </div>
       <LetterPositionPractice slug={grapheme.slug} lang={currentLang} />
       {grapheme.order >= 11 && grapheme.order <= 16 && <CGPatternPractice lang={currentLang} />}
+      {grapheme.slug === 'consoane' && <BasicConsonantPractice lang={currentLang} />}
+      <ConsonantWordPractice slug={grapheme.slug} lang={currentLang} />
     </div>
   );
 }
