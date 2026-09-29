@@ -120,7 +120,7 @@ export default function RomanianGraphemeDetailPage({
   }
 
   return (
-    <div className="space-y-8 animate-fadeIn max-w-[960px] mx-auto px-4 py-8">
+    <main className="space-y-6 animate-fadeIn max-w-[960px] mx-auto px-4 py-8">
       {/* Breadcrumb Navigation */}
       <Breadcrumb
         items={[
@@ -133,8 +133,16 @@ export default function RomanianGraphemeDetailPage({
         disableJsonLd={true}
       />
 
+      <div className="rounded-2xl border border-blue-100 bg-blue-50 p-5 sm:p-6">
+        <p className="text-xs font-bold uppercase tracking-wide text-[#1554bd]">{isFa ? 'هدف این درس' : 'Your goal'}</p>
+        <p className="mt-2 text-sm leading-7 text-slate-700">{isFa ? 'این الگو را در واژهٔ نمونه پیدا کنید، قاعدهٔ آن را بخوانید و در تمرین‌های پایین بنویسید یا بگویید. می‌توانید هر بخش را دوباره انجام دهید.' : 'Find this pattern in the example, read its rule, then write or say it in the practice below. You can repeat any part.'}</p>
+        <div className="mt-4 flex flex-wrap gap-2 text-xs font-semibold text-[#1554bd]">
+          {(isFa ? ['۱. دیدن الگو', '۲. بررسی واژه', '۳. تمرین'] : ['1. See the pattern', '2. Explore a word', '3. Practise']).map(step => <span key={step} className="rounded-full bg-white px-3 py-1.5">{step}</span>)}
+        </div>
+      </div>
+
       {/* Main Lesson Card */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-8 sm:p-12 shadow-md space-y-8">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-6 sm:p-10 shadow-md space-y-7">
         {/* Top bar: back to alphabet and lesson number */}
         <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
           <Link
@@ -150,9 +158,9 @@ export default function RomanianGraphemeDetailPage({
         </div>
 
         {/* Center: Large Letter & Audio Island */}
-        <div className="text-center py-6 space-y-6">
-          <div className="inline-flex items-center justify-center w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/50 shadow-inner">
-            <span className="text-5xl sm:text-6xl font-extrabold text-[#1554bd] dark:text-blue-400 font-heading">
+        <div className="text-center py-3 space-y-5">
+          <div className="inline-flex items-center justify-center min-w-28 min-h-28 px-5 sm:min-w-36 sm:min-h-36 rounded-3xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/50 shadow-inner">
+            <span dir="ltr" lang="ro" className="text-4xl sm:text-5xl font-extrabold text-[#1554bd] dark:text-blue-400 font-heading">
               {grapheme.grapheme}
             </span>
           </div>
@@ -166,10 +174,12 @@ export default function RomanianGraphemeDetailPage({
             </p>
           </div>
 
-          <p className="text-sm text-amber-900 bg-amber-50 rounded-xl p-3">
-            {isFa ? 'فایل‌های صوتی قدیمی کنار گذاشته شده‌اند. دکمهٔ زیر فقط واژهٔ نمونه را با صدای مصنوعی رومانیایی مرورگر می‌خواند، نه صدای مستقل حرف؛ این صدا هنوز تأیید انسانی نشده است.' : 'Old recordings are not used. The button reads only the example word using a Romanian browser voice, not the isolated letter; this voice is not human-verified.'}
-          </p>
-          {displayWord && <div className="flex justify-center"><PronunciationAudio currentLang={currentLang} label={displayWord} /></div>}
+          {displayWord && <div className="inline-flex flex-col items-center gap-2 rounded-2xl bg-slate-50 px-5 py-4">
+            <span className="text-xs font-semibold text-slate-600">{isFa ? 'شنیدن واژهٔ نمونه' : 'Hear the example word'}</span>
+            <strong dir="ltr" lang="ro" className="text-xl text-slate-900">{displayWord}</strong>
+            <PronunciationAudio currentLang={currentLang} label={displayWord} />
+            <span className="max-w-xs text-xs leading-5 text-slate-500">{isFa ? 'صدای مصنوعی مرورگر؛ تلفظ مستقل حرف یا ضبط تأییدشده نیست.' : 'Browser synthesis; not an isolated letter or verified recording.'}</span>
+          </div>}
         </div>
 
         {/* Example Word Section */}
@@ -226,8 +236,17 @@ export default function RomanianGraphemeDetailPage({
           </div>
         )}
 
-        {/* Bottom Navigation: Prev / Next Grapheme */}
-        <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+      </div>
+      <section aria-labelledby="practice-heading" className="space-y-4">
+        <div><p className="text-xs font-bold uppercase tracking-wide text-[#1554bd]">{isFa ? 'بخش تمرین' : 'Practice'}</p><h2 id="practice-heading" className="mt-1 text-2xl font-extrabold text-slate-900">{isFa ? 'حالا نوبت شماست' : 'Now it is your turn'}</h2></div>
+        <LetterPositionPractice slug={grapheme.slug} lang={currentLang} />
+        {grapheme.order >= 11 && grapheme.order <= 16 && <CGPatternPractice slug={grapheme.slug as 'c-hard' | 'ce-ci' | 'che-chi' | 'g-hard' | 'ge-gi' | 'ghe-ghi'} lang={currentLang} />}
+        {grapheme.slug === 'consoane' && <BasicConsonantPractice lang={currentLang} />}
+        <ConsonantWordPractice slug={grapheme.slug} lang={currentLang} />
+      </section>
+      <nav aria-label={isFa ? 'درس قبلی و بعدی' : 'Previous and next lesson'} className="rounded-2xl border border-slate-200 bg-white p-5">
+        <p className="mb-4 text-sm font-bold text-slate-800">{isFa ? 'ادامهٔ مسیر' : 'Continue learning'}</p>
+        <div className="flex items-center justify-between gap-4">
           {prevGrapheme ? (
             <Link
               href={`/learn-romanian/alfabet/${prevGrapheme.slug}`}
@@ -256,11 +275,8 @@ export default function RomanianGraphemeDetailPage({
             <div />
           )}
         </div>
-      </div>
-      <LetterPositionPractice slug={grapheme.slug} lang={currentLang} />
-      {grapheme.order >= 11 && grapheme.order <= 16 && <CGPatternPractice slug={grapheme.slug as 'c-hard' | 'ce-ci' | 'che-chi' | 'g-hard' | 'ge-gi' | 'ghe-ghi'} lang={currentLang} />}
-      {grapheme.slug === 'consoane' && <BasicConsonantPractice lang={currentLang} />}
-      <ConsonantWordPractice slug={grapheme.slug} lang={currentLang} />
-    </div>
+        <Link href="/learn-romanian/alfabet" className="mt-4 inline-block text-sm font-semibold text-[#1554bd] hover:underline">{isFa ? 'بازگشت به همهٔ حروف' : 'Back to all letters'}</Link>
+      </nav>
+    </main>
   );
 }
