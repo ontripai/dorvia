@@ -65,6 +65,25 @@ export const RomanianHub: React.FC<RomanianHubProps> = ({
           : 'About 15 minutes per lesson is a suggestion. If you have more time today, choose another lesson or repeat a practice session; there is no daily lesson limit.'}
       </p>
 
+      <section aria-labelledby="ticket-path-heading" className="space-y-4">
+        <div>
+          <h2 id="ticket-path-heading" className="text-xl sm:text-2xl font-extrabold text-[#142033]">{isFa ? 'مسیر مکالمهٔ بلیت' : 'The ticket conversation path'}</h2>
+          <p className="text-sm text-slate-600">{isFa ? 'هر درس مستقل و قابل تکرار است. برای ادامه در همان روز محدودیتی ندارید.' : 'Each lesson can be repeated. Continue on the same day whenever you like.'}</p>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-3">
+          {[
+            { href: '/learn-romanian/lectie/bilet', fa: '۱. یک یا دو بلیت؟', en: '1. One or two tickets?', detailFa: 'تعداد و درخواست مؤدبانه', detailEn: 'Quantity and a polite request' },
+            { href: '/learn-romanian/lectie/autobuz-tramvai', fa: '۲. اتوبوس و تراموا', en: '2. Bus and tram', detailFa: 'پرسیدن دربارهٔ اعتبار بلیت', detailEn: 'Ask whether a ticket is valid' },
+            { href: '/learn-romanian/lectie/metrou', fa: '۳. متروی بخارست', en: '3. Bucharest metro', detailFa: 'ده سفر یا اشتراک ماهانه', detailEn: 'Ten journeys or a monthly pass' },
+          ].map(lesson => <Link key={lesson.href} href={lesson.href} className="rounded-2xl border border-slate-200 bg-white p-5 hover:border-[#1554bd] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1554bd]">
+            <h3 className="font-bold text-[#142033]">{isFa ? lesson.fa : lesson.en}</h3>
+            <p className="text-sm text-slate-600 mt-1">{isFa ? lesson.detailFa : lesson.detailEn}</p>
+            <span className="text-sm font-semibold text-[#1554bd] mt-3 inline-block">{isFa ? 'ورود به درس' : 'Open lesson'}</span>
+          </Link>)}
+        </div>
+        <p className="text-sm text-slate-600">{isFa ? 'در ادامهٔ این مسیر: اتوبوس بین‌شهری، سینما، تئاتر و تله‌کابین؛ هر کدام با موقعیت و واژگان مخصوص خود.' : 'Planned next: intercity buses, cinema, theatre, and cable cars, each with its own dialogue and vocabulary.'}</p>
+      </section>
+
       {/*
         ورودِ تمرین روزانه (dre-p188).
 
