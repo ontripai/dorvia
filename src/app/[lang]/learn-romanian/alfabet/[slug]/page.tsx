@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
 import { LOCALES } from '@/lib/locale-router';
 import { Language } from '@/types';
 import {
@@ -166,8 +167,9 @@ export default function RomanianGraphemeDetailPage({
           </div>
 
           <p className="text-sm text-amber-900 bg-amber-50 rounded-xl p-3">
-            {isFa ? 'فایل‌های صوتی این بخش به دلیل گزارش ناهماهنگی با حروف از پخش خارج شده‌اند. واژهٔ نمونه و تمرین‌های نوشتاری را دنبال کنید تا ضبط صحیح بررسی و جایگزین شود.' : 'The recordings are paused after a report that they do not match the letters. Use the example word and writing practice until corrected recordings are reviewed.'}
+            {isFa ? 'فایل‌های صوتی قدیمی کنار گذاشته شده‌اند. دکمهٔ زیر فقط واژهٔ نمونه را با صدای مصنوعی رومانیایی مرورگر می‌خواند، نه صدای مستقل حرف؛ این صدا هنوز تأیید انسانی نشده است.' : 'Old recordings are not used. The button reads only the example word using a Romanian browser voice, not the isolated letter; this voice is not human-verified.'}
           </p>
+          {displayWord && <div className="flex justify-center"><PronunciationAudio currentLang={currentLang} label={displayWord} /></div>}
         </div>
 
         {/* Example Word Section */}

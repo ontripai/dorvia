@@ -14,7 +14,6 @@ import {
   loadLearnerSnapshot,
   startSession,
 } from '@/lib/romanian/learnerStore';
-import { CORE_AUDIO } from '@/content/romanian/audio-manifest';
 import {
   PracticeSession,
   PracticeQuestion,
@@ -132,7 +131,6 @@ export default async function RomanianPracticePage({
         // پاسخ درست عمداً فرستاده نمی‌شود.
         options: q.options.map(o => ({ id: o.id, fa: o.fa, en: o.en })),
         isNew,
-        clips: CORE_AUDIO[q.itemId],
       });
     }
   }

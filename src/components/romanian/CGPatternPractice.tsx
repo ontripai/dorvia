@@ -47,6 +47,6 @@ export function CGPatternPractice({ slug, lang }: { slug: keyof typeof questions
       {second && round === 1 && <button type="button" onClick={() => { setRound(0); setChoice(null); }} className="rounded-lg border border-[#1554bd] px-4 py-2 text-[#1554bd]">{isFa ? 'تکرار از ابتدا' : 'Repeat from start'}</button>}
     </div>
     <SpokenWordCheck key={current.word} word={current.word} lang={lang} />
-    <p className="text-xs text-slate-600">{isFa ? 'واژه‌های این نقشه برای مقایسهٔ املا و صدا هستند؛ صوت ضبط‌شدهٔ هر صفحه مربوط به نمونهٔ همان درس است. تلفظ وام‌واژه‌ها را جدا بررسی می‌کنیم.' : 'These words compare spelling and sound; each page’s recorded clip belongs to its own lesson sample. Loans need separate pronunciation review.'}</p>
+    <p className="text-xs text-slate-600">{isFa ? 'واژه‌ها برای مقایسهٔ املا و صدا هستند. دکمهٔ پخش فقط واژهٔ نمونه را با صدای مصنوعی مرورگر می‌خواند؛ تلفظ وام‌واژه‌ها بررسی جداگانه می‌خواهد.' : 'These words compare spelling and sound. Playback reads the example word using browser synthesis; loans need separate pronunciation review.'}</p>
   </section>;
 }

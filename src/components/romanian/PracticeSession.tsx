@@ -233,16 +233,13 @@ export function PracticeSession({
         >
           <PhraseText text={q.promptRo} variant="ro" lang={currentLang} />
         </div>
-        {q.clips && q.clips.length > 0 && (
-          <div className="flex justify-center">
+        <div className="flex justify-center">
             <PronunciationAudio
-              clips={q.clips}
               currentLang={currentLang}
               label={q.promptRo}
               variant="compact"
             />
-          </div>
-        )}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

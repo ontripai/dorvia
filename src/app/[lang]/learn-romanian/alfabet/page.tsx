@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
 import { LOCALES } from '@/lib/locale-router';
 import { Language } from '@/types';
 import { getPublishedGraphemes, getWordById } from '@/lib/romanian/content';
@@ -113,8 +114,8 @@ export default function RomanianAlphabetIndexPage({
           </h1>
           <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed">
             {isFa
-              ? 'الفبای رومانیایی ۳۱ حرف دارد. ۲۴ درسِ صدا و املا چند حرف یا الگوی نوشتاری را با هم آموزش می‌دهند. فایل‌های ضبط‌شدهٔ این بخش به دلیل گزارش ناهماهنگی با حروف موقتاً از پخش خارج شده‌اند.'
-              : 'The Romanian alphabet has 31 letters. The 24 sound and spelling lessons sometimes combine letters or patterns. Recorded clips have been paused after a report that they do not match the lessons.'}
+              ? 'الفبای رومانیایی ۳۱ حرف دارد. ۲۴ درسِ صدا و املا چند حرف یا الگوی نوشتاری را با هم آموزش می‌دهند. فایل‌های صوتی قدیمی استفاده نمی‌شوند؛ پخش واژهٔ نمونه با صدای مصنوعی رومانیایی مرورگر است.'
+              : 'The Romanian alphabet has 31 letters. The 24 sound and spelling lessons sometimes combine letters or patterns. Old recordings are not used; example words use a Romanian browser voice.'}
           </p>
         </div>
 
@@ -123,14 +124,14 @@ export default function RomanianAlphabetIndexPage({
             {isFa ? '۳۱ حرف · ۲۴ درس صدا و املا' : '31 letters · 24 sound and spelling lessons'}
           </span>
           <span className="inline-flex items-center px-3 py-1 rounded-full bg-amber-500/20 text-amber-200 border border-amber-500/30 font-medium">
-            {isFa ? 'ضبط صوت در حال بررسی' : 'Recorded audio under review'}
+            {isFa ? 'صدای واژه با مرورگر · تأییدنشده' : 'Browser word voice · unverified'}
           </span>
         </div>
       </div>
 
       <section className="space-y-4" aria-labelledby="letter-inventory">
         <h2 id="letter-inventory" className="text-2xl font-bold">{isFa ? 'فهرست کامل حروف' : 'Complete letter inventory'}</h2>
-        <p className="text-sm text-slate-700">{isFa ? 'ترتیب حروف مطابق DOOM3 است. برای هر حرف درس مرتبط را باز کنید؛ نمونه‌های ضبط‌شدهٔ این بخش تا پایان بررسی در دسترس نیستند.' : 'Letters follow DOOM3 alphabetical order. Open a lesson for each letter; recorded examples are unavailable pending review.'}</p>
+        <p className="text-sm text-slate-700">{isFa ? 'ترتیب حروف مطابق DOOM3 است. دکمه‌های پخش پایین، واژهٔ نوشته‌شدهٔ همان کارت را با صدای رومانیایی مرورگر می‌خوانند؛ تلفظ مستقل حرف یا ضبط تأییدشده نیستند.' : 'Letters follow DOOM3 alphabetical order. Each play button reads that card’s displayed word with a Romanian browser voice; it is not an isolated letter or verified recording.'}</p>
         {alphabetGroups.map(group => <div key={group.en} className="rounded-2xl border border-slate-200 bg-white p-5 space-y-3">
           <h3 className="font-bold text-lg">{isFa ? group.fa : group.en} <span className="text-sm font-normal text-slate-500">({isFa ? toFaDigits(group.letters.length) : group.letters.length})</span></h3>
           <div className="flex flex-wrap gap-2" dir="ltr">{group.letters.map(([letter, slug]) => slug ? <Link key={letter} href={`/learn-romanian/alfabet/${slug}`} lang="ro" className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 font-semibold text-[#1554bd] hover:bg-blue-100">{letter}</Link> : <a key={letter} href="#borrowed-letters" lang="ro" className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 font-semibold text-slate-700 hover:bg-slate-100">{letter}</a>)}</div>
@@ -213,9 +214,9 @@ export default function RomanianAlphabetIndexPage({
                 )}
               </div>
 
-              {/* Recorded clips are intentionally withheld pending content review. */}
+              {/* Each browser voice reads this card's word, never an old clip. */}
               <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
-                <span className="text-xs text-amber-800">{isFa ? 'صوت در حال بررسی' : 'Audio under review'}</span>
+                {displayWord && <PronunciationAudio currentLang={currentLang} label={displayWord} variant="compact" />}
                 <Link
                   href={`/learn-romanian/alfabet/${g.slug}`}
                   className="text-xs font-medium text-[#1554bd] dark:text-blue-400 hover:underline inline-flex items-center gap-1 shrink-0"

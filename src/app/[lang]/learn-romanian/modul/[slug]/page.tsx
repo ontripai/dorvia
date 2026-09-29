@@ -19,7 +19,6 @@ import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
 import { UsageNoteText } from '@/components/romanian/UsageNoteText';
 import { PhraseText } from '@/components/romanian/PhraseText';
 import { spokenForm } from '@/lib/romanian/placeholders';
-import { CORE_AUDIO } from '@/content/romanian/audio-manifest';
 
 export function generateStaticParams() {
   const stations = getPublishedStations();
@@ -167,7 +166,6 @@ function WordCardBlock({
         </div>
 
         <PronunciationAudio
-          clips={CORE_AUDIO[word.id]}
           currentLang={currentLang}
           label={word.lemma}
           variant="compact"
@@ -229,7 +227,6 @@ function WordCardBlock({
                   </div>
                   <div className="text-[11px] text-slate-500">{dep.translations.en}</div>
                   <PronunciationAudio
-                    clips={CORE_AUDIO[dep.id]}
                     currentLang={currentLang}
                     label={dep.lemma}
                     variant="compact"
@@ -283,7 +280,6 @@ function PhraseCardBlock({
         </div>
 
         <PronunciationAudio
-          clips={CORE_AUDIO[phrase.id]}
           currentLang={currentLang}
           label={spokenForm(phrase.text.ro)}
           variant="compact"
