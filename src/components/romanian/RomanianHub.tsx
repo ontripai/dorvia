@@ -59,6 +59,12 @@ export const RomanianHub: React.FC<RomanianHubProps> = ({
         </div>
       </Link>
 
+      <p className="text-sm text-slate-700 leading-relaxed">
+        {isFa
+          ? 'حدود ۱۵ دقیقه برای هر جلسه پیشنهاد می‌شود. اگر امروز فرصت بیشتری دارید، پس از هر درس می‌توانید درس دیگری انتخاب کنید یا همان تمرین را تکرار کنید؛ محدودیت روزانه‌ای وجود ندارد.'
+          : 'About 15 minutes per lesson is a suggestion. If you have more time today, choose another lesson or repeat a practice session; there is no daily lesson limit.'}
+      </p>
+
       {/*
         ورودِ تمرین روزانه (dre-p188).
 
