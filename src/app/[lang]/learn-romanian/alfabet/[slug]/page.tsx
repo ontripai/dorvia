@@ -14,9 +14,15 @@ import { LetterPositionPractice } from '@/components/romanian/LetterPositionPrac
 import { CGPatternPractice } from '@/components/romanian/CGPatternPractice';
 import { BasicConsonantPractice } from '@/components/romanian/BasicConsonantPractice';
 import { ConsonantWordPractice } from '@/components/romanian/ConsonantWordPractice';
+import { LoanLetterLesson } from '@/components/romanian/LoanLetterLesson';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ArrowLeft, ArrowRight, ChevronRight, ChevronLeft } from '@/components/Icons';
+
+const LOAN_LETTER_SLUGS = ['k', 'q', 'w', 'y'] as const;
+function isLoanLetterSlug(slug: string): slug is typeof LOAN_LETTER_SLUGS[number] {
+  return LOAN_LETTER_SLUGS.some(letter => letter === slug);
+}
 
 export function generateStaticParams() {
   const published = getPublishedGraphemes();
@@ -25,6 +31,7 @@ export function generateStaticParams() {
     for (const g of published) {
       params.push({ lang, slug: g.slug });
     }
+    for (const slug of LOAN_LETTER_SLUGS) params.push({ lang, slug });
   }
   return params;
 }
@@ -35,6 +42,9 @@ export async function generateMetadata({
   params: { lang: string; slug: string };
 }): Promise<Metadata> {
   const grapheme = getGraphemeBySlug(params.slug);
+  if (isLoanLetterSlug(params.slug)) {
+    return { title: params.lang === 'fa' ? `حرف ${params.slug.toUpperCase()} در الفبای رومانیایی | DORVIA` : `Romanian letter ${params.slug.toUpperCase()} | DORVIA`, robots: { index: false, follow: false } };
+  }
   if (!grapheme) {
     return {
       title: 'Not Found',
@@ -66,6 +76,9 @@ export default function RomanianGraphemeDetailPage({
     notFound();
   }
 
+  if (isLoanLetterSlug(params.slug)) {
+    return <main className="max-w-4xl mx-auto px-4 py-8"><LoanLetterLesson slug={params.slug} lang={params.lang as 'fa' | 'en'} /></main>;
+  }
   const grapheme = getGraphemeBySlug(params.slug);
   if (!grapheme) {
     notFound();
@@ -251,7 +264,7 @@ export default function RomanianGraphemeDetailPage({
         </div>
       </div>
       <LetterPositionPractice slug={grapheme.slug} lang={currentLang} />
-      {grapheme.order >= 11 && grapheme.order <= 16 && <CGPatternPractice lang={currentLang} />}
+      {grapheme.order >= 11 && grapheme.order <= 16 && <CGPatternPractice slug={grapheme.slug as 'c-hard' | 'ce-ci' | 'che-chi' | 'g-hard' | 'ge-gi' | 'ghe-ghi'} lang={currentLang} />}
       {grapheme.slug === 'consoane' && <BasicConsonantPractice lang={currentLang} />}
       <ConsonantWordPractice slug={grapheme.slug} lang={currentLang} />
     </div>

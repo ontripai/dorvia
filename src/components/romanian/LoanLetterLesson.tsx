@@ -1,0 +1,45 @@
+'use client';
+
+import React from 'react';
+import { LocalizedLink as Link } from '@/components/LocalizedLink';
+import { SpokenWordCheck } from './SpokenWordCheck';
+
+const lessons = {
+  k: { letter: 'K k', name: 'ka / kapa', word: 'kilometru', fa: 'کیلومتر', en: 'kilometre', ruleFa: 'اسم مذکر: un kilometru، جمع kilometri، صورت مشخص kilometrul. در این واژه k صدای «ک» دارد.', ruleEn: 'Masculine noun: un kilometru, plural kilometri, definite kilometrul. Here k has a k sound.', source: 'https://dexonline.ro/definitie/kilometru', useFa: 'برای فاصلهٔ مسیر و سفر به کار می‌رود.', useEn: 'Used for travel distance.' },
+  q: { letter: 'Q q', name: 'kü', word: 'quasar', fa: 'اختروش', en: 'quasar', ruleFa: 'اسم مذکرِ اصطلاح علمی: un quasar، جمع quasari، صورت مشخص quasarul. آغاز آن در فرهنگ «cua-» خوانده شده است؛ Q را در همهٔ وام‌واژه‌ها یکسان نخوانید.', ruleEn: 'Masculine scientific noun: un quasar, plural quasari, definite quasarul. Dictionary pronunciation begins “cua-”; Q in loans is not universally pronounced alike.', source: 'https://dexonline.ro/definitie/quasar/definitii', useFa: 'این واژه تخصصی است؛ شناخت حرف هدف درس است، نه حفظ واژه برای مکالمهٔ روزانه.', useEn: 'This is a specialist word; the goal is recognising the letter, not daily conversation vocabulary.' },
+  w: { letter: 'W w', name: 'dublu ve', word: 'weekend', fa: 'آخر هفته', en: 'weekend', ruleFa: 'اسم خنثی: un weekend، جمع weekenduri، صورت مشخص weekendul. تلفظ این واژه از انگلیسی آمده است؛ W در همهٔ وام‌واژه‌ها یک صدای ثابت ندارد.', ruleEn: 'Neuter noun: un weekend, plural weekenduri, definite weekendul. This loan retains an English-influenced pronunciation; W varies across loans.', source: 'https://dexonline.ro/intrare/weekend/187448', useFa: 'در برنامه‌ریزی آخر هفته کاربرد دارد.', useEn: 'Useful for weekend plans.' },
+  y: { letter: 'Y y', name: 'i grec', word: 'yoga', fa: 'یوگا', en: 'yoga', ruleFa: 'اسم مؤنث برای فعالیت/مکتب یوگا؛ در این جلسه جمع ساختگی برای آن تمرین نمی‌کنیم. تلفظ Y در وام‌واژه‌ها را باید برای هر واژه جدا بررسی کرد.', ruleEn: 'Feminine noun for yoga as an activity/tradition; no artificial plural is practised. Check Y pronunciation word by word in loans.', source: 'https://dexonline.ro/definitie/yoga/821328', useFa: 'در باشگاه و برنامهٔ ورزش دیده می‌شود.', useEn: 'Seen in fitness and class schedules.' },
+} as const;
+
+export type LoanLetterSlug = keyof typeof lessons;
+
+export function LoanLetterLesson({ slug, lang }: { slug: LoanLetterSlug; lang: 'fa' | 'en' }) {
+  const item = lessons[slug];
+  const isFa = lang === 'fa';
+  const stages = isFa ? ['شنیدن', 'کشف واژه', 'یادآوری', 'گفتن', 'نتیجه'] : ['Listen', 'Discover', 'Recall', 'Speak', 'Result'];
+  const [stage, setStage] = React.useState(0);
+  const [answer, setAnswer] = React.useState('');
+  const [checked, setChecked] = React.useState(false);
+  const [written, setWritten] = React.useState(false);
+  const [audioNotice, setAudioNotice] = React.useState('');
+  const correct = answer.normalize('NFC').trim().toLocaleLowerCase('ro-RO') === item.word;
+
+  function speak() {
+    const voice = window.speechSynthesis?.getVoices().find(v => v.lang.toLowerCase().startsWith('ro'));
+    if (!voice) { setAudioNotice(isFa ? 'صدای رومانیایی مرورگر در دسترس نیست. متن و تمرین نوشتاری را دنبال کنید.' : 'No Romanian browser voice is available. Continue with the text and writing task.'); return; }
+    const utterance = new SpeechSynthesisUtterance(item.word);
+    utterance.voice = voice; utterance.lang = 'ro-RO'; utterance.rate = 0.8;
+    window.speechSynthesis.cancel(); setAudioNotice(''); window.speechSynthesis.speak(utterance);
+  }
+
+  return <div className="space-y-6" dir={isFa ? 'rtl' : 'ltr'}>
+    <header className="dark-hero-panel rounded-3xl p-7 text-white space-y-2"><p className="text-blue-100">{isFa ? 'الفبا · حروف وام‌واژه‌ها' : 'Alphabet · letters in loans'}</p><h1 className="text-3xl font-bold" lang="ro" dir="ltr">{item.letter}</h1><p>{isFa ? `نام حرف: ${item.name}` : `Letter name: ${item.name}`}</p></header>
+    <nav aria-label={isFa ? 'مراحل درس' : 'Lesson stages'} className="flex flex-wrap gap-2">{stages.map((name, index) => <button key={name} type="button" onClick={() => { setStage(index); setChecked(false); }} aria-current={stage === index ? 'step' : undefined} className={`rounded-full px-3 py-2 text-sm font-semibold ${stage === index ? 'bg-[#1554bd] text-white' : 'bg-slate-100 text-slate-700'}`}>{index + 1}. {name}</button>)}</nav>
+    {stage === 0 && <section className="rounded-2xl bg-white border border-slate-200 p-6 space-y-4"><h2 className="text-xl font-bold">{isFa ? 'واژه را ببینید و بشنوید' : 'See and hear the word'}</h2><p lang="ro" dir="ltr" className="text-3xl font-bold text-[#1554bd]">{item.word}</p><p>{isFa ? item.fa : item.en}</p><button type="button" onClick={speak} className="rounded-xl bg-[#1554bd] px-4 py-2 text-white">{isFa ? 'پخش صدای رومانیایی مرورگر' : 'Play Romanian browser voice'}</button><p className="text-xs text-slate-600">{isFa ? 'برای این واژه فایل ضبط‌شده و تأییدشده نداریم؛ صدای مصنوعی مرورگر ممکن است در وام‌واژه‌ها دقیق نباشد.' : 'There is no verified recorded clip for this word; browser synthesis may mispronounce loans.'}</p><button type="button" onClick={() => setStage(1)} className="block text-[#1554bd] underline">{isFa ? 'کشف قاعده' : 'Discover the rule'}</button></section>}
+    {stage === 1 && <section className="rounded-2xl bg-white border border-slate-200 p-6 space-y-3"><h2 className="text-xl font-bold">{isFa ? 'معنی و قاعدهٔ همین واژه' : 'Meaning and this word’s grammar'}</h2><p lang="ro" dir="ltr" className="text-2xl font-bold">{item.word}</p><p>{isFa ? item.ruleFa : item.ruleEn}</p><p>{isFa ? item.useFa : item.useEn}</p><a href={item.source} target="_blank" rel="noopener noreferrer" className="text-[#1554bd] underline">{isFa ? 'منبع واژه' : 'Word source'}</a><button type="button" onClick={() => setStage(2)} className="block rounded-xl bg-[#1554bd] px-4 py-2 text-white">{isFa ? 'تمرین از حافظه' : 'Recall from memory'}</button></section>}
+    {stage === 2 && <section className="rounded-2xl bg-white border border-slate-200 p-6 space-y-4"><h2 className="text-xl font-bold">{isFa ? `«${item.fa}» را با ${item.letter[0]} بنویسید.` : `Write “${item.en}” with ${item.letter[0]}.`}</h2><form onSubmit={event => { event.preventDefault(); setChecked(true); if (correct) setWritten(true); }} className="flex flex-wrap gap-2"><input lang="ro" dir="ltr" aria-label={isFa ? 'پاسخ رومانیایی' : 'Romanian answer'} autoComplete="off" value={answer} onChange={event => { setAnswer(event.target.value); setChecked(false); }} className="rounded-xl border border-slate-300 p-3" /><button type="submit" disabled={!answer.trim()} className="rounded-xl bg-[#1554bd] px-4 py-2 text-white disabled:opacity-50">{isFa ? 'بررسی' : 'Check'}</button></form>{checked && <p role="status" className={correct ? 'text-emerald-800' : 'text-amber-900'}>{correct ? isFa ? 'درست است.' : 'Correct.' : isFa ? 'به املا و جای حرف نگاه کنید و دوباره تلاش کنید.' : 'Check the spelling and try again.'}</p>}{correct && checked && <button type="button" onClick={() => setStage(3)} className="text-[#1554bd] underline">{isFa ? 'تمرین گفتاری' : 'Speaking practice'}</button>}</section>}
+    {stage === 3 && <section className="rounded-2xl bg-white border border-slate-200 p-6 space-y-3"><h2 className="text-xl font-bold">{isFa ? 'این واژه را بلند بگویید' : 'Say the word aloud'}</h2><p lang="ro" dir="ltr" className="text-2xl font-bold">{item.word}</p><SpokenWordCheck word={item.word} lang={lang} /><button type="button" onClick={() => setStage(4)} className="rounded-xl bg-[#1554bd] px-4 py-2 text-white">{isFa ? 'دیدن نتیجه' : 'See result'}</button></section>}
+    {stage === 4 && <section className="rounded-2xl bg-white border border-slate-200 p-6 space-y-3"><h2 className="text-xl font-bold">{isFa ? 'نتیجهٔ این تمرین' : 'Practice result'}</h2><p>{written ? isFa ? 'نوشتن واژه با پاسخ درست انجام شد.' : 'You wrote the word correctly.' : isFa ? 'برای تکمیل تمرین نوشتن، به مرحلهٔ یادآوری برگردید.' : 'Return to recall to complete writing.'}</p><p className="text-sm text-slate-600">{isFa ? 'تمرین گفتاری آزادانه تکرار می‌شود؛ متن تشخیص‌داده‌شده ارزیابی تلفظ نیست.' : 'Repeat speaking freely; a matching transcript is not a pronunciation assessment.'}</p><button type="button" onClick={() => { setStage(0); setAnswer(''); setChecked(false); }} className="rounded-xl border border-[#1554bd] px-4 py-2 text-[#1554bd]">{isFa ? 'تکرار درس' : 'Repeat lesson'}</button><Link href="/learn-romanian/alfabet" className="block text-[#1554bd] underline">{isFa ? 'بازگشت به الفبا' : 'Back to alphabet'}</Link></section>}
+    {audioNotice && <p role="status" className="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">{audioNotice}</p>}
+  </div>;
+}

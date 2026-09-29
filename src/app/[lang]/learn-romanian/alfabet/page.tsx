@@ -24,7 +24,7 @@ const alphabetGroups = [
     ['V v', 'v'], ['X x', 'x'], ['Z z', 'consoane'],
   ] },
   { fa: 'حروف بیشتر در وام‌واژه‌ها و نام‌ها', en: 'Letters common in loans and names', letters: [
-    ['K k', null], ['Q q', null], ['W w', null], ['Y y', null],
+    ['K k', 'k'], ['Q q', 'q'], ['W w', 'w'], ['Y y', 'y'],
   ] },
 ] as const;
 
@@ -131,7 +131,7 @@ export default function RomanianAlphabetIndexPage({
 
       <section className="space-y-4" aria-labelledby="letter-inventory">
         <h2 id="letter-inventory" className="text-2xl font-bold">{isFa ? 'فهرست کامل حروف' : 'Complete letter inventory'}</h2>
-        <p className="text-sm text-slate-700">{isFa ? 'ترتیب حروف مطابق DOOM3 است. روی هر حرف بزنید تا درس صوتی مرتبط را ببینید؛ برای K، Q، W و Y هنوز درس صوتی جداگانه منتشر نشده است.' : 'Letters follow DOOM3 alphabetical order. Open a linked sound lesson; K, Q, W and Y do not yet have dedicated audio lessons.'}</p>
+        <p className="text-sm text-slate-700">{isFa ? 'ترتیب حروف مطابق DOOM3 است. روی هر حرف بزنید تا درس مرتبط را ببینید. چهار درس K/Q/W/Y فعلاً صوت ضبط‌شده ندارند و این موضوع در خود درس مشخص است.' : 'Letters follow DOOM3 alphabetical order. Open a lesson for each letter. The four K/Q/W/Y lessons currently have no verified recorded audio, as marked on each page.'}</p>
         {alphabetGroups.map(group => <div key={group.en} className="rounded-2xl border border-slate-200 bg-white p-5 space-y-3">
           <h3 className="font-bold text-lg">{isFa ? group.fa : group.en} <span className="text-sm font-normal text-slate-500">({isFa ? toFaDigits(group.letters.length) : group.letters.length})</span></h3>
           <div className="flex flex-wrap gap-2" dir="ltr">{group.letters.map(([letter, slug]) => slug ? <Link key={letter} href={`/learn-romanian/alfabet/${slug}`} lang="ro" className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 font-semibold text-[#1554bd] hover:bg-blue-100">{letter}</Link> : <a key={letter} href="#borrowed-letters" lang="ro" className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 font-semibold text-slate-700 hover:bg-slate-100">{letter}</a>)}</div>
@@ -153,7 +153,7 @@ export default function RomanianAlphabetIndexPage({
         <h2 className="text-xl font-bold">{isFa ? 'چهار حرف وام‌واژه‌ها: K، Q، W، Y' : 'Four letters in loans: K, Q, W, Y'}</h2>
         <p className="text-sm">{isFa ? 'این چهار حرف جزو همان ۳۱ حرف‌اند. در وام‌واژه‌ها، نام‌های خاص و بعضی واژه‌های بین‌المللی به کار می‌روند. تلفظشان را از خود واژه و زبان مبدأ یاد می‌گیریم؛ برای W، Y و ترکیب QU یک صدای ثابت به همهٔ واژه‌ها نسبت نمی‌دهیم.' : 'These four belong to the same 31-letter alphabet. They occur in loans, proper names and international words. Learn pronunciation word by word; W, Y and QU do not have one universal sound in all loans.'}</p>
         <div className="flex flex-wrap gap-3" dir="ltr" lang="ro">{[['K k', 'ka / kapa'], ['Q q', 'kü'], ['W w', 'dublu ve'], ['Y y', 'i grec']].map(([letter, name]) => <div key={letter} className="rounded-lg bg-slate-50 p-3 min-w-28"><strong>{letter}</strong><p className="text-sm text-slate-600">{name}</p></div>)}</div>
-        <p className="text-xs text-slate-600">{isFa ? 'نام حروف و کاربردشان مطابق DOOM3 است. درس‌های واژه‌محور و صوت مستقل این چهار حرف هنوز منتشر نشده‌اند.' : 'Letter names and usage follow DOOM3. Dedicated word and audio lessons for these four are pending.'}</p>
+        <p className="text-xs text-slate-600">{isFa ? 'نام حروف و کاربردشان مطابق DOOM3 است. درس واژه‌محور هر چهار حرف موجود است؛ ضبط و تأیید صوت مستقل هنوز باقی است.' : 'Names and usage follow DOOM3. All four have word-based lessons; verified recordings are still pending.'}</p>
       </section>
 
       <section className="space-y-6" aria-labelledby="sound-lessons">
