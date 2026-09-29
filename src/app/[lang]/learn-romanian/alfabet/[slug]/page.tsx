@@ -10,6 +10,7 @@ import {
 } from '@/lib/romanian/content';
 import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
 import { ABreveFoundationLesson } from '@/components/romanian/ABreveFoundationLesson';
+import { VowelPositionPractice } from '@/components/romanian/VowelPositionPractice';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ArrowLeft, ArrowRight, ChevronRight, ChevronLeft } from '@/components/Icons';
@@ -246,6 +247,7 @@ export default function RomanianGraphemeDetailPage({
           )}
         </div>
       </div>
+      <VowelPositionPractice slug={grapheme.slug} lang={currentLang} />
     </div>
   );
 }
