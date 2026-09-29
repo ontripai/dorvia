@@ -50,6 +50,7 @@ export function TicketLesson({ lang }: { lang: Locale }) {
   const [task, setTask] = React.useState(0);
   const [mistakes, setMistakes] = React.useState<string[]>([]);
   const [finishedOn, setFinishedOn] = React.useState<string | null>(null);
+  const [sessionComplete, setSessionComplete] = React.useState(false);
 
   React.useEffect(() => {
     try {
@@ -112,6 +113,7 @@ export function TicketLesson({ lang }: { lang: Locale }) {
     const completedOn = new Date().toISOString().slice(0, 10);
     try { localStorage.setItem(progressKey, JSON.stringify({ completedOn, mistakes })); } catch { /* optional device state */ }
     setFinishedOn(completedOn);
+    setSessionComplete(true);
     move(4);
   }
 
@@ -133,11 +135,11 @@ export function TicketLesson({ lang }: { lang: Locale }) {
         </p>
       </header>
 
-      <nav aria-label={isFa ? 'مراحل درس' : 'Lesson stages'} className="flex flex-wrap gap-2">
-        {stages[lang].map((label, i) => <span key={label} aria-current={phase === i ? 'step' : undefined}
-          className={`rounded-full px-3 py-1.5 text-sm font-semibold ${phase === i ? 'bg-[#1554bd] text-white' : i < phase ? 'bg-blue-50 text-[#1554bd]' : 'bg-slate-100 text-slate-600'}`}>
+      <nav aria-label={isFa ? 'مراحل درس؛ برای جابه‌جایی انتخاب کنید' : 'Lesson stages; select to navigate'} className="flex flex-wrap gap-2">
+        {stages[lang].map((label, i) => <button key={label} type="button" onClick={() => move(i as Phase)} aria-current={phase === i ? 'step' : undefined}
+          className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1554bd] ${phase === i ? 'bg-[#1554bd] text-white' : i < phase ? 'bg-blue-50 text-[#1554bd] hover:bg-blue-100' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}>
           {isFa ? '۰۱۲۳۴۵۶۷۸۹'[i + 1] : i + 1}. {label}
-        </span>)}
+        </button>)}
       </nav>
 
       {phase === 0 && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-5">
@@ -206,11 +208,13 @@ export function TicketLesson({ lang }: { lang: Locale }) {
       </section>}
 
       {phase === 4 && <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 space-y-5">
-        <h2 className="text-2xl font-bold">{isFa ? 'توانستید یک یا دو بلیت بخواهید' : 'You asked for one or two tickets'}</h2>
-        <p className="text-base">{isFa ? 'برای ماندگاری بهتر، فردا همین تغییر از یک به دو را با واژه‌ای دیگر تمرین کنید.' : 'For better recall, practise changing one to two with a different noun tomorrow.'}</p>
-        {mistakes.length > 0 && <p className="rounded-xl bg-blue-50 p-4 text-sm">{isFa ? 'برای مرور بعدی، روی این بخش‌ها بیشتر کار کنید: ' : 'Focus your next review on: '}{mistakes.map(m => m === 'number' ? isFa ? 'عدد مناسب اسم خنثی' : 'neuter number' : m === 'plural' ? isFa ? 'صورت جمع اسم' : 'noun plural' : isFa ? 'ساخت جمله' : 'sentence building').join('، ')}</p>}
-        <p className="text-sm text-slate-600">{isFa ? 'اتمام این جلسه فقط روی همین دستگاه ذخیره می‌شود.' : 'Completion is saved on this device only.'}</p>
-        <button type="button" onClick={() => { setMistakes([]); move(0); }} className="rounded-xl border border-[#1554bd] px-5 py-3 font-semibold text-[#1554bd]">{isFa ? 'تمرین دوباره' : 'Practise again'}</button>
+        <h2 className="text-2xl font-bold">{sessionComplete ? isFa ? 'توانستید یک یا دو بلیت بخواهید' : 'You asked for one or two tickets' : isFa ? 'نتیجهٔ این نوبت هنوز آماده نیست' : 'This attempt is not complete yet'}</h2>
+        <p className="text-base">{sessionComplete
+          ? isFa ? 'برای ماندگاری بهتر، فردا همین تغییر از یک به دو را با واژه‌ای دیگر تمرین کنید.' : 'For better recall, practise changing one to two with a different noun tomorrow.'
+          : isFa ? 'پس از پاسخ‌دادن به سه نوبت گفت‌وگو، نتیجهٔ این نوبت ثبت می‌شود. می‌توانید هر مرحله را هر چند بار بخواهید تکرار کنید.' : 'Answer all three dialogue rounds to complete this attempt. You can repeat any stage as often as you like.'}</p>
+        {sessionComplete && mistakes.length > 0 && <p className="rounded-xl bg-blue-50 p-4 text-sm">{isFa ? 'برای مرور بعدی، روی این بخش‌ها بیشتر کار کنید: ' : 'Focus your next review on: '}{mistakes.map(m => m === 'number' ? isFa ? 'عدد مناسب اسم خنثی' : 'neuter number' : m === 'plural' ? isFa ? 'صورت جمع اسم' : 'noun plural' : isFa ? 'ساخت جمله' : 'sentence building').join('، ')}</p>}
+        {sessionComplete && <p className="text-sm text-slate-600">{isFa ? 'اتمام این جلسه فقط روی همین دستگاه ذخیره می‌شود.' : 'Completion is saved on this device only.'}</p>}
+        <button type="button" onClick={() => { if (sessionComplete) { setMistakes([]); setSessionComplete(false); move(0); } else move(3); }} className="rounded-xl border border-[#1554bd] px-5 py-3 font-semibold text-[#1554bd]">{sessionComplete ? isFa ? 'تمرین دوباره' : 'Practise again' : isFa ? 'رفتن به گفت‌وگو' : 'Go to dialogue'}</button>
         <Link href="/learn-romanian" className="inline-block ms-3 text-[#1554bd] underline">{isFa ? 'بازگشت به آموزش' : 'Back to learning'}</Link>
       </section>}
       {finishedOn && phase !== 4 && <p className="text-sm text-slate-500">{isFa ? 'این جلسه قبلاً روی همین دستگاه انجام شده است؛ می‌توانید دوباره تمرین کنید.' : 'You completed this lesson on this device; you can practise again.'}</p>}
