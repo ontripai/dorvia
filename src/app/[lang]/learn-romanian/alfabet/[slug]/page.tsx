@@ -10,7 +10,8 @@ import {
 } from '@/lib/romanian/content';
 import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
 import { ABreveFoundationLesson } from '@/components/romanian/ABreveFoundationLesson';
-import { VowelPositionPractice } from '@/components/romanian/VowelPositionPractice';
+import { LetterPositionPractice } from '@/components/romanian/LetterPositionPractice';
+import { CGPatternPractice } from '@/components/romanian/CGPatternPractice';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ArrowLeft, ArrowRight, ChevronRight, ChevronLeft } from '@/components/Icons';
@@ -45,8 +46,8 @@ export async function generateMetadata({
       ? `تلفظ حرف «${grapheme.grapheme}» در زبان رومانیایی | DORVIA`
       : `Pronunciation of "${grapheme.grapheme}" in Romanian | DORVIA`,
     description: isFa
-      ? `راهنمای شنیداری و تلفظ حرف «${grapheme.grapheme}» در رومانیایی با واژه نمونه و صوت دوگانه گویندگان بومی.`
-      : `Listening and pronunciation guide for Romanian letter "${grapheme.grapheme}" with example word and native audio.`,
+      ? `راهنمای شنیداری و تلفظ «${grapheme.grapheme}» در رومانیایی با واژه نمونه و دو فایل صوتی.`
+      : `Listening and pronunciation guide for Romanian spelling pattern "${grapheme.grapheme}" with an example word and two audio clips.`,
     robots: {
       index: false,
       follow: false,
@@ -143,7 +144,7 @@ export default function RomanianGraphemeDetailPage({
 
           <div className="space-y-2 max-w-lg mx-auto">
             <h1 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100">
-              {isFa ? `تلفظ و آوای حرف «${grapheme.grapheme}»` : `Pronunciation of letter "${grapheme.grapheme}"`}
+              {isFa ? `تلفظ «${grapheme.grapheme}»` : `Pronunciation of "${grapheme.grapheme}"`}
             </h1>
             <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
               {grapheme.soundHintFa}
@@ -247,7 +248,8 @@ export default function RomanianGraphemeDetailPage({
           )}
         </div>
       </div>
-      <VowelPositionPractice slug={grapheme.slug} lang={currentLang} />
+      <LetterPositionPractice slug={grapheme.slug} lang={currentLang} />
+      {grapheme.order >= 11 && grapheme.order <= 16 && <CGPatternPractice lang={currentLang} />}
     </div>
   );
 }
