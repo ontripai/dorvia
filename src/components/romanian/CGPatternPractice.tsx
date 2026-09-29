@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { SpokenWordCheck } from './SpokenWordCheck';
 
 const patterns = [
   { ro: 'ca / co / cu', soundFa: 'ک', soundEn: 'k', example: 'card', grammarFa: 'کارت؛ اسم خنثی: card، جمع carduri، مشخص cardul.', grammarEn: 'Card; neuter noun: card, plural carduri, definite cardul.', source: 'https://dexonline.ro/definitie/card/paradigma', noteFa: 'c پیش از a/o/u صدای «ک» می‌دهد.', noteEn: 'c before a/o/u has a k sound.' },
@@ -29,6 +30,7 @@ export function CGPatternPractice({ lang }: { lang: 'fa' | 'en' }) {
       <div className="flex gap-2" dir="ltr">{['k', 'ch'].map(value => <button key={value} type="button" onClick={() => setChoice(value)} aria-pressed={choice === value} className={`rounded-lg border px-4 py-2 ${choice === value ? 'border-[#1554bd] bg-[#1554bd] text-white' : 'border-slate-300'}`}>{value}</button>)}</div>
       {choice && <p role="status" className="text-sm">{choice === 'k' ? isFa ? 'درست است. با «ceai» که صدای چ دارد مقایسه کنید.' : 'Correct. Compare ceai, which has the ch sound.' : isFa ? 'h را ببینید: در che صدای c سخت می‌ماند؛ دوباره امتحان کنید.' : 'Notice h: che keeps the hard c sound. Try again.'}</p>}
     </div>
+    <SpokenWordCheck word="cheie" lang={lang} />
     <p className="text-xs text-slate-600">{isFa ? 'واژه‌های این نقشه برای مقایسهٔ املا و صدا هستند؛ صوت ضبط‌شدهٔ هر صفحه مربوط به نمونهٔ همان درس است. تلفظ وام‌واژه‌ها را جدا بررسی می‌کنیم.' : 'These words compare spelling and sound; each page’s recorded clip belongs to its own lesson sample. Loans need separate pronunciation review.'}</p>
   </section>;
 }

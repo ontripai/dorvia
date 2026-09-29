@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { SpokenWordCheck } from './SpokenWordCheck';
 
 type Example = { word: string; fa: string; en: string; ruleFa: string; ruleEn: string; source: string };
 type SetOfExamples = { letter: string; samples: [Example, Example, Example]; noteFa?: string; noteEn?: string };
@@ -88,6 +89,7 @@ export function LetterPositionPractice({ slug, lang }: { slug: string; lang: 'fa
       <div className="flex flex-wrap gap-2"><input id={`letter-${slug}`} lang="ro" dir="ltr" value={answer} onChange={event => { setAnswer(event.target.value); setChecked(false); }} autoComplete="off" className="rounded-xl border border-slate-300 px-3 py-2" /><button type="submit" disabled={!answer.trim()} className="rounded-xl bg-[#1554bd] px-4 py-2 text-white disabled:opacity-50">{isFa ? 'بررسی' : 'Check'}</button></div>
       {checked && <p role="status" className={correct ? 'text-emerald-800' : 'text-amber-800'}>{correct ? isFa ? 'درست است. واژه را بلند بخوانید.' : 'Correct. Read the word aloud.' : isFa ? 'املای واژه و جای حرف را دوباره بررسی کنید.' : 'Check the word spelling and letter position again.'}</p>}
     </form>
+    <SpokenWordCheck key={target} word={target} lang={lang} />
     <p className="text-xs text-slate-600">{isFa ? 'صوت ضبط‌شدهٔ بالای صفحه نمونهٔ درس است؛ صدای این سه واژه فقط در صورت وجود صدای رومانیایی مرورگر پخش می‌شود.' : 'The recorded clip above is the lesson sample; these three words use a Romanian browser voice only when available.'}</p>
   </section>;
 }

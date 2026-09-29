@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { SpokenWordCheck } from './SpokenWordCheck';
 
 const items = [
   { letter: 'b', word: 'bilet', fa: 'بلیت', en: 'ticket', ruleFa: 'اسم خنثی: un bilet، جمع bilete، مشخص biletul.', ruleEn: 'Neuter noun: un bilet, plural bilete, definite biletul.', source: 'https://dexonline.ro/definitie/bilet/paradigma' },
@@ -38,6 +39,7 @@ export function BasicConsonantPractice({ lang }: { lang: 'fa' | 'en' }) {
       <details className="rounded-lg bg-white p-2 text-sm"><summary className="cursor-pointer font-semibold">{isFa ? 'قاعدهٔ واژه' : 'Word grammar'}</summary><p className="mt-2">{isFa ? item.ruleFa : item.ruleEn}</p><a href={item.source} target="_blank" rel="noopener noreferrer" className="text-[#1554bd] underline">{isFa ? 'منبع' : 'Source'}</a></details>
     </article>)}</div>
     {audioNotice && <p role="status" className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900">{audioNotice}</p>}
+    <SpokenWordCheck word="zi" lang={lang} />
     <div className="rounded-xl border border-slate-200 p-4 space-y-2"><h3 className="font-bold">{isFa ? 'یادآوری کوتاه' : 'Quick recall'}</h3><p>{isFa ? '«روز» با کدام حرف شروع می‌شود؟' : 'Which letter begins “day” (zi)?'}</p><div className="flex gap-2" dir="ltr">{['s', 'z'].map(letter => <button key={letter} type="button" aria-pressed={choice === letter} onClick={() => setChoice(letter)} className={`rounded-lg border px-4 py-2 ${choice === letter ? 'bg-[#1554bd] text-white' : 'border-slate-300'}`}>{letter}</button>)}</div>{choice && <p role="status">{choice === 'z' ? isFa ? 'درست است: zi با z آغاز می‌شود.' : 'Correct: zi begins with z.' : isFa ? 'به املای zi دوباره نگاه کنید.' : 'Look at the spelling of zi again.'}</p>}</div>
     <p className="text-xs text-slate-600">{isFa ? 'فایل صوتی ضبط‌شدهٔ بالای صفحه فقط نمونهٔ telefon است؛ پخش سایر واژه‌ها به صدای رومانیایی مرورگر نیاز دارد.' : 'The recorded clip above is only the telefon sample; the other words need a Romanian browser voice.'}</p>
   </section>;
