@@ -1010,6 +1010,18 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     inSitemap: false,
     pageType: 'hub'
   },
+  'learn-romanian/lectie/bilet': {
+    canonical: '/learn-romanian/lectie/bilet',
+    aliases: [],
+    parentHub: '/learn-romanian',
+    titleFa: 'درس تعاملی: یک یا دو بلیت',
+    titleEn: 'Interactive lesson: One or two tickets',
+    parentTitleFa: 'آموزش زبان رومانیایی',
+    parentTitleEn: 'Learn Romanian',
+    indexable: false,
+    inSitemap: false,
+    pageType: 'content'
+  },
   'learn-romanian/everyday': {
     canonical: '/learn-romanian/everyday',
     aliases: [],
@@ -1191,4 +1203,3 @@ export const ROUTE_REGISTRY: Record<string, RouteConfig> = {
     pageType: 'content'
   },
 };
-

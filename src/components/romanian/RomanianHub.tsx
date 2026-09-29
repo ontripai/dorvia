@@ -45,6 +45,20 @@ export const RomanianHub: React.FC<RomanianHubProps> = ({
         </p>
       </div>
 
+      <Link
+        href="/learn-romanian/lectie/bilet"
+        className="block rounded-3xl border border-[#1554bd]/30 bg-blue-50 p-6 sm:p-8 hover:border-[#1554bd] transition-colors"
+      >
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="space-y-2">
+            <span className="text-sm font-bold text-[#1554bd]">{isFa ? 'جلسه نمونه تعاملی · حدود ۱۵ دقیقه' : 'Interactive sample · about 15 minutes'}</span>
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033]">{isFa ? 'یک بلیت یا دو بلیت؟' : 'One ticket or two?'}</h2>
+            <p className="text-sm text-slate-700">{isFa ? 'واژه و قاعده را در مکالمه با فروشنده تمرین کنید و خودتان پاسخ بسازید.' : 'Practise the noun and its grammar in a ticket-counter conversation.'}</p>
+          </div>
+          <span className="rounded-xl bg-[#1554bd] px-5 py-3 text-white text-sm font-bold">{isFa ? 'ورود به درس' : 'Open lesson'}</span>
+        </div>
+      </Link>
+
       {/*
         ورودِ تمرین روزانه (dre-p188).
 
