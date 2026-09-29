@@ -83,6 +83,11 @@ export function TicketLesson({ lang }: { lang: Locale }) {
   const [voiceAvailable, setVoiceAvailable] = React.useState(false);
   const [listening, setListening] = React.useState(false);
   const [voiceMessage, setVoiceMessage] = React.useState('');
+  const [writtenSuccess, setWrittenSuccess] = React.useState(0);
+  const [spokenSuccess, setSpokenSuccess] = React.useState(0);
+  const [answerMode, setAnswerMode] = React.useState<'written' | 'spoken' | null>(null);
+  const [typedAnswer, setTypedAnswer] = React.useState(false);
+  const recordedAnswers = React.useRef(new Set<string>());
   const [microRound, setMicroRound] = React.useState(0);
   const [microChoice, setMicroChoice] = React.useState<string | null>(null);
   const recognitionRef = React.useRef<RomanianRecognition | null>(null);
@@ -131,16 +136,29 @@ export function TicketLesson({ lang }: { lang: Locale }) {
     setTask(0);
     setMicroRound(0);
     setMicroChoice(null);
+    setAnswerMode(null);
+    setTypedAnswer(false);
   }
 
   const expected: 'one' | 'two' = phase === 2 ? 'two' : task === 2 ? 'one' : 'two';
-  function check(raw = answer) {
+  function check(raw = answer, mode: 'written' | 'spoken' = 'written') {
     const submitted = normalize(raw);
     if (!submitted) return;
     const valid = expected === 'two'
       ? ['două bilete', 'două bilete, vă rog'].includes(submitted)
       : ['un bilet', 'un bilet, vă rog'].includes(submitted);
-    if (valid) { setFeedback('correct'); return; }
+    if (valid) {
+      setFeedback('correct');
+      setAnswerMode(mode);
+      const key = `${phase}:${task}:${mode}`;
+      if (!recordedAnswers.current.has(key)) {
+        recordedAnswers.current.add(key);
+        if (mode === 'written') setWrittenSuccess(count => count + 1);
+        else setSpokenSuccess(count => count + 1);
+      }
+      return;
+    }
+    setAnswerMode(null);
     const kind = errorKind(raw, expected);
     setFeedback(kind);
     setMistakes(old => old.includes(kind) ? old : [...old, kind]);
@@ -167,7 +185,8 @@ export function TicketLesson({ lang }: { lang: Locale }) {
       const transcript = event.results[0]?.[0]?.transcript?.trim();
       if (transcript) {
         setAnswer(transcript);
-        check(transcript);
+        setTypedAnswer(false);
+        check(transcript, 'spoken');
       }
     };
     recognition.onerror = event => {
@@ -198,6 +217,7 @@ export function TicketLesson({ lang }: { lang: Locale }) {
   function advanceTask() {
     setFeedback(null);
     setAnswer('');
+    setTypedAnswer(false);
     setHint(false);
     if (phase === 2) move(3);
     else if (task < 2) setTask(task + 1);
@@ -206,7 +226,7 @@ export function TicketLesson({ lang }: { lang: Locale }) {
 
   function finish() {
     const completedOn = new Date().toISOString().slice(0, 10);
-    try { localStorage.setItem(progressKey, JSON.stringify({ completedOn, mistakes })); } catch { /* optional device state */ }
+    try { localStorage.setItem(progressKey, JSON.stringify({ completedOn, mistakes, writtenSuccess, spokenSuccess })); } catch { /* optional device state */ }
     setFinishedOn(completedOn);
     setSessionComplete(true);
     move(4);
@@ -298,17 +318,18 @@ export function TicketLesson({ lang }: { lang: Locale }) {
           ? isFa ? '«دو بلیت، لطفاً» را به رومانیایی بنویسید' : 'Write “Two tickets, please” in Romanian'
           : task === 2 ? isFa ? 'این بار تنها هستید. به فروشنده پاسخ دهید.' : 'This time you are alone. Answer the clerk.'
           : isFa ? 'برای خود و همراهتان به فروشنده پاسخ دهید.' : 'Answer the clerk for yourself and a companion.'}</h2>
+        <p className="text-sm text-slate-600">{isFa ? 'یک بار پاسخ را بنویسید و اگر میکروفون در دسترس است، همان درخواست را با صدا هم بگویید. هر دو مهارت جدا ثبت می‌شوند.' : 'Write the answer once, then say the same request if your microphone is available. Both practices are tracked separately.'}</p>
         {phase === 3 && <div className="rounded-xl bg-slate-50 p-4 space-y-2">
           <p className="text-sm text-slate-600">{isFa ? 'فروشنده' : 'Clerk'}</p>
           <p lang="ro" dir="ltr" className="text-lg font-semibold">{task === 1 ? 'Bună ziua. Un bilet sau două?' : 'Un bilet sau două?'}</p>
           <button type="button" onClick={() => speak('Un bilet sau două?')} className="text-sm text-[#1554bd] underline">{isFa ? 'شنیدن سؤال' : 'Hear the question'}</button>
         </div>}
-        <form onSubmit={e => { e.preventDefault(); check(); }} className="space-y-3">
+        <form onSubmit={e => { e.preventDefault(); if (typedAnswer) check(); }} className="space-y-3">
           <label htmlFor="ticket-answer" className="block text-sm font-semibold">{isFa ? 'پاسخ شما به رومانیایی' : 'Your answer in Romanian'}</label>
-          <input id="ticket-answer" lang="ro" dir="ltr" autoComplete="off" value={answer} onChange={e => { setAnswer(e.target.value); setFeedback(null); }}
+          <input id="ticket-answer" lang="ro" dir="ltr" autoComplete="off" value={answer} onChange={e => { setAnswer(e.target.value); setTypedAnswer(true); setFeedback(null); setAnswerMode(null); }}
             className="w-full rounded-xl border border-slate-300 p-3 text-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#1554bd]" />
           <div className="flex flex-wrap gap-3">
-            <button type="submit" disabled={!answer.trim()} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-semibold disabled:opacity-50">{isFa ? 'بررسی پاسخ' : 'Check answer'}</button>
+            <button type="submit" disabled={!answer.trim() || !typedAnswer} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-semibold disabled:opacity-50">{isFa ? 'بررسی پاسخ نوشتاری' : 'Check written answer'}</button>
             {voiceAvailable && <button type="button" onClick={listen} aria-pressed={listening} className="rounded-xl border border-[#1554bd] px-5 py-3 text-[#1554bd] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1554bd]">
               {listening ? isFa ? 'پایان شنیدن' : 'Stop listening' : isFa ? '🎙️ پاسخ با صدا' : '🎙️ Answer by voice'}
             </button>}
@@ -319,7 +340,7 @@ export function TicketLesson({ lang }: { lang: Locale }) {
         {voiceMessage && <p role="status" className="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">{voiceMessage}</p>}
         {voiceAvailable && <p className="text-xs text-slate-600">{isFa ? 'با اجازهٔ شما، تشخیص گفتار مرورگر متن پاسخ را می‌نویسد و همان تمرین بررسی می‌شود. این بخش کیفیت تلفظ را نمره‌دهی نمی‌کند.' : 'With your permission, browser speech recognition transcribes your answer and checks the same exercise. It does not grade pronunciation.'}</p>}
         {hint && <p className="rounded-xl bg-blue-50 p-3 text-base" dir="ltr" lang="ro">{expected === 'two' ? 'Două …, vă rog.' : 'Un …, vă rog.'}</p>}
-        {feedback && <div role="status" className={`rounded-xl p-4 text-base ${feedback === 'correct' ? 'bg-emerald-50 text-emerald-900' : 'bg-amber-50 text-amber-900'}`}>{feedbackText}</div>}
+        {feedback && <div role="status" className={`rounded-xl p-4 text-base ${feedback === 'correct' ? 'bg-emerald-50 text-emerald-900' : 'bg-amber-50 text-amber-900'}`}>{feedbackText}{feedback === 'correct' && answerMode === 'spoken' && <span className="block text-sm mt-1">{isFa ? 'پاسخ گفتاری به متن تبدیل شد و متن آن درست بود؛ این نمرهٔ تلفظ نیست.' : 'Speech was transcribed and the text matched; this is not a pronunciation score.'}</span>}</div>}
         {feedback === 'correct' && <button type="button" onClick={advanceTask} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-semibold">{phase === 3 && task === 2 ? isFa ? 'پایان جلسه' : 'Finish lesson' : isFa ? 'ادامه' : 'Continue'}</button>}
       </section>}
 
@@ -328,9 +349,13 @@ export function TicketLesson({ lang }: { lang: Locale }) {
         <p className="text-base">{sessionComplete
           ? isFa ? 'برای ماندگاری بهتر، فردا همین تغییر از یک به دو را با واژه‌ای دیگر تمرین کنید.' : 'For better recall, practise changing one to two with a different noun tomorrow.'
           : isFa ? 'پس از پاسخ‌دادن به سه نوبت گفت‌وگو، نتیجهٔ این نوبت ثبت می‌شود. می‌توانید هر مرحله را هر چند بار بخواهید تکرار کنید.' : 'Answer all three dialogue rounds to complete this attempt. You can repeat any stage as often as you like.'}</p>
+        {sessionComplete && <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-xl bg-blue-50 p-4"><h3 className="font-bold">{isFa ? 'نوشتن' : 'Writing'}</h3><p>{isFa ? `${writtenSuccess} پاسخ درست ثبت شد.` : `${writtenSuccess} correct answers recorded.`}</p><p className="text-sm mt-1">{isFa ? 'مرور پیشنهادی: un bilet و două bilete را بدون دیدن نمونه بنویسید.' : 'Next: write un bilet and două bilete from memory.'}</p></div>
+          <div className="rounded-xl bg-blue-50 p-4"><h3 className="font-bold">{isFa ? 'مکالمه' : 'Speaking'}</h3><p>{spokenSuccess ? isFa ? `${spokenSuccess} پاسخ گفتاری به متن درست تبدیل شد.` : `${spokenSuccess} spoken answers transcribed correctly.` : isFa ? 'هنوز پاسخ گفتاری ثبت نشده است.' : 'No spoken answer recorded yet.'}</p><p className="text-sm mt-1">{isFa ? 'مرور پیشنهادی: نقش خریدار و فروشنده را با صدای بلند اجرا کنید. تشخیص متن، کیفیت تلفظ را نمی‌سنجد.' : 'Next: say both buyer and clerk lines aloud. Transcription does not assess pronunciation.'}</p></div>
+        </div>}
         {sessionComplete && mistakes.length > 0 && <p className="rounded-xl bg-blue-50 p-4 text-sm">{isFa ? 'برای مرور بعدی، روی این بخش‌ها بیشتر کار کنید: ' : 'Focus your next review on: '}{mistakes.map(m => m === 'number' ? isFa ? 'عدد مناسب اسم خنثی' : 'neuter number' : m === 'plural' ? isFa ? 'صورت جمع اسم' : 'noun plural' : isFa ? 'ساخت جمله' : 'sentence building').join('، ')}</p>}
         {sessionComplete && <p className="text-sm text-slate-600">{isFa ? 'اتمام این جلسه فقط روی همین دستگاه ذخیره می‌شود.' : 'Completion is saved on this device only.'}</p>}
-        <button type="button" onClick={() => { if (sessionComplete) { setMistakes([]); setSessionComplete(false); move(0); } else move(3); }} className="rounded-xl border border-[#1554bd] px-5 py-3 font-semibold text-[#1554bd]">{sessionComplete ? isFa ? 'تمرین دوباره' : 'Practise again' : isFa ? 'رفتن به گفت‌وگو' : 'Go to dialogue'}</button>
+        <button type="button" onClick={() => { if (sessionComplete) { setMistakes([]); setWrittenSuccess(0); setSpokenSuccess(0); recordedAnswers.current.clear(); setSessionComplete(false); move(0); } else move(3); }} className="rounded-xl border border-[#1554bd] px-5 py-3 font-semibold text-[#1554bd]">{sessionComplete ? isFa ? 'تمرین دوباره' : 'Practise again' : isFa ? 'رفتن به گفت‌وگو' : 'Go to dialogue'}</button>
         {sessionComplete && <Link href="/learn-romanian/lectie/autobuz-tramvai" className="inline-block ms-3 rounded-xl bg-[#1554bd] px-5 py-3 font-semibold text-white">{isFa ? 'درس بعد: اتوبوس و تراموا' : 'Next: bus and tram'}</Link>}
         <Link href="/learn-romanian" className="inline-block ms-3 text-[#1554bd] underline">{isFa ? 'همهٔ درس‌ها' : 'All lessons'}</Link>
         {sessionComplete && <p className="text-sm text-slate-600">{isFa ? '۱۵ دقیقه فقط زمان پیشنهادی هر جلسه است. می‌توانید همین امروز درس دیگری بخوانید یا هر یک از مراحل را دوباره تمرین کنید.' : 'Fifteen minutes is only a suggested session length. You can study another lesson today or repeat any stage.'}</p>}
