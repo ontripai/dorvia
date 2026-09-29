@@ -162,7 +162,7 @@ export default function RomanianGraphemeDetailPage({
               {isFa ? `تلفظ «${grapheme.grapheme}»` : `Pronunciation of "${grapheme.grapheme}"`}
             </h1>
             <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-              {grapheme.soundHintFa}
+              {isFa ? grapheme.soundHintFa : grapheme.soundHintEn}
             </p>
           </div>
 

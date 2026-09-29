@@ -188,7 +188,7 @@ export default function RomanianAlphabetIndexPage({
 
                 {/* Persian Sound Hint */}
                 <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                  {g.soundHintFa}
+                  {isFa ? g.soundHintFa : g.soundHintEn}
                 </p>
 
                 {/* Example Word */}
