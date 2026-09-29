@@ -153,9 +153,16 @@ export function TicketLesson({ lang }: { lang: Locale }) {
       }
     };
     recognition.onerror = event => {
-      setVoiceMessage(event.error === 'not-allowed' || event.error === 'service-not-allowed'
-        ? isFa ? 'دسترسی میکروفون داده نشد. می‌توانید پاسخ را تایپ کنید.' : 'Microphone access was denied. You can type your answer.'
-        : isFa ? 'گفتار تشخیص داده نشد. دوباره بگویید یا پاسخ را تایپ کنید.' : 'Speech was not recognised. Try again or type your answer.');
+      if (event.error === 'aborted') return;
+      const messages: Record<string, [string, string]> = {
+        'not-allowed': ['مرورگر اجازهٔ استفاده از میکروفون را نداد. مجوز سایت و Windows را بررسی کنید.', 'The browser denied microphone access. Check the site and Windows permissions.'],
+        'service-not-allowed': ['میکروفون ممکن است مجاز باشد، اما سرویس تشخیص گفتار مرورگر در دسترس نیست. اتصال اینترنت یا تنظیمات مرورگر را بررسی کنید.', 'The microphone may be allowed, but the browser speech service is unavailable. Check your connection or browser settings.'],
+        'audio-capture': ['مرورگر به میکروفون انتخاب‌شده دسترسی ندارد. دستگاه ورودی را در تنظیمات Chrome بررسی کنید.', 'The browser cannot capture audio from the selected microphone. Check the input device in Chrome settings.'],
+        network: ['ارتباط با سرویس تشخیص گفتار برقرار نشد. اتصال اینترنت را بررسی کنید.', 'Could not reach the speech recognition service. Check your internet connection.'],
+        'no-speech': ['صدایی شنیده نشد. دوباره صحبت کنید یا پاسخ را تایپ کنید.', 'No speech was detected. Try speaking again or type your answer.'],
+      };
+      const message = messages[event.error] || ['تشخیص گفتار انجام نشد. دوباره تلاش کنید یا پاسخ را تایپ کنید.', 'Speech recognition failed. Try again or type your answer.'];
+      setVoiceMessage(`${message[isFa ? 0 : 1]} (${event.error})`);
     };
     recognition.onend = () => {
       recognitionRef.current = null;
