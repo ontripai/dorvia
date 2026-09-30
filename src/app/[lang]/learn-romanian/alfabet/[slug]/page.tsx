@@ -12,7 +12,8 @@ import {
 import { ABreveFoundationLesson } from '@/components/romanian/ABreveFoundationLesson';
 import { LetterPositionPractice } from '@/components/romanian/LetterPositionPractice';
 import { CGPatternPractice } from '@/components/romanian/CGPatternPractice';
-import { BASIC_CONSONANT_LETTERS, BasicConsonantPractice, type BasicConsonantSlug } from '@/components/romanian/BasicConsonantPractice';
+import { BasicConsonantPractice } from '@/components/romanian/BasicConsonantPractice';
+import { BASIC_CONSONANT_LETTERS, type BasicConsonantSlug } from '@/content/romanian/basic-consonants';
 import { ConsonantWordPractice } from '@/components/romanian/ConsonantWordPractice';
 import { LoanLetterLesson } from '@/components/romanian/LoanLetterLesson';
 import { Breadcrumb } from '@/components/Breadcrumb';

@@ -3,9 +3,8 @@
 import React from 'react';
 import { SpokenWordCheck } from './SpokenWordCheck';
 import { PronunciationAudio } from './PronunciationAudio';
+import type { BasicConsonantSlug } from '@/content/romanian/basic-consonants';
 
-export const BASIC_CONSONANT_LETTERS = ['b', 'd', 'f', 'l', 'm', 'n', 'p', 't', 'z'] as const;
-export type BasicConsonantSlug = typeof BASIC_CONSONANT_LETTERS[number];
 
 const items = [
   { letter: 'b', name: 'be', sound: 'ba', word: 'bilet', fa: 'بلیت', en: 'ticket', ruleFa: 'اسم خنثی: un bilet، جمع bilete، مشخص biletul.', ruleEn: 'Neuter noun: un bilet, plural bilete, definite biletul.', source: 'https://dexonline.ro/definitie/bilet/paradigma' },
