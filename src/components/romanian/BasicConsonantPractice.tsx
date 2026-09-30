@@ -46,6 +46,7 @@ export function BasicConsonantPractice({ lang, letter }: { lang: 'fa' | 'en'; le
         <p lang="ro" dir="ltr" className="text-3xl font-bold text-[#1554bd]">{item.letter.toUpperCase()} {item.letter}</p>
         <div><p className="text-sm font-semibold">{isFa ? `نام حرف: ${item.name}` : `Letter name: ${item.name}`}</p><PronunciationAudio currentLang={lang} label={item.name} /></div>
         <div><p className="text-sm font-semibold">{isFa ? `آوا در هجای ${item.sound}` : `Sound in the syllable ${item.sound}`}</p><PronunciationAudio currentLang={lang} label={item.sound} /></div>
+        <div className="border-t border-blue-100 pt-3"><p lang="ro" dir="ltr" className="text-lg font-bold">{item.word}</p><p className="text-sm">{isFa ? item.fa : item.en}</p><PronunciationAudio currentLang={lang} label={item.word} /></div>
       </article>)}</div>
       <button type="button" onClick={() => setStage(1)} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'دیدن نمونه و قاعده' : 'Explore example and rule'}</button>
     </section>}
