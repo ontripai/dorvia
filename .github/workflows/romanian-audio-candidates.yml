@@ -20,7 +20,13 @@ jobs:
         with:
           node-version: '20'
       - name: Install audio trimming tool
-        run: sudo apt-get update -qq && sudo apt-get install -y ffmpeg
+        run: |
+          if node -e "const fs = require('node:fs'); const catalog = require('./scripts/romanian-audio-catalog.json'); process.exit(catalog.every(item => fs.existsSync('public/audio/romanian/verified/' + item.slug + '.mp3')) ? 0 : 1)"; then
+            echo "All catalog clips already exist; no trimming tool needed."
+          else
+            sudo apt-get update -qq
+            sudo apt-get install -y ffmpeg
+          fi
       - name: Generate candidate Romanian recordings
         env:
           AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
