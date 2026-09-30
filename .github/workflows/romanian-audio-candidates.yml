@@ -2,15 +2,20 @@ name: Romanian audio candidates
 
 on:
   workflow_dispatch:
+  pull_request:
+    types: [synchronize]
 
 permissions:
   contents: read
 
 jobs:
   generate:
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.number == 180 && github.event.pull_request.head.repo.full_name == 'ontripai/dorvia')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
