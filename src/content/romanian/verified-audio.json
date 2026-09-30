@@ -1,1 +1,11 @@
-{}
+{
+  "apă": "/audio/romanian/verified/apa.mp3",
+  "elev": "/audio/romanian/verified/elev.mp3",
+  "inimă": "/audio/romanian/verified/inima.mp3",
+  "oraș": "/audio/romanian/verified/oras.mp3",
+  "unu": "/audio/romanian/verified/unu.mp3",
+  "Eu sunt aici.": "/audio/romanian/verified/eu-sunt-aici.mp3",
+  "Eu am un bilet.": "/audio/romanian/verified/eu-am-un-bilet.mp3",
+  "Ele sunt aici.": "/audio/romanian/verified/ele-sunt-aici.mp3",
+  "Dumneavoastră sunteți Ana?": "/audio/romanian/verified/dumneavoastra-sunteti-ana.mp3"
+}

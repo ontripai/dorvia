@@ -1,11 +1,47 @@
 [
-  { "text": "apă", "slug": "apa" },
-  { "text": "elev", "slug": "elev" },
-  { "text": "inimă", "slug": "inima" },
-  { "text": "oraș", "slug": "oras" },
-  { "text": "unu", "slug": "unu" },
-  { "text": "Eu sunt aici.", "slug": "eu-sunt-aici" },
-  { "text": "Eu am un bilet.", "slug": "eu-am-un-bilet" },
-  { "text": "Ele sunt aici.", "slug": "ele-sunt-aici" },
-  { "text": "Dumneavoastră sunteți Ana?", "slug": "dumneavoastra-sunteti-ana" }
+  {
+    "text": "apă",
+    "slug": "apa",
+    "approved": true
+  },
+  {
+    "text": "elev",
+    "slug": "elev",
+    "approved": true
+  },
+  {
+    "text": "inimă",
+    "slug": "inima",
+    "approved": true
+  },
+  {
+    "text": "oraș",
+    "slug": "oras",
+    "approved": true
+  },
+  {
+    "text": "unu",
+    "slug": "unu",
+    "approved": true
+  },
+  {
+    "text": "Eu sunt aici.",
+    "slug": "eu-sunt-aici",
+    "approved": true
+  },
+  {
+    "text": "Eu am un bilet.",
+    "slug": "eu-am-un-bilet",
+    "approved": true
+  },
+  {
+    "text": "Ele sunt aici.",
+    "slug": "ele-sunt-aici",
+    "approved": true
+  },
+  {
+    "text": "Dumneavoastră sunteți Ana?",
+    "slug": "dumneavoastra-sunteti-ana",
+    "approved": true
+  }
 ]

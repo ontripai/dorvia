@@ -55,7 +55,7 @@ for (const item of catalog) {
   await fs.writeFile(temporary, raw);
   try {
     execFileSync('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-i', temporary,
-      '-af', 'silenceremove=start_periods=1:start_silence=0.02:start_threshold=-42dB:detection=rms',
+      '-af', 'silenceremove=start_periods=1:start_duration=0:start_silence=0.02:start_threshold=-42dB:stop_periods=1:stop_duration=0.15:stop_silence=0.08:stop_threshold=-42dB:detection=rms',
       '-codec:a', 'libmp3lame', '-b:a', '48k', target]);
     if ((await fs.stat(target)).size < 100) throw new Error(`Silent audio for ${item.slug}`);
     if (item.approved === true) manifest[text] = url;
