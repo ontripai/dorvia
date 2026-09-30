@@ -7,24 +7,30 @@ import type { Language } from '@/types';
 // The historical Aoede/Puck recordings are deliberately not loaded or played.
 // Synthesis receives the exact Romanian text displayed for this item.
 let activeReset: (() => void) | null = null;
+let romanianVoice: SpeechSynthesisVoice | undefined;
+let voiceLookup: Promise<SpeechSynthesisVoice | undefined> | null = null;
 
 function findRomanianVoice(): Promise<SpeechSynthesisVoice | undefined> {
   const synthesis = window.speechSynthesis;
-  const immediate = synthesis.getVoices().find(v => v.lang.toLowerCase().startsWith('ro'));
-  if (immediate) return Promise.resolve(immediate);
-  return new Promise(resolve => {
+  const immediate = romanianVoice ?? synthesis.getVoices().find(v => v.lang.toLowerCase().startsWith('ro'));
+  if (immediate) { romanianVoice = immediate; return Promise.resolve(immediate); }
+  if (voiceLookup) return voiceLookup;
+  voiceLookup = new Promise(resolve => {
     let finished = false;
     const finish = (voice?: SpeechSynthesisVoice) => {
       if (finished) return;
       finished = true;
       clearTimeout(timer);
       synthesis.removeEventListener('voiceschanged', retry);
+      romanianVoice = voice;
+      voiceLookup = null;
       resolve(voice);
     };
     const retry = () => finish(synthesis.getVoices().find(v => v.lang.toLowerCase().startsWith('ro')));
     const timer = window.setTimeout(() => finish(), 1500);
     synthesis.addEventListener('voiceschanged', retry);
   });
+  return voiceLookup;
 }
 
 export interface PronunciationAudioProps {
@@ -56,6 +62,10 @@ export function PronunciationAudio({
     }
   }, [reset]);
 
+  React.useEffect(() => {
+    if ('speechSynthesis' in window) void findRomanianVoice();
+  }, []);
+
   async function toggle() {
     if (!('speechSynthesis' in window)) {
       setMessage(isFa ? 'پخش مصنوعی در این مرورگر پشتیبانی نمی‌شود.' : 'Browser speech is unavailable.');
@@ -74,8 +84,10 @@ export function PronunciationAudio({
       setMessage(isFa ? 'صدای رومانیایی در این مرورگر نصب یا بارگذاری نشده است.' : 'No Romanian voice is available in this browser.');
       return;
     }
-    window.speechSynthesis.cancel();
-    activeReset?.();
+    if (activeReset) {
+      window.speechSynthesis.cancel();
+      activeReset();
+    }
     const utterance = new SpeechSynthesisUtterance(label);
     utterance.voice = voice;
     utterance.lang = 'ro-RO';
