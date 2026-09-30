@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { LessonStageNav } from './LessonStageNav';
 import type { Language } from '@/types';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
@@ -168,12 +169,7 @@ export function CoreSentenceBuildingLesson({ lang, kind }: { lang: Language; kin
 
       <div><h3 className="font-extrabold">{isFa ? 'نمونه‌ها را بخوانید و بشنوید' : 'Read and hear the examples'}</h3><div className="mt-3 grid gap-3 sm:grid-cols-2">{copy.examples.map(item => <div key={item.ro} className="rounded-xl border border-slate-200 bg-slate-50 p-4"><p lang="ro" dir="ltr" className="text-lg font-bold text-[#1554bd]">{item.ro}</p><p className="mt-1 text-sm">{isFa ? item.fa : item.en}</p><PronunciationAudio currentLang={lang} label={item.ro} className="mt-2" /></div>)}</div></div>
     </article>
-
-    <nav aria-label={isFa ? 'مراحل درس ۱۵ دقیقه‌ای' : '15-minute lesson stages'} className="grid grid-cols-2 gap-2 rounded-2xl border border-slate-200 bg-white p-3 sm:grid-cols-5">
-      {(isFa ? stagesFa : stagesEn).map((label, step) => <button key={label} type="button" onClick={() => setStage(step)} aria-current={stage === step ? 'step' : undefined} className={`rounded-xl px-3 py-2 text-start text-xs font-semibold ${stage === step ? 'bg-[#1554bd] text-white' : 'bg-slate-50 text-slate-700 hover:bg-blue-50'}`}>
-        <span className="block">{step + 1}. {kind === 'verbs-present' && step === 3 ? (isFa ? 'آزمون و نوشتن' : 'Quiz and write') : label}</span><span className="mt-1 block opacity-80">{isFa ? `${minutes[step]} دقیقه` : `${minutes[step]} min`}</span>
-      </button>)}
-    </nav>
+    <LessonStageNav lang={lang} labels={(isFa ? stagesFa : stagesEn).map((label, index) => kind === 'verbs-present' && index === 3 ? (isFa ? 'آزمون و نوشتن' : 'Quiz and write') : label)} stage={stage} onSelect={setStage} minutes={minutes} />
 
     {stage === 0 && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
       <p className="text-xs font-extrabold text-[#1554bd]">{isFa ? 'مرحلهٔ ۱ · ۲ دقیقه' : 'STEP 1 · 2 MINUTES'}</p>

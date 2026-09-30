@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { LessonStageNav } from './LessonStageNav';
 import type { Language } from '@/types';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
@@ -118,13 +119,7 @@ export function SentenceOrderFoundationLesson({ lang }: { lang: Language }) {
       <div className="grid gap-3 md:grid-cols-3 text-sm leading-6"><p className="rounded-xl bg-slate-50 p-4">{isFa ? 'حذف فاعل: Eu am un bilet و Am un bilet هر دو درست‌اند؛ شناسهٔ am شخص اول را نشان می‌دهد.' : 'Omitting a subject: Eu am un bilet and Am un bilet are both correct; am indicates first person.'}</p><p className="rounded-xl bg-slate-50 p-4">{isFa ? 'منفی: nu را پیش از فعل صرف‌شده بگذارید: Nu am un bilet. = من بلیت ندارم.' : 'Negation: put nu before the conjugated verb: Nu am un bilet. = I do not have a ticket.'}</p><p className="rounded-xl bg-slate-50 p-4">{isFa ? 'پرسش ساده: با آهنگ پرسشی و علامت سؤال می‌پرسیم: Ai un bilet? = آیا بلیت داری؟' : 'A simple question can use rising intonation and a question mark: Ai un bilet? = Do you have a ticket?'}</p></div>
       <p className="rounded-xl bg-amber-50 p-4 text-sm leading-7 text-amber-950">{isFa ? 'صفت با جنس و شمار اسم هماهنگ می‌شود: un bilet nou / o carte nouă. قیدِ azi با جنس و شمار تغییر نمی‌کند. در تمرین‌های بعد، اول فعل را پیدا کنید و سپس از روی معنا فاعل، مفعول، صفت و قید را جای‌گذاری کنید.' : 'An adjective agrees with its noun in gender and number: un bilet nou / o carte nouă. The adverb azi does not change for gender or number. In practice, find the verb first, then place the subject, object, adjective, and adverb according to meaning.'}</p>
     </article>
-
-    <nav aria-label={isFa ? 'مراحل درس ۱۵ دقیقه‌ای' : '15-minute lesson stages'} className="grid grid-cols-2 gap-2 rounded-2xl border border-slate-200 bg-white p-3 sm:grid-cols-5">
-      {phases.map((phase, index) => <button key={phase.en} type="button" onClick={() => setStage(index)} aria-current={stage === index ? 'step' : undefined} className={`min-h-14 rounded-xl px-3 py-2 text-start text-xs font-bold transition ${stage === index ? 'bg-[#1554bd] text-white' : 'bg-slate-50 text-slate-700 hover:bg-blue-50'}`}>
-        <span className="block">{isFa ? `مرحلهٔ ${'۱۲۳۴۵'[index]}` : `STEP ${index + 1}`} · {isFa ? `${phase.min} دقیقه` : `${phase.min} min`}</span>
-        <span className="mt-1 block">{isFa ? phase.fa : phase.en}</span>
-      </button>)}
-    </nav>
+    <LessonStageNav lang={lang} labels={phases.map(phase => isFa ? phase.fa : phase.en)} stage={stage} onSelect={setStage} minutes={phases.map(phase => phase.min)} />
 
     {stage === 0 && <section className="space-y-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
       <div><p className="text-xs font-extrabold text-[#1554bd]">{isFa ? 'مرحلهٔ ۱ · ۲ دقیقه' : 'STEP 1 · 2 MINUTES'}</p><h2 className="mt-1 text-xl font-extrabold">{isFa ? 'یک الگوی ساده را بشناسید' : 'Recognize a simple pattern'}</h2></div>

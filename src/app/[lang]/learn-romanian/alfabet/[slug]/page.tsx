@@ -1,7 +1,5 @@
-import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
 import { LOCALES } from '@/lib/locale-router';
 import { Language } from '@/types';
 import {
@@ -10,15 +8,12 @@ import {
   getWordById,
 } from '@/lib/romanian/content';
 import { ABreveFoundationLesson } from '@/components/romanian/ABreveFoundationLesson';
-import { LetterPositionPractice } from '@/components/romanian/LetterPositionPractice';
-import { CGPatternPractice } from '@/components/romanian/CGPatternPractice';
 import { BasicConsonantPractice } from '@/components/romanian/BasicConsonantPractice';
 import { BASIC_CONSONANT_LETTERS, type BasicConsonantSlug } from '@/content/romanian/basic-consonants';
-import { ConsonantWordPractice } from '@/components/romanian/ConsonantWordPractice';
 import { LoanLetterLesson } from '@/components/romanian/LoanLetterLesson';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
-import { ArrowLeft, ArrowRight, ChevronRight, ChevronLeft } from '@/components/Icons';
+import { GuidedAlphabetLesson } from '@/components/romanian/GuidedAlphabetLesson';
 import { VowelFoundationLesson } from '@/components/romanian/VowelFoundationLesson';
 import { VOWEL_FOUNDATION_LESSONS, type VowelFoundationSlug } from '@/content/romanian/vowel-foundation-lessons';
 import { CircumflexFoundationLesson } from '@/components/romanian/CircumflexFoundationLesson';
@@ -170,12 +165,6 @@ export default function RomanianGraphemeDetailPage({
   const displayWord = grapheme.exampleForm || exampleWord?.lemma || '';
   const letterReadings = LETTER_READINGS[grapheme.slug];
 
-  const toFaDigits = (n: number | string) =>
-    String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
-
-  const PrevNextArrow = isFa ? ArrowRight : ArrowLeft;
-  const ForwardArrow = isFa ? ArrowLeft : ArrowRight;
-
   if (grapheme.slug === 'a-breve') {
     return <main className="max-w-4xl mx-auto px-4 py-8 space-y-6">
       <Breadcrumb
@@ -256,173 +245,36 @@ export default function RomanianGraphemeDetailPage({
     </main>;
   }
 
-  return (
-    <main className="space-y-6 animate-fadeIn max-w-[960px] mx-auto px-4 py-8">
-      {/* Breadcrumb Navigation */}
-      <Breadcrumb
-        items={[
-          { label: isFa ? 'صفحه اصلی' : 'Home', href: '/' },
-          { label: isFa ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' },
-          { label: isFa ? 'الفبا و تلفظ' : 'Alphabet & Pronunciation', href: '/learn-romanian/alfabet' },
-          { label: grapheme.grapheme },
-        ]}
-        currentLang={currentLang}
-        disableJsonLd={true}
-      />
+  if (grapheme.slug === 'consoane') {
+    return <main className="mx-auto max-w-4xl space-y-6 px-4 py-8">
+      <Breadcrumb items={[{ label: isFa ? 'خانه' : 'Home', href: '/' }, { label: isFa ? 'الفبا و صداها' : 'Alphabet and sounds', href: '/learn-romanian/alfabet' }, { label: grapheme.grapheme }]} currentLang={currentLang} disableJsonLd />
+      <BasicConsonantPractice lang={currentLang} />
+    </main>;
+  }
 
-      <div className="rounded-2xl border border-blue-100 bg-blue-50 p-5 sm:p-6">
-        <p className="text-xs font-bold uppercase tracking-wide text-[#1554bd]">{isFa ? 'هدف این درس' : 'Your goal'}</p>
-        <p className="mt-2 text-sm leading-7 text-slate-700">{isFa ? 'این الگو را در واژهٔ نمونه پیدا کنید، قاعدهٔ آن را بخوانید و در تمرین‌های پایین بنویسید یا بگویید. می‌توانید هر بخش را دوباره انجام دهید.' : 'Find this pattern in the example, read its rule, then write or say it in the practice below. You can repeat any part.'}</p>
-        <div className="mt-4 flex flex-wrap gap-2 text-xs font-semibold text-[#1554bd]">
-          {(isFa ? ['۱. دیدن الگو', '۲. بررسی واژه', '۳. تمرین'] : ['1. See the pattern', '2. Explore a word', '3. Practise']).map(step => <span key={step} className="rounded-full bg-white px-3 py-1.5">{step}</span>)}
-        </div>
-      </div>
-
-      {/* Main Lesson Card */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-6 sm:p-10 shadow-md space-y-7">
-        {/* Top bar: back to alphabet and lesson number */}
-        <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-          <Link
-            href="/learn-romanian/alfabet"
-            className="hover:text-[#1554bd] dark:hover:text-blue-400 inline-flex items-center gap-1 font-medium transition-colors"
-          >
-            <PrevNextArrow className="w-3.5 h-3.5" />
-            <span>{isFa ? 'تمام حروف الفبا' : 'All Alphabet Lessons'}</span>
-          </Link>
-          <span className="font-mono bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-full font-semibold">
-            {isFa ? `درس ${toFaDigits(grapheme.order)} از ۲۴` : `Lesson ${grapheme.order} of 24`}
-          </span>
-        </div>
-
-        {/* Center: Large Letter & Audio Island */}
-        <div className="text-center py-3 space-y-5">
-          <div className="inline-flex items-center justify-center min-w-28 min-h-28 px-5 sm:min-w-36 sm:min-h-36 rounded-3xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/50 shadow-inner">
-            <span dir="ltr" lang="ro" className="text-4xl sm:text-5xl font-extrabold text-[#1554bd] dark:text-blue-400 font-heading">
-              {grapheme.grapheme}
-            </span>
-          </div>
-
-          <div className="space-y-2 max-w-lg mx-auto">
-            <h1 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100">
-              {isFa ? `تلفظ «${grapheme.grapheme}»` : `Pronunciation of "${grapheme.grapheme}"`}
-            </h1>
-            <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-              {isFa ? grapheme.soundHintFa : grapheme.soundHintEn}
-            </p>
-            {letterReadings && <div className="mx-auto flex max-w-md flex-col items-center gap-2 rounded-2xl border border-blue-100 bg-blue-50/70 p-4">
-              <div className="grid w-full gap-3 sm:grid-cols-2">{letterReadings.map(reading => <div key={reading.label} className="rounded-xl bg-white/80 p-3 text-center">
-                <span className="block text-xs font-bold text-slate-700">{isFa ? 'نام حرف' : 'Letter name'}</span>
-                <span lang="ro" dir="ltr" className="block text-sm font-semibold text-slate-800">{reading.label}: {reading.text}</span>
-                <PronunciationAudio currentLang={currentLang} label={reading.text} className="mx-auto mt-1" />
-                <span className="mt-3 block text-xs font-bold text-slate-700">{isFa ? reading.soundCaptionFa || 'آوای حرف در هجای کوتاه' : reading.soundCaptionEn || 'Letter sound in a short syllable'}</span>
-                <span lang="ro" dir="ltr" className="block text-sm font-semibold text-[#1554bd]">{reading.sound}</span>
-                <PronunciationAudio currentLang={currentLang} label={reading.sound} className="mx-auto mt-1" />
-              </div>)}</div>
-              <span className="text-xs leading-5 text-slate-600">{isFa ? 'برای واکه‌ها خود آوا پخش می‌شود. همخوان را در هجای کوتاه می‌شنوید تا آوا بدون افزودن نام حرف روشن باشد؛ واژهٔ کامل پایین جدا پخش می‌شود.' : 'Vowels play on their own. Consonants are heard in a short syllable so you hear the sound rather than the letter name; the full example word plays separately below.'}</span>
-            </div>}
-          </div>
-
-        </div>
-
-        {/* Example Word Section */}
-        {exampleWord && (
-          <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60 rounded-2xl p-6 sm:p-8 space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                {isFa ? 'واژه نمونه در رومانیایی' : 'Romanian Example Word'}
-              </span>
-            </div>
-
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-slate-200/60 dark:border-slate-700/50 pb-4">
-              <div className="flex items-baseline gap-3">
-                <span className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-                  {displayWord}
-                </span>
-                {exampleWord.definiteForm && (
-                  <span className="text-sm text-slate-500 font-normal">
-                    {isFa ? 'معرفه:' : 'definite:'} <strong className="font-semibold text-slate-700 dark:text-slate-300">{exampleWord.definiteForm}</strong>
-                  </span>
-                )}
-              </div>
-              <div className="text-base font-semibold text-[#1554bd] dark:text-blue-400">
-                {isFa ? exampleWord.translations.fa : exampleWord.translations.en}
-              </div>
-            </div>
-            <div className="flex flex-wrap items-center gap-3">
-              <PronunciationAudio currentLang={currentLang} label={displayWord} />
-              <span className="text-xs text-slate-500">{isFa ? 'پخش همین واژه با صدای مصنوعی رومانیایی مرورگر' : 'Plays this exact word with Romanian browser synthesis'}</span>
-            </div>
-
-            <div className="flex flex-wrap gap-4 text-xs text-slate-500 dark:text-slate-400">
-              {exampleWord.gender && (
-                <span>
-                  {isFa ? 'جنسیت:' : 'Gender:'}{' '}
-                  <strong className="text-slate-700 dark:text-slate-300">
-                    {exampleWord.gender === 'f'
-                      ? (isFa ? 'مؤنث (feminin)' : 'Feminine')
-                      : exampleWord.gender === 'm'
-                      ? (isFa ? 'مذکر (masculin)' : 'Masculine')
-                      : (isFa ? 'خنثی (neutru)' : 'Neuter')}
-                  </strong>
-                </span>
-              )}
-              {exampleWord.plural && (
-                <span>
-                  {isFa ? 'حالت جمع:' : 'Plural:'}{' '}
-                  <strong className="text-slate-700 dark:text-slate-300">{exampleWord.plural}</strong>
-                </span>
-              )}
-              {exampleWord.source?.label && (
-                <span>
-                  {isFa ? 'منبع واژه:' : 'Source:'}{' '}
-                  <span className="text-slate-600 dark:text-slate-400">{exampleWord.source.label}</span>
-                </span>
-              )}
-            </div>
-          </div>
-        )}
-
-      </div>
-      <section aria-labelledby="practice-heading" className="space-y-4">
-        <div><p className="text-xs font-bold uppercase tracking-wide text-[#1554bd]">{isFa ? 'بخش تمرین' : 'Practice'}</p><h2 id="practice-heading" className="mt-1 text-2xl font-extrabold text-slate-900">{isFa ? 'حالا نوبت شماست' : 'Now it is your turn'}</h2></div>
-        <LetterPositionPractice slug={grapheme.slug} lang={currentLang} />
-        {grapheme.order >= 11 && grapheme.order <= 16 && <CGPatternPractice slug={grapheme.slug as 'c-hard' | 'ce-ci' | 'che-chi' | 'g-hard' | 'ge-gi' | 'ghe-ghi'} lang={currentLang} />}
-        {grapheme.slug === 'consoane' && <BasicConsonantPractice lang={currentLang} />}
-        <ConsonantWordPractice slug={grapheme.slug} lang={currentLang} />
-      </section>
-      <nav aria-label={isFa ? 'درس قبلی و بعدی' : 'Previous and next lesson'} className="rounded-2xl border border-slate-200 bg-white p-5">
-        <p className="mb-4 text-sm font-bold text-slate-800">{isFa ? 'ادامهٔ مسیر' : 'Continue learning'}</p>
-        <div className="flex items-center justify-between gap-4">
-          {prevGrapheme ? (
-            <Link
-              href={`/learn-romanian/alfabet/${prevGrapheme.slug}`}
-              className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-[#1554bd] dark:hover:text-blue-400 transition-colors"
-            >
-              <PrevNextArrow className="w-4 h-4" />
-              <span>
-                {isFa ? 'حرف قبلی' : 'Previous'}: <strong className="font-bold">{prevGrapheme.grapheme}</strong>
-              </span>
-            </Link>
-          ) : (
-            <div />
-          )}
-
-          {nextGrapheme ? (
-            <Link
-              href={`/learn-romanian/alfabet/${nextGrapheme.slug}`}
-              className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-[#1554bd] dark:hover:text-blue-400 transition-colors"
-            >
-              <span>
-                {isFa ? 'حرف بعدی' : 'Next'}: <strong className="font-bold">{nextGrapheme.grapheme}</strong>
-              </span>
-              <ForwardArrow className="w-4 h-4" />
-            </Link>
-          ) : (
-            <div />
-          )}
-        </div>
-        <Link href="/learn-romanian/alfabet" className="mt-4 inline-block text-sm font-semibold text-[#1554bd] hover:underline">{isFa ? 'بازگشت به همهٔ حروف' : 'Back to all letters'}</Link>
-      </nav>
-    </main>
-  );
+  return <main className="mx-auto max-w-4xl space-y-6 px-4 py-8">
+    <Breadcrumb items={[
+      { label: isFa ? 'خانه' : 'Home', href: '/' },
+      { label: isFa ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' },
+      { label: isFa ? 'الفبا و صداها' : 'Alphabet and sounds', href: '/learn-romanian/alfabet' },
+      { label: grapheme.grapheme },
+    ]} currentLang={currentLang} disableJsonLd />
+    <GuidedAlphabetLesson
+      lang={currentLang}
+      slug={grapheme.slug}
+      symbol={grapheme.grapheme}
+      soundHint={isFa ? grapheme.soundHintFa : grapheme.soundHintEn}
+      readings={letterReadings}
+      example={exampleWord ? {
+        form: displayWord,
+        translation: isFa ? exampleWord.translations.fa : exampleWord.translations.en,
+        definite: exampleWord.definiteForm,
+        gender: exampleWord.gender === 'f' ? (isFa ? 'مؤنث' : 'feminine') : exampleWord.gender === 'm' ? (isFa ? 'مذکر' : 'masculine') : exampleWord.gender === 'n' ? (isFa ? 'خنثی' : 'neuter') : undefined,
+        plural: exampleWord.plural,
+        source: exampleWord.source?.label,
+      } : undefined}
+      previous={prevGrapheme ? { slug: prevGrapheme.slug, symbol: prevGrapheme.grapheme } : undefined}
+      next={nextGrapheme ? { slug: nextGrapheme.slug, symbol: nextGrapheme.grapheme } : undefined}
+    />
+  </main>;
 }

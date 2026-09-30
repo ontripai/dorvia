@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { AlphabetStageNav } from './AlphabetStageNav';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { PronunciationAudio } from './PronunciationAudio';
 import { SpokenWordCheck } from './SpokenWordCheck';
@@ -17,7 +18,6 @@ export type LoanLetterSlug = keyof typeof lessons;
 export function LoanLetterLesson({ slug, lang }: { slug: LoanLetterSlug; lang: 'fa' | 'en' }) {
   const item = lessons[slug];
   const isFa = lang === 'fa';
-  const stages = isFa ? ['شنیدن', 'کشف واژه', 'یادآوری', 'گفتن', 'نتیجه'] : ['Listen', 'Discover', 'Recall', 'Speak', 'Result'];
   const [stage, setStage] = React.useState(0);
   const [answer, setAnswer] = React.useState('');
   const [checked, setChecked] = React.useState(false);
@@ -42,7 +42,7 @@ export function LoanLetterLesson({ slug, lang }: { slug: LoanLetterSlug; lang: '
       </div>
       <p className="max-w-xl text-sm leading-6 text-blue-100">{isFa ? 'در پنج مرحله، جای حرف را در یک واژه ببینید، قاعدهٔ آن را کشف کنید و نوشتن و گفتن را تمرین کنید. هر مرحله قابل بازگشت است.' : 'Find this letter in a word, explore its grammar, then practise writing and speaking in five repeatable stages.'}</p>
     </header>
-    <nav aria-label={isFa ? 'مراحل درس' : 'Lesson stages'} className="flex flex-wrap gap-2 rounded-2xl border border-slate-200 bg-white p-3">{stages.map((name, index) => <button key={name} type="button" onClick={() => { setStage(index); setChecked(false); }} aria-current={stage === index ? 'step' : undefined} className={`rounded-xl px-3 py-2 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1554bd] ${stage === index ? 'bg-[#1554bd] text-white' : 'bg-slate-50 text-slate-700 hover:bg-blue-50'}`}>{index + 1}. {name}</button>)}</nav>
+    <AlphabetStageNav lang={lang} stage={stage} onSelect={index => { setStage(index); setChecked(false); }} />
     {stage === 0 && <section className="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 space-y-4 shadow-sm"><h2 className="text-xl font-bold">{isFa ? 'واژه را ببینید و بشنوید' : 'See and hear the word'}</h2><div className="rounded-2xl bg-blue-50 p-5"><p lang="ro" dir="ltr" className="text-3xl font-bold text-[#1554bd]">{item.word}</p><p className="mt-2">{isFa ? item.fa : item.en}</p></div><PronunciationAudio currentLang={lang} label={item.word} /><p className="text-xs text-slate-600">{isFa ? 'صدای مصنوعی مرورگر در وام‌واژه‌ها ممکن است دقیق نباشد؛ فایل تأییدشده هنوز نداریم.' : 'Browser speech may mispronounce loans; no verified recording is available yet.'}</p><button type="button" onClick={() => setStage(1)} className="block rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'کشف قاعده ←' : 'Discover the rule →'}</button></section>}
     {stage === 1 && <section className="rounded-2xl bg-white border border-slate-200 p-6 space-y-3"><h2 className="text-xl font-bold">{isFa ? 'معنی و قاعدهٔ همین واژه' : 'Meaning and this word’s grammar'}</h2><p lang="ro" dir="ltr" className="text-2xl font-bold">{item.word}</p><p>{isFa ? item.ruleFa : item.ruleEn}</p><p>{isFa ? item.useFa : item.useEn}</p><a href={item.source} target="_blank" rel="noopener noreferrer" className="text-[#1554bd] underline">{isFa ? 'منبع واژه' : 'Word source'}</a><button type="button" onClick={() => setStage(2)} className="block rounded-xl bg-[#1554bd] px-4 py-2 text-white">{isFa ? 'تمرین از حافظه' : 'Recall from memory'}</button></section>}
     {stage === 2 && <section className="rounded-2xl bg-white border border-slate-200 p-6 space-y-4"><h2 className="text-xl font-bold">{isFa ? `«${item.fa}» را با ${item.letter[0]} بنویسید.` : `Write “${item.en}” with ${item.letter[0]}.`}</h2><form onSubmit={event => { event.preventDefault(); setChecked(true); if (correct) setWritten(true); }} className="flex flex-wrap gap-2"><input lang="ro" dir="ltr" aria-label={isFa ? 'پاسخ رومانیایی' : 'Romanian answer'} autoComplete="off" value={answer} onChange={event => { setAnswer(event.target.value); setChecked(false); }} className="rounded-xl border border-slate-300 p-3" /><button type="submit" disabled={!answer.trim()} className="rounded-xl bg-[#1554bd] px-4 py-2 text-white disabled:opacity-50">{isFa ? 'بررسی' : 'Check'}</button></form>{checked && <p role="status" className={correct ? 'text-emerald-800' : 'text-amber-900'}>{correct ? isFa ? 'درست است.' : 'Correct.' : isFa ? 'به املا و جای حرف نگاه کنید و دوباره تلاش کنید.' : 'Check the spelling and try again.'}</p>}{correct && checked && <button type="button" onClick={() => setStage(3)} className="text-[#1554bd] underline">{isFa ? 'تمرین گفتاری' : 'Speaking practice'}</button>}</section>}

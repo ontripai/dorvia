@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { AlphabetStageNav } from './AlphabetStageNav';
 import type { RomanianWord } from '@/lib/romanian/types';
 import type { Language } from '@/types';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
@@ -29,7 +30,6 @@ function HighlightVowel({ text, vowel }: { text: string; vowel: string }) {
 export function VowelFoundationLesson({ lang, slug, data }: { lang: Language; slug: VowelFoundationSlug; data: LessonData }) {
   const isFa = lang === 'fa';
   const letter = VOWELS[slug];
-  const stages = isFa ? ['شنیدن آوا', 'واژه‌ها', 'نوشتن', 'گفتن', 'نتیجه'] : ['Hear the sound', 'Words', 'Write', 'Speak', 'Result'];
   const positions = isFa ? { start: 'آغاز واژه', middle: 'میانهٔ واژه', end: 'پایان واژه' } : { start: 'Word beginning', middle: 'Word middle', end: 'Word ending' };
   const [stage, setStage] = React.useState(0);
   const [sampleIndex, setSampleIndex] = React.useState(0);
@@ -74,9 +74,7 @@ export function VowelFoundationLesson({ lang, slug, data }: { lang: Language; sl
       <p className="max-w-2xl leading-7 text-blue-50">{isFa ? data.introFa : data.introEn}</p>
     </header>
 
-    <nav aria-label={isFa ? 'مراحل درس' : 'Lesson stages'} className="flex flex-wrap gap-2 rounded-2xl border border-slate-200 bg-white p-3">
-      {stages.map((name, index) => <button key={name} type="button" onClick={() => setStage(index)} aria-current={stage === index ? 'step' : undefined} className={`rounded-xl px-3 py-2 text-sm font-semibold ${stage === index ? 'bg-[#1554bd] text-white' : 'bg-slate-50 text-slate-700 hover:bg-blue-50'}`}>{index + 1}. {name}</button>)}
-    </nav>
+    <AlphabetStageNav lang={lang} stage={stage} onSelect={index => setStage(index)} />
 
     {stage === 0 && <section className="space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
       <h2 className="text-xl font-bold">{isFa ? 'اول خودِ آوا را بشنوید' : 'First, hear the vowel sound by itself'}</h2>

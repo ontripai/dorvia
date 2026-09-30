@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { AlphabetStageNav } from './AlphabetStageNav';
 import type { RomanianWord } from '@/lib/romanian/types';
 import type { Language } from '@/types';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
@@ -9,8 +10,6 @@ import { SpokenWordCheck } from './SpokenWordCheck';
 import { FINAL_I_FOUNDATION_LESSON } from '@/content/romanian/final-i-foundation-lesson';
 
 type LessonSample = (typeof FINAL_I_FOUNDATION_LESSON.samples)[number] & { word: RomanianWord };
-const stagesFa = ['شنیدن', 'مقایسهٔ واژه‌ها', 'نوشتن', 'گفتن', 'نتیجه'];
-const stagesEn = ['Listen', 'Compare words', 'Write', 'Speak', 'Result'];
 
 function normalize(value: string) {
   return value.normalize('NFC').trim().toLocaleLowerCase('ro-RO');
@@ -56,7 +55,7 @@ export function FinalIFoundationLesson({ lang, samples }: { lang: Language; samp
       <p className="text-xs text-blue-100">{isFa ? 'همهٔ پخش‌ها گفتار مصنوعی مرورگرند و ضبط گویندهٔ بازبینی‌شده نیستند.' : 'All playback uses browser speech synthesis, not reviewed speaker recordings.'}</p>
     </header>
 
-    <nav aria-label={isFa ? 'مراحل درس' : 'Lesson stages'} className="flex flex-wrap gap-2 rounded-2xl border border-slate-200 bg-white p-3">{(isFa ? stagesFa : stagesEn).map((label, step) => <button key={label} type="button" onClick={() => setStage(step)} aria-current={stage === step ? 'step' : undefined} className={`rounded-xl px-3 py-2 text-sm font-semibold ${stage === step ? 'bg-[#1554bd] text-white' : 'bg-slate-50 text-slate-700 hover:bg-blue-50'}`}>{step + 1}. {label}</button>)}</nav>
+    <AlphabetStageNav lang={lang} stage={stage} onSelect={index => setStage(index)} />
 
     {stage === 0 && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"><h2 className="text-xl font-bold">{isFa ? 'صدای حرف را از نقش پایانی جدا کنید' : 'Separate the letter sound from its word-final role'}</h2><div className="flex flex-wrap items-center gap-4 rounded-2xl bg-blue-50 p-5"><span lang="ro" dir="ltr" className="text-4xl font-extrabold text-[#1554bd]">i</span><span className="text-xl font-bold">/i/</span><PronunciationAudio currentLang={lang} label="i" /></div><p className="text-sm leading-6 text-slate-600">{isFa ? 'آوای پایهٔ حرف i شنیدنی است؛ اما در پایان همهٔ واژه‌ها به شکل یک واکهٔ کامل ادا نمی‌شود. تفاوت را با واژه‌های واقعی بشنوید.' : 'The basic i sound is clear, but word-final i is not always pronounced as a full vowel. Hear the difference in real words.'}</p><button type="button" onClick={() => setStage(1)} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'مقایسهٔ نمونه‌ها ←' : 'Compare examples →'}</button></section>}
 

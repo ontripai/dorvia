@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { AlphabetStageNav } from './AlphabetStageNav';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { PronunciationAudio } from './PronunciationAudio';
 
@@ -31,10 +32,6 @@ const words: Word[] = [
   { ro: 'astăzi', en: 'today', fa: 'امروز', position: 'middle', ruleFa: 'قید زمان است؛ جنس، جمع یا حرف تعریف ندارد. می‌تواند زمان رویداد را در جمله مشخص کند.', ruleEn: 'Time adverb; it has no gender, plural, or definite article. It locates an event in time.', forms: 'astăzi (صورت ثابت / invariable)', source: 'https://dexonline.ro/definitie/ast%C4%83zi' },
   { ro: 'ăsta', en: 'this one (masculine, informal)', fa: 'این یکی (مذکر، خودمانی)', position: 'start', ruleFa: 'ضمیر/صفت اشاره در گفتار خودمانی؛ مذکر مفرد است. صورت مؤنث asta و صورت رسمی‌تر acesta است.', ruleEn: 'Informal demonstrative pronoun/adjective, masculine singular. The feminine is asta; a more formal form is acesta.', forms: 'ăsta · asta · ăștia · astea', source: 'https://dexonline.ro/definitie/%C4%83sta' },
 ];
-const stages = {
-  fa: ['شنیدن', 'کشف صدا و واژه', 'یادآوری', 'کاربرد', 'نتیجه'],
-  en: ['Listen', 'Discover', 'Recall', 'Use it', 'Result'],
-};
 const recall = [
   { answer: 'masă', fa: '«میز» را با ă بنویسید.', en: 'Write “table” with ă.' },
   { answer: 'astăzi', fa: '«امروز» را با ă بنویسید.', en: 'Write “today” with ă.' },
@@ -121,12 +118,7 @@ export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
         <span className="text-xs text-blue-100">{isFa ? 'صدای مصنوعی نام حرف است؛ برای شنیدن آن در واژه، نمونه‌ها را جداگانه پخش کنید.' : 'Browser synthesis reads the letter name; play examples to hear it in words.'}</span>
       </div>
     </header>
-    <nav aria-label={isFa ? 'مراحل درس' : 'Lesson stages'} className="flex flex-wrap gap-2">
-      {stages[lang].map((label, i) => <button key={label} type="button" aria-current={phase === i ? 'step' : undefined} onClick={() => move(i as Phase)}
-        className={`rounded-full px-3 py-1.5 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1554bd] ${phase === i ? 'bg-[#1554bd] text-white' : 'bg-slate-100 text-slate-700 hover:bg-blue-50'}`}>
-        {isFa ? '۰۱۲۳۴۵۶۷۸۹'[i + 1] : i + 1}. {label}
-      </button>)}
-    </nav>
+    <AlphabetStageNav lang={lang} stage={phase} onSelect={index => move(index as Phase)} />
     {phase === 0 && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-5">
       <h2 className="text-xl font-bold">{isFa ? 'حرف و واژهٔ نمونه' : 'Letter and example word'}</h2>
       <p>{isFa ? 'جای ă را در واژهٔ «masă» ببینید و تکرار کنید. آن را با a یکی نخوانید. صدای ضبط‌شدهٔ این درس تا بررسی مطابقت با حرف پخش نمی‌شود.' : 'Find ă in “masă” and practise it. Do not confuse it with a. The recording is unavailable until it is checked against the letter.'}</p>
@@ -178,6 +170,6 @@ export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
       <Link href="/learn-romanian/alfabet" className="inline-block ms-3 text-[#1554bd] underline">{isFa ? 'دیگر درس‌های آوا' : 'Other sound lessons'}</Link>
     </section>}
     {priorCompletion && phase !== 4 && <p className="text-sm text-slate-500">{isFa ? 'این درس قبلاً روی همین دستگاه انجام شده است؛ تکرار آزاد است.' : 'You completed this lesson on this device; repeat it anytime.'}</p>}
-    <p className="text-xs text-slate-500">{isFa ? 'همهٔ صداهای این درس با گفتار مصنوعی مرورگر پخش می‌شوند و فایل گویندهٔ تأییدشده نیستند. تشخیص گفتار کیفیت تلفظ را نمره‌دهی نمی‌کند.' : 'All audio in this lesson uses browser synthesis, not verified speaker recordings. Speech recognition does not grade pronunciation.'}</p>
+    <p className="text-xs text-slate-500">{isFa ? 'واژه‌های دارای فایل بررسی‌شده با همان فایل و بقیه با صدای رومانیایی مرورگر پخش می‌شوند. تشخیص گفتار کیفیت تلفظ را نمره‌دهی نمی‌کند.' : 'Reviewed word files play where available; the others use a Romanian browser voice. Speech recognition does not grade pronunciation.'}</p>
   </div>;
 }

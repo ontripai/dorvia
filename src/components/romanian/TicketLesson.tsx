@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { LessonStageNav } from './LessonStageNav';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 
 type Locale = 'fa' | 'en';
@@ -249,13 +250,7 @@ export function TicketLesson({ lang }: { lang: Locale }) {
           {isFa ? 'در باجه بلیت، سؤال فروشنده را بفهمید و خودتان پاسخ بدهید.' : 'At a ticket counter, understand the clerk and answer for yourself.'}
         </p>
       </header>
-
-      <nav aria-label={isFa ? 'مراحل درس؛ برای جابه‌جایی انتخاب کنید' : 'Lesson stages; select to navigate'} className="flex flex-wrap gap-2">
-        {stages[lang].map((label, i) => <button key={label} type="button" onClick={() => move(i as Phase)} aria-current={phase === i ? 'step' : undefined}
-          className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1554bd] ${phase === i ? 'bg-[#1554bd] text-white' : i < phase ? 'bg-blue-50 text-[#1554bd] hover:bg-blue-100' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}>
-          {isFa ? '۰۱۲۳۴۵۶۷۸۹'[i + 1] : i + 1}. {label}
-        </button>)}
-      </nav>
+    <LessonStageNav lang={lang} labels={stages[lang]} stage={phase} onSelect={index => move(index as Phase)} />
 
       {phase === 0 && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-5">
         <h2 className="text-xl font-bold">{isFa ? 'ابتدا گفت‌وگو را بشنوید' : 'First, listen to the conversation'}</h2>

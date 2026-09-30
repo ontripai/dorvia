@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { AlphabetStageNav } from './AlphabetStageNav';
 import type { RomanianWord } from '@/lib/romanian/types';
 import type { Language } from '@/types';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
@@ -9,8 +10,6 @@ import { SpokenWordCheck } from './SpokenWordCheck';
 import { CIRCUMFLEX_FOUNDATION_LESSON } from '@/content/romanian/circumflex-foundation-lesson';
 
 type Sample = (typeof CIRCUMFLEX_FOUNDATION_LESSON.samples)[number] & { word: RomanianWord };
-const stagesFa = ['شنیدن آوا', 'کشف تفاوت', 'نوشتن', 'گفتن', 'نتیجه'];
-const stagesEn = ['Hear the sound', 'Explore the contrast', 'Write', 'Speak', 'Result'];
 
 function normalize(value: string) {
   return value.normalize('NFC').trim().toLocaleLowerCase('ro-RO');
@@ -24,7 +23,6 @@ function HighlightLetter({ text, target }: { text: string; target: 'â' | 'î' }
 
 export function CircumflexFoundationLesson({ lang, samples, focusLetter }: { lang: Language; samples: [Sample, Sample, Sample]; focusLetter?: 'â' | 'î' }) {
   const isFa = lang === 'fa';
-  const stages = isFa ? stagesFa : stagesEn;
   const [stage, setStage] = React.useState(0);
   const [index, setIndex] = React.useState(0);
   const [answer, setAnswer] = React.useState('');
@@ -72,7 +70,7 @@ export function CircumflexFoundationLesson({ lang, samples, focusLetter }: { lan
       <p className="text-xs leading-5 text-blue-100">{isFa ? 'آوای /ɨ/ در فارسی معادل دقیق ندارد؛ به آوای شنیده‌شده در واژه‌های نمونه گوش دهید. صدا از گفتار مصنوعی مرورگر است.' : '/ɨ/ has no exact English equivalent; listen to it in the example words. Playback uses browser speech synthesis.'}</p>
     </header>
 
-    <nav aria-label={isFa ? 'مراحل درس' : 'Lesson stages'} className="flex flex-wrap gap-2 rounded-2xl border border-slate-200 bg-white p-3">{stages.map((label, step) => <button key={label} type="button" onClick={() => setStage(step)} aria-current={stage === step ? 'step' : undefined} className={`rounded-xl px-3 py-2 text-sm font-semibold ${stage === step ? 'bg-[#1554bd] text-white' : 'bg-slate-50 text-slate-700 hover:bg-blue-50'}`}>{step + 1}. {label}</button>)}</nav>
+    <AlphabetStageNav lang={lang} stage={stage} onSelect={index => setStage(index)} />
 
     {stage === 0 && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"><h2 className="text-xl font-bold">{isFa ? 'یک آوا، دو حرف' : 'One sound, two letters'}</h2><p className="text-sm leading-6 text-slate-600">{isFa ? 'Â و Î در جایگاه‌های متفاوت نوشته می‌شوند، اما هر دو واکهٔ /ɨ/ دارند. نام هر حرف را جدا از صدای آن بشنوید.' : 'Â and Î appear in different spelling positions but both represent /ɨ/. Hear each letter name separately from its sound.'}</p><div className="flex flex-wrap gap-4 rounded-2xl bg-blue-50 p-5"><span lang="ro" dir="ltr" className="text-3xl font-bold">Â / Î</span><span className="text-xl font-bold text-[#1554bd]">/ɨ/</span><PronunciationAudio currentLang={lang} label="î" /></div><button type="button" onClick={() => setStage(1)} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'دیدن قاعده در واژه‌ها ←' : 'Explore the spelling in words →'}</button></section>}
 
