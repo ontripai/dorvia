@@ -124,7 +124,8 @@ export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
       <p>{isFa ? 'جای ă را در واژهٔ «masă» ببینید و تکرار کنید. آن را با a یکی نخوانید. صدای ضبط‌شدهٔ این درس تا بررسی مطابقت با حرف پخش نمی‌شود.' : 'Find ă in “masă” and practise it. Do not confuse it with a. The recording is unavailable until it is checked against the letter.'}</p>
       <div lang="ro" dir="ltr" className="text-4xl font-bold text-[#1554bd]">mas<span className="underline decoration-amber-500 decoration-4">ă</span></div>
       <PronunciationAudio currentLang={lang} label="masă" />
-      <p className="text-sm text-slate-600">{isFa ? 'پخش واژه‌ها در مرحلهٔ بعد به صدای رومانیایی مرورگر وابسته است و صدای تأییدشدهٔ گوینده نیست.' : 'Word playback in the next stage relies on a Romanian browser voice and is not a verified speaker recording.'}</p>
+      <div className="grid gap-3 sm:grid-cols-3">{words.filter(word => word.ro !== 'masă').map(word => <div key={word.ro} className="rounded-xl bg-blue-50 p-3"><p lang="ro" dir="ltr" className="text-lg font-bold">{word.ro}</p><p className="text-sm">{isFa ? word.fa : word.en}</p><PronunciationAudio currentLang={lang} label={word.ro} variant="compact" /></div>)}</div>
+      <p className="text-sm text-slate-600">{isFa ? 'جزئیات و قاعدهٔ هر واژه در مرحلهٔ بعد باز می‌شود. فایل‌های بررسی‌شده در صورت وجود پخش می‌شوند؛ بقیه از صدای رومانیایی مرورگر استفاده می‌کنند.' : 'Open the next stage for each word’s grammar. Reviewed files play where available; other words use a Romanian browser voice.'}</p>
       <button type="button" onClick={() => move(1)} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-bold">{isFa ? 'کشف واژه‌ها' : 'Explore the words'}</button>
     </section>}
     {phase === 1 && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-5">
