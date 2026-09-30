@@ -30,6 +30,16 @@ export function LoanLetterLesson({ slug, lang }: { slug: LoanLetterSlug; lang: '
       <p className="text-sm font-semibold text-blue-100">{isFa ? 'الفبا · حروف وام‌واژه‌ها' : 'Alphabet · letters in loans'}</p>
       <h1 className="text-5xl font-extrabold" lang="ro" dir="ltr">{item.letter}</h1>
       <p>{isFa ? `نام حرف: ${item.name}` : `Letter name: ${item.name}`}</p>
+      <div className="rounded-2xl border border-white/20 bg-white/10 p-4 space-y-2">
+        <p className="text-sm font-bold">{isFa ? 'شنیدن نام حرف' : 'Hear the letter name'}</p>
+        <PronunciationAudio currentLang={lang} label={item.name} />
+        <p className="text-xs text-blue-100">{isFa ? slug === 'k' ? 'صدای مصنوعی مرورگر است؛ واژهٔ نمونه را هم جداگانه بشنوید.' : 'در Q، W و Y صدای ثابت و یگانه‌ای برای همهٔ وام‌واژه‌ها نداریم؛ تلفظ همین نمونه را جدا بشنوید.' : slug === 'k' ? 'Browser synthesis; hear the example word separately too.' : 'Q, W and Y do not have one fixed sound across loans; hear this example word separately.'}</p>
+        <div className="border-t border-white/20 pt-2">
+          <p className="text-sm font-bold">{isFa ? 'شنیدن آوای حرف در هجای کوتاه یا واژهٔ نمونه' : 'Hear the sound in a short syllable or example word'}</p>
+          <PronunciationAudio currentLang={lang} label={slug === 'k' ? 'ka' : item.word} />
+          <p className="text-xs text-blue-100">{isFa ? slug === 'k' ? 'برای K آوا در هجای کوتاه ka شنیده می‌شود؛ پایین‌تر خود واژهٔ kilometru را جدا پخش کنید.' : `این پخش فقط صدای ${item.letter[0]} را در واژهٔ «${item.word}» نشان می‌دهد؛ آن را به همهٔ وام‌واژه‌ها تعمیم ندهید.` : slug === 'k' ? 'K is heard in the short syllable ka; play kilometru separately below.' : `This plays ${item.letter[0]} in “${item.word}”; the sound can vary in other loanwords.`}</p>
+        </div>
+      </div>
       <p className="max-w-xl text-sm leading-6 text-blue-100">{isFa ? 'در پنج مرحله، جای حرف را در یک واژه ببینید، قاعدهٔ آن را کشف کنید و نوشتن و گفتن را تمرین کنید. هر مرحله قابل بازگشت است.' : 'Find this letter in a word, explore its grammar, then practise writing and speaking in five repeatable stages.'}</p>
     </header>
     <nav aria-label={isFa ? 'مراحل درس' : 'Lesson stages'} className="flex flex-wrap gap-2 rounded-2xl border border-slate-200 bg-white p-3">{stages.map((name, index) => <button key={name} type="button" onClick={() => { setStage(index); setChecked(false); }} aria-current={stage === index ? 'step' : undefined} className={`rounded-xl px-3 py-2 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1554bd] ${stage === index ? 'bg-[#1554bd] text-white' : 'bg-slate-50 text-slate-700 hover:bg-blue-50'}`}>{index + 1}. {name}</button>)}</nav>

@@ -18,10 +18,36 @@ import { LoanLetterLesson } from '@/components/romanian/LoanLetterLesson';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { ArrowLeft, ArrowRight, ChevronRight, ChevronLeft } from '@/components/Icons';
+import { VowelFoundationLesson } from '@/components/romanian/VowelFoundationLesson';
+import { VOWEL_FOUNDATION_LESSONS, type VowelFoundationSlug } from '@/content/romanian/vowel-foundation-lessons';
+import { CircumflexFoundationLesson } from '@/components/romanian/CircumflexFoundationLesson';
+import { CIRCUMFLEX_FOUNDATION_LESSON } from '@/content/romanian/circumflex-foundation-lesson';
+import { FinalIFoundationLesson } from '@/components/romanian/FinalIFoundationLesson';
+import { FINAL_I_FOUNDATION_LESSON } from '@/content/romanian/final-i-foundation-lesson';
 
 const LOAN_LETTER_SLUGS = ['k', 'q', 'w', 'y'] as const;
+const LETTER_READINGS: Record<string, Array<{ label: string; text: string; sound: string; soundCaptionFa?: string; soundCaptionEn?: string }>> = {
+  a: [{ label: 'A', text: 'a', sound: 'a' }], e: [{ label: 'E', text: 'e', sound: 'e' }], i: [{ label: 'I', text: 'i', sound: 'i' }],
+  o: [{ label: 'O', text: 'o', sound: 'o' }], u: [{ label: 'U', text: 'u', sound: 'u' }],
+  'a-breve': [{ label: 'Ă', text: 'ă', sound: 'ă' }],
+  'a-circ': [{ label: 'Â', text: 'î din a', sound: 'î' }, { label: 'Î', text: 'î din i', sound: 'î' }],
+  'c-hard': [{ label: 'C', text: 'ce', sound: 'ca' }], 'g-hard': [{ label: 'G', text: 'ge', sound: 'ga' }],
+  's-comma': [{ label: 'Ș', text: 'șe', sound: 'șa' }], 't-comma': [{ label: 'Ț', text: 'țe', sound: 'ța' }],
+  j: [{ label: 'J', text: 'je', sound: 'ja' }], r: [{ label: 'R', text: 'er', sound: 'ra' }], v: [{ label: 'V', text: 've', sound: 'va' }],
+  h: [{ label: 'H', text: 'haș', sound: 'ha' }], s: [{ label: 'S', text: 'es', sound: 'sa' }],
+  x: [{ label: 'X', text: 'iks', sound: 'taxi', soundCaptionFa: 'صدای x در واژهٔ taxi', soundCaptionEn: 'X in the word taxi' }],
+};
 function isLoanLetterSlug(slug: string): slug is typeof LOAN_LETTER_SLUGS[number] {
   return LOAN_LETTER_SLUGS.some(letter => letter === slug);
+}
+function isFoundationVowel(slug: string): slug is VowelFoundationSlug {
+  return Object.hasOwn(VOWEL_FOUNDATION_LESSONS, slug);
+}
+function isCircumflexLesson(slug: string): slug is 'a-circ' | 'circ-rule' {
+  return slug === 'a-circ' || slug === 'circ-rule';
+}
+function isFinalILesson(slug: string): slug is 'i-final' {
+  return slug === 'i-final';
 }
 
 export function generateStaticParams() {
@@ -44,6 +70,28 @@ export async function generateMetadata({
   const grapheme = getGraphemeBySlug(params.slug);
   if (isLoanLetterSlug(params.slug)) {
     return { title: params.lang === 'fa' ? `حرف ${params.slug.toUpperCase()} در الفبای رومانیایی | DORVIA` : `Romanian letter ${params.slug.toUpperCase()} | DORVIA`, robots: { index: false, follow: false } };
+  }
+  if (isFoundationVowel(params.slug)) {
+    const lesson = VOWEL_FOUNDATION_LESSONS[params.slug];
+    return {
+      title: params.lang === 'fa' ? `${lesson.titleFa} | DORVIA` : `${lesson.titleEn} | DORVIA`,
+      description: params.lang === 'fa' ? `${lesson.introFa} همراه با تلفظ واژه‌های نمونه، نوشتن و گفتار.` : `${lesson.introEn} Includes word pronunciation, writing and speaking practice.`,
+      robots: { index: false, follow: false },
+    };
+  }
+  if (isCircumflexLesson(params.slug)) {
+    return {
+      title: params.lang === 'fa' ? `${CIRCUMFLEX_FOUNDATION_LESSON.titleFa} | DORVIA` : `${CIRCUMFLEX_FOUNDATION_LESSON.titleEn} | DORVIA`,
+      description: params.lang === 'fa' ? CIRCUMFLEX_FOUNDATION_LESSON.introFa : CIRCUMFLEX_FOUNDATION_LESSON.introEn,
+      robots: { index: false, follow: false },
+    };
+  }
+  if (isFinalILesson(params.slug)) {
+    return {
+      title: params.lang === 'fa' ? `${FINAL_I_FOUNDATION_LESSON.titleFa} | DORVIA` : `${FINAL_I_FOUNDATION_LESSON.titleEn} | DORVIA`,
+      description: params.lang === 'fa' ? FINAL_I_FOUNDATION_LESSON.introFa : FINAL_I_FOUNDATION_LESSON.introEn,
+      robots: { index: false, follow: false },
+    };
   }
   if (!grapheme) {
     return {
@@ -96,6 +144,7 @@ export default function RomanianGraphemeDetailPage({
 
   const exampleWord = getWordById(grapheme.exampleWordId);
   const displayWord = grapheme.exampleForm || exampleWord?.lemma || '';
+  const letterReadings = LETTER_READINGS[grapheme.slug];
 
   const toFaDigits = (n: number | string) =>
     String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
@@ -116,6 +165,70 @@ export default function RomanianGraphemeDetailPage({
         disableJsonLd
       />
       <ABreveFoundationLesson lang={currentLang} />
+    </main>;
+  }
+
+  if (isCircumflexLesson(grapheme.slug)) {
+    const mapped = CIRCUMFLEX_FOUNDATION_LESSON.samples.map(sample => {
+      const word = getWordById(sample.wordId);
+      if (!word) notFound();
+      return { ...sample, word };
+    });
+    return <main className="max-w-4xl mx-auto px-4 py-8 space-y-6">
+      <Breadcrumb
+        items={[
+          { label: isFa ? 'خانه' : 'Home', href: '/' },
+          { label: isFa ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' },
+          { label: isFa ? 'الفبا و تلفظ' : 'Alphabet & pronunciation', href: '/learn-romanian/alfabet' },
+          { label: grapheme.grapheme },
+        ]}
+        currentLang={currentLang}
+        disableJsonLd
+      />
+      <CircumflexFoundationLesson lang={currentLang} samples={mapped as unknown as [typeof mapped[number], typeof mapped[number], typeof mapped[number]]} />
+    </main>;
+  }
+
+  if (isFinalILesson(grapheme.slug)) {
+    const mapped = FINAL_I_FOUNDATION_LESSON.samples.map(sample => {
+      const word = getWordById(sample.wordId);
+      if (!word) notFound();
+      return { ...sample, word };
+    });
+    return <main className="max-w-4xl mx-auto px-4 py-8 space-y-6">
+      <Breadcrumb
+        items={[
+          { label: isFa ? 'خانه' : 'Home', href: '/' },
+          { label: isFa ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' },
+          { label: isFa ? 'الفبا و تلفظ' : 'Alphabet & pronunciation', href: '/learn-romanian/alfabet' },
+          { label: grapheme.grapheme },
+        ]}
+        currentLang={currentLang}
+        disableJsonLd
+      />
+      <FinalIFoundationLesson lang={currentLang} samples={mapped as unknown as [typeof mapped[number], typeof mapped[number], typeof mapped[number]]} />
+    </main>;
+  }
+
+  if (isFoundationVowel(grapheme.slug)) {
+    const lesson = VOWEL_FOUNDATION_LESSONS[grapheme.slug];
+    const samples = lesson.samples.map(sample => {
+      const word = getWordById(sample.wordId);
+      if (!word) notFound();
+      return { ...sample, word };
+    });
+    return <main className="max-w-4xl mx-auto px-4 py-8 space-y-6">
+      <Breadcrumb
+        items={[
+          { label: isFa ? 'خانه' : 'Home', href: '/' },
+          { label: isFa ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' },
+          { label: isFa ? 'الفبا و تلفظ' : 'Alphabet & pronunciation', href: '/learn-romanian/alfabet' },
+          { label: grapheme.grapheme },
+        ]}
+        currentLang={currentLang}
+        disableJsonLd
+      />
+      <VowelFoundationLesson lang={currentLang} slug={grapheme.slug} data={{ ...lesson, samples: samples as typeof samples & [typeof samples[number], typeof samples[number], typeof samples[number]] }} />
     </main>;
   }
 
@@ -172,14 +285,19 @@ export default function RomanianGraphemeDetailPage({
             <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
               {isFa ? grapheme.soundHintFa : grapheme.soundHintEn}
             </p>
+            {letterReadings && <div className="mx-auto flex max-w-md flex-col items-center gap-2 rounded-2xl border border-blue-100 bg-blue-50/70 p-4">
+              <div className="grid w-full gap-3 sm:grid-cols-2">{letterReadings.map(reading => <div key={reading.label} className="rounded-xl bg-white/80 p-3 text-center">
+                <span className="block text-xs font-bold text-slate-700">{isFa ? 'نام حرف' : 'Letter name'}</span>
+                <span lang="ro" dir="ltr" className="block text-sm font-semibold text-slate-800">{reading.label}: {reading.text}</span>
+                <PronunciationAudio currentLang={currentLang} label={reading.text} className="mx-auto mt-1" />
+                <span className="mt-3 block text-xs font-bold text-slate-700">{isFa ? reading.soundCaptionFa || 'آوای حرف در هجای کوتاه' : reading.soundCaptionEn || 'Letter sound in a short syllable'}</span>
+                <span lang="ro" dir="ltr" className="block text-sm font-semibold text-[#1554bd]">{reading.sound}</span>
+                <PronunciationAudio currentLang={currentLang} label={reading.sound} className="mx-auto mt-1" />
+              </div>)}</div>
+              <span className="text-xs leading-5 text-slate-600">{isFa ? 'برای واکه‌ها خود آوا پخش می‌شود. همخوان را در هجای کوتاه می‌شنوید تا آوا بدون افزودن نام حرف روشن باشد؛ واژهٔ کامل پایین جدا پخش می‌شود.' : 'Vowels play on their own. Consonants are heard in a short syllable so you hear the sound rather than the letter name; the full example word plays separately below.'}</span>
+            </div>}
           </div>
 
-          {displayWord && <div className="inline-flex flex-col items-center gap-2 rounded-2xl bg-slate-50 px-5 py-4">
-            <span className="text-xs font-semibold text-slate-600">{isFa ? 'شنیدن واژهٔ نمونه' : 'Hear the example word'}</span>
-            <strong dir="ltr" lang="ro" className="text-xl text-slate-900">{displayWord}</strong>
-            <PronunciationAudio currentLang={currentLang} label={displayWord} />
-            <span className="max-w-xs text-xs leading-5 text-slate-500">{isFa ? 'صدای مصنوعی مرورگر؛ تلفظ مستقل حرف یا ضبط تأییدشده نیست.' : 'Browser synthesis; not an isolated letter or verified recording.'}</span>
-          </div>}
         </div>
 
         {/* Example Word Section */}
@@ -205,6 +323,10 @@ export default function RomanianGraphemeDetailPage({
               <div className="text-base font-semibold text-[#1554bd] dark:text-blue-400">
                 {isFa ? exampleWord.translations.fa : exampleWord.translations.en}
               </div>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <PronunciationAudio currentLang={currentLang} label={displayWord} />
+              <span className="text-xs text-slate-500">{isFa ? 'پخش همین واژه با صدای مصنوعی رومانیایی مرورگر' : 'Plays this exact word with Romanian browser synthesis'}</span>
             </div>
 
             <div className="flex flex-wrap gap-4 text-xs text-slate-500 dark:text-slate-400">

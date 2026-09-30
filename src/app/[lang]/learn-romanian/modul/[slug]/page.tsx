@@ -562,6 +562,14 @@ export default function RomanianStationModulePage({
         </div>
       </div>
 
+      {station.slug === 'numere' && (
+        <Link href="/learn-romanian/lectie/un-o-doi-doua" className="block rounded-2xl border border-emerald-200 bg-emerald-50 p-5 hover:border-emerald-500 transition-colors">
+          <span className="text-xs font-bold text-emerald-900">{isFa ? 'درس تعاملی · گام اول اعداد' : 'Interactive lesson · first numbers step'}</span>
+          <h2 className="mt-1 text-lg font-extrabold text-[#142033]">{isFa ? 'یک و دو را با جنس اسم هماهنگ کن' : 'Match one and two to noun gender'}</h2>
+          <p className="mt-1 text-sm text-slate-700">{isFa ? 'un/o، doi/două و اسم خنثی را با نوشتن و مکالمه تمرین کن.' : 'Practise un/o, doi/două and neuter nouns by writing and speaking.'}</p>
+        </Link>
+      )}
+
       {hasSteps ? (
         /* Stepped layout — teaching order */
         <div className="space-y-10">

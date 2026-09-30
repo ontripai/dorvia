@@ -12,6 +12,48 @@ import { RomanianWord, RomanianGrapheme } from '@/lib/romanian/types';
 
 export const FOUNDATION_WORDS: RomanianWord[] = [
   {
+    "id": "w-mana",
+    "lemma": "mână",
+    "pos": "noun",
+    "gender": "f",
+    "definiteForm": "mâna",
+    "plural": "mâini",
+    "translations": { "en": "hand", "fa": "دست" },
+    "domains": ["core"],
+    "intendedUse": "produce",
+    "source": { "kind": "common-usage", "label": "dexonline (DOOM 3)", "url": "https://dexonline.ro/definitie/m%C3%A2n%C4%83/paradigma" },
+    "reviewer": "ai-only",
+    "status": "published"
+  },
+  {
+    "id": "w-inima",
+    "lemma": "inimă",
+    "pos": "noun",
+    "gender": "f",
+    "definiteForm": "inima",
+    "plural": "inimi",
+    "translations": { "en": "heart", "fa": "قلب" },
+    "domains": ["core"],
+    "intendedUse": "produce",
+    "source": { "kind": "common-usage", "label": "dexonline (DOOM 3)", "url": "https://dexonline.ro/definitie/inim%C4%83/paradigma" },
+    "reviewer": "ai-only",
+    "status": "published"
+  },
+  {
+    "id": "w-radio",
+    "lemma": "radio",
+    "pos": "noun",
+    "gender": "n",
+    "definiteForm": "radioul",
+    "plural": "radiouri",
+    "translations": { "en": "radio", "fa": "رادیو" },
+    "domains": ["core"],
+    "intendedUse": "produce",
+    "source": { "kind": "common-usage", "label": "dexonline (DOOM 3)", "url": "https://dexonline.ro/definitie/radio/paradigma" },
+    "reviewer": "ai-only",
+    "status": "published"
+  },
+  {
     "id": "w-apa",
     "lemma": "apă",
     "pos": "noun",

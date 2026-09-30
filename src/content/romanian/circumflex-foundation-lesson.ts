@@ -1,0 +1,22 @@
+export const CIRCUMFLEX_FOUNDATION_LESSON = {
+  titleFa: 'صدای مشترک â و î، املای متفاوت',
+  titleEn: 'The shared sound of â and î, with different spelling',
+  introFa: 'Â و Î دو حرف جدا هستند، اما در رومانیایی یک واکهٔ مرکزیِ مشترک /ɨ/ دارند. در واژه‌های معمول، Î بیشتر در آغاز و â در میانه نوشته می‌شود؛ در پایان مصدرهای فعل نیز î می‌آید.',
+  introEn: 'Â and Î are separate letters but share the Romanian central vowel /ɨ/. In ordinary words, î is generally written at the beginning and â in the middle; infinitives also end in î.',
+  samples: [
+    { wordId: 'w-mana', target: 'â', ipa: '/ˈmɨ.nə/', pronunciationFa: 'مِنَ (تقریبی)', noteFa: 'â میان حروف واژه آمده است. /ɨ/ معادل دقیق فارسی ندارد: زبان را بالا و کمی عقب ببرید و لب‌ها را گرد نکنید.', noteEn: 'Â occurs inside the word. /ɨ/ has no exact Persian equivalent: raise and retract the tongue slightly, with unrounded lips.' },
+    { wordId: 'w-romana', target: 'â', ipa: '/roˈmɨ.nə/', pronunciationFa: 'رومِنَ (تقریبی)', noteFa: 'در română نیز â در میانهٔ واژه است. این واژه به معنی «زبان رومانیایی» است؛ صورت مؤنث română با اسم مؤنث می‌آید.', noteEn: 'Â is medial in română too. It means “Romanian language”; the feminine form română agrees with feminine nouns.' },
+    { wordId: 'w-inainte', target: 'î', ipa: '/ɨ.na.in.te/', pronunciationFa: 'اِنَ‌اینتِ (تقریبی)', noteFa: 'Î در آغاز واژه آمده است. قاعدهٔ جایگاه یک راهنمای املایی است؛ در واژه‌های مرکب استثناهایی وجود دارد.', noteEn: 'Î begins the word. The positional rule is a spelling guide; compounds have exceptions.' },
+  ] as const,
+  speakingPhrase: 'Am mâna în buzunar.',
+  speakingFa: 'دستم در جیبم است.',
+  speakingEn: 'I have my hand in my pocket.',
+  speakingNoteFa: 'در این جمله، mâna با â نوشته می‌شود و în با î آغاز می‌شود.',
+  speakingNoteEn: 'In this sentence, mâna is written with â and în begins with î.',
+  finalInfinitive: 'a coborî',
+  finalInfinitiveFa: 'پایین آمدن / پیاده شدن',
+  finalInfinitiveEn: 'to descend / get off',
+  finalInfinitiveIPA: '/a ko.boˈrɨ/',
+  finalInfinitiveNoteFa: 'در پایان مصدرهای فعل نیز î نوشته می‌شود؛ مانند a coborî. ترکیب‌ها و نام‌های خاص را باید جداگانه بررسی کرد.',
+  finalInfinitiveNoteEn: 'Infinitives also end in î, as in a coborî. Compounds and proper names need separate checking.',
+} as const;

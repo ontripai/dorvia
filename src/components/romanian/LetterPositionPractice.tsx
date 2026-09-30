@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { SpokenWordCheck } from './SpokenWordCheck';
+import { PronunciationAudio } from './PronunciationAudio';
 
 type Example = { word: string; fa: string; en: string; ruleFa: string; ruleEn: string; source: string };
 type SetOfExamples = { letter: string; samples: [Example, Example, Example]; noteFa?: string; noteEn?: string };
@@ -53,24 +54,11 @@ export function LetterPositionPractice({ slug, lang }: { slug: string; lang: 'fa
   const set = examples[slug];
   const [answer, setAnswer] = React.useState('');
   const [checked, setChecked] = React.useState(false);
-  const [audioNotice, setAudioNotice] = React.useState('');
   if (!set) return null;
   const isFa = lang === 'fa';
   const positions = isFa ? ['آغاز', 'میانه', 'پایان'] : ['Beginning', 'Middle', 'End'];
   const target = set.samples[2].word;
   const correct = answer.normalize('NFC').trim().toLocaleLowerCase('ro-RO') === target;
-
-  function speak(word: string) {
-    const voice = window.speechSynthesis?.getVoices().find(v => v.lang.toLowerCase().startsWith('ro'));
-    if (!voice) { setAudioNotice(isFa ? 'صدای رومانیایی مرورگر در دسترس نیست.' : 'A Romanian browser voice is unavailable.'); return; }
-    window.speechSynthesis.cancel();
-    setAudioNotice('');
-    const utterance = new SpeechSynthesisUtterance(word);
-    utterance.voice = voice;
-    utterance.lang = 'ro-RO';
-    utterance.rate = 0.8;
-    window.speechSynthesis.speak(utterance);
-  }
 
   return <section className="rounded-2xl border border-blue-200 bg-white p-5 sm:p-7 space-y-5" dir={isFa ? 'rtl' : 'ltr'}>
     <h2 className="text-xl font-bold">{isFa ? `جای «${set.letter}» در واژه` : `Where ${set.letter} appears in a word`}</h2>
@@ -80,16 +68,15 @@ export function LetterPositionPractice({ slug, lang }: { slug: string; lang: 'fa
       <p className="text-xs font-semibold text-[#1554bd]">{positions[index]}</p>
       <p lang="ro" dir="ltr" className="text-2xl font-bold">{sample.word}</p>
       <p className="text-sm">{isFa ? sample.fa : sample.en}</p>
-      <button type="button" onClick={() => speak(sample.word)} className="text-sm text-[#1554bd] underline">{isFa ? 'شنیدن با صدای مرورگر' : 'Hear browser voice'}</button>
+      <div className="flex flex-wrap items-center gap-2"><span className="text-xs text-slate-600">{isFa ? 'شنیدن واژهٔ نمونه' : 'Hear the example word'}</span><PronunciationAudio currentLang={lang} label={sample.word} /></div>
       <details className="rounded-lg bg-white p-2 text-sm"><summary className="cursor-pointer font-semibold">{isFa ? 'قاعده و صورت‌ها' : 'Grammar and forms'}</summary><p className="mt-2">{isFa ? sample.ruleFa : sample.ruleEn}</p><a href={sample.source} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-[#1554bd] underline">{isFa ? 'منبع' : 'Source'}</a></details>
     </article>)}</div>
-    {audioNotice && <p role="status" className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900">{audioNotice}</p>}
     <form onSubmit={event => { event.preventDefault(); setChecked(true); }} className="space-y-2">
       <label htmlFor={`letter-${slug}`} className="block font-semibold">{isFa ? `واژهٔ «${set.samples[2].fa}» را با حرف هدف در پایان بنویسید.` : `Write “${set.samples[2].en}” with the target letter at the end.`}</label>
       <div className="flex flex-wrap gap-2"><input id={`letter-${slug}`} lang="ro" dir="ltr" value={answer} onChange={event => { setAnswer(event.target.value); setChecked(false); }} autoComplete="off" className="rounded-xl border border-slate-300 px-3 py-2" /><button type="submit" disabled={!answer.trim()} className="rounded-xl bg-[#1554bd] px-4 py-2 text-white disabled:opacity-50">{isFa ? 'بررسی' : 'Check'}</button></div>
       {checked && <p role="status" className={correct ? 'text-emerald-800' : 'text-amber-800'}>{correct ? isFa ? 'درست است. واژه را بلند بخوانید.' : 'Correct. Read the word aloud.' : isFa ? 'املای واژه و جای حرف را دوباره بررسی کنید.' : 'Check the word spelling and letter position again.'}</p>}
     </form>
     <SpokenWordCheck key={target} word={target} lang={lang} />
-    <p className="text-xs text-slate-600">{isFa ? 'صوت ضبط‌شدهٔ بالای صفحه نمونهٔ درس است؛ صدای این سه واژه فقط در صورت وجود صدای رومانیایی مرورگر پخش می‌شود.' : 'The recorded clip above is the lesson sample; these three words use a Romanian browser voice only when available.'}</p>
+    <p className="text-xs text-slate-600">{isFa ? 'هر سه واژه با صدای مصنوعی رومانیایی مرورگر پخش می‌شوند؛ این صدا ضبط تأییدشدهٔ گوینده نیست.' : 'All three words use Romanian browser synthesis; this is not a verified speaker recording.'}</p>
   </section>;
 }

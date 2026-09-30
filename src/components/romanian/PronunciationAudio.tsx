@@ -8,6 +8,25 @@ import type { Language } from '@/types';
 // Synthesis receives the exact Romanian text displayed for this item.
 let activeReset: (() => void) | null = null;
 
+function findRomanianVoice(): Promise<SpeechSynthesisVoice | undefined> {
+  const synthesis = window.speechSynthesis;
+  const immediate = synthesis.getVoices().find(v => v.lang.toLowerCase().startsWith('ro'));
+  if (immediate) return Promise.resolve(immediate);
+  return new Promise(resolve => {
+    let finished = false;
+    const finish = (voice?: SpeechSynthesisVoice) => {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timer);
+      synthesis.removeEventListener('voiceschanged', retry);
+      resolve(voice);
+    };
+    const retry = () => finish(synthesis.getVoices().find(v => v.lang.toLowerCase().startsWith('ro')));
+    const timer = window.setTimeout(() => finish(), 1500);
+    synthesis.addEventListener('voiceschanged', retry);
+  });
+}
+
 export interface PronunciationAudioProps {
   clips?: AudioClip[]; // Kept for existing callers; never used for playback.
   currentLang: Language;
@@ -24,6 +43,7 @@ export function PronunciationAudio({
 }: PronunciationAudioProps) {
   const isFa = currentLang === 'fa';
   const [playing, setPlaying] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const [message, setMessage] = React.useState('');
   const resetRef = React.useRef<() => void>(() => {});
   resetRef.current = () => setPlaying(false);
@@ -36,7 +56,7 @@ export function PronunciationAudio({
     }
   }, [reset]);
 
-  function toggle() {
+  async function toggle() {
     if (!('speechSynthesis' in window)) {
       setMessage(isFa ? 'پخش مصنوعی در این مرورگر پشتیبانی نمی‌شود.' : 'Browser speech is unavailable.');
       return;
@@ -47,7 +67,9 @@ export function PronunciationAudio({
       setPlaying(false);
       return;
     }
-    const voice = window.speechSynthesis.getVoices().find(v => v.lang.toLowerCase().startsWith('ro'));
+    setLoading(true);
+    const voice = await findRomanianVoice();
+    setLoading(false);
     if (!voice) {
       setMessage(isFa ? 'صدای رومانیایی در این مرورگر نصب یا بارگذاری نشده است.' : 'No Romanian voice is available in this browser.');
       return;
@@ -71,8 +93,10 @@ export function PronunciationAudio({
   return <div className={`inline-flex flex-col items-start gap-1 ${className}`}>
     <button type="button" onClick={toggle} aria-pressed={playing}
       aria-label={isFa ? `پخش مصنوعی رومانیایی: ${label}` : `Play Romanian browser voice: ${label}`}
-      className={`rounded-lg border border-blue-200 px-3 py-1.5 text-xs font-medium text-[#1554bd] hover:bg-blue-50 ${variant === 'compact' ? 'text-[11px]' : ''}`}>
-      {playing ? (isFa ? 'توقف' : 'Stop') : (isFa ? '🔊 صدای مصنوعی مرورگر' : '🔊 Browser voice')}
+      disabled={loading}
+      aria-busy={loading}
+      className={`rounded-lg border border-blue-200 px-3 py-1.5 text-xs font-medium text-[#1554bd] hover:bg-blue-50 disabled:cursor-wait disabled:opacity-60 ${variant === 'compact' ? 'text-[11px]' : ''}`}>
+      {loading ? (isFa ? 'در حال آماده‌سازی صدا…' : 'Loading voice…') : playing ? (isFa ? 'توقف' : 'Stop') : (isFa ? '🔊 پخش' : '🔊 Play')}
     </button>
     {message && <span role="status" className="text-xs text-amber-900">{message}</span>}
   </div>;

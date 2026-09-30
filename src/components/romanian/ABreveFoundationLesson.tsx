@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
+import { PronunciationAudio } from './PronunciationAudio';
 
 type Locale = 'fa' | 'en';
 type Phase = 0 | 1 | 2 | 3 | 4;
@@ -57,7 +58,6 @@ export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
   const [voiceAvailable, setVoiceAvailable] = React.useState(false);
   const [listening, setListening] = React.useState(false);
   const [voiceMessage, setVoiceMessage] = React.useState('');
-  const [audioMessage, setAudioMessage] = React.useState('');
   const recognitionRef = React.useRef<Recognition | null>(null);
 
   React.useEffect(() => {
@@ -72,16 +72,6 @@ export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
     window.speechSynthesis?.cancel();
     setListening(false); setVoiceMessage(''); setPhase(next); setRound(0);
     setAnswer(''); setFeedback(null); setHint(false);
-  }
-
-  function speak(ro: string) {
-    if (!('speechSynthesis' in window)) { setAudioMessage(isFa ? 'پخش این واژه در مرورگر شما در دسترس نیست.' : 'Browser speech is unavailable.'); return; }
-    const voice = window.speechSynthesis.getVoices().find(v => v.lang.toLowerCase().startsWith('ro'));
-    if (!voice) { setAudioMessage(isFa ? 'صدای رومانیایی برای این واژه در مرورگر موجود نیست.' : 'A Romanian browser voice is unavailable.'); return; }
-    window.speechSynthesis.cancel(); setAudioMessage('');
-    const utterance = new SpeechSynthesisUtterance(ro);
-    utterance.voice = voice; utterance.lang = 'ro-RO'; utterance.rate = 0.78;
-    window.speechSynthesis.speak(utterance);
   }
 
   const expected = phase === 2 ? recall[round].answer : round === 0 ? 'masă' : 'astăzi';
@@ -125,6 +115,11 @@ export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
       <span className="text-sm font-semibold text-blue-100">{isFa ? 'درس نمونهٔ پایه · حدود ۱۵ دقیقه' : 'Foundation sample · about 15 minutes'}</span>
       <h1 className="text-3xl sm:text-4xl font-extrabold">{isFa ? 'صدای «ă» را پیدا کن' : 'Find the sound “ă”'}</h1>
       <p className="text-slate-200">{isFa ? 'بشنو، جای حرف را در واژه پیدا کن، آن را بنویس و تفاوتش را با a ببین.' : 'Listen, find the letter in words, write it, and distinguish it from a.'}</p>
+      <div className="inline-flex flex-col items-start gap-2 rounded-2xl border border-white/20 bg-white/10 p-4">
+        <span className="text-sm font-bold">{isFa ? 'شنیدن نام حرف' : 'Hear the letter name'}</span>
+        <PronunciationAudio currentLang={lang} label="ă" />
+        <span className="text-xs text-blue-100">{isFa ? 'صدای مصنوعی نام حرف است؛ برای شنیدن آن در واژه، نمونه‌ها را جداگانه پخش کنید.' : 'Browser synthesis reads the letter name; play examples to hear it in words.'}</span>
+      </div>
     </header>
     <nav aria-label={isFa ? 'مراحل درس' : 'Lesson stages'} className="flex flex-wrap gap-2">
       {stages[lang].map((label, i) => <button key={label} type="button" aria-current={phase === i ? 'step' : undefined} onClick={() => move(i as Phase)}
@@ -136,6 +131,7 @@ export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
       <h2 className="text-xl font-bold">{isFa ? 'حرف و واژهٔ نمونه' : 'Letter and example word'}</h2>
       <p>{isFa ? 'جای ă را در واژهٔ «masă» ببینید و تکرار کنید. آن را با a یکی نخوانید. صدای ضبط‌شدهٔ این درس تا بررسی مطابقت با حرف پخش نمی‌شود.' : 'Find ă in “masă” and practise it. Do not confuse it with a. The recording is unavailable until it is checked against the letter.'}</p>
       <div lang="ro" dir="ltr" className="text-4xl font-bold text-[#1554bd]">mas<span className="underline decoration-amber-500 decoration-4">ă</span></div>
+      <PronunciationAudio currentLang={lang} label="masă" />
       <p className="text-sm text-slate-600">{isFa ? 'پخش واژه‌ها در مرحلهٔ بعد به صدای رومانیایی مرورگر وابسته است و صدای تأییدشدهٔ گوینده نیست.' : 'Word playback in the next stage relies on a Romanian browser voice and is not a verified speaker recording.'}</p>
       <button type="button" onClick={() => move(1)} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-bold">{isFa ? 'کشف واژه‌ها' : 'Explore the words'}</button>
     </section>}
@@ -146,7 +142,7 @@ export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
         <p className="text-xs font-bold text-[#1554bd]">{word.position === 'start' ? isFa ? 'آغاز واژه' : 'Beginning' : word.position === 'middle' ? isFa ? 'میانهٔ واژه' : 'Middle' : isFa ? 'پایان واژه' : 'End'}</p>
         <p lang="ro" dir="ltr" className="text-2xl font-bold">{word.ro}</p>
         <p className="text-sm">{isFa ? word.fa : word.en}</p>
-        <button type="button" onClick={() => speak(word.ro)} className="text-sm text-[#1554bd] underline">{isFa ? 'شنیدن و تکرار' : 'Listen and repeat'}</button>
+        <PronunciationAudio currentLang={lang} label={word.ro} />
         <details className="rounded-lg bg-white p-3 text-sm"><summary className="cursor-pointer font-semibold">{isFa ? 'قاعده و صورت‌های این واژه' : 'This word’s rule and forms'}</summary>
           <p className="mt-2">{isFa ? word.ruleFa : word.ruleEn}</p>
           <p lang="ro" dir="ltr" className="mt-2 font-semibold">{word.forms}</p>
@@ -159,7 +155,7 @@ export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
     {(phase === 2 || phase === 3) && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-5">
       <div className="text-sm font-bold text-[#1554bd]">{phase === 2 ? isFa ? `یادآوری ${round + 1} از ۳` : `Recall ${round + 1} of 3` : isFa ? `کاربرد ${round + 1} از ۲` : `Use it ${round + 1} of 2`}</div>
       <h2 className="text-xl font-bold">{phase === 2 ? isFa ? recall[round].fa : recall[round].en : round === 0 ? isFa ? 'در رستوران، واژهٔ «میز» را به رومانیایی بگویید.' : 'At a restaurant, say the Romanian word for “table”.' : isFa ? 'برای گفتن «امروز»، کدام واژه را به کار می‌برید؟' : 'Which word means “today”?'}</h2>
-      {phase === 3 && <button type="button" onClick={() => speak(expected)} className="text-sm text-[#1554bd] underline">{isFa ? 'شنیدن واژه' : 'Hear the word'}</button>}
+      {phase === 3 && <PronunciationAudio currentLang={lang} label={expected} />}
       <form onSubmit={event => { event.preventDefault(); check(); }} className="space-y-3">
         <label htmlFor="breve-answer" className="block text-sm font-semibold">{isFa ? 'پاسخ شما به رومانیایی' : 'Your Romanian answer'}</label>
         <input id="breve-answer" lang="ro" dir="ltr" autoComplete="off" value={answer} onChange={event => { setAnswer(event.target.value); setFeedback(null); }} className="w-full rounded-xl border border-slate-300 p-3 text-lg focus:outline-none focus:ring-2 focus:ring-[#1554bd]" />
@@ -182,7 +178,6 @@ export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
       <Link href="/learn-romanian/alfabet" className="inline-block ms-3 text-[#1554bd] underline">{isFa ? 'دیگر درس‌های آوا' : 'Other sound lessons'}</Link>
     </section>}
     {priorCompletion && phase !== 4 && <p className="text-sm text-slate-500">{isFa ? 'این درس قبلاً روی همین دستگاه انجام شده است؛ تکرار آزاد است.' : 'You completed this lesson on this device; repeat it anytime.'}</p>}
-    {audioMessage && <p role="status" className="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">{audioMessage}</p>}
-    <p className="text-xs text-slate-500">{isFa ? 'دو صوت آوای پایه ضبط‌شده‌اند؛ پخش واژه‌ها به صدای مرورگر وابسته است. تشخیص گفتار کیفیت تلفظ را نمره‌دهی نمی‌کند.' : 'The foundation sound has two recordings; words depend on browser speech. Speech recognition does not grade pronunciation.'}</p>
+    <p className="text-xs text-slate-500">{isFa ? 'همهٔ صداهای این درس با گفتار مصنوعی مرورگر پخش می‌شوند و فایل گویندهٔ تأییدشده نیستند. تشخیص گفتار کیفیت تلفظ را نمره‌دهی نمی‌کند.' : 'All audio in this lesson uses browser synthesis, not verified speaker recordings. Speech recognition does not grade pronunciation.'}</p>
   </div>;
 }
