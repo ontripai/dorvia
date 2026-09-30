@@ -349,7 +349,10 @@ function StepSection({
           </div>
           <div className="text-xs text-slate-500 font-medium shrink-0 text-end">
             <div>{isFa ? `گام ${num} از ${total}` : `Step ${num} of ${total}`}</div>
-            <div className="text-slate-400">
+            <div className="mt-1 inline-flex rounded-full bg-blue-50 px-2 py-1 font-bold text-[#1554bd]">
+              {isFa ? 'حدود ۱۵ دقیقه' : 'About 15 min'}
+            </div>
+            <div className="mt-1 text-slate-400">
               {isFa ? `${toFaDigits(group.itemCount)} قلم` : `${group.itemCount} items`}
             </div>
           </div>
