@@ -3,7 +3,6 @@ import { Language } from '@/types';
 import { RomanianPhrase, RomanianCategory } from '@/lib/romanian/types';
 import { PublishedStationInfo } from '@/lib/romanian/content';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
-import { ArrowLeft, ArrowRight } from '@/components/Icons';
 import { CategoryGrid } from './CategoryGrid';
 import { PhraseCard } from './PhraseCard';
 
@@ -14,9 +13,6 @@ interface RomanianHubProps {
   stations?: PublishedStationInfo[];
 }
 
-const toFaDigits = (n: number | string): string =>
-  String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
-
 export const RomanianHub: React.FC<RomanianHubProps> = ({
   currentLang,
   categoryCounts,
@@ -24,7 +20,6 @@ export const RomanianHub: React.FC<RomanianHubProps> = ({
   stations = [],
 }) => {
   const isFa = currentLang === 'fa';
-  const ArrowIcon = isFa ? ArrowLeft : ArrowRight;
 
   return (
     <div className="space-y-12 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
@@ -44,6 +39,73 @@ export const RomanianHub: React.FC<RomanianHubProps> = ({
             : 'A structured collection of official and practical Romanian phrases for living, working, studying, and administrative procedures in Romania.'}
         </p>
       </div>
+
+      <section aria-labelledby="foundation-path-heading" className="overflow-hidden rounded-3xl border border-blue-200 bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-6 shadow-sm sm:p-8">
+        <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+          <div>
+            <span className="text-xs font-extrabold uppercase tracking-wide text-[#1554bd]">{isFa ? 'مسیر یادگیری · پیش از مکالمه' : 'Learning path · before conversation'}</span>
+            <h2 id="foundation-path-heading" className="mt-2 text-2xl font-extrabold text-[#142033] sm:text-3xl">{isFa ? 'درس‌های پایهٔ زبان رومانیایی' : 'Romanian foundation lessons'}</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-700">{isFa ? 'صدا و نوشتار را مرحله‌به‌مرحله یاد بگیرید: از حرف و گروه‌حرف، تا ساخت واژه و جمله. این مسیر از درس‌های کاربردی و موقعیت‌های روزمره جداست.' : 'Learn sounds and spelling step by step, from letters and letter groups to words and sentences. This path is separate from practical, everyday dialogues.'}</p>
+          </div>
+          <Link href="/learn-romanian/fundamente" className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[#1554bd] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#0f3f8f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1554bd]">{isFa ? 'نمایش مسیر درس‌های پایه ←' : 'Explore foundation path →'}</Link>
+        </div>
+        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          {[
+            { n: '۰۱', enN: '01', fa: 'حرف و صدای مستقل', en: 'Letters and their sounds', href: '/learn-romanian/alfabet' },
+            { n: '۰۲', enN: '02', fa: 'گروه‌حرف و قواعد نوشتار', en: 'Letter groups and spelling', href: '/learn-romanian/fundamente#spelling' },
+            { n: '۰۳', enN: '03', fa: 'ساخت واژه و جمله', en: 'Build words and sentences', href: '/learn-romanian/lectie/un-o-doi-doua' },
+          ].map(item => <Link key={item.n} href={item.href} className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm transition hover:border-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1554bd]">
+            <span className="text-xs font-extrabold tracking-wider text-[#1554bd]">{isFa ? item.n : item.enN}</span>
+            <span className="mt-1 block text-sm font-bold text-slate-800">{isFa ? item.fa : item.en}</span>
+          </Link>)}
+        </div>
+      </section>
+
+      <section aria-labelledby="practical-lessons-heading" className="space-y-4">
+      <div>
+        <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">{isFa ? 'پس از یادگیری پایه‌ها' : 'After the foundations'}</span>
+        <h2 id="practical-lessons-heading" className="mt-1 text-xl font-extrabold text-[#142033] sm:text-2xl">{isFa ? 'درس‌های کاربردی و موقعیت‌های روزمره' : 'Practical lessons and everyday situations'}</h2>
+        <p className="mt-1 text-sm text-slate-600">{isFa ? 'در این بخش، واژه و قاعده را در گفت‌وگوی واقعی به کار ببرید.' : 'Use vocabulary and grammar in realistic conversations.'}</p>
+      </div>
+      <Link
+        href="/learn-romanian/lectie/bilet"
+        className="block rounded-3xl border border-[#1554bd]/30 bg-blue-50 p-6 sm:p-8 hover:border-[#1554bd] transition-colors"
+      >
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="space-y-2">
+            <span className="text-sm font-bold text-[#1554bd]">{isFa ? 'جلسه نمونه تعاملی · حدود ۱۵ دقیقه' : 'Interactive sample · about 15 minutes'}</span>
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033]">{isFa ? 'یک بلیت یا دو بلیت؟' : 'One ticket or two?'}</h2>
+            <p className="text-sm text-slate-700">{isFa ? 'واژه و قاعده را در مکالمه با فروشنده تمرین کنید و خودتان پاسخ بسازید.' : 'Practise the noun and its grammar in a ticket-counter conversation.'}</p>
+          </div>
+          <span className="rounded-xl bg-[#1554bd] px-5 py-3 text-white text-sm font-bold">{isFa ? 'ورود به درس' : 'Open lesson'}</span>
+        </div>
+      </Link>
+      </section>
+
+      <p className="text-sm text-slate-700 leading-relaxed">
+        {isFa
+          ? 'حدود ۱۵ دقیقه برای هر جلسه پیشنهاد می‌شود. اگر امروز فرصت بیشتری دارید، پس از هر درس می‌توانید درس دیگری انتخاب کنید یا همان تمرین را تکرار کنید؛ محدودیت روزانه‌ای وجود ندارد.'
+          : 'About 15 minutes per lesson is a suggestion. If you have more time today, choose another lesson or repeat a practice session; there is no daily lesson limit.'}
+      </p>
+
+      <section aria-labelledby="ticket-path-heading" className="space-y-4">
+        <div>
+          <h2 id="ticket-path-heading" className="text-xl sm:text-2xl font-extrabold text-[#142033]">{isFa ? 'مسیر مکالمهٔ بلیت' : 'The ticket conversation path'}</h2>
+          <p className="text-sm text-slate-600">{isFa ? 'هر درس مستقل و قابل تکرار است. برای ادامه در همان روز محدودیتی ندارید.' : 'Each lesson can be repeated. Continue on the same day whenever you like.'}</p>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-3">
+          {[
+            { href: '/learn-romanian/lectie/bilet', fa: '۱. یک یا دو بلیت؟', en: '1. One or two tickets?', detailFa: 'تعداد و درخواست مؤدبانه', detailEn: 'Quantity and a polite request' },
+            { href: '/learn-romanian/lectie/autobuz-tramvai', fa: '۲. اتوبوس و تراموا', en: '2. Bus and tram', detailFa: 'پرسیدن دربارهٔ اعتبار بلیت', detailEn: 'Ask whether a ticket is valid' },
+            { href: '/learn-romanian/lectie/metrou', fa: '۳. متروی بخارست', en: '3. Bucharest metro', detailFa: 'ده سفر یا اشتراک ماهانه', detailEn: 'Ten journeys or a monthly pass' },
+          ].map(lesson => <Link key={lesson.href} href={lesson.href} className="rounded-2xl border border-slate-200 bg-white p-5 hover:border-[#1554bd] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1554bd]">
+            <h3 className="font-bold text-[#142033]">{isFa ? lesson.fa : lesson.en}</h3>
+            <p className="text-sm text-slate-600 mt-1">{isFa ? lesson.detailFa : lesson.detailEn}</p>
+            <span className="text-sm font-semibold text-[#1554bd] mt-3 inline-block">{isFa ? 'ورود به درس' : 'Open lesson'}</span>
+          </Link>)}
+        </div>
+        <p className="text-sm text-slate-600">{isFa ? 'در ادامهٔ این مسیر: اتوبوس بین‌شهری، سینما، تئاتر و تله‌کابین؛ هر کدام با موقعیت و واژگان مخصوص خود.' : 'Planned next: intercity buses, cinema, theatre, and cable cars, each with its own dialogue and vocabulary.'}</p>
+      </section>
 
       {/*
         ورودِ تمرین روزانه (dre-p188).
@@ -79,85 +141,6 @@ export const RomanianHub: React.FC<RomanianHubProps> = ({
             </span>
           </div>
         </Link>
-      )}
-
-      {/* Core Stations Section (Dynamically rendered from published stations) */}
-      {stations.length > 0 && (
-        <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-slate-200/80 pb-4">
-            <div>
-              <div className="text-xs font-bold text-[#1554bd] uppercase tracking-wider mb-1">
-                {isFa ? 'برنامه آموزشی پایه' : 'Foundational Curriculum'}
-              </div>
-              <h2 className="text-xl sm:text-2xl font-extrabold text-[#142033]">
-                {isFa ? 'ایستگاه‌های یادگیری هسته' : 'Core Learning Stations'}
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                {isFa
-                  ? 'پنج ایستگاه اصلی آموزش رومانیایی: ضمایر، کلمات پرسشی، اعداد، زمان و احوال‌پرسی روزمره.'
-                  : 'Five essential foundation modules: pronouns, question words, numbers, time, and greetings.'}
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {stations.map(st => (
-              <Link
-                key={st.slug}
-                href={`/learn-romanian/modul/${st.slug}`}
-                className="editorial-card group p-5 sm:p-6 bg-white border border-slate-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-[#1554bd] transition-all flex flex-col justify-between space-y-4"
-              >
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 text-[#1554bd]">
-                      {isFa
-                        ? `${toFaDigits(st.totalCount)} مورد آموزشی`
-                        : `${st.totalCount} learning item${st.totalCount > 1 ? 's' : ''}`}
-                    </span>
-                    <span className="text-[11px] text-slate-400 font-mono shrink-0">
-                      {isFa ? `ایستگاه ${toFaDigits(st.order)}` : `Station ${st.order}`}
-                    </span>
-                  </div>
-
-                  {/*
-                    مرز پرداخت باید دیده شود. `isFree` از dre-p177 در داده بود و
-                    V37 تضمین می‌کرد پیشوند ترتیب آموزشی باشد، ولی هیچ‌جا رندر
-                    نمی‌شد — یعنی یادگیرنده نمی‌دانست از کجا رایگان است.
-                  */}
-                  {(st.isFree || st.stepCount > 0) && (
-                    <div className="flex flex-wrap items-center gap-1.5">
-                      {st.isFree && (
-                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/70">
-                          {isFa ? 'رایگان' : 'Free'}
-                        </span>
-                      )}
-                      {st.stepCount > 0 && (
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200/70">
-                          {isFa
-                            ? `${toFaDigits(st.stepCount)} گام`
-                            : `${st.stepCount} step${st.stepCount > 1 ? 's' : ''}`}
-                        </span>
-                      )}
-                    </div>
-                  )}
-                  <div>
-                    <h3 className="text-base sm:text-lg font-bold text-[#142033] group-hover:text-[#1554bd] transition-colors">
-                      {isFa ? st.titleFa : st.titleRo}
-                    </h3>
-                    <div className="text-xs text-slate-400 font-heading">
-                      {isFa ? st.titleRo : st.titleFa}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#1554bd]">
-                  <span>{isFa ? 'مشاهده درس‌ها و واژگان' : 'View module content'}</span>
-                  <ArrowIcon className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
       )}
 
       {/* Thematic Category Grid */}

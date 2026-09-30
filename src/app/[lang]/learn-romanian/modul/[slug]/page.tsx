@@ -19,7 +19,6 @@ import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
 import { UsageNoteText } from '@/components/romanian/UsageNoteText';
 import { PhraseText } from '@/components/romanian/PhraseText';
 import { spokenForm } from '@/lib/romanian/placeholders';
-import { CORE_AUDIO } from '@/content/romanian/audio-manifest';
 
 export function generateStaticParams() {
   const stations = getPublishedStations();
@@ -167,7 +166,6 @@ function WordCardBlock({
         </div>
 
         <PronunciationAudio
-          clips={CORE_AUDIO[word.id]}
           currentLang={currentLang}
           label={word.lemma}
           variant="compact"
@@ -229,7 +227,6 @@ function WordCardBlock({
                   </div>
                   <div className="text-[11px] text-slate-500">{dep.translations.en}</div>
                   <PronunciationAudio
-                    clips={CORE_AUDIO[dep.id]}
                     currentLang={currentLang}
                     label={dep.lemma}
                     variant="compact"
@@ -283,7 +280,6 @@ function PhraseCardBlock({
         </div>
 
         <PronunciationAudio
-          clips={CORE_AUDIO[phrase.id]}
           currentLang={currentLang}
           label={spokenForm(phrase.text.ro)}
           variant="compact"
@@ -353,7 +349,10 @@ function StepSection({
           </div>
           <div className="text-xs text-slate-500 font-medium shrink-0 text-end">
             <div>{isFa ? `گام ${num} از ${total}` : `Step ${num} of ${total}`}</div>
-            <div className="text-slate-400">
+            <div className="mt-1 inline-flex rounded-full bg-blue-50 px-2 py-1 font-bold text-[#1554bd]">
+              {isFa ? 'حدود ۱۵ دقیقه' : 'About 15 min'}
+            </div>
+            <div className="mt-1 text-slate-400">
               {isFa ? `${toFaDigits(group.itemCount)} قلم` : `${group.itemCount} items`}
             </div>
           </div>
@@ -565,6 +564,14 @@ export default function RomanianStationModulePage({
           )}
         </div>
       </div>
+
+      {station.slug === 'numere' && (
+        <Link href="/learn-romanian/lectie/un-o-doi-doua" className="block rounded-2xl border border-emerald-200 bg-emerald-50 p-5 hover:border-emerald-500 transition-colors">
+          <span className="text-xs font-bold text-emerald-900">{isFa ? 'درس تعاملی · گام اول اعداد' : 'Interactive lesson · first numbers step'}</span>
+          <h2 className="mt-1 text-lg font-extrabold text-[#142033]">{isFa ? 'یک و دو را با جنس اسم هماهنگ کن' : 'Match one and two to noun gender'}</h2>
+          <p className="mt-1 text-sm text-slate-700">{isFa ? 'un/o، doi/două و اسم خنثی را با نوشتن و مکالمه تمرین کن.' : 'Practise un/o, doi/două and neuter nouns by writing and speaking.'}</p>
+        </Link>
+      )}
 
       {hasSteps ? (
         /* Stepped layout — teaching order */

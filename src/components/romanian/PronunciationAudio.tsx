@@ -1,227 +1,160 @@
 'use client';
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { AudioClip } from '@/lib/romanian/types';
-import { Language } from '@/types';
+import React from 'react';
+import type { AudioClip } from '@/lib/romanian/types';
+import type { Language } from '@/types';
+import verifiedAudio from '@/content/romanian/verified-audio.json';
 
-/* ---------------------------------------------------------------------------
- * Module-level exclusive player (dre-p170).
- *
- * Why module level and not component state: a station page renders one
- * PronunciationAudio per word, per dependent form, and per phrase. Component
- * state can only stop a clip inside its own card, so clicking `eu` and then
- * `mă` would play both at once. One shared reference guarantees that starting
- * any clip stops whatever was playing, in any card.
- *
- * Why `new Audio(...)` and not an <audio> element in JSX: the numbers station
- * has 55 words x 2 voices. Rendering 110 <audio> nodes costs DOM and hydration
- * for something most visitors never click. Nothing is created until a play.
- * ------------------------------------------------------------------------- */
+// Only explicitly approved exact-text files may be played. Legacy Aoede/Puck
+// recordings are excluded; unapproved text continues to use browser speech.
+let activeReset: (() => void) | null = null;
+let romanianVoice: SpeechSynthesisVoice | undefined;
+let voiceLookup: Promise<SpeechSynthesisVoice | undefined> | null = null;
+let activeAudio: HTMLAudioElement | null = null;
+const recordings: Record<string, string> = verifiedAudio;
 
-let currentAudio: HTMLAudioElement | null = null;
-let currentReset: (() => void) | null = null;
-
-function releaseCurrent() {
-  if (currentAudio) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-  }
-  if (currentReset) {
-    currentReset();
-  }
-  currentAudio = null;
-  currentReset = null;
-}
-
-function playExclusive(src: string, reset: () => void): Promise<void> {
-  releaseCurrent();
-
-  const audio = new Audio(src);
-  currentAudio = audio;
-  currentReset = reset;
-
-  const finish = () => {
-    if (currentAudio === audio) {
-      currentAudio = null;
-      currentReset = null;
-    }
-    reset();
-  };
-
-  audio.addEventListener('ended', finish, { once: true });
-  audio.addEventListener('error', finish, { once: true });
-
-  return audio.play().catch(err => {
-    if (currentAudio === audio) {
-      currentAudio = null;
-      currentReset = null;
-    }
-    reset();
-    throw err;
+function findRomanianVoice(): Promise<SpeechSynthesisVoice | undefined> {
+  const synthesis = window.speechSynthesis;
+  const immediate = romanianVoice ?? synthesis.getVoices().find(v => v.lang.toLowerCase().startsWith('ro'));
+  if (immediate) { romanianVoice = immediate; return Promise.resolve(immediate); }
+  if (voiceLookup) return voiceLookup;
+  voiceLookup = new Promise(resolve => {
+    let finished = false;
+    const finish = (voice?: SpeechSynthesisVoice) => {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timer);
+      synthesis.removeEventListener('voiceschanged', retry);
+      romanianVoice = voice;
+      voiceLookup = null;
+      resolve(voice);
+    };
+    const retry = () => finish(synthesis.getVoices().find(v => v.lang.toLowerCase().startsWith('ro')));
+    const timer = window.setTimeout(() => finish(), 1500);
+    synthesis.addEventListener('voiceschanged', retry);
   });
+  return voiceLookup;
 }
-
-function stopIfOwnedBy(reset: () => void) {
-  if (currentReset === reset) {
-    releaseCurrent();
-  }
-}
-
-/* ------------------------------------------------------------------------- */
 
 export interface PronunciationAudioProps {
-  clips?: AudioClip[];
+  clips?: AudioClip[]; // Kept for existing callers; never used for playback.
   currentLang: Language;
-  /** The word, phrase, or letter being pronounced — used in aria-label and title. */
-  label?: string;
-  /**
-   * `labelled` shows the voice name beside the icon (alphabet pages, one item
-   * per page). `compact` is icon-only for dense station lists.
-   */
+  label: string;
   variant?: 'labelled' | 'compact';
   className?: string;
 }
 
 export function PronunciationAudio({
-  clips = [],
   currentLang,
-  label = '',
+  label,
   variant = 'labelled',
   className = '',
 }: PronunciationAudioProps) {
-  const [playingVoice, setPlayingVoice] = useState<string | null>(null);
-  const resetRef = useRef<() => void>(() => {});
+  const isFa = currentLang === 'fa';
+  const [playing, setPlaying] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const [message, setMessage] = React.useState('');
+  const resetRef = React.useRef<() => void>(() => {});
+  resetRef.current = () => setPlaying(false);
+  const reset = React.useCallback(() => resetRef.current(), []);
 
-  resetRef.current = () => setPlayingVoice(null);
-
-  const reset = useCallback(() => {
-    resetRef.current();
-  }, []);
-
-  // If this instance is the one currently playing when it unmounts, stop it.
-  useEffect(() => {
-    return () => {
-      stopIfOwnedBy(reset);
-    };
+  React.useEffect(() => () => {
+    if (activeReset === reset) {
+      activeAudio?.pause();
+      activeAudio = null;
+      window.speechSynthesis?.cancel();
+      activeReset = null;
+    }
   }, [reset]);
 
-  // Aoede first, Puck second — stable order across every card.
-  const sortedClips = [...clips].sort((a, b) => {
-    if (a.voice === b.voice) return 0;
-    if (a.voice === 'Aoede') return -1;
-    if (b.voice === 'Aoede') return 1;
-    return 0;
-  });
+  React.useEffect(() => {
+    if ('speechSynthesis' in window) void findRomanianVoice();
+  }, []);
 
-  if (sortedClips.length === 0) {
-    // No audio for this entry: render nothing at all. Not a disabled button,
-    // not a greyed icon, not a "coming soon" label. (dre-p168)
-    return null;
-  }
-
-  const isFa = currentLang === 'fa';
-  const isCompact = variant === 'compact';
-
-  const handleToggle = (clip: AudioClip) => {
-    if (playingVoice === clip.voice) {
-      releaseCurrent();
-      setPlayingVoice(null);
+  async function toggle() {
+    const recording = recordings[label.normalize('NFC').trim()];
+    if (recording) {
+      if (activeReset === reset) {
+        activeAudio?.pause();
+        activeAudio = null;
+        activeReset = null;
+        setPlaying(false);
+        return;
+      }
+      if (activeReset) {
+        activeAudio?.pause();
+        window.speechSynthesis?.cancel();
+        activeReset();
+      }
+      const audio = new Audio(recording);
+      activeAudio = audio;
+      activeReset = reset;
+      audio.onended = audio.onerror = () => {
+        if (activeAudio !== audio) return;
+        activeAudio = null;
+        activeReset = null;
+        reset();
+        if (audio.error) setMessage(isFa ? 'فایل صوتی در دسترس نیست.' : 'Audio file is unavailable.');
+      };
+      setMessage('');
+      setPlaying(true);
+      try { await audio.play(); }
+      catch {
+        if (activeAudio === audio) { activeAudio = null; activeReset = null; }
+        reset();
+        setMessage(isFa ? 'پخش فایل صوتی ممکن نشد.' : 'Could not play audio.');
+      }
       return;
     }
+    if (!('speechSynthesis' in window)) {
+      setMessage(isFa ? 'پخش مصنوعی در این مرورگر پشتیبانی نمی‌شود.' : 'Browser speech is unavailable.');
+      return;
+    }
+    if (activeReset === reset) {
+      activeAudio?.pause();
+      activeAudio = null;
+      window.speechSynthesis.cancel();
+      activeReset = null;
+      setPlaying(false);
+      return;
+    }
+    setLoading(true);
+    const voice = await findRomanianVoice();
+    setLoading(false);
+    if (!voice) {
+      setMessage(isFa ? 'صدای رومانیایی در این مرورگر نصب یا بارگذاری نشده است.' : 'No Romanian voice is available in this browser.');
+      return;
+    }
+    if (activeReset) {
+      activeAudio?.pause();
+      activeAudio = null;
+      window.speechSynthesis.cancel();
+      activeReset();
+    }
+    const utterance = new SpeechSynthesisUtterance(label);
+    utterance.voice = voice;
+    utterance.lang = 'ro-RO';
+    utterance.rate = 0.8;
+    utterance.onend = utterance.onerror = () => {
+      if (activeReset === reset) activeReset = null;
+      reset();
+    };
+    activeReset = reset;
+    setMessage('');
+    setPlaying(true);
+    window.speechSynthesis.speak(utterance);
+  }
 
-    setPlayingVoice(clip.voice);
-    playExclusive(clip.src, reset).catch(() => setPlayingVoice(null));
-  };
-
-  return (
-    <div
-      className={`inline-flex flex-wrap items-center gap-2 ${className}`}
-      role="group"
-      aria-label={isFa ? 'پخش تلفظ صوتی' : 'Audio pronunciation'}
-    >
-      {sortedClips.map(clip => {
-        const isPlaying = playingVoice === clip.voice;
-        const ariaLabel = isFa
-          ? `پخش تلفظ ${label} با صدای ${clip.voice}`
-          : `Play pronunciation of ${label || 'this item'} with the ${clip.voice} voice`;
-
-        return (
-          <button
-            key={clip.voice}
-            type="button"
-            onClick={() => handleToggle(clip)}
-            aria-label={ariaLabel}
-            aria-pressed={isPlaying}
-            title={ariaLabel}
-            className={`inline-flex items-center gap-1.5 rounded-lg font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#1554bd]/40 active:scale-95 ${
-              isCompact ? 'p-1.5 text-[11px]' : 'px-3 py-1.5 text-xs'
-            } ${
-              isPlaying
-                ? 'bg-[#1554bd] text-white shadow-sm ring-2 ring-[#1554bd]/30'
-                : 'bg-slate-100 hover:bg-slate-200/80 text-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700/60'
-            }`}
-          >
-            {isPlaying ? (
-              /* Speaker Icon with sound waves (pulsing active state) */
-              <svg
-                className="w-3.5 h-3.5 animate-pulse text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
-                />
-              </svg>
-            ) : isCompact ? (
-              /* Speaker Icon (compact idle state — dre-p170 Section 2) */
-              <svg
-                className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
-                />
-              </svg>
-            ) : (
-              /* Play Circle Icon (labelled idle state — alphabet pages) */
-              <svg
-                className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            )}
-            {!isCompact && <span>{clip.voice}</span>}
-          </button>
-        );
-      })}
-    </div>
-  );
+  return <div className={`inline-flex flex-col items-start gap-1 ${className}`}>
+    <button type="button" onClick={toggle} aria-pressed={playing}
+      aria-label={recordings[label.normalize('NFC').trim()] ? (isFa ? `پخش رومانیایی: ${label}` : `Play Romanian: ${label}`) : (isFa ? `پخش مصنوعی رومانیایی: ${label}` : `Play Romanian browser voice: ${label}`)}
+      disabled={loading}
+      aria-busy={loading}
+      className={`rounded-lg border border-blue-200 px-3 py-1.5 text-xs font-medium text-[#1554bd] hover:bg-blue-50 disabled:cursor-wait disabled:opacity-60 ${variant === 'compact' ? 'text-[11px]' : ''}`}>
+      {loading ? (isFa ? 'در حال آماده‌سازی صدا…' : 'Loading voice…') : playing ? (isFa ? 'توقف' : 'Stop') : (isFa ? '🔊 پخش' : '🔊 Play')}
+    </button>
+    {message && <span role="status" className="text-xs text-amber-900">{message}</span>}
+  </div>;
 }
 
 export default PronunciationAudio;
-

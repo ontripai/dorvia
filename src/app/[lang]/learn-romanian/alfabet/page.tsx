@@ -2,174 +2,132 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { LOCALES } from '@/lib/locale-router';
-import { Language } from '@/types';
 import { getPublishedGraphemes, getWordById } from '@/lib/romanian/content';
-import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
+import { AlphabetExplorer } from '@/components/romanian/AlphabetExplorer';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
-import { ArrowLeft, ArrowRight } from '@/components/Icons';
+
+const groups = [
+  { category: 'vowels', letters: [['A a', 'a'], ['Ă ă', 'a-breve'], ['Â â', 'a-circ'], ['E e', 'e'], ['I i', 'i'], ['Î î', 'i-circ'], ['O o', 'o'], ['U u', 'u']] },
+  { category: 'consonants', letters: [['B b', 'b'], ['C c', 'c-hard'], ['D d', 'd'], ['F f', 'f'], ['G g', 'g-hard'], ['H h', 'h'], ['J j', 'j'], ['L l', 'l'], ['M m', 'm'], ['N n', 'n'], ['P p', 'p'], ['R r', 'r'], ['S s', 's'], ['Ș ș', 's-comma'], ['T t', 't'], ['Ț ț', 't-comma'], ['V v', 'v'], ['X x', 'x'], ['Z z', 'z']] },
+  { category: 'loans', letters: [['K k', 'k'], ['Q q', 'q'], ['W w', 'w'], ['Y y', 'y']] },
+] as const;
+
+const patterns = [
+  { label: 'ce / ci', slug: 'ce-ci', fa: 'صدای چ · ceai', en: 'ch sound · ceai' },
+  { label: 'che / chi', slug: 'che-chi', fa: 'صدای ک · cheie', en: 'k sound · cheie' },
+  { label: 'ge / gi', slug: 'ge-gi', fa: 'صدای ج · geam', en: 'j sound · geam' },
+  { label: 'ghe / ghi', slug: 'ghe-ghi', fa: 'صدای گ · ghișeu', en: 'hard g · ghișeu' },
+] as const;
+
+const additionalExamples: Record<string, { word: string; fa: string; en: string }> = {
+  'B b': { word: 'bilet', fa: 'بلیت', en: 'ticket' },
+  'D d': { word: 'card', fa: 'کارت', en: 'card' },
+  'F f': { word: 'telefon', fa: 'تلفن', en: 'phone' },
+  'L l': { word: 'elev', fa: 'دانش‌آموز', en: 'pupil' },
+  'M m': { word: 'masă', fa: 'میز', en: 'table' },
+  'N n': { word: 'ban', fa: 'واحد پول', en: 'monetary unit' },
+  'P p': { word: 'apă', fa: 'آب', en: 'water' },
+  'T t': { word: 'taxi', fa: 'تاکسی', en: 'taxi' },
+  'Z z': { word: 'zi', fa: 'روز', en: 'day' },
+  'K k': { word: 'kilometru', fa: 'کیلومتر', en: 'kilometre' },
+  'Q q': { word: 'quasar', fa: 'اختروش', en: 'quasar' },
+  'W w': { word: 'weekend', fa: 'آخر هفته', en: 'weekend' },
+  'Y y': { word: 'yoga', fa: 'یوگا', en: 'yoga' },
+};
 
 export function generateStaticParams() {
   return LOCALES.map(lang => ({ lang }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { lang: string };
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const isFa = params.lang === 'fa';
   return {
-    title: isFa
-      ? 'الفبا و تلفظ زبان رومانیایی | DORVIA'
-      : 'Romanian Alphabet & Pronunciation | DORVIA',
-    description: isFa
-      ? 'راهنمای جامع حروف، صداها و تلفظ صحیح زبان رومانیایی به همراه فایل‌های صوتی بومی.'
-      : 'Comprehensive guide to Romanian letters, sounds, and pronunciation with native audio.',
-    robots: {
-      index: false,
-      follow: false,
-    },
+    title: isFa ? 'الفبا و درس‌های تلفظ رومانیایی | DORVIA' : 'Romanian Alphabet Lessons | DORVIA',
+    description: isFa ? '۳۱ حرف رومانیایی، گروه‌حرف‌های C و G، واژهٔ نمونه و تمرین نوشتن و گفتن.' : 'Explore 31 Romanian letters, C/G spelling patterns, example words, writing and speaking practice.',
+    robots: { index: false, follow: false },
   };
 }
 
-export default function RomanianAlphabetIndexPage({
-  params,
-}: {
-  params: { lang: string };
-}) {
-  if (!LOCALES.includes(params.lang as any)) {
-    notFound();
-  }
-
-  const currentLang = params.lang as Language;
-  const isFa = currentLang === 'fa';
+export default function RomanianAlphabetIndexPage({ params }: { params: { lang: string } }) {
+  if (!LOCALES.includes(params.lang as any)) notFound();
+  const lang = params.lang as 'fa' | 'en';
+  const isFa = lang === 'fa';
   const graphemes = getPublishedGraphemes();
-  const ArrowIcon = isFa ? ArrowRight : ArrowLeft;
+  const letters = groups.flatMap(group => group.letters.map(([glyph, slug]) => {
+    const sound = graphemes.find(entry => entry.slug === slug);
+    const word = slug === 'i-circ' ? getWordById('w-inainte') : sound && getWordById(sound.exampleWordId);
+    const extra = additionalExamples[glyph];
+    return {
+      glyph, slug, category: group.category,
+      example: extra?.word || (slug === 'i-circ' ? word?.lemma : sound?.exampleForm || word?.lemma),
+      translation: extra?.[lang] || word?.translations[lang],
+      hint: undefined,
+    };
+  }));
 
-  const toFaDigits = (n: number | string) =>
-    String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
+  return <main className="mx-auto max-w-6xl space-y-12 px-4 py-7 sm:py-10">
+    <Breadcrumb items={[
+      { label: isFa ? 'خانه' : 'Home', href: '/' },
+      { label: isFa ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' },
+      { label: isFa ? 'الفبا و صداها' : 'Alphabet and sounds' },
+    ]} currentLang={lang} disableJsonLd />
 
-  return (
-    <div className="space-y-8 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
-      {/* Breadcrumb Navigation */}
-      <Breadcrumb
-        items={[
-          { label: isFa ? 'صفحه اصلی' : 'Home', href: '/' },
-          { label: isFa ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' },
-          { label: isFa ? 'الفبا و تلفظ' : 'Alphabet & Pronunciation' },
-        ]}
-        currentLang={currentLang}
-        disableJsonLd={true}
-      />
-
-      {/* Header Panel */}
-      <div className="dark-hero-panel rounded-3xl p-8 sm:p-12 space-y-4 shadow-xl">
-        <div className="flex items-center gap-2 text-xs text-slate-300 font-semibold">
-          <Link
-            href="/learn-romanian"
-            className="hover:text-white transition-colors underline decoration-dotted inline-flex items-center gap-1"
-          >
-            <ArrowIcon className="w-3.5 h-3.5" />
-            <span>{isFa ? 'بازگشت به آموزش رومانیایی' : 'Back to Learn Romanian'}</span>
-          </Link>
-        </div>
-
-        <div className="space-y-2">
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-heading">
-            {isFa ? 'الفبا و آواهای زبان رومانیایی' : 'Romanian Alphabet & Phonetics'}
-          </h1>
-          <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed">
-            {isFa
-              ? 'زبان رومانیایی خطی تا حد زیادی فونتیک (واج‌نگار) دارد؛ یعنی هر حرف غالباً همان‌گونه که نوشته می‌شود خوانده می‌شود. این ۲۴ درس پایه، تمامی صداهای خاص و حروف ترکیبی را با واژه نمونه و صوت دوگانه گویندگان بومی آموزش می‌دهند.'
-              : 'Romanian is largely phonetic: words are generally pronounced as they are written. These 24 foundation lessons cover all special characters and combinations with native dual audio recordings.'}
-          </p>
-        </div>
-
-        <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-300">
-          <span className="inline-flex items-center px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 font-medium">
-            {isFa ? '۲۴ درس آوایی' : '24 Sound Lessons'}
-          </span>
-          <span className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-medium">
-            {isFa ? 'صوت آزاد و عمومی' : 'Free Public Audio'}
-          </span>
-        </div>
+    <header className="dark-hero-panel overflow-hidden rounded-3xl px-6 py-9 text-white shadow-xl sm:px-10 sm:py-12">
+      <p className="text-sm font-semibold text-blue-200">{isFa ? 'مسیر پایه · درس‌های کوتاه و قابل تکرار' : 'Foundation path · short, repeatable lessons'}</p>
+      <h1 className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight sm:text-5xl">{isFa ? 'از دیدن حرف تا ساختن واژه' : 'From letters to usable words'}</h1>
+      <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-200 sm:text-base">{isFa ? 'یک حرف را انتخاب کنید، نام آن را بشنوید، صدایش را در واژه پیدا کنید، بنویسید و بلند بگویید. اگر میکروفون در دسترس باشد، پاسخ گفتاری شما هم به متن تبدیل می‌شود. هر درس را هر چند بار خواستید مرور کنید.' : 'Choose a letter, hear its name, find its sound in a word, write it, and say it aloud. If a microphone is available, speech recognition can transcribe your response. Repeat a lesson as often as you like.'}</p>
+      <div className="mt-7 flex flex-wrap gap-3">
+        <Link href="/learn-romanian/alfabet/a" className="rounded-xl bg-white px-5 py-3 text-sm font-bold text-[#1554bd] hover:bg-blue-50">{isFa ? 'شروع از A' : 'Start with A'}</Link>
+        <a href="#letters" className="rounded-xl border border-white/40 px-5 py-3 text-sm font-bold text-white hover:bg-white/10">{isFa ? 'انتخاب حرف' : 'Choose a letter'}</a>
       </div>
+      <p className="mt-5 text-xs text-blue-100">{isFa ? '۳۱ حرف · ۴ گروه‌حرف کاربردی · فایل صوتی بررسی‌شده برای نمونه‌های موجود و صدای رومانیایی مرورگر برای بقیه' : '31 letters · 4 useful C/G patterns · reviewed audio where available, Romanian browser voice for other examples'}</p>
+    </header>
 
-      {/* Graphemes Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {graphemes.map(g => {
-          const exampleWord = getWordById(g.exampleWordId);
-          const displayWord = g.exampleForm || exampleWord?.lemma || '';
-
-          return (
-            <div
-              key={g.id}
-              className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4"
-            >
-              <div className="space-y-3">
-                {/* Header: Letter and order badge */}
-                <div className="flex items-start justify-between">
-                  <Link
-                    href={`/learn-romanian/alfabet/${g.slug}`}
-                    className="group inline-flex items-baseline gap-2"
-                  >
-                    <span className="text-3xl font-extrabold text-[#1554bd] dark:text-blue-400 group-hover:underline">
-                      {g.grapheme}
-                    </span>
-                  </Link>
-                  <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
-                    {isFa ? `#${toFaDigits(g.order)}` : `#${g.order}`}
-                  </span>
-                </div>
-
-                {/* Persian Sound Hint */}
-                <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                  {g.soundHintFa}
-                </p>
-
-                {/* Example Word */}
-                {exampleWord && (
-                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs">
-                    <div>
-                      <span className="text-slate-400 block mb-0.5">
-                        {isFa ? 'واژه نمونه:' : 'Example word:'}
-                      </span>
-                      <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">
-                        {displayWord}
-                      </span>
-                      {exampleWord.definiteForm && (
-                        <span className="text-slate-500 ms-1.5 font-normal">
-                          ({exampleWord.definiteForm})
-                        </span>
-                      )}
-                    </div>
-                    <div className="text-end text-slate-500 dark:text-slate-400">
-                      {isFa ? exampleWord.translations.fa : exampleWord.translations.en}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Bottom: Audio Island & Lesson Link */}
-              <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
-                <PronunciationAudio
-                  clips={g.audio}
-                  currentLang={currentLang}
-                  label={g.grapheme}
-                  variant="labelled"
-                />
-                <Link
-                  href={`/learn-romanian/alfabet/${g.slug}`}
-                  className="text-xs font-medium text-[#1554bd] dark:text-blue-400 hover:underline inline-flex items-center gap-1 shrink-0"
-                >
-                  <span>{isFa ? 'مشاهده درس' : 'Lesson'}</span>
-                </Link>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      {[
+        { n: '۱', enN: '1', fa: 'نام و آوای حرف را بشنوید', en: 'Hear the letter name and sound' },
+        { n: '۲', enN: '2', fa: 'واژهٔ نمونه و قاعده را ببینید', en: 'Explore the example and rule' },
+        { n: '۳', enN: '3', fa: 'واژه را از حافظه بنویسید', en: 'Write the word from memory' },
+        { n: '۴', enN: '4', fa: 'واژه را بلند بگویید', en: 'Say the word aloud' },
+        { n: '۵', enN: '5', fa: 'نتیجه را مرور کنید', en: 'Review your result' },
+      ].map(item => <div key={item.enN} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <span className="inline-flex size-9 items-center justify-center rounded-full bg-blue-50 font-extrabold text-[#1554bd]">{isFa ? item.n : item.enN}</span>
+        <p className="mt-3 text-sm font-semibold text-slate-800">{isFa ? item.fa : item.en}</p>
+      </div>)}
     </div>
-  );
+
+    <section id="alphabet-curriculum" aria-labelledby="alphabet-curriculum-heading" className="space-y-8 rounded-3xl border-2 border-blue-200 bg-white p-5 shadow-sm sm:p-8">
+      <header>
+        <p className="text-xs font-extrabold uppercase tracking-wider text-[#1554bd]">{isFa ? 'یک بخش · همهٔ حروف و ترکیب‌ها' : 'One section · all letters and patterns'}</p>
+        <h2 id="alphabet-curriculum-heading" className="mt-1 text-2xl font-extrabold text-slate-900 sm:text-3xl">{isFa ? 'الفبا را دسته‌بندی‌شده کامل کنید' : 'Complete the alphabet in clear groups'}</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{isFa ? 'همهٔ حروف تکی، واکه‌ها، همخوان‌ها، حروف وام‌واژه و گروه‌حرف‌های دو و سه‌حرفی در همین بخش قرار دارند. هر درس صدا و واژهٔ نمونهٔ خودش را دارد.' : 'Single letters, vowels, consonants, loan letters, and two- or three-letter patterns all live in this section. Each lesson includes its own sound and sample word.'}</p>
+      </header>
+      <AlphabetExplorer letters={letters} lang={lang} />
+
+    <section id="patterns" className="scroll-mt-24 space-y-4" aria-labelledby="patterns-heading">
+      <div><p className="text-xs font-bold uppercase tracking-wider text-[#1554bd]">{isFa ? 'زیرگروه · ترکیب‌حرف‌ها' : 'Alphabet subgroup · letter patterns'}</p>
+        <h2 id="patterns-heading" className="mt-1 text-2xl font-extrabold text-slate-900 sm:text-3xl">{isFa ? 'گروه‌حرف‌های دو و سه‌حرفی' : 'Two- and three-letter patterns'}</h2>
+        <p className="mt-2 text-sm text-slate-600">{isFa ? 'این ترکیب‌ها حرف تازهٔ الفبا نیستند. تفاوت صدای آن‌ها را با واژه و تمرین یاد بگیرید.' : 'These patterns are not extra alphabet letters. Learn the sound differences through words and practice.'}</p>
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{patterns.map(pattern => <Link key={pattern.slug} href={`/learn-romanian/alfabet/${pattern.slug}`} className="group rounded-2xl border border-blue-200 bg-blue-50 p-5 transition-all hover:-translate-y-0.5 hover:border-blue-400 hover:shadow-md">
+        <strong lang="ro" dir="ltr" className="block text-2xl text-[#1554bd]">{pattern.label}</strong>
+        <span className="mt-2 block text-sm text-slate-700">{isFa ? pattern.fa : pattern.en}</span>
+        <span className="mt-4 block text-xs font-bold text-[#1554bd] group-hover:underline">{isFa ? 'تمرین این ترکیب ←' : 'Practise this pattern →'}</span>
+      </Link>)}</div>
+    </section>
+
+    <section className="grid gap-4 rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:grid-cols-2 sm:p-8">
+      <div><h2 className="text-xl font-bold text-slate-900">{isFa ? 'بعد از حروف چه بخوانم؟' : 'What comes after letters?'}</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-600">{isFa ? 'تفاوت جایگاه i پایانی و قاعدهٔ نوشتن â/î را جدا مرور کنید؛ سپس سراغ جمله‌ها و موقعیت‌های روزمره بروید.' : 'Explore word-final i and the â/î spelling rule separately, then move to useful sentences and everyday situations.'}</p></div>
+      <div className="flex flex-col gap-2">
+        <Link href="/learn-romanian/alfabet/i-final" className="rounded-xl bg-white px-4 py-3 text-sm font-semibold text-[#1554bd] hover:bg-blue-50">{isFa ? 'i پایانی در واژه‌ها ←' : 'Word-final i →'}</Link>
+        <Link href="/learn-romanian/alfabet/circ-rule" className="rounded-xl bg-white px-4 py-3 text-sm font-semibold text-[#1554bd] hover:bg-blue-50">{isFa ? 'قاعدهٔ نوشتن â و î ←' : 'The â and î spelling rule →'}</Link>
+        <Link href="/learn-romanian" className="rounded-xl bg-white px-4 py-3 text-sm font-semibold text-[#1554bd] hover:bg-blue-50">{isFa ? 'مسیر کامل آموزش ←' : 'Full learning path →'}</Link>
+      </div>
+    </section>
+
+    <p className="text-xs leading-6 text-slate-500">{isFa ? 'حروف K، Q، W و Y نیز جزو ۳۱ حرف‌اند و بیشتر در نام‌ها و وام‌واژه‌ها دیده می‌شوند. â و î دو حرف جدا با صدای مشترک‌اند. صدای مصنوعی مرورگر ضبط گوینده یا ارزیابی تلفظ نیست.' : 'K, Q, W and Y are part of the 31 letters and occur mostly in names and loans. Â and î are separate letters with a shared sound. Browser speech is neither a verified recording nor pronunciation assessment.'} <a href="https://doom.lingv.ro/studiu_introductiv_complet" target="_blank" rel="noopener noreferrer" className="text-[#1554bd] underline">DOOM3</a></p>
+    </section>
+  </main>;
 }

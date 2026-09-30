@@ -129,6 +129,7 @@ export type RomanianGrapheme = {
   slug: string;            // اسلاگ پایدار و خوانا برای مسیرهای URL (مانند 'a-breve')
   grapheme: string;        // 'ș' یا 'ce'
   soundHintFa: string;     // توضیح صدا — نه آوانگاری جمله
+  soundHintEn: string;     // English explanation for the same sound lesson
   exampleWordId: string;   // به واژه وصل می‌شود (V18)
   exampleForm?: string;    // شکل نمایشی (پیش‌فرض lemma است، برای فرم‌های جمع مثل bani از پارسر می‌آید)
   matchPattern: string;    // الگوی regex برای اعتبارسنجی حضور گرافم در شکل نمایشی (V19)

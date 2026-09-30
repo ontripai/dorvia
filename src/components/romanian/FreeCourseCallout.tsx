@@ -31,8 +31,8 @@ export function FreeCourseCallout({ currentLang }: { currentLang: Language }) {
           </h2>
           <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
             {isFa
-              ? 'DORVIA یک دورهی آموزش زبان رومانیایی برای فارسیزبانان دارد: الفبا و تلفظ، واژهها و عبارتهای کاربردی با فایل صوتی، و تمرین مرور روزانه. بدون هزینه و بدون نیاز به ثبتنام.'
-              : 'DORVIA has its own Romanian course built for Persian speakers: the alphabet and pronunciation, everyday words and phrases with audio, and a daily review exercise. Free, and no sign-up needed to begin.'}
+              ? 'DORVIA دورهٔ آموزش رومانیایی دارد: الفبا، واژه‌ها و عبارت‌های کاربردی، صدای مصنوعی رومانیایی مرورگر و مرور روزانه. شروع دوره رایگان و بدون ثبت‌نام است.'
+              : 'DORVIA offers Romanian alphabet, everyday words and phrases, Romanian browser speech, and daily review. You can begin for free without signing up.'}
           </p>
           <Link
             href="/learn-romanian"

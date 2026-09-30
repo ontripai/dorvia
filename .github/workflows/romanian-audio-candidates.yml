@@ -1,0 +1,42 @@
+name: Romanian audio candidates
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.number == 180 && github.event.pull_request.head.repo.full_name == 'ontripai/dorvia')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install audio trimming tool
+        run: |
+          if node -e "const fs = require('node:fs'); const catalog = require('./scripts/romanian-audio-catalog.json'); process.exit(catalog.every(item => fs.existsSync('public/audio/romanian/verified/' + item.slug + '.mp3')) ? 0 : 1)"; then
+            echo "All catalog clips already exist; no trimming tool needed."
+          else
+            sudo apt-get update -qq
+            sudo apt-get install -y ffmpeg
+          fi
+      - name: Generate candidate Romanian recordings
+        env:
+          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+          AZURE_SPEECH_REGION: eastus
+          AZURE_SPEECH_VOICE: ro-RO-AlinaNeural
+        run: node scripts/generateAzureRomanianAudio.mjs
+      - name: Keep recordings for pronunciation review
+        uses: actions/upload-artifact@v4
+        with:
+          name: romanian-audio-candidates
+          path: public/audio/romanian/verified/*.mp3
+          if-no-files-found: error
+          retention-days: 14
