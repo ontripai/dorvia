@@ -81,14 +81,16 @@ export default function RomanianAlphabetIndexPage({ params }: { params: { lang: 
         <Link href="/learn-romanian/alfabet/a" className="rounded-xl bg-white px-5 py-3 text-sm font-bold text-[#1554bd] hover:bg-blue-50">{isFa ? 'شروع از A' : 'Start with A'}</Link>
         <a href="#letters" className="rounded-xl border border-white/40 px-5 py-3 text-sm font-bold text-white hover:bg-white/10">{isFa ? 'انتخاب حرف' : 'Choose a letter'}</a>
       </div>
-      <p className="mt-5 text-xs text-blue-100">{isFa ? '۳۱ حرف · ۴ گروه‌حرف کاربردی · صدای مرورگر برای واژهٔ نوشته‌شده' : '31 letters · 4 useful C/G patterns · browser voice reads the displayed word'}</p>
+      <p className="mt-5 text-xs text-blue-100">{isFa ? '۳۱ حرف · ۴ گروه‌حرف کاربردی · فایل صوتی بررسی‌شده برای نمونه‌های موجود و صدای رومانیایی مرورگر برای بقیه' : '31 letters · 4 useful C/G patterns · reviewed audio where available, Romanian browser voice for other examples'}</p>
     </header>
 
-    <div className="grid gap-3 sm:grid-cols-3">
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
       {[
-        { n: '۱', enN: '1', fa: 'یک حرف یا گروه‌حرف انتخاب کنید', en: 'Pick a letter or pattern' },
-        { n: '۲', enN: '2', fa: 'واژه و قاعدهٔ آن را ببینید', en: 'Explore the word and rule' },
-        { n: '۳', enN: '3', fa: 'بنویسید، بگویید و تکرار کنید', en: 'Write, speak and repeat' },
+        { n: '۱', enN: '1', fa: 'نام و آوای حرف را بشنوید', en: 'Hear the letter name and sound' },
+        { n: '۲', enN: '2', fa: 'واژهٔ نمونه و قاعده را ببینید', en: 'Explore the example and rule' },
+        { n: '۳', enN: '3', fa: 'واژه را از حافظه بنویسید', en: 'Write the word from memory' },
+        { n: '۴', enN: '4', fa: 'واژه را بلند بگویید', en: 'Say the word aloud' },
+        { n: '۵', enN: '5', fa: 'نتیجه را مرور کنید', en: 'Review your result' },
       ].map(item => <div key={item.enN} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <span className="inline-flex size-9 items-center justify-center rounded-full bg-blue-50 font-extrabold text-[#1554bd]">{isFa ? item.n : item.enN}</span>
         <p className="mt-3 text-sm font-semibold text-slate-800">{isFa ? item.fa : item.en}</p>
