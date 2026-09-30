@@ -11,6 +11,7 @@ import { NUMBER_GENDER_FOUNDATION_LESSON as lesson } from '@/content/romanian/nu
 type Sample = (typeof lesson.samples)[number] & { word: RomanianWord };
 const stagesFa = ['قاعده', 'شنیدن نمونه‌ها', 'نوشتن', 'گفتن', 'نتیجه'];
 const stagesEn = ['The rule', 'Hear examples', 'Write', 'Speak', 'Result'];
+const stageMinutes = [2, 3, 4, 4, 2];
 
 function normalize(value: string) {
   return value.normalize('NFC').trim().toLocaleLowerCase('ro-RO').replace(/\s+/g, ' ');
@@ -55,7 +56,7 @@ export function NumberGenderFoundationLesson({ lang, samples }: { lang: Language
   return <div className="space-y-6" dir={isFa ? 'rtl' : 'ltr'}>
     <Link href="/learn-romanian" className="inline-flex text-sm font-semibold text-[#1554bd] hover:underline">{isFa ? '→ بازگشت به آموزش رومانیایی' : '← Back to Romanian lessons'}</Link>
     <header className="dark-hero-panel space-y-4 rounded-3xl p-7 text-white sm:p-10">
-      <p className="text-sm font-semibold text-blue-100">{isFa ? 'درس پایه · عدد و جنس اسم' : 'Foundation · numbers and noun gender'}</p>
+      <div className="flex flex-wrap items-center justify-between gap-2"><p className="text-sm font-semibold text-blue-100">{isFa ? 'درس پایه · حدود ۱۵ دقیقه' : 'Foundation · about 15 minutes'}</p><span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold">{isFa ? 'یک اسم + عدد + جمله' : 'Noun + number + sentence'}</span></div>
       <h1 className="text-3xl font-extrabold sm:text-4xl">{isFa ? lesson.titleFa : lesson.titleEn}</h1>
       <p className="max-w-3xl leading-7 text-blue-50">{isFa ? lesson.introFa : lesson.introEn}</p>
       <div className="grid gap-3 sm:grid-cols-3">
@@ -68,7 +69,7 @@ export function NumberGenderFoundationLesson({ lang, samples }: { lang: Language
       <p className="text-xs text-blue-100">{isFa ? 'پخش واژه‌ها با گفتار مصنوعی مرورگر انجام می‌شود، نه صدای ضبط‌شدهٔ بازبینی‌شده.' : 'Words use browser speech synthesis, not reviewed speaker recordings.'}</p>
     </header>
 
-    <nav aria-label={isFa ? 'مراحل درس' : 'Lesson stages'} className="flex flex-wrap gap-2 rounded-2xl border border-slate-200 bg-white p-3">{(isFa ? stagesFa : stagesEn).map((label, step) => <button key={label} type="button" onClick={() => setStage(step)} aria-current={stage === step ? 'step' : undefined} className={`rounded-xl px-3 py-2 text-sm font-semibold ${stage === step ? 'bg-[#1554bd] text-white' : 'bg-slate-50 text-slate-700 hover:bg-blue-50'}`}>{step + 1}. {label}</button>)}</nav>
+    <nav aria-label={isFa ? 'مراحل درس ۱۵ دقیقه‌ای' : '15-minute lesson stages'} className="grid grid-cols-2 gap-2 rounded-2xl border border-slate-200 bg-white p-3 sm:grid-cols-5">{(isFa ? stagesFa : stagesEn).map((label, step) => <button key={label} type="button" onClick={() => setStage(step)} aria-current={stage === step ? 'step' : undefined} className={`rounded-xl px-3 py-2 text-start text-xs font-semibold ${stage === step ? 'bg-[#1554bd] text-white' : 'bg-slate-50 text-slate-700 hover:bg-blue-50'}`}><span className="block">{step + 1}. {label}</span><span className="mt-1 block opacity-80">{isFa ? `${stageMinutes[step]} دقیقه` : `${stageMinutes[step]} min`}</span></button>)}</nav>
 
     {stage === 0 && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"><h2 className="text-xl font-bold">{isFa ? 'الگوی ساده را به خاطر بسپارید' : 'Remember the basic pattern'}</h2><div className="grid gap-3 sm:grid-cols-3"><div className="rounded-xl bg-blue-50 p-4"><strong>{isFa ? 'مذکر' : 'Masculine'}</strong><p className="mt-2" lang="ro" dir="ltr">un elev → doi elevi</p></div><div className="rounded-xl bg-blue-50 p-4"><strong>{isFa ? 'مؤنث' : 'Feminine'}</strong><p className="mt-2" lang="ro" dir="ltr">o casă → două case</p></div><div className="rounded-xl bg-amber-50 p-4"><strong>{isFa ? 'خنثی' : 'Neuter'}</strong><p className="mt-2" lang="ro" dir="ltr">un bilet → două bilete</p></div></div><p className="text-sm leading-6 text-slate-600">{isFa ? 'اسم خنثی در مفرد از un استفاده می‌کند، اما در جمع با două می‌آید. جنس دستوری ویژگی خود اسم است و همیشه به جنس طبیعی اشاره نمی‌کند.' : 'A neuter noun uses un in the singular and două in the plural. Grammatical gender belongs to the noun and does not always refer to natural sex.'}</p><button type="button" onClick={() => setStage(1)} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'شنیدن مثال‌ها ←' : 'Hear the examples →'}</button></section>}
 

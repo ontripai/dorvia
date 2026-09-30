@@ -95,11 +95,17 @@ export default function RomanianAlphabetIndexPage({ params }: { params: { lang: 
       </div>)}
     </div>
 
-    <AlphabetExplorer letters={letters} lang={lang} />
+    <section id="alphabet-curriculum" aria-labelledby="alphabet-curriculum-heading" className="space-y-8 rounded-3xl border-2 border-blue-200 bg-white p-5 shadow-sm sm:p-8">
+      <header>
+        <p className="text-xs font-extrabold uppercase tracking-wider text-[#1554bd]">{isFa ? 'یک بخش · همهٔ حروف و ترکیب‌ها' : 'One section · all letters and patterns'}</p>
+        <h2 id="alphabet-curriculum-heading" className="mt-1 text-2xl font-extrabold text-slate-900 sm:text-3xl">{isFa ? 'الفبا را دسته‌بندی‌شده کامل کنید' : 'Complete the alphabet in clear groups'}</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{isFa ? 'همهٔ حروف تکی، واکه‌ها، همخوان‌ها، حروف وام‌واژه و گروه‌حرف‌های دو و سه‌حرفی در همین بخش قرار دارند. هر درس صدا و واژهٔ نمونهٔ خودش را دارد.' : 'Single letters, vowels, consonants, loan letters, and two- or three-letter patterns all live in this section. Each lesson includes its own sound and sample word.'}</p>
+      </header>
+      <AlphabetExplorer letters={letters} lang={lang} />
 
     <section id="patterns" className="scroll-mt-24 space-y-4" aria-labelledby="patterns-heading">
-      <div><p className="text-xs font-bold uppercase tracking-wider text-[#1554bd]">{isFa ? 'بخش دوم · ترکیب حروف' : 'Part two · letter combinations'}</p>
-        <h2 id="patterns-heading" className="mt-1 text-2xl font-extrabold text-slate-900 sm:text-3xl">{isFa ? 'چهار گروه‌حرف مهم C و G' : 'Four key C/G patterns'}</h2>
+      <div><p className="text-xs font-bold uppercase tracking-wider text-[#1554bd]">{isFa ? 'زیرگروه · ترکیب‌حرف‌ها' : 'Alphabet subgroup · letter patterns'}</p>
+        <h2 id="patterns-heading" className="mt-1 text-2xl font-extrabold text-slate-900 sm:text-3xl">{isFa ? 'گروه‌حرف‌های دو و سه‌حرفی' : 'Two- and three-letter patterns'}</h2>
         <p className="mt-2 text-sm text-slate-600">{isFa ? 'این ترکیب‌ها حرف تازهٔ الفبا نیستند. تفاوت صدای آن‌ها را با واژه و تمرین یاد بگیرید.' : 'These patterns are not extra alphabet letters. Learn the sound differences through words and practice.'}</p>
       </div>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{patterns.map(pattern => <Link key={pattern.slug} href={`/learn-romanian/alfabet/${pattern.slug}`} className="group rounded-2xl border border-blue-200 bg-blue-50 p-5 transition-all hover:-translate-y-0.5 hover:border-blue-400 hover:shadow-md">
@@ -120,5 +126,6 @@ export default function RomanianAlphabetIndexPage({ params }: { params: { lang: 
     </section>
 
     <p className="text-xs leading-6 text-slate-500">{isFa ? 'حروف K، Q، W و Y نیز جزو ۳۱ حرف‌اند و بیشتر در نام‌ها و وام‌واژه‌ها دیده می‌شوند. â و î دو حرف جدا با صدای مشترک‌اند. صدای مصنوعی مرورگر ضبط گوینده یا ارزیابی تلفظ نیست.' : 'K, Q, W and Y are part of the 31 letters and occur mostly in names and loans. Â and î are separate letters with a shared sound. Browser speech is neither a verified recording nor pronunciation assessment.'} <a href="https://doom.lingv.ro/studiu_introductiv_complet" target="_blank" rel="noopener noreferrer" className="text-[#1554bd] underline">DOOM3</a></p>
+    </section>
   </main>;
 }
