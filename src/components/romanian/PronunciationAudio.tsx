@@ -3,12 +3,15 @@
 import React from 'react';
 import type { AudioClip } from '@/lib/romanian/types';
 import type { Language } from '@/types';
+import verifiedAudio from '@/content/romanian/verified-audio.json';
 
-// The historical Aoede/Puck recordings are deliberately not loaded or played.
-// Synthesis receives the exact Romanian text displayed for this item.
+// Only explicitly approved exact-text files may be played. Legacy Aoede/Puck
+// recordings are excluded; unapproved text continues to use browser speech.
 let activeReset: (() => void) | null = null;
 let romanianVoice: SpeechSynthesisVoice | undefined;
 let voiceLookup: Promise<SpeechSynthesisVoice | undefined> | null = null;
+let activeAudio: HTMLAudioElement | null = null;
+const recordings: Record<string, string> = verifiedAudio;
 
 function findRomanianVoice(): Promise<SpeechSynthesisVoice | undefined> {
   const synthesis = window.speechSynthesis;
@@ -57,6 +60,8 @@ export function PronunciationAudio({
 
   React.useEffect(() => () => {
     if (activeReset === reset) {
+      activeAudio?.pause();
+      activeAudio = null;
       window.speechSynthesis?.cancel();
       activeReset = null;
     }
@@ -67,11 +72,47 @@ export function PronunciationAudio({
   }, []);
 
   async function toggle() {
+    const recording = recordings[label.normalize('NFC').trim()];
+    if (recording) {
+      if (activeReset === reset) {
+        activeAudio?.pause();
+        activeAudio = null;
+        activeReset = null;
+        setPlaying(false);
+        return;
+      }
+      if (activeReset) {
+        activeAudio?.pause();
+        window.speechSynthesis?.cancel();
+        activeReset();
+      }
+      const audio = new Audio(recording);
+      activeAudio = audio;
+      activeReset = reset;
+      audio.onended = audio.onerror = () => {
+        if (activeAudio !== audio) return;
+        activeAudio = null;
+        activeReset = null;
+        reset();
+        if (audio.error) setMessage(isFa ? 'فایل صوتی در دسترس نیست.' : 'Audio file is unavailable.');
+      };
+      setMessage('');
+      setPlaying(true);
+      try { await audio.play(); }
+      catch {
+        if (activeAudio === audio) { activeAudio = null; activeReset = null; }
+        reset();
+        setMessage(isFa ? 'پخش فایل صوتی ممکن نشد.' : 'Could not play audio.');
+      }
+      return;
+    }
     if (!('speechSynthesis' in window)) {
       setMessage(isFa ? 'پخش مصنوعی در این مرورگر پشتیبانی نمی‌شود.' : 'Browser speech is unavailable.');
       return;
     }
     if (activeReset === reset) {
+      activeAudio?.pause();
+      activeAudio = null;
       window.speechSynthesis.cancel();
       activeReset = null;
       setPlaying(false);
@@ -85,6 +126,8 @@ export function PronunciationAudio({
       return;
     }
     if (activeReset) {
+      activeAudio?.pause();
+      activeAudio = null;
       window.speechSynthesis.cancel();
       activeReset();
     }
@@ -104,7 +147,7 @@ export function PronunciationAudio({
 
   return <div className={`inline-flex flex-col items-start gap-1 ${className}`}>
     <button type="button" onClick={toggle} aria-pressed={playing}
-      aria-label={isFa ? `پخش مصنوعی رومانیایی: ${label}` : `Play Romanian browser voice: ${label}`}
+      aria-label={recordings[label.normalize('NFC').trim()] ? (isFa ? `پخش رومانیایی: ${label}` : `Play Romanian: ${label}`) : (isFa ? `پخش مصنوعی رومانیایی: ${label}` : `Play Romanian browser voice: ${label}`)}
       disabled={loading}
       aria-busy={loading}
       className={`rounded-lg border border-blue-200 px-3 py-1.5 text-xs font-medium text-[#1554bd] hover:bg-blue-50 disabled:cursor-wait disabled:opacity-60 ${variant === 'compact' ? 'text-[11px]' : ''}`}>

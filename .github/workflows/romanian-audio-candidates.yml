@@ -1,0 +1,29 @@
+name: Romanian audio candidates
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Generate candidate Romanian recordings
+        env:
+          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+          AZURE_SPEECH_REGION: eastus
+          AZURE_SPEECH_VOICE: ro-RO-AlinaNeural
+        run: node scripts/generateAzureRomanianAudio.mjs
+      - name: Keep recordings for pronunciation review
+        uses: actions/upload-artifact@v4
+        with:
+          name: romanian-audio-candidates
+          path: public/audio/romanian/verified/*.mp3
+          if-no-files-found: error
+          retention-days: 14

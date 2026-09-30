@@ -8,8 +8,8 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 
 const groups = [
-  { category: 'vowels', letters: [['A a', 'a'], ['Ă ă', 'a-breve'], ['Â â', 'a-circ'], ['E e', 'e'], ['I i', 'i'], ['Î î', 'a-circ'], ['O o', 'o'], ['U u', 'u']] },
-  { category: 'consonants', letters: [['B b', 'consoane'], ['C c', 'c-hard'], ['D d', 'consoane'], ['F f', 'consoane'], ['G g', 'g-hard'], ['H h', 'h'], ['J j', 'j'], ['L l', 'consoane'], ['M m', 'consoane'], ['N n', 'consoane'], ['P p', 'consoane'], ['R r', 'r'], ['S s', 's'], ['Ș ș', 's-comma'], ['T t', 'consoane'], ['Ț ț', 't-comma'], ['V v', 'v'], ['X x', 'x'], ['Z z', 'consoane']] },
+  { category: 'vowels', letters: [['A a', 'a'], ['Ă ă', 'a-breve'], ['Â â', 'a-circ'], ['E e', 'e'], ['I i', 'i'], ['Î î', 'i-circ'], ['O o', 'o'], ['U u', 'u']] },
+  { category: 'consonants', letters: [['B b', 'b'], ['C c', 'c-hard'], ['D d', 'd'], ['F f', 'f'], ['G g', 'g-hard'], ['H h', 'h'], ['J j', 'j'], ['L l', 'l'], ['M m', 'm'], ['N n', 'n'], ['P p', 'p'], ['R r', 'r'], ['S s', 's'], ['Ș ș', 's-comma'], ['T t', 't'], ['Ț ț', 't-comma'], ['V v', 'v'], ['X x', 'x'], ['Z z', 'z']] },
   { category: 'loans', letters: [['K k', 'k'], ['Q q', 'q'], ['W w', 'w'], ['Y y', 'y']] },
 ] as const;
 
@@ -56,13 +56,13 @@ export default function RomanianAlphabetIndexPage({ params }: { params: { lang: 
   const graphemes = getPublishedGraphemes();
   const letters = groups.flatMap(group => group.letters.map(([glyph, slug]) => {
     const sound = graphemes.find(entry => entry.slug === slug);
-    const word = glyph === 'Î î' ? getWordById('w-inainte') : sound && getWordById(sound.exampleWordId);
+    const word = slug === 'i-circ' ? getWordById('w-inainte') : sound && getWordById(sound.exampleWordId);
     const extra = additionalExamples[glyph];
     return {
       glyph, slug, category: group.category,
-      example: extra?.word || (glyph === 'Î î' ? word?.lemma : sound?.exampleForm || word?.lemma),
+      example: extra?.word || (slug === 'i-circ' ? word?.lemma : sound?.exampleForm || word?.lemma),
       translation: extra?.[lang] || word?.translations[lang],
-      hint: slug === 'consoane' ? (isFa ? 'درس مشترک همخوان‌ها' : 'Shared consonant lesson') : undefined,
+      hint: undefined,
     };
   }));
 

@@ -12,7 +12,7 @@ import {
 import { ABreveFoundationLesson } from '@/components/romanian/ABreveFoundationLesson';
 import { LetterPositionPractice } from '@/components/romanian/LetterPositionPractice';
 import { CGPatternPractice } from '@/components/romanian/CGPatternPractice';
-import { BasicConsonantPractice } from '@/components/romanian/BasicConsonantPractice';
+import { BASIC_CONSONANT_LETTERS, BasicConsonantPractice, type BasicConsonantSlug } from '@/components/romanian/BasicConsonantPractice';
 import { ConsonantWordPractice } from '@/components/romanian/ConsonantWordPractice';
 import { LoanLetterLesson } from '@/components/romanian/LoanLetterLesson';
 import { Breadcrumb } from '@/components/Breadcrumb';
@@ -40,11 +40,14 @@ const LETTER_READINGS: Record<string, Array<{ label: string; text: string; sound
 function isLoanLetterSlug(slug: string): slug is typeof LOAN_LETTER_SLUGS[number] {
   return LOAN_LETTER_SLUGS.some(letter => letter === slug);
 }
+function isBasicConsonantSlug(slug: string): slug is BasicConsonantSlug {
+  return BASIC_CONSONANT_LETTERS.some(letter => letter === slug);
+}
 function isFoundationVowel(slug: string): slug is VowelFoundationSlug {
   return Object.hasOwn(VOWEL_FOUNDATION_LESSONS, slug);
 }
-function isCircumflexLesson(slug: string): slug is 'a-circ' | 'circ-rule' {
-  return slug === 'a-circ' || slug === 'circ-rule';
+function isCircumflexLesson(slug: string): slug is 'a-circ' | 'i-circ' | 'circ-rule' {
+  return slug === 'a-circ' || slug === 'i-circ' || slug === 'circ-rule';
 }
 function isFinalILesson(slug: string): slug is 'i-final' {
   return slug === 'i-final';
@@ -58,6 +61,8 @@ export function generateStaticParams() {
       params.push({ lang, slug: g.slug });
     }
     for (const slug of LOAN_LETTER_SLUGS) params.push({ lang, slug });
+    for (const slug of BASIC_CONSONANT_LETTERS) params.push({ lang, slug });
+    params.push({ lang, slug: 'i-circ' });
   }
   return params;
 }
@@ -67,9 +72,13 @@ export async function generateMetadata({
 }: {
   params: { lang: string; slug: string };
 }): Promise<Metadata> {
-  const grapheme = getGraphemeBySlug(params.slug);
+  const grapheme = getGraphemeBySlug(params.slug === 'i-circ' ? 'a-circ' : params.slug);
   if (isLoanLetterSlug(params.slug)) {
     return { title: params.lang === 'fa' ? `حرف ${params.slug.toUpperCase()} در الفبای رومانیایی | DORVIA` : `Romanian letter ${params.slug.toUpperCase()} | DORVIA`, robots: { index: false, follow: false } };
+  }
+  if (isBasicConsonantSlug(params.slug)) {
+    const letter = params.slug.toUpperCase();
+    return { title: params.lang === 'fa' ? `درس حرف ${letter} در رومانیایی | DORVIA` : `Romanian letter ${letter} lesson | DORVIA`, robots: { index: false, follow: false } };
   }
   if (isFoundationVowel(params.slug)) {
     const lesson = VOWEL_FOUNDATION_LESSONS[params.slug];
@@ -81,7 +90,7 @@ export async function generateMetadata({
   }
   if (isCircumflexLesson(params.slug)) {
     return {
-      title: params.lang === 'fa' ? `${CIRCUMFLEX_FOUNDATION_LESSON.titleFa} | DORVIA` : `${CIRCUMFLEX_FOUNDATION_LESSON.titleEn} | DORVIA`,
+      title: params.slug === 'i-circ' ? (params.lang === 'fa' ? 'درس حرف Î در رومانیایی | DORVIA' : 'Romanian letter Î lesson | DORVIA') : params.lang === 'fa' ? `${CIRCUMFLEX_FOUNDATION_LESSON.titleFa} | DORVIA` : `${CIRCUMFLEX_FOUNDATION_LESSON.titleEn} | DORVIA`,
       description: params.lang === 'fa' ? CIRCUMFLEX_FOUNDATION_LESSON.introFa : CIRCUMFLEX_FOUNDATION_LESSON.introEn,
       robots: { index: false, follow: false },
     };
@@ -127,7 +136,21 @@ export default function RomanianGraphemeDetailPage({
   if (isLoanLetterSlug(params.slug)) {
     return <main className="max-w-4xl mx-auto px-4 py-8"><LoanLetterLesson slug={params.slug} lang={params.lang as 'fa' | 'en'} /></main>;
   }
-  const grapheme = getGraphemeBySlug(params.slug);
+  if (isBasicConsonantSlug(params.slug)) {
+    const currentLang = params.lang as 'fa' | 'en';
+    const isFa = currentLang === 'fa';
+    return <main className="mx-auto max-w-4xl space-y-6 px-4 py-8">
+      <Breadcrumb items={[
+        { label: isFa ? 'خانه' : 'Home', href: '/' },
+        { label: isFa ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' },
+        { label: isFa ? 'الفبا و صداها' : 'Alphabet and sounds', href: '/learn-romanian/alfabet' },
+        { label: params.slug.toUpperCase() },
+      ]} currentLang={currentLang} disableJsonLd />
+      <BasicConsonantPractice lang={currentLang} letter={params.slug} />
+      <Link href="/learn-romanian/alfabet" className="inline-block font-semibold text-[#1554bd] underline">{isFa ? 'بازگشت به همهٔ حروف' : 'Back to all letters'}</Link>
+    </main>;
+  }
+  const grapheme = getGraphemeBySlug(params.slug === 'i-circ' ? 'a-circ' : params.slug);
   if (!grapheme) {
     notFound();
   }
@@ -180,12 +203,12 @@ export default function RomanianGraphemeDetailPage({
           { label: isFa ? 'خانه' : 'Home', href: '/' },
           { label: isFa ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' },
           { label: isFa ? 'الفبا و تلفظ' : 'Alphabet & pronunciation', href: '/learn-romanian/alfabet' },
-          { label: grapheme.grapheme },
+          { label: params.slug === 'i-circ' ? 'Î î' : grapheme.grapheme },
         ]}
         currentLang={currentLang}
         disableJsonLd
       />
-      <CircumflexFoundationLesson lang={currentLang} samples={mapped as unknown as [typeof mapped[number], typeof mapped[number], typeof mapped[number]]} />
+      <CircumflexFoundationLesson lang={currentLang} focusLetter={params.slug === 'i-circ' ? 'î' : params.slug === 'a-circ' ? 'â' : undefined} samples={mapped as unknown as [typeof mapped[number], typeof mapped[number], typeof mapped[number]]} />
     </main>;
   }
 

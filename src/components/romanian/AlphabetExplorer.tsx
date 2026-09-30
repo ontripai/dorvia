@@ -33,7 +33,7 @@ export function AlphabetExplorer({ letters, lang }: { letters: Letter[]; lang: '
       <div>
         <p className="text-xs font-bold uppercase tracking-wider text-[#1554bd]">{isFa ? 'بخش اول · انتخاب حرف' : 'Part one · choose a letter'}</p>
         <h2 id="letters-heading" className="mt-1 text-2xl sm:text-3xl font-extrabold text-slate-900">{isFa ? 'حروف را پیدا کنید' : 'Find a letter'}</h2>
-        <p className="mt-2 max-w-2xl text-sm text-slate-600">{isFa ? '۳۱ حرف در سه گروه. هر کارت شما را به درس همان حرف یا درس مشترک آن می‌برد.' : '31 letters in three groups. Each card opens its own lesson or a shared sound lesson.'}</p>
+        <p className="mt-2 max-w-2xl text-sm text-slate-600">{isFa ? '۳۱ حرف در سه گروه. هر کارت درس همان حرف را باز می‌کند؛ Â و Î قاعدهٔ صدای مشترک دارند.' : '31 letters in three groups. Each card opens its letter lesson; Â and Î share a sound lesson.'}</p>
       </div>
       <label className="block w-full sm:w-64">
         <span className="sr-only">{isFa ? 'جست‌وجوی حرف یا واژه' : 'Search letter or word'}</span>

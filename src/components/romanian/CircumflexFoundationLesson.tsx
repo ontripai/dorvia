@@ -22,7 +22,7 @@ function HighlightLetter({ text, target }: { text: string; target: 'â' | 'î' }
   return <>{text.slice(0, index)}<span className="rounded bg-amber-200 px-0.5 text-amber-950">{text[index]}</span>{text.slice(index + 1)}</>;
 }
 
-export function CircumflexFoundationLesson({ lang, samples }: { lang: Language; samples: [Sample, Sample, Sample] }) {
+export function CircumflexFoundationLesson({ lang, samples, focusLetter }: { lang: Language; samples: [Sample, Sample, Sample]; focusLetter?: 'â' | 'î' }) {
   const isFa = lang === 'fa';
   const stages = isFa ? stagesFa : stagesEn;
   const [stage, setStage] = React.useState(0);
@@ -57,7 +57,7 @@ export function CircumflexFoundationLesson({ lang, samples }: { lang: Language; 
     <Link href="/learn-romanian/alfabet" className="inline-flex text-sm font-semibold text-[#1554bd] hover:underline">{isFa ? '→ بازگشت به الفبا' : '← Back to the alphabet'}</Link>
     <header className="dark-hero-panel space-y-4 rounded-3xl p-7 text-white sm:p-10">
       <p className="text-sm font-semibold text-blue-100">{isFa ? 'الفبا · واکه‌های ویژه' : 'Alphabet · Romanian vowels with diacritics'}</p>
-      <h1 className="text-5xl font-extrabold" lang="ro" dir="ltr">Â â · Î î</h1>
+      <h1 className="text-5xl font-extrabold" lang="ro" dir="ltr">{focusLetter === 'î' ? 'Î î · Â â' : 'Â â · Î î'}</h1>
       <p className="max-w-3xl leading-7 text-blue-50">{isFa ? CIRCUMFLEX_FOUNDATION_LESSON.introFa : CIRCUMFLEX_FOUNDATION_LESSON.introEn}</p>
       <div className="grid gap-3 sm:grid-cols-2">
         {[
