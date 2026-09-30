@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { CoreSentenceBuildingLesson } from '@/components/romanian/CoreSentenceBuildingLesson';
+import { SubjectPronounsFoundationLesson } from '@/components/romanian/SubjectPronounsFoundationLesson';
 import { LOCALES } from '@/lib/locale-router';
 
 const lessonBySlug = {
+  damayr: { kind: 'subject-pronouns' as const, titleFa: 'ضمیرهای فاعلی رومانیایی', titleEn: 'Romanian subject pronouns', summaryFa: 'ضمیرهای مفرد و جمع، سوم‌شخص و خطاب محترمانه را با مثال و تمرین یاد بگیرید.', summaryEn: 'Learn singular, plural, third-person, and polite subjects with examples and practice.' },
   'fi-avea': { kind: 'verbs-present' as const, titleFa: 'دو فعل پایه: بودن و داشتن', titleEn: 'Two essential verbs: to be and to have', summaryFa: 'صرف زمان حالِ a fi و a avea را با فاعل هماهنگ کنید.', summaryEn: 'Match the present forms of a fi and a avea to their subjects.' },
   sifat: { kind: 'adjectives' as const, titleFa: 'صفت و هماهنگی آن با اسم', titleEn: 'Adjectives and noun agreement', summaryFa: 'جای صفت و هماهنگی جنس و شمار را در عبارت تمرین کنید.', summaryEn: 'Practise adjective position and gender and number agreement.' },
 };
@@ -37,6 +39,6 @@ export default function CoreFoundationLessonPage({ params }: { params: { lang: s
       { label: lang === 'fa' ? 'درس‌های پایه' : 'Foundation lessons', href: '/learn-romanian/fundamente' },
       { label: lang === 'fa' ? lesson.titleFa : lesson.titleEn },
     ]} currentLang={lang} disableJsonLd />
-    <CoreSentenceBuildingLesson lang={lang} kind={lesson.kind} />
+    {lesson.kind === 'subject-pronouns' ? <SubjectPronounsFoundationLesson lang={lang} /> : <CoreSentenceBuildingLesson lang={lang} kind={lesson.kind} />}
   </main>;
 }

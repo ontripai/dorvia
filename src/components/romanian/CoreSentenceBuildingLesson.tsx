@@ -13,12 +13,12 @@ const stagesEn = ['Goal and recall', 'Listen to examples', 'Notice the rule', 'W
 const minutes = [2, 3, 4, 4, 2];
 
 const conjugations = [
-  { person: 'eu', fa: 'من', fi: 'sunt', avea: 'am' },
-  { person: 'tu', fa: 'تو', fi: 'ești', avea: 'ai' },
-  { person: 'el / ea', fa: 'او', fi: 'este', avea: 'are' },
-  { person: 'noi', fa: 'ما', fi: 'suntem', avea: 'avem' },
-  { person: 'voi', fa: 'شما', fi: 'sunteți', avea: 'aveți' },
-  { person: 'ei / ele', fa: 'آن‌ها', fi: 'sunt', avea: 'au' },
+  { person: 'eu', fa: 'من', en: 'I', fi: 'sunt', avea: 'am', example: 'Eu am un bilet.' },
+  { person: 'tu', fa: 'تو', en: 'you (informal)', fi: 'ești', avea: 'ai', example: 'Tu ai un bilet.' },
+  { person: 'el / ea', fa: 'او', en: 'he / she', fi: 'este', avea: 'are', example: 'Ea are un bilet.' },
+  { person: 'noi', fa: 'ما', en: 'we', fi: 'suntem', avea: 'avem', example: 'Noi avem un bilet.' },
+  { person: 'voi', fa: 'شما', en: 'you (plural)', fi: 'sunteți', avea: 'aveți', example: 'Voi aveți un bilet.' },
+  { person: 'ei / ele', fa: 'آن‌ها', en: 'they', fi: 'sunt', avea: 'au', example: 'Ei au un bilet.' },
 ];
 
 const verbQuiz = [
@@ -92,6 +92,7 @@ export function CoreSentenceBuildingLesson({ lang, kind }: { lang: Language; kin
   const [quizIndex, setQuizIndex] = React.useState(0);
   const [quizChoice, setQuizChoice] = React.useState('');
   const [quizChecked, setQuizChecked] = React.useState(false);
+  const [quizDone, setQuizDone] = React.useState(false);
   const isCorrect = normalize(answer) === normalize(copy.prompts[index].answer);
   const correctFeedback = kind === 'verbs-present'
     ? isFa ? 'درست است؛ فعل را با فاعل هماهنگ کردید.' : 'Correct. You matched the verb to its subject.'
@@ -119,7 +120,10 @@ export function CoreSentenceBuildingLesson({ lang, kind }: { lang: Language; kin
       setQuizChoice('');
       setQuizChecked(false);
     } else {
-      setStage(4);
+      setQuizDone(true);
+      setIndex(2);
+      setAnswer('');
+      setChecked(false);
     }
   }
 
@@ -136,9 +140,38 @@ export function CoreSentenceBuildingLesson({ lang, kind }: { lang: Language; kin
       <p className="text-xs text-blue-100">{isFa ? 'زمان پیشنهادی است؛ هر مرحله را می‌توانید تکرار کنید.' : 'The time is a guide; you can repeat any stage.'}</p>
     </header>
 
+    <article aria-labelledby="core-grammar-guide" className="space-y-6 rounded-3xl border-2 border-blue-200 bg-white p-5 shadow-sm sm:p-8">
+      <div>
+        <p className="text-xs font-extrabold text-[#1554bd]">{isFa ? 'درسنامهٔ کامل · پیش از شروع تمرین' : 'COMPLETE REFERENCE · BEFORE PRACTICE'}</p>
+        <h2 id="core-grammar-guide" className="mt-1 text-2xl font-extrabold">{kind === 'verbs-present' ? (isFa ? 'فعل در جمله چگونه کار می‌کند؟' : 'How does a verb work in a sentence?') : (isFa ? 'صفت را چگونه با اسم هماهنگ کنیم؟' : 'How do adjectives agree with nouns?')}</h2>
+        <p className="mt-2 text-sm leading-7 text-slate-700">{isFa ? copy.ruleFa : copy.ruleEn}</p>
+      </div>
+
+      {kind === 'verbs-present' ? <>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <section className="rounded-2xl bg-blue-50 p-4"><h3 className="font-extrabold">a fi · {isFa ? 'بودن' : 'to be'}</h3><p className="mt-2 text-sm leading-6">{isFa ? 'برای هویت، حالت و مکان: «Eu sunt aici.» یعنی «من اینجا هستم». در جمله، شکل صرف‌شدهٔ sunt را به جای مصدر a fi می‌گذاریم.' : 'For identity, state, or location: “Eu sunt aici.” means “I am here.” Use the conjugated sunt in the sentence, rather than the infinitive a fi.'}</p></section>
+          <section className="rounded-2xl bg-emerald-50 p-4"><h3 className="font-extrabold">a avea · {isFa ? 'داشتن' : 'to have'}</h3><p className="mt-2 text-sm leading-6">{isFa ? 'برای داشتن چیزی: «Eu am un bilet.» یعنی «من یک بلیت دارم». فعل am با eu هماهنگ است و un bilet چیزی است که دارم.' : 'For possession: “Eu am un bilet.” means “I have a ticket.” Am agrees with eu; un bilet is the thing I have.'}</p></section>
+        </div>
+        <div className="overflow-x-auto rounded-2xl border border-slate-200"><table className="w-full min-w-[500px] text-sm"><thead className="bg-blue-50"><tr><th className="p-3 text-start">{isFa ? 'فاعل' : 'Subject'}</th><th className="p-3 text-start">a fi</th><th className="p-3 text-start">a avea</th><th className="p-3 text-start">{isFa ? 'نمونهٔ کامل' : 'Complete example'}</th></tr></thead><tbody>{conjugations.map(row => <tr key={row.person} className="border-t border-slate-100"><td className="p-3"><span lang="ro" dir="ltr" className="font-bold">{row.person}</span><span className="ms-2 text-slate-500">{isFa ? row.fa : row.en}</span></td><td lang="ro" dir="ltr" className="p-3 font-bold">{row.fi}</td><td lang="ro" dir="ltr" className="p-3 font-bold">{row.avea}</td><td lang="ro" dir="ltr" className="p-3">{row.example}</td></tr>)}</tbody></table></div>
+        <p className="rounded-xl bg-violet-50 p-4 text-sm leading-7 text-violet-950">{isFa ? 'el و ea هر دو با este / are، و ei و ele هر دو با sunt / au می‌آیند. در خطاب محترمانه، dumneavoastră با شکل دوم‌شخص جمع می‌آید: «Dumneavoastră sunteți aici.» و «Dumneavoastră aveți un bilet.»' : 'El and ea share este / are; ei and ele share sunt / au. Polite dumneavoastră takes second-person plural forms: “Dumneavoastră sunteți aici.” and “Dumneavoastră aveți un bilet.”'}</p>
+        <div className="grid gap-3 sm:grid-cols-2"><div className="rounded-xl border border-slate-200 p-4"><h3 className="font-extrabold">{isFa ? 'الگوی جمله' : 'Sentence pattern'}</h3><p lang="ro" dir="ltr" className="mt-2 font-bold text-[#1554bd]">Eu + am + un bilet.</p><p className="mt-1 text-sm">{isFa ? 'فاعل + فعل صرف‌شده + چیزی که داریم' : 'Subject + conjugated verb + what we have'}</p></div><div className="rounded-xl border border-slate-200 p-4"><h3 className="font-extrabold">{isFa ? 'حذف ضمیر، پرسش و منفی' : 'Omission, question, and negation'}</h3><p lang="ro" dir="ltr" className="mt-2 font-bold text-[#1554bd]">Am un bilet. · Ai un bilet? · Nu am un bilet.</p><p className="mt-1 text-sm leading-6">{isFa ? 'وقتی فاعل روشن است، eu حذف می‌شود؛ پرسش با آهنگ پرسشی می‌آید؛ nu پیش از فعل می‌نشیند.' : 'Drop eu when the subject is clear; a question can use question intonation; nu precedes the verb.'}</p></div></div>
+      </> : <>
+        <div className="grid gap-3 sm:grid-cols-2"><section className="rounded-2xl bg-blue-50 p-4"><h3 className="font-extrabold">{isFa ? 'اسم و صفت' : 'Noun and adjective'}</h3><p className="mt-2 text-sm leading-6">{isFa ? 'اسم می‌گوید دربارهٔ چه چیزی حرف می‌زنیم؛ صفت ویژگی آن را می‌گوید. در عبارت ساده، صفت اغلب بعد از اسم می‌آید: «un bilet nou». جای آن همیشه ثابت نیست، ولی این الگو نقطهٔ شروع مناسبی است.' : 'A noun names the thing; an adjective describes it. In a simple phrase the adjective often follows the noun: “un bilet nou”. Its position is not fixed in every context, but this is a useful starting pattern.'}</p></section><section className="rounded-2xl bg-emerald-50 p-4"><h3 className="font-extrabold">{isFa ? 'هماهنگی جنس و شمار' : 'Gender and number agreement'}</h3><p className="mt-2 text-sm leading-6">{isFa ? 'شکل صفت را از روی اسم انتخاب می‌کنیم. برای nou: مفرد مذکر/خنثی nou، مفرد مؤنث nouă و جمع این نمونه‌ها noi است. اسم خنثی در جمع مانند مؤنث رفتار می‌کند.' : 'Choose the adjective form from the noun. For nou: masculine/neuter singular nou, feminine singular nouă, and plural noi in these examples. Neuter nouns behave like feminine nouns in the plural.'}</p></section></div>
+        <div className="overflow-x-auto rounded-2xl border border-slate-200"><table className="w-full min-w-[460px] text-sm"><thead className="bg-blue-50"><tr><th className="p-3 text-start">{isFa ? 'اسم' : 'Noun'}</th><th className="p-3 text-start">{isFa ? 'جنس و شمار' : 'Gender and number'}</th><th className="p-3 text-start">{isFa ? 'اسم + صفت' : 'Noun + adjective'}</th><th className="p-3 text-start">{isFa ? 'معنی' : 'Meaning'}</th></tr></thead><tbody>{[
+          ['bilet', isFa ? 'خنثی مفرد' : 'neuter singular', 'un bilet nou', isFa ? 'یک بلیت جدید' : 'a new ticket'],
+          ['casă', isFa ? 'مؤنث مفرد' : 'feminine singular', 'o casă nouă', isFa ? 'یک خانهٔ جدید' : 'a new house'],
+          ['bilete', isFa ? 'خنثی جمع' : 'neuter plural', 'două bilete noi', isFa ? 'دو بلیت جدید' : 'two new tickets'],
+          ['case', isFa ? 'مؤنث جمع' : 'feminine plural', 'două case noi', isFa ? 'دو خانهٔ جدید' : 'two new houses'],
+        ].map(([noun, gender, phrase, meaning]) => <tr key={noun} className="border-t border-slate-100"><td lang="ro" dir="ltr" className="p-3 font-bold">{noun}</td><td className="p-3">{gender}</td><td lang="ro" dir="ltr" className="p-3 font-bold text-[#1554bd]">{phrase}</td><td className="p-3">{meaning}</td></tr>)}</tbody></table></div>
+        <p className="rounded-xl bg-violet-50 p-4 text-sm leading-7 text-violet-950">{isFa ? 'صفت‌های دیگر ممکن است الگوی دیگری داشته باشند: «un elev bun»، «o elevă bună»، «doi elevi buni»، «două eleve bune». پس شکل هر صفت را همراه با جنس و شمار اسم یاد بگیرید. در جمله نیز می‌گوییم: «Eu am o casă nouă.»' : 'Other adjectives can follow another pattern: “un elev bun”, “o elevă bună”, “doi elevi buni”, “două eleve bune”. Learn each adjective with the noun’s gender and number. In a sentence: “Eu am o casă nouă.”'}</p>
+      </>}
+
+      <div><h3 className="font-extrabold">{isFa ? 'نمونه‌ها را بخوانید و بشنوید' : 'Read and hear the examples'}</h3><div className="mt-3 grid gap-3 sm:grid-cols-2">{copy.examples.map(item => <div key={item.ro} className="rounded-xl border border-slate-200 bg-slate-50 p-4"><p lang="ro" dir="ltr" className="text-lg font-bold text-[#1554bd]">{item.ro}</p><p className="mt-1 text-sm">{isFa ? item.fa : item.en}</p><PronunciationAudio currentLang={lang} label={item.ro} className="mt-2" /></div>)}</div></div>
+    </article>
+
     <nav aria-label={isFa ? 'مراحل درس ۱۵ دقیقه‌ای' : '15-minute lesson stages'} className="grid grid-cols-2 gap-2 rounded-2xl border border-slate-200 bg-white p-3 sm:grid-cols-5">
       {(isFa ? stagesFa : stagesEn).map((label, step) => <button key={label} type="button" onClick={() => setStage(step)} aria-current={stage === step ? 'step' : undefined} className={`rounded-xl px-3 py-2 text-start text-xs font-semibold ${stage === step ? 'bg-[#1554bd] text-white' : 'bg-slate-50 text-slate-700 hover:bg-blue-50'}`}>
-        <span className="block">{step + 1}. {label}</span><span className="mt-1 block opacity-80">{isFa ? `${minutes[step]} دقیقه` : `${minutes[step]} min`}</span>
+        <span className="block">{step + 1}. {kind === 'verbs-present' && step === 3 ? (isFa ? 'آزمون و نوشتن' : 'Quiz and write') : label}</span><span className="mt-1 block opacity-80">{isFa ? `${minutes[step]} دقیقه` : `${minutes[step]} min`}</span>
       </button>)}
     </nav>
 
@@ -165,17 +198,26 @@ export function CoreSentenceBuildingLesson({ lang, kind }: { lang: Language; kin
       <h2 className="text-xl font-extrabold">{isFa ? 'قاعده را از جدول و جمله پیدا کنید' : 'Find the rule in the table and examples'}</h2>
       <p className="leading-7 text-slate-700">{isFa ? kind === 'verbs-present' ? lessonCopy['verbs-present'].ruleFa : lessonCopy.adjectives.ruleFa : kind === 'verbs-present' ? lessonCopy['verbs-present'].ruleEn : lessonCopy.adjectives.ruleEn}</p>
       {kind === 'verbs-present' ? <div className="overflow-x-auto rounded-xl border border-slate-200"><table className="w-full min-w-[430px] text-sm"><thead className="bg-blue-50"><tr><th className="p-3 text-start">{isFa ? 'فاعل' : 'Subject'}</th><th className="p-3 text-start">a fi</th><th className="p-3 text-start">a avea</th></tr></thead><tbody>{conjugations.map(row => <tr key={row.person} className="border-t border-slate-100"><td className="p-3"><span lang="ro" dir="ltr" className="font-bold">{row.person}</span><span className="ms-2 text-slate-500">{isFa ? row.fa : ''}</span></td><td lang="ro" dir="ltr" className="p-3 font-bold">{row.fi}</td><td lang="ro" dir="ltr" className="p-3 font-bold">{row.avea}</td></tr>)}</tbody></table></div> : <div className="grid gap-3 sm:grid-cols-2">{[['nou', isFa ? 'مذکر/خنثی مفرد' : 'masculine/neuter singular'], ['nouă', isFa ? 'مؤنث مفرد' : 'feminine singular'], ['noi', isFa ? 'جمع؛ در نمونه‌های این درس' : 'plural in these examples'], ['buni', isFa ? 'صفت دیگری در جمع مذکر' : 'another adjective, masculine plural']].map(([form, note]) => <div key={form} className="rounded-xl bg-blue-50 p-4"><span lang="ro" dir="ltr" className="text-lg font-extrabold text-[#1554bd]">{form}</span><p className="mt-1 text-sm">{note}</p></div>)}</div>}
-      <button type="button" onClick={() => { setStage(3); setIndex(0); setAnswer(''); setChecked(false); }} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'تمرین نوشتن ←' : 'Practise writing →'}</button>
+      <button type="button" onClick={() => { setStage(3); setQuizIndex(0); setQuizChoice(''); setQuizChecked(false); setQuizDone(false); setIndex(0); setAnswer(''); setChecked(false); }} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'تمرین و نوشتن ←' : 'Practise and write →'}</button>
     </section>}
 
-    {stage === 3 && kind === 'verbs-present' && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+    {stage === 3 && kind === 'verbs-present' && !quizDone && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
       <p className="text-xs font-extrabold text-[#1554bd]">{isFa ? `مرحلهٔ ۴ · ۴ دقیقه · پرسش ${quizIndex + 1} از ${verbQuiz.length}` : `STEP 4 · 4 MINUTES · QUESTION ${quizIndex + 1} OF ${verbQuiz.length}`}</p>
       <h2 className="text-xl font-extrabold">{isFa ? 'جای خالی را با شکل درست فعل کامل کنید' : 'Complete the sentence with the correct verb form'}</h2>
       <div className="rounded-xl bg-blue-50 p-4"><p lang="ro" dir="ltr" className="text-lg font-extrabold text-[#1554bd]">{verbQuiz[quizIndex].form}</p><p className="mt-1 text-sm">{isFa ? verbQuiz[quizIndex].promptFa : verbQuiz[quizIndex].promptEn}</p></div>
       <div role="group" aria-label={isFa ? 'گزینه‌های شکل فعل' : 'Verb form choices'} className="flex flex-wrap gap-2">{verbQuiz[quizIndex].choices.map(choice => <button key={choice} type="button" onClick={() => { setQuizChoice(choice); setQuizChecked(false); }} aria-pressed={quizChoice === choice} lang="ro" dir="ltr" className={`rounded-xl border px-5 py-3 text-lg font-bold ${quizChoice === choice ? 'border-[#1554bd] bg-blue-50 text-[#1554bd]' : 'border-slate-300 bg-white text-slate-800 hover:bg-slate-50'}`}>{choice}</button>)}</div>
       <button type="button" disabled={!quizChoice} onClick={() => setQuizChecked(true)} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white disabled:opacity-50">{isFa ? 'بررسی' : 'Check'}</button>
       {quizChecked && <p role="status" className={`rounded-xl p-3 ${quizChoice === verbQuiz[quizIndex].answer ? 'bg-emerald-50 text-emerald-800' : 'bg-amber-50 text-amber-900'}`}>{quizChoice === verbQuiz[quizIndex].answer ? (isFa ? 'درست است؛ فاعل و شکل فعل با هم جورند.' : 'Correct. The subject and verb form agree.') : (isFa ? 'این شکل با فاعل جور نیست. دوباره انتخاب کنید.' : 'That form does not match the subject. Try again.')}</p>}
-      {quizChecked && quizChoice === verbQuiz[quizIndex].answer && <button type="button" onClick={moveToNextQuizItem} className="rounded-xl bg-emerald-700 px-5 py-3 font-bold text-white">{quizIndex < verbQuiz.length - 1 ? (isFa ? 'پرسش بعدی ←' : 'Next question →') : (isFa ? 'رفتن به گفتن جمله ←' : 'Continue to speaking →')}</button>}
+      {quizChecked && quizChoice === verbQuiz[quizIndex].answer && <button type="button" onClick={moveToNextQuizItem} className="rounded-xl bg-emerald-700 px-5 py-3 font-bold text-white">{quizIndex < verbQuiz.length - 1 ? (isFa ? 'پرسش بعدی ←' : 'Next question →') : (isFa ? 'یک جمله هم بنویسید ←' : 'Write one sentence →')}</button>}
+    </section>}
+
+    {stage === 3 && kind === 'verbs-present' && quizDone && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+      <p className="text-xs font-extrabold text-[#1554bd]">{isFa ? 'مرحلهٔ ۴ · نوشتن پس از آزمون' : 'STEP 4 · WRITE AFTER THE QUIZ'}</p>
+      <h2 className="text-xl font-extrabold">{isFa ? `«${copy.prompts[2].fa}» را به رومانیایی بنویسید.` : `Write “${copy.prompts[2].en}” in Romanian.`}</h2>
+      <form onSubmit={submit} className="flex flex-wrap gap-2"><input lang="ro" dir="ltr" autoComplete="off" aria-label={isFa ? 'جملهٔ رومانیایی' : 'Romanian sentence'} value={answer} onChange={event => { setAnswer(event.target.value); setChecked(false); }} className="min-w-56 flex-1 rounded-xl border border-slate-300 p-3 text-lg" /><button type="submit" disabled={!answer.trim()} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white disabled:opacity-50">{isFa ? 'بررسی' : 'Check'}</button></form>
+      {checked && <p role="status" className={`rounded-xl p-3 ${isCorrect ? 'bg-emerald-50 text-emerald-800' : 'bg-amber-50 text-amber-900'}`}>{isCorrect ? correctFeedback : (isFa ? 'فاعل eu است؛ صورت درست a avea را از جدول پیدا کنید و دوباره بنویسید.' : 'The subject is eu; find its a avea form in the table and try again.')}</p>}
+      {checked && !isCorrect && <button type="button" onClick={() => setAnswer(copy.prompts[2].answer)} className="text-sm font-semibold text-[#1554bd] underline">{isFa ? 'نمایش پاسخ' : 'Show answer'}</button>}
+      {passed.includes(2) && <button type="button" onClick={() => setStage(4)} className="rounded-xl bg-emerald-700 px-5 py-3 font-bold text-white">{isFa ? 'گفتن و مرور ←' : 'Speak and review →'}</button>}
     </section>}
 
     {stage === 3 && kind === 'adjectives' && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
@@ -185,7 +227,6 @@ export function CoreSentenceBuildingLesson({ lang, kind }: { lang: Language; kin
       {checked && <p role="status" className={`rounded-xl p-3 ${isCorrect ? 'bg-emerald-50 text-emerald-800' : 'bg-amber-50 text-amber-900'}`}>{isCorrect ? correctFeedback : isFa ? 'هنوز درست نیست؛ قاعدهٔ تطبیق را دوباره بررسی کنید.' : 'Not quite. Check the agreement rule and try again.'}</p>}
       {checked && !isCorrect && <button type="button" onClick={() => setAnswer(copy.prompts[index].answer)} className="text-sm font-semibold text-[#1554bd] underline">{isFa ? 'نمایش پاسخ' : 'Show answer'}</button>}
       {passed.includes(index) && <button type="button" onClick={moveToNextPrompt} className="rounded-xl bg-emerald-700 px-5 py-3 font-bold text-white">{index < copy.prompts.length - 1 ? (isFa ? 'تمرین بعدی ←' : 'Next prompt →') : (isFa ? 'رفتن به گفتن و مرور ←' : 'Continue to speak and review →')}</button>}
-      <p lang="ro" dir="ltr" className="text-sm font-semibold text-slate-500">{copy.prompts[index].answer}</p>
     </section>}
 
     {stage === 4 && <section className="space-y-4 rounded-2xl border border-emerald-200 bg-white p-6 shadow-sm sm:p-8">
