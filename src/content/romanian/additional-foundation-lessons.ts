@@ -1,0 +1,114 @@
+export type Bilingual = { fa: string; en: string };
+type Example = { ro: string; fa: string; en: string };
+export type Lesson = {
+  title: Bilingual; goal: Bilingual; introduction: Bilingual;
+  rules: Array<{ title: Bilingual; explanation: Bilingual; examples: Example[] }>;
+  table: { headers: Bilingual[]; rows: Array<{ cells: string[]; note: Bilingual }> };
+  practice: Array<{ meaning: Bilingual; answer: string; hint: Bilingual }>;
+  next: string;
+};
+
+const B = (fa: string, en: string): Bilingual => ({ fa, en });
+const E = (ro: string, fa: string, en: string): Example => ({ ro, fa, en });
+
+export const additionalFoundationLessons = {
+  moarefe: {
+    title: B('سلام، معرفی خود و خطاب محترمانه', 'Greetings, introductions, and polite address'),
+    goal: B('نام، کشور و شغل خود را در گفت‌وگوی کوتاه بیان کنید.', 'Give your name, country, and job in a short exchange.'),
+    introduction: B('سلام و معرفی، اولین کاربرد جملهٔ ساده است. در برخورد رسمی از عبارت‌های مؤدبانه و فعل دوم‌شخص جمع استفاده کنید؛ برای دوست و هم‌سن‌وسال، شکل خودمانی مناسب است. هنگام معرفی، من با sunt و شما با sunteți می‌آید.', 'Greetings make the first useful sentences. Use polite expressions and the second-person plural verb form in formal encounters; use informal forms with friends. In introductions, I takes sunt and polite you takes sunteți.'),
+    rules: [
+      { title: B('سلام و خداحافظی', 'Greeting and leave-taking'), explanation: B('Bună ziua در طول روز مؤدبانه است؛ Bună خودمانی است. La revedere برای خداحافظی در هر دو موقعیت کاربرد دارد.', 'Bună ziua is polite during the day; Bună is informal. La revedere is a useful goodbye in both settings.'), examples: [E('Bună ziua!','روز بخیر!','Good day!'), E('La revedere!','خداحافظ!','Goodbye!')] },
+      { title: B('نام، کشور و شغل', 'Name, country, and job'), explanation: B('برای معرفی بگویید Mă numesc ... یا Eu sunt ... . برای کشور از Sunt din ... و برای شغل از Sunt ... استفاده کنید. جای سه‌نقطه را با اطلاعات واقعی خود پر کنید.', 'Introduce yourself with Mă numesc ... or Eu sunt ... . Use Sunt din ... for origin and Sunt ... for a job. Replace the dots with your own details.'), examples: [E('Mă numesc Ana.','نام من آنا است.','My name is Ana.'), E('Sunt din Iran.','من اهل ایران هستم.','I am from Iran.'), E('Sunt studentă.','من دانشجو هستم (زن).','I am a student (woman).')] },
+      { title: B('سوم‌شخص مفرد و جمع', 'Singular and plural third person'), explanation: B('el و ea به یک مرد یا زن اشاره می‌کنند و با este می‌آیند. ei برای مردان یا گروه ترکیبی و ele برای گروه مؤنث است؛ هر دو با sunt می‌آیند. وقتی جنس یا شخص از بافت روشن نباشد، ضمیر را نگه دارید.', 'El and ea refer to masculine or feminine singular subjects and both take este. Ei refers to masculine or mixed groups; ele to feminine groups. Both take sunt. Keep the pronoun when context does not identify the subject.'), examples: [E('El este aici.','او (مرد) اینجا است.','He is here.'),E('Ea este aici.','او (زن) اینجا است.','She is here.'),E('Ei sunt aici.','آن‌ها (مردان یا گروه ترکیبی) اینجا هستند.','They (masculine or mixed) are here.'),E('Ele sunt aici.','آن‌ها (زنان) اینجا هستند.','They (women) are here.')] },
+      { title: B('رسمی یا خودمانی', 'Formal or informal'), explanation: B('برای یک دوست می‌گوییم Tu ești ...؛ برای خطاب محترمانه به یک نفر نیز Dumneavoastră sunteți ... . فعل رسمی همان شکل جمع است.', 'Say Tu ești ... to a friend; address one person politely with Dumneavoastră sunteți ... . The polite verb has the plural form.'), examples: [E('Dumneavoastră sunteți profesor?','آیا شما معلم هستید؟ (محترمانه)','Are you a teacher? (polite)')] },
+    ],
+    table: { headers: [B('ضمیر فاعلی','Subject pronoun'),B('a fi · بودن','a fi · to be')], rows: [
+      {cells:['eu','sunt'],note:B('من','I')},{cells:['tu','ești'],note:B('تو؛ خودمانی','you; informal')},
+      {cells:['el','este'],note:B('او؛ مذکر','he')},{cells:['ea','este'],note:B('او؛ مؤنث','she')},{cells:['noi','suntem'],note:B('ما','we')},
+      {cells:['voi','sunteți'],note:B('شما؛ جمع خودمانی','you; plural informal')},
+      {cells:['ei','sunt'],note:B('آن‌ها؛ مذکر یا گروه ترکیبی','they; masculine or mixed')},{cells:['ele','sunt'],note:B('آن‌ها؛ گروه مؤنث','they; feminine')},
+      {cells:['dumneavoastră','sunteți'],note:B('شما؛ محترمانه برای یک یا چند نفر','you; polite singular or plural')},
+    ] },
+    practice: [
+      { meaning: B('نام من آنا است.','My name is Ana.'), answer: 'Mă numesc Ana.', hint: B('با Mă numesc شروع کنید.','Start with Mă numesc.') },
+      { meaning: B('من اهل ایران هستم.','I am from Iran.'), answer: 'Sunt din Iran.', hint: B('برای «اهلِ» از din استفاده کنید.','Use din for origin.') },
+    ], next: '/learn-romanian/fundamente/porsesh',
+  },
+  porsesh: {
+    title: B('سؤال‌سازی و پاسخ کوتاه', 'Questions and short answers'), goal: B('دربارهٔ شخص، چیز، مکان و چگونگی سؤال بپرسید.', 'Ask about a person, thing, place, and manner.'),
+    introduction: B('واژهٔ پرسشی را در آغاز جمله بیاورید، سپس فعل مناسب را بگذارید. برای پرسش بله/خیر می‌توان همان ترتیب خبری را با آهنگ پرسشی و علامت سؤال آورد. پاسخ را نخست کوتاه و سپس با یک جملهٔ کامل بیان کنید.', 'Put a question word at the beginning, followed by a suitable verb. A yes/no question can retain statement order with question intonation and a question mark. Give a short reply, then a complete sentence.'),
+    rules: [
+      { title: B('چه کسی، چه چیز، کجا', 'Who, what, where'), explanation: B('cine برای شخص، ce برای چیز، unde برای مکان و de unde برای مبدأ است. در سؤال، فعل باید با فاعل جمله هماهنگ باشد.', 'Cine asks about a person, ce about a thing, unde about a place, and de unde about origin. Match the verb to the subject.'), examples: [E('Cine este aici?','چه کسی اینجا است؟','Who is here?'),E('Unde este biletul?','بلیت کجاست؟','Where is the ticket?'),E('De unde sunteți?','اهل کجا هستید؟ (محترمانه)','Where are you from? (polite)')] },
+      { title: B('چگونه و بله/خیر', 'How and yes/no'), explanation: B('cum یعنی چگونه. برای تأیید یا رد، Da / Nu بگویید و سپس پاسخ روشن بدهید: Da, am un bilet. یا Nu, nu am un bilet.', 'Cum means how. For yes/no, say Da / Nu and then a clear sentence: Da, am un bilet. or Nu, nu am un bilet.'), examples: [E('Cum sunteți?','حال شما چطور است؟','How are you?'),E('Aveți un bilet?','آیا بلیت دارید؟','Do you have a ticket?')] },
+    ],
+    table: { headers: [B('واژه','Word'),B('کاربرد','Use')], rows: [
+      {cells:['cine','person'],note:B('چه کسی؟','Who?')},{cells:['ce','thing'],note:B('چه؟','What?')},{cells:['unde / de unde','place / origin'],note:B('کجا / اهل کجا؟','Where / from where?')},{cells:['cum','manner'],note:B('چگونه؟','How?')},
+    ] },
+    practice: [
+      {meaning:B('چه کسی اینجا است؟','Who is here?'),answer:'Cine este aici?',hint:B('cine + este + aici','cine + este + aici')},
+      {meaning:B('آیا بلیت دارید؟ (محترمانه)','Do you have a ticket? (polite)'),answer:'Aveți un bilet?',hint:B('صورت محترمانهٔ a avea برابر aveți است.','The polite a avea form is aveți.')},
+    ], next:'/learn-romanian/fundamente/nafi',
+  },
+  nafi: {
+    title:B('منفی‌سازی و پاسخ بله یا خیر','Negation and yes/no answers'),goal:B('یک جملهٔ مثبت را منفی کنید و پاسخ روشن بدهید.','Negate a positive sentence and give a clear answer.'),
+    introduction:B('در جملهٔ ساده، nu درست پیش از فعل صرف‌شده می‌آید. اگر ضمیر فاعلی را حذف کنید، جای nu تغییر نمی‌کند. در پاسخ کوتاه، Nu به‌تنهایی «نه» است؛ در جملهٔ منفی دوباره nu را کنار فعل می‌آوریم.', 'In a simple sentence, nu goes immediately before the conjugated verb. Omitting the subject does not move nu. In a short answer, Nu means “no”; repeat nu before the verb in a full negative sentence.'),
+    rules:[
+      {title:B('جای nu','Where nu goes'),explanation:B('الگو: (فاعل) + nu + فعل + بقیهٔ جمله. منفی‌ساز پیش از am و sunt قرار می‌گیرد، نه پس از مفعول یا در پایان جمله.', 'Pattern: (subject) + nu + verb + the rest. Put nu before am and sunt, not after the object or at the end.'),examples:[E('Eu nu am un bilet.','من بلیت ندارم.','I do not have a ticket.'),E('Ea nu este aici.','او اینجا نیست.','She is not here.')]},
+      {title:B('پاسخ کوتاه و کامل','Short and complete replies'),explanation:B('پس از سؤال، پاسخ مثبت را با Da و پاسخ منفی را با Nu آغاز کنید. شکل فعل را با شخص پاسخ‌دهنده هماهنگ کنید: پرسش Aveți? اما پاسخ Am / Nu am.', 'Begin positive answers with Da and negative ones with Nu. Adjust the verb to the respondent: the question Aveți? can receive Am / Nu am.'),examples:[E('Aveți un bilet? Da, am un bilet.','بلیت دارید؟ بله، بلیت دارم.','Do you have a ticket? Yes, I do.'),E('Aveți un bilet? Nu, nu am un bilet.','بلیت دارید؟ نه، بلیت ندارم.','Do you have a ticket? No, I do not.')]},
+    ],
+    table:{headers:[B('مثبت','Positive'),B('منفی','Negative')],rows:[{cells:['Am un bilet.','Nu am un bilet.'],note:B('دارم ← ندارم','I have ← I do not have')},{cells:['Ea este aici.','Ea nu este aici.'],note:B('اینجا است ← اینجا نیست','She is here ← She is not here')}]},
+    practice:[{meaning:B('من بلیت ندارم.','I do not have a ticket.'),answer:'Nu am un bilet.',hint:B('nu را پیش از am بگذارید.','Place nu before am.')},{meaning:B('او (زن) اینجا نیست.','She is not here.'),answer:'Ea nu este aici.',hint:B('ea + nu + este','ea + nu + este')}],next:'/learn-romanian/fundamente/articole',
+  },
+  articole: {
+    title:B('اسم نامعین و معین','Indefinite and definite nouns'),goal:B('فرق «یک بلیت» و «بلیتِ مشخص» را بیان کنید.','Distinguish “a ticket” from “the ticket”.'),
+    introduction:B('در رومانیایی «یک» پیش از اسم می‌آید: un bilet، o carte. اما نشانهٔ اسم معین معمولاً به پایان اسم می‌چسبد: biletul، cartea. صورت‌های جمع و تغییرهای املایی را باید همراه هر اسم یاد گرفت. «معین» یعنی شنونده می‌داند دربارهٔ کدام چیز حرف می‌زنیم.', 'Romanian puts the indefinite article before the noun: un bilet, o carte. The definite article usually attaches to the noun: biletul, cartea. Learn plural and spelling changes with each noun. “Definite” means the listener can identify the item.'),
+    rules:[
+      {title:B('نامعین: un / o / niște','Indefinite: un / o / niște'),explanation:B('un برای مفرد مذکر و خنثی، o برای مفرد مؤنث است. niște برای جمع نامعین کاربرد دارد. جنس اسم را همراه خود واژه یاد بگیرید.', 'Use un for masculine and neuter singular, o for feminine singular, and niște for indefinite plurals. Learn each noun together with its gender.'),examples:[E('Am un bilet.','یک بلیت دارم.','I have a ticket.'),E('Am o carte.','یک کتاب دارم.','I have a book.'),E('Am niște bilete.','چند بلیت دارم.','I have some tickets.')]},
+      {title:B('معین: پسوندِ اسم','Definite: a noun ending'),explanation:B('در این نمونه‌ها un bilet به biletul و o carte به cartea تبدیل می‌شود. حرف تعریف معین واژهٔ جداگانه نیست؛ شکل اسم تغییر می‌کند.', 'In these examples un bilet becomes biletul and o carte becomes cartea. The definite article is not a separate word; the noun changes form.'),examples:[E('Biletul este aici.','بلیت اینجاست.','The ticket is here.'),E('Cartea este aici.','کتاب اینجاست.','The book is here.')]},
+    ],
+    table:{headers:[B('نامعین','Indefinite'),B('معین','Definite')],rows:[{cells:['un bilet','biletul'],note:B('بلیت؛ خنثی مفرد','ticket; neuter singular')},{cells:['o carte','cartea'],note:B('کتاب؛ مؤنث مفرد','book; feminine singular')},{cells:['niște bilete','biletele'],note:B('بلیت‌ها؛ جمع','tickets; plural')}]},
+    practice:[{meaning:B('بلیت اینجاست.','The ticket is here.'),answer:'Biletul este aici.',hint:B('صورت معین bilet برابر biletul است.','The definite form of bilet is biletul.')},{meaning:B('یک کتاب دارم.','I have a book.'),answer:'Am o carte.',hint:B('carte مؤنث است؛ o را پیش از آن بگذارید.','Carte is feminine; use o before carte.') }],next:'/learn-romanian/fundamente/verbe',
+  },
+  verbe: {
+    title:B('فعل‌های پرکاربرد در زمان حال','Everyday verbs in the present'),goal:B('رفتن، زندگی‌کردن، صحبت‌کردن و انجام‌دادن را در جمله به کار ببرید.','Use go, live, speak, and do in sentences.'),
+    introduction:B('پس از a fi و a avea، برای ساخت جمله‌های روزمره به فعل حرکتی و کاری نیاز دارید. مصدر با a می‌آید، اما در جمله شکل صرف‌شده را انتخاب می‌کنیم. همهٔ فعل‌ها دقیقاً یک الگوی واحد ندارند؛ صورت‌های جدول را همراه ضمیر و مثال یاد بگیرید.', 'After a fi and a avea, everyday sentences need verbs for movement and action. The infinitive starts with a; a sentence uses a conjugated form. Not all verbs follow exactly one pattern, so learn the table with pronouns and examples.'),
+    rules:[
+      {title:B('a merge و a locui','Going and living'),explanation:B('merg / merge برای رفتن و locuiesc / locuiește برای زندگی‌کردن است. برای مقصد یا مکان، اغلب la یا în می‌آید.', 'Merg / merge mean go/goes; locuiesc / locuiește mean live/lives. Destinations or locations often use la or în.'),examples:[E('Eu merg la școală.','من به مدرسه می‌روم.','I go to school.'),E('Ea locuiește în București.','او در بخارست زندگی می‌کند.','She lives in Bucharest.')]},
+      {title:B('a vorbi و a face','Speaking and doing'),explanation:B('vorbesc برای «من صحبت می‌کنم» و vorbește برای «او صحبت می‌کند» است. fac و face صورت‌های پرکاربرد a face هستند. پسوند فعل را از روی فاعل انتخاب کنید.', 'Vorbesc is “I speak”; vorbește is “he/she speaks”. Fac and face are common forms of a face. Choose the ending from the subject.'),examples:[E('Eu vorbesc română.','من رومانیایی صحبت می‌کنم.','I speak Romanian.'),E('El face o cafea.','او قهوه درست می‌کند.','He makes a coffee.')]},
+    ],
+    table:{headers:[B('مصدر','Infinitive'),B('من / eu','I / eu'),B('او / el/ea','He/she')],rows:[{cells:['a merge','merg','merge'],note:B('رفتن','go')},{cells:['a locui','locuiesc','locuiește'],note:B('زندگی‌کردن','live')},{cells:['a vorbi','vorbesc','vorbește'],note:B('صحبت‌کردن','speak')},{cells:['a face','fac','face'],note:B('انجام‌دادن / درست‌کردن','do / make')}]},
+    practice:[{meaning:B('من رومانیایی صحبت می‌کنم.','I speak Romanian.'),answer:'Eu vorbesc română.',hint:B('eu + vorbesc + română','eu + vorbesc + română')},{meaning:B('او (زن) در بخارست زندگی می‌کند.','She lives in Bucharest.'),answer:'Ea locuiește în București.',hint:B('ea + locuiește + în + București','ea + locuiește + în + București')}],next:'/learn-romanian/fundamente/locatie',
+  },
+  locatie: {
+    title:B('مکان و حروف اضافهٔ پایه','Places and basic prepositions'),goal:B('جای خود یا یک شیء را در جمله بیان کنید.','Say where you or an object are.'),
+    introduction:B('برای جواب دادن به «کجا؟» از فعل بودن و یک عبارت مکانی استفاده کنید. حرف اضافه رابطهٔ اسم با مکان را نشان می‌دهد: în برای «درون»، pe برای «روی»، lângă برای «کنار»، sub برای «زیر» و la برای بسیاری از مقصدها یا مکان‌ها. آن‌ها را در جمله یاد بگیرید.', 'Answer “Where?” with a form of “to be” and a place phrase. A preposition links a noun to a place: în for inside, pe for on, lângă for next to, sub for under, and la for many destinations or locations. Learn them in sentences.'),
+    rules:[
+      {title:B('در، روی، کنار، زیر','In, on, beside, under'),explanation:B('برای جای ثابت، الگوی سادهٔ اسم + este + عبارت مکانی را به کار ببرید. صورت اسم پس از حرف اضافه بسته به معنی و معرفه‌بودن آن تغییر می‌کند؛ فعلاً هر عبارت را یک‌جا بخوانید.', 'For a fixed position, use noun + este + place phrase. Noun forms after prepositions vary with meaning and definiteness; learn each phrase as a unit for now.'),examples:[E('Cartea este pe masă.','کتاب روی میز است.','The book is on the table.'),E('Biletul este în geantă.','بلیت در کیف است.','The ticket is in the bag.'),E('Cartea este lângă telefon.','کتاب کنار تلفن است.','The book is beside the phone.')]},
+      {title:B('مقصد با la','A destination with la'),explanation:B('با a merge، برای بسیاری از مقصدها la می‌آید: Merg la școală. برای شهرها معمولاً în: Merg în București. این دو را با یک قاعدهٔ بی‌استثنا یکی ندانید.', 'With a merge, many destinations take la: Merg la școală. Cities often take în: Merg în București. These are useful patterns, not an exception-free rule.'),examples:[E('Merg la școală.','به مدرسه می‌روم.','I go to school.'),E('Merg în București.','به بخارست می‌روم.','I go to Bucharest.')]},
+    ],
+    table:{headers:[B('حرف اضافه','Preposition'),B('عبارت','Phrase')],rows:[{cells:['în','în geantă'],note:B('در کیف','in the bag')},{cells:['pe','pe masă'],note:B('روی میز','on the table')},{cells:['lângă','lângă telefon'],note:B('کنار تلفن','beside the phone')},{cells:['sub','sub masă'],note:B('زیر میز','under the table')},{cells:['la','la școală'],note:B('به / در مدرسه','to / at school')}]},
+    practice:[{meaning:B('کتاب روی میز است.','The book is on the table.'),answer:'Cartea este pe masă.',hint:B('cartea + este + pe masă','cartea + este + pe masă')},{meaning:B('من به مدرسه می‌روم.','I go to school.'),answer:'Merg la școală.',hint:B('فعل رفتن برای «من» merg است.','The “I go” form is merg.')}],next:'/learn-romanian/fundamente/numere-pret',
+  },
+  'numere-pret': {
+    title:B('عدد، مقدار و قیمت','Numbers, quantities, and prices'),goal:B('تعداد و قیمت ساده را بپرسید و بگویید.','Ask and state a simple quantity and price.'),
+    introduction:B('اعداد را تنها حفظ نکنید؛ آن‌ها را کنار اسم و در پرسش خرید به کار ببرید. برای «چند؟» صورت cât را با جنس و شمار اسم هماهنگ کنید: câți برای جمع مذکر و câte برای جمع مؤنث یا خنثی. برای قیمت، Cât costă ...? یک قالب بسیار پرکاربرد است.', 'Do not learn numbers in isolation; use them with nouns and shopping questions. For “how many?”, match cât to the noun: câți for masculine plural and câte for feminine or neuter plural. Cât costă ...? is a frequent price question.'),
+    rules:[
+      {title:B('یک و دو کنار اسم','One and two with nouns'),explanation:B('un bilet، o carte، doi elevi و două bilete. اسم خنثی در مفرد با un و در جمع با două می‌آید.', 'Use un bilet, o carte, doi elevi, and două bilete. Neuter nouns take un in the singular and două in the plural.'),examples:[E('Am două bilete.','دو بلیت دارم.','I have two tickets.'),E('Am o carte.','یک کتاب دارم.','I have one book.')]},
+      {title:B('چندتا و چقدر؟','How many and how much?'),explanation:B('Câți برای اسم جمع مذکر مانند elevi و Câte برای bilete یا cărți است. وقتی دربارهٔ قیمت یک کالا می‌پرسید از Cât costă ...? استفاده کنید.', 'Use Câți for masculine plural nouns such as elevi, and Câte for bilete or cărți. Ask an item’s price with Cât costă ...?'),examples:[E('Câte bilete aveți?','چند بلیت دارید؟','How many tickets do you have?'),E('Cât costă biletul?','بلیت چقدر قیمت دارد؟','How much does the ticket cost?')]},
+    ],
+    table:{headers:[B('عدد / پرسش','Number / question'),B('نمونه','Example')],rows:[{cells:['un / o','un bilet / o carte'],note:B('یک؛ بسته به جنس اسم','one; depends on noun gender')},{cells:['doi / două','doi elevi / două bilete'],note:B('دو؛ بسته به جنس جمع','two; depends on plural gender')},{cells:['câți / câte','câți elevi / câte bilete'],note:B('چند؛ بسته به جنس جمع','how many; depends on plural gender')}]},
+    practice:[{meaning:B('دو بلیت دارم.','I have two tickets.'),answer:'Am două bilete.',hint:B('bilet خنثی است؛ جمع آن با două می‌آید.','Bilet is neuter; use două with its plural.')},{meaning:B('بلیت چقدر قیمت دارد؟','How much does the ticket cost?'),answer:'Cât costă biletul?',hint:B('با Cât costă شروع کنید.','Start with Cât costă.')}],next:'/learn-romanian/fundamente/timp-sade',
+  },
+  'timp-sade': {
+    title:B('روز، ساعت و قید زمان','Day, time, and time adverbs'),goal:B('بگویید کاری امروز، فردا یا در ساعتی مشخص انجام می‌شود.','Say whether something happens today, tomorrow, or at a set time.'),
+    introduction:B('قید زمان به سؤال «کی؟» جواب می‌دهد. در جملهٔ ساده می‌تواند آغاز یا پایان جمله بیاید. برای ساعت از la ora ... استفاده کنید؛ pentru întrebare «چه ساعتی؟» بگویید La ce oră? و برای زمان کلی بگویید Când?', 'Time adverbs answer “When?”. In simple sentences they can come at the beginning or end. Use la ora ... for a clock time, La ce oră? to ask “At what time?”, and Când? to ask when more generally.'),
+    rules:[
+      {title:B('امروز، فردا و حالا','Today, tomorrow, now'),explanation:B('azi = امروز، mâine = فردا، acum = الان. جای قید برای تأکید می‌تواند عوض شود: Azi merg la școală / Merg la școală azi.', 'Azi means today, mâine tomorrow, and acum now. The time word can move for emphasis: Azi merg la școală / Merg la școală azi.'),examples:[E('Azi merg la școală.','امروز به مدرسه می‌روم.','I go to school today.'),E('Mâine merg la bancă.','فردا به بانک می‌روم.','I go to the bank tomorrow.')]},
+      {title:B('پرسیدن ساعت','Asking about time'),explanation:B('Cât este ceasul? برای پرسیدن ساعت فعلی است؛ La ce oră? زمان یک کار یا قرار را می‌پرسد. La ora două یعنی ساعت دو.', 'Cât este ceasul? asks the current time; La ce oră? asks the time of an activity or appointment. La ora două means at two o’clock.'),examples:[E('Cât este ceasul?','ساعت چند است؟','What time is it?'),E('La ce oră mergeți?','چه ساعتی می‌روید؟','At what time are you going?'),E('Merg la ora două.','ساعت دو می‌روم.','I go at two o’clock.')]},
+    ],
+    table:{headers:[B('عبارت','Expression'),B('معنی','Meaning')],rows:[{cells:['azi','today'],note:B('امروز','today')},{cells:['mâine','tomorrow'],note:B('فردا','tomorrow')},{cells:['acum','now'],note:B('الان','now')},{cells:['la ora două','at two o’clock'],note:B('ساعت دو','at two')}]},
+    practice:[{meaning:B('امروز به مدرسه می‌روم.','I go to school today.'),answer:'Azi merg la școală.',hint:B('azi + merg + la școală','azi + merg + la școală')},{meaning:B('ساعت دو می‌روم.','I go at two o’clock.'),answer:'Merg la ora două.',hint:B('برای ساعت از la ora استفاده کنید.','Use la ora for the time.')}],next:'/learn-romanian/fundamente/sakht-jomle',
+  },
+} satisfies Record<string, Lesson>;
+
+export type AdditionalFoundationSlug = keyof typeof additionalFoundationLessons;

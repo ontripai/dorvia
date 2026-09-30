@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { LOCALES } from '@/lib/locale-router';
-import { getPublishedStations } from '@/lib/romanian/content';
 
 type Copy = { fa: string; en: string; noteFa: string; noteEn: string; href: string };
 
@@ -48,13 +47,16 @@ const alphabetGroups: Array<{ titleFa: string; titleEn: string; items: Copy[] }>
   },
 ];
 
-const coreModules: Record<string, { titleFa: string; titleEn: string; summaryFa: string; summaryEn: string }> = {
-  salutari: { titleFa: 'گفت‌وگو و معرفی خود', titleEn: 'Greetings and introductions', summaryFa: 'سلام، معرفی خود، تشکر و عبارت‌های مؤدبانه.', summaryEn: 'Greetings, introductions, thanks, and polite expressions.' },
-  numere: { titleFa: 'اعداد و شمارش', titleEn: 'Numbers and counting', summaryFa: 'شمارش فراتر از یک و دو در چند نوبت کوتاه.', summaryEn: 'Count beyond one and two across short sessions.' },
-  timp: { titleFa: 'زمان و تقویم', titleEn: 'Time and calendar', summaryFa: 'روز، تاریخ، ساعت و بخش‌های روز.', summaryEn: 'Days, dates, clock time, and parts of the day.' },
-  'cuvinte-interogative': { titleFa: 'واژه‌های پرسشی', titleEn: 'Question words', summaryFa: 'واژه‌های چه، کجا، کی، چگونه و چندتا.', summaryEn: 'What, where, when, how, and how many.' },
-  pronume: { titleFa: 'ضمیرهای مفعولی و ملکی', titleEn: 'Object and possessive pronouns', summaryFa: 'پس از ضمیر فاعلی، پی‌بست‌های مفعولی و صورت‌های ملکی را یاد بگیرید.', summaryEn: 'After subject pronouns, continue with object clitics and possessive forms.' },
-};
+const newPath = [
+  { slug: 'moarefe', fa: 'سلام و معرفی خود', en: 'Greetings and introductions', noteFa: 'سلام، نام، کشور، شغل و خطاب محترمانه را در جمله یاد بگیرید.', noteEn: 'Use greetings, your name, country, job, and polite address in sentences.' },
+  { slug: 'porsesh', fa: 'سؤال‌سازی و پاسخ کوتاه', en: 'Questions and short answers', noteFa: 'با چه کسی، چه، کجا و چگونه سؤال بپرسید و پاسخ دهید.', noteEn: 'Ask and answer who, what, where, and how questions.' },
+  { slug: 'nafi', fa: 'منفی‌سازی', en: 'Negation', noteFa: 'جای nu را یاد بگیرید و پاسخ مثبت و منفی بدهید.', noteEn: 'Place nu correctly and give positive and negative answers.' },
+  { slug: 'articole', fa: 'اسم نامعین و معین', en: 'Indefinite and definite nouns', noteFa: 'فرق un bilet با biletul و کاربرد o و niște را تمرین کنید.', noteEn: 'Distinguish un bilet from biletul and practise o and niște.' },
+  { slug: 'verbe', fa: 'فعل‌های روزمره در زمان حال', en: 'Everyday present-tense verbs', noteFa: 'رفتن، زندگی‌کردن، صحبت‌کردن و انجام‌دادن را در جمله به کار ببرید.', noteEn: 'Use go, live, speak, and do in sentences.' },
+  { slug: 'locatie', fa: 'مکان و حروف اضافه', en: 'Places and prepositions', noteFa: 'با در، روی، کنار، زیر و به، جای چیزها و مقصد را بگویید.', noteEn: 'Describe positions and destinations using in, on, beside, under, and to.' },
+  { slug: 'numere-pret', fa: 'عدد، مقدار و قیمت', en: 'Numbers, quantities, and prices', noteFa: 'تعداد را با جنس اسم هماهنگ کنید و قیمت بپرسید.', noteEn: 'Match quantities to noun gender and ask prices.' },
+  { slug: 'timp-sade', fa: 'روز، ساعت و قید زمان', en: 'Days, clock time, and time words', noteFa: 'امروز، فردا و ساعت انجام کار را بگویید و بپرسید.', noteEn: 'Say and ask when something happens.' },
+] as const;
 
 export function generateStaticParams() {
   return LOCALES.map(lang => ({ lang }));
@@ -73,7 +75,6 @@ export default function RomanianFoundationPage({ params }: { params: { lang: str
   if (!LOCALES.includes(params.lang as (typeof LOCALES)[number])) notFound();
   const isFa = params.lang === 'fa';
   const lang = params.lang as 'fa' | 'en';
-  const stations = getPublishedStations().filter(station => station.id.startsWith('core-')).sort((a, b) => a.order - b.order);
 
   return <main className="mx-auto max-w-6xl space-y-8 px-4 py-7 sm:space-y-12 sm:py-10">
     <Breadcrumb items={[
@@ -85,7 +86,7 @@ export default function RomanianFoundationPage({ params }: { params: { lang: str
     <header className="dark-hero-panel overflow-hidden rounded-3xl px-6 py-9 text-white shadow-xl sm:px-10 sm:py-12">
       <span className="text-sm font-bold text-blue-200">{isFa ? 'مسیر پایه · هر نوبت حدود ۱۵ دقیقه' : 'Foundation path · about 15 minutes per session'}</span>
       <h1 className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight sm:text-5xl">{isFa ? 'از الفبا تا ساخت جملهٔ ساده' : 'From the alphabet to a simple sentence'}</h1>
-      <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-200 sm:text-base">{isFa ? 'هدف این مسیر آن است که در پایان بتوانید واژه‌ها را کنار هم بگذارید و جملهٔ سادهٔ رومانیایی بسازید. نخست الفبا و همهٔ ترکیب‌های آن را یک‌جا و دسته‌بندی‌شده یاد می‌گیرید؛ سپس اسم، عدد، ضمیر، فعل و ترتیب جمله را تمرین می‌کنید.' : 'The goal is to put words together and make a simple Romanian sentence. First learn the alphabet and all its letter patterns in one classified place; then practise nouns, numbers, pronouns, verbs, and word order.'}</p>
+      <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-200 sm:text-base">{isFa ? 'هدف این مسیر آن است که در پایان بتوانید واژه‌ها را کنار هم بگذارید و جملهٔ سادهٔ رومانیایی بسازید. نخست الفبا و همهٔ ترکیب‌های آن را یک‌جا و دسته‌بندی‌شده یاد می‌گیرید؛ سپس معرفی، پرسش، منفی‌سازی، اسم، فعل، مکان، عدد و زمان را در جمله تمرین می‌کنید.' : 'The goal is to put words together and make a simple Romanian sentence. First learn the alphabet and all its letter patterns in one classified place; then practise introductions, questions, negation, nouns, verbs, places, numbers, and time in sentences.'}</p>
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <span lang="ro" dir="ltr" className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-lg font-bold">Eu am un bilet nou.</span>
         <span className="text-sm text-blue-100">{isFa ? 'من یک بلیت جدید دارم.' : 'I have a new ticket.'}</span>
@@ -144,18 +145,14 @@ export default function RomanianFoundationPage({ params }: { params: { lang: str
 
     <section aria-labelledby="sentence-foundations-heading" className="space-y-5">
       <div>
-        <p className="text-xs font-extrabold uppercase tracking-wider text-violet-700">{isFa ? 'بخش ۲ · مسیر جمله‌سازی' : 'PART 2 · THE SENTENCE-BUILDING PATH'}</p>
-        <h2 id="sentence-foundations-heading" className="mt-1 text-2xl font-extrabold text-slate-900 sm:text-3xl">{isFa ? 'این درس‌ها را به ترتیب پیش ببرید' : 'Follow these lessons in order'}</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{isFa ? 'هر درس حدود ۱۵ دقیقه است و یک مهارت را اضافه می‌کند. ترتیب از اسم و فاعل شروع می‌شود، به فعل و صفت می‌رسد و با ساخت جملهٔ کامل پایان می‌یابد.' : 'Each lesson takes about 15 minutes and adds one skill. Start with nouns and subjects, move to verbs and adjectives, and finish by building a complete sentence.'}</p>
+        <p className="text-xs font-extrabold uppercase tracking-wider text-violet-700">{isFa ? 'بخش ۲ · مسیر تازهٔ درس‌های پایه' : 'PART 2 · NEW FOUNDATION PATH'}</p>
+        <h2 id="sentence-foundations-heading" className="mt-1 text-2xl font-extrabold text-slate-900 sm:text-3xl">{isFa ? 'هشت درس، به ترتیب کاربرد' : 'Eight lessons in practical order'}</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{isFa ? 'هر کارت یک درس مستقل دارد: ابتدا درسنامهٔ کامل، سپس شنیدن، قاعده، نوشتن و گفتن در یک نوبت پیشنهادی ۱۵ دقیقه‌ای. در پایان، آموخته‌ها را در درس جمله‌سازی به هم وصل می‌کنید.' : 'Each card opens a complete reference followed by listening, rules, writing, and speaking in a suggested 15-minute session. The final lesson brings the skills together.'}</p>
       </div>
       <ol className="grid gap-4 md:grid-cols-2">
-        <li><LessonCard lang={lang} number="۱" numberEn="1" href="/learn-romanian/lectie/un-o-doi-doua" titleFa="اسم، جنس و شمار" titleEn="Nouns, gender, and number" noteFa="با un / o و doi / două اسم مذکر، مؤنث و خنثی را بسازید؛ پایهٔ انتخاب صفت هم همین‌جاست." noteEn="Build masculine, feminine, and neuter noun phrases with un / o and doi / două." /></li>
-        <li><LessonCard lang={lang} number="۲" numberEn="2" href="/learn-romanian/fundamente/damayr" titleFa="همهٔ ضمیرهای فاعلی" titleEn="All subject pronouns" noteFa="eu، tu، el، ea، noi، voi، ei، ele و dumneavoastră را با جدول، قاعدهٔ حذف ضمیر و جمله‌های نمونه یاد بگیرید." noteEn="Learn eu, tu, el, ea, noi, voi, ei, ele, and dumneavoastră with a complete table, rules, and examples." /></li>
-        <li><LessonCard lang={lang} number="۳" numberEn="3" href="/learn-romanian/fundamente/fi-avea" titleFa="فعل‌های بودن و داشتن" titleEn="The verbs to be and to have" noteFa="a fi و a avea را در زمان حال صرف کنید و فعل را با فاعل هماهنگ کنید." noteEn="Conjugate a fi and a avea in the present and match each form to its subject." /></li>
-        <li><LessonCard lang={lang} number="۴" numberEn="4" href="/learn-romanian/fundamente/sifat" titleFa="صفت و هماهنگی با اسم" titleEn="Adjectives and noun agreement" noteFa="جای معمول صفت و تغییر شکل آن بر اساس جنس و شمار اسم را تمرین کنید." noteEn="Practise the usual adjective position and match its form to the noun." /></li>
-        <li className="md:col-span-2"><LessonCard lang={lang} number="۵" numberEn="5" href="/learn-romanian/fundamente/sakht-jomle" titleFa="ترتیب جمله و جمله‌سازی" titleEn="Sentence order and building" noteFa="فاعل، فعل، مفعول، صفت، قید و منفی‌سازی را کنار هم بگذارید و جملهٔ ساده بسازید." noteEn="Combine subjects, verbs, objects, adjectives, adverbs, and negation to make simple sentences." featured /></li>
+        {newPath.map((item,index)=><li key={item.slug}><LessonCard lang={lang} number={'۰۱۲۳۴۵۶۷۸۹'[index+1]} numberEn={String(index+1)} href={`/learn-romanian/fundamente/${item.slug}`} titleFa={item.fa} titleEn={item.en} noteFa={item.noteFa} noteEn={item.noteEn} /></li>)}
+        <li className="md:col-span-2"><LessonCard lang={lang} number="۹" numberEn="9" href="/learn-romanian/fundamente/sakht-jomle" titleFa="جمع‌بندی: ترتیب جمله و جمله‌سازی" titleEn="Final practice: sentence order" noteFa="فاعل، فعل، مفعول، صفت و قید را کنار هم بگذارید؛ جملهٔ خبری، منفی و پرسشی بسازید." noteEn="Combine subjects, verbs, objects, adjectives, and adverbs; build statements, negatives, and questions." featured /></li>
       </ol>
-      <p className="rounded-2xl border border-violet-100 bg-violet-50/70 p-4 text-sm leading-6 text-violet-950">{isFa ? 'معیار پایان این بخش: بتوانید جمله‌ای مانند «Eu am un bilet nou.» را بخوانید، اجزایش را تشخیص دهید، بنویسید و با صدای بلند بگویید.' : 'End goal: read a sentence such as “Eu am un bilet nou.”, identify its parts, write it, and say it aloud.'}</p>
     </section>
 
     <section aria-labelledby="sentence-order-outcome" className="overflow-hidden rounded-3xl border border-emerald-200 bg-emerald-50 p-5 sm:p-8">
@@ -168,30 +165,6 @@ export default function RomanianFoundationPage({ params }: { params: { lang: str
           <p className="text-sm text-emerald-900" lang="fa">من یک بلیت جدید دارم.</p>
         </div>
         <Link href="/learn-romanian/fundamente/sakht-jomle" className="inline-flex min-h-12 items-center justify-center rounded-xl bg-emerald-800 px-5 py-3 text-sm font-bold text-white hover:bg-emerald-900">{isFa ? 'رفتن به درس جمله‌سازی ←' : 'Open the sentence lesson →'}</Link>
-      </div>
-    </section>
-
-    <section aria-labelledby="more-core-heading" className="space-y-5 rounded-3xl border border-indigo-100 bg-indigo-50/60 p-5 sm:p-7">
-      <div>
-        <p className="text-xs font-extrabold uppercase tracking-wider text-indigo-700">{isFa ? 'بخش ۳ · ادامهٔ پایه پس از جمله‌سازی' : 'PART 3 · CONTINUE AFTER YOUR FIRST SENTENCES'}</p>
-        <h2 id="more-core-heading" className="mt-1 text-xl font-extrabold text-slate-900 sm:text-2xl">{isFa ? 'درس‌های پایهٔ بعدی' : 'Continue with other foundations'}</h2>
-        <p className="mt-2 text-sm leading-6 text-slate-600">{isFa ? 'این‌ها برای گسترش مکالمه‌اند، نه پیش‌نیاز جملهٔ نخست. هر گام را در یک نوبت حدود ۱۵ دقیقه‌ای بخوانید؛ ترتیب همان ترتیب کارت‌هاست.' : 'These modules extend your conversations; they are not prerequisites for your first sentence. Take one step in each 15-minute session, in the order shown.'}</p>
-      </div>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {stations.map((station, index) => {
-          const copy = coreModules[station.slug];
-          if (!copy) return null;
-          return <Link key={station.id} href={`/learn-romanian/modul/${station.slug}`} className="group rounded-2xl border border-white bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-md">
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-[11px] font-extrabold text-indigo-700">{isFa ? `درس هسته ${'۰۱۲۳۴۵۶۷۸۹'[index + 1]}` : `CORE ${String(index + 1).padStart(2, '0')}`}</span>
-              <span className="rounded-full bg-indigo-50 px-2.5 py-1 text-[11px] font-semibold text-indigo-700">{isFa ? 'هر گام ۱۵ دقیقه' : '15 min per step'}</span>
-            </div>
-            <h3 className="mt-3 font-extrabold text-slate-900 group-hover:text-indigo-700">{isFa ? copy.titleFa : copy.titleEn}</h3>
-            <p lang="ro" dir="ltr" className="mt-1 text-xs text-slate-400">{station.titleRo}</p>
-            <p className="mt-3 text-sm leading-6 text-slate-600">{isFa ? copy.summaryFa : copy.summaryEn}</p>
-            <p className="mt-4 border-t border-slate-100 pt-3 text-xs font-bold text-indigo-700">{isFa ? `${station.stepCount} گام آموزشی · بازکردن درس ←` : `${station.stepCount} learning steps · Open module →`}</p>
-          </Link>;
-        })}
       </div>
     </section>
 
