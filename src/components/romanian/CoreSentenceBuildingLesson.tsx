@@ -21,6 +21,14 @@ const conjugations = [
   { person: 'ei / ele', fa: 'آن‌ها', fi: 'sunt', avea: 'au' },
 ];
 
+const verbQuiz = [
+  { promptFa: 'من اینجا ...', promptEn: 'I ... here.', form: 'Eu ___ aici.', choices: ['sunt', 'ești', 'este'], answer: 'sunt' },
+  { promptFa: 'تو یک بلیت ...', promptEn: 'You ... a ticket.', form: 'Tu ___ un bilet.', choices: ['am', 'ai', 'are'], answer: 'ai' },
+  { promptFa: 'ما اینجا ...', promptEn: 'We ... here.', form: 'Noi ___ aici.', choices: ['suntem', 'sunteți', 'sunt'], answer: 'suntem' },
+  { promptFa: 'او یک بلیت ...', promptEn: 'She ... a ticket.', form: 'Ea ___ un bilet.', choices: ['au', 'are', 'avem'], answer: 'are' },
+  { promptFa: 'شکل «avem» با کدام فاعل می‌آید؟', promptEn: 'Which subject goes with “avem”?', form: '___ avem un bilet.', choices: ['Eu', 'Noi', 'Ei'], answer: 'Noi' },
+];
+
 const lessonCopy = {
   'verbs-present': {
     titleFa: 'دو فعل پایه در زمان حال: a fi و a avea',
@@ -81,7 +89,13 @@ export function CoreSentenceBuildingLesson({ lang, kind }: { lang: Language; kin
   const [checked, setChecked] = React.useState(false);
   const [passed, setPassed] = React.useState<number[]>([]);
   const [saidAloud, setSaidAloud] = React.useState(false);
+  const [quizIndex, setQuizIndex] = React.useState(0);
+  const [quizChoice, setQuizChoice] = React.useState('');
+  const [quizChecked, setQuizChecked] = React.useState(false);
   const isCorrect = normalize(answer) === normalize(copy.prompts[index].answer);
+  const correctFeedback = kind === 'verbs-present'
+    ? isFa ? 'درست است؛ فعل را با فاعل هماهنگ کردید.' : 'Correct. You matched the verb to its subject.'
+    : isFa ? 'درست است؛ صفت را با جنس و شمار اسم هماهنگ کردید.' : 'Correct. You matched the adjective to the noun’s gender and number.';
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -94,6 +108,16 @@ export function CoreSentenceBuildingLesson({ lang, kind }: { lang: Language; kin
       setIndex(current => current + 1);
       setAnswer('');
       setChecked(false);
+    } else {
+      setStage(4);
+    }
+  }
+
+  function moveToNextQuizItem() {
+    if (quizIndex < verbQuiz.length - 1) {
+      setQuizIndex(current => current + 1);
+      setQuizChoice('');
+      setQuizChecked(false);
     } else {
       setStage(4);
     }
@@ -144,11 +168,21 @@ export function CoreSentenceBuildingLesson({ lang, kind }: { lang: Language; kin
       <button type="button" onClick={() => { setStage(3); setIndex(0); setAnswer(''); setChecked(false); }} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'تمرین نوشتن ←' : 'Practise writing →'}</button>
     </section>}
 
-    {stage === 3 && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+    {stage === 3 && kind === 'verbs-present' && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+      <p className="text-xs font-extrabold text-[#1554bd]">{isFa ? `مرحلهٔ ۴ · ۴ دقیقه · پرسش ${quizIndex + 1} از ${verbQuiz.length}` : `STEP 4 · 4 MINUTES · QUESTION ${quizIndex + 1} OF ${verbQuiz.length}`}</p>
+      <h2 className="text-xl font-extrabold">{isFa ? 'جای خالی را با شکل درست فعل کامل کنید' : 'Complete the sentence with the correct verb form'}</h2>
+      <div className="rounded-xl bg-blue-50 p-4"><p lang="ro" dir="ltr" className="text-lg font-extrabold text-[#1554bd]">{verbQuiz[quizIndex].form}</p><p className="mt-1 text-sm">{isFa ? verbQuiz[quizIndex].promptFa : verbQuiz[quizIndex].promptEn}</p></div>
+      <div role="group" aria-label={isFa ? 'گزینه‌های شکل فعل' : 'Verb form choices'} className="flex flex-wrap gap-2">{verbQuiz[quizIndex].choices.map(choice => <button key={choice} type="button" disabled={quizChecked && choice === verbQuiz[quizIndex].answer} onClick={() => { setQuizChoice(choice); setQuizChecked(false); }} aria-pressed={quizChoice === choice} lang="ro" dir="ltr" className={`rounded-xl border px-5 py-3 text-lg font-bold ${quizChoice === choice ? 'border-[#1554bd] bg-blue-50 text-[#1554bd]' : 'border-slate-300 bg-white text-slate-800 hover:bg-slate-50'}`}>{choice}</button>)}</div>
+      <button type="button" disabled={!quizChoice} onClick={() => setQuizChecked(true)} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white disabled:opacity-50">{isFa ? 'بررسی' : 'Check'}</button>
+      {quizChecked && <p role="status" className={`rounded-xl p-3 ${quizChoice === verbQuiz[quizIndex].answer ? 'bg-emerald-50 text-emerald-800' : 'bg-amber-50 text-amber-900'}`}>{quizChoice === verbQuiz[quizIndex].answer ? (isFa ? 'درست است؛ فاعل و شکل فعل با هم جورند.' : 'Correct. The subject and verb form agree.') : (isFa ? 'این شکل با فاعل جور نیست. دوباره انتخاب کنید.' : 'That form does not match the subject. Try again.')}</p>}
+      {quizChecked && quizChoice === verbQuiz[quizIndex].answer && <button type="button" onClick={moveToNextQuizItem} className="rounded-xl bg-emerald-700 px-5 py-3 font-bold text-white">{quizIndex < verbQuiz.length - 1 ? (isFa ? 'پرسش بعدی ←' : 'Next question →') : (isFa ? 'رفتن به گفتن جمله ←' : 'Continue to speaking →')}</button>}
+    </section>}
+
+    {stage === 3 && kind === 'adjectives' && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
       <p className="text-xs font-extrabold text-[#1554bd]">{isFa ? `مرحلهٔ ۴ · ۴ دقیقه · تمرین ${index + 1} از ${copy.prompts.length}` : `STEP 4 · 4 MINUTES · PROMPT ${index + 1} OF ${copy.prompts.length}`}</p>
       <h2 className="text-xl font-extrabold">{isFa ? `«${copy.prompts[index].fa}» را به رومانیایی بنویسید.` : `Write “${copy.prompts[index].en}” in Romanian.`}</h2>
       <form onSubmit={submit} className="flex flex-wrap gap-2"><input lang="ro" dir="ltr" autoComplete="off" aria-label={isFa ? 'پاسخ به رومانیایی' : 'Romanian answer'} value={answer} onChange={event => { setAnswer(event.target.value); setChecked(false); }} className="min-w-56 flex-1 rounded-xl border border-slate-300 p-3 text-lg" /><button type="submit" disabled={!answer.trim()} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white disabled:opacity-50">{isFa ? 'بررسی' : 'Check'}</button></form>
-      {checked && <p role="status" className={`rounded-xl p-3 ${isCorrect ? 'bg-emerald-50 text-emerald-800' : 'bg-amber-50 text-amber-900'}`}>{isCorrect ? (isFa ? 'درست است؛ شکل فعل/صفت را با فاعل/اسم هماهنگ کردید.' : 'Correct. You matched the verb/adjective to its subject/noun.') : (isFa ? 'هنوز درست نیست؛ قاعدهٔ تطبیق را دوباره بررسی کنید.' : 'Not quite. Check the agreement rule and try again.')}</p>}
+      {checked && <p role="status" className={`rounded-xl p-3 ${isCorrect ? 'bg-emerald-50 text-emerald-800' : 'bg-amber-50 text-amber-900'}`}>{isCorrect ? correctFeedback : isFa ? 'هنوز درست نیست؛ قاعدهٔ تطبیق را دوباره بررسی کنید.' : 'Not quite. Check the agreement rule and try again.'}</p>}
       {checked && !isCorrect && <button type="button" onClick={() => setAnswer(copy.prompts[index].answer)} className="text-sm font-semibold text-[#1554bd] underline">{isFa ? 'نمایش پاسخ' : 'Show answer'}</button>}
       {passed.includes(index) && <button type="button" onClick={moveToNextPrompt} className="rounded-xl bg-emerald-700 px-5 py-3 font-bold text-white">{index < copy.prompts.length - 1 ? (isFa ? 'تمرین بعدی ←' : 'Next prompt →') : (isFa ? 'رفتن به گفتن و مرور ←' : 'Continue to speak and review →')}</button>}
       <p lang="ro" dir="ltr" className="text-sm font-semibold text-slate-500">{copy.prompts[index].answer}</p>
