@@ -52,10 +52,10 @@ const newPath = [
   { slug: 'porsesh', fa: 'سؤال‌سازی و پاسخ کوتاه', en: 'Questions and short answers', noteFa: 'با چه کسی، چه، کجا و چگونه سؤال بپرسید و پاسخ دهید.', noteEn: 'Ask and answer who, what, where, and how questions.' },
   { slug: 'nafi', fa: 'منفی‌سازی', en: 'Negation', noteFa: 'جای nu را یاد بگیرید و پاسخ مثبت و منفی بدهید.', noteEn: 'Place nu correctly and give positive and negative answers.' },
   { slug: 'articole', fa: 'اسم نامعین و معین', en: 'Indefinite and definite nouns', noteFa: 'فرق un bilet با biletul و کاربرد o و niște را تمرین کنید.', noteEn: 'Distinguish un bilet from biletul and practise o and niște.' },
-  { slug: 'verbe', fa: 'فعل‌های روزمره در زمان حال', en: 'Everyday present-tense verbs', noteFa: 'رفتن، زندگی‌کردن، صحبت‌کردن و انجام‌دادن را در جمله به کار ببرید.', noteEn: 'Use go, live, speak, and do in sentences.' },
-  { slug: 'locatie', fa: 'مکان و حروف اضافه', en: 'Places and prepositions', noteFa: 'با در، روی، کنار، زیر و به، جای چیزها و مقصد را بگویید.', noteEn: 'Describe positions and destinations using in, on, beside, under, and to.' },
+  { slug: 'verbe', fa: 'دو فعل پایه: بودن و داشتن', en: 'Two foundation verbs: to be and to have', noteFa: 'صرف کامل a fi و a avea را با همهٔ ضمیرها در جمله تمرین کنید.', noteEn: 'Practise the full a fi and a avea paradigms with every subject.' },
+  { slug: 'locatie', fa: 'مکان و حروف اضافه', en: 'Places and prepositions', noteFa: 'با در، روی، کنار، زیر و در مدرسه، جای ثابت چیزها و افراد را بگویید.', noteEn: 'Describe where people and things are using in, on, beside, under, and at.' },
   { slug: 'numere-pret', fa: 'عدد، مقدار و قیمت', en: 'Numbers, quantities, and prices', noteFa: 'تعداد را با جنس اسم هماهنگ کنید و قیمت بپرسید.', noteEn: 'Match quantities to noun gender and ask prices.' },
-  { slug: 'timp-sade', fa: 'روز، ساعت و قید زمان', en: 'Days, clock time, and time words', noteFa: 'امروز، فردا و ساعت انجام کار را بگویید و بپرسید.', noteEn: 'Say and ask when something happens.' },
+  { slug: 'timp-sade', fa: 'روز، ساعت و قید زمان', en: 'Days, clock time, and time words', noteFa: 'روز و ساعت یک وضعیت یا قرار را بگویید و بپرسید.', noteEn: 'Say and ask the day and time of a situation or meeting.' },
 ] as const;
 
 export function generateStaticParams() {
@@ -86,7 +86,7 @@ export default function RomanianFoundationPage({ params }: { params: { lang: str
     <header className="dark-hero-panel overflow-hidden rounded-3xl px-6 py-9 text-white shadow-xl sm:px-10 sm:py-12">
       <span className="text-sm font-bold text-blue-200">{isFa ? 'مسیر پایه · هر نوبت حدود ۱۵ دقیقه' : 'Foundation path · about 15 minutes per session'}</span>
       <h1 className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight sm:text-5xl">{isFa ? 'از الفبا تا ساخت جملهٔ ساده' : 'From the alphabet to a simple sentence'}</h1>
-      <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-200 sm:text-base">{isFa ? 'هدف این مسیر آن است که در پایان بتوانید واژه‌ها را کنار هم بگذارید و جملهٔ سادهٔ رومانیایی بسازید. نخست الفبا و همهٔ ترکیب‌های آن را یک‌جا و دسته‌بندی‌شده یاد می‌گیرید؛ سپس معرفی، پرسش، منفی‌سازی، اسم، فعل، مکان، عدد و زمان را در جمله تمرین می‌کنید.' : 'The goal is to put words together and make a simple Romanian sentence. First learn the alphabet and all its letter patterns in one classified place; then practise introductions, questions, negation, nouns, verbs, places, numbers, and time in sentences.'}</p>
+      <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-200 sm:text-base">{isFa ? 'هدف این مسیر ساخت جملهٔ سادهٔ رومانیایی است. پس از الفبا، معرفی، پرسش، منفی‌سازی، اسم، مکان، عدد و زمان را فقط با فعل‌های a fi و a avea تمرین می‌کنید. فعل‌های دیگر در درس‌های روزمره آموزش داده می‌شوند.' : 'Build simple Romanian sentences after the alphabet. Practise introductions, questions, negation, nouns, places, numbers, and time using only a fi and a avea. Other verbs belong in everyday lessons.'}</p>
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <span lang="ro" dir="ltr" className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-lg font-bold">Eu am un bilet nou.</span>
         <span className="text-sm text-blue-100">{isFa ? 'من یک بلیت جدید دارم.' : 'I have a new ticket.'}</span>

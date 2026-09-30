@@ -19,9 +19,9 @@ const exercises: Exercise[] = [
     hintFa: 'با اسم مؤنث، صفت هم شکل مؤنث می‌گیرد: carte nouă.', hintEn: 'With a feminine noun, the adjective agrees: carte nouă.',
   },
   {
-    id: 'slowly', words: ['încet.', 'Vorbesc'], answer: ['Vorbesc', 'încet.'],
-    meaningFa: 'آهسته صحبت می‌کنم.', meaningEn: 'I speak slowly.',
-    hintFa: 'قیدِ حالت معمولاً بعد از فعل می‌آید؛ گاهی برای تأکید جابه‌جا می‌شود.', hintEn: 'An adverb of manner often follows the verb; it can move for emphasis.',
+    id: 'today', words: ['azi.', 'sunt', 'Eu', 'aici'], answer: ['Eu', 'sunt', 'aici', 'azi.'],
+    meaningFa: 'من امروز اینجا هستم.', meaningEn: 'I am here today.',
+    hintFa: 'قید زمان می‌تواند پایان جمله بیاید: Eu sunt aici azi.', hintEn: 'A time adverb can appear at the end: Eu sunt aici azi.',
   },
   {
     id: 'negative-ticket', words: ['bilet.', 'am', 'Nu', 'un'], answer: ['Nu', 'am', 'un', 'bilet.'],
@@ -103,20 +103,20 @@ export function SentenceOrderFoundationLesson({ lang }: { lang: Language }) {
     </header>
 
     <article aria-labelledby="sentence-order-guide" className="space-y-5 rounded-3xl border border-blue-200 bg-white p-5 shadow-sm sm:p-8">
-      <div><p className="text-xs font-extrabold text-[#1554bd]">{isFa ? 'راهنمای کامل درس · پیش از تمرین' : 'Complete lesson guide · before practice'}</p><h2 id="sentence-order-guide" className="mt-2 text-2xl font-extrabold">{isFa ? 'اجزای جمله و جای معمول آن‌ها' : 'Sentence parts and their usual order'}</h2><p className="mt-2 text-sm leading-7 text-slate-700">{isFa ? 'در جملهٔ خبری ساده، معمولاً فاعل پیش از فعل و مفعول پس از فعل می‌آید. صفت اسم را توصیف می‌کند و اغلب بعد از همان اسم قرار می‌گیرد؛ قید چگونگی انجام کار را توضیح می‌دهد و معمولاً پس از فعل می‌آید. این‌ها الگوهای رایج‌اند و با تأکید یا نوع جمله می‌توانند تغییر کنند.' : 'In a simple statement, the subject usually precedes the verb and the object follows it. An adjective describes a noun and often follows that noun; an adverb describes how an action happens and often follows the verb. These are common patterns and can change with emphasis or sentence type.'}</p></div>
+      <div><p className="text-xs font-extrabold text-[#1554bd]">{isFa ? 'راهنمای کامل درس · پیش از تمرین' : 'Complete lesson guide · before practice'}</p><h2 id="sentence-order-guide" className="mt-2 text-2xl font-extrabold">{isFa ? 'اجزای جمله و جای معمول آن‌ها' : 'Sentence parts and their usual order'}</h2><p className="mt-2 text-sm leading-7 text-slate-700">{isFa ? 'در جملهٔ خبری ساده، معمولاً فاعل پیش از فعل و مفعول پس از فعل می‌آید. صفت اسم را توصیف می‌کند و اغلب بعد از همان اسم قرار می‌گیرد؛ قید زمان می‌گوید چه وقت و می‌تواند آغاز یا پایان جمله بیاید. این‌ها الگوهای رایج‌اند و با تأکید یا نوع جمله می‌توانند تغییر کنند.' : 'In a simple statement, the subject usually precedes the verb and the object follows it. An adjective describes a noun and often follows that noun; a time adverb says when and can appear at the beginning or end. These are common patterns and can change with emphasis or sentence type.'}</p></div>
       <div className="overflow-x-auto"><table className="w-full min-w-[620px] border-collapse text-start text-sm"><thead><tr className="bg-blue-50 text-slate-900"><th className="p-3 text-start">{isFa ? 'نقش' : 'Part'}</th><th className="p-3 text-start">{isFa ? 'پرسش راهنما' : 'Question'}</th><th className="p-3 text-start">{isFa ? 'جای معمول و مثال' : 'Usual place and example'}</th></tr></thead><tbody className="divide-y divide-slate-200 text-slate-700">
         <tr><th className="p-3 text-start">{isFa ? 'فاعل' : 'Subject'}</th><td className="p-3">{isFa ? 'چه کسی؟' : 'Who?'}</td><td className="p-3"><span lang="ro" dir="ltr">Eu</span> {isFa ? 'در آغاز «Eu am...»' : 'at the start of “Eu am…”'}</td></tr>
         <tr><th className="p-3 text-start">{isFa ? 'فعل' : 'Verb'}</th><td className="p-3">{isFa ? 'چه می‌کند؟' : 'Does what?'}</td><td className="p-3"><span lang="ro" dir="ltr">am</span> {isFa ? 'پس از فاعل' : 'after the subject'}</td></tr>
         <tr><th className="p-3 text-start">{isFa ? 'مفعول' : 'Object'}</th><td className="p-3">{isFa ? 'چه چیزی را دارد؟' : 'Has what?'}</td><td className="p-3"><span lang="ro" dir="ltr">un bilet</span> {isFa ? 'پس از فعل' : 'after the verb'}</td></tr>
         <tr><th className="p-3 text-start">{isFa ? 'صفت' : 'Adjective'}</th><td className="p-3">{isFa ? 'چه‌جور بلیتی؟' : 'What kind of ticket?'}</td><td className="p-3"><span lang="ro" dir="ltr">nou</span> {isFa ? 'پس از اسم bilet' : 'after the noun bilet'}</td></tr>
-        <tr><th className="p-3 text-start">{isFa ? 'قید' : 'Adverb'}</th><td className="p-3">{isFa ? 'چگونه؟' : 'How?'}</td><td className="p-3"><span lang="ro" dir="ltr">încet</span> {isFa ? 'پس از فعل در «Vorbesc încet.»' : 'after the verb in “Vorbesc încet.”'}</td></tr>
+        <tr><th className="p-3 text-start">{isFa ? 'قید' : 'Adverb'}</th><td className="p-3">{isFa ? 'چه وقت؟' : 'When?'}</td><td className="p-3"><span lang="ro" dir="ltr">azi</span> {isFa ? 'در پایان «Eu sunt aici azi.»' : 'at the end of “Eu sunt aici azi.”'}</td></tr>
       </tbody></table></div>
       <div className="grid gap-3 md:grid-cols-2">
         <ExampleRow lang={lang} sentence="Eu am un bilet nou." meaningFa="من یک بلیت جدید دارم." meaningEn="I have a new ticket." labelsFa="Eu = فاعل · am = فعل · un bilet = مفعول · nou = صفت" labelsEn="Eu = subject · am = verb · un bilet = object · nou = adjective" />
-        <ExampleRow lang={lang} sentence="Vorbesc încet." meaningFa="آهسته صحبت می‌کنم." meaningEn="I speak slowly." labelsFa="Vorbesc = فعل · încet = قید؛ فاعل از شناسهٔ فعل فهمیده می‌شود." labelsEn="Vorbesc = verb · încet = adverb; the verb ending identifies the subject." />
+        <ExampleRow lang={lang} sentence="Eu sunt aici azi." meaningFa="من امروز اینجا هستم." meaningEn="I am here today." labelsFa="Eu = فاعل · sunt = فعل · aici = مکان · azi = قید زمان." labelsEn="Eu = subject · sunt = verb · aici = place · azi = time adverb." />
       </div>
       <div className="grid gap-3 md:grid-cols-3 text-sm leading-6"><p className="rounded-xl bg-slate-50 p-4">{isFa ? 'حذف فاعل: Eu am un bilet و Am un bilet هر دو درست‌اند؛ شناسهٔ am شخص اول را نشان می‌دهد.' : 'Omitting a subject: Eu am un bilet and Am un bilet are both correct; am indicates first person.'}</p><p className="rounded-xl bg-slate-50 p-4">{isFa ? 'منفی: nu را پیش از فعل صرف‌شده بگذارید: Nu am un bilet. = من بلیت ندارم.' : 'Negation: put nu before the conjugated verb: Nu am un bilet. = I do not have a ticket.'}</p><p className="rounded-xl bg-slate-50 p-4">{isFa ? 'پرسش ساده: با آهنگ پرسشی و علامت سؤال می‌پرسیم: Ai un bilet? = آیا بلیت داری؟' : 'A simple question can use rising intonation and a question mark: Ai un bilet? = Do you have a ticket?'}</p></div>
-      <p className="rounded-xl bg-amber-50 p-4 text-sm leading-7 text-amber-950">{isFa ? 'صفت با جنس و شمار اسم هماهنگ می‌شود: un bilet nou / o carte nouă. قیدِ încet با جنس و شمار تغییر نمی‌کند. در تمرین‌های بعد، اول فعل را پیدا کنید و سپس از روی معنا فاعل، مفعول، صفت و قید را جای‌گذاری کنید.' : 'An adjective agrees with its noun in gender and number: un bilet nou / o carte nouă. The adverb încet does not change for gender or number. In practice, find the verb first, then place the subject, object, adjective, and adverb according to meaning.'}</p>
+      <p className="rounded-xl bg-amber-50 p-4 text-sm leading-7 text-amber-950">{isFa ? 'صفت با جنس و شمار اسم هماهنگ می‌شود: un bilet nou / o carte nouă. قیدِ azi با جنس و شمار تغییر نمی‌کند. در تمرین‌های بعد، اول فعل را پیدا کنید و سپس از روی معنا فاعل، مفعول، صفت و قید را جای‌گذاری کنید.' : 'An adjective agrees with its noun in gender and number: un bilet nou / o carte nouă. The adverb azi does not change for gender or number. In practice, find the verb first, then place the subject, object, adjective, and adverb according to meaning.'}</p>
     </article>
 
     <nav aria-label={isFa ? 'مراحل درس ۱۵ دقیقه‌ای' : '15-minute lesson stages'} className="grid grid-cols-2 gap-2 rounded-2xl border border-slate-200 bg-white p-3 sm:grid-cols-5">
@@ -131,7 +131,7 @@ export function SentenceOrderFoundationLesson({ lang }: { lang: Language }) {
       <div className="grid gap-3 sm:grid-cols-3">
         <PatternCard lang={lang} code="فاعل + فعل + مفعول" english="Subject + verb + object" example="Eu am un bilet." meaningFa="من یک بلیت دارم." meaningEn="I have a ticket." />
         <PatternCard lang={lang} code="اسم + صفت" english="Noun + adjective" example="un bilet nou" meaningFa="یک بلیت جدید" meaningEn="a new ticket" />
-        <PatternCard lang={lang} code="فعل + قید" english="Verb + adverb" example="Vorbesc încet." meaningFa="آهسته صحبت می‌کنم." meaningEn="I speak slowly." />
+        <PatternCard lang={lang} code="فاعل + فعل + قید" english="Subject + verb + adverb" example="Eu sunt aici azi." meaningFa="من امروز اینجا هستم." meaningEn="I am here today." />
       </div>
       <p className="rounded-xl bg-amber-50 p-4 text-sm leading-6 text-amber-950">{isFa ? 'این‌ها الگوهای معمول جملهٔ ساده‌اند، نه قانون بی‌استثنا. ضمیر فاعلی در رومانیایی اغلب حذف می‌شود؛ مثلاً Am un bilet هم یعنی «یک بلیت دارم».' : 'These are common simple patterns, not exception-free rules. Romanian often omits the subject pronoun; Am un bilet also means “I have a ticket.”'}</p>
       <button type="button" onClick={() => setStage(1)} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'شنیدن نمونه‌ها ←' : 'Hear the examples →'}</button>
@@ -141,16 +141,16 @@ export function SentenceOrderFoundationLesson({ lang }: { lang: Language }) {
       <div><p className="text-xs font-extrabold text-[#1554bd]">{isFa ? 'مرحلهٔ ۲ · ۳ دقیقه' : 'STEP 2 · 3 MINUTES'}</p><h2 className="mt-1 text-xl font-extrabold">{isFa ? 'جمله‌ها را بشنوید و اجزا را پیدا کنید' : 'Listen and identify each part'}</h2></div>
       <ExampleRow lang={lang} sentence="Eu am un bilet nou." meaningFa="من یک بلیت جدید دارم." meaningEn="I have a new ticket." labelsFa="Eu (فاعل) · am (فعل) · un bilet (مفعول) · nou (صفت)" labelsEn="Eu (subject) · am (verb) · un bilet (object) · nou (adjective)" />
       <ExampleRow lang={lang} sentence="Am o carte nouă." meaningFa="یک کتاب جدید دارم." meaningEn="I have a new book." labelsFa="am (فعل) · o carte (مفعول) · nouă (صفت مؤنث)" labelsEn="am (verb) · o carte (object) · nouă (feminine adjective)" />
-      <ExampleRow lang={lang} sentence="Vorbesc încet." meaningFa="آهسته صحبت می‌کنم." meaningEn="I speak slowly." labelsFa="Vorbesc (فعل) · încet (قید حالت)" labelsEn="Vorbesc (verb) · încet (adverb of manner)" />
+      <ExampleRow lang={lang} sentence="Eu sunt aici azi." meaningFa="من امروز اینجا هستم." meaningEn="I am here today." labelsFa="sunt (فعل) · aici (مکان) · azi (قید زمان)" labelsEn="sunt (verb) · aici (place) · azi (time adverb)" />
       <button type="button" onClick={() => setStage(2)} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'بررسی قاعده ←' : 'Explore the rules →'}</button>
     </section>}
 
     {stage === 2 && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
       <div><p className="text-xs font-extrabold text-[#1554bd]">{isFa ? 'مرحلهٔ ۳ · ۳ دقیقه' : 'STEP 3 · 3 MINUTES'}</p><h2 className="mt-1 text-xl font-extrabold">{isFa ? 'جای هر جزء را در جمله پیدا کنید' : 'Notice where each part goes'}</h2></div>
       <RuleRow lang={lang} titleFa="فاعل پیش از فعل" titleEn="The subject comes before the verb" detailFa="ترتیب معمول جملهٔ خبری فاعل + فعل + مفعول است. چون شناسهٔ فعل شخص را نشان می‌دهد، فاعل را گاهی نمی‌آوریم: (Eu) am un bilet." detailEn="A common statement order is subject + verb + object. Since the verb ending can identify the person, the subject is sometimes omitted: (Eu) am un bilet." example="(Eu) am un bilet." />
-      <RuleRow lang={lang} titleFa="مفعول بعد از فعل" titleEn="The object follows the verb" detailFa="در جملهٔ خبری ساده، چیزی که داریم یا می‌خواهیم معمولاً بعد از فعل می‌آید: Am un bilet. مفعول را با فاعل اشتباه نگیرید." detailEn="In a simple statement, the thing we have or want usually follows the verb: Am un bilet. Keep the object distinct from the subject." example="Am un bilet." />
+      <RuleRow lang={lang} titleFa="مفعول بعد از فعل" titleEn="The object follows the verb" detailFa="در جملهٔ خبری ساده، چیزی که داریم معمولاً بعد از فعل a avea می‌آید: Am un bilet. مفعول را با فاعل اشتباه نگیرید." detailEn="In a simple statement, the thing we have usually follows a avea: Am un bilet. Keep the object distinct from the subject." example="Am un bilet." />
       <RuleRow lang={lang} titleFa="صفت معمولاً بعد از اسم و هماهنگ با آن" titleEn="The adjective usually follows and agrees with the noun" detailFa="جای معمول صفت پس از اسم است و شکلش با جنس و شمار اسم هماهنگ می‌شود: un bilet nou، اما o carte nouă." detailEn="The usual adjective position is after the noun, and its form agrees in gender and number: un bilet nou, but o carte nouă." example="un bilet nou · o carte nouă" />
-      <RuleRow lang={lang} titleFa="قید و منفی‌ساز" titleEn="Adverbs and negation" detailFa="قید حالت اغلب پس از فعل می‌آید: Vorbesc încet. برای منفی‌کردن، nu پیش از فعل قرار می‌گیرد: Nu am un bilet." detailEn="An adverb of manner often follows the verb: Vorbesc încet. To negate, nu goes before the verb: Nu am un bilet." example="Vorbesc încet. · Nu am un bilet." />
+      <RuleRow lang={lang} titleFa="قید و منفی‌ساز" titleEn="Adverbs and negation" detailFa="قید زمان می‌تواند پایان جمله بیاید: Eu sunt aici azi. برای منفی‌کردن، nu پیش از فعل قرار می‌گیرد: Nu am un bilet." detailEn="A time adverb can appear at the end: Eu sunt aici azi. To negate, nu goes before the verb: Nu am un bilet." example="Eu sunt aici azi. · Nu am un bilet." />
       <button type="button" onClick={beginPractice} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'شروع تمرین جمله‌سازی ←' : 'Start building sentences →'}</button>
     </section>}
 
@@ -177,7 +177,7 @@ export function SentenceOrderFoundationLesson({ lang }: { lang: Language }) {
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <FinalExample lang={lang} sentence="Sunt student." meaningFa="دانشجو هستم." meaningEn="I am a student." />
         <FinalExample lang={lang} sentence="Am un bilet nou." meaningFa="یک بلیت جدید دارم." meaningEn="I have a new ticket." />
-        <FinalExample lang={lang} sentence="Vorbesc încet." meaningFa="آهسته صحبت می‌کنم." meaningEn="I speak slowly." />
+        <FinalExample lang={lang} sentence="Eu sunt aici azi." meaningFa="من امروز اینجا هستم." meaningEn="I am here today." />
         <FinalExample lang={lang} sentence="Nu am un bilet." meaningFa="بلیت ندارم." meaningEn="I do not have a ticket." />
         <FinalExample lang={lang} sentence="Ai un bilet?" meaningFa="آیا بلیت داری؟" meaningEn="Do you have a ticket?" />
       </div>
