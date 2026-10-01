@@ -38,16 +38,22 @@ for (const item of catalog) {
     }
   } catch { /* generate missing clip */ }
   const ssml = `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="ro-RO"><voice name="${voice}">${escapeXml(text)}</voice></speak>`;
-  const response = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
-    method: 'POST',
-    headers: {
-      'Ocp-Apim-Subscription-Key': key,
-      'Content-Type': 'application/ssml+xml',
-      'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3',
-      'User-Agent': 'dorvia-audio-builder',
-    },
-    body: ssml,
-  });
+  let response;
+  for (let attempt = 0; attempt < 6; attempt++) {
+    response = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
+      method: 'POST',
+      headers: {
+        'Ocp-Apim-Subscription-Key': key,
+        'Content-Type': 'application/ssml+xml',
+        'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3',
+        'User-Agent': 'dorvia-audio-builder',
+      },
+      body: ssml,
+    });
+    if (response.status !== 429 && response.status < 500) break;
+    if (attempt === 5) break;
+    await new Promise(resolve => setTimeout(resolve, Math.min(30000, 1000 * 2 ** attempt)));
+  }
   if (!response.ok) throw new Error(`Azure speech failed (${response.status}) for ${item.slug}. Check region, voice and subscription.`);
   const raw = Buffer.from(await response.arrayBuffer());
   if (raw.length < 100) throw new Error(`Empty audio for ${item.slug}`);
