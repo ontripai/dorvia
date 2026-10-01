@@ -665,6 +665,16 @@
     "approved": true
   },
   {
+    "text": "Doriți un abonament lunar?",
+    "slug": "ro-3febfc42b5e0847e",
+    "approved": true
+  },
+  {
+    "text": "Doriți zece călătorii sau un abonament lunar?",
+    "slug": "ro-ad3ea263e95e97e1",
+    "approved": true
+  },
+  {
     "text": "două",
     "slug": "ro-62e5d651734634d4",
     "approved": true
@@ -850,6 +860,16 @@
     "approved": true
   },
   {
+    "text": "er",
+    "slug": "ro-cc7e4412564ba8a7",
+    "approved": true
+  },
+  {
+    "text": "es",
+    "slug": "ro-c0bc1e08f9743b2d",
+    "approved": true
+  },
+  {
     "text": "este",
     "slug": "ro-b3aa33b34e1b14e4",
     "approved": true
@@ -960,6 +980,11 @@
     "approved": true
   },
   {
+    "text": "ge",
+    "slug": "ro-309d20864f274b09",
+    "approved": true
+  },
+  {
     "text": "geam",
     "slug": "ro-e93d9d4634b02b4c",
     "approved": true
@@ -995,6 +1020,11 @@
     "approved": true
   },
   {
+    "text": "haș",
+    "slug": "ro-08e7f2e496debf6a",
+    "approved": true
+  },
+  {
     "text": "i",
     "slug": "ro-de7d1b721a1e0632",
     "approved": true
@@ -1012,6 +1042,11 @@
   {
     "text": "ieri",
     "slug": "ro-c8ffb0eb46c07c61",
+    "approved": true
+  },
+  {
+    "text": "iks",
+    "slug": "ro-ef6cf956ccace2a5",
     "approved": true
   },
   {
@@ -1107,6 +1142,11 @@
   {
     "text": "ja",
     "slug": "ro-3702fc1866630796",
+    "approved": true
+  },
+  {
+    "text": "je",
+    "slug": "ro-9e507a6dfbf98393",
     "approved": true
   },
   {
@@ -1735,6 +1775,11 @@
     "approved": true
   },
   {
+    "text": "șe",
+    "slug": "ro-8f7d4763b891a0ee",
+    "approved": true
+  },
+  {
     "text": "ta",
     "slug": "ro-76592b9de6d38238",
     "approved": true
@@ -1815,6 +1860,11 @@
     "approved": true
   },
   {
+    "text": "țe",
+    "slug": "ro-9cc946836c0071ee",
+    "approved": true
+  },
+  {
     "text": "u",
     "slug": "ro-0bfe935e70c321c7",
     "approved": true
@@ -1837,6 +1887,11 @@
   {
     "text": "un bilet nou",
     "slug": "ro-a4f55e685f8067f4",
+    "approved": true
+  },
+  {
+    "text": "Un bilet sau două?",
+    "slug": "ro-599c91f903b259bf",
     "approved": true
   },
   {
@@ -1932,6 +1987,11 @@
   {
     "text": "Vă rog.",
     "slug": "ro-94298f54d4551395",
+    "approved": true
+  },
+  {
+    "text": "ve",
+    "slug": "ro-4bd2c412ba70847f",
     "approved": true
   },
   {

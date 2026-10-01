@@ -3,6 +3,7 @@
 import React from 'react';
 import { LessonStageNav } from './LessonStageNav';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
+import { playVerifiedAudio, stopVerifiedAudio } from '@/lib/romanian/playVerifiedAudio';
 
 type Locale = 'fa' | 'en';
 type Phase = 0 | 1 | 2 | 3 | 4;
@@ -64,13 +65,13 @@ export function MetroTicketLesson({ lang }: { lang: Locale }) {
     const browser = window as RecognitionWindow;
     setVoiceAvailable(Boolean(browser.SpeechRecognition || browser.webkitSpeechRecognition));
     try { setPriorCompletion(Boolean(localStorage.getItem(storageKey))); } catch { /* storage is optional */ }
-    return () => { recognitionRef.current?.abort(); window.speechSynthesis?.cancel(); };
+    return () => { recognitionRef.current?.abort(); stopVerifiedAudio(); };
   }, []);
 
   function move(next: Phase) {
     recognitionRef.current?.abort();
     recognitionRef.current = null;
-    window.speechSynthesis?.cancel();
+    stopVerifiedAudio();
     setListening(false);
     setVoiceMessage('');
     setPhase(next);
@@ -80,17 +81,9 @@ export function MetroTicketLesson({ lang }: { lang: Locale }) {
     setHint(false);
   }
 
-  function speak(ro: string) {
-    if (!('speechSynthesis' in window)) { setAudioMessage(isFa ? 'پخش صوت در این مرورگر در دسترس نیست.' : 'Audio playback is unavailable in this browser.'); return; }
-    const voice = window.speechSynthesis.getVoices().find(v => v.lang.toLowerCase().startsWith('ro'));
-    if (!voice) { setAudioMessage(isFa ? 'صدای رومانیایی روی این مرورگر در دسترس نیست.' : 'A Romanian voice is unavailable in this browser.'); return; }
-    window.speechSynthesis.cancel();
+  function speak(ro: string | string[]) {
     setAudioMessage('');
-    const utterance = new SpeechSynthesisUtterance(ro);
-    utterance.lang = 'ro-RO';
-    utterance.voice = voice;
-    utterance.rate = 0.82;
-    window.speechSynthesis.speak(utterance);
+    playVerifiedAudio(ro, () => setAudioMessage(isFa ? 'فایل صدای این عبارت در دسترس نیست.' : 'This recording is unavailable.'));
   }
 
   const expected: Choice = phase === 2 ? 'ten' : prompts[round];
@@ -146,7 +139,7 @@ export function MetroTicketLesson({ lang }: { lang: Locale }) {
 
     {phase === 0 && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-4">
       <h2 className="text-xl font-bold">{isFa ? 'گفت‌وگو را بشنوید و نقش خود را پیدا کنید' : 'Listen and find your part in the dialogue'}</h2>
-      <button type="button" onClick={() => speak(examples.map(t => t.ro).join(' '))} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-semibold">{isFa ? 'شنیدن گفت‌وگو' : 'Play dialogue'}</button>
+      <button type="button" onClick={() => speak(examples.map(t => t.ro))} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-semibold">{isFa ? 'شنیدن گفت‌وگو' : 'Play dialogue'}</button>
       {examples.map((line, i) => <div key={i} className={`rounded-xl p-4 ${line.who === 'you' ? 'bg-blue-50' : 'bg-slate-50'}`}>
         <p className="text-xs text-[#1554bd] font-bold">{line.who === 'you' ? isFa ? 'شما' : 'You' : isFa ? 'فروشنده' : 'Clerk'}</p>
         <p lang="ro" dir="ltr" className="text-lg font-bold">{line.ro}</p>
@@ -163,7 +156,7 @@ export function MetroTicketLesson({ lang }: { lang: Locale }) {
       <p>{isFa ? 'در درس قبل bilet / bilete را به کار بردید. اینجا نوع سفر را مشخص می‌کنید.' : 'In the previous lesson you used bilet / bilete. Now you specify what kind of travel you need.'}</p>
       {[{ ro: 'zece călătorii', fa: 'ده سفر', en: 'ten journeys' }, { ro: 'un abonament lunar', fa: 'یک اشتراک ماهانه', en: 'a monthly pass' }, { ro: 'Doresc …, vă rog.', fa: '… می‌خواهم، لطفاً. (محترمانه)', en: 'I would like …, please. (polite)' }].map(item => <div key={item.ro} className="rounded-xl bg-blue-50 p-4">
         <p lang="ro" dir="ltr" className="text-xl font-bold">{item.ro}</p><p className="text-sm">{isFa ? item.fa : item.en}</p>
-        <button type="button" onClick={() => speak(item.ro)} className="text-sm text-[#1554bd] underline">{isFa ? 'بشنو و تکرار کن' : 'Listen and repeat'}</button>
+        <button type="button" onClick={() => speak(item.ro.includes('…') ? 'Doresc zece călătorii, vă rog.' : item.ro)} className="text-sm text-[#1554bd] underline">{isFa ? 'بشنو و تکرار کن' : 'Listen and repeat'}</button>
       </div>)}
       <p className="text-sm text-slate-700">{isFa ? 'در این جلسه فقط انتخاب نوع سفر را تمرین می‌کنیم؛ قیمت و شرایط خرید ممکن است تغییر کنند.' : 'This lesson focuses on choosing the type of travel; prices and purchase conditions can change.'}</p>
       <button type="button" onClick={() => move(2)} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-bold">{isFa ? 'یادآوری از حافظه' : 'Recall from memory'}</button>
@@ -202,6 +195,6 @@ export function MetroTicketLesson({ lang }: { lang: Locale }) {
     </section>}
     {priorCompletion && phase !== 4 && <p className="text-sm text-slate-500">{isFa ? 'این درس قبلاً روی همین دستگاه انجام شده است؛ می‌توانید دوباره تمرین کنید.' : 'You completed this lesson on this device; you can practise again.'}</p>}
     {audioMessage && <p role="status" className="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">{audioMessage}</p>}
-    <p className="text-xs text-slate-500">{isFa ? 'پخش به صدای رومانیایی مرورگر وابسته است. پاسخ صوتی به متن تبدیل می‌شود و کیفیت تلفظ نمره‌دهی نمی‌شود.' : 'Playback needs a Romanian browser voice. Spoken answers are transcribed; pronunciation is not graded.'}</p>
+    <p className="text-xs text-slate-500">{isFa ? 'صداهای درس با آزور آماده شده‌اند. پاسخ صوتی به متن تبدیل می‌شود و کیفیت تلفظ نمره‌دهی نمی‌شود.' : 'Lesson recordings are generated with Azure. Spoken answers are transcribed; pronunciation is not graded.'}</p>
   </div>;
 }
