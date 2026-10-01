@@ -1,37 +1,827 @@
 [
   {
+    "text": "a",
+    "slug": "ro-ca978112ca1bbdca",
+    "approved": true
+  },
+  {
+    "text": "a cincea",
+    "slug": "ro-7d5cd415080b5b8f",
+    "approved": true
+  },
+  {
+    "text": "a coborî",
+    "slug": "ro-2db0297f1b802064",
+    "approved": true
+  },
+  {
+    "text": "a doua",
+    "slug": "ro-087fa74f9b259172",
+    "approved": true
+  },
+  {
+    "text": "a noua",
+    "slug": "ro-66fb75f599fe8756",
+    "approved": true
+  },
+  {
+    "text": "a opta",
+    "slug": "ro-1df75f1621679647",
+    "approved": true
+  },
+  {
+    "text": "a patra",
+    "slug": "ro-77763c78930370b2",
+    "approved": true
+  },
+  {
+    "text": "a șaptea",
+    "slug": "ro-88c748b852870b38",
+    "approved": true
+  },
+  {
+    "text": "a șasea",
+    "slug": "ro-06ae34bf8aa32125",
+    "approved": true
+  },
+  {
+    "text": "a treia",
+    "slug": "ro-276a22d59dbace1b",
+    "approved": true
+  },
+  {
+    "text": "a zecea",
+    "slug": "ro-fb3355b72ea03d7a",
+    "approved": true
+  },
+  {
+    "text": "acum",
+    "slug": "ro-13ee37f183bddde8",
+    "approved": true
+  },
+  {
+    "text": "ai",
+    "slug": "ro-32e83e92d45d71f6",
+    "approved": true
+  },
+  {
+    "text": "ajutor",
+    "slug": "ro-9f40cc5e569df358",
+    "approved": true
+  },
+  {
+    "text": "Ajutor!",
+    "slug": "ro-ff688b2d3640f11d",
+    "approved": true
+  },
+  {
+    "text": "al cincilea",
+    "slug": "ro-537fe3b2e0a46512",
+    "approved": true
+  },
+  {
+    "text": "al doilea",
+    "slug": "ro-2d462b2c822f7860",
+    "approved": true
+  },
+  {
+    "text": "al nouălea",
+    "slug": "ro-6f034671ef8ec74a",
+    "approved": true
+  },
+  {
+    "text": "al optulea",
+    "slug": "ro-5bcea12d1477fa66",
+    "approved": true
+  },
+  {
+    "text": "al patrulea",
+    "slug": "ro-2ed8290d40226d5f",
+    "approved": true
+  },
+  {
+    "text": "al șaptelea",
+    "slug": "ro-dee064fc50a9e69c",
+    "approved": true
+  },
+  {
+    "text": "al șaselea",
+    "slug": "ro-d9f113c4d0ae79c6",
+    "approved": true
+  },
+  {
+    "text": "al treilea",
+    "slug": "ro-55fb08e9f91613a1",
+    "approved": true
+  },
+  {
+    "text": "al zecelea",
+    "slug": "ro-ea4a3f45443a7633",
+    "approved": true
+  },
+  {
+    "text": "am",
+    "slug": "ro-ab6db599234d2636",
+    "approved": true
+  },
+  {
+    "text": "Am apă.",
+    "slug": "ro-f9ea9d3a7a4734ac",
+    "approved": true
+  },
+  {
+    "text": "Am bani pentru taxi.",
+    "slug": "ro-f612a084172d9027",
+    "approved": true
+  },
+  {
+    "text": "Am două bilete.",
+    "slug": "ro-b6f4f8467476883e",
+    "approved": true
+  },
+  {
+    "text": "Am douăzeci și unu de bilete.",
+    "slug": "ro-293f68dcf9e6d1ca",
+    "approved": true
+  },
+  {
+    "text": "Am mâna în buzunar.",
+    "slug": "ro-9f5b8455d1564648",
+    "approved": true
+  },
+  {
+    "text": "Am nevoie de ajutor.",
+    "slug": "ro-48671f44acd1c15c",
+    "approved": true
+  },
+  {
+    "text": "Am niște bilete.",
+    "slug": "ro-f38fe2059b00ef3c",
+    "approved": true
+  },
+  {
+    "text": "Am o carte.",
+    "slug": "ro-e391ba66f9b998fb",
+    "approved": true
+  },
+  {
+    "text": "Am o programare.",
+    "slug": "ro-47c9bce44b8a5830",
+    "approved": true
+  },
+  {
+    "text": "Am un bilet.",
+    "slug": "ro-ce72ae103a9a6002",
+    "approved": true
+  },
+  {
+    "text": "an",
+    "slug": "ro-ea325d761f98c6b7",
+    "approved": true
+  },
+  {
     "text": "apă",
     "slug": "apa",
     "approved": true
   },
   {
-    "text": "elev",
-    "slug": "elev",
+    "text": "aprilie",
+    "slug": "ro-5d6d6246e4855ac9",
     "approved": true
   },
   {
-    "text": "inimă",
-    "slug": "inima",
+    "text": "are",
+    "slug": "ro-ba78973ddcf98d4e",
     "approved": true
   },
   {
-    "text": "oraș",
-    "slug": "oras",
+    "text": "astăzi",
+    "slug": "ro-e22efd4dd289b37c",
     "approved": true
   },
   {
-    "text": "unu",
-    "slug": "unu",
+    "text": "Aș dori să deschid un cont bancar.",
+    "slug": "ro-cd76d9dc41bea317",
     "approved": true
   },
   {
-    "text": "Eu sunt aici.",
-    "slug": "eu-sunt-aici",
+    "text": "au",
+    "slug": "ro-632cd2fea71dcde0",
     "approved": true
   },
   {
-    "text": "Eu am un bilet.",
-    "slug": "eu-am-un-bilet",
+    "text": "august",
+    "slug": "ro-c2afdd38565b01f2",
+    "approved": true
+  },
+  {
+    "text": "avem",
+    "slug": "ro-68121781a835dfea",
+    "approved": true
+  },
+  {
+    "text": "aveți",
+    "slug": "ro-1ddd5e07e1406b0c",
+    "approved": true
+  },
+  {
+    "text": "Aveți un bilet?",
+    "slug": "ro-dcc84a83604b7dd5",
+    "approved": true
+  },
+  {
+    "text": "Aveți un bilet? Da, am un bilet.",
+    "slug": "ro-91814c3101508b2e",
+    "approved": true
+  },
+  {
+    "text": "Aveți un bilet? Nu, nu am un bilet.",
+    "slug": "ro-873d02dc15cdc59e",
+    "approved": true
+  },
+  {
+    "text": "Aveți?",
+    "slug": "ro-c85d9c6a3657d901",
+    "approved": true
+  },
+  {
+    "text": "azi",
+    "slug": "ro-91a72ebec308d670",
+    "approved": true
+  },
+  {
+    "text": "Azi este luni.",
+    "slug": "ro-f46251f96f77f5ba",
+    "approved": true
+  },
+  {
+    "text": "Azi sunt la școală.",
+    "slug": "ro-eb37e415f8c8a0b4",
+    "approved": true
+  },
+  {
+    "text": "ă",
+    "slug": "ro-817789243c880b91",
+    "approved": true
+  },
+  {
+    "text": "ăsta",
+    "slug": "ro-2368b65367725a04",
+    "approved": true
+  },
+  {
+    "text": "â",
+    "slug": "ro-115ddb376a021b97",
+    "approved": true
+  },
+  {
+    "text": "ba",
+    "slug": "ro-970f519c2cadbcef",
+    "approved": true
+  },
+  {
+    "text": "ban",
+    "slug": "ro-b2a96c3d3fc2b6ac",
+    "approved": true
+  },
+  {
+    "text": "bani",
+    "slug": "ro-193c7004999b0277",
+    "approved": true
+  },
+  {
+    "text": "be",
+    "slug": "ro-46599c5bb5c33101",
+    "approved": true
+  },
+  {
+    "text": "bilet",
+    "slug": "ro-aea49165ba40d3f5",
+    "approved": true
+  },
+  {
+    "text": "biletele",
+    "slug": "ro-fe6422dc9d8c0eee",
+    "approved": true
+  },
+  {
+    "text": "biletul",
+    "slug": "ro-0685b7c483874dd5",
+    "approved": true
+  },
+  {
+    "text": "Biletul este aici.",
+    "slug": "ro-9017b153b55cffd2",
+    "approved": true
+  },
+  {
+    "text": "Biletul este în geantă.",
+    "slug": "ro-e6da1169c62541fb",
+    "approved": true
+  },
+  {
+    "text": "bine",
+    "slug": "ro-baf34cda01f0f3d3",
+    "approved": true
+  },
+  {
+    "text": "Bine, mulțumesc.",
+    "slug": "ro-c50432c9d0d44e17",
+    "approved": true
+  },
+  {
+    "text": "braț",
+    "slug": "ro-ab65c68b02799d20",
+    "approved": true
+  },
+  {
+    "text": "bun",
+    "slug": "ro-08d1082cc8d85a08",
+    "approved": true
+  },
+  {
+    "text": "bună",
+    "slug": "ro-9210254babb73147",
+    "approved": true
+  },
+  {
+    "text": "Bună dimineața!",
+    "slug": "ro-a43b0245c505ef02",
+    "approved": true
+  },
+  {
+    "text": "Bună seara!",
+    "slug": "ro-79805fb79fe78f25",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua",
+    "slug": "ro-027ff77255a4ef20",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua!",
+    "slug": "ro-a5de4d43c03eee7b",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua! Da, eu sunt Ana.",
+    "slug": "ro-3ad3619d88596807",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua! Doriți zece călătorii sau un abonament lunar?",
+    "slug": "ro-10e02867d874d1c0",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua! Dumneavoastră sunteți Ana?",
+    "slug": "ro-d9590f8f27c03ba7",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua! Este valabil și în tramvai?",
+    "slug": "ro-7413d68af172e800",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua! Un bilet sau două?",
+    "slug": "ro-a1459cd5a678b0fb",
+    "approved": true
+  },
+  {
+    "text": "ca",
+    "slug": "ro-6959097001d10501",
+    "approved": true
+  },
+  {
+    "text": "card",
+    "slug": "ro-8367cd66fdd136bb",
+    "approved": true
+  },
+  {
+    "text": "care",
+    "slug": "ro-f9ed2b54fd72ac16",
+    "approved": true
+  },
+  {
+    "text": "cartea",
+    "slug": "ro-dad10fa470577d45",
+    "approved": true
+  },
+  {
+    "text": "Cartea este aici.",
+    "slug": "ro-6732e29a470d0f0e",
+    "approved": true
+  },
+  {
+    "text": "Cartea este lângă telefon.",
+    "slug": "ro-49953c04478494f8",
+    "approved": true
+  },
+  {
+    "text": "Cartea este pe masă.",
+    "slug": "ro-f4a587aaef0e3745",
+    "approved": true
+  },
+  {
+    "text": "casa",
+    "slug": "ro-b3813027ed2150ec",
+    "approved": true
+  },
+  {
+    "text": "casă",
+    "slug": "ro-60588c8a4049f715",
+    "approved": true
+  },
+  {
+    "text": "când",
+    "slug": "ro-8ffc5558e3abc0ca",
+    "approved": true
+  },
+  {
+    "text": "cât",
+    "slug": "ro-185b31697b067366",
+    "approved": true
+  },
+  {
+    "text": "Cât costă?",
+    "slug": "ro-56283d707ab3d3c9",
+    "approved": true
+  },
+  {
+    "text": "Cât este biletul?",
+    "slug": "ro-fc3a4ab55eba4d09",
+    "approved": true
+  },
+  {
+    "text": "Cât este ceasul?",
+    "slug": "ro-93e82f595b3ff8cb",
+    "approved": true
+  },
+  {
+    "text": "câtă",
+    "slug": "ro-b62c93aa6dd5a3dc",
+    "approved": true
+  },
+  {
+    "text": "câte",
+    "slug": "ro-cd1fa20bef54f4d9",
+    "approved": true
+  },
+  {
+    "text": "Câte bilete aveți?",
+    "slug": "ro-25e9ecc6443f1a2e",
+    "approved": true
+  },
+  {
+    "text": "câți",
+    "slug": "ro-13a0c9e66cda9046",
+    "approved": true
+  },
+  {
+    "text": "ce",
+    "slug": "ro-e64c826b6b33f307",
+    "approved": true
+  },
+  {
+    "text": "Ce înseamnă asta, vă rog?",
+    "slug": "ro-4575e8661c9d2f15",
+    "approved": true
+  },
+  {
+    "text": "Ce mai faceți?",
+    "slug": "ro-2466f3ce28004ca4",
+    "approved": true
+  },
+  {
+    "text": "Ce mai faci?",
+    "slug": "ro-4931c9e44a928b98",
+    "approved": true
+  },
+  {
+    "text": "Ce zi este? Este luni.",
+    "slug": "ro-35b408bc9e552095",
+    "approved": true
+  },
+  {
+    "text": "ceai",
+    "slug": "ro-cda28b8ea9d67313",
+    "approved": true
+  },
+  {
+    "text": "ceas",
+    "slug": "ro-cbde78cc776c50db",
+    "approved": true
+  },
+  {
+    "text": "ch",
+    "slug": "ro-343677762813eaeb",
+    "approved": true
+  },
+  {
+    "text": "cheie",
+    "slug": "ro-f3859c52059a276d",
+    "approved": true
+  },
+  {
+    "text": "chitară",
+    "slug": "ro-76e9c8194b9e6abc",
+    "approved": true
+  },
+  {
+    "text": "cinci",
+    "slug": "ro-4ef0a96e2bcedf85",
+    "approved": true
+  },
+  {
+    "text": "cincisprezece",
+    "slug": "ro-60547a8dd5c70b65",
+    "approved": true
+  },
+  {
+    "text": "cincizeci",
+    "slug": "ro-ff0ceaee7ed638b9",
+    "approved": true
+  },
+  {
+    "text": "cine",
+    "slug": "ro-1694f8317982ddce",
+    "approved": true
+  },
+  {
+    "text": "Cine este aici?",
+    "slug": "ro-a4bfa34214a7792f",
+    "approved": true
+  },
+  {
+    "text": "coborî",
+    "slug": "ro-304175cfd68854b3",
+    "approved": true
+  },
+  {
+    "text": "cont",
+    "slug": "ro-0cc1c74193b578d2",
+    "approved": true
+  },
+  {
+    "text": "Cu plăcere.",
+    "slug": "ro-7d5291f2ccbca07d",
+    "approved": true
+  },
+  {
+    "text": "cum",
+    "slug": "ro-594810adcbee20bd",
+    "approved": true
+  },
+  {
+    "text": "Cum se spune în română?",
+    "slug": "ro-da3b37f35a5dfb7d",
+    "approved": true
+  },
+  {
+    "text": "Cum sunteți?",
+    "slug": "ro-edff46300fcf7ad5",
+    "approved": true
+  },
+  {
+    "text": "Cum vă numiți?",
+    "slug": "ro-75e387c42e3d55f8",
+    "approved": true
+  },
+  {
+    "text": "da",
+    "slug": "ro-aa58b21b01d6b8a9",
+    "approved": true
+  },
+  {
+    "text": "Da, am un bilet.",
+    "slug": "ro-a9303e6657422f8c",
+    "approved": true
+  },
+  {
+    "text": "Da, este valabil.",
+    "slug": "ro-c2c8afc927d3bce1",
+    "approved": true
+  },
+  {
+    "text": "Da, eu sunt Ana.",
+    "slug": "ro-ab7d037123761a9c",
+    "approved": true
+  },
+  {
+    "text": "de",
+    "slug": "ro-959a45d44e6fcf58",
+    "approved": true
+  },
+  {
+    "text": "de ce",
+    "slug": "ro-0a04040b20670095",
+    "approved": true
+  },
+  {
+    "text": "De unde sunteți?",
+    "slug": "ro-7072df6511954dd6",
+    "approved": true
+  },
+  {
+    "text": "decembrie",
+    "slug": "ro-60e0c209409d8338",
+    "approved": true
+  },
+  {
+    "text": "devreme",
+    "slug": "ro-f745e61d3eee93a0",
+    "approved": true
+  },
+  {
+    "text": "dimineață",
+    "slug": "ro-64022d70be9a5394",
+    "approved": true
+  },
+  {
+    "text": "Doar mă uit, mulțumesc.",
+    "slug": "ro-587c22cc5ad68954",
+    "approved": true
+  },
+  {
+    "text": "doi",
+    "slug": "ro-cc19ad25eef37f44",
+    "approved": true
+  },
+  {
+    "text": "doi elevi buni",
+    "slug": "ro-0c237a38dc9329c0",
+    "approved": true
+  },
+  {
+    "text": "doisprezece",
+    "slug": "ro-a349dd020c7bab2e",
+    "approved": true
+  },
+  {
+    "text": "Doresc zece călătorii, vă rog.",
+    "slug": "ro-4265df560d7ca123",
+    "approved": true
+  },
+  {
+    "text": "Doriți un abonament lunar?",
+    "slug": "ro-3febfc42b5e0847e",
+    "approved": true
+  },
+  {
+    "text": "Doriți zece călătorii sau un abonament lunar?",
+    "slug": "ro-ad3ea263e95e97e1",
+    "approved": true
+  },
+  {
+    "text": "două",
+    "slug": "ro-62e5d651734634d4",
+    "approved": true
+  },
+  {
+    "text": "Două bilete",
+    "slug": "ro-56e2b08a6942b505",
+    "approved": true
+  },
+  {
+    "text": "Două bilete, vă rog.",
+    "slug": "ro-55a74a988312739b",
+    "approved": true
+  },
+  {
+    "text": "două case noi",
+    "slug": "ro-359df4a205b6a43a",
+    "approved": true
+  },
+  {
+    "text": "douăsprezece",
+    "slug": "ro-8043f57b0753a2c4",
+    "approved": true
+  },
+  {
+    "text": "douăzeci",
+    "slug": "ro-88b630608e260e24",
+    "approved": true
+  },
+  {
+    "text": "douăzeci și unu",
+    "slug": "ro-5be8c9857fee2b76",
+    "approved": true
+  },
+  {
+    "text": "dublu ve",
+    "slug": "ro-f4d5ad23e5d90d58",
+    "approved": true
+  },
+  {
+    "text": "duminică",
+    "slug": "ro-de2848e4094fec6d",
+    "approved": true
+  },
+  {
+    "text": "dumneata",
+    "slug": "ro-74d6c06c527e9525",
+    "approved": true
+  },
+  {
+    "text": "dumneavoastră",
+    "slug": "ro-093181d232e45241",
+    "approved": true
+  },
+  {
+    "text": "Dumneavoastră sunteți aici.",
+    "slug": "ro-549dc54170f40a5c",
+    "approved": true
+  },
+  {
+    "text": "Dumneavoastră sunteți Ana?",
+    "slug": "dumneavoastra-sunteti-ana",
+    "approved": true
+  },
+  {
+    "text": "Dumneavoastră sunteți profesor?",
+    "slug": "ro-3c85dfcb7f4b9c7b",
+    "approved": true
+  },
+  {
+    "text": "după-amiază",
+    "slug": "ro-027051e8b16b90e3",
+    "approved": true
+  },
+  {
+    "text": "e",
+    "slug": "ro-3f79bb7b435b0532",
+    "approved": true
+  },
+  {
+    "text": "ea",
+    "slug": "ro-8405ae6de3ebde2a",
+    "approved": true
+  },
+  {
+    "text": "Ea are un bilet.",
+    "slug": "ro-ba686b59f885bc24",
+    "approved": true
+  },
+  {
+    "text": "Ea este aici.",
+    "slug": "ro-b8a00041ea3866f1",
+    "approved": true
+  },
+  {
+    "text": "Ea este în București.",
+    "slug": "ro-4c067b355f5488de",
+    "approved": true
+  },
+  {
+    "text": "Ea este studentă.",
+    "slug": "ro-d8c6345d70ccd432",
+    "approved": true
+  },
+  {
+    "text": "Ea nu este aici.",
+    "slug": "ro-c43a17cf098b01d8",
+    "approved": true
+  },
+  {
+    "text": "ef",
+    "slug": "ro-4ca669ac3713d1f4",
+    "approved": true
+  },
+  {
+    "text": "ei",
+    "slug": "ro-39d633dc9cf015fb",
+    "approved": true
+  },
+  {
+    "text": "Ei au o carte.",
+    "slug": "ro-e4b378e6f8692b49",
+    "approved": true
+  },
+  {
+    "text": "Ei sunt aici.",
+    "slug": "ro-87cc6c6a7cbe6831",
+    "approved": true
+  },
+  {
+    "text": "Ei sunt studenți.",
+    "slug": "ro-06ffdf123c4fa057",
+    "approved": true
+  },
+  {
+    "text": "el",
+    "slug": "ro-d65c3e892354b17a",
+    "approved": true
+  },
+  {
+    "text": "El este aici.",
+    "slug": "ro-ff02d0835a7fd3f3",
+    "approved": true
+  },
+  {
+    "text": "ele",
+    "slug": "ro-0b883aa10f7af56f",
     "approved": true
   },
   {
@@ -40,8 +830,1228 @@
     "approved": true
   },
   {
-    "text": "Dumneavoastră sunteți Ana?",
-    "slug": "dumneavoastra-sunteti-ana",
+    "text": "Ele sunt studente.",
+    "slug": "ro-56e52dc7800ca1a4",
+    "approved": true
+  },
+  {
+    "text": "elev",
+    "slug": "elev",
+    "approved": true
+  },
+  {
+    "text": "elevi",
+    "slug": "ro-2039f0cabbae1e8e",
+    "approved": true
+  },
+  {
+    "text": "Elevul este aici.",
+    "slug": "ro-9ac4392c74f351e0",
+    "approved": true
+  },
+  {
+    "text": "em",
+    "slug": "ro-84a47f61dd341ce7",
+    "approved": true
+  },
+  {
+    "text": "en",
+    "slug": "ro-dbd3a49d0d906b4e",
+    "approved": true
+  },
+  {
+    "text": "er",
+    "slug": "ro-cc7e4412564ba8a7",
+    "approved": true
+  },
+  {
+    "text": "es",
+    "slug": "ro-c0bc1e08f9743b2d",
+    "approved": true
+  },
+  {
+    "text": "este",
+    "slug": "ro-b3aa33b34e1b14e4",
+    "approved": true
+  },
+  {
+    "text": "Este departe?",
+    "slug": "ro-62cc47602f3ac964",
+    "approved": true
+  },
+  {
+    "text": "Este valabil și în autobuz?",
+    "slug": "ro-d3035665b96f9151",
+    "approved": true
+  },
+  {
+    "text": "Este valabil și în tramvai?",
+    "slug": "ro-f8e4d15fa8c9068c",
+    "approved": true
+  },
+  {
+    "text": "ești",
+    "slug": "ro-a12249bae35ccfb5",
+    "approved": true
+  },
+  {
+    "text": "eu",
+    "slug": "ro-4d0282941aaf2d69",
+    "approved": true
+  },
+  {
+    "text": "Eu am un bilet.",
+    "slug": "eu-am-un-bilet",
+    "approved": true
+  },
+  {
+    "text": "Eu am un bilet. Eu am două bilete.",
+    "slug": "ro-c678aa0e6d479d84",
+    "approved": true
+  },
+  {
+    "text": "Eu nu am un bilet.",
+    "slug": "ro-793bbf37fd16db9b",
+    "approved": true
+  },
+  {
+    "text": "Eu sunt aici.",
+    "slug": "eu-sunt-aici",
+    "approved": true
+  },
+  {
+    "text": "Eu sunt Ana.",
+    "slug": "ro-3b0f27a5afe1de76",
+    "approved": true
+  },
+  {
+    "text": "Eu sunt la școală.",
+    "slug": "ro-ed151b100195c41a",
+    "approved": true
+  },
+  {
+    "text": "Eu sunt student.",
+    "slug": "ro-49f994e966925bdd",
+    "approved": true
+  },
+  {
+    "text": "Eu sunt studentă.",
+    "slug": "ro-eb0138430210dd0c",
+    "approved": true
+  },
+  {
+    "text": "fa",
+    "slug": "ro-3097e26b7f3cbdb9",
+    "approved": true
+  },
+  {
+    "text": "fără",
+    "slug": "ro-b842d4a25ef206b0",
+    "approved": true
+  },
+  {
+    "text": "februarie",
+    "slug": "ro-a9a79295ba6a753d",
+    "approved": true
+  },
+  {
+    "text": "Fiul meu este elev aici.",
+    "slug": "ro-0238f13a4ea129ae",
+    "approved": true
+  },
+  {
+    "text": "fix",
+    "slug": "ro-1c6e6c4c02e55178",
+    "approved": true
+  },
+  {
+    "text": "g",
+    "slug": "ro-cd0aa9856147b6c5",
+    "approved": true
+  },
+  {
+    "text": "ga",
+    "slug": "ro-f52d63231eb0dbaa",
+    "approved": true
+  },
+  {
+    "text": "gară",
+    "slug": "ro-81d3711b4a391936",
+    "approved": true
+  },
+  {
+    "text": "ge",
+    "slug": "ro-309d20864f274b09",
+    "approved": true
+  },
+  {
+    "text": "geam",
+    "slug": "ro-e93d9d4634b02b4c",
+    "approved": true
+  },
+  {
+    "text": "gheață",
+    "slug": "ro-ba0524ac7ad6f06e",
+    "approved": true
+  },
+  {
+    "text": "ghișeu",
+    "slug": "ro-c58dad7bb57c63d5",
+    "approved": true
+  },
+  {
+    "text": "girafă",
+    "slug": "ro-7fbff8a6eb8b051d",
+    "approved": true
+  },
+  {
+    "text": "h",
+    "slug": "ro-aaa9402664f1a41f",
+    "approved": true
+  },
+  {
+    "text": "ha",
+    "slug": "ro-8693873cd8f8a2d9",
+    "approved": true
+  },
+  {
+    "text": "hartă",
+    "slug": "ro-2a4a4b466c334334",
+    "approved": true
+  },
+  {
+    "text": "haș",
+    "slug": "ro-08e7f2e496debf6a",
+    "approved": true
+  },
+  {
+    "text": "i",
+    "slug": "ro-de7d1b721a1e0632",
+    "approved": true
+  },
+  {
+    "text": "i grec",
+    "slug": "ro-d6964d40c92b0d1a",
+    "approved": true
+  },
+  {
+    "text": "ianuarie",
+    "slug": "ro-6ecc7ed7c795342f",
+    "approved": true
+  },
+  {
+    "text": "ieri",
+    "slug": "ro-c8ffb0eb46c07c61",
+    "approved": true
+  },
+  {
+    "text": "iks",
+    "slug": "ro-ef6cf956ccace2a5",
+    "approved": true
+  },
+  {
+    "text": "inimă",
+    "slug": "inima",
+    "approved": true
+  },
+  {
+    "text": "iulie",
+    "slug": "ro-7d4c541d56c1bf9d",
+    "approved": true
+  },
+  {
+    "text": "iunie",
+    "slug": "ro-24211ba635b5b682",
+    "approved": true
+  },
+  {
+    "text": "î",
+    "slug": "ro-cf1f17b9f234c4de",
+    "approved": true
+  },
+  {
+    "text": "î din a",
+    "slug": "ro-7428d2bd7a116748",
+    "approved": true
+  },
+  {
+    "text": "î din i",
+    "slug": "ro-12fc69ed5923d03c",
+    "approved": true
+  },
+  {
+    "text": "îmi",
+    "slug": "ro-724121546c11d1c4",
+    "approved": true
+  },
+  {
+    "text": "Îmi pare bine.",
+    "slug": "ro-b5387584421470dd",
+    "approved": true
+  },
+  {
+    "text": "Îmi pare rău.",
+    "slug": "ro-c065e4c3c9f17091",
+    "approved": true
+  },
+  {
+    "text": "în",
+    "slug": "ro-0cf56b5c780797bd",
+    "approved": true
+  },
+  {
+    "text": "în geantă",
+    "slug": "ro-c88d2c51b16d0c3c",
+    "approved": true
+  },
+  {
+    "text": "înainte",
+    "slug": "ro-7f65c860302dabee",
+    "approved": true
+  },
+  {
+    "text": "încet",
+    "slug": "ro-a9c35bf42d9fba1b",
+    "approved": true
+  },
+  {
+    "text": "întâi",
+    "slug": "ro-062e9e0931566eea",
+    "approved": true
+  },
+  {
+    "text": "întâia",
+    "slug": "ro-8dd3ba312e9fcc61",
+    "approved": true
+  },
+  {
+    "text": "Întâlnirea este la ora două.",
+    "slug": "ro-a97b61bc8e676763",
+    "approved": true
+  },
+  {
+    "text": "îți",
+    "slug": "ro-ef5b25524fc3d948",
+    "approved": true
+  },
+  {
+    "text": "j",
+    "slug": "ro-189f40034be7a199",
+    "approved": true
+  },
+  {
+    "text": "ja",
+    "slug": "ro-3702fc1866630796",
+    "approved": true
+  },
+  {
+    "text": "je",
+    "slug": "ro-9e507a6dfbf98393",
+    "approved": true
+  },
+  {
+    "text": "joi",
+    "slug": "ro-8cc885468e049858",
+    "approved": true
+  },
+  {
+    "text": "joi, vineri",
+    "slug": "ro-b563dc066889768a",
+    "approved": true
+  },
+  {
+    "text": "jumătate",
+    "slug": "ro-71959f4f19d929dd",
+    "approved": true
+  },
+  {
+    "text": "k",
+    "slug": "ro-8254c329a92850f6",
+    "approved": true
+  },
+  {
+    "text": "kilometru",
+    "slug": "ro-6acbb43407bb963c",
+    "approved": true
+  },
+  {
+    "text": "la",
+    "slug": "ro-b737ca7ee563ae80",
+    "approved": true
+  },
+  {
+    "text": "La ce oră este întâlnirea?",
+    "slug": "ro-116078ce26ff5f8d",
+    "approved": true
+  },
+  {
+    "text": "La revedere!",
+    "slug": "ro-7ac1c3cccb521bb9",
+    "approved": true
+  },
+  {
+    "text": "la școală",
+    "slug": "ro-5863af3f9411140a",
+    "approved": true
+  },
+  {
+    "text": "lângă",
+    "slug": "ro-3963ff2ea3665258",
+    "approved": true
+  },
+  {
+    "text": "lângă telefon",
+    "slug": "ro-6479596cf4320773",
+    "approved": true
+  },
+  {
+    "text": "lună",
+    "slug": "ro-d446576ad92d9d78",
+    "approved": true
+  },
+  {
+    "text": "luni",
+    "slug": "ro-6ebd004b75876eed",
+    "approved": true
+  },
+  {
+    "text": "M-am rătăcit.",
+    "slug": "ro-9ffb0f8c4f4f925b",
+    "approved": true
+  },
+  {
+    "text": "ma",
+    "slug": "ro-3c44c3e1b8b78447",
+    "approved": true
+  },
+  {
+    "text": "mai",
+    "slug": "ro-7d980bbde514db41",
+    "approved": true
+  },
+  {
+    "text": "martie",
+    "slug": "ro-246d3e81c71dec04",
+    "approved": true
+  },
+  {
+    "text": "marți",
+    "slug": "ro-de5a4fb558d8e6b2",
+    "approved": true
+  },
+  {
+    "text": "Marți sunt la școală.",
+    "slug": "ro-55e96ef95d18fec0",
+    "approved": true
+  },
+  {
+    "text": "masă",
+    "slug": "ro-4674530eb58c9bd3",
+    "approved": true
+  },
+  {
+    "text": "mă",
+    "slug": "ro-311865d25b2bc913",
+    "approved": true
+  },
+  {
+    "text": "Mă numesc {{name}}.",
+    "slug": "ro-67260e38fbdae6f2",
+    "approved": true
+  },
+  {
+    "text": "mâine",
+    "slug": "ro-f48043a41b58509f",
+    "approved": true
+  },
+  {
+    "text": "Mâine sunt în București.",
+    "slug": "ro-1f92669a1d39bc1a",
+    "approved": true
+  },
+  {
+    "text": "mână",
+    "slug": "ro-854a2e5ba77a5b62",
+    "approved": true
+  },
+  {
+    "text": "mea",
+    "slug": "ro-dcb0e34fce1a4824",
+    "approved": true
+  },
+  {
+    "text": "meu",
+    "slug": "ro-4b152f7c6c1c13de",
+    "approved": true
+  },
+  {
+    "text": "miercuri",
+    "slug": "ro-c9a49273a4394956",
+    "approved": true
+  },
+  {
+    "text": "minut",
+    "slug": "ro-644f616d7904c28d",
+    "approved": true
+  },
+  {
+    "text": "mulțumesc",
+    "slug": "ro-56141135df946a07",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc",
+    "slug": "ro-db1b4a591a97f1e2",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc!",
+    "slug": "ro-837f137a005506b7",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc.",
+    "slug": "ro-30bbb21043f63b0f",
+    "approved": true
+  },
+  {
+    "text": "Mulțumim.",
+    "slug": "ro-63b183a1c74d1db4",
+    "approved": true
+  },
+  {
+    "text": "na",
+    "slug": "ro-3d9fc4bde7ceef05",
+    "approved": true
+  },
+  {
+    "text": "ne",
+    "slug": "ro-cb58e4600bf0142c",
+    "approved": true
+  },
+  {
+    "text": "niște bilete",
+    "slug": "ro-1d299dc3a0573072",
+    "approved": true
+  },
+  {
+    "text": "noapte",
+    "slug": "ro-5ded03ec7fda45fc",
+    "approved": true
+  },
+  {
+    "text": "Noapte bună!",
+    "slug": "ro-250feb95b7d18486",
+    "approved": true
+  },
+  {
+    "text": "noi",
+    "slug": "ro-7c45d237d2c93594",
+    "approved": true
+  },
+  {
+    "text": "Noi",
+    "slug": "ro-e96c6b0710db06cd",
+    "approved": true
+  },
+  {
+    "text": "Noi avem două bilete.",
+    "slug": "ro-4b038e9c9676ae06",
+    "approved": true
+  },
+  {
+    "text": "Noi suntem aici.",
+    "slug": "ro-cee37d171af262b3",
+    "approved": true
+  },
+  {
+    "text": "noiembrie",
+    "slug": "ro-2760f8bef13e3912",
+    "approved": true
+  },
+  {
+    "text": "nouă",
+    "slug": "ro-13bb53cb8d06462e",
+    "approved": true
+  },
+  {
+    "text": "nouăsprezece",
+    "slug": "ro-cb0312941a469fed",
+    "approved": true
+  },
+  {
+    "text": "nouăzeci",
+    "slug": "ro-7088403d94ab1e68",
+    "approved": true
+  },
+  {
+    "text": "nu",
+    "slug": "ro-3086cf468ccca87c",
+    "approved": true
+  },
+  {
+    "text": "Nu am înțeles. Puteți repeta, vă rog?",
+    "slug": "ro-6be234a1381a9b62",
+    "approved": true
+  },
+  {
+    "text": "Nu am un bilet.",
+    "slug": "ro-fdc604358fd8ba09",
+    "approved": true
+  },
+  {
+    "text": "Nu mă simt bine.",
+    "slug": "ro-43c5d6c233fcb23c",
+    "approved": true
+  },
+  {
+    "text": "Nu vorbesc românește.",
+    "slug": "ro-b7fcff46e735b965",
+    "approved": true
+  },
+  {
+    "text": "o",
+    "slug": "ro-65c74c15a686187b",
+    "approved": true
+  },
+  {
+    "text": "o carte",
+    "slug": "ro-357cf3dbfbb073d0",
+    "approved": true
+  },
+  {
+    "text": "o casă nouă",
+    "slug": "ro-5c690d583d759c60",
+    "approved": true
+  },
+  {
+    "text": "o mie",
+    "slug": "ro-3410a7e7582254ba",
+    "approved": true
+  },
+  {
+    "text": "O sticlă de apă, vă rog.",
+    "slug": "ro-f80f9d045ef05f30",
+    "approved": true
+  },
+  {
+    "text": "o sută",
+    "slug": "ro-d5b62f6b5a8da17a",
+    "approved": true
+  },
+  {
+    "text": "O zi bună!",
+    "slug": "ro-73d6d1cae20b10e8",
+    "approved": true
+  },
+  {
+    "text": "octombrie",
+    "slug": "ro-ebc6f21e80d1ef50",
+    "approved": true
+  },
+  {
+    "text": "opt",
+    "slug": "ro-5f44712b7d71ded7",
+    "approved": true
+  },
+  {
+    "text": "optsprezece",
+    "slug": "ro-3d406078e17537af",
+    "approved": true
+  },
+  {
+    "text": "optzeci",
+    "slug": "ro-37cde41c3fef3a15",
+    "approved": true
+  },
+  {
+    "text": "ora două și jumătate",
+    "slug": "ro-e3852396eed7e266",
+    "approved": true
+  },
+  {
+    "text": "oraș",
+    "slug": "oras",
+    "approved": true
+  },
+  {
+    "text": "Orașul este mare.",
+    "slug": "ro-4d41a5476346af85",
+    "approved": true
+  },
+  {
+    "text": "oră",
+    "slug": "ro-239570adecf13a03",
+    "approved": true
+  },
+  {
+    "text": "pa",
+    "slug": "ro-9513229d43597826",
+    "approved": true
+  },
+  {
+    "text": "Pa!",
+    "slug": "ro-e7ce31b3d56904ca",
+    "approved": true
+  },
+  {
+    "text": "paisprezece",
+    "slug": "ro-bef0a1d8edd85140",
+    "approved": true
+  },
+  {
+    "text": "pașaport",
+    "slug": "ro-3130a4d22dcb0f8f",
+    "approved": true
+  },
+  {
+    "text": "patru",
+    "slug": "ro-fa809045d9192f77",
+    "approved": true
+  },
+  {
+    "text": "patruzeci",
+    "slug": "ro-f4e196e901b16cbe",
+    "approved": true
+  },
+  {
+    "text": "pe",
+    "slug": "ro-cdf69b25a417e257",
+    "approved": true
+  },
+  {
+    "text": "pe masă",
+    "slug": "ro-0b06733c087684fb",
+    "approved": true
+  },
+  {
+    "text": "plăcere",
+    "slug": "ro-ec97b4e619a71184",
+    "approved": true
+  },
+  {
+    "text": "Poftiți",
+    "slug": "ro-f514ec6f5c8e2373",
+    "approved": true
+  },
+  {
+    "text": "Poftiți.",
+    "slug": "ro-457a7b1b0f96b66c",
+    "approved": true
+  },
+  {
+    "text": "Poftiți. Mulțumesc!",
+    "slug": "ro-e44ea5e086573f9f",
+    "approved": true
+  },
+  {
+    "text": "poimâine",
+    "slug": "ro-92f7c48f6bb1d313",
+    "approved": true
+  },
+  {
+    "text": "Pot plăti cu cardul?",
+    "slug": "ro-aef9f5e484d6b3fa",
+    "approved": true
+  },
+  {
+    "text": "Prețul biletului este zece lei.",
+    "slug": "ro-357b811622854d94",
+    "approved": true
+  },
+  {
+    "text": "prima",
+    "slug": "ro-51365d01e2957632",
+    "approved": true
+  },
+  {
+    "text": "primul",
+    "slug": "ro-e76d2f495bffca5c",
+    "approved": true
+  },
+  {
+    "text": "Puteți scrie, vă rog?",
+    "slug": "ro-b8732c956f7e46ca",
+    "approved": true
+  },
+  {
+    "text": "Puteți vorbi mai rar, vă rog?",
+    "slug": "ro-d45142d200eefbce",
+    "approved": true
+  },
+  {
+    "text": "quasar",
+    "slug": "ro-24a86a184ecdd7e6",
+    "approved": true
+  },
+  {
+    "text": "r",
+    "slug": "ro-454349e422f05297",
+    "approved": true
+  },
+  {
+    "text": "ra",
+    "slug": "ro-37e7702e5ce449c1",
+    "approved": true
+  },
+  {
+    "text": "radio",
+    "slug": "ro-aa3a05d9d57c08d6",
+    "approved": true
+  },
+  {
+    "text": "rău",
+    "slug": "ro-ccb3b9731f4a7366",
+    "approved": true
+  },
+  {
+    "text": "rece",
+    "slug": "ro-34062fac106e98c4",
+    "approved": true
+  },
+  {
+    "text": "revedere",
+    "slug": "ro-3f33c071bf8987c9",
+    "approved": true
+  },
+  {
+    "text": "rog",
+    "slug": "ro-3cb95ec0c6cc1835",
+    "approved": true
+  },
+  {
+    "text": "română",
+    "slug": "ro-0ca093c1a955343a",
+    "approved": true
+  },
+  {
+    "text": "s",
+    "slug": "ro-043a718774c572bd",
+    "approved": true
+  },
+  {
+    "text": "sa",
+    "slug": "ro-4cf6829aa93728e8",
+    "approved": true
+  },
+  {
+    "text": "salut",
+    "slug": "ro-ec9c3a34e791bda2",
+    "approved": true
+  },
+  {
+    "text": "sau",
+    "slug": "ro-dfb3c9aac79bac44",
+    "approved": true
+  },
+  {
+    "text": "săptămână",
+    "slug": "ro-fc1bac386b7b09f6",
+    "approved": true
+  },
+  {
+    "text": "sâmbătă",
+    "slug": "ro-1f400a4deace7efd",
+    "approved": true
+  },
+  {
+    "text": "sâmbătă, duminică",
+    "slug": "ro-fa55c0c82b1c9370",
+    "approved": true
+  },
+  {
+    "text": "Scuzați-mă.",
+    "slug": "ro-99d0e83345715245",
+    "approved": true
+  },
+  {
+    "text": "scuză",
+    "slug": "ro-b6cf561572f5f2d8",
+    "approved": true
+  },
+  {
+    "text": "Scuze.",
+    "slug": "ro-e76557eafaae8440",
+    "approved": true
+  },
+  {
+    "text": "seară",
+    "slug": "ro-252caf1740cd92c0",
+    "approved": true
+  },
+  {
+    "text": "septembrie",
+    "slug": "ro-0b6da0b1e7c28ecd",
+    "approved": true
+  },
+  {
+    "text": "sfert",
+    "slug": "ro-3ce3b8dd3ac9d86f",
+    "approved": true
+  },
+  {
+    "text": "sub",
+    "slug": "ro-ddc6e2b224d0fd82",
+    "approved": true
+  },
+  {
+    "text": "sub masă",
+    "slug": "ro-197511395a12fc6c",
+    "approved": true
+  },
+  {
+    "text": "Sunați la 112, vă rog.",
+    "slug": "ro-3254a2d3e4e6acee",
+    "approved": true
+  },
+  {
+    "text": "sunt",
+    "slug": "ro-ed68511884c42fd0",
+    "approved": true
+  },
+  {
+    "text": "Sunt din Iran.",
+    "slug": "ro-641266cebca23a21",
+    "approved": true
+  },
+  {
+    "text": "Sunt studentă.",
+    "slug": "ro-7f406e7d38db7d09",
+    "approved": true
+  },
+  {
+    "text": "suntem",
+    "slug": "ro-a040dc5b8abf66d8",
+    "approved": true
+  },
+  {
+    "text": "sunteți",
+    "slug": "ro-83e795d3b1b0337e",
+    "approved": true
+  },
+  {
+    "text": "ș",
+    "slug": "ro-3592cf0f2c6c21c3",
+    "approved": true
+  },
+  {
+    "text": "șa",
+    "slug": "ro-9b89365027123ecd",
+    "approved": true
+  },
+  {
+    "text": "șaisprezece",
+    "slug": "ro-6e0be59d27166172",
+    "approved": true
+  },
+  {
+    "text": "șaizeci",
+    "slug": "ro-53f1bd51c0593101",
+    "approved": true
+  },
+  {
+    "text": "șapte",
+    "slug": "ro-fa98b4707c968bda",
+    "approved": true
+  },
+  {
+    "text": "șaptesprezece",
+    "slug": "ro-9b62adbc5ecdaf45",
+    "approved": true
+  },
+  {
+    "text": "șaptezeci",
+    "slug": "ro-b43504a3dd0301cc",
+    "approved": true
+  },
+  {
+    "text": "șase",
+    "slug": "ro-a4592ebb9d79cdb8",
+    "approved": true
+  },
+  {
+    "text": "școală",
+    "slug": "ro-e7ac89e80a8413c2",
+    "approved": true
+  },
+  {
+    "text": "șe",
+    "slug": "ro-8f7d4763b891a0ee",
+    "approved": true
+  },
+  {
+    "text": "ta",
+    "slug": "ro-76592b9de6d38238",
+    "approved": true
+  },
+  {
+    "text": "taxi",
+    "slug": "ro-12796d3d5f4e1323",
+    "approved": true
+  },
+  {
+    "text": "Taxiul este aici.",
+    "slug": "ro-7e8485378758e1cd",
+    "approved": true
+  },
+  {
+    "text": "târziu",
+    "slug": "ro-b2abcdf8233a4c2a",
+    "approved": true
+  },
+  {
+    "text": "te",
+    "slug": "ro-2d6c9a90dd38f685",
+    "approved": true
+  },
+  {
+    "text": "Te rog.",
+    "slug": "ro-49902267cb9c2215",
+    "approved": true
+  },
+  {
+    "text": "telefon",
+    "slug": "ro-b7367edaa7bb6757",
+    "approved": true
+  },
+  {
+    "text": "trecut",
+    "slug": "ro-8090fbb7d6f08e4d",
+    "approved": true
+  },
+  {
+    "text": "trei",
+    "slug": "ro-225a84aab4f08918",
+    "approved": true
+  },
+  {
+    "text": "treisprezece",
+    "slug": "ro-fca668cbc133524c",
+    "approved": true
+  },
+  {
+    "text": "treizeci",
+    "slug": "ro-8f4815a86ff6c674",
+    "approved": true
+  },
+  {
+    "text": "tu",
+    "slug": "ro-764c4c7b78d6fd3b",
+    "approved": true
+  },
+  {
+    "text": "Tu ești aici.",
+    "slug": "ro-842acf2e6d7c98f3",
+    "approved": true
+  },
+  {
+    "text": "ț",
+    "slug": "ro-d2d95cf5f50d00d0",
+    "approved": true
+  },
+  {
+    "text": "ța",
+    "slug": "ro-127b5f7840066659",
+    "approved": true
+  },
+  {
+    "text": "țară",
+    "slug": "ro-6221e032144aac85",
+    "approved": true
+  },
+  {
+    "text": "țe",
+    "slug": "ro-9cc946836c0071ee",
+    "approved": true
+  },
+  {
+    "text": "u",
+    "slug": "ro-0bfe935e70c321c7",
+    "approved": true
+  },
+  {
+    "text": "un abonament lunar",
+    "slug": "ro-7d99f90679877562",
+    "approved": true
+  },
+  {
+    "text": "un bilet",
+    "slug": "ro-d4bb189d05b9f080",
+    "approved": true
+  },
+  {
+    "text": "Un bilet",
+    "slug": "ro-3f797e42d26d9b97",
+    "approved": true
+  },
+  {
+    "text": "un bilet nou",
+    "slug": "ro-a4f55e685f8067f4",
+    "approved": true
+  },
+  {
+    "text": "Un bilet sau două?",
+    "slug": "ro-599c91f903b259bf",
+    "approved": true
+  },
+  {
+    "text": "Un bilet, vă rog.",
+    "slug": "ro-07dd54cc41c740b5",
+    "approved": true
+  },
+  {
+    "text": "una",
+    "slug": "ro-161f0e5ed45f6d51",
+    "approved": true
+  },
+  {
+    "text": "unde",
+    "slug": "ro-c632a6ac63ec64dd",
+    "approved": true
+  },
+  {
+    "text": "Unde este biletul?",
+    "slug": "ro-3b617fb00287fd2d",
+    "approved": true
+  },
+  {
+    "text": "Unde este ghișeul?",
+    "slug": "ro-2f9a9ad0b7661b1d",
+    "approved": true
+  },
+  {
+    "text": "Unde este o farmacie?",
+    "slug": "ro-48e5dd3a4d879df0",
+    "approved": true
+  },
+  {
+    "text": "Unde este stația de metrou?",
+    "slug": "ro-f69812b9dcb103ee",
+    "approved": true
+  },
+  {
+    "text": "Unde este toaleta?",
+    "slug": "ro-fe49ec1892511da5",
+    "approved": true
+  },
+  {
+    "text": "Unde este?",
+    "slug": "ro-5100099db61a1743",
+    "approved": true
+  },
+  {
+    "text": "Unde trebuie să depun documentele?",
+    "slug": "ro-7f635593162ea401",
+    "approved": true
+  },
+  {
+    "text": "unsprezece",
+    "slug": "ro-9527fb6294dbb9d3",
+    "approved": true
+  },
+  {
+    "text": "unu",
+    "slug": "unu",
+    "approved": true
+  },
+  {
+    "text": "ușă",
+    "slug": "ro-f8f3fa2cf99c84c0",
+    "approved": true
+  },
+  {
+    "text": "v",
+    "slug": "ro-4c94485e0c21ae6c",
+    "approved": true
+  },
+  {
+    "text": "va",
+    "slug": "ro-198dea392afc21d0",
+    "approved": true
+  },
+  {
+    "text": "vamă",
+    "slug": "ro-cf758081a9669864",
+    "approved": true
+  },
+  {
+    "text": "vă",
+    "slug": "ro-36cf1518a472ff43",
+    "approved": true
+  },
+  {
+    "text": "Vă mulțumesc.",
+    "slug": "ro-5c4106be26f6ad3d",
+    "approved": true
+  },
+  {
+    "text": "Vă rog.",
+    "slug": "ro-94298f54d4551395",
+    "approved": true
+  },
+  {
+    "text": "ve",
+    "slug": "ro-4bd2c412ba70847f",
+    "approved": true
+  },
+  {
+    "text": "viitor",
+    "slug": "ro-7ff78f0867ab4b62",
+    "approved": true
+  },
+  {
+    "text": "vineri",
+    "slug": "ro-f7da2b613fff450f",
+    "approved": true
+  },
+  {
+    "text": "voi",
+    "slug": "ro-c08c0d279a7fc15d",
+    "approved": true
+  },
+  {
+    "text": "Vorbiți engleză?",
+    "slug": "ro-5ec45724b184b979",
+    "approved": true
+  },
+  {
+    "text": "x",
+    "slug": "ro-2d711642b726b044",
+    "approved": true
+  },
+  {
+    "text": "yoga",
+    "slug": "ro-ca3142d55e008e17",
+    "approved": true
+  },
+  {
+    "text": "za",
+    "slug": "ro-3c42d9ac9807bbf9",
+    "approved": true
+  },
+  {
+    "text": "zece",
+    "slug": "ro-bc1357ba5819f331",
+    "approved": true
+  },
+  {
+    "text": "zece călătorii",
+    "slug": "ro-5f2229e42f1101ee",
+    "approved": true
+  },
+  {
+    "text": "zero",
+    "slug": "ro-f9194e73f9e9459e",
+    "approved": true
+  },
+  {
+    "text": "zet",
+    "slug": "ro-72d7027887e4341e",
+    "approved": true
+  },
+  {
+    "text": "zi",
+    "slug": "ro-6df02ca00ca28629",
     "approved": true
   }
 ]

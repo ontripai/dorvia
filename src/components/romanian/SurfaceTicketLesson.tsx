@@ -3,6 +3,7 @@
 import React from 'react';
 import { LessonStageNav } from './LessonStageNav';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
+import { playVerifiedAudio, stopVerifiedAudio } from '@/lib/romanian/playVerifiedAudio';
 
 type Locale = 'fa' | 'en';
 type Phase = 0 | 1 | 2 | 3 | 4;
@@ -54,24 +55,19 @@ export function SurfaceTicketLesson({ lang }: { lang: Locale }) {
     const browser = window as RecognitionWindow;
     setVoiceAvailable(Boolean(browser.SpeechRecognition || browser.webkitSpeechRecognition));
     try { setPriorCompletion(Boolean(localStorage.getItem(progressKey))); } catch { /* optional */ }
-    return () => { recognitionRef.current?.abort(); window.speechSynthesis?.cancel(); };
+    return () => { recognitionRef.current?.abort(); stopVerifiedAudio(); };
   }, []);
 
   function move(next: Phase) {
     recognitionRef.current?.abort(); recognitionRef.current = null;
-    window.speechSynthesis?.cancel();
+    stopVerifiedAudio();
     setListening(false); setVoiceMessage(''); setPhase(next); setRound(0);
     setAnswer(''); setFeedback(null); setHint(false);
   }
 
   function speak(ro: string) {
-    if (!('speechSynthesis' in window)) { setAudioMessage(isFa ? 'پخش صوت در این مرورگر در دسترس نیست.' : 'Audio playback is unavailable.'); return; }
-    const voice = window.speechSynthesis.getVoices().find(v => v.lang.toLowerCase().startsWith('ro'));
-    if (!voice) { setAudioMessage(isFa ? 'صدای رومانیایی در مرورگر در دسترس نیست.' : 'A Romanian browser voice is unavailable.'); return; }
-    window.speechSynthesis.cancel(); setAudioMessage('');
-    const utterance = new SpeechSynthesisUtterance(ro);
-    utterance.lang = 'ro-RO'; utterance.voice = voice; utterance.rate = 0.82;
-    window.speechSynthesis.speak(utterance);
+    setAudioMessage('');
+    playVerifiedAudio(ro, () => setAudioMessage(isFa ? 'فایل صدای این عبارت در دسترس نیست.' : 'This recording is unavailable.'));
   }
 
   const vehicle: Vehicle = phase === 2 ? 'tram' : sequence[round];
@@ -172,6 +168,6 @@ export function SurfaceTicketLesson({ lang }: { lang: Locale }) {
     </section>}
     {priorCompletion && phase !== 4 && <p className="text-sm text-slate-500">{isFa ? 'این درس قبلاً روی همین دستگاه انجام شده است؛ می‌توانید دوباره تمرین کنید.' : 'You completed this lesson on this device; you can practise again.'}</p>}
     {audioMessage && <p role="status" className="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">{audioMessage}</p>}
-    <p className="text-xs text-slate-500">{isFa ? 'پخش به صدای رومانیایی مرورگر وابسته است. پاسخ صوتی به متن تبدیل می‌شود و کیفیت تلفظ نمره‌دهی نمی‌شود.' : 'Playback needs a Romanian browser voice. Spoken answers are transcribed; pronunciation is not graded.'}</p>
+    <p className="text-xs text-slate-500">{isFa ? 'صداهای درس با آزور آماده شده‌اند. پاسخ صوتی به متن تبدیل می‌شود و کیفیت تلفظ نمره‌دهی نمی‌شود.' : 'Lesson recordings are generated with Azure. Spoken answers are transcribed; pronunciation is not graded.'}</p>
   </div>;
 }

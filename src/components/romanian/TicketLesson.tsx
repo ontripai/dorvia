@@ -3,6 +3,7 @@
 import React from 'react';
 import { LessonStageNav } from './LessonStageNav';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
+import { playVerifiedAudio, stopVerifiedAudio } from '@/lib/romanian/playVerifiedAudio';
 
 type Locale = 'fa' | 'en';
 type Phase = 0 | 1 | 2 | 3 | 4;
@@ -102,25 +103,14 @@ export function TicketLesson({ lang }: { lang: Locale }) {
     } catch { /* Browsing still works without device storage. */ }
     return () => {
       recognitionRef.current?.abort();
+      stopVerifiedAudio();
       window.speechSynthesis?.cancel();
     };
   }, []);
 
-  function speak(ro: string) {
-    if (!('speechSynthesis' in window)) { setAudioError(true); return; }
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(ro);
-    utterance.lang = 'ro-RO';
-    utterance.rate = 0.82;
-    const voices = window.speechSynthesis.getVoices();
-    const romanianVoice = voices.find(v => v.lang.toLowerCase().startsWith('ro'));
-    if (!romanianVoice) { setAudioError(true); return; }
-    utterance.voice = romanianVoice;
-    utterance.onstart = () => setSpeaking(true);
-    utterance.onend = () => setSpeaking(false);
-    utterance.onerror = () => { setSpeaking(false); setAudioError(true); };
+  function speak(ro: string | string[]) {
     setAudioError(false);
-    window.speechSynthesis.speak(utterance);
+    playVerifiedAudio(ro, () => setAudioError(true), setSpeaking);
   }
 
   function move(next: Phase) {
@@ -129,6 +119,7 @@ export function TicketLesson({ lang }: { lang: Locale }) {
     setListening(false);
     setVoiceMessage('');
     window.speechSynthesis?.cancel();
+    stopVerifiedAudio();
     setSpeaking(false);
     setPhase(next);
     setAnswer('');
@@ -255,10 +246,10 @@ export function TicketLesson({ lang }: { lang: Locale }) {
       {phase === 0 && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-5">
         <h2 className="text-xl font-bold">{isFa ? 'ابتدا گفت‌وگو را بشنوید' : 'First, listen to the conversation'}</h2>
         <p className="text-base text-slate-700">{isFa ? 'برای خودتان و یک همراه بلیت می‌خواهید. فروشنده می‌پرسد چند بلیت؟' : 'You need tickets for yourself and a companion. The clerk asks how many.'}</p>
-        <button type="button" onClick={() => speak(conversation.map(t => t.ro).join(' '))} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-semibold">
+        <button type="button" onClick={() => speak(conversation.map(t => t.ro))} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-semibold">
           {speaking ? isFa ? 'در حال پخش…' : 'Playing…' : isFa ? 'شنیدن گفت‌وگو' : 'Play conversation'}
         </button>
-        {audioError && <p role="status" className="text-sm text-amber-900 bg-amber-50 p-3 rounded-lg">{isFa ? 'صدای رومانیایی در این مرورگر در دسترس نیست؛ متن درس و تمرین‌ها همچنان قابل استفاده‌اند.' : 'A Romanian voice is unavailable in this browser. You can still use the lesson and exercises.'}</p>}
+        {audioError && <p role="status" className="text-sm text-amber-900 bg-amber-50 p-3 rounded-lg">{isFa ? 'فایل صدای این عبارت در دسترس نیست؛ دوباره تلاش کنید.' : 'This recording is unavailable. Please try again.'}</p>}
         <div className="space-y-3">
           {conversation.map((turn, i) => <div key={i} className={`rounded-xl p-4 ${turn.speaker === 'you' ? 'bg-blue-50' : 'bg-slate-50'}`}>
             <div className="text-sm font-bold text-[#1554bd]">{turn.speaker === 'you' ? isFa ? 'شما' : 'You' : isFa ? 'فروشنده' : 'Clerk'}</div>
@@ -356,7 +347,7 @@ export function TicketLesson({ lang }: { lang: Locale }) {
         {sessionComplete && <p className="text-sm text-slate-600">{isFa ? '۱۵ دقیقه فقط زمان پیشنهادی هر جلسه است. می‌توانید همین امروز درس دیگری بخوانید یا هر یک از مراحل را دوباره تمرین کنید.' : 'Fifteen minutes is only a suggested session length. You can study another lesson today or repeat any stage.'}</p>}
       </section>}
       {finishedOn && phase !== 4 && <p className="text-sm text-slate-500">{isFa ? 'این جلسه قبلاً روی همین دستگاه انجام شده است؛ می‌توانید دوباره تمرین کنید.' : 'You completed this lesson on this device; you can practise again.'}</p>}
-      <p className="text-xs text-slate-500">{isFa ? 'پخش صوت به صدای رومانیایی مرورگر وابسته است. پاسخ صوتی، در مرورگرهای پشتیبانی‌شده، به متن تبدیل می‌شود؛ ارزیابی تلفظ در این نمونه وجود ندارد.' : 'Audio playback needs a Romanian browser voice. Supported browsers can transcribe spoken answers; this sample does not assess pronunciation.'}</p>
+      <p className="text-xs text-slate-500">{isFa ? 'صداهای درس با آزور آماده شده‌اند. پاسخ صوتی، در مرورگرهای پشتیبانی‌شده، به متن تبدیل می‌شود؛ ارزیابی تلفظ در این نمونه وجود ندارد.' : 'Lesson recordings are generated with Azure. Supported browsers can transcribe spoken answers; this sample does not assess pronunciation.'}</p>
     </div>
   );
 }
