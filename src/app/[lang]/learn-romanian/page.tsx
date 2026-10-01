@@ -4,7 +4,6 @@ import { LOCALES } from '@/lib/locale-router';
 import { Language } from '@/types';
 import {
   getCategoryCounts,
-  getPublishedPhrases,
   getPublishedStations,
 } from '@/lib/romanian/content';
 import { RomanianHub } from '@/components/romanian/RomanianHub';
@@ -20,14 +19,12 @@ export default function LearnRomanianPage({
 
   const currentLang = params.lang as Language;
   const categoryCounts = getCategoryCounts();
-  const samplePhrases = getPublishedPhrases().slice(0, 3);
   const stations = getPublishedStations();
 
   return (
     <RomanianHub
       currentLang={currentLang}
       categoryCounts={categoryCounts}
-      samplePhrases={samplePhrases}
       stations={stations}
     />
   );
