@@ -65,6 +65,11 @@
     "approved": true
   },
   {
+    "text": "Ai un bilet?",
+    "slug": "ro-4bdfc5bd66fcc182",
+    "approved": true
+  },
+  {
     "text": "ajutor",
     "slug": "ro-9f40cc5e569df358",
     "approved": true
@@ -160,6 +165,11 @@
     "approved": true
   },
   {
+    "text": "Am o carte nouă.",
+    "slug": "ro-8995687f62ec8dee",
+    "approved": true
+  },
+  {
     "text": "Am o carte.",
     "slug": "ro-e391ba66f9b998fb",
     "approved": true
@@ -167,6 +177,11 @@
   {
     "text": "Am o programare.",
     "slug": "ro-47c9bce44b8a5830",
+    "approved": true
+  },
+  {
+    "text": "Am un bilet nou.",
+    "slug": "ro-892f70742a2a7adc",
     "approved": true
   },
   {
@@ -650,6 +665,11 @@
     "approved": true
   },
   {
+    "text": "doi elevi",
+    "slug": "ro-11d441479c44e158",
+    "approved": true
+  },
+  {
     "text": "doi elevi buni",
     "slug": "ro-0c237a38dc9329c0",
     "approved": true
@@ -680,6 +700,11 @@
     "approved": true
   },
   {
+    "text": "două bilete",
+    "slug": "ro-9eda53bd6d62cae3",
+    "approved": true
+  },
+  {
     "text": "Două bilete",
     "slug": "ro-56e2b08a6942b505",
     "approved": true
@@ -687,6 +712,11 @@
   {
     "text": "Două bilete, vă rog.",
     "slug": "ro-55a74a988312739b",
+    "approved": true
+  },
+  {
+    "text": "două case",
+    "slug": "ro-861c001719c2d42a",
     "approved": true
   },
   {
@@ -800,6 +830,11 @@
     "approved": true
   },
   {
+    "text": "Ei au un bilet.",
+    "slug": "ro-ebae3811349a362a",
+    "approved": true
+  },
+  {
     "text": "Ei sunt aici.",
     "slug": "ro-87cc6c6a7cbe6831",
     "approved": true
@@ -900,6 +935,11 @@
     "approved": true
   },
   {
+    "text": "Eu am un bilet nou.",
+    "slug": "ro-7144429250b76bda",
+    "approved": true
+  },
+  {
     "text": "Eu am un bilet.",
     "slug": "eu-am-un-bilet",
     "approved": true
@@ -912,6 +952,11 @@
   {
     "text": "Eu nu am un bilet.",
     "slug": "ro-793bbf37fd16db9b",
+    "approved": true
+  },
+  {
+    "text": "Eu sunt aici azi.",
+    "slug": "ro-0e434a4de09ab523",
     "approved": true
   },
   {
@@ -1360,6 +1405,11 @@
     "approved": true
   },
   {
+    "text": "Noi avem un bilet.",
+    "slug": "ro-5a01a5b07e0af403",
+    "approved": true
+  },
+  {
     "text": "Noi suntem aici.",
     "slug": "ro-cee37d171af262b3",
     "approved": true
@@ -1417,6 +1467,11 @@
   {
     "text": "o carte",
     "slug": "ro-357cf3dbfbb073d0",
+    "approved": true
+  },
+  {
+    "text": "o casă",
+    "slug": "ro-13f239657887eb95",
     "approved": true
   },
   {
@@ -1715,6 +1770,11 @@
     "approved": true
   },
   {
+    "text": "Sunt student.",
+    "slug": "ro-b05970d47e5bb339",
+    "approved": true
+  },
+  {
     "text": "Sunt studentă.",
     "slug": "ro-7f406e7d38db7d09",
     "approved": true
@@ -1840,6 +1900,11 @@
     "approved": true
   },
   {
+    "text": "Tu ai un bilet.",
+    "slug": "ro-59f7d3a6189f9bf2",
+    "approved": true
+  },
+  {
     "text": "Tu ești aici.",
     "slug": "ro-842acf2e6d7c98f3",
     "approved": true
@@ -1890,6 +1955,16 @@
     "approved": true
   },
   {
+    "text": "Un bilet sau două bilete?",
+    "slug": "ro-fe1efec1c521ff3a",
+    "approved": true
+  },
+  {
+    "text": "Un bilet sau două bilete? Am două bilete.",
+    "slug": "ro-e4edfa73a74b35cb",
+    "approved": true
+  },
+  {
     "text": "Un bilet sau două?",
     "slug": "ro-599c91f903b259bf",
     "approved": true
@@ -1897,6 +1972,11 @@
   {
     "text": "Un bilet, vă rog.",
     "slug": "ro-07dd54cc41c740b5",
+    "approved": true
+  },
+  {
+    "text": "un elev",
+    "slug": "ro-3bb7b771530cc826",
     "approved": true
   },
   {
@@ -2007,6 +2087,16 @@
   {
     "text": "voi",
     "slug": "ro-c08c0d279a7fc15d",
+    "approved": true
+  },
+  {
+    "text": "Voi aveți un bilet.",
+    "slug": "ro-4c6a697c986a2013",
+    "approved": true
+  },
+  {
+    "text": "Voi sunteți aici.",
+    "slug": "ro-9e6eb14594ccc6c1",
     "approved": true
   },
   {

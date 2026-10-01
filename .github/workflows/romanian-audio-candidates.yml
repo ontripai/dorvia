@@ -3,19 +3,19 @@ name: Romanian audio candidates
 on:
   workflow_dispatch:
   push:
-    branches: [audio/azure-all-lessons]
+    branches: [audio/azure-*]
 
 permissions:
   contents: write
 
 jobs:
   generate:
-    if: github.ref == 'refs/heads/audio/azure-all-lessons'
+    if: startsWith(github.ref, 'refs/heads/audio/azure-')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: audio/azure-all-lessons
+          ref: ${{ github.ref_name }}
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -40,7 +40,7 @@ jobs:
           git add public/audio/romanian/verified src/content/romanian/verified-audio.json
           if ! git diff --cached --quiet; then
             git commit -m 'Add Azure Romanian recordings for lessons'
-            git push origin HEAD:audio/azure-all-lessons
+            git push origin HEAD:${{ github.ref_name }}
           fi
       - name: Keep recordings for pronunciation review
         uses: actions/upload-artifact@v4
