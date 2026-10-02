@@ -61,7 +61,8 @@ export default function RomanianAlphabetIndexPage({ params }: { params: { lang: 
     return {
       glyph, slug, category: group.category,
       example: extra?.word || (slug === 'i-circ' ? word?.lemma : sound?.exampleForm || word?.lemma),
-      translation: extra?.[lang] || word?.translations[lang],
+      translation: extra?.en || word?.translations.en,
+      translationFa: extra?.fa || word?.translations.fa,
       hint: undefined,
     };
   }));

@@ -1,5 +1,7 @@
 'use client';
 
+import { MeaningLines } from './MeaningLines';
+
 import React from 'react';
 import { SpokenWordCheck } from './SpokenWordCheck';
 import { PronunciationAudio } from './PronunciationAudio';
@@ -67,7 +69,7 @@ export function LetterPositionPractice({ slug, lang }: { slug: string; lang: 'fa
     <div className="grid gap-3 sm:grid-cols-3">{set.samples.map((sample, index) => <article key={`${index}-${sample.word}`} className="rounded-xl bg-blue-50 p-4 space-y-2">
       <p className="text-xs font-semibold text-[#1554bd]">{positions[index]}</p>
       <p lang="ro" dir="ltr" className="text-2xl font-bold">{sample.word}</p>
-      <p className="text-sm">{isFa ? sample.fa : sample.en}</p>
+      <MeaningLines en={sample.en} fa={sample.fa} lang={lang} />
       <div className="flex flex-wrap items-center gap-2"><span className="text-xs text-slate-600">{isFa ? 'شنیدن واژهٔ نمونه' : 'Hear the example word'}</span><PronunciationAudio currentLang={lang} label={sample.word} /></div>
       <details className="rounded-lg bg-white p-2 text-sm"><summary className="cursor-pointer font-semibold">{isFa ? 'قاعده و صورت‌ها' : 'Grammar and forms'}</summary><p className="mt-2">{isFa ? sample.ruleFa : sample.ruleEn}</p><a href={sample.source} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-[#1554bd] underline">{isFa ? 'منبع' : 'Source'}</a></details>
     </article>)}</div>

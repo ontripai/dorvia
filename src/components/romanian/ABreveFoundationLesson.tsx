@@ -1,5 +1,7 @@
 'use client';
 
+import { MeaningLines } from './MeaningLines';
+
 import React from 'react';
 import { AlphabetStageNav } from './AlphabetStageNav';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
@@ -124,7 +126,7 @@ export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
       <p>{isFa ? 'جای ă را در واژهٔ «masă» ببینید و تکرار کنید. آن را با a یکی نخوانید. صدای ضبط‌شدهٔ این درس تا بررسی مطابقت با حرف پخش نمی‌شود.' : 'Find ă in “masă” and practise it. Do not confuse it with a. The recording is unavailable until it is checked against the letter.'}</p>
       <div lang="ro" dir="ltr" className="text-4xl font-bold text-[#1554bd]">mas<span className="underline decoration-amber-500 decoration-4">ă</span></div>
       <PronunciationAudio currentLang={lang} label="masă" />
-      <div className="grid gap-3 sm:grid-cols-3">{words.filter(word => word.ro !== 'masă').map(word => <div key={word.ro} className="rounded-xl bg-blue-50 p-3"><p lang="ro" dir="ltr" className="text-lg font-bold">{word.ro}</p><p className="text-sm">{isFa ? word.fa : word.en}</p><PronunciationAudio currentLang={lang} label={word.ro} variant="compact" /></div>)}</div>
+      <div className="grid gap-3 sm:grid-cols-3">{words.filter(word => word.ro !== 'masă').map(word => <div key={word.ro} className="rounded-xl bg-blue-50 p-3"><p lang="ro" dir="ltr" className="text-lg font-bold">{word.ro}</p><MeaningLines en={word.en} fa={word.fa} lang={lang} className="text-sm" /><PronunciationAudio currentLang={lang} label={word.ro} variant="compact" /></div>)}</div>
       <p className="text-sm text-slate-600">{isFa ? 'جزئیات و قاعدهٔ هر واژه در مرحلهٔ بعد باز می‌شود. برای واژه‌های ثبت‌شده، فایل صوتی آزور پخش می‌شود.' : 'Open the next stage for each word’s grammar. Catalogued words play their Azure recordings.'}</p>
       <button type="button" onClick={() => move(1)} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-bold">{isFa ? 'کشف واژه‌ها' : 'Explore the words'}</button>
     </section>}
@@ -134,7 +136,7 @@ export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
       <div className="grid gap-4 sm:grid-cols-2">{words.map(word => <article key={word.ro} className="rounded-xl border border-blue-200 bg-blue-50 p-4 space-y-2">
         <p className="text-xs font-bold text-[#1554bd]">{word.position === 'start' ? isFa ? 'آغاز واژه' : 'Beginning' : word.position === 'middle' ? isFa ? 'میانهٔ واژه' : 'Middle' : isFa ? 'پایان واژه' : 'End'}</p>
         <p lang="ro" dir="ltr" className="text-2xl font-bold">{word.ro}</p>
-        <p className="text-sm">{isFa ? word.fa : word.en}</p>
+        <MeaningLines en={word.en} fa={word.fa} lang={lang} className="text-sm" />
         <PronunciationAudio currentLang={lang} label={word.ro} />
         <details className="rounded-lg bg-white p-3 text-sm"><summary className="cursor-pointer font-semibold">{isFa ? 'قاعده و صورت‌های این واژه' : 'This word’s rule and forms'}</summary>
           <p className="mt-2">{isFa ? word.ruleFa : word.ruleEn}</p>

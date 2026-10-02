@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { MeaningLines } from './MeaningLines';
 import { AlphabetStageNav } from './AlphabetStageNav';
 import type { RomanianWord } from '@/lib/romanian/types';
 import type { Language } from '@/types';
@@ -83,7 +84,7 @@ export function VowelFoundationLesson({ lang, slug, data }: { lang: Language; sl
         <div><p className="font-semibold">{isFa ? `آوا: ${letter.lower}` : `Sound: ${letter.lower}`}</p><PronunciationAudio currentLang={lang} label={letter.lower} className="mt-2" /></div>
       </div>
       <p className="text-sm leading-6 text-slate-600">{isFa ? 'گوش کنید و واکه را کوتاه و روشن تکرار کنید. سپس ببینید همین آوا در کدام بخش واژه می‌آید.' : 'Listen and repeat the vowel clearly. Then find it in different parts of a word.'}</p>
-      <div className="grid gap-3 sm:grid-cols-3">{data.samples.map(item => <div key={item.wordId} className="rounded-xl bg-slate-50 p-3"><p lang="ro" dir="ltr" className="text-lg font-bold">{item.displayForm || item.word.lemma}</p><p className="text-sm">{isFa ? item.word.translations.fa : item.word.translations.en}</p><PronunciationAudio currentLang={lang} label={item.displayForm || item.word.lemma} variant="compact" /></div>)}</div>
+      <div className="grid gap-3 sm:grid-cols-3">{data.samples.map(item => <div key={item.wordId} className="rounded-xl bg-slate-50 p-3"><p lang="ro" dir="ltr" className="text-lg font-bold">{item.displayForm || item.word.lemma}</p><MeaningLines en={item.word.translations.en} fa={item.word.translations.fa} lang={lang} className="text-sm" /><PronunciationAudio currentLang={lang} label={item.displayForm || item.word.lemma} variant="compact" /></div>)}</div>
       <button type="button" onClick={() => setStage(1)} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'دیدن واژه‌های نمونه ←' : 'Explore example words →'}</button>
     </section>}
 
@@ -95,7 +96,7 @@ export function VowelFoundationLesson({ lang, slug, data }: { lang: Language; sl
           return <article key={item.wordId} className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-[#1554bd]">{positions[item.position]}</span>
             <p lang="ro" dir="ltr" className="text-3xl font-bold"><HighlightVowel text={form} vowel={slug} /></p>
-            <p className="text-sm font-semibold text-slate-700">{isFa ? item.word.translations.fa : item.word.translations.en}</p>
+            <MeaningLines en={item.word.translations.en} fa={item.word.translations.fa} lang={lang} className="text-sm font-semibold text-slate-700" />
             <div className="rounded-xl bg-slate-50 p-3 text-sm">
               <p>{isFa ? 'تقریب فارسی:' : 'Approximate:'} <strong lang="fa" dir="rtl">{item.pronunciationFa}</strong></p>
               <p className="mt-1" lang="ro" dir="ltr">IPA: <strong>{item.ipa}</strong></p>

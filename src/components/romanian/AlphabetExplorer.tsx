@@ -10,6 +10,7 @@ type Letter = {
   category: Category;
   example?: string;
   translation?: string;
+  translationFa?: string;
   hint?: string;
 };
 
@@ -25,7 +26,7 @@ export function AlphabetExplorer({ letters, lang }: { letters: Letter[]; lang: '
   const filtered = letters.filter(letter => {
     const matchesCategory = category === 'all' || letter.category === category;
     const term = query.trim().toLocaleLowerCase('ro-RO');
-    return matchesCategory && (!term || [letter.glyph, letter.example, letter.translation].some(value => value?.toLocaleLowerCase('ro-RO').includes(term)));
+    return matchesCategory && (!term || [letter.glyph, letter.example, letter.translation, letter.translationFa].some(value => value?.toLocaleLowerCase('ro-RO').includes(term)));
   });
 
   return <section id="letters" aria-labelledby="letters-heading" className="scroll-mt-24 space-y-5">
@@ -55,7 +56,8 @@ export function AlphabetExplorer({ letters, lang }: { letters: Letter[]; lang: '
         className="group flex min-h-36 flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1554bd]">
         <span dir="ltr" lang="ro" className="text-3xl font-extrabold text-[#1554bd]">{letter.glyph}</span>
         <span className="mt-2 truncate text-sm font-semibold text-slate-800" lang="ro" dir="ltr">{letter.example || ' '}</span>
-        <span className="min-h-5 truncate text-xs text-slate-500">{letter.translation || letter.hint || ' '}</span>
+        <span lang="en" dir="ltr" className="min-h-5 truncate text-xs text-slate-500">{letter.translation || letter.hint || ' '}</span>
+        {isFa && letter.translationFa && <span lang="fa" dir="rtl" className="min-h-5 truncate text-xs text-slate-500">{letter.translationFa}</span>}
         <span className="mt-auto pt-3 text-xs font-bold text-[#1554bd] group-hover:underline">{isFa ? 'باز کردن درس ←' : 'Open lesson →'}</span>
       </Link>)}
     </div> : <p className="rounded-2xl bg-slate-50 p-6 text-sm text-slate-600">{isFa ? 'حرف یا واژه‌ای با این جست‌وجو پیدا نشد. فیلتر را عوض کنید.' : 'No matching letter or word. Try another filter.'}</p>}
