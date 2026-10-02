@@ -261,10 +261,10 @@ export function PracticeSession({
               disabled={pending || !!verdict}
               className={`rounded-2xl border p-4 text-start transition-colors shadow-sm disabled:cursor-default ${tone}`}
             >
-              <div className="font-bold text-base leading-snug">{opt.fa}</div>
-              <div dir="ltr" className="text-xs text-slate-400 mt-0.5">
+              <div dir="ltr" lang="en" className="font-bold text-base leading-snug">
                 {opt.en}
               </div>
+              {isFa && <div dir="rtl" lang="fa" className="text-xs text-slate-500 mt-1">{opt.fa}</div>}
             </button>
           );
         })}

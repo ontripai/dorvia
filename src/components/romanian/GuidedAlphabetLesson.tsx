@@ -8,9 +8,10 @@ import { LetterPositionPractice } from './LetterPositionPractice';
 import { CGPatternPractice } from './CGPatternPractice';
 import { ConsonantWordPractice } from './ConsonantWordPractice';
 import { AlphabetStageNav } from './AlphabetStageNav';
+import { MeaningLines } from './MeaningLines';
 
 type Reading = { label: string; text: string; sound: string; soundCaptionFa?: string; soundCaptionEn?: string };
-type Example = { form: string; translation: string; definite?: string; gender?: string; plural?: string; source?: string };
+type Example = { form: string; translation: string; translationFa?: string; definite?: string; gender?: string; plural?: string; source?: string };
 
 export function GuidedAlphabetLesson({ lang, slug, symbol, soundHint, readings, example, previous, next }: {
   lang: 'fa' | 'en'; slug: string; symbol: string; soundHint: string; readings?: Reading[]; example?: Example;
@@ -38,12 +39,12 @@ export function GuidedAlphabetLesson({ lang, slug, symbol, soundHint, readings, 
         <div><p className="text-sm font-semibold">{isFa ? 'نام حرف' : 'Letter name'} · <span lang="ro" dir="ltr">{reading.text}</span></p><PronunciationAudio currentLang={lang} label={reading.text} /></div>
         <div><p className="text-sm font-semibold">{isFa ? reading.soundCaptionFa || 'آوا در هجای کوتاه' : reading.soundCaptionEn || 'Sound in a short syllable'} · <span lang="ro" dir="ltr">{reading.sound}</span></p><PronunciationAudio currentLang={lang} label={reading.sound} /></div>
       </div>)}</div> : <div className="rounded-xl bg-blue-50 p-4"><p lang="ro" dir="ltr" className="text-3xl font-bold text-[#1554bd]">{symbol}</p><p className="mt-2 text-sm text-slate-600">{isFa ? 'آوای این الگو را در واژهٔ نمونهٔ مرحلهٔ بعد بشنوید.' : 'Hear this pattern in the example word in the next stage.'}</p></div>}
-      {example && <div className="rounded-xl border border-blue-100 bg-blue-50 p-4"><p className="text-xs font-bold text-[#1554bd]">{isFa ? 'واژهٔ نمونه' : 'Example word'}</p><p lang="ro" dir="ltr" className="mt-1 text-2xl font-bold">{example.form}</p><p className="text-sm">{example.translation}</p><PronunciationAudio currentLang={lang} label={example.form} /></div>}
+      {example && <div className="rounded-xl border border-blue-100 bg-blue-50 p-4"><p className="text-xs font-bold text-[#1554bd]">{isFa ? 'واژهٔ نمونه' : 'Example word'}</p><p lang="ro" dir="ltr" className="mt-1 text-2xl font-bold">{example.form}</p><MeaningLines en={example.translation} fa={example.translationFa} lang={lang} /><PronunciationAudio currentLang={lang} label={example.form} /></div>}
       <button type="button" onClick={() => setStage(1)} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'دیدن نمونه و قاعده' : 'Explore example and rule'}</button>
     </section>}
     {stage === 1 && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
       <h2 className="text-xl font-bold">{isFa ? 'واژهٔ نمونه و قاعده' : 'Example word and rule'}</h2>
-      {example ? <div className="space-y-3 rounded-xl bg-blue-50 p-5"><p lang="ro" dir="ltr" className="text-3xl font-bold text-[#1554bd]">{example.form}</p><p className="font-semibold">{example.translation}</p><PronunciationAudio currentLang={lang} label={example.form} /><div className="flex flex-wrap gap-3 text-sm text-slate-700">{example.gender && <span>{isFa ? 'جنس:' : 'Gender:'} {example.gender}</span>}{example.plural && <span>{isFa ? 'جمع:' : 'Plural:'} <span lang="ro" dir="ltr">{example.plural}</span></span>}{example.definite && <span>{isFa ? 'معرفه:' : 'Definite:'} <span lang="ro" dir="ltr">{example.definite}</span></span>}</div>{example.source && <p className="text-xs text-slate-600">{isFa ? 'منبع:' : 'Source:'} {example.source}</p>}</div> : <p>{isFa ? 'نمونه‌های این الگو را در تمرین مرحلهٔ بعد ببینید.' : 'Explore this pattern in the practice examples in the next stage.'}</p>}
+      {example ? <div className="space-y-3 rounded-xl bg-blue-50 p-5"><p lang="ro" dir="ltr" className="text-3xl font-bold text-[#1554bd]">{example.form}</p><MeaningLines en={example.translation} fa={example.translationFa} lang={lang} /><PronunciationAudio currentLang={lang} label={example.form} /><div className="flex flex-wrap gap-3 text-sm text-slate-700">{example.gender && <span>{isFa ? 'جنس:' : 'Gender:'} {example.gender}</span>}{example.plural && <span>{isFa ? 'جمع:' : 'Plural:'} <span lang="ro" dir="ltr">{example.plural}</span></span>}{example.definite && <span>{isFa ? 'معرفه:' : 'Definite:'} <span lang="ro" dir="ltr">{example.definite}</span></span>}</div>{example.source && <p className="text-xs text-slate-600">{isFa ? 'منبع:' : 'Source:'} {example.source}</p>}</div> : <p>{isFa ? 'نمونه‌های این الگو را در تمرین مرحلهٔ بعد ببینید.' : 'Explore this pattern in the practice examples in the next stage.'}</p>}
       <button type="button" onClick={() => setStage(2)} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'نوشتن از حافظه' : 'Write from memory'}</button>
     </section>}
     {stage === 2 && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">

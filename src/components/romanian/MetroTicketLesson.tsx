@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { MeaningLines } from './MeaningLines';
 import { LessonStageNav } from './LessonStageNav';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { playVerifiedAudio, stopVerifiedAudio } from '@/lib/romanian/playVerifiedAudio';
@@ -155,7 +156,7 @@ export function MetroTicketLesson({ lang }: { lang: Locale }) {
       <h2 className="text-xl font-bold">{isFa ? 'بلیت، سفر و اشتراک را از هم جدا کنید' : 'Distinguish ticket, journey, and pass'}</h2>
       <p>{isFa ? 'در درس قبل bilet / bilete را به کار بردید. اینجا نوع سفر را مشخص می‌کنید.' : 'In the previous lesson you used bilet / bilete. Now you specify what kind of travel you need.'}</p>
       {[{ ro: 'zece călătorii', fa: 'ده سفر', en: 'ten journeys' }, { ro: 'un abonament lunar', fa: 'یک اشتراک ماهانه', en: 'a monthly pass' }, { ro: 'Doresc …, vă rog.', fa: '… می‌خواهم، لطفاً. (محترمانه)', en: 'I would like …, please. (polite)' }].map(item => <div key={item.ro} className="rounded-xl bg-blue-50 p-4">
-        <p lang="ro" dir="ltr" className="text-xl font-bold">{item.ro}</p><p className="text-sm">{isFa ? item.fa : item.en}</p>
+        <p lang="ro" dir="ltr" className="text-xl font-bold">{item.ro}</p><MeaningLines en={item.en} fa={item.fa} lang={lang} className="text-sm" />
         <button type="button" onClick={() => speak(item.ro.includes('…') ? 'Doresc zece călătorii, vă rog.' : item.ro)} className="text-sm text-[#1554bd] underline">{isFa ? 'بشنو و تکرار کن' : 'Listen and repeat'}</button>
       </div>)}
       <p className="text-sm text-slate-700">{isFa ? 'در این جلسه فقط انتخاب نوع سفر را تمرین می‌کنیم؛ قیمت و شرایط خرید ممکن است تغییر کنند.' : 'This lesson focuses on choosing the type of travel; prices and purchase conditions can change.'}</p>

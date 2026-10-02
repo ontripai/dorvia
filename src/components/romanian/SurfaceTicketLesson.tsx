@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { MeaningLines } from './MeaningLines';
 import { LessonStageNav } from './LessonStageNav';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { playVerifiedAudio, stopVerifiedAudio } from '@/lib/romanian/playVerifiedAudio';
@@ -131,7 +132,7 @@ export function SurfaceTicketLesson({ lang }: { lang: Locale }) {
       <h2 className="text-xl font-bold">{isFa ? 'فقط نام وسیله را عوض کنید' : 'Change only the vehicle'}</h2>
       <p>{isFa ? 'از درس قبل «بلیت» را می‌شناسید. حالا با Este valabil și în …? دربارهٔ اعتبار آن سؤال کنید.' : 'You know “ticket” from the last lesson. Now ask whether it is valid with Este valabil și în …?'}</p>
       {([{ ro: 'Este valabil și în autobuz?', fa: 'در اتوبوس هم معتبر است؟', en: 'Is it also valid on the bus?' }, { ro: 'Este valabil și în tramvai?', fa: 'در تراموا هم معتبر است؟', en: 'Is it also valid on the tram?' }] as const).map(item => <div key={item.ro} className="rounded-xl bg-blue-50 p-4">
-        <p lang="ro" dir="ltr" className="text-xl font-bold">{item.ro}</p><p className="text-sm">{isFa ? item.fa : item.en}</p>
+        <p lang="ro" dir="ltr" className="text-xl font-bold">{item.ro}</p><MeaningLines en={item.en} fa={item.fa} lang={lang} className="text-sm" />
         <button type="button" onClick={() => speak(item.ro)} className="text-sm text-[#1554bd] underline">{isFa ? 'بشنو و تکرار کن' : 'Listen and repeat'}</button>
       </div>)}
       <p className="text-sm text-slate-600">{isFa ? 'این یک تمرین پرسیدن است؛ اعتبار واقعی هر بلیت به نوع آن وابسته است و باید بررسی شود.' : 'This is a question practice. Actual validity depends on the travel product and should be checked.'}</p>

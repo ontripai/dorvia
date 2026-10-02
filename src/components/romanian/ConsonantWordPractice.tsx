@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { MeaningLines } from './MeaningLines';
 import { SpokenWordCheck } from './SpokenWordCheck';
 
 const lessons = {
@@ -22,7 +23,7 @@ export function ConsonantWordPractice({ slug, lang }: { slug: string; lang: 'fa'
 
   return <section className="rounded-2xl border border-blue-200 bg-white p-5 sm:p-7 space-y-4" dir={isFa ? 'rtl' : 'ltr'}>
     <h2 className="text-xl font-bold">{isFa ? 'واژه، قاعده و یادآوری' : 'Word, grammar and recall'}</h2>
-    <div className="rounded-xl bg-blue-50 p-4 space-y-2"><p lang="ro" dir="ltr" className="text-2xl font-bold">{lesson.word}</p><p>{isFa ? lesson.fa : lesson.en}</p><p className="text-sm">{isFa ? lesson.ruleFa : lesson.ruleEn}</p><a href={lesson.source} target="_blank" rel="noopener noreferrer" className="text-sm text-[#1554bd] underline">{isFa ? 'منبع واژه' : 'Word source'}</a></div>
+    <div className="rounded-xl bg-blue-50 p-4 space-y-2"><p lang="ro" dir="ltr" className="text-2xl font-bold">{lesson.word}</p><MeaningLines en={lesson.en} fa={lesson.fa} lang={lang} className="" /><p className="text-sm">{isFa ? lesson.ruleFa : lesson.ruleEn}</p><a href={lesson.source} target="_blank" rel="noopener noreferrer" className="text-sm text-[#1554bd] underline">{isFa ? 'منبع واژه' : 'Word source'}</a></div>
     <form onSubmit={event => { event.preventDefault(); setChecked(true); }} className="space-y-2"><label htmlFor={`consonant-${slug}`} className="block font-semibold">{isFa ? `«${lesson.fa}» را به رومانیایی بنویسید.` : `Write “${lesson.en}” in Romanian.`}</label><div className="flex flex-wrap gap-2"><input id={`consonant-${slug}`} lang="ro" dir="ltr" autoComplete="off" value={answer} onChange={event => { setAnswer(event.target.value); setChecked(false); }} className="rounded-xl border border-slate-300 px-3 py-2" /><button disabled={!answer.trim()} type="submit" className="rounded-xl bg-[#1554bd] px-4 py-2 text-white disabled:opacity-50">{isFa ? 'بررسی' : 'Check'}</button></div>{checked && <p role="status" className={correct ? 'text-emerald-800' : 'text-amber-800'}>{correct ? isFa ? 'درست است. اکنون با صدای بلند تکرار کنید.' : 'Correct. Now repeat aloud.' : isFa ? 'یک بار دیگر واژهٔ نمونه را ببینید و تلاش کنید.' : 'Review the example word and try again.'}</p>}</form>
     <SpokenWordCheck key={lesson.word} word={lesson.word} lang={lang} />
   </section>;

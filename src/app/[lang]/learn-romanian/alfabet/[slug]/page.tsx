@@ -267,7 +267,8 @@ export default function RomanianGraphemeDetailPage({
       readings={letterReadings}
       example={exampleWord ? {
         form: displayWord,
-        translation: isFa ? exampleWord.translations.fa : exampleWord.translations.en,
+        translation: exampleWord.translations.en,
+        translationFa: exampleWord.translations.fa,
         definite: exampleWord.definiteForm,
         gender: exampleWord.gender === 'f' ? (isFa ? 'مؤنث' : 'feminine') : exampleWord.gender === 'm' ? (isFa ? 'مذکر' : 'masculine') : exampleWord.gender === 'n' ? (isFa ? 'خنثی' : 'neuter') : undefined,
         plural: exampleWord.plural,

@@ -1,5 +1,7 @@
 'use client';
 
+import { MeaningLines } from './MeaningLines';
+
 import React from 'react';
 import { LessonStageNav } from './LessonStageNav';
 import type { Language } from '@/types';
@@ -185,12 +187,12 @@ export function SentenceOrderFoundationLesson({ lang }: { lang: Language }) {
 
 function PatternCard({ lang, code, english, example, meaningFa, meaningEn }: { lang: Language; code: string; english: string; example: string; meaningFa: string; meaningEn: string }) {
   const isFa = lang === 'fa';
-  return <article className="rounded-xl border border-slate-200 bg-slate-50 p-4"><h3 className="text-xs font-bold text-slate-500">{isFa ? code : english}</h3><p lang="ro" dir="ltr" className="mt-2 text-lg font-extrabold text-[#1554bd]">{example}</p><p className="mt-1 text-sm text-slate-600">{isFa ? meaningFa : meaningEn}</p></article>;
+  return <article className="rounded-xl border border-slate-200 bg-slate-50 p-4"><h3 className="text-xs font-bold text-slate-500">{isFa ? code : english}</h3><p lang="ro" dir="ltr" className="mt-2 text-lg font-extrabold text-[#1554bd]">{example}</p><p className="mt-1 text-sm text-slate-600"><MeaningLines en={meaningEn} fa={meaningFa} lang={lang} /></p></article>;
 }
 
 function ExampleRow({ lang, sentence, meaningFa, meaningEn, labelsFa, labelsEn }: { lang: Language; sentence: string; meaningFa: string; meaningEn: string; labelsFa: string; labelsEn: string }) {
   const isFa = lang === 'fa';
-  return <article className="grid gap-3 rounded-xl border border-slate-200 p-4 sm:grid-cols-[1fr_auto] sm:items-center"><div><p lang="ro" dir="ltr" className="text-xl font-extrabold text-[#1554bd]">{sentence}</p><p className="mt-1 text-sm text-slate-700">{isFa ? meaningFa : meaningEn}</p><p className="mt-2 text-xs leading-5 text-slate-500">{isFa ? labelsFa : labelsEn}</p></div><PronunciationAudio currentLang={lang} label={sentence} variant="compact" /></article>;
+  return <article className="grid gap-3 rounded-xl border border-slate-200 p-4 sm:grid-cols-[1fr_auto] sm:items-center"><div><p lang="ro" dir="ltr" className="text-xl font-extrabold text-[#1554bd]">{sentence}</p><p className="mt-1 text-sm text-slate-700"><MeaningLines en={meaningEn} fa={meaningFa} lang={lang} /></p><p className="mt-2 text-xs leading-5 text-slate-500">{isFa ? labelsFa : labelsEn}</p></div><PronunciationAudio currentLang={lang} label={sentence} variant="compact" /></article>;
 }
 
 function RuleRow({ lang, titleFa, titleEn, detailFa, detailEn, example }: { lang: Language; titleFa: string; titleEn: string; detailFa: string; detailEn: string; example: string }) {
@@ -198,5 +200,5 @@ function RuleRow({ lang, titleFa, titleEn, detailFa, detailEn, example }: { lang
 }
 
 function FinalExample({ lang, sentence, meaningFa, meaningEn }: { lang: Language; sentence: string; meaningFa: string; meaningEn: string }) {
-  return <article className="rounded-xl bg-emerald-50 p-4"><p lang="ro" dir="ltr" className="text-lg font-extrabold text-emerald-950">{sentence}</p><p className="mt-1 text-sm text-emerald-900">{lang === 'fa' ? meaningFa : meaningEn}</p><PronunciationAudio currentLang={lang} label={sentence} variant="compact" className="mt-2" /></article>;
+  return <article className="rounded-xl bg-emerald-50 p-4"><p lang="ro" dir="ltr" className="text-lg font-extrabold text-emerald-950">{sentence}</p><p className="mt-1 text-sm text-emerald-900"><MeaningLines en={meaningEn} fa={meaningFa} lang={lang} /></p><PronunciationAudio currentLang={lang} label={sentence} variant="compact" className="mt-2" /></article>;
 }

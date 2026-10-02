@@ -1,5 +1,7 @@
 'use client';
 
+import { MeaningLines } from './MeaningLines';
+
 import React from 'react';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { SpokenWordCheck } from './SpokenWordCheck';
@@ -46,14 +48,14 @@ export function BasicConsonantPractice({ lang, letter }: { lang: 'fa' | 'en'; le
         <p lang="ro" dir="ltr" className="text-3xl font-bold text-[#1554bd]">{item.letter.toUpperCase()} {item.letter}</p>
         <div><p className="text-sm font-semibold">{isFa ? `نام حرف: ${item.name}` : `Letter name: ${item.name}`}</p><PronunciationAudio currentLang={lang} label={item.name} /></div>
         <div><p className="text-sm font-semibold">{isFa ? `آوا در هجای ${item.sound}` : `Sound in the syllable ${item.sound}`}</p><PronunciationAudio currentLang={lang} label={item.sound} /></div>
-        <div className="border-t border-blue-100 pt-3"><p lang="ro" dir="ltr" className="text-lg font-bold">{item.word}</p><p className="text-sm">{isFa ? item.fa : item.en}</p><PronunciationAudio currentLang={lang} label={item.word} /></div>
+        <div className="border-t border-blue-100 pt-3"><p lang="ro" dir="ltr" className="text-lg font-bold">{item.word}</p><MeaningLines en={item.en} fa={item.fa} lang={lang} className="text-sm" /><PronunciationAudio currentLang={lang} label={item.word} /></div>
       </article>)}</div>
       <button type="button" onClick={() => setStage(1)} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'دیدن نمونه و قاعده' : 'Explore example and rule'}</button>
     </section>}
     {stage === 1 && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6">
       <h2 className="text-xl font-bold">{isFa ? 'واژه‌ها و قاعده' : 'Words and rule'}</h2>
       <p className="text-sm text-slate-600">{isFa ? 'جای حرف در هر واژه ممکن است آغاز، میانه یا پایان باشد.' : 'The letter may appear at the beginning, middle, or end of a word.'}</p>
-      <div className="grid gap-3 sm:grid-cols-3">{shown.map(item => <article key={item.letter} className="space-y-2 rounded-xl bg-blue-50 p-4"><p lang="ro" dir="ltr" className="text-2xl font-bold">{item.word}</p><p>{isFa ? item.fa : item.en}</p><PronunciationAudio currentLang={lang} label={item.word} /><p className="text-sm">{isFa ? item.ruleFa : item.ruleEn}</p><a href={item.source} target="_blank" rel="noopener noreferrer" className="text-sm text-[#1554bd] underline">{isFa ? 'منبع واژه' : 'Word source'}</a></article>)}</div>
+      <div className="grid gap-3 sm:grid-cols-3">{shown.map(item => <article key={item.letter} className="space-y-2 rounded-xl bg-blue-50 p-4"><p lang="ro" dir="ltr" className="text-2xl font-bold">{item.word}</p><MeaningLines en={item.en} fa={item.fa} lang={lang} className="" /><PronunciationAudio currentLang={lang} label={item.word} /><p className="text-sm">{isFa ? item.ruleFa : item.ruleEn}</p><a href={item.source} target="_blank" rel="noopener noreferrer" className="text-sm text-[#1554bd] underline">{isFa ? 'منبع واژه' : 'Word source'}</a></article>)}</div>
       <button type="button" onClick={() => setStage(2)} className="rounded-xl bg-[#1554bd] px-5 py-3 font-bold text-white">{isFa ? 'نوشتن از حافظه' : 'Write from memory'}</button>
     </section>}
     {stage === 2 && <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6">
