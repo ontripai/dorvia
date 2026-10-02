@@ -4,6 +4,19 @@ export const CONVERSATION_LESSONS = [
   { href: '/learn-romanian/lectie/metrou', fa: 'متروی بخارست', en: 'Bucharest metro', detailFa: 'انتخاب ده سفر یا اشتراک ماهانه', detailEn: 'Choose ten journeys or a monthly pass' },
 ] as const;
 
+export const CONVERSATION_GROUPS = [
+  { slug: 'transport', fa: 'رفت‌وآمد و بلیت', en: 'Transport and tickets', introFa: 'از باجهٔ بلیت تا اتوبوس، تراموا و مترو؛ درس‌ها را به ترتیب بخوانید.', introEn: 'From the ticket counter to buses, trams and the metro. Follow the lessons in order.', lessons: CONVERSATION_LESSONS },
+  { slug: 'shopping', fa: 'خرید روزمره', en: 'Everyday shopping', introFa: 'در فروشگاه کالا بخواهید، مقدار را تغییر دهید و قیمت را بپرسید.', introEn: 'Ask for an item, change the quantity and ask the price in a shop.', lessons: [
+    { href: '/learn-romanian/lectie/magazin', fa: 'خرید آب در فروشگاه', en: 'Buying water in a shop', detailFa: 'درخواست مؤدبانه، یک و دو بطری، و پرسیدن قیمت', detailEn: 'Polite requests, one or two bottles, and asking the price' },
+  ] },
+] as const;
+
+export const UPCOMING_CONVERSATION_GROUPS = [
+  { fa: 'راه‌یابی در شهر', en: 'Finding your way', detailFa: 'پرسیدن نشانی و مسیر', detailEn: 'Asking for directions' },
+  { fa: 'کافه و غذا', en: 'Cafés and food', detailFa: 'سفارش و پرداخت', detailEn: 'Ordering and paying' },
+  { fa: 'کارهای ضروری', en: 'Essential services', detailFa: 'داروخانه و قرار ملاقات', detailEn: 'Pharmacy and appointments' },
+] as const;
+
 export const STATION_ENGLISH: Record<string, string> = {
   salutari: 'Greetings and politeness', numere: 'Numbers', timp: 'Time',
   'cuvinte-interogative': 'Question words', pronume: 'Pronouns',
