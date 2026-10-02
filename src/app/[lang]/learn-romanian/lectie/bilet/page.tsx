@@ -28,6 +28,7 @@ export default function TicketLessonPage({ params }: { params: { lang: string } 
         items={[
           { label: lang === 'fa' ? 'صفحه اصلی' : 'Home', href: '/' },
           { label: lang === 'fa' ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' },
+          { label: lang === 'fa' ? 'مکالمه‌های روزمره' : 'Everyday conversations', href: '/learn-romanian/lectie' },
           { label: lang === 'fa' ? 'یک یا دو بلیت' : 'One or two tickets' },
         ]}
         currentLang={lang}
