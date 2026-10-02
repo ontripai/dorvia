@@ -6,6 +6,8 @@ import {
   getCategoryCounts,
   getPublishedStations,
 } from '@/lib/romanian/content';
+import { ORDERED_CATEGORIES } from '@/lib/romanian/categories';
+import { CONVERSATION_LESSONS } from '@/content/romanian/learning-collections';
 import { RomanianHub } from '@/components/romanian/RomanianHub';
 
 export default function LearnRomanianPage({
@@ -24,8 +26,9 @@ export default function LearnRomanianPage({
   return (
     <RomanianHub
       currentLang={currentLang}
-      categoryCounts={categoryCounts}
-      stations={stations}
+      conversationCount={CONVERSATION_LESSONS.length}
+      moduleCount={stations.length}
+      categoryCount={ORDERED_CATEGORIES.filter(category => categoryCounts[category.slug] > 0).length}
     />
   );
 }

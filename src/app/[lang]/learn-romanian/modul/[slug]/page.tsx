@@ -488,6 +488,7 @@ export default function RomanianStationModulePage({
         items={[
           { label: isFa ? 'صفحه اصلی' : 'Home', href: '/' },
           { label: isFa ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' },
+          { label: isFa ? 'تمرین‌های تکمیلی' : 'Extra practice', href: '/learn-romanian/modul' },
           { label: isFa ? station.titleFa : station.titleRo },
         ]}
         currentLang={currentLang}
@@ -498,11 +499,11 @@ export default function RomanianStationModulePage({
       <div className="dark-hero-panel rounded-3xl p-8 sm:p-12 space-y-4 shadow-xl">
         <div className="flex items-center gap-2 text-xs text-slate-300 font-semibold">
           <Link
-            href="/learn-romanian"
+            href="/learn-romanian/modul"
             className="hover:text-white transition-colors underline decoration-dotted inline-flex items-center gap-1"
           >
             {isFa ? <ArrowRight className="w-3.5 h-3.5" /> : <ArrowLeft className="w-3.5 h-3.5" />}
-            <span>{isFa ? 'بازگشت به آموزش رومانیایی' : 'Back to Learn Romanian'}</span>
+            <span>{isFa ? 'بازگشت به تمرین‌های تکمیلی' : 'Back to extra practice'}</span>
           </Link>
         </div>
 

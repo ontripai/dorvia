@@ -46,17 +46,18 @@ export default function RomanianCategoryPage({
   return (
     <div className="space-y-8 animate-fadeIn max-w-[1280px] mx-auto px-4 py-8">
       {/* Breadcrumb Navigation */}
-      <Breadcrumb
-        slugRoute={`learn-romanian/${categorySlug}`}
-        currentLang={currentLang}
-        disableJsonLd={true}
-      />
+      <Breadcrumb items={[
+        { label: isFa ? 'خانه' : 'Home', href: '/' },
+        { label: isFa ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' },
+        { label: isFa ? 'عبارت‌های کاربردی' : 'Practical phrases', href: '/learn-romanian/expresii' },
+        { label: title || categorySlug },
+      ]} currentLang={currentLang} disableJsonLd />
 
       {/* Category Header */}
       <div className="dark-hero-panel rounded-3xl p-8 sm:p-12 space-y-3 shadow-xl">
         <div className="flex items-center gap-2 text-xs text-slate-300 font-semibold">
           <Link
-            href="/learn-romanian"
+            href="/learn-romanian/expresii"
             className="hover:text-white transition-colors underline decoration-dotted"
           >
             {isFa ? 'آموزش زبان رومانیایی' : 'Learn Romanian'}
@@ -110,7 +111,7 @@ export default function RomanianCategoryPage({
           </div>
           <div className="pt-2">
             <Link
-              href="/learn-romanian"
+              href="/learn-romanian/expresii"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1554bd] text-white text-xs font-bold hover:bg-[#12469e] transition-colors shadow-sm"
             >
               <ArrowIcon size={14} />
@@ -127,7 +128,7 @@ export default function RomanianCategoryPage({
       {/* Back to Hub Footer Navigation */}
       <div className="pt-6 border-t border-slate-200/80">
         <Link
-          href="/learn-romanian"
+          href="/learn-romanian/expresii"
           className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#1554bd] hover:underline"
         >
           <ArrowIcon size={14} />

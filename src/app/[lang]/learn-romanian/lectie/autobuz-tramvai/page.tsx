@@ -19,7 +19,7 @@ export default function SurfaceLessonPage({ params }: { params: { lang: string }
   if (!LOCALES.includes(params.lang as 'fa' | 'en')) notFound();
   const lang = params.lang as 'fa' | 'en';
   return <main className="max-w-4xl mx-auto px-4 py-8 space-y-6">
-    <Breadcrumb items={[{ label: lang === 'fa' ? 'خانه' : 'Home', href: '/' }, { label: lang === 'fa' ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' }, { label: lang === 'fa' ? 'اتوبوس و تراموا' : 'Bus and tram' }]} currentLang={lang} disableJsonLd />
+    <Breadcrumb items={[{ label: lang === 'fa' ? 'خانه' : 'Home', href: '/' }, { label: lang === 'fa' ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' }, { label: lang === 'fa' ? 'مکالمه‌های روزمره' : 'Everyday conversations', href: '/learn-romanian/lectie' }, { label: lang === 'fa' ? 'اتوبوس و تراموا' : 'Bus and tram' }]} currentLang={lang} disableJsonLd />
     <SurfaceTicketLesson lang={lang} />
   </main>;
 }
