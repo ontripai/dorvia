@@ -5,6 +5,7 @@ import type { PublishedStationInfo } from '@/lib/romanian/content';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { CategoryGrid } from './CategoryGrid';
+import { FOUNDATION_PATH } from '@/content/romanian/foundation-path';
 
 interface Props {
   currentLang: Language;
@@ -83,6 +84,19 @@ export function RomanianHub({ currentLang, categoryCounts, stations }: Props) {
           <p className="mt-2 flex-1 text-sm leading-6 text-slate-600">{isFa ? 'معرفی، پرسش، منفی‌سازی، اسم، دو فعل پایه، مکان، عدد و زمان؛ پایان مسیر، ترتیب فاعل، فعل، مفعول، صفت و قید است.' : 'Introductions, questions, negation, nouns, two essential verbs, place, number, and time; finish with sentence order.'}</p>
           <span className="mt-5 text-sm font-bold text-violet-700 group-hover:underline">{isFa ? 'دیدن ترتیب درس‌ها ←' : 'See lesson order →'}</span>
         </Link>
+      </div>
+      <div className="mt-6 border-t border-blue-100 pt-5">
+        <h3 className="text-base font-extrabold text-slate-900">{isFa ? 'ترتیب درس‌های پایه پس از الفبا' : 'Foundation lessons after the alphabet'}</h3>
+        <ol className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {FOUNDATION_PATH.map((lesson, index) => <li key={lesson.slug}><Link href={`/learn-romanian/fundamente/${lesson.slug}`} className="group flex h-full items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 transition hover:border-blue-300 hover:bg-blue-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1554bd]">
+            <span className="shrink-0 text-xs font-extrabold text-[#1554bd]">{number(index + 1)}</span>
+            <span className="text-sm font-semibold text-slate-800 group-hover:text-[#1554bd]">{isFa ? lesson.fa : lesson.en}</span>
+          </Link></li>)}
+          <li><Link href="/learn-romanian/fundamente/sakht-jomle" className="group flex h-full items-center gap-3 rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 transition hover:border-violet-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700">
+            <span className="shrink-0 text-xs font-extrabold text-violet-700">{number(9)}</span>
+            <span className="text-sm font-semibold text-slate-900 group-hover:text-violet-800">{isFa ? 'ترتیب جمله و جمله‌سازی' : 'Sentence order and building'}</span>
+          </Link></li>
+        </ol>
       </div>
       <p className="mt-5 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-700">{isFa ? 'هدف این بخش: «Eu am un bilet nou.» — من یک بلیت جدید دارم.' : 'Goal: “Eu am un bilet nou.” — I have a new ticket.'}</p>
     </section>

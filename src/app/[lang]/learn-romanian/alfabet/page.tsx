@@ -81,7 +81,7 @@ export default function RomanianAlphabetIndexPage({ params }: { params: { lang: 
         <Link href="/learn-romanian/alfabet/a" className="rounded-xl bg-white px-5 py-3 text-sm font-bold text-[#1554bd] hover:bg-blue-50">{isFa ? 'شروع از A' : 'Start with A'}</Link>
         <a href="#letters" className="rounded-xl border border-white/40 px-5 py-3 text-sm font-bold text-white hover:bg-white/10">{isFa ? 'انتخاب حرف' : 'Choose a letter'}</a>
       </div>
-      <p className="mt-5 text-xs text-blue-100">{isFa ? '۳۱ حرف · ۴ گروه‌حرف کاربردی · فایل صوتی بررسی‌شده برای نمونه‌های موجود و صدای رومانیایی مرورگر برای بقیه' : '31 letters · 4 useful C/G patterns · reviewed audio where available, Romanian browser voice for other examples'}</p>
+      <p className="mt-5 text-xs text-blue-100">{isFa ? '۳۱ حرف · ۴ گروه‌حرف کاربردی · صدای ضبط‌شدهٔ آزور برای متن‌های ثبت‌شده' : '31 letters · 4 useful C/G patterns · Azure recordings for catalogued lesson text'}</p>
     </header>
 
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
