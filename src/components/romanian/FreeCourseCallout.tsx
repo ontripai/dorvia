@@ -26,19 +26,19 @@ export function FreeCourseCallout({ currentLang }: { currentLang: Language }) {
         <div className="space-y-3">
           <h2 className="text-lg sm:text-xl font-extrabold text-[#142033]">
             {isFa
-              ? 'پیش از ثبتنام در هر دورهای، رایگان شروع کنید'
+              ? 'پیش از ثبت‌نام در دوره‌های دیگر، رایگان شروع کنید'
               : 'Start for free, before you enrol anywhere'}
           </h2>
           <p className="text-sm sm:text-base text-[#526174] leading-relaxed">
             {isFa
-              ? 'DORVIA دورهٔ آموزش رومانیایی دارد: الفبا، واژه‌ها و عبارت‌های کاربردی، صدای مصنوعی رومانیایی مرورگر و مرور روزانه. شروع دوره رایگان و بدون ثبت‌نام است.'
-              : 'DORVIA offers Romanian alphabet, everyday words and phrases, Romanian browser speech, and daily review. You can begin for free without signing up.'}
+              ? 'در DORVIA از الفبا و درس‌های پایه شروع کنید، جمله‌سازی و مکالمه را تمرین کنید و صداهای ضبط‌شدهٔ درس‌ها را بشنوید. شروع یادگیری بدون ثبت‌نام است.'
+              : 'Start with the alphabet and foundations, then practise sentences and conversation with recorded lesson audio. You can begin without signing up.'}
           </p>
           <Link
             href="/learn-romanian"
             className="inline-flex items-center px-5 py-3 rounded-xl bg-[#2F6FED] text-white text-sm font-extrabold hover:opacity-95 transition-opacity cursor-pointer"
           >
-            {isFa ? 'شروع دورهی رایگان' : 'Start the free course'}
+            {isFa ? 'شروع آموزش رایگان' : 'Start learning for free'}
           </Link>
         </div>
       </div>

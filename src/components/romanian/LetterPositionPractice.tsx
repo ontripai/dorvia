@@ -77,6 +77,6 @@ export function LetterPositionPractice({ slug, lang }: { slug: string; lang: 'fa
       {checked && <p role="status" className={correct ? 'text-emerald-800' : 'text-amber-800'}>{correct ? isFa ? 'درست است. واژه را بلند بخوانید.' : 'Correct. Read the word aloud.' : isFa ? 'املای واژه و جای حرف را دوباره بررسی کنید.' : 'Check the word spelling and letter position again.'}</p>}
     </form>
     <SpokenWordCheck key={target} word={target} lang={lang} />
-    <p className="text-xs text-slate-600">{isFa ? 'هر دکمه همان واژه را پخش می‌کند؛ برای واژه‌های دارای فایل بررسی‌شده از آن و برای بقیه از صدای رومانیایی مرورگر استفاده می‌شود.' : 'Each button plays its exact word. Reviewed files play where available; the others use a Romanian browser voice.'}</p>
+    <p className="text-xs text-slate-600">{isFa ? 'هر دکمه واژهٔ همان کارت را با فایل ضبط‌شدهٔ آن پخش می‌کند.' : 'Each button plays the recording for that card’s exact word.'}</p>
   </section>;
 }

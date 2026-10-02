@@ -125,7 +125,7 @@ export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
       <div lang="ro" dir="ltr" className="text-4xl font-bold text-[#1554bd]">mas<span className="underline decoration-amber-500 decoration-4">ă</span></div>
       <PronunciationAudio currentLang={lang} label="masă" />
       <div className="grid gap-3 sm:grid-cols-3">{words.filter(word => word.ro !== 'masă').map(word => <div key={word.ro} className="rounded-xl bg-blue-50 p-3"><p lang="ro" dir="ltr" className="text-lg font-bold">{word.ro}</p><p className="text-sm">{isFa ? word.fa : word.en}</p><PronunciationAudio currentLang={lang} label={word.ro} variant="compact" /></div>)}</div>
-      <p className="text-sm text-slate-600">{isFa ? 'جزئیات و قاعدهٔ هر واژه در مرحلهٔ بعد باز می‌شود. فایل‌های بررسی‌شده در صورت وجود پخش می‌شوند؛ بقیه از صدای رومانیایی مرورگر استفاده می‌کنند.' : 'Open the next stage for each word’s grammar. Reviewed files play where available; other words use a Romanian browser voice.'}</p>
+      <p className="text-sm text-slate-600">{isFa ? 'جزئیات و قاعدهٔ هر واژه در مرحلهٔ بعد باز می‌شود. برای واژه‌های ثبت‌شده، فایل صوتی آزور پخش می‌شود.' : 'Open the next stage for each word’s grammar. Catalogued words play their Azure recordings.'}</p>
       <button type="button" onClick={() => move(1)} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-bold">{isFa ? 'کشف واژه‌ها' : 'Explore the words'}</button>
     </section>}
     {phase === 1 && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-5">
@@ -171,6 +171,6 @@ export function ABreveFoundationLesson({ lang }: { lang: Locale }) {
       <Link href="/learn-romanian/alfabet" className="inline-block ms-3 text-[#1554bd] underline">{isFa ? 'دیگر درس‌های آوا' : 'Other sound lessons'}</Link>
     </section>}
     {priorCompletion && phase !== 4 && <p className="text-sm text-slate-500">{isFa ? 'این درس قبلاً روی همین دستگاه انجام شده است؛ تکرار آزاد است.' : 'You completed this lesson on this device; repeat it anytime.'}</p>}
-    <p className="text-xs text-slate-500">{isFa ? 'واژه‌های دارای فایل بررسی‌شده با همان فایل و بقیه با صدای رومانیایی مرورگر پخش می‌شوند. تشخیص گفتار کیفیت تلفظ را نمره‌دهی نمی‌کند.' : 'Reviewed word files play where available; the others use a Romanian browser voice. Speech recognition does not grade pronunciation.'}</p>
+    <p className="text-xs text-slate-500">{isFa ? 'برای واژه‌های ثبت‌شده فایل صوتی آزور پخش می‌شود. تشخیص گفتار کیفیت تلفظ را نمره‌دهی نمی‌کند.' : 'Catalogued words play Azure recordings. Speech recognition does not grade pronunciation.'}</p>
   </div>;
 }

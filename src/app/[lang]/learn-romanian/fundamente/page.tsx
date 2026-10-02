@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { LOCALES } from '@/lib/locale-router';
+import { FOUNDATION_PATH } from '@/content/romanian/foundation-path';
 
 type Copy = { fa: string; en: string; noteFa: string; noteEn: string; href: string };
 
@@ -46,17 +47,6 @@ const alphabetGroups: Array<{ titleFa: string; titleEn: string; items: Copy[] }>
     ],
   },
 ];
-
-const newPath = [
-  { slug: 'moarefe', fa: 'سلام و معرفی خود', en: 'Greetings and introductions', noteFa: 'سلام، نام، کشور، شغل و خطاب محترمانه را در جمله یاد بگیرید.', noteEn: 'Use greetings, your name, country, job, and polite address in sentences.' },
-  { slug: 'porsesh', fa: 'سؤال‌سازی و پاسخ کوتاه', en: 'Questions and short answers', noteFa: 'با چه کسی، چه، کجا و چگونه سؤال بپرسید و پاسخ دهید.', noteEn: 'Ask and answer who, what, where, and how questions.' },
-  { slug: 'nafi', fa: 'منفی‌سازی', en: 'Negation', noteFa: 'جای nu را یاد بگیرید و پاسخ مثبت و منفی بدهید.', noteEn: 'Place nu correctly and give positive and negative answers.' },
-  { slug: 'articole', fa: 'اسم نامعین و معین', en: 'Indefinite and definite nouns', noteFa: 'فرق un bilet با biletul و کاربرد o و niște را تمرین کنید.', noteEn: 'Distinguish un bilet from biletul and practise o and niște.' },
-  { slug: 'verbe', fa: 'دو فعل پایه: بودن و داشتن', en: 'Two foundation verbs: to be and to have', noteFa: 'صرف کامل a fi و a avea را با همهٔ ضمیرها در جمله تمرین کنید.', noteEn: 'Practise the full a fi and a avea paradigms with every subject.' },
-  { slug: 'locatie', fa: 'مکان و حروف اضافه', en: 'Places and prepositions', noteFa: 'با در، روی، کنار، زیر و در مدرسه، جای ثابت چیزها و افراد را بگویید.', noteEn: 'Describe where people and things are using in, on, beside, under, and at.' },
-  { slug: 'numere-pret', fa: 'عدد، مقدار و قیمت', en: 'Numbers, quantities, and prices', noteFa: 'تعداد را با جنس اسم هماهنگ کنید و قیمت بپرسید.', noteEn: 'Match quantities to noun gender and ask prices.' },
-  { slug: 'timp-sade', fa: 'روز، ساعت و قید زمان', en: 'Days, clock time, and time words', noteFa: 'روز و ساعت یک وضعیت یا قرار را بگویید و بپرسید.', noteEn: 'Say and ask the day and time of a situation or meeting.' },
-] as const;
 
 export function generateStaticParams() {
   return LOCALES.map(lang => ({ lang }));
@@ -150,7 +140,7 @@ export default function RomanianFoundationPage({ params }: { params: { lang: str
         <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{isFa ? 'هر کارت یک درس مستقل دارد: ابتدا درسنامهٔ کامل، سپس شنیدن، قاعده، نوشتن و گفتن در یک نوبت پیشنهادی ۱۵ دقیقه‌ای. در پایان، آموخته‌ها را در درس جمله‌سازی به هم وصل می‌کنید.' : 'Each card opens a complete reference followed by listening, rules, writing, and speaking in a suggested 15-minute session. The final lesson brings the skills together.'}</p>
       </div>
       <ol className="grid gap-4 md:grid-cols-2">
-        {newPath.map((item,index)=><li key={item.slug}><LessonCard lang={lang} number={'۰۱۲۳۴۵۶۷۸۹'[index+1]} numberEn={String(index+1)} href={`/learn-romanian/fundamente/${item.slug}`} titleFa={item.fa} titleEn={item.en} noteFa={item.noteFa} noteEn={item.noteEn} /></li>)}
+        {FOUNDATION_PATH.map((item,index)=><li key={item.slug}><LessonCard lang={lang} number={'۰۱۲۳۴۵۶۷۸۹'[index+1]} numberEn={String(index+1)} href={`/learn-romanian/fundamente/${item.slug}`} titleFa={item.fa} titleEn={item.en} noteFa={item.noteFa} noteEn={item.noteEn} /></li>)}
         <li className="md:col-span-2"><LessonCard lang={lang} number="۹" numberEn="9" href="/learn-romanian/fundamente/sakht-jomle" titleFa="جمع‌بندی: ترتیب جمله و جمله‌سازی" titleEn="Final practice: sentence order" noteFa="فاعل، فعل، مفعول، صفت و قید را کنار هم بگذارید؛ جملهٔ خبری، منفی و پرسشی بسازید." noteEn="Combine subjects, verbs, objects, adjectives, and adverbs; build statements, negatives, and questions." featured /></li>
       </ol>
     </section>
