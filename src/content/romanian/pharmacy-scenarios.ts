@@ -98,6 +98,58 @@ export const pharmacyScenarios: PharmacyScenario[] = [
       { ro: 'Cât costă?', en: 'Ask how much it costs.', fa: 'قیمت را بپرسید.', hint: 'Cât …?' },
     ],
   },
+  {
+    slug: 'reteta', title: { fa: 'نسخه، موجودی و توضیح داروساز', en: 'Prescription, stock and pharmacist explanation' },
+    goal: { fa: 'نسخه را نشان دهید، موجودی را بپرسید و دربارهٔ برچسب و دستور پزشک توضیح بخواهید.', en: 'Show a prescription, ask about availability, and request an explanation of the label and medical instructions.' },
+    dialogue: [
+      { who: 'you', ro: 'Bună ziua. Am o rețetă de la medic.', en: 'Hello. I have a prescription from the doctor.', fa: 'سلام. از پزشک نسخه دارم.' },
+      { who: 'pharmacist', ro: 'Bună ziua. Îmi arătați rețeta, vă rog?', en: 'Hello. Could you show me the prescription, please?', fa: 'سلام. لطفاً نسخه را به من نشان می‌دهید؟' },
+      { who: 'you', ro: 'Sigur. Aveți acest medicament în stoc?', en: 'Of course. Do you have this medicine in stock?', fa: 'حتماً. این دارو را موجود دارید؟' },
+      { who: 'pharmacist', ro: 'Verific acum. Ce cantitate este pe rețetă?', en: 'I will check now. What quantity is on the prescription?', fa: 'الان بررسی می‌کنم. چه مقداری در نسخه نوشته شده است؟' },
+      { who: 'you', ro: 'Nu sunt sigur. Mă ajutați să citesc rețeta?', en: 'I am not sure. Could you help me read the prescription?', fa: 'مطمئن نیستم. کمک می‌کنید نسخه را بخوانم؟' },
+      { who: 'pharmacist', ro: 'Da. Vă explic ce scrie și verific disponibilitatea.', en: 'Yes. I will explain what it says and check availability.', fa: 'بله. نوشتهٔ آن را توضیح می‌دهم و موجودی را بررسی می‌کنم.' },
+      { who: 'you', ro: 'Dacă nu este disponibil, ce trebuie să fac?', en: 'If it is unavailable, what should I do?', fa: 'اگر موجود نباشد، چه باید بکنم؟' },
+      { who: 'pharmacist', ro: 'Vă explic opțiunile și, dacă este necesar, contactați medicul.', en: 'I will explain the options and, if needed, you can contact your doctor.', fa: 'گزینه‌ها را توضیح می‌دهم و در صورت لزوم با پزشک تماس بگیرید.' },
+      { who: 'you', ro: 'Mulțumesc. Vă rog să îmi explicați și eticheta.', en: 'Thank you. Please explain the label to me too.', fa: 'ممنون. لطفاً برچسب را هم برایم توضیح دهید.' },
+    ],
+    rules: [
+      { title: { fa: 'نشان دادن نسخه', en: 'Show a prescription' }, explanation: { fa: 'Am o rețetă de la medic یعنی «از پزشک نسخه دارم». Îmi arătați ...? صورت مؤدبانهٔ «به من نشان می‌دهید؟» است.', en: 'Am o rețetă de la medic means “I have a prescription from the doctor”. Îmi arătați ...? politely asks someone to show it.' }, examples: [{ ro: 'Am o rețetă de la medic.', en: 'I have a prescription from the doctor.', fa: 'از پزشک نسخه دارم.' }] },
+      { title: { fa: 'موجودی و شرط', en: 'Stock and condition' }, explanation: { fa: 'în stoc یعنی «موجود». Dacă ... یعنی «اگر ...». به جای حدس دربارهٔ جایگزین دارو، گزینه‌ها را از داروساز و در صورت نیاز از پزشک بپرسید.', en: 'În stoc means “in stock”; dacă means “if”. Ask the pharmacist and, where needed, the doctor about alternatives.' }, examples: [{ ro: 'Aveți acest medicament în stoc?', en: 'Do you have this medicine in stock?', fa: 'این دارو را موجود دارید؟' }] },
+      { title: { fa: 'درخواست توضیح برچسب', en: 'Ask about the label' }, explanation: { fa: 'Vă rog să îmi explicați ... یعنی «لطفاً برایم توضیح دهید». eticheta برچسب است. مقدار یا روش مصرف را از گفت‌وگوی نمونه نتیجه‌گیری نکنید؛ دستور واقعی را با متخصص روشن کنید.', en: 'Vă rog să îmi explicați ... means “please explain to me”. Eticheta is the label. Clarify actual instructions with a professional.' }, examples: [{ ro: 'Vă rog să îmi explicați și eticheta.', en: 'Please explain the label to me too.', fa: 'لطفاً برچسب را هم برایم توضیح دهید.' }] },
+    ],
+    tasks: [
+      { ro: 'Am o rețetă de la medic.', en: 'Say you have a prescription.', fa: 'بگویید نسخه دارید.', hint: 'Am o rețetă ...' },
+      { ro: 'Aveți acest medicament în stoc?', en: 'Ask if the medicine is in stock.', fa: 'موجودی دارو را بپرسید.', hint: 'Aveți acest medicament ...?' },
+      { ro: 'Dacă nu este disponibil, ce trebuie să fac?', en: 'Ask what to do if it is unavailable.', fa: 'اگر دارو موجود نبود، راهنمایی بخواهید.', hint: 'Dacă nu este ...?' },
+      { ro: 'Vă rog să îmi explicați și eticheta.', en: 'Ask for an explanation of the label.', fa: 'توضیح برچسب را بخواهید.', hint: 'Vă rog să îmi explicați ...' },
+    ],
+  },
+  {
+    slug: 'raceala', title: { fa: 'علائم سرماخوردگی و راهنمایی', en: 'Cold symptoms and advice' },
+    goal: { fa: 'علائم و زمان شروع را بگویید و از داروساز دربارهٔ اقدام مناسب و زمان مراجعه به پزشک بپرسید.', en: 'Describe symptoms and duration and ask the pharmacist about appropriate next steps and when to see a doctor.' },
+    dialogue: [
+      { who: 'you', ro: 'Bună ziua. Nu mă simt bine.', en: 'Hello. I do not feel well.', fa: 'سلام. حالم خوب نیست.' },
+      { who: 'pharmacist', ro: 'Ce simptome aveți?', en: 'What symptoms do you have?', fa: 'چه علائمی دارید؟' },
+      { who: 'you', ro: 'Am nasul înfundat și mă doare gâtul.', en: 'I have a blocked nose and a sore throat.', fa: 'بینی‌ام گرفته و گلویم درد می‌کند.' },
+      { who: 'pharmacist', ro: 'De când aveți aceste simptome?', en: 'How long have you had these symptoms?', fa: 'از چه زمانی این علائم را دارید؟' },
+      { who: 'you', ro: 'De ieri. Nu știu dacă am febră.', en: 'Since yesterday. I do not know if I have a fever.', fa: 'از دیروز. نمی‌دانم تب دارم یا نه.' },
+      { who: 'pharmacist', ro: 'Luați deja vreun medicament?', en: 'Are you already taking any medicine?', fa: 'در حال حاضر دارویی مصرف می‌کنید؟' },
+      { who: 'you', ro: 'Da, iau un medicament prescris. Vă spun numele.', en: 'Yes, I take a prescribed medicine. I will tell you its name.', fa: 'بله، یک داروی تجویزشده مصرف می‌کنم. نامش را می‌گویم.' },
+      { who: 'you', ro: 'Ce mă sfătuiți? Când ar trebui să merg la medic?', en: 'What do you advise? When should I see a doctor?', fa: 'چه توصیه‌ای دارید؟ چه زمانی باید به پزشک مراجعه کنم؟' },
+      { who: 'pharmacist', ro: 'Vă pun câteva întrebări înainte să vă răspund.', en: 'I will ask you a few questions before answering.', fa: 'پیش از پاسخ، چند پرسش از شما می‌پرسم.' },
+    ],
+    rules: [
+      { title: { fa: 'بیان علائم', en: 'Describe symptoms' }, explanation: { fa: 'Am nasul înfundat یعنی «بینی‌ام گرفته است». Mă doare gâtul یعنی «گلویم درد می‌کند». علائم واقعی خود را جایگزین مثال آموزشی کنید.', en: 'Am nasul înfundat means “my nose is blocked”. Mă doare gâtul means “my throat hurts”. Describe your actual symptoms.' }, examples: [{ ro: 'Am nasul înfundat și mă doare gâtul.', en: 'I have a blocked nose and a sore throat.', fa: 'بینی‌ام گرفته و گلویم درد می‌کند.' }] },
+      { title: { fa: 'زمان شروع و عدم قطعیت', en: 'Duration and uncertainty' }, explanation: { fa: 'De când? یعنی «از چه زمانی؟» و De ieri یعنی «از دیروز». اگر چیزی را نمی‌دانید، Nu știu dacă ... بگویید و حدس نزنید.', en: 'De când? asks “Since when?” De ieri means “since yesterday”. Use Nu știu dacă ... when you are uncertain.' }, examples: [{ ro: 'De ieri. Nu știu dacă am febră.', en: 'Since yesterday. I do not know if I have a fever.', fa: 'از دیروز. نمی‌دانم تب دارم یا نه.' }] },
+      { title: { fa: 'داروی مصرفی و سؤال از متخصص', en: 'Current medication and professional advice' }, explanation: { fa: 'Iau یعنی «مصرف می‌کنم». نام داروهای مصرفی را به داروساز بگویید و با Ce mă sfătuiți? راهنمایی بخواهید. نمونهٔ درس تشخیص یا نسخه نیست.', en: 'Iau means “I take”. Tell the pharmacist the names of current medicines and ask Ce mă sfătuiți? for advice. The example is not a diagnosis or prescription.' }, examples: [{ ro: 'Ce mă sfătuiți? Când ar trebui să merg la medic?', en: 'What do you advise? When should I see a doctor?', fa: 'چه توصیه‌ای دارید؟ چه زمانی باید به پزشک مراجعه کنم؟' }] },
+    ],
+    tasks: [
+      { ro: 'Nu mă simt bine.', en: 'Say you do not feel well.', fa: 'بگویید حالتان خوب نیست.', hint: 'Nu mă simt ...' },
+      { ro: 'Am nasul înfundat și mă doare gâtul.', en: 'Describe a blocked nose and sore throat.', fa: 'گرفتگی بینی و گلودرد را بیان کنید.', hint: 'Am nasul ...' },
+      { ro: 'De ieri. Nu știu dacă am febră.', en: 'Give the duration and state uncertainty.', fa: 'زمان شروع و تردید دربارهٔ تب را بگویید.', hint: 'De ieri. Nu știu ...' },
+      { ro: 'Ce mă sfătuiți? Când ar trebui să merg la medic?', en: 'Ask for advice and when to see a doctor.', fa: 'دربارهٔ توصیه و مراجعه به پزشک بپرسید.', hint: 'Ce mă sfătuiți? Când ...?' },
+    ],
+  },
 ];
 
 export function getPharmacyScenario(slug: string) { return pharmacyScenarios.find(scenario => scenario.slug === slug); }
