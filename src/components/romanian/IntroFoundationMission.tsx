@@ -19,7 +19,7 @@ const dialogue = [
 export function IntroFoundationMission({ lang, stage, onNext, passed, total, next }: Props) {
   const isFa = lang === 'fa';
   const [choice, setChoice] = React.useState<string | null>(null);
-  const [showMeaning, setShowMeaning] = React.useState(false);
+  const [showMeaning, setShowMeaning] = React.useState(true);
   const [personName, setPersonName] = React.useState('Ana');
   const [spoken, setSpoken] = React.useState(false);
   const name = personName.trim() || 'Ana';

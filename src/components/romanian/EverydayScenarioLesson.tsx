@@ -18,7 +18,7 @@ export function EverydayScenarioLesson({ lang, lesson, topic, counterpart, topic
   const [answer, setAnswer] = React.useState('');
   const [feedback, setFeedback] = React.useState<'correct' | 'retry' | null>(null);
   const [hint, setHint] = React.useState(false);
-  const [translation, setTranslation] = React.useState(false);
+  const [translation, setTranslation] = React.useState(true);
   const [complete, setComplete] = React.useState(false);
   const [audioError, setAudioError] = React.useState(false);
   React.useEffect(() => () => stopVerifiedAudio(), []);
