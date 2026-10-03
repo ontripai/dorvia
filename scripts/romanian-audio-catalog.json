@@ -205,6 +205,11 @@
     "approved": true
   },
   {
+    "text": "Am nasul înfundat și mă doare gâtul.",
+    "slug": "ro-19d7df145ff0243f",
+    "approved": true
+  },
+  {
     "text": "Am nevoie de ajutor.",
     "slug": "ro-48671f44acd1c15c",
     "approved": true
@@ -242,6 +247,11 @@
   {
     "text": "Am o programare.",
     "slug": "ro-47c9bce44b8a5830",
+    "approved": true
+  },
+  {
+    "text": "Am o rețetă de la medic.",
+    "slug": "ro-74f037dd47ba7a1b",
     "approved": true
   },
   {
@@ -402,6 +412,11 @@
   {
     "text": "aveți",
     "slug": "ro-1ddd5e07e1406b0c",
+    "approved": true
+  },
+  {
+    "text": "Aveți acest medicament în stoc?",
+    "slug": "ro-f6854ae498e9e079",
     "approved": true
   },
   {
@@ -680,6 +695,11 @@
     "approved": true
   },
   {
+    "text": "Bună ziua. Am o rețetă de la medic.",
+    "slug": "ro-374030bb1a842c0c",
+    "approved": true
+  },
+  {
     "text": "Bună ziua. Aș dori o programare la medic.",
     "slug": "ro-69a7780512ee0b2c",
     "approved": true
@@ -707,6 +727,16 @@
   {
     "text": "Bună ziua. Cum vă numiți?",
     "slug": "ro-a1a985baf4d95196",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua. Îmi arătați rețeta, vă rog?",
+    "slug": "ro-11deb90e74edd67e",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua. Nu mă simt bine.",
+    "slug": "ro-c0aea63dba4637c5",
     "approved": true
   },
   {
@@ -880,6 +910,11 @@
     "approved": true
   },
   {
+    "text": "Ce mă sfătuiți? Când ar trebui să merg la medic?",
+    "slug": "ro-6f8dc73de1d7277e",
+    "approved": true
+  },
+  {
     "text": "Ce mărime doriți în loc?",
     "slug": "ro-4d5ab6d98eb27b5b",
     "approved": true
@@ -887,6 +922,11 @@
   {
     "text": "Ce opțiuni am?",
     "slug": "ro-0911af4a91eb699c",
+    "approved": true
+  },
+  {
+    "text": "Ce simptome aveți?",
+    "slug": "ro-7c42760bd1d979a3",
     "approved": true
   },
   {
@@ -1165,6 +1205,11 @@
     "approved": true
   },
   {
+    "text": "Da, iau un medicament prescris. Vă spun numele.",
+    "slug": "ro-cf57c149d20c28dc",
+    "approved": true
+  },
+  {
     "text": "Da, îmi puteți arăta ecranul.",
     "slug": "ro-97c577c142466d51",
     "approved": true
@@ -1245,6 +1290,16 @@
     "approved": true
   },
   {
+    "text": "Da. Vă explic ce scrie și verific disponibilitatea.",
+    "slug": "ro-24d87ae6617cce4e",
+    "approved": true
+  },
+  {
+    "text": "Dacă nu este disponibil, ce trebuie să fac?",
+    "slug": "ro-db1f2ace707bf535",
+    "approved": true
+  },
+  {
     "text": "de",
     "slug": "ro-959a45d44e6fcf58",
     "approved": true
@@ -1252,6 +1307,11 @@
   {
     "text": "De azi dimineață.",
     "slug": "ro-a1437a268320fd3d",
+    "approved": true
+  },
+  {
+    "text": "De când aveți aceste simptome?",
+    "slug": "ro-87a470b02cc388a5",
     "approved": true
   },
   {
@@ -1267,6 +1327,11 @@
   {
     "text": "De ce materiale am nevoie?",
     "slug": "ro-376d93b72e8128cb",
+    "approved": true
+  },
+  {
+    "text": "De ieri. Nu știu dacă am febră.",
+    "slug": "ro-31d907b51b5f2f5c",
     "approved": true
   },
   {
@@ -2095,6 +2160,11 @@
     "approved": true
   },
   {
+    "text": "Luați deja vreun medicament?",
+    "slug": "ro-78318f285800d1a3",
+    "approved": true
+  },
+  {
     "text": "lună",
     "slug": "ro-d446576ad92d9d78",
     "approved": true
@@ -2280,6 +2350,11 @@
     "approved": true
   },
   {
+    "text": "Mulțumesc. Vă rog să îmi explicați și eticheta.",
+    "slug": "ro-dc8fcb785040d18b",
+    "approved": true
+  },
+  {
     "text": "Mulțumesc. Verific acum biletul și bonul.",
     "slug": "ro-b583ba057ff005c7",
     "approved": true
@@ -2417,6 +2492,11 @@
   {
     "text": "Nu pentru această destinație. Coborâți la Piața Unirii.",
     "slug": "ro-f4d1064cfdc27c80",
+    "approved": true
+  },
+  {
+    "text": "Nu sunt sigur. Mă ajutați să citesc rețeta?",
+    "slug": "ro-3f6812946b8b523d",
     "approved": true
   },
   {
@@ -2915,6 +2995,11 @@
     "approved": true
   },
   {
+    "text": "Sigur. Aveți acest medicament în stoc?",
+    "slug": "ro-2c5527061133e01a",
+    "approved": true
+  },
+  {
     "text": "Sigur. Ce fel de sandviș doriți?",
     "slug": "ro-60e9ac534e4a8b47",
     "approved": true
@@ -3335,6 +3420,11 @@
     "approved": true
   },
   {
+    "text": "Vă explic opțiunile și, dacă este necesar, contactați medicul.",
+    "slug": "ro-7e127a6020ff63f4",
+    "approved": true
+  },
+  {
     "text": "Vă explic opțiunile.",
     "slug": "ro-d4027a169ca009bd",
     "approved": true
@@ -3355,6 +3445,11 @@
     "approved": true
   },
   {
+    "text": "Vă pun câteva întrebări înainte să vă răspund.",
+    "slug": "ro-5ef30f3608f7b343",
+    "approved": true
+  },
+  {
     "text": "Vă rog să așteptați în sala de așteptare.",
     "slug": "ro-ebe2d04191c53edf",
     "approved": true
@@ -3362,6 +3457,11 @@
   {
     "text": "Vă rog să îmi arătați.",
     "slug": "ro-8d6f3e0d2a7001bd",
+    "approved": true
+  },
+  {
+    "text": "Vă rog să îmi explicați și eticheta.",
+    "slug": "ro-495b61a58dde6ebe",
     "approved": true
   },
   {
@@ -3382,6 +3482,11 @@
   {
     "text": "ve",
     "slug": "ro-4bd2c412ba70847f",
+    "approved": true
+  },
+  {
+    "text": "Verific acum. Ce cantitate este pe rețetă?",
+    "slug": "ro-b853b71b50028bea",
     "approved": true
   },
   {

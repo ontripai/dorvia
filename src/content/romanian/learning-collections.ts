@@ -45,7 +45,9 @@ export const CONVERSATION_GROUPS = [
   ] },
   { slug: 'pharmacy', fa: 'داروخانه', en: 'Pharmacy', introFa: 'از گفت‌وگوی عمومی شروع کنید؛ سپس هر نیاز را در یک درس جداگانه تمرین کنید.', introEn: 'Start with the general conversation, then practise each need in a focused lesson.', lessons: [
     { href: '/learn-romanian/lectie/farmacie', fa: 'گفت‌وگوی اصلی در داروخانه', en: 'General pharmacy conversation', detailFa: 'موجودی دارو، نسخه و درخواست توضیح', detailEn: 'Medicine availability, prescription, and asking for an explanation' },
+    { href: '/learn-romanian/lectie/farmacie/reteta', fa: 'نسخه، موجودی و توضیح داروساز', en: 'Prescription, stock and pharmacist explanation', detailFa: 'نشان دادن نسخه، بررسی موجودی و خواندن برچسب', detailEn: 'Show a prescription, check stock and clarify the label' },
     { href: '/learn-romanian/lectie/farmacie/durere-cap', fa: 'سردرد', en: 'Headache', detailFa: 'بیان درد، زمان شروع و پرسیدن گزینه‌ها', detailEn: 'Describe pain, when it started, and ask about options' },
+    { href: '/learn-romanian/lectie/farmacie/raceala', fa: 'علائم سرماخوردگی و راهنمایی', en: 'Cold symptoms and advice', detailFa: 'بیان علائم، زمان شروع و پرسیدن زمان مراجعه به پزشک', detailEn: 'Symptoms, duration and when to see a doctor' },
     { href: '/learn-romanian/lectie/farmacie/arsura', fa: 'سوختگی', en: 'Burn', detailFa: 'بیان محل سوختگی و درخواست بررسی لوازم لازم', detailEn: 'Describe a burn and ask about appropriate supplies' },
     { href: '/learn-romanian/lectie/farmacie/vitamine', fa: 'ویتامین‌ها', en: 'Vitamins', detailFa: 'پرسیدن گزینه‌ها و خواندن برچسب', detailEn: 'Ask about options and read labels' },
     { href: '/learn-romanian/lectie/farmacie/igiena', fa: 'بهداشت و مراقبت', en: 'Hygiene and care', detailFa: 'شامپو، کرم دست و پرسیدن قیمت', detailEn: 'Shampoo, hand cream, and asking the price' },
@@ -81,8 +83,9 @@ export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; det
     { fa: 'روز مراجعه', en: 'On the day', detailFa: 'در پذیرش نام و وقت را بگویید و مدارک لازم را بپرسید.', detailEn: 'Check in and ask about required documents.', lessonIndexes: [4, 5] },
   ],
   pharmacy: [
-    { fa: 'شروع گفت‌وگو و علائم', en: 'Opening and symptoms', detailFa: 'از گفت‌وگوی اصلی به سردرد و سوختگی بروید.', detailEn: 'Move from the general exchange to headache and burn scenarios.', lessonIndexes: [0, 1, 2] },
-    { fa: 'محصول و مراقبت', en: 'Products and care', detailFa: 'دربارهٔ ویتامین‌ها و محصولات بهداشتی پرسش کنید.', detailEn: 'Ask about vitamins and hygiene products.', lessonIndexes: [3, 4] },
+    { fa: 'نسخه و موجودی', en: 'Prescription and stock', detailFa: 'از گفت‌وگوی عمومی به نسخه، موجودی و توضیح برچسب بروید.', detailEn: 'Move from the general exchange to prescriptions, stock and labels.', lessonIndexes: [0, 1] },
+    { fa: 'توضیح علائم', en: 'Describing symptoms', detailFa: 'سردرد، سرماخوردگی و سوختگی را دقیق بیان کنید و از متخصص راهنمایی بخواهید.', detailEn: 'Describe headache, cold symptoms and a burn; ask a professional for guidance.', lessonIndexes: [2, 3, 4] },
+    { fa: 'محصول و مراقبت', en: 'Products and care', detailFa: 'دربارهٔ ویتامین‌ها و محصولات بهداشتی پرسش کنید.', detailEn: 'Ask about vitamins and hygiene products.', lessonIndexes: [5, 6] },
   ],
 };
 
