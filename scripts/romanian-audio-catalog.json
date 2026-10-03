@@ -2338,5 +2338,40 @@
     "text": "La ora nouă, vă rog.",
     "slug": "ro-69d4b2d3e83c402c",
     "approved": true
+  },
+  {
+    "text": "Aveți acest medicament?",
+    "slug": "ro-f405d2e6002c8952",
+    "approved": true
+  },
+  {
+    "text": "Da, avem acest medicament. Aveți rețetă?",
+    "slug": "ro-cd7f8349368d8d8b",
+    "approved": true
+  },
+  {
+    "text": "Da, am rețetă.",
+    "slug": "ro-1a3046a6c4ee1447",
+    "approved": true
+  },
+  {
+    "text": "Cum se administrează?",
+    "slug": "ro-b97ab766c2f812ce",
+    "approved": true
+  },
+  {
+    "text": "Vă explic imediat.",
+    "slug": "ro-23e055c9701457e7",
+    "approved": true
+  },
+  {
+    "text": "Aveți rețetă?",
+    "slug": "ro-5fd3090f2d169a42",
+    "approved": true
+  },
+  {
+    "text": "Nu am rețetă.",
+    "slug": "ro-e9034c8c7673dc50",
+    "approved": true
   }
 ]
