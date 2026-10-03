@@ -8,6 +8,7 @@ export const CONVERSATION_LESSONS = [
 ] as const;
 
 export const CONVERSATION_GROUPS = [
+{"slug": "workplace", "fa": "کار و محیط کار", "en": "Workplace", "introFa": "معرفی، برنامهٔ شیفت و روشن‌کردن دستور کار را در سه موقعیت مستقل تمرین کنید.", "introEn": "Practise introductions, shift schedules and task clarification in three situations.", "lessons": [{"href": "/learn-romanian/lectie/munca/prima-zi", "fa": "معرفی در روز اول", "en": "First-day introductions", "detailFa": "خودتان را معرفی کنید، مسئول تیم را پیدا کنید و محل شروع را بپرسید.", "detailEn": "Introduce yourself, find the team leader and ask where to start."}, {"href": "/learn-romanian/lectie/munca/program", "fa": "شیفت و زمان استراحت", "en": "Shift and break times", "detailFa": "شروع و پایان شیفت، استراحت و برنامهٔ فردا را تأیید کنید.", "detailEn": "Confirm shift times, breaks and tomorrow’s schedule."}, {"href": "/learn-romanian/lectie/munca/instructiuni", "fa": "درخواست توضیح و تأیید کار", "en": "Clarify and confirm a task", "detailFa": "وقتی دستور را نفهمیده‌اید، تکرار، نمایش عملی و تأیید بخواهید.", "detailEn": "Ask for repetition, a demonstration and confirmation when instructions are unclear."}]},
   { slug: 'transport', fa: 'رفت‌وآمد و بلیت', en: 'Transport and tickets', introFa: 'از باجهٔ بلیت تا اتوبوس، تراموا و مترو؛ درس‌ها را به ترتیب بخوانید.', introEn: 'From the ticket counter to buses, trams and the metro. Follow the lessons in order.', lessons: CONVERSATION_LESSONS },
   { slug: 'shopping', fa: 'خرید روزمره', en: 'Everyday shopping', introFa: 'در فروشگاه کالا بخواهید، مقدار را تغییر دهید و قیمت را بپرسید.', introEn: 'Ask for an item, change the quantity and ask the price in a shop.', lessons: [
     { href: '/learn-romanian/lectie/magazin', fa: 'خرید آب در فروشگاه', en: 'Buying water in a shop', detailFa: 'درخواست مؤدبانه، یک و دو بطری، و پرسیدن قیمت', detailEn: 'Polite requests, one or two bottles, and asking the price' },
@@ -93,6 +94,10 @@ export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; det
     { fa: 'توضیح علائم', en: 'Describing symptoms', detailFa: 'سردرد، سرماخوردگی و سوختگی را دقیق بیان کنید و از متخصص راهنمایی بخواهید.', detailEn: 'Describe headache, cold symptoms and a burn; ask a professional for guidance.', lessonIndexes: [2, 3, 4] },
     { fa: 'محصول و مراقبت', en: 'Products and care', detailFa: 'دربارهٔ ویتامین‌ها و محصولات بهداشتی پرسش کنید.', detailEn: 'Ask about vitamins and hygiene products.', lessonIndexes: [5, 6] },
   ],
+  workplace: [
+    { fa: "شروع کار", en: "Starting work", detailFa: "معرفی و برنامهٔ روزانه", detailEn: "Introductions and daily schedule", lessonIndexes: [0, 1] },
+    { fa: "ارتباط در کار", en: "Communication at work", detailFa: "پرسیدن، روشن‌کردن و تأیید", detailEn: "Ask, clarify and confirm", lessonIndexes: [2] },
+  ],
   banking: [
     { fa: 'ورود به شعبه', en: 'At the branch', detailFa: 'نوبت بگیرید و دربارهٔ مدارک و شرایط حساب پرسش کنید.', detailEn: 'Take a number and ask about account documents and terms.', lessonIndexes: [0, 1] },
     { fa: 'کارت و انتقال', en: 'Card and transfer', detailFa: 'مشکل کارت و جزئیات انتقال را با کارمند بانک روشن کنید.', detailEn: 'Clarify a card issue and transfer details with the bank.', lessonIndexes: [2, 3] },
@@ -101,7 +106,6 @@ export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; det
 
 export const UPCOMING_CONVERSATION_GROUPS = [
   { fa: 'مسکن و اجاره', en: 'Housing and renting', detailFa: 'بازدید، قرارداد و مشکلات خانه', detailEn: 'Viewing, contract and home issues' },
-  { fa: 'کار و محیط کار', en: 'Workplace', detailFa: 'معرفی، برنامهٔ کار و درخواست کمک', detailEn: 'Introductions, schedule and asking for help' },
 ] as const;
 
 export const STATION_ENGLISH: Record<string, string> = {
