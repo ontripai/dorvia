@@ -160,6 +160,16 @@
     "approved": true
   },
   {
+    "text": "Am găsit programarea. Doriți să o anulez?",
+    "slug": "ro-01b1724a031812fb",
+    "approved": true
+  },
+  {
+    "text": "Am înțeles. Mulțumesc!",
+    "slug": "ro-466a6a30bbe4bc62",
+    "approved": true
+  },
+  {
     "text": "Am mâna în buzunar.",
     "slug": "ro-9f5b8455d1564648",
     "approved": true
@@ -172,6 +182,11 @@
   {
     "text": "Am niște bilete.",
     "slug": "ro-f38fe2059b00ef3c",
+    "approved": true
+  },
+  {
+    "text": "Am notat. Vă așteptăm marți la zece.",
+    "slug": "ro-badda700de2b75ba",
     "approved": true
   },
   {
@@ -192,6 +207,11 @@
   {
     "text": "Am o programare.",
     "slug": "ro-47c9bce44b8a5830",
+    "approved": true
+  },
+  {
+    "text": "Am schimbat programarea pentru joi.",
+    "slug": "ro-88e6ae6d02655ead",
     "approved": true
   },
   {
@@ -260,6 +280,11 @@
     "approved": true
   },
   {
+    "text": "Aș dori să schimb ziua, dacă se poate.",
+    "slug": "ro-ad95f888f2f61905",
+    "approved": true
+  },
+  {
     "text": "Aș dori un ceai și un croissant, vă rog.",
     "slug": "ro-f8404eed454617d7",
     "approved": true
@@ -295,6 +320,16 @@
     "approved": true
   },
   {
+    "text": "Avem un loc liber joi la ora unsprezece.",
+    "slug": "ro-c7cdec36ddf065f3",
+    "approved": true
+  },
+  {
+    "text": "Avem un loc liber marți la ora zece.",
+    "slug": "ro-5f6dc62c2ff2cc29",
+    "approved": true
+  },
+  {
     "text": "aveți",
     "slug": "ro-1ddd5e07e1406b0c",
     "approved": true
@@ -325,8 +360,18 @@
     "approved": true
   },
   {
+    "text": "Aveți și confirmarea programării?",
+    "slug": "ro-7331b8055a4ed8e0",
+    "approved": true
+  },
+  {
     "text": "Aveți și o cremă de mâini?",
     "slug": "ro-2822bdac17fff55a",
+    "approved": true
+  },
+  {
+    "text": "Aveți un act de identitate?",
+    "slug": "ro-c333f591b292dca0",
     "approved": true
   },
   {
@@ -465,6 +510,11 @@
     "approved": true
   },
   {
+    "text": "Bună ziua, recepția clinicii. Cu ce vă pot ajuta?",
+    "slug": "ro-bcf583b84cc377ce",
+    "approved": true
+  },
+  {
     "text": "Bună ziua!",
     "slug": "ro-a5de4d43c03eee7b",
     "approved": true
@@ -497,6 +547,36 @@
   {
     "text": "Bună ziua! Un bilet sau două?",
     "slug": "ro-a1459cd5a678b0fb",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua. Am o programare la ora zece.",
+    "slug": "ro-a3d055fa61c3fca9",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua. Am o programare miercuri la ora nouă.",
+    "slug": "ro-9d82fac58f0a8e65",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua. Aș dori o programare la medic.",
+    "slug": "ro-69a7780512ee0b2c",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua. Ce documente trebuie să prezint?",
+    "slug": "ro-c4565e2a7a4411ac",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua. Cum vă numiți?",
+    "slug": "ro-a1a985baf4d95196",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua. Vreau să anulez o programare.",
+    "slug": "ro-ed549381756f0401",
     "approved": true
   },
   {
@@ -725,6 +805,11 @@
     "approved": true
   },
   {
+    "text": "Confirmăm pentru luni la ora zece?",
+    "slug": "ro-f5c24416732ea3fb",
+    "approved": true
+  },
+  {
     "text": "cont",
     "slug": "ro-0cc1c74193b578d2",
     "approved": true
@@ -780,6 +865,11 @@
     "approved": true
   },
   {
+    "text": "Da, am pașaportul aici.",
+    "slug": "ro-eba8c9472bca9f30",
+    "approved": true
+  },
+  {
     "text": "Da, am rețetă.",
     "slug": "ro-1a3046a6c4ee1447",
     "approved": true
@@ -815,6 +905,16 @@
     "approved": true
   },
   {
+    "text": "Da, confirm pentru luni la ora zece.",
+    "slug": "ro-cfcfc5dffb9d774d",
+    "approved": true
+  },
+  {
+    "text": "Da, corect.",
+    "slug": "ro-dfb620dbb6d047be",
+    "approved": true
+  },
+  {
     "text": "Da, desigur.",
     "slug": "ro-2c4cf5c8fdd1c814",
     "approved": true
@@ -830,6 +930,11 @@
     "approved": true
   },
   {
+    "text": "Da, este prima mea vizită.",
+    "slug": "ro-05661b05a5707555",
+    "approved": true
+  },
+  {
     "text": "Da, este valabil.",
     "slug": "ro-c2c8afc927d3bce1",
     "approved": true
@@ -842,6 +947,11 @@
   {
     "text": "Da, exact.",
     "slug": "ro-b46547372f6a22c4",
+    "approved": true
+  },
+  {
+    "text": "Da, îmi puteți arăta ecranul.",
+    "slug": "ro-97c577c142466d51",
     "approved": true
   },
   {
@@ -862,6 +972,21 @@
   {
     "text": "Da, puteți plăti cu cardul.",
     "slug": "ro-7571768edb1958f6",
+    "approved": true
+  },
+  {
+    "text": "Da, sunteți pe listă.",
+    "slug": "ro-2f4f65c8d0a28c79",
+    "approved": true
+  },
+  {
+    "text": "Da, urcați scările și faceți la dreapta.",
+    "slug": "ro-8a0ec4699d520932",
+    "approved": true
+  },
+  {
+    "text": "Da, vă rog să o anulați.",
+    "slug": "ro-d7f1fd346e853e0c",
     "approved": true
   },
   {
@@ -902,6 +1027,11 @@
   {
     "text": "decembrie",
     "slug": "ro-60e0c209409d8338",
+    "approved": true
+  },
+  {
+    "text": "Deci joi la ora unsprezece, corect?",
+    "slug": "ro-916d9b5dce72aeff",
     "approved": true
   },
   {
@@ -1202,6 +1332,16 @@
   {
     "text": "Este departe?",
     "slug": "ro-62cc47602f3ac964",
+    "approved": true
+  },
+  {
+    "text": "Este la etajul întâi?",
+    "slug": "ro-1a6f46306034ffca",
+    "approved": true
+  },
+  {
+    "text": "Este prima dumneavoastră vizită?",
+    "slug": "ro-5441c6bc7bc63391",
     "approved": true
   },
   {
@@ -1535,6 +1675,11 @@
     "approved": true
   },
   {
+    "text": "Joi la unsprezece este bine.",
+    "slug": "ro-ea0f0131be5ada8f",
+    "approved": true
+  },
+  {
     "text": "joi, vineri",
     "slug": "ro-b563dc066889768a",
     "approved": true
@@ -1635,6 +1780,11 @@
     "approved": true
   },
   {
+    "text": "Mai este nevoie de altceva?",
+    "slug": "ro-4125ae7e9908fbf0",
+    "approved": true
+  },
+  {
     "text": "martie",
     "slug": "ro-246d3e81c71dec04",
     "approved": true
@@ -1642,6 +1792,11 @@
   {
     "text": "marți",
     "slug": "ro-de5a4fb558d8e6b2",
+    "approved": true
+  },
+  {
+    "text": "Marți la ora zece este bine pentru mine.",
+    "slug": "ro-7fccc0681679e308",
     "approved": true
   },
   {
@@ -1672,6 +1827,11 @@
   {
     "text": "Mă numesc {{name}}.",
     "slug": "ro-67260e38fbdae6f2",
+    "approved": true
+  },
+  {
+    "text": "Mă numesc Ana Popescu.",
+    "slug": "ro-bf604d19bb5806c1",
     "approved": true
   },
   {
@@ -1865,6 +2025,11 @@
     "approved": true
   },
   {
+    "text": "Nu, acestea sunt suficiente.",
+    "slug": "ro-ba70461f8abc3d3f",
+    "approved": true
+  },
+  {
     "text": "Nu, este aproape.",
     "slug": "ro-37e25595908768a1",
     "approved": true
@@ -1892,6 +2057,11 @@
   {
     "text": "o",
     "slug": "ro-65c74c15a686187b",
+    "approved": true
+  },
+  {
+    "text": "O am pe telefon. Este suficient?",
+    "slug": "ro-4e4b7a4982eaa736",
     "approved": true
   },
   {
@@ -2010,8 +2180,23 @@
     "approved": true
   },
   {
+    "text": "Pe ce nume este programarea?",
+    "slug": "ro-c000f334b13591c5",
+    "approved": true
+  },
+  {
     "text": "pe masă",
     "slug": "ro-0b06733c087684fb",
+    "approved": true
+  },
+  {
+    "text": "Pe numele Ana Popescu.",
+    "slug": "ro-5dc484562fcda1d5",
+    "approved": true
+  },
+  {
+    "text": "Pentru ce zi aveți programarea?",
+    "slug": "ro-a69cee432d8ba1f6",
     "approved": true
   },
   {
@@ -2037,6 +2222,11 @@
   {
     "text": "Pentru mine.",
     "slug": "ro-d091fb8036ac14d4",
+    "approved": true
+  },
+  {
+    "text": "Pentru vineri la ora zece.",
+    "slug": "ro-c4b630f65060b88f",
     "approved": true
   },
   {
@@ -2112,6 +2302,11 @@
   {
     "text": "primul",
     "slug": "ro-e76d2f495bffca5c",
+    "approved": true
+  },
+  {
+    "text": "Programarea este anulată.",
+    "slug": "ro-ffbec0e93f34b43a",
     "approved": true
   },
   {
@@ -2565,6 +2760,11 @@
     "approved": true
   },
   {
+    "text": "Unde trebuie să aștept?",
+    "slug": "ro-2dbbb87990438258",
+    "approved": true
+  },
+  {
     "text": "Unde trebuie să depun documentele?",
     "slug": "ro-7f635593162ea401",
     "approved": true
@@ -2620,8 +2820,23 @@
     "approved": true
   },
   {
+    "text": "Vă mulțumesc pentru ajutor.",
+    "slug": "ro-ba79f80cdc020e42",
+    "approved": true
+  },
+  {
+    "text": "Vă mulțumesc pentru confirmare.",
+    "slug": "ro-c1919c629d92adba",
+    "approved": true
+  },
+  {
     "text": "Vă mulțumesc.",
     "slug": "ro-5c4106be26f6ad3d",
+    "approved": true
+  },
+  {
+    "text": "Vă rog să așteptați în sala de așteptare.",
+    "slug": "ro-ebe2d04191c53edf",
     "approved": true
   },
   {
