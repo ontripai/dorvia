@@ -14,6 +14,9 @@ export const CONVERSATION_GROUPS = [
   ] },
   { slug: 'directions', fa: 'راه‌یابی در شهر', en: 'Finding your way', introFa: 'نشانی مکان‌ها را بپرسید و پاسخ کوتاه رهگذر را بفهمید.', introEn: 'Ask where places are and understand a short reply.', lessons: [
     { href: '/learn-romanian/lectie/directii', fa: 'ایستگاه مترو کجاست؟', en: 'Where is the metro station?', detailFa: 'نشانی مترو و داروخانه، راست و چپ، و فاصله', detailEn: 'Metro and pharmacy directions, left and right, and distance' },
+    { href: '/learn-romanian/lectie/directii/adresa', fa: 'خیابان و شمارهٔ ساختمان', en: 'Street and building number', detailFa: 'نام خیابان، شماره و نشانهٔ مکانی', detailEn: 'Street name, number, and landmark' },
+    { href: '/learn-romanian/lectie/directii/statie', fa: 'پیدا کردن ایستگاه اتوبوس', en: 'Finding the bus stop', detailFa: 'نزدیک‌ترین ایستگاه و دو گام مسیر', detailEn: 'Nearest stop and two walking directions' },
+    { href: '/learn-romanian/lectie/directii/repetati', fa: 'تکرار و روشن‌کردن مسیر', en: 'Repeating and clarifying directions', detailFa: 'درخواست تکرار آهسته و تأیید جهت', detailEn: 'Ask for a slow repeat and confirm a turn' },
   ] },
   { slug: 'cafe', fa: 'کافه و غذا', en: 'Cafés and food', introFa: 'سفارش ساده بدهید، نوع نوشیدنی را مشخص کنید و صورتحساب بخواهید.', introEn: 'Place a simple order, specify a drink, and ask for the bill.', lessons: [
     { href: '/learn-romanian/lectie/cafenea', fa: 'سفارش در کافه', en: 'Ordering in a café', detailFa: 'درخواست قهوه یا چای، واژهٔ «بدون» و درخواست صورتحساب', detailEn: 'Ask for coffee or tea, use “without”, and request the bill' },
