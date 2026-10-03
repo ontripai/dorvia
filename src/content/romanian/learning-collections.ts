@@ -11,6 +11,9 @@ export const CONVERSATION_GROUPS = [
     { href: '/learn-romanian/lectie/magazin/brutarie', fa: 'خرید از نانوایی', en: 'At the bakery', detailFa: 'نان تازه، تعداد و پرسیدن قیمت', detailEn: 'Fresh bread, quantity, and the price' },
     { href: '/learn-romanian/lectie/magazin/fructe', fa: 'میوه و مقدار', en: 'Fruit and quantity', detailFa: 'یک کیلو، نیم کیلو و درخواست کیسه', detailEn: 'One kilo, half a kilo, and a bag' },
     { href: '/learn-romanian/lectie/magazin/marime', fa: 'اندازه و رنگ در فروشگاه', en: 'Size and colour in a shop', detailFa: 'اندازهٔ لباس، رنگ و اتاق پرو', detailEn: 'Clothing size, colour, and the fitting room' },
+    { href: '/learn-romanian/lectie/magazin/stoc', fa: 'کالای ناموجود و جایگزین', en: 'Out of stock and alternatives', detailFa: 'جست‌وجوی کالا، موجودی، جایگزین و قیمت', detailEn: 'Find an item, check stock, an alternative and its price' },
+    { href: '/learn-romanian/lectie/magazin/casa', fa: 'صندوق، پرداخت و رسید', en: 'Checkout, payment and receipt', detailFa: 'مبلغ نهایی، کارت، کیسه و رسید', detailEn: 'Total, card payment, bag and receipt' },
+    { href: '/learn-romanian/lectie/magazin/retur', fa: 'بازگرداندن کالا', en: 'Returning an item', detailFa: 'توضیح مشکل، رسید و پرسیدن امکان تعویض', detailEn: 'Explain an issue, show a receipt and ask about an exchange' },
   ] },
   { slug: 'directions', fa: 'راه‌یابی در شهر', en: 'Finding your way', introFa: 'نشانی مکان‌ها را بپرسید و پاسخ کوتاه رهگذر را بفهمید.', introEn: 'Ask where places are and understand a short reply.', lessons: [
     { href: '/learn-romanian/lectie/directii', fa: 'ایستگاه مترو کجاست؟', en: 'Where is the metro station?', detailFa: 'نشانی مترو و داروخانه، راست و چپ، و فاصله', detailEn: 'Metro and pharmacy directions, left and right, and distance' },
@@ -49,6 +52,8 @@ export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; det
   shopping: [
     { fa: 'مواد غذایی و مقدار', en: 'Food and quantity', detailFa: 'کالا، تعداد، وزن و قیمت را مشخص کنید.', detailEn: 'Specify the item, count, weight, and price.', lessonIndexes: [0, 1, 2] },
     { fa: 'پوشاک', en: 'Clothing', detailFa: 'اندازه و رنگ را بپرسید و لباس را امتحان کنید.', detailEn: 'Ask about size and colour and try on an item.', lessonIndexes: [3] },
+    { fa: 'موجودی و جایگزین', en: 'Stock and alternatives', detailFa: 'کالای ناموجود را پیگیری و گزینهٔ دیگری انتخاب کنید.', detailEn: 'Ask about an unavailable item and choose another option.', lessonIndexes: [4] },
+    { fa: 'صندوق و خدمات پس از خرید', en: 'Checkout and after purchase', detailFa: 'پرداخت، رسید و درخواست تعویض را تمرین کنید.', detailEn: 'Practise payment, receipts and asking for an exchange.', lessonIndexes: [5, 6] },
   ],
   directions: [
     { fa: 'آدرس و نشانه‌ها', en: 'Addresses and landmarks', detailFa: 'مکان، خیابان، شماره و فاصله را پیدا کنید.', detailEn: 'Find a place, street, number, and distance.', lessonIndexes: [0, 1] },
@@ -78,4 +83,3 @@ export const STATION_ENGLISH: Record<string, string> = {
   salutari: 'Greetings and politeness', numere: 'Numbers', timp: 'Time',
   'cuvinte-interogative': 'Question words', pronume: 'Pronouns',
 };
-
