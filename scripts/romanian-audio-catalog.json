@@ -215,6 +215,11 @@
     "approved": true
   },
   {
+    "text": "Apoi faceți la stânga.",
+    "slug": "ro-8ab81c32b7a0bbc5",
+    "approved": true
+  },
+  {
     "text": "aprilie",
     "slug": "ro-5d6d6246e4855ac9",
     "approved": true
@@ -545,6 +550,11 @@
     "approved": true
   },
   {
+    "text": "Caut numărul zece.",
+    "slug": "ro-cacae43b636696f2",
+    "approved": true
+  },
+  {
     "text": "Caut un șampon pentru păr uscat.",
     "slug": "ro-d166ab84d908d516",
     "approved": true
@@ -815,6 +825,11 @@
     "approved": true
   },
   {
+    "text": "Da, este chiar lângă bancă.",
+    "slug": "ro-5e9981ef1773b535",
+    "approved": true
+  },
+  {
     "text": "Da, este valabil.",
     "slug": "ro-c2c8afc927d3bce1",
     "approved": true
@@ -822,6 +837,11 @@
   {
     "text": "Da, eu sunt Ana.",
     "slug": "ro-ab7d037123761a9c",
+    "approved": true
+  },
+  {
+    "text": "Da, exact.",
+    "slug": "ro-b46547372f6a22c4",
     "approved": true
   },
   {
@@ -842,6 +862,11 @@
   {
     "text": "Da, puteți plăti cu cardul.",
     "slug": "ro-7571768edb1958f6",
+    "approved": true
+  },
+  {
+    "text": "Da. Mergeți drept înainte.",
+    "slug": "ro-812a190c68ba8089",
     "approved": true
   },
   {
@@ -877,6 +902,11 @@
   {
     "text": "decembrie",
     "slug": "ro-60e0c209409d8338",
+    "approved": true
+  },
+  {
+    "text": "Deci la dreapta după semafor?",
+    "slug": "ro-49cd7827401553ba",
     "approved": true
   },
   {
@@ -1165,8 +1195,18 @@
     "approved": true
   },
   {
+    "text": "Este departe de aici?",
+    "slug": "ro-df9db95663499324",
+    "approved": true
+  },
+  {
     "text": "Este departe?",
     "slug": "ro-62cc47602f3ac964",
+    "approved": true
+  },
+  {
+    "text": "Este prima stradă la dreapta.",
+    "slug": "ro-0dbb10da1160b8e3",
     "approved": true
   },
   {
@@ -1530,6 +1570,11 @@
     "approved": true
   },
   {
+    "text": "La dreapta, după semafor.",
+    "slug": "ro-9183aa472f151f96",
+    "approved": true
+  },
+  {
     "text": "La ora nouă, vă rog.",
     "slug": "ro-69d4b2d3e83c402c",
     "approved": true
@@ -1650,6 +1695,16 @@
     "approved": true
   },
   {
+    "text": "Mergeți drept înainte.",
+    "slug": "ro-0dfe291c68d41614",
+    "approved": true
+  },
+  {
+    "text": "Mergeți înainte și faceți la dreapta.",
+    "slug": "ro-364874a02fe4bf71",
+    "approved": true
+  },
+  {
     "text": "Mergeți înainte. Stația este pe dreapta.",
     "slug": "ro-40ba8d3e300c919e",
     "approved": true
@@ -1677,6 +1732,11 @@
   {
     "text": "Mulțumesc",
     "slug": "ro-db1b4a591a97f1e2",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc pentru ajutor!",
+    "slug": "ro-38556b7b4b17277c",
     "approved": true
   },
   {
@@ -1822,6 +1882,11 @@
   {
     "text": "Nu, mulțumesc. Nota, vă rog.",
     "slug": "ro-d5668ee55a459e50",
+    "approved": true
+  },
+  {
+    "text": "Numărul zece este după farmacie.",
+    "slug": "ro-193d58e87083347d",
     "approved": true
   },
   {
@@ -2150,6 +2215,11 @@
     "approved": true
   },
   {
+    "text": "Scuzați-mă, unde este strada Florilor?",
+    "slug": "ro-a4ec7c639c9780ef",
+    "approved": true
+  },
+  {
     "text": "Scuzați-mă.",
     "slug": "ro-99d0e83345715245",
     "approved": true
@@ -2202,6 +2272,11 @@
   {
     "text": "stația de metrou",
     "slug": "ro-6535d0b22120e9de",
+    "approved": true
+  },
+  {
+    "text": "Stația este lângă bancă?",
+    "slug": "ro-722dbcca16cf51f2",
     "approved": true
   },
   {
@@ -2457,6 +2532,11 @@
   {
     "text": "Unde este biletul?",
     "slug": "ro-3b617fb00287fd2d",
+    "approved": true
+  },
+  {
+    "text": "Unde este cea mai apropiată stație de autobuz?",
+    "slug": "ro-7a1012acb01ce14e",
     "approved": true
   },
   {
