@@ -72,7 +72,7 @@ const progressKey = 'dorvia:romanian:ticket-lesson:v1';
 export function TicketLesson({ lang }: { lang: Locale }) {
   const isFa = lang === 'fa';
   const [phase, setPhase] = React.useState<Phase>(0);
-  const [showTranslation, setShowTranslation] = React.useState(false);
+  const [showTranslation, setShowTranslation] = React.useState(true);
   const [audioError, setAudioError] = React.useState(false);
   const [speaking, setSpeaking] = React.useState(false);
   const [answer, setAnswer] = React.useState('');
