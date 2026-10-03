@@ -15,10 +15,13 @@ export const CONVERSATION_GROUPS = [
   { slug: 'cafe', fa: 'کافه و غذا', en: 'Cafés and food', introFa: 'سفارش ساده بدهید، نوع نوشیدنی را مشخص کنید و صورتحساب بخواهید.', introEn: 'Place a simple order, specify a drink, and ask for the bill.', lessons: [
     { href: '/learn-romanian/lectie/cafenea', fa: 'سفارش در کافه', en: 'Ordering in a café', detailFa: 'درخواست قهوه یا چای، واژهٔ «بدون» و درخواست صورتحساب', detailEn: 'Ask for coffee or tea, use “without”, and request the bill' },
   ] },
+  { slug: 'services', fa: 'کارهای ضروری', en: 'Essential services', introFa: 'در پذیرش درمانگاه وقت ملاقات بگیرید و روز و ساعت را مشخص کنید.', introEn: 'Ask for an appointment at a clinic desk and choose a day and time.', lessons: [
+    { href: '/learn-romanian/lectie/programare', fa: 'گرفتن وقت ملاقات', en: 'Booking an appointment', detailFa: 'درخواست مؤدبانه، پرسیدن روز و اعلام ساعت', detailEn: 'Polite request, choosing a day and stating a time' },
+  ] },
 ] as const;
 
 export const UPCOMING_CONVERSATION_GROUPS = [
-  { fa: 'کارهای ضروری', en: 'Essential services', detailFa: 'داروخانه و قرار ملاقات', detailEn: 'Pharmacy and appointments' },
+  { fa: 'داروخانه', en: 'Pharmacy', detailFa: 'پرسیدن دربارهٔ دارو و فهمیدن پاسخ داروساز', detailEn: 'Asking about medicine and understanding the pharmacist' },
 ] as const;
 
 export const STATION_ENGLISH: Record<string, string> = {
