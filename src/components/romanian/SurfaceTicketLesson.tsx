@@ -43,7 +43,7 @@ export function SurfaceTicketLesson({ lang }: { lang: Locale }) {
   const [answer, setAnswer] = React.useState('');
   const [feedback, setFeedback] = React.useState<'correct' | 'vehicle' | 'other' | null>(null);
   const [hint, setHint] = React.useState(false);
-  const [translation, setTranslation] = React.useState(false);
+  const [translation, setTranslation] = React.useState(true);
   const [complete, setComplete] = React.useState(false);
   const [priorCompletion, setPriorCompletion] = React.useState(false);
   const [audioMessage, setAudioMessage] = React.useState('');
