@@ -18,7 +18,7 @@ import { ArrowLeft, ArrowRight } from '@/components/Icons';
 import { PronunciationAudio } from '@/components/romanian/PronunciationAudio';
 import { UsageNoteText } from '@/components/romanian/UsageNoteText';
 import { PhraseText } from '@/components/romanian/PhraseText';
-import { spokenForm } from '@/lib/romanian/placeholders';
+import { hasPlaceholder, spokenForm } from '@/lib/romanian/placeholders';
 
 export function generateStaticParams() {
   const stations = getPublishedStations();
@@ -281,7 +281,7 @@ function PhraseCardBlock({
 
         <PronunciationAudio
           currentLang={currentLang}
-          label={spokenForm(phrase.text.ro)}
+          label={hasPlaceholder(phrase.text.ro) ? spokenForm(phrase.text.ro) : phrase.text.ro}
           variant="compact"
         />
 
@@ -291,6 +291,7 @@ function PhraseCardBlock({
               {isFa ? 'صورت محاوره‌ای (برای شنیدار): ' : 'Spoken variant (for listening): '}
             </span>
             <span className="font-bold text-slate-800">{phrase.informalVariant.ro}</span>
+            <PronunciationAudio currentLang={currentLang} label={phrase.informalVariant.ro} variant="compact" className="mt-2" />
           </div>
         )}
 
