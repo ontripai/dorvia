@@ -14,6 +14,9 @@ export const CONVERSATION_GROUPS = [
   ] },
   { slug: 'cafe', fa: 'کافه و غذا', en: 'Cafés and food', introFa: 'سفارش ساده بدهید، نوع نوشیدنی را مشخص کنید و صورتحساب بخواهید.', introEn: 'Place a simple order, specify a drink, and ask for the bill.', lessons: [
     { href: '/learn-romanian/lectie/cafenea', fa: 'سفارش در کافه', en: 'Ordering in a café', detailFa: 'درخواست قهوه یا چای، واژهٔ «بدون» و درخواست صورتحساب', detailEn: 'Ask for coffee or tea, use “without”, and request the bill' },
+    { href: '/learn-romanian/lectie/cafenea/mic-dejun', fa: 'صبحانه در کافه', en: 'Breakfast at a café', detailFa: 'چای، کروسان و آب بدون گاز در گفت‌وگوی صبحانه', detailEn: 'Tea, a croissant, and still water in a breakfast conversation' },
+    { href: '/learn-romanian/lectie/cafenea/schimbare-comanda', fa: 'تغییر در سفارش', en: 'Changing an order', detailFa: 'با و بدون شیر یا شکر؛ اصلاح مؤدبانهٔ سفارش', detailEn: 'With or without milk and sugar; politely correct an order' },
+    { href: '/learn-romanian/lectie/cafenea/plata', fa: 'صورتحساب و پرداخت', en: 'Bill and payment', detailFa: 'صورتحساب، پرداخت با کارت و درخواست رسید', detailEn: 'The bill, paying by card, and requesting a receipt' },
   ] },
   { slug: 'appointments', fa: 'قرار ملاقات و پذیرش', en: 'Appointments and reception', introFa: 'در پذیرش درمانگاه وقت ملاقات بگیرید و روز و ساعت را مشخص کنید.', introEn: 'Ask for an appointment at a clinic desk and choose a day and time.', lessons: [
     { href: '/learn-romanian/lectie/programare', fa: 'گرفتن وقت ملاقات', en: 'Booking an appointment', detailFa: 'درخواست مؤدبانه، پرسیدن روز و اعلام ساعت', detailEn: 'Polite request, choosing a day and stating a time' },
