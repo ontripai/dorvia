@@ -130,6 +130,11 @@
     "approved": true
   },
   {
+    "text": "Altceva?",
+    "slug": "ro-83ed8040b7a39f95",
+    "approved": true
+  },
+  {
     "text": "am",
     "slug": "ro-ab6db599234d2636",
     "approved": true
@@ -260,6 +265,11 @@
     "approved": true
   },
   {
+    "text": "Aș dori un kilogram de mere, vă rog.",
+    "slug": "ro-05bf1a00eb7d1558",
+    "approved": true
+  },
+  {
     "text": "au",
     "slug": "ro-632cd2fea71dcde0",
     "approved": true
@@ -292,6 +302,16 @@
   {
     "text": "Aveți ceva pentru durere de cap?",
     "slug": "ro-ab1e2a4947f3f27b",
+    "approved": true
+  },
+  {
+    "text": "Aveți o pungă, vă rog?",
+    "slug": "ro-cf6da1133daf844d",
+    "approved": true
+  },
+  {
+    "text": "Aveți pâine proaspătă?",
+    "slug": "ro-6caafe6a475713f5",
     "approved": true
   },
   {
@@ -442,6 +462,11 @@
   {
     "text": "Bună ziua!",
     "slug": "ro-a5de4d43c03eee7b",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua! Aveți acest tricou în mărimea M?",
+    "slug": "ro-c9482c4383b8b0bc",
     "approved": true
   },
   {
@@ -760,8 +785,23 @@
     "approved": true
   },
   {
+    "text": "Da, avem mărimea M.",
+    "slug": "ro-acceb712c67e7577",
+    "approved": true
+  },
+  {
+    "text": "Da, avem pâine proaspătă.",
+    "slug": "ro-49561f9bcceb34f7",
+    "approved": true
+  },
+  {
     "text": "Da, avem un loc liber.",
     "slug": "ro-8d2f7bbe775c567e",
+    "approved": true
+  },
+  {
+    "text": "Da, cabina de probă este acolo.",
+    "slug": "ro-4ecc861d749673b4",
     "approved": true
   },
   {
@@ -787,6 +827,16 @@
   {
     "text": "Da, o apă plată, vă rog.",
     "slug": "ro-d0dd724e49760065",
+    "approved": true
+  },
+  {
+    "text": "Da, o jumătate de kilogram de banane.",
+    "slug": "ro-6fc75fd878b69015",
+    "approved": true
+  },
+  {
+    "text": "Da, poftiți.",
+    "slug": "ro-62b5d7bd693d8196",
     "approved": true
   },
   {
@@ -875,6 +925,11 @@
     "approved": true
   },
   {
+    "text": "Doriți și banane?",
+    "slug": "ro-56d36d2c99a9d08f",
+    "approved": true
+  },
+  {
     "text": "Doriți un abonament lunar?",
     "slug": "ro-3febfc42b5e0847e",
     "approved": true
@@ -912,6 +967,11 @@
   {
     "text": "două case noi",
     "slug": "ro-359df4a205b6a43a",
+    "approved": true
+  },
+  {
+    "text": "Două pâini, vă rog.",
+    "slug": "ro-51e9ae17d18ba9d8",
     "approved": true
   },
   {
@@ -1345,6 +1405,11 @@
     "approved": true
   },
   {
+    "text": "Îl aveți și pe albastru?",
+    "slug": "ro-f1bc46bb2333f9b3",
+    "approved": true
+  },
+  {
     "text": "îmi",
     "slug": "ro-724121546c11d1c4",
     "approved": true
@@ -1517,6 +1582,11 @@
   {
     "text": "mai",
     "slug": "ro-7d980bbde514db41",
+    "approved": true
+  },
+  {
+    "text": "Mai doriți ceva?",
+    "slug": "ro-03c9df7be77222fb",
     "approved": true
   },
   {
@@ -1745,6 +1815,11 @@
     "approved": true
   },
   {
+    "text": "Nu, mulțumesc. Cât costă?",
+    "slug": "ro-775059e5025b3ece",
+    "approved": true
+  },
+  {
     "text": "Nu, mulțumesc. Nota, vă rog.",
     "slug": "ro-d5668ee55a459e50",
     "approved": true
@@ -1942,6 +2017,11 @@
   {
     "text": "Pot să citesc eticheta?",
     "slug": "ro-d214781fd1dcc810",
+    "approved": true
+  },
+  {
+    "text": "Pot să îl probez?",
+    "slug": "ro-65d8f25f1fe77f94",
     "approved": true
   },
   {
