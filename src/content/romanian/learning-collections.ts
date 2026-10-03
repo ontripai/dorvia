@@ -1,7 +1,10 @@
 export const CONVERSATION_LESSONS = [
   { href: '/learn-romanian/lectie/bilet', fa: 'یک بلیت یا دو بلیت؟', en: 'One ticket or two?', detailFa: 'درخواست مؤدبانه و تعداد بلیت در باجه', detailEn: 'Polite requests and ticket quantities at the counter' },
+  { href: '/learn-romanian/lectie/transport/automat', fa: 'دستگاه بلیت و پرداخت', en: 'Ticket machine and payment', detailFa: 'انتخاب نوع سفر، قیمت، پرداخت و دریافت بلیت', detailEn: 'Journey type, price, payment and ticket collection' },
   { href: '/learn-romanian/lectie/autobuz-tramvai', fa: 'اتوبوس و تراموا', en: 'Bus and tram', detailFa: 'پرسیدن دربارهٔ اعتبار بلیت در وسیلهٔ دیگر', detailEn: 'Ask whether a ticket works on another vehicle' },
   { href: '/learn-romanian/lectie/metrou', fa: 'متروی بخارست', en: 'Bucharest metro', detailFa: 'انتخاب ده سفر یا اشتراک ماهانه', detailEn: 'Choose ten journeys or a monthly pass' },
+  { href: '/learn-romanian/lectie/transport/traseu', fa: 'خط و جهت حرکت', en: 'Route and direction of travel', detailFa: 'شمارهٔ خط، جهت، تعداد ایستگاه و پیاده‌شدن', detailEn: 'Line number, direction, stops and getting off' },
+  { href: '/learn-romanian/lectie/transport/legatura', fa: 'تعویض وسیله و از دست دادن ایستگاه', en: 'Transfer and missed stop', detailFa: 'رد شدن از ایستگاه، برگشت و بررسی اعتبار بلیت', detailEn: 'Missed stop, return route and ticket validity' },
 ] as const;
 
 export const CONVERSATION_GROUPS = [
@@ -49,8 +52,9 @@ export const CONVERSATION_GROUPS = [
 
 export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; detailFa: string; detailEn: string; lessonIndexes: number[] }[]> = {
   transport: [
-    { fa: 'خرید بلیت', en: 'Buying tickets', detailFa: 'تعداد، نوع و اعتبار بلیت را از باجه بپرسید.', detailEn: 'Ask for quantity, type, and validity at a counter.', lessonIndexes: [0] },
-    { fa: 'استفاده از وسیلهٔ نقلیه', en: 'Using transport', detailFa: 'اتوبوس، تراموا و مترو را در موقعیت واقعی تمرین کنید.', detailEn: 'Practise buses, trams, and metro in context.', lessonIndexes: [1, 2] },
+    { fa: 'خرید بلیت', en: 'Buying tickets', detailFa: 'تعداد، نوع و اعتبار بلیت را از باجه و دستگاه بپرسید.', detailEn: 'Ask about quantity, type and validity at a counter or machine.', lessonIndexes: [0, 1] },
+    { fa: 'استفاده از وسیلهٔ نقلیه', en: 'Using transport', detailFa: 'اتوبوس، تراموا و مترو را در موقعیت واقعی تمرین کنید.', detailEn: 'Practise buses, trams, and metro in context.', lessonIndexes: [2, 3] },
+    { fa: 'در طول مسیر', en: 'During the journey', detailFa: 'خط و جهت را تأیید کنید و بعد از رد شدن از ایستگاه راه برگشت را بپرسید.', detailEn: 'Confirm route and direction, then ask how to return after a missed stop.', lessonIndexes: [4, 5] },
   ],
   shopping: [
     { fa: 'مواد غذایی و مقدار', en: 'Food and quantity', detailFa: 'کالا، تعداد، وزن و قیمت را مشخص کنید.', detailEn: 'Specify the item, count, weight, and price.', lessonIndexes: [0, 1, 2] },

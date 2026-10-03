@@ -55,6 +55,11 @@
     "approved": true
   },
   {
+    "text": "Acest autobuz merge spre centru?",
+    "slug": "ro-1d6f480e52d06dc7",
+    "approved": true
+  },
+  {
     "text": "acum",
     "slug": "ro-13ee37f183bddde8",
     "approved": true
@@ -185,6 +190,11 @@
     "approved": true
   },
   {
+    "text": "Am înțeles. Verific și afișajul. Mulțumesc!",
+    "slug": "ro-026df593a943179e",
+    "approved": true
+  },
+  {
     "text": "Am mâna în buzunar.",
     "slug": "ro-9f5b8455d1564648",
     "approved": true
@@ -192,6 +202,11 @@
   {
     "text": "Am nevoie de ajutor.",
     "slug": "ro-48671f44acd1c15c",
+    "approved": true
+  },
+  {
+    "text": "Am nevoie de un alt bilet pentru întoarcere?",
+    "slug": "ro-a36f499d1f25e1e2",
     "approved": true
   },
   {
@@ -225,8 +240,18 @@
     "approved": true
   },
   {
+    "text": "Am plătit. De unde iau biletul?",
+    "slug": "ro-79f6c0038ab09d90",
+    "approved": true
+  },
+  {
     "text": "Am schimbat programarea pentru joi.",
     "slug": "ro-88e6ae6d02655ead",
+    "approved": true
+  },
+  {
+    "text": "Am trecut de stația mea.",
+    "slug": "ro-3563ad557c5150e9",
     "approved": true
   },
   {
@@ -247,6 +272,11 @@
   {
     "text": "apă",
     "slug": "apa",
+    "approved": true
+  },
+  {
+    "text": "Apăsați aici, apoi verificați prețul pe ecran.",
+    "slug": "ro-2c6a36d5705c01f0",
     "approved": true
   },
   {
@@ -620,6 +650,11 @@
     "approved": true
   },
   {
+    "text": "Bună ziua. Acest autobuz merge spre centru?",
+    "slug": "ro-9c03362d8615e61c",
+    "approved": true
+  },
+  {
     "text": "Bună ziua. Am cumpărat acest tricou ieri.",
     "slug": "ro-29a54c8e0aea00e2",
     "approved": true
@@ -790,6 +825,11 @@
     "approved": true
   },
   {
+    "text": "Câte stații sunt până acolo?",
+    "slug": "ro-8f2a38d2a5a3b6ef",
+    "approved": true
+  },
+  {
     "text": "câți",
     "slug": "ro-13a0c9e66cda9046",
     "approved": true
@@ -915,6 +955,11 @@
     "approved": true
   },
   {
+    "text": "Coborâți la următoarea stație.",
+    "slug": "ro-075362d393b83df1",
+    "approved": true
+  },
+  {
     "text": "coborî",
     "slug": "ro-304175cfd68854b3",
     "approved": true
@@ -957,6 +1002,11 @@
   {
     "text": "cum",
     "slug": "ro-594810adcbee20bd",
+    "approved": true
+  },
+  {
+    "text": "Cum mă întorc spre Universitate?",
+    "slug": "ro-9aaa1ef160eadc7e",
     "approved": true
   },
   {
@@ -1045,6 +1095,11 @@
     "approved": true
   },
   {
+    "text": "Da, dar verificați numărul liniei.",
+    "slug": "ro-7c27965b9e87ae13",
+    "approved": true
+  },
+  {
     "text": "Da, desigur.",
     "slug": "ro-2c4cf5c8fdd1c814",
     "approved": true
@@ -1087,6 +1142,11 @@
   {
     "text": "Da, îmi puteți arăta ecranul.",
     "slug": "ro-97c577c142466d51",
+    "approved": true
+  },
+  {
+    "text": "Da, merge în acea direcție.",
+    "slug": "ro-d64063ecff045fa2",
     "approved": true
   },
   {
@@ -1135,6 +1195,11 @@
     "approved": true
   },
   {
+    "text": "Da. Alegeți mai întâi tipul de călătorie.",
+    "slug": "ro-cb70a796a1bcb5fd",
+    "approved": true
+  },
+  {
     "text": "Da. Apropiați cardul de terminal, vă rog.",
     "slug": "ro-964f83e4e065f97d",
     "approved": true
@@ -1177,6 +1242,11 @@
   {
     "text": "De obicei este pe raftul din dreapta.",
     "slug": "ro-3ca2a039b23afe5a",
+    "approved": true
+  },
+  {
+    "text": "De unde iau biletul?",
+    "slug": "ro-5177a54862998313",
     "approved": true
   },
   {
@@ -1525,8 +1595,18 @@
     "approved": true
   },
   {
+    "text": "Este în fanta de jos. Păstrați și bonul.",
+    "slug": "ro-3c215dd4186b8b51",
+    "approved": true
+  },
+  {
     "text": "Este la etajul întâi?",
     "slug": "ro-1a6f46306034ffca",
+    "approved": true
+  },
+  {
+    "text": "Este linia potrivită pentru Piața Unirii?",
+    "slug": "ro-4cd79c6d8cd132a3",
     "approved": true
   },
   {
@@ -1910,6 +1990,11 @@
     "approved": true
   },
   {
+    "text": "La ce stație voiați să coborâți?",
+    "slug": "ro-cf81a660c83f4bed",
+    "approved": true
+  },
+  {
     "text": "La dreapta, după semafor.",
     "slug": "ro-9183aa472f151f96",
     "approved": true
@@ -1927,6 +2012,11 @@
   {
     "text": "La revedere!",
     "slug": "ro-7ac1c3cccb521bb9",
+    "approved": true
+  },
+  {
+    "text": "La stația Universitate. Unde pot coborî acum?",
+    "slug": "ro-604adb8de375dd39",
     "approved": true
   },
   {
@@ -2125,6 +2215,16 @@
     "approved": true
   },
   {
+    "text": "Mulțumesc. Verific acum biletul și bonul.",
+    "slug": "ro-b583ba057ff005c7",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc. Voi verifica direcția și biletul.",
+    "slug": "ro-b6f965660ee890ad",
+    "approved": true
+  },
+  {
     "text": "Mulțumim.",
     "slug": "ro-63b183a1c74d1db4",
     "approved": true
@@ -2247,6 +2347,11 @@
   {
     "text": "Nu mă simt bine.",
     "slug": "ro-43c5d6c233fcb23c",
+    "approved": true
+  },
+  {
+    "text": "Nu pentru această destinație. Coborâți la Piața Unirii.",
+    "slug": "ro-f4d1064cfdc27c80",
     "approved": true
   },
   {
@@ -2510,6 +2615,11 @@
     "approved": true
   },
   {
+    "text": "Pot cumpăra un bilet de la acest automat?",
+    "slug": "ro-be860494d263333c",
+    "approved": true
+  },
+  {
     "text": "Pot întreba despre o salată fără sos.",
     "slug": "ro-d04a4602fdf8a39d",
     "approved": true
@@ -2660,8 +2770,18 @@
     "approved": true
   },
   {
+    "text": "Scuzați-mă, am trecut de stația mea.",
+    "slug": "ro-a16d3058ddb6dd33",
+    "approved": true
+  },
+  {
     "text": "Scuzați-mă, ce ingrediente are această supă?",
     "slug": "ro-2bf0421c8ba11aaf",
+    "approved": true
+  },
+  {
+    "text": "Scuzați-mă, pot cumpăra un bilet de la acest automat?",
+    "slug": "ro-6e0a9e94d5c7f648",
     "approved": true
   },
   {
@@ -2767,6 +2887,11 @@
   {
     "text": "sunt",
     "slug": "ro-ed68511884c42fd0",
+    "approved": true
+  },
+  {
+    "text": "Sunt câteva stații. Urmăriți numele pe ecran.",
+    "slug": "ro-332a9c5396a1f558",
     "approved": true
   },
   {
@@ -2890,6 +3015,11 @@
     "approved": true
   },
   {
+    "text": "Trebuie să schimb autobuzul?",
+    "slug": "ro-13d4095f86492bd9",
+    "approved": true
+  },
+  {
     "text": "trecut",
     "slug": "ro-8090fbb7d6f08e4d",
     "approved": true
@@ -2947,6 +3077,11 @@
   {
     "text": "u",
     "slug": "ro-0bfe935e70c321c7",
+    "approved": true
+  },
+  {
+    "text": "Uitați-vă la opțiunile de plată afișate.",
+    "slug": "ro-757cee2fa5a8b406",
     "approved": true
   },
   {
@@ -3155,6 +3290,16 @@
     "approved": true
   },
   {
+    "text": "Verificați stația de pe partea opusă.",
+    "slug": "ro-f0de6ca891714558",
+    "approved": true
+  },
+  {
+    "text": "Verificați valabilitatea biletului înainte să urcați.",
+    "slug": "ro-fea282a11417f8ad",
+    "approved": true
+  },
+  {
     "text": "viitor",
     "slug": "ro-7ff78f0867ab4b62",
     "approved": true
@@ -3187,6 +3332,11 @@
   {
     "text": "Vorbiți engleză?",
     "slug": "ro-5ec45724b184b979",
+    "approved": true
+  },
+  {
+    "text": "Vreau o singură călătorie. Unde apăs?",
+    "slug": "ro-321122f92bc340d2",
     "approved": true
   },
   {
