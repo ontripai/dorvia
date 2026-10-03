@@ -68,7 +68,58 @@ export const directionsScenarios: EverydayScenario[] = [
       { ro: 'Deci la dreapta după semafor?', en: 'Confirm a right turn after the traffic light.', fa: 'پیچیدن به راست پس از چراغ راهنمایی را تأیید کنید.', hint: 'Deci la dreapta după …?' },
     ],
   },
+  {
+    slug: 'punct-reper', title: { fa: 'نشانهٔ مکانی و ورودی ساختمان', en: 'Landmark and building entrance' },
+    goal: { fa: 'ساختمان را با نشانهٔ نزدیک پیدا کنید و ورودی درست را تأیید کنید.', en: 'Find a building using a landmark and confirm the correct entrance.' },
+    dialogue: [
+      { who: 'you', ro: 'Scuzați-mă, caut clădirea de la numărul douăzeci.', en: 'Excuse me, I am looking for the building at number twenty.', fa: 'ببخشید، دنبال ساختمان شمارهٔ بیست هستم.' },
+      { who: 'passerby', ro: 'Este lângă poștă, pe partea stângă.', en: 'It is next to the post office, on the left.', fa: 'کنار ادارهٔ پست، سمت چپ است.' },
+      { who: 'you', ro: 'Văd poșta, dar nu văd numărul.', en: 'I can see the post office, but not the number.', fa: 'ادارهٔ پست را می‌بینم، اما شماره را نه.' },
+      { who: 'passerby', ro: 'Uitați-vă la plăcuța de lângă ușă.', en: 'Look at the plaque next to the door.', fa: 'به پلاک کنار در نگاه کنید.' },
+      { who: 'you', ro: 'Intrarea este pe această stradă?', en: 'Is the entrance on this street?', fa: 'ورودی در همین خیابان است؟' },
+      { who: 'passerby', ro: 'Nu, intrarea este după colț.', en: 'No, the entrance is around the corner.', fa: 'نه، ورودی بعد از پیچ است.' },
+      { who: 'you', ro: 'Trebuie să fac la dreapta după clădire?', en: 'Do I need to turn right after the building?', fa: 'باید بعد از ساختمان به راست بپیچم؟' },
+      { who: 'passerby', ro: 'Da, apoi vedeți ușa principală.', en: 'Yes, then you will see the main door.', fa: 'بله، بعد درِ اصلی را می‌بینید.' },
+      { who: 'you', ro: 'Am înțeles. Mulțumesc pentru explicație!', en: 'I understand. Thank you for explaining!', fa: 'متوجه شدم. از توضیحتان ممنونم!' },
+    ],
+    rules: [
+      { title: { fa: 'نشانهٔ نزدیک ساختمان', en: 'A nearby landmark' }, explanation: { fa: 'lângă یعنی «کنار» و pe partea stângă یعنی «در سمت چپ». برای یافتن ساختمان، نشانهٔ مشخص و شماره را با هم بررسی کنید.', en: 'Lângă means “next to”; pe partea stângă means “on the left”. Check both the landmark and building number.' }, examples: [{ ro: 'Este lângă poștă, pe partea stângă.', en: 'It is next to the post office, on the left.', fa: 'کنار ادارهٔ پست، سمت چپ است.' }] },
+      { title: { fa: 'دیدن و ندیدن', en: 'See and not see' }, explanation: { fa: 'Văd یعنی «می‌بینم». برای منفی کردن، nu را پیش از فعل بیاورید: nu văd. دو بخش را با dar («اما») پیوند دهید.', en: 'Văd means “I see”. Put nu before the verb to negate it: nu văd. Dar means “but”.' }, examples: [{ ro: 'Văd poșta, dar nu văd numărul.', en: 'I can see the post office, but not the number.', fa: 'ادارهٔ پست را می‌بینم، اما شماره را نه.' }] },
+      { title: { fa: 'ورودی اصلی', en: 'The main entrance' }, explanation: { fa: 'Intrarea este ...? محل ورودی را می‌پرسد. după colț یعنی «آن‌طرف پیچ» و ușa principală یعنی «درِ اصلی».', en: 'Intrarea este ...? asks where the entrance is. După colț means “around the corner”; ușa principală is the main door.' }, examples: [{ ro: 'Intrarea este pe această stradă?', en: 'Is the entrance on this street?', fa: 'ورودی در همین خیابان است؟' }] },
+    ],
+    tasks: [
+      { ro: 'Scuzați-mă, caut clădirea de la numărul douăzeci.', en: 'Ask for building number twenty.', fa: 'ساختمان شمارهٔ بیست را بپرسید.', hint: 'Scuzați-mă, caut clădirea ...' },
+      { ro: 'Văd poșta, dar nu văd numărul.', en: 'Say you see the post office but not the number.', fa: 'بگویید پست را می‌بینید اما شماره را نه.', hint: 'Văd poșta, dar ...' },
+      { ro: 'Intrarea este pe această stradă?', en: 'Check if the entrance is on this street.', fa: 'محل ورودی را تأیید کنید.', hint: 'Intrarea este ...?' },
+      { ro: 'Trebuie să fac la dreapta după clădire?', en: 'Confirm the right turn after the building.', fa: 'پیچیدن به راست را تأیید کنید.', hint: 'Trebuie să fac ...?' },
+    ],
+  },
+  {
+    slug: 'drum-inchis', title: { fa: 'راه بسته و مسیر جایگزین', en: 'Closed road and alternative route' },
+    goal: { fa: 'وقتی راه بسته است، مسیر پیادهٔ جایگزین را بپرسید و دو گام آن را تأیید کنید.', en: 'When a street is closed, ask for a walking alternative and confirm its steps.' },
+    dialogue: [
+      { who: 'you', ro: 'Bună ziua. Pot trece pe această stradă?', en: 'Hello. Can I go through this street?', fa: 'سلام. می‌توانم از این خیابان عبور کنم؟' },
+      { who: 'passerby', ro: 'Nu, strada este închisă astăzi.', en: 'No, the street is closed today.', fa: 'نه، خیابان امروز بسته است.' },
+      { who: 'you', ro: 'Cum ajung pe jos la bibliotecă?', en: 'How do I get to the library on foot?', fa: 'پیاده چطور به کتابخانه برسم؟' },
+      { who: 'passerby', ro: 'Mergeți până la semafor și traversați acolo.', en: 'Go to the traffic light and cross there.', fa: 'تا چراغ راهنمایی بروید و همان‌جا عبور کنید.' },
+      { who: 'you', ro: 'După semafor fac la stânga?', en: 'Do I turn left after the traffic light?', fa: 'بعد از چراغ راهنمایی به چپ بپیچم؟' },
+      { who: 'passerby', ro: 'Da. Apoi continuați drept înainte.', en: 'Yes. Then continue straight ahead.', fa: 'بله. سپس مستقیم ادامه دهید.' },
+      { who: 'you', ro: 'Biblioteca este pe aceeași parte?', en: 'Is the library on the same side?', fa: 'کتابخانه در همان سمت است؟' },
+      { who: 'passerby', ro: 'Este pe partea dreaptă, după parc.', en: 'It is on the right, after the park.', fa: 'در سمت راست، بعد از پارک است.' },
+      { who: 'you', ro: 'Deci trec la semafor, apoi merg la stânga. Mulțumesc!', en: 'So I cross at the light, then go left. Thank you!', fa: 'پس از چراغ عبور می‌کنم، سپس به چپ می‌روم. ممنون!' },
+    ],
+    rules: [
+      { title: { fa: 'بسته بودن راه', en: 'A closed street' }, explanation: { fa: 'strada este închisă یعنی «خیابان بسته است». închisă با اسم مؤنث strada هماهنگ است. برای عبور، Pot trece ...? بپرسید.', en: 'Strada este închisă means “the street is closed”. Închisă agrees with feminine strada. Pot trece ...? asks if you can pass.' }, examples: [{ ro: 'Pot trece pe această stradă?', en: 'Can I go through this street?', fa: 'می‌توانم از این خیابان عبور کنم؟' }] },
+      { title: { fa: 'مسیر پیاده', en: 'Walking route' }, explanation: { fa: 'Cum ajung ...? یعنی «چطور می‌رسم؟». pe jos یعنی «پیاده». پس از آن نام مقصد را بیاورید.', en: 'Cum ajung ...? asks how to get somewhere. Pe jos means “on foot”. Add the destination after it.' }, examples: [{ ro: 'Cum ajung pe jos la bibliotecă?', en: 'How do I get to the library on foot?', fa: 'پیاده چطور به کتابخانه برسم؟' }] },
+      { title: { fa: 'تأیید گام‌های مسیر', en: 'Confirm route steps' }, explanation: { fa: 'până la یعنی «تا»، apoi یعنی «سپس» و după یعنی «بعد از». گام‌ها را با Deci ... بازگو کنید تا مسیر را درست فهمیده باشید.', en: 'Până la means “as far as”, apoi “then”, and după “after”. Repeat the steps using Deci ... to confirm.' }, examples: [{ ro: 'Deci trec la semafor, apoi merg la stânga.', en: 'So I cross at the light, then go left.', fa: 'پس از چراغ عبور می‌کنم، سپس به چپ می‌روم.' }] },
+    ],
+    tasks: [
+      { ro: 'Pot trece pe această stradă?', en: 'Ask whether you can use this street.', fa: 'عبور از خیابان را بپرسید.', hint: 'Pot trece ...?' },
+      { ro: 'Cum ajung pe jos la bibliotecă?', en: 'Ask for a walking route to the library.', fa: 'مسیر پیاده تا کتابخانه را بپرسید.', hint: 'Cum ajung pe jos ...?' },
+      { ro: 'După semafor fac la stânga?', en: 'Confirm the left turn.', fa: 'پیچیدن به چپ را تأیید کنید.', hint: 'După semafor ...?' },
+      { ro: 'Biblioteca este pe aceeași parte?', en: 'Ask if the library is on the same side.', fa: 'سمت کتابخانه را بپرسید.', hint: 'Biblioteca este ...?' },
+    ],
+  },
 ];
 
 export function getDirectionsScenario(slug: string) { return directionsScenarios.find(scenario => scenario.slug === slug); }
-

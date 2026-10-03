@@ -185,6 +185,11 @@
     "approved": true
   },
   {
+    "text": "Am înțeles. Mulțumesc pentru explicație!",
+    "slug": "ro-a22d2b1de100f388",
+    "approved": true
+  },
+  {
     "text": "Am înțeles. Mulțumesc!",
     "slug": "ro-466a6a30bbe4bc62",
     "approved": true
@@ -530,6 +535,11 @@
     "approved": true
   },
   {
+    "text": "Biblioteca este pe aceeași parte?",
+    "slug": "ro-ad570e7aa04b3e6e",
+    "approved": true
+  },
+  {
     "text": "bilet",
     "slug": "ro-aea49165ba40d3f5",
     "approved": true
@@ -697,6 +707,11 @@
   {
     "text": "Bună ziua. Cum vă numiți?",
     "slug": "ro-a1a985baf4d95196",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua. Pot trece pe această stradă?",
+    "slug": "ro-a494091fd93d85c2",
     "approved": true
   },
   {
@@ -1005,6 +1020,11 @@
     "approved": true
   },
   {
+    "text": "Cum ajung pe jos la bibliotecă?",
+    "slug": "ro-834d20bc3c3507e5",
+    "approved": true
+  },
+  {
     "text": "Cum mă întorc spre Universitate?",
     "slug": "ro-9aaa1ef160eadc7e",
     "approved": true
@@ -1047,6 +1067,11 @@
   {
     "text": "Da, am un bilet.",
     "slug": "ro-a9303e6657422f8c",
+    "approved": true
+  },
+  {
+    "text": "Da, apoi vedeți ușa principală.",
+    "slug": "ro-57d0bd1df0463ce3",
     "approved": true
   },
   {
@@ -1200,6 +1225,11 @@
     "approved": true
   },
   {
+    "text": "Da. Apoi continuați drept înainte.",
+    "slug": "ro-4b77fade064f9564",
+    "approved": true
+  },
+  {
     "text": "Da. Apropiați cardul de terminal, vă rog.",
     "slug": "ro-964f83e4e065f97d",
     "approved": true
@@ -1267,6 +1297,16 @@
   {
     "text": "Deci la dreapta după semafor?",
     "slug": "ro-49cd7827401553ba",
+    "approved": true
+  },
+  {
+    "text": "Deci trec la semafor, apoi merg la stânga.",
+    "slug": "ro-ba665ece20f12f2e",
+    "approved": true
+  },
+  {
+    "text": "Deci trec la semafor, apoi merg la stânga. Mulțumesc!",
+    "slug": "ro-24bd87bdfdb53265",
     "approved": true
   },
   {
@@ -1440,6 +1480,11 @@
     "approved": true
   },
   {
+    "text": "După semafor fac la stânga?",
+    "slug": "ro-35c92f7a16d61f68",
+    "approved": true
+  },
+  {
     "text": "după-amiază",
     "slug": "ro-027051e8b16b90e3",
     "approved": true
@@ -1605,8 +1650,18 @@
     "approved": true
   },
   {
+    "text": "Este lângă poștă, pe partea stângă.",
+    "slug": "ro-169e68cb7ba5177e",
+    "approved": true
+  },
+  {
     "text": "Este linia potrivită pentru Piața Unirii?",
     "slug": "ro-4cd79c6d8cd132a3",
+    "approved": true
+  },
+  {
+    "text": "Este pe partea dreaptă, după parc.",
+    "slug": "ro-3d7ca3ecaa8a1ee2",
     "approved": true
   },
   {
@@ -1827,6 +1882,11 @@
   {
     "text": "inimă",
     "slug": "inima",
+    "approved": true
+  },
+  {
+    "text": "Intrarea este pe această stradă?",
+    "slug": "ro-1c64e1c13e562173",
     "approved": true
   },
   {
@@ -2160,6 +2220,11 @@
     "approved": true
   },
   {
+    "text": "Mergeți până la semafor și traversați acolo.",
+    "slug": "ro-2091dc663aea6218",
+    "approved": true
+  },
+  {
     "text": "meu",
     "slug": "ro-4b152f7c6c1c13de",
     "approved": true
@@ -2380,6 +2445,11 @@
     "approved": true
   },
   {
+    "text": "Nu, intrarea este după colț.",
+    "slug": "ro-d220cc4c3846f3ac",
+    "approved": true
+  },
+  {
     "text": "Nu, mulțumesc. Cât costă?",
     "slug": "ro-775059e5025b3ece",
     "approved": true
@@ -2392,6 +2462,11 @@
   {
     "text": "Nu, nu am card de fidelitate.",
     "slug": "ro-ff5f3e05ee8ae884",
+    "approved": true
+  },
+  {
+    "text": "Nu, strada este închisă astăzi.",
+    "slug": "ro-aba780438927bdf0",
     "approved": true
   },
   {
@@ -2640,6 +2715,11 @@
     "approved": true
   },
   {
+    "text": "Pot trece pe această stradă?",
+    "slug": "ro-06528e708a3331ed",
+    "approved": true
+  },
+  {
     "text": "Poți vorbi mai rar?",
     "slug": "ro-1783e0203d00facb",
     "approved": true
@@ -2772,6 +2852,11 @@
   {
     "text": "Scuzați-mă, am trecut de stația mea.",
     "slug": "ro-a16d3058ddb6dd33",
+    "approved": true
+  },
+  {
+    "text": "Scuzați-mă, caut clădirea de la numărul douăzeci.",
+    "slug": "ro-941275a4add3ec9f",
     "approved": true
   },
   {
@@ -3015,6 +3100,11 @@
     "approved": true
   },
   {
+    "text": "Trebuie să fac la dreapta după clădire?",
+    "slug": "ro-749cef4eb3c556f2",
+    "approved": true
+  },
+  {
     "text": "Trebuie să schimb autobuzul?",
     "slug": "ro-13d4095f86492bd9",
     "approved": true
@@ -3082,6 +3172,11 @@
   {
     "text": "Uitați-vă la opțiunile de plată afișate.",
     "slug": "ro-757cee2fa5a8b406",
+    "approved": true
+  },
+  {
+    "text": "Uitați-vă la plăcuța de lângă ușă.",
+    "slug": "ro-f1e0887970d7cf44",
     "approved": true
   },
   {
@@ -3277,6 +3372,11 @@
   {
     "text": "Vă rog.",
     "slug": "ro-94298f54d4551395",
+    "approved": true
+  },
+  {
+    "text": "Văd poșta, dar nu văd numărul.",
+    "slug": "ro-a13103f7dc24be3c",
     "approved": true
   },
   {
