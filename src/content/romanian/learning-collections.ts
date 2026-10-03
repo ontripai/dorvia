@@ -17,11 +17,12 @@ export const CONVERSATION_GROUPS = [
   ] },
   { slug: 'services', fa: 'کارهای ضروری', en: 'Essential services', introFa: 'در پذیرش درمانگاه وقت ملاقات بگیرید و روز و ساعت را مشخص کنید.', introEn: 'Ask for an appointment at a clinic desk and choose a day and time.', lessons: [
     { href: '/learn-romanian/lectie/programare', fa: 'گرفتن وقت ملاقات', en: 'Booking an appointment', detailFa: 'درخواست مؤدبانه، پرسیدن روز و اعلام ساعت', detailEn: 'Polite request, choosing a day and stating a time' },
+    { href: '/learn-romanian/lectie/farmacie', fa: 'گفت‌وگو در داروخانه', en: 'At the pharmacy', detailFa: 'پرسیدن موجودی دارو، نسخه و درخواست توضیح', detailEn: 'Ask about a medicine, a prescription, and how it is taken' },
   ] },
 ] as const;
 
 export const UPCOMING_CONVERSATION_GROUPS = [
-  { fa: 'داروخانه', en: 'Pharmacy', detailFa: 'پرسیدن دربارهٔ دارو و فهمیدن پاسخ داروساز', detailEn: 'Asking about medicine and understanding the pharmacist' },
+  { fa: 'کارهای بانکی', en: 'Banking', detailFa: 'پرسیدن دربارهٔ حساب و نوبت در شعبه', detailEn: 'Asking about an account and a turn at the branch' },
 ] as const;
 
 export const STATION_ENGLISH: Record<string, string> = {
