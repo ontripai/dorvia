@@ -4128,5 +4128,140 @@
     "text": "Mulțumesc. Vă întreb dacă nu sunt sigur.",
     "slug": "ro-58aef3830584bf8e",
     "approved": true
+  },
+  {
+    "text": "Bună ziua. Apartamentul din anunț mai este disponibil?",
+    "slug": "ro-afffa121d4a5e304",
+    "approved": true
+  },
+  {
+    "text": "Da, este disponibil. Doriți să îl vedeți?",
+    "slug": "ro-aa58dec933d7ee40",
+    "approved": true
+  },
+  {
+    "text": "Da. Putem stabili o vizionare pentru mâine?",
+    "slug": "ro-1d3fa9f0a964f307",
+    "approved": true
+  },
+  {
+    "text": "Mâine la ora șaptesprezece este bine?",
+    "slug": "ro-1022790b52b18bd0",
+    "approved": true
+  },
+  {
+    "text": "Da. Care este adresa exactă?",
+    "slug": "ro-0abea38bcf3a2f9b",
+    "approved": true
+  },
+  {
+    "text": "Vă trimit strada, numărul și intrarea.",
+    "slug": "ro-8e0ff3ed51e78b5b",
+    "approved": true
+  },
+  {
+    "text": "Cu cine mă întâlnesc la intrare?",
+    "slug": "ro-6856bd8937220337",
+    "approved": true
+  },
+  {
+    "text": "Vă întâlniți cu mine. Sunați-mă când ajungeți.",
+    "slug": "ro-18372a1821585cc9",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc. Confirm vizionarea pentru mâine la ora șaptesprezece.",
+    "slug": "ro-d806b8c5fc32e88a",
+    "approved": true
+  },
+  {
+    "text": "Cât este chiria lunară?",
+    "slug": "ro-1ca3f05d8493c197",
+    "approved": true
+  },
+  {
+    "text": "Suma este cea din anunț.",
+    "slug": "ro-b7e7053a7fe4f360",
+    "approved": true
+  },
+  {
+    "text": "Utilitățile sunt incluse sau se plătesc separat?",
+    "slug": "ro-66ceaacbe7390bf0",
+    "approved": true
+  },
+  {
+    "text": "Se plătesc separat. Vă pot arăta facturile recente.",
+    "slug": "ro-2ebb67cdb134912a",
+    "approved": true
+  },
+  {
+    "text": "Ce garanție solicitați?",
+    "slug": "ro-b03d47f771ad2735",
+    "approved": true
+  },
+  {
+    "text": "Discutăm suma și condițiile în scris.",
+    "slug": "ro-dd4a1974fbe3a79e",
+    "approved": true
+  },
+  {
+    "text": "Apartamentul este mobilat? Cum funcționează încălzirea?",
+    "slug": "ro-1511b71eb759b14e",
+    "approved": true
+  },
+  {
+    "text": "Este mobilat. Vă arăt sistemul de încălzire la vizionare.",
+    "slug": "ro-cc38c0572f9cb483",
+    "approved": true
+  },
+  {
+    "text": "Aș dori lista costurilor și condițiile în scris, vă rog.",
+    "slug": "ro-81c26befa8d66aa8",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua. Am o problemă în apartament.",
+    "slug": "ro-791f83b65a820e39",
+    "approved": true
+  },
+  {
+    "text": "Ce s-a întâmplat?",
+    "slug": "ro-252ce30b2bc788d5",
+    "approved": true
+  },
+  {
+    "text": "Robinetul din baie curge de ieri.",
+    "slug": "ro-01bbd919217fc1ae",
+    "approved": true
+  },
+  {
+    "text": "Puteți trimite o fotografie?",
+    "slug": "ro-8ff6f77fb430ddca",
+    "approved": true
+  },
+  {
+    "text": "Da. Când poate veni cineva să verifice?",
+    "slug": "ro-eb5b4f8a5d441512",
+    "approved": true
+  },
+  {
+    "text": "Verific disponibilitatea și vă confirm ora.",
+    "slug": "ro-3498ba0efe35bfc5",
+    "approved": true
+  },
+  {
+    "text": "Vă rog să mă anunțați înainte de vizită.",
+    "slug": "ro-b7ad0df6eab163ee",
+    "approved": true
+  },
+  {
+    "text": "Sigur. Stabilim împreună ora vizitei.",
+    "slug": "ro-1a510c876b8bcef8",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc. Aștept confirmarea și păstrez mesajul.",
+    "slug": "ro-dc156bcaccf5c4c7",
+    "approved": true
   }
 ]
