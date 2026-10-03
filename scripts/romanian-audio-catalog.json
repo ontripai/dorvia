@@ -5,6 +5,11 @@
     "approved": true
   },
   {
+    "text": "A apărut un mesaj pe ecran?",
+    "slug": "ro-dc87e443a65c3911",
+    "approved": true
+  },
+  {
     "text": "a cincea",
     "slug": "ro-7d5cd415080b5b8f",
     "approved": true
@@ -135,6 +140,11 @@
     "approved": true
   },
   {
+    "text": "Alegeți serviciul pentru informații despre cont.",
+    "slug": "ro-24c12f1c349c3e53",
+    "approved": true
+  },
+  {
     "text": "Altceva?",
     "slug": "ro-83ed8040b7a39f95",
     "approved": true
@@ -185,6 +195,11 @@
     "approved": true
   },
   {
+    "text": "Am înțeles. Mulțumesc pentru ajutor!",
+    "slug": "ro-330ef9f5046a08a9",
+    "approved": true
+  },
+  {
     "text": "Am înțeles. Mulțumesc pentru explicație!",
     "slug": "ro-a22d2b1de100f388",
     "approved": true
@@ -212,6 +227,11 @@
   {
     "text": "Am nevoie de ajutor.",
     "slug": "ro-48671f44acd1c15c",
+    "approved": true
+  },
+  {
+    "text": "Am nevoie de informații despre un cont.",
+    "slug": "ro-c23c26ec28d0e53b",
     "approved": true
   },
   {
@@ -317,6 +337,16 @@
   {
     "text": "astăzi",
     "slug": "ro-e22efd4dd289b37c",
+    "approved": true
+  },
+  {
+    "text": "Aș dori informații despre deschiderea unui cont.",
+    "slug": "ro-d5113cadd52cfca3",
+    "approved": true
+  },
+  {
+    "text": "Aș dori informații despre un transfer bancar.",
+    "slug": "ro-2bc136e9399448d0",
     "approved": true
   },
   {
@@ -685,6 +715,11 @@
     "approved": true
   },
   {
+    "text": "Bună ziua. Am nevoie de informații despre un cont.",
+    "slug": "ro-e549521b5482d3c7",
+    "approved": true
+  },
+  {
     "text": "Bună ziua. Am o programare la ora zece.",
     "slug": "ro-a3d055fa61c3fca9",
     "approved": true
@@ -700,6 +735,16 @@
     "approved": true
   },
   {
+    "text": "Bună ziua. Aș dori informații despre deschiderea unui cont.",
+    "slug": "ro-0982b6919be62423",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua. Aș dori informații despre un transfer bancar.",
+    "slug": "ro-d452a251786691a9",
+    "approved": true
+  },
+  {
     "text": "Bună ziua. Aș dori o programare la medic.",
     "slug": "ro-69a7780512ee0b2c",
     "approved": true
@@ -712,6 +757,16 @@
   {
     "text": "Bună ziua. Aveți card de fidelitate?",
     "slug": "ro-111a3f23b1a60a11",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua. Aveți o programare?",
+    "slug": "ro-7539d2786ba04545",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua. Cardul meu nu funcționează la bancomat.",
+    "slug": "ro-cb43cc5a73416973",
     "approved": true
   },
   {
@@ -740,6 +795,11 @@
     "approved": true
   },
   {
+    "text": "Bună ziua. Pentru cine este contul?",
+    "slug": "ro-0cffb00a8389c834",
+    "approved": true
+  },
+  {
     "text": "Bună ziua. Pot trece pe această stradă?",
     "slug": "ro-a494091fd93d85c2",
     "approved": true
@@ -765,8 +825,18 @@
     "approved": true
   },
   {
+    "text": "Cardul meu nu funcționează la bancomat.",
+    "slug": "ro-438cca5b596b70fa",
+    "approved": true
+  },
+  {
     "text": "care",
     "slug": "ro-f9ed2b54fd72ac16",
+    "approved": true
+  },
+  {
+    "text": "Care este suma totală și există un comision?",
+    "slug": "ro-3180569e2ca26ac0",
     "approved": true
   },
   {
@@ -917,6 +987,11 @@
   {
     "text": "Ce mărime doriți în loc?",
     "slug": "ro-4d5ab6d98eb27b5b",
+    "approved": true
+  },
+  {
+    "text": "Ce opțiune aleg pe ecran?",
+    "slug": "ro-a986eeb3abeb4a76",
     "approved": true
   },
   {
@@ -1160,6 +1235,11 @@
     "approved": true
   },
   {
+    "text": "Da, dar nu am înțeles mesajul.",
+    "slug": "ro-cc33dec990aadee8",
+    "approved": true
+  },
+  {
     "text": "Da, dar verificați numărul liniei.",
     "slug": "ro-7c27965b9e87ae13",
     "approved": true
@@ -1212,6 +1292,11 @@
   {
     "text": "Da, îmi puteți arăta ecranul.",
     "slug": "ro-97c577c142466d51",
+    "approved": true
+  },
+  {
+    "text": "Da, luați un număr de la aparat.",
+    "slug": "ro-90eee5335cd9672a",
     "approved": true
   },
   {
@@ -1290,13 +1375,28 @@
     "approved": true
   },
   {
+    "text": "Da. Tranzacția a fost refuzată. Ce pot verifica?",
+    "slug": "ro-83bc6b7ef672d46f",
+    "approved": true
+  },
+  {
     "text": "Da. Vă explic ce scrie și verific disponibilitatea.",
     "slug": "ro-24d87ae6617cce4e",
     "approved": true
   },
   {
+    "text": "Da. Vreau să verific numele și contul înainte de plată.",
+    "slug": "ro-668a1de6f300aa00",
+    "approved": true
+  },
+  {
     "text": "Dacă nu este disponibil, ce trebuie să fac?",
     "slug": "ro-db1f2ace707bf535",
+    "approved": true
+  },
+  {
+    "text": "Dacă pierd cardul, cum îl blochez?",
+    "slug": "ro-dfc0ace1bf911b66",
     "approved": true
   },
   {
@@ -1372,6 +1472,16 @@
   {
     "text": "Deci trec la semafor, apoi merg la stânga. Mulțumesc!",
     "slug": "ro-24bd87bdfdb53265",
+    "approved": true
+  },
+  {
+    "text": "Depinde de tipul contului. Verificăm condițiile.",
+    "slug": "ro-4d2e1e14371333f6",
+    "approved": true
+  },
+  {
+    "text": "Desigur. Aveți datele beneficiarului?",
+    "slug": "ro-b2990bb987180a2e",
     "approved": true
   },
   {
@@ -1807,6 +1917,11 @@
   {
     "text": "Eu sunt studentă.",
     "slug": "ro-eb0138430210dd0c",
+    "approved": true
+  },
+  {
+    "text": "Există un comision lunar?",
+    "slug": "ro-9c9c6231e484efa5",
     "approved": true
   },
   {
@@ -2340,6 +2455,16 @@
     "approved": true
   },
   {
+    "text": "Mulțumesc. Confirm doar după ce verific toate datele.",
+    "slug": "ro-1c60c6a4fc65b30b",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc. Nu voi comunica nimănui codul PIN.",
+    "slug": "ro-179623e54661b729",
+    "approved": true
+  },
+  {
     "text": "Mulțumesc. Pot plăti acum cu cardul?",
     "slug": "ro-b2b237cd276f3fe1",
     "approved": true
@@ -2362,6 +2487,11 @@
   {
     "text": "Mulțumesc. Voi verifica direcția și biletul.",
     "slug": "ro-b6f965660ee890ad",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc. Vreau să citesc condițiile înainte de a decide.",
+    "slug": "ro-7b46c496f2d688ec",
     "approved": true
   },
   {
@@ -2505,6 +2635,11 @@
     "approved": true
   },
   {
+    "text": "Nu voi comunica nimănui codul PIN.",
+    "slug": "ro-6defd70927a0c2ca",
+    "approved": true
+  },
+  {
     "text": "Nu vorbesc românește.",
     "slug": "ro-b7fcff46e735b965",
     "approved": true
@@ -2542,6 +2677,11 @@
   {
     "text": "Nu, nu am card de fidelitate.",
     "slug": "ro-ff5f3e05ee8ae884",
+    "approved": true
+  },
+  {
+    "text": "Nu, nu am programare. Pot lua un număr de ordine?",
+    "slug": "ro-ec89aad7ab0268d6",
     "approved": true
   },
   {
@@ -2730,6 +2870,11 @@
     "approved": true
   },
   {
+    "text": "Pentru mine. Ce documente îmi trebuie?",
+    "slug": "ro-cb9a1f044255b764",
+    "approved": true
+  },
+  {
     "text": "Pentru vineri la ora zece.",
     "slug": "ro-c4b630f65060b88f",
     "approved": true
@@ -2775,13 +2920,28 @@
     "approved": true
   },
   {
+    "text": "Pot folosi aplicația și cardul pentru acest cont?",
+    "slug": "ro-2b08db0f69affc95",
+    "approved": true
+  },
+  {
     "text": "Pot întreba despre o salată fără sos.",
     "slug": "ro-d04a4602fdf8a39d",
     "approved": true
   },
   {
+    "text": "Pot lua un număr de ordine?",
+    "slug": "ro-7591c963f8c66eb0",
+    "approved": true
+  },
+  {
     "text": "Pot plăti cu cardul?",
     "slug": "ro-aef9f5e484d6b3fa",
+    "approved": true
+  },
+  {
+    "text": "Pot primi o confirmare a transferului?",
+    "slug": "ro-3c7c963f6169a585",
     "approved": true
   },
   {
@@ -2827,6 +2987,11 @@
   {
     "text": "Programarea este anulată.",
     "slug": "ro-ffbec0e93f34b43a",
+    "approved": true
+  },
+  {
+    "text": "Puteți descrie ce scria, fără să spuneți codul PIN?",
+    "slug": "ro-206a2f26bf1cbb7e",
     "approved": true
   },
   {
@@ -3375,6 +3540,11 @@
     "approved": true
   },
   {
+    "text": "Unde văd când vine rândul meu?",
+    "slug": "ro-ba93084aade1ae8a",
+    "approved": true
+  },
+  {
     "text": "unsprezece",
     "slug": "ro-9527fb6294dbb9d3",
     "approved": true
@@ -3382,6 +3552,11 @@
   {
     "text": "unu",
     "slug": "unu",
+    "approved": true
+  },
+  {
+    "text": "Urmăriți numărul pe afișaj și mergeți la ghișeul indicat.",
+    "slug": "ro-f5714b7ae11f41a8",
     "approved": true
   },
   {
@@ -3410,6 +3585,31 @@
     "approved": true
   },
   {
+    "text": "Vă arăt numărul oficial de contact al băncii.",
+    "slug": "ro-e972e5261249c050",
+    "approved": true
+  },
+  {
+    "text": "Vă arăt opțiunile și costurile în scris.",
+    "slug": "ro-4755c0a269ea4450",
+    "approved": true
+  },
+  {
+    "text": "Vă arăt suma și costurile înainte de confirmare.",
+    "slug": "ro-63491a380a4e4fe6",
+    "approved": true
+  },
+  {
+    "text": "Vă explic ce confirmare este disponibilă.",
+    "slug": "ro-d258a6e431764058",
+    "approved": true
+  },
+  {
+    "text": "Vă explic cum verificați situația prin canalul oficial.",
+    "slug": "ro-8c2d8c84a7d75faf",
+    "approved": true
+  },
+  {
     "text": "Vă explic după ce mă uit.",
     "slug": "ro-1c911152873d6bd4",
     "approved": true
@@ -3417,6 +3617,11 @@
   {
     "text": "Vă explic imediat.",
     "slug": "ro-23e055c9701457e7",
+    "approved": true
+  },
+  {
+    "text": "Vă explic lista actuală de documente.",
+    "slug": "ro-5a7e63f812aca705",
     "approved": true
   },
   {
@@ -3495,6 +3700,11 @@
     "approved": true
   },
   {
+    "text": "Verificați cu atenție toate datele afișate.",
+    "slug": "ro-863138ff5fd88754",
+    "approved": true
+  },
+  {
     "text": "Verificați stația de pe partea opusă.",
     "slug": "ro-f0de6ca891714558",
     "approved": true
@@ -3542,6 +3752,16 @@
   {
     "text": "Vreau o singură călătorie. Unde apăs?",
     "slug": "ro-321122f92bc340d2",
+    "approved": true
+  },
+  {
+    "text": "Vreau să citesc condițiile înainte de a decide.",
+    "slug": "ro-53a0f5ec9700b66e",
+    "approved": true
+  },
+  {
+    "text": "Vreau să verific numele și contul înainte de plată.",
+    "slug": "ro-e73a7d4f16e02f76",
     "approved": true
   },
   {

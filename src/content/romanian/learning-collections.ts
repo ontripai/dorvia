@@ -52,6 +52,12 @@ export const CONVERSATION_GROUPS = [
     { href: '/learn-romanian/lectie/farmacie/vitamine', fa: 'ویتامین‌ها', en: 'Vitamins', detailFa: 'پرسیدن گزینه‌ها و خواندن برچسب', detailEn: 'Ask about options and read labels' },
     { href: '/learn-romanian/lectie/farmacie/igiena', fa: 'بهداشت و مراقبت', en: 'Hygiene and care', detailFa: 'شامپو، کرم دست و پرسیدن قیمت', detailEn: 'Shampoo, hand cream, and asking the price' },
   ] },
+  { slug: 'banking', fa: 'کارهای بانکی', en: 'Banking', introFa: 'از گرفتن نوبت شعبه تا پرسیدن شرایط حساب، مشکل کارت و تأیید انتقال؛ هر موقعیت را جدا تمرین کنید.', introEn: 'From a branch queue to account terms, a card issue and transfer confirmation, practise each situation separately.', lessons: [
+    { href: '/learn-romanian/lectie/banca/sucursala', fa: 'نوبت و راهنمایی در شعبه', en: 'Queue and help at the branch', detailFa: 'گفتن نوع کار، دستگاه نوبت و باجه', detailEn: 'Purpose, queue machine and service desk' },
+    { href: '/learn-romanian/lectie/banca/cont', fa: 'پرسش دربارهٔ حساب بانکی', en: 'Asking about a bank account', detailFa: 'مدارک، کارمزد و شرایط مکتوب', detailEn: 'Documents, fees and written terms' },
+    { href: '/learn-romanian/lectie/banca/card', fa: 'کارت و مشکل خودپرداز', en: 'Card and ATM issue', detailFa: 'توضیح خطا و راه رسمی مسدود کردن کارت', detailEn: 'Describe an error and ask about official card blocking' },
+    { href: '/learn-romanian/lectie/banca/transfer', fa: 'انتقال وجه و رسید', en: 'Transfer and receipt', detailFa: 'گیرنده، مبلغ، کارمزد و تأییدیه', detailEn: 'Recipient, total, fee and confirmation' },
+  ] },
 ] as const;
 
 export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; detailFa: string; detailEn: string; lessonIndexes: number[] }[]> = {
@@ -87,10 +93,15 @@ export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; det
     { fa: 'توضیح علائم', en: 'Describing symptoms', detailFa: 'سردرد، سرماخوردگی و سوختگی را دقیق بیان کنید و از متخصص راهنمایی بخواهید.', detailEn: 'Describe headache, cold symptoms and a burn; ask a professional for guidance.', lessonIndexes: [2, 3, 4] },
     { fa: 'محصول و مراقبت', en: 'Products and care', detailFa: 'دربارهٔ ویتامین‌ها و محصولات بهداشتی پرسش کنید.', detailEn: 'Ask about vitamins and hygiene products.', lessonIndexes: [5, 6] },
   ],
+  banking: [
+    { fa: 'ورود به شعبه', en: 'At the branch', detailFa: 'نوبت بگیرید و دربارهٔ مدارک و شرایط حساب پرسش کنید.', detailEn: 'Take a number and ask about account documents and terms.', lessonIndexes: [0, 1] },
+    { fa: 'کارت و انتقال', en: 'Card and transfer', detailFa: 'مشکل کارت و جزئیات انتقال را با کارمند بانک روشن کنید.', detailEn: 'Clarify a card issue and transfer details with the bank.', lessonIndexes: [2, 3] },
+  ],
 };
 
 export const UPCOMING_CONVERSATION_GROUPS = [
-  { fa: 'کارهای بانکی', en: 'Banking', detailFa: 'پرسیدن دربارهٔ حساب و نوبت در شعبه', detailEn: 'Asking about an account and a turn at the branch' },
+  { fa: 'مسکن و اجاره', en: 'Housing and renting', detailFa: 'بازدید، قرارداد و مشکلات خانه', detailEn: 'Viewing, contract and home issues' },
+  { fa: 'کار و محیط کار', en: 'Workplace', detailFa: 'معرفی، برنامهٔ کار و درخواست کمک', detailEn: 'Introductions, schedule and asking for help' },
 ] as const;
 
 export const STATION_ENGLISH: Record<string, string> = {
