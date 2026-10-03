@@ -8,6 +8,7 @@ export const CONVERSATION_LESSONS = [
 ] as const;
 
 export const CONVERSATION_GROUPS = [
+{"slug": "housing", "fa": "مسکن و اجاره", "en": "Housing and renting", "introFa": "از بازدید و پرسیدن هزینه‌ها تا گزارش مشکل خانه؛ هر موقعیت را مستقل تمرین کنید.", "introEn": "Practise viewing arrangements, cost questions and reporting an apartment problem.", "lessons": [{"href": "/learn-romanian/lectie/locuinta/vizionare", "fa": "هماهنگی بازدید خانه", "en": "Arrange a viewing", "detailFa": "نشانی، زمان بازدید و شخصی که باید ملاقات کنید را روشن کنید.", "detailEn": "Confirm the address, viewing time and whom to meet."}, {"href": "/learn-romanian/lectie/locuinta/costuri", "fa": "هزینه‌ها و امکانات خانه", "en": "Costs and apartment facilities", "detailFa": "اجاره، هزینه‌های جداگانه، ضمانت و امکانات را پیش از تصمیم روشن کنید.", "detailEn": "Clarify rent, separate costs, deposit and facilities before deciding."}, {"href": "/learn-romanian/lectie/locuinta/problema", "fa": "گزارش مشکل و هماهنگی تعمیر", "en": "Report a problem and arrange a repair", "detailFa": "مشکل، محل و زمان آن را بیان کنید و زمان مراجعه و پیگیری بخواهید.", "detailEn": "Explain what happened, where and when, then arrange a visit and follow-up."}]},
 {"slug": "workplace", "fa": "کار و محیط کار", "en": "Workplace", "introFa": "معرفی، برنامهٔ شیفت و روشن‌کردن دستور کار را در سه موقعیت مستقل تمرین کنید.", "introEn": "Practise introductions, shift schedules and task clarification in three situations.", "lessons": [{"href": "/learn-romanian/lectie/munca/prima-zi", "fa": "معرفی در روز اول", "en": "First-day introductions", "detailFa": "خودتان را معرفی کنید، مسئول تیم را پیدا کنید و محل شروع را بپرسید.", "detailEn": "Introduce yourself, find the team leader and ask where to start."}, {"href": "/learn-romanian/lectie/munca/program", "fa": "شیفت و زمان استراحت", "en": "Shift and break times", "detailFa": "شروع و پایان شیفت، استراحت و برنامهٔ فردا را تأیید کنید.", "detailEn": "Confirm shift times, breaks and tomorrow’s schedule."}, {"href": "/learn-romanian/lectie/munca/instructiuni", "fa": "درخواست توضیح و تأیید کار", "en": "Clarify and confirm a task", "detailFa": "وقتی دستور را نفهمیده‌اید، تکرار، نمایش عملی و تأیید بخواهید.", "detailEn": "Ask for repetition, a demonstration and confirmation when instructions are unclear."}]},
   { slug: 'transport', fa: 'رفت‌وآمد و بلیت', en: 'Transport and tickets', introFa: 'از باجهٔ بلیت تا اتوبوس، تراموا و مترو؛ درس‌ها را به ترتیب بخوانید.', introEn: 'From the ticket counter to buses, trams and the metro. Follow the lessons in order.', lessons: CONVERSATION_LESSONS },
   { slug: 'shopping', fa: 'خرید روزمره', en: 'Everyday shopping', introFa: 'در فروشگاه کالا بخواهید، مقدار را تغییر دهید و قیمت را بپرسید.', introEn: 'Ask for an item, change the quantity and ask the price in a shop.', lessons: [
@@ -94,6 +95,10 @@ export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; det
     { fa: 'توضیح علائم', en: 'Describing symptoms', detailFa: 'سردرد، سرماخوردگی و سوختگی را دقیق بیان کنید و از متخصص راهنمایی بخواهید.', detailEn: 'Describe headache, cold symptoms and a burn; ask a professional for guidance.', lessonIndexes: [2, 3, 4] },
     { fa: 'محصول و مراقبت', en: 'Products and care', detailFa: 'دربارهٔ ویتامین‌ها و محصولات بهداشتی پرسش کنید.', detailEn: 'Ask about vitamins and hygiene products.', lessonIndexes: [5, 6] },
   ],
+  housing: [
+    { fa: "پیش از انتخاب خانه", en: "Before choosing a home", detailFa: "بازدید، امکانات و هزینه‌ها", detailEn: "Viewing, facilities and costs", lessonIndexes: [0, 1] },
+    { fa: "زندگی در خانه", en: "Living in the home", detailFa: "گزارش مشکل و هماهنگی مراجعه", detailEn: "Report a problem and arrange a visit", lessonIndexes: [2] },
+  ],
   workplace: [
     { fa: "شروع کار", en: "Starting work", detailFa: "معرفی و برنامهٔ روزانه", detailEn: "Introductions and daily schedule", lessonIndexes: [0, 1] },
     { fa: "ارتباط در کار", en: "Communication at work", detailFa: "پرسیدن، روشن‌کردن و تأیید", detailEn: "Ask, clarify and confirm", lessonIndexes: [2] },
@@ -105,7 +110,12 @@ export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; det
 };
 
 export const UPCOMING_CONVERSATION_GROUPS = [
-  { fa: 'مسکن و اجاره', en: 'Housing and renting', detailFa: 'بازدید، قرارداد و مشکلات خانه', detailEn: 'Viewing, contract and home issues' },
+  { fa: 'فرودگاه و سفر', en: 'Airport and travel', detailFa: 'پذیرش پرواز، بار و پیدا کردن خروجی', detailEn: 'Check-in, baggage and finding the gate' },
+  { fa: 'ایستگاه قطار و سفر بین‌شهری', en: 'Station and intercity travel', detailFa: 'بلیت، سکو، تعویض و تأخیر', detailEn: 'Tickets, platforms, transfers and delays' },
+  { fa: 'تاکسی و سفر شهری', en: 'Taxi and city trips', detailFa: 'محل سوارشدن، مقصد و پیاده‌شدن', detailEn: 'Pickup, destination and getting off' },
+  { fa: 'پزشک و بیمارستان', en: 'Doctor and hospital', detailFa: 'پذیرش، بیان علائم و پرسیدن توضیح', detailEn: 'Reception, describing symptoms and asking for clarification' },
+  { fa: 'پلیس و امور اداری', en: 'Police and administration', detailFa: 'بیان درخواست، مدارک و پیگیری', detailEn: 'Explain a request, documents and follow-up' },
+  { fa: 'تفریح و گردش', en: 'Leisure and outings', detailFa: 'سینما، تئاتر، پارک، کوه و تله‌کابین', detailEn: 'Cinema, theatre, parks, mountains and cable cars' },
 ] as const;
 
 export const STATION_ENGLISH: Record<string, string> = {
