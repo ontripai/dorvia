@@ -505,6 +505,11 @@
     "approved": true
   },
   {
+    "text": "Aveți și un pahar pentru apă?",
+    "slug": "ro-606172ce1b54f32f",
+    "approved": true
+  },
+  {
     "text": "Aveți un act de identitate?",
     "slug": "ro-c333f591b292dca0",
     "approved": true
@@ -612,6 +617,11 @@
   {
     "text": "bine",
     "slug": "ro-baf34cda01f0f3d3",
+    "approved": true
+  },
+  {
+    "text": "Bine, caut trecerea de pietoni. Mulțumesc!",
+    "slug": "ro-81b83bab081cd4f7",
     "approved": true
   },
   {
@@ -910,6 +920,11 @@
     "approved": true
   },
   {
+    "text": "Cât costă toate fructele?",
+    "slug": "ro-dad93872e74abda4",
+    "approved": true
+  },
+  {
     "text": "Cât costă?",
     "slug": "ro-56283d707ab3d3c9",
     "approved": true
@@ -1115,8 +1130,18 @@
     "approved": true
   },
   {
+    "text": "Costă zece lei. Doriți o pungă?",
+    "slug": "ro-5c7a0a500776a5d4",
+    "approved": true
+  },
+  {
     "text": "cu",
     "slug": "ro-e67be79550661604",
+    "approved": true
+  },
+  {
+    "text": "Cu plăcere!",
+    "slug": "ro-4f13a001f88fa007",
     "approved": true
   },
   {
@@ -1167,6 +1192,11 @@
   {
     "text": "da",
     "slug": "ro-aa58b21b01d6b8a9",
+    "approved": true
+  },
+  {
+    "text": "Da, aceste informații sunt importante.",
+    "slug": "ro-c0453bc9426d60ea",
     "approved": true
   },
   {
@@ -1320,6 +1350,11 @@
     "approved": true
   },
   {
+    "text": "Da, o pregătim fără lapte și fără zahăr.",
+    "slug": "ro-8f953424332fdc21",
+    "approved": true
+  },
+  {
     "text": "Da, o pungă mică, vă rog.",
     "slug": "ro-cce829c7ae8249df",
     "approved": true
@@ -1340,8 +1375,23 @@
     "approved": true
   },
   {
+    "text": "Da, traversați la trecerea de pietoni.",
+    "slug": "ro-345ee4878190545a",
+    "approved": true
+  },
+  {
     "text": "Da, urcați scările și faceți la dreapta.",
     "slug": "ro-8a0ec4699d520932",
+    "approved": true
+  },
+  {
+    "text": "Da, vă aduc un pahar imediat.",
+    "slug": "ro-d7651fe90dce9058",
+    "approved": true
+  },
+  {
+    "text": "Da, vă arăt etichetele amândurora.",
+    "slug": "ro-c415d0a60fc4f740",
     "approved": true
   },
   {
@@ -1367,6 +1417,11 @@
   {
     "text": "Da. Mergeți drept înainte.",
     "slug": "ro-812a190c68ba8089",
+    "approved": true
+  },
+  {
+    "text": "Da. Poftiți bonul. Mulțumesc!",
+    "slug": "ro-666c85f37017ad27",
     "approved": true
   },
   {
@@ -1655,6 +1710,11 @@
     "approved": true
   },
   {
+    "text": "După farmacie, pe partea dreaptă.",
+    "slug": "ro-0467ffef84beb189",
+    "approved": true
+  },
+  {
     "text": "După semafor fac la stânga?",
     "slug": "ro-35c92f7a16d61f68",
     "approved": true
@@ -1850,6 +1910,11 @@
     "approved": true
   },
   {
+    "text": "Este puțin prea mic. Aveți mărimea L?",
+    "slug": "ro-a9a1c05b35b70703",
+    "approved": true
+  },
+  {
     "text": "Este valabil și în autobuz?",
     "slug": "ro-d3035665b96f9151",
     "approved": true
@@ -1947,6 +2012,11 @@
   {
     "text": "fix",
     "slug": "ro-1c6e6c4c02e55178",
+    "approved": true
+  },
+  {
+    "text": "Foarte bine. Mulțumesc mult!",
+    "slug": "ro-2b5a24a6b8966cdf",
     "approved": true
   },
   {
@@ -2062,6 +2132,11 @@
   {
     "text": "inimă",
     "slug": "inima",
+    "approved": true
+  },
+  {
+    "text": "Intrarea este înainte sau după farmacie?",
+    "slug": "ro-3fb97de017bd702f",
     "approved": true
   },
   {
@@ -2265,6 +2340,11 @@
     "approved": true
   },
   {
+    "text": "La trecerea de pietoni de lângă semafor.",
+    "slug": "ro-2ef12d02414e7dd9",
+    "approved": true
+  },
+  {
     "text": "lângă",
     "slug": "ro-3963ff2ea3665258",
     "approved": true
@@ -2440,6 +2520,11 @@
     "approved": true
   },
   {
+    "text": "Mulțumesc pentru verificare.",
+    "slug": "ro-54432bd29cd664a1",
+    "approved": true
+  },
+  {
     "text": "Mulțumesc!",
     "slug": "ro-837f137a005506b7",
     "approved": true
@@ -2455,8 +2540,23 @@
     "approved": true
   },
   {
+    "text": "Mulțumesc. Aștept lângă cabina de probă.",
+    "slug": "ro-e4c10dd4d31620c0",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc. Aveți și un pahar pentru apă?",
+    "slug": "ro-b970413cd401870b",
+    "approved": true
+  },
+  {
     "text": "Mulțumesc. Confirm doar după ce verific toate datele.",
     "slug": "ro-1c60c6a4fc65b30b",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc. Îmi dați bonul, vă rog?",
+    "slug": "ro-46c56ae1941c286a",
     "approved": true
   },
   {
@@ -2477,6 +2577,16 @@
   {
     "text": "Mulțumesc. Vă rog să îmi explicați și eticheta.",
     "slug": "ro-dc8fcb785040d18b",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc. Vă rog să verificați și zahărul.",
+    "slug": "ro-d07b7af12ff1beca",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc. Vă spun cum s-a întâmplat.",
+    "slug": "ro-f2fbf2099a6b0469",
     "approved": true
   },
   {
@@ -2647,6 +2757,11 @@
   {
     "text": "Nu, acestea sunt suficiente.",
     "slug": "ro-ba70461f8abc3d3f",
+    "approved": true
+  },
+  {
+    "text": "Nu, am o sacoșă. Pot plăti cu cardul?",
+    "slug": "ro-9395cb3a1089b9ab",
     "approved": true
   },
   {
@@ -2880,6 +2995,11 @@
     "approved": true
   },
   {
+    "text": "Perfect. Aștept cafeaua corectă.",
+    "slug": "ro-e2be6c3e6d9af5dd",
+    "approved": true
+  },
+  {
     "text": "plăcere",
     "slug": "ro-ec97b4e619a71184",
     "approved": true
@@ -2912,6 +3032,11 @@
   {
     "text": "poimâine",
     "slug": "ro-92f7c48f6bb1d313",
+    "approved": true
+  },
+  {
+    "text": "Pot compara cele două produse?",
+    "slug": "ro-b7f171c8c46712db",
     "approved": true
   },
   {
@@ -3115,6 +3240,11 @@
     "approved": true
   },
   {
+    "text": "Scuzați-mă, suma de pe bon este corectă?",
+    "slug": "ro-fa2fb2ddf83ba328",
+    "approved": true
+  },
+  {
     "text": "Scuzați-mă, unde este strada Florilor?",
     "slug": "ro-a4ec7c639c9780ef",
     "approved": true
@@ -3215,6 +3345,11 @@
     "approved": true
   },
   {
+    "text": "Suma de pe bon este corectă?",
+    "slug": "ro-51a3a1ccb8960025",
+    "approved": true
+  },
+  {
     "text": "Sunați la 112, vă rog.",
     "slug": "ro-3254a2d3e4e6acee",
     "approved": true
@@ -3310,6 +3445,11 @@
     "approved": true
   },
   {
+    "text": "Și unde traversez strada?",
+    "slug": "ro-344725e4132ed640",
+    "approved": true
+  },
+  {
     "text": "ta",
     "slug": "ro-76592b9de6d38238",
     "approved": true
@@ -3345,6 +3485,11 @@
     "approved": true
   },
   {
+    "text": "Totalul este optsprezece lei.",
+    "slug": "ro-0a060b05325d8d12",
+    "approved": true
+  },
+  {
     "text": "Totalul este treizeci și doi de lei.",
     "slug": "ro-b930af479364dd2b",
     "approved": true
@@ -3355,8 +3500,18 @@
     "approved": true
   },
   {
+    "text": "Trebuie să merg la medic?",
+    "slug": "ro-401864c8e684b7a6",
+    "approved": true
+  },
+  {
     "text": "Trebuie să schimb autobuzul?",
     "slug": "ro-13d4095f86492bd9",
+    "approved": true
+  },
+  {
+    "text": "Trebuie să traversez strada?",
+    "slug": "ro-4caff139008c3401",
     "approved": true
   },
   {
@@ -3525,6 +3680,11 @@
     "approved": true
   },
   {
+    "text": "Unde găsesc ingredientele pe etichetă?",
+    "slug": "ro-b08f31e352309788",
+    "approved": true
+  },
+  {
     "text": "Unde găsesc laptele fără lactoză?",
     "slug": "ro-e95b6c0e63804c2c",
     "approved": true
@@ -3582,6 +3742,11 @@
   {
     "text": "vă",
     "slug": "ro-36cf1518a472ff43",
+    "approved": true
+  },
+  {
+    "text": "Vă arăt lista și vă explic ce scrie.",
+    "slug": "ro-09af66f0f15d4558",
     "approved": true
   },
   {
@@ -3675,8 +3840,23 @@
     "approved": true
   },
   {
+    "text": "Vă rog să verificați și zahărul.",
+    "slug": "ro-cc4a70c40ed26dd2",
+    "approved": true
+  },
+  {
     "text": "Vă rog.",
     "slug": "ro-94298f54d4551395",
+    "approved": true
+  },
+  {
+    "text": "Vă spun ce pot evalua aici și când e nevoie de medic.",
+    "slug": "ro-5e797fcb9ae8035b",
+    "approved": true
+  },
+  {
+    "text": "Vă spun și ce medicamente iau deja.",
+    "slug": "ro-7569a1b1d6657770",
     "approved": true
   },
   {
@@ -3690,8 +3870,18 @@
     "approved": true
   },
   {
+    "text": "Verific acum nota și bonul.",
+    "slug": "ro-18de25f1eee35841",
+    "approved": true
+  },
+  {
     "text": "Verific acum. Ce cantitate este pe rețetă?",
     "slug": "ro-b853b71b50028bea",
+    "approved": true
+  },
+  {
+    "text": "Verific imediat dacă avem mărimea L.",
+    "slug": "ro-ab8f8f3d56d5c6d2",
     "approved": true
   },
   {

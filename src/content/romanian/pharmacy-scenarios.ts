@@ -18,6 +18,8 @@ export const pharmacyScenarios: PharmacyScenario[] = [
       { who: 'you', ro: 'De azi dimineață.', en: 'Since this morning.', fa: 'از امروز صبح.' },
       { who: 'you', ro: 'Ce opțiuni am?', en: 'What options do I have?', fa: 'چه گزینه‌هایی دارم؟' },
       { who: 'pharmacist', ro: 'Vă explic opțiunile.', en: 'I will explain the options.', fa: 'گزینه‌ها را برایتان توضیح می‌دهم.' },
+      { who: 'you', ro: 'Vă spun și ce medicamente iau deja.', en: 'I will also tell you what medicines I already take.', fa: 'داروهایی را که از قبل مصرف می‌کنم هم به شما می‌گویم.' },
+      { who: 'pharmacist', ro: 'Da, aceste informații sunt importante.', en: 'Yes, that information is important.', fa: 'بله، این اطلاعات مهم است.' },
     ],
     rules: [
       { title: { fa: 'بیان درد: Mă doare + عضو بدن', en: 'Describe pain: Mă doare + body part' }, explanation: { fa: 'Mă یعنی «مرا» و doare شکل سوم‌شخص مفرد فعل a durea است. در Mă doare capul، capul («سر») با حرف تعریف معین در پایان آمده است. این الگو برای یک عضو مفرد بدن به کار می‌رود؛ در این درس فقط همین نمونه را تمرین کنید.', en: 'Mă means “me”; doare is the third-person singular of a durea. Capul is the definite form of “head”. This pattern describes pain in one singular body part; practise this example first.' }, examples: [{ ro: 'Mă doare capul.', en: 'I have a headache.', fa: 'سرم درد می‌کند.' }] },
@@ -28,6 +30,7 @@ export const pharmacyScenarios: PharmacyScenario[] = [
       { ro: 'Mă doare capul.', en: 'Say that you have a headache.', fa: 'بگویید سرتان درد می‌کند.', hint: 'Mă doare … .' },
       { ro: 'De azi dimineață.', en: 'Say “since this morning”.', fa: 'بگویید «از امروز صبح».', hint: 'De azi … .' },
       { ro: 'Ce opțiuni am?', en: 'Ask what options you have.', fa: 'بپرسید چه گزینه‌هایی دارید.', hint: 'Ce … am?' },
+      { ro: 'Vă spun și ce medicamente iau deja.', en: 'Mention your current medicines.', fa: 'دربارهٔ داروهای مصرفی فعلی‌تان بگویید.', hint: 'Vă spun și ce ...' },
     ],
   },
   {
@@ -40,6 +43,9 @@ export const pharmacyScenarios: PharmacyScenario[] = [
       { who: 'pharmacist', ro: 'Vă rog să îmi arătați.', en: 'Please show me.', fa: 'لطفاً به من نشان دهید.' },
       { who: 'you', ro: 'De ce materiale am nevoie?', en: 'What supplies do I need?', fa: 'به چه لوازمی نیاز دارم؟' },
       { who: 'pharmacist', ro: 'Vă explic după ce mă uit.', en: 'I will explain after I take a look.', fa: 'بعد از بررسی توضیح می‌دهم.' },
+      { who: 'you', ro: 'Trebuie să merg la medic?', en: 'Do I need to see a doctor?', fa: 'باید به پزشک مراجعه کنم؟' },
+      { who: 'pharmacist', ro: 'Vă spun ce pot evalua aici și când e nevoie de medic.', en: 'I will explain what I can assess here and when a doctor is needed.', fa: 'توضیح می‌دهم اینجا چه چیزی را می‌توانم بررسی کنم و چه زمانی پزشک لازم است.' },
+      { who: 'you', ro: 'Mulțumesc. Vă spun cum s-a întâmplat.', en: 'Thank you. I will tell you how it happened.', fa: 'ممنون. می‌گویم چطور اتفاق افتاد.' },
     ],
     rules: [
       { title: { fa: 'بیان مشکل و محل آن', en: 'Describe the problem and its location' }, explanation: { fa: 'Am صورت «من دارم» از a avea است. o arsură یعنی «یک سوختگی» و la mână محل آن را مشخص می‌کند. در مراجعهٔ واقعی، محل و وضعیت را دقیق و صادقانه بیان کنید.', en: 'Am means “I have” from a avea. O arsură is “a burn”; la mână locates it on the hand. Give an accurate description of the actual situation.' }, examples: [{ ro: 'Am o arsură la mână.', en: 'I have a burn on my hand.', fa: 'روی دستم سوختگی دارم.' }] },
@@ -50,6 +56,7 @@ export const pharmacyScenarios: PharmacyScenario[] = [
       { ro: 'Am o arsură la mână.', en: 'Say you have a burn on your hand.', fa: 'بگویید روی دستتان سوختگی دارید.', hint: 'Am o … la mână.' },
       { ro: 'Puteți să vă uitați, vă rog?', en: 'Politely ask the pharmacist to take a look.', fa: 'مؤدبانه بخواهید نگاهی بیندازد.', hint: 'Puteți să vă …, vă rog?' },
       { ro: 'De ce materiale am nevoie?', en: 'Ask what supplies you need.', fa: 'دربارهٔ لوازم لازم سؤال کنید.', hint: 'De ce … am nevoie?' },
+      { ro: 'Trebuie să merg la medic?', en: 'Ask whether you need to see a doctor.', fa: 'لزوم مراجعه به پزشک را بپرسید.', hint: 'Trebuie să merg ...?' },
     ],
   },
   {
@@ -63,6 +70,8 @@ export const pharmacyScenarios: PharmacyScenario[] = [
       { who: 'you', ro: 'Ce variante aveți?', en: 'What options do you have?', fa: 'چه گزینه‌هایی دارید؟' },
       { who: 'you', ro: 'Pot să citesc eticheta?', en: 'May I read the label?', fa: 'می‌توانم برچسب را بخوانم؟' },
       { who: 'pharmacist', ro: 'Da, desigur.', en: 'Yes, of course.', fa: 'بله، حتماً.' },
+      { who: 'you', ro: 'Unde găsesc ingredientele pe etichetă?', en: 'Where can I find the ingredients on the label?', fa: 'مواد تشکیل‌دهنده را کجای برچسب پیدا می‌کنم؟' },
+      { who: 'pharmacist', ro: 'Vă arăt lista și vă explic ce scrie.', en: 'I will show you the list and explain what it says.', fa: 'فهرست را نشان می‌دهم و نوشتهٔ آن را توضیح می‌دهم.' },
     ],
     rules: [
       { title: { fa: 'درخواست اطلاعات، بدون نام بردن محصول', en: 'Ask for information without naming a product' }, explanation: { fa: 'Caut یعنی «جست‌وجو می‌کنم» از a căuta. informații جمع «اطلاعات» است و despre یعنی «دربارهٔ». Caut informații despre vitamine. به داروساز می‌گوید ابتدا می‌خواهید اطلاعات بگیرید.', en: 'Caut means “I am looking for” from a căuta. Informații is plural “information”, and despre means “about”. This sentence asks for information first.' }, examples: [{ ro: 'Caut informații despre vitamine.', en: 'I am looking for information about vitamins.', fa: 'دربارهٔ ویتامین‌ها اطلاعات می‌خواهم.' }] },
@@ -73,6 +82,7 @@ export const pharmacyScenarios: PharmacyScenario[] = [
       { ro: 'Caut informații despre vitamine.', en: 'Say you are looking for information about vitamins.', fa: 'بگویید دربارهٔ ویتامین‌ها اطلاعات می‌خواهید.', hint: 'Caut informații despre … .' },
       { ro: 'Pentru mine.', en: 'Answer “for me”.', fa: 'پاسخ دهید «برای خودم».', hint: 'Pentru … .' },
       { ro: 'Pot să citesc eticheta?', en: 'Ask to read the label.', fa: 'اجازهٔ خواندن برچسب را بخواهید.', hint: 'Pot să citesc …?' },
+      { ro: 'Unde găsesc ingredientele pe etichetă?', en: 'Ask where the ingredients are on the label.', fa: 'جای مواد تشکیل‌دهنده روی برچسب را بپرسید.', hint: 'Unde găsesc ...?' },
     ],
   },
   {
@@ -86,6 +96,8 @@ export const pharmacyScenarios: PharmacyScenario[] = [
       { who: 'pharmacist', ro: 'Da, este aici.', en: 'Yes, it is here.', fa: 'بله، اینجاست.' },
       { who: 'you', ro: 'Cât costă?', en: 'How much does it cost?', fa: 'چقدر قیمت دارد؟' },
       { who: 'pharmacist', ro: 'Prețul este pe etichetă.', en: 'The price is on the label.', fa: 'قیمت روی برچسب است.' },
+      { who: 'you', ro: 'Pot compara cele două produse?', en: 'May I compare the two products?', fa: 'می‌توانم این دو محصول را مقایسه کنم؟' },
+      { who: 'pharmacist', ro: 'Da, vă arăt etichetele amândurora.', en: 'Yes, I will show you both labels.', fa: 'بله، برچسب هر دو را نشان می‌دهم.' },
     ],
     rules: [
       { title: { fa: 'نوع محصول: برای + ویژگی', en: 'Product type: for + feature' }, explanation: { fa: 'Caut یعنی «دنبالِ ... هستم». șampon اسم خنثی است و در مفرد un می‌گیرد. pentru păr uscat یعنی «برای موی خشک»؛ صفت uscat پس از اسم păr آمده است. این فقط نمونه‌ای برای یادگیری توصیف محصول است.', en: 'Caut means “I am looking for”. Șampon is neuter and takes un in the singular. Pentru păr uscat means “for dry hair”; the adjective uscat follows păr. This is an example of describing a product.' }, examples: [{ ro: 'Caut un șampon pentru păr uscat.', en: 'I am looking for a shampoo for dry hair.', fa: 'شامپویی برای موی خشک می‌خواهم.' }] },
@@ -96,6 +108,7 @@ export const pharmacyScenarios: PharmacyScenario[] = [
       { ro: 'Caut un șampon pentru păr uscat.', en: 'Ask for shampoo for dry hair.', fa: 'شامپو برای موی خشک بخواهید.', hint: 'Caut un șampon pentru … .' },
       { ro: 'Aveți și o cremă de mâini?', en: 'Ask whether they also have hand cream.', fa: 'بپرسید کرم دست هم دارند؟', hint: 'Aveți și o …?' },
       { ro: 'Cât costă?', en: 'Ask how much it costs.', fa: 'قیمت را بپرسید.', hint: 'Cât …?' },
+      { ro: 'Pot compara cele două produse?', en: 'Ask to compare two products.', fa: 'مقایسهٔ دو محصول را بخواهید.', hint: 'Pot compara ...?' },
     ],
   },
   {
