@@ -24,8 +24,13 @@ export const CONVERSATION_GROUPS = [
     { href: '/learn-romanian/lectie/cafenea/schimbare-comanda', fa: 'تغییر در سفارش', en: 'Changing an order', detailFa: 'با و بدون شیر یا شکر؛ اصلاح مؤدبانهٔ سفارش', detailEn: 'With or without milk and sugar; politely correct an order' },
     { href: '/learn-romanian/lectie/cafenea/plata', fa: 'صورتحساب و پرداخت', en: 'Bill and payment', detailFa: 'صورتحساب، پرداخت با کارت و درخواست رسید', detailEn: 'The bill, paying by card, and requesting a receipt' },
   ] },
-  { slug: 'appointments', fa: 'قرار ملاقات و پذیرش', en: 'Appointments and reception', introFa: 'در پذیرش درمانگاه وقت ملاقات بگیرید و روز و ساعت را مشخص کنید.', introEn: 'Ask for an appointment at a clinic desk and choose a day and time.', lessons: [
+  { slug: 'appointments', fa: 'قرار ملاقات و پذیرش', en: 'Appointments and reception', introFa: 'از تماس اولیه تا تغییر یا لغو وقت، ورود به پذیرش و پرسیدن مدارک؛ هر موقعیت را در درس جدا تمرین کنید.', introEn: 'From the first call to rescheduling, cancelling, checking in, and asking about documents, practise each situation separately.', lessons: [
     { href: '/learn-romanian/lectie/programare', fa: 'گرفتن وقت ملاقات', en: 'Booking an appointment', detailFa: 'درخواست مؤدبانه، پرسیدن روز و اعلام ساعت', detailEn: 'Polite request, choosing a day and stating a time' },
+    { href: '/learn-romanian/lectie/programare/telefon', fa: 'گرفتن وقت تلفنی', en: 'Booking by phone', detailFa: 'اولین مراجعه، نام، روز و ساعت در یک تماس کامل', detailEn: 'First visit, name, day and time in a full call' },
+    { href: '/learn-romanian/lectie/programare/schimbare', fa: 'جابه‌جایی وقت', en: 'Rescheduling', detailFa: 'وقت قبلی، روز جایگزین و تأیید نهایی', detailEn: 'Old slot, new day and final confirmation' },
+    { href: '/learn-romanian/lectie/programare/anulare', fa: 'لغو وقت', en: 'Cancelling', detailFa: 'شناسایی وقت و دریافت تأیید لغو', detailEn: 'Identify a booking and confirm cancellation' },
+    { href: '/learn-romanian/lectie/programare/receptie', fa: 'ورود به پذیرش', en: 'Checking in', detailFa: 'معرفی نام و وقت و پیدا کردن اتاق انتظار', detailEn: 'Give name and time, find the waiting room' },
+    { href: '/learn-romanian/lectie/programare/documente', fa: 'مدارک در پذیرش', en: 'Documents at reception', detailFa: 'پرسیدن مدارک، نشان دادن تأییدیه و بررسی کمبود', detailEn: 'Ask for requirements, show confirmation, check missing items' },
   ] },
   { slug: 'pharmacy', fa: 'داروخانه', en: 'Pharmacy', introFa: 'از گفت‌وگوی عمومی شروع کنید؛ سپس هر نیاز را در یک درس جداگانه تمرین کنید.', introEn: 'Start with the general conversation, then practise each need in a focused lesson.', lessons: [
     { href: '/learn-romanian/lectie/farmacie', fa: 'گفت‌وگوی اصلی در داروخانه', en: 'General pharmacy conversation', detailFa: 'موجودی دارو، نسخه و درخواست توضیح', detailEn: 'Medicine availability, prescription, and asking for an explanation' },
@@ -35,6 +40,35 @@ export const CONVERSATION_GROUPS = [
     { href: '/learn-romanian/lectie/farmacie/igiena', fa: 'بهداشت و مراقبت', en: 'Hygiene and care', detailFa: 'شامپو، کرم دست و پرسیدن قیمت', detailEn: 'Shampoo, hand cream, and asking the price' },
   ] },
 ] as const;
+
+export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; detailFa: string; detailEn: string; lessonIndexes: number[] }[]> = {
+  transport: [
+    { fa: 'خرید بلیت', en: 'Buying tickets', detailFa: 'تعداد، نوع و اعتبار بلیت را از باجه بپرسید.', detailEn: 'Ask for quantity, type, and validity at a counter.', lessonIndexes: [0] },
+    { fa: 'استفاده از وسیلهٔ نقلیه', en: 'Using transport', detailFa: 'اتوبوس، تراموا و مترو را در موقعیت واقعی تمرین کنید.', detailEn: 'Practise buses, trams, and metro in context.', lessonIndexes: [1, 2] },
+  ],
+  shopping: [
+    { fa: 'مواد غذایی و مقدار', en: 'Food and quantity', detailFa: 'کالا، تعداد، وزن و قیمت را مشخص کنید.', detailEn: 'Specify the item, count, weight, and price.', lessonIndexes: [0, 1, 2] },
+    { fa: 'پوشاک', en: 'Clothing', detailFa: 'اندازه و رنگ را بپرسید و لباس را امتحان کنید.', detailEn: 'Ask about size and colour and try on an item.', lessonIndexes: [3] },
+  ],
+  directions: [
+    { fa: 'آدرس و نشانه‌ها', en: 'Addresses and landmarks', detailFa: 'مکان، خیابان، شماره و فاصله را پیدا کنید.', detailEn: 'Find a place, street, number, and distance.', lessonIndexes: [0, 1] },
+    { fa: 'ایستگاه و مسیر', en: 'Stops and routes', detailFa: 'دستورهای پیاده‌روی را به ترتیب دنبال کنید.', detailEn: 'Follow walking directions in order.', lessonIndexes: [2] },
+    { fa: 'رفع ابهام', en: 'Clarifying directions', detailFa: 'تکرار آهسته بخواهید و یک گام را تأیید کنید.', detailEn: 'Ask for a slow repeat and confirm a step.', lessonIndexes: [3] },
+  ],
+  cafe: [
+    { fa: 'سفارش خوراکی و نوشیدنی', en: 'Ordering food and drink', detailFa: 'گفت‌وگوی اصلی و صبحانه را تمرین کنید.', detailEn: 'Practise the basic exchange and breakfast.', lessonIndexes: [0, 1] },
+    { fa: 'تغییر و پرداخت', en: 'Changes and payment', detailFa: 'سفارش را اصلاح کنید و صورتحساب و رسید بخواهید.', detailEn: 'Correct an order and request the bill and receipt.', lessonIndexes: [2, 3] },
+  ],
+  appointments: [
+    { fa: 'گرفتن وقت', en: 'Booking', detailFa: 'درخواست حضوری و گفت‌وگوی کامل تلفنی.', detailEn: 'An in-person request and a full phone call.', lessonIndexes: [0, 1] },
+    { fa: 'مدیریت وقت', en: 'Managing a booking', detailFa: 'وقت را جابه‌جا یا لغو کنید و نتیجه را تأیید کنید.', detailEn: 'Reschedule or cancel, then confirm the result.', lessonIndexes: [2, 3] },
+    { fa: 'روز مراجعه', en: 'On the day', detailFa: 'در پذیرش نام و وقت را بگویید و مدارک لازم را بپرسید.', detailEn: 'Check in and ask about required documents.', lessonIndexes: [4, 5] },
+  ],
+  pharmacy: [
+    { fa: 'شروع گفت‌وگو و علائم', en: 'Opening and symptoms', detailFa: 'از گفت‌وگوی اصلی به سردرد و سوختگی بروید.', detailEn: 'Move from the general exchange to headache and burn scenarios.', lessonIndexes: [0, 1, 2] },
+    { fa: 'محصول و مراقبت', en: 'Products and care', detailFa: 'دربارهٔ ویتامین‌ها و محصولات بهداشتی پرسش کنید.', detailEn: 'Ask about vitamins and hygiene products.', lessonIndexes: [3, 4] },
+  ],
+};
 
 export const UPCOMING_CONVERSATION_GROUPS = [
   { fa: 'کارهای بانکی', en: 'Banking', detailFa: 'پرسیدن دربارهٔ حساب و نوبت در شعبه', detailEn: 'Asking about an account and a turn at the branch' },
