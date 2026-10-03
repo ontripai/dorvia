@@ -21,7 +21,9 @@ export const CONVERSATION_GROUPS = [
   { slug: 'directions', fa: 'راه‌یابی در شهر', en: 'Finding your way', introFa: 'نشانی مکان‌ها را بپرسید و پاسخ کوتاه رهگذر را بفهمید.', introEn: 'Ask where places are and understand a short reply.', lessons: [
     { href: '/learn-romanian/lectie/directii', fa: 'ایستگاه مترو کجاست؟', en: 'Where is the metro station?', detailFa: 'نشانی مترو و داروخانه، راست و چپ، و فاصله', detailEn: 'Metro and pharmacy directions, left and right, and distance' },
     { href: '/learn-romanian/lectie/directii/adresa', fa: 'خیابان و شمارهٔ ساختمان', en: 'Street and building number', detailFa: 'نام خیابان، شماره و نشانهٔ مکانی', detailEn: 'Street name, number, and landmark' },
+    { href: '/learn-romanian/lectie/directii/punct-reper', fa: 'نشانهٔ مکانی و ورودی ساختمان', en: 'Landmark and building entrance', detailFa: 'پیدا کردن پلاک و ورودی اصلی ساختمان', detailEn: 'Find the building number and main entrance' },
     { href: '/learn-romanian/lectie/directii/statie', fa: 'پیدا کردن ایستگاه اتوبوس', en: 'Finding the bus stop', detailFa: 'نزدیک‌ترین ایستگاه و دو گام مسیر', detailEn: 'Nearest stop and two walking directions' },
+    { href: '/learn-romanian/lectie/directii/drum-inchis', fa: 'راه بسته و مسیر جایگزین', en: 'Closed road and alternative route', detailFa: 'پرسیدن راه پیاده و تأیید گام‌های جایگزین', detailEn: 'Ask for a walking route and confirm an alternative' },
     { href: '/learn-romanian/lectie/directii/repetati', fa: 'تکرار و روشن‌کردن مسیر', en: 'Repeating and clarifying directions', detailFa: 'درخواست تکرار آهسته و تأیید جهت', detailEn: 'Ask for a slow repeat and confirm a turn' },
   ] },
   { slug: 'cafe', fa: 'کافه و غذا', en: 'Cafés and food', introFa: 'سفارش ساده بدهید، نوع نوشیدنی را مشخص کنید و صورتحساب بخواهید.', introEn: 'Place a simple order, specify a drink, and ask for the bill.', lessons: [
@@ -63,9 +65,9 @@ export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; det
     { fa: 'صندوق و خدمات پس از خرید', en: 'Checkout and after purchase', detailFa: 'پرداخت، رسید و درخواست تعویض را تمرین کنید.', detailEn: 'Practise payment, receipts and asking for an exchange.', lessonIndexes: [5, 6] },
   ],
   directions: [
-    { fa: 'آدرس و نشانه‌ها', en: 'Addresses and landmarks', detailFa: 'مکان، خیابان، شماره و فاصله را پیدا کنید.', detailEn: 'Find a place, street, number, and distance.', lessonIndexes: [0, 1] },
-    { fa: 'ایستگاه و مسیر', en: 'Stops and routes', detailFa: 'دستورهای پیاده‌روی را به ترتیب دنبال کنید.', detailEn: 'Follow walking directions in order.', lessonIndexes: [2] },
-    { fa: 'رفع ابهام', en: 'Clarifying directions', detailFa: 'تکرار آهسته بخواهید و یک گام را تأیید کنید.', detailEn: 'Ask for a slow repeat and confirm a step.', lessonIndexes: [3] },
+    { fa: 'آدرس و نشانه‌ها', en: 'Addresses and landmarks', detailFa: 'مکان، خیابان، شماره، پلاک و ورودی را پیدا کنید.', detailEn: 'Find a place, street, number, plaque and entrance.', lessonIndexes: [0, 1, 2] },
+    { fa: 'ایستگاه و مسیر جایگزین', en: 'Stops and alternative routes', detailFa: 'دستورهای پیاده‌روی را دنبال کنید و هنگام بسته بودن راه مسیر دیگری بپرسید.', detailEn: 'Follow walking steps and ask for an alternative when a street is closed.', lessonIndexes: [3, 4] },
+    { fa: 'رفع ابهام', en: 'Clarifying directions', detailFa: 'تکرار آهسته بخواهید و یک گام را تأیید کنید.', detailEn: 'Ask for a slow repeat and confirm a step.', lessonIndexes: [5] },
   ],
   cafe: [
     { fa: 'نشستن و سفارش', en: 'Dining in and ordering', detailFa: 'گفت‌وگوی اصلی، صبحانه و درخواست میز و منو را تمرین کنید.', detailEn: 'Practise the basic exchange, breakfast, tables and menus.', lessonIndexes: [0, 1, 2] },
