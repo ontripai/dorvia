@@ -8,9 +8,10 @@ import { pharmacyScenarios } from '../src/content/romanian/pharmacy-scenarios';
 import { shoppingScenarios } from '../src/content/romanian/shopping-scenarios';
 import { transportScenarios } from '../src/content/romanian/transport-scenarios';
 import { workplaceScenarios } from '../src/content/romanian/workplace-scenarios';
+import { housingScenarios } from '../src/content/romanian/housing-scenarios';
 import audio from '../src/content/romanian/verified-audio.json';
 
-const groups = { workplace: workplaceScenarios, appointments: appointmentScenarios, banking: bankingScenarios, cafe: cafeScenarios, directions: directionsScenarios, pharmacy: pharmacyScenarios, shopping: shoppingScenarios, transport: transportScenarios };
+const groups = { housing: housingScenarios, workplace: workplaceScenarios, appointments: appointmentScenarios, banking: bankingScenarios, cafe: cafeScenarios, directions: directionsScenarios, pharmacy: pharmacyScenarios, shopping: shoppingScenarios, transport: transportScenarios };
 const recordings: Record<string, string> = audio;
 const errors: string[] = [];
 let lessons = 0;
