@@ -15,9 +15,15 @@ export const CONVERSATION_GROUPS = [
   { slug: 'cafe', fa: 'کافه و غذا', en: 'Cafés and food', introFa: 'سفارش ساده بدهید، نوع نوشیدنی را مشخص کنید و صورتحساب بخواهید.', introEn: 'Place a simple order, specify a drink, and ask for the bill.', lessons: [
     { href: '/learn-romanian/lectie/cafenea', fa: 'سفارش در کافه', en: 'Ordering in a café', detailFa: 'درخواست قهوه یا چای، واژهٔ «بدون» و درخواست صورتحساب', detailEn: 'Ask for coffee or tea, use “without”, and request the bill' },
   ] },
-  { slug: 'services', fa: 'کارهای ضروری', en: 'Essential services', introFa: 'در پذیرش درمانگاه وقت ملاقات بگیرید و روز و ساعت را مشخص کنید.', introEn: 'Ask for an appointment at a clinic desk and choose a day and time.', lessons: [
+  { slug: 'appointments', fa: 'قرار ملاقات و پذیرش', en: 'Appointments and reception', introFa: 'در پذیرش درمانگاه وقت ملاقات بگیرید و روز و ساعت را مشخص کنید.', introEn: 'Ask for an appointment at a clinic desk and choose a day and time.', lessons: [
     { href: '/learn-romanian/lectie/programare', fa: 'گرفتن وقت ملاقات', en: 'Booking an appointment', detailFa: 'درخواست مؤدبانه، پرسیدن روز و اعلام ساعت', detailEn: 'Polite request, choosing a day and stating a time' },
-    { href: '/learn-romanian/lectie/farmacie', fa: 'گفت‌وگو در داروخانه', en: 'At the pharmacy', detailFa: 'پرسیدن موجودی دارو، نسخه و درخواست توضیح', detailEn: 'Ask about a medicine, a prescription, and how it is taken' },
+  ] },
+  { slug: 'pharmacy', fa: 'داروخانه', en: 'Pharmacy', introFa: 'از گفت‌وگوی عمومی شروع کنید؛ سپس هر نیاز را در یک درس جداگانه تمرین کنید.', introEn: 'Start with the general conversation, then practise each need in a focused lesson.', lessons: [
+    { href: '/learn-romanian/lectie/farmacie', fa: 'گفت‌وگوی اصلی در داروخانه', en: 'General pharmacy conversation', detailFa: 'موجودی دارو، نسخه و درخواست توضیح', detailEn: 'Medicine availability, prescription, and asking for an explanation' },
+    { href: '/learn-romanian/lectie/farmacie/durere-cap', fa: 'سردرد', en: 'Headache', detailFa: 'بیان درد، زمان شروع و پرسیدن گزینه‌ها', detailEn: 'Describe pain, when it started, and ask about options' },
+    { href: '/learn-romanian/lectie/farmacie/arsura', fa: 'سوختگی', en: 'Burn', detailFa: 'بیان محل سوختگی و درخواست بررسی لوازم لازم', detailEn: 'Describe a burn and ask about appropriate supplies' },
+    { href: '/learn-romanian/lectie/farmacie/vitamine', fa: 'ویتامین‌ها', en: 'Vitamins', detailFa: 'پرسیدن گزینه‌ها و خواندن برچسب', detailEn: 'Ask about options and read labels' },
+    { href: '/learn-romanian/lectie/farmacie/igiena', fa: 'بهداشت و مراقبت', en: 'Hygiene and care', detailFa: 'شامپو، کرم دست و پرسیدن قیمت', detailEn: 'Shampoo, hand cream, and asking the price' },
   ] },
 ] as const;
 
