@@ -2263,5 +2263,40 @@
     "text": "Vorbești engleză?",
     "slug": "ro-cb56b6ea8b4d5968",
     "approved": true
+  },
+  {
+    "text": "Ce doriți?",
+    "slug": "ro-a95ace349683d641",
+    "approved": true
+  },
+  {
+    "text": "Aș dori o cafea fără zahăr, vă rog.",
+    "slug": "ro-8868379cd12d2104",
+    "approved": true
+  },
+  {
+    "text": "Sigur. Altceva?",
+    "slug": "ro-e8cc684f1e997048",
+    "approved": true
+  },
+  {
+    "text": "Nu, mulțumesc. Nota, vă rog.",
+    "slug": "ro-d5668ee55a459e50",
+    "approved": true
+  },
+  {
+    "text": "Aș dori o cafea, vă rog.",
+    "slug": "ro-edd7cf6d772f7253",
+    "approved": true
+  },
+  {
+    "text": "Aș dori un ceai, vă rog.",
+    "slug": "ro-ad71f2d8de118dae",
+    "approved": true
+  },
+  {
+    "text": "Nota, vă rog.",
+    "slug": "ro-f82ed930582cb5a3",
+    "approved": true
   }
 ]
