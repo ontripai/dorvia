@@ -9,10 +9,12 @@ export const CONVERSATION_GROUPS = [
   { slug: 'shopping', fa: 'خرید روزمره', en: 'Everyday shopping', introFa: 'در فروشگاه کالا بخواهید، مقدار را تغییر دهید و قیمت را بپرسید.', introEn: 'Ask for an item, change the quantity and ask the price in a shop.', lessons: [
     { href: '/learn-romanian/lectie/magazin', fa: 'خرید آب در فروشگاه', en: 'Buying water in a shop', detailFa: 'درخواست مؤدبانه، یک و دو بطری، و پرسیدن قیمت', detailEn: 'Polite requests, one or two bottles, and asking the price' },
   ] },
+  { slug: 'directions', fa: 'راه‌یابی در شهر', en: 'Finding your way', introFa: 'نشانی مکان‌ها را بپرسید و پاسخ کوتاه رهگذر را بفهمید.', introEn: 'Ask where places are and understand a short reply.', lessons: [
+    { href: '/learn-romanian/lectie/directii', fa: 'ایستگاه مترو کجاست؟', en: 'Where is the metro station?', detailFa: 'نشانی مترو و داروخانه، راست و چپ، و فاصله', detailEn: 'Metro and pharmacy directions, left and right, and distance' },
+  ] },
 ] as const;
 
 export const UPCOMING_CONVERSATION_GROUPS = [
-  { fa: 'راه‌یابی در شهر', en: 'Finding your way', detailFa: 'پرسیدن نشانی و مسیر', detailEn: 'Asking for directions' },
   { fa: 'کافه و غذا', en: 'Cafés and food', detailFa: 'سفارش و پرداخت', detailEn: 'Ordering and paying' },
   { fa: 'کارهای ضروری', en: 'Essential services', detailFa: 'داروخانه و قرار ملاقات', detailEn: 'Pharmacy and appointments' },
 ] as const;

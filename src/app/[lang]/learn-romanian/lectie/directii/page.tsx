@@ -1,0 +1,16 @@
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { Breadcrumb } from '@/components/Breadcrumb';
+import { DirectionsLesson } from '@/components/romanian/DirectionsLesson';
+import { LOCALES } from '@/lib/locale-router';
+
+export function generateStaticParams() { return LOCALES.map(lang => ({ lang })); }
+export function generateMetadata({ params }: { params: { lang: string } }): Metadata {
+  const isFa = params.lang === 'fa';
+  return { title: isFa ? 'پرسیدن نشانی در شهر | درس رومانیایی | درویا' : 'Asking directions | Romanian lesson | Dorvia', description: isFa ? 'درس ۱۵ دقیقه‌ای پرسیدن نشانی مترو و داروخانه، فهمیدن مسیر و فاصله.' : 'A 15-minute Romanian lesson on asking where places are and understanding directions.', robots: { index: false, follow: false } };
+}
+export default function DirectionsLessonPage({ params }: { params: { lang: string } }) {
+  if (!LOCALES.includes(params.lang as 'fa' | 'en')) notFound();
+  const lang = params.lang as 'fa' | 'en';
+  return <main className="mx-auto max-w-4xl space-y-6 px-4 py-8"><Breadcrumb items={[{ label: lang === 'fa' ? 'خانه' : 'Home', href: '/' }, { label: lang === 'fa' ? 'آموزش رومانیایی' : 'Learn Romanian', href: '/learn-romanian' }, { label: lang === 'fa' ? 'مکالمه‌های روزمره' : 'Everyday conversations', href: '/learn-romanian/lectie' }, { label: lang === 'fa' ? 'راه‌یابی در شهر' : 'Finding your way' }]} currentLang={lang} disableJsonLd /><DirectionsLesson lang={lang} /></main>;
+}
