@@ -11,6 +11,9 @@ export const directionsScenarios: EverydayScenario[] = [
       { who: 'passerby', ro: 'Numărul zece este după farmacie.', en: 'Number ten is after the pharmacy.', fa: 'شمارهٔ ده بعد از داروخانه است.' },
       { who: 'you', ro: 'Este departe de aici?', en: 'Is it far from here?', fa: 'از اینجا دور است؟' },
       { who: 'passerby', ro: 'Nu, este aproape.', en: 'No, it is close.', fa: 'نه، نزدیک است.' },
+      { who: 'you', ro: 'Intrarea este înainte sau după farmacie?', en: 'Is the entrance before or after the pharmacy?', fa: 'ورودی قبل از داروخانه است یا بعد از آن؟' },
+      { who: 'passerby', ro: 'După farmacie, pe partea dreaptă.', en: 'After the pharmacy, on the right.', fa: 'بعد از داروخانه، سمت راست.' },
+      { who: 'you', ro: 'Am înțeles. Mulțumesc pentru ajutor!', en: 'I understand. Thank you for your help!', fa: 'متوجه شدم. از کمکتان ممنونم!' },
     ],
     rules: [
       { title: { fa: 'پرسیدن نام خیابان', en: 'Ask for a street' }, explanation: { fa: 'Unde este ...? یعنی «... کجاست؟». strada شکل معینِ stradă («خیابان») است؛ سپس نام خیابان می‌آید. Scuzați-mă خطاب را مؤدبانه می‌کند.', en: 'Unde este ...? means “Where is ...?” Strada is the definite form of stradă (“street”), followed by its name. Scuzați-mă politely opens the question.' }, examples: [{ ro: 'Scuzați-mă, unde este strada Florilor?', en: 'Excuse me, where is Florilor Street?', fa: 'ببخشید، خیابان فلوریلور کجاست؟' }] },
@@ -21,6 +24,7 @@ export const directionsScenarios: EverydayScenario[] = [
       { ro: 'Scuzați-mă, unde este strada Florilor?', en: 'Ask where Florilor Street is.', fa: 'نشانی خیابان فلوریلور را بپرسید.', hint: 'Scuzați-mă, unde este strada …?' },
       { ro: 'Caut numărul zece.', en: 'Say you are looking for number ten.', fa: 'بگویید دنبال شمارهٔ ده هستید.', hint: 'Caut numărul … .' },
       { ro: 'Este departe de aici?', en: 'Ask whether it is far from here.', fa: 'بپرسید از اینجا دور است؟', hint: 'Este departe de …?' },
+      { ro: 'Intrarea este înainte sau după farmacie?', en: 'Check whether the entrance is before or after the pharmacy.', fa: 'محل ورودی نسبت به داروخانه را بپرسید.', hint: 'Intrarea este înainte sau ...?' },
     ],
   },
   {
@@ -32,7 +36,10 @@ export const directionsScenarios: EverydayScenario[] = [
       { who: 'passerby', ro: 'Apoi faceți la stânga.', en: 'Then turn left.', fa: 'سپس به چپ بپیچید.' },
       { who: 'you', ro: 'Stația este lângă bancă?', en: 'Is the stop next to the bank?', fa: 'ایستگاه کنار بانک است؟' },
       { who: 'passerby', ro: 'Da, este chiar lângă bancă.', en: 'Yes, it is right next to the bank.', fa: 'بله، درست کنار بانک است.' },
-      { who: 'you', ro: 'Mulțumesc pentru ajutor!', en: 'Thank you for your help!', fa: 'از کمکتان ممنونم!' },
+      { who: 'you', ro: 'Trebuie să traversez strada?', en: 'Do I need to cross the street?', fa: 'باید از خیابان عبور کنم؟' },
+      { who: 'passerby', ro: 'Da, traversați la trecerea de pietoni.', en: 'Yes, cross at the pedestrian crossing.', fa: 'بله، از گذرگاه عابر پیاده عبور کنید.' },
+      { who: 'you', ro: 'Bine, caut trecerea de pietoni. Mulțumesc!', en: 'All right, I will look for the pedestrian crossing. Thank you!', fa: 'خوب، دنبال گذرگاه عابر پیاده می‌گردم. ممنون!' },
+      { who: 'passerby', ro: 'Cu plăcere!', en: 'You are welcome!', fa: 'خواهش می‌کنم!' },
     ],
     rules: [
       { title: { fa: 'نزدیک‌ترین ایستگاه', en: 'The nearest stop' }, explanation: { fa: 'stație de autobuz یعنی «ایستگاه اتوبوس». cea mai apropiată ساخت برترینِ مؤنث برای «نزدیک‌ترین» است و با stație هماهنگ می‌شود. Unde este ...? پرسش مکان است.', en: 'Stație de autobuz means “bus stop”. Cea mai apropiată is the feminine superlative “nearest”, agreeing with stație. Unde este ...? asks for a place.' }, examples: [{ ro: 'Unde este cea mai apropiată stație de autobuz?', en: 'Where is the nearest bus stop?', fa: 'نزدیک‌ترین ایستگاه اتوبوس کجاست؟' }] },
@@ -43,6 +50,7 @@ export const directionsScenarios: EverydayScenario[] = [
       { ro: 'Unde este cea mai apropiată stație de autobuz?', en: 'Ask for the nearest bus stop.', fa: 'نشانی نزدیک‌ترین ایستگاه اتوبوس را بپرسید.', hint: 'Unde este cea mai apropiată …?' },
       { ro: 'Apoi faceți la stânga.', en: 'Say “then turn left”.', fa: 'بگویید «سپس به چپ بپیچید».', hint: 'Apoi faceți la … .' },
       { ro: 'Stația este lângă bancă?', en: 'Check whether the stop is next to the bank.', fa: 'بپرسید ایستگاه کنار بانک است؟', hint: 'Stația este lângă …?' },
+      { ro: 'Trebuie să traversez strada?', en: 'Ask whether you need to cross.', fa: 'عبور از خیابان را بپرسید.', hint: 'Trebuie să ...?' },
     ],
   },
   {
@@ -56,6 +64,8 @@ export const directionsScenarios: EverydayScenario[] = [
       { who: 'passerby', ro: 'La dreapta, după semafor.', en: 'To the right, after the traffic light.', fa: 'به راست، بعد از چراغ راهنمایی.' },
       { who: 'you', ro: 'Deci la dreapta după semafor?', en: 'So, right after the traffic light?', fa: 'پس بعد از چراغ راهنمایی به راست؟' },
       { who: 'passerby', ro: 'Da, exact.', en: 'Yes, exactly.', fa: 'بله، دقیقاً.' },
+      { who: 'you', ro: 'Și unde traversez strada?', en: 'And where do I cross the street?', fa: 'و کجا از خیابان عبور کنم؟' },
+      { who: 'passerby', ro: 'La trecerea de pietoni de lângă semafor.', en: 'At the pedestrian crossing by the traffic light.', fa: 'از گذرگاه عابر پیاده کنار چراغ راهنمایی.' },
     ],
     rules: [
       { title: { fa: 'وقتی متوجه نشدید', en: 'When you did not understand' }, explanation: { fa: 'Nu am înțeles. گذشتهٔ فعل a înțelege است: «نفهمیدم». Puteți صورت مؤدبانهٔ «می‌توانید؟» است و repeta مصدر کوتاه «تکرار کردن». vă rog پرسش را مؤدبانه می‌کند.', en: 'Nu am înțeles. means “I did not understand”, using the past of a înțelege. Puteți is polite “can you?” and repeta is the short infinitive “repeat”. Vă rog adds courtesy.' }, examples: [{ ro: 'Nu am înțeles. Puteți repeta, vă rog?', en: 'I did not understand. Could you repeat, please?', fa: 'متوجه نشدم. لطفاً تکرار می‌کنید؟' }] },
@@ -66,6 +76,7 @@ export const directionsScenarios: EverydayScenario[] = [
       { ro: 'Nu am înțeles. Puteți repeta, vă rog?', en: 'Say you did not understand and ask for a repeat.', fa: 'بگویید متوجه نشدید و درخواست تکرار کنید.', hint: 'Nu am înțeles. Puteți …, vă rog?' },
       { ro: 'Puteți vorbi mai rar, vă rog?', en: 'Ask the person to speak more slowly.', fa: 'بخواهید آهسته‌تر صحبت کند.', hint: 'Puteți vorbi mai …, vă rog?' },
       { ro: 'Deci la dreapta după semafor?', en: 'Confirm a right turn after the traffic light.', fa: 'پیچیدن به راست پس از چراغ راهنمایی را تأیید کنید.', hint: 'Deci la dreapta după …?' },
+      { ro: 'Și unde traversez strada?', en: 'Ask where to cross the street.', fa: 'محل عبور از خیابان را بپرسید.', hint: 'Și unde ...?' },
     ],
   },
   {

@@ -11,6 +11,9 @@ export const shoppingScenarios: EverydayScenario[] = [
       { who: 'you', ro: 'Două pâini, vă rog.', en: 'Two loaves, please.', fa: 'لطفاً دو قرص نان.' },
       { who: 'seller', ro: 'Mai doriți ceva?', en: 'Would you like anything else?', fa: 'چیز دیگری هم میل دارید؟' },
       { who: 'you', ro: 'Nu, mulțumesc. Cât costă?', en: 'No, thank you. How much is it?', fa: 'نه، ممنون. چقدر می‌شود؟' },
+      { who: 'seller', ro: 'Costă zece lei. Doriți o pungă?', en: 'It costs ten lei. Would you like a bag?', fa: 'ده لِی می‌شود. کیسه می‌خواهید؟' },
+      { who: 'you', ro: 'Nu, am o sacoșă. Pot plăti cu cardul?', en: 'No, I have a bag. Can I pay by card?', fa: 'نه، کیسه دارم. می‌توانم با کارت پرداخت کنم؟' },
+      { who: 'seller', ro: 'Da. Poftiți bonul. Mulțumesc!', en: 'Yes. Here is your receipt. Thank you!', fa: 'بله. بفرمایید رسید. ممنون!' },
     ],
     rules: [
       { title: { fa: 'پرسش دربارهٔ موجودی', en: 'Ask if an item is available' }, explanation: { fa: 'Aveți صورت مؤدبانهٔ «دارید؟» از a avea است. نام کالا پس از فعل می‌آید: Aveți pâine proaspătă? صفت proaspătă بعد از pâine قرار می‌گیرد و با اسم مؤنث هماهنگ است.', en: 'Aveți is polite “do you have?” from a avea. Put the item after the verb. Proaspătă (“fresh”) follows the feminine noun pâine and agrees with it.' }, examples: [{ ro: 'Aveți pâine proaspătă?', en: 'Do you have fresh bread?', fa: 'نان تازه دارید؟' }] },
@@ -21,6 +24,7 @@ export const shoppingScenarios: EverydayScenario[] = [
       { ro: 'Aveți pâine proaspătă?', en: 'Ask for fresh bread.', fa: 'بپرسید نان تازه دارند؟', hint: 'Aveți pâine …?' },
       { ro: 'Două pâini, vă rog.', en: 'Ask for two loaves.', fa: 'دو قرص نان بخواهید.', hint: 'Două …, vă rog.' },
       { ro: 'Nu, mulțumesc. Cât costă?', en: 'Decline more items and ask the price.', fa: 'کالای دیگری نخواهید و قیمت را بپرسید.', hint: 'Nu, mulțumesc. Cât …?' },
+      { ro: 'Nu, am o sacoșă. Pot plăti cu cardul?', en: 'Say you have a bag and ask to pay by card.', fa: 'بگویید کیسه دارید و پرداخت با کارت را بپرسید.', hint: 'Nu, am o sacoșă. Pot ...?' },
     ],
   },
   {
@@ -33,6 +37,9 @@ export const shoppingScenarios: EverydayScenario[] = [
       { who: 'seller', ro: 'Altceva?', en: 'Anything else?', fa: 'چیز دیگری؟' },
       { who: 'you', ro: 'Aveți o pungă, vă rog?', en: 'Do you have a bag, please?', fa: 'لطفاً یک کیسه دارید؟' },
       { who: 'seller', ro: 'Da, poftiți.', en: 'Yes, here you are.', fa: 'بله، بفرمایید.' },
+      { who: 'you', ro: 'Cât costă toate fructele?', en: 'How much does all the fruit cost?', fa: 'همهٔ میوه‌ها چقدر می‌شود؟' },
+      { who: 'seller', ro: 'Totalul este optsprezece lei.', en: 'The total is eighteen lei.', fa: 'مجموع هجده لِی است.' },
+      { who: 'you', ro: 'Mulțumesc. Îmi dați bonul, vă rog?', en: 'Thank you. Could you give me the receipt, please?', fa: 'ممنون. لطفاً رسید را می‌دهید؟' },
     ],
     rules: [
       { title: { fa: 'مقدار + de + کالا', en: 'Quantity + de + item' }, explanation: { fa: 'برای وزن، نخست مقدار، سپس de و بعد نام کالا را می‌آوریم: un kilogram de mere. mere جمعِ măr («سیب») است. مقدار را مطابق نیاز واقعی تغییر دهید.', en: 'For weight, put the quantity before de and the item: un kilogram de mere. Mere is the plural of măr (“apple”). Change the amount to match your need.' }, examples: [{ ro: 'Aș dori un kilogram de mere, vă rog.', en: 'I would like one kilogram of apples, please.', fa: 'لطفاً یک کیلوگرم سیب می‌خواهم.' }] },
@@ -43,6 +50,7 @@ export const shoppingScenarios: EverydayScenario[] = [
       { ro: 'Aș dori un kilogram de mere, vă rog.', en: 'Ask for one kilogram of apples.', fa: 'یک کیلوگرم سیب بخواهید.', hint: 'Aș dori un kilogram de … .' },
       { ro: 'Da, o jumătate de kilogram de banane.', en: 'Add half a kilogram of bananas.', fa: 'نیم کیلوگرم موز اضافه کنید.', hint: 'Da, o jumătate de kilogram de … .' },
       { ro: 'Aveți o pungă, vă rog?', en: 'Ask for a bag.', fa: 'یک کیسه بخواهید.', hint: 'Aveți o …, vă rog?' },
+      { ro: 'Cât costă toate fructele?', en: 'Ask for the total fruit price.', fa: 'قیمت کل میوه‌ها را بپرسید.', hint: 'Cât costă ...?' },
     ],
   },
   {
@@ -55,6 +63,9 @@ export const shoppingScenarios: EverydayScenario[] = [
       { who: 'seller', ro: 'Da, este aici.', en: 'Yes, it is here.', fa: 'بله، اینجاست.' },
       { who: 'you', ro: 'Pot să îl probez?', en: 'May I try it on?', fa: 'می‌توانم آن را امتحان کنم؟' },
       { who: 'seller', ro: 'Da, cabina de probă este acolo.', en: 'Yes, the fitting room is over there.', fa: 'بله، اتاق پرو آنجاست.' },
+      { who: 'you', ro: 'Este puțin prea mic. Aveți mărimea L?', en: 'It is a little too small. Do you have size L?', fa: 'کمی کوچک است. اندازهٔ L دارید؟' },
+      { who: 'seller', ro: 'Verific imediat dacă avem mărimea L.', en: 'I will check right away if we have size L.', fa: 'همین حالا بررسی می‌کنم که اندازهٔ L داریم یا نه.' },
+      { who: 'you', ro: 'Mulțumesc. Aștept lângă cabina de probă.', en: 'Thank you. I will wait by the fitting room.', fa: 'ممنون. کنار اتاق پرو منتظر می‌مانم.' },
     ],
     rules: [
       { title: { fa: 'اندازهٔ لباس', en: 'Clothing size' }, explanation: { fa: 'acest tricou یعنی «این تی‌شرت». în mărimea M یعنی «در اندازهٔ M». برای پرسیدن موجودی، Aveți را در آغاز جمله بیاورید. mărimea شکل معینِ mărime («اندازه») است.', en: 'Acest tricou means “this T-shirt”; în mărimea M means “in size M”. Begin with Aveți to ask if the shop has it. Mărimea is the definite form of mărime (“size”).' }, examples: [{ ro: 'Bună ziua! Aveți acest tricou în mărimea M?', en: 'Hello! Do you have this T-shirt in size M?', fa: 'سلام! این تی‌شرت را در اندازهٔ M دارید؟' }] },
@@ -65,6 +76,7 @@ export const shoppingScenarios: EverydayScenario[] = [
       { ro: 'Bună ziua! Aveți acest tricou în mărimea M?', en: 'Ask for this T-shirt in size M.', fa: 'تی‌شرت را در اندازهٔ M بخواهید.', hint: 'Bună ziua! Aveți acest tricou în …?' },
       { ro: 'Îl aveți și pe albastru?', en: 'Ask whether it also comes in blue.', fa: 'رنگ آبی آن را بپرسید.', hint: 'Îl aveți și pe …?' },
       { ro: 'Pot să îl probez?', en: 'Ask to try it on.', fa: 'اجازهٔ پرو کردن بخواهید.', hint: 'Pot să îl …?' },
+      { ro: 'Este puțin prea mic. Aveți mărimea L?', en: 'Say it is too small and ask for size L.', fa: 'بگویید کوچک است و اندازهٔ L بخواهید.', hint: 'Este puțin ... Aveți ...?' },
     ],
   },
   {

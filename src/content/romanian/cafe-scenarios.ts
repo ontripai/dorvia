@@ -11,6 +11,9 @@ export const cafeScenarios: EverydayScenario[] = [
       { who: 'server', ro: 'Doriți și apă?', en: 'Would you like water too?', fa: 'آب هم می‌خواهید؟' },
       { who: 'you', ro: 'Da, o apă plată, vă rog.', en: 'Yes, still water, please.', fa: 'بله، لطفاً یک آب بدون گاز.' },
       { who: 'server', ro: 'Sigur. Poftiți!', en: 'Certainly. Here you are!', fa: 'حتماً. بفرمایید!' },
+      { who: 'you', ro: 'Mulțumesc. Aveți și un pahar pentru apă?', en: 'Thank you. Do you also have a glass for the water?', fa: 'ممنون. برای آب لیوان هم دارید؟' },
+      { who: 'server', ro: 'Da, vă aduc un pahar imediat.', en: 'Yes, I will bring you a glass right away.', fa: 'بله، همین حالا یک لیوان می‌آورم.' },
+      { who: 'you', ro: 'Foarte bine. Mulțumesc mult!', en: 'Very good. Thank you very much!', fa: 'خیلی خوب. بسیار ممنون!' },
     ],
     rules: [
       { title: { fa: 'درخواست مؤدبانه: Aș dori', en: 'Polite request: Aș dori' }, explanation: { fa: 'Aș dori یعنی «مایلم/می‌خواهم» و در سفارش مؤدبانه‌تر از vreau است. نام چیز درخواستی را پس از آن بیاورید و در پایان vă rog بگویید.', en: 'Aș dori means “I would like” and is a polite way to order. Put the item after it and add vă rog (“please”) at the end.' }, examples: [{ ro: 'Aș dori un ceai și un croissant, vă rog.', en: 'I would like a tea and a croissant, please.', fa: 'لطفاً یک چای و یک کروسان می‌خواهم.' }] },
@@ -21,6 +24,7 @@ export const cafeScenarios: EverydayScenario[] = [
       { ro: 'Aș dori un ceai și un croissant, vă rog.', en: 'Politely order tea and a croissant.', fa: 'چای و کروسان را مؤدبانه سفارش دهید.', hint: 'Aș dori un ceai și …, vă rog.' },
       { ro: 'Da, o apă plată, vă rog.', en: 'Also ask for still water.', fa: 'آب بدون گاز هم بخواهید.', hint: 'Da, o apă …, vă rog.' },
       { ro: 'Bună dimineața!', en: 'Greet the server in the morning.', fa: 'صبح به پیشخدمت سلام کنید.', hint: 'Bună …!' },
+      { ro: 'Aveți și un pahar pentru apă?', en: 'Ask for a glass of water.', fa: 'برای آب لیوان بخواهید.', hint: 'Aveți și un pahar ...?' },
     ],
   },
   {
@@ -33,6 +37,9 @@ export const cafeScenarios: EverydayScenario[] = [
       { who: 'server', ro: 'Poftiți cafeaua cu lapte.', en: 'Here is the coffee with milk.', fa: 'بفرمایید قهوه با شیر.' },
       { who: 'you', ro: 'Scuzați-mă, am cerut cafea fără lapte.', en: 'Excuse me, I asked for coffee without milk.', fa: 'ببخشید، قهوه بدون شیر خواسته بودم.' },
       { who: 'server', ro: 'Îmi pare rău. O schimb imediat.', en: 'I am sorry. I will change it right away.', fa: 'متأسفم. همین حالا عوضش می‌کنم.' },
+      { who: 'you', ro: 'Mulțumesc. Vă rog să verificați și zahărul.', en: 'Thank you. Please check the sugar too.', fa: 'ممنون. لطفاً شکر را هم بررسی کنید.' },
+      { who: 'server', ro: 'Da, o pregătim fără lapte și fără zahăr.', en: 'Yes, we will prepare it without milk and without sugar.', fa: 'بله، آن را بدون شیر و بدون شکر آماده می‌کنیم.' },
+      { who: 'you', ro: 'Perfect. Aștept cafeaua corectă.', en: 'Perfect. I will wait for the correct coffee.', fa: 'عالی. منتظر قهوهٔ درست می‌مانم.' },
     ],
     rules: [
       { title: { fa: 'با و بدون', en: 'With and without' }, explanation: { fa: 'cu یعنی «با» و fără یعنی «بدون». بعد از آنها نام ماده می‌آید: cu lapte / fără lapte، cu zahăr / fără zahăr. برای جلوگیری از اشتباه، ویژگی مورد نظر را همان هنگام سفارش بگویید.', en: 'Cu means “with”; fără means “without”. Follow either with the ingredient: cu lapte / fără lapte, cu zahăr / fără zahăr. State the preference when ordering.' }, examples: [{ ro: 'Aș dori o cafea fără lapte, vă rog.', en: 'I would like a coffee without milk, please.', fa: 'لطفاً یک قهوه بدون شیر می‌خواهم.' }, { ro: 'Nu, fără zahăr, vă rog.', en: 'No, without sugar, please.', fa: 'نه، لطفاً بدون شکر.' }] },
@@ -43,6 +50,7 @@ export const cafeScenarios: EverydayScenario[] = [
       { ro: 'Aș dori o cafea fără lapte, vă rog.', en: 'Order coffee without milk.', fa: 'قهوهٔ بدون شیر سفارش دهید.', hint: 'Aș dori o cafea fără … .' },
       { ro: 'Nu, fără zahăr, vă rog.', en: 'Answer that you do not want sugar.', fa: 'بگویید شکر نمی‌خواهید.', hint: 'Nu, fără …, vă rog.' },
       { ro: 'Scuzați-mă, am cerut cafea fără lapte.', en: 'Politely explain that you asked for coffee without milk.', fa: 'مؤدبانه بگویید قهوه بدون شیر خواسته‌اید.', hint: 'Scuzați-mă, am cerut … .' },
+      { ro: 'Vă rog să verificați și zahărul.', en: 'Ask the server to check the sugar too.', fa: 'بخواهید شکر را هم بررسی کند.', hint: 'Vă rog să verificați ...' },
     ],
   },
   {
@@ -55,6 +63,9 @@ export const cafeScenarios: EverydayScenario[] = [
       { who: 'server', ro: 'Da, puteți plăti cu cardul.', en: 'Yes, you can pay by card.', fa: 'بله، می‌توانید با کارت پرداخت کنید.' },
       { who: 'you', ro: 'Îmi dați bonul, vă rog?', en: 'Could you give me the receipt, please?', fa: 'لطفاً رسید را به من می‌دهید؟' },
       { who: 'server', ro: 'Poftiți bonul. Mulțumesc!', en: 'Here is the receipt. Thank you!', fa: 'بفرمایید رسید. متشکرم!' },
+      { who: 'you', ro: 'Scuzați-mă, suma de pe bon este corectă?', en: 'Excuse me, is the amount on the receipt correct?', fa: 'ببخشید، مبلغ روی رسید درست است؟' },
+      { who: 'server', ro: 'Verific acum nota și bonul.', en: 'I will check the bill and receipt now.', fa: 'اکنون صورتحساب و رسید را بررسی می‌کنم.' },
+      { who: 'you', ro: 'Mulțumesc pentru verificare.', en: 'Thank you for checking.', fa: 'از بررسی‌تان ممنونم.' },
     ],
     rules: [
       { title: { fa: 'صورتحساب و رسید', en: 'Bill and receipt' }, explanation: { fa: 'nota صورتحساب مبلغ سفارش است؛ bonul رسید پرداخت است. در پایان غذا Nota, vă rog. بگویید و پس از پرداخت برای رسید از bonul استفاده کنید.', en: 'Nota is the bill showing what you owe; bonul is the receipt after payment. Ask Nota, vă rog. at the end, then ask for bonul after paying.' }, examples: [{ ro: 'Nota, vă rog.', en: 'The bill, please.', fa: 'لطفاً صورتحساب.' }, { ro: 'Îmi dați bonul, vă rog?', en: 'Could you give me the receipt, please?', fa: 'لطفاً رسید را به من می‌دهید؟' }] },
@@ -65,6 +76,7 @@ export const cafeScenarios: EverydayScenario[] = [
       { ro: 'Nota, vă rog.', en: 'Ask for the bill.', fa: 'صورتحساب بخواهید.', hint: 'Nota, … .' },
       { ro: 'Pot plăti cu cardul?', en: 'Ask if you can pay by card.', fa: 'بپرسید آیا می‌توانید با کارت پرداخت کنید.', hint: 'Pot plăti cu …?' },
       { ro: 'Îmi dați bonul, vă rog?', en: 'Politely ask for the receipt.', fa: 'مؤدبانه رسید بخواهید.', hint: 'Îmi dați …, vă rog?' },
+      { ro: 'Suma de pe bon este corectă?', en: 'Ask if the receipt amount is correct.', fa: 'درستی مبلغ رسید را بپرسید.', hint: 'Suma de pe bon ...?' },
     ],
   },
   {
