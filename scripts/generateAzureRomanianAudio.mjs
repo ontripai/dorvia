@@ -12,6 +12,7 @@ const output = path.join(root, 'public/audio/romanian/verified');
 const key = process.env.AZURE_SPEECH_KEY;
 const region = process.env.AZURE_SPEECH_REGION;
 const voice = process.env.AZURE_SPEECH_VOICE || 'ro-RO-AlinaNeural';
+const rebuild = process.env.AZURE_REBUILD_AUDIO === '1';
 if (!key || !region) throw new Error('Set AZURE_SPEECH_KEY and AZURE_SPEECH_REGION outside source control.');
 if (!/^[a-z0-9-]+$/i.test(region)) throw new Error('Invalid Azure region.');
 if (!/^ro-RO-[\w:-]+$/.test(voice)) throw new Error('Select a Romanian voice.');
@@ -31,7 +32,7 @@ for (const item of catalog) {
   const target = path.join(output, filename);
   const url = `/audio/romanian/verified/${filename}`;
   try {
-    if ((await fs.stat(target)).size > 100) {
+    if (!rebuild && (await fs.stat(target)).size > 100) {
       if (item.approved === true) manifest[text] = url;
       else delete manifest[text];
       continue;
@@ -58,18 +59,23 @@ for (const item of catalog) {
   const raw = Buffer.from(await response.arrayBuffer());
   if (raw.length < 100) throw new Error(`Empty audio for ${item.slug}`);
   const temporary = `${target}.raw.mp3`;
+  const candidate = `${target}.trimmed.mp3`;
   await fs.writeFile(temporary, raw);
   try {
+    // Trim only the edges. A stop_periods=1 filter ends at the first natural
+    // pause inside a sentence and can discard the rest of the spoken text.
     execFileSync('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-i', temporary,
-      '-af', 'silenceremove=start_periods=1:start_duration=0:start_silence=0.02:start_threshold=-42dB:stop_periods=1:stop_duration=0.15:stop_silence=0.08:stop_threshold=-42dB:detection=rms',
-      '-codec:a', 'libmp3lame', '-b:a', '48k', target]);
-    if ((await fs.stat(target)).size < 100) throw new Error(`Silent audio for ${item.slug}`);
+      '-af', 'silenceremove=start_periods=1:start_duration=0:start_silence=0.02:start_threshold=-42dB:detection=rms,areverse,silenceremove=start_periods=1:start_duration=0:start_silence=0.02:start_threshold=-42dB:detection=rms,areverse',
+      '-codec:a', 'libmp3lame', '-b:a', '48k', candidate]);
+    if ((await fs.stat(candidate)).size < 100) throw new Error(`Silent audio for ${item.slug}`);
+    await fs.rename(candidate, target);
     if (item.approved === true) manifest[text] = url;
     else delete manifest[text];
     // Save after every successful item so an interrupted batch can resume.
     await fs.writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
-  } finally { await fs.rm(temporary, { force: true }); }
+  } finally { await fs.rm(temporary, { force: true }); await fs.rm(candidate, { force: true }); }
   console.log(`Generated ${item.slug}`);
 }
 await fs.writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(`Generated candidate clips. ${Object.keys(manifest).length} approved clips registered for playback.`);
+
