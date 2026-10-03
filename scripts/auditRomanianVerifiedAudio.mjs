@@ -27,7 +27,7 @@ function scan(file, visitNode) {
   const visit = node => { visitNode(node, source); ts.forEachChild(node, visit); };
   visit(source);
 }
-for (const file of ['src/components/romanian/ShopLesson.tsx', 'src/components/romanian/DirectionsLesson.tsx', 'src/components/romanian/CafeLesson.tsx']) {
+for (const file of ['src/components/romanian/ShopLesson.tsx', 'src/components/romanian/DirectionsLesson.tsx', 'src/components/romanian/CafeLesson.tsx', 'src/components/romanian/AppointmentLesson.tsx']) {
   scan(file, (node, source) => {
     if (ts.isObjectLiteralExpression(node)) {
       const field = node.properties.find(p => ts.isPropertyAssignment(p) && p.name.getText(source) === 'ro');
