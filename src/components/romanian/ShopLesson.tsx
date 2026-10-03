@@ -28,7 +28,7 @@ export function ShopLesson({ lang }: { lang: Locale }) {
   const [round, setRound] = React.useState(0);
   const [answer, setAnswer] = React.useState('');
   const [result, setResult] = React.useState<'correct' | 'retry' | null>(null);
-  const [showFa, setShowFa] = React.useState(false);
+  const [showFa, setShowFa] = React.useState(true);
   const [hint, setHint] = React.useState(false);
   const [finished, setFinished] = React.useState(false);
   const [audioError, setAudioError] = React.useState(false);
