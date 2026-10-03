@@ -70,6 +70,11 @@
     "approved": true
   },
   {
+    "text": "Ai?",
+    "slug": "ro-cf96948c25836a0b",
+    "approved": true
+  },
+  {
     "text": "ajutor",
     "slug": "ro-9f40cc5e569df358",
     "approved": true
@@ -165,6 +170,11 @@
     "approved": true
   },
   {
+    "text": "Am o arsură la mână.",
+    "slug": "ro-8d0974815f66ce25",
+    "approved": true
+  },
+  {
     "text": "Am o carte nouă.",
     "slug": "ro-8995687f62ec8dee",
     "approved": true
@@ -215,8 +225,38 @@
     "approved": true
   },
   {
+    "text": "Aș dori o cafea fără lapte, vă rog.",
+    "slug": "ro-1661e27eac95300e",
+    "approved": true
+  },
+  {
+    "text": "Aș dori o cafea fără zahăr, vă rog.",
+    "slug": "ro-8868379cd12d2104",
+    "approved": true
+  },
+  {
+    "text": "Aș dori o cafea, vă rog.",
+    "slug": "ro-edd7cf6d772f7253",
+    "approved": true
+  },
+  {
+    "text": "Aș dori o programare la medic, vă rog.",
+    "slug": "ro-95d6e27a71783be9",
+    "approved": true
+  },
+  {
     "text": "Aș dori să deschid un cont bancar.",
     "slug": "ro-cd76d9dc41bea317",
+    "approved": true
+  },
+  {
+    "text": "Aș dori un ceai și un croissant, vă rog.",
+    "slug": "ro-f8404eed454617d7",
+    "approved": true
+  },
+  {
+    "text": "Aș dori un ceai, vă rog.",
+    "slug": "ro-ad71f2d8de118dae",
     "approved": true
   },
   {
@@ -235,8 +275,33 @@
     "approved": true
   },
   {
+    "text": "Avem mai multe variante.",
+    "slug": "ro-1512c81fb5883f83",
+    "approved": true
+  },
+  {
     "text": "aveți",
     "slug": "ro-1ddd5e07e1406b0c",
+    "approved": true
+  },
+  {
+    "text": "Aveți acest medicament?",
+    "slug": "ro-f405d2e6002c8952",
+    "approved": true
+  },
+  {
+    "text": "Aveți ceva pentru durere de cap?",
+    "slug": "ro-ab1e2a4947f3f27b",
+    "approved": true
+  },
+  {
+    "text": "Aveți rețetă?",
+    "slug": "ro-5fd3090f2d169a42",
+    "approved": true
+  },
+  {
+    "text": "Aveți și o cremă de mâini?",
+    "slug": "ro-2822bdac17fff55a",
     "approved": true
   },
   {
@@ -450,6 +515,16 @@
     "approved": true
   },
   {
+    "text": "Caut informații despre vitamine.",
+    "slug": "ro-75245559ab841179",
+    "approved": true
+  },
+  {
+    "text": "Caut un șampon pentru păr uscat.",
+    "slug": "ro-d166ab84d908d516",
+    "approved": true
+  },
+  {
     "text": "când",
     "slug": "ro-8ffc5558e3abc0ca",
     "approved": true
@@ -457,6 +532,11 @@
   {
     "text": "cât",
     "slug": "ro-185b31697b067366",
+    "approved": true
+  },
+  {
+    "text": "Cât costă două sticle de apă?",
+    "slug": "ro-df8473ac60a6a7bf",
     "approved": true
   },
   {
@@ -500,6 +580,11 @@
     "approved": true
   },
   {
+    "text": "Ce doriți?",
+    "slug": "ro-a95ace349683d641",
+    "approved": true
+  },
+  {
     "text": "Ce înseamnă asta, vă rog?",
     "slug": "ro-4575e8661c9d2f15",
     "approved": true
@@ -512,6 +597,16 @@
   {
     "text": "Ce mai faci?",
     "slug": "ro-4931c9e44a928b98",
+    "approved": true
+  },
+  {
+    "text": "Ce opțiuni am?",
+    "slug": "ro-0911af4a91eb699c",
+    "approved": true
+  },
+  {
+    "text": "Ce variante aveți?",
+    "slug": "ro-f1375e6210e20648",
     "approved": true
   },
   {
@@ -535,13 +630,28 @@
     "approved": true
   },
   {
+    "text": "che",
+    "slug": "ro-250fccd5f5f76c7c",
+    "approved": true
+  },
+  {
     "text": "cheie",
     "slug": "ro-f3859c52059a276d",
     "approved": true
   },
   {
+    "text": "chi",
+    "slug": "ro-dffe602cd1e0bfa9",
+    "approved": true
+  },
+  {
     "text": "chitară",
     "slug": "ro-76e9c8194b9e6abc",
+    "approved": true
+  },
+  {
+    "text": "ci",
+    "slug": "ro-1b158839f8aa339e",
     "approved": true
   },
   {
@@ -570,6 +680,11 @@
     "approved": true
   },
   {
+    "text": "co",
+    "slug": "ro-c330ec504d82c24f",
+    "approved": true
+  },
+  {
     "text": "coborî",
     "slug": "ro-304175cfd68854b3",
     "approved": true
@@ -580,13 +695,33 @@
     "approved": true
   },
   {
+    "text": "Costă cinci lei.",
+    "slug": "ro-edef52b097ecc017",
+    "approved": true
+  },
+  {
+    "text": "cu",
+    "slug": "ro-e67be79550661604",
+    "approved": true
+  },
+  {
     "text": "Cu plăcere.",
     "slug": "ro-7d5291f2ccbca07d",
     "approved": true
   },
   {
+    "text": "Cu zahăr?",
+    "slug": "ro-02cafd189138acc5",
+    "approved": true
+  },
+  {
     "text": "cum",
     "slug": "ro-594810adcbee20bd",
+    "approved": true
+  },
+  {
+    "text": "Cum se administrează?",
+    "slug": "ro-b97ab766c2f812ce",
     "approved": true
   },
   {
@@ -610,8 +745,33 @@
     "approved": true
   },
   {
+    "text": "Da, am rețetă.",
+    "slug": "ro-1a3046a6c4ee1447",
+    "approved": true
+  },
+  {
     "text": "Da, am un bilet.",
     "slug": "ro-a9303e6657422f8c",
+    "approved": true
+  },
+  {
+    "text": "Da, avem acest medicament. Aveți rețetă?",
+    "slug": "ro-cd7f8349368d8d8b",
+    "approved": true
+  },
+  {
+    "text": "Da, avem un loc liber.",
+    "slug": "ro-8d2f7bbe775c567e",
+    "approved": true
+  },
+  {
+    "text": "Da, desigur.",
+    "slug": "ro-2c4cf5c8fdd1c814",
+    "approved": true
+  },
+  {
+    "text": "Da, este aici.",
+    "slug": "ro-585c25daa29434e4",
     "approved": true
   },
   {
@@ -625,13 +785,38 @@
     "approved": true
   },
   {
+    "text": "Da, o apă plată, vă rog.",
+    "slug": "ro-d0dd724e49760065",
+    "approved": true
+  },
+  {
+    "text": "Da, puteți plăti cu cardul.",
+    "slug": "ro-7571768edb1958f6",
+    "approved": true
+  },
+  {
     "text": "de",
     "slug": "ro-959a45d44e6fcf58",
     "approved": true
   },
   {
+    "text": "De azi dimineață.",
+    "slug": "ro-a1437a268320fd3d",
+    "approved": true
+  },
+  {
+    "text": "De când vă doare capul?",
+    "slug": "ro-fe8693e61c6edc81",
+    "approved": true
+  },
+  {
     "text": "de ce",
     "slug": "ro-0a04040b20670095",
+    "approved": true
+  },
+  {
+    "text": "De ce materiale am nevoie?",
+    "slug": "ro-376d93b72e8128cb",
     "approved": true
   },
   {
@@ -685,6 +870,11 @@
     "approved": true
   },
   {
+    "text": "Doriți și apă?",
+    "slug": "ro-fcf3db98ea267cf8",
+    "approved": true
+  },
+  {
     "text": "Doriți un abonament lunar?",
     "slug": "ro-3febfc42b5e0847e",
     "approved": true
@@ -722,6 +912,11 @@
   {
     "text": "două case noi",
     "slug": "ro-359df4a205b6a43a",
+    "approved": true
+  },
+  {
+    "text": "Două sticle de apă, vă rog.",
+    "slug": "ro-d57f934901b16a62",
     "approved": true
   },
   {
@@ -1035,8 +1230,18 @@
     "approved": true
   },
   {
+    "text": "ghe",
+    "slug": "ro-45f489b04637a9e2",
+    "approved": true
+  },
+  {
     "text": "gheață",
     "slug": "ro-ba0524ac7ad6f06e",
+    "approved": true
+  },
+  {
+    "text": "ghi",
+    "slug": "ro-50ae61e841fac4e8",
     "approved": true
   },
   {
@@ -1045,8 +1250,23 @@
     "approved": true
   },
   {
+    "text": "gi",
+    "slug": "ro-1917d730c88ed0f6",
+    "approved": true
+  },
+  {
     "text": "girafă",
     "slug": "ro-7fbff8a6eb8b051d",
+    "approved": true
+  },
+  {
+    "text": "go",
+    "slug": "ro-4cd0e21a9a0795a1",
+    "approved": true
+  },
+  {
+    "text": "gu",
+    "slug": "ro-6152d43caa491abe",
     "approved": true
   },
   {
@@ -1130,6 +1350,11 @@
     "approved": true
   },
   {
+    "text": "Îmi dați bonul, vă rog?",
+    "slug": "ro-3896fdc7faa363ce",
+    "approved": true
+  },
+  {
     "text": "Îmi pare bine.",
     "slug": "ro-b5387584421470dd",
     "approved": true
@@ -1137,6 +1362,11 @@
   {
     "text": "Îmi pare rău.",
     "slug": "ro-c065e4c3c9f17091",
+    "approved": true
+  },
+  {
+    "text": "Îmi pare rău. O schimb imediat.",
+    "slug": "ro-aba49f9f62b0a561",
     "approved": true
   },
   {
@@ -1230,6 +1460,21 @@
     "approved": true
   },
   {
+    "text": "La ce oră?",
+    "slug": "ro-663d0aea95729730",
+    "approved": true
+  },
+  {
+    "text": "La ora nouă, vă rog.",
+    "slug": "ro-69d4b2d3e83c402c",
+    "approved": true
+  },
+  {
+    "text": "La ora zece, vă rog.",
+    "slug": "ro-497489d1c353f45c",
+    "approved": true
+  },
+  {
     "text": "La revedere!",
     "slug": "ro-7ac1c3cccb521bb9",
     "approved": true
@@ -1300,6 +1545,16 @@
     "approved": true
   },
   {
+    "text": "Mă doare capul.",
+    "slug": "ro-8d34b7bd4c91c534",
+    "approved": true
+  },
+  {
+    "text": "Mă numesc",
+    "slug": "ro-82cd21cc6a410cc9",
+    "approved": true
+  },
+  {
     "text": "Mă numesc {{name}}.",
     "slug": "ro-67260e38fbdae6f2",
     "approved": true
@@ -1322,6 +1577,11 @@
   {
     "text": "mea",
     "slug": "ro-dcb0e34fce1a4824",
+    "approved": true
+  },
+  {
+    "text": "Mergeți înainte. Stația este pe dreapta.",
+    "slug": "ro-40ba8d3e300c919e",
     "approved": true
   },
   {
@@ -1420,6 +1680,11 @@
     "approved": true
   },
   {
+    "text": "Nota, vă rog.",
+    "slug": "ro-f82ed930582cb5a3",
+    "approved": true
+  },
+  {
     "text": "nouă",
     "slug": "ro-13bb53cb8d06462e",
     "approved": true
@@ -1440,8 +1705,18 @@
     "approved": true
   },
   {
+    "text": "Nu am înțeles. Poți repeta, te rog?",
+    "slug": "ro-f80534cd14e27b86",
+    "approved": true
+  },
+  {
     "text": "Nu am înțeles. Puteți repeta, vă rog?",
     "slug": "ro-6be234a1381a9b62",
+    "approved": true
+  },
+  {
+    "text": "Nu am rețetă.",
+    "slug": "ro-e9034c8c7673dc50",
     "approved": true
   },
   {
@@ -1457,6 +1732,21 @@
   {
     "text": "Nu vorbesc românește.",
     "slug": "ro-b7fcff46e735b965",
+    "approved": true
+  },
+  {
+    "text": "Nu, este aproape.",
+    "slug": "ro-37e25595908768a1",
+    "approved": true
+  },
+  {
+    "text": "Nu, fără zahăr, vă rog.",
+    "slug": "ro-3b05d31611106a62",
+    "approved": true
+  },
+  {
+    "text": "Nu, mulțumesc. Nota, vă rog.",
+    "slug": "ro-d5668ee55a459e50",
     "approved": true
   },
   {
@@ -1477,6 +1767,11 @@
   {
     "text": "o casă nouă",
     "slug": "ro-5c690d583d759c60",
+    "approved": true
+  },
+  {
+    "text": "o farmacie",
+    "slug": "ro-5b5ccd6b90a2babd",
     "approved": true
   },
   {
@@ -1580,6 +1875,31 @@
     "approved": true
   },
   {
+    "text": "Pentru ce zi?",
+    "slug": "ro-2d494e6704a44662",
+    "approved": true
+  },
+  {
+    "text": "Pentru cine?",
+    "slug": "ro-9b7fbd662343d466",
+    "approved": true
+  },
+  {
+    "text": "Pentru luni, vă rog.",
+    "slug": "ro-a140f4deef0b880c",
+    "approved": true
+  },
+  {
+    "text": "Pentru marți, vă rog.",
+    "slug": "ro-30ca6ffd7a459c04",
+    "approved": true
+  },
+  {
+    "text": "Pentru mine.",
+    "slug": "ro-d091fb8036ac14d4",
+    "approved": true
+  },
+  {
     "text": "plăcere",
     "slug": "ro-ec97b4e619a71184",
     "approved": true
@@ -1587,6 +1907,16 @@
   {
     "text": "Poftiți",
     "slug": "ro-f514ec6f5c8e2373",
+    "approved": true
+  },
+  {
+    "text": "Poftiți bonul. Mulțumesc!",
+    "slug": "ro-33bb79936ea9ec64",
+    "approved": true
+  },
+  {
+    "text": "Poftiți cafeaua cu lapte.",
+    "slug": "ro-71d2789e405b2248",
     "approved": true
   },
   {
@@ -1610,8 +1940,23 @@
     "approved": true
   },
   {
+    "text": "Pot să citesc eticheta?",
+    "slug": "ro-d214781fd1dcc810",
+    "approved": true
+  },
+  {
+    "text": "Poți vorbi mai rar?",
+    "slug": "ro-1783e0203d00facb",
+    "approved": true
+  },
+  {
     "text": "Prețul biletului este zece lei.",
     "slug": "ro-357b811622854d94",
+    "approved": true
+  },
+  {
+    "text": "Prețul este pe etichetă.",
+    "slug": "ro-5c43ebb17a0850bb",
     "approved": true
   },
   {
@@ -1622,6 +1967,11 @@
   {
     "text": "primul",
     "slug": "ro-e76d2f495bffca5c",
+    "approved": true
+  },
+  {
+    "text": "Puteți să vă uitați, vă rog?",
+    "slug": "ro-4fc8d1876dd550c3",
     "approved": true
   },
   {
@@ -1715,6 +2065,11 @@
     "approved": true
   },
   {
+    "text": "Scuzați-mă, am cerut cafea fără lapte.",
+    "slug": "ro-2e73e26b02e328ec",
+    "approved": true
+  },
+  {
     "text": "Scuzați-mă.",
     "slug": "ro-99d0e83345715245",
     "approved": true
@@ -1722,6 +2077,11 @@
   {
     "text": "scuză",
     "slug": "ro-b6cf561572f5f2d8",
+    "approved": true
+  },
+  {
+    "text": "Scuză-mă.",
+    "slug": "ro-c08a8d91afb16dde",
     "approved": true
   },
   {
@@ -1742,6 +2102,31 @@
   {
     "text": "sfert",
     "slug": "ro-3ce3b8dd3ac9d86f",
+    "approved": true
+  },
+  {
+    "text": "Sigur. Altceva?",
+    "slug": "ro-e8cc684f1e997048",
+    "approved": true
+  },
+  {
+    "text": "Sigur. Poftiți nota.",
+    "slug": "ro-bc19bcba57e0868a",
+    "approved": true
+  },
+  {
+    "text": "Sigur. Poftiți!",
+    "slug": "ro-b8a382055d055b39",
+    "approved": true
+  },
+  {
+    "text": "stația de metrou",
+    "slug": "ro-6535d0b22120e9de",
+    "approved": true
+  },
+  {
+    "text": "Stația este pe stânga.",
+    "slug": "ro-9499840cb09002d9",
     "approved": true
   },
   {
@@ -2060,8 +2445,28 @@
     "approved": true
   },
   {
+    "text": "Vă explic după ce mă uit.",
+    "slug": "ro-1c911152873d6bd4",
+    "approved": true
+  },
+  {
+    "text": "Vă explic imediat.",
+    "slug": "ro-23e055c9701457e7",
+    "approved": true
+  },
+  {
+    "text": "Vă explic opțiunile.",
+    "slug": "ro-d4027a169ca009bd",
+    "approved": true
+  },
+  {
     "text": "Vă mulțumesc.",
     "slug": "ro-5c4106be26f6ad3d",
+    "approved": true
+  },
+  {
+    "text": "Vă rog să îmi arătați.",
+    "slug": "ro-8d6f3e0d2a7001bd",
     "approved": true
   },
   {
@@ -2097,6 +2502,11 @@
   {
     "text": "Voi sunteți aici.",
     "slug": "ro-9e6eb14594ccc6c1",
+    "approved": true
+  },
+  {
+    "text": "Vorbești engleză?",
+    "slug": "ro-cb56b6ea8b4d5968",
     "approved": true
   },
   {
@@ -2142,346 +2552,6 @@
   {
     "text": "zi",
     "slug": "ro-6df02ca00ca28629",
-    "approved": true
-  },
-  {
-    "text": "Ai?",
-    "slug": "ro-cf96948c25836a0b",
-    "approved": true
-  },
-  {
-    "text": "che",
-    "slug": "ro-250fccd5f5f76c7c",
-    "approved": true
-  },
-  {
-    "text": "chi",
-    "slug": "ro-dffe602cd1e0bfa9",
-    "approved": true
-  },
-  {
-    "text": "ci",
-    "slug": "ro-1b158839f8aa339e",
-    "approved": true
-  },
-  {
-    "text": "co",
-    "slug": "ro-c330ec504d82c24f",
-    "approved": true
-  },
-  {
-    "text": "Costă cinci lei.",
-    "slug": "ro-edef52b097ecc017",
-    "approved": true
-  },
-  {
-    "text": "cu",
-    "slug": "ro-e67be79550661604",
-    "approved": true
-  },
-  {
-    "text": "Cât costă două sticle de apă?",
-    "slug": "ro-df8473ac60a6a7bf",
-    "approved": true
-  },
-  {
-    "text": "Două sticle de apă, vă rog.",
-    "slug": "ro-d57f934901b16a62",
-    "approved": true
-  },
-  {
-    "text": "ghe",
-    "slug": "ro-45f489b04637a9e2",
-    "approved": true
-  },
-  {
-    "text": "ghi",
-    "slug": "ro-50ae61e841fac4e8",
-    "approved": true
-  },
-  {
-    "text": "gi",
-    "slug": "ro-1917d730c88ed0f6",
-    "approved": true
-  },
-  {
-    "text": "go",
-    "slug": "ro-4cd0e21a9a0795a1",
-    "approved": true
-  },
-  {
-    "text": "gu",
-    "slug": "ro-6152d43caa491abe",
-    "approved": true
-  },
-  {
-    "text": "Mergeți înainte. Stația este pe dreapta.",
-    "slug": "ro-40ba8d3e300c919e",
-    "approved": true
-  },
-  {
-    "text": "Mă numesc",
-    "slug": "ro-82cd21cc6a410cc9",
-    "approved": true
-  },
-  {
-    "text": "Nu am înțeles. Poți repeta, te rog?",
-    "slug": "ro-f80534cd14e27b86",
-    "approved": true
-  },
-  {
-    "text": "Nu, este aproape.",
-    "slug": "ro-37e25595908768a1",
-    "approved": true
-  },
-  {
-    "text": "o farmacie",
-    "slug": "ro-5b5ccd6b90a2babd",
-    "approved": true
-  },
-  {
-    "text": "Poți vorbi mai rar?",
-    "slug": "ro-1783e0203d00facb",
-    "approved": true
-  },
-  {
-    "text": "Scuză-mă.",
-    "slug": "ro-c08a8d91afb16dde",
-    "approved": true
-  },
-  {
-    "text": "stația de metrou",
-    "slug": "ro-6535d0b22120e9de",
-    "approved": true
-  },
-  {
-    "text": "Stația este pe stânga.",
-    "slug": "ro-9499840cb09002d9",
-    "approved": true
-  },
-  {
-    "text": "Vorbești engleză?",
-    "slug": "ro-cb56b6ea8b4d5968",
-    "approved": true
-  },
-  {
-    "text": "Ce doriți?",
-    "slug": "ro-a95ace349683d641",
-    "approved": true
-  },
-  {
-    "text": "Aș dori o cafea fără zahăr, vă rog.",
-    "slug": "ro-8868379cd12d2104",
-    "approved": true
-  },
-  {
-    "text": "Sigur. Altceva?",
-    "slug": "ro-e8cc684f1e997048",
-    "approved": true
-  },
-  {
-    "text": "Nu, mulțumesc. Nota, vă rog.",
-    "slug": "ro-d5668ee55a459e50",
-    "approved": true
-  },
-  {
-    "text": "Aș dori o cafea, vă rog.",
-    "slug": "ro-edd7cf6d772f7253",
-    "approved": true
-  },
-  {
-    "text": "Aș dori un ceai, vă rog.",
-    "slug": "ro-ad71f2d8de118dae",
-    "approved": true
-  },
-  {
-    "text": "Nota, vă rog.",
-    "slug": "ro-f82ed930582cb5a3",
-    "approved": true
-  },
-  {
-    "text": "Aș dori o programare la medic, vă rog.",
-    "slug": "ro-95d6e27a71783be9",
-    "approved": true
-  },
-  {
-    "text": "Pentru ce zi?",
-    "slug": "ro-2d494e6704a44662",
-    "approved": true
-  },
-  {
-    "text": "Pentru luni, vă rog.",
-    "slug": "ro-a140f4deef0b880c",
-    "approved": true
-  },
-  {
-    "text": "La ce oră?",
-    "slug": "ro-663d0aea95729730",
-    "approved": true
-  },
-  {
-    "text": "La ora zece, vă rog.",
-    "slug": "ro-497489d1c353f45c",
-    "approved": true
-  },
-  {
-    "text": "Da, avem un loc liber.",
-    "slug": "ro-8d2f7bbe775c567e",
-    "approved": true
-  },
-  {
-    "text": "Pentru marți, vă rog.",
-    "slug": "ro-30ca6ffd7a459c04",
-    "approved": true
-  },
-  {
-    "text": "La ora nouă, vă rog.",
-    "slug": "ro-69d4b2d3e83c402c",
-    "approved": true
-  },
-  {
-    "text": "Aveți acest medicament?",
-    "slug": "ro-f405d2e6002c8952",
-    "approved": true
-  },
-  {
-    "text": "Da, avem acest medicament. Aveți rețetă?",
-    "slug": "ro-cd7f8349368d8d8b",
-    "approved": true
-  },
-  {
-    "text": "Da, am rețetă.",
-    "slug": "ro-1a3046a6c4ee1447",
-    "approved": true
-  },
-  {
-    "text": "Cum se administrează?",
-    "slug": "ro-b97ab766c2f812ce",
-    "approved": true
-  },
-  {
-    "text": "Vă explic imediat.",
-    "slug": "ro-23e055c9701457e7",
-    "approved": true
-  },
-  {
-    "text": "Aveți rețetă?",
-    "slug": "ro-5fd3090f2d169a42",
-    "approved": true
-  },
-  {
-    "text": "Nu am rețetă.",
-    "slug": "ro-e9034c8c7673dc50",
-    "approved": true
-  },
-  {
-    "text": "Mă doare capul.",
-    "slug": "ro-8d34b7bd4c91c534",
-    "approved": true
-  },
-  {
-    "text": "Aveți ceva pentru durere de cap?",
-    "slug": "ro-ab1e2a4947f3f27b",
-    "approved": true
-  },
-  {
-    "text": "De când vă doare capul?",
-    "slug": "ro-fe8693e61c6edc81",
-    "approved": true
-  },
-  {
-    "text": "De azi dimineață.",
-    "slug": "ro-a1437a268320fd3d",
-    "approved": true
-  },
-  {
-    "text": "Ce opțiuni am?",
-    "slug": "ro-0911af4a91eb699c",
-    "approved": true
-  },
-  {
-    "text": "Vă explic opțiunile.",
-    "slug": "ro-d4027a169ca009bd",
-    "approved": true
-  },
-  {
-    "text": "Am o arsură la mână.",
-    "slug": "ro-8d0974815f66ce25",
-    "approved": true
-  },
-  {
-    "text": "Puteți să vă uitați, vă rog?",
-    "slug": "ro-4fc8d1876dd550c3",
-    "approved": true
-  },
-  {
-    "text": "Vă rog să îmi arătați.",
-    "slug": "ro-8d6f3e0d2a7001bd",
-    "approved": true
-  },
-  {
-    "text": "De ce materiale am nevoie?",
-    "slug": "ro-376d93b72e8128cb",
-    "approved": true
-  },
-  {
-    "text": "Vă explic după ce mă uit.",
-    "slug": "ro-1c911152873d6bd4",
-    "approved": true
-  },
-  {
-    "text": "Caut informații despre vitamine.",
-    "slug": "ro-75245559ab841179",
-    "approved": true
-  },
-  {
-    "text": "Pentru cine?",
-    "slug": "ro-9b7fbd662343d466",
-    "approved": true
-  },
-  {
-    "text": "Pentru mine.",
-    "slug": "ro-d091fb8036ac14d4",
-    "approved": true
-  },
-  {
-    "text": "Ce variante aveți?",
-    "slug": "ro-f1375e6210e20648",
-    "approved": true
-  },
-  {
-    "text": "Pot să citesc eticheta?",
-    "slug": "ro-d214781fd1dcc810",
-    "approved": true
-  },
-  {
-    "text": "Da, desigur.",
-    "slug": "ro-2c4cf5c8fdd1c814",
-    "approved": true
-  },
-  {
-    "text": "Caut un șampon pentru păr uscat.",
-    "slug": "ro-d166ab84d908d516",
-    "approved": true
-  },
-  {
-    "text": "Avem mai multe variante.",
-    "slug": "ro-1512c81fb5883f83",
-    "approved": true
-  },
-  {
-    "text": "Aveți și o cremă de mâini?",
-    "slug": "ro-2822bdac17fff55a",
-    "approved": true
-  },
-  {
-    "text": "Da, este aici.",
-    "slug": "ro-585c25daa29434e4",
-    "approved": true
-  },
-  {
-    "text": "Prețul este pe etichetă.",
-    "slug": "ro-5c43ebb17a0850bb",
     "approved": true
   }
 ]
