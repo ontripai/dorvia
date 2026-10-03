@@ -67,7 +67,84 @@ export const shoppingScenarios: EverydayScenario[] = [
       { ro: 'Pot să îl probez?', en: 'Ask to try it on.', fa: 'اجازهٔ پرو کردن بخواهید.', hint: 'Pot să îl …?' },
     ],
   },
+  {
+    slug: 'stoc', title: { fa: 'کالای ناموجود و جایگزین', en: 'Out of stock and alternatives' },
+    goal: { fa: 'کالای موردنظر را پیدا کنید، جایگزین را بررسی کنید و قیمت را مقایسه کنید.', en: 'Find an item, consider an alternative, and compare prices.' },
+    dialogue: [
+      { who: 'you', ro: 'Bună ziua. Unde găsesc laptele fără lactoză?', en: 'Hello. Where can I find lactose-free milk?', fa: 'سلام. شیر بدون لاکتوز را کجا پیدا می‌کنم؟' },
+      { who: 'seller', ro: 'De obicei este pe raftul din dreapta.', en: 'It is usually on the shelf on the right.', fa: 'معمولاً در قفسهٔ سمت راست است.' },
+      { who: 'you', ro: 'Nu îl găsesc. Mai aveți în stoc?', en: 'I cannot find it. Do you still have it in stock?', fa: 'پیدایش نمی‌کنم. هنوز موجود دارید؟' },
+      { who: 'seller', ro: 'Din păcate, această marcă s-a terminat.', en: 'Unfortunately, this brand has sold out.', fa: 'متأسفانه این برند تمام شده است.' },
+      { who: 'you', ro: 'Aveți o altă marcă fără lactoză?', en: 'Do you have another lactose-free brand?', fa: 'برند دیگری بدون لاکتوز دارید؟' },
+      { who: 'seller', ro: 'Da, avem această cutie de un litru.', en: 'Yes, we have this one-litre carton.', fa: 'بله، این بستهٔ یک لیتری را داریم.' },
+      { who: 'you', ro: 'Cât costă această cutie?', en: 'How much does this carton cost?', fa: 'این بسته چقدر قیمت دارد؟' },
+      { who: 'seller', ro: 'Costă doisprezece lei. Este la reducere astăzi.', en: 'It costs twelve lei. It is on sale today.', fa: 'دوازده لِی است. امروز تخفیف دارد.' },
+      { who: 'you', ro: 'Bine, iau una. Mulțumesc!', en: 'All right, I will take one. Thank you!', fa: 'خوب است، یکی برمی‌دارم. ممنون!' },
+    ],
+    rules: [
+      { title: { fa: 'پرسیدن محل کالا', en: 'Finding a product' }, explanation: { fa: 'Unde găsesc ...? یعنی «... را کجا پیدا می‌کنم؟». بعد از آن نام دقیق کالا را بیاورید. بدون لاکتوز در رومانیایی fără lactoză است.', en: 'Unde găsesc ...? means “Where can I find ...?” Follow it with the exact item. “Lactose-free” is fără lactoză.' }, examples: [{ ro: 'Unde găsesc laptele fără lactoză?', en: 'Where can I find lactose-free milk?', fa: 'شیر بدون لاکتوز را کجا پیدا می‌کنم؟' }] },
+      { title: { fa: 'موجودی و جایگزین', en: 'Stock and alternatives' }, explanation: { fa: 'Mai aveți în stoc? می‌پرسد آیا هنوز موجود است. اگر برند تمام شده، با o altă marcă یک برند دیگر بخواهید. altă با marcă مؤنث هماهنگ است.', en: 'Mai aveți în stoc? asks if an item is still in stock. Ask for o altă marcă when the brand is sold out; altă agrees with feminine marcă.' }, examples: [{ ro: 'Aveți o altă marcă fără lactoză?', en: 'Do you have another lactose-free brand?', fa: 'برند دیگری بدون لاکتوز دارید؟' }] },
+      { title: { fa: 'قیمت و تصمیم خرید', en: 'Price and decision' }, explanation: { fa: 'Cât costă ...? قیمت یک کالا را می‌پرسد. بعد از شنیدن قیمت، iau una یعنی «یکی برمی‌دارم»؛ una به cutie مؤنث برمی‌گردد.', en: 'Cât costă ...? asks the price. After hearing it, iau una means “I will take one”; una refers to feminine cutie.' }, examples: [{ ro: 'Bine, iau una. Mulțumesc!', en: 'All right, I will take one. Thank you!', fa: 'خوب است، یکی برمی‌دارم. ممنون!' }] },
+    ],
+    tasks: [
+      { ro: 'Unde găsesc laptele fără lactoză?', en: 'Ask where the lactose-free milk is.', fa: 'محل شیر بدون لاکتوز را بپرسید.', hint: 'Unde găsesc ...?' },
+      { ro: 'Nu îl găsesc. Mai aveți în stoc?', en: 'Say you cannot find it and ask about stock.', fa: 'بگویید پیدا نمی‌کنید و موجودی را بپرسید.', hint: 'Nu îl găsesc. Mai ...?' },
+      { ro: 'Aveți o altă marcă fără lactoză?', en: 'Ask for another brand.', fa: 'برند جایگزین بخواهید.', hint: 'Aveți o altă marcă ...?' },
+      { ro: 'Cât costă această cutie?', en: 'Ask the carton price.', fa: 'قیمت بسته را بپرسید.', hint: 'Cât costă ...?' },
+    ],
+  },
+  {
+    slug: 'casa', title: { fa: 'صندوق، پرداخت و رسید', en: 'Checkout, payment and receipt' },
+    goal: { fa: 'قیمت نهایی را بفهمید، روش پرداخت را انتخاب کنید و رسید بخواهید.', en: 'Understand the total, choose a payment method, and ask for a receipt.' },
+    dialogue: [
+      { who: 'seller', ro: 'Bună ziua. Aveți card de fidelitate?', en: 'Hello. Do you have a loyalty card?', fa: 'سلام. کارت وفاداری دارید؟' },
+      { who: 'you', ro: 'Nu, nu am card de fidelitate.', en: 'No, I do not have a loyalty card.', fa: 'نه، کارت وفاداری ندارم.' },
+      { who: 'seller', ro: 'Doriți o pungă?', en: 'Would you like a bag?', fa: 'کیسه می‌خواهید؟' },
+      { who: 'you', ro: 'Da, o pungă mică, vă rog.', en: 'Yes, a small bag, please.', fa: 'بله، لطفاً یک کیسهٔ کوچک.' },
+      { who: 'seller', ro: 'Totalul este treizeci și doi de lei.', en: 'The total is thirty-two lei.', fa: 'مجموع سی‌ودو لِی است.' },
+      { who: 'you', ro: 'Pot plăti cu cardul?', en: 'Can I pay by card?', fa: 'می‌توانم با کارت پرداخت کنم؟' },
+      { who: 'seller', ro: 'Da. Apropiați cardul de terminal, vă rog.', en: 'Yes. Please tap your card on the terminal.', fa: 'بله. لطفاً کارت را به دستگاه نزدیک کنید.' },
+      { who: 'you', ro: 'Îmi dați bonul, vă rog?', en: 'Could you give me the receipt, please?', fa: 'لطفاً رسید را به من می‌دهید؟' },
+      { who: 'seller', ro: 'Sigur. Poftiți bonul și punga.', en: 'Of course. Here are the receipt and the bag.', fa: 'حتماً. بفرمایید رسید و کیسه.' },
+    ],
+    rules: [
+      { title: { fa: 'پاسخ منفی دربارهٔ کارت', en: 'A negative answer about a card' }, explanation: { fa: 'Nu, nu am ... پاسخ طبیعی «نه، ... ندارم» است. فعل am از a avea می‌آید. نام کارت را پس از آن بیاورید.', en: 'Nu, nu am ... is a natural “No, I do not have ...” response. Am comes from a avea; place the card name after it.' }, examples: [{ ro: 'Nu, nu am card de fidelitate.', en: 'No, I do not have a loyalty card.', fa: 'نه، کارت وفاداری ندارم.' }] },
+      { title: { fa: 'مجموع و پرداخت', en: 'Total and payment' }, explanation: { fa: 'Totalul este ... مبلغ نهایی را نشان می‌دهد. Pot plăti cu cardul? یعنی «می‌توانم با کارت پرداخت کنم؟». برای نقدی، cu numerar را جای cu cardul بگذارید.', en: 'Totalul este ... introduces the final amount. Pot plăti cu cardul? asks to pay by card; replace cu cardul with cu numerar for cash.' }, examples: [{ ro: 'Pot plăti cu cardul?', en: 'Can I pay by card?', fa: 'می‌توانم با کارت پرداخت کنم؟' }] },
+      { title: { fa: 'درخواست رسید', en: 'Ask for a receipt' }, explanation: { fa: 'bonul یعنی «رسید» با حرف تعریف معین در پایان اسم. Îmi dați ...? درخواست مؤدبانهٔ «به من می‌دهید؟» است؛ vă rog را برای ادب بیشتر اضافه کنید.', en: 'Bonul is the definite form of “receipt”, with the article attached at the end. Îmi dați ...? is a polite request; add vă rog.' }, examples: [{ ro: 'Îmi dați bonul, vă rog?', en: 'Could you give me the receipt, please?', fa: 'لطفاً رسید را به من می‌دهید؟' }] },
+    ],
+    tasks: [
+      { ro: 'Nu, nu am card de fidelitate.', en: 'Say you do not have a loyalty card.', fa: 'بگویید کارت وفاداری ندارید.', hint: 'Nu, nu am ...' },
+      { ro: 'Da, o pungă mică, vă rog.', en: 'Ask for a small bag.', fa: 'یک کیسهٔ کوچک بخواهید.', hint: 'Da, o pungă ...' },
+      { ro: 'Pot plăti cu cardul?', en: 'Ask to pay by card.', fa: 'پرداخت با کارت را بپرسید.', hint: 'Pot plăti ...?' },
+      { ro: 'Îmi dați bonul, vă rog?', en: 'Ask for the receipt.', fa: 'رسید بخواهید.', hint: 'Îmi dați ...?' },
+    ],
+  },
+  {
+    slug: 'retur', title: { fa: 'بازگرداندن کالا', en: 'Returning an item' },
+    goal: { fa: 'مشکل کالا را توضیح دهید، رسید را نشان دهید و گزینه‌های فروشگاه را بپرسید.', en: 'Explain an issue, show the receipt, and ask about the shop’s options.' },
+    dialogue: [
+      { who: 'you', ro: 'Bună ziua. Am cumpărat acest tricou ieri.', en: 'Hello. I bought this T-shirt yesterday.', fa: 'سلام. این تی‌شرت را دیروز خریدم.' },
+      { who: 'seller', ro: 'Bună ziua. Cu ce vă pot ajuta?', en: 'Hello. How can I help you?', fa: 'سلام. چطور می‌توانم کمک کنم؟' },
+      { who: 'you', ro: 'Mărimea este prea mică. Îl pot schimba?', en: 'The size is too small. Can I exchange it?', fa: 'اندازه‌اش خیلی کوچک است. می‌توانم آن را تعویض کنم؟' },
+      { who: 'seller', ro: 'Aveți bonul și eticheta?', en: 'Do you have the receipt and the tag?', fa: 'رسید و برچسب را دارید؟' },
+      { who: 'you', ro: 'Da, iată bonul. Eticheta este încă pe tricou.', en: 'Yes, here is the receipt. The tag is still on the T-shirt.', fa: 'بله، این هم رسید. برچسب هنوز روی تی‌شرت است.' },
+      { who: 'seller', ro: 'Ce mărime doriți în loc?', en: 'What size would you like instead?', fa: 'به‌جایش چه اندازه‌ای می‌خواهید؟' },
+      { who: 'you', ro: 'Aveți mărimea L în aceeași culoare?', en: 'Do you have size L in the same colour?', fa: 'اندازهٔ L را در همین رنگ دارید؟' },
+      { who: 'seller', ro: 'Verific imediat. Dacă nu este, vă explic opțiunile.', en: 'I will check right away. If it is unavailable, I will explain the options.', fa: 'همین حالا بررسی می‌کنم. اگر موجود نباشد، گزینه‌ها را توضیح می‌دهم.' },
+      { who: 'you', ro: 'Mulțumesc. Aștept aici.', en: 'Thank you. I will wait here.', fa: 'ممنون. اینجا منتظر می‌مانم.' },
+    ],
+    rules: [
+      { title: { fa: 'زمان خرید و دلیل', en: 'When and why' }, explanation: { fa: 'Am cumpărat ... ieri یعنی «دیروز ... خریدم»؛ am همراه با قسمت سوم فعل زمان گذشته را می‌سازد. prea mică یعنی «خیلی کوچک» و با mărimea مؤنث هماهنگ است.', en: 'Am cumpărat ... ieri means “I bought ... yesterday”; am plus the participle forms the past tense. Prea mică agrees with feminine mărimea.' }, examples: [{ ro: 'Am cumpărat acest tricou ieri.', en: 'I bought this T-shirt yesterday.', fa: 'این تی‌شرت را دیروز خریدم.' }] },
+      { title: { fa: 'درخواست تعویض', en: 'Ask for an exchange' }, explanation: { fa: 'Îl pot schimba? یعنی «می‌توانم آن را عوض کنم؟». îl به tricou برمی‌گردد. بهتر است به جای فرض کردن امکان بازگشت، سیاست همان فروشگاه را بپرسید.', en: 'Îl pot schimba? asks whether you can exchange it; îl refers to tricou. Ask the shop about its actual policy rather than assuming an outcome.' }, examples: [{ ro: 'Mărimea este prea mică. Îl pot schimba?', en: 'The size is too small. Can I exchange it?', fa: 'اندازه‌اش خیلی کوچک است. می‌توانم آن را تعویض کنم؟' }] },
+      { title: { fa: 'رسید، برچسب و اندازهٔ جایگزین', en: 'Receipt, tag and replacement size' }, explanation: { fa: 'bonul رسید و eticheta برچسب کالا است. برای اندازهٔ جایگزین از Aveți mărimea L ...? استفاده کنید. în aceeași culoare یعنی «در همان رنگ».', en: 'Bonul is the receipt and eticheta the tag. Ask Aveți mărimea L ...? for a replacement size; în aceeași culoare means “in the same colour”.' }, examples: [{ ro: 'Aveți mărimea L în aceeași culoare?', en: 'Do you have size L in the same colour?', fa: 'اندازهٔ L را در همین رنگ دارید؟' }] },
+    ],
+    tasks: [
+      { ro: 'Am cumpărat acest tricou ieri.', en: 'Say when you bought it.', fa: 'بگویید چه وقت آن را خریدید.', hint: 'Am cumpărat ... ieri.' },
+      { ro: 'Mărimea este prea mică. Îl pot schimba?', en: 'Explain the size and ask to exchange.', fa: 'مشکل اندازه را بگویید و تعویض را بپرسید.', hint: 'Mărimea este ... Îl pot ...?' },
+      { ro: 'Da, iată bonul. Eticheta este încă pe tricou.', en: 'Show the receipt and confirm the tag.', fa: 'رسید و باقی ماندن برچسب را توضیح دهید.', hint: 'Da, iată bonul. Eticheta ...' },
+      { ro: 'Aveți mărimea L în aceeași culoare?', en: 'Ask for size L in the same colour.', fa: 'اندازهٔ L را در همان رنگ بخواهید.', hint: 'Aveți mărimea L ...?' },
+    ],
+  },
 ];
 
 export function getShoppingScenario(slug: string) { return shoppingScenarios.find(scenario => scenario.slug === slug); }
-
