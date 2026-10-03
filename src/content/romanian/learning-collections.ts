@@ -24,8 +24,11 @@ export const CONVERSATION_GROUPS = [
   { slug: 'cafe', fa: 'کافه و غذا', en: 'Cafés and food', introFa: 'سفارش ساده بدهید، نوع نوشیدنی را مشخص کنید و صورتحساب بخواهید.', introEn: 'Place a simple order, specify a drink, and ask for the bill.', lessons: [
     { href: '/learn-romanian/lectie/cafenea', fa: 'سفارش در کافه', en: 'Ordering in a café', detailFa: 'درخواست قهوه یا چای، واژهٔ «بدون» و درخواست صورتحساب', detailEn: 'Ask for coffee or tea, use “without”, and request the bill' },
     { href: '/learn-romanian/lectie/cafenea/mic-dejun', fa: 'صبحانه در کافه', en: 'Breakfast at a café', detailFa: 'چای، کروسان و آب بدون گاز در گفت‌وگوی صبحانه', detailEn: 'Tea, a croissant, and still water in a breakfast conversation' },
+    { href: '/learn-romanian/lectie/cafenea/masa', fa: 'میز، منو و سفارش در سالن', en: 'A table, the menu and dining in', detailFa: 'میز برای دو نفر، منو، نوشیدنی و غذا', detailEn: 'Table for two, menu, drinks and food' },
+    { href: '/learn-romanian/lectie/cafenea/ingrediente', fa: 'مواد غذا و حساسیت', en: 'Ingredients and an allergy', detailFa: 'پرسیدن مواد، بیان حساسیت و درخواست بررسی', detailEn: 'Ask about ingredients, state an allergy and request a check' },
     { href: '/learn-romanian/lectie/cafenea/schimbare-comanda', fa: 'تغییر در سفارش', en: 'Changing an order', detailFa: 'با و بدون شیر یا شکر؛ اصلاح مؤدبانهٔ سفارش', detailEn: 'With or without milk and sugar; politely correct an order' },
     { href: '/learn-romanian/lectie/cafenea/plata', fa: 'صورتحساب و پرداخت', en: 'Bill and payment', detailFa: 'صورتحساب، پرداخت با کارت و درخواست رسید', detailEn: 'The bill, paying by card, and requesting a receipt' },
+    { href: '/learn-romanian/lectie/cafenea/la-pachet', fa: 'سفارش بیرون‌بر', en: 'Ordering takeaway', detailFa: 'سفارش، زمان آماده‌شدن و بررسی هنگام تحویل', detailEn: 'Order, pickup time and checking the item' },
   ] },
   { slug: 'appointments', fa: 'قرار ملاقات و پذیرش', en: 'Appointments and reception', introFa: 'از تماس اولیه تا تغییر یا لغو وقت، ورود به پذیرش و پرسیدن مدارک؛ هر موقعیت را در درس جدا تمرین کنید.', introEn: 'From the first call to rescheduling, cancelling, checking in, and asking about documents, practise each situation separately.', lessons: [
     { href: '/learn-romanian/lectie/programare', fa: 'گرفتن وقت ملاقات', en: 'Booking an appointment', detailFa: 'درخواست مؤدبانه، پرسیدن روز و اعلام ساعت', detailEn: 'Polite request, choosing a day and stating a time' },
@@ -61,8 +64,10 @@ export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; det
     { fa: 'رفع ابهام', en: 'Clarifying directions', detailFa: 'تکرار آهسته بخواهید و یک گام را تأیید کنید.', detailEn: 'Ask for a slow repeat and confirm a step.', lessonIndexes: [3] },
   ],
   cafe: [
-    { fa: 'سفارش خوراکی و نوشیدنی', en: 'Ordering food and drink', detailFa: 'گفت‌وگوی اصلی و صبحانه را تمرین کنید.', detailEn: 'Practise the basic exchange and breakfast.', lessonIndexes: [0, 1] },
-    { fa: 'تغییر و پرداخت', en: 'Changes and payment', detailFa: 'سفارش را اصلاح کنید و صورتحساب و رسید بخواهید.', detailEn: 'Correct an order and request the bill and receipt.', lessonIndexes: [2, 3] },
+    { fa: 'نشستن و سفارش', en: 'Dining in and ordering', detailFa: 'گفت‌وگوی اصلی، صبحانه و درخواست میز و منو را تمرین کنید.', detailEn: 'Practise the basic exchange, breakfast, tables and menus.', lessonIndexes: [0, 1, 2] },
+    { fa: 'مواد و نیازهای غذایی', en: 'Ingredients and dietary needs', detailFa: 'مواد غذا و حساسیت را روشن بگویید و بررسی بخواهید.', detailEn: 'Clarify ingredients and allergies and ask for a check.', lessonIndexes: [3] },
+    { fa: 'تغییر و پرداخت', en: 'Changes and payment', detailFa: 'سفارش را اصلاح کنید و صورتحساب و رسید بخواهید.', detailEn: 'Correct an order and request the bill and receipt.', lessonIndexes: [4, 5] },
+    { fa: 'بیرون‌بر', en: 'Takeaway', detailFa: 'سفارش بیرون‌بر، زمان تحویل و تأیید جزئیات.', detailEn: 'Order takeaway, ask about pickup and check details.', lessonIndexes: [6] },
   ],
   appointments: [
     { fa: 'گرفتن وقت', en: 'Booking', detailFa: 'درخواست حضوری و گفت‌وگوی کامل تلفنی.', detailEn: 'An in-person request and a full phone call.', lessonIndexes: [0, 1] },

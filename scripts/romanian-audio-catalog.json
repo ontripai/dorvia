@@ -140,6 +140,16 @@
     "approved": true
   },
   {
+    "text": "Am alergie la lapte.",
+    "slug": "ro-d546a89cfb80fe6a",
+    "approved": true
+  },
+  {
+    "text": "Am alergie la lapte. Conține și alte produse lactate?",
+    "slug": "ro-33c4250e75078e98",
+    "approved": true
+  },
+  {
     "text": "Am apă.",
     "slug": "ro-f9ea9d3a7a4734ac",
     "approved": true
@@ -255,6 +265,11 @@
     "approved": true
   },
   {
+    "text": "Are legume și smântână.",
+    "slug": "ro-7ff9f8e31596c4e0",
+    "approved": true
+  },
+  {
     "text": "astăzi",
     "slug": "ro-e22efd4dd289b37c",
     "approved": true
@@ -290,6 +305,11 @@
     "approved": true
   },
   {
+    "text": "Aș dori supa de legume.",
+    "slug": "ro-dab54cb7bdda78dd",
+    "approved": true
+  },
+  {
     "text": "Aș dori un ceai și un croissant, vă rog.",
     "slug": "ro-f8404eed454617d7",
     "approved": true
@@ -302,6 +322,16 @@
   {
     "text": "Aș dori un kilogram de mere, vă rog.",
     "slug": "ro-05bf1a00eb7d1558",
+    "approved": true
+  },
+  {
+    "text": "Aș dori un sandviș la pachet.",
+    "slug": "ro-ba10bb4e899fc839",
+    "approved": true
+  },
+  {
+    "text": "Atunci nu pot mânca acest fel. Aveți altă opțiune?",
+    "slug": "ro-8eb3108c16253a28",
     "approved": true
   },
   {
@@ -362,6 +392,11 @@
   {
     "text": "Aveți o altă marcă fără lactoză?",
     "slug": "ro-5a4e826bcf900b3a",
+    "approved": true
+  },
+  {
+    "text": "Aveți o masă pentru două persoane?",
+    "slug": "ro-6a7c17ea704463db",
     "approved": true
   },
   {
@@ -510,6 +545,11 @@
     "approved": true
   },
   {
+    "text": "Bucătarul spune că sosul conține unt.",
+    "slug": "ro-dfacdf5d0e49c37b",
+    "approved": true
+  },
+  {
     "text": "bun",
     "slug": "ro-08d1082cc8d85a08",
     "approved": true
@@ -527,6 +567,11 @@
   {
     "text": "Bună seara!",
     "slug": "ro-79805fb79fe78f25",
+    "approved": true
+  },
+  {
+    "text": "Bună seara. Aveți o masă pentru două persoane?",
+    "slug": "ro-b0ddc5bb0e1dc445",
     "approved": true
   },
   {
@@ -592,6 +637,11 @@
   {
     "text": "Bună ziua. Aș dori o programare la medic.",
     "slug": "ro-69a7780512ee0b2c",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua. Aș dori un sandviș la pachet.",
+    "slug": "ro-87a8840f45569290",
     "approved": true
   },
   {
@@ -690,6 +740,11 @@
     "approved": true
   },
   {
+    "text": "Când este gata comanda?",
+    "slug": "ro-91f6012f069c09c5",
+    "approved": true
+  },
+  {
     "text": "cât",
     "slug": "ro-185b31697b067366",
     "approved": true
@@ -747,6 +802,11 @@
   {
     "text": "Ce doriți?",
     "slug": "ro-a95ace349683d641",
+    "approved": true
+  },
+  {
+    "text": "Ce ingrediente are această supă?",
+    "slug": "ro-04623f1aeb5ae8ce",
     "approved": true
   },
   {
@@ -955,6 +1015,11 @@
     "approved": true
   },
   {
+    "text": "Da, avem o masă lângă fereastră.",
+    "slug": "ro-62cfad1712f935cf",
+    "approved": true
+  },
+  {
     "text": "Da, avem pâine proaspătă.",
     "slug": "ro-49561f9bcceb34f7",
     "approved": true
@@ -1030,6 +1095,11 @@
     "approved": true
   },
   {
+    "text": "Da, o apă plată. Când este gata comanda?",
+    "slug": "ro-66bc6656bf3b67c1",
+    "approved": true
+  },
+  {
     "text": "Da, o jumătate de kilogram de banane.",
     "slug": "ro-6fc75fd878b69015",
     "approved": true
@@ -1072,6 +1142,11 @@
   {
     "text": "Da. Mergeți drept înainte.",
     "slug": "ro-812a190c68ba8089",
+    "approved": true
+  },
+  {
+    "text": "Da. Poftiți comanda: un sandviș și o apă.",
+    "slug": "ro-51c812ac78016966",
     "approved": true
   },
   {
@@ -1185,6 +1260,11 @@
     "approved": true
   },
   {
+    "text": "Doriți și o băutură?",
+    "slug": "ro-151b4133672227d6",
+    "approved": true
+  },
+  {
     "text": "Doriți un abonament lunar?",
     "slug": "ro-3febfc42b5e0847e",
     "approved": true
@@ -1197,6 +1277,11 @@
   {
     "text": "două",
     "slug": "ro-62e5d651734634d4",
+    "approved": true
+  },
+  {
+    "text": "Două ape plate, vă rog.",
+    "slug": "ro-fc4222c5a8e447bf",
     "approved": true
   },
   {
@@ -1420,6 +1505,11 @@
     "approved": true
   },
   {
+    "text": "Este bine. Ne aduceți meniul, vă rog?",
+    "slug": "ro-fe0a8350263b5e60",
+    "approved": true
+  },
+  {
     "text": "Este departe de aici?",
     "slug": "ro-df9db95663499324",
     "approved": true
@@ -1427,6 +1517,11 @@
   {
     "text": "Este departe?",
     "slug": "ro-62cc47602f3ac964",
+    "approved": true
+  },
+  {
+    "text": "Este fără brânză, corect? Mulțumesc!",
+    "slug": "ro-8becbd6da1dca1cb",
     "approved": true
   },
   {
@@ -1712,6 +1807,11 @@
   {
     "text": "în",
     "slug": "ro-0cf56b5c780797bd",
+    "approved": true
+  },
+  {
+    "text": "În aproximativ zece minute. Vă dau un număr de comandă.",
+    "slug": "ro-63e4ba319ca14348",
     "approved": true
   },
   {
@@ -2015,6 +2115,16 @@
     "approved": true
   },
   {
+    "text": "Mulțumesc. Pot plăti acum cu cardul?",
+    "slug": "ro-b2b237cd276f3fe1",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc. Vă rog să confirmați ingredientele înainte de comandă.",
+    "slug": "ro-a5b168a4db1ba585",
+    "approved": true
+  },
+  {
     "text": "Mulțumim.",
     "slug": "ro-63b183a1c74d1db4",
     "approved": true
@@ -2027,6 +2137,11 @@
   {
     "text": "ne",
     "slug": "ro-cb58e4600bf0142c",
+    "approved": true
+  },
+  {
+    "text": "Ne aduceți meniul, vă rog?",
+    "slug": "ro-837b075480ed6376",
     "approved": true
   },
   {
@@ -2100,6 +2215,11 @@
     "approved": true
   },
   {
+    "text": "Nu acum, mulțumesc. Acesta este tot.",
+    "slug": "ro-b8ff951564301b9f",
+    "approved": true
+  },
+  {
     "text": "Nu am înțeles. Poți repeta, te rog?",
     "slug": "ro-f80534cd14e27b86",
     "approved": true
@@ -2127,6 +2247,11 @@
   {
     "text": "Nu mă simt bine.",
     "slug": "ro-43c5d6c233fcb23c",
+    "approved": true
+  },
+  {
+    "text": "Nu știu sigur. Verific la bucătărie.",
+    "slug": "ro-b25f7d23b94a1d5a",
     "approved": true
   },
   {
@@ -2207,6 +2332,11 @@
   {
     "text": "O sticlă de apă, vă rog.",
     "slug": "ro-f80f9d045ef05f30",
+    "approved": true
+  },
+  {
+    "text": "O supă de legume. Mai doriți ceva?",
+    "slug": "ro-af7255272e8df535",
     "approved": true
   },
   {
@@ -2380,6 +2510,11 @@
     "approved": true
   },
   {
+    "text": "Pot întreba despre o salată fără sos.",
+    "slug": "ro-d04a4602fdf8a39d",
+    "approved": true
+  },
+  {
     "text": "Pot plăti cu cardul?",
     "slug": "ro-aef9f5e484d6b3fa",
     "approved": true
@@ -2525,6 +2660,11 @@
     "approved": true
   },
   {
+    "text": "Scuzați-mă, ce ingrediente are această supă?",
+    "slug": "ro-2bf0421c8ba11aaf",
+    "approved": true
+  },
+  {
     "text": "Scuzați-mă, unde este strada Florilor?",
     "slug": "ro-a4ec7c639c9780ef",
     "approved": true
@@ -2567,6 +2707,16 @@
   {
     "text": "Sigur. Altceva?",
     "slug": "ro-e8cc684f1e997048",
+    "approved": true
+  },
+  {
+    "text": "Sigur. Ce fel de sandviș doriți?",
+    "slug": "ro-60e9ac534e4a8b47",
+    "approved": true
+  },
+  {
+    "text": "Sigur. Doriți ceva de băut?",
+    "slug": "ro-4cf947b9ffee1ef6",
     "approved": true
   },
   {
@@ -2692,6 +2842,11 @@
   {
     "text": "șe",
     "slug": "ro-8f7d4763b891a0ee",
+    "approved": true
+  },
+  {
+    "text": "Și ce doriți de mâncare?",
+    "slug": "ro-12f9ee229c12ddf0",
     "approved": true
   },
   {
@@ -2840,6 +2995,11 @@
     "approved": true
   },
   {
+    "text": "Un sandviș cu legume, fără brânză, vă rog.",
+    "slug": "ro-90553d8ee7c8206b",
+    "approved": true
+  },
+  {
     "text": "una",
     "slug": "ro-161f0e5ed45f6d51",
     "approved": true
@@ -2972,6 +3132,11 @@
   {
     "text": "Vă rog să îmi arătați.",
     "slug": "ro-8d6f3e0d2a7001bd",
+    "approved": true
+  },
+  {
+    "text": "Vă rog să verificați și sosul.",
+    "slug": "ro-a12e0b6192e0b887",
     "approved": true
   },
   {
