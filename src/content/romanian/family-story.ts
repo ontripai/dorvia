@@ -1414,7 +1414,658 @@ export const familyTableLesson = {
   "answerVoice": "ro-RO-EmilNeural"
 } satisfies EverydayScenario;
 
-export const homeStoryLessons: (EverydayScenario & { vocabulary: NonNullable<EverydayScenario['vocabulary']> })[] = [welcomeHomeLesson, meetFamilyLesson, homeRoomLesson, familyBreakfastLesson, familyTableLesson];
+export const familyBreadLesson = {
+  "slug": "paine",
+  "title": {
+    "fa": "درس ۶: نان برای فردا",
+    "en": "Lesson 6: Bread for tomorrow"
+  },
+  "goal": {
+    "fa": "برای خرید نان به آنا کمک کنید و نشانی نانوایی را بپرسید.",
+    "en": "Offer to buy bread for Ana and ask where the bakery is."
+  },
+  "setting": {
+    "fa": "عصر است. پس از چیدن میز، آنا متوجه می‌شود نان کمی برای صبح فردا مانده است. شما پیشنهاد می‌کنید از نانوایی کنار خانه نان بیاورید.",
+    "en": "It is afternoon. After setting the table, Ana notices there is little bread left for tomorrow morning. You offer to get bread from the bakery next to the house."
+  },
+  "dialogue": [
+    {
+      "ro": "Avem puțină pâine pentru mâine.",
+      "en": "We have little bread for tomorrow.",
+      "fa": "برای فردا نان کمی داریم.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Cumpăr pâine?",
+      "en": "Shall I buy bread?",
+      "fa": "نان بخرم؟",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    },
+    {
+      "ro": "Da, de la brutărie.",
+      "en": "Yes, from the bakery.",
+      "fa": "بله، از نانوایی.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Unde e brutăria?",
+      "en": "Where is the bakery?",
+      "fa": "نانوایی کجاست؟",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    },
+    {
+      "ro": "E lângă casă.",
+      "en": "It is next to the house.",
+      "fa": "کنار خانه است.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Bine, cumpăr pâine.",
+      "en": "Okay, I’ll buy bread.",
+      "fa": "خوب، نان می‌خرم.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    },
+    {
+      "ro": "Adu pâinea acasă, te rog.",
+      "en": "Bring the bread home, please.",
+      "fa": "لطفاً نان را به خانه بیاور.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Da, aduc pâinea acasă.",
+      "en": "Yes, I’ll bring the bread home.",
+      "fa": "بله، نان را به خانه می‌آورم.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    }
+  ],
+  "tasks": [
+    {
+      "ro": "Cumpăr pâine?",
+      "en": "Shall I buy bread?",
+      "fa": "نان بخرم؟",
+      "hint": "Cumpăr …",
+      "cue": {
+        "ro": "Avem puțină pâine pentru mâine.",
+        "en": "We have little bread for tomorrow.",
+        "fa": "برای فردا نان کمی داریم.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Unde e brutăria?",
+      "en": "Where is the bakery?",
+      "fa": "نانوایی کجاست؟",
+      "hint": "Unde …",
+      "cue": {
+        "ro": "Da, de la brutărie.",
+        "en": "Yes, from the bakery.",
+        "fa": "بله، از نانوایی.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Bine, cumpăr pâine.",
+      "en": "Okay, I’ll buy bread.",
+      "fa": "خوب، نان می‌خرم.",
+      "hint": "Bine, …",
+      "cue": {
+        "ro": "E lângă casă.",
+        "en": "It is next to the house.",
+        "fa": "کنار خانه است.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Da, aduc pâinea acasă.",
+      "en": "Yes, I’ll bring the bread home.",
+      "fa": "بله، نان را به خانه می‌آورم.",
+      "hint": "Da, …",
+      "cue": {
+        "ro": "Adu pâinea acasă, te rog.",
+        "en": "Bring the bread home, please.",
+        "fa": "لطفاً نان را به خانه بیاور.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "title": {
+        "fa": "پیشنهاد کمک و آوردن خرید",
+        "en": "Offer help and bring shopping home"
+      },
+      "explanation": {
+        "fa": "cumpăr یعنی «می‌خرم» و aduc یعنی «می‌آورم». با سؤال Cumpăr pâine? برای خرید کمک پیشنهاد می‌کنید. Adu دستور صمیمیِ همین فعل a aduce است؛ te rog یعنی «لطفاً» خطاب به یک نفر.",
+        "en": "Cumpăr means I buy and aduc means I bring. Cumpăr pâine? offers to help. Adu is the familiar imperative of a aduce; te rog is please when addressing one person."
+      },
+      "examples": [
+        {
+          "ro": "Cumpăr pâine?",
+          "en": "Shall I buy bread?",
+          "fa": "نان بخرم؟",
+          "audioVoice": "ro-RO-EmilNeural"
+        },
+        {
+          "ro": "Adu pâinea acasă, te rog.",
+          "en": "Bring the bread home, please.",
+          "fa": "لطفاً نان را به خانه بیاور.",
+          "audioVoice": "ro-RO-AlinaNeural"
+        },
+        {
+          "ro": "Da, aduc pâinea acasă.",
+          "en": "Yes, I’ll bring the bread home.",
+          "fa": "بله، نان را به خانه می‌آورم.",
+          "audioVoice": "ro-RO-EmilNeural"
+        }
+      ]
+    },
+    {
+      "title": {
+        "fa": "زمان و مقدار کم",
+        "en": "Time and a small quantity"
+      },
+      "explanation": {
+        "fa": "mâine یعنی «فردا». puțin با pâine به صورت puțină می‌آید، چون pâine مؤنث است؛ یک واژه با دو شکل. lângă casă از درس صبحانه و pâine از درس میز مرور می‌شوند.",
+        "en": "Mâine means tomorrow. Puțin becomes puțină with feminine pâine; these are forms of one target. Lângă casă reviews breakfast and pâine reviews setting the table."
+      },
+      "examples": [
+        {
+          "ro": "Avem puțină pâine pentru mâine.",
+          "en": "We have little bread for tomorrow.",
+          "fa": "برای فردا نان کمی داریم.",
+          "audioVoice": "ro-RO-AlinaNeural"
+        },
+        {
+          "ro": "E lângă casă.",
+          "en": "It is next to the house.",
+          "fa": "کنار خانه است.",
+          "audioVoice": "ro-RO-AlinaNeural"
+        }
+      ]
+    }
+  ],
+  "answerVoice": "ro-RO-EmilNeural",
+  "vocabulary": [
+    {
+      "ro": "mâine",
+      "en": "tomorrow",
+      "fa": "فردا",
+      "example": {
+        "ro": "Avem puțină pâine pentru mâine.",
+        "en": "We have little bread for tomorrow.",
+        "fa": "برای فردا نان کمی داریم.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "puțin",
+      "en": "little / a little",
+      "fa": "کم / کمی",
+      "example": {
+        "ro": "Avem puțină pâine pentru mâine.",
+        "en": "We have little bread for tomorrow.",
+        "fa": "برای فردا نان کمی داریم.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "brutărie",
+      "en": "bakery",
+      "fa": "نانوایی",
+      "example": {
+        "ro": "Unde e brutăria?",
+        "en": "Where is the bakery?",
+        "fa": "نانوایی کجاست؟",
+        "audioVoice": "ro-RO-EmilNeural"
+      }
+    },
+    {
+      "ro": "a cumpăra",
+      "en": "to buy",
+      "fa": "خریدن",
+      "example": {
+        "ro": "Cumpăr pâine?",
+        "en": "Shall I buy bread?",
+        "fa": "نان بخرم؟",
+        "audioVoice": "ro-RO-EmilNeural"
+      }
+    },
+    {
+      "ro": "a aduce",
+      "en": "to bring",
+      "fa": "آوردن",
+      "example": {
+        "ro": "Da, aduc pâinea acasă.",
+        "en": "Yes, I’ll bring the bread home.",
+        "fa": "بله، نان را به خانه می‌آورم.",
+        "audioVoice": "ro-RO-EmilNeural"
+      }
+    }
+  ]
+} satisfies EverydayScenario;
+
+export const familyBakeryLesson = {
+  "slug": "paine-pentru-acasa",
+  "title": {
+    "fa": "نان تازه برای خانه",
+    "en": "Fresh bread for home"
+  },
+  "goal": {
+    "fa": "یک نان بخواهید، با کارت پرداخت کنید و رسید را بگیرید.",
+    "en": "Ask for a loaf, pay by card and collect the receipt."
+  },
+  "setting": {
+    "fa": "در نانوایی محله هستید. آنا برای صبح فردا نان می‌خواهد؛ یک قرص نان می‌خرید و رسید را همراه می‌برید. قیمت پنج لِی فقط نمونهٔ آموزشی است.",
+    "en": "You are at the neighbourhood bakery. Ana needs bread for tomorrow morning; buy one loaf and take the receipt home. Five lei is a practice price."
+  },
+  "dialogue": [
+    {
+      "ro": "Bună ziua!",
+      "en": "Hello!",
+      "fa": "سلام!",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Bună ziua! O pâine proaspătă, vă rog.",
+      "en": "Hello! A fresh loaf, please.",
+      "fa": "سلام! یک نان تازه، لطفاً.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    },
+    {
+      "ro": "Da. Cinci lei.",
+      "en": "Yes. Five lei.",
+      "fa": "بله. پنج لِی.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Plătesc cu cardul.",
+      "en": "I’ll pay by card.",
+      "fa": "با کارت پرداخت می‌کنم.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    },
+    {
+      "ro": "Bine. Pâinea e în pungă.",
+      "en": "Okay. The bread is in the bag.",
+      "fa": "خوب. نان داخل کیسه است.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Am și bonul?",
+      "en": "May I have the receipt too?",
+      "fa": "رسید را هم می‌گیرم؟",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    },
+    {
+      "ro": "Da, bonul e aici.",
+      "en": "Yes, the receipt is here.",
+      "fa": "بله، رسید اینجاست.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Mulțumesc!",
+      "en": "Thank you!",
+      "fa": "ممنون!",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    }
+  ],
+  "tasks": [
+    {
+      "ro": "Bună ziua! O pâine proaspătă, vă rog.",
+      "en": "Hello! A fresh loaf, please.",
+      "fa": "سلام! یک نان تازه، لطفاً.",
+      "hint": "Bună …",
+      "cue": {
+        "ro": "Bună ziua!",
+        "en": "Hello!",
+        "fa": "سلام!",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Plătesc cu cardul.",
+      "en": "I’ll pay by card.",
+      "fa": "با کارت پرداخت می‌کنم.",
+      "hint": "Plătesc …",
+      "cue": {
+        "ro": "Da. Cinci lei.",
+        "en": "Yes. Five lei.",
+        "fa": "بله. پنج لِی.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Am și bonul?",
+      "en": "May I have the receipt too?",
+      "fa": "رسید را هم می‌گیرم؟",
+      "hint": "Am …",
+      "cue": {
+        "ro": "Bine. Pâinea e în pungă.",
+        "en": "Okay. The bread is in the bag.",
+        "fa": "خوب. نان داخل کیسه است.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Mulțumesc!",
+      "en": "Thank you!",
+      "fa": "ممنون!",
+      "hint": "Mulțumesc! …",
+      "cue": {
+        "ro": "Da, bonul e aici.",
+        "en": "Yes, the receipt is here.",
+        "fa": "بله، رسید اینجاست.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "title": {
+        "fa": "درخواست مؤدبانه در نانوایی",
+        "en": "A polite request at the bakery"
+      },
+      "explanation": {
+        "fa": "در خانه te rog خطاب صمیمی است؛ در نانوایی vă rog مؤدبانه است. proaspăt با pâine به شکل مؤنث proaspătă می‌آید. «نان» را از خانه می‌شناسید و اینجا تازگی آن را مشخص می‌کنید.",
+        "en": "Te rog is familiar at home; vă rog is polite at the bakery. Proaspăt becomes feminine proaspătă with pâine. You already know bread and now specify that it is fresh."
+      },
+      "examples": [
+        {
+          "ro": "Bună ziua! O pâine proaspătă, vă rog.",
+          "en": "Hello! A fresh loaf, please.",
+          "fa": "سلام! یک نان تازه، لطفاً.",
+          "audioVoice": "ro-RO-EmilNeural"
+        }
+      ]
+    },
+    {
+      "title": {
+        "fa": "پرداخت و گرفتن رسید",
+        "en": "Pay and collect a receipt"
+      },
+      "explanation": {
+        "fa": "plătesc شکل «من» از a plăti است؛ cu cardul یعنی «با کارت». cardul و bonul شکل معرفهٔ card و bon هستند. جملهٔ Am și bonul? در این موقعیت درخواست رسید است.",
+        "en": "Plătesc is the I-form of a plăti. Cu cardul means by card. Cardul and bonul are definite forms of card and bon. Am și bonul? asks for the receipt in this scene."
+      },
+      "examples": [
+        {
+          "ro": "Plătesc cu cardul.",
+          "en": "I’ll pay by card.",
+          "fa": "با کارت پرداخت می‌کنم.",
+          "audioVoice": "ro-RO-EmilNeural"
+        },
+        {
+          "ro": "Am și bonul?",
+          "en": "May I have the receipt too?",
+          "fa": "رسید را هم می‌گیرم؟",
+          "audioVoice": "ro-RO-EmilNeural"
+        },
+        {
+          "ro": "Da, bonul e aici.",
+          "en": "Yes, the receipt is here.",
+          "fa": "بله، رسید اینجاست.",
+          "audioVoice": "ro-RO-AlinaNeural"
+        }
+      ]
+    }
+  ],
+  "answerVoice": "ro-RO-EmilNeural",
+  "vocabulary": [
+    {
+      "ro": "proaspăt",
+      "en": "fresh",
+      "fa": "تازه",
+      "example": {
+        "ro": "Bună ziua! O pâine proaspătă, vă rog.",
+        "en": "Hello! A fresh loaf, please.",
+        "fa": "سلام! یک نان تازه، لطفاً.",
+        "audioVoice": "ro-RO-EmilNeural"
+      }
+    },
+    {
+      "ro": "card",
+      "en": "card",
+      "fa": "کارت",
+      "example": {
+        "ro": "Plătesc cu cardul.",
+        "en": "I’ll pay by card.",
+        "fa": "با کارت پرداخت می‌کنم.",
+        "audioVoice": "ro-RO-EmilNeural"
+      }
+    },
+    {
+      "ro": "a plăti",
+      "en": "to pay",
+      "fa": "پرداخت کردن",
+      "example": {
+        "ro": "Plătesc cu cardul.",
+        "en": "I’ll pay by card.",
+        "fa": "با کارت پرداخت می‌کنم.",
+        "audioVoice": "ro-RO-EmilNeural"
+      }
+    },
+    {
+      "ro": "pungă",
+      "en": "bag",
+      "fa": "کیسه",
+      "example": {
+        "ro": "Bine. Pâinea e în pungă.",
+        "en": "Okay. The bread is in the bag.",
+        "fa": "خوب. نان داخل کیسه است.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "bon",
+      "en": "receipt",
+      "fa": "رسید",
+      "example": {
+        "ro": "Am și bonul?",
+        "en": "May I have the receipt too?",
+        "fa": "رسید را هم می‌گیرم؟",
+        "audioVoice": "ro-RO-EmilNeural"
+      }
+    }
+  ]
+} satisfies EverydayScenario;
+
+export const bakeryReturnLesson = {
+  "slug": "paine-inapoi",
+  "title": {
+    "fa": "بازگشت با نان تازه",
+    "en": "Back home with fresh bread"
+  },
+  "goal": {
+    "fa": "برای آنا تعریف کنید چه خریدید؛ واژهٔ تازه‌ای اضافه نمی‌شود.",
+    "en": "Tell Ana what you bought; no new vocabulary targets."
+  },
+  "setting": {
+    "fa": "نان را به خانه آورده‌اید و آنا خرید را تحویل می‌گیرد. am cumpărat یعنی «خریدم» و ai cumpărat یعنی «خریدی»؛ شکل گذشتهٔ همان فعل a cumpăra از درس قبل هستند.",
+    "en": "You have brought the bread home and Ana receives it. Am cumpărat means I bought and ai cumpărat means you bought; these are past forms of a cumpăra from the previous lesson."
+  },
+  "dialogue": [
+    {
+      "ro": "Ai cumpărat pâine?",
+      "en": "Did you buy bread?",
+      "fa": "نان خریدی؟",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Da, am cumpărat pâine.",
+      "en": "Yes, I bought bread.",
+      "fa": "بله، نان خریدم.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    },
+    {
+      "ro": "E proaspătă?",
+      "en": "Is it fresh?",
+      "fa": "تازه است؟",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Da, e proaspătă.",
+      "en": "Yes, it is fresh.",
+      "fa": "بله، تازه است.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    },
+    {
+      "ro": "Și bonul?",
+      "en": "And the receipt?",
+      "fa": "و رسید؟",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Bonul e aici.",
+      "en": "The receipt is here.",
+      "fa": "رسید اینجاست.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    },
+    {
+      "ro": "Mulțumesc! Avem pâine pentru mâine.",
+      "en": "Thank you! We have bread for tomorrow.",
+      "fa": "ممنون! برای فردا نان داریم.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Da, avem pâine.",
+      "en": "Yes, we have bread.",
+      "fa": "بله، نان داریم.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    }
+  ],
+  "tasks": [
+    {
+      "ro": "Da, am cumpărat pâine.",
+      "en": "Yes, I bought bread.",
+      "fa": "بله، نان خریدم.",
+      "hint": "Da, …",
+      "cue": {
+        "ro": "Ai cumpărat pâine?",
+        "en": "Did you buy bread?",
+        "fa": "نان خریدی؟",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Da, e proaspătă.",
+      "en": "Yes, it is fresh.",
+      "fa": "بله، تازه است.",
+      "hint": "Da, …",
+      "cue": {
+        "ro": "E proaspătă?",
+        "en": "Is it fresh?",
+        "fa": "تازه است؟",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Bonul e aici.",
+      "en": "The receipt is here.",
+      "fa": "رسید اینجاست.",
+      "hint": "Bonul …",
+      "cue": {
+        "ro": "Și bonul?",
+        "en": "And the receipt?",
+        "fa": "و رسید؟",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Da, avem pâine.",
+      "en": "Yes, we have bread.",
+      "fa": "بله، نان داریم.",
+      "hint": "Da, …",
+      "cue": {
+        "ro": "Mulțumesc! Avem pâine pentru mâine.",
+        "en": "Thank you! We have bread for tomorrow.",
+        "fa": "ممنون! برای فردا نان داریم.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "title": {
+        "fa": "از خرید اکنون به گزارش گذشته",
+        "en": "From buying to reporting a past action"
+      },
+      "explanation": {
+        "fa": "پیش از رفتن می‌گفتید cumpăr pâine؛ پس از برگشت می‌گویید am cumpărat pâine. فعل تازه‌ای اضافه نشده است. برای پرسشِ «خریدی؟» از ai cumpărat استفاده می‌کنیم.",
+        "en": "Before leaving you said cumpăr pâine; after returning you say am cumpărat pâine. This is the same verb. Ai cumpărat asks did you buy?"
+      },
+      "examples": [
+        {
+          "ro": "Ai cumpărat pâine?",
+          "en": "Did you buy bread?",
+          "fa": "نان خریدی؟",
+          "audioVoice": "ro-RO-AlinaNeural"
+        },
+        {
+          "ro": "Da, am cumpărat pâine.",
+          "en": "Yes, I bought bread.",
+          "fa": "بله، نان خریدم.",
+          "audioVoice": "ro-RO-EmilNeural"
+        }
+      ]
+    },
+    {
+      "title": {
+        "fa": "تکرار طبیعی در خانه",
+        "en": "Natural review at home"
+      },
+      "explanation": {
+        "fa": "نان تازه و رسید از نانوایی مرور می‌شوند. آنا از خریدِ انجام‌شده می‌پرسد و شما با جمله‌های کوتاه جواب می‌دهید.",
+        "en": "Fresh bread and the receipt review the bakery. Ana asks about the completed purchase and you reply briefly."
+      },
+      "examples": [
+        {
+          "ro": "Da, e proaspătă.",
+          "en": "Yes, it is fresh.",
+          "fa": "بله، تازه است.",
+          "audioVoice": "ro-RO-EmilNeural"
+        },
+        {
+          "ro": "Bonul e aici.",
+          "en": "The receipt is here.",
+          "fa": "رسید اینجاست.",
+          "audioVoice": "ro-RO-EmilNeural"
+        },
+        {
+          "ro": "Da, avem pâine.",
+          "en": "Yes, we have bread.",
+          "fa": "بله، نان داریم.",
+          "audioVoice": "ro-RO-EmilNeural"
+        }
+      ]
+    }
+  ],
+  "answerVoice": "ro-RO-EmilNeural"
+} satisfies EverydayScenario;
+
+export const homeStoryLessons: (EverydayScenario & { vocabulary: NonNullable<EverydayScenario['vocabulary']> })[] = [welcomeHomeLesson, meetFamilyLesson, homeRoomLesson, familyBreakfastLesson, familyTableLesson, familyBreadLesson];
 
 export const homeReturnDialogue = [
   {
