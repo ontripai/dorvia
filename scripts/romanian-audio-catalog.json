@@ -4618,7 +4618,7 @@
   },
   {
     "text": "Cu lapte?",
-    "slug": "ro-3974f5954946b1ab",
+    "slug": "ro-cb22eefd87ff2893",
     "approved": true,
     "intonation": "yes-no"
   },
@@ -4675,7 +4675,7 @@
   },
   {
     "text": "Bagajul aici?",
-    "slug": "ro-cbf5e27f4cb054e0",
+    "slug": "ro-cc40a7e6686c7980",
     "approved": true,
     "intonation": "yes-no"
   },
@@ -4687,7 +4687,7 @@
   },
   {
     "text": "Ești obosit?",
-    "slug": "ro-3457849cfa0a4b21",
+    "slug": "ro-411d900d1813c5e9",
     "approved": true,
     "intonation": "yes-no"
   },
@@ -4753,7 +4753,7 @@
   },
   {
     "text": "Mama ta e bine?",
-    "slug": "ro-7cf9d99cdfa5416b",
+    "slug": "ro-78efe6f015f6800d",
     "approved": true,
     "intonation": "yes-no"
   },
@@ -4847,7 +4847,7 @@
   },
   {
     "text": "Ești bine?",
-    "slug": "ro-8cda606825720d32",
+    "slug": "ro-9d382a224dda073a",
     "approved": true,
     "intonation": "yes-no"
   },
@@ -4955,7 +4955,7 @@
   },
   {
     "text": "Și cu zahăr?",
-    "slug": "ro-a6a262c4af35ccfe",
+    "slug": "ro-4c28e059ad5e330a",
     "approved": true,
     "intonation": "yes-no"
   },
@@ -5005,7 +5005,7 @@
   },
   {
     "text": "Ai avut ceai cu lapte?",
-    "slug": "ro-e3a0732b0afae2f2",
+    "slug": "ro-8bcb5a670e745987",
     "approved": true,
     "intonation": "yes-no"
   },
@@ -5039,7 +5039,7 @@
   },
   {
     "text": "Mergem la cafenea pentru micul dejun?",
-    "slug": "ro-19aed553d83627da",
+    "slug": "ro-9f2d15b2692e6945",
     "approved": true,
     "intonation": "yes-no"
   },
@@ -5073,7 +5073,7 @@
   },
   {
     "text": "Pun pâinea pe masă?",
-    "slug": "ro-8e33d56137b4fd3b",
+    "slug": "ro-bf78774937b7ce1c",
     "approved": true,
     "voice": "ro-RO-EmilNeural",
     "intonation": "yes-no"
@@ -5140,7 +5140,7 @@
   },
   {
     "text": "Cumpăr pâine?",
-    "slug": "ro-7fac3448077d65ce",
+    "slug": "ro-dd764e47934d53ca",
     "approved": true,
     "voice": "ro-RO-EmilNeural",
     "intonation": "yes-no"
@@ -5223,7 +5223,7 @@
   },
   {
     "text": "Am și bonul?",
-    "slug": "ro-5d08eb87a2224627",
+    "slug": "ro-030fa4843cf63bf5",
     "approved": true,
     "voice": "ro-RO-EmilNeural",
     "intonation": "yes-no"
@@ -5255,7 +5255,7 @@
   },
   {
     "text": "Ai cumpărat pâine?",
-    "slug": "ro-d36c8123da0ac060",
+    "slug": "ro-254194bc39cbed36",
     "approved": true,
     "intonation": "yes-no"
   },
@@ -5267,7 +5267,7 @@
   },
   {
     "text": "E proaspătă?",
-    "slug": "ro-e067e40c682b3401",
+    "slug": "ro-98a4a185976b0df3",
     "approved": true,
     "intonation": "yes-no"
   },
@@ -5308,7 +5308,7 @@
   },
   {
     "text": "Bună! Ți-e foame?",
-    "slug": "ro-b0a4981b38009c70",
+    "slug": "ro-f3a2d75153bae3f7",
     "approved": true,
     "intonation": "yes-no"
   },
