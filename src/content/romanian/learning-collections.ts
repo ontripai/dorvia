@@ -1,5 +1,6 @@
 /** Ordered by everyday need, dialogue load and prerequisites, rather than date added. */
 export const CONVERSATION_GROUPS = [
+  { slug: "home", fa: "در خانه؛ داستان خانواده", en: "At home: the family story", introFa: "به عنوان مهمان وارد خانه شوید و با خانواده داستان را ادامه دهید.", introEn: "Enter the home as a guest and continue the story with the family.", lessons: [{ href: "/learn-romanian/lectie/acasa/bun-venit", fa: "مهمان خانهٔ خانوادهٔ پوپسکو", en: "A guest at the Popescu home", detailFa: "قسمت اول؛ خوش‌آمدگویی، خانواده، خانه و اتاق؛ پنج واژهٔ تازه", detailEn: "Episode one: the welcome, family, house and room; five new words" }] },
   {
     "slug": "shopping",
     "fa": "خرید روزمره",
@@ -429,6 +430,7 @@ export const CONVERSATION_GROUPS = [
 export const CONVERSATION_LESSONS = CONVERSATION_GROUPS.find(group => group.slug === 'transport')!.lessons;
 
 export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; detailFa: string; detailEn: string; lessonIndexes: number[] }[]> = {
+  home: [{ fa: "ورود مهمان و آشنایی", en: "Arrival and introductions", detailFa: "از خانه شروع کنید؛ ادامهٔ داستان شما را به محیط‌های دیگر می‌برد.", detailEn: "Begin at home; the story continues in other places.", lessonIndexes: [0] }],
   "shopping": [
     {
       "fa": "خرید ساده و مقدار",

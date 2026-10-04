@@ -4263,5 +4263,130 @@
     "text": "Mulțumesc. Aștept confirmarea și păstrez mesajul.",
     "slug": "ro-dc156bcaccf5c4c7",
     "approved": true
+  },
+  {
+    "text": "Bună ziua! Sunteți aici pentru vizită?",
+    "slug": "ro-2bbbf7fad6e00241",
+    "approved": true
+  },
+  {
+    "text": "Da, sunt musafirul vostru.",
+    "slug": "ro-553d529c6c1ffaf7",
+    "approved": true
+  },
+  {
+    "text": "Aveți un prieten aici?",
+    "slug": "ro-e230e296a726e263",
+    "approved": true
+  },
+  {
+    "text": "Da, am un prieten aici.",
+    "slug": "ro-b0bfb3a33320db55",
+    "approved": true
+  },
+  {
+    "text": "Eu sunt Ana. Aceasta este familia mea.",
+    "slug": "ro-7f56db8e1d90259f",
+    "approved": true
+  },
+  {
+    "text": "Aveți o familie mare.",
+    "slug": "ro-ed4fda5dd0a2c51e",
+    "approved": true
+  },
+  {
+    "text": "Da, suntem șase. Aceasta este casa noastră.",
+    "slug": "ro-8d87d3543f3623b5",
+    "approved": true
+  },
+  {
+    "text": "Aveți o casă frumoasă.",
+    "slug": "ro-418bcc2b212b4fb7",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc. Aceasta este camera pentru musafiri.",
+    "slug": "ro-bdd4af29e1823ba6",
+    "approved": true
+  },
+  {
+    "text": "Aceasta este camera mea?",
+    "slug": "ro-4ad343de88847d22",
+    "approved": true
+  },
+  {
+    "text": "Da. Aveți apă aici.",
+    "slug": "ro-018461ba50d38af9",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc. Aceasta este camera mea.",
+    "slug": "ro-ffdab48b6923ea13",
+    "approved": true
+  },
+  {
+    "text": "Da, sunt musafira voastră.",
+    "slug": "ro-58f661cf062166a8",
+    "approved": true
+  },
+  {
+    "text": "musafir",
+    "slug": "ro-3754b72c86cef647",
+    "approved": true
+  },
+  {
+    "text": "prieten",
+    "slug": "ro-778cb6d986f1f01e",
+    "approved": true
+  },
+  {
+    "text": "familie",
+    "slug": "ro-bc5efe441ea27181",
+    "approved": true
+  },
+  {
+    "text": "cameră",
+    "slug": "ro-ab25bf28f5a6c4e2",
+    "approved": true
+  },
+  {
+    "text": "Ce ai în pungă?",
+    "slug": "ro-ed330a4146e30469",
+    "approved": true
+  },
+  {
+    "text": "Am o sticlă de apă.",
+    "slug": "ro-54542999df085fdd",
+    "approved": true
+  },
+  {
+    "text": "Mulțumesc. Acum avem apă acasă.",
+    "slug": "ro-1e37f759ea8b1e62",
+    "approved": true
+  },
+  {
+    "text": "Ieri am avut o sticlă de apă.",
+    "slug": "ro-4d58db13b37a13c7",
+    "approved": true
+  },
+  {
+    "text": "Acum am o sticlă de apă.",
+    "slug": "ro-995bf8fc08ce71cc",
+    "approved": true
+  },
+  {
+    "text": "Mâine voi avea o sticlă de apă.",
+    "slug": "ro-49221ceb9dabd98a",
+    "approved": true
+  },
+  {
+    "text": "Aveți apă?",
+    "slug": "ro-5b5724c141eda385",
+    "approved": true
+  },
+  {
+    "text": "Ai apă?",
+    "slug": "ro-eeeed3fa77117561",
+    "approved": true
   }
 ]
