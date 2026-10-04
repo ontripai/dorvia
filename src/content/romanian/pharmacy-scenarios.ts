@@ -1,4 +1,4 @@
-export type LocalizedPhrase = { ro: string; en: string; fa: string };
+export type LocalizedPhrase = { ro: string; en: string; fa: string; audioVoice?: string };
 export type PharmacyScenario = {
   slug: string; title: { fa: string; en: string }; goal: { fa: string; en: string };
   dialogue: (LocalizedPhrase & { who: 'you' | 'pharmacist' })[];
