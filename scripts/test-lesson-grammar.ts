@@ -22,7 +22,7 @@ for(const lang of ['fa','en']) {
 assert.deepEqual(grammarVerbsFor('Mergem la cafenea. Cumpăr pâine.',true).map(v=>v.lemma),['a fi','a avea']);
 assert(grammarVerbsFor('Da, mergem împreună. Plătesc cu cardul.',false).some(v=>v.lemma==='a merge'));
 assert(grammarVerbsFor('Plătesc cu cardul.',false).some(v=>v.lemma==='a plăti'));
-assert(grammarVerbsFor('Nu înțeleg.',false).some(v=>v.lemma==='a înțelege'));
+assert(!grammarVerbsFor('Nu înțeleg.',false).some(v=>v.lemma==='a înțelege'), 'Unpublished dictionary verb paradigms must stay out of the guide');
 assert(!grammarVerbsFor('O schimbare.',false).some(v=>v.lemma==='a avea'));
 assert.equal(GRAMMAR_NOUNS.find(n=>n.lemma==='bilet')?.gender,'n');
 for(const topic of GRAMMAR_TOPICS){assert(topic.explanation.fa&&topic.explanation.en&&topic.warning.fa&&topic.warning.en);assert(topic.rows.every(row=>row.length===topic.headers.length));assert(topic.examples.every(e=>e.ro&&e.fa&&e.en));assert(topic.sources.every(s=>s.url.startsWith('https://dexonline.ro/definitie/')));}
