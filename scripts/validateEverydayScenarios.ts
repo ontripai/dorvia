@@ -18,6 +18,16 @@ import audio from '../src/content/romanian/verified-audio.json';
 const groups = { home: homeStoryLessons, shortCafe: [familyCafeLesson, familyBakeryLesson, bakeryReturnLesson], housing: housingScenarios, workplace: workplaceScenarios, appointments: appointmentScenarios, banking: bankingScenarios, cafe: cafeScenarios, directions: directionsScenarios, pharmacy: pharmacyScenarios, shopping: shoppingScenarios, transport: transportScenarios };
 const recordings: Record<string, string> = audio;
 const errors: string[] = [];
+const breakfast = homeStoryLessons.find(lesson => lesson.slug === 'mic-dejun');
+if (!breakfast || breakfast.dialogue[0].ro !== 'Bună! Ți-e foame?' || breakfast.tasks[0].ro !== 'Da, mi-e foame.') {
+  errors.push('Breakfast must model Ți-e foame? / Da, mi-e foame.');
+}
+if (breakfast && !breakfast.tasks[0].alternatives?.includes('Da, îmi este foame.')) {
+  errors.push('Breakfast must accept the full form Îmi este foame.');
+}
+if (/\b(?:am|ai|are|avem|aveți|au) foame\b/iu.test(JSON.stringify(homeStoryLessons))) {
+  errors.push('Home lessons must not teach hunger with a avea.');
+}
 let lessons = 0;
 let phrases = 0;
 for (const [topic, scenarios] of Object.entries(groups)) {
