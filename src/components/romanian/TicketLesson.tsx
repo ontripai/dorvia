@@ -1,6 +1,9 @@
 'use client';
 
 import React from 'react';
+import { normalizeRomanianAnswer as normalize, matchesRomanianAnswer } from '@/lib/romanian/answerFeedback';
+import { VoiceAnswer } from './VoiceAnswer';
+import { AnswerWritingTip } from './AnswerWritingTip';
 import { ListeningPractice } from './ListeningPractice';
 import { LessonStageNav } from './LessonStageNav';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
@@ -9,22 +12,6 @@ import { playVerifiedAudio, stopVerifiedAudio } from '@/lib/romanian/playVerifie
 type Locale = 'fa' | 'en';
 type Phase = 0 | 1 | 2 | 3 | 4;
 type Turn = { speaker: 'clerk' | 'you'; ro: string; en: string; fa: string };
-type RomanianRecognition = {
-  lang: string;
-  continuous: boolean;
-  interimResults: boolean;
-  onresult: ((event: { results: ArrayLike<ArrayLike<{ transcript: string }>> }) => void) | null;
-  onerror: ((event: { error: string }) => void) | null;
-  onend: (() => void) | null;
-  start: () => void;
-  stop: () => void;
-  abort: () => void;
-};
-type RecognitionWindow = Window & {
-  SpeechRecognition?: new () => RomanianRecognition;
-  webkitSpeechRecognition?: new () => RomanianRecognition;
-};
-
 const conversation: Turn[] = [
   { speaker: 'clerk', ro: 'Bună ziua! Un bilet sau două?', en: 'Hello! One ticket or two?', fa: 'سلام! یک بلیت یا دو تا؟' },
   { speaker: 'you', ro: 'Două bilete, vă rog.', en: 'Two tickets, please.', fa: 'دو بلیت، لطفاً.' },
@@ -37,17 +24,13 @@ const stages = {
   en: ['Conversation', 'Discover', 'Recall', 'Dialogue', 'Result'],
 };
 
-function normalize(value: string) {
-  return value.normalize('NFC').trim().toLocaleLowerCase('ro-RO')
-    .replace(/[.!?،,]+$/g, '').replace(/\s+/g, ' ');
-}
 
 function errorKind(value: string, expected: 'one' | 'two'): 'number' | 'plural' | 'other' {
   const answer = normalize(value);
   if (expected === 'two') {
     if (/\bdoi\b/.test(answer)) return 'number';
-    if (/\bdouă bilet\b/.test(answer)) return 'plural';
-  } else if (/\bo bilet\b/.test(answer) || /\bdouă? bilet/.test(answer)) {
+    if (/\bdoua bilet\b/.test(answer)) return 'plural';
+  } else if (/\bo bilet\b/.test(answer) || /\bdoua? bilet/.test(answer)) {
     return 'number';
   }
   return 'other';
@@ -82,9 +65,6 @@ export function TicketLesson({ lang }: { lang: Locale }) {
   const [mistakes, setMistakes] = React.useState<string[]>([]);
   const [finishedOn, setFinishedOn] = React.useState<string | null>(null);
   const [sessionComplete, setSessionComplete] = React.useState(false);
-  const [voiceAvailable, setVoiceAvailable] = React.useState(false);
-  const [listening, setListening] = React.useState(false);
-  const [voiceMessage, setVoiceMessage] = React.useState('');
   const [writtenSuccess, setWrittenSuccess] = React.useState(0);
   const [spokenSuccess, setSpokenSuccess] = React.useState(0);
   const [answerMode, setAnswerMode] = React.useState<'written' | 'spoken' | null>(null);
@@ -92,17 +72,14 @@ export function TicketLesson({ lang }: { lang: Locale }) {
   const recordedAnswers = React.useRef(new Set<string>());
   const [microRound, setMicroRound] = React.useState(0);
   const [microChoice, setMicroChoice] = React.useState<string | null>(null);
-  const recognitionRef = React.useRef<RomanianRecognition | null>(null);
 
   React.useEffect(() => {
-    const recognitionWindow = window as RecognitionWindow;
-    setVoiceAvailable(Boolean(recognitionWindow.SpeechRecognition || recognitionWindow.webkitSpeechRecognition));
     try {
       const saved = JSON.parse(localStorage.getItem(progressKey) || 'null');
       if (saved && typeof saved.completedOn === 'string') setFinishedOn(saved.completedOn);
     } catch { /* Browsing still works without device storage. */ }
     return () => {
-      recognitionRef.current?.abort();
+
       stopVerifiedAudio();
       window.speechSynthesis?.cancel();
     };
@@ -114,10 +91,10 @@ export function TicketLesson({ lang }: { lang: Locale }) {
   }
 
   function move(next: Phase) {
-    recognitionRef.current?.abort();
-    recognitionRef.current = null;
-    setListening(false);
-    setVoiceMessage('');
+
+
+
+
     window.speechSynthesis?.cancel();
     stopVerifiedAudio();
     setSpeaking(false);
@@ -137,8 +114,8 @@ export function TicketLesson({ lang }: { lang: Locale }) {
     const submitted = normalize(raw);
     if (!submitted) return;
     const valid = expected === 'two'
-      ? ['două bilete', 'două bilete, vă rog'].includes(submitted)
-      : ['un bilet', 'un bilet, vă rog'].includes(submitted);
+      ? ['Două bilete.', 'Două bilete, vă rog.'].some(value => matchesRomanianAnswer(raw, value))
+      : ['Un bilet.', 'Un bilet, vă rog.'].some(value => matchesRomanianAnswer(raw, value));
     if (valid) {
       setFeedback('correct');
       setAnswerMode(mode);
@@ -153,58 +130,9 @@ export function TicketLesson({ lang }: { lang: Locale }) {
     setAnswerMode(null);
     const kind = errorKind(raw, expected);
     setFeedback(kind);
-    setMistakes(old => old.includes(kind) ? old : [...old, kind]);
+    if (mode === 'written') setMistakes(old => old.includes(kind) ? old : [...old, kind]);
   }
 
-  function listen() {
-    if (listening) {
-      recognitionRef.current?.stop();
-      return;
-    }
-    const recognitionWindow = window as RecognitionWindow;
-    const Recognition = recognitionWindow.SpeechRecognition || recognitionWindow.webkitSpeechRecognition;
-    if (!Recognition) return;
-    window.speechSynthesis?.cancel();
-    setSpeaking(false);
-    setVoiceMessage('');
-    setFeedback(null);
-    const recognition = new Recognition();
-    recognitionRef.current = recognition;
-    recognition.lang = 'ro-RO';
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.onresult = event => {
-      const transcript = event.results[0]?.[0]?.transcript?.trim();
-      if (transcript) {
-        setAnswer(transcript);
-        setTypedAnswer(false);
-        check(transcript, 'spoken');
-      }
-    };
-    recognition.onerror = event => {
-      if (event.error === 'aborted') return;
-      const messages: Record<string, [string, string]> = {
-        'not-allowed': ['مرورگر اجازهٔ استفاده از میکروفون را نداد. مجوز سایت و Windows را بررسی کنید.', 'The browser denied microphone access. Check the site and Windows permissions.'],
-        'service-not-allowed': ['میکروفون ممکن است مجاز باشد، اما سرویس تشخیص گفتار مرورگر در دسترس نیست. اتصال اینترنت یا تنظیمات مرورگر را بررسی کنید.', 'The microphone may be allowed, but the browser speech service is unavailable. Check your connection or browser settings.'],
-        'audio-capture': ['مرورگر به میکروفون انتخاب‌شده دسترسی ندارد. دستگاه ورودی را در تنظیمات Chrome بررسی کنید.', 'The browser cannot capture audio from the selected microphone. Check the input device in Chrome settings.'],
-        network: ['ارتباط با سرویس تشخیص گفتار برقرار نشد. اتصال اینترنت را بررسی کنید.', 'Could not reach the speech recognition service. Check your internet connection.'],
-        'no-speech': ['صدایی شنیده نشد. دوباره صحبت کنید یا پاسخ را تایپ کنید.', 'No speech was detected. Try speaking again or type your answer.'],
-      };
-      const message = messages[event.error] || ['تشخیص گفتار انجام نشد. دوباره تلاش کنید یا پاسخ را تایپ کنید.', 'Speech recognition failed. Try again or type your answer.'];
-      setVoiceMessage(`${message[isFa ? 0 : 1]} (${event.error})`);
-    };
-    recognition.onend = () => {
-      recognitionRef.current = null;
-      setListening(false);
-    };
-    try {
-      recognition.start();
-      setListening(true);
-    } catch {
-      recognitionRef.current = null;
-      setVoiceMessage(isFa ? 'میکروفون آغاز نشد. می‌توانید پاسخ را تایپ کنید.' : 'The microphone could not start. You can type your answer.');
-    }
-  }
 
   function advanceTask() {
     setFeedback(null);
@@ -246,7 +174,7 @@ export function TicketLesson({ lang }: { lang: Locale }) {
       {phase === 0 && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-5">
         <h2 className="text-xl font-bold">{isFa ? 'ابتدا گفت‌وگو را بشنوید' : 'First, listen to the conversation'}</h2>
         <p className="text-base text-slate-700">{isFa ? 'برای خودتان و یک همراه بلیت می‌خواهید. فروشنده می‌پرسد چند بلیت؟' : 'You need tickets for yourself and a companion. The clerk asks how many.'}</p>
-      <ListeningPractice lang={lang} dialogue={conversation.map(turn => ({ ...turn, who: turn.speaker }))} counterpart={{ fa: 'فروشنده', en: 'Clerk' }}/>
+      <ListeningPractice scene="transport" lang={lang} dialogue={conversation.map(turn => ({ ...turn, who: turn.speaker }))} counterpart={{ fa: 'فروشنده', en: 'Clerk' }}/>
       <div><button type="button" onClick={() => move(1)} className="rounded-xl bg-[#1554bd] px-6 py-3 text-white font-bold">{isFa ? 'واژه و قاعده' : 'Explore the rule'}</button></div>
       </section>}
 
@@ -303,15 +231,13 @@ export function TicketLesson({ lang }: { lang: Locale }) {
             className="w-full rounded-xl border border-slate-300 p-3 text-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#1554bd]" />
           <div className="flex flex-wrap gap-3">
             <button type="submit" disabled={!answer.trim() || !typedAnswer} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-semibold disabled:opacity-50">{isFa ? 'بررسی پاسخ نوشتاری' : 'Check written answer'}</button>
-            {voiceAvailable && <button type="button" onClick={listen} aria-pressed={listening} className="rounded-xl border border-[#1554bd] px-5 py-3 text-[#1554bd] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1554bd]">
-              {listening ? isFa ? 'پایان شنیدن' : 'Stop listening' : isFa ? '🎙️ پاسخ با صدا' : '🎙️ Answer by voice'}
-            </button>}
+
             <button type="button" onClick={() => setHint(true)} className="rounded-xl border border-slate-300 px-5 py-3 text-[#1554bd] font-semibold">{isFa ? 'راهنمای مرحله‌ای' : 'Show a hint'}</button>
           </div>
-        </form>
-        {listening && <p role="status" className="text-sm text-[#1554bd]">{isFa ? 'در حال شنیدن پاسخ رومانیایی شما…' : 'Listening for your Romanian answer…'}</p>}
-        {voiceMessage && <p role="status" className="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">{voiceMessage}</p>}
-        {voiceAvailable && <p className="text-xs text-slate-600">{isFa ? 'با اجازهٔ شما، تشخیص گفتار مرورگر متن پاسخ را می‌نویسد و همان تمرین بررسی می‌شود. این بخش کیفیت تلفظ را نمره‌دهی نمی‌کند.' : 'With your permission, browser speech recognition transcribes your answer and checks the same exercise. It does not grade pronunciation.'}</p>}
+        </form><VoiceAnswer key={`${phase}:${task}:${target[expected]}`} lang={lang} target={target[expected]} onAnswer={value => { setAnswer(value); setTypedAnswer(false); check(value, 'spoken'); }}/>{feedback === 'correct' && <AnswerWritingTip lang={lang} answer={answer} target={target[expected]}/>}
+
+
+
         {hint && <p className="rounded-xl bg-blue-50 p-3 text-base" dir="ltr" lang="ro">{expected === 'two' ? 'Două …, vă rog.' : 'Un …, vă rog.'}</p>}
         {feedback && <div role="status" className={`rounded-xl p-4 text-base ${feedback === 'correct' ? 'bg-emerald-50 text-emerald-900' : 'bg-amber-50 text-amber-900'}`}>{feedbackText}{feedback === 'correct' && answerMode === 'spoken' && <span className="block text-sm mt-1">{isFa ? 'پاسخ گفتاری به متن تبدیل شد و متن آن درست بود؛ این نمرهٔ تلفظ نیست.' : 'Speech was transcribed and the text matched; this is not a pronunciation score.'}</span>}</div>}
         {feedback === 'correct' && <button type="button" onClick={advanceTask} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-semibold">{phase === 3 && task === 2 ? isFa ? 'پایان جلسه' : 'Finish lesson' : isFa ? 'ادامه' : 'Continue'}</button>}
