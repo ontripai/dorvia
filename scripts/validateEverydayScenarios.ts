@@ -65,4 +65,4 @@ for (const phrase of storyPhrases) {
   const url = recordings[audioRecordingKey(phrase.ro, 'audioVoice' in phrase ? phrase.audioVoice : undefined)];
   if (!url || !existsSync(join(process.cwd(), 'public', url))) throw new Error('Story needs exact-text audio: ' + phrase.ro);
 }
-console.log('Family story: five short lessons, exactly five distinct targets each, cousin gender alternative, return-home dialogue and exact-text audio checked.');
+console.log('Family story: six short lessons, exactly five distinct targets each, cousin gender alternative, return-home dialogue and exact-text audio checked.');
