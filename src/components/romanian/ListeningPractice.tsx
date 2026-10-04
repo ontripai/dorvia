@@ -7,7 +7,7 @@ import { normalizeRomanianAnswer as normalize } from '@/lib/romanian/answerFeedb
 import { AnswerWritingTip } from './AnswerWritingTip';
 import { playVerifiedSequence, stopVerifiedAudio } from '@/lib/romanian/playVerifiedAudio';
 
-type Line = { ro: string; en: string; fa: string; who: string };
+type Line = { ro: string; en: string; fa: string; audioVoice?: string; who: string };
 type Mode = 'full' | 'repeat' | 'role' | 'meaning' | 'dictation';
 
 export function ListeningPractice({ lang, dialogue, counterpart, scene }: { lang: 'fa' | 'en'; scene?: string; dialogue: readonly Line[]; counterpart: { fa: string; en: string } }) {
@@ -40,7 +40,7 @@ export function ListeningPractice({ lang, dialogue, counterpart, scene }: { lang
     setError(false);
     const source = single || exercise ? [line] : dialogue.slice(index);
     const offset = index;
-    const steps = source.map(item => mode === 'role' && !single && item.who === 'you' ? { pauseMs: pause * 1000 } : { text: item.ro, pauseMs: undefined });
+    const steps = source.map(item => mode === 'role' && !single && item.who === 'you' ? { pauseMs: pause * 1000 } : { text: item.ro, audioVoice: item.audioVoice, pauseMs: undefined });
     const sequence = mode === 'repeat' && !single ? steps.flatMap(step => [step, { pauseMs: pause * 1000 }]) : steps;
     playVerifiedSequence(sequence, () => setError(true), setPlaying, {
       rate, gapMs: 350, repeat: loop && !exercise,
@@ -87,6 +87,6 @@ export function ListeningPractice({ lang, dialogue, counterpart, scene }: { lang
     {feedback && <p role="status" className={`rounded-xl p-3 ${feedback === 'correct' ? 'bg-emerald-50' : 'bg-amber-50'}`}>{feedback === 'correct' ? t('درست است؛ برای جملهٔ بعد «بعدی» را بزنید.', 'Correct. Choose Next for another sentence.') : t('دوباره گوش کنید و تلاش کنید.', 'Listen again and try again.')}</p>}
     {exercise && <button type="button" className={button} onClick={() => setRevealed(!revealed)}>{revealed ? t('پنهان کردن پاسخ', 'Hide answer') : t('نمایش پاسخ', 'Reveal answer')}</button>}
     {exercise && revealed && <div className="rounded-xl bg-slate-50 p-4"><p lang="ro" dir="ltr" className="font-bold">{line.ro}</p><p lang="en" dir="ltr">{line.en}</p>{fa && <p>{line.fa}</p>}</div>}
-    {showText && <div className="space-y-3">{dialogue.map((item, position) => <article key={position} className={`rounded-xl border p-4 ${position === index ? 'border-blue-400 bg-blue-50' : 'border-transparent bg-slate-50'}`}><p className="text-xs font-bold">{item.who === 'you' ? t('شما', 'You') : counterpart[lang]}</p><p lang="ro" dir="ltr" className="text-xl font-bold">{item.ro}</p><p lang="en" dir="ltr" className="text-sm text-slate-700">{item.en}</p>{fa && persian && <p className="text-sm">{item.fa}</p>}<button type="button" aria-label={t(`شنیدن جملهٔ ${position + 1}`, `Hear line ${position + 1}`)} title={t('شنیدن جمله', 'Hear line')} className="mt-2 grid h-11 w-11 place-items-center rounded-full text-[#1554bd] hover:bg-blue-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700" onClick={() => { reset(); setIndex(position); playVerifiedSequence([{ text: item.ro }], () => setError(true), setPlaying, { rate }); }}><AudioControlIcon name="volume"/></button></article>)}{fa && <button type="button" className={button} onClick={() => setPersian(!persian)}>{persian ? 'پنهان کردن فارسی' : 'نمایش فارسی'}</button>}</div>}
+    {showText && <div className="space-y-3">{dialogue.map((item, position) => <article key={position} className={`rounded-xl border p-4 ${position === index ? 'border-blue-400 bg-blue-50' : 'border-transparent bg-slate-50'}`}><p className="text-xs font-bold">{item.who === 'you' ? t('شما', 'You') : counterpart[lang]}</p><p lang="ro" dir="ltr" className="text-xl font-bold">{item.ro}</p><p lang="en" dir="ltr" className="text-sm text-slate-700">{item.en}</p>{fa && persian && <p className="text-sm">{item.fa}</p>}<button type="button" aria-label={t(`شنیدن جملهٔ ${position + 1}`, `Hear line ${position + 1}`)} title={t('شنیدن جمله', 'Hear line')} className="mt-2 grid h-11 w-11 place-items-center rounded-full text-[#1554bd] hover:bg-blue-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700" onClick={() => { reset(); setIndex(position); playVerifiedSequence([{ text: item.ro, audioVoice: item.audioVoice }], () => setError(true), setPlaying, { rate }); }}><AudioControlIcon name="volume"/></button></article>)}{fa && <button type="button" className={button} onClick={() => setPersian(!persian)}>{persian ? 'پنهان کردن فارسی' : 'نمایش فارسی'}</button>}</div>}
   </div>;
 }
