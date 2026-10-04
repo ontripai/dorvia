@@ -5136,5 +5136,172 @@
     "text": "a pune",
     "slug": "ro-ad2985a65e9d8109",
     "approved": true
+  },
+  {
+    "text": "Avem puțină pâine pentru mâine.",
+    "slug": "ro-c23a896230ca0cc8",
+    "approved": true
+  },
+  {
+    "text": "Cumpăr pâine?",
+    "slug": "ro-1d76bfe841390c5e",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Da, de la brutărie.",
+    "slug": "ro-e816690f67d3363b",
+    "approved": true
+  },
+  {
+    "text": "Unde e brutăria?",
+    "slug": "ro-e88328465c83592c",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "E lângă casă.",
+    "slug": "ro-8440b1ab3529113b",
+    "approved": true
+  },
+  {
+    "text": "Bine, cumpăr pâine.",
+    "slug": "ro-9997b207e4ad40f6",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Adu pâinea acasă, te rog.",
+    "slug": "ro-e01b345683bc6398",
+    "approved": true
+  },
+  {
+    "text": "Da, aduc pâinea acasă.",
+    "slug": "ro-5497afeb11555b02",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "puțin",
+    "slug": "ro-cb4feb77466b79bc",
+    "approved": true
+  },
+  {
+    "text": "brutărie",
+    "slug": "ro-6a039e0395f9c901",
+    "approved": true
+  },
+  {
+    "text": "a cumpăra",
+    "slug": "ro-3c22e622e38fdeab",
+    "approved": true
+  },
+  {
+    "text": "a aduce",
+    "slug": "ro-fba9caf0e983ed38",
+    "approved": true
+  },
+  {
+    "text": "Bună ziua! O pâine proaspătă, vă rog.",
+    "slug": "ro-1ee96af4f147bdd7",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Da. Cinci lei.",
+    "slug": "ro-4f286225fe4ceb4d",
+    "approved": true
+  },
+  {
+    "text": "Plătesc cu cardul.",
+    "slug": "ro-096fe5e7db01a2c4",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Bine. Pâinea e în pungă.",
+    "slug": "ro-ece1497e8b8f7615",
+    "approved": true
+  },
+  {
+    "text": "Am și bonul?",
+    "slug": "ro-b3087dff6b0e8ee2",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Da, bonul e aici.",
+    "slug": "ro-e335a3aa2ad19b89",
+    "approved": true
+  },
+  {
+    "text": "proaspăt",
+    "slug": "ro-aa8b8de42db7933c",
+    "approved": true
+  },
+  {
+    "text": "a plăti",
+    "slug": "ro-de8383f69dcc4c77",
+    "approved": true
+  },
+  {
+    "text": "pungă",
+    "slug": "ro-55b17cf05e664245",
+    "approved": true
+  },
+  {
+    "text": "bon",
+    "slug": "ro-72b90a0d25a6e8f7",
+    "approved": true
+  },
+  {
+    "text": "Ai cumpărat pâine?",
+    "slug": "ro-b07c3d31d8de7d0c",
+    "approved": true
+  },
+  {
+    "text": "Da, am cumpărat pâine.",
+    "slug": "ro-3b436eb57f10fb91",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "E proaspătă?",
+    "slug": "ro-c06f450b1f431b4c",
+    "approved": true
+  },
+  {
+    "text": "Da, e proaspătă.",
+    "slug": "ro-ed201b3f8ea37af3",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Și bonul?",
+    "slug": "ro-5a1607b2054d42bc",
+    "approved": true
+  },
+  {
+    "text": "Bonul e aici.",
+    "slug": "ro-e2e70ae2639eaf57",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Mulțumesc! Avem pâine pentru mâine.",
+    "slug": "ro-a6694ce18d75fc1c",
+    "approved": true
+  },
+  {
+    "text": "Da, avem pâine.",
+    "slug": "ro-ef3a1e22c5fcb377",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Cu plăcere.",
+    "voice": "ro-RO-EmilNeural",
+    "slug": "ro-7fc5d61bc872d1f5",
+    "approved": true
   }
 ]

@@ -1,6 +1,56 @@
 /** Ordered by everyday need, dialogue load and prerequisites, rather than date added. */
 export const CONVERSATION_GROUPS = [
-  {"slug": "home", "fa": "در خانه؛ داستان خانواده", "en": "At home: the family story", "introFa": "به عنوان پسرعمو یا دخترعمو وارد داستان شوید؛ پنج درس کوتاه، هر کدام پنج واژهٔ تازه.", "introEn": "Enter as a cousin; five short lessons, each with five new vocabulary targets.", "lessons": [{"href": "/learn-romanian/lectie/acasa/bun-venit", "fa": "دیدار پسرعمو یا دخترعمو", "en": "A cousin comes to visit", "detailFa": "ورود با چمدان، خستگی و آب؛ پنج واژه، هشت نوبت", "detailEn": "Arriving with luggage, tiredness and water; five words, eight turns"}, {"href": "/learn-romanian/lectie/acasa/familia", "fa": "شناخت خانواده", "en": "Meet the family", "detailFa": "احوال‌پرسی از خانواده، مادر، پدر، برادر و خواهر", "detailEn": "Ask after the family, mother, father, brother and sister"}, {"href": "/learn-romanian/lectie/acasa/camera", "fa": "خانه و اتاق شما", "en": "Your house and room", "detailFa": "دیدن اتاق و تخت، تشکر از میزبان", "detailEn": "See the room and bed, thank the host"}, {"href": "/learn-romanian/lectie/acasa/mic-dejun", "fa": "صبحانه با خانواده", "en": "Breakfast with the family", "detailFa": "گرسنگی، صبحانه و تصمیم برای رفتن با النا", "detailEn": "Hunger, breakfast and deciding to go with Elena"}, {"href": "/learn-romanian/lectie/acasa/la-masa", "fa": "کمک در چیدن میز", "en": "Helping set the table", "detailFa": "نان، پنیر، میز، بشقاب و گذاشتن؛ مهمان در کار خانه کمک می‌کند", "detailEn": "Bread, cheese, table, plate and to put; the guest helps at home"}]},
+  {
+    "slug": "home",
+    "fa": "در خانه؛ داستان خانواده",
+    "en": "At home: the family story",
+    "introFa": "به عنوان پسرعمو یا دخترعمو وارد داستان شوید؛ شش درس کوتاه، هر کدام پنج واژهٔ تازه.",
+    "introEn": "Enter as a cousin; six short lessons, each with five new vocabulary targets.",
+    "lessons": [
+      {
+        "href": "/learn-romanian/lectie/acasa/bun-venit",
+        "fa": "دیدار پسرعمو یا دخترعمو",
+        "en": "A cousin comes to visit",
+        "detailFa": "ورود با چمدان، خستگی و آب؛ پنج واژه، هشت نوبت",
+        "detailEn": "Arriving with luggage, tiredness and water; five words, eight turns"
+      },
+      {
+        "href": "/learn-romanian/lectie/acasa/familia",
+        "fa": "شناخت خانواده",
+        "en": "Meet the family",
+        "detailFa": "احوال‌پرسی از خانواده، مادر، پدر، برادر و خواهر",
+        "detailEn": "Ask after the family, mother, father, brother and sister"
+      },
+      {
+        "href": "/learn-romanian/lectie/acasa/camera",
+        "fa": "خانه و اتاق شما",
+        "en": "Your house and room",
+        "detailFa": "دیدن اتاق و تخت، تشکر از میزبان",
+        "detailEn": "See the room and bed, thank the host"
+      },
+      {
+        "href": "/learn-romanian/lectie/acasa/mic-dejun",
+        "fa": "صبحانه با خانواده",
+        "en": "Breakfast with the family",
+        "detailFa": "گرسنگی، صبحانه و تصمیم برای رفتن با النا",
+        "detailEn": "Hunger, breakfast and deciding to go with Elena"
+      },
+      {
+        "href": "/learn-romanian/lectie/acasa/la-masa",
+        "fa": "کمک در چیدن میز",
+        "en": "Helping set the table",
+        "detailFa": "نان، پنیر، میز، بشقاب و گذاشتن؛ مهمان در کار خانه کمک می‌کند",
+        "detailEn": "Bread, cheese, table, plate and to put; the guest helps at home"
+      },
+      {
+        "href": "/learn-romanian/lectie/acasa/paine",
+        "fa": "نان برای فردا",
+        "en": "Bread for tomorrow",
+        "detailFa": "کمبود نان، پیشنهاد خرید و آوردن خرید به خانه",
+        "detailEn": "Little bread, offering to buy more and bring it home"
+      }
+    ]
+  },
   {
     "slug": "shopping",
     "fa": "خرید روزمره",
@@ -14,6 +64,13 @@ export const CONVERSATION_GROUPS = [
         "en": "Buying water in a shop",
         "detailFa": "درخواست مؤدبانه، یک و دو بطری، و پرسیدن قیمت",
         "detailEn": "Polite requests, one or two bottles, and asking the price"
+      },
+      {
+        "href": "/learn-romanian/lectie/magazin/paine-pentru-acasa",
+        "fa": "نان تازه برای خانه",
+        "en": "Fresh bread for home",
+        "detailFa": "یک نان، پرداخت با کارت، کیسه و رسید؛ پنج هدف، هشت نوبت",
+        "detailEn": "One loaf, paying by card, bag and receipt; five targets, eight turns"
       },
       {
         "href": "/learn-romanian/lectie/magazin/brutarie",
@@ -115,7 +172,13 @@ export const CONVERSATION_GROUPS = [
         "detailFa": "سفارش، زمان آماده‌شدن و بررسی هنگام تحویل",
         "detailEn": "Order, pickup time and checking the item"
       },
-      {"href": "/learn-romanian/lectie/cafenea/cu-familia", "fa": "چای در کافه با خانواده", "en": "Tea at the café with the family", "detailFa": "چای، شیر، شکر، با و بدون؛ هشت نوبت کوتاه", "detailEn": "Five vocabulary targets; eight short turns; independent or in the story"}
+      {
+        "href": "/learn-romanian/lectie/cafenea/cu-familia",
+        "fa": "چای در کافه با خانواده",
+        "en": "Tea at the café with the family",
+        "detailFa": "چای، شیر، شکر، با و بدون؛ هشت نوبت کوتاه",
+        "detailEn": "Five vocabulary targets; eight short turns; independent or in the story"
+      }
     ]
   },
   {
@@ -431,38 +494,28 @@ export const CONVERSATION_GROUPS = [
 export const CONVERSATION_LESSONS = CONVERSATION_GROUPS.find(group => group.slug === 'transport')!.lessons;
 
 export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; detailFa: string; detailEn: string; lessonIndexes: number[] }[]> = {
-  home: [{ fa: "ورود مهمان و آشنایی", en: "Arrival and introductions", detailFa: "از خانه شروع کنید؛ ادامهٔ داستان شما را به محیط‌های دیگر می‌برد.", detailEn: "Begin at home; the story continues in other places.", lessonIndexes: [0, 1, 2] }, { fa: "صبحانه و رفت‌وبرگشت به کافه", en: "Breakfast and a trip to the café", detailFa: "خانه، کافه و بازگشت برای مرور؛ هر بخش یک جلسهٔ جدا.", detailEn: "Home, café and a return review; each part is a separate session.", lessonIndexes: [3] }, { fa: "کمک در کارهای خانه", en: "Helping at home", detailFa: "بعد از بازگشت، مهمان در چیدن میز کمک می‌کند.", detailEn: "After the outing, the guest helps set the table.", lessonIndexes: [4] }],
+  home: [{ fa: "ورود مهمان و آشنایی", en: "Arrival and introductions", detailFa: "از خانه شروع کنید؛ ادامهٔ داستان شما را به محیط‌های دیگر می‌برد.", detailEn: "Begin at home; the story continues in other places.", lessonIndexes: [0, 1, 2] }, { fa: "صبحانه و رفت‌وبرگشت به کافه", en: "Breakfast and a trip to the café", detailFa: "خانه، کافه و بازگشت برای مرور؛ هر بخش یک جلسهٔ جدا.", detailEn: "Home, café and a return review; each part is a separate session.", lessonIndexes: [3] }, { fa: "کمک در کارهای خانه", en: "Helping at home", detailFa: "بعد از بازگشت، مهمان در چیدن میز کمک می‌کند.", detailEn: "After the outing, the guest helps set the table.", lessonIndexes: [4] }, {fa:"تدارک فردا و نانوایی",en:"Tomorrow and the bakery",detailFa:"خانه، خرید نان و برگشت به خانه برای مرور.",detailEn:"Home, buying bread and returning to review.",lessonIndexes:[5]}],
   "shopping": [
     {
       "fa": "خرید ساده و مقدار",
       "en": "Simple purchases and quantity",
       "detailFa": "از گفت‌وگوی ساده‌تر این بخش شروع کنید و سپس جزئیات بیشتری را تمرین کنید.",
       "detailEn": "Start with the simpler exchange in this section, then practise more details.",
-      "lessonIndexes": [
-        0,
-        1,
-        2
-      ]
+      "lessonIndexes": [0, 1, 2, 3]
     },
     {
       "fa": "پرداخت و انتخاب کالا",
       "en": "Payment and choosing an item",
       "detailFa": "از گفت‌وگوی ساده‌تر این بخش شروع کنید و سپس جزئیات بیشتری را تمرین کنید.",
       "detailEn": "Start with the simpler exchange in this section, then practise more details.",
-      "lessonIndexes": [
-        3,
-        4
-      ]
+      "lessonIndexes": [4, 5]
     },
     {
       "fa": "جایگزین و پیگیری مشکل",
       "en": "Alternatives and purchase problems",
       "detailFa": "از گفت‌وگوی ساده‌تر این بخش شروع کنید و سپس جزئیات بیشتری را تمرین کنید.",
       "detailEn": "Start with the simpler exchange in this section, then practise more details.",
-      "lessonIndexes": [
-        5,
-        6
-      ]
+      "lessonIndexes": [6, 7]
     }
   ],
   "cafe": [
