@@ -206,6 +206,28 @@ export const welcomeHomeLesson = {
           "fa": "ممنون. این اتاق من است."
         }
       ]
+    },
+    {
+      "title": {
+        "fa": "رسمی و صمیمی: aveți و ai",
+        "en": "Polite and familiar: aveți and ai"
+      },
+      "explanation": {
+        "fa": "در نخستین دیدار، برای یک بزرگسال ناآشنا از aveți استفاده می‌کنیم. میان دوستان و در خانواده، پس از توافق یا آشنایی، ai رایج است. برای خطاب به چند نفر نیز aveți به کار می‌رود. مؤدبانه بودن فقط به فعل وابسته نیست؛ لحن و لطفاً هم مهم‌اند.",
+        "en": "Use aveți when politely addressing an unfamiliar adult. Among friends and family, ai is common once familiar address is welcome. Aveți also addresses several people. Politeness also depends on tone and words such as please."
+      },
+      "examples": [
+        {
+          "ro": "Aveți apă?",
+          "en": "Do you have water? (polite or plural)",
+          "fa": "آب دارید؟ (مؤدبانه یا خطاب به چند نفر)"
+        },
+        {
+          "ro": "Ai apă?",
+          "en": "Do you have water? (familiar singular)",
+          "fa": "آب داری؟ (صمیمی، خطاب به یک نفر)"
+        }
+      ]
     }
   ],
   "tasks": [
@@ -335,4 +357,10 @@ export const homeReturnDialogue = [
   { who: 'host', ro: 'Cât costă?', en: 'How much does it cost?', fa: 'قیمتش چقدر است؟' },
   { who: 'you', ro: 'Costă cinci lei.', en: 'It costs five lei.', fa: 'قیمتش پنج لِی است.' },
   { who: 'host', ro: 'Mulțumesc. Acum avem apă acasă.', en: 'Thank you. Now we have water at home.', fa: 'ممنون. حالا در خانه آب داریم.' },
+] as const;
+
+export const homeVerbTimes = [
+  { tense: { fa: 'گذشته · دیروز', en: 'Past · yesterday' }, ro: 'Ieri am avut o sticlă de apă.', en: 'Yesterday I had a bottle of water.', fa: 'دیروز یک بطری آب داشتم.', form: 'am avut', hint: { fa: 'am + avut؛ در این جمله، am بخش کمکیِ گذشته است.', en: 'am + avut; here am is the auxiliary for the compound past.' } },
+  { tense: { fa: 'حال · اکنون', en: 'Present · now' }, ro: 'Acum am o sticlă de apă.', en: 'Now I have a bottle of water.', fa: 'اکنون یک بطری آب دارم.', form: 'am', hint: { fa: 'am؛ شکل حالِ a avea برای «من».', en: 'am; the present form of a avea for “I”.' } },
+  { tense: { fa: 'آینده · فردا', en: 'Future · tomorrow' }, ro: 'Mâine voi avea o sticlă de apă.', en: 'Tomorrow I will have a bottle of water.', fa: 'فردا یک بطری آب خواهم داشت.', form: 'voi avea', hint: { fa: 'voi + avea؛ یکی از شکل‌های استاندارد آینده برای «من».', en: 'voi + avea; one standard future form for “I”.' } },
 ] as const;
