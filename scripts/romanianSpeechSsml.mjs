@@ -11,7 +11,7 @@ export function romanianSpeechSsml(text, voice, intonation) {
     const escaped = escapeXml(sentence.trim());
     if (!sentence.trim().endsWith('?') || !intonation) return `<s>${escaped}</s>`;
     const contour = intonation === 'yes-no'
-      ? '(0%,+0%) (65%,+0%) (100%,+25%)'
+      ? '(0%,+0%) (60%,-5%) (100%,+80%)'
       : '(0%,+0%) (35%,+10%) (100%,-8%)';
     return `<s><prosody contour="${contour}">${escaped}</prosody></s>`;
   }).join('');
