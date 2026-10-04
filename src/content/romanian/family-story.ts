@@ -1193,8 +1193,8 @@ export const familyTableLesson = {
     "en": "Help Ana at home; ask about bread, cheese and where to put the plate."
   },
   "setting": {
-    "fa": "بعدتر در همان روز، آنا نان و پنیر برای یک وعدهٔ ساده آماده کرده است. شما به عنوان مهمان کمک می‌کنید میز را بچینید؛ لازم نیست نام وسایل را بی‌دلیل تکرار کنید، هر سؤال برای انجام کاری است.",
-    "en": "Later that day, Ana has prepared bread and cheese for a simple meal. As her guest, you help set the table; each question helps you do something."
+    "fa": "بعدتر در همان روز، آنا نان و پنیر برای یک وعدهٔ ساده آماده کرده است. شما به عنوان مهمان در چیدن میز کمک می‌کنید و جای نان، پنیر و بشقاب را از آنا می‌پرسید.",
+    "en": "Later that day, Ana has prepared bread and cheese for a simple meal. As her guest, you help set the table and ask Ana where the bread, cheese and plate belong."
   },
   "dialogue": [
     {
