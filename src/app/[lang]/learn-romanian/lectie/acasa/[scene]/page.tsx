@@ -6,7 +6,7 @@ import { EverydayScenarioLesson } from '@/components/romanian/EverydayScenarioLe
 import { meetFamilyLesson, homeRoomLesson, familyBreakfastLesson, familyTableLesson } from '@/content/romanian/family-story';
 import { FamilyHomeReturn } from '@/components/romanian/FamilyHomeReturn';
 import { LOCALES } from '@/lib/locale-router';
-const lessons = { familia: meetFamilyLesson, camera: homeRoomLesson, 'mic-dejun': familyBreakfastLesson, familyTableLesson };
+const lessons = { familia: meetFamilyLesson, camera: homeRoomLesson, 'mic-dejun': familyBreakfastLesson, 'la-masa': familyTableLesson };
 function getLesson(scene: string) { return lessons[scene as keyof typeof lessons]; }
 export function generateStaticParams() { return LOCALES.flatMap(lang => Object.keys(lessons).map(scene => ({lang, scene}))); }
 export function generateMetadata({params, searchParams}: {params: {lang: string; scene: string}; searchParams: {return?: string}}): Metadata {
