@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { ListeningPractice } from './ListeningPractice';
 import { LessonStageNav } from './LessonStageNav';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { playVerifiedAudio, stopVerifiedAudio } from '@/lib/romanian/playVerifiedAudio';
@@ -35,7 +36,6 @@ export function CafeLesson({ lang }: { lang: Locale }) {
   const [answer, setAnswer] = React.useState('');
   const [feedback, setFeedback] = React.useState<'correct' | 'retry' | null>(null);
   const [hint, setHint] = React.useState(false);
-  const [translation, setTranslation] = React.useState(true);
   const [complete, setComplete] = React.useState(false);
   const [audioError, setAudioError] = React.useState(false);
   React.useEffect(() => () => stopVerifiedAudio(), []);
@@ -53,7 +53,7 @@ export function CafeLesson({ lang }: { lang: Locale }) {
   return <div className="space-y-6" dir={isFa ? 'rtl' : 'ltr'}>
     <header className="dark-hero-panel rounded-3xl p-7 text-white sm:p-10"><p className="text-sm font-semibold text-blue-100">{isFa ? 'کافه و غذا · درس ۱ · حدود ۱۵ دقیقه' : 'Cafés and food · lesson 1 · about 15 minutes'}</p><h1 className="mt-2 text-3xl font-extrabold">{isFa ? 'سفارش در کافه' : 'Ordering in a café'}</h1><p className="mt-3 text-blue-50">{isFa ? 'قهوه یا چای بخواهید، «بدون شکر» بگویید و صورتحساب درخواست کنید.' : 'Ask for coffee or tea, say “without sugar”, and request the bill.'}</p></header>
     <LessonStageNav lang={lang} labels={labels[lang]} stage={stage} onSelect={move} />
-    {stage === 0 && <section className="space-y-4 rounded-2xl border bg-white p-5 sm:p-7"><h2 className="text-xl font-bold">{isFa ? '۱. گفت‌وگو را بشنوید' : '1. Listen to the conversation'}</h2><p>{isFa ? 'در کافه یک نوشیدنی سفارش می‌دهید. جمله‌ها را بشنوید و بلند تکرار کنید.' : 'You order a drink at a café. Listen to each line and repeat it aloud.'}</p>{dialogue.map((line, i) => <div key={i} className={`rounded-xl p-4 ${line.who === 'you' ? 'bg-blue-50' : 'bg-slate-50'}`}><p className="text-xs font-bold text-[#1554bd]">{line.who === 'you' ? isFa ? 'شما' : 'You' : isFa ? 'پیشخدمت' : 'Server'}</p><p lang="ro" dir="ltr" className="text-xl font-bold">{line.ro}</p><p lang="en" dir="ltr" className="text-sm text-slate-700">{line.en}</p>{isFa && translation && <p className="text-sm">{line.fa}</p>}<button type="button" onClick={() => play(line.ro)} className="mt-2 text-sm font-semibold text-[#1554bd] underline">{isFa ? 'شنیدن جمله' : 'Hear the line'}</button></div>)}{isFa && <button type="button" onClick={() => setTranslation(!translation)} className="text-sm text-[#1554bd] underline">{translation ? 'پنهان کردن فارسی' : 'نمایش فارسی'}</button>}<div>{action(isFa ? 'واژه‌ها و قاعده‌ها' : 'Words and rules', () => move(1))}</div></section>}
+    {stage === 0 && <section className="space-y-4 rounded-2xl border bg-white p-5 sm:p-7"><h2 className="text-xl font-bold">{isFa ? '۱. گفت‌وگو را بشنوید' : '1. Listen to the conversation'}</h2><p>{isFa ? 'در کافه یک نوشیدنی سفارش می‌دهید. جمله‌ها را بشنوید و بلند تکرار کنید.' : 'You order a drink at a café. Listen to each line and repeat it aloud.'}</p><ListeningPractice lang={lang} dialogue={dialogue} counterpart={{ fa: 'پیشخدمت', en: 'Server' }}/><div>{action(isFa ? 'واژه‌ها و قاعده‌ها' : 'Words and rules', () => move(1))}</div></section>}
     {stage === 1 && <section className="space-y-5 rounded-2xl border bg-white p-5 sm:p-7"><h2 className="text-xl font-bold">{isFa ? '۲. قاعده‌ها و کاربرد' : '2. Rules and usage'}</h2>
       <article className="space-y-3 rounded-xl bg-sky-50 p-4"><h3 className="font-bold">{isFa ? 'درخواست مؤدبانه: Aș dori + کالا' : 'Polite request: Aș dori + item'}</h3><p>{isFa ? 'Aș dori یعنی «مایلم/می‌خواهم» و از فعل a dori می‌آید. این شکل شرطی برای درخواست مؤدبانه است؛ برخلاف درخواست مستقیم، آهنگ نرم‌تری دارد. پس از آن نام نوشیدنی را بیاورید و در پایان vă rog («لطفاً») بگویید. ترتیب: درخواست + نام نوشیدنی + لطفاً.' : 'Aș dori means “I would like” and comes from a dori. This conditional form makes a polite request. Put the drink after it and add vă rog (“please”) at the end: request + drink + please.'}</p>{phrase(examples[0])}</article>
       <article className="space-y-3 rounded-xl bg-emerald-50 p-4"><h3 className="font-bold">{isFa ? 'یک قهوه و یک چای: o / un' : 'A coffee and a tea: o / un'}</h3><p>{isFa ? 'cafea اسم مؤنث است و با o می‌آید: o cafea. ceai اسم خنثی است و در مفرد مانند اسم مذکر با un می‌آید: un ceai. برای این دو نوشیدنی o و un را جابه‌جا نکنید.' : 'Cafea is feminine, so use o cafea. Ceai is neuter and takes un in the singular: un ceai. Keep the article with its noun.'}</p>{phrase(examples[1])}</article>

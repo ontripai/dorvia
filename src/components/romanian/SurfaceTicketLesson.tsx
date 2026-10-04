@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { ListeningPractice } from './ListeningPractice';
 import { MeaningLines } from './MeaningLines';
 import { LessonStageNav } from './LessonStageNav';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
@@ -43,7 +44,6 @@ export function SurfaceTicketLesson({ lang }: { lang: Locale }) {
   const [answer, setAnswer] = React.useState('');
   const [feedback, setFeedback] = React.useState<'correct' | 'vehicle' | 'other' | null>(null);
   const [hint, setHint] = React.useState(false);
-  const [translation, setTranslation] = React.useState(true);
   const [complete, setComplete] = React.useState(false);
   const [priorCompletion, setPriorCompletion] = React.useState(false);
   const [audioMessage, setAudioMessage] = React.useState('');
@@ -116,16 +116,9 @@ export function SurfaceTicketLesson({ lang }: { lang: Locale }) {
     {phase === 0 && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-4">
       <h2 className="text-xl font-bold">{isFa ? 'گفت‌وگو را بشنوید' : 'Listen to the conversation'}</h2>
       <p>{isFa ? 'بلیت سفر شهری دارید و می‌خواهید بدانید در تراموا هم قابل استفاده است یا نه.' : 'You have a city travel ticket and want to ask if it also works on a tram.'}</p>
-      {[{ ro: 'Bună ziua! Este valabil și în tramvai?', en: 'Hello! Is it also valid on the tram?', fa: 'سلام! در تراموا هم معتبر است؟', who: 'you' },
+      <ListeningPractice lang={lang} dialogue={[{ ro: 'Bună ziua! Este valabil și în tramvai?', en: 'Hello! Is it also valid on the tram?', fa: 'سلام! در تراموا هم معتبر است؟', who: 'you' },
         { ro: 'Da, este valabil.', en: 'Yes, it is valid.', fa: 'بله، معتبر است.', who: 'clerk' },
-        { ro: 'Mulțumesc!', en: 'Thank you!', fa: 'ممنون!', who: 'you' }].map((line, i) => <div key={i} className={`rounded-xl p-4 ${line.who === 'you' ? 'bg-blue-50' : 'bg-slate-50'}`}>
-          <p className="text-xs font-bold text-[#1554bd]">{line.who === 'you' ? isFa ? 'شما' : 'You' : isFa ? 'فروشنده' : 'Clerk'}</p>
-          <p lang="ro" dir="ltr" className="text-lg font-bold">{line.ro}</p>
-          <p lang="en" dir="ltr" className="text-sm text-slate-600">{line.en}</p>
-          {translation && isFa && <p className="text-sm">{line.fa}</p>}
-          <button type="button" onClick={() => speak(line.ro)} className="text-sm text-[#1554bd] underline">{isFa ? 'شنیدن این جمله' : 'Hear this line'}</button>
-        </div>)}
-      {isFa && <button type="button" onClick={() => setTranslation(v => !v)} className="text-sm text-[#1554bd] underline">{translation ? 'پنهان کردن فارسی' : 'نمایش فارسی'}</button>}
+        { ro: 'Mulțumesc!', en: 'Thank you!', fa: 'ممنون!', who: 'you' }]} counterpart={{ fa: 'فروشنده', en: 'Clerk' }}/>
       <div><button type="button" onClick={() => move(1)} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-bold">{isFa ? 'واژه و قاعده' : 'Explore the words'}</button></div>
     </section>}
     {phase === 1 && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-5">
