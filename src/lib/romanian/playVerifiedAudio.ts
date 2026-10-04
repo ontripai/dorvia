@@ -1,8 +1,12 @@
 import verifiedAudio from '../../content/romanian/verified-audio.json';
 
 const recordings: Record<string, string> = verifiedAudio;
-export type ListeningStep = { text?: string; pauseMs?: number };
+export type ListeningStep = { text?: string; audioVoice?: string; pauseMs?: number };
 export type ListeningOptions = { rate?: number; gapMs?: number; repeat?: boolean; onLine?: (index: number) => void };
+export function audioRecordingKey(text: string, voice?: string) {
+  const normalized = text.normalize('NFC').trim();
+  return voice && voice !== 'ro-RO-AlinaNeural' ? `${voice}:${normalized}` : normalized;
+}
 let active: HTMLAudioElement | null = null;
 let timer: ReturnType<typeof setTimeout> | null = null;
 let generation = 0;
@@ -23,7 +27,7 @@ export function stopVerifiedAudio() {
 export function playVerifiedSequence(steps: ListeningStep[], onError: () => void, onState?: (playing: boolean) => void, options: ListeningOptions = {}) {
   stopVerifiedAudio();
   const token = generation;
-  const urls = steps.map(step => step.text ? recordings[step.text.normalize('NFC').trim()] : undefined);
+  const urls = steps.map(step => step.text ? recordings[audioRecordingKey(step.text, step.audioVoice)] : undefined);
   if (steps.some((step, i) => step.text && !urls[i])) { onError(); onState?.(false); return; }
   if (!steps.length) { onState?.(false); return; }
   reportState = onState;
@@ -59,6 +63,6 @@ export function playVerifiedSequence(steps: ListeningStep[], onError: () => void
   next();
 }
 
-export function playVerifiedAudio(lines: string | string[], onError: () => void, onState?: (playing: boolean) => void) {
-  playVerifiedSequence((Array.isArray(lines) ? lines : [lines]).map(text => ({ text })), onError, onState, { gapMs: 0 });
+export function playVerifiedAudio(lines: string | string[], onError: () => void, onState?: (playing: boolean) => void, audioVoice?: string) {
+  playVerifiedSequence((Array.isArray(lines) ? lines : [lines]).map(text => ({ text, audioVoice })), onError, onState, { gapMs: 0 });
 }
