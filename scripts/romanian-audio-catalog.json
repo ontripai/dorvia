@@ -5039,5 +5039,102 @@
     "slug": "ro-7b48ae03c1c653df",
     "approved": true,
     "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Da, am foame.",
+    "slug": "ro-e485e54b61f3e99c",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Mergem la cafenea pentru micul dejun?",
+    "slug": "ro-6d0e6c57bf1affcb",
+    "approved": true
+  },
+  {
+    "text": "Da, mergem împreună.",
+    "slug": "ro-e08fe88de259b464",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Cafeneaua e lângă casă.",
+    "slug": "ro-41af7e60d8086598",
+    "approved": true
+  },
+  {
+    "text": "Și mama ta?",
+    "slug": "ro-bf2d03a454dda42b",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Mama e acasă.",
+    "slug": "ro-9a6ff8d04793b8e6",
+    "approved": true
+  },
+  {
+    "text": "Avem pâine și brânză.",
+    "slug": "ro-82995d74dce01e74",
+    "approved": true
+  },
+  {
+    "text": "Pun pâinea pe masă?",
+    "slug": "ro-e535b96a080def76",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Da, mulțumesc.",
+    "slug": "ro-1a4b044992bfd867",
+    "approved": true
+  },
+  {
+    "text": "Și brânza?",
+    "slug": "ro-44d7ba9528a8eb47",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Da, pe masă.",
+    "slug": "ro-85bf4f5966e4a51a",
+    "approved": true
+  },
+  {
+    "text": "Unde pun farfuria?",
+    "slug": "ro-0fe165567c1aadff",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Aici, lângă pâine.",
+    "slug": "ro-8b2f664004c2eacd",
+    "approved": true
+  },
+  {
+    "text": "Bine, pun farfuria aici.",
+    "slug": "ro-cd2a3e680e7c7b18",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "pâine",
+    "slug": "ro-6f475cdbd1a1249a",
+    "approved": true
+  },
+  {
+    "text": "brânză",
+    "slug": "ro-932dbf42d0409cf8",
+    "approved": true
+  },
+  {
+    "text": "farfurie",
+    "slug": "ro-c41e892a213d3048",
+    "approved": true
+  },
+  {
+    "text": "a pune",
+    "slug": "ro-ad2985a65e9d8109",
+    "approved": true
   }
 ]
