@@ -1,3 +1,4 @@
+import type { EverydayScenario } from '../src/components/romanian/EverydayScenarioLesson';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { appointmentScenarios } from '../src/content/romanian/appointment-scenarios';
@@ -48,8 +49,9 @@ if (errors.length) {
 }
 console.log(`Everyday scenarios: ${lessons} lessons, ${phrases} phrases; translations, depth and exact-text audio files passed. Pronunciation requires listening review.`);
 
+const storyLearningLessons: (EverydayScenario & { vocabulary: NonNullable<EverydayScenario['vocabulary']> })[] = [...homeStoryLessons, familyCafeLesson, familyBakeryLesson];
 const targetWords = new Set<string>();
-for (const lesson of [...homeStoryLessons, familyCafeLesson, familyBakeryLesson]) {
+for (const lesson of storyLearningLessons) {
   if (lesson.vocabulary.length !== 5 || new Set(lesson.vocabulary.map(w => w.ro)).size !== 5) throw new Error('Each short home lesson must teach exactly five distinct targets');
   if (!lesson.setting?.fa || !lesson.setting?.en) throw new Error('A short story lesson needs a real scene');
   const hostVoice = lesson.dialogue.find(x => x.who !== 'you')?.audioVoice;
@@ -60,7 +62,7 @@ for (const lesson of [...homeStoryLessons, familyCafeLesson, familyBakeryLesson]
     targetWords.add(word.ro);
   }
 }
-const storyPhrases = [...bakeryReturnLesson.dialogue, ...bakeryReturnLesson.tasks.map(t => ({...t,audioVoice:bakeryReturnLesson.answerVoice})),...homeVerbTimes, ...homeReturnDialogue, ...cafeReturnDialogue, ...[...homeStoryLessons, familyCafeLesson, familyBakeryLesson].flatMap(l => [...l.dialogue, ...l.tasks.map(t => ({...t, audioVoice:l.answerVoice})), ...l.vocabulary, ...l.vocabulary.flatMap(w => [w.example, ...(w.alternatives ?? [])]), ...l.tasks.flatMap(t => (t.alternatives ?? []).map(ro => ({ro, en: t.en, fa: t.fa, audioVoice:l.answerVoice})))])];
+const storyPhrases = [...bakeryReturnLesson.dialogue, ...bakeryReturnLesson.tasks.map(t => ({...t,audioVoice:bakeryReturnLesson.answerVoice})),...homeVerbTimes, ...homeReturnDialogue, ...cafeReturnDialogue, ...storyLearningLessons.flatMap(l => [...l.dialogue, ...l.tasks.map(t => ({...t, audioVoice:l.answerVoice})), ...l.vocabulary, ...l.vocabulary.flatMap(w => [w.example, ...(w.alternatives ?? [])]), ...l.tasks.flatMap(t => (t.alternatives ?? []).map(ro => ({ro, en: t.en, fa: t.fa, audioVoice:l.answerVoice})))])];
 for (const phrase of storyPhrases) {
   if (!phrase.en || !/[\u0600-\u06ff]/.test(phrase.fa)) throw new Error('Story phrase needs Romanian, English and Persian');
   const url = recordings[audioRecordingKey(phrase.ro, 'audioVoice' in phrase ? phrase.audioVoice : undefined)];
