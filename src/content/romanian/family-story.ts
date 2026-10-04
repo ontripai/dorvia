@@ -1949,9 +1949,9 @@ export const bakeryReturnLesson = {
       "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Da, avem pâine.",
-      "en": "Yes, we have bread.",
-      "fa": "بله، نان داریم.",
+      "ro": "Cu plăcere.",
+      "en": "You are welcome.",
+      "fa": "خواهش می‌کنم.",
       "who": "you",
       "audioVoice": "ro-RO-EmilNeural"
     }
@@ -1994,9 +1994,9 @@ export const bakeryReturnLesson = {
       }
     },
     {
-      "ro": "Da, avem pâine.",
-      "en": "Yes, we have bread.",
-      "fa": "بله، نان داریم.",
+      "ro": "Cu plăcere.",
+      "en": "You are welcome.",
+      "fa": "خواهش می‌کنم.",
       "hint": "Da, …",
       "cue": {
         "ro": "Mulțumesc! Avem pâine pentru mâine.",
@@ -2054,9 +2054,9 @@ export const bakeryReturnLesson = {
           "audioVoice": "ro-RO-EmilNeural"
         },
         {
-          "ro": "Da, avem pâine.",
-          "en": "Yes, we have bread.",
-          "fa": "بله، نان داریم.",
+          "ro": "Cu plăcere.",
+          "en": "You are welcome.",
+          "fa": "خواهش می‌کنم.",
           "audioVoice": "ro-RO-EmilNeural"
         }
       ]
