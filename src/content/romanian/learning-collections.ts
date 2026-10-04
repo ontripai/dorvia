@@ -1,6 +1,6 @@
 /** Ordered by everyday need, dialogue load and prerequisites, rather than date added. */
 export const CONVERSATION_GROUPS = [
-  {"slug": "home", "fa": "در خانه؛ داستان خانواده", "en": "At home: the family story", "introFa": "به عنوان پسرعمو یا دخترعمو وارد داستان شوید؛ سه درس کوتاه، هر کدام پنج واژهٔ تازه.", "introEn": "Enter as a cousin; three short lessons, each with five new vocabulary targets.", "lessons": [{"href": "/learn-romanian/lectie/acasa/bun-venit", "fa": "دیدار پسرعمو یا دخترعمو", "en": "A cousin comes to visit", "detailFa": "سلام و نسبت خانوادگی؛ پنج واژه، هشت نوبت", "detailEn": "Greetings and family relations; five words, eight turns"}, {"href": "/learn-romanian/lectie/acasa/familia", "fa": "شناخت خانواده", "en": "Meet the family", "detailFa": "مادر، پدر، دختر، پسر و خانواده", "detailEn": "Mother, father, daughter, son and family"}, {"href": "/learn-romanian/lectie/acasa/camera", "fa": "خانه و اتاق شما", "en": "Your house and room", "detailFa": "خانه، اتاق، آب، بزرگ و زیبا", "detailEn": "House, room, water, large and beautiful"}]},
+  {"slug": "home", "fa": "در خانه؛ داستان خانواده", "en": "At home: the family story", "introFa": "به عنوان پسرعمو یا دخترعمو وارد داستان شوید؛ چهار درس کوتاه، هر کدام پنج واژهٔ تازه.", "introEn": "Enter as a cousin; four short lessons, each with five new vocabulary targets.", "lessons": [{"href": "/learn-romanian/lectie/acasa/bun-venit", "fa": "دیدار پسرعمو یا دخترعمو", "en": "A cousin comes to visit", "detailFa": "سلام و نسبت خانوادگی؛ پنج واژه، هشت نوبت", "detailEn": "Greetings and family relations; five words, eight turns"}, {"href": "/learn-romanian/lectie/acasa/familia", "fa": "شناخت خانواده", "en": "Meet the family", "detailFa": "مادر، پدر، دختر، پسر و خانواده", "detailEn": "Mother, father, daughter, son and family"}, {"href": "/learn-romanian/lectie/acasa/camera", "fa": "خانه و اتاق شما", "en": "Your house and room", "detailFa": "خانه، اتاق، آب، بزرگ و زیبا", "detailEn": "House, room, water, large and beautiful"}, {"href": "/learn-romanian/lectie/acasa/mic-dejun", "fa": "صبحانه با خانواده", "en": "Breakfast with the family", "detailFa": "صبح، گرسنگی، صبحانه، کافه و با هم؛ ادامه در کافه", "detailEn": "Morning, hunger, breakfast, café and together; continue at the café"}]},
   {
     "slug": "shopping",
     "fa": "خرید روزمره",
@@ -114,7 +114,8 @@ export const CONVERSATION_GROUPS = [
         "en": "Ordering takeaway",
         "detailFa": "سفارش، زمان آماده‌شدن و بررسی هنگام تحویل",
         "detailEn": "Order, pickup time and checking the item"
-      }
+      },
+      {"href": "/learn-romanian/lectie/cafenea/cu-familia", "fa": "چای در کافه با خانواده", "en": "Tea at the café with the family", "detailFa": "چای، شیر، شکر، با و بدون؛ هشت نوبت کوتاه", "detailEn": "Five vocabulary targets; eight short turns; independent or in the story"}
     ]
   },
   {
@@ -430,7 +431,7 @@ export const CONVERSATION_GROUPS = [
 export const CONVERSATION_LESSONS = CONVERSATION_GROUPS.find(group => group.slug === 'transport')!.lessons;
 
 export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; detailFa: string; detailEn: string; lessonIndexes: number[] }[]> = {
-  home: [{ fa: "ورود مهمان و آشنایی", en: "Arrival and introductions", detailFa: "از خانه شروع کنید؛ ادامهٔ داستان شما را به محیط‌های دیگر می‌برد.", detailEn: "Begin at home; the story continues in other places.", lessonIndexes: [0, 1, 2] }],
+  home: [{ fa: "ورود مهمان و آشنایی", en: "Arrival and introductions", detailFa: "از خانه شروع کنید؛ ادامهٔ داستان شما را به محیط‌های دیگر می‌برد.", detailEn: "Begin at home; the story continues in other places.", lessonIndexes: [0, 1, 2] }, { fa: "صبحانه و رفت‌وبرگشت به کافه", en: "Breakfast and a trip to the café", detailFa: "خانه، کافه و بازگشت برای مرور؛ هر بخش یک جلسهٔ جدا.", detailEn: "Home, café and a return review; each part is a separate session.", lessonIndexes: [3] }],
   "shopping": [
     {
       "fa": "خرید ساده و مقدار",
@@ -495,7 +496,8 @@ export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; det
         5,
         6
       ]
-    }
+    },
+    {"fa":"سفارش کوتاه با خانواده","en":"A short order with the family","detailFa":"پنج واژه، شامل با و بدون؛ مستقل یا در داستان.","detailEn":"Five words including with and without; independent or in the story.","lessonIndexes":[7]}
   ],
   "directions": [
     {
