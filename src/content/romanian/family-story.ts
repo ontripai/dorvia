@@ -749,44 +749,44 @@ export const familyBreakfastLesson = {
       "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Da. Avem mic dejun?",
-      "en": "Yes. Are we having breakfast?",
-      "fa": "بله. صبحانه داریم؟",
+      "ro": "Da, am foame.",
+      "en": "Yes, I am hungry.",
+      "fa": "بله، گرسنه‌ام.",
       "who": "you",
       "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Da. Mergem la cafenea.",
-      "en": "Yes. We are going to the café.",
-      "fa": "بله. به کافه می‌رویم.",
+      "ro": "Mergem la cafenea pentru micul dejun?",
+      "en": "Shall we go to the café for breakfast?",
+      "fa": "برای صبحانه به کافه برویم؟",
       "who": "host",
       "audioVoice": "ro-RO-AlinaNeural"
-    },
-    {
-      "ro": "Mergem împreună?",
-      "en": "Are we going together?",
-      "fa": "با هم می‌رویم؟",
-      "who": "you",
-      "audioVoice": "ro-RO-EmilNeural"
     },
     {
       "ro": "Da, mergem împreună.",
-      "en": "Yes, we are going together.",
-      "fa": "بله، با هم می‌رویم.",
-      "who": "host",
-      "audioVoice": "ro-RO-AlinaNeural"
-    },
-    {
-      "ro": "Cafeneaua e aici?",
-      "en": "Is the café here?",
-      "fa": "کافه همین‌جاست؟",
+      "en": "Yes, let’s go together.",
+      "fa": "بله، با هم برویم.",
       "who": "you",
       "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Da, e aici.",
-      "en": "Yes, it is here.",
-      "fa": "بله، همین‌جاست.",
+      "ro": "Cafeneaua e lângă casă.",
+      "en": "The café is next to the house.",
+      "fa": "کافه کنار خانه است.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Și mama ta?",
+      "en": "And your mother?",
+      "fa": "و مادرت؟",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    },
+    {
+      "ro": "Mama e acasă.",
+      "en": "My mother is at home.",
+      "fa": "مادرم در خانه است.",
       "who": "host",
       "audioVoice": "ro-RO-AlinaNeural"
     },
@@ -800,10 +800,10 @@ export const familyBreakfastLesson = {
   ],
   "tasks": [
     {
-      "ro": "Da. Avem mic dejun?",
-      "en": "Yes. Are we having breakfast?",
-      "fa": "بله. صبحانه داریم؟",
-      "hint": "Da. …",
+      "ro": "Da, am foame.",
+      "en": "Yes, I am hungry.",
+      "fa": "بله، گرسنه‌ام.",
+      "hint": "Da, …",
       "cue": {
         "ro": "Bună! Ai foame?",
         "en": "Hi! Are you hungry?",
@@ -812,26 +812,26 @@ export const familyBreakfastLesson = {
       }
     },
     {
-      "ro": "Mergem împreună?",
-      "en": "Are we going together?",
-      "fa": "با هم می‌رویم؟",
-      "hint": "Mergem …",
+      "ro": "Da, mergem împreună.",
+      "en": "Yes, let’s go together.",
+      "fa": "بله، با هم برویم.",
+      "hint": "Da, …",
       "cue": {
-        "ro": "Da. Mergem la cafenea.",
-        "en": "Yes. We are going to the café.",
-        "fa": "بله. به کافه می‌رویم.",
+        "ro": "Mergem la cafenea pentru micul dejun?",
+        "en": "Shall we go to the café for breakfast?",
+        "fa": "برای صبحانه به کافه برویم؟",
         "audioVoice": "ro-RO-AlinaNeural"
       }
     },
     {
-      "ro": "Cafeneaua e aici?",
-      "en": "Is the café here?",
-      "fa": "کافه همین‌جاست؟",
-      "hint": "Cafeneaua …",
+      "ro": "Și mama ta?",
+      "en": "And your mother?",
+      "fa": "و مادرت؟",
+      "hint": "Și …",
       "cue": {
-        "ro": "Da, mergem împreună.",
-        "en": "Yes, we are going together.",
-        "fa": "بله، با هم می‌رویم.",
+        "ro": "Cafeneaua e lângă casă.",
+        "en": "The café is next to the house.",
+        "fa": "کافه کنار خانه است.",
         "audioVoice": "ro-RO-AlinaNeural"
       }
     },
@@ -841,9 +841,9 @@ export const familyBreakfastLesson = {
       "fa": "خوب، برویم!",
       "hint": "Bine, …",
       "cue": {
-        "ro": "Da, e aici.",
-        "en": "Yes, it is here.",
-        "fa": "بله، همین‌جاست.",
+        "ro": "Mama e acasă.",
+        "en": "My mother is at home.",
+        "fa": "مادرم در خانه است.",
         "audioVoice": "ro-RO-AlinaNeural"
       }
     }
@@ -855,14 +855,14 @@ export const familyBreakfastLesson = {
         "en": "A plan that leads to going out"
       },
       "explanation": {
-        "fa": "Mergem یعنی «می‌رویم» و از a merge است؛ یک فعل تازه، نه دو واژهٔ جدا. در این گفت‌وگو تصمیم می‌گیرید برای صبحانه به کافه بروید.",
-        "en": "Mergem means we go, a form of a merge; it is one new verb, not two separate targets. This conversation makes the plan to go to a café for breakfast."
+        "fa": "Mergem la cafenea pentru micul dejun? یک پیشنهاد است: «برای صبحانه به کافه برویم؟». mergem شکل «ما» از a merge است. împreună یعنی «با هم» و برای فهم صحنه کمک می‌کند؛ حفظ آن در این جلسه لازم نیست.",
+        "en": "Mergem la cafenea pentru micul dejun? is an invitation: shall we go to the café for breakfast? Mergem is the we-form of a merge. Împreună means together; it supports the scene and is not a memorisation target in this session."
       },
       "examples": [
         {
-          "ro": "Da. Mergem la cafenea.",
-          "en": "Yes. We are going to the café.",
-          "fa": "بله. به کافه می‌رویم."
+          "ro": "Mergem la cafenea pentru micul dejun?",
+          "en": "Shall we go to the café for breakfast?",
+          "fa": "برای صبحانه به کافه برویم؟"
         },
         {
           "ro": "Bine, mergem!",
@@ -873,12 +873,12 @@ export const familyBreakfastLesson = {
     },
     {
       "title": {
-        "fa": "مرور خستگی و گرسنگی",
-        "en": "Review how to express hunger"
+        "fa": "گرسنگی و نشانی نزدیک خانه",
+        "en": "Hunger and a location near home"
       },
       "explanation": {
-        "fa": "Ai foame? و Avem mic dejun? از a avea استفاده می‌کنند. mic dejun را یک ترکیب به معنی صبحانه یاد می‌گیریم. e، aici و bine از درس‌های قبلی مرور می‌شوند.",
-        "en": "Ai foame and Avem mic dejun use a avea. Learn mic dejun as one expression meaning breakfast. E, aici and bine review earlier lessons."
+        "fa": "Ai foame? و Am foame از فعل آشنای a avea هستند. lângă casă یعنی «کنار خانه». pentru در پیشنهاد النا یعنی «برای»؛ هدف یادگیری مستقل این جلسه نیست.",
+        "en": "Ai foame? and Am foame use the familiar a avea. Lângă casă means next to the house. Pentru means for in Elena’s invitation; it is supporting language, not a separate target."
       },
       "examples": [
         {
@@ -887,9 +887,9 @@ export const familyBreakfastLesson = {
           "fa": "سلام! گرسنه‌ای؟"
         },
         {
-          "ro": "Da. Avem mic dejun?",
-          "en": "Yes. Are we having breakfast?",
-          "fa": "بله. صبحانه داریم؟"
+          "ro": "Da, am foame.",
+          "en": "Yes, I am hungry.",
+          "fa": "بله، گرسنه‌ام."
         }
       ]
     }
@@ -910,9 +910,9 @@ export const familyBreakfastLesson = {
       "en": "breakfast",
       "fa": "صبحانه؛ یک ترکیب واژگانی",
       "example": {
-        "ro": "Da. Avem mic dejun?",
-        "en": "Yes. Are we having breakfast?",
-        "fa": "بله. صبحانه داریم؟"
+        "ro": "Da, am foame.",
+        "en": "Yes, I am hungry.",
+        "fa": "بله، گرسنه‌ام."
       }
     },
     {
@@ -920,19 +920,20 @@ export const familyBreakfastLesson = {
       "en": "café",
       "fa": "کافه",
       "example": {
-        "ro": "Cafeneaua e aici?",
-        "en": "Is the café here?",
-        "fa": "کافه همین‌جاست؟"
+        "ro": "Cafeneaua e lângă casă.",
+        "en": "The café is next to the house.",
+        "fa": "کافه کنار خانه است.",
+        "audioVoice": "ro-RO-AlinaNeural"
       }
     },
     {
-      "ro": "împreună",
-      "en": "together",
-      "fa": "با هم",
+      "ro": "lângă",
+      "en": "next to",
+      "fa": "کنار",
       "example": {
-        "ro": "Mergem împreună?",
-        "en": "Are we going together?",
-        "fa": "با هم می‌رویم؟"
+        "ro": "Cafeneaua e lângă casă.",
+        "en": "The café is next to the house.",
+        "fa": "کافه کنار خانه است."
       }
     },
     {
@@ -948,8 +949,8 @@ export const familyBreakfastLesson = {
   ],
   "answerVoice": "ro-RO-EmilNeural",
   "setting": {
-    "fa": "صبح روز بعد، النا هم گرسنه است. کافه نزدیک خانه است و او پیشنهاد می‌کند همراهش بروید. آنا در خانه می‌ماند.",
-    "en": "The next morning, Elena is hungry too. The café is close to home and she suggests going together. Ana stays at home."
+    "fa": "صبح روز تعطیل است. النا شما را برای صبحانه به کافهٔ کنار خانه دعوت می‌کند. شما دعوتش را قبول می‌کنید و پیش از رفتن دربارهٔ آنا می‌پرسید؛ آنا امروز در خانه می‌ماند.",
+    "en": "It is a morning on a day off. Elena invites you to breakfast at the café next to the house. You accept and ask about Ana before leaving; Ana is staying home today."
   }
 } satisfies EverydayScenario;
 
@@ -1181,7 +1182,239 @@ export const familyCafeLesson: EverydayScenario & { vocabulary: NonNullable<Ever
   }
 } satisfies EverydayScenario;
 
-export const homeStoryLessons: (EverydayScenario & { vocabulary: NonNullable<EverydayScenario['vocabulary']> })[] = [welcomeHomeLesson, meetFamilyLesson, homeRoomLesson, familyBreakfastLesson];
+export const familyTableLesson = {
+  "slug": "la-masa",
+  "title": {
+    "fa": "درس ۵: کمک در چیدن میز",
+    "en": "Lesson 5: Helping set the table"
+  },
+  "goal": {
+    "fa": "در خانه به آنا کمک کنید؛ دربارهٔ نان، پنیر و جای بشقاب بپرسید.",
+    "en": "Help Ana at home; ask about bread, cheese and where to put the plate."
+  },
+  "setting": {
+    "fa": "بعدتر در همان روز، آنا نان و پنیر برای یک وعدهٔ ساده آماده کرده است. شما به عنوان مهمان در چیدن میز کمک می‌کنید و جای نان، پنیر و بشقاب را از آنا می‌پرسید.",
+    "en": "Later that day, Ana has prepared bread and cheese for a simple meal. As her guest, you help set the table and ask Ana where the bread, cheese and plate belong."
+  },
+  "dialogue": [
+    {
+      "ro": "Avem pâine și brânză.",
+      "en": "We have bread and cheese.",
+      "fa": "نان و پنیر داریم.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Pun pâinea pe masă?",
+      "en": "Shall I put the bread on the table?",
+      "fa": "نان را روی میز بگذارم؟",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    },
+    {
+      "ro": "Da, mulțumesc.",
+      "en": "Yes, thank you.",
+      "fa": "بله، ممنون.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Și brânza?",
+      "en": "And the cheese?",
+      "fa": "پنیر را هم؟",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    },
+    {
+      "ro": "Da, pe masă.",
+      "en": "Yes, on the table.",
+      "fa": "بله، روی میز.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Unde pun farfuria?",
+      "en": "Where shall I put the plate?",
+      "fa": "بشقاب را کجا بگذارم؟",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    },
+    {
+      "ro": "Aici, lângă pâine.",
+      "en": "Here, next to the bread.",
+      "fa": "اینجا، کنار نان.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Bine, pun farfuria aici.",
+      "en": "Okay, I’ll put the plate here.",
+      "fa": "خوب، بشقاب را اینجا می‌گذارم.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    }
+  ],
+  "tasks": [
+    {
+      "ro": "Pun pâinea pe masă?",
+      "en": "Shall I put the bread on the table?",
+      "fa": "نان را روی میز بگذارم؟",
+      "hint": "Pun …",
+      "cue": {
+        "ro": "Avem pâine și brânză.",
+        "en": "We have bread and cheese.",
+        "fa": "نان و پنیر داریم.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Și brânza?",
+      "en": "And the cheese?",
+      "fa": "پنیر را هم؟",
+      "hint": "Și …",
+      "cue": {
+        "ro": "Da, mulțumesc.",
+        "en": "Yes, thank you.",
+        "fa": "بله، ممنون.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Unde pun farfuria?",
+      "en": "Where shall I put the plate?",
+      "fa": "بشقاب را کجا بگذارم؟",
+      "hint": "Unde …",
+      "cue": {
+        "ro": "Da, pe masă.",
+        "en": "Yes, on the table.",
+        "fa": "بله، روی میز.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Bine, pun farfuria aici.",
+      "en": "Okay, I’ll put the plate here.",
+      "fa": "خوب، بشقاب را اینجا می‌گذارم.",
+      "hint": "Bine, …",
+      "cue": {
+        "ro": "Aici, lângă pâine.",
+        "en": "Here, next to the bread.",
+        "fa": "اینجا، کنار نان.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "title": {
+        "fa": "پیشنهاد کمک با فعل گذاشتن",
+        "en": "Offer help with to put"
+      },
+      "explanation": {
+        "fa": "a pune یعنی «گذاشتن»؛ pun شکل «من» است. Pun pâinea pe masă? در این صحنه یعنی «نان را روی میز بگذارم؟». با لحن سؤال اجازه می‌گیرید و کمک می‌کنید.",
+        "en": "A pune means to put; pun is the I-form. Pun pâinea pe masă? offers help: shall I put the bread on the table? The question asks for guidance."
+      },
+      "examples": [
+        {
+          "ro": "Pun pâinea pe masă?",
+          "en": "Shall I put the bread on the table?",
+          "fa": "نان را روی میز بگذارم؟",
+          "audioVoice": "ro-RO-EmilNeural"
+        },
+        {
+          "ro": "Bine, pun farfuria aici.",
+          "en": "Okay, I’ll put the plate here.",
+          "fa": "خوب، بشقاب را اینجا می‌گذارم.",
+          "audioVoice": "ro-RO-EmilNeural"
+        }
+      ]
+    },
+    {
+      "title": {
+        "fa": "از یک سؤال تا جای درست وسیله",
+        "en": "Ask where an item belongs"
+      },
+      "explanation": {
+        "fa": "Unde یعنی «کجا» و از پرسش‌واژه‌های پایه مرور می‌شود. pe masă یعنی «روی میز»؛ pe فقط برای فهم جمله توضیح داده شده است. pâinea، brânza و farfuria شکل معرفهٔ سه واژهٔ هدف هستند. lângă از درس قبل مرور می‌شود.",
+        "en": "Unde reviews the basic question word where. Pe masă means on the table; pe supports the sentence. Pâinea, brânza and farfuria are definite forms of three targets. Lângă reviews the previous lesson."
+      },
+      "examples": [
+        {
+          "ro": "Unde pun farfuria?",
+          "en": "Where shall I put the plate?",
+          "fa": "بشقاب را کجا بگذارم؟",
+          "audioVoice": "ro-RO-EmilNeural"
+        },
+        {
+          "ro": "Aici, lângă pâine.",
+          "en": "Here, next to the bread.",
+          "fa": "اینجا، کنار نان.",
+          "audioVoice": "ro-RO-AlinaNeural"
+        }
+      ]
+    }
+  ],
+  "vocabulary": [
+    {
+      "ro": "pâine",
+      "en": "bread",
+      "fa": "نان",
+      "example": {
+        "ro": "Avem pâine și brânză.",
+        "en": "We have bread and cheese.",
+        "fa": "نان و پنیر داریم.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "brânză",
+      "en": "cheese",
+      "fa": "پنیر",
+      "example": {
+        "ro": "Și brânza?",
+        "en": "And the cheese?",
+        "fa": "پنیر را هم؟",
+        "audioVoice": "ro-RO-EmilNeural"
+      }
+    },
+    {
+      "ro": "masă",
+      "en": "table",
+      "fa": "میز",
+      "example": {
+        "ro": "Pun pâinea pe masă?",
+        "en": "Shall I put the bread on the table?",
+        "fa": "نان را روی میز بگذارم؟",
+        "audioVoice": "ro-RO-EmilNeural"
+      }
+    },
+    {
+      "ro": "farfurie",
+      "en": "plate",
+      "fa": "بشقاب",
+      "example": {
+        "ro": "Unde pun farfuria?",
+        "en": "Where shall I put the plate?",
+        "fa": "بشقاب را کجا بگذارم؟",
+        "audioVoice": "ro-RO-EmilNeural"
+      }
+    },
+    {
+      "ro": "a pune",
+      "en": "to put",
+      "fa": "گذاشتن",
+      "example": {
+        "ro": "Bine, pun farfuria aici.",
+        "en": "Okay, I’ll put the plate here.",
+        "fa": "خوب، بشقاب را اینجا می‌گذارم.",
+        "audioVoice": "ro-RO-EmilNeural"
+      }
+    }
+  ],
+  "answerVoice": "ro-RO-EmilNeural"
+} satisfies EverydayScenario;
+
+export const homeStoryLessons: (EverydayScenario & { vocabulary: NonNullable<EverydayScenario['vocabulary']> })[] = [welcomeHomeLesson, meetFamilyLesson, homeRoomLesson, familyBreakfastLesson, familyTableLesson];
 
 export const homeReturnDialogue = [
   {

@@ -11,6 +11,7 @@ import { workplaceScenarios } from '../src/content/romanian/workplace-scenarios'
 import { housingScenarios } from '../src/content/romanian/housing-scenarios';
 import { homeStoryLessons, homeReturnDialogue, homeVerbTimes, familyCafeLesson, cafeReturnDialogue } from '../src/content/romanian/family-story';
 import { audioRecordingKey } from '../src/lib/romanian/playVerifiedAudio';
+import { CONVERSATION_GROUPS, CONVERSATION_SECTIONS } from '../src/content/romanian/learning-collections';
 import audio from '../src/content/romanian/verified-audio.json';
 
 const groups = { home: homeStoryLessons, shortCafe: [familyCafeLesson], housing: housingScenarios, workplace: workplaceScenarios, appointments: appointmentScenarios, banking: bankingScenarios, cafe: cafeScenarios, directions: directionsScenarios, pharmacy: pharmacyScenarios, shopping: shoppingScenarios, transport: transportScenarios };
@@ -65,4 +66,14 @@ for (const phrase of storyPhrases) {
   const url = recordings[audioRecordingKey(phrase.ro, 'audioVoice' in phrase ? phrase.audioVoice : undefined)];
   if (!url || !existsSync(join(process.cwd(), 'public', url))) throw new Error('Story needs exact-text audio: ' + phrase.ro);
 }
-console.log('Family story: five short lessons, exactly five distinct targets each, cousin gender alternative, return-home dialogue and exact-text audio checked.');
+console.log('Family story: six short lessons, exactly five distinct targets each, cousin gender alternative, return-home dialogue and exact-text audio checked.');
+
+for (const group of CONVERSATION_GROUPS) {
+  const sections = CONVERSATION_SECTIONS[group.slug];
+  if (!sections) continue;
+  const visible = sections.flatMap(section => section.lessonIndexes);
+  if (visible.length !== group.lessons.length || new Set(visible).size !== visible.length || visible.some(i => i < 0 || i >= group.lessons.length)) {
+    throw new Error(`Topic ${group.slug} must show every lesson exactly once in its learning path`);
+  }
+}
+console.log('Topic learning paths: every grouped lesson is visible exactly once.');
