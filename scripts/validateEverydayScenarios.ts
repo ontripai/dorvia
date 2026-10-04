@@ -9,10 +9,10 @@ import { shoppingScenarios } from '../src/content/romanian/shopping-scenarios';
 import { transportScenarios } from '../src/content/romanian/transport-scenarios';
 import { workplaceScenarios } from '../src/content/romanian/workplace-scenarios';
 import { housingScenarios } from '../src/content/romanian/housing-scenarios';
-import { welcomeHomeLesson, homeReturnDialogue, homeVerbTimes } from '../src/content/romanian/family-story';
+import { homeStoryLessons, homeReturnDialogue, homeVerbTimes } from '../src/content/romanian/family-story';
 import audio from '../src/content/romanian/verified-audio.json';
 
-const groups = { home: [welcomeHomeLesson], housing: housingScenarios, workplace: workplaceScenarios, appointments: appointmentScenarios, banking: bankingScenarios, cafe: cafeScenarios, directions: directionsScenarios, pharmacy: pharmacyScenarios, shopping: shoppingScenarios, transport: transportScenarios };
+const groups = { home: homeStoryLessons, housing: housingScenarios, workplace: workplaceScenarios, appointments: appointmentScenarios, banking: bankingScenarios, cafe: cafeScenarios, directions: directionsScenarios, pharmacy: pharmacyScenarios, shopping: shoppingScenarios, transport: transportScenarios };
 const recordings: Record<string, string> = audio;
 const errors: string[] = [];
 let lessons = 0;
@@ -24,9 +24,10 @@ for (const [topic, scenarios] of Object.entries(groups)) {
     const id = `${topic}/${lesson.slug}`;
     if (slugs.has(lesson.slug)) errors.push(`${id}: duplicate slug`);
     slugs.add(lesson.slug);
-    if (lesson.dialogue.length < 9) errors.push(`${id}: fewer than nine dialogue turns`);
+    if (topic === 'home' && lesson.dialogue.length !== 8) errors.push(`${id}: short home lessons must have exactly eight turns`);
+    if (topic !== 'home' && lesson.dialogue.length < 9) errors.push(`${id}: fewer than nine dialogue turns`);
     if (lesson.tasks.length < 4) errors.push(`${id}: fewer than four tasks`);
-    if (lesson.rules.length < 3) errors.push(`${id}: fewer than three rules`);
+    if (lesson.rules.length < (topic === 'home' ? 2 : 3)) errors.push(`${id}: fewer than three rules`);
     for (const [section, lines] of Object.entries({ dialogue: lesson.dialogue, examples: lesson.rules.flatMap(rule => rule.examples), tasks: lesson.tasks })) {
       for (const [index, line] of lines.entries()) {
         phrases++;
@@ -45,11 +46,18 @@ if (errors.length) {
 }
 console.log(`Everyday scenarios: ${lessons} lessons, ${phrases} phrases; translations, depth and exact-text audio files passed. Pronunciation requires listening review.`);
 
-if (welcomeHomeLesson.vocabulary.length < 5 || new Set(welcomeHomeLesson.vocabulary.map(w => w.ro)).size < 5) throw new Error('Home episode must teach at least five distinct vocabulary targets');
-const storyPhrases = [...homeVerbTimes,...homeReturnDialogue, ...welcomeHomeLesson.vocabulary, ...welcomeHomeLesson.vocabulary.flatMap(w => [w.example, ...('alternatives' in w ? (w.alternatives ?? []) : [])])];
+const targetWords = new Set<string>();
+for (const lesson of homeStoryLessons) {
+  if (lesson.vocabulary.length !== 5 || new Set(lesson.vocabulary.map(w => w.ro)).size !== 5) throw new Error('Each short home lesson must teach exactly five distinct targets');
+  for (const word of lesson.vocabulary) {
+    if (targetWords.has(word.ro)) throw new Error('Repeated new target across home lessons: ' + word.ro);
+    targetWords.add(word.ro);
+  }
+}
+const storyPhrases = [...homeVerbTimes, ...homeReturnDialogue, ...homeStoryLessons.flatMap(l => [...l.vocabulary, ...l.vocabulary.flatMap(w => [w.example, ...(w.alternatives ?? [])]), ...l.tasks.flatMap(t => (t.alternatives ?? []).map(ro => ({ro, en: t.en, fa: t.fa})))])];
 for (const phrase of storyPhrases) {
   if (!phrase.en || !/[\u0600-\u06ff]/.test(phrase.fa)) throw new Error('Story phrase needs Romanian, English and Persian');
   const url = recordings[phrase.ro];
   if (!url || !existsSync(join(process.cwd(), 'public', url))) throw new Error('Story needs exact-text audio: ' + phrase.ro);
 }
-console.log('Family story: five vocabulary targets, gender alternative, return-home dialogue and exact-text audio checked.');
+console.log('Family story: three short lessons, exactly five distinct targets each, cousin gender alternative, return-home dialogue and exact-text audio checked.');

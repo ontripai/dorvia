@@ -5,16 +5,16 @@ export const familyMembers = [
     "name": "Ana",
     "age": 42,
     "role": {
-      "fa": "مادر؛ میزبان شما در این قسمت",
-      "en": "Mother; your host in this episode"
+      "fa": "مادر؛ زن‌عموی شما",
+      "en": "Mother; your aunt by marriage"
     }
   },
   {
     "name": "Mihai",
     "age": 45,
     "role": {
-      "fa": "پدر",
-      "en": "Father"
+      "fa": "پدر؛ عموی شما",
+      "en": "Father; your paternal uncle"
     }
   },
   {
@@ -54,66 +54,447 @@ export const familyMembers = [
 export const welcomeHomeLesson = {
   "slug": "bun-venit",
   "title": {
-    "fa": "قسمت ۱: مهمان خانهٔ خانوادهٔ پوپسکو",
-    "en": "Episode 1: A guest at the Popescu home"
+    "fa": "درس ۱: دیدار پسرعمو یا دخترعمو",
+    "en": "Lesson 1: A cousin comes to visit"
   },
   "goal": {
-    "fa": "شما مهمان خانواده هستید: پاسخ خوش‌آمدگویی بدهید، دربارهٔ خانواده و خانه صحبت کنید و اتاق خود را بشناسید.",
-    "en": "You are the family’s guest: answer the welcome, talk about the family and house, and recognise your room."
+    "fa": "با النا سلام و آشنایی کنید. فقط پنج واژهٔ تازه؛ خانواده و اتاق در درس‌های بعدی.",
+    "en": "Greet Elena and introduce yourself. Only five new words; family and rooms come in later lessons."
   },
   "dialogue": [
     {
-      "ro": "Bună ziua! Sunteți aici pentru vizită?",
-      "en": "Hello! Are you here for a visit?",
-      "fa": "سلام! برای دیدار آمده‌اید؟",
+      "ro": "Bună ziua! Eu sunt Elena.",
+      "en": "Hello! I am Elena.",
+      "fa": "سلام! من النا هستم.",
       "who": "host"
     },
     {
-      "ro": "Da, sunt musafirul vostru.",
-      "en": "Yes, I am your guest.",
-      "fa": "بله، من مهمان شما هستم.",
+      "ro": "Bună ziua! Sunt vărul tău.",
+      "en": "Hello! I am your male cousin.",
+      "fa": "سلام! من پسرعموی تو هستم.",
       "who": "you"
     },
     {
-      "ro": "Aveți un prieten aici?",
-      "en": "Do you have a friend here?",
-      "fa": "اینجا دوستی دارید؟",
+      "ro": "Mihai este unchiul tău.",
+      "en": "Mihai is your uncle.",
+      "fa": "میهای عموی توست.",
       "who": "host"
     },
     {
-      "ro": "Da, am un prieten aici.",
-      "en": "Yes, I have a friend here.",
-      "fa": "بله، اینجا یک دوست دارم.",
+      "ro": "El este unchiul meu.",
+      "en": "He is my uncle.",
+      "fa": "او عموی من است.",
       "who": "you"
     },
     {
-      "ro": "Eu sunt Ana. Aceasta este familia mea.",
-      "en": "I am Ana. This is my family.",
-      "fa": "من آنا هستم. این خانوادهٔ من است.",
+      "ro": "Ana este mătușa ta.",
+      "en": "Ana is your aunt.",
+      "fa": "آنا زن‌عموی توست.",
       "who": "host"
     },
     {
-      "ro": "Aveți o familie mare.",
-      "en": "You have a large family.",
-      "fa": "شما خانوادهٔ بزرگی دارید.",
+      "ro": "Ea este mătușa mea.",
+      "en": "She is my aunt.",
+      "fa": "او زن‌عموی من است.",
       "who": "you"
     },
     {
-      "ro": "Da, suntem șase. Aceasta este casa noastră.",
-      "en": "Yes, there are six of us. This is our house.",
-      "fa": "بله، ما شش نفر هستیم. این خانهٔ ماست.",
+      "ro": "Ești aici pentru vizită?",
+      "en": "Are you here for a visit?",
+      "fa": "برای دیدار اینجا هستی؟",
       "who": "host"
     },
     {
-      "ro": "Aveți o casă frumoasă.",
+      "ro": "Da, sunt aici pentru vizită.",
+      "en": "Yes, I am here for a visit.",
+      "fa": "بله، برای دیدار اینجا هستم.",
+      "who": "you"
+    }
+  ],
+  "rules": [
+    {
+      "title": {
+        "fa": "پسرعمو یا دخترعمو",
+        "en": "Male or female cousin"
+      },
+      "explanation": {
+        "fa": "اگر پسرعمو هستید vărul tău و اگر دخترعمو هستید vara ta بگویید؛ هر دو پذیرفته می‌شوند. văr و vară صورت‌های جنسیتی یک واژهٔ هدف‌اند، نه دو واژهٔ تازه. unchi و mătușă در رومانیایی سمت پدری یا مادری را مشخص نمی‌کنند.",
+        "en": "Use vărul tău for a male cousin or vara ta for a female cousin; both are accepted. They count as one vocabulary target. Unchi and mătușă do not distinguish the paternal or maternal side."
+      },
+      "examples": [
+        {
+          "ro": "Bună ziua! Sunt vărul tău.",
+          "en": "Hello! I am your male cousin.",
+          "fa": "سلام! من پسرعموی تو هستم."
+        },
+        {
+          "ro": "Bună ziua! Sunt vara ta.",
+          "en": "Hello! I am your female cousin.",
+          "fa": "سلام! من دخترعموی تو هستم."
+        }
+      ]
+    },
+    {
+      "title": {
+        "fa": "مرور «بودن»؛ خطاب صمیمی",
+        "en": "Review “to be”; familiar address"
+      },
+      "explanation": {
+        "fa": "sunt، ești و este شکل‌های فعل a fi از درس‌های پایه‌اند؛ واژهٔ تازه حساب نمی‌شوند. النا دخترعموی شماست، پس خطاب صمیمیِ tu طبیعی است.",
+        "en": "Sunt, ești and este are forms of a fi from the foundations; they do not count as new vocabulary. Elena is your cousin, so familiar tu is natural."
+      },
+      "examples": [
+        {
+          "ro": "Ești aici pentru vizită?",
+          "en": "Are you here for a visit?",
+          "fa": "برای دیدار اینجا هستی؟"
+        },
+        {
+          "ro": "Da, sunt aici pentru vizită.",
+          "en": "Yes, I am here for a visit.",
+          "fa": "بله، برای دیدار اینجا هستم."
+        }
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "ro": "Bună ziua! Sunt vărul tău.",
+      "en": "Hello! I am your male cousin.",
+      "fa": "سلام! من پسرعموی تو هستم.",
+      "hint": "Bună …",
+      "cue": {
+        "ro": "Bună ziua! Eu sunt Elena.",
+        "en": "Hello! I am Elena.",
+        "fa": "سلام! من النا هستم."
+      },
+      "alternatives": [
+        "Bună ziua! Sunt vara ta."
+      ]
+    },
+    {
+      "ro": "El este unchiul meu.",
+      "en": "He is my uncle.",
+      "fa": "او عموی من است.",
+      "hint": "El …",
+      "cue": {
+        "ro": "Mihai este unchiul tău.",
+        "en": "Mihai is your uncle.",
+        "fa": "میهای عموی توست."
+      }
+    },
+    {
+      "ro": "Ea este mătușa mea.",
+      "en": "She is my aunt.",
+      "fa": "او زن‌عموی من است.",
+      "hint": "Ea …",
+      "cue": {
+        "ro": "Ana este mătușa ta.",
+        "en": "Ana is your aunt.",
+        "fa": "آنا زن‌عموی توست."
+      }
+    },
+    {
+      "ro": "Da, sunt aici pentru vizită.",
+      "en": "Yes, I am here for a visit.",
+      "fa": "بله، برای دیدار اینجا هستم.",
+      "hint": "Da, …",
+      "cue": {
+        "ro": "Ești aici pentru vizită?",
+        "en": "Are you here for a visit?",
+        "fa": "برای دیدار اینجا هستی؟"
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "ro": "văr",
+      "en": "cousin (male; female: vară)",
+      "fa": "پسرعمو؛ صورت مؤنث: vară، دخترعمو",
+      "example": {
+        "ro": "Bună ziua! Sunt vărul tău.",
+        "en": "Hello! I am your male cousin.",
+        "fa": "سلام! من پسرعموی تو هستم."
+      },
+      "alternatives": [
+        {
+          "ro": "Bună ziua! Sunt vara ta.",
+          "en": "Hello! I am your female cousin.",
+          "fa": "سلام! من دخترعموی تو هستم."
+        }
+      ]
+    },
+    {
+      "ro": "unchi",
+      "en": "uncle",
+      "fa": "عمو / دایی؛ در این داستان: عمو",
+      "example": {
+        "ro": "El este unchiul meu.",
+        "en": "He is my uncle.",
+        "fa": "او عموی من است."
+      }
+    },
+    {
+      "ro": "mătușă",
+      "en": "aunt",
+      "fa": "عمه / خاله / همسر عمو یا دایی؛ اینجا: زن‌عمو",
+      "example": {
+        "ro": "Ea este mătușa mea.",
+        "en": "She is my aunt.",
+        "fa": "او زن‌عموی من است."
+      }
+    },
+    {
+      "ro": "aici",
+      "en": "here",
+      "fa": "اینجا",
+      "example": {
+        "ro": "Da, sunt aici pentru vizită.",
+        "en": "Yes, I am here for a visit.",
+        "fa": "بله، برای دیدار اینجا هستم."
+      }
+    },
+    {
+      "ro": "vizită",
+      "en": "visit",
+      "fa": "دیدار",
+      "example": {
+        "ro": "Da, sunt aici pentru vizită.",
+        "en": "Yes, I am here for a visit.",
+        "fa": "بله، برای دیدار اینجا هستم."
+      }
+    }
+  ]
+} satisfies EverydayScenario;
+
+export const meetFamilyLesson = {
+  "slug": "familia",
+  "title": {
+    "fa": "درس ۲: شناخت خانواده",
+    "en": "Lesson 2: Meet the family"
+  },
+  "goal": {
+    "fa": "پنج واژهٔ تازه برای نسبت‌های خانوادگی؛ با آنا صحبت کنید.",
+    "en": "Five new family words; talk with Ana."
+  },
+  "dialogue": [
+    {
+      "ro": "Aceasta este familia mea.",
+      "en": "This is my family.",
+      "fa": "این خانوادهٔ من است.",
+      "who": "host"
+    },
+    {
+      "ro": "Aceasta este familia ta?",
+      "en": "Is this your family?",
+      "fa": "این خانوادهٔ توست؟",
+      "who": "you"
+    },
+    {
+      "ro": "Da. Eu sunt mama.",
+      "en": "Yes. I am the mother.",
+      "fa": "بله. من مادر هستم.",
+      "who": "host"
+    },
+    {
+      "ro": "Tu ești mama.",
+      "en": "You are the mother.",
+      "fa": "تو مادر هستی.",
+      "who": "you"
+    },
+    {
+      "ro": "Mihai este tatăl.",
+      "en": "Mihai is the father.",
+      "fa": "میهای پدر است.",
+      "who": "host"
+    },
+    {
+      "ro": "El este tatăl.",
+      "en": "He is the father.",
+      "fa": "او پدر است.",
+      "who": "you"
+    },
+    {
+      "ro": "Elena este fiica mea. Andrei este fiul meu.",
+      "en": "Elena is my daughter. Andrei is my son.",
+      "fa": "النا دختر من است. آندری پسر من است.",
+      "who": "host"
+    },
+    {
+      "ro": "Ai o fiică și un fiu.",
+      "en": "You have a daughter and a son.",
+      "fa": "تو یک دختر و یک پسر داری.",
+      "who": "you"
+    }
+  ],
+  "rules": [
+    {
+      "title": {
+        "fa": "عضو خانواده را معرفی کنید",
+        "en": "Introduce a family member"
+      },
+      "explanation": {
+        "fa": "برای معرفی از este استفاده کنید؛ فعل تازه نداریم. mama، tatăl، fiica و fiul صورت‌های معرفهٔ همین واژه‌ها هستند.",
+        "en": "Use este to introduce someone; there is no new verb. Mama, tatăl, fiica and fiul are definite forms of these same words."
+      },
+      "examples": [
+        {
+          "ro": "Da. Eu sunt mama.",
+          "en": "Yes. I am the mother.",
+          "fa": "بله. من مادر هستم."
+        },
+        {
+          "ro": "Mihai este tatăl.",
+          "en": "Mihai is the father.",
+          "fa": "میهای پدر است."
+        }
+      ]
+    },
+    {
+      "title": {
+        "fa": "مرور «داشتن»",
+        "en": "Review “to have”"
+      },
+      "explanation": {
+        "fa": "Ai یعنی «داری»، شکل آشنای a avea. fiică مؤنث با o و fiu مذکر با un می‌آید. آنا دو دختر و دو پسر دارد؛ این گفت‌وگو فقط النا و آندری را معرفی می‌کند.",
+        "en": "Ai means “you have”, a familiar form of a avea. Use o with feminine fiică and un with masculine fiu. Ana has two daughters and two sons; this exchange introduces only Elena and Andrei."
+      },
+      "examples": [
+        {
+          "ro": "Ai o fiică și un fiu.",
+          "en": "You have a daughter and a son.",
+          "fa": "تو یک دختر و یک پسر داری."
+        }
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "ro": "Aceasta este familia ta?",
+      "en": "Is this your family?",
+      "fa": "این خانوادهٔ توست؟",
+      "hint": "Aceasta …",
+      "cue": {
+        "ro": "Aceasta este familia mea.",
+        "en": "This is my family.",
+        "fa": "این خانوادهٔ من است."
+      }
+    },
+    {
+      "ro": "Tu ești mama.",
+      "en": "You are the mother.",
+      "fa": "تو مادر هستی.",
+      "hint": "Tu …",
+      "cue": {
+        "ro": "Da. Eu sunt mama.",
+        "en": "Yes. I am the mother.",
+        "fa": "بله. من مادر هستم."
+      }
+    },
+    {
+      "ro": "El este tatăl.",
+      "en": "He is the father.",
+      "fa": "او پدر است.",
+      "hint": "El …",
+      "cue": {
+        "ro": "Mihai este tatăl.",
+        "en": "Mihai is the father.",
+        "fa": "میهای پدر است."
+      }
+    },
+    {
+      "ro": "Ai o fiică și un fiu.",
+      "en": "You have a daughter and a son.",
+      "fa": "تو یک دختر و یک پسر داری.",
+      "hint": "Ai …",
+      "cue": {
+        "ro": "Elena este fiica mea. Andrei este fiul meu.",
+        "en": "Elena is my daughter. Andrei is my son.",
+        "fa": "النا دختر من است. آندری پسر من است."
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "ro": "familie",
+      "en": "family",
+      "fa": "خانواده",
+      "example": {
+        "ro": "Aceasta este familia mea.",
+        "en": "This is my family.",
+        "fa": "این خانوادهٔ من است."
+      }
+    },
+    {
+      "ro": "mamă",
+      "en": "mother",
+      "fa": "مادر",
+      "example": {
+        "ro": "Tu ești mama.",
+        "en": "You are the mother.",
+        "fa": "تو مادر هستی."
+      }
+    },
+    {
+      "ro": "tată",
+      "en": "father",
+      "fa": "پدر",
+      "example": {
+        "ro": "El este tatăl.",
+        "en": "He is the father.",
+        "fa": "او پدر است."
+      }
+    },
+    {
+      "ro": "fiică",
+      "en": "daughter",
+      "fa": "دخترِ کسی",
+      "example": {
+        "ro": "Elena este fiica mea. Andrei este fiul meu.",
+        "en": "Elena is my daughter. Andrei is my son.",
+        "fa": "النا دختر من است. آندری پسر من است."
+      }
+    },
+    {
+      "ro": "fiu",
+      "en": "son",
+      "fa": "پسرِ کسی",
+      "example": {
+        "ro": "Ai o fiică și un fiu.",
+        "en": "You have a daughter and a son.",
+        "fa": "تو یک دختر و یک پسر داری."
+      }
+    }
+  ]
+} satisfies EverydayScenario;
+
+export const homeRoomLesson = {
+  "slug": "camera",
+  "title": {
+    "fa": "درس ۳: خانه و اتاق شما",
+    "en": "Lesson 3: Your house and room"
+  },
+  "goal": {
+    "fa": "پنج واژهٔ تازه برای خانه، اتاق و آب؛ سپس می‌توانید به فروشگاه بروید.",
+    "en": "Five new words for the house, room and water; then you can go to the shop."
+  },
+  "dialogue": [
+    {
+      "ro": "Aceasta este casa noastră.",
+      "en": "This is our house.",
+      "fa": "این خانهٔ ماست.",
+      "who": "host"
+    },
+    {
+      "ro": "Ai o casă frumoasă.",
       "en": "You have a beautiful house.",
-      "fa": "شما خانهٔ زیبایی دارید.",
+      "fa": "تو خانهٔ زیبایی داری.",
       "who": "you"
     },
     {
-      "ro": "Mulțumesc. Aceasta este camera pentru musafiri.",
-      "en": "Thank you. This is the guest room.",
-      "fa": "ممنون. این اتاق مهمان است.",
+      "ro": "Aceasta este camera ta.",
+      "en": "This is your room.",
+      "fa": "این اتاق توست.",
       "who": "host"
     },
     {
@@ -123,219 +504,131 @@ export const welcomeHomeLesson = {
       "who": "you"
     },
     {
-      "ro": "Da. Aveți apă aici.",
-      "en": "Yes. You have water here.",
-      "fa": "بله. اینجا آب دارید.",
+      "ro": "Da. Ai o cameră mare.",
+      "en": "Yes. You have a large room.",
+      "fa": "بله. تو اتاق بزرگی داری.",
       "who": "host"
     },
     {
-      "ro": "Mulțumesc. Aceasta este camera mea.",
-      "en": "Thank you. This is my room.",
-      "fa": "ممنون. این اتاق من است.",
+      "ro": "Am o cameră mare.",
+      "en": "I have a large room.",
+      "fa": "من اتاق بزرگی دارم.",
+      "who": "you"
+    },
+    {
+      "ro": "Ai apă aici.",
+      "en": "You have water here.",
+      "fa": "اینجا آب داری.",
+      "who": "host"
+    },
+    {
+      "ro": "Mulțumesc. Am apă.",
+      "en": "Thank you. I have water.",
+      "fa": "ممنون. آب دارم.",
       "who": "you"
     }
   ],
   "rules": [
     {
       "title": {
-        "fa": "خودتان را معرفی کنید: sunt",
-        "en": "Introduce yourself: sunt"
+        "fa": "خانهٔ زیبا، اتاق بزرگ",
+        "en": "A beautiful house, a large room"
       },
       "explanation": {
-        "fa": "Sunt یعنی «هستم». musafirul vostru برای مهمان مرد و musafira voastră برای مهمان زن است؛ هر دو پاسخ پذیرفته می‌شوند. در نوبت مهمان، خودتان پاسخ بدهید.",
-        "en": "Sunt means “I am”. Use musafirul vostru for a male guest or musafira voastră for a female guest; both are accepted. Answer during the guest’s turn."
+        "fa": "frumoasă صورت مؤنث frumos است؛ یک واژهٔ هدف حساب می‌شود. mare برای این اسم‌ها تغییر نمی‌کند. صفت در این مثال‌ها بعد از اسم می‌آید.",
+        "en": "Frumoasă is the feminine form of frumos; they count as one target. Mare stays the same for these nouns. In these examples the adjective follows the noun."
       },
       "examples": [
         {
-          "ro": "Da, sunt musafirul vostru.",
-          "en": "Yes, I am your guest.",
-          "fa": "بله، من مهمان شما هستم."
-        },
-        {
-          "ro": "Da, sunt musafira voastră.",
-          "en": "Yes, I am your guest.",
-          "fa": "بله، من مهمان شما هستم."
-        }
-      ]
-    },
-    {
-      "title": {
-        "fa": "داشتن: am و aveți",
-        "en": "Having: am and aveți"
-      },
-      "explanation": {
-        "fa": "Am یعنی «دارم». Aveți یعنی «دارید» و برای خطاب مؤدبانه یا چند نفر به کار می‌رود. اسم مؤنث مفرد مانند familie، casă و cameră با o می‌آید؛ prieten در این مثال با un می‌آید.",
-        "en": "Am means “I have”. Aveți means “you have”, for polite address or several people. Feminine singular nouns such as familie, casă and cameră take o; prieten takes un here."
-      },
-      "examples": [
-        {
-          "ro": "Da, am un prieten aici.",
-          "en": "Yes, I have a friend here.",
-          "fa": "بله، اینجا یک دوست دارم."
-        },
-        {
-          "ro": "Aveți o familie mare.",
-          "en": "You have a large family.",
-          "fa": "شما خانوادهٔ بزرگی دارید."
-        },
-        {
-          "ro": "Aveți o casă frumoasă.",
+          "ro": "Ai o casă frumoasă.",
           "en": "You have a beautiful house.",
-          "fa": "شما خانهٔ زیبایی دارید."
+          "fa": "تو خانهٔ زیبایی داری."
+        },
+        {
+          "ro": "Am o cameră mare.",
+          "en": "I have a large room.",
+          "fa": "من اتاق بزرگی دارم."
         }
       ]
     },
     {
       "title": {
-        "fa": "این چیست؟ aceasta este",
-        "en": "What is this? aceasta este"
+        "fa": "پرسش با همان جمله",
+        "en": "Ask using the same sentence"
       },
       "explanation": {
-        "fa": "Acesta/aceasta به جنس اسم وابسته است؛ اینجا camera مؤنث است، پس aceasta este می‌گوییم. Camera mea یعنی «اتاق من». یک پرسش و پاسخ می‌توانند همان واژه‌ها را داشته باشند، اما لحن و نشانه‌گذاری متفاوت دارند.",
-        "en": "Acesta/aceasta agrees with the noun; camera is feminine, so use aceasta este. Camera mea means “my room”. A question and a statement can use the same words with different intonation and punctuation."
+        "fa": "camera mea یعنی اتاق من. با لحن پرسشی و علامت سؤال، جمله به پرسش تبدیل می‌شود. am و ai مرور a avea هستند. واژهٔ aici را از درس اول دوباره می‌بینید.",
+        "en": "Camera mea means my room. Question intonation and a question mark turn the sentence into a question. Am and ai review a avea. Aici repeats the word from lesson one."
       },
       "examples": [
+        {
+          "ro": "Aceasta este camera ta.",
+          "en": "This is your room.",
+          "fa": "این اتاق توست."
+        },
         {
           "ro": "Aceasta este camera mea?",
           "en": "Is this my room?",
           "fa": "این اتاق من است؟"
-        },
-        {
-          "ro": "Mulțumesc. Aceasta este camera mea.",
-          "en": "Thank you. This is my room.",
-          "fa": "ممنون. این اتاق من است."
-        }
-      ]
-    },
-    {
-      "title": {
-        "fa": "رسمی و صمیمی: aveți و ai",
-        "en": "Polite and familiar: aveți and ai"
-      },
-      "explanation": {
-        "fa": "در نخستین دیدار، برای یک بزرگسال ناآشنا از aveți استفاده می‌کنیم. میان دوستان و در خانواده، پس از توافق یا آشنایی، ai رایج است. برای خطاب به چند نفر نیز aveți به کار می‌رود. مؤدبانه بودن فقط به فعل وابسته نیست؛ لحن و لطفاً هم مهم‌اند.",
-        "en": "Use aveți when politely addressing an unfamiliar adult. Among friends and family, ai is common once familiar address is welcome. Aveți also addresses several people. Politeness also depends on tone and words such as please."
-      },
-      "examples": [
-        {
-          "ro": "Aveți apă?",
-          "en": "Do you have water? (polite or plural)",
-          "fa": "آب دارید؟ (مؤدبانه یا خطاب به چند نفر)"
-        },
-        {
-          "ro": "Ai apă?",
-          "en": "Do you have water? (familiar singular)",
-          "fa": "آب داری؟ (صمیمی، خطاب به یک نفر)"
         }
       ]
     }
   ],
   "tasks": [
     {
-      "ro": "Da, sunt musafirul vostru.",
-      "en": "Yes, I am your guest.",
-      "fa": "بله، من مهمان شما هستم.",
-      "hint": "Da, …",
-      "cue": {
-        "ro": "Bună ziua! Sunteți aici pentru vizită?",
-        "en": "Hello! Are you here for a visit?",
-        "fa": "سلام! برای دیدار آمده‌اید؟"
-      },
-      "alternatives": [
-        "Da, sunt musafira voastră."
-      ]
-    },
-    {
-      "ro": "Da, am un prieten aici.",
-      "en": "Yes, I have a friend here.",
-      "fa": "بله، اینجا یک دوست دارم.",
-      "hint": "Da, …",
-      "cue": {
-        "ro": "Aveți un prieten aici?",
-        "en": "Do you have a friend here?",
-        "fa": "اینجا دوستی دارید؟"
-      }
-    },
-    {
-      "ro": "Aveți o familie mare.",
-      "en": "You have a large family.",
-      "fa": "شما خانوادهٔ بزرگی دارید.",
-      "hint": "Aveți …",
-      "cue": {
-        "ro": "Eu sunt Ana. Aceasta este familia mea.",
-        "en": "I am Ana. This is my family.",
-        "fa": "من آنا هستم. این خانوادهٔ من است."
-      }
-    },
-    {
-      "ro": "Aveți o casă frumoasă.",
+      "ro": "Ai o casă frumoasă.",
       "en": "You have a beautiful house.",
-      "fa": "شما خانهٔ زیبایی دارید.",
-      "hint": "Aveți …",
+      "fa": "تو خانهٔ زیبایی داری.",
+      "hint": "Ai …",
       "cue": {
-        "ro": "Da, suntem șase. Aceasta este casa noastră.",
-        "en": "Yes, there are six of us. This is our house.",
-        "fa": "بله، ما شش نفر هستیم. این خانهٔ ماست."
+        "ro": "Aceasta este casa noastră.",
+        "en": "This is our house.",
+        "fa": "این خانهٔ ماست."
       }
     },
     {
-      "ro": "Mulțumesc. Aceasta este camera mea.",
-      "en": "Thank you. This is my room.",
-      "fa": "ممنون. این اتاق من است.",
+      "ro": "Aceasta este camera mea?",
+      "en": "Is this my room?",
+      "fa": "این اتاق من است؟",
+      "hint": "Aceasta …",
+      "cue": {
+        "ro": "Aceasta este camera ta.",
+        "en": "This is your room.",
+        "fa": "این اتاق توست."
+      }
+    },
+    {
+      "ro": "Am o cameră mare.",
+      "en": "I have a large room.",
+      "fa": "من اتاق بزرگی دارم.",
+      "hint": "Am …",
+      "cue": {
+        "ro": "Da. Ai o cameră mare.",
+        "en": "Yes. You have a large room.",
+        "fa": "بله. تو اتاق بزرگی داری."
+      }
+    },
+    {
+      "ro": "Mulțumesc. Am apă.",
+      "en": "Thank you. I have water.",
+      "fa": "ممنون. آب دارم.",
       "hint": "Mulțumesc. …",
       "cue": {
-        "ro": "Da. Aveți apă aici.",
-        "en": "Yes. You have water here.",
-        "fa": "بله. اینجا آب دارید."
+        "ro": "Ai apă aici.",
+        "en": "You have water here.",
+        "fa": "اینجا آب داری."
       }
     }
   ],
   "vocabulary": [
     {
-      "ro": "musafir",
-      "en": "guest",
-      "fa": "مهمان",
-      "example": {
-        "ro": "Da, sunt musafirul vostru.",
-        "en": "Yes, I am your guest.",
-        "fa": "بله، من مهمان شما هستم."
-      },
-      "alternatives": [
-        {
-          "ro": "Da, sunt musafira voastră.",
-          "en": "Yes, I am your guest.",
-          "fa": "بله، من مهمان شما هستم."
-        }
-      ]
-    },
-    {
-      "ro": "prieten",
-      "en": "friend",
-      "fa": "دوست",
-      "example": {
-        "ro": "Da, am un prieten aici.",
-        "en": "Yes, I have a friend here.",
-        "fa": "بله، اینجا یک دوست دارم."
-      }
-    },
-    {
-      "ro": "familie",
-      "en": "family",
-      "fa": "خانواده",
-      "example": {
-        "ro": "Aveți o familie mare.",
-        "en": "You have a large family.",
-        "fa": "شما خانوادهٔ بزرگی دارید."
-      }
-    },
-    {
       "ro": "casă",
       "en": "house",
       "fa": "خانه",
       "example": {
-        "ro": "Aveți o casă frumoasă.",
+        "ro": "Ai o casă frumoasă.",
         "en": "You have a beautiful house.",
-        "fa": "شما خانهٔ زیبایی دارید."
+        "fa": "تو خانهٔ زیبایی داری."
       }
     },
     {
@@ -343,13 +636,45 @@ export const welcomeHomeLesson = {
       "en": "room",
       "fa": "اتاق",
       "example": {
-        "ro": "Mulțumesc. Aceasta este camera mea.",
-        "en": "Thank you. This is my room.",
-        "fa": "ممنون. این اتاق من است."
+        "ro": "Aceasta este camera mea?",
+        "en": "Is this my room?",
+        "fa": "این اتاق من است؟"
+      }
+    },
+    {
+      "ro": "mare",
+      "en": "large",
+      "fa": "بزرگ",
+      "example": {
+        "ro": "Am o cameră mare.",
+        "en": "I have a large room.",
+        "fa": "من اتاق بزرگی دارم."
+      }
+    },
+    {
+      "ro": "frumos",
+      "en": "beautiful",
+      "fa": "زیبا؛ صورت مؤنث: frumoasă",
+      "example": {
+        "ro": "Ai o casă frumoasă.",
+        "en": "You have a beautiful house.",
+        "fa": "تو خانهٔ زیبایی داری."
+      }
+    },
+    {
+      "ro": "apă",
+      "en": "water",
+      "fa": "آب",
+      "example": {
+        "ro": "Mulțumesc. Am apă.",
+        "en": "Thank you. I have water.",
+        "fa": "ممنون. آب دارم."
       }
     }
   ]
 } satisfies EverydayScenario;
+
+export const homeStoryLessons: (EverydayScenario & { vocabulary: NonNullable<EverydayScenario['vocabulary']> })[] = [welcomeHomeLesson, meetFamilyLesson, homeRoomLesson];
 
 export const homeReturnDialogue = [
   { who: 'host', ro: 'Ce ai în pungă?', en: 'What do you have in the bag?', fa: 'داخل کیسه چه داری؟' },
