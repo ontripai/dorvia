@@ -742,14 +742,14 @@ export const familyBreakfastLesson = {
   },
   "dialogue": [
     {
-      "ro": "Bună! Ai foame?",
+      "ro": "Bună! Ți-e foame?",
       "en": "Hi! Are you hungry?",
       "fa": "سلام! گرسنه‌ای؟",
       "who": "host",
       "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Da, am foame.",
+      "ro": "Da, mi-e foame.",
       "en": "Yes, I am hungry.",
       "fa": "بله، گرسنه‌ام.",
       "who": "you",
@@ -784,9 +784,9 @@ export const familyBreakfastLesson = {
       "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Mama e acasă.",
-      "en": "My mother is at home.",
-      "fa": "مادرم در خانه است.",
+      "ro": "Mama e obosită. Nu merge.",
+      "en": "My mother is tired. She is not coming.",
+      "fa": "مادرم خسته است. همراه ما نمی‌آید.",
       "who": "host",
       "audioVoice": "ro-RO-AlinaNeural"
     },
@@ -800,12 +800,13 @@ export const familyBreakfastLesson = {
   ],
   "tasks": [
     {
-      "ro": "Da, am foame.",
+      "ro": "Da, mi-e foame.",
       "en": "Yes, I am hungry.",
       "fa": "بله، گرسنه‌ام.",
-      "hint": "Da, …",
+      "hint": "Da, mi-e …",
+      "alternatives": ["Da, îmi este foame.", "Mi-e foame.", "Îmi este foame."],
       "cue": {
-        "ro": "Bună! Ai foame?",
+        "ro": "Bună! Ți-e foame?",
         "en": "Hi! Are you hungry?",
         "fa": "سلام! گرسنه‌ای؟",
         "audioVoice": "ro-RO-AlinaNeural"
@@ -841,9 +842,9 @@ export const familyBreakfastLesson = {
       "fa": "خوب، برویم!",
       "hint": "Bine, …",
       "cue": {
-        "ro": "Mama e acasă.",
-        "en": "My mother is at home.",
-        "fa": "مادرم در خانه است.",
+        "ro": "Mama e obosită. Nu merge.",
+        "en": "My mother is tired. She is not coming.",
+        "fa": "مادرم خسته است. همراه ما نمی‌آید.",
         "audioVoice": "ro-RO-AlinaNeural"
       }
     }
@@ -877,17 +878,17 @@ export const familyBreakfastLesson = {
         "en": "Hunger and a location near home"
       },
       "explanation": {
-        "fa": "Ai foame? و Am foame از فعل آشنای a avea هستند. lângă casă یعنی «کنار خانه». pentru در پیشنهاد النا یعنی «برای»؛ هدف یادگیری مستقل این جلسه نیست.",
-        "en": "Ai foame? and Am foame use the familiar a avea. Lângă casă means next to the house. Pentru means for in Elena’s invitation; it is supporting language, not a separate target."
+        "fa": "برای گفتن «گرسنه‌ام» از Mi-e foame استفاده می‌کنیم؛ صورت کامل آن Îmi este foame است. برای پرسیدن «گرسنه‌ای؟» می‌گوییم Ți-e foame?؛ صورت کامل: Îți este foame? این ساختار با a fi ساخته می‌شود، نه a avea. فعلاً سؤال و پاسخ را به‌صورت یک عبارت کاربردی تمرین کنید. lângă casă یعنی «کنار خانه».",
+        "en": "Say Mi-e foame for I am hungry; the full form is Îmi este foame. Ask Ți-e foame? for Are you hungry?; the full form is Îți este foame? This construction uses a fi, not a avea. Practise the question and answer as useful phrases for now. Lângă casă means next to the house."
       },
       "examples": [
         {
-          "ro": "Bună! Ai foame?",
+          "ro": "Bună! Ți-e foame?",
           "en": "Hi! Are you hungry?",
           "fa": "سلام! گرسنه‌ای؟"
         },
         {
-          "ro": "Da, am foame.",
+          "ro": "Da, mi-e foame.",
           "en": "Yes, I am hungry.",
           "fa": "بله، گرسنه‌ام."
         }
@@ -900,7 +901,7 @@ export const familyBreakfastLesson = {
       "en": "hunger",
       "fa": "گرسنگی",
       "example": {
-        "ro": "Bună! Ai foame?",
+        "ro": "Bună! Ți-e foame?",
         "en": "Hi! Are you hungry?",
         "fa": "سلام! گرسنه‌ای؟"
       }
@@ -910,9 +911,9 @@ export const familyBreakfastLesson = {
       "en": "breakfast",
       "fa": "صبحانه؛ یک ترکیب واژگانی",
       "example": {
-        "ro": "Da, am foame.",
-        "en": "Yes, I am hungry.",
-        "fa": "بله، گرسنه‌ام."
+        "ro": "Mergem la cafenea pentru micul dejun?",
+        "en": "Shall we go to the café for breakfast?",
+        "fa": "برای صبحانه به کافه برویم؟"
       }
     },
     {
@@ -949,8 +950,8 @@ export const familyBreakfastLesson = {
   ],
   "answerVoice": "ro-RO-EmilNeural",
   "setting": {
-    "fa": "صبح روز تعطیل است. النا شما را برای صبحانه به کافهٔ کنار خانه دعوت می‌کند. شما دعوتش را قبول می‌کنید و پیش از رفتن دربارهٔ آنا می‌پرسید؛ آنا امروز در خانه می‌ماند.",
-    "en": "It is a morning on a day off. Elena invites you to breakfast at the café next to the house. You accept and ask about Ana before leaving; Ana is staying home today."
+    "fa": "صبح روز تعطیل است. النا شما را برای صبحانه به کافهٔ کنار خانه دعوت می‌کند. شما دعوتش را قبول می‌کنید و پیش از رفتن دربارهٔ آنا می‌پرسید؛ آنا خسته است و برای استراحت در خانه می‌ماند.",
+    "en": "It is a morning on a day off. Elena invites you to breakfast at the café next to the house. You accept and ask about Ana before leaving; Ana is tired and is staying home to rest."
   }
 } satisfies EverydayScenario;
 
