@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useLessonGrammar } from './LessonGrammarGuide';
 import { MeaningLines } from './MeaningLines';
 import { LessonStageNav } from './LessonStageNav';
 import type { Language } from '@/types';
@@ -17,7 +18,8 @@ function normalize(value:string) { return value.normalize('NFC').trim().toLocale
 export function AdditionalFoundationLesson({lang,slug}:{lang:Language;slug:AdditionalFoundationSlug}) {
   const isFa=lang==='fa'; const key=isFa?'fa':'en'; const copy=additionalFoundationLessons[slug];
   const [stage,setStage]=React.useState(0); const [index,setIndex]=React.useState(0); const [answer,setAnswer]=React.useState(''); const [checked,setChecked]=React.useState(false); const [passed,setPassed]=React.useState<number[]>([]); const [spoken,setSpoken]=React.useState(false);
-  const allExamples=copy.rules.flatMap(rule=>rule.examples); const current=copy.practice[index]; const correct=normalize(answer)===normalize(current.answer);
+  const allExamples=React.useMemo(()=>copy.rules.flatMap(rule=>rule.examples),[copy]);
+  useLessonGrammar(allExamples); const current=copy.practice[index]; const correct=normalize(answer)===normalize(current.answer);
   function submit(event:React.FormEvent<HTMLFormElement>){event.preventDefault();setChecked(true);if(correct)setPassed(previous=>previous.includes(index)?previous:[...previous,index]);}
   function nextPrompt(){if(index<copy.practice.length-1){setIndex(index+1);setAnswer('');setChecked(false);}else setStage(4);}
   return <div dir={isFa?'rtl':'ltr'} className="space-y-6">
