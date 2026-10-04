@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { romanianSpeechSsml } from './romanianSpeechSsml.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const catalog = JSON.parse(await fs.readFile(path.join(root, 'scripts/romanian-audio-catalog.json'), 'utf8'));
@@ -17,7 +18,6 @@ if (!key || !region) throw new Error('Set AZURE_SPEECH_KEY and AZURE_SPEECH_REGI
 if (!/^[a-z0-9-]+$/i.test(region)) throw new Error('Invalid Azure region.');
 if (!/^ro-RO-[\w:-]+$/.test(voice)) throw new Error('Select a Romanian voice.');
 
-const escapeXml = text => text.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[c]);
 const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
 const seen = new Set();
 const seenSlugs = new Set();
@@ -41,7 +41,7 @@ for (const item of catalog) {
       continue;
     }
   } catch { /* generate missing clip */ }
-  const ssml = `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="ro-RO"><voice name="${itemVoice}">${escapeXml(text)}</voice></speak>`;
+  const ssml = romanianSpeechSsml(text, itemVoice, item.intonation);
   let response;
   for (let attempt = 0; attempt < 6; attempt++) {
     response = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
@@ -81,4 +81,3 @@ for (const item of catalog) {
 }
 await fs.writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(`Generated candidate clips. ${Object.keys(manifest).length} approved clips registered for playback.`);
-
