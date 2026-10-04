@@ -69,9 +69,9 @@ export function grammarWords(text:string) { return new Set(text.normalize('NFC')
 export function grammarVerbsFor(text:string,foundation:boolean) {
  if(foundation)return GRAMMAR_VERBS.slice(0,2);
  const words=grammarWords(text);
- const extra=CORE_VERBS.filter(v=>!GRAMMAR_VERBS.some(g=>g.lemma===v.infinitive)).map(v=>({
+ const extra=CORE_VERBS.filter(v=>v.status==='published'&&!GRAMMAR_VERBS.some(g=>g.lemma===v.infinitive)).map(v=>({
    lemma:v.infinitive,meaning:{fa:v.translations.fa,en:v.translations.en},
-   forms:Object.values(v.conjugation.prezent),past:v.participiu ?? '',
+   forms:['eu','tu','el','noi','voi','ei'].map(p=>v.conjugation.prezent[p as keyof typeof v.conjugation.prezent]),past:v.participiu ?? '',
    source:v.infinitive.slice(2),tokens:Object.values(v.conjugation.prezent),
  }));
  return [...GRAMMAR_VERBS,...extra].filter(v=>v.tokens.some(t=>words.has(t)));
