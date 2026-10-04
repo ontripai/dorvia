@@ -34,7 +34,7 @@ for (const [topic, scenarios] of Object.entries(groups)) {
         phrases++;
         const label = `${id}/${section}/${index + 1}`;
         if (!line.ro.trim() || !line.en.trim() || !/[\u0600-\u06ff]/.test(line.fa)) errors.push(`${label}: missing translation`);
-        const url = recordings[audioRecordingKey(line.ro, 'audioVoice' in line ? line.audioVoice : undefined)];
+        const url = recordings[audioRecordingKey(line.ro, section === 'tasks' && 'answerVoice' in lesson ? lesson.answerVoice : ('audioVoice' in line ? line.audioVoice : undefined))];
         if (!url) errors.push(`${label}: missing exact-text audio: ${line.ro}`);
         else if (!url.startsWith('/audio/romanian/verified/') || !existsSync(join(process.cwd(), 'public', url))) errors.push(`${label}: missing or invalid audio file: ${url}`);
       }
