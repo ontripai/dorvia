@@ -431,7 +431,7 @@ export const CONVERSATION_GROUPS = [
 export const CONVERSATION_LESSONS = CONVERSATION_GROUPS.find(group => group.slug === 'transport')!.lessons;
 
 export const CONVERSATION_SECTIONS: Record<string, { fa: string; en: string; detailFa: string; detailEn: string; lessonIndexes: number[] }[]> = {
-  home: [{ fa: "ورود مهمان و آشنایی", en: "Arrival and introductions", detailFa: "از خانه شروع کنید؛ ادامهٔ داستان شما را به محیط‌های دیگر می‌برد.", detailEn: "Begin at home; the story continues in other places.", lessonIndexes: [0, 1, 2] }, { fa: "صبحانه و رفت‌وبرگشت به کافه", en: "Breakfast and a trip to the café", detailFa: "خانه، کافه و بازگشت برای مرور؛ هر بخش یک جلسهٔ جدا.", detailEn: "Home, café and a return review; each part is a separate session.", lessonIndexes: [3] }],
+  home: [{ fa: "ورود مهمان و آشنایی", en: "Arrival and introductions", detailFa: "از خانه شروع کنید؛ ادامهٔ داستان شما را به محیط‌های دیگر می‌برد.", detailEn: "Begin at home; the story continues in other places.", lessonIndexes: [0, 1, 2] }, { fa: "صبحانه و رفت‌وبرگشت به کافه", en: "Breakfast and a trip to the café", detailFa: "خانه، کافه و بازگشت برای مرور؛ هر بخش یک جلسهٔ جدا.", detailEn: "Home, café and a return review; each part is a separate session.", lessonIndexes: [3] }, { fa: "کمک در کارهای خانه", en: "Helping at home", detailFa: "بعد از بازگشت، مهمان در چیدن میز کمک می‌کند.", detailEn: "After the outing, the guest helps set the table.", lessonIndexes: [4] }],
   "shopping": [
     {
       "fa": "خرید ساده و مقدار",
