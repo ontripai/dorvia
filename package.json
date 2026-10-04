@@ -21,13 +21,14 @@
     "validate:exchange-queries": "npx tsx scripts/validateQueries.ts",
     "validate:schema-rebuild": "npx tsx scripts/validateSchemaRebuild.ts",
     "test:integrity": "npm run validate:first-days-negative && npm run validate:universities-negative",
-    "build": "npm run validate:translations && npm run validate:content && npm run validate:content-safety && npm run validate:universities && npm run validate:faq-parity && npm run validate:romanian && npm run test:romanian-rules && npm run validate:everyday && npm run test:listening && npm run test:supportive-answers && next build",
+    "build": "npm run validate:translations && npm run validate:content && npm run validate:content-safety && npm run validate:universities && npm run validate:faq-parity && npm run validate:romanian && npm run test:romanian-rules && npm run validate:everyday && npm run test:listening && npm run test:supportive-answers && npm run test:lesson-grammar && next build",
     "sweep": "npx tsx scripts/comprehensive-page-sweep.ts",
     "start": "next start",
     "lint": "next lint",
     "validate:everyday": "node --import tsx scripts/validateEverydayScenarios.ts",
     "test:listening": "node --import tsx scripts/test-listening-playback.ts",
-    "test:supportive-answers": "node --import tsx scripts/test-supportive-answers.ts"
+    "test:supportive-answers": "node --import tsx scripts/test-supportive-answers.ts",
+    "test:lesson-grammar": "node --import tsx scripts/test-lesson-grammar.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.6",
