@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { Breadcrumb } from '@/components/Breadcrumb';
-import { EverydayScenarioLesson } from '@/components/romanian/EverydayScenarioLesson';
+import { EverydayScenarioLesson, type EverydayScenario } from '@/components/romanian/EverydayScenarioLesson';
 import { meetFamilyLesson, homeRoomLesson, familyBreakfastLesson, familyTableLesson, familyBreadLesson, bakeryReturnLesson } from '@/content/romanian/family-story';
 import { FamilyHomeReturn } from '@/components/romanian/FamilyHomeReturn';
 import { LOCALES } from '@/lib/locale-router';
-const lessons = { familia: meetFamilyLesson, camera: homeRoomLesson, 'mic-dejun': familyBreakfastLesson, 'la-masa': familyTableLesson, familyBreadLesson, bakeryReturnLesson };
+const lessons: Record<string, EverydayScenario> = Object.fromEntries([meetFamilyLesson, homeRoomLesson, familyBreakfastLesson, familyTableLesson, familyBreadLesson].map(lesson => [lesson.slug, lesson]));
 function getLesson(scene: string) { return lessons[scene as keyof typeof lessons]; }
 export function generateStaticParams() { return LOCALES.flatMap(lang => Object.keys(lessons).map(scene => ({lang, scene}))); }
 export function generateMetadata({params, searchParams}: {params: {lang: string; scene: string}; searchParams: {return?: string}}): Metadata {
