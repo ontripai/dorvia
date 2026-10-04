@@ -13,7 +13,7 @@ type Recognition = {
 };
 type SpeechWindow = Window & { SpeechRecognition?: new () => Recognition; webkitSpeechRecognition?: new () => Recognition };
 
-export function VoiceAnswer({ lang, target, onAnswer }: { lang: 'fa' | 'en'; target: string; onAnswer: (text: string) => void }) {
+export function VoiceAnswer({ lang, target, onAnswer, audioVoice }: { lang: 'fa' | 'en'; target: string; audioVoice?: string; onAnswer: (text: string) => void }) {
   const fa = lang === 'fa';
   const t = (persian: string, english: string) => fa ? persian : english;
   const [supported, setSupported] = React.useState(false);
@@ -120,7 +120,7 @@ export function VoiceAnswer({ lang, target, onAnswer }: { lang: 'fa' | 'en'; tar
     <div className="flex flex-wrap gap-3">
       {supported && <button type="button" disabled={recording || requesting} aria-pressed={listening} onClick={speak} className={`${button.replace("bg-white", "bg-[#1554bd]").replace("text-[#1554bd]", "text-white")}`}><AudioControlIcon name="mic"/>{listening ? t('پایان گفتن پاسخ', 'Finish speaking') : t('پاسخ صوتی', 'Speak answer')}</button>}
       {recordable && <button type="button" disabled={listening || requesting} aria-pressed={recording} onClick={() => void record()} className={button}><AudioControlIcon name={recording ? "stop" : "mic"}/>{requesting ? t('در انتظار اجازهٔ میکروفون…', 'Waiting for microphone permission…') : recording ? t('پایان ضبط', 'Finish recording') : t('ضبط صدای خود', 'Record yourself')}</button>}
-      <button type="button" className={button} disabled={listening || recording || requesting} onClick={() => { audio.current?.pause(); playVerifiedAudio(target, () => setMessage(t('صدای نمونه در دسترس نیست.', 'Model audio is unavailable.'))); }}><AudioControlIcon name="volume"/>{t('صدای نمونه', 'Model audio')}</button>
+      <button type="button" className={button} disabled={listening || recording || requesting} onClick={() => { audio.current?.pause(); playVerifiedAudio(target, () => setMessage(t('صدای نمونه در دسترس نیست.', 'Model audio is unavailable.')), undefined, audioVoice); }}><AudioControlIcon name="volume"/>{t('صدای نمونه', 'Model audio')}</button>
     </div>
     {(listening || recording) && <p role="status" className="font-semibold text-[#1554bd]">{listening ? t('اکنون جمله را به رومانیایی بگویید…', 'Say the sentence in Romanian now…') : t('در حال ضبط؛ حداکثر ۳۰ ثانیه.', 'Recording, up to 30 seconds.')}</p>}
     {message && <p role="status" className="text-sm">{message}</p>}

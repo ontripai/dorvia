@@ -25,20 +25,23 @@ await fs.mkdir(output, { recursive: true });
 
 for (const item of catalog) {
   const text = item.text?.normalize('NFC').trim();
-  if (!text || !/^[a-z0-9-]+$/.test(item.slug) || seen.has(text) || seenSlugs.has(item.slug)) throw new Error(`Invalid or repeated catalog item: ${JSON.stringify(item)}`);
-  seen.add(text);
+  const itemVoice = item.voice || voice;
+  if (!['ro-RO-AlinaNeural', 'ro-RO-EmilNeural'].includes(itemVoice)) throw new Error('Unknown catalog voice');
+  const recordingKey = item.voice && item.voice !== 'ro-RO-AlinaNeural' ? `${item.voice}:${text}` : text;
+  if (!text || !/^[a-z0-9-]+$/.test(item.slug) || seen.has(recordingKey) || seenSlugs.has(item.slug)) throw new Error(`Invalid or repeated catalog item: ${JSON.stringify(item)}`);
+  seen.add(recordingKey);
   seenSlugs.add(item.slug);
   const filename = `${item.slug}.mp3`;
   const target = path.join(output, filename);
   const url = `/audio/romanian/verified/${filename}`;
   try {
     if (!rebuild && (await fs.stat(target)).size > 100) {
-      if (item.approved === true) manifest[text] = url;
-      else delete manifest[text];
+      if (item.approved === true) manifest[recordingKey] = url;
+      else delete manifest[recordingKey];
       continue;
     }
   } catch { /* generate missing clip */ }
-  const ssml = `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="ro-RO"><voice name="${voice}">${escapeXml(text)}</voice></speak>`;
+  const ssml = `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="ro-RO"><voice name="${itemVoice}">${escapeXml(text)}</voice></speak>`;
   let response;
   for (let attempt = 0; attempt < 6; attempt++) {
     response = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
@@ -69,8 +72,8 @@ for (const item of catalog) {
       '-codec:a', 'libmp3lame', '-b:a', '48k', candidate]);
     if ((await fs.stat(candidate)).size < 100) throw new Error(`Silent audio for ${item.slug}`);
     await fs.rename(candidate, target);
-    if (item.approved === true) manifest[text] = url;
-    else delete manifest[text];
+    if (item.approved === true) manifest[recordingKey] = url;
+    else delete manifest[recordingKey];
     // Save after every successful item so an interrupted batch can resume.
     await fs.writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
   } finally { await fs.rm(temporary, { force: true }); await fs.rm(candidate, { force: true }); }

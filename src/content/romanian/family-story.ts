@@ -58,213 +58,230 @@ export const welcomeHomeLesson = {
     "en": "Lesson 1: A cousin comes to visit"
   },
   "goal": {
-    "fa": "با النا سلام و آشنایی کنید. فقط پنج واژهٔ تازه؛ خانواده و اتاق در درس‌های بعدی.",
-    "en": "Greet Elena and introduce yourself. Only five new words; family and rooms come in later lessons."
+    "fa": "بعد از سفر رسیده‌اید؛ وارد شوید، چمدان را بگذارید و خستگی خود را بگویید.",
+    "en": "You have arrived after travelling; enter, put your bag down and say you are tired."
   },
   "dialogue": [
     {
-      "ro": "Bună ziua! Eu sunt Elena.",
-      "en": "Hello! I am Elena.",
-      "fa": "سلام! من النا هستم.",
-      "who": "host"
+      "ro": "Bună! Intră!",
+      "en": "Hi! Come in!",
+      "fa": "سلام! بیا داخل!",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Bună ziua! Sunt vărul tău.",
-      "en": "Hello! I am your male cousin.",
-      "fa": "سلام! من پسرعموی تو هستم.",
-      "who": "you"
+      "ro": "Bună! Am un bagaj.",
+      "en": "Hi! I have a bag.",
+      "fa": "سلام! یک چمدان دارم.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Mihai este unchiul tău.",
-      "en": "Mihai is your uncle.",
-      "fa": "میهای عموی توست.",
-      "who": "host"
+      "ro": "Bagajul aici?",
+      "en": "The bag here?",
+      "fa": "چمدان را اینجا بگذاریم؟",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "El este unchiul meu.",
-      "en": "He is my uncle.",
-      "fa": "او عموی من است.",
-      "who": "you"
+      "ro": "Da, mulțumesc.",
+      "en": "Yes, thank you.",
+      "fa": "بله، ممنون.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Ana este mătușa ta.",
-      "en": "Ana is your aunt.",
-      "fa": "آنا زن‌عموی توست.",
-      "who": "host"
+      "ro": "Ești obosit?",
+      "en": "Are you tired?",
+      "fa": "خسته‌ای؟",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Ea este mătușa mea.",
-      "en": "She is my aunt.",
-      "fa": "او زن‌عموی من است.",
-      "who": "you"
+      "ro": "Da, sunt obosit.",
+      "en": "Yes, I am tired.",
+      "fa": "بله، خسته‌ام.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Ești aici pentru vizită?",
-      "en": "Are you here for a visit?",
-      "fa": "برای دیدار اینجا هستی؟",
-      "who": "host"
+      "ro": "Ai apă aici.",
+      "en": "There is water here for you.",
+      "fa": "اینجا برایت آب هست.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Da, sunt aici pentru vizită.",
-      "en": "Yes, I am here for a visit.",
-      "fa": "بله، برای دیدار اینجا هستم.",
-      "who": "you"
+      "ro": "Mulțumesc!",
+      "en": "Thank you!",
+      "fa": "ممنون!",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     }
   ],
   "rules": [
     {
       "title": {
-        "fa": "پسرعمو یا دخترعمو",
-        "en": "Male or female cousin"
+        "fa": "خوش‌آمدگویی با یک کار واقعی",
+        "en": "A welcome with a real action"
       },
       "explanation": {
-        "fa": "اگر پسرعمو هستید vărul tău و اگر دخترعمو هستید vara ta بگویید؛ هر دو پذیرفته می‌شوند. văr و vară صورت‌های جنسیتی یک واژهٔ هدف‌اند، نه دو واژهٔ تازه. unchi و mătușă در رومانیایی سمت پدری یا مادری را مشخص نمی‌کنند.",
-        "en": "Use vărul tău for a male cousin or vara ta for a female cousin; both are accepted. They count as one vocabulary target. Unchi and mătușă do not distinguish the paternal or maternal side."
+        "fa": "Intră یعنی «بیا داخل»؛ شکل دعوتیِ a intra است. النا در را باز کرده و زبان‌آموز با چمدان وارد می‌شود. bagajul صورت معرفهٔ bagaj است.",
+        "en": "Intră means come in, an invitation form of a intra. Elena has opened the door and the learner enters with luggage. Bagajul is the definite form of bagaj."
       },
       "examples": [
         {
-          "ro": "Bună ziua! Sunt vărul tău.",
-          "en": "Hello! I am your male cousin.",
-          "fa": "سلام! من پسرعموی تو هستم."
+          "ro": "Bună! Intră!",
+          "en": "Hi! Come in!",
+          "fa": "سلام! بیا داخل!"
         },
         {
-          "ro": "Bună ziua! Sunt vara ta.",
-          "en": "Hello! I am your female cousin.",
-          "fa": "سلام! من دخترعموی تو هستم."
+          "ro": "Bagajul aici?",
+          "en": "The bag here?",
+          "fa": "چمدان را اینجا بگذاریم؟"
         }
       ]
     },
     {
       "title": {
-        "fa": "مرور «بودن»؛ خطاب صمیمی",
-        "en": "Review “to be”; familiar address"
+        "fa": "خستگی را طبیعی بیان کنید",
+        "en": "Say you are tired naturally"
       },
       "explanation": {
-        "fa": "sunt، ești و este شکل‌های فعل a fi از درس‌های پایه‌اند؛ واژهٔ تازه حساب نمی‌شوند. النا دخترعموی شماست، پس خطاب صمیمیِ tu طبیعی است.",
-        "en": "Sunt, ești and este are forms of a fi from the foundations; they do not count as new vocabulary. Elena is your cousin, so familiar tu is natural."
+        "fa": "برای گویندهٔ مرد obosit و برای گویندهٔ زن obosită به کار می‌رود؛ هر دو یک واژهٔ هدف‌اند و پذیرفته می‌شوند. sunt و ești مرور «بودن» هستند. جمله‌های کوتاهِ تشکر پاسخ‌های واقعی همین موقعیت‌اند.",
+        "en": "Use obosit for a male speaker and obosită for a female speaker. They count as one target and both are accepted. Sunt and ești review to be. Short thanks are natural replies in this situation."
       },
       "examples": [
         {
-          "ro": "Ești aici pentru vizită?",
-          "en": "Are you here for a visit?",
-          "fa": "برای دیدار اینجا هستی؟"
+          "ro": "Da, sunt obosit.",
+          "en": "Yes, I am tired.",
+          "fa": "بله، خسته‌ام."
         },
         {
-          "ro": "Da, sunt aici pentru vizită.",
-          "en": "Yes, I am here for a visit.",
-          "fa": "بله، برای دیدار اینجا هستم."
+          "ro": "Da, sunt obosită.",
+          "en": "Yes, I am tired. (female speaker)",
+          "fa": "بله، خسته‌ام. (گویندهٔ زن)"
         }
       ]
     }
   ],
   "tasks": [
     {
-      "ro": "Bună ziua! Sunt vărul tău.",
-      "en": "Hello! I am your male cousin.",
-      "fa": "سلام! من پسرعموی تو هستم.",
-      "hint": "Bună …",
+      "ro": "Bună! Am un bagaj.",
+      "en": "Hi! I have a bag.",
+      "fa": "سلام! یک چمدان دارم.",
+      "hint": "Bună! …",
       "cue": {
-        "ro": "Bună ziua! Eu sunt Elena.",
-        "en": "Hello! I am Elena.",
-        "fa": "سلام! من النا هستم."
+        "ro": "Bună! Intră!",
+        "en": "Hi! Come in!",
+        "fa": "سلام! بیا داخل!",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Da, mulțumesc.",
+      "en": "Yes, thank you.",
+      "fa": "بله، ممنون.",
+      "hint": "Da, …",
+      "cue": {
+        "ro": "Bagajul aici?",
+        "en": "The bag here?",
+        "fa": "چمدان را اینجا بگذاریم؟",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Da, sunt obosit.",
+      "en": "Yes, I am tired.",
+      "fa": "بله، خسته‌ام.",
+      "hint": "Da, …",
+      "cue": {
+        "ro": "Ești obosit?",
+        "en": "Are you tired?",
+        "fa": "خسته‌ای؟",
+        "audioVoice": "ro-RO-AlinaNeural"
       },
       "alternatives": [
-        "Bună ziua! Sunt vara ta."
+        "Da, sunt obosită."
       ]
     },
     {
-      "ro": "El este unchiul meu.",
-      "en": "He is my uncle.",
-      "fa": "او عموی من است.",
-      "hint": "El …",
+      "ro": "Mulțumesc!",
+      "en": "Thank you!",
+      "fa": "ممنون!",
+      "hint": "Mulțumesc! …",
       "cue": {
-        "ro": "Mihai este unchiul tău.",
-        "en": "Mihai is your uncle.",
-        "fa": "میهای عموی توست."
-      }
-    },
-    {
-      "ro": "Ea este mătușa mea.",
-      "en": "She is my aunt.",
-      "fa": "او زن‌عموی من است.",
-      "hint": "Ea …",
-      "cue": {
-        "ro": "Ana este mătușa ta.",
-        "en": "Ana is your aunt.",
-        "fa": "آنا زن‌عموی توست."
-      }
-    },
-    {
-      "ro": "Da, sunt aici pentru vizită.",
-      "en": "Yes, I am here for a visit.",
-      "fa": "بله، برای دیدار اینجا هستم.",
-      "hint": "Da, …",
-      "cue": {
-        "ro": "Ești aici pentru vizită?",
-        "en": "Are you here for a visit?",
-        "fa": "برای دیدار اینجا هستی؟"
+        "ro": "Ai apă aici.",
+        "en": "There is water here for you.",
+        "fa": "اینجا برایت آب هست.",
+        "audioVoice": "ro-RO-AlinaNeural"
       }
     }
   ],
   "vocabulary": [
     {
-      "ro": "văr",
-      "en": "cousin (male; female: vară)",
-      "fa": "پسرعمو؛ صورت مؤنث: vară، دخترعمو",
+      "ro": "a intra",
+      "en": "to enter",
+      "fa": "وارد شدن",
       "example": {
-        "ro": "Bună ziua! Sunt vărul tău.",
-        "en": "Hello! I am your male cousin.",
-        "fa": "سلام! من پسرعموی تو هستم."
+        "ro": "Bună! Intră!",
+        "en": "Hi! Come in!",
+        "fa": "سلام! بیا داخل!"
+      }
+    },
+    {
+      "ro": "bagaj",
+      "en": "luggage / bag",
+      "fa": "چمدان / بار سفر",
+      "example": {
+        "ro": "Bună! Am un bagaj.",
+        "en": "Hi! I have a bag.",
+        "fa": "سلام! یک چمدان دارم."
+      }
+    },
+    {
+      "ro": "obosit",
+      "en": "tired",
+      "fa": "خسته",
+      "example": {
+        "ro": "Da, sunt obosit.",
+        "en": "Yes, I am tired.",
+        "fa": "بله، خسته‌ام."
       },
       "alternatives": [
         {
-          "ro": "Bună ziua! Sunt vara ta.",
-          "en": "Hello! I am your female cousin.",
-          "fa": "سلام! من دخترعموی تو هستم."
+          "ro": "Da, sunt obosită.",
+          "en": "Yes, I am tired. (female speaker)",
+          "fa": "بله، خسته‌ام. (گویندهٔ زن)"
         }
       ]
-    },
-    {
-      "ro": "unchi",
-      "en": "uncle",
-      "fa": "عمو / دایی؛ در این داستان: عمو",
-      "example": {
-        "ro": "El este unchiul meu.",
-        "en": "He is my uncle.",
-        "fa": "او عموی من است."
-      }
-    },
-    {
-      "ro": "mătușă",
-      "en": "aunt",
-      "fa": "عمه / خاله / همسر عمو یا دایی؛ اینجا: زن‌عمو",
-      "example": {
-        "ro": "Ea este mătușa mea.",
-        "en": "She is my aunt.",
-        "fa": "او زن‌عموی من است."
-      }
     },
     {
       "ro": "aici",
       "en": "here",
       "fa": "اینجا",
       "example": {
-        "ro": "Da, sunt aici pentru vizită.",
-        "en": "Yes, I am here for a visit.",
-        "fa": "بله، برای دیدار اینجا هستم."
+        "ro": "Bagajul aici?",
+        "en": "The bag here?",
+        "fa": "چمدان را اینجا بگذاریم؟"
       }
     },
     {
-      "ro": "vizită",
-      "en": "visit",
-      "fa": "دیدار",
+      "ro": "apă",
+      "en": "water",
+      "fa": "آب",
       "example": {
-        "ro": "Da, sunt aici pentru vizită.",
-        "en": "Yes, I am here for a visit.",
-        "fa": "بله، برای دیدار اینجا هستم."
+        "ro": "Ai apă aici.",
+        "en": "There is water here for you.",
+        "fa": "اینجا برایت آب هست."
       }
     }
-  ]
+  ],
+  "answerVoice": "ro-RO-EmilNeural",
+  "setting": {
+    "fa": "النا درِ خانه را باز می‌کند. شما پسرعمو یا دخترعموی او هستید و پس از سفر با یک چمدان رسیده‌اید.",
+    "en": "Elena opens the front door. You are her cousin and have arrived after a journey with one bag."
+  }
 } satisfies EverydayScenario;
 
 export const meetFamilyLesson = {
@@ -274,143 +291,160 @@ export const meetFamilyLesson = {
     "en": "Lesson 2: Meet the family"
   },
   "goal": {
-    "fa": "پنج واژهٔ تازه برای نسبت‌های خانوادگی؛ با آنا صحبت کنید.",
-    "en": "Five new family words; talk with Ana."
+    "fa": "آنا از حال خانوادهٔ شما می‌پرسد؛ پاسخ‌های کوتاه و صمیمی بدهید.",
+    "en": "Ana asks after your family; give short, familiar answers."
   },
   "dialogue": [
     {
-      "ro": "Aceasta este familia mea.",
-      "en": "This is my family.",
-      "fa": "این خانوادهٔ من است.",
-      "who": "host"
+      "ro": "Cum e familia ta?",
+      "en": "How is your family?",
+      "fa": "خانواده‌ات چطورند؟",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Aceasta este familia ta?",
-      "en": "Is this your family?",
-      "fa": "این خانوادهٔ توست؟",
-      "who": "you"
+      "ro": "Familia mea e bine.",
+      "en": "My family is well.",
+      "fa": "خانواده‌ام خوب‌اند.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Da. Eu sunt mama.",
-      "en": "Yes. I am the mother.",
-      "fa": "بله. من مادر هستم.",
-      "who": "host"
+      "ro": "Mama ta e bine?",
+      "en": "Is your mother well?",
+      "fa": "مادرت خوب است؟",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Tu ești mama.",
-      "en": "You are the mother.",
-      "fa": "تو مادر هستی.",
-      "who": "you"
+      "ro": "Mama e obosită.",
+      "en": "My mother is tired.",
+      "fa": "مادرم خسته است.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Mihai este tatăl.",
-      "en": "Mihai is the father.",
-      "fa": "میهای پدر است.",
-      "who": "host"
+      "ro": "Și tata?",
+      "en": "And your father?",
+      "fa": "و پدرت؟",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "El este tatăl.",
-      "en": "He is the father.",
-      "fa": "او پدر است.",
-      "who": "you"
+      "ro": "Și tata e bine.",
+      "en": "My father is well too.",
+      "fa": "پدرم هم خوب است.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Elena este fiica mea. Andrei este fiul meu.",
-      "en": "Elena is my daughter. Andrei is my son.",
-      "fa": "النا دختر من است. آندری پسر من است.",
-      "who": "host"
+      "ro": "Și fratele și sora ta?",
+      "en": "And your brother and sister?",
+      "fa": "و برادر و خواهرت؟",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Ai o fiică și un fiu.",
-      "en": "You have a daughter and a son.",
-      "fa": "تو یک دختر و یک پسر داری.",
-      "who": "you"
+      "ro": "Și ei sunt bine.",
+      "en": "They are well too.",
+      "fa": "آن‌ها هم خوب‌اند.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     }
   ],
   "rules": [
     {
       "title": {
-        "fa": "عضو خانواده را معرفی کنید",
-        "en": "Introduce a family member"
+        "fa": "احوال‌پرسی، نه معرفیِ بدیهیات",
+        "en": "Ask after relatives, rather than state the obvious"
       },
       "explanation": {
-        "fa": "برای معرفی از este استفاده کنید؛ فعل تازه نداریم. mama، tatăl، fiica و fiul صورت‌های معرفهٔ همین واژه‌ها هستند.",
-        "en": "Use este to introduce someone; there is no new verb. Mama, tatăl, fiica and fiul are definite forms of these same words."
+        "fa": "آنا خانوادهٔ شما را می‌شناسد و پس از دیدار دربارهٔ حالشان می‌پرسد. bine یعنی «خوب» و از پایه‌ها مرور می‌شود؛ e شکل کوتاه و رایج este است.",
+        "en": "Ana knows your family and asks how they are when you visit. Bine reviews well from foundations; e is a common short form of este."
       },
       "examples": [
         {
-          "ro": "Da. Eu sunt mama.",
-          "en": "Yes. I am the mother.",
-          "fa": "بله. من مادر هستم."
+          "ro": "Cum e familia ta?",
+          "en": "How is your family?",
+          "fa": "خانواده‌ات چطورند؟"
         },
         {
-          "ro": "Mihai este tatăl.",
-          "en": "Mihai is the father.",
-          "fa": "میهای پدر است."
+          "ro": "Familia mea e bine.",
+          "en": "My family is well.",
+          "fa": "خانواده‌ام خوب‌اند."
         }
       ]
     },
     {
       "title": {
-        "fa": "مرور «داشتن»",
-        "en": "Review “to have”"
+        "fa": "پرسش کوتاه در گفت‌وگوی خانوادگی",
+        "en": "Short questions in family conversation"
       },
       "explanation": {
-        "fa": "Ai یعنی «داری»، شکل آشنای a avea. fiică مؤنث با o و fiu مذکر با un می‌آید. آنا دو دختر و دو پسر دارد؛ این گفت‌وگو فقط النا و آندری را معرفی می‌کند.",
-        "en": "Ai means “you have”, a familiar form of a avea. Use o with feminine fiică and un with masculine fiu. Ana has two daughters and two sons; this exchange introduces only Elena and Andrei."
+        "fa": "پس از پرسش دربارهٔ مادر، «و پدرت؟» طبیعی است؛ لازم نیست ساختار کامل هر بار تکرار شود. fratele و sora صورت‌های معرفهٔ frate و soră هستند. در این داستانِ نمونه، مهمان یک برادر و یک خواهر دارد.",
+        "en": "After asking about the mother, and your father is natural; the full question need not be repeated. Fratele and sora are definite forms of frate and soră. In this model story the guest has a brother and a sister."
       },
       "examples": [
         {
-          "ro": "Ai o fiică și un fiu.",
-          "en": "You have a daughter and a son.",
-          "fa": "تو یک دختر و یک پسر داری."
+          "ro": "Și tata?",
+          "en": "And your father?",
+          "fa": "و پدرت؟"
+        },
+        {
+          "ro": "Și ei sunt bine.",
+          "en": "They are well too.",
+          "fa": "آن‌ها هم خوب‌اند."
         }
       ]
     }
   ],
   "tasks": [
     {
-      "ro": "Aceasta este familia ta?",
-      "en": "Is this your family?",
-      "fa": "این خانوادهٔ توست؟",
-      "hint": "Aceasta …",
+      "ro": "Familia mea e bine.",
+      "en": "My family is well.",
+      "fa": "خانواده‌ام خوب‌اند.",
+      "hint": "Familia …",
       "cue": {
-        "ro": "Aceasta este familia mea.",
-        "en": "This is my family.",
-        "fa": "این خانوادهٔ من است."
+        "ro": "Cum e familia ta?",
+        "en": "How is your family?",
+        "fa": "خانواده‌ات چطورند؟",
+        "audioVoice": "ro-RO-AlinaNeural"
       }
     },
     {
-      "ro": "Tu ești mama.",
-      "en": "You are the mother.",
-      "fa": "تو مادر هستی.",
-      "hint": "Tu …",
+      "ro": "Mama e obosită.",
+      "en": "My mother is tired.",
+      "fa": "مادرم خسته است.",
+      "hint": "Da, …",
       "cue": {
-        "ro": "Da. Eu sunt mama.",
-        "en": "Yes. I am the mother.",
-        "fa": "بله. من مادر هستم."
+        "ro": "Mama ta e bine?",
+        "en": "Is your mother well?",
+        "fa": "مادرت خوب است؟",
+        "audioVoice": "ro-RO-AlinaNeural"
       }
     },
     {
-      "ro": "El este tatăl.",
-      "en": "He is the father.",
-      "fa": "او پدر است.",
-      "hint": "El …",
+      "ro": "Și tata e bine.",
+      "en": "My father is well too.",
+      "fa": "پدرم هم خوب است.",
+      "hint": "Și …",
       "cue": {
-        "ro": "Mihai este tatăl.",
-        "en": "Mihai is the father.",
-        "fa": "میهای پدر است."
+        "ro": "Și tata?",
+        "en": "And your father?",
+        "fa": "و پدرت؟",
+        "audioVoice": "ro-RO-AlinaNeural"
       }
     },
     {
-      "ro": "Ai o fiică și un fiu.",
-      "en": "You have a daughter and a son.",
-      "fa": "تو یک دختر و یک پسر داری.",
-      "hint": "Ai …",
+      "ro": "Și ei sunt bine.",
+      "en": "They are well too.",
+      "fa": "آن‌ها هم خوب‌اند.",
+      "hint": "Și …",
       "cue": {
-        "ro": "Elena este fiica mea. Andrei este fiul meu.",
-        "en": "Elena is my daughter. Andrei is my son.",
-        "fa": "النا دختر من است. آندری پسر من است."
+        "ro": "Și fratele și sora ta?",
+        "en": "And your brother and sister?",
+        "fa": "و برادر و خواهرت؟",
+        "audioVoice": "ro-RO-AlinaNeural"
       }
     }
   ],
@@ -420,9 +454,9 @@ export const meetFamilyLesson = {
       "en": "family",
       "fa": "خانواده",
       "example": {
-        "ro": "Aceasta este familia mea.",
-        "en": "This is my family.",
-        "fa": "این خانوادهٔ من است."
+        "ro": "Familia mea e bine.",
+        "en": "My family is well.",
+        "fa": "خانواده‌ام خوب‌اند."
       }
     },
     {
@@ -430,9 +464,9 @@ export const meetFamilyLesson = {
       "en": "mother",
       "fa": "مادر",
       "example": {
-        "ro": "Tu ești mama.",
-        "en": "You are the mother.",
-        "fa": "تو مادر هستی."
+        "ro": "Mama e obosită.",
+        "en": "My mother is tired.",
+        "fa": "مادرم خسته است."
       }
     },
     {
@@ -440,32 +474,37 @@ export const meetFamilyLesson = {
       "en": "father",
       "fa": "پدر",
       "example": {
-        "ro": "El este tatăl.",
-        "en": "He is the father.",
-        "fa": "او پدر است."
+        "ro": "Și tata e bine.",
+        "en": "My father is well too.",
+        "fa": "پدرم هم خوب است."
       }
     },
     {
-      "ro": "fiică",
-      "en": "daughter",
-      "fa": "دخترِ کسی",
+      "ro": "frate",
+      "en": "brother",
+      "fa": "برادر",
       "example": {
-        "ro": "Elena este fiica mea. Andrei este fiul meu.",
-        "en": "Elena is my daughter. Andrei is my son.",
-        "fa": "النا دختر من است. آندری پسر من است."
+        "ro": "Și fratele și sora ta?",
+        "en": "And your brother and sister?",
+        "fa": "و برادر و خواهرت؟"
       }
     },
     {
-      "ro": "fiu",
-      "en": "son",
-      "fa": "پسرِ کسی",
+      "ro": "soră",
+      "en": "sister",
+      "fa": "خواهر",
       "example": {
-        "ro": "Ai o fiică și un fiu.",
-        "en": "You have a daughter and a son.",
-        "fa": "تو یک دختر و یک پسر داری."
+        "ro": "Și fratele și sora ta?",
+        "en": "And your brother and sister?",
+        "fa": "و برادر و خواهرت؟"
       }
     }
-  ]
+  ],
+  "answerVoice": "ro-RO-EmilNeural",
+  "setting": {
+    "fa": "چمدان را کنار گذاشته‌اید. آنا، زن‌عموی شما، خوش‌آمد می‌گوید و از حال خانواده‌تان خبر می‌گیرد. در این خبرگیری، می‌گویید مادرتان خسته است؛ واژهٔ خستگی از درس ورود دوباره به کار می‌رود.",
+    "en": "You have put your bag down. Ana, your aunt by marriage, welcomes you and asks after your family. You mention that your mother is tired, reusing tiredness from the arrival lesson."
+  }
 } satisfies EverydayScenario;
 
 export const homeRoomLesson = {
@@ -475,90 +514,76 @@ export const homeRoomLesson = {
     "en": "Lesson 3: Your house and room"
   },
   "goal": {
-    "fa": "پنج واژهٔ تازه برای خانه، اتاق و آب؛ سپس می‌توانید به فروشگاه بروید.",
-    "en": "Five new words for the house, room and water; then you can go to the shop."
+    "fa": "آنا اتاق را نشان می‌دهد؛ دربارهٔ تخت و اتاق واکنش نشان دهید و تشکر کنید.",
+    "en": "Ana shows you the room; react to the room and bed, then thank her."
   },
   "dialogue": [
-    {
-      "ro": "Aceasta este casa noastră.",
-      "en": "This is our house.",
-      "fa": "این خانهٔ ماست.",
-      "who": "host"
-    },
-    {
-      "ro": "Ai o casă frumoasă.",
-      "en": "You have a beautiful house.",
-      "fa": "تو خانهٔ زیبایی داری.",
-      "who": "you"
-    },
     {
       "ro": "Aceasta este camera ta.",
       "en": "This is your room.",
       "fa": "این اتاق توست.",
-      "who": "host"
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Aceasta este camera mea?",
-      "en": "Is this my room?",
-      "fa": "این اتاق من است؟",
-      "who": "you"
+      "ro": "Ce cameră frumoasă!",
+      "en": "What a beautiful room!",
+      "fa": "چه اتاق زیبایی!",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Da. Ai o cameră mare.",
-      "en": "Yes. You have a large room.",
-      "fa": "بله. تو اتاق بزرگی داری.",
-      "who": "host"
+      "ro": "Patul e aici.",
+      "en": "The bed is here.",
+      "fa": "تخت اینجاست.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Am o cameră mare.",
-      "en": "I have a large room.",
-      "fa": "من اتاق بزرگی دارم.",
-      "who": "you"
+      "ro": "Patul e mare!",
+      "en": "The bed is big!",
+      "fa": "تخت بزرگ است!",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Ai apă aici.",
-      "en": "You have water here.",
-      "fa": "اینجا آب داری.",
-      "who": "host"
+      "ro": "Da. Ai apă aici.",
+      "en": "Yes. There is water here for you.",
+      "fa": "بله. اینجا برایت آب هست.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Mulțumesc. Am apă.",
-      "en": "Thank you. I have water.",
-      "fa": "ممنون. آب دارم.",
-      "who": "you"
+      "ro": "Mulțumesc. Casa e frumoasă.",
+      "en": "Thank you. The house is beautiful.",
+      "fa": "ممنون. خانه زیباست.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
+    },
+    {
+      "ro": "Ești bine?",
+      "en": "Are you okay?",
+      "fa": "حالت خوب است؟",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
+    },
+    {
+      "ro": "Da, sunt bine.",
+      "en": "Yes, I am okay.",
+      "fa": "بله، خوبم.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     }
   ],
   "rules": [
     {
       "title": {
-        "fa": "خانهٔ زیبا، اتاق بزرگ",
-        "en": "A beautiful house, a large room"
+        "fa": "واکنش به اتاق",
+        "en": "React to the room"
       },
       "explanation": {
-        "fa": "frumoasă صورت مؤنث frumos است؛ یک واژهٔ هدف حساب می‌شود. mare برای این اسم‌ها تغییر نمی‌کند. صفت در این مثال‌ها بعد از اسم می‌آید.",
-        "en": "Frumoasă is the feminine form of frumos; they count as one target. Mare stays the same for these nouns. In these examples the adjective follows the noun."
-      },
-      "examples": [
-        {
-          "ro": "Ai o casă frumoasă.",
-          "en": "You have a beautiful house.",
-          "fa": "تو خانهٔ زیبایی داری."
-        },
-        {
-          "ro": "Am o cameră mare.",
-          "en": "I have a large room.",
-          "fa": "من اتاق بزرگی دارم."
-        }
-      ]
-    },
-    {
-      "title": {
-        "fa": "پرسش با همان جمله",
-        "en": "Ask using the same sentence"
-      },
-      "explanation": {
-        "fa": "camera mea یعنی اتاق من. با لحن پرسشی و علامت سؤال، جمله به پرسش تبدیل می‌شود. am و ai مرور a avea هستند. واژهٔ aici را از درس اول دوباره می‌بینید.",
-        "en": "Camera mea means my room. Question intonation and a question mark turn the sentence into a question. Am and ai review a avea. Aici repeats the word from lesson one."
+        "fa": "Ce cameră frumoasă! یک واکنش طبیعی به دیدن اتاق است. frumoasă صورت مؤنث frumos است و یک واژهٔ تازه شمرده می‌شود.",
+        "en": "Ce cameră frumoasă is a natural reaction when seeing the room. Frumoasă is the feminine form of frumos; they count as one new target."
       },
       "examples": [
         {
@@ -567,88 +592,124 @@ export const homeRoomLesson = {
           "fa": "این اتاق توست."
         },
         {
-          "ro": "Aceasta este camera mea?",
-          "en": "Is this my room?",
-          "fa": "این اتاق من است؟"
+          "ro": "Ce cameră frumoasă!",
+          "en": "What a beautiful room!",
+          "fa": "چه اتاق زیبایی!"
+        }
+      ]
+    },
+    {
+      "title": {
+        "fa": "اشاره به وسایل و پرسیدن حال مهمان",
+        "en": "Point out things and check on the guest"
+      },
+      "explanation": {
+        "fa": "Patul صورت معرفهٔ pat است. آب و خستگی به دیدار اول پیوند دارند؛ آنا آب می‌گذارد و می‌پرسد حال مهمان خوب است یا نه. sunt و e مرور «بودن» هستند.",
+        "en": "Patul is the definite form of pat. Water and tiredness connect back to the arrival; Ana provides water and checks on the guest. Sunt and e review to be."
+      },
+      "examples": [
+        {
+          "ro": "Patul e aici.",
+          "en": "The bed is here.",
+          "fa": "تخت اینجاست."
+        },
+        {
+          "ro": "Ești bine?",
+          "en": "Are you okay?",
+          "fa": "حالت خوب است؟"
         }
       ]
     }
   ],
   "tasks": [
     {
-      "ro": "Ai o casă frumoasă.",
-      "en": "You have a beautiful house.",
-      "fa": "تو خانهٔ زیبایی داری.",
-      "hint": "Ai …",
-      "cue": {
-        "ro": "Aceasta este casa noastră.",
-        "en": "This is our house.",
-        "fa": "این خانهٔ ماست."
-      }
-    },
-    {
-      "ro": "Aceasta este camera mea?",
-      "en": "Is this my room?",
-      "fa": "این اتاق من است؟",
-      "hint": "Aceasta …",
+      "ro": "Ce cameră frumoasă!",
+      "en": "What a beautiful room!",
+      "fa": "چه اتاق زیبایی!",
+      "hint": "Ce …",
       "cue": {
         "ro": "Aceasta este camera ta.",
         "en": "This is your room.",
-        "fa": "این اتاق توست."
+        "fa": "این اتاق توست.",
+        "audioVoice": "ro-RO-AlinaNeural"
       }
     },
     {
-      "ro": "Am o cameră mare.",
-      "en": "I have a large room.",
-      "fa": "من اتاق بزرگی دارم.",
-      "hint": "Am …",
+      "ro": "Patul e mare!",
+      "en": "The bed is big!",
+      "fa": "تخت بزرگ است!",
+      "hint": "Patul …",
       "cue": {
-        "ro": "Da. Ai o cameră mare.",
-        "en": "Yes. You have a large room.",
-        "fa": "بله. تو اتاق بزرگی داری."
+        "ro": "Patul e aici.",
+        "en": "The bed is here.",
+        "fa": "تخت اینجاست.",
+        "audioVoice": "ro-RO-AlinaNeural"
       }
     },
     {
-      "ro": "Mulțumesc. Am apă.",
-      "en": "Thank you. I have water.",
-      "fa": "ممنون. آب دارم.",
+      "ro": "Mulțumesc. Casa e frumoasă.",
+      "en": "Thank you. The house is beautiful.",
+      "fa": "ممنون. خانه زیباست.",
       "hint": "Mulțumesc. …",
       "cue": {
-        "ro": "Ai apă aici.",
-        "en": "You have water here.",
-        "fa": "اینجا آب داری."
+        "ro": "Da. Ai apă aici.",
+        "en": "Yes. There is water here for you.",
+        "fa": "بله. اینجا برایت آب هست.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
+    },
+    {
+      "ro": "Da, sunt bine.",
+      "en": "Yes, I am okay.",
+      "fa": "بله، خوبم.",
+      "hint": "Da, …",
+      "cue": {
+        "ro": "Ești bine?",
+        "en": "Are you okay?",
+        "fa": "حالت خوب است؟",
+        "audioVoice": "ro-RO-AlinaNeural"
       }
     }
   ],
   "vocabulary": [
     {
-      "ro": "casă",
-      "en": "house",
-      "fa": "خانه",
-      "example": {
-        "ro": "Ai o casă frumoasă.",
-        "en": "You have a beautiful house.",
-        "fa": "تو خانهٔ زیبایی داری."
-      }
-    },
-    {
       "ro": "cameră",
       "en": "room",
       "fa": "اتاق",
       "example": {
-        "ro": "Aceasta este camera mea?",
-        "en": "Is this my room?",
-        "fa": "این اتاق من است؟"
+        "ro": "Ce cameră frumoasă!",
+        "en": "What a beautiful room!",
+        "fa": "چه اتاق زیبایی!"
+      }
+    },
+    {
+      "ro": "casă",
+      "en": "house",
+      "fa": "خانه",
+      "example": {
+        "ro": "Mulțumesc. Casa e frumoasă.",
+        "en": "Thank you. The house is beautiful.",
+        "fa": "ممنون. خانه زیباست."
+      }
+    },
+    {
+      "ro": "pat",
+      "en": "bed",
+      "fa": "تخت",
+      "example": {
+        "ro": "Patul e mare!",
+        "en": "The bed is big!",
+        "fa": "تخت بزرگ است!"
       }
     },
     {
       "ro": "mare",
-      "en": "large",
+      "en": "big",
       "fa": "بزرگ",
       "example": {
-        "ro": "Am o cameră mare.",
-        "en": "I have a large room.",
-        "fa": "من اتاق بزرگی دارم."
+        "ro": "Patul e mare!",
+        "en": "The bed is big!",
+        "fa": "تخت بزرگ است!"
       }
     },
     {
@@ -656,22 +717,17 @@ export const homeRoomLesson = {
       "en": "beautiful",
       "fa": "زیبا؛ صورت مؤنث: frumoasă",
       "example": {
-        "ro": "Ai o casă frumoasă.",
-        "en": "You have a beautiful house.",
-        "fa": "تو خانهٔ زیبایی داری."
-      }
-    },
-    {
-      "ro": "apă",
-      "en": "water",
-      "fa": "آب",
-      "example": {
-        "ro": "Mulțumesc. Am apă.",
-        "en": "Thank you. I have water.",
-        "fa": "ممنون. آب دارم."
+        "ro": "Ce cameră frumoasă!",
+        "en": "What a beautiful room!",
+        "fa": "چه اتاق زیبایی!"
       }
     }
-  ]
+  ],
+  "answerVoice": "ro-RO-EmilNeural",
+  "setting": {
+    "fa": "بعد از احوال‌پرسی، آنا اتاق مهمان را نشان می‌دهد تا چمدان را بگذارید و استراحت کنید.",
+    "en": "After catching up, Ana shows you the guest room so you can put your bag down and rest."
+  }
 } satisfies EverydayScenario;
 
 export const familyBreakfastLesson = {
@@ -681,170 +737,172 @@ export const familyBreakfastLesson = {
     "en": "Lesson 4: Breakfast with the family"
   },
   "goal": {
-    "fa": "صبح بعد با آنا برای صبحانه برنامه می‌گذارید؛ پنج واژهٔ تازه و مرور «بودن» و «داشتن».",
-    "en": "The next morning, plan breakfast with Ana; five new targets and a review of “to be” and “to have”."
+    "fa": "صبح روز تعطیل، با النا برای صبحانه در کافه قرار می‌گذارید.",
+    "en": "On a day off, make a plan with Elena to have breakfast at the café."
   },
   "dialogue": [
     {
-      "ro": "Bună dimineața!",
-      "en": "Good morning!",
-      "fa": "صبح بخیر!",
-      "who": "host"
+      "ro": "Bună! Ai foame?",
+      "en": "Hi! Are you hungry?",
+      "fa": "سلام! گرسنه‌ای؟",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Bună dimineața!",
-      "en": "Good morning!",
-      "fa": "صبح بخیر!",
-      "who": "you"
+      "ro": "Da. Avem mic dejun?",
+      "en": "Yes. Are we having breakfast?",
+      "fa": "بله. صبحانه داریم؟",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Ai foame?",
-      "en": "Are you hungry?",
-      "fa": "گرسنه‌ای؟",
-      "who": "host"
+      "ro": "Da. Mergem la cafenea.",
+      "en": "Yes. We are going to the café.",
+      "fa": "بله. به کافه می‌رویم.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Da, am foame.",
-      "en": "Yes, I am hungry.",
-      "fa": "بله، گرسنه‌ام.",
-      "who": "you"
+      "ro": "Mergem împreună?",
+      "en": "Are we going together?",
+      "fa": "با هم می‌رویم؟",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Avem mic dejun la cafenea.",
-      "en": "We have breakfast at the café.",
-      "fa": "در کافه صبحانه داریم.",
-      "who": "host"
+      "ro": "Da, mergem împreună.",
+      "en": "Yes, we are going together.",
+      "fa": "بله، با هم می‌رویم.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Mic dejun la cafenea?",
-      "en": "Breakfast at the café?",
-      "fa": "صبحانه در کافه؟",
-      "who": "you"
+      "ro": "Cafeneaua e aici?",
+      "en": "Is the café here?",
+      "fa": "کافه همین‌جاست؟",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Da. Suntem împreună.",
-      "en": "Yes. We are together.",
-      "fa": "بله. با هم هستیم.",
-      "who": "host"
+      "ro": "Da, e aici.",
+      "en": "Yes, it is here.",
+      "fa": "بله، همین‌جاست.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Da, suntem împreună.",
-      "en": "Yes, we are together.",
-      "fa": "بله، با هم هستیم.",
-      "who": "you"
+      "ro": "Bine, mergem!",
+      "en": "Okay, let’s go!",
+      "fa": "خوب، برویم!",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     }
   ],
   "tasks": [
     {
-      "ro": "Bună dimineața!",
-      "en": "Good morning!",
-      "fa": "صبح بخیر!",
+      "ro": "Da. Avem mic dejun?",
+      "en": "Yes. Are we having breakfast?",
+      "fa": "بله. صبحانه داریم؟",
+      "hint": "Da. …",
       "cue": {
-        "ro": "Bună dimineața!",
-        "en": "Good morning!",
-        "fa": "صبح بخیر!"
-      },
-      "hint": "Bună …"
+        "ro": "Bună! Ai foame?",
+        "en": "Hi! Are you hungry?",
+        "fa": "سلام! گرسنه‌ای؟",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
     },
     {
-      "ro": "Da, am foame.",
-      "en": "Yes, I am hungry.",
-      "fa": "بله، گرسنه‌ام.",
+      "ro": "Mergem împreună?",
+      "en": "Are we going together?",
+      "fa": "با هم می‌رویم؟",
+      "hint": "Mergem …",
       "cue": {
-        "ro": "Ai foame?",
-        "en": "Are you hungry?",
-        "fa": "گرسنه‌ای؟"
-      },
-      "hint": "Da, …"
+        "ro": "Da. Mergem la cafenea.",
+        "en": "Yes. We are going to the café.",
+        "fa": "بله. به کافه می‌رویم.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
     },
     {
-      "ro": "Mic dejun la cafenea?",
-      "en": "Breakfast at the café?",
-      "fa": "صبحانه در کافه؟",
+      "ro": "Cafeneaua e aici?",
+      "en": "Is the café here?",
+      "fa": "کافه همین‌جاست؟",
+      "hint": "Cafeneaua …",
       "cue": {
-        "ro": "Avem mic dejun la cafenea.",
-        "en": "We have breakfast at the café.",
-        "fa": "در کافه صبحانه داریم."
-      },
-      "hint": "Mic …"
+        "ro": "Da, mergem împreună.",
+        "en": "Yes, we are going together.",
+        "fa": "بله، با هم می‌رویم.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
     },
     {
-      "ro": "Da, suntem împreună.",
-      "en": "Yes, we are together.",
-      "fa": "بله، با هم هستیم.",
+      "ro": "Bine, mergem!",
+      "en": "Okay, let’s go!",
+      "fa": "خوب، برویم!",
+      "hint": "Bine, …",
       "cue": {
-        "ro": "Da. Suntem împreună.",
-        "en": "Yes. We are together.",
-        "fa": "بله. با هم هستیم."
-      },
-      "hint": "Da, …"
+        "ro": "Da, e aici.",
+        "en": "Yes, it is here.",
+        "fa": "بله، همین‌جاست.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
     }
   ],
   "rules": [
     {
       "title": {
-        "fa": "گرسنه‌ام: am foame",
-        "en": "I am hungry: am foame"
+        "fa": "برنامه‌ای که به رفتن منجر می‌شود",
+        "en": "A plan that leads to going out"
       },
       "explanation": {
-        "fa": "در رومانیایی برای گرسنگی از «داشتن» استفاده می‌کنیم: am foame. am و ai مرور a avea هستند؛ فعل تازه‌ای نداریم.",
-        "en": "Romanian expresses hunger with “to have”: am foame. Am and ai review a avea; there is no new verb."
+        "fa": "Mergem یعنی «می‌رویم» و از a merge است؛ یک فعل تازه، نه دو واژهٔ جدا. در این گفت‌وگو تصمیم می‌گیرید برای صبحانه به کافه بروید.",
+        "en": "Mergem means we go, a form of a merge; it is one new verb, not two separate targets. This conversation makes the plan to go to a café for breakfast."
       },
       "examples": [
         {
-          "ro": "Ai foame?",
-          "en": "Are you hungry?",
-          "fa": "گرسنه‌ای؟"
+          "ro": "Da. Mergem la cafenea.",
+          "en": "Yes. We are going to the café.",
+          "fa": "بله. به کافه می‌رویم."
         },
         {
-          "ro": "Da, am foame.",
-          "en": "Yes, I am hungry.",
-          "fa": "بله، گرسنه‌ام."
+          "ro": "Bine, mergem!",
+          "en": "Okay, let’s go!",
+          "fa": "خوب، برویم!"
         }
       ]
     },
     {
       "title": {
-        "fa": "یک ترکیب، یک هدف واژگانی",
-        "en": "One expression, one vocabulary target"
+        "fa": "مرور خستگی و گرسنگی",
+        "en": "Review how to express hunger"
       },
       "explanation": {
-        "fa": "mic dejun یک ترکیب به معنی صبحانه است؛ آن را یک هدف واژگانی یاد می‌گیریم. dimineața صورت معرفهٔ dimineață در سلام صبحگاهی است. suntem شکل آموخته‌شدهٔ a fi است.",
-        "en": "Learn mic dejun as one expression meaning breakfast. Dimineața is the definite form used in the morning greeting. Suntem is the already learned form of a fi."
+        "fa": "Ai foame? و Avem mic dejun? از a avea استفاده می‌کنند. mic dejun را یک ترکیب به معنی صبحانه یاد می‌گیریم. e، aici و bine از درس‌های قبلی مرور می‌شوند.",
+        "en": "Ai foame and Avem mic dejun use a avea. Learn mic dejun as one expression meaning breakfast. E, aici and bine review earlier lessons."
       },
       "examples": [
         {
-          "ro": "Bună dimineața!",
-          "en": "Good morning!",
-          "fa": "صبح بخیر!"
+          "ro": "Bună! Ai foame?",
+          "en": "Hi! Are you hungry?",
+          "fa": "سلام! گرسنه‌ای؟"
         },
         {
-          "ro": "Da, suntem împreună.",
-          "en": "Yes, we are together.",
-          "fa": "بله، با هم هستیم."
+          "ro": "Da. Avem mic dejun?",
+          "en": "Yes. Are we having breakfast?",
+          "fa": "بله. صبحانه داریم؟"
         }
       ]
     }
   ],
   "vocabulary": [
     {
-      "ro": "dimineață",
-      "en": "morning",
-      "fa": "صبح",
-      "example": {
-        "ro": "Bună dimineața!",
-        "en": "Good morning!",
-        "fa": "صبح بخیر!"
-      }
-    },
-    {
       "ro": "foame",
       "en": "hunger",
       "fa": "گرسنگی",
       "example": {
-        "ro": "Da, am foame.",
-        "en": "Yes, I am hungry.",
-        "fa": "بله، گرسنه‌ام."
+        "ro": "Bună! Ai foame?",
+        "en": "Hi! Are you hungry?",
+        "fa": "سلام! گرسنه‌ای؟"
       }
     },
     {
@@ -852,9 +910,9 @@ export const familyBreakfastLesson = {
       "en": "breakfast",
       "fa": "صبحانه؛ یک ترکیب واژگانی",
       "example": {
-        "ro": "Avem mic dejun la cafenea.",
-        "en": "We have breakfast at the café.",
-        "fa": "در کافه صبحانه داریم."
+        "ro": "Da. Avem mic dejun?",
+        "en": "Yes. Are we having breakfast?",
+        "fa": "بله. صبحانه داریم؟"
       }
     },
     {
@@ -862,9 +920,9 @@ export const familyBreakfastLesson = {
       "en": "café",
       "fa": "کافه",
       "example": {
-        "ro": "Mic dejun la cafenea?",
-        "en": "Breakfast at the café?",
-        "fa": "صبحانه در کافه؟"
+        "ro": "Cafeneaua e aici?",
+        "en": "Is the café here?",
+        "fa": "کافه همین‌جاست؟"
       }
     },
     {
@@ -872,12 +930,27 @@ export const familyBreakfastLesson = {
       "en": "together",
       "fa": "با هم",
       "example": {
-        "ro": "Da, suntem împreună.",
-        "en": "Yes, we are together.",
-        "fa": "بله، با هم هستیم."
+        "ro": "Mergem împreună?",
+        "en": "Are we going together?",
+        "fa": "با هم می‌رویم؟"
+      }
+    },
+    {
+      "ro": "a merge",
+      "en": "to go",
+      "fa": "رفتن",
+      "example": {
+        "ro": "Bine, mergem!",
+        "en": "Okay, let’s go!",
+        "fa": "خوب، برویم!"
       }
     }
-  ]
+  ],
+  "answerVoice": "ro-RO-EmilNeural",
+  "setting": {
+    "fa": "صبح روز بعد، النا هم گرسنه است. کافه نزدیک خانه است و او پیشنهاد می‌کند همراهش بروید. آنا در خانه می‌ماند.",
+    "en": "The next morning, Elena is hungry too. The café is close to home and she suggests going together. Ana stays at home."
+  }
 } satisfies EverydayScenario;
 
 export const familyCafeLesson: EverydayScenario & { vocabulary: NonNullable<EverydayScenario['vocabulary']> } = {
@@ -887,152 +960,159 @@ export const familyCafeLesson: EverydayScenario & { vocabulary: NonNullable<Ever
     "en": "Tea at the café with the family"
   },
   "goal": {
-    "fa": "یک چای سفارش دهید و شیر و شکر را مشخص کنید؛ پنج واژهٔ تازه، شامل «با» و «بدون».",
-    "en": "Order a tea and specify milk and sugar; five new words, including with and without."
+    "fa": "چای با شیر و بدون شکر سفارش دهید و تأیید کنید که سفارش درست فهمیده شده است.",
+    "en": "Order tea with milk and without sugar, then confirm that the order has been understood."
   },
   "dialogue": [
     {
-      "ro": "Bună ziua! Avem ceai.",
-      "en": "Hello! We have tea.",
-      "fa": "سلام! چای داریم.",
-      "who": "host"
+      "ro": "Bună ziua!",
+      "en": "Hello!",
+      "fa": "سلام!",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Un ceai, vă rog.",
-      "en": "A tea, please.",
-      "fa": "یک چای، لطفاً.",
-      "who": "you"
+      "ro": "Bună ziua! Un ceai, vă rog.",
+      "en": "Hello! A tea, please.",
+      "fa": "سلام! یک چای، لطفاً.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     },
     {
       "ro": "Cu lapte?",
       "en": "With milk?",
       "fa": "با شیر؟",
-      "who": "host"
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Fără lapte, vă rog.",
-      "en": "Without milk, please.",
-      "fa": "بدون شیر، لطفاً.",
-      "who": "you"
+      "ro": "Da, cu lapte, vă rog.",
+      "en": "Yes, with milk, please.",
+      "fa": "بله، با شیر، لطفاً.",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Cu zahăr?",
-      "en": "With sugar?",
-      "fa": "با شکر؟",
-      "who": "host"
+      "ro": "Și cu zahăr?",
+      "en": "And with sugar?",
+      "fa": "و با شکر؟",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
       "ro": "Fără zahăr, vă rog.",
       "en": "Without sugar, please.",
       "fa": "بدون شکر، لطفاً.",
-      "who": "you"
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     },
     {
-      "ro": "Aveți ceaiul aici.",
-      "en": "Your tea is here.",
-      "fa": "چای شما اینجاست.",
-      "who": "host"
+      "ro": "Un ceai cu lapte, fără zahăr.",
+      "en": "A tea with milk, without sugar.",
+      "fa": "یک چای با شیر، بدون شکر.",
+      "who": "host",
+      "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Mulțumesc. Am un ceai.",
-      "en": "Thank you. I have a tea.",
-      "fa": "ممنون. یک چای دارم.",
-      "who": "you"
+      "ro": "Da. Mulțumesc!",
+      "en": "Yes. Thank you!",
+      "fa": "بله. ممنون!",
+      "who": "you",
+      "audioVoice": "ro-RO-EmilNeural"
     }
   ],
   "tasks": [
     {
-      "ro": "Un ceai, vă rog.",
-      "en": "A tea, please.",
-      "fa": "یک چای، لطفاً.",
+      "ro": "Bună ziua! Un ceai, vă rog.",
+      "en": "Hello! A tea, please.",
+      "fa": "سلام! یک چای، لطفاً.",
+      "hint": "Bună …",
       "cue": {
-        "ro": "Bună ziua! Avem ceai.",
-        "en": "Hello! We have tea.",
-        "fa": "سلام! چای داریم."
-      },
-      "hint": "Un …"
+        "ro": "Bună ziua!",
+        "en": "Hello!",
+        "fa": "سلام!",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
     },
     {
-      "ro": "Fără lapte, vă rog.",
-      "en": "Without milk, please.",
-      "fa": "بدون شیر، لطفاً.",
+      "ro": "Da, cu lapte, vă rog.",
+      "en": "Yes, with milk, please.",
+      "fa": "بله، با شیر، لطفاً.",
+      "hint": "Da, …",
       "cue": {
         "ro": "Cu lapte?",
         "en": "With milk?",
-        "fa": "با شیر؟"
-      },
-      "hint": "Fără …"
+        "fa": "با شیر؟",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
     },
     {
       "ro": "Fără zahăr, vă rog.",
       "en": "Without sugar, please.",
       "fa": "بدون شکر، لطفاً.",
+      "hint": "Fără …",
       "cue": {
-        "ro": "Cu zahăr?",
-        "en": "With sugar?",
-        "fa": "با شکر؟"
-      },
-      "hint": "Fără …"
+        "ro": "Și cu zahăr?",
+        "en": "And with sugar?",
+        "fa": "و با شکر؟",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
     },
     {
-      "ro": "Mulțumesc. Am un ceai.",
-      "en": "Thank you. I have a tea.",
-      "fa": "ممنون. یک چای دارم.",
+      "ro": "Da. Mulțumesc!",
+      "en": "Yes. Thank you!",
+      "fa": "بله. ممنون!",
+      "hint": "Da. …",
       "cue": {
-        "ro": "Aveți ceaiul aici.",
-        "en": "Your tea is here.",
-        "fa": "چای شما اینجاست."
-      },
-      "hint": "Mulțumesc. …"
+        "ro": "Un ceai cu lapte, fără zahăr.",
+        "en": "A tea with milk, without sugar.",
+        "fa": "یک چای با شیر، بدون شکر.",
+        "audioVoice": "ro-RO-AlinaNeural"
+      }
     }
   ],
   "rules": [
     {
       "title": {
-        "fa": "در کافه مؤدبانه صحبت کنید",
-        "en": "Use polite address at the café"
+        "fa": "سفارش، پرسش، تأیید",
+        "en": "Order, clarify, confirm"
       },
       "explanation": {
-        "fa": "در خانواده ai را شنیدید؛ کارکنان کافه aveți می‌گویند. vă rog یعنی «لطفاً» و از درخواست خرید مرور می‌شود. ceaiul صورت معرفهٔ ceai است، نه واژهٔ تازه.",
-        "en": "At home you heard familiar ai; café staff use polite aveți. Vă rog reviews please from shopping. Ceaiul is the definite form of ceai, not a new word."
+        "fa": "کارمند ابتدا سلام می‌کند، سپس دربارهٔ شیر و شکر می‌پرسد و سفارش را دوباره می‌گوید تا تأیید کنید. vă rog درخواست را مؤدبانه می‌کند و از خرید آب مرور می‌شود.",
+        "en": "The staff greet you, ask about milk and sugar, then repeat the order for confirmation. Vă rog makes the request polite and reviews the water-shopping lesson."
       },
       "examples": [
         {
-          "ro": "Un ceai, vă rog.",
-          "en": "A tea, please.",
-          "fa": "یک چای، لطفاً."
+          "ro": "Bună ziua! Un ceai, vă rog.",
+          "en": "Hello! A tea, please.",
+          "fa": "سلام! یک چای، لطفاً."
         },
         {
-          "ro": "Aveți ceaiul aici.",
-          "en": "Your tea is here.",
-          "fa": "چای شما اینجاست."
+          "ro": "Un ceai cu lapte, fără zahăr.",
+          "en": "A tea with milk, without sugar.",
+          "fa": "یک چای با شیر، بدون شکر."
+        },
+        {
+          "ro": "Da. Mulțumesc!",
+          "en": "Yes. Thank you!",
+          "fa": "بله. ممنون!"
         }
       ]
     },
     {
       "title": {
-        "fa": "با یا بدون؛ هر دو جزو پنج واژه",
-        "en": "With or without; both count among the five words"
+        "fa": "انتخاب واقعی: با شیر، بدون شکر",
+        "en": "A real choice: with milk, without sugar"
       },
       "explanation": {
-        "fa": "cu یعنی «با» و fără یعنی «بدون». هر دو در شمار پنج واژهٔ تازه هستند. فعلاً فقط سفارش چای را تمرین می‌کنید؛ قهوه و صورتحساب در درس دیگری ادامه پیدا می‌کنند.",
-        "en": "Cu means with and fără means without. Both count among the five new words. Practise only tea today; coffee and the bill belong to another lesson."
+        "fa": "در این نمونه چای را با شیر و بدون شکر می‌خواهید. cu و fără هر دو جزو پنج واژهٔ تازه‌اند. گفت‌وگوی مستقلِ سفارش‌های دیگر را می‌توانید جداگانه تمرین کنید.",
+        "en": "In this model you choose tea with milk and without sugar. Cu and fără both count among the five new words. Other orders can be studied independently."
       },
       "examples": [
         {
-          "ro": "Cu lapte?",
-          "en": "With milk?",
-          "fa": "با شیر؟"
-        },
-        {
-          "ro": "Fără lapte, vă rog.",
-          "en": "Without milk, please.",
-          "fa": "بدون شیر، لطفاً."
-        },
-        {
-          "ro": "Cu zahăr?",
-          "en": "With sugar?",
-          "fa": "با شکر؟"
+          "ro": "Da, cu lapte, vă rog.",
+          "en": "Yes, with milk, please.",
+          "fa": "بله، با شیر، لطفاً."
         },
         {
           "ro": "Fără zahăr, vă rog.",
@@ -1048,9 +1128,9 @@ export const familyCafeLesson: EverydayScenario & { vocabulary: NonNullable<Ever
       "en": "tea",
       "fa": "چای",
       "example": {
-        "ro": "Un ceai, vă rog.",
-        "en": "A tea, please.",
-        "fa": "یک چای، لطفاً."
+        "ro": "Bună ziua! Un ceai, vă rog.",
+        "en": "Hello! A tea, please.",
+        "fa": "سلام! یک چای، لطفاً."
       }
     },
     {
@@ -1058,9 +1138,9 @@ export const familyCafeLesson: EverydayScenario & { vocabulary: NonNullable<Ever
       "en": "milk",
       "fa": "شیر",
       "example": {
-        "ro": "Fără lapte, vă rog.",
-        "en": "Without milk, please.",
-        "fa": "بدون شیر، لطفاً."
+        "ro": "Da, cu lapte, vă rog.",
+        "en": "Yes, with milk, please.",
+        "fa": "بله، با شیر، لطفاً."
       }
     },
     {
@@ -1088,22 +1168,57 @@ export const familyCafeLesson: EverydayScenario & { vocabulary: NonNullable<Ever
       "en": "without",
       "fa": "بدون",
       "example": {
-        "ro": "Fără lapte, vă rog.",
-        "en": "Without milk, please.",
-        "fa": "بدون شیر، لطفاً."
+        "ro": "Fără zahăr, vă rog.",
+        "en": "Without sugar, please.",
+        "fa": "بدون شکر، لطفاً."
       }
     }
-  ]
+  ],
+  "answerVoice": "ro-RO-EmilNeural",
+  "setting": {
+    "fa": "با النا در کافه نشسته‌اید. او سفارش خودش را داده؛ حالا کارمند از شما سفارش می‌گیرد.",
+    "en": "You are at the café with Elena. She has placed her own order; now the staff take yours."
+  }
 } satisfies EverydayScenario;
 
 export const homeStoryLessons: (EverydayScenario & { vocabulary: NonNullable<EverydayScenario['vocabulary']> })[] = [welcomeHomeLesson, meetFamilyLesson, homeRoomLesson, familyBreakfastLesson];
 
 export const homeReturnDialogue = [
-  { who: 'host', ro: 'Ce ai în pungă?', en: 'What do you have in the bag?', fa: 'داخل کیسه چه داری؟' },
-  { who: 'you', ro: 'Am o sticlă de apă.', en: 'I have a bottle of water.', fa: 'یک بطری آب دارم.' },
-  { who: 'host', ro: 'Cât costă?', en: 'How much does it cost?', fa: 'قیمتش چقدر است؟' },
-  { who: 'you', ro: 'Costă cinci lei.', en: 'It costs five lei.', fa: 'قیمتش پنج لِی است.' },
-  { who: 'host', ro: 'Mulțumesc. Acum avem apă acasă.', en: 'Thank you. Now we have water at home.', fa: 'ممنون. حالا در خانه آب داریم.' },
+  {
+    "ro": "Ce ai în pungă?",
+    "en": "What do you have in the bag?",
+    "fa": "داخل کیسه چه داری؟",
+    "who": "host",
+    "audioVoice": "ro-RO-AlinaNeural"
+  },
+  {
+    "ro": "Am o sticlă de apă.",
+    "en": "I have a bottle of water.",
+    "fa": "یک بطری آب دارم.",
+    "who": "you",
+    "audioVoice": "ro-RO-EmilNeural"
+  },
+  {
+    "ro": "Cât costă?",
+    "en": "How much does it cost?",
+    "fa": "قیمتش چقدر است؟",
+    "who": "host",
+    "audioVoice": "ro-RO-AlinaNeural"
+  },
+  {
+    "ro": "Costă cinci lei.",
+    "en": "It costs five lei.",
+    "fa": "قیمتش پنج لِی است.",
+    "who": "you",
+    "audioVoice": "ro-RO-EmilNeural"
+  },
+  {
+    "ro": "Mulțumesc. Acum avem apă acasă.",
+    "en": "Thank you. Now we have water at home.",
+    "fa": "ممنون. حالا در خانه آب داریم.",
+    "who": "host",
+    "audioVoice": "ro-RO-AlinaNeural"
+  }
 ] as const;
 
 export const homeVerbTimes = [
@@ -1114,33 +1229,38 @@ export const homeVerbTimes = [
 
 export const cafeReturnDialogue = [
   {
-    "ro": "Cu lapte?",
-    "en": "With milk?",
-    "fa": "با شیر؟",
-    "who": "host"
+    "ro": "Ai avut ceai cu lapte?",
+    "en": "Did you have tea with milk?",
+    "fa": "چای با شیر داشتی؟",
+    "who": "host",
+    "audioVoice": "ro-RO-AlinaNeural"
   },
   {
-    "ro": "Fără lapte.",
-    "en": "Without milk.",
-    "fa": "بدون شیر.",
-    "who": "you"
+    "ro": "Da, am avut ceai cu lapte.",
+    "en": "Yes, I had tea with milk.",
+    "fa": "بله، چای با شیر داشتم.",
+    "who": "you",
+    "audioVoice": "ro-RO-EmilNeural"
   },
   {
-    "ro": "Cu zahăr?",
-    "en": "With sugar?",
-    "fa": "با شکر؟",
-    "who": "host"
+    "ro": "Și cu zahăr?",
+    "en": "And with sugar?",
+    "fa": "و با شکر؟",
+    "who": "host",
+    "audioVoice": "ro-RO-AlinaNeural"
   },
   {
-    "ro": "Fără zahăr.",
-    "en": "Without sugar.",
-    "fa": "بدون شکر.",
-    "who": "you"
+    "ro": "Nu, fără zahăr.",
+    "en": "No, without sugar.",
+    "fa": "نه، بدون شکر.",
+    "who": "you",
+    "audioVoice": "ro-RO-EmilNeural"
   },
   {
-    "ro": "Mulțumesc.",
-    "en": "Thank you.",
-    "fa": "ممنون.",
-    "who": "host"
+    "ro": "Bine.",
+    "en": "Okay.",
+    "fa": "خوب.",
+    "who": "host",
+    "audioVoice": "ro-RO-AlinaNeural"
   }
 ] as const;
