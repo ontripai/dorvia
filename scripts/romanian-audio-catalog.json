@@ -5297,5 +5297,11 @@
     "slug": "ro-ef3a1e22c5fcb377",
     "approved": true,
     "voice": "ro-RO-EmilNeural"
+  },
+  {
+    "text": "Cu plăcere.",
+    "voice": "ro-RO-EmilNeural",
+    "slug": "ro-7fc5d61bc872d1f5",
+    "approved": true
   }
 ]
