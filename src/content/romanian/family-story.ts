@@ -674,7 +674,429 @@ export const homeRoomLesson = {
   ]
 } satisfies EverydayScenario;
 
-export const homeStoryLessons: (EverydayScenario & { vocabulary: NonNullable<EverydayScenario['vocabulary']> })[] = [welcomeHomeLesson, meetFamilyLesson, homeRoomLesson];
+export const familyBreakfastLesson = {
+  "slug": "mic-dejun",
+  "title": {
+    "fa": "درس ۴: صبحانه با خانواده",
+    "en": "Lesson 4: Breakfast with the family"
+  },
+  "goal": {
+    "fa": "صبح بعد با آنا برای صبحانه برنامه می‌گذارید؛ پنج واژهٔ تازه و مرور «بودن» و «داشتن».",
+    "en": "The next morning, plan breakfast with Ana; five new targets and a review of “to be” and “to have”."
+  },
+  "dialogue": [
+    {
+      "ro": "Bună dimineața!",
+      "en": "Good morning!",
+      "fa": "صبح بخیر!",
+      "who": "host"
+    },
+    {
+      "ro": "Bună dimineața!",
+      "en": "Good morning!",
+      "fa": "صبح بخیر!",
+      "who": "you"
+    },
+    {
+      "ro": "Ai foame?",
+      "en": "Are you hungry?",
+      "fa": "گرسنه‌ای؟",
+      "who": "host"
+    },
+    {
+      "ro": "Da, am foame.",
+      "en": "Yes, I am hungry.",
+      "fa": "بله، گرسنه‌ام.",
+      "who": "you"
+    },
+    {
+      "ro": "Avem mic dejun la cafenea.",
+      "en": "We have breakfast at the café.",
+      "fa": "در کافه صبحانه داریم.",
+      "who": "host"
+    },
+    {
+      "ro": "Mic dejun la cafenea?",
+      "en": "Breakfast at the café?",
+      "fa": "صبحانه در کافه؟",
+      "who": "you"
+    },
+    {
+      "ro": "Da. Suntem împreună.",
+      "en": "Yes. We are together.",
+      "fa": "بله. با هم هستیم.",
+      "who": "host"
+    },
+    {
+      "ro": "Da, suntem împreună.",
+      "en": "Yes, we are together.",
+      "fa": "بله، با هم هستیم.",
+      "who": "you"
+    }
+  ],
+  "tasks": [
+    {
+      "ro": "Bună dimineața!",
+      "en": "Good morning!",
+      "fa": "صبح بخیر!",
+      "cue": {
+        "ro": "Bună dimineața!",
+        "en": "Good morning!",
+        "fa": "صبح بخیر!"
+      },
+      "hint": "Bună …"
+    },
+    {
+      "ro": "Da, am foame.",
+      "en": "Yes, I am hungry.",
+      "fa": "بله، گرسنه‌ام.",
+      "cue": {
+        "ro": "Ai foame?",
+        "en": "Are you hungry?",
+        "fa": "گرسنه‌ای؟"
+      },
+      "hint": "Da, …"
+    },
+    {
+      "ro": "Mic dejun la cafenea?",
+      "en": "Breakfast at the café?",
+      "fa": "صبحانه در کافه؟",
+      "cue": {
+        "ro": "Avem mic dejun la cafenea.",
+        "en": "We have breakfast at the café.",
+        "fa": "در کافه صبحانه داریم."
+      },
+      "hint": "Mic …"
+    },
+    {
+      "ro": "Da, suntem împreună.",
+      "en": "Yes, we are together.",
+      "fa": "بله، با هم هستیم.",
+      "cue": {
+        "ro": "Da. Suntem împreună.",
+        "en": "Yes. We are together.",
+        "fa": "بله. با هم هستیم."
+      },
+      "hint": "Da, …"
+    }
+  ],
+  "rules": [
+    {
+      "title": {
+        "fa": "گرسنه‌ام: am foame",
+        "en": "I am hungry: am foame"
+      },
+      "explanation": {
+        "fa": "در رومانیایی برای گرسنگی از «داشتن» استفاده می‌کنیم: am foame. am و ai مرور a avea هستند؛ فعل تازه‌ای نداریم.",
+        "en": "Romanian expresses hunger with “to have”: am foame. Am and ai review a avea; there is no new verb."
+      },
+      "examples": [
+        {
+          "ro": "Ai foame?",
+          "en": "Are you hungry?",
+          "fa": "گرسنه‌ای؟"
+        },
+        {
+          "ro": "Da, am foame.",
+          "en": "Yes, I am hungry.",
+          "fa": "بله، گرسنه‌ام."
+        }
+      ]
+    },
+    {
+      "title": {
+        "fa": "یک ترکیب، یک هدف واژگانی",
+        "en": "One expression, one vocabulary target"
+      },
+      "explanation": {
+        "fa": "mic dejun یک ترکیب به معنی صبحانه است؛ آن را یک هدف واژگانی یاد می‌گیریم. dimineața صورت معرفهٔ dimineață در سلام صبحگاهی است. suntem شکل آموخته‌شدهٔ a fi است.",
+        "en": "Learn mic dejun as one expression meaning breakfast. Dimineața is the definite form used in the morning greeting. Suntem is the already learned form of a fi."
+      },
+      "examples": [
+        {
+          "ro": "Bună dimineața!",
+          "en": "Good morning!",
+          "fa": "صبح بخیر!"
+        },
+        {
+          "ro": "Da, suntem împreună.",
+          "en": "Yes, we are together.",
+          "fa": "بله، با هم هستیم."
+        }
+      ]
+    }
+  ],
+  "vocabulary": [
+    {
+      "ro": "dimineață",
+      "en": "morning",
+      "fa": "صبح",
+      "example": {
+        "ro": "Bună dimineața!",
+        "en": "Good morning!",
+        "fa": "صبح بخیر!"
+      }
+    },
+    {
+      "ro": "foame",
+      "en": "hunger",
+      "fa": "گرسنگی",
+      "example": {
+        "ro": "Da, am foame.",
+        "en": "Yes, I am hungry.",
+        "fa": "بله، گرسنه‌ام."
+      }
+    },
+    {
+      "ro": "mic dejun",
+      "en": "breakfast",
+      "fa": "صبحانه؛ یک ترکیب واژگانی",
+      "example": {
+        "ro": "Avem mic dejun la cafenea.",
+        "en": "We have breakfast at the café.",
+        "fa": "در کافه صبحانه داریم."
+      }
+    },
+    {
+      "ro": "cafenea",
+      "en": "café",
+      "fa": "کافه",
+      "example": {
+        "ro": "Mic dejun la cafenea?",
+        "en": "Breakfast at the café?",
+        "fa": "صبحانه در کافه؟"
+      }
+    },
+    {
+      "ro": "împreună",
+      "en": "together",
+      "fa": "با هم",
+      "example": {
+        "ro": "Da, suntem împreună.",
+        "en": "Yes, we are together.",
+        "fa": "بله، با هم هستیم."
+      }
+    }
+  ]
+} satisfies EverydayScenario;
+
+export const familyCafeLesson: EverydayScenario & { vocabulary: NonNullable<EverydayScenario['vocabulary']> } = {
+  "slug": "cu-familia",
+  "title": {
+    "fa": "چای در کافه با خانواده",
+    "en": "Tea at the café with the family"
+  },
+  "goal": {
+    "fa": "یک چای سفارش دهید و شیر و شکر را مشخص کنید؛ پنج واژهٔ تازه، شامل «با» و «بدون».",
+    "en": "Order a tea and specify milk and sugar; five new words, including with and without."
+  },
+  "dialogue": [
+    {
+      "ro": "Bună ziua! Avem ceai.",
+      "en": "Hello! We have tea.",
+      "fa": "سلام! چای داریم.",
+      "who": "host"
+    },
+    {
+      "ro": "Un ceai, vă rog.",
+      "en": "A tea, please.",
+      "fa": "یک چای، لطفاً.",
+      "who": "you"
+    },
+    {
+      "ro": "Cu lapte?",
+      "en": "With milk?",
+      "fa": "با شیر؟",
+      "who": "host"
+    },
+    {
+      "ro": "Fără lapte, vă rog.",
+      "en": "Without milk, please.",
+      "fa": "بدون شیر، لطفاً.",
+      "who": "you"
+    },
+    {
+      "ro": "Cu zahăr?",
+      "en": "With sugar?",
+      "fa": "با شکر؟",
+      "who": "host"
+    },
+    {
+      "ro": "Fără zahăr, vă rog.",
+      "en": "Without sugar, please.",
+      "fa": "بدون شکر، لطفاً.",
+      "who": "you"
+    },
+    {
+      "ro": "Aveți ceaiul aici.",
+      "en": "Your tea is here.",
+      "fa": "چای شما اینجاست.",
+      "who": "host"
+    },
+    {
+      "ro": "Mulțumesc. Am un ceai.",
+      "en": "Thank you. I have a tea.",
+      "fa": "ممنون. یک چای دارم.",
+      "who": "you"
+    }
+  ],
+  "tasks": [
+    {
+      "ro": "Un ceai, vă rog.",
+      "en": "A tea, please.",
+      "fa": "یک چای، لطفاً.",
+      "cue": {
+        "ro": "Bună ziua! Avem ceai.",
+        "en": "Hello! We have tea.",
+        "fa": "سلام! چای داریم."
+      },
+      "hint": "Un …"
+    },
+    {
+      "ro": "Fără lapte, vă rog.",
+      "en": "Without milk, please.",
+      "fa": "بدون شیر، لطفاً.",
+      "cue": {
+        "ro": "Cu lapte?",
+        "en": "With milk?",
+        "fa": "با شیر؟"
+      },
+      "hint": "Fără …"
+    },
+    {
+      "ro": "Fără zahăr, vă rog.",
+      "en": "Without sugar, please.",
+      "fa": "بدون شکر، لطفاً.",
+      "cue": {
+        "ro": "Cu zahăr?",
+        "en": "With sugar?",
+        "fa": "با شکر؟"
+      },
+      "hint": "Fără …"
+    },
+    {
+      "ro": "Mulțumesc. Am un ceai.",
+      "en": "Thank you. I have a tea.",
+      "fa": "ممنون. یک چای دارم.",
+      "cue": {
+        "ro": "Aveți ceaiul aici.",
+        "en": "Your tea is here.",
+        "fa": "چای شما اینجاست."
+      },
+      "hint": "Mulțumesc. …"
+    }
+  ],
+  "rules": [
+    {
+      "title": {
+        "fa": "در کافه مؤدبانه صحبت کنید",
+        "en": "Use polite address at the café"
+      },
+      "explanation": {
+        "fa": "در خانواده ai را شنیدید؛ کارکنان کافه aveți می‌گویند. vă rog یعنی «لطفاً» و از درخواست خرید مرور می‌شود. ceaiul صورت معرفهٔ ceai است، نه واژهٔ تازه.",
+        "en": "At home you heard familiar ai; café staff use polite aveți. Vă rog reviews please from shopping. Ceaiul is the definite form of ceai, not a new word."
+      },
+      "examples": [
+        {
+          "ro": "Un ceai, vă rog.",
+          "en": "A tea, please.",
+          "fa": "یک چای، لطفاً."
+        },
+        {
+          "ro": "Aveți ceaiul aici.",
+          "en": "Your tea is here.",
+          "fa": "چای شما اینجاست."
+        }
+      ]
+    },
+    {
+      "title": {
+        "fa": "با یا بدون؛ هر دو جزو پنج واژه",
+        "en": "With or without; both count among the five words"
+      },
+      "explanation": {
+        "fa": "cu یعنی «با» و fără یعنی «بدون». هر دو در شمار پنج واژهٔ تازه هستند. فعلاً فقط سفارش چای را تمرین می‌کنید؛ قهوه و صورتحساب در درس دیگری ادامه پیدا می‌کنند.",
+        "en": "Cu means with and fără means without. Both count among the five new words. Practise only tea today; coffee and the bill belong to another lesson."
+      },
+      "examples": [
+        {
+          "ro": "Cu lapte?",
+          "en": "With milk?",
+          "fa": "با شیر؟"
+        },
+        {
+          "ro": "Fără lapte, vă rog.",
+          "en": "Without milk, please.",
+          "fa": "بدون شیر، لطفاً."
+        },
+        {
+          "ro": "Cu zahăr?",
+          "en": "With sugar?",
+          "fa": "با شکر؟"
+        },
+        {
+          "ro": "Fără zahăr, vă rog.",
+          "en": "Without sugar, please.",
+          "fa": "بدون شکر، لطفاً."
+        }
+      ]
+    }
+  ],
+  "vocabulary": [
+    {
+      "ro": "ceai",
+      "en": "tea",
+      "fa": "چای",
+      "example": {
+        "ro": "Un ceai, vă rog.",
+        "en": "A tea, please.",
+        "fa": "یک چای، لطفاً."
+      }
+    },
+    {
+      "ro": "lapte",
+      "en": "milk",
+      "fa": "شیر",
+      "example": {
+        "ro": "Fără lapte, vă rog.",
+        "en": "Without milk, please.",
+        "fa": "بدون شیر، لطفاً."
+      }
+    },
+    {
+      "ro": "zahăr",
+      "en": "sugar",
+      "fa": "شکر",
+      "example": {
+        "ro": "Fără zahăr, vă rog.",
+        "en": "Without sugar, please.",
+        "fa": "بدون شکر، لطفاً."
+      }
+    },
+    {
+      "ro": "cu",
+      "en": "with",
+      "fa": "با",
+      "example": {
+        "ro": "Cu lapte?",
+        "en": "With milk?",
+        "fa": "با شیر؟"
+      }
+    },
+    {
+      "ro": "fără",
+      "en": "without",
+      "fa": "بدون",
+      "example": {
+        "ro": "Fără lapte, vă rog.",
+        "en": "Without milk, please.",
+        "fa": "بدون شیر، لطفاً."
+      }
+    }
+  ]
+} satisfies EverydayScenario;
+
+export const homeStoryLessons: (EverydayScenario & { vocabulary: NonNullable<EverydayScenario['vocabulary']> })[] = [welcomeHomeLesson, meetFamilyLesson, homeRoomLesson, familyBreakfastLesson];
 
 export const homeReturnDialogue = [
   { who: 'host', ro: 'Ce ai în pungă?', en: 'What do you have in the bag?', fa: 'داخل کیسه چه داری؟' },
@@ -688,4 +1110,37 @@ export const homeVerbTimes = [
   { tense: { fa: 'گذشته · دیروز', en: 'Past · yesterday' }, ro: 'Ieri am avut o sticlă de apă.', en: 'Yesterday I had a bottle of water.', fa: 'دیروز یک بطری آب داشتم.', form: 'am avut', hint: { fa: 'am + avut؛ در این جمله، am بخش کمکیِ گذشته است.', en: 'am + avut; here am is the auxiliary for the compound past.' } },
   { tense: { fa: 'حال · اکنون', en: 'Present · now' }, ro: 'Acum am o sticlă de apă.', en: 'Now I have a bottle of water.', fa: 'اکنون یک بطری آب دارم.', form: 'am', hint: { fa: 'am؛ شکل حالِ a avea برای «من».', en: 'am; the present form of a avea for “I”.' } },
   { tense: { fa: 'آینده · فردا', en: 'Future · tomorrow' }, ro: 'Mâine voi avea o sticlă de apă.', en: 'Tomorrow I will have a bottle of water.', fa: 'فردا یک بطری آب خواهم داشت.', form: 'voi avea', hint: { fa: 'voi + avea؛ یکی از شکل‌های استاندارد آینده برای «من».', en: 'voi + avea; one standard future form for “I”.' } },
+] as const;
+
+export const cafeReturnDialogue = [
+  {
+    "ro": "Cu lapte?",
+    "en": "With milk?",
+    "fa": "با شیر؟",
+    "who": "host"
+  },
+  {
+    "ro": "Fără lapte.",
+    "en": "Without milk.",
+    "fa": "بدون شیر.",
+    "who": "you"
+  },
+  {
+    "ro": "Cu zahăr?",
+    "en": "With sugar?",
+    "fa": "با شکر؟",
+    "who": "host"
+  },
+  {
+    "ro": "Fără zahăr.",
+    "en": "Without sugar.",
+    "fa": "بدون شکر.",
+    "who": "you"
+  },
+  {
+    "ro": "Mulțumesc.",
+    "en": "Thank you.",
+    "fa": "ممنون.",
+    "who": "host"
+  }
 ] as const;
