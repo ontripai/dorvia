@@ -16,6 +16,7 @@ const names: Record<Scene, {fa: string; en: string}> = {
   shopping: {fa:'خرید',en:'Shopping'}, cafe: {fa:'کافه',en:'Café'}, directions: {fa:'راه‌یابی',en:'Directions'}, transport: {fa:'رفت‌وآمد',en:'Transport'}, pharmacy: {fa:'داروخانه',en:'Pharmacy'}, workplace: {fa:'محیط کار',en:'Workplace'}, appointments: {fa:'قرار ملاقات',en:'Appointments'}, housing: {fa:'مسکن',en:'Housing'}, banking: {fa:'بانک',en:'Banking'},
 };
 export function LessonSceneIllustration({ scene, lang }: { scene: string; lang: 'fa' | 'en' }) {
+  if (scene === 'home') scene = 'housing';
   if (!(scene in drawings)) return null;
   const key = scene as Scene;
   return <svg role="img" aria-label={names[key][lang]} width="64" height="64" viewBox="0 0 64 64" className="shrink-0 rounded-2xl bg-sky-100/70 text-[#1554bd]"><circle cx="49" cy="12" r="7" fill="#fbbf24" opacity=".45"/><circle cx="10" cy="50" r="9" fill="#93c5fd" opacity=".4"/><g fill="white" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">{drawings[key]}</g></svg>;
