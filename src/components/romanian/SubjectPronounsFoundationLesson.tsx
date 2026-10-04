@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useLessonGrammar } from './LessonGrammarGuide';
 import { MeaningLines } from './MeaningLines';
 import { LessonStageNav } from './LessonStageNav';
 import type { Language } from '@/types';
@@ -44,6 +45,7 @@ function normalize(value: string) {
 }
 
 export function SubjectPronounsFoundationLesson({ lang }: { lang: Language }) {
+  useLessonGrammar(examples);
   const isFa = lang === 'fa';
   const [stage, setStage] = React.useState(0);
   const [index, setIndex] = React.useState(0);

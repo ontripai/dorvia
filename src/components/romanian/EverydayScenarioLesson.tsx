@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useLessonGrammar } from './LessonGrammarGuide';
 import { normalizeRomanianAnswer as normalize, matchesRomanianAnswer } from '@/lib/romanian/answerFeedback';
 import { VoiceAnswer } from './VoiceAnswer';
 import { AnswerWritingTip } from './AnswerWritingTip';
@@ -15,6 +16,7 @@ export type EverydayScenario = { slug: string; setting?: { fa: string; en: strin
 type Locale = 'fa' | 'en';
 
 export function EverydayScenarioLesson({ lang, lesson, topic, counterpart, topicHref, footer, storyIntro, continuation }: { lang: Locale; lesson: EverydayScenario; topic: { fa: string; en: string }; counterpart: { fa: string; en: string }; topicHref: string; footer: { fa: string; en: string }; storyIntro?: React.ReactNode; continuation?: React.ReactNode }) {
+  useLessonGrammar(lesson.dialogue);
   const isFa = lang === 'fa';
   const [stage, setStage] = React.useState(0);
   const [round, setRound] = React.useState(0);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { LessonGrammarBoundary } from '@/components/romanian/LessonGrammarGuide';
 import type { Metadata } from 'next';
 import { getLocalizedMetadata } from '@/lib/metadata';
 import { Language } from '@/types';
@@ -24,5 +25,5 @@ export default function LearnRomanianLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <LessonGrammarBoundary>{children}</LessonGrammarBoundary>;
 }

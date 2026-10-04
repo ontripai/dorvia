@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useLessonGrammar } from './LessonGrammarGuide';
 import { MeaningLines } from './MeaningLines';
 import { LessonStageNav } from './LessonStageNav';
 import type { Language } from '@/types';
@@ -83,6 +84,7 @@ function normalize(value: string) {
 }
 
 export function CoreSentenceBuildingLesson({ lang, kind }: { lang: Language; kind: LessonKind }) {
+  useLessonGrammar(lessonCopy[kind].examples);
   const isFa = lang === 'fa';
   const copy = lessonCopy[kind];
   const [stage, setStage] = React.useState(0);
