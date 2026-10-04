@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { ListeningPractice } from './ListeningPractice';
 import { LessonStageNav } from './LessonStageNav';
 import { LocalizedLink as Link } from '@/components/LocalizedLink';
 import { playVerifiedAudio, stopVerifiedAudio } from '@/lib/romanian/playVerifiedAudio';
@@ -72,7 +73,6 @@ const progressKey = 'dorvia:romanian:ticket-lesson:v1';
 export function TicketLesson({ lang }: { lang: Locale }) {
   const isFa = lang === 'fa';
   const [phase, setPhase] = React.useState<Phase>(0);
-  const [showTranslation, setShowTranslation] = React.useState(true);
   const [audioError, setAudioError] = React.useState(false);
   const [speaking, setSpeaking] = React.useState(false);
   const [answer, setAnswer] = React.useState('');
@@ -246,21 +246,8 @@ export function TicketLesson({ lang }: { lang: Locale }) {
       {phase === 0 && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-5">
         <h2 className="text-xl font-bold">{isFa ? 'ابتدا گفت‌وگو را بشنوید' : 'First, listen to the conversation'}</h2>
         <p className="text-base text-slate-700">{isFa ? 'برای خودتان و یک همراه بلیت می‌خواهید. فروشنده می‌پرسد چند بلیت؟' : 'You need tickets for yourself and a companion. The clerk asks how many.'}</p>
-        <button type="button" onClick={() => speak(conversation.map(t => t.ro))} className="rounded-xl bg-[#1554bd] px-5 py-3 text-white font-semibold">
-          {speaking ? isFa ? 'در حال پخش…' : 'Playing…' : isFa ? 'شنیدن گفت‌وگو' : 'Play conversation'}
-        </button>
-        {audioError && <p role="status" className="text-sm text-amber-900 bg-amber-50 p-3 rounded-lg">{isFa ? 'فایل صدای این عبارت در دسترس نیست؛ دوباره تلاش کنید.' : 'This recording is unavailable. Please try again.'}</p>}
-        <div className="space-y-3">
-          {conversation.map((turn, i) => <div key={i} className={`rounded-xl p-4 ${turn.speaker === 'you' ? 'bg-blue-50' : 'bg-slate-50'}`}>
-            <div className="text-sm font-bold text-[#1554bd]">{turn.speaker === 'you' ? isFa ? 'شما' : 'You' : isFa ? 'فروشنده' : 'Clerk'}</div>
-            <div dir="ltr" lang="ro" className="text-lg font-bold text-slate-900">{turn.ro}</div>
-            <div dir="ltr" lang="en" className="text-sm text-slate-600">{turn.en}</div>
-            {showTranslation && <div lang="fa" dir="rtl" className="text-sm text-slate-700 mt-1">{turn.fa}</div>}
-            <button type="button" onClick={() => speak(turn.ro)} className="text-sm text-[#1554bd] underline mt-2">{isFa ? 'شنیدن این جمله' : 'Hear this line'}</button>
-          </div>)}
-        </div>
-        {isFa && <button type="button" onClick={() => setShowTranslation(v => !v)} className="text-sm text-[#1554bd] underline">{showTranslation ? 'پنهان‌کردن ترجمه فارسی' : 'نمایش ترجمه فارسی'}</button>}
-        <div><button type="button" onClick={() => move(1)} className="rounded-xl bg-[#1554bd] px-6 py-3 text-white font-bold">{isFa ? 'واژه و قاعده' : 'Explore the rule'}</button></div>
+      <ListeningPractice lang={lang} dialogue={conversation.map(turn => ({ ...turn, who: turn.speaker }))} counterpart={{ fa: 'فروشنده', en: 'Clerk' }}/>
+      <div><button type="button" onClick={() => move(1)} className="rounded-xl bg-[#1554bd] px-6 py-3 text-white font-bold">{isFa ? 'واژه و قاعده' : 'Explore the rule'}</button></div>
       </section>}
 
       {phase === 1 && <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7 space-y-5">
