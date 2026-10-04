@@ -317,9 +317,9 @@ export const meetFamilyLesson = {
       "audioVoice": "ro-RO-AlinaNeural"
     },
     {
-      "ro": "Da, mama e bine.",
-      "en": "Yes, my mother is well.",
-      "fa": "بله، مادرم خوب است.",
+      "ro": "Mama e obosită.",
+      "en": "My mother is tired.",
+      "fa": "مادرم خسته است.",
       "who": "you",
       "audioVoice": "ro-RO-EmilNeural"
     },
@@ -412,9 +412,9 @@ export const meetFamilyLesson = {
       }
     },
     {
-      "ro": "Da, mama e bine.",
-      "en": "Yes, my mother is well.",
-      "fa": "بله، مادرم خوب است.",
+      "ro": "Mama e obosită.",
+      "en": "My mother is tired.",
+      "fa": "مادرم خسته است.",
       "hint": "Da, …",
       "cue": {
         "ro": "Mama ta e bine?",
@@ -464,9 +464,9 @@ export const meetFamilyLesson = {
       "en": "mother",
       "fa": "مادر",
       "example": {
-        "ro": "Da, mama e bine.",
-        "en": "Yes, my mother is well.",
-        "fa": "بله، مادرم خوب است."
+        "ro": "Mama e obosită.",
+        "en": "My mother is tired.",
+        "fa": "مادرم خسته است."
       }
     },
     {
@@ -502,8 +502,8 @@ export const meetFamilyLesson = {
   ],
   "answerVoice": "ro-RO-EmilNeural",
   "setting": {
-    "fa": "چمدان را کنار گذاشته‌اید. آنا، زن‌عموی شما، خوش‌آمد می‌گوید و از حال خانواده‌تان خبر می‌گیرد.",
-    "en": "You have put your bag down. Ana, your aunt by marriage, welcomes you and asks after your family."
+    "fa": "چمدان را کنار گذاشته‌اید. آنا، زن‌عموی شما، خوش‌آمد می‌گوید و از حال خانواده‌تان خبر می‌گیرد. در این خبرگیری، می‌گویید مادرتان خسته است؛ واژهٔ خستگی از درس ورود دوباره به کار می‌رود.",
+    "en": "You have put your bag down. Ana, your aunt by marriage, welcomes you and asks after your family. You mention that your mother is tired, reusing tiredness from the arrival lesson."
   }
 } satisfies EverydayScenario;
 
