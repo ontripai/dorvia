@@ -5028,5 +5028,16 @@
     "text": "Bine.",
     "slug": "ro-0351c45b5bb53679",
     "approved": true
+  },
+  {
+    "text": "Mama e obosită.",
+    "slug": "ro-eccae6217c6ae768",
+    "approved": true
+  },
+  {
+    "text": "Mama e obosită.",
+    "slug": "ro-7b48ae03c1c653df",
+    "approved": true,
+    "voice": "ro-RO-EmilNeural"
   }
 ]
