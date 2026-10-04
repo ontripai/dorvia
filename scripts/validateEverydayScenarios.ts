@@ -9,7 +9,7 @@ import { shoppingScenarios } from '../src/content/romanian/shopping-scenarios';
 import { transportScenarios } from '../src/content/romanian/transport-scenarios';
 import { workplaceScenarios } from '../src/content/romanian/workplace-scenarios';
 import { housingScenarios } from '../src/content/romanian/housing-scenarios';
-import { welcomeHomeLesson, homeReturnDialogue } from '../src/content/romanian/family-story';
+import { welcomeHomeLesson, homeReturnDialogue, homeVerbTimes } from '../src/content/romanian/family-story';
 import audio from '../src/content/romanian/verified-audio.json';
 
 const groups = { home: [welcomeHomeLesson], housing: housingScenarios, workplace: workplaceScenarios, appointments: appointmentScenarios, banking: bankingScenarios, cafe: cafeScenarios, directions: directionsScenarios, pharmacy: pharmacyScenarios, shopping: shoppingScenarios, transport: transportScenarios };
@@ -46,7 +46,7 @@ if (errors.length) {
 console.log(`Everyday scenarios: ${lessons} lessons, ${phrases} phrases; translations, depth and exact-text audio files passed. Pronunciation requires listening review.`);
 
 if (welcomeHomeLesson.vocabulary.length < 5 || new Set(welcomeHomeLesson.vocabulary.map(w => w.ro)).size < 5) throw new Error('Home episode must teach at least five distinct vocabulary targets');
-const storyPhrases = [...homeReturnDialogue, ...welcomeHomeLesson.vocabulary, ...welcomeHomeLesson.vocabulary.flatMap(w => [w.example, ...('alternatives' in w ? w.alternatives : [])])];
+const storyPhrases = [...homeVerbTimes,...homeReturnDialogue, ...welcomeHomeLesson.vocabulary, ...welcomeHomeLesson.vocabulary.flatMap(w => [w.example, ...('alternatives' in w ? (w.alternatives ?? []) : [])])];
 for (const phrase of storyPhrases) {
   if (!phrase.en || !/[\u0600-\u06ff]/.test(phrase.fa)) throw new Error('Story phrase needs Romanian, English and Persian');
   const url = recordings[phrase.ro];
