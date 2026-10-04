@@ -10,6 +10,13 @@ export function romanianSpeechSsml(text, voice, intonation) {
   const body = sentences.map(sentence => {
     const escaped = escapeXml(sentence.trim());
     if (!sentence.trim().endsWith('?') || !intonation) return `<s>${escaped}</s>`;
+    // Azure contour can be ignored on short phrases. Give a short yes/no
+    // question a higher final word as well; do not alter information questions.
+    if (intonation === 'yes-no' && sentence.trim().split(/\s+/u).length <= 4) {
+      const words = sentence.trim().split(/\s+/u);
+      const last = words.pop();
+      return `<s>${escapeXml(words.join(' '))} <prosody pitch="+50%">${escapeXml(last)}</prosody></s>`;
+    }
     const contour = intonation === 'yes-no'
       ? '(0%,+0%) (60%,-5%) (100%,+80%)'
       : '(0%,+0%) (35%,+10%) (100%,-8%)';
